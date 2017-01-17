@@ -1,0 +1,15 @@
+{
+    "name": "mip-fixed1",
+    "version": "1.0.1",
+    "description" : "fixed1",
+    "contributors": [{
+        "name": "fix1 author",
+        "email": "fix1@baidu.com"
+        },{
+        "name": "fix2 author",
+        "email": "fix3@baidu.com"
+        }],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
