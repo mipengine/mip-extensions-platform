@@ -12,6 +12,7 @@ define(function (require) {
      */
     customElement.prototype.build = function () {
         // TODO
+        this.element.innerHTML = 'hello';
     };
 
     return customElement;
