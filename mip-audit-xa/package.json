@@ -2,12 +2,10 @@
     "name": "mip-audit-xa",
     "version": "1.0.1",
     "description": "组件介绍",
-    "contributors": [
-        {
-            "name": "mip-audit-xa",
-            "email": "c@baidu.com"
-        }
-    ],
+    "author": {
+        "name": "mip-audit-xa",
+        "email": "mengke01@baidu.com"
+    },
     "engines": {
         "mip": ">=1.1.0"
     }
