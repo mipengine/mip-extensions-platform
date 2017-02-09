@@ -1,0 +1,14 @@
+{
+    "name": "mip-sina-sax",
+    "version": "1.0.0",
+    "description": "新浪广告组件",
+    "contributors": [
+        {
+            "name": "fengzihao",
+            "email": "452242153@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
