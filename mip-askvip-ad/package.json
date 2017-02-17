@@ -1,0 +1,13 @@
+{
+    "name": "mip-askvip-ad",
+    "version": "1.0.0",
+	"description":"ask页面广告加载",
+    "author": {
+        "name": "yuwei",
+        "email": "security@120ask.com",
+        "url": ""
+    },
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
