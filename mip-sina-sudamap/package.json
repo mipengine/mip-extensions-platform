@@ -1,0 +1,14 @@
+{
+    "name": "mip-sina-sudamap",
+    "version": "1.0.0",
+    "description": "新浪点击统计组件",
+    "contributors": [
+        {
+            "name": "fengzihao",
+            "email": "452242153@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
