@@ -14,10 +14,6 @@ define(function (require) {
             DateTime: $('.f-information').attr('data-DateTime'),
             Id: $('.f-information').attr('data-id')
         };
-        var cnzzprotocol = (('https:' === document.location.protocol) ? ' https://' : ' http://');
-        var cnzzId1 = '%3Cspan id=\'cnzz_stat_icon_5932461\'%3E%3C/span%3E%3Cscript src=\'';
-        var cnzzUrl1 = 's11.cnzz.com/stat.php%3Fid%3D5932461\' type=\'text/javascript\'%3E%3C/script%3E';
-        document.write(unescape(cnzzId1 + cnzzprotocol + cnzzUrl1));
         var rootidArry = [37, 38, 39, 40, 41, 42, 43, 44];
         if ($.inArray(webInfo.Rootid, rootidArry) !== -1) {
             var cnzzprotocol = (('https:' === document.location.protocol) ? ' https://' : ' http://');
