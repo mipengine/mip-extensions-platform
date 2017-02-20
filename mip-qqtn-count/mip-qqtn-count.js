@@ -14,7 +14,7 @@ define(function (require) {
             DateTime: $('.f-information').attr('data-DateTime'),
             Id: $('.f-information').attr('data-id')
         };
-        var rootidArry = [37, 38, 39, 40, 41, 42, 43, 44];
+        var rootidArry = ['37', '38', '39', '40', '41', '42', '43', '44'];
         if ($.inArray(webInfo.Rootid, rootidArry) !== -1) {
             var cnzzprotocol = (('https:' === document.location.protocol) ? ' https://' : ' http://');
             var cnzzId2 = '%3Cspan id=\'cnzz_stat_icon_1257361975\'%3E%3C/span%3E%3Cscript src=\'';
