@@ -16,7 +16,7 @@ define(function (e) {
                 var i = d(t);
                 var s = ['<script type="text/javascript" id="ads_' + n + '">', '</script>'];
                 i.append(s.join(''));
-                __loadJs__('http://afpmm.alicdn.com/g/mm/afp-cdn/JS/w.js', function () {
+                __loadJs__('https://afpmm.alicdn.com/g/mm/afp-cdn/JS/w.js', function () {
                     var mms = window._mmW;
                     mms.q({aid: e, destid: id, async: 1, serverbaseurl: 'afpeng.alimama.com/'});
                 }, t);
