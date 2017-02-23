@@ -1,0 +1,12 @@
+{
+    "name": "mip-qbb-isweixin",
+    "version": "1.0.1",
+    "description": "针对微信以及不同平台的相关操作",
+    "author": {
+        "name": "yml",
+        "email": "1179739037@qq.com"
+    },
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

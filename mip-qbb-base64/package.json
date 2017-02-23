@@ -1,0 +1,12 @@
+{
+    "name": "mip-qbb-base64",
+    "version": "1.0.0",
+    "description": "支持base64编码,base64解码,utf16转utf8,utf8转utf16",
+    "author": {
+        "name": "yml",
+        "email": "1179739037@qq.com"
+    },
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

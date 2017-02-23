@@ -1,0 +1,12 @@
+{
+    "name": "mip-qbb-qinxin",
+    "version": "1.0.0",
+     "description": "针对亲信app相关操作",
+    "author": {
+        "name": "yml",
+        "email": "1179739037@qq.com"
+    },
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
