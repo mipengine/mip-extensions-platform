@@ -1,13 +1,12 @@
 # mip-ticket
 
-mip-ticket 组件说明
-适用于票价的选择、票数的增加和减少
+mip-ticket 组件 适用于票价的选择、票数的增加和减少
+
 标题|内容
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|http://mipcache.bdstatic.com/static/v1/mip-ticket/mip-ticket.js
-http://mipcache.bdstatic.com/static/v1/mip-form/mip-form.js
+所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-ticket/mip-ticket.js<br>https://mipcache.bdstatic.com/static/v1/mip-form/mip-form.js
 
 ## 示例
 

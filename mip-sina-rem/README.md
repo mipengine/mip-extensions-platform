@@ -5,7 +5,7 @@ mip-sina-rem 组件说明
 标题|内容
 ----|----
 类型|通用，定制
-所需脚本|http://mipcache.bdstatic.com/static/mip-sina-rem/v1/mip-sina-rem.js
+所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-sina-rem/mip-sina-rem.js
 
 ## 示例
 
