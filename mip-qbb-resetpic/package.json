@@ -1,0 +1,12 @@
+{
+    "name": "mip-qbb-resetpic",
+    "version": "1.0.0",
+     "description": "根据原始图片的宽高，计算图片是横向图片，还是竖向图片，重置图片大小",
+    "author": {
+        "name": "yml",
+        "email": "1179739037@qq.com"
+    },
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
