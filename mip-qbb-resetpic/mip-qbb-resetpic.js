@@ -19,7 +19,7 @@ define(function (require) {
             if (Img.length > 0) {
                 imgo.src = Img.first().attr('src');
                 imgo.onload = function () {
-                    $('.show-imgs ul').show();
+                    obj.show();
                     jtw = Img.first().width();
                     jth = Img.first().height();
                     if (jtw > jth) {

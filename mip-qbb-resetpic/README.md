@@ -17,6 +17,10 @@ mip-qbb-resetpic 根据原始图片的宽高，计算图片是横向图片，还
                 <li class="swiper-slide"><mip-img src="http://pic.7y7.com/Uploads/Picture/2016-08-05/57a3ec39d1ff9.jpg" alt=""></mip-img></li>
                 <li class="swiper-slide"><mip-img src="http://pic.7y7.com/Uploads/Picture/2016-08-05/57a3ec39d1ff9.jpg" alt=""></mip-img></li>
                 <li class="swiper-slide"><mip-img src="http://pic.7y7.com/Uploads/Picture/2016-08-05/57a3ec39d1ff9.jpg" alt=""></mip-img></li>
+                <li class="swiper-slide"><mip-img src="http://pic.7y7.com/Uploads/Picture/2016-08-05/57a3ec39d1ff9.jpg" alt=""></mip-img></li>
+                <li class="swiper-slide"><mip-img src="http://pic.7y7.com/Uploads/Picture/2016-08-05/57a3ec39d1ff9.jpg" alt=""></mip-img></li>
+                <li class="swiper-slide"><mip-img src="http://pic.7y7.com/Uploads/Picture/2016-08-05/57a3ec39d1ff9.jpg" alt=""></mip-img></li>
+                
             </ul>
         </div>
     </section>
