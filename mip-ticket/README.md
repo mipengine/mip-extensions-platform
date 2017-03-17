@@ -6,7 +6,7 @@ mip-ticket 组件说明
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|http://mipcache.bdstatic.com/static/v1/mip-ticket/mip-go-back.js
+所需脚本|http://mipcache.bdstatic.com/static/v1/mip-ticket/mip-ticket.js
 
 ## 示例
 

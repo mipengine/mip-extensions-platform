@@ -20,29 +20,37 @@ define(function (require) {
             var id = $(this).attr('data-id');
             var $number = $(this).find('.mip-number');
             var num = parseInt($number.text(), 0);
-            if (ticketname.tagName === 'INPUT') {
-                $(ticketname).val(name);
+            if (ticketname) {
+                if (ticketname.tagName === 'INPUT') {
+                    $(ticketname).val(name);
+                }
+                else {
+                    $(ticketname).text(name);
+                }
             }
-            else {
-                $(ticketname).text(name);
+            if (totalnum) {
+                if (totalnum.tagName === 'INPUT') {
+                    $(totalnum).val(num);
+                }
+                else {
+                    $(totalnum).text(num);
+                }
             }
-            if (totalnum.tagName === 'INPUT') {
-                $(totalnum).val(num);
+            if (totalpay) {
+                if (totalpay.tagName === 'INPUT') {
+                    $(totalpay).val(num * price);
+                }
+                else {
+                    $(totalpay).text(num * price);
+                }
             }
-            else {
-                $(totalnum).text(num);
-            }
-            if (totalpay.tagName === 'INPUT') {
-                $(totalpay).val(num * price);
-            }
-            else {
-                $(totalpay).text(num * price);
-            }
-            if (priceid.tagName === 'INPUT') {
-                $(priceid).val(id);
-            }
-            else {
-                $(priceid).text(id);
+            if (priceid) {
+                if (priceid.tagName === 'INPUT') {
+                    $(priceid).val(id);
+                }
+                else {
+                    $(priceid).text(id);
+                }
             }
             $element.find('.mip-ticket-list').eq($(this).index()).addClass('active').siblings().removeClass('active');
             $('.all').text('￥' + num * price);
