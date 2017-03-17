@@ -1,0 +1,14 @@
+{
+    "name": "mip-gudingwzshipin",
+    "version": "1.0.0",
+    "description": "用于投放第三方广告",
+    "contributors": [
+        {
+            "name": "yuan3570",
+            "email": "623319047@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
