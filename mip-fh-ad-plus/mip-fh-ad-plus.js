@@ -18,10 +18,18 @@ define(function (require) {
 
     // 页面广告参数
     var $adKeywords = $('meta[name="fh-ad-keywords"]');
+    // 是否开启ip调用
+    var $ipEnabled = $('meta[name="ip-enabled"]');
+    var ipEnabled = $ipEnabled.attr('content') || '';
+    ipEnabled = ipEnabled.length && ipEnabled !== 'false' || false;
+
     var paramObj = $adKeywords.attr('content');
+
 
     // 直投广告请求url
     var adUrl = 'https://partners.fh21.com.cn/partners/showcodejsonp?callback=?';
+    // 获取ip请求url;
+    var ipUrl = 'https://ips.fh21.com.cn/getArea.php?callback=?&t=' + new Date().getTime();
 
     // 初始化直 投广告
     var init = function (opt) {
@@ -31,8 +39,9 @@ define(function (require) {
         var kw = opt.kw || '';
         var element = opt.element;
         var uid = opt.uid;
-        var combo = Boolean(opt.combo);
         var $plus = $('mip-fh-ad-plus');
+        var fhAdPutNum = $plus.length;
+        var fhAdNum = $body.attr('fh-ad-num') || 0;
 
         // 接口参数值
         var query = {
@@ -42,60 +51,27 @@ define(function (require) {
 
         uid && (query.uid = uid);
 
-        var FhAdPutNum = $plus.length;
+        query.pid = getPids($plus).join(',');
+        query.uid = getUids($plus).join(',');
 
-        if (combo) {
-            query.pid = getPids($plus).join(',');
-            query.uid = getUids($plus).join(',');
+        $body.attr('fh-ad-num', ++fhAdNum);
+
+        var fhAdOpt = {
+            adUrl: adUrl,
+            query: query,
+            element: element
+        };
+
+        if (fhAdNum !== fhAdPutNum) {
+            return;
+        }
+
+        if (ipEnabled) {
+            getIP(fhAdOpt, getFhAd);
         }
         else {
-            if (getCombo($plus).length !== 0) {
-                return;
-            }
+            getFhAd(fhAdOpt);
         }
-
-        $.getJSON(adUrl, query, function (res) {
-            var isHasFhAd;
-            var fhAdNum = $body.attr('fh-ad-num') || 0;
-            var data = $.parseJSON(res.result);
-
-            // 遍历直投广告ID
-            $.each(data, function (k, v) {
-
-                // 判断是否触发一次性所有广告位请求
-                if (combo) {
-                    element = $('mip-fh-ad-plus[fh-ad-pid="' + k + '"]');
-                    uid = element.attr('fh-ad-uid');
-                }
-
-                // 根据医生id判断物料类型
-                v = (query.uid && util.fn.isPlainObject(v)) ? v[uid] : v;
-
-                // 有特定广告位id的直投广告 先隐藏网盟 再显示直投
-                if ($.trim(v)) {
-                    element.children(':first-child').remove();
-                    element.html(v);
-
-                    $body.addClass('view-fh-ad-' + (+k));
-                    $body.attr('fh-ad-num', ++fhAdNum);
-
-                    combo && (isHasFhAd = true);
-                }
-                // 无特定广告位id直投广告显示网盟
-                else {
-                    element.children(':first-child').show();
-
-                    $body.addClass('view-fh-ad-' + (+k) + '-union');
-                    $body.attr('fh-ad-num', --fhAdNum);
-                }
-
-                // 所有的直投广告位均无直投广告
-                if (fhAdNum === -FhAdPutNum || (combo && !isHasFhAd)) {
-                    $body.addClass('view-fh-ad-union');
-                    $emptyShowEle.show();
-                }
-            });
-        });
     };
 
     function getOpt(element) {
@@ -112,7 +88,6 @@ define(function (require) {
             kw: $.trim(keywords),
             lazy: lazy,
             uid: $.trim(uid),
-            combo: (isCombo($element)) || false,
             element: $element
         };
 
@@ -129,34 +104,7 @@ define(function (require) {
         return res;
     }
 
-    function getCombo(ele) {
-        var res = [];
-
-        $.each(ele, function (k, v) {
-            var combo = $(v).attr('combo');
-            if (isCombo(v)) {
-                res.push(combo);
-            }
-        });
-
-        return res;
-    }
-
-    function isCombo(ele) {
-        var flag;
-        var combo = $(ele).attr('combo');
-
-        if (typeof combo === 'string' && combo !== 'false') {
-            flag = true;
-        }
-        else {
-            flag = false;
-        }
-
-        return flag;
-    }
-
-    var getUids = function (ele) {
+    function getUids(ele) {
         var res = [];
 
         $.each(ele, function (k, v) {
@@ -167,7 +115,7 @@ define(function (require) {
         });
 
         return res;
-    };
+    }
 
     // build 方法，元素插入到文档时执行，仅会执行一次
     customElem.prototype.build = function () {
@@ -175,6 +123,67 @@ define(function (require) {
         var opt = getOpt(this.element);
         opt.lazy === 'false' && init(opt);
     };
+
+
+    function getFhAd(opt) {
+        opt = opt || {};
+        var adUrl = opt.adUrl;
+        var query = opt.query;
+        var element = opt.element;
+        var uid = '';
+
+        $.getJSON(adUrl, query, function (res) {
+            var isHasFhAd;
+            var data = $.parseJSON(res.result);
+
+            // 遍历直投广告ID
+            $.each(data, function (k, v) {
+
+                // 获取投放直销广告的节点
+                element = $('mip-fh-ad-plus[fh-ad-pid="' + k + '"]');
+                uid = element.attr('fh-ad-uid');
+
+                // 根据医生id判断物料类型
+                v = (query.uid && util.fn.isPlainObject(v)) ? v[uid] : v;
+
+                // 有特定广告位id的直投广告 先隐藏网盟 再显示直投
+                if ($.trim(v)) {
+                    element.children(':first-child').remove();
+                    element.html(v);
+
+                    $body.addClass('view-fh-ad-' + (+k));
+
+                    isHasFhAd = true;
+                }
+                // 无特定广告位id直投广告显示网盟
+                else {
+                    element.children(':first-child').show();
+
+                    $body.addClass('view-fh-ad-' + (+k) + '-union');
+                }
+
+                // 所有的直投广告位均无直投广告
+                if (!isHasFhAd) {
+                    $body.addClass('view-fh-ad-union');
+                    $emptyShowEle.show();
+                }
+            });
+        });
+
+    }
+
+    function getIP(opt, cb) {
+        opt = opt || {};
+
+        $.getJSON(ipUrl, function (json) {
+            var res = json || {};
+            util.fn.isPlainObject(opt.query) && (opt.query.ip = res.ip);
+
+            if ((typeof cb).toLocaleLowerCase() === 'function') {
+                cb(opt);
+            }
+        });
+    }
 
     // 第一次进入可视区回调,只会执行一次，做懒加载，利于网页速度
     customElem.prototype.firstInviewCallback = function () {
