@@ -60,7 +60,7 @@ mip-ticket 组件说明
 
 说明：需要填充票价id的元素
 必选项：否
-备注:  一个mip-ticket内只允许出现一个 ticketname
+备注:  一个mip-ticket内只允许出现一个 priceid
 
 ### data-name
 
