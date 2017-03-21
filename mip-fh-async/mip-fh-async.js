@@ -111,11 +111,10 @@ define(function (require) {
             fetch(url, fetchCfg).then(function (res) {
                 return res.text();
             }).then(function (text) {
-                text = text || {};
-                var data = text.data;
+                text = JSON.parse(text) || {};
 
                 complete.call(self, btn, activeClass);
-                display(element, data, block);
+                display(element, text, block);
             });
         }
     }

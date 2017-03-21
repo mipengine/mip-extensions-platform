@@ -62,3 +62,8 @@ jsonp="callback">
 必填：否
 类型：string
 
+### jsonp
+说明：设置请求类型是jsonp
+必填：否
+类型：string
+
