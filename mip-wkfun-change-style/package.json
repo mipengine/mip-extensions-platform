@@ -1,0 +1,12 @@
+{
+    "name": "mip-wkfun-change-style",
+    "version": "1.0.0",
+    "description": "寻医问药页面功能组件",
+    "author": {
+        "name": "妖吖1314",
+		"email": "yaoyar6@gmail.com"
+    },
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
