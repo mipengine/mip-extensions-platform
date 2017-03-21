@@ -25,20 +25,9 @@ define(function (require) {
             }
         });
 
-        // 底部搜索
-        $('.chat-bot-search').on('submit', function () {
-            var textValK = $.trim($('.keysd').val());
-            if (textValK === '帮您寻医问药') {
-                textValK = '';
-            } else {
-                textValK = textValK;
-            }
-            $(this).attr('method', 'post').attr('action', 'http://m.so.xywy.com/comse.php?src=3gclubso&keyword=' + encodeURIComponent(textValK));
-        });
-
     };
 
-    customElem.prototype.firstInviewCallback = function () {
+    customElem.prototype.build = function () {
         // this.element 可取到当前实例对应的 dom 元素
         var elem = this.element;
         var cname = $(elem).attr('elClass');
