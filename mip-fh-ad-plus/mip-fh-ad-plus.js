@@ -27,9 +27,9 @@ define(function (require) {
 
 
     // 直投广告请求url
-    var adUrl = 'https://partners.fh21.com.cn/partners/showcodejsonp?callback=?';
+    var adUrl = '//partners.fh21.com.cn/partners/showcodejsonp?callback=?';
     // 获取ip请求url;
-    var ipUrl = 'https://ips.fh21.com.cn/getArea.php?callback=?&t=' + new Date().getTime();
+    var ipUrl = '//ips.fh21.com.cn/getArea.php?callback=?&t=' + new Date().getTime();
 
     // 初始化直 投广告
     var init = function (opt) {
