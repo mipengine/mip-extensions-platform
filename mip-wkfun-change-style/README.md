@@ -1,6 +1,6 @@
 # mip-wkfun-change-style
 
-寻医问药页面功能组件--页面滑动指示状态,以及站内搜索功能
+寻医问药页面功能组件--站内搜索功能，回复逐条显示功能等
 
 标题|内容
 ----|----
@@ -13,14 +13,21 @@
 只需要一个`<mip-wkfun-change-style>`标签，无须其他填充dom
 
 ```
-<mip-wkfun-change-style elClass="tips"></mip-wkfun-change-style>
+<mip-wkfun-change-style botShowHeight="150" docCount="2"></mip-wkfun-change-style>
 ```
 
 ## 属性
 
-### elClass
+### botShowHeight
 
-说明：滑动指示状态的容器
+说明：底部模块露出的高度
 必选项：是
-类型：className
+类型：Number
+取值范围：不限
+
+### docCount
+
+说明：加载医生回复的数量
+必选项：是
+类型：Number
 取值范围：不限
