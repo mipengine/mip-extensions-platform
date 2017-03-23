@@ -1,0 +1,14 @@
+{
+    "name": "mip-push",
+    "version": "1.0.1",
+    "description":"百度自动推送",
+    "contributors": [
+        {
+            "name": "yanfei",
+            "email": "785423753@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

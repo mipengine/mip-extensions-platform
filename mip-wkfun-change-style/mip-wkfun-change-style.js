@@ -71,37 +71,21 @@ define(function (require) {
         });
 
 
-        $('.item_hd_form button').on('click', function (e) {
+        $('.item_hd_form').on('submit', function () {
             var textVal = $.trim($('.item-hd-so-inp').val());
-            var actHref = $('.chat-bot-search').attr('url');
-            window.location.href =  actHref + '&keyword=' + encodeURIComponent(textVal);
-            return false;
+            $(this).attr('method', 'post').attr('action', actHref + '&keyword=' + encodeURIComponent(textVal));
         });
-
-        $('.item-hd-so-inp, .keysd').on({
-            keydown: function (e) {
-                var textVal = $.trim($(this).val());
-                var actHref = $('.chat-bot-search').attr('url');
-                if (e.keyCode === 13) {
-                    window.location.href =  actHref + '&keyword=' + encodeURIComponent(textVal);
-                    return false;
-                }
-            }
-        });
-
 
 
         // 底部搜索
-        $('.chat-bot-search button').on('click', function () {
+        $('.chat-bot-search').on('submit', function () {
             var textValK = $.trim($('.keysd').val());
-            var actHref = $('.chat-bot-search').attr('url');
             if (textValK === '帮您寻医问药') {
                 textValK = '';
             } else {
                 textValK = textValK;
             }
-            window.location.href = actHref + '&keyword=' + encodeURIComponent(textValK);
-            return false;
+            $(this).attr('method', 'post').attr('action', actHref + '&keyword=' + encodeURIComponent(textValK));
         });
 
     };
