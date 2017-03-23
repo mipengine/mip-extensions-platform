@@ -6,7 +6,7 @@
 ----|----
 类型|dom操作组件
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://mipcache.bdstatic.com/static/platform/v1/mip-wkfun-change-style/mip-wkfun-change-style.js
+所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-wkfun-change-style/mip-wkfun-change-style.js
 
 ## 示例
 
