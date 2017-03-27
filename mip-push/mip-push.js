@@ -19,6 +19,7 @@ define(function (require) {
             bp.src = 'http://push.zhanzhang.baidu.com/push.js';
         }
         $(elem).append(bp);
+        $('a[data-cke-saved-href]').remove();
 
     };
     return customElement;
