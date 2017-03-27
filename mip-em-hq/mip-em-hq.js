@@ -6,16 +6,14 @@ define(function (require) {
     var customElem = require('customElement').create();
     var num = require('./em-hqnum');
     var common = require('./em-hqcommon');
-    var pageevent = require('./em-hqevent');
     var $ = require('zepto');
 
-    // build 方法，元素插入到文档时执行，仅会执行一次
-    customElem.prototype.build = function () {
+    // 第一次进入可视区回调,只会执行一次，做懒加载，利于网页速度
+    customElem.prototype.firstInviewCallback = function () {
         var scode = common.getQueryString('code') || '300059';
         var smkt = common.getMkt(scode);
         var stockcode = scode + smkt;
         num.intital(stockcode);
-        pageevent.intital(stockcode);
     };
     return customElem;
 });
