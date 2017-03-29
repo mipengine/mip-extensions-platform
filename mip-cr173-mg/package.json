@@ -1,0 +1,15 @@
+{
+    "name": "mip-cr173-mg",
+    "version": "1.0.0",
+    "description": "组件介绍",
+    "contributors": [
+        {
+            "name": "MIP Zhang",
+			"email": "409210932@qq.com",
+            "url": "https://www.cr173.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
