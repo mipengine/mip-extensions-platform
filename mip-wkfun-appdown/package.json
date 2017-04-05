@@ -1,0 +1,12 @@
+{
+    "name": "mip-wkfun-appdown",
+    "version": "1.0.0",
+    "description": "寻医问药页面功能组件",
+    "author": {
+        "name": "zhunan",
+		"email": "1220849060@qq.com"
+    },
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
