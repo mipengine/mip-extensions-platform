@@ -39,7 +39,8 @@ define(function (require) {
         if (typeof kwd !== 'undefined') {
             key = key + ',' + kwd;
         }
-        else {
+        else
+        {
             kwd = $('meta[name=page-key]');
             if (typeof kwd !== 'undefined') {
                 key = key + ',' + kwd;
@@ -49,13 +50,13 @@ define(function (require) {
         var keyword = encodeURI(key);
 
         var reUrl = encodeURIComponent(window.location.href);
-        var url = 'https://ad.11dn.net/index.php?m=Api&c=Js&a=zx&keyword=' + keyword + '&reUrl=' + reUrl + '&site=2';
+        var url = 'https://ad.11dn.net/index.php?m=Api&c=Js&a=zx&keyword=' + keyword + '&reUrl=' + reUrl + '&site=2&mip=1';
 
         var adId = getQueryString('ad');
 
         if (typeof (adId) !== 'undefined' && adId != null) {
 
-            url = 'https://ad.11dn.net/index.php?m=Api&c=Js&a=zx&adId=' + adId + '&reUrl=' + reUrl + '&site=2' + '&keyword=' + keyword;
+            url = 'https://ad.11dn.net/index.php?m=Api&c=Js&a=zx&adId=' + adId + '&reUrl=' + reUrl + '&site=2&mip=1' + '&keyword=' + keyword;
 
         }
         $(document).ready(function () {

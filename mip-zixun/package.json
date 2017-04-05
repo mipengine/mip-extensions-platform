@@ -1,14 +1,12 @@
 {
-    "name": "mip-zixun",
-    "version": "1.0.0",
-    "description": "页面加载商务通咨询邀请框",
-    "contributors": [
-        {
-            "name": "Hugh Zhao",
-            "email": "lc.18@qq.com"
-        }
-    ],
-    "engines": {
-        "mip": ">=1.1.0"
-    }
+  "name": "mip-zixun",
+  "version": "1.0.1",
+  "description": "页面加载商务通咨询邀请框",
+  "contributors": [{
+    "name": "Hugh Zhao",
+    "email": "lc.18@qq.com"
+  }],
+  "engines": {
+    "mip": ">=1.1.0"
+  }
 }
