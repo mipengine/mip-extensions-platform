@@ -113,12 +113,20 @@ define(function (require) {
             };
             var i = 0;
             for (i = 0; i < azEjectData.length; i++) {
+                var amp = '&amp;';
+                if (azEjectData[i][1].indexOf(amp) !== -1) {
+                    azEjectData[i][1] = azEjectData[i][1].replace(new RegExp(amp, 'g'), '&');
+                }
                 azEject.list.push({title: azEjectData[i][0], url: azEjectData[i][1], smallimg: azEjectData[i][2]});
             }
             for (i = 0; i < azOhterEjectData.length; i++) {
                 var title = azOhterEjectData[i][0];
                 var url = azOhterEjectData[i][1];
                 var smallimg = azOhterEjectData[i][2];
+                var amp = '&amp;';
+                if (url.indexOf(amp) !== -1) {
+                    url = url.replace(new RegExp(amp, 'g'), '&');
+                }
                 azOhterEject.list.push({title: title, url: url, smallimg: smallimg});
             }
             province = remotIpInfo.province;

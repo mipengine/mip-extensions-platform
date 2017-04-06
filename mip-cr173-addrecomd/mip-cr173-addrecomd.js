@@ -41,9 +41,17 @@ define(function (require) {
                 var title = androidDateArry[i][0];
                 var url = androidDateArry[i][1];
                 var smallimg = androidDateArry[i][2];
+                var amp = '&amp;';
+                if (url.indexOf(amp) !== -1) {
+                    url = url.replace(new RegExp(amp, 'g'), '&');
+                }
                 androidData.list.push({title: title, url: url, smallimg: smallimg});
             }
             for (i = 0; i < iosDateArry.length; i++) {
+                var amp = '&amp;';
+                if (iosDateArry[i][1].indexOf(amp) !== -1) {
+                    iosDateArry[i][1] = iosDateArry[i][1].replace(new RegExp(amp, 'g'), '&');
+                }
                 iosData.list.push({title: iosDateArry[i][0], url: iosDateArry[i][1], smallimg: iosDateArry[i][2]});
             }
 
