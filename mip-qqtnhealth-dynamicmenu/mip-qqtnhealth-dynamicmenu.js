@@ -55,7 +55,13 @@ define(function (require) {
             for (i = 0; i < contChildrenSize; i++) {
                 var divName = $('.g-cont').children().eq(i).prop('tagName');
                 if (divName !== 'H3') {
-                    chongZuHtml += '<p>' + $('.g-cont').children().eq(i).html() + '</p>';
+                    var pObj = $('.g-cont').children().eq(i);
+                    if (pObj.find('img').length > 0) {
+                        var imgSrc = pObj.find('img').attr('src');
+                        chongZuHtml += '<p><mip-img src="' + imgSrc + '"></mip-img></p>';
+                    } else {
+                        chongZuHtml += '<p>' + pObj.html() + '</p>';
+                    }
                 }
                 else {
                     chongZuHtml += '<b class="m-float-top"></b></div><div class="g-cont-obj"><h3>'
