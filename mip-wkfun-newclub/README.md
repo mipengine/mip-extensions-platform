@@ -13,5 +13,14 @@
 只需要一个`<mip-wkfun-newclub>`标签，无须其他填充dom
 
 ```
-<mip-wkfun-newclub></mip-wkfun-newclub>
+<mip-wkfun-newclub ans="300"></mip-wkfun-newclub>
+
 ```
+## 属性
+
+### ans
+
+说明：回复内容的高度
+必选项：是
+类型：Number
+取值范围：不限
