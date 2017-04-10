@@ -1,0 +1,12 @@
+{
+    "name": "mip-wkfun-newslist",
+    "version": "1.0.1",
+    "description": "底层页功能组件",
+    "author": {
+        "name": "wss",
+		"email": "yaoyar6@gmail.com"
+    },
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
