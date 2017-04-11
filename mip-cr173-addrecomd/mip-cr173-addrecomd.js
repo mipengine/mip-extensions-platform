@@ -55,14 +55,14 @@ define(function (require) {
                 iosData.list.push({title: iosDateArry[i][0], url: iosDateArry[i][1], smallimg: iosDateArry[i][2]});
             }
 
-            if (platform.isAndroid()) {
+            if (platform.isIos()) {
                 // 获取数据后，通过 template 模板渲染到页面的
 
-                this.addDate(document.querySelector('.group'), androidData);
+                this.addDate(document.querySelector('.group'), iosData);
             }
             else {
                 // 获取数据后，通过 template 模板渲染到页面的
-                this.addDate(document.querySelector('.group'), iosData);
+                this.addDate(document.querySelector('.group'), androidData);
             }
         },
         addDate: function (htmldom, date) {

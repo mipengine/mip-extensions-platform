@@ -6,7 +6,8 @@ mip-cr173-addrecomd 添加推荐板块
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|http://mipcache.bdstatic.com/static/v1/mip-cr173-addrecomd/mip-cr173-addrecomd.js
+所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-cr173-addrecomd/mip-cr173-addrecomd.js
+
 
 ## 示例
 
