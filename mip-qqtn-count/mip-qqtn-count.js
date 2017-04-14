@@ -14,13 +14,6 @@ define(function (require) {
             DateTime: $('.f-information').attr('data-DateTime'),
             Id: $('.f-information').attr('data-id')
         };
-        var rootidArry = ['37', '38', '39', '40', '41', '42', '43', '44'];
-        if ($.inArray(webInfo.Rootid, rootidArry) !== -1) {
-            var cnzzprotocol = (('https:' === document.location.protocol) ? ' https://' : ' http://');
-            var cnzzId2 = '%3Cspan id=\'cnzz_stat_icon_1257361975\'%3E%3C/span%3E%3Cscript src=\'';
-            var cnzzUrl2 = 's11.cnzz.com/z_stat.php%3Fid%3D1257361975\' type=\'text/javascript\'%3E%3C/script%3E';
-            document.write(unescape(cnzzId2 + cnzzprotocol + cnzzUrl2));
-        }
         var src = 'https://count.612.com//index.php?m=r';
         var charset = '&charset=' + getPageCharset();
         var atime = '&atime=' + webInfo.DateTime;
@@ -35,7 +28,7 @@ define(function (require) {
             var jsStrdate = src + charset + atime + ref + url + username + type + rid + platform + content;
             document.write('<iframe src="' + jsStrdate + '" width="0" height="0" style="display:none;"></iframe>');
             var bjname = webInfo.Username;
-            var cnzzprotocol = (('https:' === document.location.protocol) ? ' https://' : ' http://');
+            var cnzzprotocol = 'https://';
             var cnzzid;
             var cnzzsite;
             if (bjname !== '') {
@@ -54,9 +47,6 @@ define(function (require) {
                         break;
                     case 'yjw':
                         cnzzid = 1258159606, cnzzsite = 's4.cnzz.com';
-                        break;
-                    case 'chengli':
-                        cnzzid = 1258608451, cnzzsite = 's95.cnzz.com';
                         break;
                     case 'xhl':
                         cnzzid = 1258750045, cnzzsite = 's95.cnzz.com';
@@ -117,6 +107,15 @@ define(function (require) {
                         break;
                     case 'jilin':
                         cnzzid = 1261494988, cnzzsite = 's4.cnzz.com';
+                        break;
+                    case 'zyp':
+                        cnzzid = 1261660650, cnzzsite = 's11.cnzz.com';
+                        break;
+                    case 'tjy':
+                        cnzzid = 1261660653, cnzzsite = 's4.cnzz.com';
+                        break;
+                    case 'cyl':
+                        cnzzid = 1261660654, cnzzsite = 's95.cnzz.com';
                         break;
                 }
                 if (typeof cnzzid === 'number' && typeof cnzzsite === 'string') {
