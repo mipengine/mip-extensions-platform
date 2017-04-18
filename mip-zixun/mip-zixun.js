@@ -16,6 +16,20 @@ define(function (require) {
         var element = this.element;
         var kwdStr = element.getAttribute('kwd');
         // <mip kwd="输入关键词"></mip>
+        var swt = element.getAttribute('swt');
+        // 商务通选择开关 1为华怡快商通 2为都市商务通
+
+        switch (parseInt(swt, 10)) {
+            case 1:
+                setAddress('http://kefu7.kuaishang.cn/bs/im.htm?cas=57184___267863&fi=67852');
+                break;
+            case 2:
+                setAddress('http://lkt.zoosnet.net/LR/Chatpre.aspx?id=LKT31872005&cid=1486284376577760076446&lng=cn&sid=1490506190111691726115');
+                break;
+            // default:
+            //     setAddress('http://lkt.zoosnet.net/LR/Chatpre.aspx?id=LKT31872005&cid=1486284376577760076446&lng=cn&sid=1490506190111691726115');
+            //     break;
+        }
 
         var keyObj = $('meta[name=keywords]').attr('content');
         // 关键词内容赋值给keyObj
@@ -39,8 +53,7 @@ define(function (require) {
         if (typeof kwd !== 'undefined') {
             key = key + ',' + kwd;
         }
-        else
-        {
+        else {
             kwd = $('meta[name=page-key]');
             if (typeof kwd !== 'undefined') {
                 key = key + ',' + kwd;
@@ -50,18 +63,21 @@ define(function (require) {
         var keyword = encodeURI(key);
 
         var reUrl = encodeURIComponent(window.location.href);
-        var url = 'https://ad.11dn.net/index.php?m=Api&c=Js&a=zx&keyword=' + keyword + '&reUrl=' + reUrl + '&site=2&mip=1';
+        var url = 'https://sb.11dn.net/index.php?m=Api&c=Js&a=zx&keyword=' + keyword + '&reUrl=' + reUrl + '&site=' + swt + '&mip=1';
 
         var adId = getQueryString('ad');
 
         if (typeof (adId) !== 'undefined' && adId != null) {
 
-            url = 'https://ad.11dn.net/index.php?m=Api&c=Js&a=zx&adId=' + adId + '&reUrl=' + reUrl + '&site=2&mip=1' + '&keyword=' + keyword;
+            url = 'https://sb.11dn.net/index.php?m=Api&c=Js&a=zx&adId=' + adId + '&reUrl=' + reUrl + '&site=' + swt + '&mip=1' + '&keyword=' + keyword;
 
         }
         $(document).ready(function () {
             $('body').after('<script src=\'' + url + '\' charset=\'utf-8\'></script>');
         });
+
+
+
     };
 
     function getQueryString(name) {
@@ -73,5 +89,12 @@ define(function (require) {
         return null;
     }
 
+    function setAddress(add) {
+
+        $('a[data-link="swt"]').on('click', function () {
+            $('a[data-link="swt"]').attr('href', add);
+        });
+    }
+    // 点击按钮时将链接指向商务通默认链接
     return customElement;
 });
