@@ -1,0 +1,12 @@
+{
+    "name": "mip-fh-paging",
+    "version": "0.0.1",
+    "description": "分页交互组件",
+    "author": {
+        "name": "laoono",
+        "email": "laoono@163.com"
+    },
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

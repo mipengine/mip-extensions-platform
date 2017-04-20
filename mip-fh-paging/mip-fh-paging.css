@@ -1,0 +1,85 @@
+/**
+ * @author: laoono
+ * @date:  2017-01-13
+ * @time: 15:35
+ * @file: mip-fh-paging.css
+ * @contact: laoono.com
+ * @description: #
+ */
+
+.mip-fh-paging-wrap {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.mip-fh-paging-wrap a:nth-of-type(1), .mip-fh-paging-wrap a:last-of-type {
+    -webkit-box-flex: 3;
+    -webkit-flex: 3;
+    -moz-box-flex: 3;
+    -ms-flex: 3;
+    flex: 3;
+    color: #0076ff;
+    background: #f8f9fa;
+    height: 0.7rem;
+    font-size: 0.28rem;
+    line-height: 0.7rem;
+    text-align: center;
+    border: #ddd 1px solid;
+}
+
+.mip-fh-paging-curr-box {
+    position: relative;
+    -webkit-box-flex: 4;
+    -webkit-flex: 4;
+    -moz-box-flex: 4;
+    -ms-flex: 4;
+    flex: 4;
+    margin: 0 0.1rem;
+    height: 0.7rem;
+    font-size: 0.28rem;
+    line-height: 0.7rem;
+    text-align: center;
+    background: #f8f9fa;
+    border: #ddd 1px solid;
+}
+
+.mip-fh-paging-curr-box em {
+    margin: 0 0.15em;
+    color: #666;
+}
+
+.mip-fh-paging-curr-box span:nth-of-type(1) {
+    color: #0076ff;
+}
+
+.mip-fh-paging-curr-box span:last-of-type {
+    color: #666;
+}
+
+.mip-fh-paging-select {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    outline: none;
+    opacity: 0;
+}
+
+.mip-fh-paging-arrow {
+    display: inline-block;
+    border-width: 0 0 2px 2px;
+    width: 8px;
+    height: 8px;
+    border-style: solid;
+    border-color: transparent transparent #c7c7c7 #c7c7c7;
+    -webkit-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    margin-top: -6px;
+    margin-left: 0.15rem;
+    vertical-align: middle;
+}
