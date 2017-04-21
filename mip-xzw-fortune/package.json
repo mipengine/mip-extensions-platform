@@ -1,0 +1,13 @@
+{
+    "name": "mip-xzw-fortune",
+    "version": "1.0.0",
+    "description": "星座屋运势详情组件",
+    "author": {
+        "name": "Amadalijun",
+        "email": "mipxzw@163.com",
+        "url": "http://www.xingzuowu.com/"
+    },
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
