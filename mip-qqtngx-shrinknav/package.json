@@ -1,0 +1,15 @@
+{
+    "name": "mip-qqtngx-shrinknav",
+    "version": "1.0.0",
+    "description": "组件介绍",
+    "contributors": [
+        {
+            "name": "Yang",
+			"email": "409210932@qq.com",
+            "url": "http://m.qqtn.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.0.0"
+    }
+}
