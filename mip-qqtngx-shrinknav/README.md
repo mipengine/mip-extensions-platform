@@ -1,6 +1,6 @@
 # mip-qqtngx-shrinknav
 
-mip-qqtngx-shrinknav 腾牛个性页面的伸缩导航
+mip-qqtngx-shrinknav 腾牛个性页面的内容植入和伸缩导航
 
 标题|内容
 ----|----
@@ -11,7 +11,7 @@ mip-qqtngx-shrinknav 腾牛个性页面的伸缩导航
 
 ## 示例
 
-### 个人统计
+### 腾牛个性页面的内容植入和伸缩导航
 ```html
 <mip-qqtngx-shrinknav></mip-qqtngx-shrinknav>
 ```

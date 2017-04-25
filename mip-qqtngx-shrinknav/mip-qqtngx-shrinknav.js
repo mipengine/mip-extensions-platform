@@ -15,15 +15,21 @@ define(function (require) {
     var customData = { // 获取数据
         gxqmData: JSON.parse($('.f-gx-data-' + pageAttr.catalogid).html())
     };
-
+    var pageTitle = {
+        titleText: $('.f-gx-name-' + pageAttr.catalogid).text().replace(/\s+/g, '')
+    };
     var dataArray = { // 设置数组
         gxArrayHot: [],
         gxArray: []
     };
     var pageJs = {
         init: function () {
+            this.replaceTitle(); // 替换标题
             this.addNavData(); // 添加导航数据
             this.hideBtn(); // 点击显示影藏
+        },
+        replaceTitle: function () {
+            $('.f-page-title').text(pageTitle.titleText);
         },
         addNavData: function () {
             var gxData = customData.gxqmData; // 个性签名数
