@@ -72,7 +72,7 @@ define(function (require) {
                             $(this).html('<a href="javascript:;">收起</a>');
                             $('.m-classnav-hide').show();
                         }
-                        else {
+                        else if (thisBtnName === '收起') {
                             $(this).html('<a href="javascript:;">更多</a>');
                             $('.m-classnav-hide').hide();
                         }
