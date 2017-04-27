@@ -2,7 +2,7 @@
 * 星座屋mip改造
 * @file 运势页面
 * @author mipxzw@163.com
-* @version 1.0.0
+* @version 1.0.1
 */
 define(function (require) {
     var $ = require('zepto');
@@ -36,6 +36,7 @@ define(function (require) {
         $(document).on('click', '.bg_black', function (e) {
             starBox.hide();
             starbg.hide();
+            isShowStar = false;
         });
         // 根据请求更换不同星座数据
         var aid = getUrl('aid');
@@ -52,6 +53,7 @@ define(function (require) {
             dataType: 'jsonp',
             jsonp: 'callback',
             jsonpCallback: 'call_fortune',
+            cache: true,
             success: function (data) {
                 starData = data.data;
                 getFortuneHtml(starData[0]);
