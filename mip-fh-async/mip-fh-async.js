@@ -29,6 +29,7 @@ define(function (require) {
         var activeClass = element.getAttribute('active-class');
         var template = element.getAttribute('template');
         var jsonp = element.getAttribute('jsonp');
+        var timestamp = element.hasAttribute('timestamp');
 
         // 元素参数
         var opt = {
@@ -38,7 +39,8 @@ define(function (require) {
             block: block,
             activeClass: activeClass,
             template: template,
-            jsonp: jsonp
+            jsonp: jsonp,
+            timestamp: timestamp
         };
 
         return opt;
@@ -75,13 +77,16 @@ define(function (require) {
 
         // 获取当前元素属性
         var opt = getOpt(element);
-        var data = JSON.parse(opt.data);
-        var url = formatQuery(opt.url, data);
+        var data = JSON.parse(opt.data) || {};
         var activeClass = opt.activeClass;
         var id = opt.id;
         var jsonp = opt.jsonp;
         var block = doc.querySelector(opt.block);
         var btn = doc.querySelectorAll('[on="tap:' + id + '.send"]');
+        var timestamp = opt.timestamp;
+        timestamp && (data.t = +new Date());
+
+        var url = formatQuery(opt.url, data);
 
         var fetchCfg = {
             method: 'get'
@@ -102,6 +107,8 @@ define(function (require) {
                 jsonpCallback: 'callback'
             }).then(function (res) {
                 return res.json();
+            }).catch(function () {
+                alert('失败，请重试');
             }).then(function (data) {
                 complete.call(self, btn, activeClass);
                 display(element, data, block);
@@ -111,10 +118,16 @@ define(function (require) {
             fetch(url, fetchCfg).then(function (res) {
                 return res.text();
             }).then(function (text) {
-                text = JSON.parse(text) || {};
+                var data;
+                try {
+                    data = JSON.parse(text);
+                }
+                catch (e) {
+                    data = {};
+                }
 
                 complete.call(self, btn, activeClass);
-                display(element, text, block);
+                display(element, data, block);
             });
         }
     }
