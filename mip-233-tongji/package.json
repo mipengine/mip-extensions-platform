@@ -1,0 +1,10 @@
+{
+    "name": "mip-233-tongji",
+    "version": "1.0.0",
+    "description":"添加cnzz统计",
+    "author": {
+        "name": "233tongji",
+        "email": "446545975@qq.com",
+        "url": "www.233.com"
+    }
+}
