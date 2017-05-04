@@ -122,7 +122,7 @@ define(function (require) {
                         myAttentionList();
                         $('#Attention').attr('data-state', '0');
                         $('#Attention').html('取消关注');
-                        handlePrompt('关注成功');
+                        alert('关注成功');
                     }
                 }
             });
@@ -140,7 +140,7 @@ define(function (require) {
                         myAttentionList();
                         $('#Attention').attr('data-state', '1');
                         $('#Attention').html('关注公司');
-                        handlePrompt('取消关注成功');
+                        alert('取消关注成功');
                     }
                 }
             });
@@ -185,7 +185,7 @@ define(function (require) {
                         myBlockList();
                         $('#BlockCompany').attr('data-state', '1');
                         $('#BlockCompany').html('移出黑名单');
-                        handlePrompt('已拉入黑名单');
+                        alert('已拉入黑名单');
                     }
                 }
             });
@@ -203,7 +203,7 @@ define(function (require) {
                         myBlockList();
                         $('#BlockCompany').attr('data-state', '0');
                         $('#BlockCompany').html('拉入黑名单');
-                        handlePrompt('已移出黑名单');
+                        alert('已移出黑名单');
                     }
                 }
             });
