@@ -108,7 +108,7 @@ define(function (require) {
     function attention() {
         var Attstate = $('#Attention').attr('data-state');
         var $comNuber = $('#companydetail').attr('data-comnuber');
-        if (Attstate === 1 && $('#Attention').html() === '关注公司') {
+        if (Attstate === '1' && $('#Attention').html() === '关注公司') {
             $.ajax({
                 url: '/Company/AttentionCompany',
                 type: 'post',
@@ -171,7 +171,7 @@ define(function (require) {
     function blockCompany() {
         var Blockstate = $('#BlockCompany').attr('data-state');
         var $compName = $('#companydetail').attr('data-compname');
-        if (Blockstate === 0 && $('#BlockCompany').html() === '拉入黑名单') {
+        if (Blockstate === '0' && $('#BlockCompany').html() === '拉入黑名单') {
             $.ajax({
                 url: '/Company/SaveBlockCompany',
                 type: 'post',
