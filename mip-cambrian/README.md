@@ -12,12 +12,12 @@ mip-cambrian 寒武纪组件，调用此组件，会向superframe postmessage，
 
 ### 基本用法
 ```html
-<mip-cambrian id="12345"></mip-cambrian>
+<mip-cambrian site-id="12345"></mip-cambrian>
 ```
 
 ## 属性
 
-### id
+### site-id
 
 说明：官方号唯一id
 必选项：是
