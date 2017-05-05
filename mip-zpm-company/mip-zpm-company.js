@@ -53,7 +53,7 @@ define(function (require) {
         // 关注，拉黑
         if ($('#Attention')) {
             $('#Attention').click(function () {
-                if ($userinfo !== 0) {
+                if ($userinfo !== '0') {
                     attention();
                 } else {
                     userLogin(true);
@@ -62,7 +62,7 @@ define(function (require) {
         }
         if ($('#BlockCompany')) {
             $('#BlockCompany').click(function () {
-                if ($userinfo !== 0) {
+                if ($userinfo !== '0') {
                     blockCompany();
                 } else {
                     userLogin(true);
