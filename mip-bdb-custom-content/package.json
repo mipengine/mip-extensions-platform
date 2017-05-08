@@ -1,0 +1,13 @@
+{
+    "name": "mip-bdb-custom-content",
+    "version": "1.0.0",
+	"description":"展示文章结尾的自定义内容版块",
+    "author": {
+        "name": "56",
+        "email": "569477480@qq.com",
+        "url": "http://m.bendibao.com"
+    },
+    "engines": {
+        "mip": ">=1.1.3"
+    }
+}
