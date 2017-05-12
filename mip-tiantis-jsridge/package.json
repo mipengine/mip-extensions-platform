@@ -1,0 +1,14 @@
+{
+    "name": "mip-tiantis-jsridge",
+    "version": "1.0.0",
+    "description": "封装了天梯建站系统的JS逻辑",
+    "contributors": [
+        {
+            "name": "tiantis",
+            "email": "renyanwei@qihuiwang.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
