@@ -1,0 +1,14 @@
+{
+    "name": "mip-cambrian-article",
+    "version": "1.0.0",
+    "description": "寒武纪文章落地页",
+    "contributors": [
+        {
+            "name": "lixiaoqing",
+            "email": "lixiaoqing01@baidu.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

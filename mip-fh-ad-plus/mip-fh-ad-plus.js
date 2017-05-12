@@ -144,7 +144,7 @@ define(function (require) {
                 uid = element.attr('fh-ad-uid');
 
                 // 根据医生id判断物料类型
-                v = (query.uid && util.fn.isPlainObject(v)) ? v[uid] : v;
+                v = (query.uid && $.isPlainObject(v)) ? v[uid] : v;
 
                 // 有特定广告位id的直投广告 先隐藏网盟 再显示直投
                 if ($.trim(v)) {
