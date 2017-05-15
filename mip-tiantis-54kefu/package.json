@@ -1,0 +1,12 @@
+{
+    "name": "mip-tiantis-54kefu",
+    "version": "1.0.0",
+	"description": "封装了54kefu",
+    "author": {
+        "name": "tiantis",
+        "email": "renyanwei@qihuiwang.com"
+    },
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
