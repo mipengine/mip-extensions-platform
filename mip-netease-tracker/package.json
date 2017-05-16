@@ -1,0 +1,9 @@
+{
+    "name": "mip-netease-tracker",
+    "version": "1.0.0",
+    "description": "tracker for netease mobile site",
+    "author": {
+        "name": "zhangyiding",
+        "email": "zhangyiding@corp.netease.com"
+    }
+}
