@@ -14,7 +14,7 @@ define(function (require) {
          * @return {Promise<Object[]>} 推荐列表数据
          */
         fetch: function () {
-            return jsonp('http://c.m.163.com/nc/backflow/jsonp/clickrate.html', {
+            return jsonp('https://c.m.163.com/nc/backflow/jsonp/clickrate.html', {
                 jsonpCallback: 'callback',
                 jsonpCallbackFunction: 'newsappBackFlow'
             }).then(function (res) {
