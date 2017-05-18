@@ -15,9 +15,9 @@ define(function () {
     function shouldRenderFooter() {
         var lastShowTime = 0;
         try {
-            lastShowTime = localStorage.getItem(key) || 0;
-        } catch (e) {}
-        if (lastShowTime === 0 || timestamp() - lastShowTime < hideTime) {
+            lastShowTime = parseInt(localStorage.getItem(key), 10) || 0;
+        } catch (e) { }
+        if (lastShowTime === 0 || timestamp() - lastShowTime > hideTime) {
             return true;
         }
         return false;
@@ -26,7 +26,7 @@ define(function () {
     function setLastCloseTime() {
         try {
             localStorage.setItem(key, timestamp());
-        } catch (e) {}
+        } catch (e) { }
     }
 
     return {

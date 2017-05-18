@@ -12,9 +12,13 @@ mip-netease-article-recommend 为网易移动站文章页实现了底部相关�
 
 ### 基本使用
 
+**必须包裹在具有 bottom-fixed 类名的mip-fix组件内**
+
 ```html
-<mip-netease-article-recommend>
-</mip-netease-article-recommend>
+<mip-fixed type="bottom" class="bottom-fixed">
+  <mip-netease-article-recommend>
+  </mip-netease-article-recommend>
+</mip-fixed>
 ```
 
 ## 属性

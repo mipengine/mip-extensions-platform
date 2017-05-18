@@ -7,6 +7,7 @@
 define(function (require) {
     var resizeImg = require('./utils/resizeImg');
     var display = require('./utils/displayState');
+    var rootElement;
 
     var currentImage;
     var currentIndicator;
@@ -24,14 +25,14 @@ define(function (require) {
     /**
      * 创建DOM
      *
-     * @param {Array} list  列表数据
+     * @param {Object[]} list  列表数据
      * @return {HTMLDivElement|boolean} 页脚根结点
      */
     function build(list) {
         if (!list || !list.length || !display.shouldRenderFooter()) {
             return false;
         }
-        var rootElement = document.createElement('div');
+        rootElement = document.createElement('div');
         rootElement.classList.add('doc-footer');
 
         var scrollTitleHTML = '';
@@ -83,7 +84,7 @@ define(function (require) {
      *
      * @param {HTMLDivElement} rootElement 根结点(已插入document)
      */
-    function initControl(rootElement) {
+    function initControl() {
         var closeButton = rootElement.querySelector('.close-btn');
 
         openApp = rootElement.querySelector('.open-app');
@@ -115,11 +116,7 @@ define(function (require) {
         closeButton.addEventListener('click', function (e) {
             e.stopPropagation();
             e.preventDefault();
-            rootElement.classList.remove('doc-footer-show');
-            if (interval) {
-                clearInterval(interval);
-            }
-            display.setLastCloseTime();
+            close();
         });
 
         // 跑马灯开始
@@ -167,6 +164,19 @@ define(function (require) {
         currentIndicator.classList.remove('scroll-indicator-current');
         currentIndicator = indicatorList[index];
         currentIndicator.classList.add('scroll-indicator-current');
+    }
+
+    /**
+     * 关闭悬浮框(依赖外层 mip-fixed.bottom-fixed)
+     */
+    function close() {
+        rootElement.classList.remove('doc-footer-show');
+        document.querySelector('.bottom-fixed').classList.remove('bottom-fixed-show');
+        document.body.classList.remove('article-footer-show');
+        if (interval) {
+            clearInterval(interval);
+        }
+        display.setLastCloseTime();
     }
 
     return {

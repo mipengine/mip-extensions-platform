@@ -25,6 +25,7 @@ define(function (require) {
             }
             mipElement.appendChild(rootElement);
             DOM.initControl(rootElement);
+            document.querySelector('.bottom-fixed').classList.add('bottom-fixed-show');
             document.body.classList.add('article-footer-show');
         }).catch(function () {});
     };
