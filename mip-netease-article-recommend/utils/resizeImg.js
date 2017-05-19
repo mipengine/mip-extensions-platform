@@ -26,7 +26,7 @@ define(function (require) {
         var resizedImgSrc;
 
         if (src.indexOf('nosdn.127.net/') !== -1) {
-            resizedImgSrc = 'http://imgsize.ph.126.net/?imgurl=' + src + '_' + width + 'x' + height + 'x1x' + quality + '.jpg' + (enlarge ? '&enlarge=true' : '');
+            resizedImgSrc = 'https://imgsize.ph.126.net/?imgurl=' + src + '_' + width + 'x' + height + 'x1x' + quality + '.jpg' + (enlarge ? '&enlarge=true' : '');
         } else {
             resizedImgSrc = src.replace(/\?imageView.*/, '');
             resizedImgSrc = resizedImgSrc + '?imageView&thumbnail=' + width + 'y' + height;
