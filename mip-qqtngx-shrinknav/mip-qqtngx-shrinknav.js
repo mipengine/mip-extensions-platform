@@ -60,7 +60,7 @@ define(function (require) {
             this.addDateFunction(document.querySelector('.g-gxhide-nav'), dataArray);
         },
         hideBtn: function () {
-            $('.m-classnav-hide h3').text('全部标签（' + customData.gxqmData.length + '）');
+            $('.m-classnav-hide h3').text('全部标签（' + customData.gxqmData.length - 10 + '）');
             var textOff = '';
             var textObtain = setInterval(function () {
                 textOff = $('.g-gxhot-nav li').first().text();
