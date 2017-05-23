@@ -2,11 +2,11 @@
  * @file mip-sn-shop-floor 组件
  * @author 16031316@suning.com
  */
+
 define(function (require) {
 
     var customEle = require('customElement').create();
     var templates = require('templates');
-    var fetch = require('fetch');
     var fetchJsonp = require('fetch-jsonp');
 
     /**
@@ -55,6 +55,11 @@ define(function (require) {
             templates.render(self.element, data).then(function (html) {
                 var htmlNew = html.replace(/mip-link-tmp/g, 'mip-link');
                 self.element.innerHTML = htmlNew;
+
+                // 注册返回按钮事件
+                document.getElementById('sn-icon-back').addEventListener('click', function () {
+                    window.history.go(-1);
+                });
             });
         }
         else {
@@ -66,6 +71,7 @@ define(function (require) {
 
         var self = this;
 
+        // 并没有用到，保留
         window.getStoreInfoCallback = function (json) {
 
             if (json.code === '0' && json.data) {
