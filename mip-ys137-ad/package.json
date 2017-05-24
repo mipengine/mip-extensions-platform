@@ -1,0 +1,14 @@
+{
+    "name": "mip-ys137-ad",
+    "version": "1.0.0",
+    "description": "管理页面上的所有广告位",
+    "contributors": [
+        {
+            "name": "regboy",
+            "email": "regboy@qq.com"
+        } 
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
