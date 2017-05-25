@@ -26,7 +26,7 @@ mip-ys137-ad 管理页面上的所有广告位
 
 ### 直接投放百度广告
 ```html
-<mip-ys137-ad tu="nbdqx58bef">
+<mip-ys137-ad tu="tfgERfhhh">
 </mip-ys137-ad>
 ```
 

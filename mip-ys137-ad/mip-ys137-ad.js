@@ -26,10 +26,7 @@ define(function (require) {
         var adId = [opt.id] || [0];
         var element = opt.element;
         var tuId = opt.tu;
-        if (tuId !== '') { // 有设置tu的，优先展现
-            element.innerHTML = getBaiduAd(tuId);
-        }
-        else {
+        if (tuId === null || tuId === '') { // 有设置tu的，优先展现
             switch (+adId) {
                 case 1: // 分页后（四图）
                     element.innerHTML = getBaiduAd('nbdqx58bef');
@@ -44,6 +41,8 @@ define(function (require) {
                     element.innerHTML = '';
                     break;
             }
+        } else {
+            element.innerHTML = getBaiduAd(tuId);
         }
     };
     // 获取插件参数

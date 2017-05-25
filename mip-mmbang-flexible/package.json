@@ -1,0 +1,14 @@
+{
+    "name": "mip-mmbang-flexible",
+    "version": "1.0.0",
+    "description": "妈妈帮移动端适配方案----flexible",
+    "contributors": [
+        {
+			"name": "dengzehua",
+			"email": "dengzehua@mmbang.net"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

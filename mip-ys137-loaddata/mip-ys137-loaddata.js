@@ -29,7 +29,7 @@ define(function (require) {
     var init = function (opt) {
         opt = opt || {};
         // 设置配置项默认值
-        var action = [opt.action] || ['auto'];
+        var action = opt.action;
         var element = opt.element;
 
         if (action === 'click') {
@@ -45,7 +45,7 @@ define(function (require) {
     var getOpt = function (element) {
         // 获取元素绑定的属性
         var action = element.getAttribute('action');
-        if (action === '') {
+        if (action === null || action === '') {
             action = 'auto';
         }
 
