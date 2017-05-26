@@ -35,7 +35,7 @@ define(function (require) {
                     element.innerHTML = getBaiduAd('u4djpnkdfe');
                     break;
                 case 3: // 头部
-                    element.innerHTML = ''; // 预留
+                    element.innerHTML = getBaiduAd('ggdge41lc5');
                     break;
                 default:
                     element.innerHTML = '';

@@ -19,9 +19,17 @@ mip-ys137-loaddata 异步加载数据
 ### 点击加载
 ```html
 <mip-ys137-loaddata action="click">
-	<div>加载数据</div>
+	<div>点击加载</div>
 </mip-ys137-loaddata>
 ```
+### 传自定义参数
+```html
+<mip-ys137-loaddata action="click">
+	<div>点击加载</div>
+</mip-ys137-loaddata>
+```
+
+
 ### 滚动到即加载
 ```html
 <div style="height:1000px;">
@@ -42,3 +50,11 @@ mip-ys137-loaddata 异步加载数据
 类型：字符串
 取值范围：auto,click,roll
 默认值：auto
+
+### params
+
+说明：附加参数，格式为json
+必选项：否
+类型：字符串
+取值范围：
+默认值：''

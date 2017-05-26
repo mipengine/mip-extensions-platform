@@ -11,9 +11,18 @@ define(function (require) {
     var ajaxurl = 'https://api.ys137.com/get_mipdata?';
 
     // 加载数据
-    var getdata = function (container) {
+    var getdata = function (container, params) {
         var fetchJsonp = require('fetch-jsonp');
-        fetchJsonp(ajaxurl, {
+        var url = ajaxurl;
+        if (params !== null) {
+            var ps = [];
+            for (var p in params) {
+                ps.push(p + '=' + params[p]);
+            }
+            url = ajaxurl + ps.join('&');
+        }
+
+        fetchJsonp(url, {
             jsonpCallback: 'callback'
         }).then(function (res) {
             return res.json();
@@ -31,20 +40,28 @@ define(function (require) {
         // 设置配置项默认值
         var action = opt.action;
         var element = opt.element;
-
+        var params = opt.params;
         if (action === 'click') {
             element.addEventListener('click', function () {
-                getdata(element);
+                getdata(element, params);
             }, false);
         }
         else {
-            getdata(element);
+            getdata(element, params);
         }
     };
     // 获取插件参数
     var getOpt = function (element) {
         // 获取元素绑定的属性
         var action = element.getAttribute('action');
+        var params = null;
+        if (element.getAttribute('params') !== '' && element.getAttribute('params') !== null) {
+            try {
+                params = JSON.parse(element.getAttribute('params').replace(/'/g, '"'));
+            }
+            catch (error) {}
+        }
+
         if (action === null || action === '') {
             action = 'auto';
         }
@@ -52,6 +69,7 @@ define(function (require) {
         // 广告初始化参数
         var opt = {
             action: action,
+            params: params,
             element: element
         };
         return opt;
