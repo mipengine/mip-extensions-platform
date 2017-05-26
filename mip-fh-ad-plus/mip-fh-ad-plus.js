@@ -161,13 +161,13 @@ define(function (require) {
 
                     $body.addClass('view-fh-ad-' + (+k) + '-union');
                 }
-
-                // 所有的直投广告位均无直投广告
-                if (!isHasFhAd) {
-                    $body.addClass('view-fh-ad-union');
-                    $emptyShowEle.show();
-                }
             });
+
+            // 所有的直投广告位均无直投广告
+            if (!isHasFhAd) {
+                $body.addClass('view-fh-ad-union');
+                $emptyShowEle.show();
+            }
         });
 
     }

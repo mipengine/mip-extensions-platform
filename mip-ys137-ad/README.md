@@ -30,6 +30,15 @@ mip-ys137-ad 管理页面上的所有广告位
 </mip-ys137-ad>
 ```
 
+### 投放图加广告
+```html
+<div class="pic">
+<mip-img src="https://img.ys137.com/data/upload/ueditor/20170524/592562f153994.jpg"></mip-img><br><br><br>
+<mip-img src="https://img.ys137.com/data/upload/ueditor/20170524/592562997eb90.jpg"></mip-img>
+</div>
+<mip-ys137-ad id="99999" for-class="pic">
+</mip-ys137-ad>
+```
 ## 属性
 
 ### id

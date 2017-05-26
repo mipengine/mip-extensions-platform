@@ -20,6 +20,24 @@ define(function (require) {
             tuId,
             '"></div></mip-ad>'].join('');
     };
+    // 图加广告
+    var tujia = function (forClass) {
+        var $ = require('jquery'); // 导入jquery
+        var target = $('.' + forClass);
+        target.find('img').each(function () {
+            var tujia = $('<div class="photo-plus-container"></div>');
+            $(this).wrap(tujia);
+            var str = [
+                '<div class="div-link"><iframe src="https://m.ys137.com/tujia/tujia.html" name="ifm"',
+                ' style="width:100%;height:60px;margin:0;"',
+                ' height="60px" marginheight="0" scrolling="',
+                'no" frameborder="0" allowtransparency="true"',
+                '></iframe><span class="close-l">x</span></div>'].join('');
+            $(str).insertAfter($(this)).find('.close-l').click(function () {
+                $(this).parent('.div-link').hide();
+            });
+        });
+    };
     // 初始化插件
     var init = function (opt) {
         opt = opt || {}; // 设置配置项默认值
@@ -37,11 +55,15 @@ define(function (require) {
                 case 3: // 头部
                     element.innerHTML = getBaiduAd('ggdge41lc5');
                     break;
+                case 99999: // 图+广告
+                    tujia(opt.forclass);
+                    break;
                 default:
                     element.innerHTML = '';
                     break;
             }
-        } else {
+        }
+        else {
             element.innerHTML = getBaiduAd(tuId);
         }
     };
@@ -51,11 +73,13 @@ define(function (require) {
         var adId = element.getAttribute('id');
         var isLazy = element.getAttribute('lazy');
         var tuId = element.getAttribute('tu');
+        var forClass = element.getAttribute('for-class');
         // 广告初始化参数
         var opt = {
             id: adId,
             lazy: isLazy,
             tu: tuId,
+            forclass: forClass,
             element: element
         };
         return opt;
