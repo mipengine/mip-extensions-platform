@@ -1,0 +1,12 @@
+{
+    "name": "mip-icms-comment",
+    "version": "1.0.0",
+     "description": "icms评论功能",
+    "author": {
+        "name": "点点",
+        "email": "sy3t1m@qq.com"
+    },
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
