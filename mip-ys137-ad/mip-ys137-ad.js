@@ -12,29 +12,32 @@ define(function (require) {
     // 加载百度反屏蔽代码
     var getBaiduAd = function (tuId) {
         return [
-            '<mip-ad type="baidu-wm-ext" domain="',
-            baiduDomain,
-            '" token="',
-            tuId,
-            '"><div id="',
-            tuId,
-            '"></div></mip-ad>'].join('');
+            '<script src="',
+            document.location.protocol,
+            '//' + baiduDomain,
+            '/' + tuId + '.js',
+            '"></script>'].join('');
     };
+
     // 图加广告
     var tujia = function (forClass) {
         var $ = require('jquery'); // 导入jquery
         var target = $('.' + forClass);
-        target.find('img').each(function () {
+        target.find('mip-img').each(function () {
             var tujia = $('<div class="photo-plus-container"></div>');
             $(this).wrap(tujia);
-            var str = [
-                '<div class="div-link"><iframe src="https://m.ys137.com/tujia/tujia.html" name="ifm"',
-                ' style="width:100%;height:60px;margin:0;"',
-                ' height="60px" marginheight="0" scrolling="',
-                'no" frameborder="0" allowtransparency="true"',
-                '></iframe><span class="close-l">x</span></div>'].join('');
-            $(str).insertAfter($(this)).find('.close-l').click(function () {
-                $(this).parent('.div-link').hide();
+            // 控件进入可视区域时，展现图加
+            $(this).one('DOMSubtreeModified', function (e) {
+                var photoContainer = this;
+                var str = [
+                    '<div class="div-link"><iframe src="https://m.ys137.com/tujia/tujia.html" name="ifm"',
+                    ' style="width:100%;height:60px;margin:0;"',
+                    ' height="60px" marginheight="0" scrolling="',
+                    'no" frameborder="0" allowtransparency="true"',
+                    '></iframe><span class="close-l">x</span></div>'].join('');
+                $(str).insertAfter($(photoContainer)).find('.close-l').click(function () {
+                    $(this).parent('.div-link').hide();
+                });
             });
         });
     };

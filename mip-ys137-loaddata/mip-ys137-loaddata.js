@@ -46,6 +46,11 @@ define(function (require) {
                 getdata(element, params);
             }, false);
         }
+        else if (action === 'delay') {
+            setTimeout(function () {
+                getdata(element, params);
+            }, opt.delay);
+        }
         else {
             getdata(element, params);
         }
@@ -54,6 +59,7 @@ define(function (require) {
     var getOpt = function (element) {
         // 获取元素绑定的属性
         var action = element.getAttribute('action');
+        var delay = parseInt(element.getAttribute('delay'), 10);
         var params = null;
         if (element.getAttribute('params') !== '' && element.getAttribute('params') !== null) {
             try {
@@ -70,6 +76,7 @@ define(function (require) {
         var opt = {
             action: action,
             params: params,
+            delay: delay,
             element: element
         };
         return opt;

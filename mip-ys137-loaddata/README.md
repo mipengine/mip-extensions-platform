@@ -40,6 +40,12 @@ mip-ys137-loaddata 异步加载数据
 ```
 
 
+### 延时N毫秒即加载
+```html
+<mip-ys137-loaddata action="delay">
+	<div>加载中...</div>
+</mip-ys137-loaddata>
+```
 
 ## 属性
 
@@ -48,8 +54,16 @@ mip-ys137-loaddata 异步加载数据
 说明：加载数据的方式
 必选项：否
 类型：字符串
-取值范围：auto,click,roll
+取值范围：auto,click,roll，delay
 默认值：auto
+
+### delay
+
+说明：延时毫秒
+必选项：否
+类型：数字
+取值范围：
+默认值：0
 
 ### params
 
