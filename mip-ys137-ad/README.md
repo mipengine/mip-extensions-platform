@@ -42,6 +42,7 @@ mip-ys137-ad 管理页面上的所有广告位
 <mip-ys137-ad id="99999" for-class="pic" lazy="false">
 </mip-ys137-ad>
 ```
+
 ## 属性
 
 ### id

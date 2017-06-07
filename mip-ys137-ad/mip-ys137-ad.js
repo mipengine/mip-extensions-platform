@@ -10,13 +10,11 @@ define(function (require) {
     var customElem = require('customElement').create();
     var baiduDomain = 'dm50.ys137.com';
     // 加载百度反屏蔽代码
-    var getBaiduAd = function (tuId) {
-        return [
-            '<script src="',
-            document.location.protocol,
-            '//' + baiduDomain,
-            '/' + tuId + '.js',
-            '"></script>'].join('');
+    var getBaiduAd = function (element, tuId) {
+        element.innerHTML = '<div id="' + tuId + '"></div>';
+        var script = document.createElement('script');
+        script.src = document.location.protocol + '//' + baiduDomain + '/' + tuId + '.js';
+        document.body.appendChild(script);
     };
 
     // 图加广告
@@ -50,13 +48,13 @@ define(function (require) {
         if (tuId === null || tuId === '') { // 有设置tu的，优先展现
             switch (+adId) {
                 case 1: // 分页后（四图）
-                    element.innerHTML = getBaiduAd('nbdqx58bef');
+                    getBaiduAd(element, 'nbdqx58bef');
                     break;
                 case 2: // 分页后（搜索推荐）
-                    element.innerHTML = getBaiduAd('u4djpnkdfe');
+                    getBaiduAd(element, 'u4djpnkdfe');
                     break;
                 case 3: // 头部
-                    element.innerHTML = getBaiduAd('ggdge41lc5');
+                    getBaiduAd(element, 'ggdge41lc5');
                     break;
                 case 99999: // 图+广告
                     tujia(opt.forclass);
@@ -67,7 +65,7 @@ define(function (require) {
             }
         }
         else {
-            element.innerHTML = getBaiduAd(tuId);
+            getBaiduAd(element, tuId);
         }
     };
     // 获取插件参数
