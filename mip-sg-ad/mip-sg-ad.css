@@ -1,0 +1,26 @@
+mip-sg-ad > a {
+    position: relative;
+    display: block;
+}
+
+mip-sg-ad .gg_adbox_tips {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    display: block;
+    width: 3pc;
+    height: 18px;
+}
+
+mip-sg-ad button {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background: #000;
+    color: #fff;
+    cursor: pointer;
+    font-size: 12px;
+    font-style: inherit;
+    padding: 2px 10px;
+    border: none;
+}
