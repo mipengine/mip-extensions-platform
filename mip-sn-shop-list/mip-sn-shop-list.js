@@ -3,7 +3,6 @@
  * @author 16031316@suning.com
  */
 
-// var mustMod = ['require', 'customElement', 'templates', 'fetch-jsonp', 'fetch'];
 define(function (require) {
 
     var customElement = require('customElement').create();
@@ -19,10 +18,20 @@ define(function (require) {
     function renderHtml(t) {
         var self = this;
         if (t && t.items && t.items instanceof Array) {
+            formateActUrl(t.items);
             templates.render(self.element, t.items).then(render.bind(self));
         }
         else {
         }
+    }
+
+    function formateActUrl(items) {
+        var actUrl = '//res.m.suning.com/project/sideSuning/details.html?activityCode=';
+        $.each(items, function (idx, item) {
+            if (!item.activityUrl && item.activityCode) {
+                item.activityUrl = actUrl + item.activityCode;
+            }
+        });
     }
 
     function render(t) {
