@@ -13,7 +13,7 @@ define(function (require) {
         var a = document.createElement('script');
         a.src = 'https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js';
         var r = ['var cloudTieConfig ={url:"' + u + '","sourceId:"'
-        + s + '",productKey:"' + p + ',target:"' + t + '"};'].join('');
+        + s + '",productKey:"' + p + '",target:"' + t + '"};'].join('');
         var d = document.createElement('script');
         d.innerHTML = r;
         i.appendChild(d), i.appendChild(a);
