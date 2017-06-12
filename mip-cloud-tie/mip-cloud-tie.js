@@ -9,10 +9,10 @@ define(function (require) {
         var s = i.getAttribute('sourceId');
         var p = i.getAttribute('productKey');
         var t = i.getAttribute('target') || 'cloud-tie-wrapper';
-        var u = i.getAttribute('url');
+        var u = i.getAttribute('url') || document.querySelector('link[rel="canonical"]').getAttribute('href');
         var a = document.createElement('script');
         a.src = 'https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js';
-        var r = ['var cloudTieConfig ={url:"' + u + '","sourceId:"'
+        var r = ['var cloudTieConfig ={url:"' + u + '",sourceId:"'
         + s + '",productKey:"' + p + '",target:"' + t + '"};'].join('');
         var d = document.createElement('script');
         d.innerHTML = r;
