@@ -26,6 +26,15 @@ define(function (require) {
             return res.json();
         }).then(function (data) {
             element.innerHTML = data[0];
+            if (data[1]) {
+                if (document.querySelector('.content')) {
+                    var oParent = document.querySelector('.content');
+                    var newNode = document.createElement('div');
+                    var reforeNode = document.querySelector('.leading');
+                    newNode.innerHTML = data[1];
+                    oParent.insertBefore(newNode, reforeNode.nextSibling);
+                }
+            }
         });
 
     };

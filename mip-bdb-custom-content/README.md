@@ -1,4 +1,4 @@
-# mip-bdb-custom-content 
+﻿# mip-bdb-custom-content 
 
 mip-bdb-custom-content 用来支持本地宝文章结尾的自定义内容版块显示
 
@@ -15,7 +15,7 @@ mip-bdb-custom-content 用来支持本地宝文章结尾的自定义内容版块
 
 ```html
    <mip-bdb-custom-content 
-	wedir="news" 
+	webdir="news" 
 	url="http://m.cd.bendibao.com/news/240473.html"
 	title="成都本地宝"
 	>
