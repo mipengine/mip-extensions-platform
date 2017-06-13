@@ -18,7 +18,7 @@ define(function (require) {
         var url = element.getAttribute('url');
         var title = element.getAttribute('title');
         var type = element.getAttribute('type');
-        if (type === undefined) {
+        if (type === null) {
             type = 'mobile';
         }
 
