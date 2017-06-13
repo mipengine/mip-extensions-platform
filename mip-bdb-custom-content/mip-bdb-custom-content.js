@@ -17,24 +17,20 @@ define(function (require) {
         var webdir = element.getAttribute('webdir');
         var url = element.getAttribute('url');
         var title = element.getAttribute('title');
+        var type = element.getAttribute('type');
+        if (type === undefined) {
+            type = 'mobile';
+        }
 
 
         var fetchJsonp = require('fetch-jsonp');
-        fetchJsonp('https://api.bendibao.com/weixin_right.php?type=mobile&datatype=jsonp&webdir=' + webdir + '&theurl=' + url + '&title=' + title, {
-            jsonpCallback: 'jsoncallback'
+        fetchJsonp('https://api.bendibao.com/weixin_right.php?type=' + type + '&datatype=jsonp&webdir=' + webdir + '&theurl=' + url + '&title=' + title, {
+            jsonpCallback: 'jsoncallback',
+            jsonpCallbackFunction: 'bdbcallback'
         }).then(function (res) {
             return res.json();
         }).then(function (data) {
             element.innerHTML = data[0];
-            if (data[1]) {
-                if (document.querySelector('.content')) {
-                    var oParent = document.querySelector('.content');
-                    var newNode = document.createElement('div');
-                    var reforeNode = document.querySelector('.leading');
-                    newNode.innerHTML = data[1];
-                    oParent.insertBefore(newNode, reforeNode.nextSibling);
-                }
-            }
         });
 
     };

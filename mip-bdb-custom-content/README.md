@@ -18,6 +18,7 @@ mip-bdb-custom-content 用来支持本地宝文章结尾的自定义内容版块
 	webdir="news" 
 	url="http://m.cd.bendibao.com/news/240473.html"
 	title="成都本地宝"
+	type="mobile"
 	>
 	</mip-bdb-custom-content>
 
@@ -41,4 +42,9 @@ mip-bdb-custom-content 用来支持本地宝文章结尾的自定义内容版块
 
 说明: 当前调用页面的标题
 必填: 是
+
+### type
+
+说明: 调取内容类型
+必填: 否，默认mobile
     
