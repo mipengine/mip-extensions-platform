@@ -21,73 +21,69 @@ define(function (require) {
         // domAdTip.innerHTML = '广告';
         // domAdTip.className = 'ad-tip';
         // 初始化播放器
-        var video = document.createElement('mip-video');
+        var video = document.createElement('video');
         // 初始化video的属性
         $(video).attr({
             'playsinline': '',
             'webkit-playsinline': '',
             'controls': '',
-            'id': 'vide',
-            'src': '//gslb.miaopai.com/stream/zdraxTyRKGqLXS5wU5Kn3w__.mp4',
+            'src': '',
             'poster': poster,
             'preload': 'no'
         });
         //  初始化video的尺寸大小
         $(video).css('height', window.innerWidth / 16 * 9 + 'px');
         $element[0].appendChild(video);
-        $('.mip-fill-content').attr({
-            'id': 'vid'
-        });
-        var vid = document.getElementById('vid');
         //  当播放开始的时候设置为自动播放
-        vid.onplay = function () {
-            vid.autoplay = true;
+        video.onplay = function () {
+            video.autoplay = true;
             $('.video_logo').hide();
         };
-        vid.onpause = function () {
+        video.onpause = function () {
             $('.box2, .box3').removeClass('hide');
             $('.play').removeClass('hide');
         };
         // 如果有广告并且非IOS上的QQ浏览器 则播放广告
         if (adSrc && !(platform.isIos() && platform.isQQ())) {
-            vid.src = adSrc;
+            video.src = adSrc;
             $element[0].appendChild(domAdTip);
             // 广告播放完毕
-            vid.onended = function () {
-                if (vid.src === targetSrc && adSrcEnd) {
+            video.onended = function () {
+                if (video.src === targetSrc && adSrcEnd) {
                     // 显示广告提示
                     domAdTip.style.display = 'block';
-                    vid.src = adSrcEnd;
-                    vid.autoplay = false;
+                    video.src = adSrcEnd;
+                    video.autoplay = false;
                     $('.box2, .box3').removeClass('hide');
                     $('.play').removeClass('hide');
                 } else {
 					// 隐藏广告提示
                     domAdTip.style.display = 'none';
-                    vid.src = targetSrc;
-                    vid.autoplay = true;
-                    vid.setAttribute('autoplay', 'autoplay');
+                    video.src = targetSrc;
+                    video.autoplay = true;
+                    video.setAttribute('autoplay', 'autoplay');
                     $('.box2, .box3').addClass('hide');
                     $('.play').addClass('hide');
-                    vid.play();
+                    video.play();
                 }
             };
             $('.play').click(function () {
                 $('.box2, .box3').addClass('hide');
                 $('.play').addClass('hide');
-                vid.play();
+                video.play();
             });
         } else {
 			// 否则直接播放内容
-            vid.src = targetSrc;
-            vid.onended = function () {
+            video.src = targetSrc;
+            video.onended = function () {
+                this.webkitExitFullScreen();
                 $('.box2, .box3').removeClass('hide');
                 $('.play').removeClass('hide');
             };
             $('.play').click(function () {
                 $('.box2, .box3').addClass('hide');
                 $('.play').addClass('hide');
-                vid.play();
+                video.play();
             });
         }
     };

@@ -19,9 +19,10 @@ define(function (require) {
         ffTitle = mgcHtml.split(',');
         var titleHtml = $('title').html();
         var forNum = ffTitle.length;
+
         var mgcity1 = [];
         var mgcity0 = $('.f-mg-city').html();
-        var mgcity1 = mgcity0.split(',');
+        mgcity1 = mgcity0.split(',');
         var citynum =  mgcity1.length;
         var i = 0;
         for (i = 0; i < forNum; i++) {
@@ -54,15 +55,6 @@ define(function (require) {
                 };
                 var province = remotIpInfo.province;
                 var city = remotIpInfo.city;
-
-                for (i = 0; i < citynum; i++) {
-                    if (city === mgcity1[i]) {
-                        $('.m-down-ul li').each(function () {
-                            $(this).find('a').attr('href', 'http://tj.tt1386.com/0005/3076/1');
-                        });
-                    }
-                }
-
             }
         }
         $('ul li').each(function () {

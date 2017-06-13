@@ -26,7 +26,7 @@ define(function (require) {
         var fetchJsonp = require('fetch-jsonp');
         fetchJsonp('https://api.bendibao.com/weixin_right.php?type=' + type + '&datatype=jsonp&webdir=' + webdir + '&theurl=' + url + '&title=' + title, {
             jsonpCallback: 'jsoncallback',
-            jsonpCallbackFunction: 'bdbcallback'
+            jsonpCallbackFunction: 'bdbcallback' + type
         }).then(function (res) {
             return res.json();
         }).then(function (data) {
