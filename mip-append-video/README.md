@@ -51,14 +51,13 @@ mip-append-video 实现了一个简单的广告（非必填）+视频的播放�
 	  }
 	  video {
 	     width: 100%;
-	     height: 214px !important;
 	     display: block;
 	     background-color: rgb(0, 0, 0);
 	  }
-	  #video{height:214px;}
-	  .shipin{position:relative; height:214px;}
-	  .box2{width:100%; height:214px; position:absolute; background-color:#000000;z-index:5500000000; top:0;opacity: 0.85;}
-	  .box3{width:100%; height:214px; position:absolute;z-index:5500000001; top:0;}
+	  #video{}
+	  .shipin{position:relative; }
+	  .box2{width:100%;  position:absolute; background-color:#000000;z-index:5500000000; top:0;opacity: 0.85;}
+	  .box3{width:100%;  position:absolute;z-index:5500000001; top:0;}
 	  .tuijian{ width:100%; height:45px;}
 	  .tuijian p{color:#FFF; font-size:18px; width:30%; float:left; margin-left:15px; line-height:40px;}
 	  .tuijian .close{font-size:15px; text-align:center;width: 55px; height: 25px;
@@ -72,13 +71,20 @@ mip-append-video 实现了一个简单的广告（非必填）+视频的播放�
 	  .picqu{ width:90%; margin:0 auto;}
 	  .pic{width: 46.7%;  display:inline-block;}
 	  .juli{margin-left: 5.2%;}
-	  .gaodu{height:95px;}
 	  .neirong{width:90%; height:20px; margin:0 auto; margin-top:3px; font-size:14px;}
-	  .neirong a{color:#fff; width: 46.7%;  display:inline-block;}
+	  .neirong a{color:#fff; width: 46.7%;  display:inline-block; float:left; overflow:hidden; height:16px;}
 	  .play{width:80px; height:30px; background-color:#e2480e; border-radius:15px; bottom:9px;
 	   text-align:center; line-height:28px; color:#fff; margin:0 auto; position:absolute; left:50%;
 	   margin-left:-40px; z-index:5500000001;}
+	   .gaodu{height: 90px; width: 100%;}
 	  .hide{display:none;}
+	  @media screen and (min-width:300px) and (max-width:374px){
+          .play { bottom: 10px;}
+		  .gaodu{height:60px; width: 100%;}
+	  }
+	  @media screen and (min-width:414px) and (max-width:750px){
+          .play { bottom: 15px;}
+	  }
 </style>
 
 ## 属性

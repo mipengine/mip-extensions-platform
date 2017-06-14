@@ -24,24 +24,23 @@ define(function (require) {
         var video = document.createElement('video');
         // 初始化video的属性
         $(video).attr({
-            'playsinline': '',
-            'webkit-playsinline': '',
+            'id': 'vide',
             'controls': '',
             'src': '',
-            'poster': poster,
             'preload': 'no'
         });
         //  初始化video的尺寸大小
         $(video).css('height', window.innerWidth / 16 * 9 + 'px');
         $element[0].appendChild(video);
+        var height = $('#vide').height();
+        $('.shipin,.box2,.box3').height(height);
+        $('#video').css('height', 'height');
         //  当播放开始的时候设置为自动播放
         video.onplay = function () {
             video.autoplay = true;
             $('.video_logo').hide();
-        };
-        video.onpause = function () {
-            $('.box2, .box3').removeClass('hide');
-            $('.play').removeClass('hide');
+            $('.box2, .box3').addClass('hide');
+            $('.play').addClass('hide');
         };
         // 如果有广告并且非IOS上的QQ浏览器 则播放广告
         if (adSrc && !(platform.isIos() && platform.isQQ())) {
@@ -54,23 +53,19 @@ define(function (require) {
                     domAdTip.style.display = 'block';
                     video.src = adSrcEnd;
                     video.autoplay = false;
-                    $('.box2, .box3').removeClass('hide');
-                    $('.play').removeClass('hide');
                 } else {
 					// 隐藏广告提示
                     domAdTip.style.display = 'none';
                     video.src = targetSrc;
                     video.autoplay = true;
                     video.setAttribute('autoplay', 'autoplay');
-                    $('.box2, .box3').addClass('hide');
-                    $('.play').addClass('hide');
                     video.play();
                 }
             };
             $('.play').click(function () {
+                video.play();
                 $('.box2, .box3').addClass('hide');
                 $('.play').addClass('hide');
-                video.play();
             });
         } else {
 			// 否则直接播放内容
@@ -81,9 +76,9 @@ define(function (require) {
                 $('.play').removeClass('hide');
             };
             $('.play').click(function () {
+                video.play();
                 $('.box2, .box3').addClass('hide');
                 $('.play').addClass('hide');
-                video.play();
             });
         }
     };
