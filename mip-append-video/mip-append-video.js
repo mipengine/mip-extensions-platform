@@ -27,6 +27,7 @@ define(function (require) {
             'id': 'vide',
             'controls': '',
             'src': '',
+            'poster': poster,
             'preload': 'no'
         });
         //  初始化video的尺寸大小
