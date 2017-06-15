@@ -12,12 +12,12 @@ mip-shouji-down 下载站定制组件，主要用于导航切换与下载按钮�
 
 ### 基本用法
 ```html
-<mip-shouji-down type="1"></mip-shouji-down>
+<mip-shouji-down down="URL"></mip-shouji-down>
 ```
 
 ## 属性
 
-### type
+### down
 
-说明：类型  
+说明：网址  
 必选项：否  

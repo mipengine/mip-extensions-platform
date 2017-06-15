@@ -1,6 +1,6 @@
 /**
  * @author: Qi
- * @date: 2017-6-13
+ * @date: 2017-6-15
  * @file: mip-shouji-down.js
  */
 
@@ -33,12 +33,12 @@ define(function (require) {
             }
         });
     }
-    function htmlType() {
+    function htmlType(url) {
         if (platform.isIos()) {
             return false;
         }
         var Padownurl = $('.topdown a').attr('href') || '';
-        var Pbdownurl = $('.safe-link a').attr('href') || '';
+        var Pbdownurl = url || '';
         if (Padownurl !== '' && Pbdownurl !== '') {
             $('.topdown').hide();
             $('.safe-link').hide();
@@ -73,9 +73,9 @@ define(function (require) {
     // build 方法，元素插入到文档时执行，仅会执行一次
     customElem.prototype.build = function () {
         var Element = this.element;
-        var ToType = Element.getAttribute('type') || '';
-        if (ToType === '1') {
-            htmlType();
+        var ToDown = Element.getAttribute('down') || '';
+        if (ToDown !== '') {
+            htmlType(ToDown);
         }
         htmlSet();
     };
