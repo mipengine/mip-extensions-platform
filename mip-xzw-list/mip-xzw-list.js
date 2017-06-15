@@ -11,7 +11,7 @@ define(function (require) {
         var $li = $('.list li');
         var alen = $li.length;
         $(document).on('click', '.addmorebtn', function () {
-            var num = $('.list li[style = "display:none;"]').length;
+            var num = $('.list li[style = "display:none"]').length;
             var s = alen - num;
             for (var i = s; i < s + 10; i++) {
                 var t = $li.eq(i);
