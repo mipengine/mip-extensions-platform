@@ -1,0 +1,14 @@
+{
+    "name": "mip-51la",
+    "version": "1.0.0",
+    "description": "51la统计用",
+    "contributors": [
+        {
+            "name": "点点",
+            "email": "sy3tem@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
