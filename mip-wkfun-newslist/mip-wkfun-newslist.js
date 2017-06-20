@@ -2,8 +2,8 @@
 * 底层页功能组件
 * @file 脚本支持
 * @author wss
-* @time 2017.04.07
-* @version 1.0.1
+* @time 2017.06.20
+* @version 1.0.2
 */
 define(function (require) {
     var $ = require('zepto');
@@ -29,13 +29,6 @@ define(function (require) {
             $('.sy-main').removeClass('h500');
             $(this).hide();
         });
-
-        var passagesHeight = $('.sy-main').height();
-        if (passagesHeight < 500) {
-            $('.sy-main').removeClass('h500');
-            $('.sy-more').hide();
-        }
-
     };
 
     customElem.prototype.build = function () {
