@@ -19,11 +19,6 @@ define(function (require) {
         ffTitle = mgcHtml.split(',');
         var titleHtml = $('title').html();
         var forNum = ffTitle.length;
-
-        var mgcity1 = [];
-        var mgcity0 = $('.f-mg-city').html();
-        mgcity1 = mgcity0.split(',');
-        var citynum =  mgcity1.length;
         var i = 0;
         for (i = 0; i < forNum; i++) {
             if (titleHtml.indexOf(ffTitle[i]) !== -1) {
@@ -41,20 +36,6 @@ define(function (require) {
 				+ '，用户可以免费使用会员，任何直播间都可以进去哦！优艺直播间是一款手机美女视频直播软件，这里有大量的美女帅哥在这里表演自己的才艺。你可以随时的与她们进行聊天互动哦！快来下载使用吧！</p>');
                 $('.g-tags-box,.g-show-cont').hide();
                 $('.g-keyword-cont').parents('.g-box').hide();
-                var remotIpInfo = {
-                    ret: 1,
-                    start: -1,
-                    end: -1,
-                    country: '\u4e2d\u56fd',
-                    province: '\u6e56\u5317',
-                    city: '\u6b66\u6c49',
-                    district: '',
-                    isp: '',
-                    type: '',
-                    desc: ''
-                };
-                var province = remotIpInfo.province;
-                var city = remotIpInfo.city;
             }
         }
         $('ul li').each(function () {

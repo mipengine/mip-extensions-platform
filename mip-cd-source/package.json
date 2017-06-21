@@ -1,0 +1,14 @@
+{
+    "name": "mip-cd-source",
+    "version": "1.0.0",
+    "description": "全站来源控制",
+    "contributors": [
+        {
+	    "name": "sunruinian",
+	    "email": "1098142239@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
