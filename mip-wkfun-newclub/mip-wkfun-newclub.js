@@ -3,7 +3,7 @@
 * @file 脚本支持
 * @author yaoyar6@gmail.com
 * @time 2017.04.10
-* @version 1.0.2
+* @version 1.0.3
 */
 define(function (require) {
     var $ = require('zepto');
@@ -32,6 +32,18 @@ define(function (require) {
 
             $('.moreCon').click(function () {
                 $(this).closest('.chat-con-box').find('.computedLine').removeClass('computedLine');
+                $(this).hide();
+            });
+
+            $('.chat-ans-more-btn').click(function () {
+                $('.ans-more-list').show();
+                $.each($('.ans-more-list .computedLine'), function (i) {
+                    if ($(this).height() < ans) {
+                        $(this).closest('.chat-con-box').find('.moreCon').hide();
+                    } else {
+                        $(this).closest('.chat-con-box').find('.moreCon').show();
+                    }
+                });
                 $(this).hide();
             });
         }

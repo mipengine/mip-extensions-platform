@@ -1,0 +1,14 @@
+{
+    "name": "mip-tanx",
+    "version": "1.0.0",
+    "description": "阿里妈妈SSP广告组件",
+    "contributors": [
+        {
+            "name": "点点",
+            "email": "sy3tem@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
