@@ -8,9 +8,9 @@ define(function (require) {
     var platform = util.platform;
     var customElement = require('customElement').create();
     customElement.prototype.build = function () {
-        $('#article_body').find('img').parent().append('<a  href="https://m.cnkang.com/pic/" class="tianjia">点击图片，查看无码私图（套图）</a>');
+        $('#article_body').find('mip-img').parent().append('<a  href="https://m.cnkang.com/pic/" class="tianjia">点击图片，查看无码私图（套图）</a>');
         $(function () {
-            var imgs = $('#article_body img');
+            var imgs = $('#article_body mip-img');
             if (imgs.length) {
                 $.ajax({
                     url: 'https://m.cnkang.com/cnkang/getarticleimglink',

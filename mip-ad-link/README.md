@@ -23,7 +23,7 @@ mip-ad-link 康网图片增加链接代码
               那该怎么称呼她们呢?此前，有娱乐周刊将这群体定位为&ldquo;伪情色演员&rdquo;。
         </p> 
              <div style="text-align: center;">
-                  <img src="//m.cnkang.com/cnkfile1/M00/00/40/oYYBAFYk766AWAaGAABuJJWSW4I264.jpg" width="400" border="0" height="300" /><br /> &nbsp;
+                  <mip-img src="//m.cnkang.com/cnkfile1/M00/00/40/oYYBAFYk766AWAaGAABuJJWSW4I264.jpg" width="400" border="0" height="300" /><br /> &nbsp;
              </div> 
              <p> 或许处境不同，但演员的心境都是一样，没有人不幻想自己跃上大银幕的那一天，
                  在她们的心中，每个人都有一个成名梦。凤凰娱乐抱着众多疑问：为什么想拍伪情色影片、拍片的酬劳多寡与如何做好防
@@ -31,7 +31,7 @@ mip-ad-link 康网图片增加链接代码
                  措施等问题......采访多位曾拍摄此类电影的演员与导演，为我们还原出&ldquo;小电影圈&rdquo;的生态环境与乱象。
              </p> 
              <p style="text-align: center;">
-                  <img src="//m.cnkang.com/cnkfile1/M00/00/40/ooYBAFYk76-AHWPuAABlREgRZpY465.jpg" width="400" border="0" height="300" />
+                  <mip-img src="//m.cnkang.com/cnkfile1/M00/00/40/ooYBAFYk76-AHWPuAABlREgRZpY465.jpg" width="400" border="0" height="300" />
              </p> 
              <p> &ldquo;伪情色演员&rdquo;这几字其实已经直白告诉，她们在片中拍摄的
                  <a href='//www.cnkang.com/sex/'>性爱</a>场面和暴露尺度仅点到为止，只让观众自己
@@ -42,7 +42,7 @@ mip-ad-link 康网图片增加链接代码
                  的拍摄工作。
              </p>
              <p style="text-align: center;">
-                  <img src="//m.cnkang.com/cnkfile1/M00/00/40/oYYBAFYk76-AYhAvAABugkFe1ho218.jpg" width="400" border="0" height="300" />
+                  <mip-img src="//m.cnkang.com/cnkfile1/M00/00/40/oYYBAFYk76-AYhAvAABugkFe1ho218.jpg" width="400" border="0" height="300" />
              </p> 
              <p> &ldquo;我觉得不管小电影或大电影，有裸露戏都是很正常。但他们偏偏把这个词(伪情色演员)，
                  套在演小电影的演员身上，这是一种偏见&rdquo;，张艺荠不满地说，汤唯拍了《色戒》中的
@@ -51,7 +51,7 @@ mip-ad-link 康网图片增加链接代码
                  拍了个裸背戏就被冠上&ldquo;伪情色演员&rdquo;的封号，让她们很不是滋味。
              </p> 
              <p style="text-align: center;">
-                  <img src="//m.cnkang.com/cnkfile1/M00/00/40/ooYBAFYk76-AQqzqAABLnSNPEmw531.jpg" width="400" border="0" height="300" />
+                  <mip-img src="//m.cnkang.com/cnkfile1/M00/00/40/ooYBAFYk76-AQqzqAABLnSNPEmw531.jpg" width="400" border="0" height="300" />
              </p> 
              <p> 对&ldquo;伪情色演员&rdquo;来说，当演员是他们的梦想，也是一个长期职业，背台词、看机位、琢磨演技是日常的工作，拍摄裸戏只是演员工作的一小部分。
                  对于外界的各种偏见与不认同，套用周迅的名言：安心走我路，不问江湖事。
