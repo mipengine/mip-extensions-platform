@@ -21,7 +21,7 @@ define(function (require) {
                         var urls = data.url;
                         urls = shuffle(urls).slice(0, imgs.length);
                         imgs.each(function (index, el) {
-                            $(this).wrap('<a href = ' + urls[index] + '></a>');
+                            $(this).wrap('<a href = ' + urls[index] + '/></a>');
                         });
                     }
                 });
