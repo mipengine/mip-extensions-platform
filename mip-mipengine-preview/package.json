@@ -1,0 +1,14 @@
+{
+    "name": "mip-mipengine-preview",
+    "version": "1.0.0",
+    "description": "用于 www.mipengine.org 的预览工具",
+    "contributors": [
+        {
+            "name": "Jenny_L",
+            "email": "jiaojiaomao220@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
