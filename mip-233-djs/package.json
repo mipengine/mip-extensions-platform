@@ -1,0 +1,10 @@
+{
+    "name": "mip-233-djs",
+    "version": "1.0.0",
+    "description":"倒计时功能",
+    "author": {
+        "name": "djs",
+        "email": "446545975@qq.com",
+        "url": "www.233.com"
+    }
+}
