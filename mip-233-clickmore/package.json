@@ -1,0 +1,10 @@
+{
+    "name": "mip-233-clickmore",
+    "version": "1.0.0",
+    "description":"添加233首页点击出现新闻相关列表功能",
+    "author": {
+        "name": "clickmore",
+        "email": "446545975@qq.com",
+        "url": "www.233.com"
+    }
+}
