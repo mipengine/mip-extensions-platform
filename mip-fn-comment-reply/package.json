@@ -1,0 +1,12 @@
+{
+  "name": "mip-fn-comment-reply",
+  "version": "1.0.0",
+  "description": "蜂鸟网WAP站评论回复",
+    "author": { 
+        "name": "fn",
+        "email": "tech@fengniao.com"
+    },  
+  "engines": {
+    "mip": ">=1.1.0"
+  }
+}
