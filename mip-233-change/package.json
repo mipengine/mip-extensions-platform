@@ -1,0 +1,10 @@
+{
+    "name": "mip-233-change",
+    "version": "1.0.0",
+    "description":"新闻详情改变字体大小",
+    "author": {
+        "name": "change",
+        "email": "446545975@qq.com",
+        "url": "www.233.com"
+    }
+}
