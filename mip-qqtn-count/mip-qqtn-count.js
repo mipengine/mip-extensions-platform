@@ -43,7 +43,7 @@ define(function (require) {
                         cnzzid = 1256765801, cnzzsite = 's4.cnzz.com';
                         break;
                     case 'liucui':
-                        cnzzid = 1257643251, cnzzsite = 's11.cnzz.com';
+                        cnzzid = 1257643251, cnzzsite = 's12.cnzz.com';
                         break;
                     case 'yjw':
                         cnzzid = 1258159606, cnzzsite = 's4.cnzz.com';
@@ -61,7 +61,7 @@ define(function (require) {
                         cnzzid = 1259956349, cnzzsite = 's95.cnzz.com';
                         break;
                     case 'guanxi':
-                        cnzzid = 1260279967, cnzzsite = 's11.cnzz.com';
+                        cnzzid = 1260279967, cnzzsite = 's12.cnzz.com';
                         break;
                     case 'wuying':
                         cnzzid = 1260279990, cnzzsite = 's95.cnzz.com';
@@ -73,7 +73,7 @@ define(function (require) {
                         cnzzid = 1260551136, cnzzsite = 's4.cnzz.com';
                         break;
                     case 'chenggang':
-                        cnzzid = 1260551116, cnzzsite = 's11.cnzz.com';
+                        cnzzid = 1260551116, cnzzsite = 's12.cnzz.com';
                         break;
                     case 'yangchao':
                         cnzzid = 1260870449, cnzzsite = 's95.cnzz.com';
@@ -85,19 +85,16 @@ define(function (require) {
                         cnzzid = 1261377146, cnzzsite = 's4.cnzz.com';
                         break;
                     case 'huangshan':
-                        cnzzid = 1261377155, cnzzsite = 's11.cnzz.com';
+                        cnzzid = 1261377155, cnzzsite = 's12.cnzz.com';
                         break;
                     case 'wanwenting':
                         cnzzid = 1261377180, cnzzsite = 's95.cnzz.com';
                         break;
                     case 'wwy':
-                        cnzzid = 1261494959, cnzzsite = 's11.cnzz.com';
+                        cnzzid = 1261494959, cnzzsite = 's12.cnzz.com';
                         break;
                     case 'yinpan':
-                        cnzzid = 1261494963, cnzzsite = 's11.cnzz.com';
-                        break;
-                    case 'yuanna':
-                        cnzzid = 1261494967, cnzzsite = 's95.cnzz.com';
+                        cnzzid = 1261494963, cnzzsite = 's12.cnzz.com';
                         break;
                     case 'zaq':
                         cnzzid = 1261494975, cnzzsite = 's4.cnzz.com';
@@ -108,14 +105,26 @@ define(function (require) {
                     case 'jilin':
                         cnzzid = 1261494988, cnzzsite = 's4.cnzz.com';
                         break;
-                    case 'zyp':
-                        cnzzid = 1261660650, cnzzsite = 's11.cnzz.com';
-                        break;
                     case 'tjy':
                         cnzzid = 1261660653, cnzzsite = 's4.cnzz.com';
                         break;
                     case 'cyl':
                         cnzzid = 1261660654, cnzzsite = 's95.cnzz.com';
+                        break;
+                    case 'wcx':
+                        cnzzid = 1262074704, cnzzsite = 's13.cnzz.com';
+                        break;
+                    case 'qcx':
+                        cnzzid = 1262414066, cnzzsite = 's22.cnzz.com';
+                        break;
+                    case 'ywl':
+                        cnzzid = 1262414068, cnzzsite = 's22.cnzz.com';
+                        break;
+                    case 'tianyue':
+                        cnzzid = 1262414073, cnzzsite = 's22.cnzz.com';
+                        break;
+                    case 'zhouyi':
+                        cnzzid = 1262414080, cnzzsite = 's19.cnzz.com';
                         break;
                 }
                 if (typeof cnzzid === 'number' && typeof cnzzsite === 'string') {
