@@ -1,0 +1,13 @@
+{
+    "name": "mip-fn-show-allarticles",
+    "version": "1.0.0",
+    "description": "蜂鸟网WAP站点击加载更多文章",
+    "author": { 
+        "name": "fn",
+        "email": "tech@fengniao.com"
+    },  
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
+
