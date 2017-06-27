@@ -1,0 +1,15 @@
+{
+    "name": "mip-downlink",
+    "version": "1.0.0",
+    "description": "下载软件",
+    "author": "cc",
+    "contributors": [
+        {
+            "name": "cc",
+            "email": "cc@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
