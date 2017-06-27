@@ -89,7 +89,7 @@ define(function (require) {
             $.ajax({
                 type: 'post',
                 scriptCharset: 'utf-8',
-                url: 'http://www.23113.com/search/nine-20150423/json/bespeak.asp?Act=bespeak',
+                url: 'http://www.233.com/search/nine-20150423/json/bespeak.asp?Act=bespeak',
                 data: {
                     domain: domain,
                     fullname: escape(fullname),
