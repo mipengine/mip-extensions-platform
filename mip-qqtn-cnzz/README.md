@@ -11,7 +11,7 @@ mip-qqtn-cnzz CNZZ统计
 
 ### CNZZ统计
 ```html
-<mip-qqtn-cnzz></mip-qqtn-cnzz>
+<mip-qqtn-cnzz token="1257361975"></mip-qqtn-cnzz>
 ```
 
 
