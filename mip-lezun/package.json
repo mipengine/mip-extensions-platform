@@ -1,0 +1,14 @@
+{
+    "name": "mip-lezun",
+    "version": "1.1.0",
+    "description": "乐樽广告联盟组件",
+    "contributors": [
+        {
+            "name": "点点",
+            "email": "sy3tem@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
