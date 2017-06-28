@@ -12,9 +12,6 @@
 
 ```html
 
-<mip-233-tongji> </mip-233-tongji>
+<mip-233-tongji data-host="www.233.com" data-query="?a=1"> </mip-233-tongji>
 
-\```
-
-
-
+```

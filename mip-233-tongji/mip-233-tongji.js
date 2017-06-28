@@ -8,8 +8,9 @@ define(function (require) {
     // build 方法，元素插入到文档时执行，仅会执行一次
     customElem.prototype.build = function () {
         var element = this.element;
+        var src = $(element).attr('data-host') + $(element).attr('data-query');
         var s = document.createElement('script');
-        s.src = 'https://s95.cnzz.com/stat.php?id=1254966436&web_id=1254966436';
+        s.src = src;
         s.style.display = 'none';
         s.language = 'JavaScript';
         element.appendChild(s);
