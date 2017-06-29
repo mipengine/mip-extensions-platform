@@ -167,11 +167,14 @@ define(function (require) {
     }
 
     /**
-     * 关闭悬浮框(依赖外层 mip-fixed.bottom-fixed)
+     * 关闭悬浮框(依赖 .recommend-show)
      */
     function close() {
         rootElement.classList.remove('doc-footer-show');
-        document.querySelector('.bottom-fixed').classList.remove('bottom-fixed-show');
+        try {
+            document.querySelector('.recommend-show').classList.remove('recommend-show');
+            document.querySelector('.bottom-fixed').classList.remove('bottom-fixed-show');
+        } catch (e) {}
         document.body.classList.remove('article-footer-show');
         if (interval) {
             clearInterval(interval);

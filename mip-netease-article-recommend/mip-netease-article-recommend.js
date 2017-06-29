@@ -25,9 +25,13 @@ define(function (require) {
             }
             mipElement.appendChild(rootElement);
             DOM.initControl(rootElement);
-            document.querySelector('.bottom-fixed').classList.add('bottom-fixed-show');
-            document.body.classList.add('article-footer-show');
-        }).catch(function () {});
+            try {
+                document.querySelector('.content').classList.add('recommend-show');
+                // 兼容旧模板
+                document.querySelector('.bottom-fixed').classList.add('bottom-fixed-show');
+                document.body.classList.add('article-footer-show');
+            } catch (e) { }
+        }).catch(function () { });
     };
     return articleRecommend;
 });
