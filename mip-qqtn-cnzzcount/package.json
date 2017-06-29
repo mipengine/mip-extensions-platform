@@ -1,0 +1,15 @@
+{
+    "name": "mip-qqtn-cnzzcount",
+    "version": "1.0.0",
+    "description": "CNZZ统计",
+    "contributors": [
+        {
+            "name": "mgcity",
+            "email": "gom3250@qq.com",
+            "url": "http://m.qqtn.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

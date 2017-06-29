@@ -1,0 +1,12 @@
+{
+    "name": "mip-fn-swiper",
+    "version": "1.0.0",
+    "description": "蜂鸟网WAP站图片滚动等功能",
+    "author": { 
+        "name": "fn",
+        "email": "tech@fengniao.com"
+    },  
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
