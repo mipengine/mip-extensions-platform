@@ -10,7 +10,7 @@ define(function (require) {
     customElement.prototype.build = function () {
         $('#article_body').find('mip-img').parent().css('text-indent', 'initial');
         $('#article_body').find('mip-img').parent().css('text-align', 'center');
-        $('#article_body').find('mip-img').parent().append('<mip-link  href="https://m.cnkang.com/pic/" class="tianjia">点击图片，查看无码私图（套图）</mip-link>');
+        $('#article_body').find('mip-img').parent().append('<a  href="https://m.cnkang.com/pic/" class="tianjia">点击图片，查看无码私图（套图）</a>');
         $(function () {
             var imgs = $('#article_body mip-img');
             if (imgs.length) {
@@ -23,7 +23,7 @@ define(function (require) {
                         var urls = data.url;
                         urls = shuffle(urls).slice(0, imgs.length);
                         imgs.each(function (index, el) {
-                            $(this).wrap('<mip-link href = ' + urls[index] + '/></mip-link>');
+                            $(this).wrap('<a href = ' + urls[index] + '/></a>');
                         });
                     }
                 });

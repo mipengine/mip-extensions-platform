@@ -11,18 +11,44 @@ define(function (require) {
     customElem.prototype.build = function () {
         // this.element 可取到当前实例对应的 dom 元素
         var element = this.element;
+
+        var articleid = element.getAttribute('articleid');
         var replyid = element.getAttribute('replyid');
         var replyPath = element.getAttribute('reply_path');
         var replyUserid = element.getAttribute('reply_userid');
         var replyUsername = element.getAttribute('reply_username');
 
+        $('#content').on('click', function () {
+            $(this).siblings('.post-button').removeClass('disable-button');
+        });
+
         element.addEventListener('touchstart', function () {
             var obj = document.getElementById('content');
-            obj.setAttribute('replyid', replyid);
-            obj.setAttribute('reply_path', replyPath);
-            obj.setAttribute('reply_userid', replyUserid);
-            obj.setAttribute('reply_username', replyUsername);
-            obj.value = '回复@' + replyUsername + ':';
+
+            if (replyid) {
+                obj.value = '回复@' + replyUsername + ':';
+            } else {
+                obj.value = '';
+            }
+
+            var bArticleid = document.getElementById('form_articleid');
+            bArticleid.value = articleid;
+
+            var bReplyid = document.getElementById('form_replyid');
+            bReplyid.value = replyid;
+
+            var bReplyPath = document.getElementById('form_reply_path');
+            bReplyPath.value = replyPath;
+
+            var bReplyUserid = document.getElementById('form_reply_userid');
+            bReplyUserid.value = replyUserid;
+
+
+            var bReplyUsername = document.getElementById('form_reply_username');
+            bReplyUsername.value = replyUsername;
+
+            document.getElementById('form_action').value = 'postComment';
+
         }, false);
 
     };

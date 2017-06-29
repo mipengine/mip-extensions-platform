@@ -20,7 +20,7 @@ define(function (require) {
                 success: function (data) {
                     if (data) {
                         $(element).find('.news-content').html($(element).find('.news-content').html() + data);
-                        obj.attr('data-page', ++page);
+                        $(element).attr('data-page', ++page);
                     }
                 },
                 error: function (data) {

@@ -12,6 +12,7 @@ define(function (require) {
         var lastTime = 60;
         var timer = null;
         var domain = $(element).attr('data-domain');
+        var cdomain = $(element).attr('data-cdomain');
         // 点获取验证码后，过60秒才能再次提交
         function change() {
             flag = false;
@@ -25,6 +26,28 @@ define(function (require) {
                 $('#getyanzheng').addClass('grey').html('重新发(' + lastTime + ')');
             }
         }
+        // 动态加载 select 数据
+        function chrKemulist() {
+            var htm = '';
+            $.ajax({
+                type: 'get',
+                scriptCharset: 'utf-8',
+                url: 'http://m.233.com/include201610/json/' + (('undefined' !== typeof cdomain && cdomain !== '') ? cdomain : domain) + '.json',
+                dataType: 'json',
+                success: function (data) {
+                    for (var i = 0; i < data.myClass.length; i++) {
+                        var n = data.myClass[i];
+                        htm = htm + '<option value ="' + n.ClassID + '" style="text-align:right">';
+                        htm = htm + n.ClassName + '</option>';
+                    }
+                    $('#kemu').html(htm);
+                },
+                error: function () { },
+                async: true,
+                cache: false
+            });
+        }
+        chrKemulist();
         $('.orange-btn').click(function () {
             $(element).find('.body_mask').removeClass('hide').show();
         });

@@ -1,0 +1,10 @@
+{
+    "name": "mip-233-ksbm",
+    "version": "1.0.0",
+    "description":"考试报名功能",
+    "author": {
+        "name": "ksbm",
+        "email": "446545975@qq.com",
+        "url": "www.233.com"
+    }
+}

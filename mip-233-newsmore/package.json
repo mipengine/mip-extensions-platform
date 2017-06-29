@@ -1,6 +1,6 @@
 {
     "name": "mip-233-newsmore",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description":"分页加载新闻插件",
     "author": {
         "name": "newsmore",
