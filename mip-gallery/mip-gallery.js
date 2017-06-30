@@ -15,10 +15,10 @@ define(function (require) {
         var nexturl = $('.data_article_next_url').html();
         var AIYUE = $('.HOST_SITE_AIYUE').html();
         var MIP = $('.HOST_SITE_TUKU_MIP').html();
-        var lianjie = '<a href = ' + MIP + AIYUE + '/view/' + prev + '></a>';
-        var lianjie1 = '<a href = ' + MIP + nexturl + '></a>';
-        var lianjie2 = '<a href = ' + MIP + prevurl + '></a>';
-        var lianjie3 = '<a href = ' + MIP + AIYUE + '/view/' + next + '></a>';
+        var lianjie = '<a data-type = mip href = ' + MIP + AIYUE + '/view/' + prev + '></a>';
+        var lianjie1 = '<a data-type = mip href = ' + MIP + nexturl + '></a>';
+        var lianjie2 = '<a data-type = mip href = ' + MIP + prevurl + '></a>';
+        var lianjie3 = '<a data-type = mip href = ' + MIP + AIYUE + '/view/' + next + '></a>';
         if (!next) {
             var wrapEles = $('<div class = jump>' + lianjie + '</div><div class=jump>' + lianjie1 + '</div>');
         } else if (!prev) {
