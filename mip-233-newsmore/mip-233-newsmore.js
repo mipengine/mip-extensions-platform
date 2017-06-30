@@ -20,7 +20,6 @@ define(function (require) {
                 success: function (data) {
                     if (data) {
                         $(element).find('.news-content').html($(element).find('.news-content').html() + data);
-                        $(element).attr('data-page', ++page);
                     }
                 },
                 error: function (data) {
@@ -31,6 +30,7 @@ define(function (require) {
         $(element).find('.more-button').click(function () {
             if (page <= maxpage) {
                 newHtml($(this), filename, page);
+                page++;
             } else {
                 $(this).remove();
             }
