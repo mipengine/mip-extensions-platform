@@ -11,8 +11,10 @@ define(function (require) {
         var flag = false;
         $(element).find('.more1').click(function () {
             if (flag) {
+                $(element).find('.more1').removeClass('on');
                 $(element).find('.eaxm-box').hide();
             } else {
+                $(element).find('.more1').addClass('on');
                 $(element).find('.eaxm-box').removeClass('hide').show();
             }
             flag = !flag;

@@ -1,0 +1,14 @@
+{
+    "name": "mip-czsy-nav",
+    "version": "1.0.0",
+    "description": "导航菜单",
+    "contributors": [
+        {
+            "name": "sunwr",
+            "email": "wrem@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
