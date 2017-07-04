@@ -13,7 +13,9 @@ define(function (require) {
         var pageSize = $(element).attr('data-pageSize');
         function getList() {
             $.ajax({
+                url: 'https://m.233.com/search/ajaxdata/wxCouser.asp',
                 dataType: 'jsonp',
+                type: 'get',
                 data: {
                     domain: domain,
                     pageIndex: pageIndex,
@@ -24,7 +26,11 @@ define(function (require) {
                         var data = res.data.items;
                         var html = '';
                         for (var i = 0; i < data.length; i++) {
-                            html += ' <li class="list_kc2">';
+                            if ((i + 1) % 2 > 0) {
+                                html += ' <li class="list_kc2">';
+                            } else {
+                                html += ' <li class="list_kc2 right">';
+                            }
                             html += ' <a href="' + data[i].link + '">';
                             html += ' <div class="list_kc2_img">';
                             html += '<mip-img src="' + data[i].src + '" alt="' + data[i].Title + '">';

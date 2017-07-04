@@ -7,7 +7,7 @@
 ----|----
 类型|业务,广告
 支持布局|N/S
-所需脚本|https://mipcache.bdstatic.com/static/v1/mip-233-yytx/mip-233-yytx.js
+所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-233-yytx/mip-233-yytx.js
 
 ## 示例
 

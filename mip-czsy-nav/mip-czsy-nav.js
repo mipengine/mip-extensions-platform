@@ -23,19 +23,22 @@ define(function (require) {
         var $btnWrap = '<div class="mmenu"><span class="span1"></span>'
 		+ '<span class="span2"></span><span class="span3"></span></div>'
 		+ '<div class="mmenu_shad"></div>';
-        $this.append($btnWrap);
-        addClass(id);
-        addClass($('.mmenu_shad'));
+        $this.prepend($btnWrap);
+        addClass($('.mmenu'), '#'
+		+ id);
+        addClass($('.mmenu_shad'), '#'
+		+ id);
     }
 
 	/**
      * 增加按钮按下class对应颜色
      *
      * @param {obj} $dom dom object
+	 * @param {obj} strid dom object
      */
-    function addClass($dom) {
+    function addClass($dom, strid) {
         $dom.on('click', function () {
-            $(this).toggleClass('active');
+            $(strid).toggleClass('active');
             $('.mmenu').toggleClass('active');
             $('.mmenu_shad').toggleClass('active');
         });

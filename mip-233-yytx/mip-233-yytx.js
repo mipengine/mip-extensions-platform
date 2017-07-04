@@ -32,7 +32,7 @@ define(function (require) {
             $.ajax({
                 type: 'get',
                 scriptCharset: 'utf-8',
-                url: 'http://m.233.com/include201610/json/' + (('undefined' !== typeof cdomain && cdomain !== '') ? cdomain : domain) + '.json',
+                url: 'https://mip.233.com/include2017/json/' + (('undefined' !== typeof cdomain && cdomain !== '') ? cdomain : domain) + '.json',
                 dataType: 'json',
                 success: function (data) {
                     for (var i = 0; i < data.myClass.length; i++) {
@@ -67,7 +67,7 @@ define(function (require) {
             $.ajax({
                 type: 'post',
                 scriptCharset: 'utf-8',
-                url: 'http://www.233.com/search/nine-20150423/json/bespeak.asp?Act=code',
+                url: 'https://www.233.com/search/nine-20150423/json/bespeak.asp?Act=code',
                 data: {
                     phone: phone
                 },
@@ -112,7 +112,7 @@ define(function (require) {
             $.ajax({
                 type: 'post',
                 scriptCharset: 'utf-8',
-                url: 'http://www.233.com/search/nine-20150423/json/bespeak.asp?Act=bespeak',
+                url: 'https://www.233.com/search/nine-20150423/json/bespeak.asp?Act=bespeak',
                 data: {
                     domain: domain,
                     fullname: escape(fullname),
