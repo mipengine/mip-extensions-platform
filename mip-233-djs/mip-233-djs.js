@@ -21,9 +21,9 @@ define(function (require) {
             var oDate2;
             var iDays;
             aDate = sDate1.split('-');
-            oDate1 = new Date(aDate[1] + '-' + aDate[2] + '-' + aDate[0]);
+            oDate1 = new Date(aDate[0] + '-' + aDate[1] + '-' + aDate[2]);
             aDate = sDate2.split('-');
-            oDate2 = new Date(aDate[1] + '-' + aDate[2] + '-' + aDate[0]);
+            oDate2 = new Date(aDate[0] + '-' + aDate[1] + '-' + aDate[2]);
             iDays = parseInt(Math.abs(oDate1 - oDate2) / 1000 / 60 / 60 / 24, 10);
             if (oDate2 > oDate1) {
                 iDays = 0;

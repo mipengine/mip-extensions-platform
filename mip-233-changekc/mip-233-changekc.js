@@ -13,13 +13,13 @@ define(function (require) {
         var pageSize = $(element).attr('data-pageSize');
         function getList() {
             $.ajax({
-                url: 'https://m.233.com/search/ajaxdata/wxCouser.asp',
+                url: 'https://mip.233.com/search/ajaxdata/wxCouser.asp',
                 dataType: 'jsonp',
                 type: 'get',
                 data: {
                     domain: domain,
                     pageIndex: pageIndex,
-                    pageSize: pageSize
+                    'page-size': pageSize
                 },
                 success: function (res) {
                     if (res && res.s === 1) {
