@@ -1,0 +1,14 @@
+{
+    "name": "mip-swt",
+    "version": "1.0.0",
+    "description": "商务通弹窗",
+    "contributors": [
+        {
+            "name": "zhangyuling",
+            "email": "zhangyiyi_0315@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

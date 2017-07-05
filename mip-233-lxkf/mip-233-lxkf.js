@@ -12,7 +12,7 @@ define(function (require) {
         var tag2 = document.createElement('script');
         var type = $(element).attr('data-type');
         tag.src = 'https://dl.ntalker.com/js/xn6/ntkfstat.js?siteid=kf_9278';
-        tag2.src = 'https://img.233.com/x/plus/kf/1.0.0/kefu.js?v=1.0.0';
+        tag2.src = 'https://www.233.com/search/nine-20150423/json/kefu.htm?v=1.0.0';
         $('body').append(tag);
         $('body').append(tag2);
         $(element).find('.kefu').click(function () {

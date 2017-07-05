@@ -22,7 +22,7 @@ define(function (require) {
                     'page-size': pageSize
                 },
                 success: function (res) {
-                    if (res && res.s === 1) {
+                    if (res && res.S === '1') {
                         var data = res.data.items;
                         var html = '';
                         for (var i = 0; i < data.length; i++) {
@@ -43,6 +43,9 @@ define(function (require) {
                             html += '</div>';
                             html += '</a>';
                             html += '</li>';
+                        }
+                        if (html) {
+                            $(element).find('.c-lanmu-list').html(html);
                         }
                     }
                 }

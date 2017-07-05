@@ -9,6 +9,7 @@ list 插件
 支持布局|N/S
 所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-233-list/mip-233-list.js
 
+
 ## 示例
 
 ``` html
