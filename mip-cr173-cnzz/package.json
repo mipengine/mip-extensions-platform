@@ -1,11 +1,12 @@
 {
     "name": "mip-cr173-cnzz",
-    "version": "1.0.0",
-    "description": "CNZZcr173统计",
+    "version": "1.0.3",
+    "description": "CNZZ统计",
     "contributors": [
         {
-            "name": "gom3250",
-            "email": "gom3250@qq.com"
+            "name": "mgcity",
+            "email": "gom3250@qq.com",
+            "url": "http://m.cr173.com"
         }
     ],
     "engines": {
