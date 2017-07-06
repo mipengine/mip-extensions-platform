@@ -29,8 +29,11 @@ define(function (require) {
         });
         if ($(element).find('.ui-tab-list2').length > 0) {
             var width = $(element).find('.ui-tab-list2 li').width() * $(element).find('.ui-tab-list2 li').length;
+            var index = $(element).find('.ui-tab-list2 .on').index();
             $(element).find('.ui-tab-list2').width(width + 40);
+            $(element).find('.tab-content').scrollLeft($(element).find('.ui-tab-list2 li').width() * (index - 1));
         }
+
     };
     return customElem;
 });
