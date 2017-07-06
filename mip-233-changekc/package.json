@@ -1,10 +1,13 @@
 {
     "name": "mip-233-changekc",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description":"更换推荐课程",
     "author": {
         "name": "changekc",
         "email": "446545975@qq.com",
         "url": "www.233.com"
+    },
+    "engines": {
+        "mip": ">=1.0.4"
     }
 }

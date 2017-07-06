@@ -27,6 +27,10 @@ define(function (require) {
                 $(element).find('.main_nav_bar').removeClass('hide').show();
             }
         });
+        if ($(element).find('.ui-tab-list2').length > 0) {
+            var width = $(element).find('.ui-tab-list2 li').width() * $(element).find('.ui-tab-list2 li').length;
+            $(element).find('.ui-tab-list2').width(width + 40);
+        }
     };
     return customElem;
 });

@@ -19,7 +19,7 @@ define(function (require) {
         }
         $(element).find('ul').width(width);
         if (index > 0) {
-            $(element).find('.topnav_list').scrollLeft(($(element).find('.channel').width() * index));
+            $(element).find('.main_nav').scrollLeft(($(element).find('.channel').width() * (index - 1)));
         }
         $(element).find('.channel').eq(index).addClass('curr');
     };

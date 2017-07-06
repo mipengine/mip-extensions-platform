@@ -39,7 +39,7 @@ define(function (require) {
                             html += '</div>';
                             html += '<div class="con-side2">';
                             html += '<p class="h2-title">' + data[i].Subtitle + '</p>';
-                            html += '<p class="st-num2"><i>' + data[i].bzNum + '</i> 人报名</p>';
+                            html += '<p class="st-num2"><i>' + data[i].study + '</i> 人报名</p>';
                             html += '</div>';
                             html += '</a>';
                             html += '</li>';
