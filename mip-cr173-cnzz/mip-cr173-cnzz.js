@@ -13,7 +13,7 @@ define(function (require) {
             var dom = document.getElementById('mip-cr173-cnzz');
             var sc = document.createElement('script');
             sc.setAttribute('type', 'text/javascript');
-            sc.setAttribute('src', 'http://w.cnzz.com/c.php?id=3608757');
+            sc.setAttribute('src', 'https://s95.cnzz.com/z_stat.php?id=3608757&web_id=3608757');
             dom.appendChild(sc);
         };
     return customElement;

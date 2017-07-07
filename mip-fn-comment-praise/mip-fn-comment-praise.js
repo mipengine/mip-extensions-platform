@@ -15,15 +15,14 @@ define(function (require) {
         var id = element.getAttribute('praiseid');
         var kindid = element.getAttribute('praiseKindid');
         var url = element.getAttribute('url');
-
         if (num === 0) {
             num = '';
         }
         oSpan.innerHTML = num || 0;
 
-        element.append(oSpan);
+        element.appendChild(oSpan);
 
-        element.onclick = function () {
+        element.addEventListener('touchstart', function () {
             var oThis = this;
             var className = $(this).hasClass('disable-tag');
             if (className) {
@@ -59,7 +58,7 @@ define(function (require) {
             } else {
                 alert('参数错误。');
             }
-        };
+        }, false);
     };
 
     // 创建元素回调

@@ -1,0 +1,13 @@
+{
+    "name": "mip-233-hideorshow",
+    "version": "1.0.0",
+    "description":"控制客服与广告的显示隐藏",
+    "author": {
+        "name": "hideorshow",
+        "email": "446545975@qq.com",
+        "url": "www.233.com"
+    },
+    "engines": {
+        "mip": ">=1.0.0"
+    }
+}
