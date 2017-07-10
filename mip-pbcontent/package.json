@@ -1,0 +1,15 @@
+{
+    "name": "mip-pbcontent",
+    "version": "1.0.0",
+    "description": "组件介绍",
+    "author": "xiaohua",
+    "contributors": [
+        {
+            "name": "xiaohua",
+            "email": "asfd@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
