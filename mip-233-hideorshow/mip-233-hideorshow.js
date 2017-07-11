@@ -10,6 +10,7 @@ define(function (require) {
         var element = this.element;
         var num = $(element).attr('data-num') || 2;
         var height = $('body').height();
+        $('#pcburl').attr('href', 'http://www' + location.href.split('mip')[1]);
         $(window).scroll(function () {
             if ($('body').scrollTop() > height * num) {
                 $('.mip-appdl-box').removeClass('hide').show();

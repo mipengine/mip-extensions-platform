@@ -6,6 +6,23 @@
 define(function (require) {
 
     var customElement = require('customElement').create();
+    function getCnzzInfo(tjinfo, bjname) {
+        var cnzzArr = tjinfo.split('|');
+        var cnzzObj;
+        for (var i = 0; i < cnzzArr.length; i++) {
+            var cnzzInfo = cnzzArr[i].split(',');
+            if (cnzzInfo[0].replace(/"/g, '') === bjname) {
+                cnzzObj = {};
+                try {
+                    cnzzObj.name = cnzzInfo[0].replace(/"/g, '');
+                    cnzzObj.cnzzid = parseInt(cnzzInfo[1].replace(/"/g, ''), 0);
+                    cnzzObj.cnzzsite = cnzzInfo[2].replace(/"/g, '');
+                } catch (e) {
+                }
+            }
+        }
+        return cnzzObj;
+    }
     function qqtnCount() {
         var webInfo = {
             Rootid: $('.f-information').attr('data-rootid'),
@@ -25,7 +42,7 @@ define(function (require) {
         var platform = '&platform=2';
         var content = '&content=' + encodeURIComponent(document.title);
         var bjtj = $('.f-tjname').html();
-        var tjname = bjtj.split('|');
+        var namesun = bjtj.split('|');
         if (compareDate(webInfo.DateTime, '2015/11/1')) {
             var jsStrdate = src + charset + atime + ref + url + username + type + rid + platform + content;
             document.write('<iframe src="' + jsStrdate + '" width="0" height="0" style="display:none;"></iframe>');
@@ -34,13 +51,10 @@ define(function (require) {
             var cnzzid;
             var cnzzsite;
             if (bjname !== '') {
-                if (tjname.legend > 1) {
-                    for (var i = 0; i < tjname.length; i++) {
-                        if (bjname = tjname[i].split(',')[0]) {
-                            cnzzid = tjname[i].split(',')[1];
-                            cnzzsite = tjname[i].split(',')[2];
-                        }
-                    }
+                if (namesun.length > 1) {
+                    var cnzzObj = getCnzzInfo(bjtj, bjname);
+                    cnzzid = cnzzObj.cnzzid;
+                    cnzzsite = cnzzObj.cnzzsite;
                 }
                 if (typeof cnzzid === 'number' && typeof cnzzsite === 'string') {
                     var jsStr = '%3Cspan id=\'cnzz_stat_icon_';
@@ -87,6 +101,5 @@ define(function (require) {
     customElement.prototype.build = function () {
         qqtnCount();
     };
-
     return customElement;
 });
