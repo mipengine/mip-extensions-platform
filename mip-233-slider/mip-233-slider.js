@@ -8,7 +8,7 @@ define(function (require) {
     // build 方法，元素插入到文档时执行，仅会执行一次
     customElem.prototype.build = function () {
         var element = this.element;
-        var width = $(element).find('.channel').width() * ($(element).find('.channel').length - 1) + 49;
+        var width = ($(element).find('.channel').width() + 5) * ($(element).find('.channel').length);
         var name = location.href.split('/')[location.href.split('/').length - 2];
         var list = $(element).find('.channel');
         var index = 0;

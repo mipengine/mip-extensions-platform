@@ -1,0 +1,14 @@
+{
+    "name": "mip-taoge-scaydk-index",
+    "version": "1.0.0",
+    "description": "wap.scaydk.com网业务逻辑组件",
+    "contributors": [
+        {
+            "name": "涛哥",
+            "email": "liangtao.gz@foamail.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

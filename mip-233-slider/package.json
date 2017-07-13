@@ -1,6 +1,6 @@
 {
     "name": "mip-233-slider",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description":"头部滑动并显示当前栏目",
     "author": {
         "name": "slider",
@@ -8,6 +8,6 @@
         "url": "www.233.com"
     },
     "engines": {
-        "mip": ">=1.0.2"
+        "mip": ">=1.0.0"
     }
 }

@@ -1,0 +1,13 @@
+{
+    "name": "mip-zpm-searchjobs",
+    "version": "1.0.0",
+	"description": "搜索结果需求",
+    "author": {
+        "name": "wangjx",
+        "email": "651183320@qq.com",
+        "url": "http://m.zhaopin.com"
+    },
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
