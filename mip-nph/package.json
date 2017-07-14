@@ -1,0 +1,18 @@
+{
+    "name": "mip-nph",
+    "version": "1.2.0",
+    "description": "呼起组件",
+    "contributors": [
+        {
+            "name": "LiTingLing",
+            "email": "tingling@staff.sina.com.cn"
+        },
+        {
+            "name": "FengZiHao",
+            "email": "452242153@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
