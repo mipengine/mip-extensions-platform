@@ -24,8 +24,8 @@ define(function (require) {
 
         cfg.forEach(function (el, index) {
             var eles = document.querySelectorAll(el.selector);
-
-            eles.forEach(function (dom) {
+            var docs = Array.prototype.slice.call(eles);
+            docs.forEach(function (dom) {
                 dom.addEventListener('click', function () {
                     callAppEvent.openApp(el.config);
                 }, false);

@@ -84,12 +84,12 @@ define(function (require) {
 
             // 为IOS9，且不为微博、微信、qq、通用链接不为空，则直接跳转
             if (isIOS9 && config.ios9Url && !isWeiboApp && !isWechatApp && !isQQ) {
-                window.location.href = config.ios9Url;
+                top.location.href = config.ios9Url;
                 return;
             }
 
             if (isIOS9 && config.ios9Weixin && (isQQ || isWechatApp)) {
-                window.location.href = config.ios9Weixin;
+                top.location.href = config.ios9Weixin;
                 return;
             }
 
@@ -99,7 +99,7 @@ define(function (require) {
 
                 var aAppBaoParams = self.openByWeixin.indexOf('app.qq.com') > 0
                     ? ('&android_schema=' + encodeURIComponent(self.nativeUrl)) : '';
-                window.location.href = self.openByWeixin + aAppBaoParams;
+                top.location.href = self.openByWeixin + aAppBaoParams;
                 return;
             }
 
@@ -130,7 +130,7 @@ define(function (require) {
             else if (self.nativeUrl) {
                 // 呼起链接不为空，则如果是IOS9&&微博则直接使用scheme呼起，否则使用iframe调用scheme呼起
                 if ((isIOS9 && isWeiboApp) || self.isNotScheme) {
-                    window.location.href = self.nativeUrl;
+                    top.location.href = self.nativeUrl;
                 }
                 else {
                     newNode.style.display = 'none';
@@ -182,7 +182,7 @@ define(function (require) {
 
             if ((isAndroid || isIOS) && !!self.installUrl) {
 
-                window.location.href = newDownloadUrl || self.installUrl;
+                top.location.href = newDownloadUrl || self.installUrl;
                 return;
             }
 
