@@ -1,7 +1,7 @@
 {
-    "name": "mip-fn-swiper",
-    "version": "2.0.0",
-    "description": "蜂鸟网WAP站图片滚动等功能",
+    "name": "mip-fn-width",
+    "version": "1.0.0",
+    "description": "蜂鸟网标签宽度计算",
     "author": { 
         "name": "fn",
         "email": "tech@fengniao.com"

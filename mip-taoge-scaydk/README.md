@@ -19,6 +19,7 @@ mip-taoge-scaydk 是wap.scaydk.com网业务逻辑组件
     sq-site-id="xxxxxx"
     sq-user-id="xxxxxx"
     sq-browser-list="Baidu,Miui,MZ-MX"
+    go-back-id="goback"
     >
 </mip-taoge-scaydk>
 ```
@@ -67,6 +68,13 @@ mip-taoge-scaydk 是wap.scaydk.com网业务逻辑组件
 必选项：否
 类型：字符串
 默认值：Baidu,Miui,MZ-MX
+
+### go-back-id
+
+说明：返回上一级按钮元素ID
+必选项：否
+类型：字符串
+默认值：goback
 
 ## 注意事项
 

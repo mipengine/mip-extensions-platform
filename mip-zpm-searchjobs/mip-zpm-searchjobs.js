@@ -6,7 +6,8 @@
 define(function (require) {
     var $ = require('zepto');
     var util = require('util');
-    var customStorage = new util.CustomStorage(0);
+    var CustomStorage = util.customStorage;
+    new CustomStorage([0]);
     var render = function () {
         // 经纬度变量
         var jwd = false;
@@ -14,7 +15,7 @@ define(function (require) {
         var $body = $('body');
         // localStorage历史记录
         // 读取
-        var indexSearchHs = customStorage.get('indexSearchHs');
+        var indexSearchHs = CustomStorage.get('indexSearchHs');
         var $SearchLsWrap = $('.indexSearchList');
         var $indexSearchHsClose = $SearchLsWrap.find('.close');
         // 首页搜索
@@ -250,7 +251,7 @@ define(function (require) {
         }
         // 清除
         $('.indexSearchList dt .clear').click(function () {
-            customStorage.rm('indexSearchHs');
+            CustomStorage.rm('indexSearchHs');
             indexSearchHs = [];
             $SearchLsWrap.hide().children('dd').remove();
             dtBool = false;
@@ -371,7 +372,7 @@ define(function (require) {
     }
     // 读取历史记录方法
     function readSearchLs() {
-        var indexSearchHs = customStorage.get('indexSearchHs');
+        var indexSearchHs = CustomStorage.get('indexSearchHs');
         var $SearchLsWrap = $('.indexSearchList');
         var dtBool = true;
         if (indexSearchHs.length > 0) {
@@ -389,7 +390,7 @@ define(function (require) {
     function saveSearchLs(hsStr) {
         // 判断新搜索关键词是否已存在
         var b = true;
-        var indexSearchHs = customStorage.get('indexSearchHs');
+        var indexSearchHs = CustomStorage.get('indexSearchHs');
         for (var i = 0; i <= indexSearchHs.length; i++) {
             if (indexSearchHs[i] === hsStr) {
                 b = false;
@@ -401,7 +402,7 @@ define(function (require) {
             if (indexSearchHs.length > 5) {
                 indexSearchHs.shift();
             }
-            customStorage.set('indexSearchHs', indexSearchHs);
+            CustomStorage.set('indexSearchHs', indexSearchHs);
             return false;
         }
     }
@@ -442,7 +443,7 @@ define(function (require) {
     function onComplete(data) {
         // 经纬度变量
         var jwd = false;
-        var dataCitycode = customStorage.get('data-citycode');
+        var dataCitycode = CustomStorage.get('data-citycode');
         var userLocationLat;
         var userLocationLon;
         var code = $('#Slocation').attr('data-location');
@@ -462,7 +463,7 @@ define(function (require) {
                     lng: userLocationLon
                 },
                 success: function (data, textStatus, jqxhr) {
-                    customStorage.set('data-citycode', data.citycode);
+                    CustomStorage.set('data-citycode', data.citycode);
                     if (code !== data.citycode) {
                         $('.fj').hide();
                         $('#fj').removeClass('h');
@@ -559,8 +560,8 @@ define(function (require) {
                     for (var f = 0; f < data.FavoritedPositions.length; f++) {
                         newCollectList += data.FavoritedPositions[f].PositionNumber + ',';
                     }
-                    customStorage.rm('CollectList');
-                    customStorage.set('CollectList', newCollectList);
+                    CustomStorage.rm('CollectList');
+                    CustomStorage.set('CollectList', newCollectList);
                 }
             }
         });
@@ -598,7 +599,7 @@ define(function (require) {
     }
     // 获取黑名单企业列表
     function myBlockList() {
-        var $BlockList = customStorage.get('BlockList');
+        var $BlockList = CustomStorage.get('BlockList');
         $.ajax({
             url: '/Company/GetBlockCompany',
             type: 'post',
@@ -606,8 +607,8 @@ define(function (require) {
                 version: '6.3.0'
             },
             success: function (data, textStatus, jqxhr) {
-                customStorage.rm('BlockList');
-                customStorage.set('BlockList', data.Info);
+                CustomStorage.rm('BlockList');
+                CustomStorage.set('BlockList', data.Info);
             }
         });
     }

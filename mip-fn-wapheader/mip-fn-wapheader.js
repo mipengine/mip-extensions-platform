@@ -11,39 +11,47 @@ define(function (require) {
         // this.element 可取到当前实例对应的 dom 元素
         var element = this.element;
         var bbusername = element.getAttribute('bbuserName');
-        var pageName = element.getAttribute('pageName');
+        var searchUrl = element.getAttribute('searchUrl');
+        var mapUrl = element.getAttribute('mapUrl');
         var classUrl = element.getAttribute('classUrl');
         var imgSrc = element.getAttribute('imgSrc');
+        var channelName = element.getAttribute('channelName');
+        var channelUrl = element.getAttribute('channelUrl');
         var headerStr;
 
         if (bbusername) {
             headerStr = ''
-            + '<div class="header-user">'
-            + '<a href="' + classUrl + '" class="goback">返回上一页</a>'
-            + '<span class="channel"></span>'
-            + '<span class="page-title">' + pageName + '</span>'
-            + '<div id="headerControl" class="control">'
-            + '<span class="avator">'
-            + '<mip-img layout="responsive" width="30" height="30" src="' + imgSrc + '"></span>'
-            + '</div>'
-            + '</div>'
-            + '<div class="username-layer">'
-            + '<a href="http://my.fengniao.com/login.php?action=logout&url=' + window.location + '" class="login-out-button">退出</a>'
-            + '<span class="avator"><mip-img layout="responsive" width="30" height="30" src="' + imgSrc + '"></span>'
-            + '<span class="username">' + bbusername + '</span>'
-            + '<span class="close-username"></span>'
-            + '</div>';
+                + '<div class="header-user">'
+                + '<a href="' + classUrl + '" class="goback">返回上一页</a>'
+                + '<a href="' + channelUrl + '" class="name">' + channelName + '</a>'
+                + '<div class="control">'
+                + '<a href="' + searchUrl + '" class="searchUrl">搜索</a>'
+                + '<span class="avator">'
+                + '<mip-img layout="responsive" id="headerControl" width="30" height="30" src="' + imgSrc + '"></span>'
+                + '<a href="' + mapUrl + '" class="map">map</a>'
+                + '</div>'
+                + '</div>'
+                + '<div class="username-layer">'
+                + '<a href="http://my.fengniao.com/login.php?action=logout&url=' + window.location + '" class="login-out-button">退出</a>'
+                + '<span class="avator">'
+                + '<mip-img layout="responsive" width="30" height="30" src="' + imgSrc + '"></span>'
+                + '<span class="username">' + bbusername + '</span>'
+                + '<span class="close-username"></span>'
+                + '</div>';
 
         } else {
             headerStr = ''
-            + '<div class="header-user">'
-            + '<a href="' + classUrl + '" class="goback">返回上一页</a>'
-            + '<span class="channel"></span>'
-            + '<span class="page-title">' + pageName + '</span>'
-            + '<div class="control">'
-            + '<a href="/login.php?url=' + window.location + '" class="login-btn">登录</a>'
-            + '</div>'
-            + '</div>';
+
+                + '<div class="header-user">'
+                + '<a href="' + classUrl + '" class="goback">返回上一页</a>'
+                + '<a href="' + channelUrl + '" class="name">' + channelName + '</a>'
+                + '<div id="headerControl" class="control">'
+                + '<a href="' + searchUrl + '" class="searchUrl">搜索</a>'
+                + '<span class="avator">'
+                + '<a href="/login.php?url=' + window.location + '" class="login-btn">登录</a>'
+                + '</span>'
+                + '</div>'
+                + '</div>';
         }
         element.innerHTML = headerStr;
 

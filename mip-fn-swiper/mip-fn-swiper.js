@@ -11,8 +11,7 @@ define(function (require) {
         boxClass: 'mip-fn-swiper-container',
         wrapBoxClass: 'mip-fn-swiper-wrapper',
         slideBox: 'mip-fn-swiper-slideBox',
-        activeitem: 'mip-fn-swiper-activeitem',
-        threshold: 0.5
+        activeitem: 'mip-fn-swiper-activeitem'
     };
     // 按tagName创建一个固定class的tag
     function createTagWithClass(className, tagName) {
@@ -64,6 +63,7 @@ define(function (require) {
         var prevAlbum = ele.getAttribute('prevAlbum') || '';
         var nextAlbum = ele.getAttribute('nextAlbum') || '';
         var currentAlbum = ele.getAttribute('currentAlbum') || '';
+        var threshold =  ele.getAttribute('threshold');
 
         var dotItems = [];
 
@@ -106,6 +106,7 @@ define(function (require) {
         // 其实图片个数应该为实际个数+2.copy了头和尾的两部分
         var childNum = childNodes.length;
 
+
         // length 等于0时，不做任何处理
         if (childNum === 0) {
             return;
@@ -138,8 +139,6 @@ define(function (require) {
 
         carouselBox.appendChild(wrapBox);
         ele.appendChild(carouselBox);
-
-
         // 初始渲染时应该改变位置到第一张图
         var initPostion = 0;
         wrapBox.style.webkitTransform = 'translate3d(' + initPostion + 'px, 0, 0)';
@@ -184,7 +183,7 @@ define(function (require) {
 
         wrapBox.addEventListener('touchend', function (event) {
             // 如果大于设定阈值
-            if (Math.abs(diffNum) > eleWidth * carouselParas.threshold) {
+            if (Math.abs(diffNum) > eleWidth * threshold) {
                 imgIdx = (diffNum > 0) ? imgIdx - 1 : imgIdx + 1;
             }
             // console.log(childNum);
@@ -316,6 +315,7 @@ define(function (require) {
 
         // 横竖屏兼容处理
         window.addEventListener('resize', function () {
+            location.reload();
             var pageNum = location.hash.substring(6);
             if (pageNum) {
                 imgIndex = Number(pageNum - 1);

@@ -22,8 +22,19 @@ define(function (require) {
             'sq_open_target': element.getAttribute('sq-open-target') || '_blank',
             'sq_site_id': element.getAttribute('sq-site-id') || '',
             'sq_user_id': element.getAttribute('sq-user-id') || '',
-            'sq_browser_list': element.getAttribute('sq-browser-list') || 'Baidu,Miui,MZ-MX'
+            'sq_browser_list': element.getAttribute('sq-browser-list') || 'Baidu,Miui,MZ-MX',
+            'go_back_id': element.getAttribute('go-back-id') || 'goback'
         };
+
+        // 返回上一级
+        $('#' + varOptions.go_back_id).click(function (event) {
+            if (document.referrer.indexOf(document.domain) >= 0) {
+                // 返回上一页
+                window.history.back();
+            } else {
+                location.href = getBaseUrl();
+            }
+        });
 
         // 监听百度商桥
         $('.ocmb').click(function (event) {

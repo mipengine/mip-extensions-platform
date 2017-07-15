@@ -8,7 +8,8 @@
 <mip-fn-swiper
     layout="responsive"  
     width="300"     
-    height="200" 
+    height="200"
+    threshold = "0.1"
     indicator 
     commentLink = "http://m.fengniao.com/comment/5345039.html"
     currentAlbum = "http://m.fengniao.com/5345269.html"
@@ -29,7 +30,7 @@
 标题|内容
 ----|----
 类型|通用 
-所需脚本|http://mipcache.bdstatic.com/static/v1/mip-sample/mip-fn-swiper.js
+所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-fn-swiper/mip-fn-swiper.js
 
 ## 属性   
 
@@ -45,7 +46,14 @@
 必选项：是
 类型：数字
 单位：无
-默认值：无 
+默认值：无
+
+### threshold
+说明：屏幕上划过距离占总宽度的比，确定是否翻页
+必选项：是
+类型：数字
+单位：无
+默认值：无
 
 ### indicatorId
 说明：下方指示器功能字段，和指示器的父节点的 id 取值请保持一致,指示器的个数和轮播的 item 个数必须保持一致，指示器这块对 ID 是强依赖，样式可以自行修改，示例中是官方默认样式。指示器可点击定位。
