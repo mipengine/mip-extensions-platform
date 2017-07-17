@@ -1,10 +1,11 @@
 /**
- * @file mip-cy-script 组件
- * @author
+ * @author: zyb
+ * @date:  2017-7-13
+ * @time: 11:10
+ * @file: mip-cy-script.js
+ * @contact: ##
+ * @description: #
  */
-
-
-
 define(function (require) {
     var $ = require('zepto');
     var customElem = require('customElement').create();
@@ -33,11 +34,11 @@ define(function (require) {
     // build 方法，元素插入到文档时执行，仅会执行一次
     customElem.prototype.build = function () {
         var $element = $(this.element);
-        var gevalPre = $element.attr('geval-pre') || $('#mip-dp-script-params').attr('geval-pre');
-        var geval = $element.attr('geval') || $('#mip-dp-script-params').attr('geval');
-        var loadjs = $element.attr('loadjs') || $('#mip-dp-script-params').attr('loadjs');
-        var loadjsEnd = $element.attr('loadjs-end') || $('#mip-dp-script-params').attr('loadjs-end');
-        var adtag = $element.attr('adtag') || $('#mip-dp-script-params').attr('adtag');
+        var gevalPre = $element.attr('geval-pre') || $('#mip-cy-script-params').attr('geval-pre');
+        var geval = $element.attr('geval') || $('#mip-cy-script-params').attr('geval');
+        var loadjs = $element.attr('loadjs') || $('#mip-cy-script-params').attr('loadjs');
+        var loadjsEnd = $element.attr('loadjs-end') || $('#mip-cy-script-params').attr('loadjs-end');
+        var adtag = $element.attr('adtag') || $('#mip-cy-script-params').attr('adtag');
         adtag = adtag ? (adtag === 'false' || adtag === '0' ? false : adtag) : true;
 
         var scriptstr = '';
@@ -67,43 +68,15 @@ define(function (require) {
         if (adtag) {
             $.each($('.adwraper').not('loaded'), function (index, obj) {
                 var tag = $.trim($(obj).attr('id'));
+                var zyb = tag.substring(tag.indexOf('_') + 1);
                 if (tag) {
-                    scriptstr += '<div id="' + tag + '_temp" style="display:none;"><script>showads("' + tag + '");';
+                    scriptstr += '<div id="' + tag + '_temp" style="display:none;"><script src="http://hfm.adsame.com/s?z=hfm&c=' + zyb + '" charset="gbk" ></script><script>("' + tag + '");';
                     scriptstr += '$("#' + tag + '").append($("#' + tag + '_temp").children().not("script"));';
-                    scriptstr += '</script></div>';
+                    scriptstr += '<\/script></div>';
                 }
 
                 $(obj).addClass('loaded');
             });
-            var adtags = adtag.split(',');
-            if (adtags.length > 0) {
-                for (var index = 0; index < adtags.length; index++) {
-                    var tag = $.trim(adtags[index]);
-                    if (tag) {
-                        if ($('#' + tag).length > 0) {
-                            scriptstr += '<div id="' + tag + '_temp" style="display:none;"><script>';
-                            scriptstr += 'showads("' + tag + '");';
-                            scriptstr += '$("#' + tag + '").append($("#' + tag + '_temp").children().not("script"));';
-                            scriptstr += '</script></div>';
-                        }
-                        else {
-                            scriptstr += '<div id="' + tag + '"><script>showads("' + tag + '");</script></div>';
-                        }
-                    }
-
-                }
-            }
-        }
-
-        if (loadjsEnd) {
-            var loadJsEnds = loadjsEnd.split('\n');
-            for (var i = loadJsEnds.length - 1; i >= 0; i--) {
-                if ($.trim(loadJsEnds[i])) {
-                    var js = $.trim(loadJsEnds[i]);
-                    scriptstr += '<script src="' + js + '"></script>';
-                }
-
-            }
         }
 
         if (scriptstr) {
