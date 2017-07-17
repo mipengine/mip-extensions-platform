@@ -94,10 +94,11 @@ define(function (require) {
                     return arr;
                 }
             };
+            var url = getBaseUrl() + '/mip/Article/loan.html';
             var ajaxTimeoutTest = $.ajax({
                 type: 'POST',
                 timeout: 3000,
-                url: 'https://mip.scaydk.com/mip/Article/loan.html',
+                url: url,
                 data: data,
                 success: function (result) {
                     $('#' + options.loanContentId + ' > table > tbody').empty().html(result);
@@ -114,6 +115,25 @@ define(function (require) {
             event.stopPropagation();
         });
     };
+    // 当前域名
+    function getBaseUrl() {
+        // protocol 属性是一个可读可写的字符串，可设置或返回当前 URL 的协议,所有主要浏览器都支持 protocol 属性
+        var ishttps;
+        if ('https:' === document.location.protocol) {
+            ishttps = true;
+        }
+        else {
+            ishttps = false;
+        }
+        var url = window.location.host;
+        if (ishttps) {
+            url = 'https://' + url;
+        }
+        else {
+            url = 'http://' + url;
+        }
+        return url;
+    }
 
     return customElement;
 });

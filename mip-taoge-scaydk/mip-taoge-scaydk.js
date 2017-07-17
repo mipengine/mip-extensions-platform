@@ -32,7 +32,7 @@ define(function (require) {
                 // 返回上一页
                 window.history.back();
             } else {
-                location.href = getBaseUrl();
+                location.href =  '/';
             }
         });
 

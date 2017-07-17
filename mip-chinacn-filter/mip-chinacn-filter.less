@@ -1,0 +1,94 @@
+/**
+ * @file mip-chinacn-filter样式文件
+ */
+mip-chinacn-filter {
+    .screen-conditions {
+        position: relative;
+        z-index: 12;
+        overflow: initial;
+        width: 100%;
+        height: 38px;
+        border-top: 1px solid #dfdfdf;
+        border-bottom: 1px solid #dfdfdf;
+        background: #fff;
+    }
+    ul {
+        margin: 0 0;
+        padding: 0 0;
+        list-style: none;
+        &:after {
+            clear: both;
+        }
+        li {
+            float: left;
+            width: 25%;
+        }
+        div.current {
+            display: block;
+        }
+        span.current {
+            position: relative;
+            border-bottom: 1px solid #d10504;
+            color: #c10505;
+        }
+        span.current::after {
+            content: "";
+            position: absolute;
+            top: 12px;
+            right: 6px;
+            display: block;
+            width: 16px;
+            height: 8px;
+            border-bottom: 1px solid #d10504;
+            border-left: 1px solid #d10504;
+            transform: rotate(-45deg);
+        }
+    }
+    .screen-box {
+        position: absolute;
+        top: 35px;
+        left: 0;
+        display: none;
+        width: 100%;
+        background-color: #fff;
+        dl {
+            overflow: hidden;
+        }
+        dd {
+            float: left;
+            width: 46%;
+            height: 36px;
+            padding-left: 3%;
+            line-height: 36px;
+        }
+        .mip-site-item {
+            display: block;
+            height: 35px;
+        }
+        .btn-float {
+            margin-top: 10px;
+            .mip-clear,
+            .mip-sure {
+                float: left;
+                width: 50%;
+                height: 36px;
+                line-height: 36px;
+                text-align: center;
+            }
+        }
+    }
+}
+.opacity-layer {
+    position: fixed;
+    z-index: 9;
+    top: 0;
+    left: 0;
+    display: none;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.5);
+}
+
+.show {
+    display: block !important;
+}

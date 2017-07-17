@@ -1,0 +1,14 @@
+{
+    "name": "mip-cnkang-details",
+    "version": "1.0.0",
+    "description": "康网mip内容化",
+    "contributors": [
+        {
+	    "name": "sunruinian",
+	    "email": "1098142239@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
