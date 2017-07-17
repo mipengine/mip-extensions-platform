@@ -172,6 +172,17 @@ define(function (require) {
                      */
                 }, self.openTime);
             }
+
+            var visibilitychange = function () {
+                var tag = document.hidden || document.webkitHidden;
+                tag && clearTimeout(self.openTimer);
+            };
+
+            document.addEventListener('visibilitychange', visibilitychange, false);
+            document.addEventListener('webkitvisibilitychange', visibilitychange, false);
+            window.addEventListener('pagehide', function () {
+                clearTimeout(self.openTimer);
+            }, false);
         },
         aGotoDownload: function (startTime, newDownloadUrl) {
             var self = this;

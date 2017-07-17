@@ -26,28 +26,7 @@ define(function (require) {
                 $('#getyanzheng').addClass('grey').html('重新发(' + lastTime + ')');
             }
         }
-        // 动态加载 select 数据
-        function chrKemulist() {
-            var htm = '';
-            $.ajax({
-                type: 'get',
-                scriptCharset: 'utf-8',
-                url: 'https://mip.233.com/include2017/json/' + (('undefined' !== typeof cdomain && cdomain !== '') ? cdomain : domain) + '.json',
-                dataType: 'json',
-                success: function (data) {
-                    for (var i = 0; i < data.myClass.length; i++) {
-                        var n = data.myClass[i];
-                        htm = htm + '<option value ="' + n.ClassID + '" style="text-align:right">';
-                        htm = htm + n.ClassName + '</option>';
-                    }
-                    $('#kemu').html(htm);
-                },
-                error: function () { },
-                async: true,
-                cache: false
-            });
-        }
-        chrKemulist();
+
         $('.orange-btn').click(function () {
             $(element).find('.body_mask').removeClass('hide').show();
         });
@@ -86,7 +65,6 @@ define(function (require) {
             var fullname = $.trim($('#fullname').val());
             var did = $.trim($('.Area').val());
             var phone = $.trim($('#chr_masswarp').val());
-            var classid = $.trim($('#kemu').val());
             var code = $.trim($('#smsCode').val());
 
             if (!/^[\u4e00-\u9fa5]+$/.test(fullname) || fullname === '填写真实姓名') {
@@ -99,10 +77,6 @@ define(function (require) {
             }
             if (!/^1[34578]\d{9}$/.test(phone)) {
                 $('.m-nerror').html('<span class="error-icon"></span>*请填写正确的手机号码');
-                return;
-            }
-            if (!/^\d+$/.test(classid) || classid === 0) {
-                $('.m-nerror').html('<span class="error-icon"></span>*请选择科目');
                 return;
             }
             if (!/^\d{6}$/.test(code)) {
@@ -118,7 +92,6 @@ define(function (require) {
                     fullname: escape(fullname),
                     did: did,
                     phone: phone,
-                    classid: classid,
                     code: code,
                     type: 1,
                     fromurl: escape(window.location.href)
