@@ -1,0 +1,14 @@
+{
+    "name": "mip-taoge-scaydk-loan",
+    "version": "1.0.0",
+    "description": "wap.scaydk.com网贷款产品筛选组件",
+    "contributors": [
+        {
+            "name": "涛哥",
+            "email": "liangtao.gz@foamail.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
