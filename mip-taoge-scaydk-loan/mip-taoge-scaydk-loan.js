@@ -110,7 +110,7 @@ define(function (require) {
                         // console.log('请求超时');
                     }
                 },
-                dataType: 'html'
+                dataType: 'json'
             });
             event.stopPropagation();
         });

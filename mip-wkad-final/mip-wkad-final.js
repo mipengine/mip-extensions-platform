@@ -1,9 +1,9 @@
 /**
-* Ѱҽ��ҩmip���� �°���������
-* @file �ű�֧��
+* 寻医问药mip改造 新版广告组件
+* @file 脚本支持
 * @author jqthink@gmail.com
-* @time 2017.07.03
-* @version 1.0.1
+* @time 2017.07.17
+* @version 1.0.2
 */
 define(function (require) {
     var $ = require('zepto');
@@ -80,9 +80,9 @@ define(function (require) {
             }
         }
     };
-    // build ������Ԫ�ز��뵽�ĵ�ʱִ�У�����ִ��һ��
+    // build 方法，元素插入到文档时执行，仅会执行一次
     customElem.prototype.build = function () {
-     // this.element ��ȡ����ǰʵ����Ӧ�� dom Ԫ��
+     // this.element 可取到当前实例对应的 dom 元素
         var elem = this.element;
         var elStr = $(elem).attr('el');
         var adStr = $(elem).attr('ads');
@@ -97,7 +97,7 @@ define(function (require) {
         }
         else {
             if (domain === '3g.xywy.com') {
-                $('mip-fixed[type="top"]').hide();
+                $('.top-float').hide();
                 $('.hot-news-panel').addClass('none');
                 $('.mobile-ad-rnk1-panel').removeClass('none');
                 $('.mobile-ad-rnk2-panel').removeClass('none');
