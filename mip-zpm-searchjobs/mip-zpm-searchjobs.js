@@ -419,9 +419,11 @@ define(function (require) {
     // 获取经纬度
     function getLocation() {
         var map;
+        var mapObj;
         var geolocation;
         // 加载地图，调用浏览器定位服务
-        map = new window.AMap.Map('container', {
+        mapObj = new window.AMap();
+        map = mapObj.map('container', {
             resizeEnable: true
         });
         map.plugin('AMap.Geolocation', function () {
