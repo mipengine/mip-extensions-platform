@@ -1,0 +1,13 @@
+{
+    "name": "mip-ask-pucker",
+    "version": "1.0.0",
+	"description":"ask页面内容折叠",
+    "author": {
+        "name": "yuwei",
+        "email": "security@120ask.com",
+        "url": ""
+    },
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
