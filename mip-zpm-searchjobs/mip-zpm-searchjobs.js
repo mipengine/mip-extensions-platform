@@ -418,15 +418,15 @@ define(function (require) {
     titVal($('#locationTitVal'), $('#locationTit'));
     // 获取经纬度
     function getLocation() {
-        var map;
+        var mapstr;
         var mapObj;
         var geolocation;
         // 加载地图，调用浏览器定位服务
         mapObj = new window.AMap();
-        map = mapObj.map('container', {
+        mapstr = mapObj.map('container', {
             resizeEnable: true
         });
-        map.plugin('AMap.Geolocation', function () {
+        mapstr.plugin('AMap.Geolocation', function () {
             geolocation = new window.AMap.Geolocation({
                 enableHighAccuracy: true,
                 timeout: 10000,
@@ -434,7 +434,7 @@ define(function (require) {
                 zoomToAccuracy: true,
                 buttonPosition: 'RB'
             });
-            map.addControl(geolocation);
+            mapstr.addControl(geolocation);
             geolocation.getCurrentPosition();
             window.AMap.event.addListener(geolocation, 'complete', onComplete);
             window.AMap.event.addListener(geolocation, 'error', onError);
