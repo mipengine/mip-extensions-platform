@@ -1,0 +1,15 @@
+{
+    "name": "mip-qcode",
+    "version": "1.0.0",
+    "description": "组件介绍",
+    "author": "xiaohua",
+    "contributors": [
+        {
+            "name": "xiaohua",
+            "email": "hfha@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
