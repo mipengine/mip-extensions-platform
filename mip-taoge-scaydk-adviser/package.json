@@ -1,0 +1,14 @@
+{
+    "name": "mip-taoge-scaydk-adviser",
+    "version": "1.0.2",
+    "description": "wap.scaydk.com 贷款顾问自定义组件",
+    "contributors": [
+        {
+            "name": "涛哥",
+            "email": "liangtao.gz@foamail.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

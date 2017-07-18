@@ -17,6 +17,8 @@ define(function (require) {
         var $mask = $('.opacity-layer');
         $element.find('.screen-conditions').on('click', 'li', function () {
             var $this = $(this);
+            $this.siblings('.current').removeClass('current');
+            $this.addClass('current');
             $this.siblings().find('div.current').removeClass('current');
             $this.find('.screen-box').addClass('current');
             $mask.addClass(maskClass);
@@ -124,6 +126,7 @@ define(function (require) {
         function hide() {
             $mask.removeClass(maskClass);
             $element.find('.screen-box').removeClass('current');
+            $element.find('li.current').removeClass('current');
         }
     };
 
