@@ -1,4 +1,4 @@
-﻿/**
+/**
 * @author: wangjx
 * @date: 2017-04-19
 * @file: mip-zpm-sindex.js
@@ -6,7 +6,8 @@
 define(function (require) {
     var $ = require('zepto');
     var util = require('util');
-    var customStorage = new util.CustomStorage(0);
+    var CustomStorage = util.customStorage;
+    var cs = new CustomStorage(0);
     var render = function () {
         // 首页搜索
         var $searchWrap = $('#indexSearchContent');
@@ -19,7 +20,7 @@ define(function (require) {
         var $userinfo = $('#userinfor').attr('data-name');
         // localStorage历史记录
         // 读取
-        var indexSearchHs = customStorage.get('indexSearchHs');
+        var indexSearchHs = cs.get('indexSearchHs');
         var $SearchLsWrap = $('.indexSearchList');
         var $indexSearchHsClose = $SearchLsWrap.find('.close');
         if (indexSearchHs === null) {
@@ -90,7 +91,7 @@ define(function (require) {
         });
         // 清除
         $('.indexSearchList dt .clear').click(function () {
-            customStorage.rm('indexSearchHs');
+            cs.rm('indexSearchHs');
             indexSearchHs = [];
             $SearchLsWrap.hide().children('dd').remove();
             dtBool = false;
@@ -134,7 +135,7 @@ define(function (require) {
         if (!noDialog) {
             if (!vivo) {
                 if (localStorage.toppayDialog !== 1) {
-                    if (!customStorage.get('zp-auth')) {
+                    if (!cs.get('zp-auth')) {
                         $('.toppay').show();
                         localStorage.toppayDialog = 1;
                     }
@@ -155,12 +156,12 @@ define(function (require) {
             var meizumz = 'meizumz' === paraDialog.toLowerCase();
             var meizugg = 'meizugg' === paraDialog.toLowerCase();
             if (vivo || meizumz || meizugg || 'meizuzc' === paraDialog.toLowerCase()) {
-                window.customStorage.set('utm_source_vivo', 'vivo');
+                window.cs.set('utm_source_vivo', 'vivo');
                 $('#j_focus').remove();
                 $('.indexLayer').remove();
                 $('.toppay').remove();
             } else {
-                window.customStorage.rm('utm_source_vivo');
+                window.cs.rm('utm_source_vivo');
             }
         }
         if (getCookie('source')) {
@@ -244,15 +245,12 @@ define(function (require) {
                 jobStatisticsEvent();
             });
         } else {
-            // 置顶
             $('#zhiding').click(function () {
                 window.location.href = '/account/login';
             });
-            // 刷新
             $('#refreshresume').click(function () {
                 window.location.href = '/account/login';
             });
-            // 求职统计
             $('#jobStat').click(function () {
                 window.location.href = '/account/login';
             });
@@ -279,7 +277,7 @@ define(function (require) {
     }
     // 读取历史记录方法
     function readSearchLs() {
-        var indexSearchHs = customStorage.get('indexSearchHs');
+        var indexSearchHs = cs.get('indexSearchHs');
         var $SearchLsWrap = $('.indexSearchList');
         var dtBool = true;
         if (indexSearchHs.length > 0) {
@@ -295,7 +293,7 @@ define(function (require) {
     }
     // 保存最新历史记录方法
     function saveSearchLs(hsStr) {
-        var indexSearchHs = customStorage.get('indexSearchHs');
+        var indexSearchHs = cs.get('indexSearchHs');
         // 判断新搜索关键词是否已存在
         var b = true;
         for (var i = 0; i <= indexSearchHs.length; i++) {
@@ -309,7 +307,7 @@ define(function (require) {
             if (indexSearchHs.length > 5) {
                 indexSearchHs.shift();
             }
-            customStorage.set('indexSearchHs', indexSearchHs);
+            cs.set('indexSearchHs', indexSearchHs);
             return false;
         }
     }
@@ -326,6 +324,7 @@ define(function (require) {
     function getLocation() {
         var map;
         var geolocation;
+        var mapObj;
         var locationNaCode = getCookie('LocationNavigatorCode');
         if (locationNaCode !== undefined && locationNaCode !== null) {
             var locationObj = {};
@@ -336,7 +335,8 @@ define(function (require) {
             onComplete(locationObj);
         } else {
             // 加载地图，调用浏览器定位服务
-            map = new window.AMap.Map('container', {
+            mapObj = new window.AMap();
+            map = mapObj.map('container', {
                 resizeEnable: true
             });
             map.plugin('AMap.Geolocation', function () {
@@ -380,7 +380,7 @@ define(function (require) {
         $.get('/Home/GetCityInfoByLatLng',
         {lat: userLocationLat, lng: userLocationLon},
         function (data, textStatus, jqxhr) {
-            if ($('.j_searchTop .position span').text() === '全国') {
+            if ($('.j_searchTop .position span').text() === 'ȫ��') {
                 $('.j_searchTop .position span').text(data.cityname);
             }
         });
