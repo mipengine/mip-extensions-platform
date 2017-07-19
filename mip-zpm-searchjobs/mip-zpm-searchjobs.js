@@ -416,116 +416,6 @@ define(function (require) {
     titVal($('#salaryTitVal'), $('#salaryTit'));
     titVal($('#educationTitVal'), $('#educationTit'));
     titVal($('#locationTitVal'), $('#locationTit'));
-    // 获取经纬度
-    function getLocation() {
-        var mapstr;
-        var mapObj;
-        var geolocation;
-        // 加载地图，调用浏览器定位服务
-        mapObj = new window.AMap();
-        mapstr = mapObj.map('container', {
-            resizeEnable: true
-        });
-        mapstr.plugin('AMap.Geolocation', function () {
-            geolocation = new window.AMap.Geolocation({
-                enableHighAccuracy: true,
-                timeout: 10000,
-                buttonOffset: new window.AMap.Pixel(10, 20),
-                zoomToAccuracy: true,
-                buttonPosition: 'RB'
-            });
-            mapstr.addControl(geolocation);
-            geolocation.getCurrentPosition();
-            window.AMap.event.addListener(geolocation, 'complete', onComplete);
-            window.AMap.event.addListener(geolocation, 'error', onError);
-        });
-    }
-    getLocation();
-    // 获得经纬度后-调用获取城市名称及id接口
-    function onComplete(data) {
-        // 经纬度变量
-        var jwd = false;
-        var dataCitycode = cs.get('data-citycode');
-        var userLocationLat;
-        var userLocationLon;
-        var code = $('#Slocation').attr('data-location');
-        if (data.coords) {
-            userLocationLat = data.coords.latitude;
-            userLocationLon = data.coords.longitude;
-        } else {
-            userLocationLat = data.position.getLat();
-            userLocationLon = data.position.getLng();
-        }
-        if (dataCitycode === undefined && dataCitycode === null) {
-            $.ajax({
-                type: 'get',
-                url: '/Home/GetCityInfoByLatLng',
-                data: {
-                    lat: userLocationLat,
-                    lng: userLocationLon
-                },
-                success: function (data, textStatus, jqxhr) {
-                    cs.set('data-citycode', data.citycode);
-                    if (code !== data.citycode) {
-                        $('.fj').hide();
-                        $('#fj').removeClass('h');
-                    }
-                }
-            });
-        } else {
-            if (code !== dataCitycode) {
-                $('.fj').hide();
-                $('#fj').removeClass('h');
-            }
-        }
-        jwd = true;
-        cheakJwd();
-        $.ajax({
-            type: 'post',
-            url: '/searchjob/SearchJobsGetlocation',
-            data: {
-                Industry: $('#S_Industry').attr('value'),
-                KeyWord: $('#S_KeyWord').attr('value'),
-                JobType: $('#S_JobType').attr('value'),
-                joblocation: userLocationLat + ';' + userLocationLon,
-                isSchoolJob: $('#S_isSchoolJob').attr('value'),
-                Location: $('#Slocation').attr('value'),
-                publishdate: $('#S_publishdate').attr('value'),
-                workexperience: $('#S_workexperience').attr('value'),
-                education: $('#S_education').attr('value'),
-                compType: $('#S_compType').attr('value'),
-                compsize: $('#S_compsize').attr('value'),
-                jobtype2: $('#S_jobtype2').attr('value'),
-                salary: $('#S_salary').attr('value'),
-                order: $('#S_order').attr('value'),
-                positionname: $('#S_positionname').attr('value'),
-                companyname: $('#S_companyname').attr('value'),
-                maprange: $('#S_maprange').attr('value')
-            },
-            success: function (data, textStatus, jqxhr) {
-                var $li = $('#fj li a');
-                for (var i = 0; i < data.length; i++) {
-                    $li.eq(i).attr('href', data[i]);
-                }
-            }
-        });
-    }
-    // 获得经纬度失败执行函数
-    function onError(error) {
-        var jwd = false;
-        cheakJwd();
-    }
-    // 检测经纬度
-    function cheakJwd() {
-        var jwd = false;
-        if (!jwd) {
-            $('#fj').hide();
-            $('.screenNull1').show();
-        } else {
-            $('#fj').show();
-        }
-    }
-    cheakJwd();
     // 收藏
     function collectJob() {
         var favorate = true;
@@ -753,6 +643,114 @@ define(function (require) {
             window.location.replace('/account/login?prevUrl=' + escape(window.location.href) + '');
         }
     }
+    // 获取经纬度
+    function getLocation() {
+        var mapstr;
+        var mapObj;
+        var geolocation;
+        // 加载地图，调用浏览器定位服务
+        mapstr = new window.AMap.Map('container', {
+            resizeEnable: true
+        });
+        mapstr.plugin('AMap.Geolocation', function () {
+            geolocation = new window.AMap.Geolocation({
+                enableHighAccuracy: true,
+                timeout: 10000,
+                buttonOffset: new window.AMap.Pixel(10, 20),
+                zoomToAccuracy: true,
+                buttonPosition: 'RB'
+            });
+            mapstr.addControl(geolocation);
+            geolocation.getCurrentPosition();
+            window.AMap.event.addListener(geolocation, 'complete', onComplete);
+            window.AMap.event.addListener(geolocation, 'error', onError);
+        });
+    }
+    // 获得经纬度后-调用获取城市名称及id接口
+    function onComplete(data) {
+        // 经纬度变量
+        var jwd = false;
+        var dataCitycode = cs.get('data-citycode');
+        var userLocationLat;
+        var userLocationLon;
+        var code = $('#Slocation').attr('data-location');
+        if (data.coords) {
+            userLocationLat = data.coords.latitude;
+            userLocationLon = data.coords.longitude;
+        } else {
+            userLocationLat = data.position.getLat();
+            userLocationLon = data.position.getLng();
+        }
+        if (dataCitycode === undefined && dataCitycode === null) {
+            $.ajax({
+                type: 'get',
+                url: '/Home/GetCityInfoByLatLng',
+                data: {
+                    lat: userLocationLat,
+                    lng: userLocationLon
+                },
+                success: function (data, textStatus, jqxhr) {
+                    cs.set('data-citycode', data.citycode);
+                    if (code !== data.citycode) {
+                        $('.fj').hide();
+                        $('#fj').removeClass('h');
+                    }
+                }
+            });
+        } else {
+            if (code !== dataCitycode) {
+                $('.fj').hide();
+                $('#fj').removeClass('h');
+            }
+        }
+        jwd = true;
+        cheakJwd();
+        $.ajax({
+            type: 'post',
+            url: '/searchjob/SearchJobsGetlocation',
+            data: {
+                Industry: $('#S_Industry').attr('value'),
+                KeyWord: $('#S_KeyWord').attr('value'),
+                JobType: $('#S_JobType').attr('value'),
+                joblocation: userLocationLat + ';' + userLocationLon,
+                isSchoolJob: $('#S_isSchoolJob').attr('value'),
+                Location: $('#Slocation').attr('value'),
+                publishdate: $('#S_publishdate').attr('value'),
+                workexperience: $('#S_workexperience').attr('value'),
+                education: $('#S_education').attr('value'),
+                compType: $('#S_compType').attr('value'),
+                compsize: $('#S_compsize').attr('value'),
+                jobtype2: $('#S_jobtype2').attr('value'),
+                salary: $('#S_salary').attr('value'),
+                order: $('#S_order').attr('value'),
+                positionname: $('#S_positionname').attr('value'),
+                companyname: $('#S_companyname').attr('value'),
+                maprange: $('#S_maprange').attr('value')
+            },
+            success: function (data, textStatus, jqxhr) {
+                var $li = $('#fj li a');
+                for (var i = 0; i < data.length; i++) {
+                    $li.eq(i).attr('href', data[i]);
+                }
+            }
+        });
+    }
+    // 获得经纬度失败执行函数
+    function onError(error) {
+        var jwd = false;
+        cheakJwd();
+    }
+    // 检测经纬度
+    function cheakJwd() {
+        var jwd = false;
+        if (!jwd) {
+            $('#fj').hide();
+            $('.screenNull1').show();
+        } else {
+            $('#fj').show();
+        }
+    }
+    cheakJwd();
     return {
         render: render
     };

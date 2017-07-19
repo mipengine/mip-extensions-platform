@@ -1,0 +1,14 @@
+{
+    "name": "mip-taoge-scaydk-qe",
+    "version": "1.0.0",
+    "description": "wap.scaydk.com网贷款额度计算组件",
+    "contributors": [
+        {
+            "name": "涛哥",
+            "email": "liangtao.gz@foamail.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
