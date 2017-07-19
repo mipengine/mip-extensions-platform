@@ -5,20 +5,34 @@
 define(function (require) {
     var customElem = require('customElement').create();
 
+    function getCookie(cname) {
+        if (document.cookie.length > 0) {
+            var start = document.cookie.indexOf(cname + '=');
+            if (start !== -1) {
+                start = start + cname.length + 1;
+                var end = document.cookie.indexOf(';', start);
+                if (end === -1) {
+                    end = document.cookie.length;
+                }
+                return unescape(document.cookie.substring(start, end));
+            }
+        }
+        return '';
+    }
     // 生命周期 function list，根据组件情况选用，（一般情况选用 build、firstInviewCallback） start
     // build 方法，元素插入到文档时执行，仅会执行一次
     customElem.prototype.build = function () {
         // this.element 可取到当前实例对应的 dom 元素
         var element = this.element;
-        var bbusername = element.getAttribute('bbuserName');
+        var bbusername = getCookie('bbusername');
         var searchUrl = element.getAttribute('searchUrl');
         var mapUrl = element.getAttribute('mapUrl');
         var classUrl = element.getAttribute('classUrl');
         var imgSrc = element.getAttribute('imgSrc');
         var channelName = element.getAttribute('channelName');
         var channelUrl = element.getAttribute('channelUrl');
+        var username = element.getAttribute('bbusername');
         var headerStr;
-
         if (bbusername) {
             headerStr = ''
                 + '<div class="header-user">'
@@ -35,7 +49,7 @@ define(function (require) {
                 + '<a href="http://my.fengniao.com/login.php?action=logout&url=' + window.location + '" class="login-out-button">退出</a>'
                 + '<span class="avator">'
                 + '<mip-img layout="responsive" width="30" height="30" src="' + imgSrc + '"></span>'
-                + '<span class="username">' + bbusername + '</span>'
+                + '<span class="username">' + username + '</span>'
                 + '<span class="close-username"></span>'
                 + '</div>';
 

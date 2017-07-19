@@ -1,7 +1,7 @@
 {
-    "name": "mip-taoge-scaydk-qe",
-    "version": "1.0.3",
-    "description": "wap.scaydk.com网贷款额度计算组件",
+    "name": "mip-taoge-scaydk-calculator",
+    "version": "1.0.0",
+    "description": "wap.scaydk.com 贷款计算器组件",
     "contributors": [
         {
             "name": "涛哥",

@@ -156,12 +156,12 @@ define(function (require) {
             var meizumz = 'meizumz' === paraDialog.toLowerCase();
             var meizugg = 'meizugg' === paraDialog.toLowerCase();
             if (vivo || meizumz || meizugg || 'meizuzc' === paraDialog.toLowerCase()) {
-                window.cs.set('utm_source_vivo', 'vivo');
+                cs.set('utm_source_vivo', 'vivo');
                 $('#j_focus').remove();
                 $('.indexLayer').remove();
                 $('.toppay').remove();
             } else {
-                window.cs.rm('utm_source_vivo');
+                cs.rm('utm_source_vivo');
             }
         }
         if (getCookie('source')) {
@@ -320,75 +320,6 @@ define(function (require) {
         }
         return null;
     }
-    // 获取经纬度
-    function getLocation() {
-        var map;
-        var geolocation;
-        var mapObj;
-        var locationNaCode = getCookie('LocationNavigatorCode');
-        if (locationNaCode !== undefined && locationNaCode !== null) {
-            var locationObj = {};
-            locationObj.coords = {};
-            var locationNaArr = locationNaCode.split(',');
-            locationObj.coords.latitude = locationNaArr[0];
-            locationObj.coords.longitude = locationNaArr[1];
-            onComplete(locationObj);
-        } else {
-            // 加载地图，调用浏览器定位服务
-            mapObj = new window.AMap();
-            map = mapObj.map('container', {
-                resizeEnable: true
-            });
-            map.plugin('AMap.Geolocation', function () {
-                geolocation = new window.AMap.Geolocation({
-                    enableHighAccuracy: true,
-                    timeout: 10000,
-                    buttonOffset: new window.AMap.Pixel(10, 20),
-                    zoomToAccuracy: true,
-                    buttonPosition: 'RB'
-                });
-                map.addControl(geolocation);
-                geolocation.getCurrentPosition();
-                window.AMap.event.addListener(geolocation, 'complete', onComplete);
-                window.AMap.event.addListener(geolocation, 'error', onError);
-
-            });
-        }
-    }
-    // 解析定位结果
-    function onComplete(data) {
-        var userLocationLat;
-        var userLocationLon;
-        var locationNaCode = getCookie('LocationNavigatorCode');
-        if (data.coords) {
-            userLocationLat = data.coords.latitude;
-            userLocationLon = data.coords.longitude;
-        } else {
-            userLocationLat = data.position.getLat();
-            userLocationLon = data.position.getLng();
-        }
-        if (locationNaCode === undefined && locationNaCode === null) {
-            // 储存经纬度cookie
-            var date = new Date();
-            date.setDate(date.getDate() + 3);
-            var strcookie = 'LocationNavigatorCode=' + userLocationLat + '';
-            strcookie += ',' + userLocationLon + ';path=/;expires=' + date.toGMTString() + '';
-            document.cookie = strcookie;
-        }
-        // 获取城市name
-        var code = $('#userinfor').attr('data-citycode');
-        $.get('/Home/GetCityInfoByLatLng',
-        {lat: userLocationLat, lng: userLocationLon},
-        function (data, textStatus, jqxhr) {
-            if ($('.j_searchTop .position span').text() === 'ȫ��') {
-                $('.j_searchTop .position span').text(data.cityname);
-            }
-        });
-    }
-    // 获得经纬度失败执行函数
-    function onError(data) {
-        var str = data.info;
-    }
     // 点击置顶简历
     function resumeTopIndexEvent() {
         if ($('#MyInfo') !== null && $('#MyInfo').length !== 0) {
@@ -447,6 +378,73 @@ define(function (require) {
                 return unescape(temp[1]);
             }
         }
+    }
+    // 获取经纬度
+    function getLocation() {
+        var geolocation;
+        var mapObj;
+        var locationNaCode = getCookie('LocationNavigatorCode');
+        if (locationNaCode !== undefined && locationNaCode !== null) {
+            var locationObj = {};
+            locationObj.coords = {};
+            var locationNaArr = locationNaCode.split(',');
+            locationObj.coords.latitude = locationNaArr[0];
+            locationObj.coords.longitude = locationNaArr[1];
+            onComplete(locationObj);
+        } else {
+            // 加载地图，调用浏览器定位服务
+            mapObj = new window.AMap.Map('container', {
+                resizeEnable: true
+            });
+            mapObj.plugin('AMap.Geolocation', function () {
+                geolocation = new window.AMap.Geolocation({
+                    enableHighAccuracy: true,
+                    timeout: 10000,
+                    buttonOffset: new window.AMap.Pixel(10, 20),
+                    zoomToAccuracy: true,
+                    buttonPosition: 'RB'
+                });
+                mapObj.addControl(geolocation);
+                geolocation.getCurrentPosition();
+                window.AMap.event.addListener(geolocation, 'complete', onComplete);
+                window.AMap.event.addListener(geolocation, 'error', onError);
+
+            });
+        }
+    }
+    // 解析定位结果
+    function onComplete(data) {
+        var userLocationLat;
+        var userLocationLon;
+        var locationNaCode = getCookie('LocationNavigatorCode');
+        if (data.coords) {
+            userLocationLat = data.coords.latitude;
+            userLocationLon = data.coords.longitude;
+        } else {
+            userLocationLat = data.position.getLat();
+            userLocationLon = data.position.getLng();
+        }
+        if (locationNaCode === undefined && locationNaCode === null) {
+            // 储存经纬度cookie
+            var date = new Date();
+            date.setDate(date.getDate() + 3);
+            var strcookie = 'LocationNavigatorCode=' + userLocationLat + '';
+            strcookie += ',' + userLocationLon + ';path=/;expires=' + date.toGMTString() + '';
+            document.cookie = strcookie;
+        }
+        // 获取城市name
+        var code = $('#userinfor').attr('data-citycode');
+        $.get('/Home/GetCityInfoByLatLng',
+        {lat: userLocationLat, lng: userLocationLon},
+        function (data, textStatus, jqxhr) {
+            if ($('.j_searchTop .position span').text() === 'ȫ��') {
+                $('.j_searchTop .position span').text(data.cityname);
+            }
+        });
+    }
+    // 获得经纬度失败执行函数
+    function onError(data) {
+        var str = data.info;
     }
     return {
         render: render

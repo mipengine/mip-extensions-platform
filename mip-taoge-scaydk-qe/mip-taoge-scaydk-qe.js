@@ -39,7 +39,7 @@ define(function (require) {
             var v = Number($(this).val());
             var i = $(this).parents('.form-group').index();
             if (v !== 2) {
-                $('.form-horizontal form > div.form-group').each(function (k, v) {
+                $('mip-form > form > div.form-group').each(function (k, v) {
                     if (k > i) {
                         if ($(this).find('select').length > 0) {
                             $(this).removeClass('hidden').addClass('show');
@@ -51,7 +51,7 @@ define(function (require) {
                 });
             }
             else {
-                $('.form-horizontal form > div.form-group').each(function (k, v) {
+                $('mip-form > form > div.form-group').each(function (k, v) {
                     if (k > i) {
                         if ($(this).find('select').length > 0) {
                             $(this).removeClass('show').addClass('hidden');
