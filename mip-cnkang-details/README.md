@@ -88,7 +88,7 @@ mip-cnkang-details 康网mip内容化
                 <strong>2016-03-29</strong>
             </dd>
         </dl>
-        <div class="viewall"><span>展开全1部内容<i></i></span></div>
+        <div class="viewall hide"><span>展开全1部内容<i></i></span></div>
     </div>
 </mip-cnkang-details>
 <div class="line10"></div>

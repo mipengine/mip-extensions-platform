@@ -12,8 +12,7 @@ define(function (require) {
             var askLength = $('.askcon').children('dl').length;
             if (askLength > 2) {
                 $('.askcon').children('dl').slice(2).hide();
-            } else {
-                $('.viewall').hide();
+                $('.viewall').removeClass('hide');
             }
         };
         $(function () {
