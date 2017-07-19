@@ -39,7 +39,7 @@ define(function (require) {
             var v = Number($(this).val());
             var i = $(this).parents('.form-group').index();
             if (v !== 2) {
-                $('.form-horizontal > div.form-group').each(function (k, v) {
+                $('.form-horizontal form > div.form-group').each(function (k, v) {
                     if (k > i) {
                         if ($(this).find('select').length > 0) {
                             $(this).removeClass('hidden').addClass('show');
@@ -51,7 +51,7 @@ define(function (require) {
                 });
             }
             else {
-                $('.form-horizontal > div.form-group').each(function (k, v) {
+                $('.form-horizontal form > div.form-group').each(function (k, v) {
                     if (k > i) {
                         if ($(this).find('select').length > 0) {
                             $(this).removeClass('show').addClass('hidden');
@@ -160,7 +160,7 @@ define(function (require) {
                 type: 'GET',
                 timeout: 3000,
                 url: getBaseUrl() + '/mip/index/verify_sms',
-                data: $('.form-horizontal').serialize(),
+                data: $('form').serialize(),
                 success: function (result) {
                     if (result.code === 1) {
                         compute(result.msg);
