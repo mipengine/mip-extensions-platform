@@ -8,13 +8,13 @@ define(function (require) {
     var platform = util.platform;
     var customElement = require('customElement').create();
     customElement.prototype.build = function () {
-        window.onload = function () {
+        $(document).ready(function (e) {
             var askLength = $('.askcon').children('dl').length;
             if (askLength > 2) {
                 $('.askcon').children('dl').slice(2).hide();
                 $('.viewall').removeClass('hide');
             }
-        };
+        });
         $(function () {
             var screen = window.screen.width;
             $('.p_text').each(function () {

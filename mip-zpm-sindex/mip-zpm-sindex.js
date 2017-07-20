@@ -177,7 +177,7 @@ define(function (require) {
         var $hotDt = $('.j_hotJobsList .warp .list b');
         var $hotHref = $('.j_hotJobsList .warp .list a');
         $hotDt.click(function () {
-            if ($(this).parents('dt').next('dd').is(':visible')) {
+            if ($(this).parents('dt').next('dd').css('display') === 'block') {
                 $(this).removeClass('h').parent('dt').next('dd').hide();
             } else {
                 $(this).addClass('h').parent('dt').next('dd').show();

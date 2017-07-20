@@ -37,6 +37,8 @@ define(function (require) {
                         if (data.code === 1) {
                             alert('评论成功');
                             location.reload();
+                        } else {
+                            alert(data.msg);
                         }
                     },
                     error: function () {

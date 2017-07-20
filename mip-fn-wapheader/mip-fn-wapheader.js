@@ -64,6 +64,7 @@ define(function (require) {
                 + '<span class="avator">'
                 + '<a href="/login.php?url=' + window.location + '" class="login-btn">登录</a>'
                 + '</span>'
+                + '<a href="' + mapUrl + '" class="map">map</a>'
                 + '</div>'
                 + '</div>';
         }

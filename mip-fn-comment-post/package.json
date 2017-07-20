@@ -1,6 +1,6 @@
 {
   "name": "mip-fn-comment-post",
-  "version": "1.0.0", 
+  "version": "1.0.1",
     "description": "蜂鸟网WAP站评论提交",
     "author": { 
         "name": "fn",

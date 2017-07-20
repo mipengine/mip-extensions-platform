@@ -1,0 +1,12 @@
+{
+    "name": "mip-wkclub-wss",
+    "version": "1.0.1",
+    "description": "寻医问药问答搜索分词组件",
+    "author": {
+        "name": "tinkbell",
+		"email": "343836944@qq.com"
+    },
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

@@ -7,6 +7,7 @@ define(function (require) {
 
     var customElement = require('customElement').create();
     var $ = require('zepto');
+    var fetchJsonp = require('fetch-jsonp');
 
     function getRequest() {
         var url = window.location.search;
@@ -28,7 +29,8 @@ define(function (require) {
         // TODO
         var url = getRequest();
         if (url.type === 'video') {
-            fetch('https://www.dianjinghu.com/web.php?m=m&c=video&a=detailData&id=' + url.id).then(function (res) {
+            fetchJsonp('https://www.dianjinghu.com/api.php/mip/video/index/id/' + url.id, {jsonpCallback: 'callback'
+            }).then(function (res) {
                 return res.json();
             }).then(function (data) {
                 var video = data.info.video;
@@ -62,7 +64,8 @@ define(function (require) {
             });
         }
         else if (url.type === 'news') {
-            fetch('https://www.dianjinghu.com/web.php?m=m&c=news&a=detaildata&id=' + url.id).then(function (res) {
+            fetchJsonp('https://www.dianjinghu.com/api.php/mip/news/index/id/' + url.id, {jsonpCallback: 'callback'
+            }).then(function (res) {
                 return res.json();
             }).then(function (data) {
                 var content = data.info.content;

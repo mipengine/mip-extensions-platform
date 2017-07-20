@@ -1,7 +1,7 @@
 {
-    "name": "mip-cnkang-details",
-    "version": "1.2.0",
-    "description": "康网mip内容化",
+    "name": "mip-cnkang-pic",
+    "version": "1.0.0",
+    "description": "康网添加三张图片",
     "contributors": [
         {
 	    "name": "sunruinian",

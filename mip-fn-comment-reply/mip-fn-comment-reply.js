@@ -5,7 +5,20 @@
 define(function (require) {
     var zepto = require('zepto');
     var customElem = require('customElement').create();
-
+    function getCookie(cname) {
+        if (document.cookie.length > 0) {
+            var start = document.cookie.indexOf(cname + '=');
+            if (start !== -1) {
+                start = start + cname.length + 1;
+                var end = document.cookie.indexOf(';', start);
+                if (end === -1) {
+                    end = document.cookie.length;
+                }
+                return unescape(document.cookie.substring(start, end));
+            }
+        }
+        return '';
+    }
     // 生命周期 function list，根据组件情况选用，（一般情况选用 build、firstInviewCallback） start
     // build 方法，元素插入到文档时执行，仅会执行一次
     customElem.prototype.build = function () {
@@ -18,12 +31,20 @@ define(function (require) {
         var replyUserid = element.getAttribute('reply_userid');
         var replyUsername = element.getAttribute('reply_username');
 
+
+
         $('#content').on('click', function () {
             $(this).siblings('.post-button').removeClass('disable-button');
         });
 
         element.addEventListener('touchstart', function () {
             var obj = document.getElementById('content');
+            var cookie = getCookie('bbusername');
+            if (!cookie) {
+                var cururl = window.location.href;
+                window.location.href = '/login.php?url=' + cururl;
+                return false;
+            }
 
             if (replyid) {
                 obj.value = '回复@' + replyUsername + ':';
@@ -53,34 +74,6 @@ define(function (require) {
 
     };
 
-    // 创建元素回调
-    customElem.prototype.createdCallback = function () {
-        // console.log('created');
-    };
-    // 向文档中插入节点回调
-    customElem.prototype.attachedCallback = function () {
-        // console.log('attached');
-    };
-    // 从文档中移出节点回调
-    customElem.prototype.detachedCallback = function () {
-        // console.log('detached');
-    };
-    // 第一次进入可视区回调,只会执行一次，做懒加载，利于网页速度
-    customElem.prototype.firstInviewCallback = function () {
-        // console.log('first in viewport');
-    };
-    // 进入或离开可视区回调，每次状态变化都会执行
-    customElem.prototype.viewportCallback = function (isInView) {
-        // true 进入可视区;false 离开可视区
-        // console.log(isInView);
-    };
-    // 控制viewportCallback、firstInviewCallback是否提前执行
-    // 轮播图片等可使用此方法提前渲染
-    customElem.prototype.prerenderAllowed = function () {
-        // 判断条件，可自定义。返回值为true时,viewportCallback、firstInviewCallback会在元素build后执行
-        return !!this.isCarouselImg;
-    };
-    // 生命周期 function list，根据组件情况选用 end
 
 
     return customElem;
