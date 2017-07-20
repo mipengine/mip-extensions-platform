@@ -56,7 +56,7 @@ define(function (require) {
                     $('.noSearch').show();
                 }
                 else {
-                    $(this).attr('href', 'search-result.html?key=' + searchVal);
+                    $(this).attr('href', 'http://mip.dianjinghu.com/search/search-result.html?key=' + searchVal);
                 }
             });
         }

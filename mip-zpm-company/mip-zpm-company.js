@@ -158,11 +158,13 @@ define(function (require) {
                 version: '6.3.0'
             },
             success: function (data) {
-                for (var a = 0; a < data.List.length; a++) {
-                    newAttentionList += data.List[a].Number + ',';
+                if (data.StatusCode === 200 && data.List.length > 1) {
+                    for (var a = 0; a < data.List.length; a++) {
+                        newAttentionList += data.List[a].Number + ',';
+                    }
+                    localStorage.removeItem('AttentionList');
+                    localStorage.setItem('AttentionList', newAttentionList);
                 }
-                localStorage.removeItem('AttentionList');
-                localStorage.setItem('AttentionList', newAttentionList);
             }
         });
     }
