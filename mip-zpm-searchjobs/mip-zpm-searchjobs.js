@@ -356,6 +356,10 @@ define(function (require) {
                 }
             }
         });
+        // 返回
+        $('.r_returnbk').click(function () {
+            window.history.back();
+        });
     };
     window.onload = function () {
         render();
