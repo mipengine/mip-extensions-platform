@@ -7,7 +7,7 @@ define(function (require) {
 
     var customElement = require('customElement').create();
     var $ = require('zepto');
-
+    var fetchJsonp = require('fetch-jsonp');
 
     function getRequest() {
         var url = window.location.search;
@@ -40,7 +40,18 @@ define(function (require) {
             $('.list-tip-left').html(url.title);
         }
         else if (url.key) {
-            $('mip-infinitescroll').attr('data-src', 'http://www.dianjinghu.com/web.php?m=mip&c=search&a=api&keyword=' + url.key);
+            fetchJsonp('http://www.dianjinghu.com/web.php?m=mip&c=search&a=api&keyword=' + url.key, {jsonpCallback: 'callback'
+            }).then(function (res) {
+                return res.json();
+            }).then(function (data) {
+                if (data.data.items) {
+                    $('mip-infinitescroll').attr('data-src', 'http://www.dianjinghu.com/web.php?m=mip&c=search&a=api&keyword=' + url.key);
+                }
+                else {
+                    $('mip-infinitescroll').hide();
+                    $('.noSearch').show();
+                }
+            });
             setTimeout(function () {
                 if (!$('.mip-infinitescroll-results').html()) {
                     $('.noSearch').show();
