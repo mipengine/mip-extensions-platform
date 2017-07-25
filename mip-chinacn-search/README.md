@@ -13,11 +13,11 @@ mip-chinacn-search 搜索
 ### 基本用法
 ```html
 <mip-chinacn-search>
-    <form action="">
+    <mip-form method="" url="">
         <input data-role="searchKey" type="search" class="txt" placeholder="请输入关键词"/>
         <span data-role="searchIcon" class="search search-btn"></span>
         <input type="hidden" name="t" id="ztype"/>
-    </form>
+    </mip-form>
 </mip-chinacn-search>
 ```
 
