@@ -48,7 +48,7 @@ define(function (require) {
                     $('mip-infinitescroll').attr('data-src', 'http://www.dianjinghu.com/web.php?m=mip&c=search&a=api&keyword=' + url.key);
                 }
                 else {
-                    $('mip-infinitescroll').hide();
+                    $('mip-infinitescroll').remove();
                     $('.noSearch').show();
                 }
             });
