@@ -60,7 +60,7 @@ define(function (require) {
 
     // ajax请求获取页面跳转地址
     function ajaxRequest(key, type) {
-        fetch('https://site.china.cn/common/search.php', {
+        fetch('/common/search.php', {
             method: 'POST',
             body: 'key=' + key + '&entType=' + type,
             credentials: 'include'

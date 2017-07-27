@@ -45,6 +45,7 @@ define(function (require) {
                 return res.json();
             }).then(function (data) {
                 if (data.data.items) {
+                    $('mip-infinitescroll').attr('data-src', '');
                     $('mip-infinitescroll').attr('data-src', 'http://www.dianjinghu.com/web.php?m=mip&c=search&a=api&keyword=' + url.key);
                 }
                 else {
@@ -59,18 +60,16 @@ define(function (require) {
                 }
             }, 1000);
         }
-        else {
-            $('.search-touch').on('click', function () {
-                var searchVal = $('.search-ipt').val();
-                if (!searchVal) {
-                    $('.search-main').hide();
-                    $('.noSearch').show();
-                }
-                else {
-                    $(this).attr('href', 'http://mip.dianjinghu.com/search/search-result.html?key=' + searchVal);
-                }
-            });
-        }
+        $('.search-touch').on('click', function () {
+            var searchVal = $('.search-ipt').val();
+            if (!searchVal) {
+                $('.search-main').hide();
+                $('.noSearch').show();
+            }
+            else {
+                $(this).attr('href', 'http://www.dianjinghu.com/web.php?m=mip&c=search&a=result&key=' + searchVal);
+            }
+        });
     };
     return customElement;
 });

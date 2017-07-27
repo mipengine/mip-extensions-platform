@@ -134,7 +134,7 @@ define(function (require) {
         }
         if (!noDialog) {
             if (!vivo) {
-                if (localStorage.toppayDialog !== 1) {
+                if (localStorage.toppayDialog !== '1') {
                     if (!cs.get('zp-auth')) {
                         $('.toppay').show();
                         localStorage.toppayDialog = 1;

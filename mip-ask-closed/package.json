@@ -1,0 +1,13 @@
+{
+    "name": "mip-ask-closed",
+    "version": "1.0.0",
+	"description":"ask广告关闭",
+    "author": {
+        "name": "yuwei",
+        "email": "security@120ask.com",
+        "url": ""
+    },
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

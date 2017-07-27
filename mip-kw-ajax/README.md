@@ -13,7 +13,7 @@ mip-kw-ajax kw—ajax请求
 ### 通过 mip-ajax-data标签来指定触发加载容器指定异步内容追加容器以及其他参数来异步加载内容
 ```html
 <span class="praise">1230 阅读量</span>
-<mip-kw-ajax mip-ajax-params="{'url':'http://www.365tang.cn/mip/getVideoCount','containerclass':'praise','id':'10','updateVideoCount':'http://www.365tang.cn/mip/updateVideoCount'}">
+<mip-kw-ajax mip-ajax-params="{'id':'10'}">
 </mip-kw-ajax>
 ```
 

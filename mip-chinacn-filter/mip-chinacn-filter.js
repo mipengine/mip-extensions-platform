@@ -45,7 +45,7 @@ define(function (require) {
             $selected.length > 0 && $selected.removeClass('current');
         });
 
-        $(document).on('click', '.opacity-layer', hide);
+        $mask.on('click,touchend', hide);
 
         $element.find('.mip-sure').on('click', function (e) {
             e.stopPropagation();
