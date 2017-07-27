@@ -32,9 +32,8 @@ define(function (require) {
                         if ($(document).height() <= totalheight) {
                             if (stop === true) {
                                 stop = false;
-                                fetch('http://cp01-rdqa-dev378-liting16.epc.baidu.com:8090/dc-admin/backend/v1/trilobite/getlistdata/' + appid, {
-                                    page: self.nextpage
-                                }).then(function (res) {
+                                fetch('/dc-admin/backend/v1/trilobite/getlistdata/' + appid + '?page=' + self.nextpage)
+                                .then(function (res) {
                                     return res.text();
                                 }).then(function (text) {
                                     var data = JSON.parse(text);
@@ -66,7 +65,8 @@ define(function (require) {
                                                 break;
                                             case 1:
                                                 for (var i = 0; i < imgnum; i++) {
-                                                    img += '<img src="' + value.thumbnail[i] + '" alt="">';
+                                                    img += '<mip-img src="' + value.thumbnail[i]
+                                                        + '" alt=""></mip-img>';
                                                 }
                                                 dom = '<a href="/dc-admin/article/'
                                                     + value.id
@@ -89,7 +89,8 @@ define(function (require) {
                                             default:
                                                 imgnum = imgnum > 3 ? 3 : imgnum;
                                                 for (var j = 0; j < imgnum; j++) {
-                                                    img += '<img src="' + value.thumbnail[j] + '" alt="">';
+                                                    img += '<mip-img src="' + value.thumbnail[j]
+                                                    + '" alt=""></mip-img>';
                                                 }
                                                 dom = '<a href="/dc-admin/article/'
                                                     + value.id
