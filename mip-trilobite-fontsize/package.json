@@ -1,0 +1,14 @@
+{
+    "name": "mip-trilobite-fontsize",
+    "version": "1.0.0",
+    "description": "三叶虫字体适配",
+    "contributors": [
+        {
+            "name": "duchenjun",
+            "email": "duchenjun@baidu.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "name": "mip-trilobite-scroll",
+    "version": "1.0.0",
+    "description": "三叶虫下拉滚动功能",
+    "contributors": [
+        {
+            "name": "duchenjun",
+            "email": "duchenjun@baidu.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
