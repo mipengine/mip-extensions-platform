@@ -45,7 +45,8 @@ define(function (require) {
             $selected.length > 0 && $selected.removeClass('current');
         });
 
-        $mask.on('click,touchend', hide);
+        $mask.on('click', hide);
+        $mask.on('touchend', hide);
 
         $element.find('.mip-sure').on('click', function (e) {
             e.stopPropagation();

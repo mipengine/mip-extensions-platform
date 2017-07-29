@@ -39,27 +39,6 @@ define(function (require) {
             }
             $('.list-tip-left').html(url.title);
         }
-        else if (url.key) {
-            fetchJsonp('http://www.dianjinghu.com/web.php?m=mip&c=search&a=api&keyword=' + url.key, {jsonpCallback: 'callback'
-            }).then(function (res) {
-                return res.json();
-            }).then(function (data) {
-                if (data.data.items) {
-                    $('mip-infinitescroll').attr('data-src', '');
-                    $('mip-infinitescroll').attr('data-src', 'http://www.dianjinghu.com/web.php?m=mip&c=search&a=api&keyword=' + url.key);
-                }
-                else {
-                    $('mip-kp-list').remove();
-                    $('.noSearch').show();
-                }
-            });
-            setTimeout(function () {
-                if (!$('.mip-infinitescroll-results').html()) {
-                    $('.noSearch').show();
-                    $('mip-infinitescroll').hide();
-                }
-            }, 1000);
-        }
         $('.search-touch').on('click', function () {
             var searchVal = $('.search-ipt').val();
             if (!searchVal) {
