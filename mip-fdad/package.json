@@ -1,0 +1,14 @@
+{
+    "name": "mip-fdad",
+    "version": "1.0.0",
+    "description": "家庭医生在线广告组件",
+    "contributors": [
+        {
+            "name": "crh",
+            "email": "chenruihui@familydoctor.com.cn"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

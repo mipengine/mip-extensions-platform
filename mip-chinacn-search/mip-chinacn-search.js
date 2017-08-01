@@ -60,9 +60,12 @@ define(function (require) {
 
     // ajax请求获取页面跳转地址
     function ajaxRequest(key, type) {
+        var formData = new FormData();
+        formData.append('key', key);
+        formData.append('entType', type);
         fetch('/common/search.php', {
             method: 'POST',
-            body: 'key=' + key + '&entType=' + type,
+            body: formData,
             credentials: 'include'
         }).then(function (response) {
             return response.json();

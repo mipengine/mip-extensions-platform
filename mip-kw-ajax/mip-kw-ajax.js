@@ -14,7 +14,7 @@ define(function (require) {
     customElement.prototype.build = function () {
         var params = document.getElementById('mipKwAjax');
 
-        params = params.attr('mip-ajax-params');
+        params = params.getAttribute('mip-ajax-params');
         fetch('https://www.365tang.cn/mip/updateVideoCount?id= ' + params, {
             method: 'get'
         }).then(function (res) { }).then(function (text) { });
@@ -24,7 +24,7 @@ define(function (require) {
             return res.json();
         }).then(function (res) {
             if (res.code === 0) {
-                document.getElementById('praise').html(res.data.CLICKNUM + ' 阅读量');
+                document.getElementById('praise').innerHTML = res.data.CLICKNUM + ' 阅读量';
             }
         });
     };

@@ -111,9 +111,16 @@ define(function (require) {
                 }
             }
 
-            fetch('//' + document.domain + '/common/search.php', {
+            // FormData
+            var formData = new FormData();
+
+            for (var key in data) {
+                formData.append(key, data[key]);
+            }
+
+            fetch('/common/search.php', {
                 method: 'POST',
-                body: JSON.stringify(data),
+                body: formData,
                 credentials: 'include'
             }).then(function (response) {
                 return response.json();

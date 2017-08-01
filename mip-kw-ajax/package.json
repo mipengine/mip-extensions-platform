@@ -1,6 +1,6 @@
 {
     "name": "mip-kw-ajax",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "来触发元素ajax异步加载视频阅读量和更新文章阅读量",
     "contributors": [
         {
