@@ -15,7 +15,7 @@ define(function (require) {
 
         ele.addEventListener('click', function () {
             var target = ele.parentElement;
-            target.parentElement.removeChild(target);
+            target.parentElement.style.display = 'none';
         }, false);
     };
 
