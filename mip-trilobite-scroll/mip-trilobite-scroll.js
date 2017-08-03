@@ -16,6 +16,8 @@ define(function (require) {
         var el = this.element;
         var end = el.getAttribute('end');
         var appid = el.getAttribute('appid');
+        var siteid = el.getAttribute('siteid');
+        var host = el.getAttribute('http-host');
 
         var list = {
             init: function () {
@@ -48,7 +50,8 @@ define(function (require) {
 
                                         switch (imgnum) {
                                             case 0:
-                                                dom = '<a href="/dc-admin/article/'
+                                                dom = '<a href="http://' + host + '/dc-admin/article/'
+                                                    + siteid + '/'
                                                     + value.id
                                                     + '" class="article-link">'
                                                     + '    <div class="no-pic">'
@@ -68,7 +71,8 @@ define(function (require) {
                                                     img += '<mip-img src="' + value.thumbnail[i]
                                                         + '" alt=""></mip-img>';
                                                 }
-                                                dom = '<a href="/dc-admin/article/'
+                                                dom = '<a href="http://' + host + '/dc-admin/article/'
+                                                    + siteid + '/'
                                                     + value.id
                                                     + '" class="article-link">'
                                                     + '<div class="one-pic">'
@@ -92,7 +96,8 @@ define(function (require) {
                                                     img += '<mip-img src="' + value.thumbnail[j]
                                                     + '" alt=""></mip-img>';
                                                 }
-                                                dom = '<a href="/dc-admin/article/'
+                                                dom = '<a href="http://' + host + '/dc-admin/article/'
+                                                    + siteid + '/'
                                                     + value.id
                                                     + '" class="article-link">'
                                                     + '<div class="three-pic">'

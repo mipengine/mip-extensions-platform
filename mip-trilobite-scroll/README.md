@@ -12,7 +12,7 @@ mip-trilobite-scroll 三叶虫下拉滚动功能
 
 ### 基本用法
 ```html
-<mip-trilobite-scroll id="Loading" end="false" appid="122132">
+<mip-trilobite-scroll id="Loading" end="false" appid="122132" siteid="1573954829326355" http-host="cp01-rdqa-dev378-liting16.epc.baidu.com:8090">
 
 </mip-trilobite-scroll>
 ```
