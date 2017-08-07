@@ -21,7 +21,7 @@ define(function (require) {
         }).then(function (data) {
             for (var i = 0; i < data.info.list.length; i++) {
                 $('.carousel-img' + i).find('img').attr('src', data.info.list[i].cover);
-                $('.carousel-img' + i).find('a').attr('href', data.info.list[i].url);
+                $('.carousel-img' + i).parent('a').attr('href', data.info.list[i].url);
             }
         });
     };

@@ -36,7 +36,7 @@ define(function (require) {
                     $('mip-infinitescroll').attr('data-src', 'https://www.dianjinghu.com/api.php/mip/search/index?keyword=' + url.key);
                 }
                 else {
-                    $('mip-kp-list').remove();
+                    $('mip-kp-search').remove();
                     $('.noSearch').show();
                 }
             });

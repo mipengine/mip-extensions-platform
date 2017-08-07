@@ -1,0 +1,14 @@
+{
+    "name": "mip-fn-thread-post",
+    "version": "1.0.0",
+    "description": "蜂鸟网WAP站论坛回帖",
+    "contributors": [
+        {
+            "name": "fn",
+            "email": "tech@fengniao.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

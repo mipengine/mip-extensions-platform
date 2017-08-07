@@ -48,7 +48,7 @@ define(function (require) {
         // 访问量
         var jobPage;
         jobPage = localStorage.getItem('jobPage');
-        if (jobPage < 50) {
+        if (jobPage < '50') {
             jobPage++;
             localStorage.setItem('jobPage', jobPage);
         } else if (getCookie('zp-auth') === null) {
