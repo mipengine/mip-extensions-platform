@@ -18,8 +18,7 @@ define(function (require) {
 
         // 给预览按钮绑定事件
         previewBtn.setAttribute('on', 'tap:example-lightbox.open');
-        previewBtn.addEventListener('mousedown', showPreview, false);
-        previewBtn.addEventListener('touchstart', showPreview, false);
+        previewBtn.addEventListener('click', showPreview, false);
 
         // 给lightbox弹层绑定关闭事件
         var lightboxFills = document.querySelectorAll('mip-lightbox .mip-fill-content');
