@@ -48,7 +48,7 @@ define(function (require) {
 
         var iframe = document.getElementById('iframe');
         iframe.srcdoc = iframeText;
-        // 兼容 IE
+        // 兼容 IE 11& IE edge
         iframe.contentDocument.body.innerHTML = iframeText;
     }
 
