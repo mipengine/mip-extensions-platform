@@ -48,6 +48,8 @@ define(function (require) {
 
         var iframe = document.getElementById('iframe');
         iframe.srcdoc = iframeText;
+        // 兼容 IE
+        iframe.contentDocument.body.innerHTML = iframeText;
     }
 
     // 查找组件依赖的javascript
