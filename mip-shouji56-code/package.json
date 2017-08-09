@@ -1,0 +1,15 @@
+{
+    "name": "mip-shouji56-code",
+    "version": "1.0.0",
+    "description": "组件介绍",
+	"author": "youcai",
+    "contributors": [
+        {
+            "name": "youcai",
+            "email": "youcai@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
