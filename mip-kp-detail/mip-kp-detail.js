@@ -53,8 +53,7 @@ define(function (require) {
                 // 推荐
                 var list = data.info.video_list;
                 for (var i = 0; i < list.length; i++) {
-                    var targetUrl = 'detail.html?id=' + list[i].id + '&type=' + list[i].type;
-                    $('.list-wrapper').eq(i).find('.list').attr('href', targetUrl);
+                    $('.list-wrapper').eq(i).find('.list').attr('href', list[i].url);
                     $('.list-main .list-wrapper').eq(i).find('.list-mip-img').attr('src', list[i].cover);
                     $('.list-main .list-wrapper').eq(i).find('.list-title').html(list[i].title);
                     $('.list-main .list-wrapper').eq(i).find('.list-tip-left').html(list[i].type_name);
@@ -87,8 +86,7 @@ define(function (require) {
                 // 推荐
                 var list = data.info.list;
                 for (var i = 0; i < list.length; i++) {
-                    var targetUrl = 'detail.html?id=' + list[i].id + '&type=' + list[i].type;
-                    $('.list-wrapper').eq(i).find('.list').attr('href', targetUrl);
+                    $('.list-wrapper').eq(i).find('.list').attr('href', list[i].url);
                     $('.list-main .list-wrapper').eq(i).find('.list-mip-img').attr('src', list[i].cover);
                     $('.list-main .list-wrapper').eq(i).find('.list-title').html(list[i].title);
                     $('.list-main .list-wrapper').eq(i).find('.list-tip-left').html(list[i].type_name);
