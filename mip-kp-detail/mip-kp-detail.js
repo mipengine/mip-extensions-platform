@@ -55,6 +55,7 @@ define(function (require) {
                 for (var i = 0; i < list.length; i++) {
                     $('.list-wrapper').eq(i).find('.list').attr('href', list[i].url);
                     $('.list-main .list-wrapper').eq(i).find('.list-mip-img').attr('src', list[i].cover);
+                    $('.list-main .list-wrapper').eq(i).find('.list-mip-img img').attr('src', list[i].cover);
                     $('.list-main .list-wrapper').eq(i).find('.list-title').html(list[i].title);
                     $('.list-main .list-wrapper').eq(i).find('.list-tip-left').html(list[i].type_name);
                     $('.list-main .list-wrapper').eq(i).find('.list-tip-right').html(list[i].add_time);
@@ -88,6 +89,7 @@ define(function (require) {
                 for (var i = 0; i < list.length; i++) {
                     $('.list-wrapper').eq(i).find('.list').attr('href', list[i].url);
                     $('.list-main .list-wrapper').eq(i).find('.list-mip-img').attr('src', list[i].cover);
+                    $('.list-main .list-wrapper').eq(i).find('.list-mip-img img').attr('src', list[i].cover);
                     $('.list-main .list-wrapper').eq(i).find('.list-title').html(list[i].title);
                     $('.list-main .list-wrapper').eq(i).find('.list-tip-left').html(list[i].type_name);
                     $('.list-main .list-wrapper').eq(i).find('.list-tip-right').html(list[i].add_time);
