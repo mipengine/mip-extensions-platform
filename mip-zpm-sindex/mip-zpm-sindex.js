@@ -278,32 +278,34 @@ define(function (require) {
     // 读取历史记录方法
     function readSearchLs() {
         var indexSearchHs = cs.get('indexSearchHs');
+        if (indexSearchHs === null) {
+            indexSearchHs = [];
+        }
         var $SearchLsWrap = $('.indexSearchList');
         var dtBool = true;
-        if (indexSearchHs !== null) {
-            if (indexSearchHs.length > 0) {
-                $SearchLsWrap.children('dd').remove();
-                $.each(indexSearchHs, function (i, v) {
-                    $('<dd><a>' + v + '</a><span class="add"></span></dd>').prependTo($SearchLsWrap);
-                });
-                $SearchLsWrap.show().find('dt').show().children('.clear').show();
-            } else {
-                dtBool = false;
-                $SearchLsWrap.hide();
-            }
+        if (indexSearchHs.length > 0) {
+            $SearchLsWrap.children('dd').remove();
+            $.each(indexSearchHs, function (i, v) {
+                $('<dd><a>' + v + '</a><span class="add"></span></dd>').prependTo($SearchLsWrap);
+            });
+            $SearchLsWrap.show().find('dt').show().children('.clear').show();
+        } else {
+            dtBool = false;
+            $SearchLsWrap.hide();
         }
     }
     // 保存最新历史记录方法
     function saveSearchLs(hsStr) {
         var indexSearchHs = cs.get('indexSearchHs');
+        if (indexSearchHs === null) {
+            indexSearchHs = [];
+        }
         // 判断新搜索关键词是否已存在
         var b = true;
-        if (indexSearchHs !== null) {
-            for (var i = 0; i <= indexSearchHs.length; i++) {
-                if (indexSearchHs[i] === hsStr) {
-                    b = false;
-                    break;
-                }
+        for (var i = 0; i <= indexSearchHs.length; i++) {
+            if (indexSearchHs[i] === hsStr) {
+                b = false;
+                break;
             }
         }
         if (b) {
