@@ -280,15 +280,17 @@ define(function (require) {
         var indexSearchHs = cs.get('indexSearchHs');
         var $SearchLsWrap = $('.indexSearchList');
         var dtBool = true;
-        if (indexSearchHs.length > 0) {
-            $SearchLsWrap.children('dd').remove();
-            $.each(indexSearchHs, function (i, v) {
-                $('<dd><a>' + v + '</a><span class="add"></span></dd>').prependTo($SearchLsWrap);
-            });
-            $SearchLsWrap.show().find('dt').show().children('.clear').show();
-        } else {
-            dtBool = false;
-            $SearchLsWrap.hide();
+        if (indexSearchHs !== null) {
+            if (indexSearchHs.length > 0) {
+                $SearchLsWrap.children('dd').remove();
+                $.each(indexSearchHs, function (i, v) {
+                    $('<dd><a>' + v + '</a><span class="add"></span></dd>').prependTo($SearchLsWrap);
+                });
+                $SearchLsWrap.show().find('dt').show().children('.clear').show();
+            } else {
+                dtBool = false;
+                $SearchLsWrap.hide();
+            }
         }
     }
     // 保存最新历史记录方法
@@ -296,10 +298,12 @@ define(function (require) {
         var indexSearchHs = cs.get('indexSearchHs');
         // 判断新搜索关键词是否已存在
         var b = true;
-        for (var i = 0; i <= indexSearchHs.length; i++) {
-            if (indexSearchHs[i] === hsStr) {
-                b = false;
-                break;
+        if (indexSearchHs !== null) {
+            for (var i = 0; i <= indexSearchHs.length; i++) {
+                if (indexSearchHs[i] === hsStr) {
+                    b = false;
+                    break;
+                }
             }
         }
         if (b) {

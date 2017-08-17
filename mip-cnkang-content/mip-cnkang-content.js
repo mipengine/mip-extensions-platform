@@ -10,12 +10,12 @@ define(function (require) {
     var customElement = require('customElement').create();
     customElement.prototype.build = function () {
         var canshu = $('.canshu1').html();
-        if (canshu !== 1) {
+        if (canshu !== '1') {
             $('.show1').hide();
             $('.xiahua').hide();
             $('.baikuang').css('margin-top', '-0.04rem');
         }
-        if (canshu === 1) {
+        if (canshu === '1') {
             $('.centergao').hide();
         }
     };
