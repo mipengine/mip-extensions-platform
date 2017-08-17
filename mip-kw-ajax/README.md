@@ -10,7 +10,7 @@ mip-kw-ajax kw—ajax请求
 
 ## 示例
 
-### 通过 mip-ajax-data标签来指定触发加载容器指定异步内容追加容器以及其他参数来异步加载内容
+### 通过 mip-ajax-data标签来指定触发加载容器指定异步内容追加容器以及其他参数来异步加载内容,增加点击查看更多伸缩等
 ```html
 <span class="praise">1230 阅读量</span>
 <mip-kw-ajax mip-ajax-params="{'id':'10'}">
@@ -54,3 +54,4 @@ mip-kw-ajax kw—ajax请求
 说明：div的class
 必选项：是
 类型：字符串
+

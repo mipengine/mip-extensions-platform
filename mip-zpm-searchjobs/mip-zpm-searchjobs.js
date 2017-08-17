@@ -239,9 +239,9 @@ define(function (require) {
                 }
             }
         });
-        // localStorage历史记录
+        // 搜索历史记录
         // 读取
-        var indexSearchHs = localStorage.getItem('indexSearchHs');
+        var indexSearchHs = cs.get('indexSearchHs');
         if (indexSearchHs === null) {
             indexSearchHs = [];
         } else {
@@ -249,7 +249,7 @@ define(function (require) {
         }
         // 清除
         $('.indexSearchList dt .clear').click(function () {
-            localStorage.removeItem('indexSearchHs');
+            cs.rm('indexSearchHs');
             indexSearchHs = [];
             $SearchLsWrap.hide().children('dd').remove();
             dtBool = false;
@@ -374,11 +374,13 @@ define(function (require) {
     }
     // 读取历史记录方法
     function readSearchLs() {
-        var indexSearchHs = localStorage.getItem('indexSearchHs');
+        var indexSearchHs = cs.get('indexSearchHs');
         var $SearchLsWrap = $('.indexSearchList');
         var dtBool = true;
-        if (indexSearchHs === null) {
+        if (indexSearchHs == null) {
             indexSearchHs = [];
+        } else {
+            indexSearchHs = indexSearchHs.split(',');
         }
         if (indexSearchHs.length > 0) {
             $SearchLsWrap.children('dd').remove();
@@ -395,9 +397,11 @@ define(function (require) {
     function saveSearchLs(hsStr) {
         // 判断新搜索关键词是否已存在
         var b = true;
-        var indexSearchHs = localStorage.getItem('indexSearchHs');
-        if (indexSearchHs === null) {
+        var indexSearchHs = cs.get('indexSearchHs');
+        if (indexSearchHs == null) {
             indexSearchHs = [];
+        } else {
+            indexSearchHs = indexSearchHs.split(',');
         }
         for (var i = 0; i <= indexSearchHs.length; i++) {
             if (indexSearchHs[i] === hsStr) {
@@ -410,7 +414,7 @@ define(function (require) {
             if (indexSearchHs.length > 5) {
                 indexSearchHs.shift();
             }
-            localStorage.setItem('indexSearchHs', indexSearchHs);
+            cs.set('indexSearchHs', indexSearchHs);
             return false;
         }
     }
@@ -460,8 +464,8 @@ define(function (require) {
                     for (var f = 0; f < data.FavoritedPositions.length; f++) {
                         newCollectList += data.FavoritedPositions[f].PositionNumber + ',';
                     }
-                    localStorage.removeItem('CollectList');
-                    localStorage.setItem('CollectList', newCollectList);
+                    cs.rm('CollectList');
+                    cs.set('CollectList', newCollectList);
                 }
             }
         });
@@ -499,7 +503,7 @@ define(function (require) {
     }
     // 获取黑名单企业列表
     function myBlockList() {
-        var $BlockList = localStorage.getItem('BlockList');
+        var $BlockList = cs.get('BlockList');
         $.ajax({
             url: '/Company/GetBlockCompany',
             type: 'post',
@@ -507,8 +511,8 @@ define(function (require) {
                 version: '6.3.0'
             },
             success: function (data, textStatus, jqxhr) {
-                localStorage.removeItem('BlockList');
-                localStorage.setItem('BlockList', data.Info);
+                cs.rm('BlockList');
+                cs.set('BlockList', data.Info);
             }
         });
     }
@@ -678,7 +682,7 @@ define(function (require) {
     function onComplete(data) {
         // 经纬度变量
         var jwd = false;
-        var dataCitycode = localStorage.getItem('data-citycode');
+        var dataCitycode = cs.get('data-citycode');
         var userLocationLat;
         var userLocationLon;
         var code = $('#Slocation').attr('data-location');
@@ -698,7 +702,7 @@ define(function (require) {
                     lng: userLocationLon
                 },
                 success: function (data, textStatus, jqxhr) {
-                    localStorage.setItem('data-citycode', data.citycode);
+                    cs.set('data-citycode', data.citycode);
                     if (code !== data.citycode) {
                         $('.fj').hide();
                         $('#fj').removeClass('h');

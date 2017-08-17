@@ -27,6 +27,19 @@ define(function (require) {
                 document.getElementById('praise').innerHTML = res.data.CLICKNUM + ' 阅读量';
             }
         });
+
+        var moreContent = document.getElementById('moreBtn');
+        moreContent.addEventListener('click', function () {
+            if (moreContent.firstElementChild.className === 'open') {
+                moreContent.firstElementChild.className = '';
+                moreContent.firstElementChild.innerHTML = '展开全部内容';
+                document.getElementById('articleContent').className = 'articleContent';
+            } else {
+                moreContent.firstElementChild.className = 'open';
+                moreContent.firstElementChild.innerHTML = '收起';
+                document.getElementById('articleContent').className = 'articleContent open';
+            }
+        });
     };
     return customElement;
 });
