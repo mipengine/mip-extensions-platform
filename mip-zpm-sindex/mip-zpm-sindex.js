@@ -18,16 +18,8 @@ define(function (require) {
         var prevStr = '';
         var dtBool = true;
         var $userinfo = $('#userinfor').attr('data-name');
-        // localStorage历史记录
-        // 读取
-        var indexSearchHs = cs.get('indexSearchHs');
         var $SearchLsWrap = $('.indexSearchList');
         var $indexSearchHsClose = $SearchLsWrap.find('.close');
-        if (indexSearchHs === null) {
-            indexSearchHs = [];
-        } else {
-            indexSearchHs = indexSearchHs.split(',');
-        }
         // 容器高度
         $searchWrap.height($(document).height());
         // 绑定弹出搜索页面关闭按钮
@@ -46,6 +38,14 @@ define(function (require) {
             indexSearchUrl();
             return false;
         });
+        // localStorage历史记录
+        // 读取
+        var indexSearchHs = localStorage.getItem('indexSearchHs');
+        if (indexSearchHs === null) {
+            indexSearchHs = [];
+        } else {
+            indexSearchHs = indexSearchHs.split(',');
+        }
         $searchInput[0].oninput = function (e) {
             // 回车换行事件
             if (event.keyCode === 13) {
@@ -91,7 +91,7 @@ define(function (require) {
         });
         // 清除
         $('.indexSearchList dt .clear').click(function () {
-            cs.rm('indexSearchHs');
+            localStorage.removeItem('indexSearchHs');
             indexSearchHs = [];
             $SearchLsWrap.hide().children('dd').remove();
             dtBool = false;
@@ -135,7 +135,7 @@ define(function (require) {
         if (!noDialog) {
             if (!vivo) {
                 if (localStorage.toppayDialog !== '1') {
-                    if (!cs.get('zp-auth')) {
+                    if (!localStorage.getItem('zp-auth')) {
                         $('.toppay').show();
                         localStorage.toppayDialog = 1;
                     }
@@ -156,12 +156,12 @@ define(function (require) {
             var meizumz = 'meizumz' === paraDialog.toLowerCase();
             var meizugg = 'meizugg' === paraDialog.toLowerCase();
             if (vivo || meizumz || meizugg || 'meizuzc' === paraDialog.toLowerCase()) {
-                cs.set('utm_source_vivo', 'vivo');
+                localStorage.setItem('utm_source_vivo', 'vivo');
                 $('#j_focus').remove();
                 $('.indexLayer').remove();
                 $('.toppay').remove();
             } else {
-                cs.rm('utm_source_vivo');
+                localStorage.removeItem('utm_source_vivo');
             }
         }
         if (getCookie('source')) {
@@ -277,7 +277,7 @@ define(function (require) {
     }
     // 读取历史记录方法
     function readSearchLs() {
-        var indexSearchHs = cs.get('indexSearchHs');
+        var indexSearchHs = localStorage.getItem('indexSearchHs');
         if (indexSearchHs === null) {
             indexSearchHs = [];
         }
@@ -296,7 +296,7 @@ define(function (require) {
     }
     // 保存最新历史记录方法
     function saveSearchLs(hsStr) {
-        var indexSearchHs = cs.get('indexSearchHs');
+        var indexSearchHs = localStorage.getItem('indexSearchHs');
         if (indexSearchHs === null) {
             indexSearchHs = [];
         }
@@ -313,7 +313,7 @@ define(function (require) {
             if (indexSearchHs.length > 5) {
                 indexSearchHs.shift();
             }
-            cs.set('indexSearchHs', indexSearchHs);
+            localStorage.setItem('indexSearchHs', indexSearchHs);
             return false;
         }
     }

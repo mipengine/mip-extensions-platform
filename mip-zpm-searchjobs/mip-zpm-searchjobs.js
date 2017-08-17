@@ -13,9 +13,6 @@ define(function (require) {
         var jwd = false;
         // body
         var $body = $('body');
-        // localStorage历史记录
-        // 读取
-        var indexSearchHs = cs.get('indexSearchHs');
         var $SearchLsWrap = $('.indexSearchList');
         var $indexSearchHsClose = $SearchLsWrap.find('.close');
         // 首页搜索
@@ -244,6 +241,7 @@ define(function (require) {
         });
         // localStorage历史记录
         // 读取
+        var indexSearchHs = localStorage.getItem('indexSearchHs');
         if (indexSearchHs === null) {
             indexSearchHs = [];
         } else {
@@ -251,7 +249,7 @@ define(function (require) {
         }
         // 清除
         $('.indexSearchList dt .clear').click(function () {
-            cs.rm('indexSearchHs');
+            localStorage.removeItem('indexSearchHs');
             indexSearchHs = [];
             $SearchLsWrap.hide().children('dd').remove();
             dtBool = false;
@@ -376,7 +374,7 @@ define(function (require) {
     }
     // 读取历史记录方法
     function readSearchLs() {
-        var indexSearchHs = cs.get('indexSearchHs');
+        var indexSearchHs = localStorage.getItem('indexSearchHs');
         var $SearchLsWrap = $('.indexSearchList');
         var dtBool = true;
         if (indexSearchHs === null) {
@@ -397,7 +395,7 @@ define(function (require) {
     function saveSearchLs(hsStr) {
         // 判断新搜索关键词是否已存在
         var b = true;
-        var indexSearchHs = cs.get('indexSearchHs');
+        var indexSearchHs = localStorage.getItem('indexSearchHs');
         if (indexSearchHs === null) {
             indexSearchHs = [];
         }
@@ -412,7 +410,7 @@ define(function (require) {
             if (indexSearchHs.length > 5) {
                 indexSearchHs.shift();
             }
-            cs.set('indexSearchHs', indexSearchHs);
+            localStorage.setItem('indexSearchHs', indexSearchHs);
             return false;
         }
     }
@@ -462,8 +460,8 @@ define(function (require) {
                     for (var f = 0; f < data.FavoritedPositions.length; f++) {
                         newCollectList += data.FavoritedPositions[f].PositionNumber + ',';
                     }
-                    cs.rm('CollectList');
-                    cs.set('CollectList', newCollectList);
+                    localStorage.removeItem('CollectList');
+                    localStorage.setItem('CollectList', newCollectList);
                 }
             }
         });
@@ -501,7 +499,7 @@ define(function (require) {
     }
     // 获取黑名单企业列表
     function myBlockList() {
-        var $BlockList = cs.get('BlockList');
+        var $BlockList = localStorage.getItem('BlockList');
         $.ajax({
             url: '/Company/GetBlockCompany',
             type: 'post',
@@ -509,8 +507,8 @@ define(function (require) {
                 version: '6.3.0'
             },
             success: function (data, textStatus, jqxhr) {
-                cs.rm('BlockList');
-                cs.set('BlockList', data.Info);
+                localStorage.removeItem('BlockList');
+                localStorage.setItem('BlockList', data.Info);
             }
         });
     }
@@ -680,7 +678,7 @@ define(function (require) {
     function onComplete(data) {
         // 经纬度变量
         var jwd = false;
-        var dataCitycode = cs.get('data-citycode');
+        var dataCitycode = localStorage.getItem('data-citycode');
         var userLocationLat;
         var userLocationLon;
         var code = $('#Slocation').attr('data-location');
@@ -700,7 +698,7 @@ define(function (require) {
                     lng: userLocationLon
                 },
                 success: function (data, textStatus, jqxhr) {
-                    cs.set('data-citycode', data.citycode);
+                    localStorage.setItem('data-citycode', data.citycode);
                     if (code !== data.citycode) {
                         $('.fj').hide();
                         $('#fj').removeClass('h');
