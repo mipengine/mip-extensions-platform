@@ -38,9 +38,9 @@ define(function (require) {
             indexSearchUrl();
             return false;
         });
-        // localStorage历史记录
+        // cs历史记录
         // 读取
-        var indexSearchHs = localStorage.getItem('indexSearchHs');
+        var indexSearchHs = cs.get('indexSearchHs');
         if (indexSearchHs === null) {
             indexSearchHs = [];
         } else {
@@ -91,7 +91,7 @@ define(function (require) {
         });
         // 清除
         $('.indexSearchList dt .clear').click(function () {
-            localStorage.removeItem('indexSearchHs');
+            cs.rm('indexSearchHs');
             indexSearchHs = [];
             $SearchLsWrap.hide().children('dd').remove();
             dtBool = false;
@@ -126,18 +126,18 @@ define(function (require) {
         }
         // 导航来源跳转至M首页取消页面弹窗
         // Hao123、uc导航精品文字、uc酷站精品文字、uc导航分类文字
-        // uc酷站分类文字、华为、手百网址站、QQ浏览器、魅族浏览器
+        // uc酷站分类文字、华为、手百网F址站、QQ浏览器、魅族浏览器
         var paraDialog = getQueryString('utm_source');
         var noDialog = ('haouczcucflzchuaweishoubaiwangzhiqqmeizuzcmeizuggmeizuzc').indexOf(paraDialog) > -1;
-        if (!localStorage.toppayDialog) {
-            localStorage.toppayDialog = '';
+        if (!cs.get('toppayDialog')) {
+            cs.set('toppayDialog', '');
         }
         if (!noDialog) {
             if (!vivo) {
-                if (localStorage.toppayDialog !== '1') {
-                    if (!localStorage.getItem('zp-auth')) {
+                if (cs.get('toppayDialog') !== '1') {
+                    if (!cs.get('zp-auth')) {
                         $('.toppay').show();
-                        localStorage.toppayDialog = 1;
+                        cs.set('toppayDialog', '1');
                     }
                 }
             }
@@ -156,12 +156,12 @@ define(function (require) {
             var meizumz = 'meizumz' === paraDialog.toLowerCase();
             var meizugg = 'meizugg' === paraDialog.toLowerCase();
             if (vivo || meizumz || meizugg || 'meizuzc' === paraDialog.toLowerCase()) {
-                localStorage.setItem('utm_source_vivo', 'vivo');
+                cs.set('utm_source_vivo', 'vivo');
                 $('#j_focus').remove();
                 $('.indexLayer').remove();
                 $('.toppay').remove();
             } else {
-                localStorage.removeItem('utm_source_vivo');
+                cs.rm('utm_source_vivo');
             }
         }
         if (getCookie('source')) {
@@ -277,9 +277,11 @@ define(function (require) {
     }
     // 读取历史记录方法
     function readSearchLs() {
-        var indexSearchHs = localStorage.getItem('indexSearchHs');
-        if (indexSearchHs === null) {
+        var indexSearchHs = cs.get('indexSearchHs');
+        if (indexSearchHs == null) {
             indexSearchHs = [];
+        } else {
+            indexSearchHs = indexSearchHs.split(',');
         }
         var $SearchLsWrap = $('.indexSearchList');
         var dtBool = true;
@@ -296,9 +298,11 @@ define(function (require) {
     }
     // 保存最新历史记录方法
     function saveSearchLs(hsStr) {
-        var indexSearchHs = localStorage.getItem('indexSearchHs');
-        if (indexSearchHs === null) {
+        var indexSearchHs = cs.get('indexSearchHs');
+        if (indexSearchHs == null) {
             indexSearchHs = [];
+        } else {
+            indexSearchHs = indexSearchHs.split(',');
         }
         // 判断新搜索关键词是否已存在
         var b = true;
@@ -313,7 +317,7 @@ define(function (require) {
             if (indexSearchHs.length > 5) {
                 indexSearchHs.shift();
             }
-            localStorage.setItem('indexSearchHs', indexSearchHs);
+            cs.set('indexSearchHs', indexSearchHs);
             return false;
         }
     }
