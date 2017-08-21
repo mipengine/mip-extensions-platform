@@ -1,0 +1,14 @@
+{
+    "name": "mip-fontsize",
+    "version": "1.0.0",
+    "description": "根据屏幕宽度设置html元素的font-size，从而实现rem布局",
+    "contributors": [
+        {
+            "name": "zhouqian04",
+            "email": "zhouqian04@baidu.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
