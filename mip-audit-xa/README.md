@@ -6,7 +6,7 @@ mip-audit-xa 组件说明
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|http://mipcache.bdstatic.com/static/mip-audit-xa/{版本号}/mip-audit-xa.js
+所需脚本|https://mipcache.bdstatic.com/static/v1/mip-audit-xa/mip-audit-xa.js
 
 ## 示例
 

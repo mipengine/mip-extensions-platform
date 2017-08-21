@@ -12,7 +12,7 @@ define(function (require) {
      */
     customElement.prototype.build = function () {
         // TODO
-        this.element.innerHTML = 'hello test auto online new';
+        this.element.innerHTML = 'hello test auto online news';
     };
 
     return customElement;
