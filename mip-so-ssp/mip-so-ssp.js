@@ -14,7 +14,8 @@ define(function (require) {
         var e = this.element;
         var id = e.getAttribute('id');
         var dom = e.getAttribute('dom');
-        var tagsA = $(dom).find('a');
+        var tagsA = document.getElementsByClassName(dom)[0].getElementsByTagName('a')
+            || document.getElementById(dom).getElementsByTagName('a');
         var tagsLen = tagsA.length;
         for (var i = 0; i < tagsLen; i++) {
             var obj = $(tagsA[i]);
