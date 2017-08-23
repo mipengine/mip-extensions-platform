@@ -1,0 +1,14 @@
+{
+    "name": "mip-pc6-touchslide",
+    "version": "1.0.0",
+    "description": "多屏轮播",
+    "contributors": [
+        {
+            "name": "fl",
+            "email": "fangle@jf.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

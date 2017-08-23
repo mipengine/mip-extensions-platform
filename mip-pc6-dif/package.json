@@ -1,0 +1,14 @@
+{
+    "name": "mip-pc6-dif",
+    "version": "1.0.0",
+    "description": "软件、手游区分",
+    "contributors": [
+        {
+            "name": "fl",
+            "email": "fangle@jf.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "name": "mip-pc6-news",
+    "version": "1.0.0",
+    "description": "文章页面逻辑",
+    "contributors": [
+        {
+            "name": "fl",
+            "email": "fangle@jf.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
