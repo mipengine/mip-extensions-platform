@@ -113,6 +113,12 @@ define(function (require) {
                 $('body').scrollTop($('body').scrollTop() + 1).scrollTop($('body').scrollTop() - 1);
             }, 150);
         }
+        if ($(e).find('.touch-nav')) {
+            $(e).find('.touch-nav li').bind('click', function () {
+                u = $(this).index() - 1;
+                t('left');
+            });
+        }
     };
     return customElement;
 });
