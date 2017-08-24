@@ -136,7 +136,7 @@ define(function (require) {
                 var projectPath = window.PROJECTPATH || 'appweb';
                 var url = '/' + projectPath + '/' + projectName + '/log';
                 var urlRet = Url.parse(location.href);
-                var actId = window.PAGEINFO && window.PAGEINFO.pageInfo
+                let actId = window.PAGEINFO && window.PAGEINFO.pageInfo
                     ? window.PAGEINFO.pageInfo.actId : urlRet.params.actId;
                 if (actId) {
                     logstrs.unshift(actId);
