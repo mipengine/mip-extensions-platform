@@ -114,8 +114,11 @@ define(function (require) {
                 $(this).toggleClass('expand');
             });
         },
+        wefocus: function () {
+            $('.wefocus_btn a').eq(0).attr('href', 'weixin://');
+        },
         init: function () {
-            this.nextPage(), this.show(), this.rank(), this.historyver();
+            this.nextPage(), this.show(), this.rank(), this.wefocus(), this.historyver();
         }
     };
     customElement.prototype.build = function () {

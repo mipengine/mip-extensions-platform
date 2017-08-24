@@ -32,6 +32,9 @@ define(function (require) {
         // 初始宽度
         o.width(l);
         r.width(o.length * o.width());
+        if ($(e).find('.touch-nav')) {
+            $(e).find('.touch-nav li').eq(0).addClass('active').siblings().removeClass('active');
+        }
         // 循环输出分页
         for (var d = 1; d < o.length; d++) {
             a += '<span></span>';
@@ -101,6 +104,9 @@ define(function (require) {
 
             b();
             $(e).find('.pagenum span').eq(u).addClass('active').siblings().removeClass('active');
+            if ($(e).find('.touch-nav')) {
+                $(e).find('.touch-nav li').eq(u).addClass('active').siblings().removeClass('active');
+            }
         }
         function b() {
             setTimeout(function () {
