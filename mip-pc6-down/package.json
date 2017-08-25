@@ -1,0 +1,14 @@
+{
+    "name": "mip-pc6-down",
+    "version": "1.0.2",
+    "description": "下载页面逻辑",
+    "contributors": [
+        {
+            "name": "fl",
+            "email": "fangle@jf.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
