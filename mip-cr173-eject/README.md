@@ -1,6 +1,6 @@
 # mip-cr173-eject
 
-mip-cr173-eject 点击下载按钮弹出推荐内容
+mip-cr173-eject 点击下载按钮弹出推荐内容,IP过滤功能,fetchJsonp只返回一个值,并没有引入外部JS
 
 标题|内容
 ----|----

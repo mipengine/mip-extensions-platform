@@ -9,6 +9,7 @@ define(function (require) {
     var platform = util.platform;
     var templates = require('templates');
     var customElement = require('customElement').create();
+    var fetchJsonp = require('fetch-jsonp');
     var pageInfo = {
         id: $('.f-information').attr('data-id'),
         categroyId: Math.ceil($('.f-information').attr('data-categroyId')),
@@ -57,39 +58,9 @@ define(function (require) {
     };
     var ejectJs = {
         init: function () {
-            this.getScript(); // getScript插件
             this.addEjectHtml(); // 添加弹出推荐内容
             this.ifMatching(); // 判断设备
             this.clickFunctionEject(); // 点击触发弹层
-        },
-        getScript: function () {
-            var getScript = function (url, callback) {
-                var head = document.getElementsByTagName('head')[0];
-                var js = document.createElement('script');
-                js.setAttribute('type', 'text/javascript');
-                js.setAttribute('src', url);
-                head.appendChild(js);
-                var callbackFn = function () {
-                    if (typeof callback === 'function') {
-                        callback();
-                    }
-
-                };
-                if (document.all) {
-                    js.onreadystatechange = function () {
-                        if (js.readyState === 'loaded' || js.readyState === 'complete') {
-                            callbackFn();
-                        }
-
-                    };
-                }
-                else {
-                    js.onload = function () {
-                        callbackFn();
-                    };
-                }
-            };
-            $.getScript = getScript;
         },
         addEjectHtml: function () {
             var azEjectData = pageInfo.ejectandroid; // 获取安卓弹层数据
@@ -186,7 +157,8 @@ define(function (require) {
         },
         clickFunctionEject: function () {
             $('.m-down-ul li a').click(function () {
-                if (platform.isIos()) {}
+                if (platform.isIos()) {
+                }
                 else {
                     var setTimer = setTimeout(function () {
                         $('.m-click-show').show();
@@ -198,15 +170,45 @@ define(function (require) {
             });
         },
         addhighLab: function () {
-            $.getScript('https://ca.6071.com/?id=cr1731002333_utf8', function () {});
+            $('#address').unbind('click');
+            fetchJsonp('https://ca.6071.com/index/filter?callback=callback', {
+                jsonpCallback: 'callback'
+            }).then(function (res) {
+                return res.json();
+            }).then(function (data) {
+                var clickN = 0;
+                var resTitle = $('h1').text() || ''; // 资源的名称
+                resTitle = resTitle.split(/(\s|\()/)[0];
+                if (data === true) {
+                    if (($('#address').attr('issw') || $('#address').attr('ispc'))) {
+                        $('#address').click(function () {
+                            $('.m-click-show').show();
+                            if (clickN <= 0) {
+                                var hzUrl = $('.f-hzurl').html().replace(/\&amp;/g, '&');
+                                window.location.href = hzUrl;
+                                clickN++;
+                                return false;
+                            }
+                            else {
+                                if ($('#address').attr('ispc')) {
+                                    $('#address').attr('href', 'javascript:;');
+                                }
+                            }
+                        });
+                    }
+
+                    $('.g-foot-nav').append('<p style="display:block">安卓360植入成功,返回值为：' + data + '</p>');
+                }
+
+            });
+            $('.m-close-btn,.m-black-bg').click(function () {
+                $('.m-click-show').hide();
+            });
         },
-        iossoftAdd: function () {
-            $.getScript('https://ca.6071.com/?id=cr17310023331_utf8', function () {});
-        }
+        iossoftAdd: function () {}
     };
     customElement.prototype.build = function () {
         ejectJs.init();
     };
-
     return customElement;
 });
