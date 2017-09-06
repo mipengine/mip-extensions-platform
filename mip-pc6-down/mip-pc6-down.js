@@ -109,23 +109,15 @@ define(function (require) {
             if (2 !== i) {
                 $('#xgk a').each(function () {
                     t.push($(this).text());
-                }), 0 === t.length ? t = '' : t = t.join(','), $.ajax({
-                    method: 'get',
-                    data: {
-                        keys: t,
-                        id: a.webInfoId,
-                        platform: i,
-                        pid: r,
-                        cid: void 0 !== a.webInfoCid ? a.webInfoCid : 0,
-                        rid: void 0 !== a.webInfoRid ? a.webInfoRid : 0,
-                        rcid: o,
-                        rrid: s
-                    },
-                    url: 'https://apis.pc6.com/ajax.asp?action=998',
-                    dataType: 'json',
-                    success: function (t) {
-                        if (void 0 !== t.list) {
-                            var n = t.list;
+                }), 0 === t.length ? t = '' : t = t.join(',');
+                var cid = (a.webInfoCid) ? a.webInfoCid : 0;
+                var rid = (a.webInfoRid) ? a.webInfoRid : 0;
+                fetch('https://apis.pc6.com/ajax.asp?action=998&keys=' + t + '&id=' + a.webInfoId + '&platform=' + i + '&pid=' + r + '&cid=' + cid + '&rid=' + rid + '&rcid=' + o + '&rrid=' + s, {
+                    method: 'get'
+                }).then(function (response) {
+                    response.json().then(function (data) {
+                        if (void 0 !== data.list) {
+                            var n = data.list;
                             var r = '';
                             if (0 === i) {
                                 for (var o = 0; o < n.length; ++o) {
@@ -141,9 +133,8 @@ define(function (require) {
                             }
                             $('.tjyxph #thelist3').append(r);
                         }
-
-                    },
-                    error: function () {}
+                    });
+                }).catch(function (err) {
                 });
             }
 
@@ -151,6 +142,9 @@ define(function (require) {
         show: function () {
             if ($('#historyver p').length === 0) {
                 $('#historyver').remove();
+            }
+            if ($('#historyver p').length <= 3) {
+                $('#historyver .lookmore').remove();
             }
 
             if ($('#tcsyy li').length === 0) {
@@ -161,8 +155,18 @@ define(function (require) {
                 $('.tips_more').remove();
             }
             if ($('body').attr('show')) {
-                $('.hot_gamerec,.rank').remove();
+                $('.hot_gamerec,.rank,.tips_more').remove();
             }
+        },
+        jc: function () {
+            var t = $('#jc');
+            $('#tab span').eq(1).click(function () {
+                t.empty();
+                t.append($('#xgwz').prev('mip-embed').clone());
+                t.append($('#xgwz').clone());
+                t.append($('#rela_down').clone());
+                t.find('#rela_down img').remove();
+            });
         },
         rank: function () {
             if ($('.rank').length > 0) {
@@ -200,7 +204,7 @@ define(function (require) {
             });
         },
         init: function () {
-            this.xfNav(), this.rank(), this.downHref(), this.hotRec(), this.show();
+            this.xfNav(), this.rank(), this.downHref(), this.hotRec(), this.show(), this.jc();
         }
     };
     customElem.prototype.build = function () {

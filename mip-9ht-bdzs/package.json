@@ -1,0 +1,14 @@
+{
+    "name": "mip-9ht-bdzs",
+    "version": "1.0.0",
+    "description": "百度站搜表单提交",
+    "contributors": [
+        {
+            "name": "lj",
+            "email": "lj@952.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
