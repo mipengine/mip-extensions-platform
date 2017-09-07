@@ -21,7 +21,11 @@ define(function (require) {
         AppArray: JSON.parse($('.f-AppArray').html()),
         chars: JSON.parse($('.f-chars').html()),
         webUrl: JSON.parse($('.f-webUrl').html()),
-        noAd: JSON.parse($('.f-noAd').html())
+        noAd: JSON.parse($('.f-noAd').html()),
+        openEject: $('.f-open-eject').html(),
+        koCity: JSON.parse($('.f-eject-city').html()),
+        azspUrl: JSON.parse($('.f-azsp-url').html()),
+        iosspUrl: JSON.parse($('.f-iossp-url').html())
     };
     function generateMixed(n) {
         var res = '';
@@ -93,7 +97,8 @@ define(function (require) {
             }
             province = remotIpInfo.province;
             city = remotIpInfo.city;
-            if (city !== '北京' && city !== '上海' && city !== '武汉') {
+            var koCity = pageInfo.koCity;
+            if ($.inArray(city, koCity) === -1) {
                 this.addDate(document.querySelector('.m-hideshow-top'), azOhterEject);
             }
             else {
@@ -107,6 +112,7 @@ define(function (require) {
             });
         },
         ifMatching: function () {
+            var spDownUrl = $('#address').attr('href');
             var i = 0;
             for (i = 0; i < pageInfo.noAd.length; i++) {
                 if (downHref.indexOf(pageInfo.noAd[i]) > -1) {
@@ -119,7 +125,12 @@ define(function (require) {
             }
 
             if (platform.isIos()) { // IOS
-                if ($.inArray(pageInfo.categroyId, pageInfo.catearrIos) === -1 && $('.g-tags-box ul li').length <= 0) { // 没有匹配到
+                var iosspUrlid = 0; // 0位适配失败，1为适配成功
+                if ($.inArray(spDownUrl, pageInfo.iosspUrl) !== -1) {
+                    iosspUrlid = 1;
+                }
+                var ifiosSp = $.inArray(pageInfo.categroyId, pageInfo.catearrIos);
+                if (ifiosSp === -1 && $('.g-tags-box ul li').length <= 0 && iosspUrlid === 0) { // 没有匹配到
                     $('.m-down-ul li a').attr({href: 'javascript:;', ispc: true});
                 }
                 else { // 匹配资源
@@ -137,7 +148,12 @@ define(function (require) {
                     $('.m-down-msg .type b:last').html('系统：Android');
                 }
                 else {
-                    if ($.inArray(pageInfo.categroyId, pageInfo.catearr) === -1 && $('.g-tags-box ul li').length <= 0) {
+                    var azspUrlid = 0; // 0位适配失败，1为适配成功
+                    if ($.inArray(spDownUrl, pageInfo.azspUrl) !== -1) {
+                        azspUrlid = 1;
+                    }
+                    var ifazSp = $.inArray(pageInfo.categroyId, pageInfo.catearr);
+                    if (ifazSp === -1 && $('.g-tags-box ul li').length <= 0 && azspUrlid === 0) {
                         $('.m-down-ul li a').attr({href: 'javascript:;', ispc: true});
                     }
                     else {
@@ -156,6 +172,10 @@ define(function (require) {
             }
         },
         clickFunctionEject: function () {
+            if (pageInfo.openEject === '关闭弹层') {
+                return false;
+            }
+
             $('.m-down-ul li a').click(function () {
                 if (platform.isIos()) {
                 }
@@ -170,8 +190,7 @@ define(function (require) {
             });
         },
         addhighLab: function () {
-            $('#address').unbind('click');
-            fetchJsonp('https://ca.6071.com/index/filter?callback=callback', {
+            fetchJsonp('https://ca.6071.com/index/filter', {
                 jsonpCallback: 'callback'
             }).then(function (res) {
                 return res.json();
@@ -182,7 +201,6 @@ define(function (require) {
                 if (data === true) {
                     if (($('#address').attr('issw') || $('#address').attr('ispc'))) {
                         $('#address').click(function () {
-                            $('.m-click-show').show();
                             if (clickN <= 0) {
                                 var hzUrl = $('.f-hzurl').html().replace(/\&amp;/g, '&');
                                 window.location.href = hzUrl;
@@ -200,9 +218,6 @@ define(function (require) {
                     $('.g-foot-nav').append('<p style="display:block">安卓360植入成功,返回值为：' + data + '</p>');
                 }
 
-            });
-            $('.m-close-btn,.m-black-bg').click(function () {
-                $('.m-click-show').hide();
             });
         },
         iossoftAdd: function () {}
