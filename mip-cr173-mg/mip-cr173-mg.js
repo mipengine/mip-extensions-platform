@@ -65,14 +65,6 @@ define(function (require) {
                 }
             }
         });
-        $('ul li').each(function () {
-            var liText = $(this).find('span').text();
-            for (i = 0; i < forNum; i++) {
-                if (liText.indexOf(ffTitle[i]) !== -1) {
-                    $(this).hide();
-                }
-            }
-        });
     }
     customElement.prototype.build = function () {
         cr173mgc();

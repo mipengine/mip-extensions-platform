@@ -1,0 +1,14 @@
+{
+    "name": "mip-iwanvi-infinitescroll",
+    "version": "1.0.0",
+    "description": "主要扩展异步请求添加headers头部信息，主要包含cookie（完美结合开发接口无用户信息时，接口返回及接口传输）来控制访问用户唯一性",
+    "contributors": [
+        {
+            "name": "zhangmc",
+            "email": "715417165@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

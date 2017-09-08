@@ -25,7 +25,8 @@ define(function (require) {
             });
             /*eslint-enable*/
             var elescript = document.createElement('script');
-            elescript.src = location.protocol + '//cir1.bdstatic.com/static/cir.min.js';
+            elescript.src = location.protocol + '//cir-smart.baidu.com/static/cir.min.js';
+            elescript.async = true;
             $('body').append(elescript);
         }
     };

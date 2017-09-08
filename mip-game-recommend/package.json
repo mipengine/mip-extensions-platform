@@ -1,0 +1,14 @@
+{
+    "name": "mip-game-recommend",
+    "version": "1.0.0",
+    "description": "游戏下载组件：游戏下载列表",
+    "contributors": [
+        {
+            "name": "zhouqian04",
+            "email": "zhouqian04@baidu.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
