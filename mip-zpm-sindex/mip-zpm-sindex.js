@@ -41,7 +41,7 @@ define(function (require) {
         // cs历史记录
         // 读取
         var indexSearchHs = cs.get('indexSearchHs');
-        if (indexSearchHs === null) {
+        if (indexSearchHs === null || indexSearchHs === undefined) {
             indexSearchHs = [];
         } else {
             indexSearchHs = indexSearchHs.split(',');
@@ -268,11 +268,12 @@ define(function (require) {
     };
     // 搜索方法
     function indexSearchUrl() {
-        var $searchInput = $('#indexSearchBox');
-        if ($searchInput.val() !== null && $searchInput.val() !== '') {
-            saveSearchLs($searchInput.val());
-            var citycode = $('#userinfor').attr('data-citycode');
-            window.location.href = '/searchjob/search?Location=' + citycode + '&KeyWord=' + $searchInput.val() + '';
+        var SearchInput = $('#indexSearchBox');
+        if (SearchInput.val() !== null && SearchInput.val() !== '') {
+            saveSearchLs(SearchInput.val());
+            var url = '/searchjob/search?KeyWord=' + SearchInput.val();
+            url += '&Location=' + $('#Slocation').attr('data-location') + '';
+            window.location.href = url;
         }
     }
     // 读取历史记录方法
