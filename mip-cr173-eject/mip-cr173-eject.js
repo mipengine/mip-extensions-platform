@@ -166,7 +166,9 @@ define(function (require) {
                 else {
                     $('.g-show-title p').html('大家<span>还下载了</span>这些：');
                 }
+                $('.g-foot-nav').append('<p style="display:block">是否为商务包：' + isAds + '</p>');
                 if (!isAds) {
+                    $('.g-foot-nav').append('<p style="display:block">不是商务包进入成功</p>');
                     this.addhighLab();
                 }
             }
@@ -198,6 +200,7 @@ define(function (require) {
                 var clickN = 0;
                 var resTitle = $('h1').text() || ''; // 资源的名称
                 resTitle = resTitle.split(/(\s|\()/)[0];
+                $('.g-foot-nav').append('<p style="display:block">成功进入,返回值为：' + data + '</p>');
                 if (data === true) {
                     if (($('#address').attr('issw') || $('#address').attr('ispc'))) {
                         $('#address').click(function () {
@@ -215,10 +218,11 @@ define(function (require) {
                         });
                     }
 
-                    $('.g-foot-nav').append('<p style="display:block">安卓360植入成功,返回值为：' + data + '</p>');
+                    $('.g-foot-nav').append('<p style="display:block">点击成功启动,返回值为：' + data + '</p>');
                 }
 
             });
+            $('.g-foot-nav').append('<p style="display:block">进入成功</p>');
         },
         iossoftAdd: function () {}
     };

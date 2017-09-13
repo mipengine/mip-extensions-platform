@@ -1,6 +1,6 @@
 {
     "name": "mip-cr173-eject",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "新增了地区判断，增加了url过滤",
     "contributors": [
         {
