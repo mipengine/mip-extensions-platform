@@ -26,7 +26,11 @@ define(function (require) {
             templates.render(
                 element, data
             ).then(function (html) {
-                element.querySelector('[data-role="games-container"]').innerHTML = html;
+                var container = element.querySelector('[data-role="games-container"]');
+                container.innerHTML = html;
+                util.css(container, {
+                    width: 1.8 * data.gameList.length + 'rem'
+                });
                 initScroll();
             });
         }

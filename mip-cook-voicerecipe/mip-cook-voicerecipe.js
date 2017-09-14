@@ -227,18 +227,18 @@ define(function (require) {
 
     var MAIN_HTML = ''
         + '<div class="mip-cook-voicerecipe-wrapper">'
-        +     '<button type="button" data-action="start">开始做菜</button>'
+        +     '<button type="button" data-action="start">开始语音做饭</button>'
         +     '<div class="mip-cook-voicerecipe-tips" style="display: none">小度语音助手，彻底解放你的双手</div>'
         + '</div>';
 
     var DIALOG_HTML = ''
         + '<div class="mip-cook-voicerecipe-dialog">'
         +     '<div class="mip-cook-voicerecipe-dialog-body">'
-        +         '<h1>唤醒未开启</h1>'
-        +         '<p>您需要先开启唤醒才能使用菜谱语音对话助手。开启后可说“小度小度”与菜谱对话，解放双手。</p>'
+        +         '<h1>语音唤醒未开启</h1>'
+        +         '<p>需先在设置中，开启“小度小度”唤醒功能（开启后，可随时说“小度小度”，与菜谱对话）。</p>'
         +         '<div class="mip-cook-voicerecipe-dialog-actions">'
         +             '<button type="button" data-action="close">取消</button>'
-        +             '<button type="button" data-action="edit">立即开启</button>'
+        +             '<button type="button" data-action="edit">去开启</button>'
         +         '</div>'
         +     '</div>'
         +     '<div class="mip-cook-voicerecipe-dialog-mask" data-action="close"></div>'
@@ -270,8 +270,10 @@ define(function (require) {
 
                 // 已开启唤醒，直接跳转
                 if (status) {
-                    location.href = 'http://m.baidu.com/sf?pd=life_cookbook&openapi=1&dspName=iphone&from_sf=1&resource_id=4638&word='
-                        + encodeURIComponent(location.href) + '&title=菜谱语音助手&ms=1';
+                    var pageUrl = util.parseCacheUrl(location.href);
+                    pageUrl = pageUrl.replace(/\#.*?$/, '');
+                    location.href = 'http://m.baidu.com/sf?pd=life_cookbook&openapi=1&dspName=iphone&from_sf=1&resource_id=35722&word='
+                        + encodeURIComponent(pageUrl) + '&title=菜谱语音助手&ms=1';
                 }
                 // 未开启唤醒、设置唤醒失败或者用户拒绝设置的情况
                 // 弹窗提示

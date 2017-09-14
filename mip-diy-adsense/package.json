@@ -1,0 +1,13 @@
+{
+    "name": "mip-diy-adsense",
+    "version": "1.0.0",
+    "author": {
+        "name": "myoa",
+        "email": "myoa@163.com",
+        "url": "http://www.gkstk.com/"
+    },
+    "description" : "完美支持adsense广告插件",
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

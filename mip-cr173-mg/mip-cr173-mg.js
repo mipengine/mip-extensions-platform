@@ -1,5 +1,5 @@
 /**
- * @file mip-alert 个人统计
+ * @file mip-cr173-mg 判断网页标题进行内容替换，判断条件已写入网页，内容不会进行修改。
  * @author
  */
 
@@ -28,9 +28,9 @@ define(function (require) {
                 $('.ico-wrap img,.ico-wrap mip-img').attr('src', imgSrc);
                 $('.g-previmg-box').html('<div class = "g-previmg plist" id = "g-previmg" > '
                 + '<ul class="g-previmg-show">'
-                + '<li><mip-img src="https://ca.6071.com/js/mgc-img2.png" /></mip-img></li>'
-                + '<li><mip-img src="https://ca.6071.com/js/mgc-img3.png" /></mip-img></li>'
-                + '<li><mip-img src="https://ca.6071.com/js/mgc-img4.png"  /></mip-img></li>'
+                + '<li><mip-img src="https://ca.6071.com/js/mgc-img2.png"></mip-img></li>'
+                + '<li><mip-img src="https://ca.6071.com/js/mgc-img3.png"></mip-img></li>'
+                + '<li><mip-img src="https://ca.6071.com/js/mgc-img4.png"></mip-img></li>'
                 + '</ul></div>');
                 $('.content').html('<p>本次西西为大家带来<strong>优艺直播间vip破解版</strong>，软件已经破解了会员'
 				+ '，用户可以免费使用会员，任何直播间都可以进去哦！优艺直播间是一款手机美女视频直播软件，这里有大量的美女帅哥在这里表演自己的才艺。你可以随时的与她们进行聊天互动哦！快来下载使用吧！</p>');
@@ -57,14 +57,6 @@ define(function (require) {
                 }
             }
         }
-        $('ul li').each(function () {
-            var liText = $(this).find('strong').text();
-            for (i = 0; i < forNum; i++) {
-                if (liText.indexOf(ffTitle[i]) !== -1) {
-                    $(this).hide();
-                }
-            }
-        });
     }
     customElement.prototype.build = function () {
         cr173mgc();

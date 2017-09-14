@@ -12,12 +12,7 @@ mip-cook-voicerecipe 实现了一个语音智能菜谱入口的功能。
 
 ### 基本用法
 ```html
-<style>
-    body {
-        height: 2000px;
-    }
-</style>
-<mip-cook-voicerecipe></mip-cook-voicerecipe>
+<mip-cook-voicerecipe layout="responsive"></mip-cook-voicerecipe>
 ```
 
 ## 属性
@@ -26,4 +21,4 @@ mip-cook-voicerecipe 实现了一个语音智能菜谱入口的功能。
 
 ## 注意事项
 
-1.
+无
