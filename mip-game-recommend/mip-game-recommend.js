@@ -55,6 +55,16 @@ define(function (require) {
      */
     customElement.prototype.build = function () {
         element = this.element;
+
+        // 因为缺少IOS下载链接，IOS不展示该模块
+        if (element.hasAttribute('ios-hide')) {
+            if (!util.platform.isIos()) {
+                util.css(element.querySelector('.mip-game-recommend-container'), {
+                    display: 'block'
+                });
+            }
+        }
+
         // 同步配置数据
         if (element.hasAttribute('synchronous-data')) {
             var script = element.querySelector('script[type="application/json"]');

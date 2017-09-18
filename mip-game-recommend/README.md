@@ -12,11 +12,13 @@ mip-game-recommend 游戏下载组件
 
 ### 基本用法
 ```html
-<mip-game-recommend src="xxx">
-<div class="game-recommend-hd">大家还在玩</div>
-<div class="game-recommend-bd">
-    <div class="iscoll-container" data-role="games-container">
-    </div>
+<mip-game-recommend src="xxx" ios-hide>
+<div class="mip-game-recommend-container">
+  <div class="game-recommend-hd">大家还在玩</div>
+  <div class="game-recommend-bd">
+      <div class="iscoll-container" data-role="games-container">
+      </div>
+  </div>
 </div>
 <template type="mip-mustache">
     <ul>
@@ -45,7 +47,7 @@ mip-game-recommend 游戏下载组件
 ### 同步数据
 
 ```html
-<mip-game-recommend synchronous-data>
+<mip-game-recommend synchronous-data ios-hide>
 <script type="application/json">
 {
     "gameList": [
@@ -124,10 +126,12 @@ mip-game-recommend 游戏下载组件
    ]
 }
 </script>
-<div class="game-recommend-hd">大家还在玩</div>
-<div class="game-recommend-bd">
-    <div class="iscoll-container" data-role="games-container">
-    </div>
+<div class="mip-game-recommend-container">
+  <div class="game-recommend-hd">大家还在玩</div>
+  <div class="game-recommend-bd">
+      <div class="iscoll-container" data-role="games-container">
+      </div>
+  </div>
 </div>
 <template type="mip-mustache">
     <ul>
@@ -166,6 +170,14 @@ mip-game-recommend 游戏下载组件
 ### synchronous-data
 
 说明：使用同步数据开关属性    
+必选项：否    
+类型：字符串    
+取值范围：无    
+单位：无    
+默认值：无 
+
+### ios-hide
+说明：在IOS下隐藏开关属性  
 必选项：否    
 类型：字符串    
 取值范围：无    

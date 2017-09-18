@@ -59,7 +59,7 @@ define(function (require) {
                     $('#info #btns a').attr('href', this.platAndroidAddress);
                 }
                 else {
-                    $('#info #btns a').attr('href', 'http://download.pc6.com/down/' + this.platAndroidId + '/');
+                    $('#info #btns a').attr('href', 'https://download.pc6.com/down/' + this.platAndroidId + '/');
                 }
                 var k = ',110974,110451,121665,115094,55819,49251,62433,140386,'.indexOf(',' + this.webInfoId + ',');
                 if ($('#ResSystem').html(this.platAndroidResSystem), k < 0) {
@@ -76,7 +76,7 @@ define(function (require) {
                     $('#info #btns a').attr('href', this.platIPhoneAddress);
                 }
                 else {
-                    $('#info #btns a').attr('href', 'http://download.pc6.com/down/' + this.platIPhoneId + '/');
+                    $('#info #btns a').attr('href', 'https://download.pc6.com/down/' + this.platIPhoneId + '/');
                 }
                 var k1 = ',110974,110451,121665,115094,55819,49251,62433,140386,'.indexOf(',' + this.webInfoId + ',');
                 if ($('#ResSystem').html(this.platIPhoneResSystem), k1 < 0) {

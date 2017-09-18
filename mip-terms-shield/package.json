@@ -1,7 +1,7 @@
 {
     "name": "mip-terms-shield",
     "version": "1.1.0",
-    "description": "标题关键字屏蔽",
+    "description": "根据标题关键字屏蔽，去掉部分百度升级后会导致报错的代码",
     "contributors": [
         {
             "name": "mgcity",

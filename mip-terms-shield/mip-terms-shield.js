@@ -38,22 +38,6 @@ define(function (require) {
                 $('.g-keyword-cont').parents('.g-box').hide();
             }
         }
-        $('ul li').each(function () {
-            var liText = $(this).find('strong').text();
-            for (i = 0; i < forNum; i++) {
-                if (liText.indexOf(ffTitle[i]) !== -1) {
-                    $(this).hide();
-                }
-            }
-        });
-        $('ul li').each(function () {
-            var liText = $(this).find('span').text();
-            for (i = 0; i < forNum; i++) {
-                if (liText.indexOf(ffTitle[i]) !== -1) {
-                    $(this).hide();
-                }
-            }
-        });
     }
     customElement.prototype.build = function () {
         mgcpingbi();
