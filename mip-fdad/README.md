@@ -13,6 +13,8 @@ mip-fdad 组件说明
 ### 基本用法
 ```html
 <mip-fdad class="__customer_place" data-id="11"></mip-fdad>
+<mip-fdad class="__customer_place" data-id="349"></mip-fdad>
+<mip-fdad class="__customer_place" data-id="542"></mip-fdad>
 ```
 
 ## 属性

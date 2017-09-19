@@ -71,6 +71,10 @@ define(function (require) {
         getScript: getScript,
         support: {
             flex: supportFlex
+        },
+        topbar: {
+            show: function () {},
+            hide: function () {}
         }
     };
 
@@ -280,7 +284,7 @@ define(function (require) {
             return false;
         }
 
-        if (!area.pid || !area.id) {
+        if (!area.pid) {
             return false;
         }
 
@@ -394,7 +398,7 @@ define(function (require) {
 
     // 处理广告(非联盟广告)
     function handle(options) {
-        customer.place.append(getElements(customer.place.className));
+        // customer.place.append(getElements(customer.place.className));
         setCustomerId(options.cid);
 
         var box = getPlaceBox(options.pid);
@@ -742,21 +746,33 @@ define(function (require) {
 
     // 记录广告展示数量
     function recordPv() {
-        var aps = customer.ids.join(',');// 广告id
-        var pps = customer.place.ids.join(',');// 广告位id
-        var params = '';
-        var count = 10;
         var timer = null;
+        var count = 100;
+        var isRecord = false;
 
         var send = function () {
-            params = customer.statis.ap + '=' + aps + '&' + customer.statis.apd + '=' + pps;
+            var aps = customer.ids.join(',');// 广告id
+            var pps = customer.place.ids.join(',');// 广告位id
+            var params = '';
 
-            getScript(customer.statis.url + '?' + params);
+            if (customer.ids.length >= customer.place.ids.length) {
+                isRecord = true;
+                params = customer.statis.ap + '=' + aps + '&' + customer.statis.apd + '=' + pps;
+                getScript(customer.statis.url + '?' + params);
+            } else {
+                timer = setTimeout(function () {
+                    if (isRecord || !count) {
+                        clearTimeout(timer);
+                        return;
+                    }
+
+                    count--;
+                    send();
+                }, 500);
+            }
         };
 
-        if (aps || pps) {
-            send();
-        }
+        send();
     }
 
     // 加载js
@@ -1276,42 +1292,12 @@ define(function (require) {
     }
 
     window.CUSTOMER = customer;
-
-    (function (win, doc, customer) {
-        customer = win.CUSTOMER;
-        var isRecord = false;
-        var total = 100;
-        var record = function (ms) {
-            if (isRecord) {
-                return;
-            }
-
-            isRecord = true;
-
-            var count = customer.getElements(customer.place.className).length;
-
-            var timer = setInterval(function () {
-                if (customer.ids.length >= count) {
-                    clearInterval(timer);
-                    customer.statis.record();
-                }
-
-                if (!total--) {
-                    clearInterval(timer);
-                    customer.statis.record();
-                }
-            }, ms || 50);
-        };
-
-        if (document.readyState !== 'loading') {
-            record();
-        } else if (window.addEventListener) {
-            window.addEventListener('DOMContentLoaded', record);
-        }
-    })(window, document);
+    window.addEventListener('DOMContentLoaded', function () {
+        customer.place.append(getElements(customer.place.className));
+        customer.statis.record();
+    });
 
     var render = function (that, me, domain, token) {
-
         var self = that;
 
         if (domain && token) {
@@ -1340,6 +1326,23 @@ define(function (require) {
                 }
             }, false);
 
+            var close = document.createElement('a');
+
+            close.innerHTML = 'X';
+            close.style.position = 'absolute';
+            close.style.right = '26px';
+            close.style.bottom = '3px';
+            close.style.height = '14px';
+            close.style.lineHeight = '14px';
+            close.style.padding = '0 3px';
+            close.style.fontSize = '11px';
+            close.style.color = 'white';
+            close.style.background = 'rgba(0,0,0,.45)';
+            close.addEventListener('click', function () {
+                that.parentNode.removeChild(that);
+            });
+
+            that.appendChild(close);
         } else {
             // console.error('请输入正确的 domain 或者 token');
         }
@@ -1361,6 +1364,7 @@ define(function (require) {
             success: function () {
                 var mipad = window.CUSTOMER.mipGet(id);
 
+                // 联盟广告
                 if (mipad) {
                     try {
                         div.id = mipad.token;
