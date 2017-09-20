@@ -261,6 +261,9 @@ define(function (require) {
         var element = $(this.element);
         var dialog = null;
 
+        // 去掉这个类，否则弹窗和 tips 都显示不出来
+        element.removeClass('mip-layout-size-defined');
+
         element.html(MAIN_HTML);
 
         element.on('click', '[data-action=start]', function () {

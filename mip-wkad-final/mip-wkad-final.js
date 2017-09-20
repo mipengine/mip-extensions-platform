@@ -2,16 +2,19 @@
 * 寻医问药mip改造 新版广告组件
 * @file 脚本支持
 * @author jqthink@gmail.com
-* @time 2017.07.17
-* @version 1.0.2
+* @time 2017.09.19
+* @version 1.0.3
 */
 define(function (require) {
     var $ = require('zepto');
+    var fetchJsonp = require('fetch-jsonp');
     var customElem = require('customElement').create();
-    var ua = navigator.userAgent;
-    var loadAd = function (elem, className, content) {
+    var date = 0;
+    var loadAd = function (elem, className, content, token) {
         var el = document.createElement('div');
         var script = document.createElement('script');
+        var bdAdWrap = null;
+        var bdAd = null;
         var json = null;
         var arr = [];
         var res = content.replace(/\[|\,\s*|\]/g, function (matchs) {
@@ -37,47 +40,16 @@ define(function (require) {
         script.innerHTML = arr.join('');
         $(elem).append(el);
         $(el).append(script);
-    };
-    var parse = function (obj, userAgent, subject) {
-        if (typeof  obj !== 'object') {
-            return;
-        }
-        var tmp = obj;
-        var x;
-        for (x in tmp) {
-            if (x.substr(0, 2) === 'if' || x === 'elseif') {
-                if (tmp[x].hasOwnProperty('condition_type')) {
-                    if (tmp[x].condition_type === 'ua') {
-                        var reg = new RegExp(tmp[x].condition);
-                        if (reg.test(userAgent)) {
-                            if (tmp[x].hasOwnProperty('return_value')) {
-                                return JSON.stringify(tmp[x].return_value).replace(/"|"/g, '');
-                            }
-                            else {
-                                return parse(tmp[x].body, userAgent, subject);
-                            }
-                        }
-                    }
-                    else if (tmp[x].condition_type === 'in_array') {
-                        if (tmp[x].condition.indexOf(subject) > -1) {
-                            if (tmp[x].hasOwnProperty('return_value')) {
-                                return JSON.stringify(tmp[x].return_value).replace(/"|"/g, '');
-                            }
-							else {
-                                return parse(tmp[x].body, userAgent, subject);
-                            }
-                        }
-                    }
-                }
-            }
-			else {
-                if (tmp[x].hasOwnProperty('return_value')) {
-                    return JSON.stringify(tmp[x].return_value).replace(/"|"/g, '');
-                }
-                else {
-                    return parse(tmp[x].body, userAgent, subject);
-                }
-            }
+        if (date === 21) {
+            bdAdWrap = document.createElement('mip-embed');
+            bdAd = document.createElement('div');
+            $(bdAdWrap).attr('layout', 'responsive');
+            $(bdAdWrap).attr('type', 'baidu-wm-ext');
+            $(bdAdWrap).attr('domain', 'bdmjs.xywy.com');
+            $(bdAdWrap).attr('token', token);
+            $(bdAd).attr('id', token);
+            $(elem).html('').append(bdAdWrap);
+            $(bdAdWrap).append(bdAd);
         }
     };
     // build 方法，元素插入到文档时执行，仅会执行一次
@@ -86,26 +58,41 @@ define(function (require) {
         var elem = this.element;
         var elStr = $(elem).attr('el');
         var adStr = $(elem).attr('ads');
-        var complex = $(elem).attr('complex');
-        var subject = parseInt($(elem).attr('subject'), 10);
-        var adJson = null;
+        var token = '';
         var domain = document.domain;
         var url = document.URL;
-        if (complex === 'on') {
-            adJson = JSON.parse($(elem).attr('adJson'));
-            loadAd(elem, elStr, parse(adJson, ua, subject));
+        if (domain === '3g.xywy.com') {
+            $('.top-float').hide();
+            $('.hot-news-panel').addClass('none');
+            $('.mobile-ad-rnk1-panel').removeClass('none');
+            $('.mobile-ad-rnk2-panel').removeClass('none');
+        }
+        if (url.indexOf('3g-xywy-com.mipcdn.com') > -1 && url.indexOf('3g.xywy.com') > -1) {
+            $('mip-fixed[type="bottom"]').hide();
+            $('.mobile-ad-rnk3-panel').removeClass('none');
+        }
+        if (url.indexOf('3g.club.xywy.com') > -1) {
+            fetchJsonp('http://3g.club.xywy.com/zhuanti/ad_status.php', {timeout: 3000})
+            .then(function (res) {
+                return res.json();
+            }).then(function (data) {
+                date = data.date;
+                loadAd(elem, elStr, adStr, token);
+            });
+            if (adStr.indexOf('mobile_doctor_consult') > -1
+                || adStr.indexOf('mobile_doctor_consult_depart') > -1) {
+                token = 'srdhldab53';
+            }
+            else if (adStr.indexOf('mobile_top_float_window_depart') > -1
+                || adStr.indexOf('mobile_top_float_window') > -1) {
+                token = 'xskytryyovz';
+            }
+            else if (adStr.indexOf('mobile_bottom_tw_combine_depart') > -1
+                || adStr.indexOf('mobile_bottom_tw_combine') > -1) {
+                token = 'lgymivofdjn';
+            }
         }
         else {
-            if (domain === '3g.xywy.com') {
-                $('.top-float').hide();
-                $('.hot-news-panel').addClass('none');
-                $('.mobile-ad-rnk1-panel').removeClass('none');
-                $('.mobile-ad-rnk2-panel').removeClass('none');
-            }
-            if (url.indexOf('mipcache.bdstatic.com') > -1 && url.indexOf('3g.xywy.com') > -1) {
-                $('mip-fixed[type="bottom"]').hide();
-                $('.mobile-ad-rnk3-panel').removeClass('none');
-            }
             loadAd(elem, elStr, adStr);
         }
     };
