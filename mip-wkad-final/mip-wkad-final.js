@@ -2,14 +2,14 @@
 * 寻医问药mip改造 新版广告组件
 * @file 脚本支持
 * @author jqthink@gmail.com
-* @time 2017.09.19
-* @version 1.0.3
+* @time 2017.09.20
+* @version 1.0.5
 */
 define(function (require) {
     var $ = require('zepto');
     var fetchJsonp = require('fetch-jsonp');
     var customElem = require('customElement').create();
-    var date = 0;
+    var date = '';
     var loadAd = function (elem, className, content, token) {
         var el = document.createElement('div');
         var script = document.createElement('script');
@@ -38,9 +38,9 @@ define(function (require) {
         el.className = className;
         script.type = 'text/javascript';
         script.innerHTML = arr.join('');
-        $(elem).append(el);
+        $(elem).html('').append(el);
         $(el).append(script);
-        if (date === 21) {
+        if (date === '21') {
             bdAdWrap = document.createElement('mip-embed');
             bdAd = document.createElement('div');
             $(bdAdWrap).attr('layout', 'responsive');
@@ -72,7 +72,7 @@ define(function (require) {
             $('.mobile-ad-rnk3-panel').removeClass('none');
         }
         if (url.indexOf('3g.club.xywy.com') > -1) {
-            fetchJsonp('http://3g.club.xywy.com/zhuanti/ad_status.php', {timeout: 3000})
+            fetchJsonp('https://3g.club.xywy.com/zhuanti/ad_status.php', {timeout: 3000})
             .then(function (res) {
                 return res.json();
             }).then(function (data) {
@@ -92,9 +92,7 @@ define(function (require) {
                 token = 'lgymivofdjn';
             }
         }
-        else {
-            loadAd(elem, elStr, adStr);
-        }
+        loadAd(elem, elStr, adStr);
     };
     return customElem;
 });
