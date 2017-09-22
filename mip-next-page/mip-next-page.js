@@ -10,19 +10,19 @@ define(function (require) {
         var webInfo = {
             catid: $('.f-information').attr('data-categroyId')
         };
-        if (webInfo.catid === 9) {
+        if (webInfo.catid === '9') {
             $('.m-nexta').attr('href', 'http://m.qqtn.com/bq.html');
-        } else if (webInfo.catid === 18) {
+        } else if (webInfo.catid === '18') {
             $('.m-nexta').attr('href', 'http://m.qqtn.com/ss.html');
-        } else if (webInfo.catid === 20) {
+        } else if (webInfo.catid === '20') {
             $('.m-nexta').attr('href', 'http://m.qqtn.com/tx.html');
-        } else if (webInfo.catid === 23) {
+        } else if (webInfo.catid === '23') {
             $('.m-nexta').attr('href', 'http://m.qqtn.com/qm.html');
-        } else if (webInfo.catid === 28) {
+        } else if (webInfo.catid === '28') {
             $('.m-nexta').attr('href', 'http://m.qqtn.com/wm.html');
-        } else if (webInfo.catid === 72) {
+        } else if (webInfo.catid === '72') {
             $('.m-nexta').attr('href', 'http://m.qqtn.com/tp.html');
-        } else if (webInfo.catid === 74) {
+        } else if (webInfo.catid === '74') {
             $('.m-nexta').attr('href', 'http://m.qqtn.com/pf.html');
         }
     }

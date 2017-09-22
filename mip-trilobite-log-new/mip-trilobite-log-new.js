@@ -54,6 +54,9 @@ define(function (require) {
             $('video').on('play', function () {
                 Log.trace(['cambrian', 'detailVideo']);
             });
+            $('[data-role="j-recommend-download"]').on('click', function () {
+                Log.trace(['cambrian', 'recommendDownload']);
+            });
         }
         logEvent();
     };
