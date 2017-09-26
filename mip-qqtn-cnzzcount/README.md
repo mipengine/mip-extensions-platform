@@ -11,7 +11,9 @@ mip-qqtn-cnzzcount CNZZ统计
 
 ### CNZZ统计
 ```html
-<mip-qqtn-cnzzcount></mip-qqtn-cnzzcount>
+<mip-qqtn-cnzzcount>
+<div id="qqtncnzz">qqtncnzz</div>
+</mip-qqtn-cnzzcount>
 ```
 
 
