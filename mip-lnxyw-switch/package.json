@@ -1,0 +1,14 @@
+{
+    "name": "mip-lnxyw-switch",
+    "version": "1.0.0",
+    "description": "站点:m.lnxyw.com,组件功能:实现文字单行垂直切换",
+    "contributors": [
+        {
+            "name": "zyl",
+            "email": "zhangyiyi_0315@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
