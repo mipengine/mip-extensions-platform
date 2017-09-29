@@ -1,0 +1,14 @@
+{
+    "name": "mip-pingao-icon",
+    "version": "1.0.0",
+    "description": "品告推广连接，品告展示在网页的图片和连接进行推广用",
+    "contributors": [
+        {
+            "name": "zhoushengzhe",
+            "email": "zhoushengzhe01@gmail.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

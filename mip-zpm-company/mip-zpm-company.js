@@ -98,7 +98,7 @@ define(function (require) {
             $('.indexLayer').hide();
         });
         $('#goreg').click(function () {
-            window.location.href = '/account/regist';
+            window.location.href = 'http://mip.zhaopin.com/account/regist';
         });
     };
     window.onload = function () {
@@ -110,7 +110,7 @@ define(function (require) {
         var $comNuber = $('#companydetail').attr('data-comnuber');
         if (Attstate === '1' && $('#Attention').html() === '关注公司') {
             $.ajax({
-                url: '/Company/AttentionCompany',
+                url: 'http://mip.zhaopin.com/Company/AttentionCompany',
                 type: 'post',
                 data: {
                     number: $comNuber
@@ -128,7 +128,7 @@ define(function (require) {
             });
         } else {
             $.ajax({
-                url: '/Company/CancelAttentionCompany',
+                url: 'http://mip.zhaopin.com/Company/CancelAttentionCompany',
                 type: 'post',
                 data: {
                     number: $comNuber
@@ -152,7 +152,7 @@ define(function (require) {
         var newAttentionList;
         var $AttentionList = localStorage.getItem('AttentionList');
         $.ajax({
-            url: '/company/attentionlistcompany',
+            url: 'http://mip.zhaopin.com/company/attentionlistcompany',
             type: 'post',
             data: {
                 version: '6.3.0'
@@ -175,7 +175,7 @@ define(function (require) {
         var $compName = $('#companydetail').attr('data-compname');
         if (Blockstate === '0' && $('#BlockCompany').html() === '拉入黑名单') {
             $.ajax({
-                url: '/Company/SaveBlockCompany',
+                url: 'http://mip.zhaopin.com/Company/SaveBlockCompany',
                 type: 'post',
                 data: {
                     companyName: $compName
@@ -193,7 +193,7 @@ define(function (require) {
             });
         } else {
             $.ajax({
-                url: '/Company/DelBlockCompany',
+                url: 'http://mip.zhaopin.com/Company/DelBlockCompany',
                 type: 'post',
                 data: {
                     companyName: $compName
@@ -215,7 +215,7 @@ define(function (require) {
     function myBlockList() {
         var $BlockList = localStorage.getItem('BlockList');
         $.ajax({
-            url: '/Company/GetBlockCompany',
+            url: 'http://mip.zhaopin.com/Company/GetBlockCompany',
             type: 'post',
             data: {
                 version: '6.3.0'
@@ -242,9 +242,9 @@ define(function (require) {
             return;
         }
         if (noreturn) {
-            window.location.href = '/account/login?prevUrl=' + escape(window.location.href) + '';
+            window.location.href = 'http://mip.zhaopin.com/account/login?prevUrl=' + escape(window.location.href) + '';
         } else {
-            window.location.replace('/account/login?prevUrl=' + escape(window.location.href) + '');
+            window.location.replace('http://mip.zhaopin.com/account/login?prevUrl=' + escape(window.location.href) + '');
         }
     }
     // ====处理反馈完成后弹出提示====
