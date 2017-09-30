@@ -1,0 +1,14 @@
+{
+    "name": "mip-xiaomi-router",
+    "version": "1.0.0",
+    "description": "用于小米公司移动端网站等的规划；主要用于通过JSONP的方式发起地址请求，不涉及布局的事情；",
+    "contributors": [
+        {
+            "name": "diydyq",
+            "email": "diydyq@126.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

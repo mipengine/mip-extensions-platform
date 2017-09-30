@@ -1,0 +1,15 @@
+{
+    "name": "mip-next-news",
+    "version": "1.0.0",
+    "description": "生成下一页按钮，地址通过JS获取相关文章第一篇的地址。",
+    "contributors": [
+        {
+            "name": "gom",
+            "email": "24356681@qq.com",
+            "url": "http://m.qqtn.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.0.0"
+    }
+}
