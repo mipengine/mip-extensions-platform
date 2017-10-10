@@ -43,7 +43,7 @@ define(function (require) {
         // 访问超量，登录
         var zpUser = document.cookie.indexOf('zp-auth');
         if (isLocalStorageSupported() === false && (getCookie('zp-auth') === null || zpUser === -1)) {
-            window.location.href = 'http://mip.zhaopin.com/account/login/account/login';
+            window.location.href = 'https://mip.zhaopin.com/account/login/account/login';
         }
         // 访问量
         var jobPage;
@@ -52,7 +52,7 @@ define(function (require) {
             jobPage++;
             localStorage.setItem('jobPage', jobPage);
         } else if (getCookie('zp-auth') === null) {
-            window.location.href = 'http://mip.zhaopin.com/account/login?prevUrl=' + escape(window.location.href) + '';
+            window.location.href = 'https://mip.zhaopin.com/account/login?prevUrl=' + escape(window.location.href) + '';
         }
         // 是否登录,登录后进行其他操作
         if ($userinfo !== '0') {
@@ -119,7 +119,7 @@ define(function (require) {
         $('.V5-1_ktfkt .kt').on('click', function () {
             $('.jobsFeedBackWrap').hide();
             $.ajax({
-                url: 'http://mip.zhaopin.com/home/SetFeedBack',
+                url: 'https://mip.zhaopin.com/home/SetFeedBack',
                 type: 'post',
                 data: {
                     use: true
@@ -136,7 +136,7 @@ define(function (require) {
             isfed = true;
             getResumeNumber(true);
             $.ajax({
-                url: 'http://mip.zhaopin.com/home/SetFeedBack',
+                url: 'https://mip.zhaopin.com/home/SetFeedBack',
                 type: 'post',
                 data: {
                     use: false
@@ -186,7 +186,7 @@ define(function (require) {
         }
         favorate = favorOp;
         $.ajax({
-            url: 'http://mip.zhaopin.com/Home/FavoritePosition',
+            url: 'https://mip.zhaopin.com/Home/FavoritePosition',
             type: 'post',
             data: {
                 positionNumber: jobId,
@@ -213,7 +213,7 @@ define(function (require) {
     function myCollectList() {
         var newCollectList;
         $.ajax({
-            url: 'http://mip.zhaopin.com/Home/MyCollectList',
+            url: 'https://mip.zhaopin.com/Home/MyCollectList',
             type: 'post',
             data: {
                 version: '6.3.0'
@@ -242,7 +242,7 @@ define(function (require) {
         // 反馈通
         var isfed = ($('#jobdetail').attr('data-isfed')) ? 'true' : 'false';
         $.ajax({
-            url: 'http://mip.zhaopin.com/Searchjob/ResumeNumbers',
+            url: 'https://mip.zhaopin.com/Searchjob/ResumeNumbers',
             type: 'post',
             data: {
                 version: '6.3.0'
@@ -301,7 +301,7 @@ define(function (require) {
                         select();
                     } else {
                         alert('请完善您的简历');
-                        window.location.href = 'http://mip.zhaopin.com/Resume/index';
+                        window.location.href = 'https://mip.zhaopin.com/Resume/index';
                     }
                 }
             },
@@ -320,12 +320,12 @@ define(function (require) {
     function setDefaultResume(number, Version, Language, id, wznumber, wznumberEn, resumeFlag, Name) {
         if (resumeFlag === 0) {
             alert('请完善您的简历');
-            window.location.href = 'http://mip.zhaopin.com/Resume/index';
+            window.location.href = 'https://mip.zhaopin.com/Resume/index';
             return false;
         }
         $('#popupPanel-screen,#popupPanel-popup').hide();
         $.ajax({
-            url: 'http://mip.zhaopin.com/Searchjob/SetDefaultResume',
+            url: 'https://mip.zhaopin.com/Searchjob/SetDefaultResume',
             type: 'post',
             data: {
                 resumeNumber: number,
@@ -381,7 +381,7 @@ define(function (require) {
         $('.cgshenqingbtn').html('已投递').attr('onclick', '').addClass('hover');
         var gaUtmzUtmcsr = parseAnalyticsCookie() || {};
         $.ajax({
-            url: 'http://mip.zhaopin.com/searchjob/apply',
+            url: 'https://mip.zhaopin.com/searchjob/apply',
             type: 'post',
             data: {
                 jobID: 'CC253509722J90250171000',
@@ -438,7 +438,7 @@ define(function (require) {
     // 置顶商品
     function resumeTop(resumeNum, resumeVer, resumeTitle, resumeId) {
         $.ajax({
-            url: 'http://mip.zhaopin.com/home/getresumetopindex',
+            url: 'https://mip.zhaopin.com/home/getresumetopindex',
             type: 'post',
             data: {
                 payPoint: '34a95223a071419da275719ea2a55daf',
@@ -454,7 +454,7 @@ define(function (require) {
                 var pList = '';
                 var url1 = '';
                 $.each(data.productList.Productes, function (k, p) {
-                    url1 += 'http://mip.zhaopin.com/home/payorder?payPoint=34a95223a071419da275719ea2a55daf';
+                    url1 += 'https://mip.zhaopin.com/home/payorder?payPoint=34a95223a071419da275719ea2a55daf';
                     url1 += '&resumeId=' + data.resumeId + '';
                     url1 += '&resumeNum=' + data.resumeNum + '';
                     url1 += '&resumeVer=' + data.resumeVer + '';
@@ -523,7 +523,7 @@ define(function (require) {
     }
     // 举报
     function report() {
-        var reportUrl = 'http://mip.zhaopin.com/Home/Report';
+        var reportUrl = 'https://mip.zhaopin.com/Home/Report';
         var PositionNumber = $('#jobdetail').attr('data-jobnumber');
         var CompanyNumber = $('#jobdetail').attr('data-compnumber');
         var CompanyName = $('#jobdetail').attr('data-compname');
@@ -618,9 +618,9 @@ define(function (require) {
             return;
         }
         if (noreturn) {
-            window.location.href = 'http://mip.zhaopin.com/account/login?prevUrl=' + escape(window.location.href) + '';
+            window.location.href = 'https://mip.zhaopin.com/account/login?prevUrl=' + escape(window.location.href) + '';
         } else {
-            window.location.replace('http://mip.zhaopin.com/account/login?prevUrl=' + escape(window.location.href) + '');
+            window.location.replace('https://mip.zhaopin.com/account/login?prevUrl=' + escape(window.location.href) + '');
         }
     }
     return {

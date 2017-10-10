@@ -62,7 +62,7 @@ define(function (require) {
                     if (prevStr === $searchInput.val()) {
                         return false;
                     }
-                    $.post('http://mip.zhaopin.com/searchjob/SearchRedolent', {
+                    $.post('https://mip.zhaopin.com/searchjob/SearchRedolent', {
                         keyword: $searchInput.val()
                     }, function (data, textStatus, jqxhr) {
                         $SearchLsWrap.show().children('dd').remove();
@@ -108,7 +108,7 @@ define(function (require) {
         // 绑定联想词点击搜索事件
         $(document).on('click', '.indexSearchList a', function () {
             saveSearchLs($(this).text());
-            var keyurl = 'http://mip.zhaopin.com/searchjob/search?Location=' + $('#userinfor').attr('data-citycode') + '';
+            var keyurl = 'https://mip.zhaopin.com/searchjob/search?Location=' + $('#userinfor').attr('data-citycode') + '';
             keyurl += '&KeyWord=' + $(this).text() + '';
             window.location.href = keyurl;
         });
@@ -246,13 +246,13 @@ define(function (require) {
             });
         } else {
             $('#zhiding').click(function () {
-                window.location.href = 'http://mip.zhaopin.com/account/login';
+                window.location.href = 'https://mip.zhaopin.com/account/login';
             });
             $('#refreshresume').click(function () {
-                window.location.href = 'http://mip.zhaopin.com/account/login';
+                window.location.href = 'https://mip.zhaopin.com/account/login';
             });
             $('#jobStat').click(function () {
-                window.location.href = 'http://mip.zhaopin.com/account/login';
+                window.location.href = 'https://mip.zhaopin.com/account/login';
             });
 
         }
@@ -271,7 +271,7 @@ define(function (require) {
         var SearchInput = $('#indexSearchBox');
         if (SearchInput.val() !== null && SearchInput.val() !== '') {
             saveSearchLs(SearchInput.val());
-            var url = 'http://mip.zhaopin.com/searchjob/search?KeyWord=' + SearchInput.val();
+            var url = 'https://mip.zhaopin.com/searchjob/search?KeyWord=' + SearchInput.val();
             url += '&Location=' + $('#Slocation').attr('data-location') + '';
             window.location.href = url;
         }
@@ -338,17 +338,17 @@ define(function (require) {
             var resumeTitle = $('#MyInfo').attr('data-name');
             var resumeNum = $('#MyInfo').attr('data-number');
             var resumeVer = $('#MyInfo').attr('data-version');
-            var topurl = 'http://mip.zhaopin.com/home/resumetopindex?payPoint=34a95223a071419da275719ea2a55daf';
+            var topurl = 'https://mip.zhaopin.com/home/resumetopindex?payPoint=34a95223a071419da275719ea2a55daf';
             topurl += '&resumeId=' + resumeId + '&resumeNum=' + resumeNum + '&resumeVer=' + resumeVer + '';
             topurl += '&resumeTitle=' + resumeTitle + '&enterSource=19&appplat=7&d=m&channel=zhaopin';
             window.location.href = topurl;
         } else {
-            window.location.href = 'http://mip.zhaopin.com/resume/index';
+            window.location.href = 'https://mip.zhaopin.com/resume/index';
         }
     }
     // 刷新简历
     function refreshResume() {
-        $.post('http://mip.zhaopin.com/searchjob/ResumeRefresh', {
+        $.post('https://mip.zhaopin.com/searchjob/ResumeRefresh', {
                 data: {version: '6.3.0'}
             }, function (data) {
                 var Refreshtxt = data.StatusDescription;
@@ -359,7 +359,7 @@ define(function (require) {
                     var name = $('#resuemlist').attr('data-name');
                     var resumeNum = $('#resuemlist').attr('data-number');
                     var resumeVer = $('#resuemlist').attr('data-version');
-                    var refrurl = 'http://mip.zhaopin.com/home/ResumeTopIndex?payPoint=34a95223a071419da275719ea2a55daf';
+                    var refrurl = 'https://mip.zhaopin.com/home/ResumeTopIndex?payPoint=34a95223a071419da275719ea2a55daf';
                     refrurl += '&resumeId=' + resumeId + '&resumeNum=' + resumeNum +  '&resumeVer=' + resumeVer + '';
                     refrurl += '&resumeTitle=' + name + '&enterSource=10&appplat=7&clickpoint=0';
                     window.location = refrurl;
@@ -373,11 +373,11 @@ define(function (require) {
             var resumeTitle = $('#MyInfo').attr('data-name');
             var resumeNum = $('#MyInfo').attr('data-number');
             var resumeVer = $('#MyInfo').attr('data-version');
-            var jobsurl = 'http://mip.zhaopin.com/home/jobstatistics?resumeId=' + resumeId + '&resumeNum=' + resumeNum + '';
+            var jobsurl = 'https://mip.zhaopin.com/home/jobstatistics?resumeId=' + resumeId + '&resumeNum=' + resumeNum + '';
             jobsurl += '&resumeVer= ' + resumeVer + '&resumeTitle=' + resumeTitle + '&appplat=7';
             window.location.href = jobsurl;
         } else {
-            window.location.href = 'http://mip.zhaopin.com/resume/index';
+            window.location.href = 'https://mip.zhaopin.com/resume/index';
         }
     }
     // cookie
@@ -445,7 +445,7 @@ define(function (require) {
         }
         // 获取城市name
         var code = $('#userinfor').attr('data-citycode');
-        $.get('http://mip.zhaopin.com/Home/GetCityInfoByLatLng',
+        $.get('https://mip.zhaopin.com/Home/GetCityInfoByLatLng',
         {lat: userLocationLat, lng: userLocationLon},
         function (data, textStatus, jqxhr) {
             if ($('.j_searchTop .position span').text() === 'ȫ��') {

@@ -104,7 +104,7 @@ define(function (require) {
             SearchInput.val($(this).children('span').text()).focus();
             if (SearchInput.val() !== null && SearchInput.val() !== '') {
                 $.ajax({
-                    url: 'http://mip.zhaopin.com/searchjob/searchredolent',
+                    url: 'https://mip.zhaopin.com/searchjob/searchredolent',
                     type: 'post',
                     data: {
                         keyword: SearchInput.val()
@@ -209,7 +209,7 @@ define(function (require) {
                     }
                     $.ajax({
                         type: 'POST',
-                        url: 'http://mip.zhaopin.com/searchjob/SearchRedolent',
+                        url: 'https://mip.zhaopin.com/searchjob/SearchRedolent',
                         data: {
                             keyword: SearchInput.val()
                         },
@@ -265,7 +265,7 @@ define(function (require) {
         // 绑定联想词点击搜索事件
         $(document).on('click', '.indexSearchList a', function () {
             saveSearchLs($(this).text());
-            var islurl = 'http://mip.zhaopin.com/searchjob/search?KeyWord=' + $(this).text();
+            var islurl = 'https://mip.zhaopin.com/searchjob/search?KeyWord=' + $(this).text();
             islurl += '&Location=' + $('#Slocation').attr('data-location') +  '';
             window.location.href = islurl;
         });
@@ -367,7 +367,7 @@ define(function (require) {
         var SearchInput = $('#indexSearchBox');
         if (SearchInput.val() !== null && SearchInput.val() !== '') {
             saveSearchLs(SearchInput.val());
-            var url = 'http://mip.zhaopin.com/searchjob/search?KeyWord=' + SearchInput.val();
+            var url = 'https://mip.zhaopin.com/searchjob/search?KeyWord=' + SearchInput.val();
             url += '&Location=' + $('#Slocation').attr('data-location') + '';
             window.location.href = url;
         }
@@ -435,7 +435,7 @@ define(function (require) {
         var cityId = $('.jzzul').attr('data-cityid');
         $.ajax({
             type: 'post',
-            url: 'http://mip.zhaopin.com/Home/FavoritePosition',
+            url: 'https://mip.zhaopin.com/Home/FavoritePosition',
             data: {
                 positionNumber: jobId,
                 cityId: cityId,
@@ -454,7 +454,7 @@ define(function (require) {
     function myCollectList() {
         var newCollectList;
         $.ajax({
-            url: 'http://mip.zhaopin.com/Home/MyCollectList',
+            url: 'https://mip.zhaopin.com/Home/MyCollectList',
             type: 'post',
             data: {
                 version: '6.3.0'
@@ -472,7 +472,7 @@ define(function (require) {
     }
     // 举报
     function report() {
-        var reportUrl = 'http://mip.zhaopin.com/Home/Report';
+        var reportUrl = 'https://mip.zhaopin.com/Home/Report';
         var PositionNumber = $('.jzzul').attr('data-jobid');
         var CompanyNumber = $('.jzzul').attr('data-companyid');
         var CompanyName = $('.jzzul').attr('data-companname');
@@ -485,7 +485,7 @@ define(function (require) {
     function blockCompany() {
         var companyId = $('.jzzul').attr('data-companyid');
         $.ajax({
-            url: 'http://mip.zhaopin.com/Company/SaveBlockOperate',
+            url: 'https://mip.zhaopin.com/Company/SaveBlockOperate',
             type: 'post',
             data: {
                 companyId: companyId
@@ -505,7 +505,7 @@ define(function (require) {
     function myBlockList() {
         var $BlockList = cs.get('BlockList');
         $.ajax({
-            url: 'http://mip.zhaopin.com/Company/GetBlockCompany',
+            url: 'https://mip.zhaopin.com/Company/GetBlockCompany',
             type: 'post',
             data: {
                 version: '6.3.0'
@@ -650,9 +650,9 @@ define(function (require) {
             return;
         }
         if (noreturn) {
-            window.location.href = 'http://mip.zhaopin.com/account/login?prevUrl=' + escape(window.location.href) + '';
+            window.location.href = 'https://mip.zhaopin.com/account/login?prevUrl=' + escape(window.location.href) + '';
         } else {
-            window.location.replace('http://mip.zhaopin.com/account/login?prevUrl=' + escape(window.location.href) + '');
+            window.location.replace('https://mip.zhaopin.com/account/login?prevUrl=' + escape(window.location.href) + '');
         }
     }
     // 获取经纬度
@@ -696,7 +696,7 @@ define(function (require) {
         if (dataCitycode === undefined && dataCitycode === null) {
             $.ajax({
                 type: 'get',
-                url: 'http://mip.zhaopin.com/Home/GetCityInfoByLatLng',
+                url: 'https://mip.zhaopin.com/Home/GetCityInfoByLatLng',
                 data: {
                     lat: userLocationLat,
                     lng: userLocationLon
@@ -719,7 +719,7 @@ define(function (require) {
         cheakJwd();
         $.ajax({
             type: 'post',
-            url: 'http://mip.zhaopin.com/searchjob/SearchJobsGetlocation',
+            url: 'https://mip.zhaopin.com/searchjob/SearchJobsGetlocation',
             data: {
                 Industry: $('#S_Industry').attr('value'),
                 KeyWord: $('#S_KeyWord').attr('value'),
