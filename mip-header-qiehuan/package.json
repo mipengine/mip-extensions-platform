@@ -1,0 +1,14 @@
+{
+    "name": "mip-header-qiehuan",
+    "version": "1.1.0",
+    "description": "点击一个元素,隐藏此元素,显示另一个元素,实现显示隐藏切换",
+    "contributors": [
+        {
+            "name": "dengzihao",
+            "email": "2362588961@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

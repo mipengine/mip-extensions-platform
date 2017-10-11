@@ -1,0 +1,14 @@
+{
+    "name": "mip-nav-show-hide",
+    "version": "1.1.0",
+    "description": "显示与隐藏nav",
+    "contributors": [
+        {
+            "name": "dengzihao",
+            "email": "2362588961@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
