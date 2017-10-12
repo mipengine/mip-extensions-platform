@@ -16,11 +16,11 @@ define(function (require) {
     var customElem = require('customElement').create();
 
     function open() {
-        $('.show').on('click', function () {
+        $('.seek-inp').on('click', function () {
             $('.show').css('display', 'none');
             $('.hide').css('display', 'block');
         });
-        $('.hide').on('click', function () {
+        $('.close').on('click', function () {
             $('.hide').css('display', 'none');
             $('.show').css('display', 'block');
         });

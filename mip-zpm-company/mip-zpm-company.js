@@ -23,10 +23,9 @@ define(function (require) {
         // 右上角更多操作,关闭
         if ($rightMore) {
             $rightMore.click(function () {
-                event.preventDefault();
-                event.stopPropagation();
                 $('.moreactions').show();
                 $('.prompt-menu').show();
+                event.preventDefault();
             });
         }
         if ($btnmore) {
@@ -38,10 +37,10 @@ define(function (require) {
         // 显示隐藏描述
         if ($('.company-box #btnmore')) {
             $('.company-box #btnmore').click(function () {
-                event.preventDefault();
-                event.stopPropagation();
                 $('.compdet-more').show();
                 $('.compaydetail-more').show();
+                event.preventDefault();
+                event.stopPropagation();
             });
         }
         if ($cancel) {
