@@ -5,7 +5,9 @@
 */
 define(function (require) {
     var $ = require('zepto');
-    var render = function () {
+    var customElem = require('customElement').create();
+    customElem.prototype.build = function () {
+        var element = this.element;
         // 动态引入dywe.js,
         var dywe = document.createElement('script');
         dywe.type = 'text/javascript';
@@ -88,46 +90,120 @@ define(function (require) {
             }
             );
         };
+        // move和click触发的是同一方法，并且 switch (listeners(step))
+        ZP.analysis.bindclick = function (scope, ie67Fun, w3Fun) {
+            // scope传入的是zepoto
+            // if (scope && (scope instanceof jQuery)) {
+            var dom = scope.get(0);
+            var funstr = dom.getAttribute('onclick') || '';
+            dom.setAttribute('onclick', '');
+            if ($.isIE6 || $.isIE7 || funstr instanceof Function) {
+                if (ie67Fun instanceof Function) {
+                    scope.click(ie67Fun);
+                }
+                if (funstr instanceof Function) {
+                    scope.click(funstr);
+                }
+            } else {
+                dom.setAttribute('onclick', w3Fun + ';' + funstr);
+            }
+            // else {
+            //    return;
+            // }
+        };
+        ZP.analysis.bindclick = function (scope, ie67Fun, w3Fun) {
+            // scope传入的是zepoto
+            // if (scope && (scope instanceof jQuery)) {
+            var dom = scope.get(0);
+            var funstr = dom.getAttribute('onclick') || '';
+            dom.setAttribute('onclick', '');
+            if ($.isIE6 || $.isIE7 || funstr instanceof Function) {
+                if (ie67Fun instanceof Function) {
+                    scope.click(ie67Fun);
+                }
+                if (funstr instanceof Function) {
+                    scope.click(funstr);
+                }
+            } else {
+                dom.setAttribute('onclick', w3Fun + ';' + funstr);
+            }
+        };
+        // 热点绑定的入口函数
+        // :标签：class=__ga__loginarea_persontag_001 cursor_p
+        // 对应参数:(this,'loginarea','persontag','001')
+        ZP.analysis.initmonitoranaly = function (dom, category, action, index) {
+            if (index !== '') {
+                action += index;
+            }
+            this.ontrackanaly({
+                analyFun: function () {
+                    if (dom && dom.tagName.toLowerCase() === 'a') {
+                        recordOutboundLink(dom, category, action);
+                    } else if (dom) {
+                        dyweTrackEvent(category, action);
+                    }
+                }
+            });
+        };
+        ZP.analysis.ontrackanaly = function (paramCfg) {
+            var defaults = {
+                beforeAnalyFun: new Function(),
+                afterAnalyFun: new Function(),
+                analyFun: new Function(),
+                analyErrorFun: new Function(),
+                category: '',
+                action: '',
+                scope: null,
+                delay: 10
+            };
+            $.extend(defaults, paramCfg);
+            try {
+                defaults.beforeAnalyFun();
+                defaults.analyFun();
+            } catch (err) {
+                defaults.analyErrorFun();
+            } finally {
+                setTimeout(defaults.afterAnalyFun, defaults.delay);
+            }
+        };
         // 主函数
         $(document).ready(function () {
             try {
                 ZP.analysis.elementsanalysis();
             } catch (e) { }
         });
+        dyweq.prototype.init = function () {
+            this._dyweq.push(['_setAccount', window.acc4zpAnalytics || 'log000001']);
+            this._dyweq.push(['_setDomainName', window.dom4zpAnalytics || '.zhaopin.com']);
+            if (window.url4zpAnalytics) {
+                this._dyweq.push(['_trackPageview', window.url4zpAnalytics]);
+            } else {
+                this._dyweq.push(['_trackPageview']);
+            }
+        };
+        gaq.prototype.init = function () {
+            this._gaq.push(['_setAccount', window.acc4googleAnalytics || 'UA-7874902-2']);
+            this._gaq.push(['_setDomainName', window.dom4googleAnalytics || 'zhaopin.com']);
+            this._gaq.push(['_addOrganic', 'youdao', 'q']);
+            this._gaq.push(['_addOrganic', 'sogou', 'query']);
+            this._gaq.push(['_addOrganic', 'soso', 'w']);
+            this._gaq.push(['_addOrganic', '360', 'q']);
+            if (window.url4googleAna) {
+                this._gaq.push(['_trackPageview', window.url4googleAna]);
+            } else {
+                this._gaq.push(['_trackPageview']);
+            }
+        };
     };
-    window.onload = function () {
-        render();
-    };
+    return customElem;
     // 数组_dyweq塞入数据
     function dyweq(name) {
         this._dyweq = this._dyweq || [];
     }
-    dyweq.prototype.init = function () {
-        this._dyweq.push(['_setAccount', window.acc4zpAnalytics || 'log000001']);
-        this._dyweq.push(['_setDomainName', window.dom4zpAnalytics || '.zhaopin.com']);
-        if (window.url4zpAnalytics) {
-            this._dyweq.push(['_trackPageview', window.url4zpAnalytics]);
-        } else {
-            this._dyweq.push(['_trackPageview']);
-        }
-    };
     // 数组_gaq塞入数据
     function gaq(name) {
         this._gaq = this._gaq || [];
     }
-    gaq.prototype.init = function () {
-        this._gaq.push(['_setAccount', window.acc4googleAnalytics || 'UA-7874902-2']);
-        this._gaq.push(['_setDomainName', window.dom4googleAnalytics || 'zhaopin.com']);
-        this._gaq.push(['_addOrganic', 'youdao', 'q']);
-        this._gaq.push(['_addOrganic', 'sogou', 'query']);
-        this._gaq.push(['_addOrganic', 'soso', 'w']);
-        this._gaq.push(['_addOrganic', '360', 'q']);
-        if (window.url4googleAna) {
-            this._gaq.push(['_trackPageview', window.url4googleAna]);
-        } else {
-            this._gaq.push(['_trackPageview']);
-        }
-    };
     // 如果热点是a链接，则触发
     function recordOutboundLink(link, category, action) {
         function ed(d, a) {
@@ -208,7 +284,4 @@ define(function (require) {
         }
         return eleobj;
     }
-    return {
-        render: render
-    };
 });
