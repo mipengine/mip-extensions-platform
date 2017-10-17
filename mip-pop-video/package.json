@@ -1,0 +1,14 @@
+{
+  "name": "mip-pop-video",
+  "version": "1.0.0",
+  "description": "江苏民福康,视频播放组件,播放结束后弹出窗口",
+  "author": {
+    "name": "xiaolong",
+    "email": "864855920@qq.com",
+    "url":"https://mip.39yst.com"
+  },
+
+  "engines": {
+    "mip": ">=1.1.0"
+  }
+}

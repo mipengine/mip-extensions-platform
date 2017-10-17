@@ -1,0 +1,13 @@
+{
+    "name": "mip-cehome-bbsinfo",
+    "version": "1.0.0",
+	"description": "论坛M站帖子详情 站点：https://m.cehome.com/bbs/ 组件用途：帖子详情MIP页改造展示 ",
+    "author": {
+        "name": "drh",
+        "email": "1055892920@qq.com",
+        "url": "https://m.cehome.com"
+    },
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

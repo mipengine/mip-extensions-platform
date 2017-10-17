@@ -1,0 +1,13 @@
+{
+    "name": "mip-cehome-common",
+    "version": "1.0.0",
+	"description": "论坛M站mip公共方法",
+    "author": {
+        "name": "drh",
+        "email": "1055892920@qq.com",
+        "url": "https://m.cehome.com"
+    },
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
