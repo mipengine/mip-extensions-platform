@@ -1,0 +1,14 @@
+{
+    "name": "mip-shushi100-toggle",
+    "version": "1.0.0",
+    "description": "http://www.shushi100.com;关闭/展开组件,关闭/展开指定dom",
+    "contributors": [
+        {
+            "name": "engineer_van",
+            "email": "engineer_van@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
