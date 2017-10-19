@@ -10,11 +10,11 @@ mip-pop-video 播放完成后带弹出层的视频播放器
 
 ### 带弹层的播放
 ```html
-<mip-pop-video pop-selecter="#end-pop"
+<mip-pop-video pop-selecter="#end-pop" pause-pop
     poster="http://upload.vodjk.com/2016/0930/1475202927645.jpg"
     src="https://gslb.miaopai.com/stream/h7Bl6r2havigFyILBt2vschzfqqRB97L.mp4?ssig=b54fd220dfd24fe6cb9bf5f07d72b904&time_stamp=1498546980748&cookie_id=&vend=1&os=1&partner=1&platform=2&cookie_id=&refer=miaopai&scid=h7Bl6r2havigFyILBt2vschzfqqRB97L">
 </mip-pop-video>
-<section id="end-pop">
+<section id="end-pop" style="display:none;">
     123123123i <i class="close-but">关闭</i>
 </section>
 ``` 
@@ -31,9 +31,10 @@ mip-pop-video 播放完成后带弹出层的视频播放器
 必选项：是
 类型：string
 
-### poster
-说明：视频的封面图片    
-必选项：否  
+### pause-pop
+说明：视频暂停是否弹窗  
+必选项：否
+默认：否  
 类型：string
 
 ## 注意事项  

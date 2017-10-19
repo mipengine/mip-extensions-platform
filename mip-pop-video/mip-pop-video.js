@@ -10,6 +10,7 @@ define(function (require) {
         var $element = $(this.element);
         var Src = $element.attr('src');
         var popSelecter = $element.attr('pop-selecter');
+        var pausePop = $element.attr('pause-pop');
         var poster = $element.attr('poster');
         var className = $element.attr('class');
         var popDom = $element.parent().find(popSelecter);
@@ -23,23 +24,30 @@ define(function (require) {
                 'class': className,
                 'poster': poster,
                 'src': Src,
-                'preload': 'no'
+                'preload': 'none'
             });
-            $(video).css('height', window.innerWidth / 16 * 9 + 'px');
             $element[0].appendChild(video);
+            if (popDom && popDom.length > 0) {
+                video.onended = function () {
+                    popDom[0].style.display = 'block';
+                    video.parentNode.removeChild(video);
+                    createVideo();
+                };
+                if (pausePop !== undefined) {
+                    video.onpause = function () {
+                        popDom[0].style.display = 'block';
+                    };
+                    video.onplay = function () {
+                        popDom[0].style.display = 'none';
+                    };
+                }
+                popDom.find('.close-but')[0].addEventListener('click', function () {
+                    popDom[0].style.display = 'none';
+                }, false);
+            }
         }
         createVideo();
         video.autoplay = true;
-        if (popDom && popDom.length > 0) {
-            video.onended = function () {
-                popDom[0].style.display = 'block';
-                video.parentNode.removeChild(video);
-                createVideo();
-            };
-            popDom.find('.close-but')[0].addEventListener('click', function () {
-                popDom[0].style.display = 'none';
-            }, false);
-        }
     };
     return customElement;
 });

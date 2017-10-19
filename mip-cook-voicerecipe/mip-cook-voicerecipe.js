@@ -227,7 +227,7 @@ define(function (require) {
 
     var MAIN_HTML = ''
         + '<div class="mip-cook-voicerecipe-wrapper">'
-        +     '<button type="button" data-action="start">开始语音做饭</button>'
+        +     '<button type="button" data-action="start">开始语音烹饪</button>'
         +     '<div class="mip-cook-voicerecipe-tips" style="display: none">小度语音助手，彻底解放你的双手</div>'
         + '</div>';
 
@@ -275,7 +275,7 @@ define(function (require) {
                 if (status) {
                     var pageUrl = util.parseCacheUrl(location.href);
                     pageUrl = pageUrl.replace(/\#.*?$/, '');
-                    location.href = 'http://m.baidu.com/sf?pd=life_cookbook&openapi=1&dspName=iphone&from_sf=1&resource_id=35722&word='
+                    location.href = 'http://m.baidu.com/sf?pd=life_cookbook&openapi=1&dspName=iphone&from_sf=1&resource_id=4669&word='
                         + encodeURIComponent(pageUrl) + '&title=菜谱语音助手&ms=1';
                 }
                 // 未开启唤醒、设置唤醒失败或者用户拒绝设置的情况
