@@ -41,11 +41,15 @@ define(function (require) {
                         popDom[0].style.display = 'none';
                     };
                 }
-                popDom.find('.close-but')[0].addEventListener('click', function () {
-                    popDom[0].style.display = 'none';
-                }, false);
             }
         }
+        popDom.find('.close-but')[0].addEventListener('click', function () {
+            popDom[0].style.display = 'none';
+        }, false);
+        popDom.find('.continue-but')[0].addEventListener('click', function () {
+            popDom[0].style.display = 'none';
+            video.play();
+        }, false);
         createVideo();
         video.autoplay = true;
     };

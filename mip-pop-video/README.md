@@ -16,6 +16,7 @@ mip-pop-video 播放完成后带弹出层的视频播放器
 </mip-pop-video>
 <section id="end-pop" style="display:none;">
     123123123i <i class="close-but">关闭</i>
+    123123123i <i class="continue-but">继续</i>
 </section>
 ``` 
 
