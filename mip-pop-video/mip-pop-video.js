@@ -4,7 +4,6 @@
  */
 define(function (require) {
     var $ = require('zepto');
-    var util = require('util');
     var customElement = require('customElement').create();
     customElement.prototype.build = function () {
         var $element = $(this.element);
@@ -40,16 +39,26 @@ define(function (require) {
                     video.onplay = function () {
                         popDom[0].style.display = 'none';
                     };
+                    video.addEventListener('pause', function () {
+                        popDom[0].style.display = 'block';
+                    }, false);
+                    video.addEventListener('play', function () {
+                        popDom[0].style.display = 'none';
+                    }, false);
                 }
             }
         }
-        popDom.find('.close-but')[0].addEventListener('click', function () {
-            popDom[0].style.display = 'none';
-        }, false);
-        popDom.find('.continue-but')[0].addEventListener('click', function () {
-            popDom[0].style.display = 'none';
-            video.play();
-        }, false);
+        if (popDom.find('.close-but').length > 0) {
+            popDom.find('.close-but')[0].addEventListener('click', function () {
+                popDom[0].style.display = 'none';
+            }, false);
+        }
+        if (popDom.find('.continue-but').length > 0) {
+            popDom.find('.continue-but')[0].addEventListener('click', function () {
+                popDom[0].style.display = 'none';
+                video.play();
+            }, false);
+        }
         createVideo();
         video.autoplay = true;
     };
