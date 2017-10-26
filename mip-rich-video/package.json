@@ -1,0 +1,15 @@
+{
+  "name": "mip-rich-video",
+  "version": "1.5.1",
+  "description": "实现了一个带前贴片后贴片广告和播放完推荐的视频播放器",
+
+  "author": {
+    "name": "cncms",
+    "email": "safeie@163.com",
+    "url":"https://www.vodjk.com"
+  },
+
+  "engines": {
+    "mip": ">=1.1.2"
+  }
+}

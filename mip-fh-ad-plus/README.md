@@ -17,7 +17,7 @@ mip-fh-ad-plus 用来支持整站页面的直投广告显示
     .dn {display: none;}
     </style>
     
-    <meta name="fh-ad-keywords" content="射精,阳痿,早泄">
+    <meta name="fh-ad-keywords" content="尖锐湿疣">
     <meta name="ip-enabled" content="true">
     
     <div class="dn" fh-ad-empty-show>没有直销广告，才会显示</div>
@@ -35,11 +35,15 @@ mip-fh-ad-plus 用来支持整站页面的直投广告显示
     </div>
     
     <div>
-        <mip-fh-ad-plus fh-ad-pid="9" fh-ad-uid="1119181"></mip-fh-ad-plus>
+        <mip-fh-ad-plus fh-ad-pid="10" fh-ad-uid="5671188"></mip-fh-ad-plus>
     </div>
     
     <div>
-        <mip-fh-ad-plus fh-ad-pid="9" fh-ad-uid="111"></mip-fh-ad-plus>
+        <mip-fh-ad-plus fh-ad-pid="9" fh-ad-uid=""></mip-fh-ad-plus>
+    </div>
+    
+    <div>
+        <mip-fh-ad-plus fh-ad-pid="119" fh-ad-cid="26200"></mip-fh-ad-plus>
     </div>
 ```
 
@@ -61,6 +65,13 @@ mip-fh-ad-plus 用来支持整站页面的直投广告显示
 ### fh-ad-uid
 
 说明：飞华广告位医生uid
+必填：否
+格式：数字
+单位：无
+
+### fh-ad-cid
+
+说明：飞华cms分类id
 必填：否
 格式：数字
 单位：无

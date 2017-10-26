@@ -54,6 +54,9 @@ define(function (require) {
         query.pid = getPids($plus).join(',');
         query.uid = getUids($plus).join(',');
 
+        var cids = getUids($plus, 'fh-ad-cid');
+        cids.length && (query.cmscateid = cids.join(','));
+
         $body.attr('fh-ad-num', ++fhAdNum);
 
         var fhAdOpt = {
@@ -104,11 +107,12 @@ define(function (require) {
         return res;
     }
 
-    function getUids(ele) {
+    function getUids(ele, type) {
+        type = type || 'fh-ad-uid';
         var res = [];
 
         $.each(ele, function (k, v) {
-            var combo = $(v).attr('fh-ad-uid');
+            var combo = $(v).attr(type);
             if (combo) {
                 res.push(combo);
             }

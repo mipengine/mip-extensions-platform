@@ -1,0 +1,13 @@
+{
+    "name": "mip-cr173-comment",
+    "version": "1.0.0",
+    "description": "新做的评论，由于文章ID号和下载ID号会有重复，所以区分了文章和下载",
+    "author": {
+        "name": "gom",
+        "email": "gom3250@qq.com",
+        "url": "https://m.cr173.com"
+    },
+    "engines": {
+        "mip": ">=1.0.0"
+    }
+}

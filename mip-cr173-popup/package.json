@@ -1,0 +1,14 @@
+{
+    "name": "mip-cr173-popup",
+    "version": "1.0.0",
+    "description": "地区判断，增加了url过滤，弹框内容显示。用json方式引入，便于mip管理和后期维护需要加载便显示。",
+    "contributors": [
+        {
+            "name": "gom",
+            "email": "24356681@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.0.0"
+    }
+}

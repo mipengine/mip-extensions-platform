@@ -1,0 +1,15 @@
+{
+    "name": "mip-cr173-addapp",
+    "version": "1.0.0",
+    "description": "判断设备添加内容，便于mip管理和维护",
+    "contributors": [
+        {
+            "name": "gom",
+            "email": "24356681@qq.com",
+            "url": "http://m.cr173.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.0.0"
+    }
+}

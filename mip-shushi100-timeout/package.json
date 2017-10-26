@@ -1,0 +1,14 @@
+{
+  "name": "mip-shushi100-timeout",
+  "version": "1.0.0",
+  "description": "http://www.shushi100.com;定时触发指定dom指定绑定事件",
+  "contributors": [
+    {
+      "name": "engineer_van",
+      "email": "engineer_van@163.com"
+    }
+  ],
+  "engines": {
+    "mip": ">=1.1.0"
+  }
+}
