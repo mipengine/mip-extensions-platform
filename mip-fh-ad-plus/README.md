@@ -43,7 +43,7 @@ mip-fh-ad-plus 用来支持整站页面的直投广告显示
     </div>
     
     <div>
-        <mip-fh-ad-plus fh-ad-pid="119" fh-ad-cid="26200"></mip-fh-ad-plus>
+        <mip-fh-ad-plus fh-ad-pid="119" fh-ad-cid="26200" fh-ad-mid="1"></mip-fh-ad-plus>
     </div>
 ```
 
@@ -72,6 +72,13 @@ mip-fh-ad-plus 用来支持整站页面的直投广告显示
 ### fh-ad-cid
 
 说明：飞华cms分类id
+必填：否
+格式：数字
+单位：无
+
+### fh-ad-mid
+
+说明：飞华媒介-id
 必填：否
 格式：数字
 单位：无

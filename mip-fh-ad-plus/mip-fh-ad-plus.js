@@ -56,6 +56,8 @@ define(function (require) {
 
         var cids = getUids($plus, 'fh-ad-cid');
         cids.length && (query.cmscateid = cids.join(','));
+        var mids = getUids($plus, 'fh-ad-mid');
+        mids.length && (query.medium = mids.join(','));
 
         $body.attr('fh-ad-num', ++fhAdNum);
 

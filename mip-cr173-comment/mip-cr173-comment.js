@@ -1,11 +1,12 @@
 /**
- * @file v3系统通用评论
+ * @file v3系统通用评论,修复一处获取地址冲突的情况。
  * @author gom
  */
 define(function (require) {
     var $ = require('zepto');
     var customElem = require('customElement').create();
     var comid = $('.f-information').attr('data-comid');
+    var ajaxUrl = $('#comment').find('mip-form').attr('url');
     // 按钮效果
     function validate() {
 
@@ -23,7 +24,6 @@ define(function (require) {
 
 
     function comment(o) {
-        var ajaxUrl = $(o).find('mip-form').attr('url');
         var oul = $('#comment-list');
         var oid = $('#app-id').val();
         var oli = oul.find('li');

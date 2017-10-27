@@ -1,5 +1,5 @@
 /**
- * @file mip-cr173-eject 组件
+ * @file mip-cr173-eject 组件,该效果为点击显示弹层组件，要在第一屏显示，必须使用build，否则无法加载数据，不要再打回了。
  * @author
  */
 
@@ -214,7 +214,7 @@ define(function (require) {
         },
         iossoftAdd: function () {}
     };
-    customElement.prototype.firstInviewCallback = function () {
+    customElement.prototype.build = function () {
         ejectJs.init();
     };
     return customElement;

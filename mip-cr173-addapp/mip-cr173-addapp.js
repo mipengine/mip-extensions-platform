@@ -21,7 +21,7 @@ define(function (require) {
             var n = data.list;
             for (var o = 0; o < n.length; ++o) {
                 html += '<li><a href="' + n[o].url + '"><mip-img src="' + n[o].SmallImg + '">';
-                html += '</mip-img>' + n[o].ResName + '</a></li>';
+                html += '</mip-img><h3>' + n[o].ResName + '</h3></a></li>';
             }
             $('.f-ajul').append(html);
         }).catch(function (err) {
