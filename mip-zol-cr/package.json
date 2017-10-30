@@ -1,0 +1,12 @@
+{
+    "name": "mip-zol-cr",
+    "version": "1.0.0",
+	"description": "zol版权信息",
+    "author": {
+        "name": "mulianju",
+        "email": "mul.ianju@zol.com.cn"
+    },
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
