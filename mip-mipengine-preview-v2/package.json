@@ -1,0 +1,14 @@
+{
+    "name": "mip-mipengine-preview-v2",
+    "version": "1.0.0",
+    "description": "MIP 官网组件预览",
+    "contributors": [
+        {
+            "name": "xuexb",
+            "email": "fe.xiaowu@gmail.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

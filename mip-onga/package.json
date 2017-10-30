@@ -1,0 +1,14 @@
+{
+    "name": "mip-onga",
+    "version": "1.0.0",
+    "description": "组件介绍",
+    "contributors": [
+        {
+            "name": "lwp",
+            "email": "499377442@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
