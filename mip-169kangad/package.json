@@ -1,0 +1,14 @@
+{
+    "name": "mip-169kangad",
+    "version": "1.0.0",
+	"description": "为了显示搜狗联盟广告",
+    "author": {
+        "name": "paul",
+        "email": "1130290545@qq.com",
+		"url": "http://www.169kang.com"
+    },
+
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
