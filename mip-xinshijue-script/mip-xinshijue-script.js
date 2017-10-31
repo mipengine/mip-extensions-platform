@@ -8,7 +8,15 @@ define(function (require) {
     var customElement = require('customElement').create();
     var $ = require('zepto');
     var customElem = require('customElement').create();
+    var SitePath = '';
+    var SiteAid = '';
+    var SiteTid = '';
+    var SiteId = '';
     customElement.prototype.build = function () {
+        SitePath = $('.wrapper').data('sitepath');
+        SiteAid = $('.wrapper').data('siteaid');
+        SiteTid = $('.wrapper').data('sitetid');
+        SiteId = $('.wrapper').data('siteid');
         var IScroll = require('./js/iscroll');
         this.addEventAction('search_display', function (event, type) {
             if (type && type === 'show') {
@@ -29,6 +37,54 @@ define(function (require) {
         });
         this.addEventAction('goto_top', function () {
             window.scroll(0, 0);
+        });
+        var downlink = $('#down-link');
+        if (downlink.length > 0) {
+            var link = downlink.data('link');
+            var dlink = '<a href="http://www.xinshijuetv.com/app.apk" ';
+            dlink = dlink + 'target="_self" title="电影APP下载" rel="nofollow"';
+            if (link) {
+                dlink = dlink + 'class="orangeBtn runApp" onClick="openzz()">下载APP</a>';
+                $('.xzgk').append(dlink);
+            } else {
+                dlink = dlink + 'class="orangeBtn runApp">下载APP</a>';
+                $('.xzgk').append(dlink);
+            }
+        }
+        if (isWeiXin()) {
+            $('a.zhongzi').click(function () {
+                alert('提示：微信用户下载，请点击微信右上角=>在浏览器中打开此网页！');
+            });
+        }
+        $('.el-s-guan').on('click', function () {
+            $('.zhezhao').css('display', 'none');
+        });
+        $('.tab-plugin').length > 0 && $('.tab-plugin').each(function () {
+            var a = $(this).find('.tab-plugin-tab');
+            var b = $(this).find('.tab-plugin-con');
+            a.bind('click', function () {
+                b.css({display: 'none'});
+                a.removeClass('cur');
+                b.eq(a.index($(this))).css({display: 'block'});
+                $(this).addClass('cur');
+            });
+        });
+        $('.tab-plugin-extend').length > 0 && $('.tab-plugin-extend').each(function () {
+            var a = $(this).find('.tab-plugin-extend-tab');
+            var b = $(this).find('.tab-plugin-extend-con');
+            a.bind('click', function () {
+                b.css({display: 'none'});
+                a.removeClass('cur');
+                b.eq(a.index($(this))).css({display: 'block'});
+                $(this).addClass('cur');
+            });
+        });
+        $('.pIntroTxtMore').on('click', function () {
+            if ($(this).hasClass('pShowAll')) {
+                $(this).removeClass('pShowAll');
+            } else {
+                $(this).addClass('pShowAll');
+            }
         });
         var iScrollArr = ['headerMenu', 'first_list_p', 'second_list_p', 'third_list_p', 'fourth_list_p'];
         var iScrollArrLength = iScrollArr.length;
@@ -107,6 +163,9 @@ define(function (require) {
             }
         });
     };
+    function openzz() {
+        $('.zhezhao').css('display', 'block');
+    }
     function addBodyHidden() {
         $('body').addClass('hidden');
     }
