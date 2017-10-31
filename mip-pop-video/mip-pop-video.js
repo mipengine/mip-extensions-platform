@@ -65,7 +65,6 @@ define(function (require) {
             }, false);
         }
         createVideo();
-        video.autoplay = true;
     };
     return customElement;
 });

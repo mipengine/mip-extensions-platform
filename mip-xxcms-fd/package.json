@@ -1,0 +1,14 @@
+{
+    "name": "mip-xxcms-fd",
+    "version": "1.0.0",
+    "description": "用于投放第三方广告",
+    "contributors": [
+        {
+            "name": "xxcms",
+            "email": "83628479@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
