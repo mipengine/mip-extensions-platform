@@ -43,7 +43,7 @@ define(function (require) {
         var content = '&content=' + encodeURIComponent(document.title);
         var bjtj = $('.f-tjname').html();
         var namesun = bjtj.split('|');
-        if (compareDate(webInfo.DateTime, '2015/11/1')) {
+        if (compareDate(webInfo.DateTime, '2011/12/31')) {
             var jsStrdate = src + charset + atime + ref + url + username + type + rid + platform + content;
             document.write('<iframe src="' + jsStrdate + '" width="0" height="0" style="display:none;"></iframe>');
             var bjname = webInfo.Username;
