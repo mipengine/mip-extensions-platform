@@ -1,0 +1,13 @@
+{
+    "name": "mip-zol-ad",
+    "description": "zol广告",
+    "version": "1.0.0",
+    "author": {
+        "name": "jiang.weiwei",
+        "email": "jiang.weiwei@zol.com.cn",
+        "url": "http://www.zol.com.cn"
+    },
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

@@ -1,0 +1,138 @@
+.m-article-comment {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+
+.m-article-comment form {
+    background-color: white;
+    display: block;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+.m-article-comment textarea,
+.m-article-comment input,
+.m-article-comment button,
+.m-article-comment select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -webkit-border-image: none;
+    -o-border-image: none;
+    border-image: none;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+}
+
+.m-article-comment i {
+    font-style: normal;
+}
+
+.m-article-comment textarea {
+    display: block;
+    width: 100%;
+    min-height: 124px;
+    overflow: visible;
+    padding: 7px 10px;
+    word-break: break-all;
+    word-wrap: break-word;
+    background: #fff;
+    border: 1px solid #e7e7e7;
+    resize: vertical;
+    -webkit-appearance: none;
+    -webkit-border-image: none;
+    -o-border-image: none;
+    border-image: none;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background-color: #efefef;
+}
+
+.m-article-comment input[type="submit"] {
+    float: right;
+    width: 70px;
+    background: #507bbf;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    color: #fff;
+    text-align: center;
+    padding: 0;
+    border: none;
+    height: 40px;
+    line-height: 40px;
+    margin-top: 10px;
+}
+
+.m-article-comment input[type="submit"]:disabled {
+    background: #ccc;
+    color: #999;
+}
+
+.m-article-comment input[type="button"] {
+    background: none;
+    border: none;
+    -webkit-appearance: none;
+    height: 40px;
+    width: auto;
+    text-align: left;
+    padding: 0 5px;
+    line-height: 40px;
+    margin-top: 10px;
+    color: #507bbf;
+    outline: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.m-article-comment .text-length-counter {
+    margin-top: 10px;
+    height: 42px;
+    float: right;
+    padding-right: 5px;
+    font-size: 12px;
+    line-height: 42px;
+    color: #cccccc;
+    pointer-events: none;
+    margin-right: 10px;
+}
+
+.m-article-comment .text-length-counter i {
+    color: #507bbf;
+}
+
+.m-article-comment .check-code {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    margin-top: 10px;
+}
+
+.m-article-comment .check-code input {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    margin-right: 10px;
+}
+
+.m-article-comment .get-check-code-btn,
+.m-article-comment .get-check-code-btn img {
+    display: block;
+    height: 40px;
+    width: auto;
+}
+
+.commenting,
+.commenting body {
+    height: 100%;
+    overflow: hidden;
+}

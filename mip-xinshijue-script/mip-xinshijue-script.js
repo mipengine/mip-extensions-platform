@@ -74,6 +74,7 @@ define(function (require) {
             var b = $(this).find('.tab-plugin-extend-con');
             a.bind('click', function () {
                 b.css({display: 'none'});
+                b.removeClass('con1');
                 a.removeClass('cur');
                 b.eq(a.index($(this))).css({display: 'block'});
                 $(this).addClass('cur');
