@@ -38,7 +38,6 @@ data-nexturl = "http://mip.woyaogexing.com/touxiang/nv/2017/541178.html"
   </li>
 </ul>
 </mip-wygx-views>
-<script src="https://mipcache.bdstatic.com/static/v1/mip-mustache/mip-mustache.js"></script>
 ```
 
 ## 属性

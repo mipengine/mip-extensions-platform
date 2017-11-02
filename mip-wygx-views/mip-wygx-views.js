@@ -1,7 +1,7 @@
 /**
  * @file mip-wygx-views 组件.
  * @author east_qiu@gmail.com.
- * @version 1.0.0
+ * @version 1.0.1
  */
 
 define(function (require) {
@@ -60,10 +60,10 @@ define(function (require) {
                 };
             });
             self.actions();
-            // 利用定时器做异步
+            // 优化定时器异步，防止首屏空白
             setTimeout(function () {
                 self.appdownload();
-            }, 0);
+            }, 800);
         },
         createWrap: function () {
             var overlay = document.createElement('div');
@@ -144,6 +144,8 @@ define(function (require) {
         },
         picdownload: function (index) {
             var download = this.downloadBtn;
+            // 优化mip链接
+            download.setAttribute('data-type', 'mip');
             if (index === this.eLen - 1) {
                 download.innerHTML = '下一组';
                 download.setAttribute('href', this.defaultSetting.nexturl);
