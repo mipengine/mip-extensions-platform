@@ -9,7 +9,7 @@ define(function (require, exports, module) {
     var fetchJsonp = require('fetch-jsonp');
     var customElement = require('customElement').create();
     var Gesture = util.Gesture;
-    var toast = require('mip-zol-toast/mip-zol-toast');
+    var toast = require('./mip-zol-toast');
     var windowGesture = new Gesture(window);
     var container;
     var form;
@@ -111,7 +111,7 @@ define(function (require, exports, module) {
                     me.close();
                 }
                 if (msg) {
-                    typeof toast !== 'function' ? toast(msg) : alert(msg);
+                    typeof toast === 'function' ? toast(msg) : alert(msg);
                 }
                 if (typeof form.onSuccess === 'function') {
                     form.onSuccess(request);
@@ -206,7 +206,7 @@ define(function (require, exports, module) {
         }
         var msg = '\u60a8\u5c1a\u672a\u767b\u5f55\uff0c\u8bf7\u767b\u5f55\u540e\u91cd\u8bd5\u3002';
         var href = 'http://service.zol.com.cn/user/mlogin.php?backurl=' + location.href;
-        typeof toast !== 'function' ? toast(msg + '<a style="color:rgb(25, 142, 246)" href="' + href
+        typeof toast === 'function' ? toast(msg + '<a style="color:rgb(25, 142, 246)" href="' + href
         + '">\u70b9\u51fb\u767b\u5f55</a>', Infinity) : confirm(msg + '\u524d\u53bb\u767b\u5f55\uff1f')
         ? (location.href = href) : '';
     }
@@ -223,7 +223,7 @@ define(function (require, exports, module) {
             postComment(data, function (request) {
                 if (request.flag === '1000') {
                     var msg = '\u8bc4\u8bba\u6210\u529f~';
-                    typeof toast !== 'function' ? toast(msg) : alert(msg);
+                    typeof toast === 'function' ? toast(msg) : alert(msg);
                 }
             });
         }
