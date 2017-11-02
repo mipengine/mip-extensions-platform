@@ -14,7 +14,7 @@ define(function (require) {
         var totalnum = element.querySelector('[totalnum]');
         var priceid = element.querySelector('[priceid]');
         var $element = $(element);
-        $element.on('click',  '.mip-ticket-list', function () {
+        $element.on('click', '.mip-ticket-list', function () {
             var name = $(this).attr('data-name');
             var price = $(this).attr('data-price');
             var id = $(this).attr('data-id');
@@ -54,6 +54,13 @@ define(function (require) {
             }
             $element.find('.mip-ticket-list').eq($(this).index()).addClass('active').siblings().removeClass('active');
             $('.all').text('￥' + num * price);
+            if (price === 0) {
+                $('.free').show();
+                $('.not_free').hide();
+            } else {
+                $('.free').hide();
+                $('.not_free').show();
+            }
         });
         $element.find('.mip-ticket-list').on('click', '.mip-btn', function () {
             var role = $(this).attr('role');

@@ -1,6 +1,6 @@
 # mip-wygx-classtab
 
-mip-wygx-classtab 用于多按钮，多样式绑定切换
+mip-wygx-classtab 我要个性网 -- 内容页，多样式绑定切换
 
 标题|内容
 ----|----
@@ -12,30 +12,47 @@ mip-wygx-classtab 用于多按钮，多样式绑定切换
 
 ### 基本用法
 ```html
-<mip-wygx-classtab bind-to=".box">
-    <span toggle-class="round">round</span>
-    <span toggle-class="square">square</span>
-    <span toggle-class="yellow">yellow</span>
-    <span toggle-class="green">green</span>
-</mip-wygx-classtab>
-
-<div class="box"></div>
-<div class="box"></div>
-
-<hr/>
-
-<mip-wygx-classtab bind-to=".box1">
+<mip-wygx-classtab bind-to=".box1" botton-class="grey" active-class="round"> 
     <span toggle-class="round">round</span>
     <span toggle-class="square">square</span>
 </mip-wygx-classtab>
-<mip-wygx-classtab bind-to=".box1">
+<mip-wygx-classtab bind-to=".box1" botton-class="grey" active-class="yellow">
  	<span toggle-class="yellow">yellow</span>
     <span toggle-class="green">green</span>
 </mip-wygx-classtab>
 <div class="box1"></div>
 <div class="box1"></div>
 
-
+<style mip-custom>
+span{
+	display: inline-block;
+	padding: 8px 10px;
+	border: 1px solid #ccc;
+	color:#999;
+}
+.box1{
+	width: 200px;
+	height: 200px;
+	border:1px solid #ccc;
+	background-color:#ccc;
+}
+.round{
+	border-radius: 50%;
+}
+.square{
+	border-radius: 0;
+}
+.yellow{
+	background-color:yellow;
+}
+.green{
+	background-color:green;
+}
+.grey{
+	background-color: #ccc;
+	color:#fff;
+}
+</style>
 ```
 
 ## 属性
@@ -49,6 +66,16 @@ mip-wygx-classtab 用于多按钮，多样式绑定切换
 
 ### toggle-class
 说明： 需要指定切换的类名
+
+必选项：是
+
+### botton-class
+说明： 按钮切换的类名
+
+必选项：是
+
+### active-class
+说明： 按钮激活状态样式
 
 必选项：是
 
