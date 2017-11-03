@@ -32,7 +32,7 @@ define(function (require, exports) {
             switch (role) {
                 case 'useravatar':
                     if (userinfo) {
-                        element.innerHTML = '<a href="' + userinfo.myUrl
+                        element.innerHTML = '<a href="' + '//m.zol.com.cn/my/'
                             + '" class="account"><img class="userAvatar" src="' + userinfo.headPic
                             + '" alt="' + userinfo.nickName + '"></a>';
                     } else {

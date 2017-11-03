@@ -1,0 +1,14 @@
+{
+    "name": "mip-nszxyu-login",
+    "version": "1.0.0",
+    "description": "判断jieqi小说网的登录状态，根据不同的状态显示模板",
+    "contributors": [
+        {
+            "name": "nszxyu",
+            "email": "nszxyu@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

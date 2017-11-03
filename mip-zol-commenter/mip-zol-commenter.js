@@ -109,6 +109,7 @@ define(function (require, exports, module) {
 
                 if (isCloseContainer) {
                     me.close();
+                    form.reset();
                 }
                 if (msg) {
                     typeof toast === 'function' ? toast(msg) : alert(msg);
@@ -204,11 +205,8 @@ define(function (require, exports, module) {
         } catch (e) {
 
         }
-        var msg = '\u60a8\u5c1a\u672a\u767b\u5f55\uff0c\u8bf7\u767b\u5f55\u540e\u91cd\u8bd5\u3002';
         var href = 'http://service.zol.com.cn/user/mlogin.php?backurl=' + location.href;
-        typeof toast === 'function' ? toast(msg + '<a style="color:rgb(25, 142, 246)" href="' + href
-        + '">\u70b9\u51fb\u767b\u5f55</a>', Infinity) : confirm(msg + '\u524d\u53bb\u767b\u5f55\uff1f')
-        ? (location.href = href) : '';
+        location.href = href;
     }
 
     goLogin.getData = function () {

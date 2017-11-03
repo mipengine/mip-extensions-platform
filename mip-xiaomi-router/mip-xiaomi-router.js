@@ -5,6 +5,7 @@
 
 define(function (require) {
 
+    var util = require('util');
     var customElement = require('customElement').create();
     var fetchJsonp = require('fetch-jsonp');
 
@@ -20,20 +21,42 @@ define(function (require) {
         var page = element.getAttribute('page');
         var confirm = !!element.getAttribute('confirm');
         var appRouter = !!element.getAttribute('appRouter');
+        // 参数名称
+        var paramsName = element.getAttribute('params');
+        // 获取参数
+        var params = this.getParams(paramsName);
 
-        console.info('Parse element attributes: ', packageName, appName, page, confirm, appRouter);
+        console.info('Parse element attributes: ', packageName, appName, page, confirm, appRouter, params);
 
         // 事件绑定
         this.addEventAction('evtAppRouter', function (event, str) {
-            self.appRouter(packageName, page, null, confirm);
+            var paramsEvent = self.getParams(str);
+            var paramsFinal = util.fn.extend({}, params, paramsEvent);
+            self.appRouter(packageName, page, paramsFinal, confirm);
         });
         this.addEventAction('evtInstallShortcut', function (event, str) {
             self.installShortcut(packageName, appName);
         });
+        this.addEventAction('evtCallNative', function (event, str) {
+            var paramsEvent = self.getParams(str);
+            var paramsFinal = util.fn.extend({}, params, paramsEvent);
+            self.callNative(packageName, page, paramsFinal);
+        });
 
         // 启动服务
         if (appRouter) {
-            this.appRouter(packageName, page, null, confirm);
+            this.appRouter(packageName, page, params, confirm);
+        }
+    };
+
+    customElement.prototype.getParams = function (name) {
+        var paramsNameType = typeof window[name];
+        if (paramsNameType === 'function') {
+            return window[name](this.element);
+        } else if (paramsNameType === 'object') {
+            return window[name];
+        } else {
+            return name;
         }
     };
 
