@@ -1,0 +1,15 @@
+{
+    "name": "mip-cngold-madapt",
+    "version": "1.0.0",
+    "description": "样式尺寸转换",
+    "contributors": [
+        {
+            "name": "edwin",
+            "email": "open@cngold.org",
+            "url": "https://www.cngold.org"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
