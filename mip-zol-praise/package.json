@@ -1,0 +1,14 @@
+{
+    "name": "mip-zol-praise",
+    "version": "1.0.0",
+	"description": "zol用户点赞",
+    
+    "author": {
+        "name": "mulianju",
+        "email": "mul.ianju@zol.com.cn"
+    },
+
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
