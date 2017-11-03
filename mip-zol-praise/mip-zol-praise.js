@@ -14,8 +14,8 @@ define(function (require, exports, module) {
         var url = options.url;
         var data = options.data ? JSON.parse(options.data) : {};
         typeof ZOL_USER_INFO !== 'undefined' && (data.userId = window.ZOL_USER_INFO.userid);
-        if (data.userId) {
-            location.href = '//service.zol.com.cn/user/login.php?backurl=' + encodeURIComponent(location.href);
+        if (!data.userId) {
+            location.href = '//service.zol.com.cn/user/mlogin.php?backurl=' + encodeURIComponent(location.href);
             return;
         }
         if (praise.posting) {
@@ -51,7 +51,7 @@ define(function (require, exports, module) {
         var options = util.fn.extend({}, element.dataset);
 
         element.addEventListener('click', function () {
-            if (element.classList.add(options.likedclass)) {
+            if (element.classList.contains(options.likedclass)) {
                 toast('\u8bf7\u52ff\u91cd\u590d\u70b9\u8d5e~');
                 return;
             }
@@ -59,9 +59,9 @@ define(function (require, exports, module) {
                 if (parseInt(request.state, 10) === 1) {
                     toast('\u70b9\u8d5e\u6210\u529f~');
                     options.likedclass && element.classList.add(options.likedclass);
-                    element.html = (element.html ? element.html : 0) + 1;
+                    element.innerHTML = (element.innerHTML ? parseInt(element.innerHTML, 10) : 0) + 1;
                 } else {
-                    toast(request.msg);
+                    request.msg && toast(request.msg);
                 }
             });
         });

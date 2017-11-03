@@ -24,7 +24,11 @@ define(function (require) {
         var url = config.view + '?nocallback&g=' + se.element.getAttribute('pid');
         fetch(url).then(function (response) {
             response.json().then(function (json) {
-                json[0] && renderPlace(json[0], se);
+                if (json[0] && json[0].length > 0) {
+                    renderPlace(json[0], se);
+                } else {
+                    se.element.style.display = 'none';
+                }
             });
         });
     };
@@ -116,10 +120,15 @@ define(function (require) {
         var iframe;
         iframe = document.createElement('iframe');
         iframe.src = bar.conf.src;
-        iframe.style.width = bar.conf.width + 'px';
-        iframe.style.height = bar.conf.height + 'px';
+        iframe.style.width = '100%';
+        iframe.style.height = '100%';
+        iframe.style.position = 'absolute';
+        se.element.style.width = '100%';
+        se.element.style.height = '0';
+        se.element.style.paddingBottom = ((bar.conf.height / bar.conf.width) * 100) + '%';
+        se.element.style.position = 'relative';
         se.element.appendChild(iframe);
-        setComponentStyle(bar, se);
+        se.element.appendChild(getIcon());
     }
 
     /**

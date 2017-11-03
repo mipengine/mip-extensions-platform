@@ -10,34 +10,16 @@ define(function (require) {
     var customElem = require('customElement').create();
     customElem.prototype.firstInviewCallback = function () {
         // 先设置动态rem适配
-        (function (win, doc) {
-            var docEl = doc.documentElement;
-            function setRemUnit() {
-                var docWidth = docEl.clientWidth;
-                var rem = docWidth / 10;
-                docEl.style.fontSize = rem + 'px';
-            }
-            win.addEventListener('resize', function () {
-                setRemUnit();
-            }, false);
-            win.addEventListener('pageshow', function (e) {
-                if (e.persisted) {
-                    setRemUnit();
-                }
-            }, false);
-            setRemUnit();
-            if (win.devicePixelRatio && win.devicePixelRatio >= 2) {
-                var testEl = doc.createElement('div');
-                var fakeBody = doc.createElement('body');
-                testEl.style.border = '0.5px solid transparent';
-                fakeBody.appendChild(testEl);
-                docEl.appendChild(fakeBody);
-                if (testEl.offsetHeight === 1) {
-                    docEl.classList.add('hairlines');
-                }
-                docEl.removeChild(fakeBody);
-            }
-        })(window, document);
+        (function flexible(window, document) {
+            var dpr = window.devicePixelRatio; // 设备像素比
+            var scale = 1 / dpr; // 设置缩放
+            var clientWidth = document.documentElement.clientWidth; // 视口宽
+            document.querySelector('meta[name="viewport"]')
+            .setAttribute('content', 'width=' + dpr * clientWidth + ', initial-scale=' + scale
+                + ',maximum-scale=' + scale + ', minimum-scale=' + scale + ',user-scalable=no');
+            document.documentElement.style.fontSize = clientWidth * dpr / 10 + 'px'; // 动态设置font-size
+            document.documentElement.setAttribute('data-dpr', dpr);
+        }(window, document));
         // this.element 可取到当前实例对应的 dom 元素
         var $element = $(this.element);
         var vSrc = $element.attr('v-src');
@@ -108,7 +90,7 @@ define(function (require) {
             }
         }
         function showReplayPage() {
-            $('video-mask').show();
+            $('.video-mask').show();
             // 监听事件
             replayEvent();
         }
