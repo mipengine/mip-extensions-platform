@@ -1,0 +1,14 @@
+{
+    "name": "mip-jt-madapt",
+    "version": "1.0.0",
+    "description": "自动适配手机屏幕宽度",
+    "contributors": [
+        {
+            "name": "jt",
+            "email": "open@cngold.org"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
