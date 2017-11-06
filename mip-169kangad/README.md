@@ -14,7 +14,7 @@ mip-169kangad 用来添加搜狗广告。
 MIP提供搜狗广告的扩展组件，代码示例：
 
 ```html
-	<mip-169kangad ad_id="912233" ad_width="20" ad_height="2" position="6"></mip-169kangad>     
+	<mip-169kangad ad_id="912233" ad_width="20" ad_height="2"></mip-169kangad>     
 ```
 
 ## 属性
@@ -22,12 +22,6 @@ MIP提供搜狗广告的扩展组件，代码示例：
 ### ad_id
 
 说明：广告ID
-必选项：是
-类型：字符串
-
-### position
-
-说明：src位置
 必选项：是
 类型：字符串
 

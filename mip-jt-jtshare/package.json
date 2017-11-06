@@ -1,0 +1,14 @@
+{
+    "name": "mip-jt-jtshare",
+    "version": "1.0.0",
+    "description": "手机端分享组件",
+    "contributors": [
+        {
+            "name": "jt",
+            "email": "open@cngold.org"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
