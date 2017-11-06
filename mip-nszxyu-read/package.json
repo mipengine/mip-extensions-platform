@@ -1,0 +1,14 @@
+{
+    "name": "mip-nszxyu-read",
+    "version": "1.0.0",
+    "description": "jieqi小说网阅读功能，包括调整字体，护眼模式，夜间模式",
+    "contributors": [
+        {
+            "name": "nszxyu",
+            "email": "nszxyu@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

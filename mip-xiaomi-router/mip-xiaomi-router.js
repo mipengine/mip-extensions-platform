@@ -49,15 +49,33 @@ define(function (require) {
         }
     };
 
-    customElement.prototype.getParams = function (name) {
-        var paramsNameType = typeof window[name];
+    customElement.prototype.getParams = function (str) {
+        var paramsNameType = typeof window[str];
         if (paramsNameType === 'function') {
-            return window[name](this.element);
-        } else if (paramsNameType === 'object') {
-            return window[name];
-        } else {
-            return name;
+            // 全局函数
+            return window[str](this.element);
         }
+        else if (paramsNameType === 'object') {
+            // 全局对象
+            return window[str];
+        }
+        else if (str) {
+            // query解析，如：'1=v1&2=v2&1=v3=v4&3&4=&='
+            return this.convertToHash(str);
+        }
+    };
+
+    customElement.prototype.convertToHash = function (str) {
+        var hash = {};
+        var list = str.split('&');
+        for (var i = 0, len = list.length; i < len; i++) {
+            var item = list[i];
+            var sideList = item.split('=');
+            if (sideList[0].length > 0) {
+                hash[sideList[0]] = item.substr(sideList[0].length + 1);
+            }
+        }
+        return hash;
     };
 
     customElement.prototype.appRouter = function (packageName, page, params, confirm) {
@@ -95,7 +113,9 @@ define(function (require) {
             }
             var t = void 0;
             for (t in obj) {
-                return !1;
+                if (obj.hasOwnProperty(t)) {
+                    return !1;
+                }
             }
             return !0;
         }
@@ -106,7 +126,8 @@ define(function (require) {
             if (index > -1) {
                 query = url.substr(1);
             }
-        } else {
+        }
+        else {
             var items = Object.keys(params).map(function (key) {
                 return key + '=' + encodeURIComponent(params[key]);
             });

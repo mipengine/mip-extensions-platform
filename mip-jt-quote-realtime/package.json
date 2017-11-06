@@ -1,0 +1,14 @@
+{
+    "name": "mip-jt-quote-realtime",
+    "version": "1.0.0",
+    "description": "实时行情获取刷新组件",
+    "contributors": [
+        {
+            "name": "jt",
+            "email": "open@cngold.org"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
