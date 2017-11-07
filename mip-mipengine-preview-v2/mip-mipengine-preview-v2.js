@@ -6,8 +6,20 @@
 
 define(function (require) {
     var customElement = require('customElement').create();
+    var create = require('util').dom.create;
     var previewLightboxElement = document.querySelector('#example-lightbox');
     var iframeElement = null;
+
+    // 如果元素不存在，则手动创建一个
+    if (!previewLightboxElement) {
+        previewLightboxElement = create([
+            '<div id="example-lightbox">',
+                '<button role="button" class="close-btn"></button>',
+                '<div class="iphone"></div>',
+            '</div>'
+        ].join(''));
+        document.body.appendChild(previewLightboxElement);
+    }
 
     var config;
     try {
