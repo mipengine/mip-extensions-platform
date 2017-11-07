@@ -11,9 +11,12 @@ define(function (require) {
         var element2 = this.element;
         var widthstr = $(element2).attr('width');
         var width = 750;
-        if (width) {
+        if (widthstr) {
             try {
                 width = parseInt(widthstr, 10);
+                if (isNaN(width)) {
+                    width = 750;
+                }
             } catch (e) {
                 width = 750;
                 console.log(e);

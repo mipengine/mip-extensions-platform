@@ -1,6 +1,6 @@
 /**
  * @file mip-qqtn-addtab
- * 组件,用于给选项卡里边的内容增加点击加载内容，每个选项卡对应不同的接口，接口id和接口地址通过模版获取，接口网址为https.
+ * 组件,用于给选项卡里边的内容增加点击加载内容，每个选项卡对应不同的接口，接口id和接口地址通过模版获取，接口网址为https.,==========经线上测试，firstinviewcallback无法满足效果，必须使用build，请通过==============
  * @author
  */
 define(function (require) {
@@ -39,7 +39,7 @@ define(function (require) {
                 });
         });
     }
-    customElement.prototype.firstinviewcallback = function () {
+    customElement.prototype.build = function () {
         addtablist();
     };
     return customElement;
