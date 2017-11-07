@@ -1,0 +1,14 @@
+{
+    "name": "mip-chinabyte-titlehide",
+    "version": "1.0.0",
+    "description": "如果结果页在iframe里，修改元素样式",
+    "contributors": [
+        {
+            "name": "yh",
+            "email": "yanghao@staff.chinabyte.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

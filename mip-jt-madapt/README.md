@@ -12,17 +12,17 @@ mip-jt-madapt 自动适配手机屏幕宽度
 
 ### 基本用法
 ```html
-<mip-jt-madapt></mip-jt-madapt>
+<mip-jt-madapt width="640"></mip-jt-madapt>
 ```
 
-## 属性
+## width
 
-### 自动适配手机屏幕宽度 mip-jt-madapt
+### 适配的屏幕宽度
 
-说明：根据手机屏幕宽度自动适配
-必选项：是
-类型：无
-取值范围：无
+说明：适配的屏幕宽度  默认750
+必选项：否
+类型：int
+取值范围：640 750 ..
 单位：无
 默认值：无
 

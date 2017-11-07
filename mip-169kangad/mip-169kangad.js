@@ -19,8 +19,8 @@ define(function (require) {
         scriptTag1.src = 'https://theta.sogoucdn.com/wap/js/aw.js',
         scriptTag1.setAttribute('async', 'true');
         var scriptTag2 = document.createElement('script');
-        scriptTag2.innerHTML = 'var sogou_div = document.getElementById("sogou_wap_912233");'
-		+ '(window.sogou_un = window.sogou_un || []).push({id:"'
+        scriptTag2.innerHTML = 'var sogou_div = document.getElementById("sogou_wap_' + adId + '");'
+		+ 'window.sogou_un = window.sogou_un || [];window.sogou_un.push({id:"'
         + '' + adId + '",ele:sogou_div,w:' + '' + width + ',h:' + '' + height + '});';
         ele.appendChild(div);
         ele.appendChild(scriptTag2);
