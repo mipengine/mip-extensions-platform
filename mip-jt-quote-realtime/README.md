@@ -12,10 +12,9 @@ mip-jt-quote-realtime 组件说明
 
 ### 基本用法
 ```html
-<mip-jt-quote-realtime>
-    <div id="heheda"></div>
+<mip-jt-quote-realtime codes="JO_63737,JO_42261" ids="qqq,showCode,q63,q70,q80,q1,q3,q2,q4,updateTime,unit">
 </mip-jt-quote-realtime>
-<dl id="JO_63737_contain">
+<dl>
 	<dd id="JO_63737_showCode"><em>----</em></dd>
 	<dd><a href="http://www.baidu.com" title="粤贵银"><em>粤贵银</em></a></dd>
 	<dd id="JO_63737_q63"><em>----</em></dd>
@@ -25,12 +24,22 @@ mip-jt-quote-realtime 组件说明
 	<dd id="JO_63737_q3"><em>----</em></dd>
 	<dd id="JO_63737_q4"><em>----</em></dd>
 	<dd id="JO_63737_q2"><em>----</em></dd>
-	<dd id="JO_63737_updateTime"><em>----</em></dd>
+	<dd id="JO_63737_updateTime" dateFormat="MM-dd HH:mm:ss"><em>----</em></dd>
 	<dd id="JO_63737_unit"><em>----</em></dd>
 </dl>
-<mip-form>
-	<input type="hidden" value="JO_63737" id="realTimeCodes" />
-</mip-form>
+<dl>
+	<dd id="JO_42261_showCode"><em>----</em></dd>
+	<dd><a href="http://www.baidu.com" title="粤贵银"><em>粤贵银</em></a></dd>
+	<dd id="JO_42261_q63"><em>----</em></dd>
+	<dd id="JO_42261_q80"><em>----</em></dd>
+	<dd id="JO_42261_q70"><em>----</em></dd>
+	<dd id="JO_42261_q1"><em>----</em></dd>
+	<dd id="JO_42261_q3"><em>----</em></dd>
+	<dd id="JO_42261_q4"><em>----</em></dd>
+	<dd id="JO_42261_q2"><em>----</em></dd>
+	<dd id="JO_42261_updateTime" dateFormat="MM-dd HH:mm:ss"><em>----</em></dd>
+	<dd id="JO_42261_unit"><em>----</em></dd>
+</dl>
 ```
 
 ## 属性

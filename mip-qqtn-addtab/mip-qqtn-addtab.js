@@ -1,13 +1,13 @@
 /**
  * @file mip-qqtn-addtab
- * 组件,用于给选项卡里边的内容增加点击加载内容，每个选项卡对应不同的接口，接口id和接口地址通过模版获取，接口网址为https.,==========经线上测试，firstinviewcallback无法满足效果，必须使用build，请通过==============
+ * 组件,用于给选项卡里边的内容增加点击加载内容，每个选项卡对应不同的接口，接口id和接口地址通过模版获取，接口网址为https.,==========经线上测试，firstinviewcallback无法满足效果，必须使用build，请通过=======可能会存在需要从第二页，有的可能会存在从第三页开始读取的情况，将页码放进模版获取=======
  * @author
  */
 define(function (require) {
     var $ = require('zepto');
     var customElement = require('customElement').create();
     function addtablist() {
-        var p = 1;
+        var p = $('.f-ajul').attr('data-page');
         var ajaxUrl = $('.f-ajul').attr('data-topdateurl');
         var gxId = $('.f-information').attr('data-id');
         $('#more').click(function () {
