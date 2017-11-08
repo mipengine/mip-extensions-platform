@@ -1,0 +1,15 @@
+{
+    "name": "mip-lmb-script",
+    "version": "1.0.0",
+    "description": "辣妈帮MIP：URL跳转、切换元素显示和隐藏",
+    "contributors": [
+        {
+            "name": "hzh",
+            "email": "981993907@qq.com",
+			"url": "http://www.lamabang.com/"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
