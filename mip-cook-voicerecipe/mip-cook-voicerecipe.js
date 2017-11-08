@@ -30,7 +30,12 @@ define(function (require) {
          */
         get: function () {
             var flags = cs.get(STORAGE_KEY);
-            flags = JSON.parse(flags) || {};
+            try {
+                flags = JSON.parse(flags) || {};
+            }
+            catch (e) {
+                flags = {};
+            }
             return flags;
         },
 
