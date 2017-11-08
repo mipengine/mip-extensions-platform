@@ -28,6 +28,7 @@ define(function (require) {
                 'preload': 'none'
             });
             $element[0].appendChild(video);
+            $element[0].parentNode.style.height = $element[0].clientWidth * 360 / 640 + 'px';
             if (popDom && popDom.length > 0) {
                 video.onended = function () {
                     popDom[0].style.display = 'block';
@@ -36,13 +37,23 @@ define(function (require) {
                 };
                 if (pausePop !== undefined) {
                     video.onpause = function () {
-                        popDom[0].style.display = 'block';
+                        if (popDom[0].style.display !== 'block') {
+                            popDom[0].style.display = 'block';
+                        }
+                        else {
+                            return false;
+                        }
                         if (!platform.isIos()) {
                             video.style.display = 'none';
                         }
                     };
                     video.onplay = function () {
-                        popDom[0].style.display = 'none';
+                        if (popDom[0].style.display !== 'none') {
+                            popDom[0].style.display = 'none';
+                        }
+                        else {
+                            return false;
+                        }
                         if (!platform.isIos()) {
                             video.style.display = 'block';
                         }
@@ -60,7 +71,6 @@ define(function (require) {
         }
         if (popDom.find('.continue-but').length > 0) {
             popDom.find('.continue-but')[0].addEventListener('click', function () {
-                popDom[0].style.display = 'none';
                 video.play();
             }, false);
         }
