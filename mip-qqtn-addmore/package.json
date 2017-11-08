@@ -1,0 +1,14 @@
+{
+    "name": "mip-qqtn-addmore",
+    "version": "1.0.0",
+    "description": "用于增加点击加载内容，接口为固定地址，没有参数。接口的网址为https。",
+    "contributors": [
+        {
+            "name": "gom",
+            "email": "24356681@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.0.0"
+    }
+}
