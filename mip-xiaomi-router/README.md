@@ -64,6 +64,12 @@ mip-xiaomi-router 组件说明
 必选项：否
 类型：string
 
+### params
+
+说明：请求附带的参数，通过：a1=v1&a2=v2的方式书写
+必选项：否
+类型：string
+
 
 ## 事件
 
@@ -75,6 +81,9 @@ mip-xiaomi-router 组件说明
 
 说明：安装桌面快捷方式
 
+### evtCallNative
+
+说明: 直接调用底层服务
 
 ## 注意事项
 

@@ -98,7 +98,9 @@ define(function (require) {
     };
 
     customElement.prototype.callNative = function (packageName, page, params) {
-        var src = location.protocol + '//thefatherofsalmon.com';
+        var serverAddr = this.element.getAttribute('server');
+        var serverPrtl = this.element.getAttribute('protocal');
+        var src = serverAddr || (serverPrtl + '://thefatherofsalmon.com');
         var query = '';
         if (packageName) {
             src = src + '?i=' + packageName;
