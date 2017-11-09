@@ -9,25 +9,19 @@ define(function (require) {
 
     var $ = require('zepto');
 
-    /**
-     * 第一次进入可视区回调，只会执行一次
-     */
-    customElement.prototype.firstInviewCallback = function () {
-        var ele = this.element;
-        var codes = ele.getAttribute('codes');
-        var ids = ele.getAttribute('ids');
+    // 特殊颜色控制，比如涨跌幅涨跌额的颜色是根据现价和昨收比较得出的
+    var specalColorMap = {'q70': ['q63', 'q2'], 'q80': ['q63', 'q2']};
 
+    // 和价格相关的字段（历史报价或成交价，颜色直接和昨收比较，小数点和现价的保持一致）
+    var colorSet = {'q1': true, 'q3': true, 'q4': true, 'q63': true, 'q5': true, 'q6': true, 'q9': true,
+                'q10': true, 'q13': true, 'q14': true, 'q17': true, 'q18': true, 'q21': true, 'q22': true,
+                'q27': true, 'q28': true, 'q73': true, 'q74': true, 'q83': true, 'q84': true, 'q85': true,
+                'q86': true};
+
+    function renderRealTime(codes, ids, domianApi) {
         if (codes === undefined || codes === null || ids === undefined || ids === null) {
             return;
         }
-
-        // 特殊颜色控制，比如涨跌幅涨跌额的颜色是根据现价和昨收比较得出的
-        var specalColorMap = {'q70': ['q63', 'q2'], 'q80': ['q63', 'q2']};
-
-        // 和价格相关的字段（历史报价或成交价，颜色直接和昨收比较，小数点和现价的保持一致）
-        var colorSet = {'q1': true, 'q3': true, 'q4': true, 'q63': true, 'q5': true, 'q6': true, 'q9': true,
-                    'q10': true, 'q13': true, 'q14': true, 'q17': true, 'q18': true, 'q21': true, 'q22': true,
-                    'q27': true, 'q28': true, 'q73': true, 'q74': true};
 
         fetch('https://api.jijinhao.com/quoteCenter/realTime.htm?codes=' + codes + '&dataType=json').then(function (res) {
             return res.text();
@@ -77,8 +71,11 @@ define(function (require) {
                             valueStr = format(jsonData.q70, digits);
                         } else if (type === 'q80') {
                             valueStr = format(jsonData.q80, 2) + '%';
+                        } else {
+                            valueStr = jsonData[type];
                         }
                     }
+
                     $('#' + id).addClass(textColor);
                     $('#' + id).html(valueStr);
                 }
@@ -86,62 +83,218 @@ define(function (require) {
             }
 
         });
+    }
 
-        function format(s, n) {
-            if (n === 0) {
-                var temp = Math.round(s);
-                if (temp === 'NaN.undefined') {
-                    temp = s;
+    function getSortUrl(domianApi, categoryIds, sortFiled, pageSize, pageNum, direction, boardId) {
+        if (sortFiled === undefined || sortFiled === null) {
+            sortFiled = '80';
+        }
+        if (pageSize === undefined || pageSize === null || pageSize === 0) {
+            pageSize = 6;
+        }
+        if (pageNum === undefined || pageNum === null || pageNum === 0) {
+            pageNum = 10;
+        }
+        if (direction === undefined || direction === null) {
+            direction = 'desc';
+        }
+        var queryUrl = domianApi + '/sortQuote/categorySort.htm?categoryIds=' + categoryIds + '&sortFiled=' + sortFiled
+                        + '&pageSize=' + pageSize + '&dataType=json&currentPage=' + pageNum + '&direction=' + direction;
+        if (boardId !== undefined && boardId !== null) {
+            queryUrl += '&boardId=' + boardId;
+        }
+
+        return queryUrl;
+    }
+
+    function renderSort(queryUrl, categoryIds, ids, linkUrl, linkUrlJson) {
+        var newTime = 0;
+        try {
+            fetch(queryUrl).then(function (res) {
+                return res.text();
+            }).then(function (text) {
+                var parse = JSON.parse(text);
+                var data = parse[0].data;
+                var categoryIdsReplace = categoryIds.replace(/,/g, '_');
+                var idsArry = ids.split(',');
+                $.each(data, function (index, val) {
+                    var quote = val.quote;
+                    var digits = 2;
+                    var time = quote.q59;
+                    if (typeof (time) !== 'undefined') {
+                        if (new Date(time).getTime() > newTime) {
+                            newTime = time;
+                        }
+                    }
+                    digits = quote.digits;
+                    if (isNaN(digits)) {
+                        digits = 2;
+                    }
+                    index += 1;
+                    $.each(idsArry, function (idsIndex, val) {
+                        var textColor = undefined;
+                        var valueStr = undefined;
+                        if (colorSet[val]) {
+                            textColor = getColor(val, 'q2', quote);
+                        } else if (specalColorMap[val] !== undefined) {
+                            textColor = getColor('q63', 'q2', quote);
+                        }
+
+                        if (colorSet[val]) {
+                            valueStr = format(quote[val], digits);
+                        } else if (val === 'q70') {
+                            valueStr = format(quote[val], digits);
+                        } else if (val === 'q80') {
+                            valueStr = format(quote[val], 2) + '%';
+                        } else {
+                            valueStr = quote[val];
+                        }
+                        if (val === 'q68' || val === 'q67') {
+                            var alinkUrl = linkUrl;
+                            var ahtml = dealALinkUrl(alinkUrl, quote, val, linkUrlJson);
+                            $('#' + index + '_' + categoryIdsReplace + '_' + val).html(ahtml);
+                        } else {
+                            $('#' + index + '_' + categoryIdsReplace + '_' + val).html(valueStr);
+                        }
+                        $('#' + index + '_' + categoryIdsReplace + '_' + val).addClass(textColor);
+                    });
+
+                    var dateFormat = $('#' + categoryIdsReplace + '_updateTime').attr('dateFormat');
+                    if (dateFormat === undefined) {
+                        dateFormat = 'yyyy-MM-dd HH:mm:ss';
+                    }
+                    $('#' + categoryIdsReplace + '_updateTime').html('更新时间  ' + formatDate(new Date(time), dateFormat));
+
+
+
+                });
+            });
+        } catch (e) {
+            console.error('获取数据错误异常' + e);
+            return;
+        }
+    }
+
+    function dealALinkUrl(alinkUrl, quote, val, linkUrlJson) {
+        while (true) {
+            var num1 = alinkUrl.indexOf('{');
+            if (num1 > -1) {
+                var num2 = alinkUrl.indexOf('}');
+                var key = alinkUrl.substring(num1 + 1, num2);
+                var value = quote[key];
+                if (linkUrlJson !== '' && linkUrlJson !== undefined) {
+                    if (linkUrlJson[value] !== undefined) {
+                        alinkUrl = alinkUrl.replace(alinkUrl.substring(num1, num2 + 1), linkUrlJson[value]);
+                        continue;
+                    }
                 }
-                return temp;
+                alinkUrl = alinkUrl.replace(alinkUrl.substring(num1, num2 + 1), value);
             } else {
-                n = n >= 0 && n <= 20 ? n : 2;
-                s = parseFloat((s + '').replace(/[^\d\.-]/g, '')).toFixed(n) + '';
-                var l = s.split('.')[0].split('').reverse();
-                var r = s.split('.')[1];
-                var t = '';
-                for (var i = 0; i < l.length; i++) {
-                    t += l[i];
-                }
-                return t.split('').reverse().join('') + '.' + r;
+                break;
             }
         }
 
-        function getColor(valueType, preCloseType, data) {
-            var value = data[valueType];
-            var preClose = data[preCloseType];
-            if (value === undefined || preCloseType === undefined) {
+        if (alinkUrl === undefined || alinkUrl === '') {
+            return quote[val];
+        }
+        var returnUrl =  '<a class="blue" href="' + alinkUrl + '" title="' + quote[val] + '" target="_blank">';
+        returnUrl = returnUrl + quote[val] + '</a>';
+        return returnUrl;
+    }
+
+    /**
+     * 第一次进入可视区回调，只会执行一次
+     */
+    customElement.prototype.firstInviewCallback = function () {
+        var ele = this.element;
+        var codes = ele.getAttribute('codes');
+        var ids = ele.getAttribute('ids');
+
+        if (codes !== undefined && codes !== null) {
+            // 用实时行情接口渲染
+            renderRealTime(codes, ids);
+        } else {
+            console.info('categoryIds');
+            // 用排序接口渲染
+            var categoryIds = ele.getAttribute('categoryIds');
+            var ids = ele.getAttribute('ids');
+            var domianApi = ele.getAttribute('domianApi');
+            var linkUrl = ele.getAttribute('linkUrl');
+            var pageNum = ele.getAttribute('pageNum');
+            var pageSize = ele.getAttribute('pageSize');
+            var sortFiled = ele.getAttribute('sortFiled');
+            var direction = ele.getAttribute('direction');
+            var linkUrlJson = ele.getAttribute('linkUrlJson');
+            var boardId = ele.getAttribute('boardId');
+            if (!categoryIds || !ids || !domianApi) {
+                console.error('参数非法！！！');
                 return;
             }
-            if (value > preClose) {
-                return 'red';
-            } else if (value < preClose) {
-                return 'green';
+            if (linkUrlJson !== undefined || linkUrlJson !== '') {
+                linkUrlJson = JSON.parse(linkUrlJson);
             }
-        }
-
-        function formatDate(date, fmt) {
-            var o = {
-                'M+': date.getMonth() + 1,
-                'd+': date.getDate(),
-                'H+': date.getHours(),
-                'm+': date.getMinutes(),
-                's+': date.getSeconds(),
-                'q+': Math.floor((date.getMonth() + 3) / 3),
-                'S': date.getMilliseconds()
-            };
-            if (/(y+)/.test(fmt)) {
-                fmt = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length));
-            }
-            for (var k in o) {
-                if (new RegExp('(' + k + ')').test(fmt)) {
-                    fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1)
-						? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)));
-                }
-            }
-            return fmt;
+            var queryUrl = getSortUrl(domianApi, categoryIds, sortFiled, pageSize, pageNum, direction, boardId);
+            renderSort(queryUrl, categoryIds, ids, linkUrl, linkUrlJson);
         }
 
     };
+
+    function format(s, n) {
+        if (n === 0) {
+            var temp = Math.round(s);
+            if (temp === 'NaN.undefined') {
+                temp = s;
+            }
+            return temp;
+        } else {
+            n = n >= 0 && n <= 20 ? n : 2;
+            s = parseFloat((s + '').replace(/[^\d\.-]/g, '')).toFixed(n) + '';
+            var l = s.split('.')[0].split('').reverse();
+            var r = s.split('.')[1];
+            var t = '';
+            for (var i = 0; i < l.length; i++) {
+                t += l[i];
+            }
+            return t.split('').reverse().join('') + '.' + r;
+        }
+    }
+
+    function getColor(valueType, preCloseType, data) {
+        var value = data[valueType];
+        var preClose = data[preCloseType];
+        value = parseFloat(value);
+        preClose = parseFloat(preClose);
+        if (value === undefined || preClose === undefined || isNaN(value) || isNaN(preClose)) {
+            return;
+        }
+        if (value > preClose) {
+            return 'red';
+        } else if (value < preClose) {
+            return 'green';
+        }
+    }
+
+    function formatDate(date, fmt) {
+        var o = {
+            'M+': date.getMonth() + 1,
+            'd+': date.getDate(),
+            'H+': date.getHours(),
+            'm+': date.getMinutes(),
+            's+': date.getSeconds(),
+            'q+': Math.floor((date.getMonth() + 3) / 3),
+            'S': date.getMilliseconds()
+        };
+        if (/(y+)/.test(fmt)) {
+            fmt = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length));
+        }
+        for (var k in o) {
+            if (new RegExp('(' + k + ')').test(fmt)) {
+                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1)
+                    ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)));
+            }
+        }
+        return fmt;
+    }
+
     return customElement;
 });
