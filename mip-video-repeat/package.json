@@ -1,6 +1,6 @@
 {
     "name": "mip-video-repeat",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "带片头片尾和重播功能的视频组件",
     "author": {
         "name": "idongde",

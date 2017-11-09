@@ -40,20 +40,27 @@ define(function (require) {
         $element[0].appendChild(video);
         $('.rec-video-wrapper').hide();
         $('.video-mask').hide();
+        //  如果是IOS上的UC浏览器 则不播放片头片尾
+        if (platform.isIos() && platform.isUc()) {
+            video.src = targetSrc;
+            curIndex = 2;
+        }
+        else {
+            //  如果有片头并且非IOS上的QQ浏览器 则播放片头
+            if (vSrc && !(platform.isIos() && platform.isQQ())) {
+                video.src = vSrc;
+                curIndex = 1;
+            }
+            else {  //  否则直接播放内容
+                video.src = targetSrc;
+                curIndex = 2;
+            }
+        }
         //  当前视频播放完毕
         video.onended = function () {
             curIndex += 1;
             whichShouldPlay();
         };
-        //  如果有片头并且非IOS上的QQ浏览器 则播放片头
-        if (vSrc && !(platform.isIos() && platform.isQQ())) {
-            video.src = vSrc;
-            curIndex = 1;
-        }
-        else {  //  否则直接播放内容
-            video.src = targetSrc;
-            curIndex = 2;
-        }
         // 判断是否连续播放，到片尾结束停止
         function whichShouldPlay() {
             switch (curIndex) {
@@ -105,13 +112,19 @@ define(function (require) {
             $('.video-replay-button').on('click', function () {
                 $('.rec-video-wrapper').hide();
                 $('.video-mask').hide();
-                if (vSrc && !(platform.isIos() && platform.isQQ())) {
-                    video.src = vSrc;
-                    curIndex = 1;
-                }
-                else {
+                if (platform.isIos() && platform.isUc()) {
                     video.src = targetSrc;
                     curIndex = 2;
+                }
+                else {
+                    if (vSrc && !(platform.isIos() && platform.isQQ())) {
+                        video.src = vSrc;
+                        curIndex = 1;
+                    }
+                    else {
+                        video.src = targetSrc;
+                        curIndex = 2;
+                    }
                 }
                 removeNode('.rec-video-wrapper');
                 removeNode('.video-mask');

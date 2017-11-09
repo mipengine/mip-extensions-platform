@@ -135,39 +135,42 @@ define(function (require) {
                 var imglist = '';
                 if (objJson.UrlPath[i].split('/')[4] !== fileid) {
                     for (var m = 0; m < uimg.length; m++) {
-                        imglist += '<i><img src="' + uimg[m] + '"></i>';
+                        imglist += '<i><mip-img src="' + uimg[m] + '"></mip-img></i>';
                     }
                     html += '<li class="g-imgnum-' + objJson.nImgNum[i] + '">';
-                    html += '<a href="' + objJson.UrlPath[i] + '" class="g-cd-left"><img src="' + uimg[0] + '" /></a>';
-                    html += '<a href="' + objJson.UrlPath[i] + '" class="g-cd-right">';
+                    html += '<a href="' + objJson.UrlPath[i] + '" class="g-cd-left"><mip-img src="' + uimg[0] + '" >';
+                    html += '</mip-img></a><a href="' + objJson.UrlPath[i] + '" class="g-cd-right">';
                     html += '<strong>' + objJson.ntitle[i] + '</strong>';
                     html += '<b>' + imglist + '</b><em><i>' + objJson.addtime[i] + '</i></em></a>';
                     html += '</li>';
                 }
-
             }
             $('#f-tuwen').append(html);
         }
         function addNews() {
             var ntitle = $('h1').text();
             var newapp = ajaxUrl;
-            $.getJSON(newapp,
-            function (data) {
-                pageData = {
-                    'nKeys': [],
-                    'UrlPath': [],
-                    'addtime': [],
-                    'nImages': [],
-                    'nImgNum': [],
-                    'nResID': [],
-                    'nding': [],
-                    'ndingday': [],
-                    'ndingtime': [],
-                    'ntitle': []
-                };
-                sortData(ntitle, data);
-                showHtml();
-            });
+            fetch(newapp)
+            .then(function (res) {
+                    return res.text();
+                }).then(function (data) {
+                    var data = (new Function('', 'return' + data))();
+                    pageData = {
+                        'nKeys': [],
+                        'UrlPath': [],
+                        'addtime': [],
+                        'nImages': [],
+                        'nImgNum': [],
+                        'nResID': [],
+                        'nding': [],
+                        'ndingday': [],
+                        'ndingtime': [],
+                        'ntitle': []
+                    };
+                    sortData(ntitle, data);
+                    showHtml();
+                }).catch(function (err) {
+                });
         }
         showMore();
         addNews();

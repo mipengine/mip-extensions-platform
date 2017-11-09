@@ -91,9 +91,10 @@ mip-video-repeat 实现了带片头片尾和重播功能的视频组件
 
 ## 注意事项  
 - 仅支持移动端，强行使用pc端打开可能会有布局混乱的风险
-- 在组件中实现了rem适配,支持1px border,以iPhone 6为基准，1rem = 75px, 设备缩放比为2
+- 在组件中实现了rem适配,支持1px border,以iPhone 6为基准，则1rem = 75px, 设备缩放比为2
 - mip-video-repeat标签如果不添加rec-video属性，则只会显示重播按钮
 - class="rec-video-wrapper"标签包含相关视频和重播
 - class="video-mask"标签只包含重播
 - 视频播放顺序为 片头 => 正片 => 片尾 => 显示相关功能界面
+- 注：若浏览器为IOS的UC浏览器，则会直接播放正片，重播功能也会被禁用。。。
 - 若想使用基本功能的视频播放组件请使用 mip-video 组件

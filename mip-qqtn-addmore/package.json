@@ -1,7 +1,7 @@
 {
     "name": "mip-qqtn-addmore",
-    "version": "1.0.0",
-    "description": "用于增加点击加载内容，接口为固定地址，没有参数。接口的网址为https。",
+    "version": "1.0.1",
+    "description": "用于增加点击加载内容，接口为固定地址，没有参数。接口的网址为https。.1.0.1更新内容：一.修改json内的<img>标签。二.替换json标签为fetch",
     "contributors": [
         {
             "name": "gom",
