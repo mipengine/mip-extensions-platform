@@ -1,0 +1,14 @@
+{
+    "name": "mip-jt-resize",
+    "version": "1.0.0",
+    "description": "金投适配",
+    "contributors": [
+        {
+            "name": "jt",
+            "email": "open@cngold.org"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
