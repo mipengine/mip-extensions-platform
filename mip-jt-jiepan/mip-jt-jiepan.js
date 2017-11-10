@@ -27,7 +27,7 @@ define(function (require) {
                         if (i === 0) {
                             addClass = 'class="first"';
                         }
-                        content += '<li' + addClass + '>';
+                        content += '<li ' + addClass + '>';
                         content += '<a href="https://m.cngold.org/kp/r' + reportArr[i].studioId + '/">';
                         content += '<p class="zbs_detail">';
                         content += '<span class="zbs_detail_name">';

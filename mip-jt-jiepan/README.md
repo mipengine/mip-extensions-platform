@@ -20,7 +20,7 @@ mip-jt-jiepan 解盘组件
 	</div>
 	<ul class="zbs_content" id="todayAnalyzeId"></ul>
 	<div class="view_more"><a href="${mobileDomain}/kp/" title="专家直播">查看更多直播<i class="icon"></i></a></div>
-	<mip-jt-jiepan num =1>
+	<mip-jt-jiepan num =2>
 	</mip-jt-jiepan>
 </section>
 

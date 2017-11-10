@@ -1,7 +1,7 @@
 {
-    "name": "mip-jt-jiepan",
-    "version": "1.0.1",
-    "description": "金投解盘组件",
+    "name": "mip-jt-quote-chart",
+    "version": "1.0.0",
+    "description": "图表组件",
     "contributors": [
         {
             "name": "jt",

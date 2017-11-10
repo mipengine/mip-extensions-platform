@@ -1,0 +1,14 @@
+{
+    "name": "mip-close-dom",
+    "version": "1.0.0",
+    "description": "关闭组件,点击关闭外层dom",
+    "contributors": [
+        {
+            "name": "fll",
+            "email": "hello-fll@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
