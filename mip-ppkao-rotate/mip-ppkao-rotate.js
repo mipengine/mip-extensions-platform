@@ -12,7 +12,7 @@ define(function (require) {
      */
     customElement.prototype.firstInviewCallback = function () {
         var ele = this.element;
-        ele.addEventListener('click', function () {
+        ele.parentNode.addEventListener('click', function () {
             var rotateDeg = ele.dataset.rotate ? ele.dataset.rotate : '90deg';
             if (ele.classList.contains('active')) {
                 ele.classList.remove('active');

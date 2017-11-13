@@ -9,10 +9,8 @@ define(function (require) {
 
     var $ = require('zepto');
 
-    // 特殊颜色控制，比如涨跌幅涨跌额的颜色是根据现价和昨收比较得出的
     var specalColorMap = {'q70': ['q63', 'q2'], 'q80': ['q63', 'q2']};
 
-    // 和价格相关的字段（历史报价或成交价，颜色直接和昨收比较，小数点和现价的保持一致）
     var colorSet = {'q1': true, 'q3': true, 'q4': true, 'q63': true, 'q5': true, 'q6': true, 'q9': true,
                 'q10': true, 'q13': true, 'q14': true, 'q17': true, 'q18': true, 'q21': true, 'q22': true,
                 'q27': true, 'q28': true, 'q73': true, 'q74': true, 'q83': true, 'q84': true, 'q85': true,
@@ -23,7 +21,7 @@ define(function (require) {
             return;
         }
 
-        fetch('https://api.jijinhao.com/quoteCenter/realTime.htm?codes=' + codes + '&dataType=json').then(function (res) {
+        fetch(domianApi + '/realTime.htm?codes=' + codes + '&dataType=json').then(function (res) {
             return res.text();
         }).then(function (text) {
             var quoteJson = JSON.parse(text);
@@ -51,7 +49,6 @@ define(function (require) {
                     var textColor = undefined;
 
                     if (type === 'updateTime') {
-                        // 判断属性updateTime元素对应的属性,有值则根据给定的值格式化日期
                         var dateFormat = $('#' + id).attr('dateFormat');
                         if (dateFormat === undefined) {
                             dateFormat = 'yyyy-MM-dd HH:mm:ss';
@@ -79,7 +76,6 @@ define(function (require) {
                     $('#' + id).addClass(textColor);
                     $('#' + id).html(valueStr);
                 }
-
             }
 
         });
@@ -209,14 +205,13 @@ define(function (require) {
         var ele = this.element;
         var codes = ele.getAttribute('codes');
         var ids = ele.getAttribute('ids');
+        var categoryIds = ele.getAttribute('categoryIds');
+        var linkUrl = ele.getAttribute('linkUrl');
+        window.quoteDomain = ele.getAttribute('quoteDomain');
 
         if (codes !== undefined && codes !== null) {
-            // 用实时行情接口渲染
-            renderRealTime(codes, ids);
-        } else {
-            console.info('categoryIds');
-            // 用排序接口渲染
-            var categoryIds = ele.getAttribute('categoryIds');
+            renderRealTime(codes, ids, linkUrl);
+        } else if (categoryIds !== undefined && categoryIds !== null) {
             var ids = ele.getAttribute('ids');
             var domianApi = ele.getAttribute('domianApi');
             var linkUrl = ele.getAttribute('linkUrl');
@@ -226,6 +221,7 @@ define(function (require) {
             var direction = ele.getAttribute('direction');
             var linkUrlJson = ele.getAttribute('linkUrlJson');
             var boardId = ele.getAttribute('boardId');
+            console.info(categoryIds, ids, domianApi);
             if (!categoryIds || !ids || !domianApi) {
                 console.error('参数非法！！！');
                 return;
@@ -235,6 +231,8 @@ define(function (require) {
             }
             var queryUrl = getSortUrl(domianApi, categoryIds, sortFiled, pageSize, pageNum, direction, boardId);
             renderSort(queryUrl, categoryIds, ids, linkUrl, linkUrlJson);
+        } else {
+            readerQuote();
         }
 
     };
@@ -257,6 +255,13 @@ define(function (require) {
             }
             return t.split('').reverse().join('') + '.' + r;
         }
+    }
+
+    function readerQuote() {
+        var c = document.createElement('script');
+        c.type = 'text/javascript';
+        c.src = 'https://res.cngoldres.com/quote/js/quote_realTime.js';
+        document.getElementsByTagName('head')[0].appendChild(c);
     }
 
     function getColor(valueType, preCloseType, data) {

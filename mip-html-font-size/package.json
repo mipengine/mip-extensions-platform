@@ -1,0 +1,14 @@
+{
+    "name": "mip-html-font-size",
+    "version": "1.0.0",
+    "description": "适用于移动端,初始化html，html根元素的font-size等于screen.availWidth * 0.1,最小宽度为320px，最大宽度为750px",
+    "contributors": [
+        {
+            "name": "xiaojinping",
+            "email": "290762142@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

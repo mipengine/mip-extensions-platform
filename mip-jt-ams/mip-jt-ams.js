@@ -23,11 +23,13 @@ define(function (require) {
     var customElement = require('customElement').create();
 
     customElement.prototype.build = function () {
+        loadJs(this.element, 'https://res.cngoldres.com/libs/jtams/1.0.0/mjtams.js');
+    };
+
+    customElement.prototype.firstInviewCallback = function () {
         var el = this.element;
-        loadJs(el, 'https://res.cngoldres.com/libs/jtams/1.0.0/jtams.js', function () {
-            var $el = $(el);
-            $el.jtAd($el.attr('spm'));
-        });
+        var $el = $(el);
+        $el.jtAd($el.attr('spm'));
     };
     return customElement;
 });

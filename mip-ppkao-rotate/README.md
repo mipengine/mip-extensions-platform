@@ -6,15 +6,16 @@ mip-ppkao-rotate 点击旋转dom，已经旋转则返回
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://mipcache.bdstatic.com/static/v1/mip-ppkao-rotate/mip-ppkao-rotate.js
+所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-ppkao-rotate/mip-ppkao-rotate.js
 
 ## 示例
 
 ### 基本用法
 ```html
+<span>
 <mip-ppkao-rotate data-rotate="90deg">
     自定义内容，可以嵌套其他组件
-</mip-ppkao-rotate>
+</mip-ppkao-rotate></span>
 ```
 
 ## 属性

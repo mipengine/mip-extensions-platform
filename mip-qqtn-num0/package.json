@@ -1,0 +1,14 @@
+{
+    "name": "mip-qqtn-num0",
+    "version": "1.0.0",
+    "description": "判断假如没有li则将外层隐藏",
+    "contributors": [
+        {
+            "name": "gom",
+            "email": "24356681@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.0.0"
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "name": "mip-mmtpk-script",
+    "version": "1.0.1",
+    "description": "自用业务组件",
+    "contributors": [
+        {
+            "name": "cwq",
+            "email": "cwqiangne@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

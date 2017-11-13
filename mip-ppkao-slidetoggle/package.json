@@ -1,7 +1,7 @@
 {
-    "name": "mip-ppkao-rotate",
+    "name": "mip-ppkao-slidetoggle",
     "version": "1.0.1",
-    "description": "点击旋转dom",
+    "description": "上滑和下滑",
     "contributors": [
         {
             "name": "fll",
