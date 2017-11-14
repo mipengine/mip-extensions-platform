@@ -73,6 +73,16 @@ define(function (require) {
     var getTitle = function (element) {
         var titleElement = element.previousElementSibling;
 
+        // 如果没有元素，通常是 first-child
+        if (!titleElement) {
+            return '';
+        }
+
+        // 如果不是元素，如文本
+        if (titleElement.nodeType !== 1) {
+            return getTitle(titleElement);
+        }
+
         if (/^h\d+/.test(titleElement.tagName.toLowerCase())) {
             return titleElement.innerText;
         }
