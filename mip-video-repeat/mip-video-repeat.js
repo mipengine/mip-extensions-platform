@@ -25,6 +25,7 @@ define(function (require) {
         var vSrc = $element.attr('v-src');
         var vSrcEnd = $element.attr('v-src-end');
         var targetSrc = $element.attr('target-src');
+        var posterSrc =  $element.attr('poster-src');
         var curIndex;
         //  初始化播放器
         var video = document.createElement('video');
@@ -33,13 +34,19 @@ define(function (require) {
             'playsinline': '',
             'webkit-playsinline': '',
             'controls': '',
-            'preload': 'no'
+            'preload': 'no',
+            'poster': posterSrc ? posterSrc : ''
         });
         //  初始化video的尺寸大小
         $(video).css('width', window.innerWidth + 'px');
         $element[0].appendChild(video);
         $('.rec-video-wrapper').hide();
         $('.video-mask').hide();
+        $('.video-play-button').on('click', function (e) {
+            video.play();
+            $(e.currentTarget).hide();
+            $(video).attr('poster', '');
+        });
         //  如果是IOS上的UC浏览器 则不播放片头片尾
         if (platform.isIos() && platform.isUc()) {
             video.src = targetSrc;

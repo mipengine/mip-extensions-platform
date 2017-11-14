@@ -15,7 +15,12 @@ define(function (require) {
         var showmore = $(ele);
         var button = showmore.parents('.kaoshi-fenlei').find('.title span');
         button.on('click', function () {
-            showmore.find('.kemulist li').toggle(400);
+            showmore.find('.kemulist li').slideToggle(400);
+        });
+        var questionsContainer = showmore.parents('.kaoshi-fenlei').find('.questions-container');
+        showmore.find('.kemulist li').on('click', function () {
+            button.find('b').text($(this).text());
+            // questions-container.find('ul').html();
         });
     };
 

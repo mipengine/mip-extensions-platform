@@ -1,7 +1,7 @@
 {
-    "name": "mip-jt-map",
-    "version": "1.0.1",
-    "description": "金投地图组件",
+    "name": "mip-jt-quote-his",
+    "version": "1.0.0",
+    "description": "历史组件",
     "contributors": [
         {
             "name": "jt",

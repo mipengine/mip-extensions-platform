@@ -14,6 +14,7 @@ mip-video-repeat 实现了带片头片尾和重播功能的视频组件
 <mip-video-repeat v-src="http://img.vodjk.com/templates/vodjk/images/ad-shipin/ad-pc-qfk.mp4"
     v-src-end="http://img.vodjk.com/templates/vodjk/images/ad-shipin/ad-pc-qfk.mp4"
     target-src="http://dianbo.vodjk.com/vod/xinma/jbl/wgk/2016/04/20/499DBA6FFCD74fc195C4C59859BDA08C.mp4"
+    poster-src="https://www.idongde.com/upload/content/images/1505904946029746.jpg"
     rec-video='[
                    {
                     "recTitle":"测试测试测试测试测试测试测试测试测试测试测试",
@@ -52,6 +53,9 @@ mip-video-repeat 实现了带片头片尾和重播功能的视频组件
             <span class="iconfont">&#8634;</span>
         </div>
     </div>
+    <div class="video-play-button">
+        <span class="iconfont">&#9658;</span>
+    </div>
 </mip-video-repeat>
 ``` 
 
@@ -72,18 +76,26 @@ mip-video-repeat 实现了带片头片尾和重播功能的视频组件
 必选项：是  
 类型：string
 
+### poster-src
+说明：视频封面图                                                                              
+必选项：否                               
+类型：string
+
 ### rec-video
 说明：片尾结束显示的相关推荐视频                        
 必选项：否                       
 类型：JSON
+
 #### recTitle
 说明：相关推荐视频的标题                            
 必选项：rec-video属性存在时必选                            
 类型：string
+
 #### recUrl
 说明：相关推荐视频源地址                        
 必选项：rec-video属性存在时必选                        
 类型：string
+
 #### recThumb
 说明：相关推荐视频的封面缩略图                     
 必选项：rec-video属性存在时必选                            

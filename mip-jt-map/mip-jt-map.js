@@ -41,15 +41,15 @@ define(function (require) {
         })();
         loadJs('https://dup.baidustatic.com/js/ds.js');
 
-
         var ele = this.element;
-        var baiyunMap = new BaiyunMap(ele);
 
+        var baiyunMap = new BaiyunMap(ele);
         var longitudes = $(element2).attr('longitude');
         var latitudes = $(element2).attr('latitude');
         var searchAddr = $(element2).attr('searchAddr');
         var lng = $(element2).attr('lng');
         var lat = $(element2).attr('lat');
+        var englishShortName = $(element2).attr('englishShortName');
 
         window.addEventListener('load', function () {
             // 根据搜索地址获取经纬度 定位
@@ -73,7 +73,8 @@ define(function (require) {
                 baiyunMap.map();
             }
             // 注册查询方式
-            ele.dataset.way && baiyunMap.way();
+
+            baiyunMap.way();
         });
 
         /**
@@ -85,6 +86,7 @@ define(function (require) {
         function BaiyunMap(ele) {
             this.mapElement = ele;
             this.imap;
+            this.endElement;
         }
 
         /**
@@ -111,47 +113,23 @@ define(function (require) {
         };
 
         /**
-         * what way
+         * what way  get route way 获取当前位置到目的地线路
          */
         BaiyunMap.prototype.way = function () {
-            var self = this;
-            this.mapElement.addEventListener('click', function (e) {
-                var targetEle = e.target;
-                if (targetEle.parentElement.id === 'tip') {
-                    self.wayId = Number(targetEle.dataset.id);
-                    // 选中
-                    var butArr = [].slice.call(targetEle.parentElement.children);
-                    butArr.forEach(function (e) {
-                        e.className = '';
-                    });
-                    targetEle.className = 'cur';
-                }
-            });
+            if (lng !== '' && typeof (lng) !== 'undefined' && lat !== '' && typeof (lat) !== 'undefined') {
+                this.endElement = new BMap.Point(lng, lat); // 终点坐标
+                navigator.geolocation.getCurrentPosition(getRoute, showError, {
+                    enableHighAccuracy: true,
+                    maximumAge: 2000
+                });
+            }
         };
 
-
-        /**
-         * get route way 获取当前位置到目的地线路
-         */
-        if (lng !== '' && typeof (lng) !== 'undefined' && lat !== '' && typeof (lat) !== 'undefined') {
-            navigator.geolocation.getCurrentPosition(getRoute, showError, {
-                enableHighAccuracy: true,
-                maximumAge: 2000
-            });
-        }
         function getRoute(position) {
-            var end = new BMap.Point(lng, lat);
-            this.imap.clearOverlays();
-            var options;
-            // options = {
-            //     renderOptions: {map: this.imap, panel: this.resultElement.id || 'l-result'}
-            // };
-            options = {
-                renderOptions: {map: this.imap},
-                policy: 0
-            };
-            var transit = new BMap.TransitRoute(this.imap, options);
-            transit.search(position, end);
+            var start = new BMap.Point(position.coords.longitude, position.coords.latitude); // 起点坐标
+            new BMap.WalkingRoute(baiyunMap.imap, {
+                renderOptions: {map: baiyunMap.imap}
+            }).search(start, baiyunMap.endElement);
         }
 
         // 根据定位获取周边网点
@@ -173,27 +151,155 @@ define(function (require) {
                     var dataList = data.data;
                     var str = '';
                     if (data.flag && dataList.length > 0) {
+                        var pointArray = [];
                         for (var i = 0; i < dataList.length; i++) {
                             var index = i + 1;
                             if (index < 5) {
                                 str += '<dl class="jyz_content_dl"><dt class="clearfix mgLR30"><span class="fr">'
-                                    + dataList[i].distance + ' km</span><a href="/energy/m_jyzwd' + dataList[i].id
+                                    + dataList[i].distance + ' km</span><a href="https://m.cngold.org/energy/m_jyzwd' + dataList[i].id
                                     + '.html" title="' + dataList[i].name + '">' + index + '. ' + dataList[i].name
-                                    + '</a></dt><dd class="con mgLR30"><a href="/energy/m_jyzwd' + dataList[i].id
+                                    + '</a></dt><dd class="con mgLR30"><a href="https://m.cngold.org/energy/m_jyzwd' + dataList[i].id
                                     + '.html" title="' + dataList[i].name + '">' + dataList[i].adress
                                     + '</a></dd><dd class="lianxi mgLR30"><a href="tel:' + dataList[i].telephone
                                     + '" title="' + dataList[i].name + '" class="dianhua"><i class="icon"></i>电话</a>'
-                                    + '<em class="icon"></em><a href="/energy/m_jyzwd' + dataList[i].id
+                                    + '<em class="icon"></em><a href="https://m.cngold.org/energy/m_jyzwd' + dataList[i].id
                                     + '.html" title="' + dataList[i].name + '" class="xiangqing"><i class="icon">'
                                     + '</i>详情</a></dd></dl>';
+                                var x = dataList[i].longitude;
+                                var y = dataList[i].latitude;
+                                pointArray[i] = new BMap.Point(x, y);
+                                var marker = new BMap.Marker(new BMap.Point(x, y));  // 创建标注
+                                baiyunMap.imap.addOverlay(marker); // 将标注添加到地图中
                             }
                         }
+                        baiyunMap.imap.setViewport(pointArray);// 所有点可视
                     }
                     str += '<a href="https://m.cngold.org/energy/m_jyzwd.html" title="查看列表结果" class="chakan mt20 mgLR30">查看列表结果</a>';
                     $('.jyz_content').html(str);
                 }
             });
         }
+
+        // 根据定位经纬度获取周边网点
+        if (englishShortName !== '' && typeof (englishShortName) !== 'undefined') {
+            navigator.geolocation.getCurrentPosition(getwangdian, showError, {
+                enableHighAccuracy: true,
+                maximumAge: 2000
+            });
+        }
+
+        function attribute(e, array, lng1, lat1) {
+            var size = array.length + 1;
+            var j = '';
+            var p = e.target;
+            var lng = p.getPosition().lng;
+            var lat = p.getPosition().lat;
+            for (var i = 1; i < size; i++) {
+                var index = array.indexOf(i + ';' + lng + ';' + lat);
+                if (index > -1) {
+                    j = index + 1;
+                }
+                // 其余点全部变回红色
+                if (i !== j) {
+                    var str = array[i - 1];
+                    var x = str.split(';')[1];
+                    var y = str.split(';')[2];
+                    var pt = new BMap.Point(x, y);
+                    var myIcon = new BMap.Icon('https://res.cngoldres.com/mobile/images/red' + i + '_futures15.png', new BMap.Size(50, 28));
+                    var marker2 = new BMap.Marker(pt, {icon: myIcon});  // 创建标注
+                    baiyunMap.imap.addOverlay(marker2);
+                    marker2.addEventListener('click', function (e) {
+                        attribute(e, array, lng1, lat1);
+                    }, false);
+                }
+            }
+            // 选中的点为蓝色
+            var pts = new BMap.Point(lng, lat);
+            var myIcons = new BMap.Icon('https://res.cngoldres.com/mobile/images/blue' + j + '_futures15.png', new BMap.Size(50, 28));
+            var marker2s = new BMap.Marker(pts, {icon: myIcons});  // 创建标注
+            baiyunMap.imap.addOverlay(marker2s);
+            if (lng !== '' && lat !== '') {
+                $.ajax({
+                    type: 'GET',
+                    url: 'https://mip.cngold.org/energy/m_getSite.html',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    data: {Longitude: lng, Latitude: lat, lng: lng1, lat: lat1},
+                    success: function (data) {
+                        var obj = data.data;
+                        if (data.flag) {
+                            var text = '<dt class="clearfix mgLR30"><span class="fr">' + obj.distance + ' km</span>'
+                                + '<a href="https://m.cngold.org/energy/m_jyzwd' + obj.id + '.html" title="' + obj.name + '">' + j + '. '
+                                + obj.name + '</a></dt><dd class="con mgLR30"><a href="https://m.cngold.org/energy/m_jyzwd' + obj.id
+                                + '.html" title="' + obj.name + '">' + obj.adress + '</a></dd>'
+                                + '<dd class="lianxi mgLR30"><a href="tel:' + obj.telephone + '" title="'
+                                + obj.name + '" class="dianhua"><i class="icon"></i>电话</a>'
+                                + '<em class="icon"></em><a href="https://m.cngold.org/energy/m_jyzwd' + obj.id
+                                + '.html" title="' + obj.name + '" class="xiangqing"><i class="icon"></i>详情</a></dd>';
+                            $('.jyz_content_dl').html(text);
+                        }
+                    }
+                });
+            }
+        }
+
+        function getwangdian(position) {
+            var num = 0;
+            var lng = position.coords.longitude; // 当前定位经纬度
+            var lat = position.coords.latitude;
+            $.ajax({
+                type: 'GET',
+                url: 'https://mip.cngold.org/energy/m_getDistance.html',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: {
+                    englishShortName: typeof (englishShortName) !== 'undefined' ? englishShortName : 'empty',
+                    Longitude: lng,
+                    Latitude: lat,
+                    cityName: ''
+                },
+                success: function (data) {
+                    if (data.flag) {
+                        $('#cityName').html('当前位置：' + data.msg);
+                        var dataList = data.data;
+                        if (dataList.length > 0) {
+                            var pointArray = [];
+                            var listArray = [];
+                            num = dataList.length;
+                            for (var i = 0; i < dataList.length; i++) {
+                                var j = i + 1;
+                                var x = dataList[i].longitude;
+                                var y = dataList[i].latitude;
+                                pointArray[i] = new BMap.Point(x, y);
+                                listArray.push(j + ';' + x + ';' + y);
+                                var pt = new BMap.Point(x, y);
+                                var img = 'https://res.cngoldres.com/mobile/images/red' + j + '_futures15.png';
+                                var myIcon = new BMap.Icon(img, new BMap.Size(50, 28));
+                                // 创建标注
+                                var marker2 = new BMap.Marker(pt, {icon: myIcon});
+                                baiyunMap.imap.addOverlay(marker2);
+                                marker2.addEventListener('click', function (e) {
+                                    attribute(e, listArray, lng, lat);
+                                }, false);
+                            }
+                            baiyunMap.imap.setViewport(pointArray);// 所有点可视
+                            var text = '<dt class="clearfix mgLR30"><span class="fr">' + dataList[0].distance
+                                + ' km</span><a href="https://m.cngold.org/energy/m_jyzwd' + dataList[0].id + '.html" title="'
+                                + dataList[0].name + '">1. ' + dataList[0].name + '</a>'
+                                + '</dt><dd class="con mgLR30"><a href="https://m.cngold.org/energy/m_jyzwd' + dataList[0].id
+                                + '.html" title="' + dataList[0].name + '">' + dataList[0].adress
+                                + '</a></dd><dd class="lianxi mgLR30"><a href="tel:' + dataList[0].telephone
+                                + '" title="' + dataList[0].name + '" class="dianhua"><i class="icon"></i>电话</a>'
+                                + '<em class="icon"></em><a href="https://m.cngold.org/energy/m_jyzwd' + dataList[0].id + '.html" title="'
+                                + dataList[0].name + '" class="xiangqing"><i class="icon"></i>详情</a></dd>';
+                            $('.jyz_content_dl').html(text);
+                            $('#cityNum').html('共有' + num + '个加油站');
+                        }
+                    }
+                }
+            });
+        }
+
 
         function showError(error) {
             // alert('定位失败')

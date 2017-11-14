@@ -6,14 +6,14 @@ mip-jt-map 金投地图组件使用说明
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://mipcache.bdstatic.com/static/v1/mip-jt-map/mip-jt-map.js
+所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-jt-map/mip-jt-map.js
 
 ## 示例
 
 ### 基本用法  所有参数都不填,就是定位当前位置
 ```html
-<mip-jt-map></mip-jt-map>
-<mip-jt-map searchAddr="西湖区文一路"></mip-jt-map>
+<div id="allmap"></div>
+<mip-jt-map lng="121.280827" lat="29.688249"></mip-jt-map>
 ```
 
 ## longitude,latitude   与  searchAddr  不需要同时存在
@@ -61,6 +61,16 @@ mip-jt-map 金投地图组件使用说明
 单位：无
 默认值：无
 
+## englishShortName 英文名称
+
+### 获取定位点
+
+说明：当前定位坐标
+必选项：否
+类型：字符串
+取值范围：经纬度
+单位：无
+默认值：无
 
 ## 注意事项
 

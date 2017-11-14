@@ -13,10 +13,14 @@ mip-ppkao-slidetoggle 上滑和下滑
 ### 基本用法
 ```html
 <div class="kaoshi-fenlei">
-<mip-ppkao-slidetoggle > 
     <div class="title">
-        <span>滑动</span>
+        <span>
+            <b></b>    
+            滑动
+        </span>
     </div>
+<mip-ppkao-slidetoggle > 
+    
     <ul class="kemulist">
         <li>1</li>
         <li>2</li>
@@ -24,7 +28,7 @@ mip-ppkao-slidetoggle 上滑和下滑
         <li>4</li>
         <li>5</li>
     </ul>
-    <div class="question">
+    <div class="questions-container">
         <ul>
             <li>
                 <a href="##">
