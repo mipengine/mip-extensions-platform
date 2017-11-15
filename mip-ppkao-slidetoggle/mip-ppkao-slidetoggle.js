@@ -4,7 +4,7 @@
  */
 
 define(function (require) {
-    var $ = require('jquery');
+    var $ = require('zepto');
     var customElement = require('customElement').create();
 
     /**
@@ -15,7 +15,7 @@ define(function (require) {
         var showmore = $(ele);
         var button = showmore.parents('.kaoshi-fenlei').find('.title');
         button.on('click', function () {
-            showmore.find('.kemulist li').slideToggle(400);
+            showmore.toggle(400);
         });
         var questionsContainer = showmore.parents('.kaoshi-fenlei').find('.questions-container');
         var xscs = true;

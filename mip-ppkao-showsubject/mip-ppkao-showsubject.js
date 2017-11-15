@@ -4,7 +4,7 @@
  */
 
 define(function (require) {
-    var $ = require('jquery');
+    var $ = require('zepto');
     var customElement = require('customElement').create();
 
     /**
@@ -20,7 +20,7 @@ define(function (require) {
             button.hide();
         }
         button.on('click', function () {
-            showmore.find('ul li:nth-of-type(n+19)').slideToggle(400);
+            showmore.find('ul li:nth-of-type(n+19)').toggle(400);
             if (button.hasClass('active')) {
                 button.removeClass('active');
                 button.text(opentext);

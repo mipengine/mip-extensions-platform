@@ -1,0 +1,14 @@
+{
+    "name": "mip-caidashi-mob",
+    "version": "1.0.0",
+    "description": "检测是否是移动设备访问，如果是移动设备访问，进入移动端，",
+    "contributors": [
+        {
+            "name": "xiaojinping",
+            "email": "290762142@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

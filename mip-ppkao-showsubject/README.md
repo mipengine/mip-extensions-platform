@@ -13,34 +13,7 @@ mip-ppkao-showsubject 上滑和下滑
 ### 基本用法
 ```html
 <mip-ppkao-showsubject data-closetext="点击收起">
-    <ul>
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
-        <li>4</li>
-        <li>5</li>
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
-        <li>4</li>
-        <li>5</li>
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
-        <li>4</li>
-        <li>5</li>
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
-        <li>4</li>
-        <li>5</li>
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
-        <li>4</li>
-        <li>5</li>
-    </ul>
-    <div class="toggle">展开全部</div>
+    
 </mip-ppkao-showsubject>
 ```
 
