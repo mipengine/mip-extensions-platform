@@ -1,7 +1,7 @@
 {
     "name": "mip-lmb-script",
-    "version": "1.0.0",
-    "description": "辣妈帮MIP：URL跳转、切换元素显示和隐藏",
+    "version": "1.1.0",
+    "description": "辣妈帮MIP：URL跳转、切换元素显示和隐藏、分页跳转",
     "contributors": [
         {
             "name": "hzh",

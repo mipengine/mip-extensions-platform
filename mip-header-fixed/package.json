@@ -1,6 +1,6 @@
 {
     "name": "mip-header-fixed",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "主要是组件的position:fixed后，创建一个元素，获取该组件的height,当页面初次加载时，不影响布局。",
     "contributors": [
         {

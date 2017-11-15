@@ -40,8 +40,7 @@ define(function (require) {
     includeJavaScript('https://res.cngoldres.com/libs/jtshare/1.0.8/jtshare.js');
     includeJavaScript('https://res.cngoldres.com/libs/jtcomment/2.7.0/CommentCoreLibrary.min.js');
     includeJavaScript('https://res.cngoldres.com/libs/jtcomment/2.7.0/comment_mobile.js');
-    // live方法不兼容报错，更正后再取消注释
-//  includeJavaScript('https://res.cngoldres.com/libs/jtcomment/2.7.0/comment_barrage.js');
+    includeJavaScript('https://res.cngoldres.com/libs/jtcomment/2.7.0/comment_barrage.js');
     var commentUtils;
 
     function __namespace__(ns, parent) {
@@ -205,8 +204,7 @@ define(function (require) {
 				+ '<div class=\"comment_repely_input\">'
 				+ '	<input type=\"text\" placeholder=\"我来说几句\" />'
 				+ '	<div class=\"comment_input_btns\">'
-				+ '		<a href=\"javascript:void(0);\" onclick=\"commentBtnClick()\"'
-				+ '      class=\"comment_detail_link\" title=\"\">'
+				+ '		<a href=\"javascript:void(0);\" class=\"comment_detail_link\" title=\"\">'
 				+ '			<div class=\"comment_input_comment\">'
 				+ '				<span class=\"comment_num\"></span>'
 				+ '				<img src=\"https://res.cngoldres.com/mobile/images/m_comment26_icon_1.png\" alt=\"\"/>'
@@ -244,6 +242,24 @@ define(function (require) {
                     return;
                 }
                 commentInsertDiv.append(str);
+                // 重写commentBtnClick的方法
+                $('.comment_detail_link').click(function () {
+                    var exist = $('#comment_cngold-comment').length;
+                    if (exist > 0) {
+                        var t = $('#comment_cngold-comment').offset().top;
+                        $('html,body').animate({scrollTop: t + 'px'}, 500);
+                    } else {
+                        if ($('.comment_num').html() === undefined
+                        || $('.comment_num').html() === '' || $('.comment_num').html() === '0') {
+                            $('.comment_repely_input input').focus();
+                        } else {
+                            var detailUrl = encodeURI(MCommentDetailGlob.commentConstant.commentDomain
+                            + '/m_comment_detail.htm?commentKey=' + MCommentDetailGlob.commentConstant.commentKey
+                            + '&commentUrl=' + window.location.href);
+                            location.href = detailUrl;
+                        }
+                    }
+                });
                 includeJavaScript('https://captcha.luosimao.com/static/js/api.js?_=' + Date.parse(new Date()));
                 // 初始化全局变量数据
                 var articleUrl = window.location.href;
@@ -509,24 +525,24 @@ define(function (require) {
             $('#comment_comment_detail').attr('placeholder', '请输入评论内容...');
         });
     }
-
-    function commentBtnClick() {
-        var exist = $('#comment_cngold-comment').length;
-        if (exist > 0) {
-            var t = $('#comment_cngold-comment').offset().top;
-            $('html,body').animate({scrollTop: t + 'px'}, 500);
-        } else {
-            if ($('.comment_num').html() === undefined
-            || $('.comment_num').html() === '' || $('.comment_num').html() === '0') {
-                $('.comment_repely_input input').focus();
-            } else {
-                var detailUrl = encodeURI(MCommentDetailGlob.commentConstant.commentDomain
-                + '/m_comment_detail.htm?commentKey=' + MCommentDetailGlob.commentConstant.commentKey
-                + '&commentUrl=' + window.location.href);
-                location.href = detailUrl;
-            }
-        }
-    }
+    // onclick方法一直报错，改成用jq重写
+//  function commentBtnClick() {
+//      var exist = $('#comment_cngold-comment').length;
+//      if (exist > 0) {
+//          var t = $('#comment_cngold-comment').offset().top;
+//          $('html,body').animate({scrollTop: t + 'px'}, 500);
+//      } else {
+//          if ($('.comment_num').html() === undefined
+//          || $('.comment_num').html() === '' || $('.comment_num').html() === '0') {
+//              $('.comment_repely_input input').focus();
+//          } else {
+//              var detailUrl = encodeURI(MCommentDetailGlob.commentConstant.commentDomain
+//              + '/m_comment_detail.htm?commentKey=' + MCommentDetailGlob.commentConstant.commentKey
+//              + '&commentUrl=' + window.location.href);
+//              location.href = detailUrl;
+//          }
+//      }
+//  }
     // 弹幕html结构
     function barrageHtml() {
         var str = ''

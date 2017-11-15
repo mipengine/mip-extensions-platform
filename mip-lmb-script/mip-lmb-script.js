@@ -1,10 +1,10 @@
 /**
-* @file     辣妈帮mip:URL跳转、关闭元素显示、点击切换元素显示组件
+* @file     辣妈帮mip:URL跳转、关闭元素显示、点击切换元素显示、分页跳转组件
 * @author   981993907@qq.com
 */
 define(function (require) {
     var customEle = require('customElement').create();
-    customEle.prototype.firstInviewCallback = function () {
+    customEle.prototype.build = function () {
         // URL跳转
         this.addEventAction('urlJump', function (event, url) {
             if (url) {
@@ -29,6 +29,12 @@ define(function (require) {
                 document.getElementById(id).style.display = 'none';
             }
         });
+        // 选择分页跳转
+        if ($('#pageSelect') !== null) {
+            $('#pageSelect').on('change', function () {
+                location.href = $(this).val();
+            });
+        }
     };
     return customEle;
 });

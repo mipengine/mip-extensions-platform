@@ -16,9 +16,13 @@ define(function (require) {
                 'q27': true, 'q28': true, 'q73': true, 'q74': true, 'q83': true, 'q84': true, 'q85': true,
                 'q86': true};
 
-    function renderRealTime(codes, ids, domain) {
+    function renderRealTime(codes, ids, domain, updateTimeId, dateFormat) {
         if (codes === undefined || codes === null || ids === undefined || ids === null) {
             return;
+        }
+
+        if (dateFormat === undefined || dateFormat === null) {
+            dateFormat = 'yyyy-MM-dd HH:mm:ss';
         }
 
         fetch(domain + '/quoteCenter/realTime.htm?codes=' + codes + '&dataType=json').then(function (res) {
@@ -28,9 +32,14 @@ define(function (require) {
 
             var codeArray = codes.split(',');
             var idArray = ids.split(',');
+            var maxTime = 0;
             for (var i = 0; i < codeArray.length; i++) {
                 var code = codeArray[i];
                 var jsonData = quoteJson[code];
+
+                if (jsonData === undefined) {
+                    continue;
+                }
 
                 var digits = 2;
                 if (jsonData.digits !== undefined && jsonData.digits !== 'NaN.undefined') {
@@ -45,15 +54,19 @@ define(function (require) {
                         continue;
                     }
 
+                    if (maxTime < jsonData.time) {
+                        maxTime = jsonData.time;
+                    }
+
                     var valueStr = undefined;
                     var textColor = undefined;
 
                     if (type === 'updateTime') {
-                        var dateFormat = $('#' + id).attr('dateFormat');
-                        if (dateFormat === undefined) {
-                            dateFormat = 'yyyy-MM-dd HH:mm:ss';
+                        var customDateFormat = $('#' + id).attr('dateFormat');
+                        if (customDateFormat === undefined || customDateFormat === null) {
+                            customDateFormat = dateFormat;
                         }
-                        valueStr = formatDate(new Date(jsonData.time), dateFormat);
+                        valueStr = formatDate(new Date(jsonData.time), customDateFormat);
                     } else {
                         if (colorSet[type]) {
                             textColor = getColor(type, 'q2', jsonData);
@@ -76,6 +89,11 @@ define(function (require) {
                     $('#' + id).html(valueStr);
                 }
 
+            }
+
+            if (updateTimeId !== undefined && updateTimeId !== null) {
+                var str = formatDate(new Date(maxTime), dateFormat);
+                $('#' + updateTimeId).html(str);
             }
 
         });
@@ -172,6 +190,9 @@ define(function (require) {
     }
 
     function dealALinkUrl(alinkUrl, quote, val, linkUrlJson) {
+        if (alinkUrl === undefined || alinkUrl === null || alinkUrl === '') {
+            return quote[val];
+        }
         while (true) {
             var num1 = alinkUrl.indexOf('{');
             if (num1 > -1) {
@@ -185,14 +206,12 @@ define(function (require) {
                     }
                 }
                 alinkUrl = alinkUrl.replace(alinkUrl.substring(num1, num2 + 1), value);
+                console.info(alinkUrl);
             } else {
                 break;
             }
         }
 
-        if (alinkUrl === undefined || alinkUrl === '') {
-            return quote[val];
-        }
         var returnUrl =  '<a class="blue" href="' + alinkUrl + '" title="' + quote[val] + '" target="_blank">';
         returnUrl = returnUrl + quote[val] + '</a>';
         return returnUrl;
@@ -208,7 +227,9 @@ define(function (require) {
 
         if (codes !== undefined && codes !== null) {
             var domain = ele.getAttribute('domain');
-            renderRealTime(codes, ids, domain);
+            var updateTimeId = ele.getAttribute('updateTimeId');
+            var dateFormat = ele.getAttribute('dateFormat');
+            renderRealTime(codes, ids, domain, updateTimeId, dateFormat);
         } else {
             var categoryIds = ele.getAttribute('categoryIds');
             var ids = ele.getAttribute('ids');

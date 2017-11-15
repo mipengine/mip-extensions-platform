@@ -15,9 +15,25 @@ define(function (require) {
         var headerFixedDom = ele.children[0];
         var eleH = headerFixedDom.offsetHeight;
         var shadowDom = document.createElement('div');
+        var target = ele.getAttribute('data-target');
         shadowDom.style.height = eleH + 'px';
         shadowDom.className += 'mip-header-fixed-shadow';
-        ele.appendChild(shadowDom);
+        if (target === null || target === '') {
+            target = 'inner';
+        }
+        switch (target) {
+            case 'inner':
+                ele.appendChild(shadowDom);
+                break;
+            default:
+                try {
+                    var targetObj = document.querySelector(target);
+                    targetObj.parentNode.insertBefore(shadowDom, targetObj);
+                }
+                catch (e) {
+                    console.log(e + ' (xiaojp:组件的data-target参数，请传递一个dom的选择器)');
+                }
+        }
     };
     return customElement;
 });

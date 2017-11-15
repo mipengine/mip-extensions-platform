@@ -1,0 +1,14 @@
+{
+    "name": "mip-xiaojp-display",
+    "version": "1.0.0",
+    "description": "通过点击这个组件，让另外一个元素显示出来",
+    "contributors": [
+        {
+            "name": "xiaojinping",
+            "email": "290762142@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

@@ -1,7 +1,7 @@
 {
-    "name": "mip-ppkao-slidetoggle",
-    "version": "1.0.2",
-    "description": "上滑和下滑",
+    "name": "mip-ppkao-goback",
+    "version": "1.0.0",
+    "description": "PPkao返回",
     "contributors": [
         {
             "name": "fll",

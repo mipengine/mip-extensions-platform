@@ -15,6 +15,12 @@ mip-lmb-script 辣妈帮mip:URL跳转、关闭元素显示、点击切换元素�
 		<div on="tap:lmb-script.urlJump(http://www.lamabang.com/)">URL跳转</div>
 		<span class="close" id="closeId" on="tap:lmb-script.closeEle(closeId)">点我关闭×</span>
 		<div  id="toggleId" on="tap:lmb-script.toggleEle(toggleId)">点我切换显示×××</div>
+		<select id="pageSelect">
+			<option value="https://www.baidu.com" selected="">第1页</option>								
+			<option value="https://www.baidu.com" >第2页</option>
+			<option value="https://www.baidu.com" >第3页</option>
+			<option value="https://www.baidu.com">第4页</option>
+		</select>
 ```
 
 ## urlJump(url) URL跳转接口
@@ -43,6 +49,11 @@ mip-lmb-script 辣妈帮mip:URL跳转、关闭元素显示、点击切换元素�
 类型：字符串  
 单位：无  
 默认值：无
+
+## 选择分页跳转组件
+### 参数 无
+
+说明：分页select元素的id必须为pageSelect，value值为跳转url    
 
 
 
