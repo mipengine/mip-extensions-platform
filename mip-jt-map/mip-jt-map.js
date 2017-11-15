@@ -150,6 +150,10 @@ define(function (require) {
                 success: function (data) {
                     var dataList = data.data;
                     var str = '';
+                    var myCity = new BMap.LocalCity();
+                    myCity.get(function (result) {
+                        $('#cityName').html('当前位置：' + result.name);
+                    });
                     if (data.flag && dataList.length > 0) {
                         var pointArray = [];
                         for (var i = 0; i < dataList.length; i++) {
@@ -180,8 +184,8 @@ define(function (require) {
             });
         }
 
-        // 根据定位经纬度获取周边网点
         if (englishShortName !== '' && typeof (englishShortName) !== 'undefined') {
+            // 根据定位经纬度获取周边网点
             navigator.geolocation.getCurrentPosition(getwangdian, showError, {
                 enableHighAccuracy: true,
                 maximumAge: 2000
@@ -260,8 +264,11 @@ define(function (require) {
                 },
                 success: function (data) {
                     if (data.flag) {
-                        $('#cityName').html('当前位置：' + data.msg);
                         var dataList = data.data;
+                        var myCity = new BMap.LocalCity();
+                        myCity.get(function (result) {
+                            $('#cityName').html('当前位置：' + result.name);
+                        });
                         if (dataList.length > 0) {
                             var pointArray = [];
                             var listArray = [];
@@ -275,8 +282,7 @@ define(function (require) {
                                 var pt = new BMap.Point(x, y);
                                 var img = 'https://res.cngoldres.com/mobile/images/red' + j + '_futures15.png';
                                 var myIcon = new BMap.Icon(img, new BMap.Size(50, 28));
-                                // 创建标注
-                                var marker2 = new BMap.Marker(pt, {icon: myIcon});
+                                var marker2 = new BMap.Marker(pt, {icon: myIcon});  // 创建标注
                                 baiyunMap.imap.addOverlay(marker2);
                                 marker2.addEventListener('click', function (e) {
                                     attribute(e, listArray, lng, lat);
