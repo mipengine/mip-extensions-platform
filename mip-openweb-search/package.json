@@ -1,6 +1,6 @@
 {
     "name": "mip-openweb-search",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "配置ghost rss搜索, 处理事件绑定弹层逻辑",
     "contributors": [
         {

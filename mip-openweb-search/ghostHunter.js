@@ -169,7 +169,6 @@ define(function (require) {
         },
 
         find: function (value) {
-            console.log('find: ' + value);
             var searchResult = this.index.search(value);
             var results = $(this.results);
             var resultsData = [];
