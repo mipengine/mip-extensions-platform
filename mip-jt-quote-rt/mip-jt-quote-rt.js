@@ -14,7 +14,7 @@ define(function (require) {
     var colorSet = {'q1': true, 'q3': true, 'q4': true, 'q63': true, 'q5': true, 'q6': true, 'q9': true,
                 'q10': true, 'q13': true, 'q14': true, 'q17': true, 'q18': true, 'q21': true, 'q22': true,
                 'q27': true, 'q28': true, 'q73': true, 'q74': true, 'q83': true, 'q84': true, 'q85': true,
-                'q86': true};
+                'q86': true, 'q2': true};
 
     function renderRealTime(codes, ids, domain, updateTimeId, dateFormat) {
         if (codes === undefined || codes === null || ids === undefined || ids === null) {
@@ -50,7 +50,7 @@ define(function (require) {
                     var type = idArray[j];
                     var id = code + '_' + type;
 
-                    if (jsonData[type] === undefined || $('#' + id).length <= 0) {
+                    if ((jsonData[type] === undefined && type !== 'updateTime') || $('#' + id).length <= 0) {
                         continue;
                     }
 

@@ -1,0 +1,14 @@
+{
+    "name": "mip-judge-port",
+    "version": "1.0.0",
+    "description": "判断访问设备,给下载按钮响应的下载连接",
+    "contributors": [
+        {
+            "name": "zwf",
+            "email": "18800188967@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

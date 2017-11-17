@@ -4,7 +4,7 @@
  */
 
 define(function (require) {
-
+    var $ = require('zepto');
     var customElement = require('customElement').create();
 
     /**
@@ -12,7 +12,8 @@ define(function (require) {
      */
     customElement.prototype.firstInviewCallback = function () {
         var ele = this.element;
-        ele.parentNode.addEventListener('click', function () {
+        var button = $(ele).parents('.title');
+        button.on('click', function () {
             var rotateDeg = ele.dataset.rotate ? ele.dataset.rotate : '90deg';
             if (ele.classList.contains('active')) {
                 ele.classList.remove('active');
@@ -21,7 +22,7 @@ define(function (require) {
                 ele.classList.add('active');
                 ele.style.transform = 'rotate(' + rotateDeg + ')';
             }
-        }, false);
+        });
     };
 
     return customElement;

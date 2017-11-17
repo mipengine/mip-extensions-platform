@@ -137,12 +137,12 @@ define(function (require) {
         element.on('click', '[data-action=start]', function () {
             var pageUrl = util.parseCacheUrl(location.href);
             pageUrl = pageUrl.replace(/\#.*?$/, '');
-            pageUrl = pageUrl.replace(/\&rqid\=\d{19}$/, '');
+            pageUrl = pageUrl.replace(/\&rqid\=\d*$/, '');
             var url = 'https://m.baidu.com/sf?pd=life_cookbook&openapi=1&dspName=iphone&from_sf=1&resource_id=4669&word='
                 + encodeURIComponent(pageUrl) + '&title=菜谱语音助手&ms=1';
 
             // iframe 内部跳转需要使用特殊处理
-            // 否则只是在iframe里面跳
+            // 否则只是在 iframe 里面跳
             window.top.location.href = url;
         });
 

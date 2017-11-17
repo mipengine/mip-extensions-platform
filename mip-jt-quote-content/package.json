@@ -1,7 +1,7 @@
 {
-    "name": "mip-jt-quote-rt",
-    "version": "1.2.1",
-    "description": "金投网行情排序组件",
+    "name": "mip-jt-quote-content",
+    "version": "1.0.0",
+    "description": "行情内容页组件",
     "contributors": [
         {
             "name": "jt",

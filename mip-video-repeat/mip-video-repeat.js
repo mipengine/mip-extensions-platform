@@ -11,14 +11,11 @@ define(function (require) {
     customElem.prototype.firstInviewCallback = function () {
         // 先设置动态rem适配
         (function flexible(window, document) {
-            var dpr = window.devicePixelRatio; // 设备像素比
-            var scale = 1 / dpr; // 设置缩放
             var clientWidth = document.documentElement.clientWidth; // 视口宽
             document.querySelector('meta[name="viewport"]')
-            .setAttribute('content', 'width=' + dpr * clientWidth + ', initial-scale=' + scale
-                + ',maximum-scale=' + scale + ', minimum-scale=' + scale + ',user-scalable=no');
-            document.documentElement.style.fontSize = clientWidth * dpr / 10 + 'px'; // 动态设置font-size
-            document.documentElement.setAttribute('data-dpr', dpr);
+            .setAttribute('content', 'width=' + clientWidth + ', initial-scale=1 ,maximum-scale=1,'
+            + ' minimum-scale=1 ,user-scalable=no');
+            document.documentElement.style.fontSize = clientWidth / 10 + 'px'; // 动态设置font-size
         }(window, document));
         // this.element 可取到当前实例对应的 dom 元素
         var $element = $(this.element);
@@ -26,6 +23,7 @@ define(function (require) {
         var vSrcEnd = $element.attr('v-src-end');
         var targetSrc = $element.attr('target-src');
         var posterSrc =  $element.attr('poster-src');
+        var playBtn = $('.video-play-button');
         var curIndex;
         //  初始化播放器
         var video = document.createElement('video');
@@ -38,31 +36,12 @@ define(function (require) {
             'poster': posterSrc ? posterSrc : ''
         });
         //  初始化video的尺寸大小
-        $(video).css('width', window.innerWidth + 'px');
+        $(video).css('width', document.documentElement.clientWidth + 'px');
         $element[0].appendChild(video);
         $('.rec-video-wrapper').hide();
         $('.video-mask').hide();
-        $('.video-play-button').on('click', function (e) {
-            video.play();
-            $(e.currentTarget).hide();
-            $(video).attr('poster', '');
-        });
-        //  如果是IOS上的UC浏览器 则不播放片头片尾
-        if (platform.isIos() && platform.isUc()) {
-            video.src = targetSrc;
-            curIndex = 2;
-        }
-        else {
-            //  如果有片头并且非IOS上的QQ浏览器 则播放片头
-            if (vSrc && !(platform.isIos() && platform.isQQ())) {
-                video.src = vSrc;
-                curIndex = 1;
-            }
-            else {  //  否则直接播放内容
-                video.src = targetSrc;
-                curIndex = 2;
-            }
-        }
+        // 检查手机系统及浏览器
+        checkSystemAndBrowser();
         //  当前视频播放完毕
         video.onended = function () {
             curIndex += 1;
@@ -99,6 +78,9 @@ define(function (require) {
                 showReplayPageWithRecommend();
             }
             else {
+                if (platform.isAndroid() && platform.isChrome()) {
+                    return;
+                }
                 // 显示只有重播的遮罩的界面
                 showReplayPage();
             }
@@ -168,6 +150,39 @@ define(function (require) {
                 removeNode('.rec-video-wrapper');
                 video.play();
             });
+        }
+        function checkSystemAndBrowser() {
+            // 如果是Android上的Chrome浏览器，则不显示播放按钮
+            if (platform.isAndroid() && platform.isChrome()) {
+                playBtn.hide();
+            }
+            // 如果是手机百度，则不显示播放按钮
+            else if (platform.isBaiduApp()) {
+                playBtn.hide();
+            }
+            else {
+                playBtn.on('click', function (e) {
+                    video.play();
+                    $(e.currentTarget).hide();
+                    $(video).attr('poster', '');
+                });
+            }
+            //  如果是IOS上的UC浏览器 则不播放片头片尾
+            if (platform.isIos() && platform.isUc()) {
+                video.src = targetSrc;
+                curIndex = 2;
+            }
+            else {
+                //  如果有片头并且非IOS上的QQ浏览器 则播放片头
+                if (vSrc && !(platform.isIos() && platform.isQQ())) {
+                    video.src = vSrc;
+                    curIndex = 1;
+                }
+                else {  //  否则直接播放内容
+                    video.src = targetSrc;
+                    curIndex = 2;
+                }
+            }
         }
         function removeNode(node) {
             $(node).remove();

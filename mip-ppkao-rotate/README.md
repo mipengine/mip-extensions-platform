@@ -12,10 +12,9 @@ mip-ppkao-rotate 点击旋转dom，已经旋转则返回
 
 ### 基本用法
 ```html
-<span>
 <mip-ppkao-rotate data-rotate="90deg">
     自定义内容，可以嵌套其他组件
-</mip-ppkao-rotate></span>
+</mip-ppkao-rotate>
 ```
 
 ## 属性
