@@ -9,14 +9,6 @@ define(function (require) {
     var platform = util.platform;
     var customElem = require('customElement').create();
     customElem.prototype.firstInviewCallback = function () {
-        // 先设置动态rem适配
-        (function flexible(window, document) {
-            var clientWidth = document.documentElement.clientWidth; // 视口宽
-            document.querySelector('meta[name="viewport"]')
-            .setAttribute('content', 'width=' + clientWidth + ', initial-scale=1 ,maximum-scale=1,'
-            + ' minimum-scale=1 ,user-scalable=no');
-            document.documentElement.style.fontSize = clientWidth / 10 + 'px'; // 动态设置font-size
-        }(window, document));
         // this.element 可取到当前实例对应的 dom 元素
         var $element = $(this.element);
         var vSrc = $element.attr('v-src');

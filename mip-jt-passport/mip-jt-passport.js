@@ -9,6 +9,13 @@
 define(function (require) {
     var $ = require('zepto');
     var customElement = require('customElement').create();
+    function includeLinkStyle(url) {
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = url;
+        document.getElementsByTagName('head')[0].appendChild(link);
+    }
 
     var registerUtil;
     var validationUtil;
@@ -23,39 +30,39 @@ define(function (require) {
         IDENTITY_CARD: /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/
     };
     function evil(fn) {
-        var Fn = Function;// 一个变量指向Function，防止有些前端编译工具报错
+        var Fn = Function;
         return new Fn('return ' + fn)();
     }
-    var strongFlag = 0;// 密码强度标志位
-    var mobileShowFlag = 0;// 图片验证码显示状态
-    var captchaShowFlag = 0;// 校验码显示状态
-    var mold = 0;//  默认为0服务申请,1邮箱注册和2手机注册
-    var needAction = 1;//  0不需要去后台验证, 1需要去后台验证
-    var recommendTimes;// 昵称推荐请求次数
-    var nicknameShowTimes;// 一个批次的推荐昵称显示次数
-    var nicknames = [];// 可用的推荐昵称数组
-    var registerMethod = 0;//  0用post提交, 1用get提交 FIXME 临时解决Android, ios, pc端注册的post提交跨域问题, 以后实现更优方案
-    var sildeType = 0;// 是否用滑动验证码0/否 1/是
-    var isSlideSuccess = 0;// 邮箱注册是否滑动成功0/否 1/是
+    var strongFlag = 0;
+    var mobileShowFlag = 0;
+    var captchaShowFlag = 0;
+    var mold = 0;
+    var needAction = 1;
+    var recommendTimes;
+    var nicknameShowTimes;
+    var nicknames = [];
+    var registerMethod = 0;
+    var sildeType = 0;
+    var isSlideSuccess = 0;
     var url = {
         CHECK_NICKNAME: PASSPORT_DOMAIN + '/account/checkNickname.htm?callback=?',
         CHECK_LOGIN_NAME: PASSPORT_DOMAIN + '/account/checkLoginName.htm?callback=?',
         CHECK_MOBILE: PASSPORT_DOMAIN + '/account/checkMobile.htm?callback=?',
         CHECK_EMAIL: PASSPORT_DOMAIN + '/account/checkEmail.htm?callback=?',
         MOBILE_CODE: PASSPORT_DOMAIN + '/account/mobileCode.htm?callback=?',
-        SAVE: PASSPORT_DOMAIN + '/account/save.htm?callback=?', // 用户注册
-        REGISTER: PASSPORT_DOMAIN + '/account/register.htm?callback=?', // 服务申请
+        SAVE: PASSPORT_DOMAIN + '/account/save.htm?callback=?',
+        REGISTER: PASSPORT_DOMAIN + '/account/register.htm?callback=?',
         RECOMMEND_NICKNAME: PASSPORT_DOMAIN + '/account/nicknameRecommend.htm?callback=?',
-        CHECK_PICCODE: PASSPORT_DOMAIN + '/account/checkPicCode.htm?callback=?', // 校验图片验证码
-        REGISTER_SECRECT: PASSPORT_DOMAIN + '/account/registerSecrect.htm?callback=?', // 弹出遮罩层前的提交入库
-        CHECK_PIC_MOBILE: PASSPORT_DOMAIN + '/account/captchaStatus.htm?callback=?', // v1.3.3一个请求, 返回图片和手机验证码是否需要
-        CHECK_MOBILECODE: PASSPORT_DOMAIN + '/account/checkMobileCode.htm?callback=?', // v1.3.3一个请求, 返回图片和手机验证码是否需要
-        EMAIL_CODE: PASSPORT_DOMAIN + '/account/sendAgainEmail.htm?callback=?', // V1.4再次发送邮件
-        EMAIL_CALLBACK_CODE: PASSPORT_DOMAIN + '/account/password/emailCode.htm?callback=?', // V1.4再次发送邮件,找回密码
-        SEND_MOBILE: PASSPORT_DOMAIN + '/account/password/sendMobile.htm?callback=?', // v.1.4 再次发送短信
-        ANA_SEND: ANA_DOMAIN + '/w/sd/transfer.htm?callback=?', // v1.12提供金投统计
-        CHECK_SLIDE_CODE: PASSPORT_DOMAIN + '/image/check.htm?callback=?', // v2.1滑动验证
-        INIT_SLIDE_CODE: PASSPORT_DOMAIN + '/image/slideValidate.htm?callback=?' // v2.1初始化滑动验证图片
+        CHECK_PICCODE: PASSPORT_DOMAIN + '/account/checkPicCode.htm?callback=?',
+        REGISTER_SECRECT: PASSPORT_DOMAIN + '/account/registerSecrect.htm?callback=?',
+        CHECK_PIC_MOBILE: PASSPORT_DOMAIN + '/account/captchaStatus.htm?callback=?',
+        CHECK_MOBILECODE: PASSPORT_DOMAIN + '/account/checkMobileCode.htm?callback=?',
+        EMAIL_CODE: PASSPORT_DOMAIN + '/account/sendAgainEmail.htm?callback=?',
+        EMAIL_CALLBACK_CODE: PASSPORT_DOMAIN + '/account/password/emailCode.htm?callback=?',
+        SEND_MOBILE: PASSPORT_DOMAIN + '/account/password/sendMobile.htm?callback=?',
+        ANA_SEND: ANA_DOMAIN + '/w/sd/transfer.htm?callback=?',
+        CHECK_SLIDE_CODE: PASSPORT_DOMAIN + '/image/check.htm?callback=?',
+        INIT_SLIDE_CODE: PASSPORT_DOMAIN + '/image/slideValidate.htm?callback=?'
     };
 
     var passporterrors = [];
@@ -111,15 +118,14 @@ define(function (require) {
     passporterrors.serviceRegister[10021402] = '密码长度必须6位以上,16位以下';
     passporterrors.serviceRegister[10021501] = '重复密码不能为空';
     passporterrors.serviceRegister[10021502] = '两次输入密码不一致';
-// ip黑名单异常
     passporterrors.serviceRegister[10021601] = '您所使用的IP地址异常，请重新访问。如有疑问，请拨打客服电话：400-103-2211';
-// ip  1天次数超过 10次 异常
+
     passporterrors.serviceRegister[10021602] = '你所使用的IP地址异常，请重新访问。如有疑问，请拨打客服电话：400-103-2211';
-// ip 10分钟 次数超过 2次 异常
+
     passporterrors.serviceRegister[10021603] = '抱歉，您注册次数过于频繁，建议您休息一会儿再试！';
     passporterrors.serviceRegister[10010408] = '你的ip存在异常，请联系客服';
     passporterrors.serviceRegister[10010409] = '您的ip存在异常，请联系客服';// referer
-    /** 已申请服务, 返回错误 (已申请该服务! 请耐心等待结果.) */
+
     passporterrors.serviceRegister[10021604] = '已申请该服务! 请耐心等待结果';// referer
 
     function __namespace__(ns, parent) {
@@ -153,21 +159,18 @@ define(function (require) {
         }
     }
 
-    /**
-     * 校验表单相关方法
-     */
+
 //    __namespace__({
 //        org: {
 //            cngold: {
 //                passport: (function () {
     function ValidationUtils() {
-                         // 获取referrer,主要用于取得跳转地址,一般情况下是本页面连接,如果是嵌套的iframe,就用父窗口的url。可以重写。
-                         // 和getFromurl的区别是,主要用于手机、邮箱已注册情况下的展示链接
+
                         ValidationUtils.prototype.getReferrer = function () {
                             var referrer;
-                            if (window.parent === window) {// 自身是父页面
+                            if (window.parent === window) {
                                 referrer = location.href;
-                            } else {// 自身是iframe
+                            } else {
                                 referrer = document.referrer;
                             }
                             if (referrer.indexOf('?') > -1) {
@@ -176,7 +179,7 @@ define(function (require) {
                             return referrer.replace('#', '%23');
                         };
 
-                        // 去掉referrer后边的参数
+
 
                         ValidationUtils.prototype.splitReferrer = function (referrer) {
                             if (referrer.indexOf('?') > -1) {
@@ -185,18 +188,17 @@ define(function (require) {
                             return referrer;
                         };
 
-                        // 获取fromUrl,主要是用于获得来源地址,一般情况下是获得所写的url,如果是嵌套的iframe,就用父窗口的url。可以重写。
-                        // 和getReferrer的区别是,主要用于获得来源fromUrl，传到后台
+
 
                         ValidationUtils.prototype.getFromUrl = function (idPrev) {
                             var fromUrl;
-                            if (window.parent === window) {// 自身是父页面
+                            if (window.parent === window) {
                                 if ($(idPrev + 'fromUrl').length > 0) {
                                     fromUrl = $(idPrev + 'fromUrl').val();
                                 } else {
                                     fromUrl = location.href;
                                 }
-                            } else {// 自身是iframe
+                            } else {
                                 fromUrl = document.referrer;
                             }
                             if (fromUrl.indexOf('?') > -1) {
@@ -205,10 +207,10 @@ define(function (require) {
                             return fromUrl.replace('#', '%23');
                         };
 
-                        // 显示错误提示
+
 
                         ValidationUtils.prototype.showErrorMsg = function (formId, errorCode, inputId) {
-                            // 有错误提示的时候, 也将按钮再次放开...
+
                             if ($('#button_submit').length > 0) {
                                 $('#button_submit').removeAttr('disabled', 'disabled');
                             }
@@ -228,16 +230,16 @@ define(function (require) {
                                 }
                             } else {
                                 if (errorCode === 10020703) {
-                                    $('#tip_mobile1').html(getMobileShowHtml(this.getErrorMsg(errorCode))); // 临时处理手机提示，等产品重新设计再修改
+                                    $('#tip_mobile1').html(getMobileShowHtml(this.getErrorMsg(errorCode)));
                                     $(formId).html(getMobileShowHtml(this.getErrorMsg(errorCode)));
                                 } else if (errorCode === 10020903) {
-                                    $('#tip_email1').html(getMobileShowHtml(this.getErrorMsg(errorCode))); // 临时处理邮箱提示，等产品重新设计再修改
+                                    $('#tip_email1').html(getMobileShowHtml(this.getErrorMsg(errorCode)));
                                     $(formId).html(getEmailShowHtml(this.getErrorMsg(errorCode)));
                                 } else {
-                                    // 兼容多表单
+
                                     $(formId).show();
                                     if (inputId !== undefined && inputId !== '#') {
-                                        // 加上Tip_开始, 找得到就显示, 找不到显示在formInputId里面
+
                                         var formInputId;
                                         if (inputId.indexOf('#') !== -1) {
                                             formInputId = inputId.split('#')[1];
@@ -245,7 +247,7 @@ define(function (require) {
                                         } else {
                                             formInputId = inputId + '_' + iptId;
                                         }
-                                        // 有错误提示的时候, 也将按钮再次放开...(兼容万恶的多表单)
+
                                         if ($(idPrev + 'button_submit').length > 0) {
                                             $(idPrev + 'button_submit').removeAttr('disabled', 'disabled');
                                         }
@@ -273,14 +275,14 @@ define(function (require) {
                                             }
                                         }
                                     }
-                                    // 如果还是找不到, 那么对不起了, 只能alert了
+
                                     if ($(formId).length === 0) {
                                         alert(this.getErrorMsg(errorCode));
                                         return;
                                     }
-                                    // 正常的走这里
+
                                     $(formId).html(this.getErrorMsg(errorCode));
-                                    if ($('#pwdStrongDisplay').length > 0) {// 密码强度
+                                    if ($('#pwdStrongDisplay').length > 0) {
                                         if (errorCode !== 10021501 && errorCode !== 10021502) {
                                             $('[name="pwd"]').attr('style', 'display:none');
                                             $('#pwdStrongDisplay').removeClass('msg-h2');
@@ -289,15 +291,15 @@ define(function (require) {
                                 }
                                 $(formId).addClass('box_error');
                                 $(formId).removeClass('box_ok');
-                                // 遮罩层特例
+
                                 if ('#tip_pictureCaptcha' === formId) {
                                     $(formId).css('display', 'block');
                                 }
-                                // 遮罩层特例
+
                                 if ('#tip_mobilecaptcha' === formId) {
                                     $(formId).css('display', 'block');
                                 }
-                                // 分两步走的情况下, 如果第二步有异常情况, 错误信息显示在手机校验码后面
+
                                 if (formId === 'mobile' && $('#mobile').parent().parent().css('display') === 'none') {
                                     $('#tip_captcha').html(this.getErrorMsg(errorCode));
                                     $('#tip_captcha').addClass('box_error');
@@ -306,7 +308,7 @@ define(function (require) {
                             }
                         };
 
-                        // @see showErrorMsg调用
+
                         ValidationUtils.prototype.getErrorMsg = function (errorCode) {
                             var language = 'serviceRegister';
                             if (passporterrors[language] && passporterrors[language][errorCode]) {
@@ -314,9 +316,9 @@ define(function (require) {
                             }
                         };
 
-                        // 移除字段属性
+
                         ValidationUtils.prototype.removeCss = function (formId) {
-                            if (formId.indexOf('#') !== -1) {// 兼容多表单#formId_inputId
+                            if (formId.indexOf('#') !== -1) {
                                 formId = formId.split('#')[1];
                             }
                             if (formId) {
@@ -325,35 +327,35 @@ define(function (require) {
                             $(formId).html('');
                             $(formId).removeClass('box_error');
                             $(formId).addClass('box_ok');
-                            // 遮罩层特例
+
                             if ('#tip_pictureCaptcha' === formId) {
                                 $(formId).css('display', 'none');
                             }
-                            // 遮罩层特例
+
                             if ('#tip_mobilecaptcha' === formId) {
                                 $(formId).css('display', 'none');
                             }
                         };
 
-                        // 移除字段属性
+
                         ValidationUtils.prototype.encodeURI = function (str) {
                             return encodeURIComponent(encodeURIComponent(str));
                         };
 
-                        // 显示并刷新图片验证码
+
 
                         ValidationUtils.prototype.refreshCaptcha = function () {
                             $('#captchaImg').attr('src', PASSPORT_DOMAIN
                              + '/account/authCode.htm?r=' + new Date().getTime());
                         };
 
-                        // 非0即真的判断方法
+
 
                         ValidationUtils.prototype.isNeedAction = function () {
                             return needAction !== 0;
                         };
 
-                        // 获取字符串字符数
+
 
                         ValidationUtils.prototype.getRealLength = function (s) {
                             if (s == null) {
@@ -363,12 +365,12 @@ define(function (require) {
                             }
                         };
 
-                        // 按批次加载推荐昵称
 
-                        ValidationUtils.prototype.getNicknameShowHtml = function (formId) {// 按批次加载推荐昵称
+
+                        ValidationUtils.prototype.getNicknameShowHtml = function (formId) {
                             nicknames.length = 0;
                             var nickname = $.trim($('#nickname').val());
-                            if (this.getRealLength(nickname) >= 16) {// 昵称长度大于等于8的时候，不做推荐，直接显示“昵称已存在”
+                            if (this.getRealLength(nickname) >= 16) {
                                 $(formId).addClass('box_error');
                                 $(formId).removeClass('box_ok');
                                 $(formId).html('昵称' + nickname + '已存在，请选择其他昵称');
@@ -383,8 +385,8 @@ define(function (require) {
                                 $(formId).addClass('box_error');
                                 $(formId).removeClass('box_ok');
                                 if (json.data.code === 0) {
-                                    // 返回了推荐昵称列表，填充提示区域
-                                    recommendTimes = json.data.times;// 更新推荐次数，因为返回的次数跟请求的次数有可能会不一样
+
+                                    recommendTimes = json.data.times;
                                     for (var i = 0; i < json.data.recommend_nicknames.length; i++) {
                                         nicknames[i] = json.data.recommend_nicknames[i];
                                     }
@@ -398,13 +400,13 @@ define(function (require) {
                                     $(formId).html(str);
                                 } else {
                                     recommendTimes = -1;
-                                    // 没有可以推荐的昵称
+
                                     $(formId).html(json.data.msg);
                                 }
                             });
                         };
 
-                        // 将昵称推荐写入昵称框内
+
 
                         ValidationUtils.prototype.useThis = function () {
                             $('#nickname').val($('#nickDiv').html());
@@ -414,7 +416,7 @@ define(function (require) {
                         };
 
 
-                        // 推荐下一个昵称
+
 
                         ValidationUtils.prototype.nextNickname = function () {
                             if (nicknames.length === 0) {
@@ -447,7 +449,7 @@ define(function (require) {
                             }
                         };
 
-                         // 校验昵称
+
 
                         ValidationUtils.prototype.checkNickname = function (idPrev) {
                             var nicknameId = 'nickname';
@@ -457,38 +459,38 @@ define(function (require) {
                                 var strLengthTrue = this.getRealLength(nickname);
                                 if (nickname === '') {
 //								$(idPrev+'nickname').focus();
-                                    this.showErrorMsg(nicknameId, 10021001);// nickname can not blank
+                                    this.showErrorMsg(nicknameId, 10021001);
                                     return false;
                                 } else if (nickname.indexOf('_') === 0) {
                                     $(nicknameFormId).focus();
-                                    this.showErrorMsg(nicknameId, 10021002);// 昵称不能以_开头
+                                    this.showErrorMsg(nicknameId, 10021002);
                                     return false;
                                 } else if (nickname.indexOf('cngold_') === 0) {
                                     $(nicknameFormId).focus();
-                                    this.showErrorMsg(nicknameId, 10021003);// 昵称不能以'cngold_'开头
+                                    this.showErrorMsg(nicknameId, 10021003);
                                     return false;
                                 } else if (nickname !== '' && !regex.LOGIN_NAME.test(nickname)) {
                                     $(nicknameFormId).focus();
-                                    this.showErrorMsg(nicknameId, 10021004);// 昵称只能由中英文字符、数字、下划线组成
+                                    this.showErrorMsg(nicknameId, 10021004);
                                     return false;
                                 } else if (nickname.indexOf('金投用户') === 0) {
                                     $(nicknameFormId).focus();
-                                    this.showErrorMsg(nicknameId, 10021005);// 昵称不能以'金投用户'开头
+                                    this.showErrorMsg(nicknameId, 10021005);
                                     return false;
                                 } else if (nickname.indexOf('小金') === 0) {
                                     $(nicknameFormId).focus();
-                                    this.showErrorMsg(nicknameId, 10021012);// 昵称不能以'小金'开头
+                                    this.showErrorMsg(nicknameId, 10021012);
                                     return false;
                                 } else if (strLengthTrue < 4 || strLengthTrue > 16) {
                                     $(nicknameFormId).focus();
-                                    this.showErrorMsg(nicknameId, 10021006);// 昵称长度必须2个字到8个字
+                                    this.showErrorMsg(nicknameId, 10021006);
                                     return false;
                                 } else if (regex.EMAIL.test(nickname)) {
                                     $(nicknameFormId).focus();
-                                    this.showErrorMsg(nicknameId, 10021007);// 昵称不能为邮箱格式
+                                    this.showErrorMsg(nicknameId, 10021007);
                                     return false;
                                 } else {
-                                    if (nicknames.length > 0) {// 输入框昵称改变的时候将推荐昵称列表清空，防止推荐昵称牛头不对马嘴
+                                    if (nicknames.length > 0) {
                                         var rN = nicknames[0];
                                         if (rN.indexOf(nickname) === -1) {
                                             nicknames.length = 0;
@@ -507,7 +509,7 @@ define(function (require) {
                             }
                         };
 
-                        // 后台异步校验昵称
+
 
                         ValidationUtils.prototype.checkNicknameAction = function (idPrev, nicknameId, nickname) {
                             var authCodeUrl = nicknameId + '=' + nickname;
@@ -526,7 +528,7 @@ define(function (require) {
                             });
                         };
 
-                        // 校验手机
+
 
                         ValidationUtils.prototype.checkMobile = function (idPrev) {
                             var mobileId = 'mobile';
@@ -535,11 +537,11 @@ define(function (require) {
                                 var mobile = $.trim($(mobileFormId).val());
                                 if (mobile === '') {
 //								$(idPrev+'mobile').focus();
-                                    this.showErrorMsg(mobileId, 10020701, mobileFormId);// 手机不能为空
+                                    this.showErrorMsg(mobileId, 10020701, mobileFormId);
                                     return false;
                                 } else if (mobile !== '' && !regex.MOBILE.test(mobile)) {
 //								$(mobileFormId).focus();
-                                    this.showErrorMsg(mobileId, 10020702, mobileFormId);// 手机号码格式不正确
+                                    this.showErrorMsg(mobileId, 10020702, mobileFormId);
                                     return false;
                                 } else {
                                     if (this.isNeedAction()) {
@@ -556,7 +558,7 @@ define(function (require) {
                             }
                         };
 
-                        // 后台异步校验手机
+
 
                         ValidationUtils.prototype.checkMobileAction = function (idPrev, mobileId, mobile) {
                             var authCodeUrl = mobileId + '=' + mobile;
@@ -567,7 +569,7 @@ define(function (require) {
                                         return true;
                                     } else {
                                         if ($(idPrev + json.data).length > 0) {
-                                            validationUtil.showErrorMsg(json.data, json.code);// 手机号码格式不正确
+                                            validationUtil.showErrorMsg(json.data, json.code);
                                         }
                                         return false;
                                     }
@@ -575,7 +577,7 @@ define(function (require) {
                             });
                         };
 
-                        // 校验邮箱Email
+
 
                         ValidationUtils.prototype.checkEmail = function (idPrev) {
                             var emailId = 'email';
@@ -584,20 +586,20 @@ define(function (require) {
                                 var email = $.trim($(emailFormId).val());
                                 if (email === '' && $(idPrev + 'email').attr('email_must') === '1') {
 //								$(idPrev+'email').focus();
-                                    this.showErrorMsg(emailId, 10020901);// 邮箱不能为空
+                                    this.showErrorMsg(emailId, 10020901);
                                     return false;
                                 } else if (email !== '' && !regex.EMAIL.test(email)) {
                                     if ($('#myemail') && $('#myemail').css('display') === 'block') {
-                                        // 这个时候会弹出mail的层, 失去焦点不去验证..
+
                                     } else {
                                         $(emailFormId).focus();
-                                        this.showErrorMsg(emailId, 10020902);// 邮箱号码格式不正确
+                                        this.showErrorMsg(emailId, 10020902);
                                         return false;
                                     }
                                 } else {
                                     if (!new RegExp('^(?!.*@sangame.com)').test(email)) {
                                         $(emailFormId).focus();
-                                        this.showErrorMsg(emailId, 10020905);// 邮箱号码不能绑定
+                                        this.showErrorMsg(emailId, 10020905);
                                         return false;
                                     }
 
@@ -611,7 +613,7 @@ define(function (require) {
                             }
                         };
 
-                        // 后台异步校验邮箱Email
+
 
                         ValidationUtils.prototype.checkEmailAction = function (idPrev, emailId, email) {
                             var authCodeUrl = emailId + '=' + email;
@@ -630,7 +632,7 @@ define(function (require) {
                             });
                         };
 
-                        // 校验登录名
+
 
                         ValidationUtils.prototype.checkLoginName = function (idPrev) {
                             var loginNameId = 'loginName';
@@ -640,32 +642,32 @@ define(function (require) {
                                 if (loginName === '' || $.trim(loginName) === '请输入姓名') {
                                     $(loginNameFormId).val('');
 //				    			$(loginNameFormId).focus();
-                                    this.showErrorMsg(loginNameId, 10020101);// 请输入姓名
+                                    this.showErrorMsg(loginNameId, 10020101);
                                     return false;
                                 }
                                 if (loginName.indexOf('_') === 0) {
                                     $(loginNameFormId).focus();
-                                    this.showErrorMsg(loginNameId, 10020104);// 用户名不能以_开头
+                                    this.showErrorMsg(loginNameId, 10020104);
                                     return false;
                                 }
                                 if (loginName.indexOf('cngold_') === 0) {
                                     $(loginNameFormId).focus();
-                                    this.showErrorMsg(loginNameId, 10020105);// 用户名不能以cngold_开头
+                                    this.showErrorMsg(loginNameId, 10020105);
                                     return false;
                                 }
                                 if (!regex.LOGIN_NAME.test(loginName)) {
                                     $(loginNameFormId).focus();
-                                    this.showErrorMsg(loginNameId, 10020106);// 用户名只能由中英文字符、数字、下划线组成
+                                    this.showErrorMsg(loginNameId, 10020106);
                                     return false;
                                 }
                                 if (loginName.indexOf('金投用户') === 0) {
                                     $(loginNameFormId).focus();
-                                    this.showErrorMsg(loginNameId, 10020107);// 用户名不能以金投用户开头
+                                    this.showErrorMsg(loginNameId, 10020107);
                                     return false;
                                 }
                                 if (loginName.indexOf('小金') === 0) {
                                     $(loginNameFormId).focus();
-                                    this.showErrorMsg(loginNameId, 10020112);// 用户名不能以小金开头
+                                    this.showErrorMsg(loginNameId, 10020112);
                                     return false;
                                 }
                                 var strLengthTrue = 0;
@@ -679,17 +681,17 @@ define(function (require) {
                                 }
                                 if (strLengthTrue < 4 || strLengthTrue > 15) {
                                     $(loginNameFormId).focus();
-                                    this.showErrorMsg(loginNameId, 10020108);// 用户名长度必须2个字到7个字,4到15个字符
+                                    this.showErrorMsg(loginNameId, 10020108);
                                     return false;
                                 }
                                 if (regex.MOBILE.test(loginName)) {
                                     $(loginNameFormId).focus();
-                                    this.showErrorMsg(loginNameId, 10020109);// 用户名不能为手机号码格式
+                                    this.showErrorMsg(loginNameId, 10020109);
                                     return false;
                                 }
                                 if (regex.EMAIL.test(loginName)) {
                                     $(loginNameFormId).focus();
-                                    this.showErrorMsg(loginNameId, 10020110);// 用户名不能为邮箱格式
+                                    this.showErrorMsg(loginNameId, 10020110);
                                     return false;
                                 }
                                 if (this.isNeedAction()) {
@@ -703,7 +705,7 @@ define(function (require) {
                         };
 
 
-                        // 后台异步校验登录名
+
 
                         ValidationUtils.prototype.checkLoginNameAction = function (idPrev, loginNameId, loginName) {
                             var authCodeUrl = loginNameId + '=' + loginName;
@@ -714,7 +716,7 @@ define(function (require) {
                                         return true;
                                     } else {
                                         if ($(idPrev + json.data).length > 0) {
-                                            validationUtil.showErrorMsg(json.data, json.code);// 用户名已存在
+                                            validationUtil.showErrorMsg(json.data, json.code);
                                         }
                                         return false;
                                     }
@@ -722,12 +724,12 @@ define(function (require) {
                             });
                         };
 
-                        // 查询图片和手机验证码是否需要 v1.3.3
+
 
                         ValidationUtils.prototype.checkCaptcha = function () {
                             $.getJSON(url.CHECK_PIC_MOBILE, function (json) {
                                 if (json !== null && json !== '' && json.flag && json.data) {
-                                    if (json.data.mobile) {// 需要手机校验码
+                                    if (json.data.mobile) {
                                         mobileShowFlag = 1;
                                         $('#captchaView').attr('style', 'display:block');
                                     } else {
@@ -735,21 +737,21 @@ define(function (require) {
                                             $('#captchaView').attr('style', 'display:block');
                                         }
                                     }
-                                    if (json.data.picture) {// 需要图片校验码
+                                    if (json.data.picture) {
                                         captchaShowFlag = 1;
                                     } else {
                                         if ($('#tip_pictureCaptcha').length > 0) {
                                             validationUtil.removeCss('pictureCaptcha');
                                         }
                                     }
-                                    if (json.data.slidePicture) {// 需要滑动验证码
+                                    if (json.data.slidePicture) {
                                         sildeType = 1;
                                     }
                                 }
                             });
                         };
 
-                        // 校验真实姓名
+
 
                         ValidationUtils.prototype.checkRealName = function (idPrev) {
                             var realNameId = 'realName';
@@ -759,18 +761,18 @@ define(function (require) {
                                 if (realName === '' || $.trim(realName) === '' || $.trim(realName) === '请输入姓名') {
 //			    				$(realNameFormId).focus();
                                     $(realNameFormId).val('');
-                                    this.showErrorMsg(realNameId, 10021101, realNameFormId);// 姓名为空,请输入姓名
+                                    this.showErrorMsg(realNameId, 10021101, realNameFormId);
                                     return false;
 
                                 }
                                 if (!regex.REALNAME.test(realName)) {
 //			    				$(realNameFormId).focus();
-                                    this.showErrorMsg(realNameId, 10021102, realNameFormId);// 必须为中文
+                                    this.showErrorMsg(realNameId, 10021102, realNameFormId);
                                     return false;
                                 }
                                 if (realName.length > 6) {
 //			    				$(realNameFormId).focus();
-                                    this.showErrorMsg(realNameId, 10021103, realNameFormId);// 姓名长度必须在6个汉字以内
+                                    this.showErrorMsg(realNameId, 10021103, realNameFormId);
                                     return false;
                                 }
                                 this.removeCss(realNameFormId);
@@ -780,7 +782,7 @@ define(function (require) {
                             }
                         };
 
-                        // 校验qq
+
 
                         ValidationUtils.prototype.checkQq = function (idPrev) {
                             var qqId = 'qq';
@@ -790,7 +792,7 @@ define(function (require) {
                                 var qq = $.trim($(qqFormId).val());
                                 if (qq !== '' && !regex.QQ.test(qq)) {
 //								$(qqFormId).focus();
-                                    this.showErrorMsg('qq', 10021202, qqFormId);// 手机号码格式不正确
+                                    this.showErrorMsg('qq', 10021202, qqFormId);
                                     return false;
                                 }
                                 this.removeCss(qqFormId);
@@ -802,7 +804,7 @@ define(function (require) {
                             }
                         };
 
-                        // 校验身份证
+
 
                         ValidationUtils.prototype.checkIdentityCard = function (idPrev) {
                             var identityCardId = 'identityCard';
@@ -811,13 +813,13 @@ define(function (require) {
                                 var identityCard = $(identityCardFormId).val();
                                 if (identityCard === '') {
                                     $(identityCardFormId).focus();
-                                    this.showErrorMsg(identityCardId, 10021301);// 身份证不能为空
+                                    this.showErrorMsg(identityCardId, 10021301);
                                     return false;
                                 }
-                                // 新的身份证号判断, 暂时就用一个正则
+
                                 if (!regex.IDENTITY_CARD.test(identityCard)) {
                                     $(identityCardId).focus();
-                                    this.showErrorMsg(identityCardId, 10021302);// 身份证格式不正确
+                                    this.showErrorMsg(identityCardId, 10021302);
                                     return false;
                                 }
                                 this.removeCss(identityCardFormId);
@@ -827,10 +829,10 @@ define(function (require) {
                             }
                         };
 
-                        // 弹出Email验证码遮罩层
+
 
                         ValidationUtils.prototype.openEmailMask = function (activedEmailFlag) {
-                            // 隐藏遮罩层并且发送邮件
+
                             var email = $.trim($('#email').val());
                             var email3 = $.trim($('#email3').val());
                             var emailId = $.trim($('#emailId').val());
@@ -865,7 +867,7 @@ define(function (require) {
                                         } else {
                                             picFormId = json.data;
                                         }
-                                        // 刷新验证码(因为后台已经刷新过了, 前台不刷新会报验证码错误)
+
                                         validationUtil.refreshCaptcha();
                                         validationUtil.showErrorMsg(picFormId, json.code);
                                     }
@@ -895,7 +897,7 @@ define(function (require) {
                                         } else {
                                             picFormId = json.data.id;
                                         }
-                                        // 刷新验证码(因为后台已经刷新过了, 前台不刷新会报验证码错误)
+
                                         validationUtil.refreshCaptcha();
                                         validationUtil.showErrorMsg(picFormId, json.code);
                                     }
@@ -903,10 +905,10 @@ define(function (require) {
                             }
                         };
 
-                        // 弹出mobile验证码遮罩层
+
 
                         ValidationUtils.prototype.openMobileMask = function () {
-                            // 隐藏遮罩层并且发送短信
+
                             var data = '';
                             $.getJSON(url.SEND_MOBILE, data, function (json) {
                                 if (json.flag) {
@@ -924,12 +926,12 @@ define(function (require) {
                                         return false;
                                     };
                                     for (var i = 1; i <= secs; i++) {
-                                        window.setTimeout('validationUtil.update(' + i + ',' + wait + ')', i * 1000);
+                                        setTimeout('validationUtil.update(' + i + ',' + wait + ')', i * 1000);
                                     }
-                                    window.setTimeout('validationUtil.timer()', wait);
+                                    setTimeout('validationUtil.timer()', wait);
                                 } else {
                                     var picFormId = 'pictureCaptcha';
-                                    // 刷新验证码(因为后台已经刷新过了, 前台不刷新会报验证码错误)
+
                                     validationUtil.refreshCaptcha();
                                     validationUtil.showErrorMsg(picFormId, json.code);
                                 }
@@ -956,21 +958,21 @@ define(function (require) {
                             };
                         };
 
-                        // 校验密码
+
 
                         ValidationUtils.prototype.checkPasspwordMd5 = function (idPrev) {
                             var pwdId = 'passwordMd5';
                             var pwdFormId = idPrev + pwdId;
                             if ($(pwdFormId).length > 0) {
-                                // 密码
+
                                 var passwordMd5 = $.trim($(pwdFormId).val());
                                 if (passwordMd5 === '') {
-                                    this.showErrorMsg(pwdId, 10021401, pwdFormId);// 登录密码不能为空
+                                    this.showErrorMsg(pwdId, 10021401, pwdFormId);
                                     return false;
                                 }
                                 if (passwordMd5.length < 6 || passwordMd5.length > 16) {
                                     $(pwdFormId).focus();
-                                    this.showErrorMsg(pwdId, 10021402, pwdFormId);// 密码长度必须6位以上,16位以下
+                                    this.showErrorMsg(pwdId, 10021402, pwdFormId);
                                     return false;
                                 }
                                 this.removeCss(pwdFormId);
@@ -980,7 +982,7 @@ define(function (require) {
                             }
                         };
 
-                        // 校验密码强度
+
 
                         ValidationUtils.prototype.checkPasswordStrong = function (idPrev, id) {
                             var passwordMd5 = $.trim($(idPrev + id).val());
@@ -998,49 +1000,49 @@ define(function (require) {
                                 // weak pwd
                                 var regNum = new RegExp('^[0-9]*$');
                                 if (regNum.test(passwordMd5) && strongFlag === 0) {
-                                    this.showPwdStrong(idPrev, 'pwdWeak');// 密码全是数字
+                                    this.showPwdStrong(idPrev, 'pwdWeak');
                                 }
                                 var regStrCap = new RegExp('^[A-Z]+$');
                                 if (regStrCap.test(passwordMd5) && strongFlag === 0) {
-                                    this.showPwdStrong(idPrev, 'pwdWeak');// 密码全是大写英文字母
+                                    this.showPwdStrong(idPrev, 'pwdWeak');
                                 }
                                 var regStrLow = new RegExp('^[a-z]+$');
                                 if (regStrLow.test(passwordMd5) && strongFlag === 0) {
-                                    this.showPwdStrong(idPrev, 'pwdWeak');// 密码全是小写英文字母
+                                    this.showPwdStrong(idPrev, 'pwdWeak');
                                 }
                                 // normal pwd
                                 var regNumStrCap = new RegExp('^(([A-Z]+[0-9]+)|([0-9]+[A-Z]+))[A-Z0-9]*$');
                                 if (regNumStrCap.test(passwordMd5) && strongFlag === 0) {
-                                    this.showPwdStrong(idPrev, 'pwdNormal');// 密码是数字+英文，全大写
+                                    this.showPwdStrong(idPrev, 'pwdNormal');
                                 }
                                 var regNumStrLow = new RegExp('^(([a-z]+[0-9]+)|([0-9]+[a-z]+))[a-z0-9]*$');
                                 if (regNumStrLow.test(passwordMd5) && strongFlag === 0) {
-                                    this.showPwdStrong(idPrev, 'pwdNormal');// 密码是数字+英文，全小写
+                                    this.showPwdStrong(idPrev, 'pwdNormal');
                                 }
                                 var regStr = new RegExp('^[A-Za-z]+$');
                                 if (regStr.test(passwordMd5) && strongFlag === 0) {
-                                    this.showPwdStrong(idPrev, 'pwdNormal');// 密码是英文
+                                    this.showPwdStrong(idPrev, 'pwdNormal');
                                 }
                                 // strong pwd
                                 var regNumStrSpe = /(?=.*[a-z])(?=.*\d)(?=.*[#@!~%^&*])[a-z\d#@!~%^&*]{6,16}/i;
                                 if (regNumStrSpe.test(passwordMd5) && strongFlag === 0) {
-                                    this.showPwdStrong(idPrev, 'pwdStrong');// 密码是特殊字符+英文+数字
+                                    this.showPwdStrong(idPrev, 'pwdStrong');
                                 }
 
                                 if (passwordMd5.match(/[0-9]/)
                                     && passwordMd5.match(/[!,@#$%^&*?_~]/) && strongFlag === 0) {
-                                    this.showPwdStrong(idPrev, 'pwdNormal');// 密码是特殊字符+数字
+                                    this.showPwdStrong(idPrev, 'pwdNormal');
                                 }
                                 if (passwordMd5.match(/[a-z]/)
                                     && passwordMd5.match(/[!,@#$%^&*?_~]/) && strongFlag === 0) {
-                                    this.showPwdStrong(idPrev, 'pwdNormal');// 密码是特殊字符+英文
+                                    this.showPwdStrong(idPrev, 'pwdNormal');
                                 }
                                 if (passwordMd5.match(/[!,@#$%^&*?_~]/) && strongFlag === 0) {
-                                    this.showPwdStrong(idPrev, 'pwdStrong');// 密码全部是特殊字符
+                                    this.showPwdStrong(idPrev, 'pwdStrong');
                                 }
                                 var regNumStr = new RegExp('^[A-Za-z0-9]+$');
                                 if (regNumStr.test(passwordMd5) && strongFlag === 0) {
-                                    this.showPwdStrong(idPrev, 'pwdStrong');// 密码是英文+数字
+                                    this.showPwdStrong(idPrev, 'pwdStrong');
                                 }
                             }
                         };
@@ -1054,7 +1056,7 @@ define(function (require) {
                             $('#pwdStrongDisplay').addClass('msg-h2');
                         };
 
-                        // 校验重复密码
+
 
                         ValidationUtils.prototype.checkPasspwordMd5Confirm = function (idPrev) {
                             var pwdConfirmId = 'passwordMd5_confirm';
@@ -1065,13 +1067,13 @@ define(function (require) {
                                 var passwordMd5Confirm = $.trim($(pwdConfirmFormId).val());
                                 var passwordMd5 = $.trim($(pwdFormId).val());
                                 if (passwordMd5Confirm === '') {
-                                    this.showErrorMsg(pwdConfirmId, 10021501);// 重复密码不能为空
+                                    this.showErrorMsg(pwdConfirmId, 10021501);
                                     return false;
                                 }
 
                                 if (passwordMd5 !== passwordMd5Confirm) {
 //								$(pwdConfirmFormId).focus();
-                                    this.showErrorMsg(pwdConfirmId, 10021502);// 两次输入密码不一致
+                                    this.showErrorMsg(pwdConfirmId, 10021502);
                                     return false;
                                 }
                                 this.removeCss(pwdConfirmFormId);
@@ -1081,7 +1083,7 @@ define(function (require) {
                             }
                         };
 
-                        // 后台异步校验图片验证码
+
 
                         ValidationUtils.prototype.checkPiccode = function () {
                             var picId = 'pictureCaptcha';
@@ -1101,19 +1103,19 @@ define(function (require) {
                                             validationUtil.openMobileMask();
                                         }
                                         validationUtil.removeCss(picId);
-                                        // 获取验证码或者提交表单
+
                                         param += '&' + clientImg;
-                                        if (type === '1') {// 获取手机验证码
-                                            // 验证成功, 隐藏遮罩层
+                                        if (type === '1') {
+
                                             validationUtil.displayOrHidden('', '', '');
                                             registerUtil.mobileCode(param, '#', formId);
-                                        } else if (type === '2') {// 提交表单
-                                            // 如果是表单提交, 则判断是否需要手机校验码
-                                            // 并且不是邮箱注册和手机注册
+                                        } else if (type === '2') {
+
+
                                             if (mobileShowFlag === 1 && mold !== 1 && mold !== 2) {
                                                 validationUtil.displayPic(formId);
                                                 registerUtil.mobileCode(param, '#', formId);
-                                            } else {// 不需要就直接提交表单
+                                            } else {
                                                 validationUtil.displayOrHidden('', '', '');
                                                 registerUtil.formSubmit(param, '#', formId);
                                             }
@@ -1129,7 +1131,7 @@ define(function (require) {
                             });
                         };
 
-                        // 后台异步校验手机验证码
+
 
                         ValidationUtils.prototype.checkMobileCode = function () {
                             var id = 'mobilecaptcha';
@@ -1148,9 +1150,9 @@ define(function (require) {
                                     if (json.flag) {
                                         param += '&authCode=' + $('#mobilecaptcha').val();
                                         validationUtil.removeCss(id);
-                                        // 验证成功, 隐藏遮罩层
+
                                         validationUtil.displayOrHidden('', '', '');
-                                        // 这里是提交表单
+
                                         registerUtil.formSubmit(param, '#', formId);
                                         return true;
                                     } else {
@@ -1162,11 +1164,11 @@ define(function (require) {
                                 }
                             });
                         };
-                        // *******************************遮罩层相关js方法start*******************************
-                        // 追加遮罩层
+                        // *******************************start*******************************
+
                         ValidationUtils.prototype.appendOverlay = function () {
-                            if (mold !== 1 && mold !== 2) {// 手机和邮箱例外
-                                if ($('#pictureCaptchaView')) {// 如果页面有图片验证码, 则移除
+                            if (mold !== 1 && mold !== 2) {
+                                if ($('#pictureCaptchaView')) {
                                     $('#pictureCaptchaView').remove();
                                     $('#pictureCaptcha').remove();
                                     $('#tip_pictureCaptcha').remove();
@@ -1178,7 +1180,7 @@ define(function (require) {
                                     + '<div class="mask_bg"></div>'
                                     + '<div id="picCodeDiv" class="main_panel">'
                                     + '<div class="modal-header">'
-                                    + '<span onclick="validationUtil.displayOrHidden(\"\",\"\",\"\");"'
+                                    + '<span onclick="validationUtil.displayOrHidden(\'\',\'\',\'\');"'
 									+ 'class="close close_alidate">'
                                     + '</span><h3>图片验证码</h3></div>'
                                     + '<div class="img_wrapper mid" style="left:.8rem">'
@@ -1201,7 +1203,7 @@ define(function (require) {
                                     + '</div>'
                                     + '<div id="modivCodeDiv" class="main_panel" style="display:none;">'
                                     + '<div class="modal-header">'
-                                    + '<span onclick="validationUtil.displayOrHidden(\"\",\"\",\"\");"'
+                                    + '<span onclick="validationUtil.displayOrHidden(\'\',\'\',\'\');"'
                                     + 'class="close close_alidate">'
                                     + '</span><h3>手机验证码</h3></div>'
                                     + '<div class="mid t2_txt"><span id="mobilespan"></span></div>'
@@ -1229,8 +1231,8 @@ define(function (require) {
 //                                bodys.appendChild(newDiv);
                                 commentInsertDiv.append(newDiv);
 
-                            } else if (!$('#pictureCaptchaView') && (mold === 1 || mold === 2)) {// 当为手机注册或者邮箱注册；追加遮罩层,不要手机验证码
-                                // if ($("#pictureCaptchaView")) {// 如果页面有图片验证码, 则移除
+                            } else if (!$('#pictureCaptchaView') && (mold === 1 || mold === 2)) {
+                                // if ($("#pictureCaptchaView")) {
                                 //     $("#pictureCaptchaView").remove();
                                 //     $("#pictureCaptcha").remove();
                                 //     $("#tip_pictureCaptcha").remove();
@@ -1242,7 +1244,7 @@ define(function (require) {
                                     + '<div class="mask_bg"></div>'
                                     + '<div id="picCodeDiv" class="main_panel">'
                                     + '<div class="modal-header">'
-                                    + '<span onclick="validationUtil.displayOrHidden(\"\",\"\",\"\");"'
+                                    + '<span onclick="validationUtil.displayOrHidden(\'\',\'\',\'\');"'
                                     + 'class="close close_alidate">'
                                     + '</span><h3>图片验证码</h3></div>'
                                     + '<div class="img_wrapper mid" style="left:.8rem"> '
@@ -1276,9 +1278,7 @@ define(function (require) {
                             }
                         };
 
-                        /**
-                         * PC滑动验证码关闭
-                         */
+
                         ValidationUtils.prototype.closeSlide = function () {
                             $('.verify-fail').css('display', 'none');
                             $('.verify-fail_mobile').css('display', 'none');
@@ -1293,9 +1293,7 @@ define(function (require) {
                         };
 
 
-                        /**
-                         * 添加PC滑动遮罩层
-                         */
+
                         ValidationUtils.prototype.appendSlideLay = function () {
                             var pcSlideDiv = document.createElement('div');
                             pcSlideDiv.className = 'passport-amazing';
@@ -1325,9 +1323,7 @@ define(function (require) {
                             bodys.appendChild(pcSlideDiv);
                         };
 
-                        /**
-                         * 添加m滑动遮罩层
-                         */
+
                         ValidationUtils.prototype.appendMSlideLay = function () {
                             var mSlideDiv = document.createElement('div');
                             mSlideDiv.className = 'passport-box-mobile';
@@ -1356,7 +1352,7 @@ define(function (require) {
                             bodys.appendChild(mSlideDiv);
                         };
 
-                        // 显示和隐藏遮罩层
+
 
                         ValidationUtils.prototype.displayOrHidden = function (param, type, formId) {
                             if (formId === '' || formId === undefined) {
@@ -1369,16 +1365,16 @@ define(function (require) {
                                 $('#realFormId').val(formId);
                                 if ($(divId).css('display') === 'none') {
                                     $(divId).css('display', 'block');
-                                    // 如果弹出遮罩层, 并且不需要图片验证码, 那就把图片验证码隐藏
+
                                     if (captchaShowFlag === 0) {
                                         this.displayPic(formId);
-                                        // 如果是不需要图片验证码, 但是需要手机校验码就直接手机校验码了
+
                                         if (mobileShowFlag === 1) {// && $('#codeButton').val().indexOf('重新发送') < 0
                                             registerUtil.mobileCode(param, '#', formId);
                                         }
                                     } else {
                                         validationUtil.refreshCaptcha();
-                                        // 弹出层的时候如果是需要图片验证码的话, 先入库
+
                                         registerUtil.secretFormSubmit(param);
                                     }
                                 } else {
@@ -1395,7 +1391,7 @@ define(function (require) {
                                     if ($(buttonSubmit).length > 0) {
                                         $(buttonSubmit).removeAttr('disabled', 'disabled');
                                     }
-                                    // 将手机验证码暂时隐藏, 将图片验证码放第一步
+
                                     $('.main_panel').eq(1).hide();
                                     $('.main_panel').eq(0).show();
                                 }
@@ -1404,12 +1400,12 @@ define(function (require) {
                             }
                         };
 
-                        // 隐藏图片验证码, 显示手机校验码
+
 
                         ValidationUtils.prototype.displayPic = function (formId) {
                             $('.main_panel').eq(0).hide();
                             $('.main_panel').eq(1).show();
-                            // 将手机号码填入提示框
+
                             var butm = 'mobile';
                             if (formId === '' || formId === '#') {
                                 butm = '#' + butm;
@@ -1417,11 +1413,9 @@ define(function (require) {
                                 butm = '#' + formId + '_' + butm;
                             }
                         };
-                        // *******************************遮罩层相关js方法end*******************************
-                        // *******************************滑动验证pc/m相关js方法start*******************************
-                        /**
-                         * 加载pc端滑动验证的js
-                         */
+                        // *******************************end*******************************
+                        // *******************************start*******************************
+
                         ValidationUtils.prototype.pcSlideLoad = function () {
                             $('#wholeImg').attr('src', PASSPORT_DOMAIN
                                 + '/image/background.htm?r=' + new Date().getTime());
@@ -1441,7 +1435,7 @@ define(function (require) {
                                     $('.gt_widget_hide').show();
                                     var _X = e.clientX - x - offsetpa.left + 'px';
                                     var y = parseInt(_X, 0);
-                                    // 可移动距离250px
+
                                     if (y <= 0) {
                                         $('.gt_slider_knob').css({'left': 0});
                                         $('#small-scroll-img').css({'left': 0, 'opacity': 1});
@@ -1503,9 +1497,7 @@ define(function (require) {
 
                         };
 
-                        /**
-                         * 加载m端滑动验证的js
-                         */
+
                         ValidationUtils.prototype.mSlideLoad = function () {
                             // $('#wholeImg').attr('src', PASSPORT_DOMAIN+'/image/background.htm?r=' + new Date().getTime());
                             // $('#repairImg').attr('src', PASSPORT_DOMAIN+'/image/buffImg.htm?r=' + new Date().getTime());
@@ -1557,7 +1549,7 @@ define(function (require) {
 
 
 
-                        // 滑动验证校验M
+
 
                         ValidationUtils.prototype.mSlideCheck = function (y) {
                             y = Math.floor(y);// 取整
@@ -1570,7 +1562,7 @@ define(function (require) {
 //	                        $('.verify-success').css('display','block');
 //	                        $('.verify-fail').css('display','none');
 
-                                        // 这里是发送验证码
+
                                         var authCodeUrl = $('#slidetxt').val();
                                         var type = $('#slidetype').val();
                                         var formId = $('#slideFormId').val();
@@ -1586,11 +1578,10 @@ define(function (require) {
                                             isSlideSuccess = 1;
                                             serviceRegisterFormSubmit();
                                         } else {
-                                            if (type === 1) {// 获取手机验证码
+                                            if (type === 1) {
                                                 registerUtil.mobileCode(authCodeUrl, '#', formId);
-                                            } else if (type === 2) {// 提交表单
-                                                // 如果是表单提交, 则判断是否需要手机校验码
-                                                // 并且不是邮箱注册和手机注册
+                                            } else if (type === 2) {
+
                                                 if (mobileShowFlag === 1
                                                     && $('#maskDivIOnly').css('display') === 'none'
                                                     && $('#' + (formId === '#' ? '' : formId) + '_'
@@ -1600,7 +1591,7 @@ define(function (require) {
                                                     || $('#' + (formId === '#' ? '' : formId)
                                                         + '_' + 'codeButton').length > 0) {
                                                     registerUtil.mobileCode(authCodeUrl, '#', formId);
-                                                } else {// 不需要就直接提交表单
+                                                } else {
                                                     registerUtil.formSubmit(authCodeUrl, '#', formId);
                                                 }
                                             }
@@ -1655,7 +1646,6 @@ define(function (require) {
 
 
 
-                         // 滑动验证校验PC
 
                         ValidationUtils.prototype.slideCheck = function (y) {
                             var x = 'x=' + y;
@@ -1666,7 +1656,7 @@ define(function (require) {
                                         $('.verify-success').css('display', 'block');
                                         $('.verify-fail').css('display', 'none');
 
-                                        // mold == 2发送验证码；mold == 1获取注册
+
                                         var authCodeUrl = $('#slidetxt').val();
                                         var type = $('#slidetype').val();
                                         var formId = $('#slideFormId').val();
@@ -1678,11 +1668,10 @@ define(function (require) {
                                             isSlideSuccess = 1;
                                             serviceRegisterFormSubmit();
                                         } else {
-                                            if (type === 1) {// 获取手机验证码
+                                            if (type === 1) {
                                                 registerUtil.mobileCode(authCodeUrl, '#', formId);
-                                            } else if (type === 2) {// 提交表单
-                                                // 如果是表单提交, 则判断是否需要手机校验码
-                                                // 并且不是邮箱注册和手机注册
+                                            } else if (type === 2) {
+
                                                 if (mobileShowFlag === 1
                                                     && $('#maskDivIOnly').css('display') === 'none'
                                                     && $('#' + (formId === '#' ? '' : formId)
@@ -1692,7 +1681,7 @@ define(function (require) {
                                                     || $('#' + (formId === '#' ? '' : formId)
                                                         + '_' + 'codeButton').length > 0) {
                                                     registerUtil.mobileCode(authCodeUrl, '#', formId);
-                                                } else {// 不需要就直接提交表单
+                                                } else {
                                                     registerUtil.formSubmit(authCodeUrl, '#', formId);
                                                 }
                                             }
@@ -1741,9 +1730,7 @@ define(function (require) {
 
                         };
 
-                        /**
-                         * PC加载滑动验证图片初始化的js
-                         */
+
                         ValidationUtils.prototype.pcSlidePicLoad = function () {
 
                             $.getJSON(url.INIT_SLIDE_CODE, function (data) {
@@ -1763,9 +1750,7 @@ define(function (require) {
 
                         };
 
-                        /**
-                         * M加载滑动验证图片初始化的js
-                         */
+
                         ValidationUtils.prototype.mSlidePicLoad = function () {
 
                             $.getJSON(url.INIT_SLIDE_CODE, function (data) {
@@ -1784,7 +1769,7 @@ define(function (require) {
                             });
 
                         };
-                        // *******************************滑动验证pc/m相关js方法end*******************************
+                        // *******************************end*******************************
                     }// ValidationUtils func end -.-
     validationUtil = new ValidationUtils;
 //                    return {ValidationUtils: ValidationUtils};
@@ -1793,9 +1778,7 @@ define(function (require) {
 //        }// cngold end
 //    });
 
-    /**
-     * 表单提交相关方法
-     */
+
 //    __namespace__({
 //        org: {
 //            cngold: {
@@ -1811,39 +1794,39 @@ define(function (require) {
                             return authCodeUrl;
                         };
 
-                        // 发送短信验证码
+
 
                         RegisterUtils.prototype.getMobileAuthCode = function (formId) {
                             var idPrev = '#';
                             if (formId && formId !== '#') {
                                 idPrev = '#' + formId + '_';
                             }
-                            needAction = 0; // 不需要后台验证
+                            needAction = 0;
                             var authCodeUrl = '';
-                            // 真实姓名
+
                             var rtn = validationUtil.checkRealName(idPrev);
                             if (rtn === false) {
                                 return rtn;
                             }
                             authCodeUrl = this.isUndefined(authCodeUrl, rtn);
 
-                            // 手机号码
+
                             rtn = validationUtil.checkMobile(idPrev);
                             if (rtn === false) {
                                 return rtn;
                             }
                             authCodeUrl = this.isUndefined(authCodeUrl, rtn);
-                            // fromUrl
+
                             authCodeUrl = authCodeUrl + '&fromUrl='
                                 + encodeURIComponent(validationUtil.getFromUrl(idPrev));
-                            // referrer
+
                             if ($(idPrev + 'referrer').length > 0) {
                                 var referrer = $(idPrev + 'referrer').val();
                                 if (referrer && referrer !== '') {
                                     authCodeUrl += '&referrer=' + validationUtil.splitReferrer(referrer);
                                 }
                             }
-                            // 昵称
+
                             if ($(idPrev + 'nickname').length > 0) {
                                 if ($(idPrev + 'tip_nickname').length > 0) {
                                     if ($(idPrev + 'tip_nickname').html() !== '') {
@@ -1856,51 +1839,51 @@ define(function (require) {
                                     authCodeUrl = this.isUndefined(authCodeUrl, rtn);
                                 }
                             }
-                            // qq
+
                             rtn = validationUtil.checkQq(idPrev);
                             if (rtn === false) {
                                 return rtn;
                             }
                             authCodeUrl = this.isUndefined(authCodeUrl, rtn);
-                            // 邮箱
+
                             rtn = validationUtil.checkEmail(idPrev);
                             if (rtn === false) {
                                 return rtn;
                             }
                             authCodeUrl = this.isUndefined(authCodeUrl, rtn);
-                            // registerType
+
                             if ($(idPrev + 'registerType').length > 0) {
                                 var registerType = $.trim($(idPrev + 'registerType').val());
                                 authCodeUrl += '&registerType=' + validationUtil.encodeURI(registerType);
                             }
-                            // 简介
+
                             if ($(idPrev + 'btg').length > 0) {
                                 var btg = $.trim($(idPrev + 'btg').val());
                                 if (btg !== '') {
                                     authCodeUrl += '&btg=' + btg;
                                 }
                             }
-                            // 聊天记录
+
                             if ($(idPrev + 'chatLog').length > 0) {
                                 var chatLog = $.trim($(idPrev + 'chatLog').val());
                                 if (chatLog !== '') {
                                     authCodeUrl += '&chatLog=' + chatLog;
                                 }
                             }
-                            // 如果是mold=1或者2, 注册的话就走下面. 否则弹出遮罩层
-                            if (mold === 1 || mold === 2) {// 注册走下面
-                                // 发送手机验证码, mold用来判断是否是手机或者邮箱注册, 然后判断图片验证码用
+
+                            if (mold === 1 || mold === 2) {
+
                                 authCodeUrl += '&mold=' + mold;
-                                if (captchaShowFlag === 1) {// 如果需要图片验证码, 则显示图片验证码的层
-                                    // 发送验证码弹出层的到时候, 先入库
+                                if (captchaShowFlag === 1) {
+
 //							this.secretFormSubmit(authCodeUrl);
-                                    // 弹出层. (表单参数和类型<1获取手机验证码,2提交表单>)
+
                                     if ($('#pictureCaptchaView')) {
                                         var pictureCaptcha = $.trim($(idPrev + 'pictureCaptcha').val());
                                         if (pictureCaptcha === '') {
                                             validationUtil.refreshCaptcha();
                                             $(idPrev + 'pictureCaptcha').focus();
-                                            validationUtil.showErrorMsg('pictureCaptcha', 10020301);// 验证码不能为空
+                                            validationUtil.showErrorMsg('pictureCaptcha', 10020301);
                                             return false;
                                         } else {
                                             validationUtil.removeCss('pictureCaptcha');
@@ -1911,12 +1894,12 @@ define(function (require) {
                                     }
                                     if ($('#maskDivIOnly').css('display') === 'none') {
                                         validationUtil.displayOrHidden(authCodeUrl, 1, formId);
-                                    } else if (captchaShowFlag === 1) {// 如果需要图片验证码, 则继续返回图片验证码界面
+                                    } else if (captchaShowFlag === 1) {
                                         $('.main_panel').eq(1).hide();
                                         $('.main_panel').eq(0).show();
                                         validationUtil.refreshCaptcha();
                                         $('#pictureCaptcha').val('');
-                                    } else {// 直接发送手机校验码
+                                    } else {
                                         this.mobileCode(authCodeUrl, idPrev, formId);
                                     }
                                     return false;
@@ -1933,24 +1916,24 @@ define(function (require) {
                                     return false;
                                 }
 
-                                // 发送手机验证码
+
                                 this.mobileCode(authCodeUrl, idPrev, formId);
                             } else {
-                                if (captchaShowFlag === 1) {// 如果需要图片验证码, 则显示图片验证码的层
-                                    // 发送验证码弹出层的到时候, 先入库
+                                if (captchaShowFlag === 1) {
+
 //							this.secretFormSubmit(authCodeUrl);
-                                    // 弹出层. (表单参数和类型<1获取手机验证码,2提交表单>)
+
                                     if ($('#maskDivIOnly').css('display') === 'none') {
                                         validationUtil.displayOrHidden(authCodeUrl, 1, formId);
-                                    } else if (captchaShowFlag === 1) {// 如果需要图片验证码, 则继续返回图片验证码界面
+                                    } else if (captchaShowFlag === 1) {
                                         $('.main_panel').eq(1).hide();
                                         $('.main_panel').eq(0).show();
                                         validationUtil.refreshCaptcha();
                                         $('#pictureCaptcha').val('');
-                                    } else {// 直接发送手机校验码
+                                    } else {
                                         this.mobileCode(authCodeUrl, idPrev, formId);
                                     }
-                                } else if (sildeType === 1) {// 如果需要滑动验证，则显示滑动验证遮罩层
+                                } else if (sildeType === 1) {
                                     $('#maskDivIOnly').css('display', 'none');
                                     $('.passport-amazing').show();
                                     $('.gt_popup_wrap').show();
@@ -1964,31 +1947,31 @@ define(function (require) {
                                     if ($('#slideFormId').val() === '') {
                                         $('#slideFormId').val(formId);
                                     }
-                                } else {// 不需要图片验证码就直接发送手机验证码
+                                } else {
                                     if ($('#modivCodeDiv').css('display') === 'block') {
                                         var param = $('#modilecodetxt').val();
                                         authCodeUrl = param;
                                     }
-                                    // 发送手机验证码
+
                                     this.mobileCode(authCodeUrl, idPrev, formId);
                                 }
                             }
                         };
 
 
-                         // 请求手机验证码
+
 
                         RegisterUtils.prototype.mobileCode = function (param, idPrev, formId) {
-                            startCountDown(formId);// 立即开始倒计时
+                            startCountDown(formId);
                             var idPre = '#';
                             if (formId && formId !== '#') {
                                 idPre = '#' + formId + '_';
                             }
                             $.getJSON(url.MOBILE_CODE, param, function (json) {
-                                // 提交表单之后, 设置表单需要后台异步校验
+
                                 needAction = 1;
                                 if (json !== null && json !== '') {
-                                    // 往金投统计发送数据
+
                                     var param = 'cngoldstat=' + getCookieCngoldId() + '&cngoldid='
                                         + json.data.cngoldid + '&flag=' + json.data.flag + '&step='
                                         + json.data.step + '&result=' + json.flag + '&message=' + json.msg;
@@ -2008,10 +1991,10 @@ define(function (require) {
                                             $('#mobilespan').html('我们向您的手机  ' + mobile.substring(0, 3) + '****'
                                                 + mobile.substring(7, 11) + ' 发送了一条验证短信');
                                         }
-                                        // captchaShowFlag = 1;// 手机验证码发送之后, 设置为1
-                                        // 临时表ID用于存服务申请记录表ID
+                                        // captchaShowFlag = 1;
+
                                         $('#temporaryMemberId').val(json.data.temporaryMemberId);
-                                        // 发送手机号码后，调用ajax去测试，是否需要图片验证码 v1.3.3不需要
+
 //								$.getJSON(url.CHECK_IP, function(json) {
 //									if (json !== null && json !== '') {
 //										if (json.flag) {
@@ -2019,16 +2002,16 @@ define(function (require) {
 //										}
 //									}
 //								});
-                                        if (typeof(evil('onSendAuthCodeSuccess')) === 'function') {
-                                            evil('onSendAuthCodeSuccess(formId)');
-                                        }
+//                                        if (typeof(evil('onSendAuthCodeSuccess')) === 'function') {
+//                                            evil('onSendAuthCodeSuccess(formId)');
+//                                        }
                                         if ($('#tip_mobilecaptcha').length > 0) {
                                             $('#tip_mobilecaptcha').html('');
                                             $('#tip_mobilecaptcha').css('display', 'none');
                                         }
                                         return;
                                     }
-                                    // 结束倒计时
+
                                     regainCodeButton(formId);
                                     if (json.data && json.data.id) {
                                         if (json.data.id === 'pictureCaptcha') {
@@ -2036,10 +2019,10 @@ define(function (require) {
                                             validationUtil.refreshCaptcha();
                                         }
 //								$(idPrev+json.data.id).focus();
-                                        // 发送手机验证码异常, 如果是层显示则隐藏遮罩层
+
                                         if ($('#maskDivIOnly').css('display') === 'block') {
                                             // validationUtil.displayOrHidden('', '', '');
-                                            // 直接将错误显示在页面
+
 //									$('#tip_mobilecaptcha').html(validationUtil.getErrorMsg(json.code));
 //									$('#tip_mobilecaptcha').addClass('box_error');
 //									$('#tip_mobilecaptcha').removeClass('box_ok');
@@ -2049,7 +2032,7 @@ define(function (require) {
                                             validationUtil.showErrorMsg(json.data.id, json.code, formId);
                                         }
                                     } else {
-                                        // 程序异常, TODO
+
                                         alert(json.msg);
                                     }
                                     return false;
@@ -2058,10 +2041,10 @@ define(function (require) {
                         };
 
 
-                        // 修改密码提交表单
+
 
                         RegisterUtils.prototype.modifySubmit = function (formId) {
-                            needAction = 0; // 不需要后台验证
+                            needAction = 0;
                             var idPrev = '#';
                             if (formId && formId !== '#') {
                                 idPrev = '#' + formId + '_';
@@ -2070,19 +2053,19 @@ define(function (require) {
                                 $(idPrev + 'button_submit').attr('disabled', 'disabled');
                             }
                             var authCodeUrl = '';
-                            // 密码
+
                             var rtn;
                             rtn = validationUtil.checkPasspwordMd5(idPrev);
                             if (rtn === false) {
                                 return rtn;
                             }
                             authCodeUrl = this.isUndefined(authCodeUrl, rtn);
-                            // 重复密码
+
                             rtn = validationUtil.checkPasspwordMd5Confirm(idPrev);
                             if (rtn === false) {
                                 return rtn;
                             }
-                            // 账号
+
                             var username = $('#clientUsername').val();
                             if (username === '') {
                                 $('#usernameTip').html('账号为空！');
@@ -2109,7 +2092,7 @@ define(function (require) {
                             });
                         };
 
-                        // qq登陆提交方法
+
 
                         RegisterUtils.prototype.qqSubmit = function (formId) {
                             var idPrev = '#';
@@ -2126,7 +2109,7 @@ define(function (require) {
                                 $(idPrev + 'button_submit').attr('disabled', 'disabled');
                             }
                             var authCodeUrl = '';
-                            // 昵称
+
                             var rtn = validationUtil.checkNickname(idPrev);
                             if (rtn === false) {
                                 return rtn;
@@ -2137,7 +2120,7 @@ define(function (require) {
                                 type: 'post',
                                 dataType: 'json',
                                 success: function (data) {
-                                    // 登录成功，转向目标页面
+
                                     if (data.flag) {
                                         if (data.data.dz) {
                                             if (data.data.dz.flag) {
@@ -2147,7 +2130,7 @@ define(function (require) {
                                                     return;
                                                 });
                                             } else {
-                                                // discuz登录失败
+
                                             }
                                         }
                                         alert('恭喜注册成功');
@@ -2158,10 +2141,10 @@ define(function (require) {
                             });
                         };
 
-                         // 注册提交表单
+
 
                         RegisterUtils.prototype.register = function (formId) {
-                            needAction = 0; // 不需要后台验证
+                            needAction = 0;
                             var idPrev = '#';
                             if (formId && formId !== '#') {
                                 idPrev = '#' + formId + '_';
@@ -2176,25 +2159,25 @@ define(function (require) {
                                 $(idPrev + 'button_submit').attr('disabled', 'disabled');
                             }
                             var authCodeUrl = '';
-                            // 真实姓名
+
                             var rtn = validationUtil.checkRealName(idPrev);
                             if (rtn === false) {
                                 return rtn;
                             }
                             authCodeUrl = this.isUndefined(authCodeUrl, rtn);
-                            // 昵称
+
                             var rtn = validationUtil.checkNickname(idPrev);
                             if (rtn === false) {
                                 return rtn;
                             }
                             authCodeUrl = this.isUndefined(authCodeUrl, rtn);
-                            // 登录名
+
                             var rtn = validationUtil.checkLoginName(idPrev);
                             if (rtn === false) {
                                 return rtn;
                             }
                             authCodeUrl = this.isUndefined(authCodeUrl, rtn);
-                            // 性别
+
                             if ($(idPrev + 'sex').length > 0) {
                                 var sex = $(idPrev + 'sex').val();
                                 if (sex === '先生') {
@@ -2205,36 +2188,36 @@ define(function (require) {
                                 }
                                 authCodeUrl += '&sex=' + sex;
                             }
-                            // 身份证
+
                             var rtn = validationUtil.checkIdentityCard(idPrev);
                             if (rtn === false) {
                                 return rtn;
                             }
                             authCodeUrl = this.isUndefined(authCodeUrl, rtn);
-                            // 手机号码
+
                             rtn = validationUtil.checkMobile(idPrev);
                             if (rtn === false) {
                                 return rtn;
                             }
                             authCodeUrl = this.isUndefined(authCodeUrl, rtn);
-                            // 邮箱
+
                             rtn = validationUtil.checkEmail(idPrev);
                             if (rtn === false) {
                                 return rtn;
                             }
                             authCodeUrl = this.isUndefined(authCodeUrl, rtn);
-                            // 密码
+
                             rtn = validationUtil.checkPasspwordMd5(idPrev);
                             if (rtn === false) {
                                 return rtn;
                             }
                             authCodeUrl = this.isUndefined(authCodeUrl, rtn);
-                            // 重复密码
+
                             rtn = validationUtil.checkPasspwordMd5Confirm(idPrev);
                             if (rtn === false) {
                                 return rtn;
                             }
-                            // fromUrl
+
                             if ($(idPrev + 'fromUrl').length > 0) {
                                 var fromUrl = $(idPrev + 'fromUrl').val();
                                 if (fromUrl && fromUrl !== '') {
@@ -2263,14 +2246,14 @@ define(function (require) {
                             authCodeUrl = this.isUndefined(authCodeUrl, rtn);
 
                             if ($(idPrev + 'temporaryMemberId').length > 0) {
-                                // 中间表id
+
                                 var temporaryMemberId = $(idPrev + 'temporaryMemberId').val();
                                 if (temporaryMemberId !== '') {
                                     authCodeUrl += '&temporaryMemberId=' + temporaryMemberId;
                                 }
                             }
                             var str = '';
-                            if (formId && formId !== '#') {// 兼容多表单
+                            if (formId && formId !== '#') {
 //                                $('#' + formId).find('[name$="attentionVariety"]:checkbox:checked').each(function () {
 //                                    str += $(this).val() + ',';
 //                                });
@@ -2284,27 +2267,27 @@ define(function (require) {
                                 authCodeUrl += '&attentionVariety=' + str;
                             }
                             // var maskboolean = false;
-                            // 页面有就传到后台
+
                             if ($(idPrev + 'captcha').length > 0) {
                                 var captcha = $.trim($(idPrev + 'captcha').val());
                                 if (captcha === '') {
                                     $(idPrev + 'captcha').focus();
-                                    validationUtil.showErrorMsg('captcha', 10020401, idPrev + 'captcha');// 校验码不能为空
+                                    validationUtil.showErrorMsg('captcha', 10020401, idPrev + 'captcha');
                                     return false;
                                 }
                                 validationUtil.removeCss('captcha');
                                 authCodeUrl = authCodeUrl + '&authCode=' + captcha;
                             } else {
-                                if ((mold === 1 && isSlideSuccess !== 1) || mold === 2) {// 注册走下面
-                                    // mold用来判断是否是手机或者邮箱注册, 然后判断图片验证码用
+                                if ((mold === 1 && isSlideSuccess !== 1) || mold === 2) {
+
                                     authCodeUrl += '&mold=' + mold;
-                                    if (captchaShowFlag === 1) {// 如果需要图片验证码, 则显示图片验证码的层
-                                        // 发送验证码弹出层的到时候, 先入库
+                                    if (captchaShowFlag === 1) {
+
 //							this.secretFormSubmit(authCodeUrl);
-                                        // 弹出层. (表单参数和类型<1获取手机验证码,2提交表单>)
+
                                         if ($('#maskDivIOnly').css('display') === 'none') {
                                             validationUtil.displayOrHidden(authCodeUrl, 2, formId);
-                                        } else if (captchaShowFlag === 1) {// 如果需要图片验证码, 则继续返回图片验证码界面
+                                        } else if (captchaShowFlag === 1) {
                                             $('.main_panel').eq(1).hide();
                                             $('.main_panel').eq(0).show();
                                             validationUtil.refreshCaptcha();
@@ -2323,8 +2306,8 @@ define(function (require) {
 
                                         return false;
                                     }
-                                } else if (mold !== 1 && mold !== 2) {// 不是注册走下面
-                                    // mold用来判断是否是手机或者邮箱注册, 然后判断图片验证码用
+                                } else if (mold !== 1 && mold !== 2) {
+
                                     authCodeUrl += '&mold=' + mold;
                                     if (captchaShowFlag === 1) {
 
@@ -2346,7 +2329,7 @@ define(function (require) {
                             var propFlag = true;
                             var index = 0;
                             if ($('.propInput').length !== undefined) {
-                                // identityCard、身份证、330624199005110000
+
                                 $('.propInput').each(function (idx) {
                                     if ($(this).attr('prop_must') === '1' && $(this).val() === '') {
                                         $(this).focus();
@@ -2434,10 +2417,10 @@ define(function (require) {
                             }
 
                             authCodeUrl += '&mold=' + mold;
-                            // 服务申请提交, 如果要图片或者手机则显示隐藏层. 如果页面有验证码, 则不再弹出
+
                             if ((captchaShowFlag === 1 || mobileShowFlag === 1)
                                 && $(idPrev + 'captcha').length < 1 && mold === 0) {
-                                // 弹出层. (表单参数和类型<1获取手机验证码,2提交表单>)
+
                                 validationUtil.displayOrHidden(authCodeUrl, 2, formId);
                             } else {
                                 this.formSubmit(authCodeUrl, idPrev, formId);
@@ -2445,10 +2428,10 @@ define(function (require) {
                         };
                         RegisterUtils.prototype.formSubmit = function (param, idPrev, formId) {
                             var requestUrl = url.REGISTER;
-                            if (mold !== 0) {// 是手机或者邮箱注册, 走注册的URL
+                            if (mold !== 0) {
                                 requestUrl = url.SAVE;
-                                // 0是post提交, 1是get. 临时解决Android, ios, pc端注册的post提交跨域问题, 以后实现更优方案
-                                if (registerMethod === 0) {// 如果不是0走下面方案
+
+                                if (registerMethod === 0) {
                                     $.post(requestUrl, param, function (json) {
                                         RegisterUtils.prototype.registerCallBack(json, idPrev, formId);
                                     }, 'json');
@@ -2460,9 +2443,9 @@ define(function (require) {
                             });
                         };
 
-                        // ajax提交表单后的回调函数
+
                         RegisterUtils.prototype.registerCallBack = function (json, idPrev, formId) {
-                            // 提交表单之后, 设置表单需要后台异步校验
+
                             needAction = 1;
                             if (formId && formId !== '#') {
                                 idPrev = '#' + formId + '_';
@@ -2471,9 +2454,9 @@ define(function (require) {
                                 $(idPrev + 'button_submit').removeAttr('disabled', 'disabled');
                             }
                             if (json !== null && json !== '') {
-                                // 成功或者服务已申请, 都正常提示成功...
+
                                 if (json.flag || json.code === '10021604') {
-                                    // 往金投统计发送数据
+
                                     var param = 'cngoldstat=' + getCookieCngoldId() + '&cngoldid=' + json.data.cngoldid
                                         + '&flag=' + json.data.flag + '&step=' + json.data.step
                                         + '&result=' + json.flag + '&message=' + json.msg;
@@ -2494,7 +2477,7 @@ define(function (require) {
                                             }
                                         });
                                     } else {
-                                        // discuz登录失败
+
                                         if (json.data.isPop) {
                                             onRegisterSuccessPop(idPrev, json, formId, json.data.isPop,
                                                 json.data.popFrom, json.data.imgUrl, json.data.title,
@@ -2506,7 +2489,7 @@ define(function (require) {
                                     }
                                     return;
                                 }
-                                // 程序异常时, data为null. 直接提示返回的消息
+
                                 if (!json.data) {
                                     alert(json.msg);
                                     return false;
@@ -2516,7 +2499,7 @@ define(function (require) {
                                     mobileShowFlag = 1;
                                 }
                                 $(idPrev + json.data.id).focus();
-                                if (mold === 2 && json.code === '10020402') {// 当注册并且返回验证码错误时
+                                if (mold === 2 && json.code === '10020402') {
                                     validationUtil.showErrorMsg(json.data.id, json.code, '#captcha');
                                     return false;
                                 }
@@ -2525,10 +2508,10 @@ define(function (require) {
                             }
                         };
 
-                         // 发送验证码, 弹出遮罩层之前, 秘密入库. 防止表单数据丢失~~ 好屌的...
+
                         RegisterUtils.prototype.secretFormSubmit = function (authCodeUrl) {
                             $.getJSON(url.REGISTER_SECRECT, authCodeUrl, function (json) {
-                                // 往金投统计发送数据
+
                                 var param = 'cngoldstat=' + getCookieCngoldId() + '&cngoldid='
                                     + json.data.cngoldid
                                     + '&flag=' + json.data.flag + '&step=' + json.data.step
@@ -2537,9 +2520,9 @@ define(function (require) {
                                     var result = json.result;
 
                                 });
-                                // 提交表单之后, 设置表单需要后台异步校验
+
                                 if (json !== null && json !== '') {
-                                    // 成功或者服务已申请, 都正常提示成功...
+
                                     // mobileCaptchaShowFlag = 1;
                                     if ($('#temporaryMemberId').length > 0) {
                                         $('#temporaryMemberId').val(json.data.temporaryMemberId);
@@ -2555,7 +2538,7 @@ define(function (require) {
 //        }
 //    });
     registerUtil = new RegisterUtils;
-// 获取cookie中的cngoldstat
+
     function getCookieCngoldId() {
         var objName = 'cngoldstat';
         var arrStr = document.cookie.split('; ');
@@ -2572,12 +2555,7 @@ define(function (require) {
 //    registerUtil = __namespace__.org.cngold.passport.RegisterUtils;
 //    validationUtil = __namespace__.org.cngold.passport.ValidationUtils;
 
-    /**
-     * 服务注册通用脚本(单表单，用于一个页面只有一个表单的情况)
-     * 表单即时验证
-     */
-    /** @description passport register domain . */
-    /** 为支持https，此js文件要维护两套，passport内部用时passportdomain不带域名，放到res.cngoldres.com上需要带上域名 */
+
 
 
     function getMobileAuthCode(formId) {
@@ -2588,17 +2566,17 @@ define(function (require) {
         }
     }
 
-// 密码强度判断方法
+
     function formPwdStrong(id) {
         validationUtil.checkPasswordStrong('#', id);
     }
 
-// qq登陆提交方法
+
     function formQqSubmit() {
         registerUtil.qqSubmit('#');
     }
 
-// 修改密码提交方法
+
     function formModifySubmit() {
         registerUtil.modifySubmit('#');
     }
@@ -2643,24 +2621,24 @@ define(function (require) {
         evt = (evt) ? evt : window.event;
         var divId = '#maskDivIOnly';
         var idMobile = '#' + formId + '_mobile';
-        // 回车键
+
         if (evt.keyCode === 13) {
-            if ($(divId).css('display') === 'block') {// 遮罩层显示的时候校验验证码
+            if ($(divId).css('display') === 'block') {
                 validationUtil.checkPiccode();
                 return false;
             }
-            if (mold === 1 || mold === 2) {// 注册
+            if (mold === 1 || mold === 2) {
                 submitForm();
                 return false;
-            } else {// 服务申请
-                if ($(obj).parents('#moni_reg_1').length !== 0 && $(obj).parents('#moni_reg_2').length === 0) {// 多步之第一步，发送验证码
-                    if ($(idMobile).length > 0) {// 带上formId
+            } else {
+                if ($(obj).parents('#moni_reg_1').length !== 0 && $(obj).parents('#moni_reg_2').length === 0) {
+                    if ($(idMobile).length > 0) {
                         getMobileAuthCode(formId);
                     } else {
                         getMobileAuthCode();
                     }
                 } else {
-                    if ($(idMobile).length > 0) {// 带上formId
+                    if ($(idMobile).length > 0) {
                         submitForm(formId);
                         return false;
                     } else {
@@ -2676,21 +2654,21 @@ define(function (require) {
         validationUtil.refreshCaptcha();
     }
 
-// 页面加载完成后执行
+
     window.onload = function () {
         if (sildeType === 1) {
-            // 自动追加遮罩层样式, 适应iframe内部引用，嵌套很小表单，使用另外的样式
+
             if ($('#formWidth').length > 0 && $('#formWidth form').width() <= 600) {
-                validationUtil.appendMSlideLay();// 当需要滑动验证时
-                validationUtil.mSlidePicLoad();// M初始化滑动验证图片
+                validationUtil.appendMSlideLay();
+                validationUtil.mSlidePicLoad();
             } else {
-                validationUtil.appendSlideLay();// 当需要滑动验证时
-                validationUtil.pcSlidePicLoad();// PC初始化滑动验证图片
+                validationUtil.appendSlideLay();
+                validationUtil.pcSlidePicLoad();
             }
         }
     };
 
-// 给需要验证的输入框, 绑定失去焦点事件
+
     customElement.prototype.firstInviewCallback = function () {
         var el = this.element;
         ct(el);
@@ -2753,7 +2731,7 @@ define(function (require) {
                 validationUtil.checkMobile('#');
             });
         }
-        // 仅当是邮件注册的时候, 才强制不为空判断
+
         if (mold === 1) {
             if ($('#email').length > 0) {
                 $('#email').blur(function () {
@@ -2772,9 +2750,9 @@ define(function (require) {
 
         validationUtil.checkCaptcha('#');
 
-        // 当时邮箱或者手机注册的时候, 图片验证码默认强制显示
+
         if (mold === 1 || mold === 2) {
-            // 当需要使用滑动验证码时
+
             if (sildeType === 1) {
 
             } else {
@@ -2786,16 +2764,16 @@ define(function (require) {
             }
 
         } else {
-            // 服务申请必弹图片验证码
+
 
         }
-        // FIXME 临时解决Android, ios, pc端注册的post提交跨域问题, 以后实现更优方案
+
         if ($('#registerMethod').length > 0) {
             registerMethod = $('#registerMethod').val();
         }
-        // 追加图片验证码的遮罩层
+
         validationUtil.appendOverlay();
-        // 自动追加遮罩层样式, 适应iframe内部引用，嵌套很小表单，使用另外的样式
+
         if ($('#formWidth').length > 0 && $('#formWidth form').width() <= 600) {
             $('<link>').attr({
                 rel: 'stylesheet',
@@ -2826,11 +2804,11 @@ define(function (require) {
                 rel: 'stylesheet',
                 type: 'text/css',
                 href: PASSPORT_DOMAIN + '/resource/passport2/pc/css/passport.suite.css'
-            }).appendTo('head');// 滑动验证
+            }).appendTo('head');
 
         }
 
-        // 添加回车事件
+
         $('input').keydown(function (evt) {
             var form = this.form;
             var formId;
@@ -2841,12 +2819,12 @@ define(function (require) {
             }
             return keydown(evt, formId, this);
         });
-        // 兼容多表单, 绑定页面所有form_x的表单, 需要失去焦点校验的字段
+
         $('form').each(function (i) {
             var formId = this.id;
             if (formId.indexOf('form_') !== -1) {
                 formId = '#' + formId + '_';
-                // 绑定多表单的鼠标移出事件
+
                 if ($(formId + 'nickname').length > 0) {
                     $(formId + 'nickname').blur(function () {
                         recommendTimes = 1;
@@ -2895,7 +2873,7 @@ define(function (require) {
     var wait = sec * 1000;
     var timer = null;
 
-// 手机验证码发送成功后, 多少秒后可重发
+
     function startCountDown(formId) {
         var codeButton = 'codeButton';
         if (formId && formId !== '#' && $('#modivCodeDiv').css('display') === 'none') {
@@ -2909,22 +2887,26 @@ define(function (require) {
 //	$(codeButton).val(sec + "秒后可重新发送");
         $(codeButton).attr('disabled', 'disabled');
         $(codeButton).addClass('after');
-        timer = window.setTimeout('timeUpdate("' + sec + '", "' + codeButton + '")', 1000);
+        timer = setTimeout(function () {
+            timeUpdate(sec, codeButton);
+        }, 1000);
     }
 
-// 更新手机验证码重新发送时间
+
     function timeUpdate(num, codeButton) {
         if (num > 0) {
 //		var pntNum = (wait / 1000) - num;
             $(codeButton).val(num + '秒后可重新发送');
             num--;
-            timer = window.setTimeout('timeUpdate("' + num + '", "' + codeButton + '")', 1000);
+            timer = setTimeout(function () {
+                timeUpdate(num, codeButton);
+            }, 1000);
         } else {
             timeOk(codeButton);
         }
     }
 
-// 结束倒计时，恢复按钮状态
+
     function regainCodeButton(formId) {
         var codeButton = 'codeButton';
         if (formId && formId !== '#' && $('#modivCodeDiv').css('display') === 'none') {
@@ -2935,7 +2917,7 @@ define(function (require) {
         timeOk(codeButton);
     }
 
-// 手机验证码可重发
+
     function timeOk(codeButton) {
         window.clearTimeout(timer);
         $(codeButton).val('免费获取校验码');
@@ -2944,13 +2926,13 @@ define(function (require) {
     }
 
 
-	// 申请成功回调函数, 重构下支持页面传入2个参数的回调
+
     onRegisterSuccess = function (idPrev, result) {
         onRegisterSuccess(idPrev, result, '#');
     };
 
 
-     // 申请成功回调函数
+
     function onRegisterSuccess(idPrev, result, formId) {
         var formRedirectUrl = 'redirectUrl';
         if (result.data.frontTip) {
@@ -2963,7 +2945,7 @@ define(function (require) {
         } else {
             formRedirectUrl = '#' + formRedirectUrl;
         }
-        // 注册成功后转跳页面
+
         if ($(formRedirectUrl).length > 0) {
             var redirectUrl = $(formRedirectUrl).val();
             if (redirectUrl && redirectUrl !== '') {
@@ -3015,13 +2997,13 @@ define(function (require) {
             var popInfo = getPCPopInfo(idPrev, result, formId, imgUrl,
                 title, popContent, popBottom, popType, buttonContent);
             $('#formWidth').append(popInfo);
-            // 广告图片大小
+
             $('.submit_sucLayer .layer_cont>div .img_adv span').height(
                 209 * $('.submit_sucLayer .layer_cont>div .img_adv span').width() / 407);
             if (window.innerWidth >= 800) {
                 $('.submit_sucLayer .layer_cont').height($('.submit_sucLayer .layer_cont>div').height() + 40);
             }
-            // 图片绝对居中
+
             var imgSize = 0;
             var imgW;
             var imgH;
@@ -3066,7 +3048,7 @@ define(function (require) {
         } else {
             formRedirectUrl = '#' + formRedirectUrl;
         }
-        // 注册成功后转跳页面
+
         if ($(formRedirectUrl).length > 0) {
             var redirectUrl = $(formRedirectUrl).val();
             if (redirectUrl && redirectUrl !== '') {

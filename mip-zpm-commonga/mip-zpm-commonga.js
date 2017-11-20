@@ -12,7 +12,7 @@ define(function (require) {
         var dywe = document.createElement('script');
         dywe.type = 'text/javascript';
         dywe.async = true;
-        dywe.src = '/Scripts/dywe.js';
+        dywe.src = 'https://img09.zhaopin.cn/2012/other/mobile/Mcontent/Scripts/dywe.js';
         var s = document.getElementsByTagName('script')[0];
         s.parentNode.insertBefore(dywe, s);
         // 动态引入dc.js,

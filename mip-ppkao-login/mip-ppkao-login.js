@@ -4,7 +4,7 @@
  */
 
 define(function (require) {
-    var $ = require('jquery');
+    var $ = require('zepto');
     var customElement = require('customElement').create();
 
     /**
@@ -16,56 +16,43 @@ define(function (require) {
         var login = mipLogin.find('.login');
         var touxiang = mipLogin.find('.touxiang');
         $(document).ready(function () {
-            if ($.session.get('UserIsLoginKey').equals('3')) {
-                $.session.set('GetUserIPKey', '0');
-            } else {
-                if (!$.session.get('UserIsLoginKey').equals('1')) {
-                    $.ajax({
-                        type: 'get',
-                        url: '//user.ppkao.com/Interface/IsLogin.ashx?action=UserIsLogin',
-                        dataType: 'jsonp',
-                        contentType: 'application/x-www-form-urlencoded;charset=utf-8',
-                        jsonp: 'callback',
-                        jsonpCallback: 'callback',
-                        async: false,
-                        success: function (data) {
-                            if (data.name.equals('1')) {
-                                $.session.set('UserIsLoginKey', data.name);
-                                $.session.set('UserIsLoginusername', data.username);
-                                $.session.set('UserIsLoginUserFace', data.UserFace);
-                                login.hide();
-                                touxiang.show();
-                                touxiang.find('mip-img').attr({
-                                    src: $.session.get('UserIsLoginUserFace')
-                                });
-                            } else {
-                                if (data.name.equals('3')) {
-                                    $.session.set('GetUserIPKey', '0');
-                                    login.show();
-                                    touxiang.hide();
-                                    return;
-                                }
-                            }
-                            login.show();
-                            touxiang.hide();
-                            return;
-                        },
-                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            $.ajax({
+                type: 'get',
+                url: '//user.ppkao.com/Interface/IsLogin.ashx?action=UserIsLogin',
+                dataType: 'jsonp',
+                contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+                jsonp: 'callback',
+                jsonpCallback: 'callback',
+                async: false,
+                success: function (data) {
+                    if (data.name === '1') {
+                        window.sessionStorage.setItem('UserIsLoginKey', data.name);
+                        window.sessionStorage.setItem('UserIsLoginusername', data.username);
+                        window.sessionStorage.setItem('UserIsLoginUserFace', data.UserFace);
+                        login.hide();
+                        touxiang.show();
+                        touxiang.find('mip-img').attr({
+                            src: window.sessionStorage.getItem('UserIsLoginUserFace')
+                        });
+                    } else {
+                        if (data.name === '3') {
+                            window.sessionStorage.setItem('GetUserIPKey', '0');
                             login.show();
                             touxiang.hide();
                             return;
                         }
-                    });
-                } else {
-                    login.hide();
-                    touxiang.show();
-                    touxiang.find('mip-img').attr({
-                        src: $.session.get('UserIsLoginUserFace')
-                    });
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    login.show();
+                    touxiang.hide();
+                    return;
                 }
-            }
+            });
         });
     };
 
     return customElement;
 });
+
+

@@ -7,6 +7,7 @@
  replyComment, showCommentBlock, clearGlobCommentData, clearGlobReplyData, showTopics
  */
 define(function (require) {
+    // 部分插件需要引用jquery
     var $ = require('jquery');
     var customElement = require('customElement').create();
     function includeLinkStyle(url) {
@@ -498,7 +499,7 @@ define(function (require) {
                 commentInsertDiv.append(str);
                 includeJavaScript('https://captcha.luosimao.com/static/js/api.js?_=' + Date.parse(new Date()));
                 // 初始化全局变量数据
-                var articleUrl = 'https://mip.jin99.net/ag/xw3980442.html';
+                var articleUrl = window.location.href;
                 articleUrl = commentUtils.subUrl(articleUrl);
                 // 适配mip的url
                 if (articleUrl.indexOf('/c/s/') > 0) {
