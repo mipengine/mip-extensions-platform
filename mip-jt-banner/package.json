@@ -1,0 +1,14 @@
+{
+    "name": "mip-jt-banner",
+    "version": "1.1.0",
+    "description": "金投头部banner",
+    "contributors": [
+        {
+            "name": "jt",
+            "email": "open@cngold.org"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
