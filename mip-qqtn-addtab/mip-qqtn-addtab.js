@@ -23,7 +23,7 @@ define(function (require) {
                     var data = (new Function('', 'return' + data))();
                     for (var o = 0; o < data.Title.length; ++o) {
                         html += '<li>';
-                        html += '<a href="/c/' + data.Id[o] + '">';
+                        html += '<a data-type="mip" href="/mipc/' + data.Id[o] + '.html">';
                         html += '<img src = "' + data.SmallImg[o] + '" />';
                         html += '</a>';
                         html += '<span>' + data.Title[o] + '</span>';

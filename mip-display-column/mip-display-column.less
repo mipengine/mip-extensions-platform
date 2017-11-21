@@ -1,0 +1,162 @@
+/**
+ * @file mip-display-column样式文件
+ */
+button, input, select, textarea, th{
+	background: #fff;
+	font-size: 12px;
+	line-height: 1.5em;
+	font-family: Arial,Tahoma,Helvetica,"SimSun";
+}
+#header_fixed{
+	height: 84px;
+    box-shadow: 0 1px #F2F2F2;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+.clearfix:before, .clearfix:after{
+	display: table;
+    content: "";
+    line-height: 0;
+}
+.clearfix:after{
+	clear: both;
+}
+li{
+	list-style:none;
+}
+.mask{
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	opacity:.4;
+	background-color:#000;
+	z-index:99;
+}
+.mip_hide{
+	display:none;
+}
+.mip_hide.mip_display{
+	display:block;
+}
+header{
+	width: 100%;
+    line-height: 44px;
+    /* position: fixed; */
+    z-index: 100;
+}
+header span{
+	display:block;
+	width:44px;
+	height:44px;
+}
+.mip_bar_box{
+	background:#fff;
+	padding:0 10px;
+	position:relative;
+	z-index:999;
+	position:absolute;
+	top:44px;left:0;
+}
+.mip_bar_box li{
+	float: left;
+    width: 25%;
+    height: auto;
+    min-width: 70px;
+    text-align: center;
+    font-size: 14px;
+}
+.mip_bar_box li a{
+	display: block;
+}
+.mip_bar_box i{
+	position:absolute;
+	right:1rem;
+	top:-5px;
+	width:0;
+	height:0;
+	border-left:.375rem solid transparent;
+	border-right:.375rem solid transparent;
+	border-bottom:.375rem solid #fff;
+}
+.header{
+	height: 44px;
+    display: -moz-box;
+    display: -webkit-box;
+    display: box;
+    background: #ffb230;
+    widtH: 100%;
+}
+
+.back{
+	display:block;
+	width:44px;
+	height:44px;
+	background:url('http://m.ququyou.com/skin/img/back_.png')no-repeat center center;
+	background-size:25px 25px;
+}
+
+header div.head{
+	-moz-box-flex: 1;
+    -webkit-box-flex: 1;
+    box-flex: 1;
+    text-align: center;
+    font-size: 18px;
+    color: #fff;
+    height: 44px;
+    overflow: hidden;
+}
+#seindex{
+	background: #fff none repeat scroll 0 0;
+    border-bottom: 1px solid #ebebeb;
+    clear: both;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    margin-bottom: 4px;
+}
+#seindex input[type="text"]{
+	border-color: #dcdcdc;
+    border-image: none;
+    border-radius: 0;
+    border-style: solid;
+    border-width: 1px 60px 1px 1px;
+    color: #333;
+    display: block;
+    height: 37px;
+    padding: 0 8px;
+    width: 100%;
+}
+#seindex input[type="submit"]{
+    background:url('http://m.ququyou.com/skin/img/seino-c.png')no-repeat;
+	background-size:20px 20px;
+	background-position:50% 50%;
+    border: 1px solid #dcdcdc;
+    height: 38px;
+    margin: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 60px;
+    z-index: 1;
+}
+mip-form[name='formsearch']{
+	display:block;
+}
+mip-display-column {
+    &.mip_bar_btn{
+		background:url('http://m.ququyou.com/skin/img/other_.png')no-repeat center center;
+		background-size:25px 25px;
+	}
+	&.mip_btn{
+		display:block;
+		width:44px;
+		height:44px;
+	}
+	&.mip_ser_btn{
+		background:url('http://m.ququyou.com/skin/img/ser_.png')no-repeat center center;
+		background-size:25px 25px;
+	}
+}

@@ -1,0 +1,14 @@
+{
+    "name": "mip-custom-passport-365caidashi",
+    "version": "1.0.0",
+    "description": "财大师专属 360统计组件",
+    "contributors": [
+        {
+            "name": "xiaojinping",
+            "email": "290762142@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

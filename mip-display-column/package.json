@@ -1,0 +1,14 @@
+{
+    "name": "mip-display-column",
+    "version": "1.0.1",
+    "description": "点击显示栏目栏,再次点击任意处关闭栏目栏",
+    "contributors": [
+        {
+            "name": "zwf",
+            "email": "18800188967@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
