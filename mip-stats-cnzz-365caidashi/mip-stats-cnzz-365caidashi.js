@@ -21,7 +21,7 @@ define(function (require) {
         var script = document.createElement('script');
         script.src = cnzzProtocol + 's19.cnzz.com/z_stat.php?id=1264625668&show=pic';
         ele.appendChild(oSpan);
-        ele.appendChild('script');
+        ele.appendChild(script);
         ele.style.display = 'none';
     };
     return customElement;

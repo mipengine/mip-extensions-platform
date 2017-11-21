@@ -17,7 +17,7 @@ define(function (require) {
         var script = document.createElement('script');
         script.src = src;
         script.id = 'sozz';
-        ele.appendChild('script');
+        ele.appendChild(script);
         ele.style.display = 'none';
     };
 

@@ -13,10 +13,16 @@ define(function (require) {
     customElement.prototype.firstInviewCallback = function () {
         var ele = this.element;
         var button = $(ele);
-        var action = ele.dataset.action;
-        var categoryID = ele.dataset.categoryid;
-        var channelID = ele.dataset.channelid;
-        var classID = ele.dataset.classid;
+        var url = '//dynamic.ppkao.com/Interface/PageAPI.ashx?action=' + ele.dataset.action;
+        if (ele.dataset.categoryid) {
+            url += '&CategoryID=' + ele.dataset.categoryid;
+        }
+        if (ele.dataset.channelid) {
+            url += '&channelID=' + ele.dataset.channelid;
+        }
+        if (ele.dataset.classid) {
+            url += '&classID=' + ele.dataset.classid;
+        }
         var page = 1;
         button.on('click', function () {
             viewMore();
@@ -36,12 +42,7 @@ define(function (require) {
             $.ajax({
                 type: 'get',
                 async: false,
-                url: '//dynamic.ppkao.com/Interface/PageAPI.ashx'
-                + '?action=' + action
-                + '&CategoryID=' + categoryID
-                + '&ChannelID=' + channelID
-                + '&ClassID=' + classID
-                + '&page=' + page,
+                url: url + '&page=' + page,
                 dataType: 'jsonp',
                 cache: true,
                 contentType: 'application/x-www-form-urlencoded;charset=utf-8',
@@ -60,6 +61,7 @@ define(function (require) {
                 }
             });
         }
+        viewMore();
     };
 
     return customElement;
