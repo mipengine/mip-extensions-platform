@@ -18,6 +18,7 @@ define(function (require) {
         $(str).children('a').css('display', 'block');
         // logo
         $('.mip-replaced-content').css('border-radius', '50%');
+        $('.mip-replaced-content').css('border-radius', '50%');
         // 返回
         $('.r_returnbk').click(function () {
             window.history.back();
@@ -25,10 +26,9 @@ define(function (require) {
         // 右上角更多操作,关闭
         if ($rightMore) {
             $rightMore.click(function () {
-                event.preventDefault();
-                event.stopPropagation();
                 $('.moreactions').show();
                 $('.prompt-menu').show();
+                event.preventDefault();
             });
         }
         $('.prompt-menu .btn').click(function () {
@@ -458,7 +458,7 @@ define(function (require) {
                     url1 += '&resumeId=' + data.resumeId + '';
                     url1 += '&resumeNum=' + data.resumeNum + '';
                     url1 += '&resumeVer=' + data.resumeVer + '';
-                    url1 += '&resumeTitle=' + data.resumeTitle + '';
+                    url1 += '&resumeTitle=' + escape(data.resumeTitle) + '';
                     url1 += '&pId=' + p.Pid + '';
                     url1 += '&enterSource=15&appplat=7';
                     if (p.PIsRecommend === 1) {

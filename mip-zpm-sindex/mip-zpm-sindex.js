@@ -59,6 +59,8 @@ define(function (require) {
             } else {
                 clearTimeout(searchTime);
                 searchTime = setTimeout(function () {
+                    var hotWordsArray = [];
+                    var sw = $searchInput.val();
                     if (prevStr === $searchInput.val()) {
                         return false;
                     }
@@ -66,17 +68,19 @@ define(function (require) {
                         keyword: $searchInput.val()
                     }, function (data, textStatus, jqxhr) {
                         $SearchLsWrap.show().children('dd').remove();
-                        var sw = $searchInput.val();
                         if (data.HotWords.length > 0) {
-                            $.each(data.HotWords, function (i, v) {
-                                v.Word = v.Word.replace(sw, '<span class="gl">' + sw + '</span>');
-                                $('<dd><a>' + v.Word + '</a><span class="add"></span></dd>').prependTo($SearchLsWrap);
-                            });
-                            $SearchLsWrap.find('.clear').hide();
+                            hotWordsArray = data.HotWords;
                         } else {
                             $SearchLsWrap.find('dt').hide();
                         }
                     }, 'json');
+                    if (hotWordsArray.length > 0) {
+                        $.each(hotWordsArray, function (i, v) {
+                            v.Word = v.Word.replace(sw, '<span class="gl">' + sw + '</span>');
+                            $('<dd><a>' + v.Word + '</a><span class="add"></span></dd>').prependTo($SearchLsWrap);
+                        });
+                        $SearchLsWrap.find('.clear').hide();
+                    }
                     prevStr = $searchInput.val();
 
                 }, 500);
@@ -335,7 +339,7 @@ define(function (require) {
     function resumeTopIndexEvent() {
         if ($('#MyInfo') !== null && $('#MyInfo').length !== 0) {
             var resumeId = $('#MyInfo').attr('data-id');
-            var resumeTitle = $('#MyInfo').attr('data-name');
+            var resumeTitle = escape($('#MyInfo').attr('data-name'));
             var resumeNum = $('#MyInfo').attr('data-number');
             var resumeVer = $('#MyInfo').attr('data-version');
             var topurl = 'https://mip.zhaopin.com/home/resumetopindex?payPoint=34a95223a071419da275719ea2a55daf';
@@ -356,7 +360,7 @@ define(function (require) {
                     alert(Refreshtxt);
                 } else {
                     var resumeId = $('#resuemlist').attr('data-id');
-                    var name = $('#resuemlist').attr('data-name');
+                    var name = escape($('#resuemlist').attr('data-name'));
                     var resumeNum = $('#resuemlist').attr('data-number');
                     var resumeVer = $('#resuemlist').attr('data-version');
                     var refrurl = 'https://mip.zhaopin.com/home/ResumeTopIndex?payPoint=34a95223a071419da275719ea2a55daf';
@@ -370,7 +374,7 @@ define(function (require) {
     function jobStatisticsEvent() {
         if ($('#MyInfo') !== null && $('#MyInfo').length !== 0) {
             var resumeId = $('#MyInfo').attr('data-id');
-            var resumeTitle = $('#MyInfo').attr('data-name');
+            var resumeTitle = escape($('#MyInfo').attr('data-name'));
             var resumeNum = $('#MyInfo').attr('data-number');
             var resumeVer = $('#MyInfo').attr('data-version');
             var jobsurl = 'https://mip.zhaopin.com/home/jobstatistics?resumeId=' + resumeId + '&resumeNum=' + resumeNum + '';

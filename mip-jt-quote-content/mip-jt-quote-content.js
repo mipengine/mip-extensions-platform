@@ -308,7 +308,7 @@ define(function (require) {
     }
     function symbolH(code, type, isCalc) {
         var isCalc = $('#isCalc').val();
-        var url = 'https://api.jijinhao.net/downVariety/query.htm';
+        var url = 'https://api.jijinhao.com/downVariety/query.htm';
         if (type === 1) {
             var currentCode = $('#currentCode').val();
             url += '?codes=' + currentCode;
@@ -743,6 +743,125 @@ define(function (require) {
             $('#' + code + '_realGoldTr').html(dataStr);
         });
     }
+    function changeStatusIndicator(obj) {
+        window.showIndicatorName = obj.id;
+        $('#landSpaceVarietyIndicator').children().not('#' + obj.id).removeClass('select');
+        $('#landSpaceVarietyIndicator > ' + '#' + obj.id).addClass('select');
+        if (obj.id.toString() !== 'noStatus') {
+            var generatorIndicatorInterval = window.generatorIndicatorInterval;
+            window.indicatorShowStatus = true;
+            if (generatorIndicatorInterval) {
+                generatorIndicatorInterval('', true);
+            }
+        }
+        else {
+            var updateDataAllFunction =  window.updateDataAll;
+            window.updateDataAll = false;
+            if (updateDataAllFunction) {
+                updateDataAllFunction();
+            }
+        }
+    }
+    function getCookieStatus(objName) {
+        var arrStr = document.cookie.split(';');
+        for (var i = 0; i < arrStr.length; i++) {
+            var cookieKV = decodeURIComponent(arrStr[i]);
+            var temp = cookieKV.split('=');
+            if (temp[0].trim() === objName) {
+                return temp[1];
+            }
+        }
+        return '';
+    }
+    function addCookieStatus(cookieStatus, objName, expireTimeSpan) {
+        var expiresDays = new Date();
+        if (expireTimeSpan === null || expireTimeSpan === undefined) {
+            expireTimeSpan = 0;
+        }
+        expiresDays.setTime(expiresDays.getTime() + parseInt(expireTimeSpan, 10));
+        document.cookie = objName + '=' + cookieStatus + ';expires=' + expiresDays.toGMTString() + ';path=/';
+    }
+    function showLandscapeChart() {
+        var cssBarrageDiv = $('#landscapeChartBarrageDiv').css('display');
+        if (getCookieByKey('CASTGC') !== '' && getCookieByKey('CASTGC') !== undefined) {
+            $('#landscapeLoginBtn').css('visibility', 'hidden');
+        }
+        else {
+            $('#landscapeLoginBtn').css('visibility', 'visible');
+        }
+        $('#landscapeBarrageContent').val('');
+        if (cssBarrageDiv === 'block') {
+            $('#landscapeChartBarrageDiv').css('display', 'none');
+        }
+        else if (cssBarrageDiv === 'none') {
+            var loginUri = 'https://passport2.cngold.org/account/login.htm?service=' + window.location.href;
+            $('#landscapeChartBarrageDivLoginUrl').attr('href', loginUri);
+            $('#landscapeChartBarrageDiv').css('display', 'block');
+        }
+    }
+    window.showLandscapeChart = showLandscapeChart;
+    function showPortraitChart() {
+        var url = window.location.href;
+        window.location.href = window.location.href.replace('mip.cngold.org', 'm.cngold.org') + '?key=formMip';
+    }
+    function showPortraitChart1() {
+        if ($('.b_controll i')[0].getAttribute('class') === 'off') {
+            window.widets.alert('请点击弹幕开启按钮');
+            return;
+        }
+        if (getCookieByKey('CASTGC') !== '' && getCookieByKey('CASTGC') !== undefined) {
+            $('#ChartBarrageLoginBtn').css('visibility', 'hidden');
+        }
+        else {
+            $('#ChartBarrageLoginBtn').css('visibility', 'visible');
+        }
+        var cssBarrageDiv = $('#ChartBarrageDiv').css('display');
+        $('#chartBarrageDivContent').val('');
+        if (cssBarrageDiv === 'block') {
+            $('#ChartBarrageDiv').css('display', 'none');
+        }
+        else if (cssBarrageDiv === 'none') {
+            var loginUri = 'https://passport2.cngold.org/account/login.htm?service=' + window.location.href;
+            $('#ChartBarrageDivLoginUrl').attr('href', loginUri);
+            $('#ChartBarrageDiv').css('display', 'block');
+        }
+    }
+    window.showPortraitChart = showPortraitChart;
+    function includeJavaScript(url) {
+            var c = document.createElement('script');
+            c.async = true;
+            c.type = 'text/javascript';
+            c.src = url;
+            document.getElementsByTagName('head')[0].appendChild(c);
+        }
+    function getCookieByKey(cookieKey) {
+        var arrStr = document.cookie.split(';');
+        for (var i = 0; i < arrStr.length; i++) {
+            var cookieKV = decodeURIComponent(arrStr[i]);
+            var temp = cookieKV.split('=');
+            if (temp[0].trim() === cookieKey) {
+                return temp[1];
+            }
+        }
+        return '';
+    }
+    window.getCookieByKey = getCookieByKey;
+    function sendPortraitBullet() {
+        var val = $('#chartBarrageDivContent').val();
+        showPortraitChart();
+        $('#comment_comment_detail').val(val);
+        if (window.addMsg({'text': val})) {
+            $('.comment_fabiao').click();
+        }
+    }
+    function sendLandscapeBullet() {
+        var val = $('#landscapeBarrageContent').val();
+        $('#comment_comment_detail').val(val);
+        showLandscapeChart();
+        if (window.addMsg({'text': val})) {
+            $('.comment_fabiao').click();
+        }
+    }
     customElement.prototype.firstInviewCallback = function () {
         var elements = this.element;
         var dataType = $(elements).attr('data-type');
@@ -754,6 +873,7 @@ define(function (require) {
             var key = $(elements).attr('key');
             var sUrl = $(elements).attr('sUrl');
             marketUrl = $(elements).attr('marketUrl');
+            var jsVersion = $(this).attr('jsVersion');
             if (sUrl.indexOf('xh') !== -1 && key) {
                 change();
             }
@@ -786,6 +906,9 @@ define(function (require) {
                     $('.top-price').css('display', 'flex');
                 }
             });
+            setTimeout(function () {
+                document.getElementById('hqLoadGif') ? document.getElementById('hqLoadGif').style.display = 'none' : '';
+            }, 4000);
         }
         if (dataType === 'refreshRealTime') {
             var isQhExpireCategory = $(elements).attr('isQhExpireCategory');
@@ -805,6 +928,19 @@ define(function (require) {
                 else {
                     $('.fixed-nav').hide();
                 }
+            });
+            window.ChangeStatusIndicator = changeStatusIndicator;
+            $('#indicatorTable li').click(function () {
+                $(this).addClass('on').siblings().removeClass('on');
+                changeStatusIndicator(this);
+            });
+            $('.ce_btn').click(function () {
+                $('#quote_icon').css('display', 'none');
+                $('#indicatorTable li[id=' + window.showIndicatorName + ']').addClass('on');
+                $('.ce_layer').show();
+            });
+            $('.ce_layer .bg_layer').click(function () {
+                $('.ce_layer').hide();
             });
         }
         if (dataType === 'ajaxData') {

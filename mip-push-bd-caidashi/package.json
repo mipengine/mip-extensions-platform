@@ -1,7 +1,7 @@
 {
-    "name": "mip-caidashi-mob",
+    "name": "mip-push-bd-caidashi",
     "version": "1.0.0",
-    "description": "检测是否是pc端访问移动端，如果是，强制进入pc端，",
+    "description": "百度主动推送",
     "contributors": [
         {
             "name": "xiaojinping",

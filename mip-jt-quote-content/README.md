@@ -13,7 +13,6 @@ mip-jt-quote-content 行情内容页js组件
 ### 基本用法
 ```html
 <mip-jt-quote-content>
-    自定义内容，可以嵌套其他组件
 </mip-jt-quote-content>
 ```
 
