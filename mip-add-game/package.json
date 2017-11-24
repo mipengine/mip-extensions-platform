@@ -1,0 +1,14 @@
+{
+    "name": "mip-add-game",
+    "version": "1.0.0",
+    "description": "动态加载游戏渲染到页面中",
+    "contributors": [
+        {
+            "name": "Dylan",
+            "email": "1060304921@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

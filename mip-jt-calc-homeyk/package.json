@@ -1,0 +1,14 @@
+{
+    "name": "mip-jt-calc-homeyk",
+    "version": "1.0.0",
+    "description": "盈亏计算器",
+    "contributors": [
+        {
+            "name": "jt",
+            "email": "open@cngold.org"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
