@@ -1,7 +1,7 @@
 {
-    "name": "mip-ppkao-calenderslide",
-    "version": "1.0.1",
-    "description": "ppkao日历加载",
+    "name": "mip-ppkao-kaoshixinxi",
+    "version": "1.0.0",
+    "description": "ppkao考试信息",
     "contributors": [
         {
             "name": "fll",

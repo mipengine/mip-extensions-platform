@@ -14,6 +14,7 @@ define(function (require) {
         var ele = this.element;
         var showmore = $(ele);
         var button = showmore.parents('.kaoshi-fenlei').find('.title');
+        $('mip-ppkao-calenderslide').hide();
         button.on('click', function () {
             showmore.toggle(400);
         });
