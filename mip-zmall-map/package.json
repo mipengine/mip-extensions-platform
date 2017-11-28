@@ -1,0 +1,14 @@
+{
+    "name": "mip-zmall-map",
+    "version": "1.0.0",
+    "description": "商品详情页商家地址定位",
+    "contributors": [
+        {
+            "name": "jy",
+            "email": "jiao.yang@zol.com.cn"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

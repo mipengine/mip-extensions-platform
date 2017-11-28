@@ -1,0 +1,14 @@
+{
+    "name": "mip-zmall-coupon",
+    "version": "1.0.0",
+    "description": "一键领取优惠劵组件",
+    "contributors": [
+        {
+            "name": "jy",
+            "email": "jiao.yang@zol.com.cn"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

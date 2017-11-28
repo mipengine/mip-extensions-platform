@@ -1,0 +1,14 @@
+{
+    "name": "mip-zmall-share",
+    "version": "1.0.0",
+    "description": "ZOl商成商品详情分享组件",
+    "contributors": [
+        {
+            "name": "jy",
+            "email": "jiao.yang@zol.com.cn"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
