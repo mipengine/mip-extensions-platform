@@ -13,6 +13,7 @@ define(function (require) {
     customElement.prototype.firstInviewCallback = function () {
         var ele = this.element;
         var showmore = $(ele);
+        showmore.hide();
         var button = showmore.parents('.kaoshi-fenlei').find('.title');
         button.on('click', function () {
             showmore.toggle(400);

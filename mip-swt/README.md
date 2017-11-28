@@ -6,7 +6,7 @@ mip-swt 组件说明
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-swt/mip-swt.js
+所需脚本|https://mipcache.bdstatic.com/static/v1/mip-swt/mip-swt.js
 
 ## 示例
 
@@ -19,23 +19,23 @@ mip-swt 组件说明
 
 ## 属性
 
-### {id}
+### swt-time
 
-说明：{说明}
-必选项：{是}
-类型：{无}
-取值范围：{无}
-单位：{无}
-默认值：{无}
+说明：弹窗关闭后再次显示时间
+必选项：否
+类型：int
+取值范围：0+
+单位：ms
+默认值：15000
 
-### {swt-time}
+### show-time
 
-说明：{弹窗重新弹出时间}
-必选项：{是}
-类型：{int}
-取值范围：{无}
-单位：{毫秒}
-默认值：{无}
+说明：打开页面显示弹窗停顿时间
+必选项：否
+类型：int
+取值范围：0+
+单位：ms
+默认值：0
 
 ## 注意事项
-关闭弹窗的元素定义一个id为swt-close
+

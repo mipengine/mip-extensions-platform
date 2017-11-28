@@ -6,6 +6,7 @@
 define(function (require) {
 
     var customElement = require('customElement').create();
+    var $ = require('zepto');
 
     function areasChange(th) {
         if (17 === parseInt(th, 10)) {

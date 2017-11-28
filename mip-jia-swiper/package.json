@@ -1,0 +1,14 @@
+{
+    "name": "mip-jia-swiper",
+    "version": "1.0.0",
+    "description": "swiper动画组件",
+    "contributors": [
+        {
+            "name": "tao",
+            "email": "165526381@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

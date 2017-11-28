@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @file 页面逻辑脚本
  * @author fl
 */
@@ -112,7 +112,7 @@ define(function (require) {
                 }), 0 === t.length ? t = '' : t = t.join(',');
                 var cid = (a.webInfoCid) ? a.webInfoCid : 0;
                 var rid = (a.webInfoRid) ? a.webInfoRid : 0;
-                fetch('https://apis.pc6.com/ajax.asp?action=998&keys=' + t + '&id=' + a.webInfoId + '&platform=' + i + '&pid=' + r + '&cid=' + cid + '&rid=' + rid + '&rcid=' + o + '&rrid=' + s, {
+                fetch('https://m.pc6.com/ajax.asp?action=998&keys=' + t + '&id=' + a.webInfoId + '&platform=' + i + '&pid=' + r + '&cid=' + cid + '&rid=' + rid + '&rcid=' + o + '&rrid=' + s, {
                     method: 'get'
                 }).then(function (response) {
                     response.json().then(function (data) {
