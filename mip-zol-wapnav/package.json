@@ -1,0 +1,14 @@
+{
+    "name": "mip-zol-wapnav",
+    "version": "1.0.0",
+    "description": "ZOL产品库wap站导航",
+    "contributors": [
+        {
+            "name": "liuxianggui",
+            "email": "liu.xianggui@zol.com.cn"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

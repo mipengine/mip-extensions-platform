@@ -1,0 +1,14 @@
+{
+    "name": "mip-zol-rem",
+    "version": "1.0.0",
+    "description": "rem设置，以及百分比的预设",
+    "contributors": [
+        {
+            "name": "liuxianggui",
+            "email": "liu.xianggui@zol.com.cn"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

@@ -1,0 +1,15 @@
+{
+    "name": "mip-qqtn-txtab",
+    "version": "1.0.0",
+    "description": "点击按钮进行样式切换",
+    "contributors": [
+        {
+            "name": "gom",
+            "email": "gom3250@qq.com",
+            "url": "https://www.mipengine.org"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.0.0"
+    }
+}

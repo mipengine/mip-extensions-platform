@@ -1,0 +1,14 @@
+{
+    "name": "mip-zol-blockload",
+    "version": "1.0.0",
+    "description": "区块加载，适用于整个区块的后加载",
+    "contributors": [
+        {
+            "name": "liuxianggui",
+            "email": "liu.xianggui@zol.com.cn"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

@@ -1,0 +1,213 @@
+/**
+ * @file mip-zol-wapnav样式文件
+ */
+
+mip-zol-wapnav {
+    .nav-box {
+        position: relative;
+        z-index: 99;
+        overflow: hidden;
+        height: 1.28rem;
+        padding: 0 1rem 0 .04rem;
+        background-color: #fff;;
+    }
+    .nav-line {
+        content: "";
+        position: absolute;
+        z-index: 1;
+        bottom: 0;
+        left: 0;
+        width: 1000%;
+        height: .3rem;
+        background-color: #f5f5f5;
+        -webkit-transform: scale(.1);
+        transform: scale(.1);
+        -webkit-transform-origin: left bottom;
+        transform-origin: left bottom;
+    }
+    .nav-scroller-l::before,
+    .nav-scroller-r::before,
+    .nav-scroller-l::after,
+    .nav-scroller-r::after {
+        position: absolute;
+        z-index: 3;
+        top: 0;
+        width: 1rem;
+        height: 1.23rem;
+    }
+    .nav-scroller-l::before,
+    .nav-scroller-r::before {
+        left: 0;
+        background: -webkit-linear-gradient(left, #fff 0%, rgba(255, 255, 255, 0) 100%);
+        background: linear-gradient(to right, #fff 0%, rgba(255, 255, 255, 0) 100%);
+    }
+    .nav-scroller-l::after,
+    .nav-scroller-r::after {
+        right: 1rem;
+        background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0) 0%, #fff 100%);
+        background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, #fff 100%);
+    }
+    .nav-scroller-l::before,
+    .nav-scroller-r::after {
+        content: "";
+    }
+
+    .nav-trigger {
+        position: absolute;
+        z-index: 3;
+        top: 0;
+        right: 0;
+        width: 1rem;
+        height: 1.25rem;
+        background: #fff;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0)!important;
+    }
+    .nav-trigger span {
+        display: none;
+    }
+    .nav-trigger::after {
+        content: "";
+        position: absolute;
+        top: .56rem;
+        right: .54rem;
+        width: 0;
+        height: 0;
+        border-width: .15rem;
+        border-style: solid;
+        border-color: #999 transparent transparent transparent;
+    }
+
+    .nav {
+        position: relative;
+        z-index: 2;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        width: 100%;
+        height: 1.28rem;
+        padding-bottom: .2rem;
+    }
+    .nav-list {
+        height: 1.28rem;
+        font-size: 0;
+        white-space: nowrap;
+    }
+    .nav-list * {
+        transform: translate3d(0, 0, 0);
+    }
+    .nav-list li {
+        display: inline-block;
+    }
+    .nav-list a {
+        display: block;
+        height: 1.28rem;
+        padding: 0 .5rem;
+        font-size: .42rem;
+        line-height: 1.28rem;
+        color: #666!important;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0)!important;
+    }
+    .nav-list span {
+        position: relative;
+        display: block;
+        height: 1.28rem;
+        padding: 0 .02rem;;
+    }
+    .nav-list .current {
+        font-weight: 700;
+    }
+    .nav-list .current a {
+        color: #333!important;
+    }
+    .nav-list .current span::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 1000%;
+        height: .6rem;
+        background-color: #000;
+        -webkit-transform: scale(.1);
+        transform: scale(.1);
+        -webkit-transform-origin: left bottom;
+        transform-origin: left bottom;
+    }
+
+    .nav-expanded,
+    .nav-expanded .nav {
+        overflow: visible;
+        height: auto;
+        padding: 0;
+    }
+    .nav-expanded::before,
+    .nav-expanded::after {
+        content: none!important;
+    }
+    .nav-expanded .nav-line {
+        content: none;
+    }
+    .nav-expanded .nav-trigger {
+        position: relative;
+        overflow: hidden;
+        width: auto;
+        height: 1.28rem;
+        padding: 0 .54rem;
+    }
+    .nav-expanded .nav-trigger::after {
+        top: .42rem;
+        border-color: transparent transparent #999 transparent;
+    }
+    .nav-expanded .nav-trigger span {
+        display: block;
+        font-size: .42rem;
+        line-height: 1.28rem;
+        color: #999;
+    }
+    .nav-expanded .nav-list {
+        overflow: hidden;
+        height: auto;
+        padding: .2rem .39rem 0;
+        white-space: normal;
+    }
+    .nav-expanded .nav-list li {
+        float: left;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        width: 33.33%;
+        margin-bottom: .6rem;
+        padding: 0 .15rem;;
+    }
+    .nav-expanded .nav-list a {
+        height: 1.05rem;
+        padding: 0;
+        border: 1px solid #f5f5f5;
+        line-height: 1.05rem;
+        text-align: center;
+        color: #333!important;
+    }
+    .nav-expanded .nav-list span {
+        display: inline;
+    }
+    .nav-expanded .nav-list .current {
+        font-weight: 400;
+    }
+    .nav-expanded .nav-list .current a {
+        border-color: #333;
+    }
+    .nav-expanded .nav-list .current span::after {
+        display: none;
+    }
+}
+body.header-with-nav {
+    padding-top: 2.54rem;
+}
+body > .zol-wapnav-cover {
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100rem;
+    background: rgba(0, 0, 0, .5);
+}

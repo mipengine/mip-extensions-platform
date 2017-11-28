@@ -1,0 +1,14 @@
+{
+    "name": "mip-zmall-goback",
+    "version": "1.0.0",
+    "description": "返回上一页组件",
+    "contributors": [
+        {
+            "name": "jy",
+            "email": "jiao.yang@zol.com.cn"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

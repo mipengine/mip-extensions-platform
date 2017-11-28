@@ -1,0 +1,27 @@
+/**
+ * @file mip-zolzmall-goback样式文件
+ */
+
+mip-zmall-goback {
+    .back {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1.32rem;
+        height: 1.32rem;
+        &::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: .32rem;
+            height: .32rem;
+            margin: -.16rem 0 0 -.16rem;
+            border: 2px solid #323332;
+            border-right: 0 none;
+            border-bottom: 0 none;
+            -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+        }
+    }
+}
