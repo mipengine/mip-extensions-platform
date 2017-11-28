@@ -1,0 +1,14 @@
+{
+    "name": "mip-all-checkout",
+    "version": "1.0.0",
+    "description": "可配置的全选复选框来操作组件中的复选框。",
+    "contributors": [
+        {
+            "name": "xuexb",
+            "email": "fe.xiaowu@gmail.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
