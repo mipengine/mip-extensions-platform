@@ -7,7 +7,7 @@ define(function (require) {
 
     var customElement = require('customElement').create();
 
-    customElement.prototype.build = function () {
+    customElement.prototype.firstInviewCallback = function () {
         var element2 = this.element;
         var widthstr = $(element2).attr('width');
         var width = 750;
@@ -41,6 +41,9 @@ define(function (require) {
         window.addEventListener(resizeEvt, resize, false);
         // 检查页面大小变化,重新适配用的
         document.addEventListener('DOMContentLoaded', resize, false);
+
+        // 第一次渲染页面触发一次
+        resize();
     };
 
     return customElement;
