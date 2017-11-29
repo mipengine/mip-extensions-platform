@@ -1,7 +1,7 @@
 {
-    "name": "mip-zmall-share",
-    "version": "1.0.1",
-    "description": "ZOl商成商品详情分享组件",
+    "name": "mip-zmall-buy",
+    "version": "1.0.0",
+    "description": "立即购买组件",
     "contributors": [
         {
             "name": "jy",

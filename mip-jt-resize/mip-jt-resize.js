@@ -35,6 +35,9 @@ define(function (require) {
             }
         };
 
+        // 第一次渲染页面触发一次
+        resize();
+
         if (!document.addEventListener) {
             return;
         }
@@ -42,8 +45,6 @@ define(function (require) {
         // 检查页面大小变化,重新适配用的
         document.addEventListener('DOMContentLoaded', resize, false);
 
-        // 第一次渲染页面触发一次
-        resize();
     };
 
     return customElement;

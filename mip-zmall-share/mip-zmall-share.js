@@ -23,12 +23,12 @@ define(function (require) {
 
         shareBtn && shareBtn.addEventListener('click', function () {
             mask.classList.add('mip-zmall-share-mask-show');
-            sharePanel.classList.add('.mip-share-container-show');
+            sharePanel.classList.add('mip-share-container-show');
         });
 
         mask.addEventListener('click', function () {
             mask.classList.remove('mip-zmall-share-mask-show');
-            sharePanel.classList.remove('.mip-share-container-show');
+            sharePanel.classList.remove('mip-share-container-show');
         });
     };
 
