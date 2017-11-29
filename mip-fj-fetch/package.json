@@ -1,0 +1,15 @@
+{
+    "name": "mip-fj-fetch",
+    "version": "1.0.0",
+    "description": "异步提交自定义数据",
+    "contributors": [
+        {
+            "name": "Jason FJ",
+            "email": "jasondurianvan@gmail.com",
+            "url": "https://www.ebiomall.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
