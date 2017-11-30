@@ -1,0 +1,14 @@
+{
+    "name": "mip-hc-popup",
+    "version": "1.0.0",
+    "description": "点击弹框元素的id",
+    "contributors": [
+        {
+            "name": "beisir",
+            "email": "hsy7426@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

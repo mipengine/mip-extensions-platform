@@ -1,0 +1,60 @@
+/**
+ * @file mip-hc-popup样式文件
+ */
+
+mip-hc-popup {
+    width: 70vw;
+    height: 40vw;
+    position: absolute;
+    top: 50vw;
+    left: 15vw;
+    color: #fff;
+    background: #fff;
+    color: #000;
+    border-radius: 5px;
+    box-shadow: 0 5px 20px rgba(255,255,255,0.5);
+    .hc-title {
+        line-height: 10vw;
+        padding-left: 5vw;
+        font-size: 4.2vw;
+      }
+    .hc-text {
+        font-size: 4vw;
+        padding: 3vw 5vw;
+        line-height: 7vw;
+        text-indent: 2em;
+    }
+}
+.hc-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #000000;
+    opacity: .8;
+    transition: all .6s;
+    &.hc-hide {
+        animation-name: trans;
+        animation-duration: .6s;
+        animation-fill-mode: forwards;
+    }
+}
+
+@-webkit-keyframes trans {
+    0% {
+        opacity: .8;
+    }
+    25% {
+        opacity: .6;
+    }
+    50% {
+        opacity: .4;
+    }
+    75% {
+        opacity: 0;
+    }
+    100% {
+        transform: scale(0);
+    }
+}

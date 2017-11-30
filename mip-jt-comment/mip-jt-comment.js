@@ -431,7 +431,7 @@ define(function (require) {
 				+     '<p>提交前请先进行人机识别验证！</p>'
 				+     '<!-- 验证码-->'
 				+     '<div class=\"l-captcha\"'
-				+     'data-site-key=\"e3e0b5fa719a8dcaaff769e9e67d7865\" data-callback=\"getResponse\"></div>'
+				+     'data-site-key=\"2e2914591f4c71244ca846fd5df1c073\" data-callback=\"getResponse\"></div>'
 				+     '</div>'
 				+     '<div class=\"comment_bg\"></div>'
 				+     '</div>'
