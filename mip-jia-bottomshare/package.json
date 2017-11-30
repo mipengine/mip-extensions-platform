@@ -1,0 +1,14 @@
+{
+    "name": "mip-jia-bottomshare",
+    "version": "1.0.0",
+    "description": "底部悬浮分享",
+    "contributors": [
+        {
+            "name": "ll",
+            "email": "liulei@qeeka.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

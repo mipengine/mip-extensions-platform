@@ -32,7 +32,7 @@ define(function (require) {
             fetch: function (id) {
                 var gameUrl = 'http://m.yxdown.com/api/down.ashx/getdownlink?type=url&id=' + id;
                 fetch(gameUrl).then(function (res) {
-                    var text =  res.text();
+                    return res.text();
                 }).then(function (text) {
                     window.location.href = text;
                 });

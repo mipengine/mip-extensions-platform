@@ -8,6 +8,12 @@
 支持布局|responsive,fixed-height,fill,container,fixed
 所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-zol-like/mip-zol-like.js
 
+## 最新版本
+
+### 1.0.1
+
+- 修复已知的bug
+
 ## 示例
 
 ### 基本用法

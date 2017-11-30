@@ -88,10 +88,10 @@ define(function (require) {
         var self = this;
         var ele = self.element;
         var data = ele.dataset;
-        var canCansel = data.cansel ? data.cansel : 'true';
+        var canCansel = (data.cansel && data.cansel === 'true');
         var status = data.status ? data.status : 0;
         var doneClass = data.done;
-        var isNeedCallback = data.callback ? data.callback : 'true';
+        var isNeedCallback = (data.callback && data.callback === 'true');
         var likeElm = ele.querySelector('._js_mip_like');
         var numElm = likeElm.querySelector('em');
 
@@ -99,33 +99,44 @@ define(function (require) {
             likeElm.classList.add(doneClass);
         }
 
-        var callback = function () {
+        var changeLikeNum = function () {
             var voteNum = numElm.innerText || numElm.textContent;
             voteNum = voteNum.match(/\d+/);
             voteNum = voteNum ? parseInt(voteNum[0], 10) : 0;
             if (likeElm.classList.contains(doneClass)) {
-                if (canCansel !== 'true') {
+                if (!canCansel) {
                     return;
                 }
                 likeElm.classList.remove(doneClass);
                 var num = (voteNum - 1 > 0) ? voteNum - 1 : 0;
                 numElm.innerHTML = num ? '(' + num + ')' : '';
-                likeElm.setAttribute('data-status', '0');
             }
             else {
                 likeElm.classList.add(doneClass);
                 var numStr = '(' + (voteNum + 1) + ')';
                 numElm.innerHTML = numStr;
-                likeElm.setAttribute('data-status', '1');
             }
         };
 
         likeElm.addEventListener('click', function () {
+
+            // 改变状态
+            if (likeElm.classList.contains(doneClass)) {
+                if (!canCansel) {
+                    return;
+                }
+                ele.setAttribute('data-status', '0');
+            }
+            else {
+                ele.setAttribute('data-status', '1');
+            }
+
             // 如果需要回调函数
             if (isNeedCallback) {
                 like.call(self, function (res) {
                     if (!res.status) {
-                        callback(res);
+                        changeLikeNum();
+                        // to do
                     }
                     else {
                         toast(res.message);
@@ -133,7 +144,7 @@ define(function (require) {
                 });
             }
             else {
-                callback();
+                changeLikeNum();
                 like.call(self);
             }
         });

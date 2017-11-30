@@ -1,0 +1,49 @@
+/**
+ * @file mip-jia-bottomshare样式文件
+ */
+
+mip-jia-bottomshare {
+    &.mip-layout-container {
+        mip-share {
+            display:none;
+            -webkit-animation:comeon .5s;
+            animation:comeon .5s;
+            .c-share-btn {
+                padding:0 4%;
+            }
+        }
+    }
+    @-webkit-keyframes comeon {
+        from {
+            -webkit-transform:translateY(100%);
+            transform:translateY(100%);
+        }
+        to {
+            -webkit-transform:translateY(0);
+            transform:translateY(0);
+        }
+    }
+    @keyframes comeon {
+        from {
+            -webkit-transform:translateY(100%);
+            transform:translateY(100%);
+        }
+        to {
+            -webkit-transform:translateY(0);
+            transform:translateY(0);
+        }
+    } 
+}
+.pop-mask {
+    display:none;
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+    right:0;
+    background-color:rgba(0,0,0,.5);
+    z-index:10000;
+}
+.jia-bottom-share {
+    z-index:10001 !important;
+}
