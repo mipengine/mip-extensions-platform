@@ -27,6 +27,9 @@ define(function (require) {
         platIPhoneRid: $('#plat_iPhone').attr('rid'),
         assid: parseInt($('#info #Associate').html(), 10),
         xfNav: function () {
+            if (platform.isBaiduApp()) {
+                return false;
+            }
             var t = $('header').height() + 90;
             $(window).scroll(function () {
                 var i = $('#btns');
