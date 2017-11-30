@@ -8,6 +8,14 @@
 支持布局|responsive,fixed-height,fill,container,fixed
 所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-zmall-coupon/mip-zmall-coupon.js
 
+## 最新版本
+
+### 1.0.1
+
+- 增加部分注释
+- 更改获取 `userId` 为 获取 `sid`
+- 把 `alert` 改成 `toast`
+
 ## 示例
 
 ### 基本用法

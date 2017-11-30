@@ -1,0 +1,14 @@
+{
+    "name": "mip-jia-tbs",
+    "version": "1.0.0",
+    "description": "tab切换",
+    "contributors": [
+        {
+            "name": "ll",
+            "email": "liulei@qeeka.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

@@ -6,30 +6,30 @@
 define(function (require) {
 
     var $ = require('zepto');
-
     var customElement = require('customElement').create();
 
+    // 授权登录链接
     var LOGIN_URL = '//cashier.zol.com/paygate/baidu/oauth?callbackurl=';
 
     // 请求频次控制开关
     var switchs = false;
 
+    // 判断element是否存在
     var single = (function () {
 
         var instance = null;
 
-        return function (txt) {
+        return function (selector) {
             if (!instance) {
-                instance = document.querySelector('.' + txt);
+                instance = document.querySelector(selector);
             }
-
             return instance;
         };
     })();
 
     function init() {
-        var self = this;
 
+        var self = this;
         var url = self.getAttribute('data-url');
 
         if (url === '' || url === null) {
@@ -38,7 +38,7 @@ define(function (require) {
 
         var params = urlParameter();
         var merchantId = params.merchantId ? params.merchantId : '';
-        var userId = window.ZOL_USER_INFO.userid;
+        var userId = window.ZOL_USER_INFO.sid;
 
         $.ajax({
             url: url,
@@ -51,72 +51,61 @@ define(function (require) {
                 userId: userId
             },
             success: function (res) {
+
                 var r = (typeof res === 'string') ? JSON.parse(res) : res;
 
                 if (r.flag === 1) {
                     switchs = true;
-
                     var data = createObj(r);
-
                     var dom = createDom(data);
-
                     appendEle.call(self, dom);
-
                     appendBg.call(self, dom);
                 }
                 else {
                     switchs = false;
-
-                    alert('数据请求失败');
+                    toast(r.msg);
                 }
             },
             error: function (err) {
                 switchs = false;
-
-                alert('数据请求失败');
+                toast('数据请求失败');
             }
         });
     }
 
     function show() {
         var box = document.querySelector('.store-discount');
-
         var cover = document.querySelector('.cover-mask');
-
         if (box) {
             box.classList.add('store-discount__show');
-
             cover.classList.add('store-discount__show');
         }
-
         return;
     }
 
     function urlParameter() {
+
         var url = location.search;
         var theRequest = {};
 
         if (url.indexOf('?') !== -1) {
             var str = url.substr(1);
-
             var strs = str.split('&');
-
             for (var i = 0; i < strs.length; i++) {
                 theRequest[strs[i].split('=')[0]] = unescape(strs[i].split('=')[1]);
             }
         }
-
         return theRequest;
     }
 
     function createObj(res) {
+
         if (res === undefined || res === '') {
             return;
         }
 
         var obj = null;
-
-        var mapUrl = 'http://api.map.baidu.com/geocoder?address=' + res.address + '&output=html';
+        var mapUrl = 'https://api.map.baidu.com/geocoder?address=' + res.address + '&output=html';
 
         obj = {
             cardNumber: res.cardNumber || '',
@@ -130,8 +119,8 @@ define(function (require) {
     }
 
     function createDom(data) {
-        var str = null;
 
+        var str = null;
         var code = couponCode(data);
         var gift = couponGift(data);
         var value = couponValue(data);
@@ -159,52 +148,48 @@ define(function (require) {
     }
 
     function couponCode(obj) {
+
         if (obj === undefined) {
             return;
         }
 
         var codeStr = '<div class="coupon-code">';
-
         if (obj.cardNumber !== '') {
             codeStr += '<p>百度专属优惠码：' + obj.cardNumber + '</p>';
         }
-
         if (obj.cardQcodeUrl !== '') {
-            codeStr += '<img src="' + obj.cardQcodeUrl + '" alt="" class="pic"/>';
+            codeStr += '<mip-img src="' + obj.cardQcodeUrl + '" class="pic"></mip-img>';
         }
-
         codeStr += '</div>';
 
         return codeStr;
     }
 
     function couponGift(obj) {
+
         if (obj === undefined) {
             return;
         }
 
         var giftStr = '<div class="coupon-gift">';
-
         if (obj.content !== '') {
             giftStr += '<label>入门礼</label>' + obj.content;
         }
-
         giftStr += '</div>';
 
         return giftStr;
     }
 
     function couponValue(obj) {
+
         if (obj === undefined) {
             return;
         }
 
         var valStr = '<div class="coupon-value">';
-
         if (obj.couponList !== '' && obj.couponList.length > 0) {
             for (var i = 0; i < obj.couponList.length; i++) {
                 var coupon = obj.couponList[i];
-
                 if (coupon.conditions === 0) {
                     valStr += '<label><span>' + coupon.couponPrice + '</span></label>';
                 }
@@ -213,19 +198,18 @@ define(function (require) {
                 }
             }
         }
-
         valStr += '</div>';
 
         return valStr;
     }
 
     function couponAdd(obj) {
+
         if (obj === undefined) {
             return;
         }
 
         var addStr = '';
-
         if (obj.address !== '') {
             addStr = '<a href="' + obj.address + '" class="btns-check">查看路线</a>';
         }
@@ -234,14 +218,13 @@ define(function (require) {
     }
 
     function appendEle(domStr) {
+
         if (domStr === undefined) {
             return;
         }
 
         var self = this;
-
         var box = self.querySelector('.draw_box');
-
         append(box, domStr);
 
         var btn = self.querySelector('.store-discount__closebtn');
@@ -250,12 +233,9 @@ define(function (require) {
         btn.addEventListener('click', function (evt) {
             evt.stopPropagation();
             evt.preventDefault();
-
             var that = this;
-
             that.parentNode.classList.add('store-discount__hide');
             that.parentNode.classList.remove('store-discount__show');
-
             self.querySelector('.cover-mask').classList.add('store-discount__hide');
             self.querySelector('.cover-mask').classList.remove('store-discount__show');
         }, false);
@@ -271,6 +251,7 @@ define(function (require) {
      * @param  {string} str 提示信息
      */
     function toast(str) {
+
         if (document.getElementById('_j_miptoast')) {
             return;
         }
@@ -284,37 +265,30 @@ define(function (require) {
         setTimeout(function () {
             toast.parentNode.removeChild(toast);
             document.body.style.pointerEvents = 'all';
-        }, 800);
+        }, 1200);
     }
 
     function appendBg() {
         var self = this;
-
         var str = '<div class="cover-mask cover-mask__visible"></div>';
-
         var box = self.querySelector('.draw_box');
-
         append(box, str);
     }
 
     function html(element, string) {
         if (typeof string === 'string') {
             element.innerHTML = string;
-
             return string;
         }
-
         return element.innerHTML;
     }
 
     function create(htmls) {
         var div = document.createElement('tbody');
         var doc = document.createDocumentFragment();
-
         html(div, htmls);
 
         var childrens = children(div);
-
         for (var i = 0, j = childrens.length; i < j; i++) {
             append(doc, childrens[i]);
         }
@@ -323,21 +297,18 @@ define(function (require) {
     }
 
     function children(element, tag) {
+
         if (typeof tag === 'boolean' && tag) {
             return element.childNodes;
         }
 
         var result = [];
-
         if (typeof tag === 'string') {
-
             for (var i = 0, j = element.childNodes.length; i < j; i++) {
                 if (element.childNodes[i].nodeName.toLowerCase() === tag.toLowerCase()) {
                     result.push(element.childNodes[i]);
                 }
-
             }
-
             return result;
         }
 
@@ -351,20 +322,19 @@ define(function (require) {
     }
 
     function append(element, html) {
+
         if (typeof html === 'string') {
             html = create(html);
         }
-
         element.appendChild(html);
 
         return html;
     }
 
     customElement.prototype.build = function () {
+
         var self = this;
-
         var ele = self.element;
-
         var entry = ele.querySelector('._js_coupon_btn');
 
         if (!entry) {
@@ -376,8 +346,8 @@ define(function (require) {
             evt.preventDefault();
 
             var userId = '';
-            if (window.ZOL_USER_INFO && window.ZOL_USER_INFO.userid) {
-                userId = window.ZOL_USER_INFO.userid;
+            if (window.ZOL_USER_INFO && window.ZOL_USER_INFO.sid) {
+                userId = window.ZOL_USER_INFO.sid;
             }
             if (userId === '') {
                 var href = encodeURIComponent(location.href);
@@ -385,7 +355,7 @@ define(function (require) {
                 return;
             }
 
-            if (single('store-discount') === null) {
+            if (single('.store-discount') === null) {
                 if (!switchs) {
                     init.call(ele);
                 }

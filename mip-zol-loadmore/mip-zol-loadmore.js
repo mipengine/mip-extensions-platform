@@ -43,8 +43,12 @@ define(function (require) {
      */
     function init() {
 
-        var element = this.element;
+        var self = this;
+        var element = self.element;
         var src = element.getAttribute('data-src') || '';
+        var appkey = element.getAttribute('appkey') || '';
+        var token = element.getAttribute('token');
+        var isNeedToken = (token && token === 'true');
 
         // 如果没有写data-api, 则报错提示
         if (!src) {
@@ -54,7 +58,7 @@ define(function (require) {
         }
 
         // 默认参数设置
-        this.params = {
+        self.params = {
             request: true,
             type: 'scroll',
             loading: '加载中',
@@ -71,7 +75,7 @@ define(function (require) {
             var script = element.querySelector('script[type="application/json"]');
             if (script) {
                 var customParams = JSON.parse(script.textContent.toString());
-                this.params = util.fn.extend(this.params, customParams);
+                self.params = util.fn.extend(self.params, customParams);
             }
 
         }
@@ -84,7 +88,27 @@ define(function (require) {
         }
 
         // 设置获取数据的 url
-        this.url = getQueryUrl(src, this.params.query);
+        self.url = getQueryUrl(src, self.params.query);
+
+        // 如果需要token
+        if (isNeedToken) {
+            // token 获取
+            var tokenApi = '//wap.zol.com.cn/mip/api/MakeToken/GetToken?appkey=' + appkey;
+
+            fetchJsonp(tokenApi, {
+                jsonpCallback: 'callback'
+            }).then(function (res) {
+                return res.json();
+            }).then(function (res) {
+                if (!res.status) {
+                    self.token = res.token;
+                    self.params.query.appkey = appkey;
+                    self.params.query.token = res.token;
+                    // 重新设置获取数据的 url
+                    self.url = getQueryUrl(src, self.params.query);
+                }
+            });
+        }
     }
 
     /**
@@ -137,7 +161,7 @@ define(function (require) {
         setTimeout(function () {
             toast.parentNode.removeChild(toast);
             document.body.style.pointerEvents = 'all';
-        }, 800);
+        }, 1000);
     }
 
     /**

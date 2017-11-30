@@ -1,6 +1,6 @@
 {
     "name": "mip-zol-loadmore",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "加载更多，用于滚动加载、点击加载",
     "contributors": [
         {

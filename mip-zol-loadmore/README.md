@@ -6,7 +6,15 @@
 ----|----
 类型|ZOL内部通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://mipcache.bdstatic.com/static/v1/mip-mustache/mip-mustache.js<br>https://mipcache.bdstatic.com/extensions/pplatform/v1/mip-zol-loadmore/mip-zol-loadmore.js
+所需脚本|https://mipcache.bdstatic.com/static/v1/mip-mustache/mip-mustache.js<br>https://mipcache.bdstatic.com/extensions/platform/v1/mip-zol-loadmore/mip-zol-loadmore.js
+
+## 版本介绍
+
+### 1.0.1
+
+- 加载数据源增加 `token` 的判断
+- 修正引用链接等
+
 
 ## 示例
 
@@ -30,6 +38,7 @@
         {
             "query": {
                 "pn": 3 // 每次点击显示个数
+
             },
             "container": "container",
             "request": false,
@@ -57,7 +66,7 @@
 ### 基本用法二
 
 ```html
-<mip-zol-loadmore data-src="//path/to/api" template="tpl-xxx">
+<mip-zol-loadmore appkey="wap" token="true" data-src="//path/to/api" template="tpl-xxx">
     <script type="application/json">
         {
             "query": {
@@ -99,6 +108,20 @@
 取值范围：无   
 单位：无   
 默认值：无   
+
+### appkey
+
+说明：应用组件的业务，具体请咨询作者。当 `token="true"` 时起作用                  
+必选项：否    
+类型：字符串   
+默认值：无   
+
+### token
+
+说明：获取内容是否需要token来限制。                               
+必选项：否    
+类型：字符串   
+默认值：`false`    
 
 ### template
 

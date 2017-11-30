@@ -8,11 +8,17 @@
 支持布局|responsive,fixed-height,fill,container,fixed
 所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-zol-blockload/mip-zol-blockload.js
 
+## 版本介绍
+
+### 1.0.1
+
+- 加载数据源增加 `token` 的判断
+
 ## 示例
 
 ### 基本用法
 ```html
-<mip-zol-blockload data-src="//path/to/api" data-limit="3" data-location="true">
+<mip-zol-blockload appkey="wap" token="true" data-src="//path/to/api" data-limit="3" data-location="true">
     <script type="application/json">
     {
         "appkey": "",

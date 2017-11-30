@@ -103,6 +103,16 @@ define(function (require) {
         var params = options || {};
         params.limit = data.limit;
 
+        // 传入appkey
+        if (this.appkey && this.appkey !== '') {
+            params.appkey = this.appkey;
+        }
+
+        // 传入token
+        if (this.token && this.token !== '') {
+            params.token = this.token;
+        }
+
         // 获取用户设置参数
         try {
             var script = element.querySelector('script[type="application/json"]');
@@ -131,6 +141,36 @@ define(function (require) {
             }
         });
     }
+
+    /**
+     * build 方法，元素插入到文档时执行，仅会执行一次
+     * 元素插入到文档时获取token (必须)
+     */
+    customElement.prototype.build = function () {
+
+        var self = this;
+        var element = this.element;
+        var token = element.getAttribute('token');
+        var isNeedToken = (token && token === 'true');
+
+        // 如果需要token
+        if (isNeedToken) {
+            var appkey = element.getAttribute('appkey') || '';
+            // token 获取
+            var tokenApi = '//wap.zol.com.cn/mip/api/MakeToken/GetToken?appkey=' + appkey;
+
+            fetchJsonp(tokenApi, {
+                jsonpCallback: 'callback'
+            }).then(function (res) {
+                return res.json();
+            }).then(function (res) {
+                if (!res.status) {
+                    self.token = res.token;
+                    self.appkey = appkey;
+                }
+            });
+        }
+    };
 
     /**
      * 第一次进入可视区回调，只会执行一次
