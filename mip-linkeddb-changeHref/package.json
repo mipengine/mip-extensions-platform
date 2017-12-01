@@ -1,0 +1,14 @@
+{
+    "name": "mip-linkeddb-changeHref",
+    "version": "1.0.0",
+    "description": "把后一个a标签的href地址，赋值给前一个",
+    "contributors": [
+        {
+            "name": "linkeddb",
+            "email": "1046251808@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
