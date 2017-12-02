@@ -23,7 +23,10 @@ define(function (require) {
             util.css([me.successEle, me.errorEle], {display: 'none'});
             var fetchData = {
                 method: me.method,
-                credentials: 'include'
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             };
             if (me.method === 'POST') {
                 fetchData = util.fn.extend({}, fetchData, {
@@ -35,6 +38,9 @@ define(function (require) {
                 if (res.ok) {
                     res.json().then(function (data) {
                         if (data && parseInt(data.status, 10) === 0) {
+                            // 返回的数据存入全局data
+                            window.m.responseData = data;
+
                             me.submitSuccessHandle();
                             util.css(me.successEle, {display: 'block'});
                             me.renderTpl(me.successEle, data);

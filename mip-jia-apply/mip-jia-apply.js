@@ -105,7 +105,10 @@ define(function (require) {
         if (!getUrl) {
             return false;
         }
-        var params = data.params[i];
+        var params = {};
+        for (var pkey in data.params[i]) {
+            params[pkey] = data.params[i][pkey];
+        }
         var $success = data.success[i];
         for (var key in params) {
             if (validateParamEle(params[key])) {

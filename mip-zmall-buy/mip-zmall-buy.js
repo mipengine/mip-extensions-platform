@@ -597,16 +597,18 @@ define(function (require) {
         var emptyDom = '';
 
         for (var i = 0; i < domArr.length; i++) {
-            if (!Array.isArray(dataArr) || dataArr.length <= 0) {
+            if (!Array.isArray(dataArr)) {
                 return;
             }
+
+            domArr[i].removeAttribute('data-empty');
+            domArr[i].classList.remove('disabled');
+
             for (var k = 0; k < dataArr.length; k++) {
                 if (dataArr[k] === domArr[i].getAttribute('report-eventid')) {
                     if (domArr[i]) {
                         domArr[i].setAttribute('data-empty', true);
-
                         emptyDom = domArr[i];
-
                         emptyDom.classList.add('disabled');
                     }
                 }

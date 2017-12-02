@@ -1,0 +1,14 @@
+{
+    "name": "mip-zol-ask-audio",
+    "version": "1.0.0",
+	"description": "zol问答堂音频问答相关模块",
+    
+    "author": {
+        "name": "mulianju",
+        "email": "mul.ianju@zol.com.cn"
+    },
+
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
