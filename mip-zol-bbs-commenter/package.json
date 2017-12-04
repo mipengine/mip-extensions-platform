@@ -1,0 +1,14 @@
+{
+    "name": "mip-zol-bbs-commenter",
+    "version": "1.0.0",
+    "description": "zol论坛回帖",
+
+    "author": {
+        "name": "mulianju",
+        "email": "mul.ianju@zol.com.cn"
+    },
+
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

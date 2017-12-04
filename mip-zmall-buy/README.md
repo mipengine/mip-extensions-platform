@@ -8,6 +8,16 @@
 支持布局|responsive,fixed-height,fill,container,fixed
 所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-zmall-buy/mip-zmall-buy.js
 
+## 最新版本
+
+### 1.0.2
+
+- 登录判断bug修改
+
+### 1.0.1
+
+- bug修复
+
 ## 示例
 
 ### 基本用法

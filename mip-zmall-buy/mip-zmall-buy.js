@@ -872,17 +872,16 @@ define(function (require) {
 
     // 判断是否登录
     function islogin() {
-        var userId = '';
 
-        typeof ZOL_USER_INFO !== 'undefined' && (userId = window.ZOL_USER_INFO.userid);
+        var userId = '';
+        if (window.ZOL_USER_INFO && window.ZOL_USER_INFO.sid) {
+            userId = window.ZOL_USER_INFO.sid;
+        }
 
         var href = '';
-
         if (userId === '') {
             href = encodeURIComponent(location.href);
-
             window.location.href = '//cashier.zol.com/paygate/baidu/oauth?callbackurl=' + href;
-
             return false;
         }
     }
