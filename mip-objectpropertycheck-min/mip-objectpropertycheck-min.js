@@ -16,8 +16,8 @@ define(function (require) {
         // 需要检测的元素以及目录元素。
         var dataCheck = ele.getAttribute('data-checkobj');
         var dataTarget = ele.getAttribute('data-target');
-        var oCheckObj = document.querySelector(dataCheck);
-        var oTargetObj = document.querySelector(dataTarget);
+        var oCheckObj = ele.querySelector(dataCheck);
+        var oTargetObj = ele.querySelector(dataTarget);
         // 需要检测的属性
         var property = ele.getAttribute('data-property');
         // 状态值。

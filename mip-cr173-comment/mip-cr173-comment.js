@@ -1,5 +1,5 @@
 /**
- * @file v3系统通用评论,修复一处获取地址冲突的情况。
+ * @file v3系统通用评论,修复一处获取地址冲突的情况。.使用firstInviewCallback方式。拖动过快会导致没有获取到路径导致/mipx/undefined的一处问题。
  * @author gom
  */
 define(function (require) {
@@ -125,7 +125,7 @@ define(function (require) {
         });
         $('.w-text textarea').keyup(validate);
     }
-    customElem.prototype.firstInviewCallback = function () {
+    customElem.prototype.build = function () {
         var element = this.element;
         comment(element);
     };

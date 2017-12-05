@@ -1,6 +1,6 @@
 {
     "name": "mip-html-font-size",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "适用于移动端,初始化html，html根元素的font-size等于screen.availWidth * 0.1,最小宽度为320px，最大宽度为750px",
     "contributors": [
         {
@@ -9,6 +9,6 @@
         }
     ],
     "engines": {
-        "mip": ">=1.1.0"
+        "mip": ">=1.0.1"
     }
 }

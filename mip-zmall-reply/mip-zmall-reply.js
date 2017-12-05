@@ -1,6 +1,6 @@
 /**
  * @file mip-zol-reply 组件
- * @author wenxd
+ * @author wen
  * @time 2017-11-17
  */
 
@@ -17,15 +17,14 @@ define(function (require) {
      * @param {string} str 提示信息
      */
     function toast(str) {
-        if (document.getElementById('_j_miptoast')) {
+        if (this.querySelector('._j_miptoast')) {
             return;
         }
 
         var toast = document.createElement('div');
-        toast.id = '_j_miptoast';
-        toast.className = 'mip-zol-toast';
+        toast.className = '_j_miptoast mip-zol-toast';
         toast.innerHTML = '<span>' + str + '</span>';
-        document.body.appendChild(toast);
+        this.appendChild(toast);
         document.body.style.pointerEvents = 'none';
         setTimeout(function () {
             toast.parentNode.removeChild(toast);
@@ -40,16 +39,18 @@ define(function (require) {
             dom.replyBtn.classList.remove('current');
         },
 
-        events: function (dom, param) {
+        events: function (dom, param, mipElement) {
 
             var self = this;
 
             // 弹出输入框
-            dom.textarea.addEventListener('focus', function () {
+            dom.textBtn.addEventListener('click', function () {
                 // 是否登录验证
                 if (window.ZOL_USER_INFO.sid) {
                     dom.inputRegion.classList.remove('bottom');
                     dom.inputRegion.classList.add('top');
+
+                    dom.textarea.focus();
                 }
                 else {
                     var href = encodeURIComponent(location.href);
@@ -93,7 +94,7 @@ define(function (require) {
                         dataType: 'json',
                         success: function (res) {
                             if (res.flag === 0) {
-                                toast(res.info);
+                                toast.call(mipElement, res.info);
                                 dom.inputRegion.classList.remove('top');
                                 dom.inputRegion.classList.add('bottom');
                                 self.resetForm(dom);
@@ -112,14 +113,14 @@ define(function (require) {
             });
         },
 
-        init: function (dom, param) {
-            this.events(dom, param);
+        init: function (dom, param, mipElement) {
+            this.events(dom, param, mipElement);
         }
     };
 
     /**
      * build 方法，元素插入到文档时执行，仅会执行一次
-     * 因为是吸底的，所以用build
+     * 必须用build，这个是一个吸底的元素，所以为了体验，需要用build
      */
     customElement.prototype.build = function () {
 
@@ -129,11 +130,13 @@ define(function (require) {
         var inputRegion = ele.querySelector('.reply-input'); // 回复区域
         var replyBtn = ele.querySelector('.reply-btn'); // 回复按钮
         var closeBtn = ele.querySelector('.reply-input--hd .close'); // 关闭按钮
+        var textBtn = ele.querySelector('.textareaDiv');
 
         var reviewId = ele.querySelector('#reviewId').value;
         var tUserId = ele.querySelector('#tUserId').value;
 
         var dom = {
+            textBtn: textBtn,
             textarea: textarea,
             inputRegion: inputRegion,
             replyBtn: replyBtn,
@@ -145,7 +148,7 @@ define(function (require) {
             url: ele.dataset.src
         };
 
-        reply.init(dom, param);
+        reply.init(dom, param, this);
     };
 
     return customElement;

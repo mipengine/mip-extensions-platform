@@ -1,0 +1,14 @@
+{
+    "name": "mip-leshu-tab",
+    "version": "1.0.0",
+    "description": "多级可嵌套tab切换",
+    "contributors": [
+        {
+            "name": "leshuadmin",
+            "email": "wanghao@leshu.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

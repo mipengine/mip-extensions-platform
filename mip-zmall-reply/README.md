@@ -6,16 +6,24 @@
 ----|----
 类型|业务组件
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-zmall-reply/mip-zmall-reply.js
+所需脚本|https://mipcache.bdstatic.com/static/v1/mip-zmall-reply/mip-zmall-reply.js
+
+## 版本更新
+
+### 1.0.1
+
+- 解决了一些bug
 
 ## 示例
 
 ### 基本用法
 ```html
-<mip-zmall-reply data-src="//path/to/api">
-    <input type="hideen" value="" id="reviewId">
-    <input type="hideen" value="" id="fUserId">
-    <input type="hideen" value="" id="tUserId">
+<mip-zmall-reply data-src="//wap.yinweida.test.zol.com/index.php?c=Shop_Ajax_Mip_MipReview&a=ReviewRely">
+    <input type="hidden" value="818751" id="reviewId"/>
+    <input type="hidden" value="48430716" id="tUserId"/>
+    <div class="textareaDiv">
+       <p>发表回复</p>
+    </div>
     <div class="reply-input bottom">
         <div class="reply-input--hd">
             <span class="close"></span>

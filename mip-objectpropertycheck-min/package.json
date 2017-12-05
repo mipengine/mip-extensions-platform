@@ -1,6 +1,6 @@
 {
     "name": "mip-objectpropertycheck-min",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "元素属性检测，可根据检测到的属性与条件匹配，做出一些操作，比如说检测某个元素内的子元素长度，如果大于某个值，让另外一个元素做出什么改变，让另外一个元素做出什么改变  以添加class的形式体现",
     "contributors": [
         {

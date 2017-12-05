@@ -1,7 +1,7 @@
 {
     "name": "mip-cr173-comment",
-    "version": "1.0.0",
-    "description": "新做的评论，由于文章ID号和下载ID号会有重复，所以区分了文章和下载",
+    "version": "1.0.1",
+    "description": "新做的评论，由于文章ID号和下载ID号会有重复，所以区分了文章和下载.。1.0.1更新内容，更换prototype方式，避免拖动过快无法获取到评论的接口路径。",
     "author": {
         "name": "gom",
         "email": "gom3250@qq.com",

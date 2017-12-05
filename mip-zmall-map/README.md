@@ -6,7 +6,13 @@ Z商城map业务组件|在地图中心显示店铺位置并计算用户与店铺
 ----|----
 类型|指定位置可用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-zmall-map/mip-zmall-map.js
+所需脚本|https://mipcache.bdstatic.com/static/v1/mip-zmall-map/mip-zmall-map.js
+
+## 最新版本
+
+### 1.0.1
+
+- 修改地图链接和一些样式的改变
 
 ## 示例
 
@@ -21,7 +27,8 @@ Z商城map业务组件|在地图中心显示店铺位置并计算用户与店铺
 	data-zoom="18"
 	data-address="北京市海淀区学院路37号801-6"
 	data-skip="true"
-	data-link="">
+	data-link=""
+	data-title="">
     <div id="z_map" class="z_map storeMap flex-item"></div>
 </mip-zmall-map>
 
@@ -33,7 +40,8 @@ Z商城map业务组件|在地图中心显示店铺位置并计算用户与店铺
 	data-zoom="16"
 	data-address="北京市海淀区学院路37号801-6"
 	data-skip="false"
-	data-link="">
+	data-link=""
+	data-title="">
     <p id="z_map1" class="distance"></p>
 </mip-zmall-map>
 
@@ -45,7 +53,8 @@ Z商城map业务组件|在地图中心显示店铺位置并计算用户与店铺
 	data-zoom="16"
 	data-address="北京市海淀区学院路37号801-6"
 	data-skip="false"
-	data-link="">
+	data-link=""
+	data-title="">
     <p id="z_map2" class="address-suction"></p>
 </mip-zmall-map>
 ```
@@ -90,6 +99,13 @@ Z商城map业务组件|在地图中心显示店铺位置并计算用户与店铺
 ### data-link
 
 说明：百度地图链接    
+必选项：否    
+类型：String   
+默认值：""  
+
+### data-title
+
+说明：Z商城分店名称
 必选项：否    
 类型：String   
 默认值：""  

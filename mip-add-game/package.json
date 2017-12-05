@@ -1,6 +1,6 @@
 {
     "name": "mip-add-game",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "动态加载游戏渲染到页面中",
     "contributors": [
         {

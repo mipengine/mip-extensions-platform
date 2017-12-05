@@ -44,6 +44,8 @@ define(function (require) {
 
         this.y = ele.dataset.lat ? ele.dataset.lat : '';
 
+        this.title = ele.dataset.title ? ele.dataset.title : '';
+
         this.zoom = ele.dataset.zoom || 18;
     }
 
@@ -147,7 +149,11 @@ define(function (require) {
         var address = this.mapEle.getAttribute('data-address');
 
         if (link === '' || link === null) {
-            link = 'http://api.map.baidu.com/geocoder?address=' + address + '&output=html';
+            link = '//api.map.baidu.com/marker?location='
+                 + this.y + ',' + this.x
+                 + '&title=' + this.title
+                 + '&content=' + address
+                 + '&output=html&autoOpen=true/vt=map';
         }
 
         this.mapEle.addEventListener('click', function (evt) {
@@ -158,7 +164,6 @@ define(function (require) {
         });
     };
 
-    // build说明: 商家定位，有多处用到，故用build
     customElement.prototype.build = function () {
         var self = this;
 
@@ -170,6 +175,8 @@ define(function (require) {
 
         window.addEventListener('load', function () {
             var zMap = new ZMap(ele);
+
+            ele.firstElementChild.classList.add('show');
 
             switch (type) {
                 case 'map':

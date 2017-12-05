@@ -15,15 +15,14 @@ define(function (require) {
      * @param  {string} str 提示信息
      */
     function toast(str) {
-        if (document.getElementById('_j_miptoast')) {
+        if (this.querySelector('._j_miptoast')) {
             return;
         }
 
         var toast = document.createElement('div');
-        toast.id = '_j_miptoast';
-        toast.className = 'mip-zol-toast';
+        toast.className = '_j_miptoast mip-zol-toast';
         toast.innerHTML = '<span>' + str + '</span>';
-        document.body.appendChild(toast);
+        this.appendChild(toast);
         document.body.style.pointerEvents = 'none';
         setTimeout(function () {
             toast.parentNode.removeChild(toast);
@@ -79,6 +78,8 @@ define(function (require) {
         }).then(function (res) {
             return res.json();
         }).then(function (res) {
+            // 防止快点
+            self.lock = false;
             callback && callback(res);
         });
     }
@@ -120,6 +121,13 @@ define(function (require) {
 
         likeElm.addEventListener('click', function () {
 
+            // 防止快点
+            if (self.lock) {
+                toast.call(self, '点击太快啦~');
+                return;
+            }
+            self.lock = true;
+
             // 改变状态
             if (likeElm.classList.contains(doneClass)) {
                 if (!canCansel) {
@@ -139,7 +147,7 @@ define(function (require) {
                         // to do
                     }
                     else {
-                        toast(res.message);
+                        toast.call(self, res.message);
                     }
                 });
             }
