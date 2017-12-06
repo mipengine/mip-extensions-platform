@@ -73,7 +73,7 @@ define(function (require) {
             dom.closeBtn.addEventListener('click', function () {
                 dom.inputRegion.classList.remove('top');
                 dom.inputRegion.classList.add('bottom');
-                self.reset(dom);
+                self.resetForm(dom);
             });
 
             // 回复

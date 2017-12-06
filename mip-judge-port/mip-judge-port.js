@@ -26,7 +26,9 @@ define(function (require) {
                 ele.setAttribute('href', ele.getAttribute('an'));
             }
         }
-
+        ele.addEventListener('click', function (event) {
+            window.location.href = this.getAttribute('href');
+        });
     };
     return customElement;
 });

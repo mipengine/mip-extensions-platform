@@ -20,7 +20,7 @@ mip-display-column  点击显示栏目栏,再次点击任意处关闭栏目栏
 	<mip-display-column class="mip_ser_btn mip_btn" target="mip_ser_form">
 		
 	</mip-display-column>
-	<mip-display-column class="mip_bar_btn mip_btn" target="mip_bar_box,mask">
+	<mip-display-column class="mip_bar_btn mip_btn" target="mip_bar_box mask">
 		
 	</mip-display-column>
 </div>
@@ -45,6 +45,7 @@ mip-display-column  点击显示栏目栏,再次点击任意处关闭栏目栏
 		<input type="hidden" name="nsid" value="1">
 	</mip-form>
 </div>
+<div class="mask mip_hide"></div>
 </header>
 <div class="mask mip_hide"></div>
 ```
@@ -57,5 +58,5 @@ mip-display-column  点击显示栏目栏,再次点击任意处关闭栏目栏
 必选项：是
 类型：字符串
 默认值：无默认
-注意: 值可以是多个用英文','分隔
+注意: 值可以是多个使用空格分隔
 

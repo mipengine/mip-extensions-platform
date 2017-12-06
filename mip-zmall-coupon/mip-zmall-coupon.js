@@ -38,7 +38,9 @@ define(function (require) {
 
         var params = urlParameter();
         var merchantId = params.merchantId ? params.merchantId : '';
+        var storeId = params.storeId ? params.storeId : '';
         var userId = window.ZOL_USER_INFO.sid;
+        var body = document.querySelector('body');
 
         $.ajax({
             url: url,
@@ -48,7 +50,8 @@ define(function (require) {
             jsonpCallback: 'success_jsonpCallback',
             data: {
                 merchantId: merchantId,
-                userId: userId
+                userId: userId,
+                storeId: storeId
             },
             success: function (res) {
 
@@ -63,12 +66,16 @@ define(function (require) {
                 }
                 else {
                     switchs = false;
-                    toast(r.msg);
+                    toast(res.msg);
+
+                    body.classList.remove('over');
                 }
             },
             error: function (err) {
                 switchs = false;
                 toast('数据请求失败');
+
+                body.classList.remove('over');
             }
         });
     }
@@ -105,7 +112,11 @@ define(function (require) {
         }
 
         var obj = null;
-        var mapUrl = 'https://api.map.baidu.com/geocoder?address=' + res.address + '&output=html';
+        var mapUrl = '//api.map.baidu.com/marker?location='
+             + res.y + ',' + res.x
+             + '&title=' + res.title
+             + '&content=' + res.address
+             + '&output=html&autoOpen=true/vt=map';
 
         obj = {
             cardNumber: res.cardNumber || '',
@@ -158,7 +169,7 @@ define(function (require) {
             codeStr += '<p>百度专属优惠码：' + obj.cardNumber + '</p>';
         }
         if (obj.cardQcodeUrl !== '') {
-            codeStr += '<mip-img src="' + obj.cardQcodeUrl + '" class="pic"></mip-img>';
+            codeStr += '<mip-img src="' + obj.cardQcodeUrl + '" class="pic">';
         }
         codeStr += '</div>';
 
@@ -238,6 +249,10 @@ define(function (require) {
             that.parentNode.classList.remove('store-discount__show');
             self.querySelector('.cover-mask').classList.add('store-discount__hide');
             self.querySelector('.cover-mask').classList.remove('store-discount__show');
+
+            var body = document.querySelector('body');
+
+            body.classList.remove('over');
         }, false);
 
         pic.addEventListener('click', function () {
@@ -265,7 +280,7 @@ define(function (require) {
         setTimeout(function () {
             toast.parentNode.removeChild(toast);
             document.body.style.pointerEvents = 'all';
-        }, 1200);
+        }, 800);
     }
 
     function appendBg() {
@@ -363,6 +378,10 @@ define(function (require) {
             else {
                 show.call(ele);
             }
+
+            var body = document.querySelector('body');
+
+            body.classList.add('over');
         }, false);
     };
 

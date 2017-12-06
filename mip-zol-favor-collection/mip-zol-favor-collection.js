@@ -58,28 +58,30 @@ define(function (require, exports, module) {
         var me = this;
         var element = this.element;
         var options = util.fn.extend({}, element.dataset);
-        if (!options.likedclass) {
-            options.likedclass = 'favorited';
+        if (!options.favoredClass) {
+            options.favoredClass = 'favorited';
         }
 
         element.addEventListener('click', function () {
-            options.favorAction = Number(element.classList.contains(options.likedclass));
+            options.favorAction = Number(element.classList.contains(options.favoredClass));
             addfavor(options, function (request) {
                 if (parseInt(request.state, 10) === 1) {
-                    element.classList.toggle(options.likedclass);
+                    element.classList.toggle(options.favoredClass);
                 } else {
                     request.msg && toast(request.msg);
                 }
             });
         });
 
-        fetchJsonp(options.checkUrl, {}).then(function (res) {
+        var data = typeof options.data === 'string' ? JSON.parse(options.data) : {};
+
+        fetchJsonp(makeUrl(options.checkUrl, data), {}).then(function (res) {
             return res.json();
         }).then(function (request) {
             if (parseInt(request.code, 10) === 1) {
-                element.classList.add(options.likedclass);
+                element.classList.add(options.favoredClass);
             } else {
-                element.classList.remove(options.likedclass);
+                element.classList.remove(options.favoredClass);
             }
         });
     };
