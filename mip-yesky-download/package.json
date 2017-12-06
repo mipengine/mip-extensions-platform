@@ -1,0 +1,10 @@
+{
+    "name": "mip-yesky-download",
+    "version": "1.0.0",
+    "description":"下载链接加密",
+    "author": {
+        "name": "msnaill",
+        "email": "576604471@qq.com",
+        "url": "http://m.yesky.com/"
+    }
+}

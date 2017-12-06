@@ -63,7 +63,7 @@ define(function (require) {
 
                     loadSuccess.call(that, res);
 
-                    suitEmpty(customParams, emptUrl);
+                    suitEmpty.call(that, customParams, emptUrl);
                 }
             },
             error: function (err) {}
@@ -73,7 +73,7 @@ define(function (require) {
     // 请求成功
     function loadSuccess(res) {
         var that = this;
-        var specMenuBox = that.element.querySelector('#_js_buy_panel');
+        var specMenuBox = that.element.querySelector('.spec-menu');
 
         var formUrl = that.element.dataset.form;
 
@@ -91,34 +91,36 @@ define(function (require) {
         }
 
         if (Object.keys(defaultSuit).length > 0) {
-            setDefaultStyle(defaultSuit);
+            setDefaultStyle.call(that, defaultSuit);
         }
 
         var suitPrice = defaultSuit.suitPrice;
 
-        setPrice(suitPrice);
+        setPrice.call(that, suitPrice);
 
-        haveChosen();
+        haveChosen.call(that);
 
-        hasSuitDesc(defaultSuit);
+        hasSuitDesc.call(that, defaultSuit);
 
-        textInput(defaultSuit);
+        textInput.call(that, defaultSuit);
 
-        createNum(defaultSuit);
+        createNum.call(that, defaultSuit);
 
-        setNum(defaultSuit);
+        setNum.call(that, defaultSuit);
 
-        optRadio(suitType);
+        optRadio.call(that, suitType);
 
-        closeDia();
+        closeDia.call(that);
 
-        submitFunc();
+        submitFunc.call(that);
     }
 
     // 关闭弹窗
     function closeDia() {
-        var closeBtn = document.querySelector('.select-package__closebtn');
-        var dia = document.querySelector('#_js_buy_panel');
+        var that = this;
+
+        var closeBtn = that.element.querySelector('.select-package__closebtn');
+        var dia = that.element.querySelector('.spec-menu');
 
         closeBtn.addEventListener('click', function (evt) {
             dia.classList.add('none');
@@ -127,8 +129,9 @@ define(function (require) {
 
     // 操作件数
     function setNum(obj) {
+        var that = this;
 
-        var specMenuBox = document.querySelector('#_js_buy_panel');
+        var specMenuBox = that.element.querySelector('.spec-menu');
 
         var sub = specMenuBox.querySelector('#js_sub');
         var add = specMenuBox.querySelector('#js_add');
@@ -366,37 +369,41 @@ define(function (require) {
 
     // 设置默认样式
     function setDefaultStyle(defaultObj) {
+        var that = this;
+
         if (typeof defaultObj === 'undefined') {
             return;
         }
 
         // productType
         if (defaultObj.productTypeId) {
-            setItemStyle(defaultObj.productTypeId, 'productType');
+            setItemStyle.call(that, defaultObj.productTypeId, 'productType');
         }
 
         // saleType
         if (defaultObj.saleTypeId) {
-            setItemStyle(defaultObj.saleTypeId, 'saleType');
+            setItemStyle.call(that, defaultObj.saleTypeId, 'saleType');
         }
 
         // colorType
         if (defaultObj.colorTypeId) {
-            setItemStyle(defaultObj.colorTypeId, 'colorType');
+            setItemStyle.call(that, defaultObj.colorTypeId, 'colorType');
         }
 
         // suitType
         if (defaultObj.suitTypeId) {
-            setItemStyle(defaultObj.suitTypeId, 'suitType');
+            setItemStyle.call(that, defaultObj.suitTypeId, 'suitType');
         }
     }
 
     function setItemStyle(byte, id) {
+        var that = this;
+
         var productTypeDom = '';
         var productTypeInput = '';
 
         if (byte) {
-            productTypeDom = document.getElementById(id);
+            productTypeDom = that.element.querySelector('#' + id);
 
             if (productTypeDom) {
                 productTypeInput = productTypeDom.querySelectorAll('input[type=\'radio\']');
@@ -416,7 +423,9 @@ define(function (require) {
 
     // 设置样式
     function setPrice(price) {
-        var specMenu = document.querySelector('#_js_buy_panel');
+        var that = this;
+
+        var specMenu = that.element.querySelector('.spec-menu');
         var priceDom = specMenu.querySelector('.js_price');
 
         var showPrice = '';
@@ -441,7 +450,9 @@ define(function (require) {
 
     // 已选显示
     function haveChosen() {
-        var specMenu = document.querySelector('#_js_buy_panel');
+        var that = this;
+
+        var specMenu = that.element.querySelector('.spec-menu');
         var specInput = specMenu.querySelectorAll('input[type=\'radio\']');
         var textDom = specMenu.querySelector('.js_selected_name');
 
@@ -459,7 +470,9 @@ define(function (require) {
     }
 
     function hasSuitDesc(obj) {
-        var specMenu = document.querySelector('#_js_buy_panel');
+        var that = this;
+
+        var specMenu = that.element.querySelector('.spec-menu');
         var textDom = specMenu.querySelector('.js_selected_suitDesc');
 
         if (obj.suitDesc) {
@@ -469,7 +482,9 @@ define(function (require) {
 
     // 设置隐藏域信息
     function textInput(obj) {
-        var specMenu = document.querySelector('#_js_buy_panel');
+        var that = this;
+
+        var specMenu = that.element.querySelector('.spec-menu');
 
         var goodsId = specMenu.querySelector('#goodsIdInput');
         var merchantId = specMenu.querySelector('#merchantIdInput');
@@ -514,7 +529,9 @@ define(function (require) {
 
     // 限购件数
     function createNum(obj) {
-        var specMenu = document.querySelector('#_js_buy_panel');
+        var that = this;
+
+        var specMenu = that.element.querySelector('.spec-menu');
         var num = specMenu.querySelector('.js_suitNum');
 
         var numStr = '';
@@ -541,6 +558,8 @@ define(function (require) {
 
     // 请求sku制灰数据
     function suitEmpty(data, url) {
+        var that = this;
+
         if (typeof data === 'undefined') {
             return;
         }
@@ -562,7 +581,7 @@ define(function (require) {
             data: data,
             success: function (response) {
                 if (parseInt(response.flag, 10) === 1) {
-                    setEmpty(response);
+                    setEmpty.call(that, response);
                 }
             },
             error: function (err) {}
@@ -571,6 +590,8 @@ define(function (require) {
 
     // 设置空样式
     function setEmpty(data) {
+        var that = this;
+
         // 内存容量：
         var productType = data.productType;
         // 购买方式：
@@ -580,7 +601,7 @@ define(function (require) {
         // 选择套装：
         var suitType = data.suitType;
 
-        var specMenu = document.querySelector('#_js_buy_panel');
+        var specMenu = that.element.querySelector('.spec-menu');
         var product = specMenu.querySelectorAll('#productType input[type=\'radio\']');
         var sale = specMenu.querySelectorAll('#saleType input[type=\'radio\']');
         var color = specMenu.querySelectorAll('#colorType input[type=\'radio\']');
@@ -608,7 +629,9 @@ define(function (require) {
                 if (dataArr[k] === domArr[i].getAttribute('report-eventid')) {
                     if (domArr[i]) {
                         domArr[i].setAttribute('data-empty', true);
+
                         emptyDom = domArr[i];
+
                         emptyDom.classList.add('disabled');
                     }
                 }
@@ -618,7 +641,9 @@ define(function (require) {
 
     // 操作radio
     function optRadio(data) {
-        var specMenu = document.querySelector('#_js_buy_panel');
+        var that = this;
+
+        var specMenu = that.element.querySelector('.spec-menu');
         var inputArr = specMenu.querySelectorAll('input[type=\'radio\']');
 
         var product = specMenu.querySelectorAll('#productType input[type=\'radio\']');
@@ -656,7 +681,8 @@ define(function (require) {
 
                     buyBtn.setAttribute('disabled', 'disabled');
 
-                    clearInputVal();
+
+                    clearInputVal.call(that);
 
                     obj = {};
 
@@ -725,18 +751,20 @@ define(function (require) {
                         label[v].querySelector('input[type=\'radio\']').classList.remove('checked');
                     }
 
-                    optAllsuit(obj);
+                    optAllsuit.call(that, obj);
                 }
 
-                suitEmpty(obj, emptUrl);
+                suitEmpty.call(that, obj, emptUrl);
 
-                haveChosen();
+                haveChosen.call(that);
             });
         });
     }
 
     function optAllsuit(obj) {
-        var buyBtn = document.querySelector('#submit');
+        var that = this;
+
+        var buyBtn = that.element.querySelector('#submit');
 
         var dataNumObj = {};
 
@@ -749,25 +777,27 @@ define(function (require) {
             if (aa && bb && cc && dd) {
                 dataNumObj = allSuitInfo[x];
 
-                setPrice(dataNumObj.suitPrice);
+                setPrice.call(that, dataNumObj.suitPrice);
 
-                textInput(dataNumObj);
+                textInput.call(that, dataNumObj);
 
-                createNum(dataNumObj);
+                createNum.call(that, dataNumObj);
 
                 buyBtn.classList.remove('suction-buy__none');
 
                 buyBtn.removeAttribute('disabled');
 
-                setNum(dataNumObj);
+                setNum.call(that, dataNumObj);
 
-                hasSuitDesc(dataNumObj);
+                hasSuitDesc.call(that, dataNumObj);
             }
         }
     }
 
     function submitFunc() {
-        var specMenu = document.querySelector('#_js_buy_panel');
+        var that = this;
+
+        var specMenu = that.element.querySelector('.spec-menu');
         var inputArr = specMenu.querySelectorAll('input[type=\'radio\']');
         var from = specMenu.querySelector('#buy_from');
         var obj = {};
@@ -849,7 +879,9 @@ define(function (require) {
 
     // 清空隐藏域
     function clearInputVal() {
-        var specMenu = document.querySelector('#_js_buy_panel');
+        var that = this;
+
+        var specMenu = that.element.querySelector('.spec-menu');
 
         var goodsId = specMenu.querySelector('#goodsIdInput');
         var merchantId = specMenu.querySelector('#merchantIdInput');
@@ -872,36 +904,44 @@ define(function (require) {
 
     // 判断是否登录
     function islogin() {
-
         var userId = '';
-        if (window.ZOL_USER_INFO && window.ZOL_USER_INFO.sid) {
-            userId = window.ZOL_USER_INFO.sid;
-        }
 
-        var href = '';
-        if (userId === '') {
-            href = encodeURIComponent(location.href);
-            window.location.href = '//cashier.zol.com/paygate/baidu/oauth?callbackurl=' + href;
+        typeof ZOL_USER_INFO !== 'undefined' && (userId = window.ZOL_USER_INFO.userid);
+
+        if (!userId || userId === '') {
             return false;
         }
+
+        return true;
     }
 
     // build 方法，元素插入到文档时执行，仅会执行一次
-    // 购买区块，需要渲染是就有，所以用build
     customElement.prototype.build = function () {
         var self = this;
 
         var element = self.element;
 
-        var entryBtn = element.querySelector('#_js_zmall_buy');
+        var entryBtn = element.querySelector('.suction-buy');
 
         var box = '';
 
-        entryBtn && entryBtn.addEventListener('click', function (evt) {
+        if (entryBtn.getAttribute('id') !== 'js_buy') {
+            return;
+        }
+
+        entryBtn.addEventListener('click', function (evt) {
             evt.stopPropagation();
             evt.preventDefault();
 
-            box = document.querySelector('#_js_buy_panel');
+            var isLogin = islogin();
+
+            if (!isLogin) {
+                var href = encodeURIComponent(location.href);
+                window.location.href = '//cashier.zol.com/paygate/baidu/oauth?callbackurl=' + href;
+                return;
+            }
+
+            box = element.querySelector('.spec-menu');
 
             if (box.innerHTML.trim() === '') {
                 init.call(self);
@@ -909,8 +949,6 @@ define(function (require) {
             else {
                 box.classList.remove('none');
             }
-
-            islogin();
         });
     };
 

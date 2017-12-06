@@ -1,0 +1,14 @@
+{
+    "name": "mip-yyg-meun",
+    "version": "1.0.0",
+    "description": "处理mip站点导航栏hover效果",
+    "contributors": [
+        {
+            "name": "Summer",
+            "email": "1254752962@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
