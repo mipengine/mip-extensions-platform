@@ -17,24 +17,30 @@ define(function (require, exports) {
                         value: userinfo[item],
                         writable: false
                     });
-                }
-                catch (error) {
+                } catch (error) {
 
                 }
             }
         }
     };
+
+
+    // 自定义方法 gotzoluserinfo
+    var evt = document.createEvent('Event');
+    evt.initEvent('gotzoluserinfo', true, true);
+
     customElement.prototype.firstInviewCallback = function () {
         var element = this.element;
         var role = element.dataset.role;
-        window.addEventListener('gotzoluserinfo', function (e) {
+
+        element.addEventListener('gotzoluserinfo', function (e) {
             var userinfo = e.ZOL_USER_INFO;
             switch (role) {
                 case 'useravatar':
                     if (userinfo) {
                         element.innerHTML = '<a href="' + '//m.zol.com.cn/my/'
-                            + '" class="account"><img class="userAvatar" src="' + userinfo.headPic
-                            + '" alt="' + userinfo.nickName + '"></a>';
+                        + '" class="account"><img class="userAvatar" src="' + userinfo.headPic
+                        + '" alt="' + userinfo.nickName + '"></a>';
                     } else {
                         [].forEach.call(element.querySelectorAll('a,mip-link'), function (link) {
                             if (link.href) {
@@ -49,28 +55,37 @@ define(function (require, exports) {
                     break;
             }
         });
+        !(function () {
+            if (setUserInfo.posting || window.ZOL_USER_INFO.userid) {
+                return;
+            }
+            setUserInfo.posting = true;
+            getUserInfo(element.dataset.url);
+        })();
     };
 
-    // 自定义方法 gotzoluserinfo
-    var evt = document.createEvent('Event');
-    evt.initEvent('gotzoluserinfo', true, true);
+    function getUserInfo(url, context) {
+        fetchJsonp(url || '//service.zol.com.cn/user/getUserInfo.php', {}).then(function (res) {
+            return res.json();
+        }).then(function (request) {
+            if (request.loginStatus === 1) {
+                setUserInfo(request.userInfo);
+                try {
+                    Object.defineProperty(evt, 'ZOL_USER_INFO', {
+                        value: request.userInfo,
+                        writable: false
+                    });
+                    context ? context.dispatchEvent(evt) : window.dispatchEvent(evt);
+                } catch (error) {
 
-    fetchJsonp('//service.zol.com.cn/user/getUserInfo.php', {}).then(function (res) {
-        return res.json();
-    }).then(function (request) {
-        if (request.loginStatus === 1) {
-            setUserInfo(request.userInfo);
-            try {
-                Object.defineProperty(evt, 'ZOL_USER_INFO', {
-                    value: request.userInfo,
-                    writable: false
-                });
-            }
-            catch (error) {
+                }
 
+            } else {
+                setUserInfo.posting = false;
             }
-        }
-        window.dispatchEvent(evt);
-    });
+        });
+    }
+    getUserInfo();
+
     return customElement;
 });

@@ -78,7 +78,7 @@ define(function (require, exports, module) {
         fetchJsonp(makeUrl(options.checkUrl, data), {}).then(function (res) {
             return res.json();
         }).then(function (request) {
-            if (parseInt(request.code, 10) === 1) {
+            if (parseInt(request.state, 10) === 1) {
                 element.classList.add(options.favoredClass);
             } else {
                 element.classList.remove(options.favoredClass);

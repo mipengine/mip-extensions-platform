@@ -1,7 +1,7 @@
 {
     "name": "mip-zol-user",
-    "version": "1.0.0",
-	"description": "zol用户信息",
+    "version": "1.2.0",
+	"description": "追加获取用户信息接口设置",
     
     "author": {
         "name": "mulianju",

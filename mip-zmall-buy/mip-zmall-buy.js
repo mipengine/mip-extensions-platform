@@ -9,6 +9,25 @@ define(function (require) {
     var $ = require('zepto');
     var customElement = require('customElement').create();
 
+    /**
+     * 提示框，需自定义样式
+     *
+     * @param  {string} str 提示信息
+     */
+    function toast(str) {
+        if (this.querySelector('._j_miptoast')) {
+            return;
+        }
+
+        var toast = document.createElement('div');
+        toast.className = '_j_miptoast mip-zol-toast';
+        toast.innerHTML = '<span>' + str + '</span>';
+        this.appendChild(toast);
+        setTimeout(function () {
+            toast.parentNode.removeChild(toast);
+        }, 800);
+    }
+
     // 存储数量计算
     var SUITNUM = '';
 
@@ -143,15 +162,11 @@ define(function (require) {
         sub.addEventListener('click', function (evt) {
             if (SUITNUM !== '' && buyBtn.classList.contains('suction-buy__none') === false) {
                 if (parseInt(showNum.value, 10) <= 1) {
-                    alert('所选商品数量不能为0');
-
+                    toast.call(that.element, '所选商品数量不能为0');
                     return;
                 }
-
                 showNum.value = showNum.value - 1;
-
                 numInput.value = showNum.value;
-
                 text.innerHTML = parseInt(obj.suitPrice.showPrice, 10) * showNum.value;
             }
         });
@@ -159,15 +174,12 @@ define(function (require) {
         add.addEventListener('click', function (evt) {
             if (SUITNUM !== '' && buyBtn.classList.contains('suction-buy__none') === false) {
                 if (parseInt(showNum.value, 10) >= parseInt(SUITNUM, 10)) {
-                    alert('所选商品数量不能超过限购数量');
-
+                    toast.call(that.element, '所选商品数量不能超过限购数量');
                     return;
                 }
 
                 showNum.value = parseInt(showNum.value, 10) + 1;
-
                 numInput.value = showNum.value;
-
                 text.innerHTML = parseInt(obj.suitPrice.showPrice, 10) * showNum.value;
             }
         });
@@ -826,26 +838,21 @@ define(function (require) {
             }
 
             if (obj.productTypeId === undefined) {
-                alert('请选择内存容量');
-
+                toast.call(that.element, '请选择内存容量');
                 return false;
             }
             else if (obj.saleTypeId === undefined) {
-                alert('请选择购买方式');
-
+                toast.call(that.element, '请选择购买方式');
                 return false;
             }
             else if (obj.colorTypeId === undefined) {
-                alert('请选择商品颜色');
-
+                toast.call(that.element, '请选择商品颜色');
                 return false;
             }
             else if (obj.suitTypeId === undefined) {
-                alert('请选择商品套装');
-
+                toast.call(that.element, '请选择商品套装');
                 return false;
             }
-
         });
     }
 
