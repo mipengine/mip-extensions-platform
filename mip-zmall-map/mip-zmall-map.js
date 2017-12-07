@@ -8,25 +8,25 @@ define(function (require) {
 
     var customElement = require('customElement').create();
 
+    var baiduMapApiLoaded = false;
+
+    window.HOST_TYPE = 2;
+
     function initMap(ele) {
 
         var akAttr = ele.getAttribute('data-ak');
-        var ak = akAttr ? akAttr : 'U8p2WjWVszzPyGzr1YaYgtxhjt1XIFk6';
+        var ak = akAttr ? akAttr : 'N5KBzk1oUZc92TCC0lzwlcv1wOEwsYIO';
 
-        var headElement = document.getElementsByTagName('body')[0];
         var scriptElement = document.createElement('script');
-
         scriptElement.id = 'baiduMap';
-        scriptElement.type = 'text/javascript';
         scriptElement.src = '//api.map.baidu.com/getscript?v=2.0&ak=' + ak;
-
-        var scriptId = document.getElementById('baiduMap');
-
-        if (scriptId) {
+        // 因为页面三个地方需要用到百度地图api,但只想插入一次
+        if (baiduMapApiLoaded) {
             return;
         }
-
-        headElement.appendChild(scriptElement);
+        // 往组件里插入百度地图API
+        ele.appendChild(scriptElement);
+        baiduMapApiLoaded = true;
     }
 
     /**
@@ -129,7 +129,7 @@ define(function (require) {
 
         var dom = this.mapEle.firstElementChild;
 
-        if (type === 'type_distance01') {
+        if (type === 'distance') {
             dom.innerText = '距您现在位置约' + text;
         }
         else {
@@ -164,6 +164,7 @@ define(function (require) {
         });
     };
 
+    // build说明: 商家定位(需要请求百度地图API)，有多处用到，故用build
     customElement.prototype.build = function () {
         var self = this;
 

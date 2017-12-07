@@ -1,0 +1,119 @@
+/**
+ * @file mip-search-prompt样式文件
+ */
+
+mip-search-prompt {
+    a,
+    a:hover,
+    a:active,
+    a:visited,
+    a:link,
+    a:focus {
+        -webkit-tap-highlight-color:rgba(0,0,0,0);
+        -webkit-tap-highlight-color: transparent;
+        outline:none;
+        background: none;
+        text-decoration: none;
+    }
+    &.ms-p {
+        margin: 0 16px;
+    }
+    .tt-menu {
+        position: absolute;
+        top: 45px;
+        left: 0;
+        z-index: 100;
+        display: none;
+        background: #fff;
+        border-radius: 4px;
+        width: 92%;
+        padding: 10px 0;
+        -webkit-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1), 0 2px 2px 0 rgba(0, 0, 0, 0.15);
+        box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1), 0 2px 2px 0 rgba(0, 0, 0, 0.15);
+        margin-top: 5px;
+    }
+    .tt-menu .tt-suggestion {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 500;
+    }
+    .tt-menu .tt-suggestion:hover {
+        background: #fff;
+    }
+    .tt-menu .tt-suggestion a {
+        padding: 8px 20px;
+        color: #444;
+        display: block;
+    }
+    .tt-menu-close {
+        width:100%;
+        height: 100%;
+        z-index: -1;
+        position: fixed;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+    }
+    .s-bn {
+        background: #e91e62;
+        color: #fff;
+        width: 90px;
+        letter-spacing: 4px;
+        display: inline;
+        margin: 0;
+        height: 42px;
+        border-radius: 0;
+        position: relative;
+        overflow: visible;
+        word-spacing: normal;
+        text-transform: none;
+        text-indent: 0;
+        text-shadow: none;
+        text-rendering: auto;
+        box-sizing: border-box;
+        align-items: flex-start;
+        user-select: none;
+        line-height: 45px;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        -ms-touch-action: manipulation;
+        touch-action: manipulation;
+        cursor: pointer;
+        font-weight: 600;
+        border: none;
+        padding: 0 15px;
+        outline: none !important;
+        font-size: 16px;
+        float: left;
+    }
+    .s-ipt {
+        position: relative;
+        vertical-align: top;
+        background-color: transparent;
+        width: 49%;
+        height: 40px;
+        border: 1px solid #b6b6b6;
+        padding: 0 15px;
+        background-image: none;
+        background: #fff;
+        display: inline-block;
+        margin-right: 0;
+        border-right-width: 0;
+        border-color: #b8b8b8 transparent #ccc #b8b8b8;
+        overflow: hidden;
+        border-radius: 2px;
+        outline: none;
+        font-size: 15px;
+        font-weight: 400;
+        text-transform: none;
+        -webkit-appearance: none;
+        line-height: 1.42857143;
+        color: #555;
+        float: left;
+    }
+    .s-ipt:focus {
+        border-color: #e91e62;
+    }
+}

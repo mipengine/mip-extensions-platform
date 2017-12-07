@@ -8,10 +8,10 @@
  */
 define(function (require) {
     var config = {
-        view: '//ca.w8.com.cn/view',
-        pv: '//ca.w8.com.cn/rpv?s=zol&on=zol',
-        clk: '//ca.w8.com.cn/cgrclk?s=zol&on=zol',
-        icon: '//pic.zol-img.com.cn/201510/thisad_1016.png'
+        view: 'https://ca.zol.com.cn/view',
+        pv: 'https://ca.zol.com.cn/rpv?s=zol&on=zol',
+        clk: 'https://ca.zol.com.cn/cgrclk?s=zol&on=zol',
+        icon: 'https://pic.zol-img.com.cn/201510/thisad_1016.png'
     };
     var customElement = require('customElement').create();
 
@@ -120,6 +120,7 @@ define(function (require) {
         var iframe;
         iframe = document.createElement('iframe');
         iframe.src = bar.conf.src;
+        iframe.frameBorder = 0;
         iframe.style.width = '100%';
         iframe.style.height = '100%';
         iframe.style.position = 'absolute';

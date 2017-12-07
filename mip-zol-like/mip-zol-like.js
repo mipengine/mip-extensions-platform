@@ -23,10 +23,8 @@ define(function (require) {
         toast.className = '_j_miptoast mip-zol-toast';
         toast.innerHTML = '<span>' + str + '</span>';
         this.appendChild(toast);
-        document.body.style.pointerEvents = 'none';
         setTimeout(function () {
             toast.parentNode.removeChild(toast);
-            document.body.style.pointerEvents = 'all';
         }, 800);
     }
 
@@ -108,14 +106,18 @@ define(function (require) {
                 if (!canCansel) {
                     return;
                 }
-                likeElm.classList.remove(doneClass);
                 var num = (voteNum - 1 > 0) ? voteNum - 1 : 0;
                 numElm.innerHTML = num ? '(' + num + ')' : '';
+                // 改变状态
+                likeElm.classList.remove(doneClass);
+                ele.setAttribute('data-status', '0');
             }
             else {
-                likeElm.classList.add(doneClass);
                 var numStr = '(' + (voteNum + 1) + ')';
                 numElm.innerHTML = numStr;
+                // 改变状态
+                likeElm.classList.add(doneClass);
+                ele.setAttribute('data-status', '1');
             }
         };
 
@@ -123,31 +125,20 @@ define(function (require) {
 
             // 防止快点
             if (self.lock) {
-                toast.call(self, '点击太快啦~');
+                toast.call(self, '点太快啦~');
                 return;
             }
             self.lock = true;
 
-            // 改变状态
-            if (likeElm.classList.contains(doneClass)) {
-                if (!canCansel) {
-                    return;
-                }
-                ele.setAttribute('data-status', '0');
-            }
-            else {
-                ele.setAttribute('data-status', '1');
-            }
-
             // 如果需要回调函数
             if (isNeedCallback) {
                 like.call(self, function (res) {
-                    if (!res.status) {
-                        changeLikeNum();
+                    changeLikeNum();
+                    if (res.status) {
+                        if (res.message && res.message !== '') {
+                            toast.call(self, res.message);
+                        }
                         // to do
-                    }
-                    else {
-                        toast.call(self, res.message);
                     }
                 });
             }

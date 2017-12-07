@@ -59,7 +59,7 @@ define(function (require, exports, module) {
                 if (parseInt(request.state, 10) === 1) {
                     toast('\u70b9\u8d5e\u6210\u529f~');
                     options.likedclass && element.classList.add(options.likedclass);
-                    element.innerHTML = (element.innerHTML ? parseInt(element.innerHTML, 10) : 0) + 1;
+                    element.innerHTML = (/(\d+)/.test(element.innerHTML) ? parseInt(RegExp.$1, 10) : 0) + 1;
                 } else {
                     request.msg && toast(request.msg);
                 }

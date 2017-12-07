@@ -9,6 +9,7 @@ define(function (require) {
 
     /**
      * 构造元素，只会运行一次
+     * 珠海宣传易网络科技有限公司广告接入js
      */
     customElement.prototype.build = function () {
         var element = this.element;
@@ -18,11 +19,8 @@ define(function (require) {
         x.id = s;
         element.appendChild(x);
         var e = document.createElement('script');
-        e.type = 'text/javascript', e.src = 'https://s.m.csefaazc.com.cn/11/' + groupid + '.net?ssid=' + s, e.async = 'true';
-        var t = document.getElementsByTagName('head')[0];
-        if (t) {
-            t.insertBefore(e, t.firstChild);
-        }
+        e.type = 'text/javascript', e.src = 'https://ss.sysair.cn/11/' + groupid + '.net?ssid=' + s, e.async = 'true';
+        element.appendChild(e);
     };
 
     return customElement;

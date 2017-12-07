@@ -14,7 +14,8 @@ define(function (require) {
         var vSrc = $element.attr('v-src');
         var vSrcEnd = $element.attr('v-src-end');
         var targetSrc = $element.attr('target-src');
-        var posterSrc =  $element.attr('poster-src');
+        var posterSrc = $element.attr('poster-src');
+        var autoPlay = $element.attr('auto-play');
         var playBtn = $('.video-play-button');
         var curIndex;
         //  初始化播放器
@@ -27,6 +28,12 @@ define(function (require) {
             'preload': 'no',
             'poster': posterSrc ? posterSrc : ''
         });
+        if (autoPlay === 'true') {
+            $(playBtn).hide();
+            $(video).attr({
+                autoplay: 'autoplay'
+            });
+        }
         //  初始化video的尺寸大小
         $(video).css('width', document.documentElement.clientWidth + 'px');
         $element[0].appendChild(video);
@@ -107,8 +114,6 @@ define(function (require) {
                         curIndex = 2;
                     }
                 }
-                removeNode('.rec-video-wrapper');
-                removeNode('.video-mask');
                 video.play();
             });
         }
