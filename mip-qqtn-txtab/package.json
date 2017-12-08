@@ -1,7 +1,7 @@
 {
     "name": "mip-qqtn-txtab",
-    "version": "1.0.0",
-    "description": "点击按钮进行样式切换",
+    "version": "1.0.1",
+    "description": "点击按钮进行样式切换1.0.1更新，当内容有空格时会把图片隐藏，新版修复此问题。",
     "contributors": [
         {
             "name": "gom",

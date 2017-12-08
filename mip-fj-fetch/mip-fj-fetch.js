@@ -10,9 +10,11 @@ define(function (require) {
     var fetchFunc = require('./mip-fj-fetch-fn');
 
     /**
-     * 第一次进入可视区回调，只会执行一次
+     * build说明：
+     *  由于这是一个用于异步获取数据的组件，经常会放在首屏以外的位置，
+     *  而且确实需要在首屏就尽快加载，以免出现操作时没反应的现象。
      */
-    customElement.prototype.firstInviewCallback = function () {
+    customElement.prototype.build = function () {
 
         // 绑定触发fetch的事件
         fetchFunc.addEventFetch(this);

@@ -28,8 +28,8 @@ define(function (require, exports) {
     // 自定义方法 gotzoluserinfo
     var evt = document.createEvent('Event');
     evt.initEvent('gotzoluserinfo', true, true);
-
-    customElement.prototype.firstInviewCallback = function () {
+    // 使用build 因为userinfo有全局依赖 必须初始化时候获取
+    customElement.prototype.build = function () {
         var element = this.element;
         var role = element.dataset.role;
 
@@ -85,7 +85,6 @@ define(function (require, exports) {
             }
         });
     }
-    getUserInfo();
 
     return customElement;
 });
