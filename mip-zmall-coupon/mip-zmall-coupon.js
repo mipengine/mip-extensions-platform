@@ -8,11 +8,32 @@ define(function (require) {
     var $ = require('zepto');
     var customElement = require('customElement').create();
 
+    /**
+     * 提示框，需自定义样式
+     *
+     * @param  {string} str 提示信息
+     */
+    function toast(str) {
+        if (this.querySelector('._j_miptoast')) {
+            return;
+        }
+        var toast = document.createElement('div');
+        toast.className = '_j_miptoast mip-zol-toast';
+        toast.innerHTML = '<span>' + str + '</span>';
+        this.appendChild(toast);
+        setTimeout(function () {
+            toast.parentNode.removeChild(toast);
+        }, 800);
+    }
+
     // 授权登录链接
     var LOGIN_URL = '//cashier.zol.com/paygate/baidu/oauth?callbackurl=';
 
     // 请求频次控制开关
     var switchs = false;
+
+    // 优惠券弹层所在的 父级
+    var cuponLayerParent = null;
 
     // 判断element是否存在
     var single = (function () {
@@ -36,11 +57,9 @@ define(function (require) {
             return;
         }
 
-        var params = urlParameter();
-        var merchantId = params.merchantId ? params.merchantId : '';
-        var storeId = params.storeId ? params.storeId : '';
+        var merchantId = self.dataset.merchantId ? self.dataset.merchantId : '';
+        var storeId = self.dataset.storeId ? self.dataset.storeId : '';
         var userId = window.ZOL_USER_INFO.sid;
-        var body = document.querySelector('body');
 
         $.ajax({
             url: url,
@@ -66,43 +85,25 @@ define(function (require) {
                 }
                 else {
                     switchs = false;
-                    toast(res.msg);
-
-                    body.classList.remove('over');
+                    toast.call(self, res.msg);
                 }
             },
             error: function (err) {
                 switchs = false;
-                toast('数据请求失败');
-
-                body.classList.remove('over');
+                toast.call(self, '数据请求失败');
             }
         });
     }
 
     function show() {
-        var box = document.querySelector('.store-discount');
-        var cover = document.querySelector('.cover-mask');
+        var box = cuponLayerParent.querySelector('.store-discount');
+        var cover = cuponLayerParent.querySelector('.cover-mask');
         if (box) {
             box.classList.add('store-discount__show');
             cover.classList.add('store-discount__show');
+            cuponLayerParent.addEventListener('touchmove', canselTouchmove);
         }
         return;
-    }
-
-    function urlParameter() {
-
-        var url = location.search;
-        var theRequest = {};
-
-        if (url.indexOf('?') !== -1) {
-            var str = url.substr(1);
-            var strs = str.split('&');
-            for (var i = 0; i < strs.length; i++) {
-                theRequest[strs[i].split('=')[0]] = unescape(strs[i].split('=')[1]);
-            }
-        }
-        return theRequest;
     }
 
     function createObj(res) {
@@ -144,7 +145,7 @@ define(function (require) {
             + gift
             + value
             + '<div class="store-discount__btns flex">'
-            + '<a href="#" class="btns-save">保存截图</a>'
+            + '<span class="btns-save">保存截图</span>'
             + lookAdd
             + '</div>'
             + '<ul class="store-discount__tips">'
@@ -182,11 +183,10 @@ define(function (require) {
             return;
         }
 
-        var giftStr = '<div class="coupon-gift">';
+        var giftStr = '';
         if (obj.content !== '') {
-            giftStr += '<label>入门礼</label>' + obj.content;
+            giftStr += '<div class="coupon-gift"><label>入门礼</label>' + obj.content + '</div>';
         }
-        giftStr += '</div>';
 
         return giftStr;
     }
@@ -197,8 +197,9 @@ define(function (require) {
             return;
         }
 
-        var valStr = '<div class="coupon-value">';
+        var valStr = '';
         if (obj.couponList !== '' && obj.couponList.length > 0) {
+            valStr = '<div class="coupon-value"><div class="coupon-value-inner">';
             for (var i = 0; i < obj.couponList.length; i++) {
                 var coupon = obj.couponList[i];
                 if (coupon.conditions === 0) {
@@ -208,8 +209,8 @@ define(function (require) {
                     valStr += '<label><span>满' + coupon.conditionsDetail + '减' + coupon.couponPrice + '</span></label>';
                 }
             }
+            valStr += '</div></div>';
         }
-        valStr += '</div>';
 
         return valStr;
     }
@@ -238,6 +239,7 @@ define(function (require) {
         var box = self.querySelector('.draw_box');
         append(box, domStr);
 
+        cuponLayerParent = box;
         var btn = self.querySelector('.store-discount__closebtn');
         var pic = self.querySelector('.btns-save');
 
@@ -249,38 +251,18 @@ define(function (require) {
             that.parentNode.classList.remove('store-discount__show');
             self.querySelector('.cover-mask').classList.add('store-discount__hide');
             self.querySelector('.cover-mask').classList.remove('store-discount__show');
-
-            var body = document.querySelector('body');
-
-            body.classList.remove('over');
+            cuponLayerParent.removeEventListener('touchmove', canselTouchmove);
         }, false);
 
         pic.addEventListener('click', function () {
-            toast('请同时按下音量下键和Home键');
+            toast.call(self, '请使用手机截屏功能');
         });
+
+        cuponLayerParent.addEventListener('touchmove', canselTouchmove);
     }
 
-    /**
-     * 提示框
-     *
-     * @param  {string} str 提示信息
-     */
-    function toast(str) {
-
-        if (document.getElementById('_j_miptoast')) {
-            return;
-        }
-
-        var toast = document.createElement('div');
-        toast.id = '_j_miptoast';
-        toast.className = 'mip-zol-toast';
-        toast.innerHTML = '<span>' + str + '</span>';
-        document.body.appendChild(toast);
-        document.body.style.pointerEvents = 'none';
-        setTimeout(function () {
-            toast.parentNode.removeChild(toast);
-            document.body.style.pointerEvents = 'all';
-        }, 800);
+    function canselTouchmove(e) {
+        e.preventDefault();
     }
 
     function appendBg() {
@@ -346,6 +328,7 @@ define(function (require) {
         return html;
     }
 
+    // buil说明：因为有两处在用，且有一处是吸底，所以需要用build
     customElement.prototype.build = function () {
 
         var self = this;
@@ -378,10 +361,6 @@ define(function (require) {
             else {
                 show.call(ele);
             }
-
-            var body = document.querySelector('body');
-
-            body.classList.add('over');
         }, false);
     };
 

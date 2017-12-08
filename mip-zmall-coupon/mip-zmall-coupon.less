@@ -47,16 +47,18 @@ mip-zmall-coupon {
                 }
             }
             .coupon-gift {
-                padding: .4rem 0 .3rem;
+                padding: .3rem 0;
                 border-bottom: 1px solid #e0e0e0;
                 font-size: .42rem;
-                line-height: .73rem;
+                height: .66rem;
+                line-height: .66rem;
+                overflow: hidden;
                 color: #f60;
                 label {
-                    display: inline-block;
+                    float: left;
                     margin: 0 .3rem 0 0;
                     padding: 0 .13rem;
-                    line-height: .63rem;
+                    overflow: hidden;
                     color: #fff;
                     -webkit-border-radius: .1rem;
                     border-radius: .1rem;
@@ -65,10 +67,10 @@ mip-zmall-coupon {
             }
             .coupon-value {
                 overflow: hidden;
-                margin: 0 -.25rem;
-                padding: .45rem 0;
+                padding: .3rem 0;
+                border-bottom: 1px solid #e0e0e0;
                 label {
-                    display: inline-block;
+                    float: left;
                     -webkit-box-sizing: border-box;
                     box-sizing: border-box;
                     width: 33.33%;
@@ -89,10 +91,14 @@ mip-zmall-coupon {
                     }
                 }
             }
+            .coupon-value-inner {
+                margin: 0 -.25rem;
+                position: relative;
+            }
             .store-discount__btns {
                 padding: .54rem 0 .35rem;
-                border-top: 1px solid #e0e0e0;
-                a {
+                a,
+                span {
                     display: block;
                     -webkit-box-sizing: border-box;
                     box-sizing: border-box;

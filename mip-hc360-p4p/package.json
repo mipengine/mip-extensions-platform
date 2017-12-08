@@ -1,0 +1,14 @@
+{
+    "name": "mip-hc360-p4p",
+    "version": "1.0.0",
+    "description": "列表渲染",
+    "contributors": [
+        {
+            "name": "beisir",
+            "email": "hsy7426@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

@@ -125,25 +125,23 @@ define(function (require) {
 
             // 防止快点
             if (self.lock) {
-                toast.call(self, '点太快啦~');
+                toast.call(ele, '点太快啦~');
                 return;
             }
             self.lock = true;
-
+            changeLikeNum();
             // 如果需要回调函数
             if (isNeedCallback) {
                 like.call(self, function (res) {
-                    changeLikeNum();
                     if (res.status) {
                         if (res.message && res.message !== '') {
-                            toast.call(self, res.message);
+                            toast.call(ele, res.message);
                         }
                         // to do
                     }
                 });
             }
             else {
-                changeLikeNum();
                 like.call(self);
             }
         });

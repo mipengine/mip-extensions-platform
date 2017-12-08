@@ -8,8 +8,10 @@ define(function (require, exports, module) {
     var util = require('util');
     var fetchJsonp = require('fetch-jsonp');
     var customElement = require('customElement').create();
-    var toast = require('./mip-zol-toast');
-
+    var mipToast = require('./mip-zol-toast');
+    var toast = function (msg, t) {
+        mipToast('<div class="mip-zol-toast-container">' + msg + '</div>', t);
+    };
     function praise(options, callback) {
         var url = options.url;
         var data = options.data ? JSON.parse(options.data) : {};

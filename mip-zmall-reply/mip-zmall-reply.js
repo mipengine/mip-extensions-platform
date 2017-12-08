@@ -125,15 +125,15 @@ define(function (require) {
     customElement.prototype.build = function () {
 
         var ele = this.element;
-
+        var data = ele.dataset;
         var textarea = ele.querySelector('.textarea'); // 输入框
         var inputRegion = ele.querySelector('.reply-input'); // 回复区域
         var replyBtn = ele.querySelector('.reply-btn'); // 回复按钮
         var closeBtn = ele.querySelector('.reply-input--hd .close'); // 关闭按钮
         var textBtn = ele.querySelector('.textareaDiv');
 
-        var reviewId = ele.querySelector('#reviewId').value;
-        var tUserId = ele.querySelector('#tUserId').value;
+        var reviewId = data.reviewId;
+        var tUserId = data.userId;
 
         var dom = {
             textBtn: textBtn,
