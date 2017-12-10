@@ -13,20 +13,20 @@ mip-jia-shopcomment 组件说明
 ### 基本用法
 ```html
 <mip-jia-shopcomment
-	data-url="http://qa.m.jia.com/wangpu/evaluation/list/item/141/" 
-	data-parms="{'evaluationLevel': '0', 'page': '1', 'pageSize': '10'}">
+    data-url="http://qa.m.jia.com/wangpu/evaluation/list/item/141/?evaluationLevel=0&pageSize=10"
+    data-page="1">
 
-	<script type="application/json" evaluation>
-        {	
-        	"zan_url": "http://qa.m.jia.com/wangpu/evaluation/zan",
-        	"reply_url": "http://qa.m.jia.com/wangpu/evaluation/reply"
+    <script type="application/json" evaluation>
+        {   
+            "zan_url": "http://qa.m.jia.com/wangpu/evaluation/zan",
+            "reply_url": "http://qa.m.jia.com/wangpu/evaluation/reply"
         }
     </script>
 
-	<div class="evaluation-detail pd-lr">
-	</div>
-	<div class="loading-more">查看更多<i class="arrow-icon"></i></div>
-	<div class="wait-icon"></div>	
+    <div class="evaluation-detail pd-lr">
+    </div>
+    <div class="loading-more">查看更多<i class="arrow-icon"></i></div>
+    <div class="wait-icon"></div>   
 </mip-jia-shopcomment>
 ```
 

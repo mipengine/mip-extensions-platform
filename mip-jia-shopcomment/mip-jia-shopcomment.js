@@ -113,29 +113,35 @@ define(function (require) {
     function setPageData(res, acBtn, box) {
         res.json().then(function (data) {
             // console.log(data);
-            acBtn.attr({'totalPage': data.totalPage, 'pageNo': data.pageNo});
-            if (data.pageNo < data.totalPage) {
-                acBtn.css('display', 'block');
-            }
-            var cData = data.shopEvaluations;
-            var str = '';
-            for (var i = 0; i < cData.length; i++) {
-                var items = commentStr(cData[i]);
-                str += items;
-            }
-            box.append(str);
-
-            // 隐藏高度不足的showmore
-            $('mip-showmore').each(function () {
-                if ($(this).attr('style').indexOf('height') === -1) {
-                    $(this).next().hide();
+            if (data && data.shopEvaluations && data.shopEvaluations.length) {
+                acBtn.attr({'pageNo': data.pageNo});
+                if (data.pageNo < data.totalPage) {
+                    acBtn.css('display', 'block');
                 }
-            });
+                var cData = data.shopEvaluations;
+                var str = '';
+                for (var i = 0; i < cData.length; i++) {
+                    var items = commentStr(cData[i]);
+                    str += items;
+                }
+                box.append(str);
+
+                // 隐藏高度不足的showmore
+                $('mip-showmore').each(function () {
+                    if ($(this).attr('style').indexOf('height') === -1) {
+                        $(this).next().hide();
+                    }
+                });
+            } else {
+
+                // 没有内容显示
+                $('.nocomment-box').show();
+            }
         });
     }
 
     var isComEnd = true;
-    function getDom(box, url, parms, loadingBox, acBtn) {
+    function getDom(box, url, loadingBox, acBtn) {
         if (isComEnd) {
             isComEnd = false;
             loadingBox.css('display', 'block');
@@ -143,8 +149,6 @@ define(function (require) {
             fetch(url, {
                 mode: 'cors',
                 method: 'post',
-                headers: {'Content-type': 'application/json'},
-                body: JSON.stringify(parms),
                 credentials: 'include'
             }).then(function (res) {
                 if (res.ok) {
@@ -166,28 +170,33 @@ define(function (require) {
     customElement.prototype.build = function () {
         var $ele = $(this.element);
         var commentBox = $ele.find('.evaluation-detail');
-        var requestUrl = $ele.attr('data-url');
-        var requestParms = $ele.attr('data-parms');
+        var rUrl = $ele.attr('data-url');
+        var rPage = $ele.attr('data-page');
         var loadingBox = $ele.find('.wait-icon');
         var acBtn = $ele.find('.loading-more');
+        var goUrl = '';
+        if (rUrl.indexOf('?') !== '-1') {
+            goUrl = rUrl + '&page=' + rPage;
+        } else {
+            goUrl = rUrl + '?page=' + rPage;
+        }
 
-        getDom(commentBox, requestUrl, requestParms, loadingBox, acBtn);
+        getDom(commentBox, goUrl, loadingBox, acBtn);
 
         acBtn.click(function () {
-            var totalPage = $(this).next().attr('totalpage');
-            var pageNo = $(this).next().attr('pageNo');
-            var parms = JSON.parse(requestParms.replace(/'/g, '"'));
-            parms.page = parseInt(parms.page, 10) + 1;
-            getDom(commentBox, requestUrl, parms, loadingBox, $(this));
+            var pageNo = parseInt($(this).attr('pageNo'), 10) + 1;
+            if (rUrl.indexOf('?') !== '-1') {
+                goUrl = rUrl + '&page=' + pageNo;
+            } else {
+                goUrl = rUrl + '?page=' + pageNo;
+            }
+            getDom(commentBox, goUrl, loadingBox, $(this));
         });
     };
 
 
     customElement.prototype.firstInviewCallback = function () {
         var $ele = $(this.element);
-        var commentBox = $ele.find('.evaluation-detail');
-        var requestUrl = $ele.attr('data-url');
-        var requestParms = $ele.attr('data-parms');
 
         var enDatas = $ele.find('script[evaluation]');
         var enabled = !!enDatas;

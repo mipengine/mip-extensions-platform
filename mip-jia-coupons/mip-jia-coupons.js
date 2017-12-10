@@ -16,11 +16,8 @@ define(function (require) {
             return false;
         }
         var configJson = JSON.parse(couponElement.text());
-        var cnData = couponStr(configJson.coupons);
-        var cnStr = cnData.str;
-        var cnIds = cnData.ids;
-
-        var parms = {shopId: configJson.shopId, promotionIds: cnIds};
+        var cnStr = couponStr(configJson.coupons);
+        var parms = configJson.parms;
 
 
         // 提示层
@@ -39,20 +36,18 @@ define(function (require) {
             }, duration);
         }
 
-        // 拼接优惠券html，ids
+        // 拼接优惠券html
         function couponStr(data) {
-            var datas = null;
+            var str = '';
             if (data && data.length) {
-                datas = {'str': '', 'ids': []};
-                datas.str = '<ul class="coupon-list">';
+                str = '<ul class="coupon-list">';
                 for (var i = 0; i < data.length; i++) {
-                    datas.str += '<li data-id=' + data[i].pomotionId + '><i></i><p><em>￥</em>';
-                    datas.str += data[i].money + '</p><span>' + data[i].desc + '</span></li>';
-                    datas.ids.push(data[i].pomotionId);
+                    str += '<li data-id=' + data[i].pomotionId + '><i></i><p><em>￥</em>';
+                    str += data[i].money + '</p><span>' + data[i].desc + '</span></li>';
                 }
-                datas.str += '</ul>';
+                str += '</ul>';
             }
-            return datas;
+            return str;
         }
 
 

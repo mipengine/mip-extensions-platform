@@ -45,6 +45,12 @@ define(function (require) {
         }, duration);
     }
 
+    customElement.prototype.build = function () {
+        var ele = this.element;
+        /* global MIP */
+        MIP.prerenderElement(ele);
+    };
+
     /**
      * 第一次进入可视区回调，只会执行一次
      */
@@ -157,7 +163,7 @@ define(function (require) {
 
         // 倒计时
         var timeBox = ele.querySelector('.time-area');
-        var timeDom = timeBox.querySelector('em');
+        var timeDom = timeBox && timeBox.querySelector('em');
         if (!!timeBox) {
             var eTime = timeBox.dataset['time'].trim();
             var sTime = new Date();

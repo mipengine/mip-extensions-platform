@@ -13,11 +13,15 @@ mip-jia-coupons 组件说明
 ### 基本用法
 ```html
 <mip-jia-coupons>
-	<div class="btn">一键领取所有优惠</div>
-	<script type="application/json" discount-coupon id="discount-coupon">
-        {	
-        	"url": "http://qa.m.jia.com/wangpu/api/promotion/mip-obtain",
-        	"shopId": "292",
+    <div class="btn">一键领取所有优惠</div>
+    <script type="application/json" discount-coupon id="discount-coupon">
+        {   
+            "url": "http://qa.m.jia.com/wangpu/api/promotion/mip-obtain",
+            "parms": {
+                "shopId": "292",
+                "pomotionIds": [1234, 2234, 9158],
+                "source": ""
+            },
             "coupons": [
                 {
                     "pomotionId": "1234",
