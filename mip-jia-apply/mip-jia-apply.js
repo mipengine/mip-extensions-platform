@@ -70,7 +70,7 @@ define(function (require) {
 
     // 验证参数是否是class或id
     function validateParamEle(str) {
-        if (str.indexOf('.') === 0 || str.indexOf('#') === 0) {
+        if (typeof str === 'string' && (str.indexOf('.') === 0 || str.indexOf('#') === 0)) {
             return true;
         } else {
             return false;
@@ -302,16 +302,17 @@ define(function (require) {
 
     // 弹出提示层
     function tipMask(msg, duration) {
+        clearTimeout(window.tipMaskTimer);
+        window.tipMaskTimer = null;
         duration = duration || 2000;
         if ($('.popup-maskEdit').length > 0) {
             $('.popup-maskEdit').remove();
         }
         $('body').append('<div class="popup-maskEdit">' + msg + '</div>');
-        var tipMaskTimer = setTimeout(function () {
+        window.tipMaskTimer = setTimeout(function () {
             $('.popup-maskEdit').fadeOut(100, function () {
                 $(this).remove();
             });
-            clearTimeout(tipMaskTimer);
         }, duration);
     }
 

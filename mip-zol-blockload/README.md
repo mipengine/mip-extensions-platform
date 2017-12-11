@@ -10,6 +10,10 @@
 
 ## 版本介绍
 
+### 1.0.2
+
+- 增加对无数据的时候的处理
+
 ### 1.0.1
 
 - 加载数据源增加 `token` 的判断
@@ -18,7 +22,7 @@
 
 ### 基本用法
 ```html
-<mip-zol-blockload appkey="wap" token="true" data-src="//path/to/api" data-limit="3" data-location="true">
+<mip-zol-blockload appkey="wap" token="true" data-src="//path/to/api" data-limit="3" data-location="true" data-empty-remove="true">
     <script type="application/json">
     {
         "appkey": "",
@@ -50,6 +54,12 @@
 说明：是否需要IP识别             
 必选项：否        
 取值：`true` or `false`  
+
+### data-empty-remove
+
+说明：加载无数据是否要移除该区块        
+必选项：否        
+取值：`true` or `false`    
 
 ## 注意事项
 

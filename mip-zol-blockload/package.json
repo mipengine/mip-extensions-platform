@@ -1,6 +1,6 @@
 {
     "name": "mip-zol-blockload",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "区块加载，适用于整个区块的后加载",
     "contributors": [
         {

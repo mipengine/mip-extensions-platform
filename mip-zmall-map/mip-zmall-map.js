@@ -133,7 +133,7 @@ define(function (require) {
             dom.innerText = '距您现在位置约' + text;
         }
         else {
-            dom.innerText = address + ' 距您约' + text;
+            dom.innerHTML = '<p>' + address + '</p><span>距您约' + text + '</span>';
         }
     };
 
@@ -176,9 +176,6 @@ define(function (require) {
 
         window.addEventListener('load', function () {
             var zMap = new ZMap(ele);
-
-            ele.firstElementChild.classList.add('show');
-
             switch (type) {
                 case 'map':
                     zMap.map();

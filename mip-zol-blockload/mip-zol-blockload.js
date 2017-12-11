@@ -131,6 +131,10 @@ define(function (require) {
 
         var url = getQueryUrl(data.src, params);
 
+        // 无数据的时候是否移除该区块
+        var emptyRemove = (data.emptyRemove && data.emptyRemove === 'true');
+        var emptyTip = '<div class="lazy-load-empty">对不起，暂无数据~</div>';
+
         fetchJsonp(url, {
             jsonpCallback: 'callback'
         }).then(function (result) {
@@ -138,6 +142,23 @@ define(function (require) {
         }).then(function (result) {
             if (!result.status) {
                 element.innerHTML = result.data.list;
+                if (result.data.list === '' || !result.data.list.length) {
+                    if (emptyRemove) {
+                        var parent = element.parentNode;
+                        parent.parentNode.removeChild(parent);
+                    }
+                    else {
+                        element.innerHTML = emptyTip;
+                    }
+                }
+            } else {
+                if (emptyRemove) {
+                    var parent = element.parentNode;
+                    parent.parentNode.removeChild(parent);
+                }
+                else {
+                    element.innerHTML = emptyTip;
+                }
             }
         });
     }
