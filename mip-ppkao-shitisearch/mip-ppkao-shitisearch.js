@@ -1,10 +1,9 @@
 /**
- * @file mip-ppkao-bottomnav 组件
+ * @file mip-ppkao-shitisearch 组件
  * @author
  */
 
 define(function (require) {
-    // var $ = require('zepto');
     var customElement = require('customElement').create();
 
     // build说明: 导航组件，在首屏展示，需要尽快加载
