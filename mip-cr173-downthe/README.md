@@ -18,12 +18,12 @@ mip-cr173-downthe .搜索框的跳转到站内搜索功能。没有下载地址�
         	<h4>
               <span class="show-more f-hideshow-btn"></span>
            	</h4>
-            <p class="f-hideshow-cont">
-                <mip-form method="POS" accept-charset="utf-8">
+            <div class="f-hideshow-cont">
+                <mip-form class="m-soudiv" url="http://so.cr173.com">
                     <input class="search-input" type="text" name="q" placeholder="请输入关键字">
-                    <input class="search-button" type="submit" value="">
+                    <p class="search-button"></p>
                 </mip-form>
-            </p>
+            </div>
       	</section>
     </mip-accordion>
     <b class="g-btn" data-num="0"></b>

@@ -1,7 +1,7 @@
 {
     "name": "mip-hc360-p4p",
-    "version": "1.0.0",
-    "description": "列表渲染",
+    "version": "1.1.0",
+    "description": "列表渲染,新增隐藏功能",
     "contributors": [
         {
             "name": "beisir",

@@ -31,25 +31,33 @@ define(function (require) {
         if (keyurl !== undefined) {
         // 获取到才执行
             $(ele).find('.search-button').click(function () {
-                var keyFont = $(ele).find('.search-input').val();
-                var openUrl = '';
-                if (keyFont !== '') {
-                    if (keyFont.indexOf('_') === -1 && keyFont.indexOf('http:') === -1) {
-                        if (/android/i.test(navigator.userAgent)) {
-                            openUrl = keyurl + '/search/md/' + keyFont + '_android_rank.html';
-                        } else {
-                            openUrl = keyurl + '/search/md/' + keyFont + '_ios_rank.html';
-                        }
-                        window.location.href = openUrl;
-                        // 点击搜索按钮，跳转到自己的搜索结果页
-                    } else {
-                        alert('包含非法字符"_"或者"http"');
-                    }
-                } else {
-                    window.location.href = keyurl + '/mindex.html';
-                    // 空值的时候跳转到自己的搜索结果首页
+                sousuo();
+            });
+            $(ele).find('.search-input').keyup(function () {
+                if (event.keyCode === 13) {
+                    sousuo();
                 };
             });
+        }
+        function sousuo() {
+            var keyFont = $(ele).find('.search-input').val();
+            var openUrl = '';
+            if (keyFont !== '') {
+                if (keyFont.indexOf('_') === -1 && keyFont.indexOf('http:') === -1) {
+                    if (/android/i.test(navigator.userAgent)) {
+                        openUrl = keyurl + '/search/md/' + keyFont + '_android_rank.html';
+                    } else {
+                        openUrl = keyurl + '/search/md/' + keyFont + '_ios_rank.html';
+                    }
+                    window.location.href = openUrl;
+                    // 点击搜索按钮，跳转到自己的搜索结果页
+                } else {
+                    alert('包含非法字符"_"或者"http"');
+                }
+            } else {
+                window.location.href = keyurl + '/mindex.html';
+                // 空值的时候跳转到自己的搜索结果首页
+            };
         }
     };
     return customElement;

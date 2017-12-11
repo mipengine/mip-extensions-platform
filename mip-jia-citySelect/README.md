@@ -13,14 +13,12 @@ mip-jia-citySelect 组件说明
 ### 基本用法
 ```html
 <mip-jia-citySelect>
-     <mip-map>
+ <mip-jia-swiper></mip-jia-swiper>
          <script type="application/json">
             {
                "ak": "243f68afdbfe0aa70ca23117c4606b94"
             }
           </script>
-     </mip-map>
-     <mip-jia-swiper></mip-jia-swiper>
      <div class="area-layer">
          <div class="area-select-box clearfix">
               <div class="sub-more-classify">
@@ -44,8 +42,9 @@ mip-jia-citySelect 组件说明
 
 使用地图组件之前必须要申请成为百度开发者，并创建百度服务密钥（ak），这里的 ak 参数即代表该功能。具体申请方式可以参见[百度地图 Javascript api 文档](http://in.lbsyun.baidu.com/index.php?title=jspopular/guide/getkey)。
 
-## 注意事项
-需要配合mip-map和mip-jia-swiper组件实现
+### 使用说明
+需要结合mip-jia-swiper的组件一起使用
+
 
 
 

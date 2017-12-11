@@ -9,6 +9,7 @@ define(function (require) {
     var util = require('util');
     var CustomStorage = util.customStorage;
     var storage = new CustomStorage(0);
+    var BaiduMap = require('./map');
 
     var isCity = true;
     var cityList = null;
@@ -216,7 +217,17 @@ define(function (require) {
 
     customElement.prototype.firstInviewCallback = function () {
         var thisObj = this.element;
-        cityPageZxbj.init($(thisObj));
+        var elemObj = thisObj.querySelector('script[type="application/json"]');
+        try {
+            var data = JSON.parse(elemObj.textContent.toString());
+        } catch (e) {
+            thisObj.innerHTML = '';
+            return false;
+        }
+        new BaiduMap(thisObj, data, function () {
+            cityPageZxbj.init($(thisObj));
+        });
+
         $(thisObj).find('.input-city').click(function () {
             // 第一次点击调取城市接口、后面则更新swiper
             cityPageZxbj.method.cityCommonPop($(thisObj));

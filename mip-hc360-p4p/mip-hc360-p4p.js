@@ -147,8 +147,13 @@ define(function (require) {
                 }, 1000);
             };
         } else {
-            if (dataList.length < 6) {
+            var newNum = self.num || numLength;
+            if (dataList.length < newNum) {
                 self.element.innerHTML = '';
+                var hideId = document.querySelector('#' + self.hideid);
+                if (hideId !== null || hideId !== undefined) {
+                    hideId.style.display = 'none';
+                }
                 return false;
             }
             setTimeout(function () {
@@ -256,6 +261,8 @@ define(function (require) {
         if (ele.hasAttribute('word')) {
             this.word = attrObj.word;
             this.referrer = attrObj.referrer;
+            this.hideid = attrObj.hideid;
+            this.num = attrObj.num;
             var script = ele.querySelector('script[type="application/json"]');
             var data = script ? JSON.parse(script.textContent.toString()) : null;
             data.w = this.word;
