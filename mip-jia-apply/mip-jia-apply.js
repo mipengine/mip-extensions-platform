@@ -111,6 +111,11 @@ define(function (require) {
         }
         var $success = data.success[i];
         for (var key in params) {
+
+            // 修复非字符串参数报错
+            if (typeof params[key] !== 'string') {
+                continue;
+            }
             if (validateParamEle(params[key])) {
                 var $ele = $(params[key]);
                 $ele.attr('emptyvalue', true);

@@ -1,0 +1,14 @@
+{
+    "name": "mip-hc360-performace",
+    "version": "1.0.0",
+    "description": "发送页面曝光数据",
+    "contributors": [
+        {
+            "name": "beisir",
+            "email": "hsy7426@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
