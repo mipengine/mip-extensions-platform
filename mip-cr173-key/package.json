@@ -1,0 +1,15 @@
+{
+    "name": "mip-cr173-key",
+    "version": "1.0.0",
+    "description": "功能：",
+    "contributors": [
+        {
+            "name": "gom",
+            "email": "24356681@qq.com",
+            "url": "http://m.cr173.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.0.0"
+    }
+}
