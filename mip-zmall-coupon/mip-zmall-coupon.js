@@ -59,7 +59,6 @@ define(function (require) {
                     var data = createObj(r);
                     var dom = createDom(data);
                     appendEle.call(self, dom);
-                    appendBg.call(self, dom);
                     callback();
                 }
                 else {
@@ -73,8 +72,13 @@ define(function (require) {
     }
 
     function show() {
-        this.classList.add('mip-zmall-coupon-show');
-        this.addEventListener('touchmove', canselTouchmove);
+        var dataset = this.dataset;
+        if (dataset.target && dataset.target !== '') {
+            // 因为 iframe 包含页面时， mip-fixed 的元素build的时候会被 挪到 页面底部
+            var couponLayer = document.querySelector('mip-fixed[zmall-fixed-id="' + dataset.target + '"]');
+            couponLayer.classList.add('mip-zmall-coupon-show');
+            couponLayer.addEventListener('touchmove', canselTouchmove);
+        }
     }
 
     function createObj(res) {
@@ -125,7 +129,7 @@ define(function (require) {
             + '</ul>'
             + '</div>'
             + '<div id="_js_coupon_close" class="store-discount__closebtn"></div>'
-            + '</div>';
+            + '</div><div class="mip-zmall-coupon-mask"></div>';
 
         return str;
     }
@@ -206,46 +210,34 @@ define(function (require) {
             return;
         }
         var self = this;
-        var couponFixedBox = self.querySelector('mip-fixed');
-        if (couponFixedBox) {
-
-            append(couponFixedBox, domStr);
-        }
-        else {
-            append(self, domStr);
+        var dataset = this.dataset;
+        if (!dataset.target || dataset.target === '') {
+            return;
         }
 
-        var close = self.querySelector('#_js_coupon_close');
-        var save = self.querySelector('#_js_coupon_save_pic');
+        // 因为 iframe 包含页面时， mip-fixed 的元素build的时候会被 挪到 页面底部
+        var couponLayer = document.querySelector('mip-fixed[zmall-fixed-id="' + dataset.target + '"]');
+        append(couponLayer, domStr);
+
+        var close = couponLayer.querySelector('#_js_coupon_close');
+        var save = couponLayer.querySelector('#_js_coupon_save_pic');
 
         close.addEventListener('click', function (evt) {
             evt.stopPropagation();
             evt.preventDefault();
-            self.classList.remove('mip-zmall-coupon-show');
-            self.removeEventListener('touchmove', canselTouchmove);
+            couponLayer.classList.remove('mip-zmall-coupon-show');
+            couponLayer.removeEventListener('touchmove', canselTouchmove);
         }, false);
 
         save.addEventListener('click', function () {
             toast.call(self, '请使用手机截屏功能');
         });
 
-        self.addEventListener('touchmove', canselTouchmove);
+        couponLayer.addEventListener('touchmove', canselTouchmove);
     }
 
     function canselTouchmove(e) {
         e.preventDefault();
-    }
-
-    function appendBg() {
-        var self = this;
-        var couponFixedBox = self.querySelector('mip-fixed');
-        var str = '<div class="mip-zmall-coupon-mask"></div>';
-        if (couponFixedBox) {
-            append(couponFixedBox, str);
-        }
-        else {
-            append(self, str);
-        }
     }
 
     function html(element, string) {
@@ -311,6 +303,9 @@ define(function (require) {
         var ele = self.element;
         var dataset = ele.dataset;
 
+        // 因为 iframe 包含页面时， mip-fixed 的元素build的时候会被 挪到 页面底部
+        var couponLayer = document.querySelector('mip-fixed[zmall-fixed-id="' + dataset.target + '"]');
+
         // 找到触发优惠券弹层的DOM，因不止一处触发，故而用 document.querySelectorAll 来获取
         var entrys = document.querySelectorAll('div[on="' + dataset.trigger + '"]');
         if (!entrys.length) {
@@ -333,16 +328,15 @@ define(function (require) {
                     return;
                 }
 
-                var couponLayer = ele.querySelector('#_js_coupon_layer');
-                if (couponLayer) {
+                var hasCoupon = couponLayer.querySelector('#_js_coupon_layer');
+                if (hasCoupon) {
                     show.call(ele);
                 }
                 else {
                     init.call(ele, function () {
-                        ele.classList.add('mip-zmall-coupon-show');
+                        couponLayer.classList.add('mip-zmall-coupon-show');
                     });
                 }
-
             }, false);
         });
     };

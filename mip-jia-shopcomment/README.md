@@ -38,11 +38,11 @@ mip-jia-shopcomment 组件说明
 必选项：是
 类型：string
 
-### data-parms
+### data-page
 
-说明：数据接口参数
+说明：返回第几页内容
 必选项：是
-类型：object
+类型：string
 
 ### zan_url
 

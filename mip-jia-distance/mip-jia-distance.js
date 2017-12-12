@@ -116,44 +116,57 @@ define(function (require) {
             tp: {
                 lng: '',
                 lat: ''
-            }
+            },
+            beforeText: this.config.beforeText || '',
+            afterText: this.config.afterText || '',
+            unit: 1
         };
 
         // 单位处理
-        var unitNumber = 1;
         switch (this.config.unit)
         {
             case '十米':
-                unitNumber = 10;
+                datas.unit = 10;
                 break;
             case '百米':
-                unitNumber = 100;
+                datas.unit = 100;
                 break;
             case '千米':
-                unitNumber = 1000;
+                datas.unit = 1000;
                 break;
             case '万米':
-                unitNumber = 10000;
+                datas.unit = 10000;
                 break;
             default:
-                unitNumber = 1;
+                datas.unit = 1;
         }
 
         // 返回距离并赋值给当前组件
         this.getCurPosition().then(function (cur) {
-            datas.cp.lat = cur.point.lat;
-            datas.cp.lng = cur.point.lng;
+            if (cur && cur.point)
+            {
+                datas.cp.lat = cur.point.lat;
+                datas.cp.lng = cur.point.lng;
 
-            selF.getTargetPosition().then(function (target) {
-                datas.tp.lat = target.point.lat;
-                datas.tp.lng = target.point.lng;
+                selF.getTargetPosition().then(function (target) {
+                    if (target && target.point)
+                    {
+                        datas.tp.lat = target.point.lat;
+                        datas.tp.lng = target.point.lng;
 
-                var pointA = new BMap.Point(datas.cp.lng, datas.cp.lat);
-                var pointB = new BMap.Point(datas.tp.lng, datas.tp.lat);
-                var distance = (selF.map.getDistance(pointA, pointB) / unitNumber).toFixed(2);
+                        var pointA = new BMap.Point(datas.cp.lng, datas.cp.lat);
+                        var pointB = new BMap.Point(datas.tp.lng, datas.tp.lat);
+                        var distance = (selF.map.getDistance(pointA, pointB) / datas.unit).toFixed(2);
 
-                selF.ele.innerHTML = distance;
-            });
+                        selF.ele.innerHTML = datas.beforeText + distance + datas.afterText;
+                    }
+                }, function () {
+                    selF.ele.innerHTML = '无法获取目标位置信息';
+                });
+            }
+
+        }, function () {
+            selF.ele.innerHTML = '无法获取定位信息';
         });
     };
 
@@ -172,7 +185,8 @@ define(function (require) {
                 if (this.getStatus() === 0) {
                     return resolve(r);
                 } else {
-                    return reject(new Error(this.getStatus()));
+                    console.log('定位当前位置失败, errorCode:' + this.getStatus());
+                    return reject();
                 }
             }, {enableHighAccuracy: true});
         });
@@ -193,12 +207,20 @@ define(function (require) {
             localSearch.setSearchCompleteCallback(function (res) {
                 if (res) {
                     var poi = res.getPoi(0);
-                    return resolve(poi);
+                    if (poi) {
+                        return resolve(poi);
+                    } else {
+                        console.log('无法获取目标位置信息');
+                        return reject();
+                    }
                 } else {
-                    return reject(new Error(this.getStatus()));
+                    console.log('请配置目标位置信息');
+                    return reject();
                 }
             });
+
             localSearch.search(selF.config.address);
+
         });
     };
 

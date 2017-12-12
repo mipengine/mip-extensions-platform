@@ -10,6 +10,10 @@
 
 ## 最新版本
 
+### 1.1.1
+
+- 解决bug
+
 ### 1.1.0
 
 - 改为独立层弹出，主要解决因 不能自己写fixed元素，而用mip-fixed导致的问题，实现逻辑变了
@@ -35,25 +39,32 @@
 ### 基本用法
 ```html
 <mip-zmall-buy
-		data-src="//path/to/api"
-		data-empty="//path/to/emptyapi"
-		data-form="//path/to/submit">
-    <!-- 请求参数 -->
-	<script type="application/json">
-		{
-			"goodsId": 27851087,
-			"merchantId": 194340,
-			"skuId": 7591876,
-			"suitSetId": 1,
-			"productTypeId": 6406,
-			"colorTypeId": 21,
-			"saleTypeId": 1,
-			"suitTypeId": 1
-		}
-	</script>
-	<span class="suction-buy flex-item" id="_js_zmall_buy">立即购买</span>
-	<div id="_js_buy_panel" class="spec-menu"></div>
+	data-src="//path/to/api"
+	data-empty="//path/to/emptyapi"
+	data-form="//path/to/submit"
+	data-trigger="click:buy.show"
+    data-target="buy"
+>
+<!-- 请求参数 -->
+<script type="application/json">
+	{
+		"goodsId": 27851087,
+		"merchantId": 194340,
+		"skuId": 7591876,
+		"suitSetId": 1,
+		"productTypeId": 6406,
+		"colorTypeId": 21,
+		"saleTypeId": 1,
+		"suitTypeId": 1
+	}
+</script>
+<mip-fixed type="top" zmall-fixed-id="buy" class="mip-zmall-buy-fixed">
+    <div class="mip-zmall-buy-layer" id="zmall_buy_panel"></div>
+</mip-fixed>
 </mip-zmall-buy>
+
+<div on="click:buy.show">立即购买</div>
+
 ```
 
 ## 属性
@@ -86,6 +97,12 @@
 类型：String          
 默认值：""   
 
+### data-target
+
+说明：被挪到下面的fixed的对应值             
+必选项：是         
+类型：String          
+默认值：""   
 
 ## 注意事项
 

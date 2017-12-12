@@ -192,11 +192,6 @@ define(function (require) {
             }
             getDom(commentBox, goUrl, loadingBox, $(this));
         });
-    };
-
-
-    customElement.prototype.firstInviewCallback = function () {
-        var $ele = $(this.element);
 
         var enDatas = $ele.find('script[evaluation]');
         var enabled = !!enDatas;

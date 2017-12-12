@@ -90,8 +90,10 @@ define(function (require) {
     function loadSuccess(res) {
 
         var that = this;
-        var specMenuBox = that.element.querySelector('#zmall_buy_panel');
-        var formUrl = that.element.dataset.form;
+        var dataset = that.element.dataset;
+
+        var specMenuBox = that.elementClone.querySelector('#zmall_buy_panel');
+        var formUrl = dataset.form;
         var menuDom = createMenu(res, formUrl);
 
         if (specMenuBox) {
@@ -131,7 +133,7 @@ define(function (require) {
 
     // 关闭弹窗
     function closeDia() {
-        var element = this.element;
+        var element = this.elementClone;
         var closeBtn = element.querySelector('#zmall_buy_close');
         closeBtn.addEventListener('click', function (evt) {
             element.classList.remove('mip-zmall-buy-show');
@@ -142,7 +144,7 @@ define(function (require) {
     function setNum(obj) {
         var that = this;
 
-        var specMenuBox = that.element.querySelector('#zmall_buy_panel');
+        var specMenuBox = that.elementClone.querySelector('#zmall_buy_panel');
 
         var sub = specMenuBox.querySelector('#js_sub');
         var add = specMenuBox.querySelector('#js_add');
@@ -407,7 +409,7 @@ define(function (require) {
         var productTypeInput = '';
 
         if (byte) {
-            productTypeDom = that.element.querySelector('#' + id);
+            productTypeDom = that.elementClone.querySelector('#' + id);
 
             if (productTypeDom) {
                 productTypeInput = productTypeDom.querySelectorAll('input[type=\'radio\']');
@@ -429,7 +431,7 @@ define(function (require) {
     function setPrice(price) {
         var that = this;
 
-        var specMenu = that.element.querySelector('#zmall_buy_panel');
+        var specMenu = that.elementClone.querySelector('#zmall_buy_panel');
         var priceDom = specMenu.querySelector('.js_price');
 
         var showPrice = '';
@@ -456,7 +458,7 @@ define(function (require) {
     function haveChosen() {
         var that = this;
 
-        var specMenu = that.element.querySelector('#zmall_buy_panel');
+        var specMenu = that.elementClone.querySelector('#zmall_buy_panel');
         var specInput = specMenu.querySelectorAll('input[type=\'radio\']');
         var textDom = specMenu.querySelector('.js_selected_name');
 
@@ -476,7 +478,7 @@ define(function (require) {
     function hasSuitDesc(obj) {
         var that = this;
 
-        var specMenu = that.element.querySelector('#zmall_buy_panel');
+        var specMenu = that.elementClone.querySelector('#zmall_buy_panel');
         var textDom = specMenu.querySelector('.js_selected_suitDesc');
 
         if (obj.suitDesc) {
@@ -488,7 +490,7 @@ define(function (require) {
     function textInput(obj) {
         var that = this;
 
-        var specMenu = that.element.querySelector('#zmall_buy_panel');
+        var specMenu = that.elementClone.querySelector('#zmall_buy_panel');
 
         var goodsId = specMenu.querySelector('#goodsIdInput');
         var merchantId = specMenu.querySelector('#merchantIdInput');
@@ -535,7 +537,7 @@ define(function (require) {
     function createNum(obj) {
         var that = this;
 
-        var specMenu = that.element.querySelector('#zmall_buy_panel');
+        var specMenu = that.elementClone.querySelector('#zmall_buy_panel');
         var num = specMenu.querySelector('.js_suitNum');
 
         var numStr = '';
@@ -605,7 +607,7 @@ define(function (require) {
         // 选择套装：
         var suitType = data.suitType;
 
-        var specMenu = that.element.querySelector('#zmall_buy_panel');
+        var specMenu = that.elementClone.querySelector('#zmall_buy_panel');
         var product = specMenu.querySelectorAll('#productType input[type=\'radio\']');
         var sale = specMenu.querySelectorAll('#saleType input[type=\'radio\']');
         var color = specMenu.querySelectorAll('#colorType input[type=\'radio\']');
@@ -647,7 +649,7 @@ define(function (require) {
     function optRadio(data) {
         var that = this;
 
-        var specMenu = that.element.querySelector('#zmall_buy_panel');
+        var specMenu = that.elementClone.querySelector('#zmall_buy_panel');
         var inputArr = specMenu.querySelectorAll('input[type=\'radio\']');
 
         var product = specMenu.querySelectorAll('#productType input[type=\'radio\']');
@@ -768,7 +770,7 @@ define(function (require) {
     function optAllsuit(obj) {
         var that = this;
 
-        var buyBtn = that.element.querySelector('#zmall_buy_submit');
+        var buyBtn = that.elementClone.querySelector('#zmall_buy_submit');
 
         var dataNumObj = {};
 
@@ -801,7 +803,7 @@ define(function (require) {
     function submitFunc() {
         var that = this;
 
-        var specMenu = that.element.querySelector('#zmall_buy_panel');
+        var specMenu = that.elementClone.querySelector('#zmall_buy_panel');
         var inputArr = specMenu.querySelectorAll('input[type=\'radio\']');
         var from = specMenu.querySelector('#zmall_buy_form');
         var obj = {};
@@ -880,7 +882,7 @@ define(function (require) {
     function clearInputVal() {
         var that = this;
 
-        var specMenu = that.element.querySelector('#zmall_buy_panel');
+        var specMenu = that.elementClone.querySelector('#zmall_buy_panel');
 
         var goodsId = specMenu.querySelector('#goodsIdInput');
         var merchantId = specMenu.querySelector('#merchantIdInput');
@@ -921,6 +923,10 @@ define(function (require) {
         var element = self.element;
         var dataset = element.dataset;
 
+        // 因为 iframe 包含页面时， mip-fixed 的元素build的时候会被 挪到 页面底部
+        var couponLayer = document.querySelector('mip-fixed[zmall-fixed-id="' + dataset.target + '"]');
+        self.elementClone = couponLayer;
+
         // 找到触发优惠券弹层的DOM，因不止一处触发，故而用 document.querySelectorAll 来获取
         var entrys = document.querySelectorAll('div[on="' + dataset.trigger + '"]');
         if (!entrys.length) {
@@ -945,7 +951,7 @@ define(function (require) {
                 }
 
                 // 显示
-                element.classList.add('mip-zmall-buy-show');
+                couponLayer.classList.add('mip-zmall-buy-show');
 
             });
         });

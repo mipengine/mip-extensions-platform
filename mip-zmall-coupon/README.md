@@ -10,6 +10,10 @@
 
 ## 最新版本
 
+### 1.1.1
+
+- 解决bug
+
 ### 1.1.0
 
 - 改为独立层弹出，主要解决因 不能自己写fixed元素，而用mip-fixed导致的问题，实现逻辑变了
@@ -37,11 +41,10 @@
 
 ### 基本用法
 ```html
-<mip-zmall-coupon data-url="//path/to/api">
-	<div class="draw_box">
-    	<div class="_js_coupon_btn draw_entry">一键领取所有优惠</div>
-	</div>
+<mip-zmall-coupon data-url="//path/to/api" data-merchant-id="" data-store-id="" data-trigger="click:coupon.show" data-target="coupon">
+    <mip-fixed type="top" zmall-fixed-id="coupon" class="mip-zmall-coupon-fixed"></mip-fixed>
 </mip-zmall-coupon>
+<div on="click:coupon.show">优惠到店</div>
 ```
 
 ## 属性
@@ -59,6 +62,13 @@
 必选项：是         
 类型：String          
 默认值：""      
+
+### data-target
+
+说明：被挪到下面的fixed的对应值             
+必选项：是         
+类型：String          
+默认值：""
 
 ## 注意事项
 - 组件内部Dom结构及属性名称不能自定义

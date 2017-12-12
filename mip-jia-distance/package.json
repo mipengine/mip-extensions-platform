@@ -1,6 +1,6 @@
 {
     "name": "mip-jia-distance",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "获取用户与目标地点的距离",
     "contributors": [
         {
