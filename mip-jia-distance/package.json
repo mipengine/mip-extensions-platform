@@ -1,0 +1,14 @@
+{
+    "name": "mip-jia-distance",
+    "version": "1.0.0",
+    "description": "获取用户与目标地点的距离",
+    "contributors": [
+        {
+            "name": "ll",
+            "email": "liulei@qeeka.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

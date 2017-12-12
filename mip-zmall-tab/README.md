@@ -10,6 +10,10 @@
 
 ## 示例
 
+### 最新版本
+
+- 1.0.1 解决因为吸顶造成的无法点击的bug,采用事件代理
+
 ### 基本用法
 ```html
 <mip-zmall-tab data-tab-current="current" data-panel-current="current">

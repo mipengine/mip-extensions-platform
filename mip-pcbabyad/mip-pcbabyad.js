@@ -12,11 +12,10 @@ define(function (require) {
             window.document.getElementById('adWrap' + adid).style.display = 'none';
         };
     };
-    var triggerPv = function (locid, ivid) {
-        var img = document.createElement('img');
-        img.style.display = 'none';
-        img.src = '//ivy.pcbaby.com.cn/show2?channel=inline&id=' + locid + '_' + ivid + ';&state=0&submitcnt=1';
-        document.body.insertBefore(img, document.body.firstChild);
+    var triggerPv = function (pvcode) {
+        if (pvcode && pvcode !== '{SRC2}') {
+            (window['tmp' + 1 * new Date()] = new Image()).src = pvcode.replace(/\[timestamp\]/i, new Date() * 1);
+        }
     };
 
     var setLocationAd = function (str) {
@@ -28,6 +27,7 @@ define(function (require) {
         var locId = data['locationId'];
         var loc = data['id'];
         var src = data['src'];
+        var pvcode = data['pv'];
         var link = data['link'];
         var html = [
             '<div style="position: relative;" id="adWrap' + adId + '">',
@@ -39,7 +39,7 @@ define(function (require) {
             '</div>'];
         target = document.getElementsByClassName(loc)[0];
         target.innerHTML = html.join('');
-        triggerPv(locId, adId);
+        triggerPv(pvcode);
         bingEvent(target, adId);
     };
 
@@ -63,7 +63,7 @@ define(function (require) {
     customElement.prototype.firstInviewCallback = function () {
         target = this.element;
         var loc = target.className.replace(/^([^\s]+\.).*/, '$1');
-        var url = '//ivy.pcbaby.com.cn/show?id=' + loc + '&media=html';
+        var url = '//ivy.pcbaby.com.cn/show?id=' + loc + '&media=html&mip';
         ajax(url, setLocationAd);
     };
     return customElement;

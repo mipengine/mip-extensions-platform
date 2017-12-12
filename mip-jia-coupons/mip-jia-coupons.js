@@ -60,7 +60,6 @@ define(function (require) {
             '            <h3>一键领取所有优惠</h3>',
             cnStr,
             '            <div class="form-area">',
-            '                <input type="tel" maxlength="11" placeholder="输手机号，领取所有优惠">',
             '                <span class="apply-btn">立即领取</span>',
             '            </div>',
             '        </div>',
@@ -123,12 +122,6 @@ define(function (require) {
         }
 
         $ele.find('.apply-btn').click(function () {
-            var regPhone = /^1[3|4|5|7|8]\d{9}$/;
-            var phone = $(this).prev().val();
-            if (!regPhone.test(phone)) {
-                tipMask('请输入正确的手机号~');
-                return;
-            }
             $('.loading-icon').css('display', 'block');
             fetch(configJson.url, {
                 mode: 'cors',
