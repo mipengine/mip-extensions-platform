@@ -64,12 +64,11 @@ define(function (require) {
             jsonpCallback: 'success_jsonpCallback',
             data: customParams,
             success: function (response) {
-                var res = '';
 
+                var res = '';
                 if (!response) {
                     return;
                 }
-
                 if (typeof response === 'string') {
                     res = JSON.parse(response);
                 }
@@ -79,9 +78,7 @@ define(function (require) {
 
                 if (parseInt(res.flag, 10) === 1) {
                     allSuitInfo = res.suitInfo;
-
                     loadSuccess.call(that, res);
-
                     suitEmpty.call(that, customParams, emptUrl);
                 }
             },
@@ -91,11 +88,10 @@ define(function (require) {
 
     // 请求成功
     function loadSuccess(res) {
+
         var that = this;
-        var specMenuBox = that.element.querySelector('.spec-menu');
-
+        var specMenuBox = that.element.querySelector('#zmall_buy_panel');
         var formUrl = that.element.dataset.form;
-
         var menuDom = createMenu(res, formUrl);
 
         if (specMenuBox) {
@@ -104,7 +100,6 @@ define(function (require) {
 
         var suitType = res.suitInfo;
         var defaultSuit = {};
-
         if (suitType) {
             defaultSuit = getsuitDefault(suitType);
         }
@@ -136,13 +131,10 @@ define(function (require) {
 
     // 关闭弹窗
     function closeDia() {
-        var that = this;
-
-        var closeBtn = that.element.querySelector('.select-package__closebtn');
-        var dia = that.element.querySelector('.spec-menu');
-
+        var element = this.element;
+        var closeBtn = element.querySelector('#zmall_buy_close');
         closeBtn.addEventListener('click', function (evt) {
-            dia.classList.add('none');
+            element.classList.remove('mip-zmall-buy-show');
         });
     }
 
@@ -150,13 +142,13 @@ define(function (require) {
     function setNum(obj) {
         var that = this;
 
-        var specMenuBox = that.element.querySelector('.spec-menu');
+        var specMenuBox = that.element.querySelector('#zmall_buy_panel');
 
         var sub = specMenuBox.querySelector('#js_sub');
         var add = specMenuBox.querySelector('#js_add');
         var showNum = specMenuBox.querySelector('#js_showNum');
         var numInput = specMenuBox.querySelector('#goodsNumberInput');
-        var buyBtn = specMenuBox.querySelector('#submit');
+        var buyBtn = specMenuBox.querySelector('#zmall_buy_submit');
         var text = specMenuBox.querySelector('.js_price');
 
         sub.addEventListener('click', function (evt) {
@@ -203,7 +195,7 @@ define(function (require) {
         }
 
         specMenu = '<aside class="select-package">'
-            + '<div class="select-package__closebtn"></div>'
+            + '<div id="zmall_buy_close" class="select-package__closebtn"></div>'
             + '<div class="select-product clearfix">'
             + '<figure>' + imgStr + '</figure>'
             + '<div class="select-product__price js_price"></div>'
@@ -222,7 +214,7 @@ define(function (require) {
             + '<div class="limit">订单实付金额满<b>399</b>元包邮，提醒您注意检验包装完整。</div>'
             + '</div>'
             + '</div>'
-            + '<form id="buy_from" method="get" action="' + url + '">'
+            + '<form id="zmall_buy_form" method="get" action="' + url + '">'
             + '<input type="hidden" id="" name="c" value="Shop_TongChengGou_MixConfirmOrder"/>'
             + '<input type="hidden" id="skuIdInput" name="skuId" value=""/>'
             + '<input type="hidden" id="suitIdInput" name="suitId" value=""/>'
@@ -232,10 +224,10 @@ define(function (require) {
             + '<input type="hidden" id="saleSuitIdInput" name="saleSuitId" value=""/>'
             + '<input type="hidden" id="isBaiduInput" name="isBaidu" value=""/>'
             + '<input type="hidden" id="goodsNumberInput" name="goodsNumber" value="1"/>'
-            + '<input type="submit" value="确 定" class="suction-buy" id="submit"/>'
+            + '<input type="submit" value="确 定" class="suction-buy" id="zmall_buy_submit"/>'
             + '</form>'
             + '</aside>'
-            + '<div class="cover-mask cover-mask__visible"></div>';
+            + '<div class="mip-zmall-buy-mask"></div>';
 
         return specMenu;
     }
@@ -248,7 +240,7 @@ define(function (require) {
             return imgStr;
         }
 
-        imgStr = '<img src="' + url + '" alt="商品展示图"/>';
+        imgStr = '<mip-img src="' + url + '" alt="商品展示图"></mip-img>';
 
         return imgStr;
     }
@@ -437,7 +429,7 @@ define(function (require) {
     function setPrice(price) {
         var that = this;
 
-        var specMenu = that.element.querySelector('.spec-menu');
+        var specMenu = that.element.querySelector('#zmall_buy_panel');
         var priceDom = specMenu.querySelector('.js_price');
 
         var showPrice = '';
@@ -464,7 +456,7 @@ define(function (require) {
     function haveChosen() {
         var that = this;
 
-        var specMenu = that.element.querySelector('.spec-menu');
+        var specMenu = that.element.querySelector('#zmall_buy_panel');
         var specInput = specMenu.querySelectorAll('input[type=\'radio\']');
         var textDom = specMenu.querySelector('.js_selected_name');
 
@@ -484,7 +476,7 @@ define(function (require) {
     function hasSuitDesc(obj) {
         var that = this;
 
-        var specMenu = that.element.querySelector('.spec-menu');
+        var specMenu = that.element.querySelector('#zmall_buy_panel');
         var textDom = specMenu.querySelector('.js_selected_suitDesc');
 
         if (obj.suitDesc) {
@@ -496,7 +488,7 @@ define(function (require) {
     function textInput(obj) {
         var that = this;
 
-        var specMenu = that.element.querySelector('.spec-menu');
+        var specMenu = that.element.querySelector('#zmall_buy_panel');
 
         var goodsId = specMenu.querySelector('#goodsIdInput');
         var merchantId = specMenu.querySelector('#merchantIdInput');
@@ -543,7 +535,7 @@ define(function (require) {
     function createNum(obj) {
         var that = this;
 
-        var specMenu = that.element.querySelector('.spec-menu');
+        var specMenu = that.element.querySelector('#zmall_buy_panel');
         var num = specMenu.querySelector('.js_suitNum');
 
         var numStr = '';
@@ -613,7 +605,7 @@ define(function (require) {
         // 选择套装：
         var suitType = data.suitType;
 
-        var specMenu = that.element.querySelector('.spec-menu');
+        var specMenu = that.element.querySelector('#zmall_buy_panel');
         var product = specMenu.querySelectorAll('#productType input[type=\'radio\']');
         var sale = specMenu.querySelectorAll('#saleType input[type=\'radio\']');
         var color = specMenu.querySelectorAll('#colorType input[type=\'radio\']');
@@ -655,7 +647,7 @@ define(function (require) {
     function optRadio(data) {
         var that = this;
 
-        var specMenu = that.element.querySelector('.spec-menu');
+        var specMenu = that.element.querySelector('#zmall_buy_panel');
         var inputArr = specMenu.querySelectorAll('input[type=\'radio\']');
 
         var product = specMenu.querySelectorAll('#productType input[type=\'radio\']');
@@ -663,7 +655,7 @@ define(function (require) {
         var color = specMenu.querySelectorAll('#colorType input[type=\'radio\']');
         var suit = specMenu.querySelectorAll('#suitType input[type=\'radio\']');
 
-        var buyBtn = specMenu.querySelector('#submit');
+        var buyBtn = specMenu.querySelector('#zmall_buy_submit');
 
         var obj = {};
 
@@ -776,7 +768,7 @@ define(function (require) {
     function optAllsuit(obj) {
         var that = this;
 
-        var buyBtn = that.element.querySelector('#submit');
+        var buyBtn = that.element.querySelector('#zmall_buy_submit');
 
         var dataNumObj = {};
 
@@ -809,9 +801,9 @@ define(function (require) {
     function submitFunc() {
         var that = this;
 
-        var specMenu = that.element.querySelector('.spec-menu');
+        var specMenu = that.element.querySelector('#zmall_buy_panel');
         var inputArr = specMenu.querySelectorAll('input[type=\'radio\']');
-        var from = specMenu.querySelector('#buy_from');
+        var from = specMenu.querySelector('#zmall_buy_form');
         var obj = {};
 
         from.addEventListener('submit', function (evt) {
@@ -888,7 +880,7 @@ define(function (require) {
     function clearInputVal() {
         var that = this;
 
-        var specMenu = that.element.querySelector('.spec-menu');
+        var specMenu = that.element.querySelector('#zmall_buy_panel');
 
         var goodsId = specMenu.querySelector('#goodsIdInput');
         var merchantId = specMenu.querySelector('#merchantIdInput');
@@ -924,38 +916,38 @@ define(function (require) {
 
     // build 方法，元素插入到文档时执行，仅会执行一次
     customElement.prototype.build = function () {
+
         var self = this;
-
         var element = self.element;
+        var dataset = element.dataset;
 
-        var entryBtn = element.querySelector('.suction-buy');
-
-        var box = '';
-
-        if (entryBtn.getAttribute('id') !== 'js_buy') {
+        // 找到触发优惠券弹层的DOM，因不止一处触发，故而用 document.querySelectorAll 来获取
+        var entrys = document.querySelectorAll('div[on="' + dataset.trigger + '"]');
+        if (!entrys.length) {
             return;
         }
 
-        entryBtn.addEventListener('click', function (evt) {
-            evt.stopPropagation();
-            evt.preventDefault();
+        // 预载入购买弹层
+        init.call(self);
 
-            var isLogin = islogin();
+        // 循环绑定事件
+        [].forEach.call(entrys, function (entry, index) {
+            entry.addEventListener('click', function (e) {
+                e.stopPropagation();
+                e.preventDefault();
 
-            if (!isLogin) {
-                var href = encodeURIComponent(location.href);
-                window.location.href = '//cashier.zol.com/paygate/baidu/oauth?callbackurl=' + href;
-                return;
-            }
+                // 判断登录
+                var isLogin = islogin();
+                if (!isLogin) {
+                    var href = encodeURIComponent(location.href);
+                    window.location.href = '//cashier.zol.com/paygate/baidu/oauth?callbackurl=' + href;
+                    return;
+                }
 
-            box = element.querySelector('.spec-menu');
+                // 显示
+                element.classList.add('mip-zmall-buy-show');
 
-            if (box.innerHTML.trim() === '') {
-                init.call(self);
-            }
-            else {
-                box.classList.remove('none');
-            }
+            });
         });
     };
 

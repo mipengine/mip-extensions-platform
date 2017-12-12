@@ -29,26 +29,7 @@ define(function (require) {
     // 授权登录链接
     var LOGIN_URL = '//cashier.zol.com/paygate/baidu/oauth?callbackurl=';
 
-    // 请求频次控制开关
-    var switchs = false;
-
-    // 优惠券弹层所在的 父级
-    var cuponLayerParent = null;
-
-    // 判断element是否存在
-    var single = (function () {
-
-        var instance = null;
-
-        return function (selector) {
-            if (!instance) {
-                instance = document.querySelector(selector);
-            }
-            return instance;
-        };
-    })();
-
-    function init() {
+    function init(callback) {
 
         var self = this;
         var url = self.getAttribute('data-url');
@@ -73,37 +54,27 @@ define(function (require) {
                 storeId: storeId
             },
             success: function (res) {
-
                 var r = (typeof res === 'string') ? JSON.parse(res) : res;
-
                 if (r.flag === 1) {
-                    switchs = true;
                     var data = createObj(r);
                     var dom = createDom(data);
                     appendEle.call(self, dom);
                     appendBg.call(self, dom);
+                    callback();
                 }
                 else {
-                    switchs = false;
                     toast.call(self, res.msg);
                 }
             },
             error: function (err) {
-                switchs = false;
                 toast.call(self, '数据请求失败');
             }
         });
     }
 
     function show() {
-        var box = cuponLayerParent.querySelector('.store-discount');
-        var cover = cuponLayerParent.querySelector('.cover-mask');
-        if (box) {
-            box.classList.add('store-discount__show');
-            cover.classList.add('store-discount__show');
-            cuponLayerParent.addEventListener('touchmove', canselTouchmove);
-        }
-        return;
+        this.classList.add('mip-zmall-coupon-show');
+        this.addEventListener('touchmove', canselTouchmove);
     }
 
     function createObj(res) {
@@ -138,14 +109,14 @@ define(function (require) {
         var value = couponValue(data);
         var lookAdd = couponAdd(data);
 
-        str = '<div class="store-discount" id="js_dialog">'
+        str = '<div class="mip-zmall-coupon-layer store-discount" id="_js_coupon_layer">'
             + '<div class="store-discount__hd">到店优惠领取成功</div>'
             + '<div class="store-discount__content">'
             + code
             + gift
             + value
             + '<div class="store-discount__btns flex">'
-            + '<span class="btns-save">保存截图</span>'
+            + '<span id="_js_coupon_save_pic" class="btns-save">保存截图</span>'
             + lookAdd
             + '</div>'
             + '<ul class="store-discount__tips">'
@@ -153,7 +124,7 @@ define(function (require) {
             + '<li>优惠详细使用规则请到店咨询商家。</li>'
             + '</ul>'
             + '</div>'
-            + '<div class="store-discount__closebtn"></div>'
+            + '<div id="_js_coupon_close" class="store-discount__closebtn"></div>'
             + '</div>';
 
         return str;
@@ -234,31 +205,31 @@ define(function (require) {
         if (domStr === undefined) {
             return;
         }
-
         var self = this;
-        var box = self.querySelector('.draw_box');
-        append(box, domStr);
+        var couponFixedBox = self.querySelector('mip-fixed');
+        if (couponFixedBox) {
 
-        cuponLayerParent = box;
-        var btn = self.querySelector('.store-discount__closebtn');
-        var pic = self.querySelector('.btns-save');
+            append(couponFixedBox, domStr);
+        }
+        else {
+            append(self, domStr);
+        }
 
-        btn.addEventListener('click', function (evt) {
+        var close = self.querySelector('#_js_coupon_close');
+        var save = self.querySelector('#_js_coupon_save_pic');
+
+        close.addEventListener('click', function (evt) {
             evt.stopPropagation();
             evt.preventDefault();
-            var that = this;
-            that.parentNode.classList.add('store-discount__hide');
-            that.parentNode.classList.remove('store-discount__show');
-            self.querySelector('.cover-mask').classList.add('store-discount__hide');
-            self.querySelector('.cover-mask').classList.remove('store-discount__show');
-            cuponLayerParent.removeEventListener('touchmove', canselTouchmove);
+            self.classList.remove('mip-zmall-coupon-show');
+            self.removeEventListener('touchmove', canselTouchmove);
         }, false);
 
-        pic.addEventListener('click', function () {
+        save.addEventListener('click', function () {
             toast.call(self, '请使用手机截屏功能');
         });
 
-        cuponLayerParent.addEventListener('touchmove', canselTouchmove);
+        self.addEventListener('touchmove', canselTouchmove);
     }
 
     function canselTouchmove(e) {
@@ -267,9 +238,14 @@ define(function (require) {
 
     function appendBg() {
         var self = this;
-        var str = '<div class="cover-mask cover-mask__visible"></div>';
-        var box = self.querySelector('.draw_box');
-        append(box, str);
+        var couponFixedBox = self.querySelector('mip-fixed');
+        var str = '<div class="mip-zmall-coupon-mask"></div>';
+        if (couponFixedBox) {
+            append(couponFixedBox, str);
+        }
+        else {
+            append(self, str);
+        }
     }
 
     function html(element, string) {
@@ -333,35 +309,42 @@ define(function (require) {
 
         var self = this;
         var ele = self.element;
-        var entry = ele.querySelector('._js_coupon_btn');
+        var dataset = ele.dataset;
 
-        if (!entry) {
+        // 找到触发优惠券弹层的DOM，因不止一处触发，故而用 document.querySelectorAll 来获取
+        var entrys = document.querySelectorAll('div[on="' + dataset.trigger + '"]');
+        if (!entrys.length) {
             return;
         }
 
-        entry.addEventListener('click', function (evt) {
-            evt.stopPropagation();
-            evt.preventDefault();
+        // 循环绑定事件
+        [].forEach.call(entrys, function (entry, index) {
+            entry.addEventListener('click', function (e) {
+                e.stopPropagation();
+                e.preventDefault();
 
-            var userId = '';
-            if (window.ZOL_USER_INFO && window.ZOL_USER_INFO.sid) {
-                userId = window.ZOL_USER_INFO.sid;
-            }
-            if (userId === '') {
-                var href = encodeURIComponent(location.href);
-                window.location.href = LOGIN_URL + href;
-                return;
-            }
-
-            if (single('.store-discount') === null) {
-                if (!switchs) {
-                    init.call(ele);
+                var userId = '';
+                if (window.ZOL_USER_INFO && window.ZOL_USER_INFO.sid) {
+                    userId = window.ZOL_USER_INFO.sid;
                 }
-            }
-            else {
-                show.call(ele);
-            }
-        }, false);
+                if (userId === '') {
+                    var href = encodeURIComponent(location.href);
+                    window.location.href = LOGIN_URL + href;
+                    return;
+                }
+
+                var couponLayer = ele.querySelector('#_js_coupon_layer');
+                if (couponLayer) {
+                    show.call(ele);
+                }
+                else {
+                    init.call(ele, function () {
+                        ele.classList.add('mip-zmall-coupon-show');
+                    });
+                }
+
+            }, false);
+        });
     };
 
     return customElement;
