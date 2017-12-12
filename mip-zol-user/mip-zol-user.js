@@ -60,7 +60,7 @@ define(function (require, exports) {
                 return;
             }
             setUserInfo.posting = true;
-            getUserInfo(element.dataset.url);
+            getUserInfo(element.dataset.url, element);
         })();
     };
 
