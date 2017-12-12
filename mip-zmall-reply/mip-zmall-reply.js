@@ -43,19 +43,21 @@ define(function (require) {
 
             var self = this;
 
-            // 弹出输入框
-            dom.textBtn.addEventListener('click', function () {
-                // 是否登录验证
-                if (window.ZOL_USER_INFO.sid) {
-                    dom.inputRegion.classList.remove('bottom');
-                    dom.inputRegion.classList.add('top');
-
-                    dom.textarea.focus();
-                }
-                else {
-                    var href = encodeURIComponent(location.href);
-                    window.location.href = LOGIN_URL + href;
-                }
+            // 循环绑定事件 弹出输入框
+            [].forEach.call(dom.triggers, function (trigger, index) {
+                trigger.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    var userInfo = window.ZOL_USER_INFO;
+                    if (userInfo && userInfo.sid && userInfo.sid !== '') {
+                        dom.panel.classList.add('mip-zmall-reply-fixed-show');
+                        dom.textarea.focus();
+                    }
+                    else {
+                        var href = encodeURIComponent(location.href);
+                        window.location.href = LOGIN_URL + href;
+                    }
+                }, false);
             });
 
             // 输入
@@ -71,8 +73,7 @@ define(function (require) {
 
             // 关闭
             dom.closeBtn.addEventListener('click', function () {
-                dom.inputRegion.classList.remove('top');
-                dom.inputRegion.classList.add('bottom');
+                dom.panel.classList.remove('mip-zmall-reply-fixed-show');
                 self.resetForm(dom);
             });
 
@@ -95,8 +96,7 @@ define(function (require) {
                         success: function (res) {
                             if (res.flag === 0) {
                                 toast.call(mipElement, res.info);
-                                dom.inputRegion.classList.remove('top');
-                                dom.inputRegion.classList.add('bottom');
+                                dom.panel.classList.remove('mip-zmall-reply-fixed-show');
                                 self.resetForm(dom);
                             }
                             else {
@@ -104,8 +104,7 @@ define(function (require) {
                             }
                         },
                         error: function () {
-                            dom.inputRegion.classList.remove('top');
-                            dom.inputRegion.classList.add('bottom');
+                            dom.panel.classList.remove('mip-zmall-reply-fixed-show');
                             self.resetForm(dom);
                         }
                     });
@@ -113,7 +112,39 @@ define(function (require) {
             });
         },
 
-        init: function (dom, param, mipElement) {
+        init: function (mipElement) {
+
+            var ele = mipElement.element;
+            var data = ele.dataset;
+            var triggers = mipElement.triggers;
+            var panel = mipElement.panel;
+
+            // 输入框
+            var textarea = panel.querySelector('.textarea');
+            // 回复区域
+            var inputRegion = panel.querySelector('.reply-input-box');
+            // 回复按钮
+            var replyBtn = panel.querySelector('.reply-btn');
+            // 关闭按钮
+            var closeBtn = panel.querySelector('.reply-input--hd .close');
+
+            var reviewId = data.reviewId;
+            var tUserId = data.userId;
+
+            var dom = {
+                panel: panel,
+                triggers: triggers,
+                textarea: textarea,
+                inputRegion: inputRegion,
+                replyBtn: replyBtn,
+                closeBtn: closeBtn
+            };
+            var param = {
+                reviewId: reviewId,
+                tUserId: tUserId,
+                url: data.src
+            };
+
             this.events(dom, param, mipElement);
         }
     };
@@ -126,29 +157,21 @@ define(function (require) {
 
         var ele = this.element;
         var data = ele.dataset;
-        var textarea = ele.querySelector('.textarea'); // 输入框
-        var inputRegion = ele.querySelector('.reply-input'); // 回复区域
-        var replyBtn = ele.querySelector('.reply-btn'); // 回复按钮
-        var closeBtn = ele.querySelector('.reply-input--hd .close'); // 关闭按钮
-        var textBtn = ele.querySelector('.textareaDiv');
 
-        var reviewId = data.reviewId;
-        var tUserId = data.userId;
+        // 因为 iframe 包含页面时， mip-fixed 的元素build的时候会被 挪到 页面底部
+        var replyLayer = document.querySelector('mip-fixed[zmall-fixed-id="' + data.target + '"]');
 
-        var dom = {
-            textBtn: textBtn,
-            textarea: textarea,
-            inputRegion: inputRegion,
-            replyBtn: replyBtn,
-            closeBtn: closeBtn
-        };
-        var param = {
-            reviewId: reviewId,
-            tUserId: tUserId,
-            url: ele.dataset.src
-        };
+        // 找到触发优惠券弹层的DOM，因不止一处触发，故而用 document.querySelectorAll 来获取
+        var buttons = document.querySelectorAll('div[on="' + data.trigger + '"]');
+        if (!buttons.length) {
+            return;
+        }
 
-        reply.init(dom, param, this);
+        this.triggers = buttons;
+
+        this.panel = replyLayer;
+
+        reply.init(this);
     };
 
     return customElement;
