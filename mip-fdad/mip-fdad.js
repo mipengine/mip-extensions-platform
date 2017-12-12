@@ -1,6 +1,8 @@
 /**
  * @file mip-fdad 组件
  * @author deiphi@qq.com
+ * @company 广州市家庭医生在线信息有限公司
+ * 本脚本用于广告代码的加载，所以需要调用外链js，已经在调用的地方加了注释。
  */
 
 window.CUSTOMER = {};
@@ -161,10 +163,57 @@ define(function (require) {
             tags = [tags];
         }
 
-        for (var i = 0, len = tags.length; i < len; i++) {
-            if (contains(customer.data.customs, tags[i])) {
-                return true;
+        var customs = customer.data.customs;
+        var sort = function (arr) {
+            var newArr = [];
+
+            for (var i = 0, len = arr.length; i < len; i++) {
+                var a = arr[i].split(':');
+                var name = a[0];
+                var list = a[1] ? a[1].split(',').sort() : [];
+
+                newArr.push({name: name.toLowerCase(), list: list});
             }
+
+            return newArr;
+        };
+
+        customs.sort();
+        tags.sort();
+        customs = sort(customs);
+        tags = sort(tags);
+
+        var arrc = [];
+        var arrt = [];
+        var total = 0;
+        var filter = function () {
+            for (var i = 0, len = tags.length; i < len; i++) {
+                for (var j = 0, count = customs.length; j < count; j++) {
+                    if (tags[i].name === customs[j].name) {
+                        arrc.push(customs[j].list);
+                        arrt.push(tags[i].list);
+                    }
+                }
+            }
+        };
+
+        filter();
+
+        for (var i = 0, len = arrc.length; i < len; i++) {
+            for (var j = 0, count = arrt[i].length; j < count; j++) {
+                if (contains(arrc[i], arrt[i][j])) {
+                    total++;
+                    break;
+                }
+            }
+        }
+
+        if (!arrc.length) {
+            return false;
+        }
+
+        if (arrc.length === total) {
+            return true;
         }
 
         return false;
@@ -398,7 +447,7 @@ define(function (require) {
 
     // 处理广告(非联盟广告)
     function handle(options) {
-        // customer.place.append(getElements(customer.place.className));
+        appendAd(getElements(customer.place.className), options.pid, options.cid);
         setCustomerId(options.cid);
 
         var box = getPlaceBox(options.pid);
@@ -688,7 +737,7 @@ define(function (require) {
     }
 
     // 添加广告到广告位
-    function appendAd(list) {
+    function appendAd(list, pid, cid) {
         var ids = customer.place.ids;
         var items = customer.place.items;
 
@@ -697,8 +746,25 @@ define(function (require) {
             var id = parseInt(item.getAttribute('data-id'), 10);
 
             if (!contains(ids, id)) {
-                items.push({box: item, id: id});
+                var arr = [];
+
+                (id === pid) && arr.push(cid);
+                items.push({box: item, id: id, cids: arr});
                 ids.push(id);
+            } else {
+                if (id === pid) {
+                    var n = items.length;
+                    var cur = null;
+
+                    while (n--) {
+                        if (items[n].id === pid) {
+                            cur = items[n];
+                            break;
+                        }
+                    }
+
+                    cur && cur.cids.push(cid);
+                }
             }
         }
     }
@@ -745,37 +811,27 @@ define(function (require) {
     }
 
     // 记录广告展示数量
-    function recordPv() {
-        var timer = null;
-        var count = 100;
-        var isRecord = false;
+    function recordPv(callback) {
+        var aps = customer.ids.join(',');// 广告id
+        var pps = customer.place.ids.join(',');// 广告位id
+        var params = customer.statis.ap + '=' + aps + '&' + customer.statis.apd + '=' + pps;
 
-        var send = function () {
-            var aps = customer.ids.join(',');// 广告id
-            var pps = customer.place.ids.join(',');// 广告位id
-            var params = '';
+        callback = callback || function () {};
 
-            if (customer.ids.length >= customer.place.ids.length) {
-                isRecord = true;
-                params = customer.statis.ap + '=' + aps + '&' + customer.statis.apd + '=' + pps;
-                getScript(customer.statis.url + '?' + params);
-            } else {
-                timer = setTimeout(function () {
-                    if (isRecord || !count) {
-                        clearTimeout(timer);
-                        return;
-                    }
-
-                    count--;
-                    send();
-                }, 500);
-            }
-        };
-
-        send();
+        /**
+         * *****加载外链js******
+         * 这里加载一个js，但并不需要执行里面的js代码，
+         * 仅仅是一个http请求，用于记录广告的展示数量，本质上这个并不是js。
+         * 服务提供商是我们自己（广州市家庭医生在线信息有限公司）
+         */
+        getScript(customer.statis.url + '?' + params, {
+            success: callback,
+            error: callback
+        });
     }
 
     // 加载js
+    // 这个只是加载外链js的执行函数，具体调用不在这里，在调用的地方有说明。
     function getScript(url, options) {
         var head = document.getElementsByTagName('head')[0];
         var js = document.createElement('script');
@@ -851,28 +907,29 @@ define(function (require) {
         return xhr;
     }
 
-    // 执行js代码
+    // 运行广告代码
     function execScript(str, context) {
-        var script = document.createElement('script');
-        var exp = /<script\b[^>]*>([\s\S]*?)<\/script>/gm;
-        var match = exp.exec(str);
-        var scriptText = '';
+        var tag = /<script\b[^>]*>([\s\S]*?)<\/script>/gm;
+        var buffer = '';
+        var match = tag.exec(str);
+        var js = document.createElement('script');
 
-        if (!match || !match[1]) {
-            return;
+        while (match) {
+            buffer += match[1];
+            match = tag.exec(str);
         }
 
-        scriptText = match[1];
-        script.type = 'text/javascript';
+        if (buffer) {
+            js.type = 'text/javascript';
 
-        try {
-            script.appendChild(document.createTextNode(scriptText));
-        } catch (ex) {
-            script.text = scriptText;
+            try {
+                js.appendChild(document.createTextNode(buffer));
+            } catch (ex) {
+                js.text = buffer;
+            }
+
+            (context || document.body).appendChild(js);
         }
-
-        context = context || document.body;
-        context.appendChild(script);
     }
 
     // 执行css代码
@@ -882,11 +939,15 @@ define(function (require) {
         var match = exp.exec(str);
         var styleText = '';
 
-        if (!match || !match[1]) {
+        if (!match) {
             return;
         }
 
-        styleText = match[1];
+        while (match) {
+            styleText += match[1];
+            match = exp.exec(str);
+        }
+
         style.type = 'text/css';
 
         try {
@@ -899,43 +960,10 @@ define(function (require) {
         context.appendChild(style);
     }
 
-    // 加载并继续js代码
-    function loadJsExec(url, context) {
-        var script = document.createElement('script');
-
-        context = context || document.body;
-        script.type = 'text/javascript';
-        script.src = url;
-        context.appendChild(script);
-    }
-
     // 获取节点集合
     function getElements(className, context) {
-        var list = [];
-
         context = context || document;
-
-        if (context.querySelectorAll) {
-            list = context.querySelectorAll('.' + className);
-        } else if (!!window.jQuery) {
-            jQuery(context).find('.' + className).each(function () {
-                list.push(this);
-            });
-        } else {
-            var arr = [];
-
-            arr = context.getElementsByTagName('div');
-
-            for (var i = 0, len = arr.length; i < len; i++) {
-                var item = arr[i];
-
-                if (item.className.indexOf(className) !== -1) {
-                    list.push(item);
-                }
-            }
-        }
-
-        return list;
+        return context.querySelectorAll('.' + className);
     }
 
     function extend(a, b, deep) {
@@ -1291,10 +1319,57 @@ define(function (require) {
         return null;
     }
 
+    function initData() {
+        var ele = document.getElementById('mip-data');
+
+        if (!ele) {
+            return;
+        }
+
+        var text = decodeURIComponent(ele.value.replace(/\+/g, ' '));
+        execScript('<script>' + text + '</' + 'script>');
+    }
+
+    function main() {
+        var timer = null;
+        var total = 6;
+        var getCidCount = function () {
+            var items = customer.place.items;
+            var i = items.length;
+            var count = 0;
+
+            while (i--) {
+                count += items[i].cids.length;
+            }
+
+            return count;
+        };
+
+        var record = function () {
+            var count = getElements(customer.place.className).length;
+
+            if (!count) {
+                return;
+            }
+
+            total--;
+
+            if (!total || (count === customer.place.items.length && customer.ids.length === getCidCount())) {
+                clearTimeout(timer);
+                recordPv();
+                return;
+            }
+
+            timer = setTimeout(record, 500);
+        };
+
+        record();
+    }
+
     window.CUSTOMER = customer;
     window.addEventListener('DOMContentLoaded', function () {
-        customer.place.append(getElements(customer.place.className));
-        customer.statis.record();
+        initData();
+        setTimeout(main, 0);
     });
 
     var render = function (that, me, domain, token) {
@@ -1360,11 +1435,18 @@ define(function (require) {
         var div = document.createElement('div');
         var url = window.CUSTOMER.getPlaceUrl(id);
 
+        /**
+         * *****加载外链js******
+         * 这里加载的是广告js代码，可根据不同条件定向展示广告
+         * 比如不同地区、不同科室、不同栏目等。
+         * 服务提供商是我们自己（广州市家庭医生在线信息有限公司）
+         * 如果调用的是百度联盟的广告，服务提供商就是百度公司。
+         */
         window.CUSTOMER.getScript(url, {
             success: function () {
                 var mipad = window.CUSTOMER.mipGet(id);
 
-                // 联盟广告
+                // 百度联盟广告
                 if (mipad) {
                     try {
                         div.id = mipad.token;

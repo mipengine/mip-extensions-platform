@@ -104,7 +104,7 @@ define(function (require, exports, module) {
                 me.currentTime = audioElement.currentTime;
                 if (me.nowIndex > 0) {
                     var temp = 0;
-                    for (let index = me.nowIndex - 1; index >= 0; index--) {
+                    for (var index = me.nowIndex - 1; index >= 0; index--) {
                         temp += parseFloat(me.audios[index].time);
                     }
                     me.currentTime = audioElement.currentTime + temp;
