@@ -1,0 +1,139 @@
+ul,
+ol,
+li {
+    list-style: none;
+}
+mip-row-slide {
+    width: 100%;
+    padding: calc(40px / 3) 0;
+    font-size: calc(38px / 3);
+    .album-wrap {
+        width: 100%;
+        padding-left: calc(40px / 3);
+        background: #fff;
+    }
+    .chapter-wrap {
+        width: 100%;
+        max-width: 430px;
+        position: relative;
+        margin-bottom: calc(42px / 3);
+        height: calc(200px / 3);
+        overflow: hidden;
+        .chapter {
+            position: absolute;
+            left: 0;
+            top: 0;
+            min-width: 100%;
+            height: calc(200px / 3);
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: flex-start;
+            align-items: center;
+            .chapter-item {
+                width: calc(445px / 3);
+                height: calc(200px / 3);
+                padding: calc(50px / 3) calc(30px / 3);
+                background: #f8f8f8;
+                border-radius: calc(20px / 3);
+                margin-right: calc(30px / 3);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                p {
+                    text-align: justify;
+                    max-width: calc(390px / 3);
+                    max-height: calc(93px / 3);
+                    overflow: hidden;
+                    line-height: calc(48px / 3);
+                }
+            }
+            .chapter-item.selected {
+                p {
+                    color: #8ab431;
+                }
+            }
+        }
+    }
+    .chapter-content-wrap {
+        width: 100%;
+        // position: relative;
+        .chapter-content {
+            // position: absolute;
+            // top: 0;
+            // left: 0;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            ul.chapter-content-item {
+                width: 100%;
+                display: none;
+                li.section {
+                    width: 100%;
+                    height: calc(195px / 3);
+                    overflow: hidden;
+                    margin-bottom: calc(30px / 3);
+                    a {
+                        display: inline-block;
+                        display: flex;
+                        justify-content: flex-start;
+                        align-items: center;
+                        .section-thumb {
+                            position: relative;
+                            width: calc(315px / 3);
+                            height: calc(195px / 3);
+                            margin-right: calc(21px / 3);
+                            mip-img {
+                                width: calc(315px / 3);
+                                height: calc(195px / 3);
+                            }
+                            .icon-play {
+                                width: calc(60px / 3);
+                                height: calc(60px / 3);
+                                display: inline-block;
+                                position: absolute;
+                                top: 50%;
+                                left: 50%;
+                                transform: translate(-50%, -50%);
+                                background: url(./imgs/icon-play.png);
+                                background-size: contain;
+                            }
+                        }
+                        .section-content {
+                            width: 100%;
+                            .section-title {
+                                max-height: calc(96px / 3);
+                                overflow: hidden;
+                                margin-bottom: calc(21px / 3);
+                            }
+                            .section-time {
+                                .icon-time {
+                                    display: inline-block;
+                                    width: calc(30px / 3);
+                                    height: calc(30px / 3);
+                                    background: url(./imgs/icon-time.png);
+                                    background-size: contain;
+                                }
+                                .dur-time {
+                                    display: inline-block;
+                                    height: calc(30px / 3);
+                                    color: #ccc;
+                                    font-size: calc(36px / 3);
+                                }
+                            }
+                        }
+                    }
+                }
+                li.section.current {
+                    .section-content {
+                        .section-title {
+                            color: #8ab431;
+                        }
+                    }
+                }
+                li:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}

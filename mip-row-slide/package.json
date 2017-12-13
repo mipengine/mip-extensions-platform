@@ -1,0 +1,13 @@
+{
+    "name": "mip-row-slide",
+    "version": "1.0.0",
+    "description": "横向滑动区块组件",
+    "author": {
+        "name": "idongde",
+        "url": "http://m.idongde.com",
+        "email": "751718620@qq.com"
+    },
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

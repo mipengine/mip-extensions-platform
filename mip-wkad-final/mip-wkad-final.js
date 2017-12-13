@@ -2,19 +2,15 @@
 * 寻医问药mip改造 新版广告组件
 * @file 脚本支持
 * @author jqthink@gmail.com
-* @time 2017.09.20
-* @version 1.0.5
+* @time 2017.12.13
+* @version 1.0.6
 */
 define(function (require) {
     var $ = require('zepto');
-    var fetchJsonp = require('fetch-jsonp');
     var customElem = require('customElement').create();
-    var date = '';
     var loadAd = function (elem, className, content, token) {
         var el = document.createElement('div');
         var script = document.createElement('script');
-        var bdAdWrap = null;
-        var bdAd = null;
         var json = null;
         var arr = [];
         var res = content.replace(/\[|\,\s*|\]/g, function (matchs) {
@@ -40,17 +36,6 @@ define(function (require) {
         script.innerHTML = arr.join('');
         $(elem).html('').append(el);
         $(el).append(script);
-        if (date === '21') {
-            bdAdWrap = document.createElement('mip-embed');
-            bdAd = document.createElement('div');
-            $(bdAdWrap).attr('layout', 'responsive');
-            $(bdAdWrap).attr('type', 'baidu-wm-ext');
-            $(bdAdWrap).attr('domain', 'bdmjs.xywy.com');
-            $(bdAdWrap).attr('token', token);
-            $(bdAd).attr('id', token);
-            $(elem).html('').append(bdAdWrap);
-            $(bdAdWrap).append(bdAd);
-        }
     };
     // build 方法，元素插入到文档时执行，仅会执行一次
     customElem.prototype.build = function () {
@@ -58,7 +43,6 @@ define(function (require) {
         var elem = this.element;
         var elStr = $(elem).attr('el');
         var adStr = $(elem).attr('ads');
-        var token = '';
         var domain = document.domain;
         var url = document.URL;
         if (domain === '3g.xywy.com') {
@@ -70,27 +54,6 @@ define(function (require) {
         if (url.indexOf('3g-xywy-com.mipcdn.com') > -1 && url.indexOf('3g.xywy.com') > -1) {
             $('mip-fixed[type="bottom"]').hide();
             $('.mobile-ad-rnk3-panel').removeClass('none');
-        }
-        if (url.indexOf('3g.club.xywy.com') > -1) {
-            fetchJsonp('https://3g.club.xywy.com/zhuanti/ad_status.php', {timeout: 3000})
-            .then(function (res) {
-                return res.json();
-            }).then(function (data) {
-                date = data.date;
-                loadAd(elem, elStr, adStr, token);
-            });
-            if (adStr.indexOf('mobile_doctor_consult') > -1
-                || adStr.indexOf('mobile_doctor_consult_depart') > -1) {
-                token = 'srdhldab53';
-            }
-            else if (adStr.indexOf('mobile_top_float_window_depart') > -1
-                || adStr.indexOf('mobile_top_float_window') > -1) {
-                token = 'xskytryyovz';
-            }
-            else if (adStr.indexOf('mobile_bottom_tw_combine_depart') > -1
-                || adStr.indexOf('mobile_bottom_tw_combine') > -1) {
-                token = 'lgymivofdjn';
-            }
         }
         loadAd(elem, elStr, adStr);
     };
