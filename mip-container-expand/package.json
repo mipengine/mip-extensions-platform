@@ -1,0 +1,13 @@
+{
+    "name": "mip-container-expand",
+    "version": "1.0.0",
+    "description": "在页面中任意位置展开和折叠内容",
+    "author": {
+        "name": "idongde",
+        "url": "http://m.idongde.com",
+        "email": "751718620@qq.com"
+    },
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

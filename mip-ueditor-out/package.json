@@ -1,0 +1,14 @@
+{
+    "name": "mip-ueditor-out",
+    "version": "1.0.0",
+    "description": "将富文本的style以mip-data-style代替，然后将该属性值转化为css样式。",
+    "contributors": [
+        {
+            "name": "xiaojinping",
+            "email": "290762142@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

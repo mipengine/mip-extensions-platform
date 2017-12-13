@@ -94,6 +94,34 @@ define(function (require) {
                 $(ele).find('.f-loading-font').html('没有更多内容了.....');
             }
         });
+
+        // K专用
+        if (/iphone|ipad/i.test(navigator.userAgent)) {
+            $(ele).find('.g-soft-ul-box').prepend($(ele).find('#f-ul-ios')[0]);
+            // 假如苹果设备访问，将苹果内容提到前边去
+        };
+        var knum = Number($(ele).find('.f-list').attr('data-shownum'));
+        var klihei = $(ele).find('.f-list li').height() + 10;
+        $(ele).find('.f-list .f-list-div').each(function (i) {
+            var klinum = $(this).find('ul li').length;
+            if (klinum === 0) {
+                $(this).remove();
+            } else if (klinum < (knum + 1)) {
+                $(this).find('.g-scoll-bottom').remove();
+            } else {
+                $(this).find('.g-newgame-ul').height(klihei * knum);
+            }
+            $(this).find('.g-scoll-bottom').click(function () {
+                var kdhei = $(this).prev('.g-newgame-ul').height();
+                var kdnum = $(this).prev('.g-newgame-ul').find('li').length;
+                if ((kdhei + (knum * klihei)) <= (klihei * kdnum)) {
+                    $(this).prev('.g-newgame-ul').height(kdhei + (knum * klihei));
+                } else {
+                    $(this).prev('.g-newgame-ul').height(klihei * kdnum);
+                    $(this).remove();
+                }
+            });
+        });
     };
     return customElement;
 });

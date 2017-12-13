@@ -13,12 +13,28 @@ define(function (require) {
     customElement.prototype.firstInviewCallback = function () {
         var element = this.element;
         var height = element.getAttribute('height');
+        if (height == null || height === '') {
+            height = 5;
+        }
         var progress = element.getAttribute('progress');
         var color = element.getAttribute('color');
-        var bgcolor = element.getAttribute('bgcolor');
-        element.setAttribute('style', 'width : 100%; height : ' + height + 'px; background-color : ' + bgcolor + '; ');
-        var html = '<div style="z-index : 2; width : ' + progress + '%; height : ';
-        html = height + html + 'px; background-color : ' + color + '; "></div>';
+        if (color == null || color === '') {
+            color = '#3BAFDA';
+        }
+        var bgColor = element.getAttribute('bgcolor');
+        if (bgColor == null || bgColor === '') {
+            bgColor = '#E2E2E2';
+        }
+        var radius = element.getAttribute('radius');
+        if (radius == null || height === '') {
+            radius = 0;
+        }
+        var html = 'width : 100%; height : ' + height + 'px;';
+        html = html + ' background-color : ' + bgColor + '; border-radius: ' + radius + 'px;';
+        element.setAttribute('style', html);
+        html = '<div style="width : ' + progress + '%; height : ';
+        html = html + height + 'px; border-radius: ' + radius + 'px;';
+        html = html + ' background-color : ' + color + '; "></div>';
         element.innerHTML = html;
     };
 

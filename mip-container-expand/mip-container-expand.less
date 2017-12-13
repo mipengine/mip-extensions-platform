@@ -1,0 +1,36 @@
+
+mip-container-expand {
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    display: none;
+    margin-bottom: 10px;
+    .expand-content {
+        height: 500px;
+        width: 100%;
+        text-align: center;
+        background: #ccc;
+    }
+}
+#container-button-wrap {
+    margin-left: auto;
+    height: 50px;
+    position: relative;
+    border: 1px solid #ccc;
+    .active {
+        display: block;
+    }
+}
+#container-expand-button,
+#container-collapse-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 70px;
+    background: #ccc;
+    margin: 10px;
+    display: none;
+}
+.container-collapse {
+    overflow: hidden;
+}

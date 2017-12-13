@@ -50,6 +50,7 @@ mip-cr173-key 组件功能：滚动显示简介，点击显示简介。默认显
         <b id="g-desc-bg"></b>
     </div>
 </section>
+
 <section id="g-other-class">
     <ul class="g-theme-other"> 
         <li>            
@@ -301,8 +302,106 @@ mip-cr173-key 组件功能：滚动显示简介，点击显示简介。默认显
         </div>
     </div>
 </section>
+<b class="f-loading-font" data-clicknum="1">点击加载更多.....</b> 
 
-<b class="f-loading-font" data-clicknum="1">点击加载更多.....</b>
+
+<div class="g-box g-soft-ul-box f-list" data-shownum="5">
+    <div  id="f-ul-az" class="f-list-div">
+        <p class="m-game-title">安卓应用</p>
+        <ul class="g-newgame-ul">
+        
+        <li data-system="Android"><a href="/x/156691" class="g-a-left"><img src="http://pic1.cr173.com/cr173/mb/up/2015-8/201582614162_100_100.png"><p><strong>趣拍-8秒短视频</strong><b>影音播放 / 5.1M / 3.7.2 安卓版</b></p></a><a href="/x/156691" class="g-a-right">下载</a></li><li data-system="Android"><a href="/x/288011" class="g-a-left"><img src="http://pic1.cr173.com/cr173/mb/up/2016-7/20167991393415_100_100.png"><p><strong>qq短视频动态挂件</strong><b>社交聊天 / 33.6M / v1.0</b></p></a><a href="/x/288011" class="g-a-right">下载</a></li><li data-system="Android"><a href="/x/184700" class="g-a-left"><img src="http://pic1.cr173.com/cr173/mb/up/2015-11/2015112011496_100_100.png"><p><strong>卡卡app(短视频平台)</strong><b>影音播放 / 15.3M / V1.5.2安卓版</b></p></a><a href="/x/184700" class="g-a-right">下载</a></li><li data-system="Android"><a href="/x/68125" class="g-a-left"><img src="http://pic1.cr173.com/cr173/mb/up/2016-6/2016621937445720_100_100.png"><p><strong>秒拍安卓版</strong><b>影音播放 / 12.0M / 6.7.50 官方最新版</b></p></a><a href="/x/68125" class="g-a-right">下载</a></li><li data-system="Android"><a href="/x/604990" class="g-a-left"><img src="http://pic1.cr173.com/cr173/mb/up/2017-10/201710101349337516_100_100.png"><p><strong>10秒拍拍app</strong><b>生活服务 / 7.1M / V1.0.0</b></p></a><a href="/x/604990" class="g-a-right">下载</a></li><li data-system="Android"><a href="/x/584043" class="g-a-left"><img src="http://pic.cr173.com/up/2017-9/201796151326094.png" maxhw="100_100"><p><strong>秒拍刷播放拍量软件</strong><b>影音播放 / 627KB / 免费版</b></p></a><a href="/x/584043" class="g-a-right">下载</a></li><li data-system="Android"><a href="/x/542261" class="g-a-left"><img src="http://pic.cr173.com/up/2017-7/2017721151315333.png" maxhw="100_100"><p><strong>秒拍手机app</strong><b>图形图像 / 37.1M / 最新版</b></p></a><a href="/x/542261" class="g-a-right">下载</a></li><li data-system="Android"><a href="/x/240162" class="g-a-left"><img src="http://pic.cr173.com/up/2016-4/2016411147434726.png" maxhw="100_100"><p><strong>LG全景秒拍器管家app</strong><b>智能影音 / 28.5M / 5.2.9 安卓手机版</b></p></a><a href="/x/240162" class="g-a-right">下载</a></li><li data-system="Android"><a href="/x/407475" class="g-a-left"><img src="http://pic.cr173.com/up/2017-1/201712484437241.png" maxhw="100_100"><p><strong>秒拍新春版</strong><b>图形图像 / 45.8M / 2017最新版</b></p></a><a href="/x/407475" class="g-a-right">下载</a></li><li data-system="Android"><a href="/x/354205" class="g-a-left"><img src="http://pic.cr173.com/up/2016-10/20161031115007922.png" maxhw="100_100"><p><strong>红包秒拍软件</strong><b>生活服务 / 2.1M / v1.0.0.1免费版</b></p></a><a href="/x/354205" class="g-a-right">下载</a></li><li data-system="Android"><a href="/x/336853" class="g-a-left"><img src="http://pic.cr173.com/up/2016-9/20169291445256586.png" maxhw="100_100"><p><strong>秒拍刷赞软件</strong><b>安卓其它 / 31M / 6.6.0.1手机版</b></p></a><a href="/x/336853" class="g-a-right">下载</a></li><li data-system="Android"><a href="/x/336840" class="g-a-left"><img src="http://pic.cr173.com/up/2016-9/20169291436162344.png" maxhw="100_100"><p><strong>秒拍刷播放量软件</strong><b>安卓其它 / 31M / 6.6.0.1安卓版</b></p></a><a href="/x/336840" class="g-a-right">下载</a></li><li data-system="Android"><a href="/x/336774" class="g-a-left"><img src="http://pic.cr173.com/up/2016-9/201692912256008.png" maxhw="100_100"><p><strong>秒拍刷热度软件</strong><b>安卓其它 / 31M / 6.6.0.1手机版</b></p></a><a href="/x/336774" class="g-a-right">下载</a></li><li data-system="Android"><a href="/x/336756" class="g-a-left"><img src="http://pic.cr173.com/up/2016-9/201692911459197.png" maxhw="100_100"><p><strong>秒拍刷粉丝软件</strong><b>安卓其它 / 31.1M / 6.6.0.1安卓版</b></p></a><a href="/x/336756" class="g-a-right">下载</a></li><li data-system="Android"><a href="/x/318901" class="g-a-left"><img src="http://pic.cr173.com/up/2016-8/20168301314345183.png" maxhw="100_100"><p><strong>秒拍直播伴侣app</strong><b>影音播放 / 44.7M / 6.5.8.1手机版</b></p></a><a href="/x/318901" class="g-a-right">下载</a></li><li data-system="Android"><a href="/x/318899" class="g-a-left"><img src="http://pic.cr173.com/up/2016-8/20168301310577670.png" maxhw="100_100"><p><strong>秒拍6.0版本</strong><b>影音播放 / 44.7M / 6.0手机版</b></p></a><a href="/x/318899" class="g-a-right">下载</a></li><li data-system="Android"><a href="/x/318898" class="g-a-left"><img src="http://pic.cr173.com/up/2016-8/20168301151175397.png" maxhw="100_100"><p><strong>秒拍4.0旧版本</strong><b>影音播放 / 44.7M / 4.0安卓版</b></p></a><a href="/x/318898" class="g-a-right">下载</a></li><li data-system="Android"><a href="/x/259977" class="g-a-left"><img src="http://pic.cr173.com/up/2016-5/201651295518176.png" maxhw="100_100"><p><strong>秒拍HD版</strong><b>影音播放 / 31.2M / v6.3.5 安卓版</b></p></a><a href="/x/259977" class="g-a-right">下载</a></li><li data-system="Android"><a href="/x/234803" class="g-a-left"><img src="http://pic.cr173.com/up/2016-3/2016322123542195.png" maxhw="100_100"><p><strong>秒拍视频加字幕软件app</strong><b>影音播放 / 14.9M / v1.6.0.0</b></p></a><a href="/x/234803" class="g-a-right">下载</a></li><li data-system="Android"><a href="/x/234791" class="g-a-left"><img src="http://pic.cr173.com/up/2016-3/20163221159237917.png" maxhw="100_100"><p><strong>新浪秒拍视频软件app</strong><b>影音播放 / 17.6M / V3.7.7</b></p></a><a href="/x/234791" class="g-a-right">下载</a></li><li data-system="Android"><a href="/x/234749" class="g-a-left"><img src="http://pic.cr173.com/up/2016-3/2016322113735981.png" maxhw="100_100"><p><strong>秒拍视频app</strong><b>影音播放 / 31.1M / v6.3.2</b></p></a><a href="/x/234749" class="g-a-right">下载</a></li><li data-system="Android"><a href="/x/228816" class="g-a-left"><img src="http://pic.cr173.com/up/2016-3/2016310145116695.png" maxhw="100_100"><p><strong>秒拍最新版app</strong><b>影音播放 / 31.2M / v6.5.8.2</b></p></a><a href="/x/228816" class="g-a-right">下载</a></li><li data-system="Android"><a href="/x/210607" class="g-a-left"><img src="http://pic.cr173.com/up/2016-1/2016126112434.png" maxhw="100_100"><p><strong>秒拍直播</strong><b>影音播放 / 28.6M / 1.1.0 官方安卓版</b></p></a><a href="/x/210607" class="g-a-right">下载</a></li><li data-system="Android"><a href="/x/250405" class="g-a-left"><img src="http://pic.cr173.com/up/2016-4/2016421170236973.jpg" maxhw="100_100"><p><strong>猎豹头牌短视频平台</strong><b>影音播放 / 5.2M / 1.0 官方安卓版</b></p></a><a href="/x/250405" class="g-a-right">下载</a></li>
+        
+      
+         </ul>
+         <p class="g-scoll-bottom m-nopage-android">点击加载更多...</p>
+    </div>
+    <div id="f-ul-ios" class="f-list-div">
+         <p class="m-game-title">苹果应用</p>
+        <ul class="g-newgame-ul" >
+        
+        <li data-system="苹果iOS"><a href="/x/188701" class="g-a-left"><img src="http://pic1.cr173.com/cr173/mb/up/2015-12/2015121112542_100_100.jpg"  /><p><strong>小自播赚钱(短视频分享)</strong><b>影音娱乐 / 13.8M / V1.0.0 官方ios版</b></p></a><a href="/x/188701" class="g-a-right">下载</a></li>
+        
+        <li data-system="苹果iOS"><a href="/x/140460" class="g-a-left"><img src="http://pic1.cr173.com/cr173/mb/up/2016-3/20163221149162658_100_100.png"  /><p><strong>秒拍IOS版</strong><b>ios影音娱乐 / 102M / 6.6.70 iPhone版</b></p></a><a href="/x/140460" class="g-a-right">下载</a></li>
+        
+        <li data-system="苹果iOS"><a href="/x/335468" class="g-a-left"><img src="http://pic1.cr173.com/cr173/mb/up/2016-9/20169271724341210_100_100.png"  /><p><strong>秒拍ipad版</strong><b>ios生活服务 / 91.4M / v6.6.0 官方IOS版</b></p></a><a href="/x/335468" class="g-a-right">下载</a></li>
+        
+        <li data-system="苹果iOS"><a href="/x/234774" class="g-a-left"><img src="http://pic1.cr173.com/cr173/mb/up/2016-3/20163221149162658_100_100.png"  /><p><strong>IOS秒拍视频最新版</strong><b>影音娱乐 / 42.0M / v6.1.0</b></p></a><a href="/x/234774" class="g-a-right">下载</a></li>
+        
+        <li data-system="苹果iOS"><a href="/x/211690" class="g-a-left"><img src="http://pic1.cr173.com/cr173/mb/up/2016-1/201612895318_100_100.jpg"  /><p><strong>秒拍直播app</strong><b>影音娱乐 / 43M / V1.1.0 苹果版</b></p></a><a href="/x/211690" class="g-a-right">下载</a></li>
+        
+        <li data-system="苹果iOS"><a href="/x/234774" class="g-a-left"><img src="http://pic1.cr173.com/cr173/mb/up/2016-3/20163221149162658_100_100.png"  /><p><strong>IOS秒拍视频最新版</strong><b>影音娱乐 / 42.0M / v6.1.0</b></p></a><a href="/x/234774" class="g-a-right">下载</a></li>
+       
+         </ul><p class="g-scoll-bottom m-nopage-ios">点击加载更多...</p>
+        </div>
+        <div id="f-ul-pc" class="f-list-div">
+        <p class="m-game-title">其他应用</p>
+        <ul class="g-newgame-ul" >
+        
+        <li data-system="WinAll"><a href="/x/148108" class="g-a-left"><img src="http://pic1.cr173.com/cr173/mb/up/2015-7/2015728153057_100_100.jpg"  /><p><strong>网络短视频制作互联网科技公司宣介PPT模板</strong><b>商务模板 / 25.1M / </b></p></a><a href="/x/148108" class="g-a-right">下载</a></li>
+        
+        <li data-system="WinXP, Win7, win8"><a href="/x/623434" class="g-a-left"><img src="http://pic.cr173.com/up/2017-11/20171151145293293.gif" maxhw="100_100" /><p><strong>秒拍刷播放小助手</strong><b>桌面工具 / 1.1M / 最新版</b></p></a><a href="/x/623434" class="g-a-right">下载</a></li>
+        
+       
+        
+        
+    </ul>
+    <p class="g-scoll-bottom m-nopage-pc">点击加载更多...</p>
+    </div>
+    <div id="f-ul-a" class="f-list-div">
+    <p class="m-game-title">电脑应用</p>
+        <ul class="g-newgame-ul" >
+        
+
+        
+        
+    </ul>
+    <p class="g-scoll-bottom m-nopage-pc">点击加载更多...</p>
+    </div>
+    <a href="/topic.html" class="m-keyword-title">更多合集<span>全部</span></a>
+    <ul class="g-key-list">        
+        <li>
+            <a href="/k/ydyl">
+                <b><img src="http://pic.cr173.com/up/2017-12/20171212165619618.png" /></b>
+                <strong>悦读悦乐</strong>
+            </a>
+        </li>        
+        <li>
+            <a href="/k/233wx">
+                <b><img src="http://pic.cr173.com/up/2017-12/201712121139441092.png" /></b>
+                <strong>233网校</strong>
+            </a>
+        </li>        
+        <li>
+            <a href="/k/txfyj">
+                <b><img src="http://pic.cr173.com/up/2017-12/201712111724251896.png" /></b>
+                <strong>腾讯翻译君</strong>
+            </a>
+        </li>        
+        <li>
+            <a href="/k/cyxy">
+                <b><img src="http://pic.cr173.com/up/2017-12/201712111712203188.jpg" /></b>
+                <strong>彩云小译</strong>
+            </a>
+        </li>        
+        <li>
+            <a href="/k/kdtkky">
+                <b><img src="http://pic.cr173.com/up/2017-12/201712111450586017.jpg" /></b>
+                <strong>口袋题库考研</strong>
+            </a>
+        </li>        
+        <li>
+            <a href="/k/huatuedu">
+                <b><img src="http://pic.cr173.com/up/2017-12/20171211925452044.jpg" /></b>
+                <strong>华图教育</strong>
+            </a>
+        </li>        
+    </ul>
+</div>
+
+
+
+
 <div class="g-foot-nav">
     <ul class="g-foot-nav-ul">
         <li><a href="/topranknew.html">最新游戏</a></li>
@@ -314,6 +413,7 @@ mip-cr173-key 组件功能：滚动显示简介，点击显示简介。默认显
 <footer>
     <a href="/webmap.html">网站地图</a> | <a href="http://www.cr173.com/?m">访问电脑版</a>
 </footer>
+
 
 
 

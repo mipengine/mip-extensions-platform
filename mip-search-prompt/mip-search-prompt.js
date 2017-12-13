@@ -67,11 +67,13 @@ define(function (require) {
                 json = validData = processData(json);
                 if (!validData || !json.data.length) {
                     util.css(ddiv, 'display', 'none');
+                    util.css(opts.elementC, 'z-index', -1);
                     return false;
                 }
                 render(parent, json, ddiv, opts);
                 parent.focus();
                 util.css(ddiv, 'display', 'block');
+                util.css(opts.elementC, 'z-index', 9998);
             };
 
             var getData = function (word, parent, callback, ddiv, opts) {
@@ -141,6 +143,7 @@ define(function (require) {
 
                 if (word === '') {
                     util.css(dropDiv, 'display', 'none');
+                    util.css(data.options.elementC, 'z-index', -1);
                 }
 
                 if (word && word === this.getAttribute('alt')) {
@@ -154,12 +157,14 @@ define(function (require) {
                 var word = this.value.trim();
                 if (word && word === this.getAttribute('alt') || util.css(dropDiv, 'display') !== 'none') {
                     util.css(dropDiv, 'display', 'block');
+                    util.css(data.options.elementC, 'z-index', 9998);
                     return;
                 }
                 getData(word, this, refreshDropDiv, dropDiv, options);
             });
             data.options.elementC.addEventListener('click', function () {
                 util.css(dropDiv, 'display', 'none');
+                util.css(data.options.elementC, 'z-index', -1);
                 return true;
             });
             data.options.elementB.addEventListener('click', function () {
