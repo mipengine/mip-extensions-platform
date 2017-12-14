@@ -1,0 +1,14 @@
+{
+    "name": "mip-jia-house-style",
+    "version": "1.0.0",
+    "description": "齐家房屋格局选择",
+    "contributors": [
+        {
+            "name": "zlj",
+            "email": "zhenglijun@qeeka.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

@@ -1,0 +1,140 @@
+/**
+ * @file mip-jia-city-select样式文件
+ */
+
+mip-jia-city-select {
+    // TODO
+}
+.popup-maskEdit {
+    position: fixed;
+    z-index: 99999;
+    top: 50%;
+    left: 50%;
+    max-width: 80%;
+    padding: .06rem .16rem;
+    line-height: .24rem;
+    text-align: center;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, .85);
+    font-size: .12rem;
+    color: #fff;
+    border-radius: .06rem;
+    white-space: nowrap;
+}
+.pop_mask,
+.popmask {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 97;
+    background: rgba(0, 0, 0, .5);
+}
+
+.area-select-box {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    box-sizing: border-box;
+    max-width: 640px;
+    left: 50%;
+    -webkit-transform: translate3d(100%, 0, 0);
+    -moz-transform: translate3d(100%, 0, 0);
+    -webkit-transition: all .5s ease-out;
+    -moz-transition: all .5s ease-out;
+    font-size: .124rem;
+    z-index: 102;
+}
+
+.area-select-box.slideLeft {
+    -webkit-transition: all .5s ease-out;
+    -moz-transition: all .5s ease-out;
+    -webkit-transform: translate3d(-50%, 0, 0);
+    -moz-transform: translate3d(-50%, 0, 0);
+}
+
+.sub-more-classify {
+    background: #fff;
+    width: 68.75%;
+    height: 100%;
+    margin-left: 32.25%;
+}
+
+.area-select-box .province-box {
+    width: 49%;
+    height: 100%;
+    background: #fff;
+    float: left;
+}
+
+.area-select-box .province-box .swiper-a,
+.area-select-box .city-box .swiper-a {
+    display: block;
+    height: .35rem;
+    line-height: .35rem;
+    padding-right: .05rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-left: .3rem;
+    text-align: left;
+    cursor: pointer;
+}
+
+.area-select-box .city-box .swiper-a {
+    padding-left: .32rem;
+}
+
+.area-select-box .province-box .swiper-a .first_letter {
+    margin-right: .05rem;
+}
+
+.area-select-box .province-box li.cur {
+    background: #f8f8f8;
+}
+
+.area-select-box .province-box li.cur .swiper-a,
+.area-select-box .city-box li.cur .swiper-a {
+    color: #d00;
+}
+
+.area-select-box .city-box {
+    width: 51%;
+    height: 100%;
+    float: left;
+    background: #f8f8f8;
+}
+
+.area-select-box .city-box .classify-xh {
+    display: none;
+}
+
+.area-select-box .city-box .classify-xh.cur {
+    display: block;
+}
+
+.area-layer {
+    display: none;
+    width: 100%;
+    height: 100%;
+    max-width: 640px;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform:translateX(-50%)!important;
+    -webkit-transform: translateX(-50%)!important;
+    overflow: hidden;
+    z-index: 100;
+    background: rgba(0, 0, 0, .4);
+}
+.popup-mask.show {
+    display: block!important;
+    opacity: 1!important;
+}
