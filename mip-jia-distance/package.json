@@ -1,7 +1,7 @@
 {
     "name": "mip-jia-distance",
-    "version": "1.0.1",
-    "description": "获取用户与目标地点的距离",
+    "version": "1.0.2",
+    "description": "在地图中心显示店铺位置并计算用户与店铺距离",
     "contributors": [
         {
             "name": "ll",
