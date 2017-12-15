@@ -33,7 +33,7 @@ define(function (require) {
         if (hasMipSemiFixed) {
             // 当选项卡吸顶的时候，因为mip-semi-fixed组件会复制一个tab，造成吸顶的时候没法点击
             // 因此采用事件代理的形式
-            $(document).on('click', '[data-panel]', function () {
+            $(document).on('click', 'mip-semi-fixed [data-panel]', function () {
                 var panel = this.dataset.panel;
                 var panelElm = ele.querySelector('div[panel="' + panel + '"]');
                 var panelSib = siblings(panelElm);

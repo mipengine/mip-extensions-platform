@@ -230,7 +230,7 @@ define(function (require) {
         }, false);
 
         save.addEventListener('click', function () {
-            toast.call(self, '请使用手机截屏功能');
+            toast.call(couponLayer, '请使用手机截屏功能');
         });
 
         couponLayer.addEventListener('touchmove', canselTouchmove);

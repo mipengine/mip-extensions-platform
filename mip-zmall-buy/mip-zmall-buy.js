@@ -156,7 +156,7 @@ define(function (require) {
         sub.addEventListener('click', function (evt) {
             if (SUITNUM !== '' && buyBtn.classList.contains('suction-buy__none') === false) {
                 if (parseInt(showNum.value, 10) <= 1) {
-                    toast.call(that.element, '所选商品数量不能为0');
+                    toast.call(that.elementClone, '所选商品数量不能为0');
                     return;
                 }
                 showNum.value = showNum.value - 1;
@@ -168,7 +168,7 @@ define(function (require) {
         add.addEventListener('click', function (evt) {
             if (SUITNUM !== '' && buyBtn.classList.contains('suction-buy__none') === false) {
                 if (parseInt(showNum.value, 10) >= parseInt(SUITNUM, 10)) {
-                    toast.call(that.element, '所选商品数量不能超过限购数量');
+                    toast.call(that.elementClone, '所选商品数量不能超过限购数量');
                     return;
                 }
 
@@ -832,19 +832,19 @@ define(function (require) {
             }
 
             if (obj.productTypeId === undefined) {
-                toast.call(that.element, '请选择内存容量');
+                toast.call(that.elementClone, '请选择内存容量');
                 return false;
             }
             else if (obj.saleTypeId === undefined) {
-                toast.call(that.element, '请选择购买方式');
+                toast.call(that.elementClone, '请选择购买方式');
                 return false;
             }
             else if (obj.colorTypeId === undefined) {
-                toast.call(that.element, '请选择商品颜色');
+                toast.call(that.elementClone, '请选择商品颜色');
                 return false;
             }
             else if (obj.suitTypeId === undefined) {
-                toast.call(that.element, '请选择商品套装');
+                toast.call(that.elementClone, '请选择商品套装');
                 return false;
             }
         });

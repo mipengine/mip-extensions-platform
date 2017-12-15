@@ -134,6 +134,7 @@ define(function (require) {
         }
         else {
             dom.innerHTML = '<p>' + address + '</p><span>距您约' + text + '</span>';
+            dom.classList.add('mip-fixed-adress-show');
         }
     };
 

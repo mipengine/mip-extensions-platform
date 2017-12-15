@@ -73,9 +73,11 @@ define(function (require) {
 
             // 关闭
             dom.closeBtn.addEventListener('click', function () {
-                dom.panel.classList.remove('mip-zmall-reply-fixed-show');
                 self.resetForm(dom);
+                dom.textarea.blur();
+                dom.panel.classList.remove('mip-zmall-reply-fixed-show');
             });
+
 
             // 回复
             dom.replyBtn.addEventListener('click', function () {
@@ -95,7 +97,7 @@ define(function (require) {
                         dataType: 'json',
                         success: function (res) {
                             if (res.flag === 0) {
-                                toast.call(mipElement, res.info);
+                                toast.call(dom.panel, res.info);
                                 dom.panel.classList.remove('mip-zmall-reply-fixed-show');
                                 self.resetForm(dom);
                             }
