@@ -45,10 +45,60 @@ define(function (require) {
         }, duration);
     }
 
+    /**
+     * 加密手机号
+     *
+     * @class
+     * @param {string} phone 手机号
+     * @param {string} key 加密key
+     */
+    function mobileEncrypt(phone, key) {
+        /* global JSEncryptExports */
+        var JSEncrypt = new JSEncryptExports.JSEncrypt();
+        JSEncrypt.setKey(key);
+
+        // base64编码在传输到后端的时候，+会变成空格，因此替换掉
+        var ep = JSEncrypt.encrypt(phone).replace(/\+/g, '%2B');
+
+        return ep;
+    }
+
+    /**
+     * 加密手机号
+     *
+     * @class
+     * @param {string} url 获取rsaPubKey接口地址
+     * @return {Object}  返回rsaPubKey
+     */
+    function getRsaPubKey(url) {
+        var promise = new Promise(function (resolve, reject) {
+            fetch(url, {
+                mode: 'cors',
+                method: 'get',
+                credentials: 'include'
+            }).then(function (res) {
+                if (res.ok) {
+                    resolve(res);
+                }
+                else {
+                    reject(new Error(this.statusText));
+                }
+            }).catch(function (err) {
+                console.log('Fetch错误:' + err);
+            });
+        });
+        return promise;
+    }
+
     customElement.prototype.build = function () {
         var ele = this.element;
         /* global MIP */
         MIP.prerenderElement(ele);
+
+        // 加密依赖
+        var scriptDom = document.createElement('script');
+        scriptDom.src = '//mued2.jia.com/js/mobile/jsencrypt.js';
+        document.body.appendChild(scriptDom);
     };
 
     /**
@@ -113,7 +163,7 @@ define(function (require) {
 
 
 
-        // 发起请求
+        // 请求成功
         function successFn(res) {
             res.json().then(function (res) {
                 if (res.code === 1) {
@@ -128,23 +178,14 @@ define(function (require) {
                 }
             });
         }
-        $(ele).find('.btn').click(function () {
-            var tel = $(ele).find('input[type="tel"]');
 
-            var datas = params['request-data'];
-            if (tel.length) {
-                if (!regPhone.test(tel.val())) {
-                    tipMask('请输入正确的手机号~');
-                    return;
-                }
-                datas.mobileNumber = tel.val();
-            }
-            $('.loading-icon').css('display', 'block');
-            fetch(params['request-url'], {
+        // 发起请求
+        function postApply(url, data) {
+            fetch(url, {
                 mode: 'cors',
                 method: 'post',
                 headers: {'Content-type': 'application/json'},
-                body: JSON.stringify(datas),
+                body: JSON.stringify(data),
                 credentials: 'include'
             }).then(function (res) {
                 $('.loading-icon').css('display', 'none');
@@ -158,6 +199,35 @@ define(function (require) {
                 $('.loading-icon').css('display', 'none');
                 console.log('Fetch错误:' + err);
             });
+        }
+
+        // 提交信息
+        $(ele).find('.btn').click(function () {
+            var tel = $(ele).find('input[type="tel"]');
+
+            var datas = params['request-data'];
+            if (tel.length) {
+                if (!regPhone.test(tel.val())) {
+                    tipMask('请输入正确的手机号~');
+                    return;
+                }
+                datas.phone = tel.val();
+            }
+
+            if (datas.phone && params['key-url']) {
+                getRsaPubKey(params['key-url']).then(function (res) {
+                    res.text().then(function (key) {
+                        datas.phone = mobileEncrypt(datas.phone, key);
+                    }).then(function () {
+                        postApply(params['request-url'], datas);
+                    });
+                });
+            } else {
+                postApply(params['request-url'], datas);
+            }
+
+            $('.loading-icon').css('display', 'block');
+
         });
 
 

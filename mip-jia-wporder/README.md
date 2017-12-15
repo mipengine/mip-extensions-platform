@@ -13,7 +13,7 @@ mip-jia-wporder 组件说明
 ### 基本用法
 ```html
 <mip-jia-wporder
-	data-request-params="{'order-typ': 0, 'order-money': '10', 'request-url': 'http://qa.m.jia.com/wangpu/product/reservation/add', 'request-data': {'productId': '819', 'shopId': '64935', 'sourceReferrer': ''}}">
+	data-request-params="{'order-typ': 0, 'order-money': '10', 'request-url': 'http://qa.m.jia.com/wangpu/product/reservation/add', 'request-data': {'productId': '819', 'shopId': '64935', 'sourceReferrer': ''}, 'key-url': '//qa.m.jia.com/wangpu/encrypt/mobile/public-key/base64'}}">
 	<div class="order">	
 		<span class="small-txt time-area" data-time="2017/12/10 12:22:00"><em>xx天xx时xx分</em>后结束</span>
 		<span class="big-txt">免费预约</span>
@@ -46,6 +46,12 @@ mip-jia-wporder 组件说明
 说明：接口请求参数
 必选项：是
 类型：json
+
+### key-url
+
+说明：加密key
+必选项：是
+类型：string
 
 
 ## 注意事项
