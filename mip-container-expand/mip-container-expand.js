@@ -91,7 +91,9 @@ define(function (require) {
                 $(node).show();
                 $(node).animate({
                     height: ctHeight
-                }, 300, 'swing');
+                }, 300, 'swing', function () {
+                    $(node).removeAttr('style');
+                });
             });
             ctHeightList = [];
             continueVideo();
@@ -109,6 +111,7 @@ define(function (require) {
             if (videoClass) {
                 var video = $(document.getElementsByClassName(videoClass)).find('video')[0];
                 video.play();
+                $('.video-play-button').hide();
             }
         }
     };

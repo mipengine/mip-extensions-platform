@@ -1,0 +1,14 @@
+{
+    "name": "mip-pcgroup-counter",
+    "version": "1.0.0",
+    "description": "太平洋网络通用计数器组件",
+    "contributors": [
+        {
+            "name": "yusion2008",
+            "email": "xieyongshuang@pconline.com.cn"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
