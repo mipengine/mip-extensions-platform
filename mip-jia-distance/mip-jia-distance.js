@@ -6,7 +6,7 @@
 define(function (require) {
 
     var customElement = require('customElement').create();
-    var MAPURL = 'https://api.map.baidu.com/getscript?';
+    var MAPURL = 'https://api.map.baidu.com/api?';
     var TYPE = 'script[type="application/json"]';
     var baiduMapApiLoaded = false;
 
@@ -42,7 +42,8 @@ define(function (require) {
         var pObj = {
             v: cf.version || '2.0',
             ak: cf.ak || '',
-            t: new Date().getTime()
+            t: new Date().getTime(),
+            callback: this.getCb()
         };
         for (var key in pObj) {
             if (pObj.hasOwnProperty(key)) {
@@ -50,6 +51,16 @@ define(function (require) {
             }
         }
         this.mapUrl = MAPURL + pArray.join('&');
+    };
+
+    /**
+     * 绑定全局 callback 函数，并返回回调名称
+     *
+     * @return {string} 回调名称
+     */
+    BaiduMap.prototype.getCb = function () {
+        window.mapCallback = this.handleResult.bind(this);
+        return 'mapCallback';
     };
 
     /**
@@ -70,6 +81,15 @@ define(function (require) {
     };
 
     /**
+     * 处理请求返回后的结果，之后扩展逻辑均在该方法中实现
+     *
+     */
+    BaiduMap.prototype.handleResult = function () {
+        /* global BMap */
+        this.map = new BMap.Map(this.ele);
+    };
+
+    /**
      * 根据两点的经纬度计算出距离
      *
      */
@@ -77,7 +97,7 @@ define(function (require) {
         var selF = this;
 
         /* global BMap */
-        this.map = new window.BMap.Map(this.ele);
+        this.map = new BMap.Map(this.ele);
 
         var datas = {
             cp: {
@@ -150,15 +170,15 @@ define(function (require) {
         var selF = this;
 
         /* global BMap */
-        selF.map = new window.BMap.Map(selF.ele);
+        selF.map = new BMap.Map(selF.ele);
 
         selF.getTargetPosition().then(function (target) {
             if (target && target.point)
             {
-                var point = new window.BMap.Point(target.point.lng, target.point.lat);
+                var point = new BMap.Point(target.point.lng, target.point.lat);
                 selF.map.centerAndZoom(point, selF.config.zoom || 18);
                 selF.map.disableDragging();
-                var marker = new window.BMap.Marker(point);
+                var marker = new BMap.Marker(point);
                 selF.map.addOverlay(marker);
             }
         }, function () {
@@ -189,7 +209,7 @@ define(function (require) {
     BaiduMap.prototype.getCurPosition = function () {
 
         /* global BMap */
-        var geolocation = new window.BMap.Geolocation();
+        var geolocation = new BMap.Geolocation();
 
         return new Promise(function (resolve, reject) {
             geolocation.getCurrentPosition(function (r) {
@@ -212,7 +232,7 @@ define(function (require) {
         var selF = this;
 
         /* global BMap */
-        var localSearch = new window.BMap.LocalSearch(this.map);
+        var localSearch = new BMap.LocalSearch(this.map);
 
         return new Promise(function (resolve, reject) {
             localSearch.setSearchCompleteCallback(function (res) {

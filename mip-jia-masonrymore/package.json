@@ -1,0 +1,14 @@
+{
+    "name": "mip-jia-masonrymore",
+    "version": "1.0.0",
+    "description": "齐家下拉加载更多",
+    "contributors": [
+        {
+            "name": "zlj",
+            "email": "zhenglijun@qeeka.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
