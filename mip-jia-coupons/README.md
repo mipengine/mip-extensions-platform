@@ -15,31 +15,37 @@ mip-jia-coupons 组件说明
 <mip-jia-coupons>
     <div class="btn">一键领取所有优惠</div>
     <script type="application/json" discount-coupon id="discount-coupon">
-        {   
-            "url": "http://qa.m.jia.com/wangpu/api/promotion/mip-obtain",
-            "parms": {
-                "shopId": "292",
-                "pomotionIds": [1234, 2234, 9158],
-                "source": ""
+    {
+        "url": "//qa.m.jia.com/wangpu/api/promotion/mip-obtain",
+        "map-url": "//qa.m.jia.com/wangpu/shop/map/64868",
+        "parms": {
+            "shopId": 64868,
+            "promotionIds": [101712, 101713, 101714, 101716],
+            "source": "BaiduMIP"
+        },
+        "coupons": [
+            { 
+                "pomotionId": 101712, 
+                "type": "优惠券",
+                "desc": "满3000减50" 
             },
-            "coupons": [
-                {
-                    "pomotionId": "1234",
-                    "money": "10",
-                    "desc": "满100使用"
-                },
-                {
-                    "pomotionId": "2234",
-                    "money": "100",
-                    "desc": "满1000使用"
-                },
-                {
-                    "pomotionId": "9158",
-                    "money": "100",
-                    "desc": "满1000使用"
-                }
-            ]
-        }
+            { 
+                "pomotionId": 101713, 
+                "type": "优惠券",
+                "desc": "满3000减50" 
+            },
+            { 
+                "pomotionId": 101714, 
+                "type": "优惠券",
+                "desc": "满3000减50" 
+            },
+            { 
+                "pomotionId": 101716, 
+                "type": "优惠券",
+                "desc": "满3000减50" 
+            }
+        ]
+    }
     </script>
 </mip-jia-coupons>
 ```
@@ -50,6 +56,12 @@ mip-jia-coupons 组件说明
 
 说明：领券接口地址
 必选项：是
+类型：string
+
+### map-url
+
+说明：查看地图链接
+必选项：否
 类型：string
 
 ### shopId

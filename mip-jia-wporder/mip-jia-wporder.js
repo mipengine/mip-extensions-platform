@@ -30,15 +30,15 @@ define(function (require) {
     }
 
     // 提示层
+    var tipMaskTimer = null;
     function tipMask(msg, duration) {
-        clearTimeout(window.tipMaskTimer);
-        window.tipMaskTimer = null;
+        clearTimeout(tipMaskTimer);
         duration = duration || 2000;
         if ($('.popup-maskEdit').length > 0) {
             $('.popup-maskEdit').remove();
         }
         $('body').append('<div class="popup-maskEdit">' + msg + '</div>');
-        window.tipMaskTimer = setTimeout(function () {
+        tipMaskTimer = setTimeout(function () {
             $('.popup-maskEdit').fadeOut(100, function () {
                 $(this).remove();
             });
@@ -115,47 +115,35 @@ define(function (require) {
         // 加载不同的弹层
         if (!!type) {
             var str = [
-                '<div class="pay-in-advance fixed-pop">',
-                '    <div class="pop-content">',
-                '        <span class="close-btn"></span>',
-                '        <div class="pop-detail">',
-                '            <div class="desc">',
-                '                <p>需支付订金：<span>￥' + params['order-money'] + '</span></p>',
-                '                <span class="btn">去支付</span>',
-                '            </div>',
-                '        </div>',
-                '    </div>',
-                '</div><div class="pop-mask"></div>'
+                '<mip-fixed type="bottom" class="bottom-base wp-order-pop pay-in-advance">',
+                '    <span class="close-btn"></span>',
+                '    <p>需支付订金：<span>' + params['order-money'] + '</span></p>',
+                '    <span class="btn">去支付</span>',
+                '</mip-fixed><div class="pop-mask"></div>'
             ].join('');
         } else {
             var str = [
-                '<div class="make-an-appointment fixed-pop">',
-                '    <div class="pop-content">',
-                '        <span class="close-btn"></span>',
-                '        <div class="pop-detail">',
-                '            <div class="desc">',
-                '                <h5>免费预约，锁定爆款特价</h5>',
-                '                <div class="input-box">',
-                '                    <input type="tel" maxlength="11" placeholder="输入手机号">',
-                '                </div>',
-                '                <span class="btn">立即预约</span>',
-                '            </div>',
-                '        </div>',
+                '<mip-fixed type="bottom" class="bottom-base wp-order-pop make-an-appointment">',
+                '    <span class="close-btn"></span>',
+                '    <h3>免费预约，锁定爆款特价</h3>',
+                '    <div class="input-box">',
+                '        <input type="tel" maxlength="11" placeholder="输入手机号">',
                 '    </div>',
-                '</div><div class="pop-mask"></div>'
+                '    <span class="btn">立即预约</span>',
+                '</mip-fixed><div class="pop-mask"></div>'
             ].join('');
         }
         str && $(ele).append(str);
 
         // 显示弹层
         $(ele).find('.order').click(function () {
-            $(ele).find('.fixed-pop').css('display', 'block');
+            $(ele).find('.wp-order-pop').css('display', 'block');
             $(ele).find('.pop-mask').css('display', 'block');
         });
 
         // 关闭弹层
         function closePop() {
-            $(ele).find('.fixed-pop, .pop-mask').css({'display': 'none'});
+            $(ele).find('.wp-order-pop, .pop-mask').css({'display': 'none'});
         }
         $(ele).find('.close-btn, .pop-mask').click(function () {
             closePop();

@@ -8,7 +8,93 @@ define(function (require) {
     var customElement = require('customElement').create();
     var $ = require('zepto');
 
+    // 提示层
+    var tipMaskTimer = null;
+
+    function tipMask(msg, duration) {
+        clearTimeout(tipMaskTimer);
+        duration = duration || 2000;
+        if ($('.popup-maskEdit').length > 0) {
+            $('.popup-maskEdit').remove();
+        }
+        $('body').append('<div class="popup-maskEdit">' + msg + '</div>');
+        tipMaskTimer = setTimeout(function () {
+            $('.popup-maskEdit').fadeOut(100, function () {
+                $(this).remove();
+            });
+        }, duration);
+    }
+
+    // 标题
+    function setTitle(data) {
+        var str = '';
+        var code = data[0].promotionCodeList[0];
+        if (data.length === 1 && code) {
+            str = '专属优惠码：' + code;
+        } else {
+            str = '专属优惠码';
+        }
+        return str;
+    }
+
+    // 二维码
+    function setCode(data) {
+        var str = '';
+        var code = data[0].promotionCodeList[0];
+        if (data.length === 1 && code) {
+            str = '<div class="code-desc" data-text="' + data[0].promotionCodeList[0] + '"></div>';
+        }
+        return str;
+    }
+
+    // 优惠券
+    function setCoupons(data) {
+        var str = '';
+        if (data && data.length) {
+            for (var i = 0; i < data.length; i++) {
+                str += '<li data-id="' + data[i].pomotionId + '">';
+                str += '<span class="label">' + data[i].type + '</span>';
+                str += '<span class="text">' + data[i].desc + '</span>';
+                str += '<span class="num"></span></li>';
+            }
+        }
+        return str;
+    }
+
+    // 优惠券不同状态的显示内容不同
+    function setState(ele, data) {
+        var str = '';
+        if (data && data.length) {
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].promotionObtainResult !== 'SUCCESS') {
+                    ele.find('li[data-id="' + data[i].promotionId + '"]').addClass('fail');
+                } else {
+                    if (data[i].promotionCodeList && data[i].promotionCodeList.length) {
+                        str = '券码：' + data[i].promotionCodeList[0];
+                        ele.find('li[data-id="' + data[i].promotionId + '"]').find('.num').html('').append(str);
+                    }
+                }
+            }
+        }
+    }
+
+
+    /**
+     * 需提前加载js，所以使用build
+     */
+    customElement.prototype.build = function () {
+        // 根据文本内容绘制二维码
+        var scriptDom = document.createElement('script');
+        scriptDom.src = '//mued2.jia.com/js/mobile/qrcode.min.js';
+        document.body.appendChild(scriptDom);
+    };
+
+    /**
+     * 第一次进入可视区回调，只会执行一次
+     * @return {customElement} 组件
+     */
     customElement.prototype.firstInviewCallback = function () {
+        var selF = this;
         var $ele = $(this.element);
         var couponElement = $ele.find('script[discount-coupon]');
         var enabled = !!couponElement;
@@ -16,112 +102,81 @@ define(function (require) {
             return false;
         }
         var configJson = JSON.parse(couponElement.text());
-        var cnStr = couponStr(configJson.coupons);
         var parms = configJson.parms;
 
 
-        // 提示层
-        function tipMask(msg, duration) {
-            clearTimeout(window.tipMaskTimer);
-            window.tipMaskTimer = null;
-            duration = duration || 2000;
-            if ($('.popup-maskEdit').length > 0) {
-                $('.popup-maskEdit').remove();
-            }
-            $('body').append('<div class="popup-maskEdit">' + msg + '</div>');
-            window.tipMaskTimer = setTimeout(function () {
-                $('.popup-maskEdit').fadeOut(100, function () {
-                    $(this).remove();
-                });
-            }, duration);
-        }
-
-        // 拼接优惠券html
-        function couponStr(data) {
-            var str = '';
-            if (data && data.length) {
-                str = '<ul class="coupon-list">';
-                for (var i = 0; i < data.length; i++) {
-                    str += '<li data-id=' + data[i].pomotionId + '><i></i><p><em>￥</em>';
-                    str += data[i].money + '</p><span>' + data[i].desc + '</span></li>';
-                }
-                str += '</ul>';
-            }
-            return str;
-        }
-
-
-        // 领取优惠券html
+        // 拼接优惠券领取成功的html
+        var couponStr = setCoupons(configJson.coupons);
         var popStr = [
-            '<div class="get-coupon-pop fixed-pop">',
+            '<div class="get-coupon-success fixed-pop">',
             '    <div class="pop-content">',
-            '        <span class="close-btn"></span>',
+            '        <span class="bottom-close-btn"></span>',
             '        <div class="pop-detail">',
-            '            <h3>一键领取所有优惠</h3>',
-            cnStr,
-            '            <div class="form-area">',
-            '                <span class="apply-btn">立即领取</span>',
+            '            <h3>到店优惠领取成功</h3>',
+            '            <div class="details">',
+            '                <h4></h4>',
+            '                <div class="code">',
+            '                </div>',
+            '                <ul class="cps">',
+            couponStr,
+            '                </ul>',
+            '                <div class="others">',
+            '                    <div class="btns">',
+            '                        <span class="save">保存截图</span>',
+            '                        <span class="way">查看地图</span>',
+            '                    </div>',
+            '                    <p>· 部分优惠券已领完，感谢您的支持！</p>',
+            '                    <p>· 截图保存此页面，到店出示，享受专属优惠。</p>',
+            '                    <p>· 优惠详细使用规则请到店咨询商家。</p>',
+            '                </div>',
             '            </div>',
             '        </div>',
             '    </div>',
-            '</div><div class="pop-mask"></div>'
+            '</div>',
+            '<div class="pop-mask"></div>'
         ].join('');
 
-
-        // 领取成功html
-        var succStr = [
-            '<div class="fixed-pop get-coupon-success">',
-            '    <div class="pop-content">',
-            '        <span class="close-btn"></span>',
-            '        <div class="pop-detail">',
-            '            <h3><i></i><p>优惠券领取成功！</p></h3>',
-            '            <div class="gray-content">',
-            '                <h4>已领到优惠券</h4>',
-            cnStr,
-            '                <p class="tip">* 部分优惠券已领完，感谢您的支持！</p>',
-            '            </div>',
-            '        </div>',
-            '    </div>',
-            '</div>'
-        ].join('');
-
-        $ele.append(succStr, popStr);
+        $ele.append(popStr);
 
 
-        // 显示优惠券弹层
-        $ele.find('.btn').click(function () {
-            $ele.find('.get-coupon-pop, .pop-mask').css('display', 'block');
-        });
 
         // 关闭弹层
-        $ele.find('.fixed-pop .close-btn, .pop-mask').click(function () {
+        $ele.find('.bottom-close-btn, .pop-mask').click(function () {
             $ele.find('.fixed-pop, .pop-mask').css('display', 'none');
         });
 
         // 领取优惠券
         function succCouponState(res) {
-            var oUl = $ele.find('.get-coupon-success');
             res.json().then(function (data) {
                 if (data.statusCode === '0000') {
-                    $ele.find('.get-coupon-pop').css('display', 'none');
-                    var error = 0;
-                    for (var i = 0; i < data.result.length; i++) {
-                        if (data.result[i].promotionObtainResult !== 'SUCCESS') {
-                            error++;
-                            oUl.find('li[data-id="' + data.result[i].promotionId + '"]').addClass('fail');
-                        }
+
+                    // title
+                    var tStr = setTitle(data.result);
+                    $ele.find('h4').html('').append(tStr);
+
+                    // code
+                    var cStr = setCode(data.result);
+                    $ele.find('.code').html('').append(cStr);
+
+                    var cele = selF.element.querySelector('.code-desc');
+                    if (cele) {
+                        var ctext = cele.dataset.text;
+                        /* global QRCode */
+                        new QRCode(cele, ctext);
                     }
-                    if (!!error) {
-                        $ele.find('.get-coupon-success .tip').css('display', 'block');
-                    }
-                    $ele.find('.get-coupon-success').css('display', 'block');
+
+                    // coupons
+                    setState($ele, data.result);
+
+                    $ele.find('.fixed-pop, .pop-mask').css('display', 'block');
                 } else {
                     tipMask(data.msg);
                 }
             });
         }
 
-        $ele.find('.apply-btn').click(function () {
+        // 点击发起请求
+        $ele.find('.btn').click(function () {
             $('.loading-icon').css('display', 'block');
             fetch(configJson.url, {
                 mode: 'cors',
@@ -134,12 +189,23 @@ define(function (require) {
                 if (res.ok) {
                     succCouponState(res);
                 } else {
-                    console.log(res.statusText);
+                    console.log(res.status);
                 }
             }).catch(function (err) {
                 $('.loading-icon').css('display', 'none');
                 console.log('Fetch错误:' + err);
             });
+        });
+
+        // 保存截图
+        $ele.find('.save').click(function () {
+            tipMask('请使用手机截屏功能~');
+        });
+
+        // 查看路线
+        $ele.find('.way').click(function () {
+            $ele.find('.fixed-pop, .pop-mask').css('display', 'none');
+            window.location.href = configJson['map-url'];
         });
 
     };
