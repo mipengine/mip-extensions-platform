@@ -1,0 +1,14 @@
+{
+    "name": "mip-app27",
+    "version": "1.0.0",
+    "description": "m.app27.com",
+    "contributors": [
+        {
+            "name": "kesan2009",
+            "email": "accp_cn@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

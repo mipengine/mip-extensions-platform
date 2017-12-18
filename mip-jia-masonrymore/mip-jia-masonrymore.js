@@ -57,11 +57,15 @@ define(function (require) {
             });
         } else {
             var status = true;
-            var pageCount = 1;
+            var pageCount;
+            if (typeof (datas.params.page_count) !== 'undefined') {
+                pageCount = datas.params.page_count;
+            }
             var pageSize = datas.params.page_size;
             $(window).scroll(function () {
                 // 当前页码数大于总页码则不加载
                 if (datas.params.page_num > pageCount) {
+                    $(datas.loadclass).hide();
                     return false;
                 }
                 var dotHeight = viewPort.getScrollHeight();
@@ -85,8 +89,9 @@ define(function (require) {
                         success: function (data) {
                             if (data.statusCode === '0000') {
                                 $(datas.containerclass).append(data.result);
-                                console.log(data.total, pageSize);
-                                pageCount = parseInt(data.total / pageSize, 10);
+                                if (typeof pageCount === 'undefined' && data.total !== 'undefined') {
+                                    pageCount = parseInt(data.total / pageSize, 10);
+                                }
                                 if (typeof (datas.type) !== 'undefined' && datas.type === 'masonry') {
                                     $(datas.containerclass).masonry().masonry('reload');
                                 }
@@ -94,6 +99,7 @@ define(function (require) {
                                 status = true;
                             } else {
                                 $(element).remove();
+                                $(datas.loadclass).hide();
                             }
                         }
                     });

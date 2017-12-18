@@ -19,7 +19,8 @@ mip-jia-masonrymore 组件说明
             "params":{
                     "tags": 7,
                     "page_num":2,
-                    "page_size":10
+                    "page_size":10,
+                    "page_count":2
              },
             "action":"scroll",
             "containerclass":".list-ul",
