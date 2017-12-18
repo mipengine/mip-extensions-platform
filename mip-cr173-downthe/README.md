@@ -44,8 +44,7 @@ mip-cr173-downthe .搜索框的跳转到站内搜索功能。没有下载地址�
             </ul>
         </div>
         <mip-cr173-popup></mip-cr173-popup>
-    </header>
-</div> <mip-html-tabs tabs-type="Qi_4" tabs-nav="#tab-nav  li" tabs-key="#tab-div div" nav-cur="m-hover">
+    </header>    
       <ul class="g-keyword-btn m-tab-btn" id="tab-nav"><!-- <li class=""><b>回合网游排行榜</b><i></i></li><li class=""><b>修仙</b><i></i></li><li class=""><b>小说改编</b><i></i></li> --></ul>        <!--相关分组-->  
         <div id="tab-div">        
         <div class="g-keyword-cont m-tab-cont">
@@ -101,12 +100,12 @@ mip-cr173-downthe .搜索框的跳转到站内搜索功能。没有下载地址�
         </div>
                 <!--/相关分组-->  
         </div>
-        </mip-html-tabs>   
+          
 
 </mip-cr173-downthe>
 
 
-<script src="https://mipcache.bdstatic.com/static/v1/mip-html-tabs/mip-html-tabs.js"></script>
+
 ```
 
 

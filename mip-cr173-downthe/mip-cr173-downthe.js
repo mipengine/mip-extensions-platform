@@ -27,6 +27,17 @@ define(function (require) {
             };
             $(ele).find('.g-keyword-btn').append(keyName);
         }
+        $(ele).find('#tab-div .m-tab-cont').hide().eq(0).show();
+        // 隐藏并且显示前边的
+        $(ele).find('#tab-nav li').eq(0).addClass('m-hover');
+        // 将第一个按钮加上css
+        $(ele).find('#tab-nav li').click(function () {
+            $(ele).find('#tab-nav li').removeClass('m-hover');
+            $(this).addClass('m-hover');
+            var btnin =  $(this).index();
+            $(ele).find('#tab-div .m-tab-cont').hide();
+            $(ele).find('#tab-div .m-tab-cont').eq(btnin).show();
+        });
         var keyurl = ele.getAttribute('data-sourl');
         if (keyurl !== undefined) {
         // 获取到才执行

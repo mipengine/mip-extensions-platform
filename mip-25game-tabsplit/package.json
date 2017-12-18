@@ -1,0 +1,15 @@
+{
+    "name": "mip-25game-tabsplit",
+    "version": "1.0.0",
+    "description": "字符串分成html标签",
+    "contributors": [
+        {
+            "name": "爱吾游戏",
+            "email": "service@25game.com",
+			"url":"https://www.25game.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

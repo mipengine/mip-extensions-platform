@@ -18,16 +18,15 @@ mip-cr173-key 组件功能：滚动显示简介，点击显示简介。默认显
               <span class="show-more f-hideshow-btn"></span>
             </h4>
             <div class="f-hideshow-cont">
-                <mip-form class="m-soudiv" method="get" url="http://s.cr173.com/cse/search" accept-charset="utf-8">
-                    <input class="search-input" type="text" name="q" placeholder="请输入关键字">
-                    <input class="search-button" type="submit" value="">
-                    <input type="hidden" name="nsid" id="headSearchType" value="1">
-                    <input type="hidden" name="s" value="3444183932313973300">
+               <mip-form class="m-soudiv" url="http://so.cr173.com">
+                    <input class="search-input" type="text" placeholder="请输入关键字">
+                    <p class="search-button"></p>
                 </mip-form>
             </div>
         </section>
     <b class="g-btn" data-num="0"></b>
-</div><div class="g-nav">
+</div>
+<div class="g-nav">
     <ul>
         <li><a href="http://m.cr173.com/">首页</a></li>
         <li><a href="http://m.cr173.com/glist.html">游戏</a></li>
@@ -40,8 +39,7 @@ mip-cr173-key 组件功能：滚动显示简介，点击显示简介。默认显
     </ul>
 </div>
 <mip-cr173-key>
-<section id="main" class="greelink"> 
-    <!--head 图片-->
+<section id="main" class="greelink">
     <div id="head">
         <img src="http://pic.cr173.com/up/2017-12/201712992547974.jpg" alt="广场舞"/><h1>广场舞</h1>
         <div id="content"><div class="g-cont-scroll">广场舞是在手上播放的舞蹈视频教程，在广场舞中可以播放各种高清的广场舞蹈哦，包括2017最全的广场舞动作分解教程，以及适合老年人的广场舞推荐等等，想要跳最新广场舞的用户快来下载广场舞西西专区下载吧</div></div>        
@@ -85,7 +83,7 @@ mip-cr173-key 组件功能：滚动显示简介，点击显示简介。默认显
                 </p>
             </a>
             <a href="/x/187064" class="g-coll-gamedown-right"><b></b>下载</a>
-        </div>     
+        </div>    
     </div>       
     <div class="m-tab-cont" id="m-ios-theme" data-p="1">   
     <div class="g-coll-gamedown">
@@ -277,7 +275,7 @@ mip-cr173-key 组件功能：滚动显示简介，点击显示简介。默认显
         </div>       
         </div>    
         <div class="m-tab-cont" id="m-pc-theme" data-p="1">
-             <div class="g-coll-gamedown">
+             <!-- <div class="g-coll-gamedown">
                 <a href="/x/484231" class="g-coll-gamedown-left">
                     <img src="http://pic1.cr173.com/cr173/mb/up/2017-6/201767173834802_100_100.png" class="m-game-img" >
                     <p>
@@ -298,7 +296,7 @@ mip-cr173-key 组件功能：滚动显示简介，点击显示简介。默认显
                 </p>
             </a>
             <a href="/x/180949" class="g-coll-gamedown-right"><b></b>下载</a>
-        </div>
+        </div> -->
         </div>
     </div>
 </section>

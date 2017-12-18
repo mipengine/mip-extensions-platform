@@ -40,8 +40,8 @@ define(function (require) {
             var tabdivnum = $(this).find('.g-coll-gamedown').length;
             // 获取每个选项卡里面的内容的数量
             if (tabdivnum === 0) {
-                $(ele).find('.g-coll-btn li').eq(i).remove();
-                $(ele).find('.m-tabdivtxt .m-tab-cont').eq(i).remove();
+                $(ele).find('.g-coll-btn').find('li').eq(i).hide();
+                $(this).remove();
             }
             if (tabdivnum < keyshownum) {
             // 假如数量小于指定的数量
@@ -54,18 +54,25 @@ define(function (require) {
 
         });
         // 自用选项卡开始
-        $(ele).find('.m-tab-box .m-tab-cont').hide().eq(0).show();
-        $(ele).find('.m-tab-box .m-tab-btn li').eq(0).addClass('m-hover');
-        $(ele).find('.m-tab-box .m-tab-btn li').click(function () {
-            $(ele).find('.f-loading-font').html('点击加载更多.....');
-            $(ele).find('.m-tab-btn li').removeClass('m-hover');
-            $(this).addClass('m-hover');
-            // 设置文提示
-            var btnin =  $(this).index();
-            console.log(btnin);
-            $(ele).find('.m-tabdivtxt .m-tab-cont').hide();
-            $(ele).find('.m-tabdivtxt .m-tab-cont').eq(btnin).show();
-        });
+        var divnum = $(ele).find('.m-tabdivtxt .m-tab-cont').length;
+        // 获取隐藏无内容后的正确选项卡数量
+        if (divnum <= 1) {
+            $(ele).find('.m-tab-box .m-tab-btn li').addClass('m-hover');
+        } else {
+            $(ele).find('.m-tab-box .m-tab-cont').hide().eq(0).show();
+            // 隐藏并且显示前边的
+            $(ele).find('.m-tab-box .m-tab-btn li').eq(0).addClass('m-hover');
+            // 将第一个按钮加上css
+            $(ele).find('.m-tab-box .m-tab-btn li').click(function () {
+                $(ele).find('.f-loading-font').html('点击加载更多.....');
+                $(ele).find('.m-tab-btn li').removeClass('m-hover');
+                $(this).addClass('m-hover');
+                // 设置文提示
+                var btnin =  $(this).index();
+                $(ele).find('.m-tabdivtxt .m-tab-cont').hide();
+                $(ele).find('.m-tabdivtxt .m-tab-cont').eq(btnin).show();
+            });
+        }
         var waidivheight = $(ele).find('.m-tabdivtxt').height();
         // 获取设置后的高度
         $(ele).find('.f-loading-font').click(function () {
@@ -73,14 +80,11 @@ define(function (require) {
             var btnindex =  $(ele).find('.g-coll-btn li.m-hover').index();
             // 获取选项卡的位置
             var dqtabdiv = $(ele).find('.m-tabdivtxt .m-tab-cont').eq(btnindex);
-            console.log(dqtabdiv);
             // 设置当前的内容div
             var hoverdivheight = dqtabdiv.height();
             // 获取当前高度
             var clicklen = dqtabdiv.find('.g-coll-gamedown').length;
             // 获取点击时，div内容的个数
-            console.log(hoverdivheight);
-            console.log(clicklen * onedivliheight);
             if (hoverdivheight < clicklen * onedivliheight) {
             // 数量大于模版规定的数量
                 if (hoverdivheight + (onedivliheight * keyshownum) < clicklen * onedivliheight) {
