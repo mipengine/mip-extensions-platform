@@ -4,6 +4,9 @@
  */
 define(function (require) {
     var target;
+    var timer;
+    var adId;
+    var rate;
     var customElement = require('customElement').create();
     var bingEvent = function (element, adid) {
         var closeBtn = target.querySelector('.close-btn');
@@ -16,6 +19,28 @@ define(function (require) {
             (window['tmp' + 1 * new Date()] = new Image()).src = pvcode.replace(/\[timestamp\]/i, new Date() * 1);
         }
     };
+    function resizeTimer(wraper) {
+        clearTimeout(timer);
+        timer = setTimeout(function () {
+            change(wraper);
+        }, 30);
+    }
+    function change(wraper) {
+        var viewW;
+        var tar;
+        tar = tar || document.getElementById('ad' + adId + '');
+        if (!tar) {
+            return;
+        }
+        viewW = getWidth(wraper);
+        viewW = (viewW > 750) ? 750 : viewW;
+        tar.width = viewW;
+        tar.height = parseFloat(viewW / rate).toFixed(2);
+    }
+    function getWidth(obj) {
+        var w = obj && (typeof obj.getBoundingClientRect !== 'undefined') && (1 * obj.getBoundingClientRect().width);
+        return (1 * w) || 640;
+    }
     var setLocationAd = function (str) {
         if (str === '') {
             return;
@@ -23,14 +48,33 @@ define(function (require) {
         var data = JSON.parse(str);
         var jsAd = data['jsad'];
         var loc = data['id'];
+        var htmlAd = data['htmlad'];
         target = document.getElementsByClassName(loc)[0];
         if (jsAd) {
             var js = document.createElement('script');
             js.innerHTML = jsAd;
             target.appendChild(js);
         }
-        else {
+        else if (htmlAd) {
             var adId = data['adId'];
+            var size = data['size'];
+            var reg = (/^[^\d]*(\d+)x(\d+).*$|^.*$/);
+            var w = 1 * size.replace(reg, '$1') || 640;
+            var h = 1 * size.replace(reg, '$2') || 100;
+            var ifr = [
+                '<div style="width:100%;margin:0 auto;text-align:center;" id="wrapAd' + adId + '">',
+                '<iframe id="ad' + adId + '" class=' + loc + ' src="' + htmlAd + '" scrolling="no" frameborder="0" ',
+                'width="' + w + '" height="' + h + '" style="display: block; border: 0px; margin: 0px auto;">',
+                '</iframe>',
+                '</div>'];
+            target.innerHTML = ifr.join('');
+            var wraper = document.getElementById('wrapAd' + adId + '');
+            rate = (w / h);
+            window.addEventListener('resize', resizeTimer(wraper), false);
+            resizeTimer(wraper);
+        }
+        else {
+            adId = data['adId'];
             var src = data['src'];
             var pvcode = data['pv'];
             var link = data['link'];
