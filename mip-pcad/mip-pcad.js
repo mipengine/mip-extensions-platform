@@ -1,5 +1,5 @@
 /**
- * @file mip-pcbabyad 组件
+ * @file mip-pcad 组件
  * @author Jesse
  */
 define(function (require) {
@@ -19,23 +19,21 @@ define(function (require) {
             (window['tmp' + 1 * new Date()] = new Image()).src = pvcode.replace(/\[timestamp\]/i, new Date() * 1);
         }
     };
-    function resizeTimer(wraper) {
+    function resizeTimer(wraper, ele) {
         clearTimeout(timer);
         timer = setTimeout(function () {
-            change(wraper);
+            change(wraper, ele);
         }, 30);
     }
-    function change(wraper) {
+    function change(wraper, ele) {
         var viewW;
-        var tar;
-        tar = tar || document.getElementById('ad' + adId + '');
-        if (!tar) {
+        if (!ele) {
             return;
         }
         viewW = getWidth(wraper);
         viewW = (viewW > 750) ? 750 : viewW;
-        tar.width = viewW;
-        tar.height = parseFloat(viewW / rate).toFixed(2);
+        ele.width = viewW;
+        ele.height = parseFloat(viewW / rate).toFixed(2);
     }
     function getWidth(obj) {
         var w = obj && (typeof obj.getBoundingClientRect !== 'undefined') && (1 * obj.getBoundingClientRect().width);
@@ -69,9 +67,10 @@ define(function (require) {
                 '</div>'];
             target.innerHTML = ifr.join('');
             var wraper = document.getElementById('wrapAd' + adId + '');
+            var ele = document.getElementById('ad' + adId + '');
             rate = (w / h);
-            window.addEventListener('resize', resizeTimer(wraper), false);
-            resizeTimer(wraper);
+            window.addEventListener('resize', resizeTimer(wraper, ele), false);
+            resizeTimer(wraper, ele);
         }
         else {
             adId = data['adId'];

@@ -1,0 +1,11 @@
+/**
+ * @file mip-fh-location样式文件
+ */
+
+mip-fh-location, mip-fh-location.mip-fh-location {
+  display: none;
+}
+
+mip-fh-location.mip-fh-location--show, mip-fh-location.mip-fh-location.mip-fh-location--show {
+  display: block;
+}

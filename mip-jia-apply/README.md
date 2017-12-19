@@ -29,7 +29,8 @@ mip-jia-apply 组件说明
                      "city":"city-",//city-area_py(市英文) city-area_cn(市中文) city-city_cn(省中文) city-city_py(省英文)
                      "source":"m-mip",
                      "mobileName":"#mobile",//正则验证的话，在对应元素上写属性validatereg,是否必传属性request,必传错误信息errortxt,验证错误信息regtxt
-                     "attach":"tg"//加密手机号使用,tg or zx
+                     "memo":"[#area]平方,[#style]",
+                     "encrypt":"tg"//加密手机号使用,tg or zx or wp
                  },
                  {"actions_id":"32458"},
                  {"actions_id":"32458"},
@@ -62,6 +63,10 @@ mip-jia-apply 组件说明
 ### params
 
 说明：参数对象
+必选项：否
+
+#### encrypt
+说明: 手机号加密来源(zx、tg、wp)
 必选项：否
 
 ### success

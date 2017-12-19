@@ -51,6 +51,52 @@ define(function (require) {
         });
     }
 
+    // [装修、团购、旺铺] 公钥
+    var keyArr = {
+        'zx': 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC8hgXGmTam'
+            + '/ZBj9q8UteZ+1Z0sja7g7gQBR1RxfVJBbxGMwLgmW2uc+ij4F'
+            + 'fFsr6poM2IO64JfDxl+9H1tmEq6kEmuju7ue4b/4KcMTftKGjr+'
+            + 'DtbNiwtFhLKIU6iQRKjetWor8pj7/arhR5weSh04AWwEFQNsQchqM2eA7gEs2wIDAQAB',
+        'tg': 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDCC0w+gQPas'
+            + 'CFul1A/LVYfU4A2C0niMgcb9t+nftc5behMmf5l0aT6fmMa1e+'
+            + 'wdfmzleVljEaFcnVi/yOY13HqPa5fymwkVC6k+7beVnFUTDUSK5'
+            + 'SJTep+jSHmNCKPM+nVhm2xQu+SjZbxbeIiFdm0mfSJH/8faNXdiWU4rv9NuwIDAQAB',
+        'wp': 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAurXXoxX'
+            + 'AHK4vwRMDDQRFhkQH6tDbVN/k69JGBAGxm2N4+2TVDCKWrBqKjgm'
+            + 'jQSqubHiURa9O3bfAXUDYyV7S3/Vajc+NP0kU0l6Fl8q4AldSsQkSf'
+            + 'Lq5NrcxU0QsXJbfRCEIyS+lfG9/O+XGVrvpy21hOqs6Zmgvsa5//d6BT'
+            + 'C31FOb/d9H4C/iFgIXqAvcEJms+agPpXTMDDjxbB6/6P8qZoqKR1iztv3'
+            + 'bzwowU7YRpMVwwdr74K+ka7p0Y+KnnE4oiX3b5rDfQ/GOdG9OJhpGMAUkpR'
+            + 'jXy01hu9bT+ep7sYTlhVPhwr+8OICO7tsxNoNW7InOix26oY0IvqWcGjwIDAQAB'
+    };
+
+    // 手机号加密
+    function loadEncrypt() {
+        if (typeof JSEncryptExports !== 'object') {
+            var loadNode = document.createElement('script');
+            loadNode.type = 'text/javascript';
+
+            // 手机号加密js
+            loadNode.src = 'https://mued2.jia.com/js/mobile/jsencrypt.js';
+            document.body.appendChild(loadNode);
+        }
+    }
+
+    /**
+     * 加密手机号
+     *
+     * @class
+     * @param {number or string} phone 手机号
+     * @param {string} type 接口类型：zx(装修)、tg(团购)、wp(旺铺)
+     */
+
+    function mobileEncrypt(phone, type) {
+        /* global JSEncryptExports */
+        var JSEncrypt = new JSEncryptExports.JSEncrypt();
+        JSEncrypt.setKey(keyArr[type]);
+        return JSEncrypt.encrypt(phone);
+    }
+
     // 设置点击事件
     function setBtnFn(data, that) {
         var obj = $(that);
@@ -66,6 +112,8 @@ define(function (require) {
                 getBtnAjax(data, obj);
             });
         }
+        // 加密
+        loadEncrypt();
     }
 
     // 验证参数是否是class或id
@@ -179,6 +227,12 @@ define(function (require) {
                     var x = arr[i].replace(/\[|\]/g, '');
                     params[key] = params[key].replace(arr[i], $(x).val() || $(x).html());
                 }
+            }
+            // 手机号加密
+            if (/^1[3|4|5|7|8]\d{9}$/.test(params[key])) {
+                console.log(params[key]);
+                params[key] = mobileEncrypt(params[key], params.encrypt || 'zx');
+                console.log(params[key]);
             }
         }
 

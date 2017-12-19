@@ -226,7 +226,8 @@ define(function (require) {
             + '<input type="hidden" id="saleSuitIdInput" name="saleSuitId" value=""/>'
             + '<input type="hidden" id="isBaiduInput" name="isBaidu" value=""/>'
             + '<input type="hidden" id="goodsNumberInput" name="goodsNumber" value="1"/>'
-            + '<input type="submit" value="确 定" class="suction-buy" id="zmall_buy_submit"/>'
+            + '<input type="submit" value="确 定" class="suction-buy" id="zmall_buy_submit" data-stats-baidu-obj='
+            + '"%7B%22type%22%3A%22click%22%2C%22data%22%3A%22%5B_trackPageview%2C%20%2Fbuy%5D%22%7D" />'
             + '</form>'
             + '</aside>'
             + '<div class="mip-zmall-buy-mask"></div>';
