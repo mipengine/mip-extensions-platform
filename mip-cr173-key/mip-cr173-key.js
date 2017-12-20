@@ -59,10 +59,19 @@ define(function (require) {
         if (divnum <= 1) {
             $(ele).find('.m-tab-box .m-tab-btn li').addClass('m-hover');
         } else {
-            $(ele).find('.m-tab-box .m-tab-cont').hide().eq(0).show();
-            // 隐藏并且显示前边的
-            $(ele).find('.m-tab-box .m-tab-btn li').eq(0).addClass('m-hover');
-            // 将第一个按钮加上css
+            // 超过2个选项卡判断设备默认显示内容。
+            if (/iphone|ipad/i.test(navigator.userAgent)) {
+            //  苹果设备
+                $(ele).find('.m-tab-box .m-tab-cont').hide().eq(1).show();
+                // 隐藏并且显示苹果选项卡
+                $(ele).find('.m-tab-box .m-tab-btn li').removeClass('m-hover').eq(1).addClass('m-hover');
+                // 将第二个按钮加上css
+            } else {
+                $(ele).find('.m-tab-box .m-tab-cont').hide().eq(0).show();
+                // 隐藏并且显示前边的
+                $(ele).find('.m-tab-box .m-tab-btn li').removeClass('m-hover').eq(0).addClass('m-hover');
+                // 将第一个按钮加上css
+            }
             $(ele).find('.m-tab-box .m-tab-btn li').click(function () {
                 $(ele).find('.f-loading-font').html('点击加载更多.....');
                 $(ele).find('.m-tab-btn li').removeClass('m-hover');
