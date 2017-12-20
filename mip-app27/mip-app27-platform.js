@@ -4,7 +4,6 @@
  */
 
 define(function (require) {
-    var $ = require('zepto');
     var customElem = require('customElement').create();
     var util = require('util');
     var platform = util.platform;
@@ -45,20 +44,20 @@ define(function (require) {
         return brower;
     })();
 
-    function firstInviewCallback() {
-        var element = this.element;
-        var pf = $(element).attr('platform');
+    function build() {
+        var el = this.element;
+        var pf = $(el).attr('platform');
         if (brower.os() !== 'ios') {
             if (pf === 'ios') {
-                element.remove();
+                el.parentNode.removeChild(el);
             }
         }
         else {
             if (pf === 'android') {
-                element.remove();
+                el.parentNode.removeChild(el);
             }
         }
     }
-    customElem.prototype.firstInviewCallback = firstInviewCallback;
+    customElem.prototype.build = build;
     return customElem;
 });

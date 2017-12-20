@@ -1,0 +1,14 @@
+{
+    "name": "mip-trueland-utils",
+    "version": "1.0.0",
+    "description": "个人定制js",
+    "contributors": [
+        {
+            "name": "nordon",
+            "email": "nordon.wang@71360.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "name": "mip-nszxyu-bookcase",
+    "version": "1.0.0",
+    "description": "主要用于jieqi小说网书架系统，包括加入书架，书签，看过的小说",
+    "contributors": [
+        {
+            "name": "nszxyu",
+            "email": "nszxyu@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

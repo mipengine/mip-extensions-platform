@@ -20,7 +20,7 @@ define(function (require) {
             }
         }
     }
-    customElement.prototype.firstInviewCallback = function () {
+    customElement.prototype.build = function () {
         browserChoose();
     };
 

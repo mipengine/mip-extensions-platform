@@ -1,0 +1,12 @@
+{
+    "name": "mip-trueland-rem",
+    "version": "1.0.0",
+    "description": "使用jsj计算rem单位",
+    "contributors": [{
+        "name": "nordon",
+        "email": "nordon.wang@71360.com"
+    }],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
