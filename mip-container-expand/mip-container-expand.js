@@ -22,7 +22,7 @@ define(function (require) {
         var collapseBtn = $(document.getElementById(collapseBtnId));
         // 获取展开和折叠的内容
         var ctContent = $('.expand-content');
-        var ctContentHeight = ctContent.outerHeight(true);
+        var ctContentHeight;
         // 获取页面内的视频
         var videoClass = $element.attr('video-wrap-class');
 
@@ -54,9 +54,19 @@ define(function (require) {
                 expandOtherCt();
             }
         }
+        // 计算要展开内容的高度,针对mip-img懒加载会对高度有影响
+        function initCtContentHeight() {
+            var mipImg = ctContent.find('.article-content mip-img');
+            var mipImgHeight = mipImg.eq(0).outerHeight(true);
+            $.each(mipImg, function (index, node) {
+                $(node).css({height: mipImgHeight});
+            });
+            ctContentHeight = ctContent.outerHeight(true);
+        }
         // 展开内容
         function expandContent() {
             $element.show();
+            initCtContentHeight();
             $element.animate({
                 height: ctContentHeight
             }, 300, 'swing');

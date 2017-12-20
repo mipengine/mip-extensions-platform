@@ -8,6 +8,7 @@ define(function (require) {
     var customElement = require('customElement').create();
 
     var util = require('util');
+    var viewport = require('viewport');
     var methods = {
         init: function (opts) {
             var showError = function (error) {
@@ -154,6 +155,11 @@ define(function (require) {
                 getData(word, this, refreshDropDiv, dropDiv, options);
             });
             data.options.element.addEventListener('click', function () {
+                var offset = util.rect.getElementOffset(this);
+                var scrollTop =  viewport.getScrollTop();
+                if (offset.top !== 5) {
+                    viewport.setScrollTop(offset.top + scrollTop - 5);
+                }
                 var word = this.value.trim();
                 if (word && word === this.getAttribute('alt') || util.css(dropDiv, 'display') !== 'none') {
                     util.css(dropDiv, 'display', 'block');
@@ -202,7 +208,6 @@ define(function (require) {
         var ipt = ele.getElementsByClassName('s-ipt');
         var close = ele.getElementsByClassName('tt-menu-close');
         var btn = ele.getElementsByClassName('s-bn');
-        var viewport = require('viewport');
         var width = viewport.getScrollWidth();
         util.css(ipt, 'width', width - 153);
         methods.init({
