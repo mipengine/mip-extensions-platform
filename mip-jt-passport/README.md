@@ -6,7 +6,7 @@ mip-jt-passport
 ----|----
 类型|业务
 支持布局|
-所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-jt-passport/mip-jt-passport.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-jt-passport/mip-jt-passport.js
 
 ## 示例
 

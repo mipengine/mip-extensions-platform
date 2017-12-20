@@ -5,7 +5,7 @@ mip-pc6-down 文章页面逻辑
 标题|内容
 ----|----
 类型|通用
-所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-pc6-down/mip-pc6-down.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-pc6-down/mip-pc6-down.js
 
 ## 示例
 

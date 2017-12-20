@@ -6,7 +6,7 @@ mip-caidashi-mob 检测是否是pc端访问移动端，如果是，强制进入p
 ----|----
 类型|通用
 支持布局|
-所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-caidashi-mob/mip-caidashi-mob.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-caidashi-mob/mip-caidashi-mob.js
 
 ## 示例
 

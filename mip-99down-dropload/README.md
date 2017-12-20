@@ -6,7 +6,7 @@ mip-99down-dropload 用来支持页面下拉加载
 ----|----
 类型|业务
 支持布局|N/S
-所需脚本|http://mipcache.bdstatic.com/static/v1/mip-99down-dropload/mip-99down-dropload.js
+所需脚本|http://c.mipcdn.com/static/v1/mip-99down-dropload/mip-99down-dropload.js
 
 ## 示例
 

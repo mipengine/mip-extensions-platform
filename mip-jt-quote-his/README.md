@@ -6,7 +6,7 @@ mip-jt-quote-his 历史组件
 | ---- | ---------------------------------------- |
 | 类型   | 通用                                       |
 | 支持布局 | responsive,fixed-height,fill,container,fixed |
-| 所需脚本 | https://mipcache.bdstatic.com/static/v1/mip-jt-quote-his/mip-jt-quote-his.js |
+| 所需脚本 | https://c.mipcdn.com/static/v1/mip-jt-quote-his/mip-jt-quote-his.js |
 
 ## 示例
 

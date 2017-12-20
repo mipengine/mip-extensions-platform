@@ -6,7 +6,7 @@ mip-cehome-bbsinfo 论坛M站帖子详情页需求
 ----|----
 类型|不通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-cehome-bbsinfo/mip-cehome-bbsinfo.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-cehome-bbsinfo/mip-cehome-bbsinfo.js
 
 ## 示例
 

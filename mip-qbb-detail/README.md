@@ -6,7 +6,7 @@ mip-qbb-detail 页面滚动时，实现选项卡的固定，选项卡固定的�
 ----|----
 类型|业务
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://mipcache.bdstatic.com/static/v1/mip-qbb-detail/mip-qbb-detail.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-qbb-detail/mip-qbb-detail.js
 
 ## 示例
 

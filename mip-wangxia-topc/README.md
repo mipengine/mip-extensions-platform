@@ -6,7 +6,7 @@ mip-wangxia-topc 移动跳转PC
 ----|----
 类型|通用
 支持布局|N/S
-所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-wangxia-topc/mip-wangxia-topc.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-wangxia-topc/mip-wangxia-topc.js
 
 ## 示例
 

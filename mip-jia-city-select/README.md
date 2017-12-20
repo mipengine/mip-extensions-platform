@@ -6,7 +6,7 @@ mip-jia-city-select 组件说明
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-jia-city-select/mip-jia-city-select.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-jia-city-select/mip-jia-city-select.js
 
 ## 示例
 

@@ -6,7 +6,7 @@ mip-em-hq  自有业务详情页整体交互组件
 ----|----
 类型|业务，定制
 支持布局|responsive,fill,container
-所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-em-hq/mip-em-hq.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-em-hq/mip-em-hq.js
 
 ## 示例
 

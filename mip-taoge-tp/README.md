@@ -6,7 +6,7 @@ mip-taoge-tp ThinPHP 系统组件
 ----|----
 类型|通用
 支持布局|不使用布局
-所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-taoge-tp/mip-taoge-tp.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-taoge-tp/mip-taoge-tp.js
 
 ## 示例
 

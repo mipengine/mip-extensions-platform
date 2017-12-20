@@ -6,7 +6,7 @@ mip-cnkang-pic 康网添加三张图片
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-cnkang-pic/mip-cnkang-pic.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-cnkang-pic/mip-cnkang-pic.js
 
 ## 示例
 

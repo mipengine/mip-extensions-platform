@@ -6,7 +6,7 @@ mip-smart-recommend 用来显示百度智荐推荐内容
 ----|----
 类型| 通用
 布局|N/S
-引用脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-smart-recommend/mip-smart-recommend.js
+引用脚本|https://c.mipcdn.com/extensions/platform/v1/mip-smart-recommend/mip-smart-recommend.js
 
 ## 示例
 

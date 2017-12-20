@@ -6,7 +6,7 @@ mip-kp-detail 组件说明
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|http://mipcache.bdstatic.com/paltform/v1/mip-kp-detail/mip-kp-detail.js
+所需脚本|http://c.mipcdn.com/paltform/v1/mip-kp-detail/mip-kp-detail.js
 
 ## 示例
 

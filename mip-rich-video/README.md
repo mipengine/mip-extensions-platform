@@ -5,7 +5,7 @@ mip-rich-video 实现了一个带前贴片后贴片广告和播放完推荐的�
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-rich-video/mip-rich-video.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-rich-video/mip-rich-video.js
 
 ## 示例
 

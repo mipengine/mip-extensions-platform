@@ -6,7 +6,7 @@ mip-cnkang-data 康网直投广告组件
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-cnkang-data/mip-cnkang-data.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-cnkang-data/mip-cnkang-data.js
 
 ## 示例
 

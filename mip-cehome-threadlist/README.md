@@ -6,7 +6,7 @@ mip-cehome-threadlist 帖子列表
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-cehome-threadlist/mip-cehome-threadlist.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-cehome-threadlist/mip-cehome-threadlist.js
 
 ## 示例
 

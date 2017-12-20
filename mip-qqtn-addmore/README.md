@@ -6,7 +6,7 @@ mip-qqtn-addmore 点击加载更多，为单文件，没有参数
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-qqtn-addmore/mip-qqtn-addmore.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-qqtn-addmore/mip-qqtn-addmore.js
 
 ## 示例
 

@@ -6,7 +6,7 @@ mip-game-recommend 游戏下载组件
 ----|----
 类型|通用
 支持布局|fill,container
-所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-game-recommend/mip-game-recommend.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-game-recommend/mip-game-recommend.js
 
 ## 示例
 

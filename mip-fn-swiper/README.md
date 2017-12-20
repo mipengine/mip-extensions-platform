@@ -30,7 +30,7 @@
 标题|内容
 ----|----
 类型|通用 
-所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-fn-swiper/mip-fn-swiper.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-fn-swiper/mip-fn-swiper.js
 
 ## 属性   
 

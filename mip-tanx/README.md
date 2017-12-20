@@ -6,7 +6,7 @@
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|mipcache.bdstatic.com/extensions/platform/v1/mip-tanx/mip-tanx.js
+所需脚本|c.mipcdn.com/extensions/platform/v1/mip-tanx/mip-tanx.js
 
 ## 示例
 

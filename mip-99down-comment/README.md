@@ -6,7 +6,7 @@ mip-99down-comment 99down下载站文章详情页的评论
 ----|----
 类型|业务
 支持布局|N/S
-所需脚本|http://mipcache.bdstatic.com/platform/v1/mip-99down-comment/mip-99down-comment.js
+所需脚本|http://c.mipcdn.com/platform/v1/mip-99down-comment/mip-99down-comment.js
 
 ## 示例
 

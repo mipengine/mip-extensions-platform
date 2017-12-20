@@ -6,7 +6,7 @@ mip-cr173-popup 点击下载按钮弹出推荐内容,IP过滤功能,并没有引
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-cr173-popup/mip-cr173-popup.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-cr173-popup/mip-cr173-popup.js
 
 ## 示例
 
@@ -437,7 +437,7 @@ footer span { font-size: 14px; }
     <b class="m-black-bg" on="tap:customid.close"></b>    
 </mip-fixed>
 <div class="f-information" data-id="566552" data-path="down" data-categroyid="161" data-rootid="13" data-commendid="9, 15" data-system="Android" data-ppaddress="" data-ismoney="1" data-commenttpye="0" data-username="huangkui" data-type="0" data-datetime="2017/8/17" data-comid="0"></div>
-<script src="https://mipcache.bdstatic.com/static/v1/mip-fixed/mip-fixed.js"></script>
+<script src="https://c.mipcdn.com/static/v1/mip-fixed/mip-fixed.js"></script>
 <div class="f-androidxz-url f-hide">
 [151, 156, 158, 159, 160, 161, 162, 163, 164,256, 257, 258, 178, 179, 180, 181, 182, 183, 184, 185, 186, 207, 208,81, 209, 210, 211, 212, 218, 219, 220, 221, 222, 223, 224, 225, 226, 230,237, 238, 239, 240, 241, 308, 309, 310, 311, 328, 322, 323, 324, 325, 326, 329]
 </div>

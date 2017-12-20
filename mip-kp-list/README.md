@@ -6,7 +6,7 @@ mip-kp-list 组件说明
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|http://mipcache.bdstatic.com/platform/v1/mip-kp-list/mip-kp-list.js
+所需脚本|http://c.mipcdn.com/platform/v1/mip-kp-list/mip-kp-list.js
 
 ## 示例
 

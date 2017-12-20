@@ -6,7 +6,7 @@ mip-bdb-custom-content 用来支持本地宝文章结尾的自定义内容版块
 ----|----
 类型|业务
 支持布局|N/S
-所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-bdb-custom-content/mip-bdb-custom-content.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-bdb-custom-content/mip-bdb-custom-content.js
 
 ## 示例
 

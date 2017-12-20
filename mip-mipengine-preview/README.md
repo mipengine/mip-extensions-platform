@@ -6,7 +6,7 @@ mip-mipengine-preview 用于 www.mipengine.org 的预览工具
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|http://mipcache.bdstatic.com/extensions/platform/v1/mip-mipengine-preview/mip-mipengine-preview.js
+所需脚本|http://c.mipcdn.com/extensions/platform/v1/mip-mipengine-preview/mip-mipengine-preview.js
 
 ## 示例
 

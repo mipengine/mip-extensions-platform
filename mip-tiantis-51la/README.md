@@ -6,7 +6,7 @@ mip-tiantis-51la 封装了51la统计
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-tiantis-51la/mip-tiantis-51la.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-tiantis-51la/mip-tiantis-51la.js
 
 ## 示例
 

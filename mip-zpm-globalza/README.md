@@ -6,7 +6,7 @@ mip-zpm-globalza 统计需求
 ----|----
 类型|通用
 支持布局|N/S
-所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-zpm-globalza/mip-zpm-globalza.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-zpm-globalza/mip-zpm-globalza.js
 
 
 ## 示例

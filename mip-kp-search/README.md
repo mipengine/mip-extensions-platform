@@ -6,7 +6,7 @@ mip-kp-search kp搜索专用
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|http://mipcache.bdstatic.com/platform/v1/mip-kp-search/mip-kp-search.js
+所需脚本|http://c.mipcdn.com/platform/v1/mip-kp-search/mip-kp-search.js
 
 ## 示例
 

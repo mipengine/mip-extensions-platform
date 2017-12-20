@@ -6,7 +6,7 @@ mip-header-fixed  主要是组件的position:fixed后，创建一个元素，获
 ----|----
 类型|通用
 支持布局|无
-所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-header-fixed/mip-header-fixed.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-header-fixed/mip-header-fixed.js
 
 ## 示例
 

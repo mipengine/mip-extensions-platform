@@ -6,7 +6,7 @@
 ----|----
 类型|业务组件
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-zol-like/mip-zol-like.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-zol-like/mip-zol-like.js
 
 ## 最新版本
 

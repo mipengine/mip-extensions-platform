@@ -11,7 +11,7 @@
 标题|内容
 ----|----
 类型|通用 
-所需脚本|http://mipcache.bdstatic.com/static/v1/mip-fn-comment-reply/mip-fn-comment-reply.js
+所需脚本|http://c.mipcdn.com/static/v1/mip-fn-comment-reply/mip-fn-comment-reply.js
 
 ## 属性
 ### replyid

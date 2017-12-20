@@ -6,7 +6,7 @@ mip-cr173-mg 词语过滤功能,去掉导致报错的争议代码,部分li下面
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-cr173-mg/mip-cr173-mg.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-cr173-mg/mip-cr173-mg.js
 
 
 ## 示例

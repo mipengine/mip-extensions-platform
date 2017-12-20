@@ -6,7 +6,7 @@ mip-trilobite-fontsize 三叶虫字体适配
 ----|----
 类型|业务
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-trilobite-fontsize/mip-trilobite-fontsize.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-trilobite-fontsize/mip-trilobite-fontsize.js
 
 ## 示例
 

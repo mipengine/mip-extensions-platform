@@ -6,7 +6,7 @@ mip-fontsize 组件说明
 ----|----
 类型|通用
 支持布局|nodisplay
-所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-fontsize/mip-fontsize.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-fontsize/mip-fontsize.js
 
 ## 示例
 

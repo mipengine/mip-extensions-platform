@@ -6,7 +6,7 @@ mip-25game-gradient 动态渐变背景色
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-25game-gradient/mip-25game-gradient.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-25game-gradient/mip-25game-gradient.js
 
 ## 示例
 

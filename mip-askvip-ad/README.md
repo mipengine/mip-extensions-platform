@@ -6,7 +6,7 @@ mip-askvip-ad 用来支持问题页面广告的展示
 ----|----
 类型|广告
 支持布局|N/S
-所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-askvip-ad/mip-askvip-ad.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-askvip-ad/mip-askvip-ad.js
 
 ## 示例
 

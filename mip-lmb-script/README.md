@@ -5,7 +5,7 @@ mip-lmb-script 辣妈帮mip:URL跳转、关闭元素显示、点击切换元素�
 标题|内容
 ----|----
 类型|通用
-所需脚本|http://mipcache.bdstatic.com/static/v1/mip-lmb-script/mip-lmb-script.js
+所需脚本|http://c.mipcdn.com/static/v1/mip-lmb-script/mip-lmb-script.js
 
 ## 示例
 

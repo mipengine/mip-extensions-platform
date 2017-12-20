@@ -6,7 +6,7 @@
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://mipcache.bdstatic.com/static/v1/mip-fj-fetch/mip-fj-fetch.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-fj-fetch/mip-fj-fetch.js
 
 ## 示例
 
@@ -67,6 +67,6 @@
 ## 注意事项
 
 1. 如果需要动态设置fetch的params，应使用POST方法
-2. 使用mip-bind时需要引入https://mipcache.bdstatic.com/static/v1/mip-bind/mip-bind.js
+2. 使用mip-bind时需要引入https://c.mipcdn.com/static/v1/mip-bind/mip-bind.js
 3. 使用fetch功能时，请求使用cors时不能配置为*
 4. 提交方法如果为post，应使用https地址。避免 MIP-Cache https环境提交到http，导致浏览器报错

@@ -6,7 +6,7 @@ mip-objectpropertycheck-min 元素属性检测，可根据检测到的属性，�
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-objectpropertycheck-min/mip-objectpropertycheck-min.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-objectpropertycheck-min/mip-objectpropertycheck-min.js
 
 ## 示例
 

@@ -6,7 +6,7 @@ mip-ueditor-out 将富文本的style以mip-data-style代替，然后将该属性
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-ueditor-out/mip-ueditor-out.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-ueditor-out/mip-ueditor-out.js
 
 ## 示例
 
@@ -35,7 +35,7 @@ mip-ueditor-out 将富文本的style以mip-data-style代替，然后将该属性
 	  	</span>
   	</div>
   	<p mip-data-style>测试 有</p>
-  	<script src="https://mipcache.bdstatic.com/static/v1/mip.js"></script>
+  	<script src="https://c.mipcdn.com/static/v1/mip.js"></script>
 </mip-ueditor-out>
 ```
 

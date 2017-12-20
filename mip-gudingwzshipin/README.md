@@ -6,7 +6,7 @@ mip-gudingwzshipin 用于wzshipin.com站点投放汇米广告固定位广告的�
 ----|----
 类型|广告
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|http://mipcache.bdstatic.com/extensions/platform/v1/mip-gudingwzshipin/mip-gudingwzshipin.js
+所需脚本|http://c.mipcdn.com/extensions/platform/v1/mip-gudingwzshipin/mip-gudingwzshipin.js
 
 ## 示例
 

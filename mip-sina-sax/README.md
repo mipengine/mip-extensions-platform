@@ -5,7 +5,7 @@ mip-sina-sax 新浪广告组件
 标题|内容
 ----|----
 类型|定制
-所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-sina-sax/mip-sina-sax.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-sina-sax/mip-sina-sax.js
 
 ## 示例
 

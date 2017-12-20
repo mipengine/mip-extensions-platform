@@ -6,7 +6,7 @@ mip-hc360-p4p p4p商机扣费
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-hc360-p4p/mip-hc360-p4p.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-hc360-p4p/mip-hc360-p4p.js
 
 ## 示例
 
@@ -19,7 +19,7 @@ mip-hc360-p4p p4p商机扣费
 	num="6"
 	hideid="pageid"
 	template="myTemplate">
-	<script src="https://mipcache.bdstatic.com/static/v1/mip-mustache/mip-mustache.js"></script>
+	<script src="https://c.mipcdn.com/static/v1/mip-mustache/mip-mustache.js"></script>
 	<script type="application/json">
         {
 			"mc":"seller",

@@ -6,7 +6,7 @@ mip-39alimama 组件说明
 ----|----
 类型|通用
 支持布局|N/S
-所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-39alimama/mip-39alimama.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-39alimama/mip-39alimama.js
 
 ## 示例
 

@@ -6,7 +6,7 @@ mip-chinacn-filter 根据不同条件过滤产品
 ----|----
 类型|业务
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-chinacn-filter/mip-chinacn-filter.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-chinacn-filter/mip-chinacn-filter.js
 
 ## 示例
 

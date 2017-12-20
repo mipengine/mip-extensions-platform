@@ -6,7 +6,7 @@ mip-jt-ams 金投网广告组件
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://mipcache.bdstatic.com/static/v1/mip-jt-ams/mip-jt-ams.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-jt-ams/mip-jt-ams.js
 
 ## 示例
 

@@ -5,7 +5,7 @@ mip-pc6-touchslide 多屏轮播
 标题|内容
 ----|----
 类型|通用
-所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-pc6-touchslide/mip-pc6-touchslide.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-pc6-touchslide/mip-pc6-touchslide.js
 
 ## 示例
 

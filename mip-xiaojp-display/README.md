@@ -6,7 +6,7 @@ mip-xiaojp-display 点击组件，可根据传递的data-type类型，打开或�
 ----|----
 类型|通用
 支持布局|无
-所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-xiaojp-display/mip-xiaojp-display.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-xiaojp-display/mip-xiaojp-display.js
 
 ## 示例
 

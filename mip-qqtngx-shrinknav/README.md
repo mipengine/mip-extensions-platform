@@ -6,7 +6,7 @@ mip-qqtngx-shrinknav 腾牛个性页面的内容植入和伸缩导航
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-qqtngx-shrinknav/mip-qqtngx-shrinknav.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-qqtngx-shrinknav/mip-qqtngx-shrinknav.js
 
 
 ## 示例

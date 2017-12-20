@@ -6,7 +6,7 @@ mip-stats-qiyu 组件说明：网易七鱼在线客服组件
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|http://mipcache.bdstatic.com/extensions/platform/v1/mip-stats-qiyu/mip-stats-qiyu.js
+所需脚本|http://c.mipcdn.com/extensions/platform/v1/mip-stats-qiyu/mip-stats-qiyu.js
 
 ## 示例
 

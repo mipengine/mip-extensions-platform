@@ -6,7 +6,7 @@ mip-praise 带有参数的点赞功能
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-praise/mip-praise.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-praise/mip-praise.js
 
 ## 示例
 

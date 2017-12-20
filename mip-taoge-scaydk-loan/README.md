@@ -6,7 +6,7 @@ wap.scaydk.com网贷款产品筛选组件
 ----|----
 类型|通用
 支持布局|不支持
-所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-taoge-scaydk-loan/mip-taoge-scaydk-loan.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-taoge-scaydk-loan/mip-taoge-scaydk-loan.js
 
 ## 示例
 

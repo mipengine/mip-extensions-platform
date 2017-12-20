@@ -6,7 +6,7 @@ mip-taoge-scaydk 是wap.scaydk.com网业务逻辑组件
 ----|----
 类型|通用
 支持布局|不使用布局
-所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-taoge-scaydk/mip-taoge-scaydk.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-taoge-scaydk/mip-taoge-scaydk.js
 
 ## 示例
 

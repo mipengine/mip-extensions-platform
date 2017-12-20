@@ -6,7 +6,7 @@
 define(function (require) {
     var ga;
     var $ = require('jquery');
-    require('https://mipcache.bdstatic.com/extensions/platform/v1/mip-jzbga/mip-jzbga.js');
+    require('https://c.mipcdn.com/extensions/platform/v1/mip-jzbga/mip-jzbga.js');
     var customElement = require('customElement').create();
 
     /**

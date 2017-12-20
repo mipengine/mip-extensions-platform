@@ -6,7 +6,7 @@ mip-jt-jtshare 手机端分享组件
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://mipcache.bdstatic.com/extensions/v1/mip-jt-jtshare/mip-jt-jtshare.js
+所需脚本|https://c.mipcdn.com/extensions/v1/mip-jt-jtshare/mip-jt-jtshare.js
 
 ## 示例
 

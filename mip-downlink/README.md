@@ -6,7 +6,7 @@ mip-downlink 下载软件
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|http://mipcache.bdstatic.com/static/v1/mip-downlink/mip-downlink.js
+所需脚本|http://c.mipcdn.com/static/v1/mip-downlink/mip-downlink.js
 
 ## 示例
 
