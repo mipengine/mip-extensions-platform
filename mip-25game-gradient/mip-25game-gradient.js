@@ -19,6 +19,7 @@ define(function (require) {
         var icon = document.getElementById(imgId);
         var image = new Image();
         image.src = icon.getAttribute('src');
+        image.crossOrigin = 'Anonymous';
         image.onload = function () {
             var imgWidth = this.width;
             var imgHeight = this.height;
