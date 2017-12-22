@@ -1,0 +1,305 @@
+/**
+ * @file mip-jia-redpacket样式文件
+ */
+.popup-maskEdit {
+    position: fixed;
+    z-index: 99999;
+    top: 50%;
+    left: 50%;
+    max-width: 80%;
+    padding: .06rem .16rem;
+    line-height: .24rem;
+    text-align: center;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, .85);
+    font-size: .12rem;
+    color: #fff;
+    border-radius: .06rem;
+    white-space: nowrap
+}
+
+mip-jia-redpacket {
+    .loading-icon {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: .65rem;
+        height: .65rem;
+        background: url(//mued3.jia.com/image/mobile/wxStore/loading_black_Alpha.gif) center center no-repeat rgba(0, 0, 0, .8);
+        background-size: .45rem;
+        border-radius: 5px;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        z-index: 10002
+    }
+
+    .popmask {
+        display: none;
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        background-color: rgba(0, 0, 0, .7);
+        z-index: 10001;
+    }
+
+    @-webkit-keyframes hb-left {
+        0% {
+            left: -10%;
+        }
+
+        30% {
+            left: 110%;
+        }
+
+        100% {
+            left: 110%;
+        }
+
+    }
+
+    @keyframes hb-left {
+        0% {
+            left: -10%;
+        }
+
+        30% {
+            left: 110%;
+        }
+
+        100% {
+            left: 110%;
+        }
+
+    }
+
+    @-webkit-keyframes popShow {
+        from {
+            -webkit-transform: scale(.5);
+            transform: scale(.5);
+        }
+
+        to {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+
+    }
+
+    @keyframes popShow {
+        from {
+            -webkit-transform: scale(.5);
+            transform: scale(.5);
+        }
+
+        to {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+
+    }
+
+    mip-fixed.fixed-hb {
+        top: 50%;
+        right: .24rem;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+
+        .hb-box {
+            position: relative;
+            width: .46rem;
+            height: .57rem;
+
+            &:after {
+                content: '';
+                position: absolute;
+                left: -.1rem;
+                top: 0;
+                width: .1rem;
+                height: .6rem;
+                background: rgba(255, 255, 255, .2);
+                -webkit-transform: rotate(8deg);
+                -ms-transform: rotate(8deg);
+                transform: rotate(8deg);
+                -webkit-animation: hb-left 2s infinite;
+                animation: hb-left 2s infinite;
+            }
+
+        }
+
+    }
+
+    .hb-popup {
+        display: none;
+        position: fixed;
+        left: 6.25%;
+        top: 50%;
+        width: 87.5%;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+        z-index: 10002;
+
+        .popup-box {
+            background: #d84e43;
+            overflow: hidden;
+            border-radius: .04rem;
+            text-align: center;
+            -webkit-animation: popShow .3s;
+            animation: popShow .3s;
+
+            .close {
+                position: absolute;
+                right: .1rem;
+                top: .15rem;
+                width: .22rem;
+                height: .22rem;
+                background: url(//mued3.jia.com/image/mobile/toutiao/hb_close.png) 0 0 no-repeat;
+                background-size: 100%;
+            }
+
+            .top {
+                padding: .4rem 0 .12rem;
+                background: #e4564c;
+
+                .img-box {
+                    font-size: 0;
+
+                    mip-img {
+                        display: inline-block;
+                        width: .48rem;
+                        height: .48rem;
+                    }
+
+                }
+
+                .name {
+                    margin-top: .15rem;
+                    font-size: .15rem;
+                    color: #f0e5af;
+                }
+
+                .event {
+                    margin-top: .04rem;
+                    font-size: .14rem;
+                    color: #f0e5af;
+                }
+
+                .title {
+                    margin-top: .2rem;
+                    font-size: .23rem;
+                    color: #f0e5af;
+                }
+
+                .input-box {
+                    width: 62%;
+                    height: .2rem;
+                    padding: .08rem;
+                    margin: .1rem auto 0;
+                    border-radius: .36rem;
+                    background: #f5ecbd;
+
+                    .form-input {
+                        display: block;
+                        width: 100%;
+                        height: .2rem;
+                        line-height: .2rem;
+                        text-align: center;
+                        border: 0 none;
+                        background: transparent;
+
+                        &:-moz-placeholder {
+                            color: #c2a08f;
+                        }
+
+                        &::-webkit-input-placeholder {
+                            color: #c2a08f;
+                        }
+
+                    }
+
+                }
+
+            }
+
+            .circle-wrap {
+                height: .5rem;
+                overflow: hidden;
+
+                .circle-box {
+                    position: relative;
+                    height: .4rem;
+
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        left: 50%;
+                        bottom: 0;
+                        width: 200%;
+                        padding-top: 180%;
+                        -webkit-box-shadow: 0 3px 9px rgba(122, 29, 22, .14);
+                        box-shadow: 0 3px 9px rgba(122, 29, 22, .14);
+                        border-radius: 100%;
+                        -webkit-transform: translate(-50%, 0);
+                        -ms-transform: translate(-50%, 0);
+                        transform: translate(-50%, 0);
+                        background: #e4564c;
+                    }
+
+                }
+
+            }
+
+            .headline-btn {
+                position: relative;
+                display: inline-block;
+                width: .64rem;
+                height: .64rem;
+                margin-top: -.42rem;
+                background: #e5c489 url(//mued3.jia.com/image/mobile/mip/hb-icon-kai.png) center center no-repeat;
+                background-size: 50%;
+                border-radius: 100%;
+                vertical-align: top;
+
+                &:before {
+                    content: '';
+                    position: absolute;
+                    left: .04rem;
+                    top: .04rem;
+                    right: .04rem;
+                    bottom: .04rem;
+                    border: 1px solid #bb9a5f;
+                    border-radius: 100%;
+                }
+
+            }
+
+            .bottom {
+                position: relative;
+                height: 1.2rem;
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    bottom: .1rem;
+                    left: 50%;
+                    width: .2rem;
+                    height: .2rem;
+                    margin-left: -.1rem;
+                    background: url(//mued3.jia.com/image/mobile/mip/hb-icon-2.png) 0 0 no-repeat;
+                    background-size: 100%;
+                }
+
+            }
+
+        }
+
+    }
+
+}

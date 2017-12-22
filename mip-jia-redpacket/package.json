@@ -1,0 +1,14 @@
+{
+    "name": "mip-jia-redpacket",
+    "version": "1.0.0",
+    "description": "领取红包",
+    "contributors": [
+        {
+            "name": "ll",
+            "email": "liulei@qeeka.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
