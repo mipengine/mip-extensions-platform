@@ -13,7 +13,7 @@
 ### 基本用法
 ```html
 <mip-25game-gradient elementid="icon" defaultcolor="#1681BA">
-		<mip-img width="96" height="96" id="icon" style="margin:50px;" src="http://m.25game.com/upload/icon/2016/03/31/37831aebbe50.png"></mip-img>
+		<mip-img width="96" height="96" id="icon" style="margin:50px;" src="https://file.25game.com/upload/icon/2016/03/31/37831aebbe50.png"></mip-img>
 </mip-25game-gradient>
 ```
 

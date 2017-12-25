@@ -18,8 +18,8 @@ define(function (require) {
         var defaultcolor = element.getAttribute('defaultcolor');
         var icon = document.getElementById(imgId);
         var image = new Image();
-        image.src = icon.getAttribute('src');
         image.crossOrigin = 'Anonymous';
+        image.src = icon.getAttribute('src');
         image.onload = function () {
             var imgWidth = this.width;
             var imgHeight = this.height;

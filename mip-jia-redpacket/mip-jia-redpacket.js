@@ -314,7 +314,7 @@ define(function (require) {
                         bmPramas['refer_url'] = window.location.href;
                         bmPramas['from_source'] = signParms.source;
                         bmPramas = JSON.stringify(bmPramas);
-                        document.cookie = 'bm_pramas=' + bmPramas;
+                        storage.set('bm_pramas', bmPramas);
                         window.location.href = cfg.signRequest.skipUrl;
                     });
                 });
