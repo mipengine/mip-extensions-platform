@@ -1,0 +1,14 @@
+{
+    "name": "mip-bkmy-audio",
+    "version": "1.0.0",
+    "description": "控制音频播放",
+    "contributors": [
+        {
+            "name": "niuyaping",
+            "email": "niuyaping@baikemy.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

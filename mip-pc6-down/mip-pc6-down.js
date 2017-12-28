@@ -1,4 +1,4 @@
-﻿/**
+/**
  * @file 页面逻辑脚本
  * @author fl
 */
@@ -25,6 +25,13 @@ define(function (require) {
         platIPhoneResVer: $('#plat_iPhone').attr('ResVer'),
         platIPhoneCid: $('#plat_iPhone').attr('cid'),
         platIPhoneRid: $('#plat_iPhone').attr('rid'),
+        platIPadId: $('#plat_iPad').attr('platid'),
+        platIPadAddress: $('#plat_iPad').attr('Address'),
+        platIPadResSystem: $('#plat_iPad').attr('ResSystem'),
+        platIPadResName: $('#plat_iPad').attr('ResName'),
+        platIPadResVer: $('#plat_iPad').attr('ResVer'),
+        platIPadCid: $('#plat_iPad').attr('cid'),
+        platIPadRid: $('#plat_iPad').attr('rid'),
         assid: parseInt($('#info #Associate').html(), 10),
         xfNav: function () {
             if (platform.isBaiduApp()) {
@@ -51,19 +58,11 @@ define(function (require) {
         },
         downHref: function () {
             if (this.assid > 0) {
-                $('#info #btns a').attr('href', 'http://m.pc6.com/down.asp?id=' + this.assid);
+                $('#info #btns a').attr('href', 'https://download.pc6.com/down/' + this.assid + '/');
             }
 
             if (platform.isAndroid() && void 0 !== this.platAndroidAddress) {
-                var http = this.platAndroidAddress.indexOf('http:');
-                var ftp = this.platAndroidAddress.indexOf('ftp:');
-                var https = this.platAndroidAddress.indexOf('https:');
-                if (http >= 0 || ftp >= 0 || https >= 0) {
-                    $('#info #btns a').attr('href', this.platAndroidAddress);
-                }
-                else {
-                    $('#info #btns a').attr('href', 'https://download.pc6.com/down/' + this.platAndroidId + '/');
-                }
+                $('#info #btns a').attr('href', 'https://download.pc6.com/down/' + this.platAndroidId + '/');
                 var k = ',110974,110451,121665,115094,55819,49251,62433,140386,'.indexOf(',' + this.webInfoId + ',');
                 if ($('#ResSystem').html(this.platAndroidResSystem), k < 0) {
                     if ($('body.dnb').length < 1) {
@@ -72,19 +71,20 @@ define(function (require) {
                 }
             }
             else if (platform.isIos() && void 0 !== this.platIPhoneAddress) {
-                var ihttp = this.platIPhoneAddress.indexOf('http:');
-                var iftp = this.platIPhoneAddress.indexOf('ftp:');
-                var ihttps = this.platIPhoneAddress.indexOf('https:');
-                if (ihttp >= 0 || iftp >= 0 || ihttps >= 0) {
-                    $('#info #btns a').attr('href', this.platIPhoneAddress);
-                }
-                else {
-                    $('#info #btns a').attr('href', 'https://download.pc6.com/down/' + this.platIPhoneId + '/');
-                }
+                $('#info #btns a').attr('href', 'https://download.pc6.com/down/' + this.platIPhoneId + '/');
                 var k1 = ',110974,110451,121665,115094,55819,49251,62433,140386,'.indexOf(',' + this.webInfoId + ',');
                 if ($('#ResSystem').html(this.platIPhoneResSystem), k1 < 0) {
                     if ($('body.dnb').length < 1) {
                         $('#info .name').html('<h1>' + this.platIPhoneResName + '</h1>' + this.platIPhoneResVer);
+                    }
+                }
+            }
+            else if (platform.isIos() && void 0 !== this.platIPadAddress) {
+                $('#info #btns a').attr('href', 'https://download.pc6.com/down/' + this.platIPadId + '/');
+                var k2 = ',110974,110451,121665,115094,55819,49251,62433,140386,'.indexOf(',' + this.webInfoId + ',');
+                if ($('#ResSystem').html(this.platIPadResSystem), k2 < 0) {
+                    if ($('body.dnb').length < 1) {
+                        $('#info .name').html('<h1>' + this.platIPadResName + '</h1>' + this.platIPadResVer);
                     }
                 }
             }
@@ -124,13 +124,13 @@ define(function (require) {
                             var r = '';
                             if (0 === i) {
                                 for (var o = 0; o < n.length; ++o) {
-                                    r += '<li><a href="http://m.pc6.com/down.asp?id=' + n[o].ID + '"><mip-img src="' + n[o].SmallImg + '" onclick="_czc.push([\'_trackEvent\',\'tuijian\',\'tuijian' + (o + 1) + '\',\'' + n[o].ResName + '\'])"></mip-img>' + n[o].ResName + '</a></li>';
+                                    r += '<li><a href="https://m.pc6.com/down.asp?id=' + n[o].ID + '"><mip-img src="' + n[o].SmallImg + '" onclick="_czc.push([\'_trackEvent\',\'tuijian\',\'tuijian' + (o + 1) + '\',\'' + n[o].ResName + '\'])"></mip-img>' + n[o].ResName + '</a></li>';
                                 }
 
                             }
                             else if (1 === i) {
                                 for (var b = 0; b < n.length; ++b) {
-                                    r += '<li><a href="http://m.pc6.com/mipd/' + n[b].ID + '.html" target="_blank"><mip-img src="' + n[b].SmallImg + '" onclick="_czc.push([\'_trackEvent\',\'tuijian\',\'tuijian' + (o + 1) + '\',\'' + n[b].ResName + '\'])"></mip-img>' + n[b].ResName + '</a></li>';
+                                    r += '<li><a href="https://m.pc6.com/mipd/' + n[b].ID + '.html" target="_blank"><mip-img src="' + n[b].SmallImg + '" onclick="_czc.push([\'_trackEvent\',\'tuijian\',\'tuijian' + (o + 1) + '\',\'' + n[b].ResName + '\'])"></mip-img>' + n[b].ResName + '</a></li>';
                                 }
 
                             }

@@ -11,12 +11,25 @@ define(function (require) {
     var fetchJsonp = require('fetch-jsonp');
     customElement.prototype.build = function () {
         var ele = this.element;
+        if ($(ele).find('.f-switch').length <= 0) { // 防止没生成时候没数据，植入默认数据
+            $(ele).append('<div class="f-switch f-hide" data-ifSwbOk="false" data-tagSpOk="false"'
+			+ 'data-addEjectDataOk="false" data-adaptationOk="false" data-clickEjectOk="false"'
+			+ 'data-mgcFilterOk="false" data-zsOk="false"></div>');
+        }
+
         var pageInfo = {
             id: $(ele).find('.f-information').attr('data-id'),
             categroyId: Math.ceil($(ele).find('.f-information').attr('data-categroyId')),
             ismoney: $(ele).find('.f-information').attr('data-ismoney'),
             system: $(ele).find('.f-information').attr('data-system').toUpperCase(),
-            phpUrl: $(ele).find('.f-information').attr('data-phpurl')
+            phpUrl: $(ele).find('.f-information').attr('data-phpurl'),
+            ifSwbOk: $(ele).find('.f-switch').attr('data-ifSwbOk'),
+            tagSpOk: $(ele).find('.f-switch').attr('data-tagSpOk'),
+            addEjectDataOk: $(ele).find('.f-switch').attr('data-addEjectDataOk'),
+            adaptationOk: $(ele).find('.f-switch').attr('data-adaptationOk'),
+            zsOk: $(ele).find('.f-switch').attr('data-zsOk'),
+            clickEjectOk: $(ele).find('.f-switch').attr('data-clickEjectOk'),
+            mgcFilterOk: $(ele).find('.f-switch').attr('data-mgcFilterOk')
         };
         var isAds = false; // 商务包初始值
         var downUrl = $(ele).find('.f-downbtn-url a').first().attr('href'); // 下载链接
@@ -41,9 +54,7 @@ define(function (require) {
         }).then(function (res) {
             return res.json();
         }).then(function (data) {
-            ifSwb(data['f-noAdf-hide']); // 判断商务包
-            tagSp(data.webUrl); // tags适配
-            addEjectData(data['eject-city'], data.tcAndroidData, data.tcOhterCity); // 植入弹层推荐内容
+            console.log(data);
             var iossopurl = data['iossp-url'];
             var iosclassid = data['ios-classid'];
             var datawebUrl = data.webUrl;
@@ -51,9 +62,30 @@ define(function (require) {
             var androidclassid = data['android-classid'];
             var dataIpok = data.ipok;
             var datahzUrl = data.hzurl;
-            adaptation(iossopurl, iosclassid, datawebUrl, azspurl, androidclassid, dataIpok, datahzUrl); // 设备适配
-            clickEject(data['open-eject']); // 点击触发弹层
-            mgcFilter(data['f-mg-gl'], data.replaceHtml, data['eject-city']); // 敏感词过滤
+            if (pageInfo.ifSwbOk === 'true') {
+                ifSwb(data['f-noAdf-hide']); // 判断商务包
+            }
+
+            if (pageInfo.tagSpOk === 'true') {
+                tagSp(data.webUrl); // tags适配
+            }
+
+            if (pageInfo.addEjectDataOk === 'true') {
+                addEjectData(data['eject-city'], data.tcAndroidData, data.tcOhterCity); // 植入弹层推荐内容
+            }
+
+            if (pageInfo.adaptationOk === 'true') {
+                adaptation(iossopurl, iosclassid, datawebUrl, azspurl, androidclassid, dataIpok, datahzUrl); // 设备适配
+            }
+
+            if (pageInfo.clickEjectOk === 'true') {
+                clickEject(data['open-eject']); // 点击触发弹层
+            }
+
+            if (pageInfo.mgcFilterOk === 'true') {
+                mgcFilter(data['f-mg-gl'], data.replaceHtml, data['eject-city']); // 敏感词过滤
+            }
+
         });
         function ifSwb(noAdf) { // 判断商务包
             var z = 0;
@@ -74,7 +106,7 @@ define(function (require) {
                         addTags($(ele).find('.f-tags-box .f-tags-ios').html(),
                             $(ele).find('.f-tags-box .f-tags-ios li').first().attr('data-system'),
                             $(ele).find('.f-tags-box .f-tags-ios li').first().attr('data-id'),
-                            $(ele).find('.f-tags-box .f-tags-ios li a p').first().text(), 'IOS'), datawebUrl;
+                            $(ele).find('.f-tags-box .f-tags-ios li a p').first().text(), 'IOS', datawebUrl);
                     }
                     else {
                         $(ele).find('.f-tags-box').remove();
@@ -85,7 +117,7 @@ define(function (require) {
                         addTags($(ele).find('.f-tags-box .f-tags-android').html(),
                             $(ele).find('.f-tags-box .f-tags-android li').first().attr('data-system'),
                             $(ele).find('.f-tags-box .f-tags-android li').first().attr('data-id'),
-                            $(ele).find('.f-tags-box .f-tags-android li a p').first().text(), 'ANDROID'), datawebUrl;
+                            $(ele).find('.f-tags-box .f-tags-android li a p').first().text(), 'ANDROID', datawebUrl);
                     }
                     else {
 
@@ -191,7 +223,7 @@ define(function (require) {
                     var clickN = 0;
                     var resTitle = $(ele).find('h1').text() || ''; // 资源的名称
                     resTitle = resTitle.split(/(\s|\()/)[0];
-                    if (dataIpok === 'false') {
+                    if (dataIpok === 'false' && pageInfo.zsOk === 'true') {
                         if ((downBtnLink.attr('issw') || downBtnLink.attr('ispc'))) {
                             downBtnLink.click(function () {
                                 if (clickN <= 0) {

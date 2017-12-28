@@ -24,7 +24,9 @@ define(function (require) {
      * 对外默认参数
      * @type {{active: string}}
      */
-    var parmas = {};
+    var parmas = {
+        bigSuffix: ''
+    };
 
     /**
      * 禁用屏幕滚动移动功能
@@ -71,7 +73,6 @@ define(function (require) {
 
     };
 
-
     PhotoWall.prototype.move = function () {
         var that = this;
         var showSize = 1;
@@ -112,7 +113,6 @@ define(function (require) {
 
     };
 
-
     PhotoWall.prototype.changeBoxLevel = function (index, isFirst) {
         var that = this;
         var moveBox = this.moveBox;
@@ -144,7 +144,6 @@ define(function (require) {
 
     };
 
-
     PhotoWall.prototype.uploadImg = function (curIndexVal) {
         var that = this;
         var moveBox = that.moveBox;
@@ -175,14 +174,12 @@ define(function (require) {
 
     };
 
-
     PhotoWall.prototype.close = function () {
         var that = this;
 
         pare.startTouchMove();
         this.outBg.remove();
     };
-
 
     PhotoWall.prototype.creatElem = function () {
 
@@ -226,7 +223,10 @@ define(function (require) {
             elem.childSize = mipImgs.length;
 
             mipImgs.each(function () {
-                var imgElem = $('<li><img _src="' + $(this).attr('bigUrl') + '" /></li>');
+
+                var nowImgUrl = $(this).attr('src');
+
+                var imgElem = $('<li><img _src="' + nowImgUrl.split('?')[0] + '?' + mip.attrs.bigSuffix + '" /></li>');
                 imgElem.css('width', body.width());
                 elem.append(imgElem);
             });
@@ -236,15 +236,13 @@ define(function (require) {
 
     };
 
-
     customElement.prototype.firstInviewCallback = function () {
 
         mip.self = this;
         mip.elem = $(this.element);
 
         mip.attrs = {
-            active: this.element.getAttribute('active') || parmas.active,
-            childClass: this.element.getAttribute('childClass') || parmas.childClass
+            bigSuffix: this.element.getAttribute('bigSuffix') || parmas.bigSuffix
         };
 
         // 获取mip-img元素

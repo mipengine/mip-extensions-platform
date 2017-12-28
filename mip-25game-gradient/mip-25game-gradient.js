@@ -23,10 +23,15 @@ define(function (require) {
         image.onload = function () {
             var imgWidth = this.width;
             var imgHeight = this.height;
+            var xz = 0;
+            if (imgWidth > 96) {
+                xz = (imgWidth - 96) / 2;
+                imgWidth = 96;
+            }
             canvas.width = imgWidth;
-            canvas.height = imgHeight;
-            context.drawImage(this, 0, imgHeight / 3, imgWidth, imgHeight / 4);
-            var imageData = context.getImageData(0, 0, imgWidth, imgHeight);
+            canvas.height = 40;
+            context.drawImage(this, xz, xz + 30, imgWidth, 40, 0, 0, imgWidth, 40);
+            var imageData = context.getImageData(0, 0, imgWidth, 40);
             var arrBox = [];
             var length = imageData.data.length;
             for (var i = 0; i < length; i++) {
