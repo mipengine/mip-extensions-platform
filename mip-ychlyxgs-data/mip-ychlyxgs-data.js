@@ -54,7 +54,6 @@ define(function (require) {
         }).then(function (res) {
             return res.json();
         }).then(function (data) {
-            console.log(data);
             var iossopurl = data['iossp-url'];
             var iosclassid = data['ios-classid'];
             var datawebUrl = data.webUrl;
