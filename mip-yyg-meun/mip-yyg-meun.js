@@ -27,7 +27,8 @@ define(function (require) {
 
     var main = {
         init: function () {
-            var url = util.parseCacheUrl(window.location.href);
+            // 需要去除百度跳转的时候添加的各类参数
+            var url = util.parseCacheUrl(window.location.href).replace(/#[\s\S]*/, '');
 
             that.childElement.each(function (i, elem) {
                 var regStr = $(elem).attr('regStr');
