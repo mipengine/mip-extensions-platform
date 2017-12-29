@@ -54,16 +54,22 @@ define(function (require) {
             target.appendChild(js);
         }
         else if (htmlAd) {
-            var adId = data['adId'];
+            adId = data['adId'];
             var size = data['size'];
+            var isAdIcon = data['adIcon'];
+            var isAdclose = data['adClose'];
+            var icon = isAdIcon !== 'none' ? '<span class="ad-tip">广告</span>' : '';
+            var close = isAdclose !== 'none' ? '<span class="close-btn">X</span>' : '';
             var reg = (/^[^\d]*(\d+)x(\d+).*$|^.*$/);
             var w = 1 * size.replace(reg, '$1') || 640;
             var h = 1 * size.replace(reg, '$2') || 100;
             var ifr = [
-                '<div style="width:100%;margin:0 auto;text-align:center;" id="wrapAd' + adId + '">',
+                '<div style="width:100%;margin:0 auto;text-align:center;position: relative;" id="adWrap' + adId + '">',
                 '<iframe id="ad' + adId + '" class=' + loc + ' src="' + htmlAd + '" scrolling="no" frameborder="0" ',
                 'width="' + w + '" height="' + h + '" style="display: block; border: 0px; margin: 0px auto;">',
                 '</iframe>',
+                icon,
+                close,
                 '</div>'];
             target.innerHTML = ifr.join('');
             var wraper = document.getElementById('wrapAd' + adId + '');
@@ -71,6 +77,7 @@ define(function (require) {
             rate = (w / h);
             window.addEventListener('resize', resizeTimer(wraper, ele), false);
             resizeTimer(wraper, ele);
+            bingEvent(target, adId);
         }
         else {
             adId = data['adId'];
