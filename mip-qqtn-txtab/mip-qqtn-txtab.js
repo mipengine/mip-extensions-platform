@@ -10,7 +10,7 @@ define(function (require) {
     var customElement = require('customElement').create();
     customElement.prototype.firstInviewCallback = function () {
         var imgurl = '';
-        var addcount = '<div class="m-touxiang"><div class="clearfix m-imgul"></div><p class="m-imgtxt"></p></div>';
+        var addcount = '<div class="m-touxiang"><div class="clearfix m-imgul"></div></div>';
         var imgtt = '<div class="m-tabimg clearfix" id="m-tabs"><div class="f-fl img_menu">';
         imgtt += '<a href="javascript:;" class="m-hover" id="b_pic">大图</a><a href="javascript:;" id="s_pic">';
         imgtt += '小图</a></div><div class="f-fr img_menu"><a href="javascript:;" class="m-hover" id="f_pic">方图</a>';
@@ -51,7 +51,7 @@ define(function (require) {
             contenp.find('.m-imgul p img').css('border-radius', '50%');
         });
         // 处理内容的文字
-        $(ele).find('.m-imgtxt').append(toutext);
+        $(ele).find('.g-cont p').last().after('<p class="m-imgtxt">' + toutext + '</p>');
     };
     return customElement;
 });

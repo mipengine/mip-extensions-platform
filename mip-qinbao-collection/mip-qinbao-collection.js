@@ -126,6 +126,14 @@ define(function (require) {
             return out;
         },
         collectionFn: function (o) {
+            if ($('#doc-id').val() > 0 && !yhscFlag) {
+                $('.me-sc').text('已收藏').addClass('me-ysc');
+            }
+            $(window).scroll(function () {
+                if ($('#doc-id').val() > 0 && !yhscFlag) {
+                    $('.me-sc').text('已收藏').addClass('me-ysc');
+                }
+            });
             var t = this;
             $(o).click(function () {
                 var loginSt = $('#data-login-status').val();
