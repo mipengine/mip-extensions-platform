@@ -1,0 +1,14 @@
+{
+    "name": "mip-jia-zxpacket",
+    "version": "1.0.0",
+    "description": "领取1000装修红包",
+    "contributors": [
+        {
+            "name": "tao",
+            "email": "165526381@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
