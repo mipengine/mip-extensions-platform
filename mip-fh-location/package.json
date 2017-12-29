@@ -1,6 +1,6 @@
 {
     "name": "mip-fh-location",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "根据不同的地区展示不同的内容",
     "contributors": [
         {

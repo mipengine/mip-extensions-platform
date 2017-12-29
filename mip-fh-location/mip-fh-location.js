@@ -119,7 +119,7 @@ define(function (require) {
         }
 
         getLocation(function (data) {
-            $mipFhLocation.forEach(function (element) {
+            Array.prototype.forEach.call($mipFhLocation, function (element) {
                 setHtmlLocation(element, data);
             });
         });
