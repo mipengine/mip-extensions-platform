@@ -17,6 +17,7 @@ mip-jia-zxpacket 组件说明
 		{
 			"text":"推荐服务3",
 			"title":"文中提到的服务",
+			"counttime":"200",
 			"list":[
 				{
 					"title":"专业的报价服务，提前掌握装修费用",
@@ -83,6 +84,12 @@ mip-jia-zxpacket 组件说明
 说明：弹层标题
 必选项：是
 类型：string
+
+### counttime
+
+说明：倒计时秒数
+必选项：否
+类型：number or string
 
 ### list
 
