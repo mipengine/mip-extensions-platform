@@ -18,6 +18,7 @@ mip-jia-zxpacket 组件说明
 			"text":"推荐服务3",
 			"title":"文中提到的服务",
 			"counttime":"200",
+			"class":".fixed-hb-right .hb-box",
 			"list":[
 				{
 					"title":"专业的报价服务，提前掌握装修费用",

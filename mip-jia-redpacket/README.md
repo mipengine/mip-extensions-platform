@@ -15,15 +15,13 @@ mip-jia-redpacket 组件说明
 <mip-jia-redpacket>
     <script type="application/json">
     {
-    	"fixedImg": "//mued3.jia.com/image/mobile/mip/fix-hb.png",
-    	"fixedImgW": "92",
-    	"fixedImgH": "114",
     	"logo": "//mued3.jia.com/image/mobile/mip/hb-icon-1.png",
     	"logoW": "96",
     	"logoH": "96",
     	"logoText": "黄晓明",
     	"desc": "给您发了一个装修红包",
     	"couponText": "领取1000元装修优惠券！",
+    	"class":".hb-wrap .hb-box",
     	"redRequest": {
     		"url": "//mall.jia.com/api/promotion/sync-obtain-by-encrypted-mobile",
     		"parms": {

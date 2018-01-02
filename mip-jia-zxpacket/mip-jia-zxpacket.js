@@ -159,9 +159,10 @@ define(function (require) {
 
     // 添加红包html
     RedPacket.prototype.appendEle = function () {
-        var str = '<mip-fixed type="right" class="fixed-hb">';
+        /*var str = '<mip-fixed type="right" class="fixed-hb">';
         str += '<div class="hb-box">' + this.cfg.text + '</div>';
-        str += '</mip-fixed>';
+        str += '</mip-fixed>';*/
+        var str = '';
         str += '<div class="hb-popup">';
         str += '<div class="popup-box">';
         str += '<em class="close"></em>';
@@ -331,7 +332,7 @@ define(function (require) {
         countTimeFn(ele, $(ele).find('.count-box'), cfg.counttime || 600);
 
         // 显示弹层
-        $(ele).find('.hb-box').click(function () {
+        $(cfg.class).click(function () {
             $(ele).find('.popmask').css('display', 'block');
             $(ele).find('.hb-popup').addClass('show');
         });

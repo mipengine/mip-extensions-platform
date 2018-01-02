@@ -118,12 +118,12 @@ define(function (require) {
     // 添加红包html
     RedPacket.prototype.appendEle = function () {
         var str = [
-            '<mip-fixed type="right" class="fixed-hb">',
+            /*'<mip-fixed type="right" class="fixed-hb">',
             '    <div class="hb-box">',
             '        <mip-img layout="responsive" width="' + this.cfg.fixedImgW + '" height="',
             this.cfg.fixedImgH + '" src="' + this.cfg.fixedImg + '"></mip-img>',
             '    </div>',
-            '</mip-fixed>',
+            '</mip-fixed>',*/
             '<div class="hb-popup">',
             '    <div class="popup-box">',
             '        <em class="close"></em>',
@@ -255,7 +255,7 @@ define(function (require) {
         redPacket.appendEle();
 
         // 显示弹层
-        $(ele).find('.hb-box').click(function () {
+        $(cfg.class).click(function () {
             $(ele).find('.popmask, .hb-popup').css('display', 'block');
         });
 
