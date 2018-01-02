@@ -190,7 +190,6 @@ define(function (require) {
          * */
         var body = $('body');
         var outBg = $('<div class="out_bg"></div>');
-        body.append(outBg);
 
         /*
          * 创建主体图片浏览内容
@@ -206,6 +205,9 @@ define(function (require) {
             that.close();
         });
         outBg.append(closeBt);
+
+        mip.elem.append(outBg);
+
 
         return {
             outBg: outBg,

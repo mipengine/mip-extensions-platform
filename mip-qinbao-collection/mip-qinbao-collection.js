@@ -50,6 +50,9 @@ define(function (require) {
                                     }
                                     else if (colletionInfo.status === '1') {
                                         yhscFlag = false;
+                                        if ($('#doc-id').val() > 0) {
+                                            $('.me-sc').text('已收藏').addClass('me-ysc');
+                                        }
                                     }
                                 }
 
@@ -126,15 +129,6 @@ define(function (require) {
             return out;
         },
         collectionFn: function (o) {
-            if ($('#doc-id').val() > 0 && !yhscFlag) {
-                $('.me-sc').text('已收藏').addClass('me-ysc');
-            }
-            $(window).scrollTop(1);
-            $(window).scroll(function () {
-                if ($('#doc-id').val() > 0 && !yhscFlag) {
-                    $('.me-sc').text('已收藏').addClass('me-ysc');
-                }
-            });
             var t = this;
             $(o).click(function () {
                 var loginSt = $('#data-login-status').val();

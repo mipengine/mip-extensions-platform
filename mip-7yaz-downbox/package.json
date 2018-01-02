@@ -1,0 +1,15 @@
+{
+    "name": "mip-7yaz-downbox",
+    "version": "1.0.1",
+    "description": "替换lightbox中的游戏下载列表,一个lightbox重复利用",
+    "contributors": [
+        {
+          "name": "趣游安卓",
+          "email": "service@7yw.cn",
+          "url": "https://www.7yaz.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

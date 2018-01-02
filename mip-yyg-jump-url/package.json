@@ -1,7 +1,7 @@
 {
-    "name": "mip-yyg-photo-wall",
-    "version": "1.0.2",
-    "description": "获取子元素中的所有图片并以大图展现",
+    "name": "mip-yyg-jump-url",
+    "version": "1.0.0",
+    "description": "处理UC浏览器a标签跳转异常bug，代替A标签跳转功能",
     "contributors": [
         {
             "name": "Summer",
