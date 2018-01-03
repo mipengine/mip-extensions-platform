@@ -77,7 +77,7 @@ define(function (require) {
             loadNode.type = 'text/javascript';
 
             // 手机号加密js
-            loadNode.src = 'https://mued2.jia.com/js/mobile/jsencrypt.js';
+            loadNode.src = '//mued2.jia.com/js/mobile/jsencrypt.js';
             document.body.appendChild(loadNode);
         }
     }
@@ -333,7 +333,7 @@ define(function (require) {
                             }
                         }
                     }
-                    location.href = $url;
+                    window.top.location.href = $url;
                 }
                 else if ($success['type'] === 'class') {
                     $($success['element']).addClass($success['value']);
