@@ -48,54 +48,6 @@ mip-jia-zxpacket {
         z-index: 10001;
     }
 
-@-webkit-keyframes hb-left {
-    0% {
-        left: -10%;
-    }
-
-    30% {
-        left: 110%;
-    }
-
-    100% {
-        left: 110%;
-    }
-}
-
-@keyframes hb-left {
-    0% {
-        left: -10%;
-    }
-
-    30% {
-        left: 110%;
-    }
-
-    100% {
-        left: 110%;
-    }
-}
-
-@-webkit-keyframes popShow {
-    from {
-        -webkit-transform: translateX(100%);
-    }
-
-    to {
-        -webkit-transform: translateX(0)
-    }
-}
-
-@keyframes popShow {
-    from {
-        transform: translateX(100%);
-    }
-
-    to {
-        transform: translateX(0);
-    }
-}
-
     .hb-popup {
         position: fixed;
         right: 0;
@@ -312,6 +264,54 @@ mip-jia-zxpacket {
     .hb-popup.show {
         -webkit-transform: translateX(0);
         -ms-transform: translateX(0);
+        transform: translateX(0);
+    }
+}
+
+@-webkit-keyframes hb-left {
+    0% {
+        left: -10%;
+    }
+
+    30% {
+        left: 110%;
+    }
+
+    100% {
+        left: 110%;
+    }
+}
+
+@keyframes hb-left {
+    0% {
+        left: -10%;
+    }
+
+    30% {
+        left: 110%;
+    }
+
+    100% {
+        left: 110%;
+    }
+}
+
+@-webkit-keyframes popShow {
+    from {
+        -webkit-transform: translateX(100%);
+    }
+
+    to {
+        -webkit-transform: translateX(0)
+    }
+}
+
+@keyframes popShow {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
         transform: translateX(0);
     }
 }

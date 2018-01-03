@@ -6,11 +6,61 @@
 define(function (require) {
 
     var customElement = require('customElement').create();
+    var fixedElement = require('fixed-element');
     var $ = require('zepto');
     var fetchJsonp = require('fetch-jsonp');
     var util = require('util');
+    var Gesture = util.Gesture;
     var CustomStorage = util.customStorage;
     var storage = new CustomStorage(0);
+    var scrollTop = {
+        body: 0,
+        documentElement: 0,
+        offset: 0
+    };
+
+
+    /**
+     * [open 打开弹层 关闭fixedLayer]
+     *
+     * @param  {Object} event [事件对象]
+     */
+    function open(event) {
+        fixedElement.hideFixedLayer(fixedElement._fixedLayer);
+        event.preventDefault();
+        // 保存页面当前滚动状态，因为设置overflow:hidden后页面会滚动到顶部
+        scrollTop.body = document.body.scrollTop;
+        scrollTop.documentElement = document.documentElement.scrollTop;
+        scrollTop.offset = window.pageYOffset;
+        document.documentElement.classList.add('mip-no-scroll');
+    }
+
+
+    /**
+     * [close 关闭弹层 打开fixedLayer]
+     *
+     * @param  {Object} event [事件对象]
+     */
+    function close(event) {
+
+        fixedElement.showFixedLayer(fixedElement._fixedLayer);
+        if (event) {
+            event.preventDefault();
+        }
+        document.documentElement.classList.remove('mip-no-scroll');
+
+        // 恢复页面滚动状态到弹层打开之前
+        if (typeof (document.body.scrollTo) === 'function') {
+            // 先判断存在，因为safari浏览器没有document.body.scrollTo方法
+            document.body.scrollTo(0, scrollTop.body);
+        }
+        if (typeof (document.documentElement.scrollTo) === 'function') {
+            // 先判断存在，因为safari浏览器没有document.documentElement.scrollTo方法
+            document.documentElement.scrollTo(0, scrollTop.documentElement);
+        }
+        window.scrollTo(0, scrollTop.offset);
+    }
+
 
     var TYPE = 'script[type="application/json"]';
     var regPhone = /^1[3|4|5|7|8]\d{9}$/;
@@ -104,9 +154,13 @@ define(function (require) {
         MIP.prerenderElement(ele);
 
         // 加密依赖
-        var scriptDom = document.createElement('script');
-        scriptDom.src = '//mued2.jia.com/js/mobile/jsencrypt.js';
-        document.body.appendChild(scriptDom);
+        /* global JSEncryptExports */
+        if (typeof JSEncryptExports === 'undefined') {
+            var scriptDom = document.createElement('script');
+            scriptDom.src = '//mued2.jia.com/js/mobile/jsencrypt.js';
+            document.body.appendChild(scriptDom);
+        }
+
     };
 
     // 红包
@@ -177,6 +231,7 @@ define(function (require) {
                 } else if (data.obtainResult === 'REACH_OBTAIN_UPPER_LIMIT') {
                     tipMask('您已领取过该红包~');
                     $(selF.element).find('.popmask, .hb-popup').css('display', 'none');
+                    close();
                 } else {
                     tipMask(data.message);
                 }
@@ -255,13 +310,15 @@ define(function (require) {
         redPacket.appendEle();
 
         // 显示弹层
-        $(cfg.class).click(function () {
+        $(cfg.class).click(function (event) {
             $(ele).find('.popmask, .hb-popup').css('display', 'block');
+            open(event);
         });
 
         // 关闭弹层
-        $(ele).find('.close, .popmask').click(function () {
+        $(ele).find('.close, .popmask').click(function (event) {
             $(ele).find('.popmask, .hb-popup').css('display', 'none');
+            close(event);
         });
 
 
