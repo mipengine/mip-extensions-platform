@@ -216,7 +216,7 @@ define(function (require) {
             + '<div class="limit">订单实付金额满<b>399</b>元包邮，提醒您注意检验包装完整。</div>'
             + '</div>'
             + '</div>'
-            + '<form id="zmall_buy_form" method="get" action="' + url + '">'
+            + '<form id="zmall_buy_form" target="_top" method="get" action="' + url + '">'
             + '<input type="hidden" id="" name="c" value="Shop_TongChengGou_MixConfirmOrder"/>'
             + '<input type="hidden" id="skuIdInput" name="skuId" value=""/>'
             + '<input type="hidden" id="suitIdInput" name="suitId" value=""/>'

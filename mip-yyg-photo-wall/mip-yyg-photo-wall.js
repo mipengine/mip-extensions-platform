@@ -38,7 +38,7 @@ define(function (require) {
          * 处理侧边栏出现禁用document触摸事件
          * */
         stopTouchMove: function () {
-            $('body').css('overflow', 'hidden');
+            $('body').eq(0).css('overflow', 'hidden');
             document.addEventListener('touchmove', pare.touchMoveFn, true);
         },
 
@@ -46,7 +46,7 @@ define(function (require) {
          * 启用document触摸事件
          * */
         startTouchMove: function () {
-            $('body').css('overflow', '');
+            $('body').eq(0).css('overflow', '');
             document.removeEventListener('touchmove', pare.touchMoveFn, true);
         },
 
@@ -188,7 +188,7 @@ define(function (require) {
         /*
          * 创建黑色背景
          * */
-        var body = $('body');
+        var body = $('body').eq(0);
         var outBg = $('<div class="out_bg"></div>');
 
         /*

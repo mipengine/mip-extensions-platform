@@ -8,6 +8,7 @@ define(function (require) {
     var customElement = require('customElement').create();
     var $body = document.querySelector('body');
     var fetchJsonp = require('fetch-jsonp');
+    var timeout = 5000;
 
     // 通过接口获取地区方法
     function getLocation(cb) {
@@ -16,7 +17,6 @@ define(function (require) {
 
         var url = 'https://partners.fh21.com.cn/ad/api_getarea/';
         var ipUrl = 'https://ips.fh21.com.cn/getarea';
-        var timeout = 5000;
 
         // 先获取客户端IP
         fetchJsonp(ipUrl, {
@@ -46,6 +46,28 @@ define(function (require) {
             cb(data.provinceId);
         });
     }
+    // 通过 src 属性获取内容
+    function getHtml(ele, cb) {
+        cb = (typeof cb === 'function') ? cb : function () {
+        };
+        var isHasSrc = ele.hasAttribute('src');
+        if (!isHasSrc) {
+            cb();
+            return;
+        }
+        var src = ele.getAttribute('src');
+        fetchJsonp(src, {
+            jsonpCallback: 'jsonp',
+            timeout: timeout
+        }).then(function (res) {
+            return res.json();
+        }).then(function (data) {
+            ele.innerHTML = data;
+            cb();
+        }).catch(function (err) {
+            cb(err);
+        });
+    }
 
     // 主体功能方法
     function setHtmlLocation(elem, data) {
@@ -68,9 +90,9 @@ define(function (require) {
 
             var flag = false;
 
-            // 判断元素是否有浏览器取反
+            // 判断元素是否地域取反
             if (converse === null) {
-                if (locationType === data) { // 判断浏览器类型
+                if (locationType === data) { // 判断地域类型
                     flag = true;
                     break;
                 }
@@ -88,8 +110,10 @@ define(function (require) {
 
         if (flag) {
             // 真 显示元素
-            elem.classList.add('mip-fh-location--show');
-            $body.classList.add('v-mip-ck-location-' + locationClass + converseClass);
+            getHtml(elem, function () {
+                elem.classList.add('mip-fh-location--show');
+                $body.classList.add('v-mip-ck-location-' + locationClass + converseClass);
+            });
         }
         else {
             // 假 移除元素

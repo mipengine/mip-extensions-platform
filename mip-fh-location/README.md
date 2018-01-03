@@ -12,7 +12,7 @@ mip-fh-location 组件说明
 
 ### 基本用法
 ```html
-<mip-fh-location location="2" class="mip-fh-location">
+<mip-fh-location location="2" src="https://sex.fh21.com.cn/sex/api/link" class="mip-fh-location">
     北京地区会显示-1
 </mip-fh-location>
 
@@ -44,6 +44,13 @@ mip-fh-location 组件说明
 必选项：否
 类型：字符串
 取值范围：converse, true
+
+### src
+
+说明：异步接口链接地址
+必选项：否
+类型：字符串
+取值范围：合法的https-jsonp链接地址
 
 ## 注意事项
 

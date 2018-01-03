@@ -312,8 +312,18 @@ define(function (require) {
         // 格式化日期
         var date = new Date();
         var year = date.getFullYear().toString();
-        var month = (date.getMonth() + 1).toString();
-        var day = date.getDate().toString();
+        var month = (date.getMonth() + 1);
+        if (month < 10) {
+            month = '0' + month.toString();
+        } else {
+            month = month.toString();
+        }
+        var day = date.getDate();
+        if (day < 10) {
+            day = '0' + day.toString();
+        } else {
+            day = day.toString();
+        }
         var formatDate = year + month + day;
 
         var randomNum;
