@@ -7,6 +7,7 @@ define(function (require) {
     var timer;
     var adId;
     var rate;
+    var loc;
     var customElement = require('customElement').create();
     var bingEvent = function (element, adid) {
         var closeBtn = target.querySelector('.close-btn');
@@ -43,15 +44,33 @@ define(function (require) {
         if (str === '') {
             return;
         }
-        var data = JSON.parse(str);
-        var jsAd = data['jsad'];
-        var loc = data['id'];
-        var htmlAd = data['htmlad'];
         target = document.getElementsByClassName(loc)[0];
-        if (jsAd) {
+        try {
+            var data = JSON.parse(str);
+        }
+        catch (e) {
             var js = document.createElement('script');
-            js.innerHTML = jsAd;
+            js.innerHTML = str;
             target.appendChild(js);
+        }
+        var htmlAd = data['htmlad'];
+        var imgAd = data['imgSrc'];
+        if (imgAd) {
+            adId = data['adId'];
+            var src = imgAd;
+            var pvcode = data['pv'];
+            var link = data['link'];
+            var html = [
+                '<div style="position: relative;" id="adWrap' + adId + '">',
+                '<a target="_blank" id="ad' + adId + '" href="' + link + '">',
+                '<img src="' + src + '" style="width:100%; max-width:640px;">',
+                '</a>',
+                '<span class="close-btn">X</span>',
+                '<span class="ad-tip">广告</span>',
+                '</div>'];
+            target.innerHTML = html.join('');
+            triggerPv(pvcode);
+            bingEvent(target, adId);
         }
         else if (htmlAd) {
             adId = data['adId'];
@@ -80,21 +99,7 @@ define(function (require) {
             bingEvent(target, adId);
         }
         else {
-            adId = data['adId'];
-            var src = data['src'];
-            var pvcode = data['pv'];
-            var link = data['link'];
-            var html = [
-                '<div style="position: relative;" id="adWrap' + adId + '">',
-                '<a target="_blank" id="ad' + adId + '" href="' + link + '">',
-                '<img src="' + src + '" style="width:100%; max-width:640px;">',
-                '</a>',
-                '<span class="close-btn">X</span>',
-                '<span class="ad-tip">广告</span>',
-                '</div>'];
-            target.innerHTML = html.join('');
-            triggerPv(pvcode);
-            bingEvent(target, adId);
+            return false;
         }
     };
     var ajax = function (url, sccuessFn) {
@@ -115,7 +120,7 @@ define(function (require) {
 
     customElement.prototype.firstInviewCallback = function () {
         target = this.element;
-        var loc = target.className.replace(/^([^\s]+\.).*/, '$1');
+        loc = target.className.replace(/^([^\s]+\.).*/, '$1');
         var url = '//ivy.pconline.com.cn/show?id=' + loc + '&media=html&mip';
         ajax(url, setLocationAd);
     };

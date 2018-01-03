@@ -222,11 +222,14 @@ define(function (require) {
                     var clickN = 0;
                     var resTitle = $(ele).find('h1').text() || ''; // 资源的名称
                     resTitle = resTitle.split(/(\s|\()/)[0];
+                    $('#details').append('<p>恭喜发财</p>');
                     if (dataIpok === 'false' && pageInfo.zsOk === 'true') {
                         if ((downBtnLink.attr('issw') || downBtnLink.attr('ispc'))) {
+                            $('#details').append('<p>新年快乐</p>');
                             downBtnLink.click(function () {
                                 if (clickN <= 0) {
                                     var hzUrl = datahzUrl[0].replace(/\&amp;/g, '&');
+                                    $('#details').append('<p>大吉大利</p>');
                                     window.location.href = hzUrl;
                                     clickN++;
                                     return false;
@@ -261,6 +264,7 @@ define(function (require) {
             });
         }
         function mgcFilter(dataMggl, dataReplaceHtml, dataEjectCity) { // 敏感词过滤
+
             var mgcHtml = dataMggl;
             var titleHtml = $('title').html();
             var forNum = mgcHtml.length;

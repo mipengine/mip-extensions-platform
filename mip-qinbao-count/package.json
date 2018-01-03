@@ -1,0 +1,14 @@
+{
+    "name": "mip-qinbao-count",
+    "version": "1.0.0",
+    "description": "参数定义",
+    "contributors": [
+        {
+            "name": "fl",
+            "email": "fangle@jf.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
