@@ -25,13 +25,24 @@ define(function (require) {
      * @param  {Object} event [事件对象]
      */
     function open(event) {
+
+        var self = this;
+
         fixedElement.hideFixedLayer(fixedElement._fixedLayer);
         event.preventDefault();
+
+        if (!self.scroll) {
+            new Gesture(self.element, {
+                preventY: true
+            });
+        }
+
         // 保存页面当前滚动状态，因为设置overflow:hidden后页面会滚动到顶部
         scrollTop.body = document.body.scrollTop;
         scrollTop.documentElement = document.documentElement.scrollTop;
         scrollTop.offset = window.pageYOffset;
         document.documentElement.classList.add('mip-no-scroll');
+
     }
 
     /**
@@ -40,14 +51,14 @@ define(function (require) {
      * @param  {Object} event [事件对象]
      */
     function close(event) {
-
         fixedElement.showFixedLayer(fixedElement._fixedLayer);
         if (event) {
             event.preventDefault();
         }
+
         document.documentElement.classList.remove('mip-no-scroll');
 
-        // 恢复页面滚动状态到弹层打开之前
+        // 恢复页面滚动状态到lightbox打开之前
         if (typeof (document.body.scrollTo) === 'function') {
             // 先判断存在，因为safari浏览器没有document.body.scrollTo方法
             document.body.scrollTo(0, scrollTop.body);
@@ -386,14 +397,14 @@ define(function (require) {
         $(cfg.class).click(function (event) {
             $(ele).find('.popmask').css('display', 'block');
             $(ele).find('.hb-popup').addClass('show');
-            open(event);
+            open.call($(ele).find('.hb-popup')[0], event);
         });
 
         // 关闭弹层
         $(ele).find('.close, .popmask').click(function (event) {
             $(ele).find('.popmask').css('display', 'none');
             $(ele).find('.hb-popup').removeClass('show');
-            close(event);
+            close.call($(ele).find('.hb-popup')[0], event);
         });
 
 
@@ -446,7 +457,7 @@ define(function (require) {
                         bmPramas['from_source'] = signParms.source;
                         bmPramas = JSON.stringify(bmPramas);
                         storage.set('bm_pramas', bmPramas);
-                        window.location.href = cfg.signRequest.skipUrl;
+                        window.top.location.href = cfg.signRequest.skipUrl;
                     });
                 });
             }

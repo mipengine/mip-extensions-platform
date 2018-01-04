@@ -230,9 +230,7 @@ define(function (require) {
             }
             // 手机号加密
             if (/^1[3|4|5|7|8]\d{9}$/.test(params[key])) {
-                console.log(params[key]);
                 params[key] = mobileEncrypt(params[key], params.encrypt || 'zx');
-                console.log(params[key]);
             }
         }
 

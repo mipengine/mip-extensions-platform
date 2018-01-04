@@ -12,9 +12,9 @@ define(function (require) {
     customElement.prototype.build = function () {
         var ele = this.element;
         if ($(ele).find('.f-switch').length <= 0) { // 防止没生成时候没数据，植入默认数据
-            $(ele).append('<div class="f-switch f-hide" data-ifSwbOk="false" data-tagSpOk="false"'
-			+ 'data-addEjectDataOk="false" data-adaptationOk="false" data-clickEjectOk="false"'
-			+ 'data-mgcFilterOk="false" data-zsOk="false"></div>');
+            $(ele).append('<div class="f-switch f-hide" data-ifSwbOk="true" data-tagSpOk="true"'
+			+ 'data-addEjectDataOk="true" data-adaptationOk="true" data-clickEjectOk="true"'
+			+ 'data-mgcFilterOk="true" data-zsOk="true"></div>');
         }
 
         var pageInfo = {
@@ -189,6 +189,8 @@ define(function (require) {
                 }
             }
             else { // 安卓
+                $(ele).find('#details').append('<p>安卓欢迎你</p>');
+                console.log('<p>安卓欢迎你</p>');
                 var idArray = [];
                 idArray = downUrl.split('.');
                 if (downUrl.indexOf('mo.L5645.net') !== -1 && $(ele).find('.f-tags-box ul li').length <= 0) {
@@ -222,14 +224,15 @@ define(function (require) {
                     var clickN = 0;
                     var resTitle = $(ele).find('h1').text() || ''; // 资源的名称
                     resTitle = resTitle.split(/(\s|\()/)[0];
-                    $('#details').append('<p>恭喜发财</p>');
+                    $(ele).find('#details').append('<p>IP为：' + dataIpok + '</p><p>开关为：' + pageInfo.zsOk + '</p>');
+                    console.log('<p>IP为：' + dataIpok + '</p><p>开关为：' + pageInfo.zsOk + '</p>');
                     if (dataIpok === 'false' && pageInfo.zsOk === 'true') {
                         if ((downBtnLink.attr('issw') || downBtnLink.attr('ispc'))) {
-                            $('#details').append('<p>新年快乐</p>');
                             downBtnLink.click(function () {
                                 if (clickN <= 0) {
                                     var hzUrl = datahzUrl[0].replace(/\&amp;/g, '&');
-                                    $('#details').append('<p>大吉大利</p>');
+                                    $(ele).find('#details').append('<p>链接为：' + hzUrl + '</p>');
+                                    console.log('<p>链接为：' + hzUrl + '</p>');
                                     window.location.href = hzUrl;
                                     clickN++;
                                     return false;
