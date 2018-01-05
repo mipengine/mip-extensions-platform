@@ -1,6 +1,6 @@
 {
     "name": "mip-popup-layer",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "在指定的位置弹出层(需要在css中自己定义位置)",
     "contributors": [
         {

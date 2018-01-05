@@ -312,11 +312,18 @@ define(function (require) {
             return;
         }
 
+        // 加载中
+        self.loading = false;
+
         // 循环绑定事件
         [].forEach.call(entrys, function (entry, index) {
             entry.addEventListener('click', function (e) {
                 e.stopPropagation();
                 e.preventDefault();
+
+                if (self.loading) {
+                    return;
+                }
 
                 var userId = '';
                 if (window.ZOL_USER_INFO && window.ZOL_USER_INFO.sid) {
@@ -333,8 +340,10 @@ define(function (require) {
                     show.call(ele);
                 }
                 else {
+                    self.loading = true;
                     init.call(ele, function () {
                         couponLayer.classList.add('mip-zmall-coupon-show');
+                        self.loading = false;
                     });
                 }
             }, false);

@@ -2,17 +2,18 @@
  * @file 弹出层位置由css中指定
  *
  * @author 381890975@qq.com, maketoday
- * @version 1.0
+ * @version 1.0.1
  * @copyright 在mip-sider上修改而成
  */
 define(function (require) {
     var customElement = require('customElement').create();
     var util = require('util');
-    var naboo = util.naboo;
+
 
     /**
      * [toggle 打开或关闭 popuplayer 入口]
-     * @param  {Object} event 点击事件
+     *
+	 * @param  {Object} event 点击事件
      */
     function toggle(event) {
 
@@ -24,7 +25,6 @@ define(function (require) {
      * [open 打开 popuplayer]
      */
     function open() {
-
         var self = this;
         if (self.runing) {
             return;
@@ -42,14 +42,9 @@ define(function (require) {
         self.bodyOverflow = getComputedStyle(document.body).overflow;
         document.body.style.overflow = 'hidden';
 
-        // 动画效果
-        var openTimer = setTimeout(function () {
+        self.element.setAttribute('open', '');
 
-            self.element.setAttribute('open', '');
-            self.element.setAttribute('aria-hidden', 'false');
-            clearTimeout(openTimer);
 
-        }, self.ANIMATION_TIMEOUT);
 
     }
 
@@ -59,26 +54,48 @@ define(function (require) {
      * @param  {Object} event 点击事件
      */
     function close(event) {
-
         var self = this;
         self.runing = true;
         event.preventDefault();
 
         self.element.removeAttribute('open');
-        self.element.setAttribute('aria-hidden', 'true');
-
+        util.css(self.element, {display: 'none'});
+        document.body.style.overflow = self.bodyOverflow;
         closeMask.call(self);
 
-        document.body.style.overflow = self.bodyOverflow;
 
-        // 动画效果
-        var closeTimer = setTimeout(function () {
+    }
 
-            util.css(self.element, {display: 'none'});
-            clearTimeout(closeTimer);
-
-        }, self.ANIMATION_TIMEOUT);
-
+    /**
+     * [closeAll 关闭除了自己的所有层 popuplayer]
+     *
+     * @param  {Object} event 点击事件
+     */
+    function closeAll(event) {
+        var self = this;
+        var id = '';
+        var ele = '';
+        self.runing = true;
+        event.preventDefault();
+        var lbclose = false;
+        var layer = document.getElementsByClassName('MIP-POPUP-LAYER-MASK');
+        for (var i = 0; i < layer.length; i++) {
+            id = layer[i].id.split('-')[1];
+            if (id === self.id) {
+                continue;
+            }
+            ele = document.getElementById(id);
+            if (ele.hasAttribute('open')) {
+                ele.removeAttribute('open');
+                ele.style.display = 'none';
+                layer[i].style.display = 'none';
+                lbclose = true;
+            }
+        }
+        if (lbclose) {
+            document.body.style.overflow = self.bodyOverflow;
+        }
+        self.runing = false;
     }
 
     /**
@@ -92,12 +109,12 @@ define(function (require) {
         if (!self.maskElement) {
 
             const mask = document.createElement('div');
-            mask.id = 'MIP-' + self.id.toUpperCase() + '-MASK';
+            mask.id = 'mip-' + self.id + '-mask';
             mask.className = 'MIP-POPUP-LAYER-MASK';
             mask.style.display = 'block';
 
-            // 与mip-sidebar 同级dom
-            self.element.parentNode.appendChild(mask);
+            // body级别dom
+            document.body.appendChild(mask);
             mask.addEventListener('touchmove', function (evt) {
                 evt.preventDefault();
             }, false);
@@ -111,13 +128,9 @@ define(function (require) {
         // 样式设置
         self.maskElement.style.display = 'block';
 
-        naboo.animate(self.maskElement, {
-            opacity: 0.2
-        }, {
-            duration: 500
-        }).start(function () {
-            self.runing = false;
-        });
+
+        self.runing = false;
+
     }
 
     /**
@@ -126,15 +139,12 @@ define(function (require) {
     function closeMask() {
         var self = this;
         if (self.maskElement) {
-            naboo.animate(self.maskElement, {
-                opacity: 0
-            }, {
-                duration: 500
-            }).start(function () {
-                self.maskElement.style.display = 'none';
-                self.runing = false;
-            });
+
+            self.maskElement.style.display = 'none';
+            self.runing = false;
+
         }
+
     }
 
     /**
@@ -157,31 +167,18 @@ define(function (require) {
         var self = this;
         self.maskElement = false;
         self.id = self.element.id;
-        self.side = self.element.getAttribute('side');
-        self.ANIMATION_TIMEOUT = 100;
 
-        if (self.side !== 'left' && self.side !== 'right') {
-            self.side = 'left';
-            self.element.setAttribute('side', self.side);
-        }
-
-        if (isOpen.call(self)) {
-            open.call(self);
-        }
-        else {
-            self.element.setAttribute('aria-hidden', 'true');
-        }
-
-
-
-        self.addEventAction('toggle', function (event) {
-            toggle.call(self, event);
-        });
         self.addEventAction('open', function () {
             open.call(self);
         });
+        self.addEventAction('toggle', function (event) {
+            toggle.call(self, event);
+        });
         self.addEventAction('close', function (event) {
             close.call(self, event);
+        });
+        self.addEventAction('closeAll', function (event) {
+            closeAll.call(self, event);
         });
 
     }

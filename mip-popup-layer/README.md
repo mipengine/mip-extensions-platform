@@ -1,5 +1,6 @@
 # mip-popup-layer
-mip-popup-layer 在指定的位置弹出层(需要在css中自己定义位置)
+mip-popup-layer 在指定的位置弹出层(需要在css中自己定义位置) 
+
 
 标题|内容
 ----|----
@@ -16,36 +17,43 @@ mip-popup-layer 在指定的位置弹出层(需要在css中自己定义位置)
 
 .popup1,.popup2,.popup3{
 	background:red;
-	display:none;	
-	top:-97px ; 
+	display:none;		
 	width:100%;
+	overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 .popup1{
-	
+	top:-97px ; 
 	left: 0px;
 
 }
 .popup2{
-	
+	top:-78px ; 
 	left: 0px;
 
 }
 .popup3{
-	
+	top:-58px ;
 	left: 0px;
 
 }
-.top_menu { border-top: 1px solid #3D3D46; width: 100%; background: rgba(255, 255, 255, 0.7); height: 48px;display: -webkit-box; display: box; margin:100px 0 0; padding:0; -webkit-box-orient: horizontal; background: -webkit-gradient(linear, 0 0, 0 100%, from(#524945), to(#48403c), color-stop(60%, #524945));} 
+.top_menu { position:relative; z-index:10004; border-top: 1px solid #3D3D46; width: 100%; background: rgba(255, 255, 255, 0.7); height: 48px;display: -webkit-box; display: box; margin:100px 0 0; padding:0; -webkit-box-orient: horizontal; background: -webkit-gradient(linear, 0 0, 0 100%, from(#524945), to(#48403c), color-stop(60%, #524945));} 
 .top_bar .top_menu>li {-webkit-box-flex:1; text-align:center;margin-right: 1px; color:#FFF;}
 
 
 .top_bar .top_menu>li label { overflow:hidden; margin: 0 0 0 0; font-size: 12px; display: block !important; line-height: 18px; text-align: center; } 
 
 </style>
-
+<ul>
+<li>元素id.open 打开层</li>
+<li>元素id.close关闭层</li>
+<li>元素id.toggle 打开或关闭层</li>
+<li>元素id.closeAll 关闭除自己的其它层</li>
+<ul>
  <div class="top_bar">
   <ul id="top_menu" class="top_menu"> 	
-	<li class="listype" on="tap:popup1.open">
+	<li class="listype" on="tap:popup1.closeAll  tap:popup1.toggle">
 	    <label>首页</label>
         <mip-popup-layer id="popup1" layout="nodisplay" class="popup1">
 			<ul>
@@ -65,7 +73,7 @@ mip-popup-layer 在指定的位置弹出层(需要在css中自己定义位置)
 			</ul>
 		</mip-popup-layer>	
 	</li>
-	<li class="listype" on="tap:popup2.open">
+	<li class="listype" on="tap:popup2.closeAll  tap:popup2.toggle">
 	<label>列表</label>
 	<mip-popup-layer id="popup2" layout="nodisplay" class="popup2">
 			<ul>
@@ -79,13 +87,11 @@ mip-popup-layer 在指定的位置弹出层(需要在css中自己定义位置)
 			<li>
 				<a href="/sy-tutor">预约教师</a>
 			</li>
-			<li>
-				<a href="/sy-pupil">预约学生</a>
-			</li>
+		
 			</ul>
 		</mip-popup-layer>	
 	</li>
-	<li class="listype" on="tap:popup3.open">
+	<li class="listype" on="tap:popup3.closeAll tap:popup3.toggle">
 	    <label>咨询</label>
 	    <mip-popup-layer id="popup3" layout="nodisplay" class="popup3">
 			<ul>
@@ -96,12 +102,7 @@ mip-popup-layer 在指定的位置弹出层(需要在css中自己定义位置)
 			<li>
 				<a  href="/sy-agencys">教育机构</a>
 			</li>
-			<li>
-				<a  href="/sy-tutor">预约教师</a>
-			</li>
-			<li>
-				<a  href="/sy-pupil">预约学生</a>
-			</li>
+			
 			</ul>
 		</mip-popup-layer>	
 	</li>

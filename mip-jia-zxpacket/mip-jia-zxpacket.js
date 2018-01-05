@@ -30,18 +30,17 @@ define(function (require) {
 
         fixedElement.hideFixedLayer(fixedElement._fixedLayer);
         event.preventDefault();
-        if (!self.scroll) {
+        /*if (!self.scroll) {
             new Gesture(self.element, {
                 preventY: true
             });
-        }
+        }*/
 
         // 保存页面当前滚动状态，因为设置overflow:hidden后页面会滚动到顶部
         scrollTop.body = document.body.scrollTop;
         scrollTop.documentElement = document.documentElement.scrollTop;
         scrollTop.offset = window.pageYOffset;
         document.documentElement.classList.add('mip-no-scroll');
-
     }
 
     /**
@@ -226,31 +225,6 @@ define(function (require) {
         str += '<div class="hb-popup">';
         str += '<div class="popup-box">';
         str += '<em class="close"></em>';
-        str += '<h5 class="title">' + this.cfg.title + '</h5>';
-        if ($.isArray(this.cfg.list)) {
-            str += '<ul class="list">';
-            this.cfg.list.forEach(function (item, index) {
-                str += '<li class="' + (item.class || '') + '"><a href="' + item.href + '">';
-                str += '<div class="img-box">';
-                // str += '<mip-img src="'+item.img+'"></mip-img>';
-                str += '</div>';
-                str += '<div class="info-box">';
-                str += '<p class="tit">' + item.title + '</p>';
-                if (item.tag) {
-                    str += '<p class="tag">';
-                    var arr = item.tag.split('-');
-                    arr.forEach(function (a, b) {
-                        str += '<span>' + a + '</span>';
-                    });
-                    str += '</p>';
-                }
-                str += '<p class="txt">' + item.desc + '</p>';
-                str += '<span class="btn">' + item.btntxt + '</span>';
-                str += '</div></a></li>';
-            });
-            str += '</ul>';
-        }
-
         str += '<div class="hbinfo-box">';
         str += '<h5 class="tit"><span>' + this.cfg.hbinfo.title + '</span></h5>';
         str += '<div class="img-box"></div>';
@@ -277,6 +251,32 @@ define(function (require) {
         str += '<span class="headline-btn">立即领取</span>';
         str += '</div>';
         str += '</div>';
+
+        str += '<h5 class="title">' + this.cfg.title + '</h5>';
+        if ($.isArray(this.cfg.list)) {
+            str += '<ul class="list">';
+            this.cfg.list.forEach(function (item, index) {
+                str += '<li class="' + (item.class || '') + '"><a href="' + item.href + '">';
+                str += '<div class="img-box">';
+                // str += '<mip-img src="'+item.img+'"></mip-img>';
+                str += '</div>';
+                str += '<div class="info-box">';
+                str += '<p class="tit">' + item.title + '</p>';
+                if (item.tag) {
+                    str += '<p class="tag">';
+                    var arr = item.tag.split('-');
+                    arr.forEach(function (a, b) {
+                        str += '<span>' + a + '</span>';
+                    });
+                    str += '</p>';
+                }
+                str += '<p class="txt">' + item.desc + '</p>';
+                str += '<span class="btn">' + item.btntxt + '</span>';
+                str += '</div></a></li>';
+            });
+            str += '</ul>';
+        }
+
         str += '</div>';
         str += '</div>';
         str += '<div class="popmask"></div><div class="loading-icon"></div>';
@@ -408,7 +408,7 @@ define(function (require) {
             close.call(self, event);
         });
 
-        if (isAndroid) {
+        /*if (isAndroid) {
             $(ele).find('.form-input').on({
                 focus: function () {
                     $(ele).find('.popup-box').addClass('focus');
@@ -417,7 +417,7 @@ define(function (require) {
                     $(ele).find('.popup-box').removeClass('focus');
                 }
             });
-        }
+        }*/
 
         // 点击报名
         $(ele).find('.headline-btn').click(function () {

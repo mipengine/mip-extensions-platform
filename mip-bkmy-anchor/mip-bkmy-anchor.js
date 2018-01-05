@@ -13,9 +13,8 @@ define(function (require) {
         if (anchor !== '') {
             var id = $(anchor).parent().prev().attr('id');
             $('#' + id).click();
-            var aid = anchor.replace('#', '');
             setTimeout(function () {
-                this.element.querySelector(aid).scrollIntoView();
+                location.href = anchor;
             }, 500);
         }
     };
