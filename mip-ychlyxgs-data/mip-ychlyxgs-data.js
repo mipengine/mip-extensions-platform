@@ -11,25 +11,12 @@ define(function (require) {
     var fetchJsonp = require('fetch-jsonp');
     customElement.prototype.build = function () {
         var ele = this.element;
-        if ($(ele).find('.f-switch').length <= 0) { // 防止没生成时候没数据，植入默认数据
-            $(ele).append('<div class="f-switch f-hide" data-ifSwbOk="true" data-tagSpOk="true"'
-			+ 'data-addEjectDataOk="true" data-adaptationOk="true" data-clickEjectOk="true"'
-			+ 'data-mgcFilterOk="true" data-zsOk="true"></div>');
-        }
-
         var pageInfo = {
             id: $(ele).find('.f-information').attr('data-id'),
             categroyId: Math.ceil($(ele).find('.f-information').attr('data-categroyId')),
             ismoney: $(ele).find('.f-information').attr('data-ismoney'),
             system: $(ele).find('.f-information').attr('data-system').toUpperCase(),
-            phpUrl: $(ele).find('.f-information').attr('data-phpurl'),
-            ifSwbOk: $(ele).find('.f-switch').attr('data-ifSwbOk'),
-            tagSpOk: $(ele).find('.f-switch').attr('data-tagSpOk'),
-            addEjectDataOk: $(ele).find('.f-switch').attr('data-addEjectDataOk'),
-            adaptationOk: $(ele).find('.f-switch').attr('data-adaptationOk'),
-            zsOk: $(ele).find('.f-switch').attr('data-zsOk'),
-            clickEjectOk: $(ele).find('.f-switch').attr('data-clickEjectOk'),
-            mgcFilterOk: $(ele).find('.f-switch').attr('data-mgcFilterOk')
+            phpUrl: $(ele).find('.f-information').attr('data-phpurl')
         };
         var isAds = false; // 商务包初始值
         var downUrl = $(ele).find('.f-downbtn-url a').first().attr('href'); // 下载链接
@@ -61,27 +48,27 @@ define(function (require) {
             var androidclassid = data['android-classid'];
             var dataIpok = data.ipok;
             var datahzUrl = data.hzurl;
-            if (pageInfo.ifSwbOk === 'true') {
+            var dataOpen = data.openZs;
+            if (data.ifSwbOk === 'true') {
                 ifSwb(data['f-noAdf-hide']); // 判断商务包
             }
-
-            if (pageInfo.tagSpOk === 'true') {
+            if (data.tagSpOk === 'true') {
                 tagSp(data.webUrl); // tags适配
             }
 
-            if (pageInfo.addEjectDataOk === 'true') {
+            if (data.addEjectDataOk === 'true') {
                 addEjectData(data['eject-city'], data.tcAndroidData, data.tcOhterCity); // 植入弹层推荐内容
             }
 
-            if (pageInfo.adaptationOk === 'true') {
-                adaptation(iossopurl, iosclassid, datawebUrl, azspurl, androidclassid, dataIpok, datahzUrl); // 设备适配
+            if (data.adaptationOk === 'true') {
+                adaptation(iossopurl, iosclassid, datawebUrl, azspurl, androidclassid, dataIpok, datahzUrl, dataOpen); // 设备适配
             }
 
-            if (pageInfo.clickEjectOk === 'true') {
+            if (data.clickEjectOk === 'true') {
                 clickEject(data['open-eject']); // 点击触发弹层
             }
 
-            if (pageInfo.mgcFilterOk === 'true') {
+            if (data.mgcFilterOk === 'true') {
                 mgcFilter(data['f-mg-gl'], data.replaceHtml, data['eject-city']); // 敏感词过滤
             }
 
@@ -176,7 +163,7 @@ define(function (require) {
             }
             $(ele).find('.f-android-eject').append(androidEjectData);
         }
-        function adaptation(iossopurl, iosclassid, datawebUrl, azspurl, androidclassid, dataIpok, datahzUrl) { // 设备适配
+        function adaptation(iossopurl, iosclassid, datawebUrl, azspurl, androidclassid, dataIpok, datahzUrl, openZs) { // 设备适配
             if (platform.isIos()) { // IOS
                 var iosspUrlid = $.inArray(downUrl, iossopurl);
                 var ifiosSp = $.inArray(pageInfo.categroyId, iosclassid);
@@ -189,8 +176,6 @@ define(function (require) {
                 }
             }
             else { // 安卓
-                $(ele).find('#details').append('<p>安卓欢迎你</p>');
-                console.log('<p>安卓欢迎你</p>');
                 var idArray = [];
                 idArray = downUrl.split('.');
                 if (downUrl.indexOf('mo.L5645.net') !== -1 && $(ele).find('.f-tags-box ul li').length <= 0) {
@@ -224,15 +209,11 @@ define(function (require) {
                     var clickN = 0;
                     var resTitle = $(ele).find('h1').text() || ''; // 资源的名称
                     resTitle = resTitle.split(/(\s|\()/)[0];
-                    $(ele).find('#details').append('<p>IP为：' + dataIpok + '</p><p>开关为：' + pageInfo.zsOk + '</p>');
-                    console.log('<p>IP为：' + dataIpok + '</p><p>开关为：' + pageInfo.zsOk + '</p>');
-                    if (dataIpok === 'false' && pageInfo.zsOk === 'true') {
+                    if (dataIpok === 'false' && openZs === 'true') {
                         if ((downBtnLink.attr('issw') || downBtnLink.attr('ispc'))) {
                             downBtnLink.click(function () {
                                 if (clickN <= 0) {
                                     var hzUrl = datahzUrl[0].replace(/\&amp;/g, '&');
-                                    $(ele).find('#details').append('<p>链接为：' + hzUrl + '</p>');
-                                    console.log('<p>链接为：' + hzUrl + '</p>');
                                     window.location.href = hzUrl;
                                     clickN++;
                                     return false;
@@ -248,6 +229,22 @@ define(function (require) {
                 }
             }
         }
+        fetchJsonp('http://ca.6071.com/home/web/get_jk/b/' + pageInfo.phpUrl, {
+            jsonpCallback: 'callback'
+        }).then(function (res) {
+            return res.json();
+        }).then(function (data) {
+            if (data !== 'false' || data !== '') {
+                var dom = document.getElementById('mip-ychlyxgs-data');
+                var geiJk = data;
+                if (dom !== null) {
+                    var sc = document.createElement('script');
+                    sc.setAttribute('type', 'text/javascript');
+                    sc.setAttribute('src', geiJk);
+                    dom.appendChild(sc);
+                }
+            }
+        });
         function clickEject(openEject) { // 点击触发弹层
             if (openEject === false) {
                 return false;

@@ -6,31 +6,31 @@
 define(function (require) {
     var customElement = require('customElement').create();
     customElement.prototype.firstInviewCallback = function () {
+        var $ = require('jquery');
         $('.aud').click(function () {
-                var id = $(this).attr('id');
-                if (id) {
-                    var idNum = id.split('_');
-                    if (idNum[0].indexOf('audioDiv') >= 0) {
+                var ids = $(this).attr('id');
+                if (ids) {
+                    var idNum = ids.split('_');
+                    if (idNum[0] === 'audioDiv') {
                         for (var i = 0; i < 5; i++) {
-                            if (i.indexOf(idNum[1]) >= 0) {
+                            if ((i + '').indexOf(idNum[1]) >= 0) {
+                                $('#mip_' + idNum[1]).children('.mip-audio-tag').attr('id', 'audiomip_' + i);
                                 var audio = document.getElementById('audiomip_' + i);
-                                if (audio.paused) {
+                                var audioClass = $('#audiomip_' + i).attr('class');
+                                if (audioClass === 'mip-audio-tag' || audioClass === 'mip-audio-tag pause') {
                                     audio.play();
                                     $('#play_' + i).text('点击暂停');
                                     $('#audio_icon_' + i).addClass('playing');
+                                    $('#audiomip_' + i).addClass('play');
+                                    $('#audiomip_' + i).removeClass('pause');
                                 } else {
                                     audio.pause();
                                     $('#play_' + i).text('点击播放');
-                                    $('#audio_icon_' + i).css('background', 'url(http://m.baikemy.com/images2.0/audio.jpg) no-repeat left -39px;background-size: 13px 52px;');
+                                    $('#audio_icon_' + i).css('background', 'url(http://m.baikemy.com/images2.0/audio.jpg) no-repeat left -39px;background-size:13px 52px;');
                                     $('#audio_icon_' + i).removeClass('playing');
+                                    $('#audiomip_' + i).addClass('pause');
+                                    $('#audiomip_' + i).removeClass('play');
                                 }
-                                audio.onended = function () {
-                                    for (var j = 0; j < 5; j++) {
-                                        $('#play_' + j).text('点击播放');
-                                        $('#audio_icon_' + j).css('background', 'url(http://m.baikemy.com/images2.0/audio.jpg) no-repeat left -39px;background-size: 13px 52px;');
-                                        $('#audio_icon_' + j).removeClass('playing');
-                                    }
-                                };
                             }
                         }
                     }

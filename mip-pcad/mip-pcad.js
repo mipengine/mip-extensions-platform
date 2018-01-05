@@ -47,59 +47,62 @@ define(function (require) {
         target = document.getElementsByClassName(loc)[0];
         try {
             var data = JSON.parse(str);
+            var htmlAd = data['htmlad'];
+            var imgAd = data['imgSrc'];
+            if (imgAd) {
+                adId = data['adId'];
+                var src = imgAd;
+                var pvcode = data['pv'];
+                var link = data['link'];
+                var html = [
+                    '<div style="position: relative;" id="adWrap' + adId + '">',
+                    '<a id="ad' + adId + '" href="' + link + '">',
+                    '<img src="' + src + '" style="width:100%; max-width:640px;">',
+                    '</a>',
+                    '<span class="close-btn">X</span>',
+                    '<span class="ad-tip">广告</span>',
+                    '</div>'];
+                target.innerHTML = html.join('');
+                triggerPv(pvcode);
+                bingEvent(target, adId);
+            }
+            else if (htmlAd) {
+                adId = data['adId'];
+                var size = data['size'];
+                var isAdIcon = data['adIcon'];
+                var isAdclose = data['adClose'];
+                var icon = isAdIcon !== 'none' ? '<span class="ad-tip">广告</span>' : '';
+                var close = isAdclose !== 'none' ? '<span class="close-btn">X</span>' : '';
+                var reg = (/^[^\d]*(\d+)x(\d+).*$|^.*$/);
+                var w = 1 * size.replace(reg, '$1') || 640;
+                var h = 1 * size.replace(reg, '$2') || 100;
+                var ifr = [
+                    '<div style="width:100%;margin:0 auto;text-align:center;position: relative;" ',
+                    'id="adWrap' + adId + '"><iframe id="ad' + adId + '" class=' + loc + ' src="' + htmlAd + '" ',
+                    'scrolling="no" frameborder="0" width="' + w + '" height="' + h + '" ',
+                    'style="display: block; border: 0px; margin: 0px auto;"></iframe>',
+                    icon,
+                    close,
+                    '</div>'];
+                target.innerHTML = ifr.join('');
+                var wraper = document.getElementById('wrapAd' + adId + '');
+                var ele = document.getElementById('ad' + adId + '');
+                rate = (w / h);
+                window.addEventListener('resize', resizeTimer(wraper, ele), false);
+                resizeTimer(wraper, ele);
+                if (close) {
+                    bingEvent(target, adId);
+                }
+            }
+            else {
+                return;
+            }
         }
         catch (e) {
             var js = document.createElement('script');
             js.innerHTML = str;
             target.appendChild(js);
-        }
-        var htmlAd = data['htmlad'];
-        var imgAd = data['imgSrc'];
-        if (imgAd) {
-            adId = data['adId'];
-            var src = imgAd;
-            var pvcode = data['pv'];
-            var link = data['link'];
-            var html = [
-                '<div style="position: relative;" id="adWrap' + adId + '">',
-                '<a target="_blank" id="ad' + adId + '" href="' + link + '">',
-                '<img src="' + src + '" style="width:100%; max-width:640px;">',
-                '</a>',
-                '<span class="close-btn">X</span>',
-                '<span class="ad-tip">广告</span>',
-                '</div>'];
-            target.innerHTML = html.join('');
-            triggerPv(pvcode);
-            bingEvent(target, adId);
-        }
-        else if (htmlAd) {
-            adId = data['adId'];
-            var size = data['size'];
-            var isAdIcon = data['adIcon'];
-            var isAdclose = data['adClose'];
-            var icon = isAdIcon !== 'none' ? '<span class="ad-tip">广告</span>' : '';
-            var close = isAdclose !== 'none' ? '<span class="close-btn">X</span>' : '';
-            var reg = (/^[^\d]*(\d+)x(\d+).*$|^.*$/);
-            var w = 1 * size.replace(reg, '$1') || 640;
-            var h = 1 * size.replace(reg, '$2') || 100;
-            var ifr = [
-                '<div style="width:100%;margin:0 auto;text-align:center;position: relative;" id="adWrap' + adId + '">',
-                '<iframe id="ad' + adId + '" class=' + loc + ' src="' + htmlAd + '" scrolling="no" frameborder="0" ',
-                'width="' + w + '" height="' + h + '" style="display: block; border: 0px; margin: 0px auto;">',
-                '</iframe>',
-                icon,
-                close,
-                '</div>'];
-            target.innerHTML = ifr.join('');
-            var wraper = document.getElementById('wrapAd' + adId + '');
-            var ele = document.getElementById('ad' + adId + '');
-            rate = (w / h);
-            window.addEventListener('resize', resizeTimer(wraper, ele), false);
-            resizeTimer(wraper, ele);
-            bingEvent(target, adId);
-        }
-        else {
-            return false;
+            return;
         }
     };
     var ajax = function (url, sccuessFn) {

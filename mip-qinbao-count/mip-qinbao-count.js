@@ -150,8 +150,38 @@ define(function (require) {
             var token3 = '3d8ae083091c839222c62a3e4ab746ee';
             $('body').append('<mip-stats-baidu token="' + token3 + '">');
         },
+        views: function () {
+            if ($('#doc-id').length > 0) {
+                var id = $('#doc-id').val();
+                var model = 'Document';
+                $.ajax({
+                    type: 'post',
+                    dataType: 'jsonp',
+                    jsonp: 'callback',
+                    jsonpCallback: 'statAjaxView',
+                    url: 'https://dynamic.qbaobei.com/dynamic.php?s=Qbaobeimobile/view',
+                    data: {id: id, model: model}
+                });
+            }
+        },
+        autoTask: function () {
+            var url = 'https://m.qbaobei.com/index.php?s=/Dynamic/autoTask/push';
+            var pm = 'm';
+            var req = '';
+            if (window.XMLHttpRequest) {
+                req = new XMLHttpRequest();
+            }
+            else if (window.ActiveXObject) {
+                req = new ActiveXObject('Microsoft.XMLHttp');
+            }
+            if (req) {
+                var link = window.location.pathname;
+                req.open('GET', url + '&url=' + encodeURIComponent(link) + '&pm=' + pm, true);
+                req.send(null);
+            }
+        },
         init: function () {
-            this.tongji();
+            this.tongji(), this.views(), this.autoTask();
         }
     };
     customElement.prototype.build = function () {
