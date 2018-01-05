@@ -1,6 +1,6 @@
 {
     "name": "mip-bkmy-anchor",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "通过锚点定位，模拟点击事件打开折叠内容，",
     "contributors": [
         {

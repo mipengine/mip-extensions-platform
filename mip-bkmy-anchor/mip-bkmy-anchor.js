@@ -14,7 +14,9 @@ define(function (require) {
             var id = $(anchor).parent().prev().attr('id');
             $('#' + id).click();
             var aid = anchor.replace('#', '');
-            document.getElementById(aid).scrollIntoView();
+            setTimeout(function () {
+                this.element.querySelector(aid).scrollIntoView();
+            }, 500);
         }
     };
     return customElement;
