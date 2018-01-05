@@ -30,7 +30,6 @@ define(function (require) {
 
         fixedElement.hideFixedLayer(fixedElement._fixedLayer);
         event.preventDefault();
-
         if (!self.scroll) {
             new Gesture(self.element, {
                 preventY: true
@@ -58,7 +57,7 @@ define(function (require) {
 
         document.documentElement.classList.remove('mip-no-scroll');
 
-        // 恢复页面滚动状态到lightbox打开之前
+        // 恢复页面滚动状态到弹层打开之前
         if (typeof (document.body.scrollTo) === 'function') {
             // 先判断存在，因为safari浏览器没有document.body.scrollTo方法
             document.body.scrollTo(0, scrollTop.body);
@@ -382,10 +381,12 @@ define(function (require) {
      * 第一次进入可视区回调，只会执行一次
      */
     customElement.prototype.firstInviewCallback = function () {
+        var self = this;
         var ele = this.element;
         var datas = this.element.querySelector(TYPE);
         var cfg = jsonParse(datas.textContent);
         var redPacket = new RedPacket(ele, cfg);
+        var isAndroid = /Android/i.test(navigator.userAgent);
 
         // 添加
         redPacket.appendEle();
@@ -397,16 +398,26 @@ define(function (require) {
         $(cfg.class).click(function (event) {
             $(ele).find('.popmask').css('display', 'block');
             $(ele).find('.hb-popup').addClass('show');
-            open.call($(ele).find('.hb-popup')[0], event);
+            open.call(self, event);
         });
 
         // 关闭弹层
         $(ele).find('.close, .popmask').click(function (event) {
             $(ele).find('.popmask').css('display', 'none');
             $(ele).find('.hb-popup').removeClass('show');
-            close.call($(ele).find('.hb-popup')[0], event);
+            close.call(self, event);
         });
 
+        if (isAndroid) {
+            $(ele).find('.form-input').on({
+                focus: function () {
+                    $(ele).find('.popup-box').addClass('focus');
+                },
+                blur: function () {
+                    $(ele).find('.popup-box').removeClass('focus');
+                }
+            });
+        }
 
         // 点击报名
         $(ele).find('.headline-btn').click(function () {

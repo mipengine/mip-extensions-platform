@@ -54,6 +54,7 @@ mip-jia-zxpacket {
         top: 0;
         bottom: 0;
         width: 85%;
+        height:100%;
         -webkit-transform: translateX(100%);
         -ms-transform: translateX(100%);
         transform: translateX(100%);
@@ -63,8 +64,16 @@ mip-jia-zxpacket {
         transition: transform .5s;
 
         .popup-box {
+            position:absolute;
+            top:0;
+            left:0;
+            width:100%;
             padding-top: .1rem;
             overflow: hidden;
+            &.focus {
+                top:auto;
+                bottom:0;
+            }
             .close {
                 position: absolute;
                 right: .1rem;
