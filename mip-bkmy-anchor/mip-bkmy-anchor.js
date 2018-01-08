@@ -11,9 +11,9 @@ define(function (require) {
 
         var anchor = window.location.hash;
         if (anchor !== '') {
-            var id = $(anchor).parent().prev().attr('id');
-            $('#' + id).click();
             var strs = anchor.split('&');
+            var id = $(strs).parent().prev().attr('id');
+            $('#' + id).click();
             location.href = strs[0];
         }
     };
