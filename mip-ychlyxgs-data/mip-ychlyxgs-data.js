@@ -49,26 +49,32 @@ define(function (require) {
             var dataIpok = data.ipok;
             var datahzUrl = data.hzurl;
             var dataOpen = data.openZs;
-            if (data.ifSwbOk === 'true') {
+            var ifSwbOk = data.ifSwbOk;
+            var tagSpOk = data.tagSpOk;
+            var addEjectDataOk = data.addEjectDataOk;
+            var adaptationOk = data.adaptationOk;
+            var clickEjectOk = data.clickEjectOk;
+            var mgcFilterOk = data.mgcFilterOk;
+            if (ifSwbOk === 'true') {
                 ifSwb(data['f-noAdf-hide']); // 判断商务包
             }
-            if (data.tagSpOk === 'true') {
+            if (tagSpOk === 'true') {
                 tagSp(data.webUrl); // tags适配
             }
 
-            if (data.addEjectDataOk === 'true') {
+            if (addEjectDataOk === 'true') {
                 addEjectData(data['eject-city'], data.tcAndroidData, data.tcOhterCity); // 植入弹层推荐内容
             }
 
-            if (data.adaptationOk === 'true') {
+            if (adaptationOk === 'true') {
                 adaptation(iossopurl, iosclassid, datawebUrl, azspurl, androidclassid, dataIpok, datahzUrl, dataOpen); // 设备适配
             }
 
-            if (data.clickEjectOk === 'true') {
+            if (clickEjectOk === 'true') {
                 clickEject(data['open-eject']); // 点击触发弹层
             }
 
-            if (data.mgcFilterOk === 'true') {
+            if (mgcFilterOk === 'true') {
                 mgcFilter(data['f-mg-gl'], data.replaceHtml, data['eject-city']); // 敏感词过滤
             }
 
@@ -176,6 +182,7 @@ define(function (require) {
                 }
             }
             else { // 安卓
+
                 var idArray = [];
                 idArray = downUrl.split('.');
                 if (downUrl.indexOf('mo.L5645.net') !== -1 && $(ele).find('.f-tags-box ul li').length <= 0) {
@@ -229,22 +236,6 @@ define(function (require) {
                 }
             }
         }
-        fetchJsonp('http://ca.6071.com/home/web/get_jk/b/' + pageInfo.phpUrl, {
-            jsonpCallback: 'callback'
-        }).then(function (res) {
-            return res.json();
-        }).then(function (data) {
-            if (data !== 'false' || data !== '') {
-                var dom = document.getElementById('mip-ychlyxgs-data');
-                var geiJk = data;
-                if (dom !== null) {
-                    var sc = document.createElement('script');
-                    sc.setAttribute('type', 'text/javascript');
-                    sc.setAttribute('src', geiJk);
-                    dom.appendChild(sc);
-                }
-            }
-        });
         function clickEject(openEject) { // 点击触发弹层
             if (openEject === false) {
                 return false;

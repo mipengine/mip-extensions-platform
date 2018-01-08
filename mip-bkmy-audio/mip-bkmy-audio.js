@@ -16,20 +16,19 @@ define(function (require) {
                             if ((i + '').indexOf(idNum[1]) >= 0) {
                                 $('#mip_' + idNum[1]).children('.mip-audio-tag').attr('id', 'audiomip_' + i);
                                 var audio = document.getElementById('audiomip_' + i);
-                                var audioClass = $('#audiomip_' + i).attr('class');
-                                if (audioClass === 'mip-audio-tag' || audioClass === 'mip-audio-tag pause') {
-                                    audio.play();
-                                    $('#play_' + i).text('点击暂停');
-                                    $('#audio_icon_' + i).addClass('playing');
-                                    $('#audiomip_' + i).addClass('play');
-                                    $('#audiomip_' + i).removeClass('pause');
-                                } else {
+                                if ($('#audiomip_' + i).hasClass('mip-audio-tag play')) {
                                     audio.pause();
                                     $('#play_' + i).text('点击播放');
                                     $('#audio_icon_' + i).css('background', 'url(http://m.baikemy.com/images2.0/audio.jpg) no-repeat left -39px;background-size:13px 52px;');
                                     $('#audio_icon_' + i).removeClass('playing');
                                     $('#audiomip_' + i).addClass('pause');
                                     $('#audiomip_' + i).removeClass('play');
+                                } else {
+                                    audio.play();
+                                    $('#play_' + i).text('点击暂停');
+                                    $('#audio_icon_' + i).addClass('playing');
+                                    $('#audiomip_' + i).addClass('play');
+                                    $('#audiomip_' + i).removeClass('pause');
                                 }
                             }
                         }

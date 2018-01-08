@@ -1,0 +1,15 @@
+{
+    "name": "mip-ychlyxgs-adddata",
+    "version": "1.1.0",
+    "description": "需要进入页面就执行，只执行一次，本公司自己使用的一个推荐数据功能，多个站点使用，不提供其他用途,mip-list满足不了我们的需求，MIP-list在源码里面会有href='{{url}}'；工具检测404",
+    "contributors": [
+        {
+            "name": "Yang",
+            "email": "409210932@qq.com",
+			"url": "m.uzzf.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
