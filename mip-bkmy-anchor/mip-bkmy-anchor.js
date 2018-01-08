@@ -13,9 +13,8 @@ define(function (require) {
         if (anchor !== '') {
             var id = $(anchor).parent().prev().attr('id');
             $('#' + id).click();
-            setTimeout(function () {
-                location.href = anchor;
-            }, 500);
+            var strs = anchor.split('&');
+            location.href = strs[0];
         }
     };
     return customElement;

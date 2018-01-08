@@ -16,7 +16,7 @@ define(function (require) {
                             if ((i + '').indexOf(idNum[1]) >= 0) {
                                 $('#mip_' + idNum[1]).children('.mip-audio-tag').attr('id', 'audiomip_' + i);
                                 var audio = document.getElementById('audiomip_' + i);
-                                if ($('#audiomip_' + i).hasClass('mip-audio-tag play')) {
+                                if ($('#audiomip_' + i).hasClass('play')) {
                                     audio.pause();
                                     $('#play_' + i).text('点击播放');
                                     $('#audio_icon_' + i).css('background', 'url(http://m.baikemy.com/images2.0/audio.jpg) no-repeat left -39px;background-size:13px 52px;');
