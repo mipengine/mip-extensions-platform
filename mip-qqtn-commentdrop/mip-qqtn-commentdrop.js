@@ -21,6 +21,7 @@ define(function (require) {
         var tagSize = $(ele).find('.g-tags-box li').length;
         var comparecid = ele.getAttribute('data-catid').split(',');
         var addmoreurl = ele.getAttribute('data-url');
+        var plname = ele.getAttribute('data-plname');
         var plurl = ele.getAttribute('data-plurl');
         var addplurl = ele.getAttribute('data-addplurl');
         $(ele).find('#tonglei').after('<div class="f-moreadd m-adddiv m-adddivbg"></div>');
@@ -119,7 +120,7 @@ define(function (require) {
                     html += '<em>发表于：' + objJson.DateAndTime[i] + ' </em></dt>';
                     html += '<dd>' + objJson.Excerpt[i] + '</dd>';
                     htmlnew += '<dt class="clearfix"><i>第 ' + objJson.Graded[i] + ' 楼 </i><span>';
-                    htmlnew += '<b>腾牛网友</b><em>' + objJson.DateAndTime[i] + '</em></span></dt>';
+                    htmlnew += '<b>' + plname + '</b><em>' + objJson.DateAndTime[i] + '</em></span></dt>';
                     if (objJson.bjhf[i] === '') {
                         htmlnew += '<dd>' + objJson.Excerpt[i] + '<p id="' + objJson.Id[i] + '">';
                         htmlnew += '<a href="javascript:">支持<em>(</em><span>0</span><em>)</em></a> ';

@@ -11,7 +11,7 @@ mip-qqtn-commentdrop 判断假如没有li则将外层隐藏
 ## 示例
 
 ```html
-<mip-qqtn-commentdrop data-catid='194|292,195|295,196|294,227|299,198|301,231|303,200|306,201|311,202|309,203|307,221|308,222|313,223|312,224|315,225|314' data-url="https://aj.cr173.com/app/addmore/" data-plurl="https://aj.qqtn.com/sajax.asp" data-addplurl="https://aj.qqtn.com/ajax.asp">
+<mip-qqtn-commentdrop data-catid='194|292,195|295,196|294,227|299,198|301,231|303,200|306,201|311,202|309,203|307,221|308,222|313,223|312,224|315,225|314' data-url="https://aj.cr173.com/app/addmore/" data-plurl="https://aj.qqtn.com/sajax.asp" data-addplurl="https://aj.qqtn.com/ajax.asp" data-plname="腾牛网友">
 <section class="g-down-introd g-game-msg" id="screen">
 正文
 </section>

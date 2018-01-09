@@ -12,7 +12,7 @@ define(function (require) {
         var anchor = window.location.hash;
         if (anchor !== '') {
             var strs = anchor.split('&');
-            var id = $(strs).parent().prev().attr('id');
+            var id = $(strs[0]).parent().prev().attr('id');
             $('#' + id).click();
             location.href = strs[0];
         }
