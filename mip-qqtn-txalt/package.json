@@ -1,12 +1,12 @@
 {
     "name": "mip-qqtn-txalt",
-    "version": "1.0.0",
-    "description": "头像页面图片切换,一键下载插件",
+    "version": "1.0.1",
+    "description": "头像页面图片切换,一键下载插件,1.0.1 根据mip新规升级代码，优化可以去掉的代码。",
     "contributors": [
         {
             "name": "wygx developer",
             "email": "gom3250@qq.com",
-            "url": "https://www.mipengine.org"
+            "url": "https://m.qqtn.com"
         }
     ],
     "engines": {

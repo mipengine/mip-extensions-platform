@@ -11,30 +11,8 @@ mip-qqtn-txalt 我要个性网头像栏目内容页图片展示
 
 ### 基本用法
 ```html
-<mip-qqtn-txalt 
-data-nexturl = "http://mip.woyaogexing.com/touxiang/nv/2017/541178.html"
->
-<ul>
-  <li>
-  <mip-img src="http://pic.qqtn.com/up/2017-11/2017112809382356116.jpg" >
-  </li>
-  <li>
-  <mip-img src="http://pic.qqtn.com/up/2017-11/2017112809382361724.jpg">
-  </li>
-  <li>
-  <mip-img src="http://pic.qqtn.com/up/2017-11/2017112809382358788.jpg">
-  </li>
-  <li>
-  <mip-img src="http://pic.qqtn.com/up/2017-11/2017112809382381222.jpg">
-  </li>
-  <li>
-  <mip-img src="http://pic.qqtn.com/up/2017-11/2017112809382365601.jpg">
-  </li>
-  <li>
-  <mip-img src="http://pic.qqtn.com/up/2017-11/2017112809382389239.jpg">
-  </li>
-  <li>
-  <mip-img src="http://pic.qqtn.com/up/2017-11/2017112809430588685.jpg">
-  </li>
-</ul>
+<mip-qqtn-txalt>
+<div class="g-cont" id="content">
+<p ><mip-img src="http://pic.qqtn.com/up/2017-12/2017120416270028431.jpg"></mip-img></p><p ><mip-img src="http://pic.qqtn.com/up/2017-12/2017120416270086248.jpg"></mip-img></p><p ><mip-img src="http://pic.qqtn.com/up/2017-12/2017120416270138294.jpg"></mip-img></p><p ><mip-img src="http://pic.qqtn.com/up/2017-12/2017120416270177554.jpg"></mip-img></p><p ><mip-img src="http://pic.qqtn.com/up/2017-12/2017120416270134154.jpg"></mip-img></p><p ><mip-img src="http://pic.qqtn.com/up/2017-12/2017120416270150980.jpg"></mip-img></p><p ><mip-img src="http://pic.qqtn.com/up/2017-12/2017120416270124405.jpg"></mip-img></p><p ><mip-img src="http://pic.qqtn.com/up/2017-12/2017120416270123201.jpg"></mip-img></p><p ><mip-img src="http://pic.qqtn.com/up/2017-12/2017120416270169537.jpg"></mip-img></p><p ><mip-img src="http://pic.qqtn.com/up/2017-12/2017120416270161669.jpg"></mip-img></p><p ><mip-img src="http://pic.qqtn.com/up/2017-12/2017120416270177027.jpg"></mip-img></p><p ><mip-img src="http://pic.qqtn.com/up/2017-12/2017120416270128018.jpg"></mip-img></p><p >喜欢养小动物的人，都是内心非常有爱心的，也是比较孤独的。</p><p >宠物可以为他们的生活增添乐趣，让他们日子更加丰富和精彩。</p>
+</div>
 </mip-qqtn-txalt>

@@ -14,7 +14,9 @@ define(function (require) {
             var strs = anchor.split('&');
             var id = $(strs[0]).parent().prev().attr('id');
             $('#' + id).click();
-            location.href = strs[0];
+            setTimeout(function () {
+                location.href = strs[0];
+            }, 300);
         }
     };
     return customElement;
