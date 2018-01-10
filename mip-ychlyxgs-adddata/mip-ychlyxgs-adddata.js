@@ -36,6 +36,8 @@ define(function (require) {
             var equipment;
             var recomdCityCont;
             var ejectCityCont;
+            var openAndroidEject = data.openAndroidEject;
+            var openIosEject = data.openIosEject;
             var allData;
             if (data.platformOpend === true) {
                 if (platform.isIos()) { // ios
@@ -84,7 +86,28 @@ define(function (require) {
                 ejectCityCont = 'default';
             }
             allData = data.eject[equipment + '_' + ejectCityCont];
-
+            if (typeof openAndroidEject === 'undefined') {
+                openAndroidEject = true;
+            }
+            if (typeof openIosEject === 'undefined') {
+                openIosEject = true;
+            }
+            if (platform.isIos()) { // ios
+                if (openIosEject === true) {
+                    clickFunction(allData);
+                }
+            }
+			else { // 安卓
+                if (openAndroidEject === true) {
+                    clickFunction(allData);
+                }
+            }
+        }, function (error) {
+            console.error(error);
+        }).catch(function (evt) {
+            console.error(evt);
+        });
+        function clickFunction(allData) {
             $(ele).find('.f-eject-btn').click(function () {
                 var btnFlag = $(this).attr('data-flag');
                 if (typeof (btnFlag) !== 'undefined' && typeof (allData[btnFlag]) !== 'undefined') {
@@ -98,11 +121,7 @@ define(function (require) {
             $('.m-close-btn,.m-black-bg').click(function () {
                 $(ele).find('.f-eject-cont').hide();
             });
-        }, function (error) {
-            $(ele).find('#details').append('<p>' + error + '</p>');
-        }).catch(function (evt) {
-            $(ele).find('#details').append('<p>' + evt + '</p>');
-        });
+        }
         function setTimeLoad() {
             var setTimer = setTimeout(function () {
                 $(ele).find('.f-eject-cont').show();

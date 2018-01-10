@@ -4,18 +4,21 @@
  */
 
 define(function (require) {
-    let $ = require('zepto');
-    let customElement = require('customElement').create();
+    var $ = require('zepto');
+    var customElement = require('customElement').create();
+    var util = require('util');
+    var CustomStorage = util.customStorage;
+    var customStorage = new CustomStorage(0);
 
     // build说明: 导航组件，在首屏展示，需要尽快加载
     customElement.prototype.build = render;
     function render() {
-        let element = this.element;
-        let $element = $(element);
+        var element = this.element;
+        var $element = $(element);
 
-        let vsSchool = JSON.parse(sessionStorage.vsSchool);
+        var vsSchool = JSON.parse(customStorage.get('vsSchool'));
 
-        let vsCount = vsSchool.length ? vsSchool.length : '0';
+        var vsCount = vsSchool.length ? vsSchool.length : '0';
 
         if (vsCount !== '0') {
             $element.find('#school-vs i').html(vsCount);

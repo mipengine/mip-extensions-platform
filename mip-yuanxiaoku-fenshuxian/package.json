@@ -1,7 +1,7 @@
 {
-    "name": "mip-yuanxiaoku-homevs",
-    "version": "1.0.1",
-    "description": "院校库首页对比",
+    "name": "mip-yuanxiaoku-fenshuxian",
+    "version": "1.0.0",
+    "description": "院校库分数线",
     "contributors": [
         {
             "name": "fll",

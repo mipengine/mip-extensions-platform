@@ -51,9 +51,7 @@ define(function (require) {
             var dataOpen = data.openZs;
             var ifSwbOk = data.ifSwbOk;
             var tagSpOk = data.tagSpOk;
-            var addEjectDataOk = data.addEjectDataOk;
             var adaptationOk = data.adaptationOk;
-            var clickEjectOk = data.clickEjectOk;
             var mgcFilterOk = data.mgcFilterOk;
             if (ifSwbOk === 'true') {
                 ifSwb(data['f-noAdf-hide']); // 判断商务包
@@ -62,16 +60,8 @@ define(function (require) {
                 tagSp(data.webUrl); // tags适配
             }
 
-            if (addEjectDataOk === 'true') {
-                addEjectData(data['eject-city'], data.tcAndroidData, data.tcOhterCity); // 植入弹层推荐内容
-            }
-
             if (adaptationOk === 'true') {
                 adaptation(iossopurl, iosclassid, datawebUrl, azspurl, androidclassid, dataIpok, datahzUrl, dataOpen); // 设备适配
-            }
-
-            if (clickEjectOk === 'true') {
-                clickEject(data['open-eject']); // 点击触发弹层
             }
 
             if (mgcFilterOk === 'true') {
@@ -148,27 +138,6 @@ define(function (require) {
                 $(ele).find(this).html(liText);
             });
         }
-        function addEjectData(ejectcity, datatcAndroidData, datatcOhterCity) { // 植入弹层推荐内容
-            province = remotIpInfo.province;
-            city = remotIpInfo.city;
-            var koCity = ejectcity;
-            if ($.inArray(city, koCity) !== -1) { // 不在指定城市
-                var i = 0;
-                for (i = 0; i < 8; i++) {
-                    androidEjectData += '<li><a href="' + datatcAndroidData[i][1] + '"><img src="'
-                        + datatcAndroidData[i][2] + '" /><p><strong>'
-                        + datatcAndroidData[i][0] + '</strong><b>下载</b></p></a></li>';
-                }
-            }
-            else {
-                for (i = 0; i < 8; i++) {
-                    androidEjectData += '<li><a href="' + datatcOhterCity[i][1] + '"><img src="'
-                        + datatcOhterCity[i][2] + '" /><p><strong>'
-                        + datatcOhterCity[i][0] + '</strong><b>下载</b></p></a></li>';
-                }
-            }
-            $(ele).find('.f-android-eject').append(androidEjectData);
-        }
         function adaptation(iossopurl, iosclassid, datawebUrl, azspurl, androidclassid, dataIpok, datahzUrl, openZs) { // 设备适配
             if (platform.isIos()) { // IOS
                 var iosspUrlid = $.inArray(downUrl, iossopurl);
@@ -182,6 +151,7 @@ define(function (require) {
                 }
             }
             else { // 安卓
+
 
                 var idArray = [];
                 idArray = downUrl.split('.');
@@ -235,24 +205,6 @@ define(function (require) {
                     }
                 }
             }
-        }
-        function clickEject(openEject) { // 点击触发弹层
-            if (openEject === false) {
-                return false;
-            }
-
-            downBtnLink.click(function () {
-                if (platform.isIos()) {
-                }
-                else {
-                    var setTimer = setTimeout(function () {
-                        $(ele).find('.m-click-show').show();
-                    }, 100);
-                }
-            });
-            $('.m-close-btn,.m-black-bg').click(function () {
-                $(ele).find('.m-click-show').hide();
-            });
         }
         function mgcFilter(dataMggl, dataReplaceHtml, dataEjectCity) { // 敏感词过滤
 
