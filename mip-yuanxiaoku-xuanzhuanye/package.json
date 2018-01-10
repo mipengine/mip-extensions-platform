@@ -1,0 +1,14 @@
+{
+    "name": "mip-yuanxiaoku-xuanzhuanye",
+    "version": "1.0.0",
+    "description": "院校库选专业",
+    "contributors": [
+        {
+            "name": "fll",
+            "email": "hello-fll@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

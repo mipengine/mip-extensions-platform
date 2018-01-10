@@ -19,8 +19,8 @@ define(function (require) {
                 var arr = hrefUrlArr[i].split('=');
                 obj[arr[0]] = arr[1];
             }
-            return obj;
         }
+        return obj;
     })();
 
     function sendAjax(options) {
@@ -436,7 +436,7 @@ define(function (require) {
         }, duration);
     }
 
-    // build 方法，元素插入到文档时执行，仅会执行一次
+
     customElement.prototype.firstInviewCallback = function () {
         var thisObj = this.element;
         var elemObj = thisObj.querySelector('script[type="application/json"]');
