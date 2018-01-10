@@ -136,7 +136,7 @@ define(function (require) {
         str && $(ele).append(str);
 
         // 显示弹层
-        $(ele).find('.order').click(function () {
+        $('.fixed-bottom').find('.order').click(function () {
             $(ele).find('.wp-order-pop').css('display', 'block');
             $(ele).find('.pop-mask').css('display', 'block');
         });
