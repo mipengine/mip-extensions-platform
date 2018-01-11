@@ -1,0 +1,14 @@
+{
+    "name": "mip-yuanxiaoku-schooldetails",
+    "version": "1.0.0",
+    "description": "院校库学校详情",
+    "contributors": [
+        {
+            "name": "fll",
+            "email": "hello-fll@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
