@@ -6,6 +6,7 @@
 define(function (require) {
 
     var customElement = require('customElement').create();
+    var fixedElement = require('fixed-element');
     var $ = require('zepto');
 
     // 倒计时
@@ -137,6 +138,7 @@ define(function (require) {
 
         // 显示弹层
         $('.fixed-bottom').find('.order').click(function () {
+            fixedElement.hideFixedLayer(fixedElement._fixedLayer);
             $(ele).find('.wp-order-pop').css('display', 'block');
             $(ele).find('.pop-mask').css('display', 'block');
         });
@@ -144,6 +146,7 @@ define(function (require) {
         // 关闭弹层
         function closePop() {
             $(ele).find('.wp-order-pop, .pop-mask').css({'display': 'none'});
+            fixedElement.showFixedLayer(fixedElement._fixedLayer);
         }
         $(ele).find('.close-btn, .pop-mask').click(function () {
             closePop();
@@ -190,8 +193,8 @@ define(function (require) {
         }
 
         // 提交信息
-        $(ele).find('.btn').click(function () {
-            var tel = $(ele).find('input[type="tel"]');
+        $('.wp-order-pop').find('.btn').click(function () {
+            var tel = $('.wp-order-pop').find('input[type="tel"]');
 
             var datas = params['request-data'];
             if (tel.length) {
