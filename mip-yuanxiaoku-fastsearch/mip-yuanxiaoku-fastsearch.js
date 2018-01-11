@@ -136,7 +136,7 @@ define(function (require) {
                 .html(
                     list.map(function (item, index) {
                         return (
-                            '<option value=\"${item.ID}\">' + item.ProvinceName + '</option>'
+                            '<option value=\"' + item.ID + '\">' + item.ProvinceName + '</option>'
                         );
                     })
                 );
