@@ -246,6 +246,11 @@ define(function (require) {
                 for (var i = 0; i < arr.length; i++) {
                     var x = arr[i].replace(/\[|\]/g, '');
                     params[key] = params[key].replace(arr[i], $(x).val() || $(x).html());
+                    if ($(x).attr('request') && $(x).val() === '') {
+                        tipMask($(x).attr('errortxt'));
+                        $('.loading-common').hide();
+                        return false;
+                    }
                 }
             } else if (params[key].indexOf('{') > -1) {
                 if (params[key].indexOf('#') > -1 || params[key].indexOf('.') > -1) {

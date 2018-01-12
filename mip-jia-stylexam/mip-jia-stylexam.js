@@ -89,6 +89,8 @@ define(function (require) {
                     manner.method.displayImage(activeIndex + 1, obj, data);
                     if (activeIndex === 5) {
                         manner.method.switchStage(2, obj);
+                        var examResult = manner.method.examResult();
+                        obj.find('.style').val(data.styleMapping[examResult]);
                     }
                     styleSwiper.slideNext();
                     manner.method.refushSwiperMessage(obj);
@@ -103,6 +105,9 @@ define(function (require) {
                     else if (!obj.find('#freeGetDecoration').hasClass('disable')) {
                         obj.find('#freeGetDecoration').addClass('disable');
                     }
+                    obj.find('.jtjg').val(obj.find('input[name=chk]:checked')
+                        .closest('.structure-item').find('p').html());
+                    obj.find('.zxys').val(obj.find('input[name=chk2]:checked').siblings().html());
                 });
             },
             freeDecorationClick: function (obj, data) {

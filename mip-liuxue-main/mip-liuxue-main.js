@@ -19,6 +19,12 @@ define(function (require) {
             $(this).addClass('active').siblings().removeClass('active');
             $('.show_all div').eq($(this).index()).fadeIn().siblings().hide();
         });
+        $('header .fr').click(function () {
+            $('.qiehuan').slideDown();
+        });
+        $('.qiehuan p').click(function () {
+            $('.qiehuan').slideUp();
+        });
     };
     return customElement;
 });

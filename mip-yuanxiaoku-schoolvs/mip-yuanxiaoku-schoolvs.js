@@ -295,7 +295,7 @@ define(function (require) {
                             })
                         );
                         $element.find('.vs-result .result-content .zonghe-canshu .mip-vd-tabs-nav').append(
-                            list.map((item, index) => {
+                            list.map(function (item, index) {
                                 return (
                                     '<li>'
                                     +    '<span>' + item.schooltype + '</span>'
