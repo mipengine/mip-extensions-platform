@@ -6,6 +6,7 @@
 define(function (require) {
 
     var customElement = require('customElement').create();
+    var viewer = require('viewer');
 
     var $ = require('./ghostHunter');
     var timeouts = [];
@@ -44,13 +45,16 @@ define(function (require) {
                 // 回车执行查询
                 e.preventDefault();
                 e.stopPropagation();
-                // XXX: 由于不能直接触发弹层open，只能触发绑定on='tap:lightbox.open'的按钮
-                $btn.trigger('click');
+                // 触发表单提交，开始搜索
+                formSubmit({
+                    target: $btn[0]
+                });
+                // 触发弹层出现
+                viewer.eventAction.execute('tap', $btn[0], e);
             }
         });
 
         function formSubmit(e) {
-
             $('.form-input').blur();
             $(e.target).closest('form').trigger('submit');
 
