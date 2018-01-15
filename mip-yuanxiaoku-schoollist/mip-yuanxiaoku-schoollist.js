@@ -12,7 +12,7 @@ define(function (require) {
 
     function render() {
         var element = this.element;
-        var url = 'https://data.api.ppkao.com' + element.dataset.url + '?action=' + 'element.dataset.action';
+        var url = 'https://data.api.ppkao.com' + element.dataset.url + '?action=' + element.dataset.action;
 
         // console.log(url)
 
