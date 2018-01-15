@@ -1,0 +1,14 @@
+{
+    "name": "mip-dftt-pageNewsList",
+    "version": "1.0.0",
+    "description": "东方头条新闻页面信息流组件",
+    "contributors": [
+        {
+            "name": "theSouthSea",
+            "email": "1611185386@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

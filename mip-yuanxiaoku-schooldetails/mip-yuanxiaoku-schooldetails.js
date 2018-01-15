@@ -158,12 +158,14 @@ define(function (require) {
                             '<section>'
                             +    '<i>'
                             +        '<mip-img src=\"' + (item.Logo
-                                        ? item.Logo : '../static/images/none.png') + '\"></mip-img>'
+                                        ? item.Logo
+                                        : '../static/images/none.png') + '\"></mip-img>'
                             +    '</i>'
                             +    '<aside>'
                             +        '<h2>' + item.schoolname + '</h2>'
-                            +        '<p>' + (item.f211 ? '985高校、' : '')
-                                        + (item.f211 ? '211高校、' : '') + item.membership + '</p>'
+                            +        '<p>' + (item.f211 === '0' ? '' : '985高校、')
+                            +            (item.f211 === '0' ? '' : '211高校、')
+                            +            item.membership + '</p>'
                             +    '</aside>'
                             + '</section>'
                         );
@@ -265,7 +267,7 @@ define(function (require) {
                     + (majorRliberalArtsId === '2' ? '【理科】' : '') + '录取专业'
                 );
                 $element.find('.major-r .container .search-result ul').html(
-                    list.map((item, index) => {
+                    list.map(function (item, index) {
                         return (
                             '<li data-zhuanye-id=\"' + item.zid + '\">'
                             +    '<span>' + item.specialname + '</span>'
@@ -403,7 +405,7 @@ define(function (require) {
                 $element.find('.major-l .container .search-result ul').append(
                     schoolList.map(function (item, index) {
                         return (
-                            '<li data-zhuanye-id=\"${item.zid}\">'
+                            '<li data-zhuanye-id=\"' + item.zid + '\">'
                             +    '<h2>'
                             +        '<span>' + item.specialname + '</span>'
                             +        '<b class=\"check\"></b>'
@@ -537,7 +539,6 @@ define(function (require) {
                 return res.json();
             }).then(function (json) {
                 // console.log(decode(json));
-
                 if (decode(json).S === '0') {
                     $element.find('.history-l .zanwu-shuju').show();
                     $element.find('.history-l .load-info .loading').hide();
@@ -875,77 +876,77 @@ define(function (require) {
                     }
                     break;
 
-                case yearArr[0]:
+                case yearArr[0].toString():
                     // console.log(str);
                     historyLyear = str;
                     historyL(str);
                     break;
-                case yearArr[1]:
+                case yearArr[1].toString():
                     // console.log(str);
                     historyLyear = str;
                     historyL(str);
                     break;
-                case yearArr[2]:
+                case yearArr[2].toString():
                     // console.log(str);
                     historyLyear = str;
                     historyL(str);
                     break;
-                case yearArr[3]:
+                case yearArr[3].toString():
                     // console.log(str);
                     historyLyear = str;
                     historyL(str);
                     break;
-                case yearArr[4]:
+                case yearArr[4].toString():
                     // console.log(str);
                     historyLyear = str;
                     historyL(str);
                     break;
-                case yearArr[5]:
+                case yearArr[5].toString():
                     // console.log(str);
                     historyLyear = str;
                     historyL(str);
                     break;
-                case yearArr[6]:
+                case yearArr[6].toString():
                     // console.log(str);
                     historyLyear = str;
                     historyL(str);
                     break;
-                case yearArr[7]:
+                case yearArr[7].toString():
                     // console.log(str);
                     historyLyear = str;
                     historyL(str);
                     break;
-                case yearArr[8]:
+                case yearArr[8].toString():
                     // console.log(str);
                     historyLyear = str;
                     historyL(str);
                     break;
-                case yearArr[9]:
+                case yearArr[9].toString():
                     // console.log(str);
                     historyLyear = str;
                     historyL(str);
                     break;
-                case yearArr[10]:
+                case yearArr[10].toString():
                     // console.log(str);
                     historyLyear = str;
                     historyL(str);
                     break;
-                case yearArr[11]:
+                case yearArr[11].toString():
                     // console.log(str);
                     historyLyear = str;
                     historyL(str);
                     break;
-                case yearArr[12]:
+                case yearArr[12].toString():
                     // console.log(str);
                     historyLyear = str;
                     historyL(str);
                     break;
-                case yearArr[13]:
+                case yearArr[13].toString():
                     // console.log(str);
                     historyLyear = str;
                     historyL(str);
                     break;
-                case yearArr[14]:
+                case yearArr[14].toString():
                     // console.log(str);
                     historyLyear = str;
                     historyL(str);
