@@ -8,42 +8,38 @@ define(function (require) {
     var customElement = require('customElement').create();
     var $ = require('zepto');
 
-    /**
-     * 第一次进入可视区回调，只会执行一次
-     */
-    customElement.prototype.firstInviewCallback = function () {
-        var $ele = $(this.element);
-        var stick = $ele.attr('data-stick');
-        var navOffsetTop = $ele.find('mip-semi-fixed');
-
-        $ele.find('.tab-head li').click(function () {
+    // 切换tab
+    function cutTable(ele) {
+        var nav = ele.attr('data-nav');
+        var con = ele.attr('data-con');
+        var cur = ele.attr('data-cur');
+        $(nav).on('click', function () {
             var index = $(this).index();
-            if (!$(this).hasClass('cur')) {
-                $(this).addClass('cur').siblings().removeClass('cur');
-                var movedis = -(index * 100);
-                $ele.find('.item-box').eq(index).removeClass('hide').siblings().addClass('hide');
-                $ele.find('.tab-wrapper').css({
-                    '-webkit-transform': 'translateX(' + movedis + '%)',
-                    '-ms-transform': 'translateX(' + movedis + '%)',
-                    'transform': 'translateX(' + movedis + '%)'
-                });
+            changeClass($(nav), index, cur);
+            changeContent($(con), index, cur);
+        });
+    }
 
-                // 是否置顶
-                if (navOffsetTop.length && stick) {
-                    $(window).scrollTop(navOffsetTop.offset().top);
-                }
-            }
-
-            // 手动触发滚动，显示图片
-            if (!$(this).hasClass('init')) {
-                $(this).addClass('init');
-                var top = $(window).scrollTop();
-                setTimeout(function () {
-                    $(window).scrollTop(top + 1);
-                    $(window).scrollTop(top);
-                }, 300);
+    // nav切换class名, 解决使用mip-semi-fixed被拆分问题
+    function changeClass(nav, index, cur) {
+        nav.each(function () {
+            if ($(this).index() === index) {
+                $(this).addClass(cur).siblings().removeClass(cur);
             }
         });
+    }
+
+    // content切换显示内容
+    function changeContent(con, index, cur) {
+        con.eq(index).addClass(cur).siblings().removeClass(cur);
+    }
+
+    /**
+     * 可能多处使用，固使用build
+     */
+    customElement.prototype.build = function () {
+        var element = $(this.element);
+        cutTable(element);
     };
 
     return customElement;

@@ -1,0 +1,14 @@
+{
+    "name": "mip-zol-stats",
+    "version": "1.0.0",
+    "description": "ZOL统计",
+    "contributors": [
+        {
+            "name": "liuxianggui",
+            "email": "liu.xianggui@zol.com.cn"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

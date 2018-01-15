@@ -12,31 +12,39 @@ mip-jia-tbs 组件说明
 
 ### 基本用法
 ```html
-<mip-jia-tbs data-stick="top">
-	<div class="mip-tab-nav">
-		<ul class="tab-head">
-			<li class="cur init"><span>一</span></li>
+<mip-jia-tbs data-nav=".nav1 li" data-con=".tab1 .item-box" data-cur="cur">
+		<ul class="nav1">
+			<li class="cur"><span>一</span></li>
 			<li><span>二</span></li>
 			<li><span>三</span></li>
 		</ul>
-	</div>
-	<div class="mip-tab-content">
-		<div class="tab-wrapper">
-			<div class="item-box">1</div>
-			<div class="item-box hide">2</div>
-			<div class="item-box hide">3</div>
+		<div class="tab1">
+			<div class="item-box cur">1</div>
+			<div class="item-box">2</div>
+			<div class="item-box">3</div>
 		</div>
-	</div>
 </mip-jia-tbs>
 ```
 
 ## 属性
 
-### data-stick
+### data-nav
 
-说明：导航是否置顶  
-必选项：否    
-类型：字符串
+说明：指定TAB按钮元素
+必选项：是
+类型：元素选择器
+
+### data-con
+
+说明：指定TAB内容元素
+必选项：是
+类型：元素选择器
+
+### data-cur
+
+说明：当前TAB按钮添加class
+必选项：是
+类型：class类名称
 
 
 ## 注意事项
