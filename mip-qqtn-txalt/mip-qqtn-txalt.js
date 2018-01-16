@@ -20,7 +20,14 @@ define(function (require) {
         // 增加专属属性供JS使用
         $(ele).find('mip-qqtn-txalt mip-img').each(function (i) {
             var myimgurl = $(this).attr('src');
-            $(this).attr({'data-index': i, 'data-original': myimgurl});
+            if (myimgurl.indexOf('pic1') !== -1) {
+                var zhimgurl = myimgurl.replace('http://pic1.qqtn.com/qqtn/mb/', 'http://pic.qqtn.com/');
+                var zhimgurl = zhimgurl.split('_');
+                var impgeshi = (zhimgurl.pop()).split('.');
+                $(this).attr({'data-index': i, 'data-original': zhimgurl[0] + '.' + impgeshi.pop()});
+            } else {
+                $(this).attr({'data-index': i, 'data-original': myimgurl});
+            }
         });
         var ui = {
             defaultSetting: {

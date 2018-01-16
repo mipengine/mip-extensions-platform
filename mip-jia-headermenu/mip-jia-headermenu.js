@@ -29,12 +29,8 @@ define(function (require) {
                     console.log('获取城市失败');
                 }
             });
-        } else {
-            typeof callback === 'function' && callback();
         }
     }
-
-    cityFn();
     // 获取热门讨论
     function getInvitation() {
         return new Promise(function (resolve, reject) {
@@ -76,7 +72,7 @@ define(function (require) {
 
         init: function (thisObj, data) {
             headNav.appendHtml(thisObj, data);
-            cityFn(function () {
+            if (storage.get('city')) {
                 var city = JSON.parse(storage.get('city'));
                 headNav.setCity(city['area_py'], data);
                 // type区分，填充数据
@@ -84,7 +80,18 @@ define(function (require) {
                 if (type === 'forum') {
                     headNav.addTopic(data);
                 }
-            });
+            }
+            else {
+                cityFn(function () {
+                    var city = JSON.parse(storage.get('city'));
+                    headNav.setCity(city['area_py'], data);
+                    // type区分，填充数据
+                    var type = storage.get('headNavType');
+                    if (type === 'forum') {
+                        headNav.addTopic(data);
+                    }
+                });
+            }
         },
         ask: function (thisObj, data) {
             var memuBox = '';
@@ -93,7 +100,7 @@ define(function (require) {
             memuBox += '<a class="close-btn" href="javascript:;"></a>';
             memuBox += '<ul class="tab-list three">';
             memuBox += '<li>';
-            memuBox += '<a href="getCity" tjjj="click_m_detail_more_index">首页</a>';
+            memuBox += '<a href="/getCity/" tjjj="click_m_detail_more_index">首页</a>';
             memuBox += '</li>';
             memuBox += '<li>';
             memuBox += '<a href="/ask/" tjjj="click_m_detail_more_ask">问答</a>';
@@ -167,7 +174,7 @@ define(function (require) {
             memuBox += '<h3><span class="logo"></span></h3>';
             memuBox += '<ul class="tab-list">';
             memuBox += '<li>';
-            memuBox += '<a href="getCity" tjjj="click_m_detail_more_index">首页</a>';
+            memuBox += '<a href="/getCity/" tjjj="click_m_detail_more_index">首页</a>';
             memuBox += '</li>';
             memuBox += '<li>';
             memuBox += '<a href="/tuku/tag/" tjjj="click_m_detail_more_meitu">美图</a>';
