@@ -112,7 +112,8 @@ define(function (require) {
             }
         }
         function addTags(tagsHtml, firstSystem, firstId, firstName, systemName, datawebUrl) {
-            tagsHtml = '<div class=\'f-tags-box\'><ul>' + tagsHtml + '</ul></div>';
+            var tagsClass = $(ele).find('.f-tags-box').attr('class');
+            tagsHtml = '<div class="' + tagsClass + '"><ul>' + tagsHtml + '</ul></div>';
             $(ele).find('.f-tags-box').remove();
             $(ele).find('.f-tags-position').after(tagsHtml);
             $(ele).find('.f-tags-box').show();
