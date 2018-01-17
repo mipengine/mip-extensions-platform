@@ -13,6 +13,8 @@ define(function (require) {
                 var idNum = ids.split('_');
                 for (var i = 0; i < 5; i++) {
                     if (idNum[1] !== i + '') {
+                        var audio = document.getElementById('mip-audio_' + i).children[0];
+                        audio.pause();
                         $('#controller_' + i).removeClass('mip-audio-playing-icon');
                     }
                 }
@@ -21,3 +23,5 @@ define(function (require) {
     };
     return customElement;
 });
+
+

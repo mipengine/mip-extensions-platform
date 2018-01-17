@@ -1,6 +1,6 @@
 {
     "name": "mip-bkmy-audio",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "description": "多个音频播放，控制一个播放，其他停止",
     "contributors": [
         {
