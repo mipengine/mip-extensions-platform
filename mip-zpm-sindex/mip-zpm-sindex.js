@@ -266,6 +266,22 @@ define(function (require) {
             var newURL = 'https://m.highpin.cn/?fromType=861&zp-auth=' + getCookie('zp-auth') + '';
             $('.highpin').children('a').attr('href', newURL);
         }
+        // jssdk 这个是统计代码，需要挂载到window上
+        var a = window;
+        var e = document;
+        var f = 'script';
+        var g = document.location.protocol + '//statistic.zhaopin.cn/sdk/zhaopin_tracker.js';
+        var b = 'za';
+        var c;
+        var d;
+        a.ZhaoPinBigdataAnalyticsObject = b;
+        a[b] = a[b] || function () {
+                    (a[b].q = a[b].q || []).push(arguments);
+                };
+        a[b].l = 1 * new Date;
+        a._ATAD_GIB_NIPOAHZ_ || (c = e.createElement(f), d = e.getElementsByTagName(f)[0],
+                c.async = 1, c.src = g, d.parentNode.insertBefore(c, d), a._ATAD_GIB_NIPOAHZ_ = !0);
+        window.za('creat', 'M');
     };
     window.onload = function () {
         render();
@@ -352,7 +368,7 @@ define(function (require) {
     }
     // 刷新简历
     function refreshResume() {
-        $.post('https://mip.zhaopin.com/searchjob/ResumeRefresh', {
+        $.post('https://mip.zhaopin.com/searchjob/resumerefresh', {
                 data: {version: '6.3.0'}
             }, function (data) {
                 var Refreshtxt = data.StatusDescription;
@@ -452,7 +468,7 @@ define(function (require) {
         $.get('https://mip.zhaopin.com/Home/GetCityInfoByLatLng',
         {lat: userLocationLat, lng: userLocationLon},
         function (data, textStatus, jqxhr) {
-            if ($('.j_searchTop .position span').text() === 'ȫ��') {
+            if ($('.j_searchTop .position span').text() === '全国') {
                 $('.j_searchTop .position span').text(data.cityname);
             }
         });

@@ -2,7 +2,7 @@
 * 星座屋mip改造
 * @file 星座屋picker弹层组件
 * @author mipxzw@163.com
-* @version 1.0.0
+* @version 1.0.1
 */
 define(function (require) {
     var $ = require('zepto');
@@ -13,13 +13,11 @@ define(function (require) {
             b: {
                 layershow: function (f) {
                     if (!$('.m_layer').length) {
-                        $('body').append('<div class="m_layer"></div>');
+                        $('.wrapper').append('<div class="m_layer"></div>');
                     }
 
                     var A = $('.m_layer');
-                    var speed = 400;
-                    var easing = 'swing';
-                    A.stop().fadeIn(speed, easing).on('touchmove', function (e) {
+                    A.fadeIn(400).on('touchmove', function (e) {
                         e.preventDefault();
                     });
                     if (f && typeof (f) === 'function') {
@@ -31,10 +29,8 @@ define(function (require) {
                 },
                 layerhide: function () {
                     var A = $('.m_layer');
-                    var speed = 400;
-                    var easing = 'swing';
-                    A.stop('fadeOut').fadeOut(speed, easing, function () {
-                        $(A).remove();
+                    A.fadeOut(400, function () {
+                        $(A).hide();
                     });
                 },
                 bSelshow: function (a, f) {
@@ -46,26 +42,21 @@ define(function (require) {
                     }
 
                     var A = $('.float_sbox');
-                    var speed = 400;
-                    var easing = 'swing';
                     A.html(a).on('touchmove', function (e) {
                         e.preventDefault();
                     });
-                    A.stop().css({
-                        bottom: -A.outerHeight()
-                    }).show().animate({
+                    A.show();
+                    A.animate({
                         bottom: 0
-                    }, speed, easing);
+                    }, 400);
                     f && typeof (f) === 'function' ? f() : '';
                 },
                 bSelhide: function () {
                     var A = $('.float_sbox');
-                    var speed = 400;
-                    var easing = 'swing';
-                    A.stop().animate({
-                        bottom: -A.outerHeight()
-                    }, speed, easing, function () {
-                        $(A).remove();
+                    A.animate({
+                        bottom: -A.height()
+                    }, 400, function () {
+                        $(A).hide();
                     });
                     xzw.b.layerhide();
                 }
@@ -145,7 +136,6 @@ define(function (require) {
                 if (!text) {
                     s = true;
                 }
-
             });
             if (s) {
                 xzw.b.layershow();

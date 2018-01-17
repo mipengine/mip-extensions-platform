@@ -49,24 +49,42 @@ define(function (require) {
                 $('.compaydetail-more').hide();
             });
         }
-        // 关注，拉黑
-        if ($('#Attention')) {
+        // 是否登录,登录后进行其他操作
+        if ($userinfo !== '0') {
+            // 关注
             $('#Attention').click(function () {
-                if ($userinfo !== '0') {
-                    attention();
-                } else {
-                    userLogin(true);
-                }
+                attention();
+            });
+            // 拉黑
+            $('#BlockCompany').click(function () {
+                blockCompany();
+            });
+        } else {
+            $('#Attention').click(function () {
+                userLogin(true);
+            });
+            $('#BlockCompany').click(function () {
+                userLogin(true);
             });
         }
-        if ($('#BlockCompany')) {
-            $('#BlockCompany').click(function () {
-                if ($userinfo !== '0') {
-                    blockCompany();
-                } else {
-                    userLogin(true);
+        // 关注 拉黑
+        var AttentionList;
+        AttentionList = localStorage.getItem('AttentionList');
+        if (AttentionList !== null && AttentionList !== '' && typeof (AttentionList) !== 'undefined') {
+            if ($userinfo !== null) {
+                if (AttentionList.indexOf($comNuber) !== -1) {
+                    $('#Attention').html('取消关注');
                 }
-            });
+            }
+        }
+        var BlockList;
+        BlockList = localStorage.getItem('BlockList');
+        if (BlockList !== null && BlockList !== '' && typeof (BlockList) !== 'undefined') {
+            if ($userinfo !== null) {
+                if (BlockList.indexOf($compName) !== -1) {
+                    $('#BlockCompany').html('移出黑名单');
+                }
+            }
         }
         // 遮罩层关闭
         if ($('.jconfirm')) {
@@ -76,22 +94,6 @@ define(function (require) {
                 $('.jconfirm').hide();
             });
         }
-        // 获取关注列表、关注公司、取消关注
-        if ($AttentionList === null || $AttentionList === '') {
-            myAttentionList();
-        } else if ($userinfo !== null) {
-            if ($AttentionList.indexOf($comNuber) !== -1) {
-                $('#Attention').html('取消关注');
-            }
-        }
-        // 获取列表、拉入黑名单、取消
-        if ($BlockList === null || $BlockList === '') {
-            myBlockList();
-        } else if ($userinfo !== null) {
-            if ($BlockList.indexOf($compName) !== -1) {
-                $('#BlockCompany').html('移出黑名单');
-            }
-        }
         // 底部浮层
         $('.indexLayer_Close').on('click', function () {
             $('.indexLayer').hide();
@@ -99,6 +101,22 @@ define(function (require) {
         $('#goreg').click(function () {
             window.location.href = 'https://mip.zhaopin.com/account/regist';
         });
+        // jssdk 这个是统计代码，需要挂载到window上
+        var a = window;
+        var e = document;
+        var f = 'script';
+        var g = document.location.protocol + '//statistic.zhaopin.cn/sdk/zhaopin_tracker.js';
+        var b = 'za';
+        var c;
+        var d;
+        a.ZhaoPinBigdataAnalyticsObject = b;
+        a[b] = a[b] || function () {
+                    (a[b].q = a[b].q || []).push(arguments);
+                };
+        a[b].l = 1 * new Date;
+        a._ATAD_GIB_NIPOAHZ_ || (c = e.createElement(f), d = e.getElementsByTagName(f)[0],
+                c.async = 1, c.src = g, d.parentNode.insertBefore(c, d), a._ATAD_GIB_NIPOAHZ_ = !0);
+        window.za('creat', 'M');
     };
     window.onload = function () {
         render();

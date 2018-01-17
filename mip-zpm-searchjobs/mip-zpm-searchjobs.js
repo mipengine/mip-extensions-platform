@@ -358,6 +358,22 @@ define(function (require) {
         $('.r_returnbk').click(function () {
             window.history.back();
         });
+        // jssdk 这个是统计代码，需要挂载到window上
+        var a = window;
+        var e = document;
+        var f = 'script';
+        var g = document.location.protocol + '//statistic.zhaopin.cn/sdk/zhaopin_tracker.js';
+        var b = 'za';
+        var c;
+        var d;
+        a.ZhaoPinBigdataAnalyticsObject = b;
+        a[b] = a[b] || function () {
+                    (a[b].q = a[b].q || []).push(arguments);
+                };
+        a[b].l = 1 * new Date;
+        a._ATAD_GIB_NIPOAHZ_ || (c = e.createElement(f), d = e.getElementsByTagName(f)[0],
+                c.async = 1, c.src = g, d.parentNode.insertBefore(c, d), a._ATAD_GIB_NIPOAHZ_ = !0);
+        window.za('creat', 'M');
     };
     window.onload = function () {
         render();
@@ -444,7 +460,7 @@ define(function (require) {
             success: function (data, textStatus, jqxhr) {
                 $('.jzz').hide();
                 $('.jzzul').hide();
-                myCollectList();
+                // myCollectList();
                 alert('收藏成功');
                 recoveryBodyTouch();
             }
@@ -494,7 +510,7 @@ define(function (require) {
                 $('.jzz').hide();
                 $('.jzzul').hide();
                 if (data.StatusCode === 200) {
-                    myBlockList();
+                    // myBlockList();
                     alert('屏蔽成功');
                     recoveryBodyTouch();
                 }
@@ -703,49 +719,11 @@ define(function (require) {
                 },
                 success: function (data, textStatus, jqxhr) {
                     cs.set('data-citycode', data.citycode);
-                    if (code !== data.citycode) {
-                        $('.fj').hide();
-                        $('#fj').removeClass('h');
-                    }
                 }
             });
-        } else {
-            if (code !== dataCitycode) {
-                $('.fj').hide();
-                $('#fj').removeClass('h');
-            }
         }
         jwd = true;
         cheakJwd();
-        $.ajax({
-            type: 'post',
-            url: 'https://mip.zhaopin.com/searchjob/SearchJobsGetlocation',
-            data: {
-                Industry: $('#S_Industry').attr('value'),
-                KeyWord: $('#S_KeyWord').attr('value'),
-                JobType: $('#S_JobType').attr('value'),
-                joblocation: userLocationLat + ';' + userLocationLon,
-                isSchoolJob: $('#S_isSchoolJob').attr('value'),
-                Location: $('#Slocation').attr('value'),
-                publishdate: $('#S_publishdate').attr('value'),
-                workexperience: $('#S_workexperience').attr('value'),
-                education: $('#S_education').attr('value'),
-                compType: $('#S_compType').attr('value'),
-                compsize: $('#S_compsize').attr('value'),
-                jobtype2: $('#S_jobtype2').attr('value'),
-                salary: $('#S_salary').attr('value'),
-                order: $('#S_order').attr('value'),
-                positionname: $('#S_positionname').attr('value'),
-                companyname: $('#S_companyname').attr('value'),
-                maprange: $('#S_maprange').attr('value')
-            },
-            success: function (data, textStatus, jqxhr) {
-                var $li = $('#fj li a');
-                for (var i = 0; i < data.length; i++) {
-                    $li.eq(i).attr('href', data[i]);
-                }
-            }
-        });
     }
     // 获得经纬度失败执行函数
     function onError(error) {
