@@ -6,6 +6,7 @@
 define(function (require) {
     var customElement = require('customElement').create();
     customElement.prototype.build = function () {
+		// jssdk  统计需要挂载在window上
         var a = window;
         var e = document;
         var f = 'script';
@@ -20,14 +21,7 @@ define(function (require) {
         a[b].l = 1 * new Date;
         a._ATAD_GIB_NIPOAHZ_ || (c = e.createElement(f), d = e.getElementsByTagName(f)[0],
                 c.async = 1, c.src = g, d.parentNode.insertBefore(c, d), a._ATAD_GIB_NIPOAHZ_ = !0);
-        window.za('creat', 'MIP');
-        var basic = {};
-        basic['uid'] = '';
-        basic['pagecode'] = 'mip_test';
-        basic['wdgtid'] = '';
-        basic['evtid'] = 'pageview';
-        basic['chnlname'] = '';
-        window.za('track', basic);
+        window.za('creat', 'A24');
     };
     return customElement;
 });

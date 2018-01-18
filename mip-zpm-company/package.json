@@ -1,10 +1,10 @@
 {
     "name": "mip-zpm-company",
-    "version": "1.0.8",
+    "version": "1.0.9",
 	"description": "公司业务需求",
     "author": {
         "name": "wangjx",
-        "email": "651183320@qq.com",
+        "email": "jianxin.wang@zhaopin.com.cn",
         "url": "http://m.zhaopin.com"
     },
     "engines": {

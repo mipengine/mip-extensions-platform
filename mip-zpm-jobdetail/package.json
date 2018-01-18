@@ -1,10 +1,10 @@
 {
     "name": "mip-zpm-jobdetail",
-    "version": "1.0.6",
+    "version": "1.0.7",
 	"description": "职位业务需求",
     "author": {
         "name": "wangjx",
-        "email": "651183320@qq.com",
+        "email": "jianxin.wang@zhaopin.com.cn",
         "url": "http://m.zhaopin.com"
     },
     "engines": {

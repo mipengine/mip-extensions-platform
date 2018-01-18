@@ -157,6 +157,7 @@ define(function (require) {
             $('.subwayBox').show();
         }
         // jssdk 这个是统计代码，需要挂载到window上
+        // 每个文件的code不一样所以需要在每个文件中单独引用
         var a = window;
         var e = document;
         var f = 'script';
@@ -171,9 +172,16 @@ define(function (require) {
         a[b].l = 1 * new Date;
         a._ATAD_GIB_NIPOAHZ_ || (c = e.createElement(f), d = e.getElementsByTagName(f)[0],
                 c.async = 1, c.src = g, d.parentNode.insertBefore(c, d), a._ATAD_GIB_NIPOAHZ_ = !0);
-        window.za('creat', 'M');
+        window.za('creat', 'A24');
+        var basic = {};
+        basic['uid'] = $userinfo || '';
+        basic['pagecode'] = '6020';
+        basic['wdgtid'] = '';
+        basic['evtid'] = 'pageopen';
+        basic['chnlname'] = 'https://m.baidu.com/from=844b/s?word=%E6%99%BA%E8%81%94%E6%8B%9B%E8%81%98&sa=tb&ts=4521339&t_kt=0&ie=utf-8&rsv_t=c084r1HBnlmdWPcjNqcpQXFgg0covw0gRT1YwxNAEXV41LTaLT5gDeIFGg&rsv_pq=11504130240738664133&ss=100&tj=1&t_it=1&rqlang=zh&rsv_sug4=9677&inputT=8769&from=844b&isid=98D843641331458917737&mod=0&async=1';
+        window.za('track', basic);
     };
-    window.init = function () {
+    window.onload = function () {
         render();
     };
     // 投递简历
@@ -210,7 +218,7 @@ define(function (require) {
                 favorite: favorate
             },
             success: function (data, textStatus, jqxhr) {
-                myCollectList();
+                // myCollectList();
                 if ($('.add-favorite').html() === '收藏职位') {
                     favorOp = false; // dis favor
                     $('.add-favorite').html('取消收藏');
