@@ -1289,11 +1289,13 @@ define(function (require) {
         return support;
     }
 
-    function mipAdd(str, pid) {
+    function mipAdd(str, pid, cid) {
         var arr1 = str.split('//');
         var str1 = arr1.length > 1 ? arr1[1] : '';
         var str2 = str1.split('.js')[0];
         var arr2 = str2.split('/');
+
+        setCustomerId(cid);
 
         if (arr2.length < 2) {
             // console.warn('baidu union string error');

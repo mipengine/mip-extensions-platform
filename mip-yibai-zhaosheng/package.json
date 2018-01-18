@@ -1,0 +1,12 @@
+{
+    "name": "mip-yibai-zhaosheng",
+    "version": "1.0.0",
+    "description": "100招生手机端功能",
+    "author": {
+        "name": "jy",
+        "email": "1248848961@qq.com"
+    },
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

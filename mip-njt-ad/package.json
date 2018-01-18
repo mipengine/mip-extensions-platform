@@ -1,0 +1,15 @@
+{
+    "name": "mip-njt-ad",
+    "version": "1.0.0",
+    "description": " mip.nongjitong.com 广告引入",
+    "contributors": [
+        {
+            "name": "houjinlong",
+	        "email": "1844041598@qq.com",
+	        "url": "https://houjinlong.github.io"   
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
