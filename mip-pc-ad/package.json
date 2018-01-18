@@ -1,0 +1,14 @@
+{
+    "name": "mip-pc-ad",
+    "version": "1.0.0",
+    "description": "太平洋广告组件",
+    "contributors": [
+        {
+            "name": "beibei",
+            "email": "1733125455@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
