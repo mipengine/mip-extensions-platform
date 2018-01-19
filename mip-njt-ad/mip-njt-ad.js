@@ -64,7 +64,6 @@ define(function (require) {
                 },
                 error: function (e) {
                     checkAdmIPajax(responsexml);
-                    console.warn(e);
                 }
             });
         }
@@ -84,7 +83,7 @@ define(function (require) {
                         && ($(this).find('city').text() === ''
                         || $(this).find('city').text().indexOf(city) >= 0
                         || city.indexOf($(this).find('city').text()) >= 0)) {
-                            $('' + placeName).html($(this).find('adcode').text())
+                            $('#' + placeName).html($(this).find('adcode').text())
                             .css('overflow', 'hidden')
                             .find('img').css({
                                 'display': 'block',
