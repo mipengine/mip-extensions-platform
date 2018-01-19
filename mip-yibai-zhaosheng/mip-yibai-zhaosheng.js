@@ -15,7 +15,7 @@ define(function (require) {
         width > 766 ? html.style.fontSize = 766 / 7.66 + 'px' : html.style.fontSize = width / 7.66 + 'px';
     };
     customElement.prototype.firstInviewCallback = function () {
-        $('.tab-nav li a').on('tap', function () {
+        $('.tab-nav li a').click(function () {
             if ($(this).hasClass('active')) {
                 return false;
             } else {
@@ -26,7 +26,7 @@ define(function (require) {
             $('#module' + $(this).attr('flag')).show();
             return false;
         });
-        $('.location').on('tap', function () {
+        $('.location').click(function () {
             $('.js-location').toggle();
         });
     };

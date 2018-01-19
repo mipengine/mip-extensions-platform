@@ -15,7 +15,7 @@ define(function (require) {
         // TODO
         var element = this.element;
         var ajaxXml = element.getAttribute('ajaxXml') || '/adm/15.xml';
-        var ajaxIp = element.getAttribute('ajaxIp') || '/API/IP.ashx?action=js';
+        var ajaxIp = element.getAttribute('ajaxIp');
         var pagename = element.getAttribute('pagename');
         var ptypeid = element.getAttribute('ptypeid');
         var pcategoryid = element.getAttribute('pcategoryid');
@@ -32,7 +32,13 @@ define(function (require) {
                 url: ajaxXml,
                 dataType: 'xml',
                 success: function (responsexml) {
-                    loadIp(responsexml);
+                    if (ajaxIp) {
+                        loadIp(responsexml);
+                    } else {
+                        for (var i = 0; i < adplace.length; i++) {
+                            loadadm(responsexml, '', '', adplace[i]);
+                        }
+                    }
                 }
             });
         }

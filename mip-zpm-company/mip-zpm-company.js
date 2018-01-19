@@ -50,7 +50,7 @@ define(function (require) {
             });
         }
         // 是否登录,登录后进行其他操作
-        if ($userinfo !== '0') {
+        if (Number($userinfo) !== 0) {
             // 关注
             $('#Attention').click(function () {
                 attention();
@@ -119,11 +119,11 @@ define(function (require) {
                 c.async = 1, c.src = g, d.parentNode.insertBefore(c, d), a._ATAD_GIB_NIPOAHZ_ = !0);
         window.za('creat', 'A24');
         var basic = {};
-        basic['uid'] = $userinfo || '';
+        basic['uid'] = Number($userinfo) !== 0 ? $userinfo : '';
         basic['pagecode'] = '6021';
         basic['wdgtid'] = '';
         basic['evtid'] = 'pageopen';
-        basic['chnlname'] = 'https://m.baidu.com/from=844b/s?word=%E6%99%BA%E8%81%94%E6%8B%9B%E8%81%98&sa=tb&ts=4521339&t_kt=0&ie=utf-8&rsv_t=c084r1HBnlmdWPcjNqcpQXFgg0covw0gRT1YwxNAEXV41LTaLT5gDeIFGg&rsv_pq=11504130240738664133&ss=100&tj=1&t_it=1&rqlang=zh&rsv_sug4=9677&inputT=8769&from=844b&isid=98D843641331458917737&mod=0&async=1';
+        basic['chnlname'] = document.referrer;
         window.za('track', basic);
     };
     window.onload = function () {

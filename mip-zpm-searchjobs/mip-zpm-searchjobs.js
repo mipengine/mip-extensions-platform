@@ -359,6 +359,7 @@ define(function (require) {
             window.history.back();
         });
         // jssdk 这个是统计代码，需要挂载到window上
+        // 每个文件的code不一样所以需要在每个文件中单独引用
         var a = window;
         var e = document;
         var f = 'script';
@@ -373,7 +374,14 @@ define(function (require) {
         a[b].l = 1 * new Date;
         a._ATAD_GIB_NIPOAHZ_ || (c = e.createElement(f), d = e.getElementsByTagName(f)[0],
                 c.async = 1, c.src = g, d.parentNode.insertBefore(c, d), a._ATAD_GIB_NIPOAHZ_ = !0);
-        window.za('creat', 'M');
+        window.za('creat', 'A24');
+        var basic = {};
+        basic['uid'] = Number($userinfo) !== 0 ? $userinfo : '';
+        basic['pagecode'] = '6019';
+        basic['wdgtid'] = '';
+        basic['evtid'] = 'pageopen';
+        basic['chnlname'] = document.referrer;
+        window.za('track', basic);
     };
     window.onload = function () {
         render();
