@@ -6,7 +6,7 @@ mip-wygx-views 我要个性网头像栏目内容页图片展示
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-wygx-views/mip-wygx-views.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-wygx-views/mip-wygx-views.js
 ## 示例
 
 ### 基本用法
@@ -60,7 +60,7 @@ data-nexturl = "http://mip.woyaogexing.com/touxiang/nv/2017/541178.html"
 类型：string
 
 ## 注意事项
-1. 组件内的图片必须使用mip-img标签 
+1. 组件内的图片必须使用mip-img标签
 
 2. 组件内的图片必须含有data-index属性
 

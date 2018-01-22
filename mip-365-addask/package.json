@@ -1,0 +1,13 @@
+{
+    "name": "mip-365-addask",
+    "version": "1.0.0",
+    "description": "咨询提交组件",
+    "author":{
+		"name": "yinpeng",
+        "email": "yinpeng@64365.com",
+		"url": "https://www.mipengine.org"
+	},
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
