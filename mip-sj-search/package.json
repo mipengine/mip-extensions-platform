@@ -1,0 +1,14 @@
+{
+    "name": "mip-sj-search",
+    "version": "1.0.0",
+    "description": "世纪加盟网站首页的头部搜索框",
+    "contributors": [
+        {
+            "name": "yangguihua",
+            "email": "3094316744@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

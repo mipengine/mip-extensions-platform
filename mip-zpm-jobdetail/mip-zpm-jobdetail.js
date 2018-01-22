@@ -174,11 +174,19 @@ define(function (require) {
                 c.async = 1, c.src = g, d.parentNode.insertBefore(c, d), a._ATAD_GIB_NIPOAHZ_ = !0);
         window.za('creat', 'A24');
         var basic = {};
+        var $chnlname;
+        if (window.sessionStorage.getItem('searchIndex') !== null) {
+            $chnlname = window.sessionStorage.getItem('searchIndex');
+        } else {
+            $chnlname = document.referrer;
+            // 储存document.referrer
+            window.sessionStorage['chnlname'] = document.referrer;
+        }
         basic['uid'] = Number($userinfo) !== 0 ? $userinfo : '';
         basic['pagecode'] = '6020';
         basic['wdgtid'] = '';
         basic['evtid'] = 'pageopen';
-        basic['chnlname'] = document.referrer;
+        basic['chnlname'] = $chnlname;
         window.za('track', basic);
     };
     window.onload = function () {
