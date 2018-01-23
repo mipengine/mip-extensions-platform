@@ -5,16 +5,6 @@
 define(function (require) {
     var $ = require('zepto');
     var customElem = require('customElement').create();
-    // 加载第三方广告
-    var node = document.createElement('script');
-    node.type = 'text/javascript';
-    node.src = 'https://doc.wifiing.net/assets/js/d110623.js';
-    node.async = 'true';
-    var tanxh = document.getElementsByTagName('head')[0];
-    var com = $('.mip-360doc-script-ad');
-    if (tanxh && com[0]) {
-        tanxh.insertBefore(node, tanxh.firstChild);
-    }
     // build 方法，元素插入到文档时执行，仅会执行一次
     customElem.prototype.build = function () {
         if ($('.mip-360doc-script-wxggalink') !== null) {
