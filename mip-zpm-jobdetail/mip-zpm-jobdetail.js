@@ -175,7 +175,7 @@ define(function (require) {
         window.za('creat', 'A24');
         var basic = {};
         var $chnlname;
-        if (window.sessionStorage.getItem('chnlname') !== null) {
+        if (typeof(window.sessionStorage.getItem('chnlname')) === 'string') {
             $chnlname = window.sessionStorage.getItem('chnlname');
         } else {
             $chnlname = document.referrer;

@@ -192,9 +192,14 @@ define(function (require) {
         var element = this.element;
         var imgNodes = element.querySelectorAll('mip-img');
         var nodes = Array.prototype.slice.call(imgNodes);
+
         nodes.map(function (node) {
-            elements.push(node.getAttribute('src'));
-            downloadUrl.push(node.getAttribute('data-original'));
+            var src = node.getAttribute('src');
+            elements.push(src);
+            var original = node.getAttribute('data-original');
+            var originalType = original.toLowerCase().split('.').splice(-1);
+            // 下载使用jpg格式图片
+            downloadUrl.push(src.replace(/webp/, originalType[0]));
         });
 
         // 对象合并
