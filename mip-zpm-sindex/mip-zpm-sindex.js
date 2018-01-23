@@ -268,6 +268,8 @@ define(function (require) {
         }
         // jssdk 这个是统计代码，需要挂载到window上
         // 每个文件的code不一样所以需要在每个文件中单独引用
+		// 是否登录
+        var $userID = $('#S_user').attr('data-uid');
         var a = window;
         var e = document;
         var f = 'script';
@@ -292,7 +294,7 @@ define(function (require) {
             // 储存document.referrer
             window.sessionStorage['chnlname'] = document.referrer;
         }
-        basic['uid'] = Number($userinfo) !== 0 ? $userinfo : '';
+        basic['uid'] = Number($userID) !== 0 ? $userID : '';
         basic['pagecode'] = '6017';
         basic['wdgtid'] = '';
         basic['evtid'] = 'pageopen';

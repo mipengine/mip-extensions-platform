@@ -8,6 +8,12 @@ define(function (require) {
     var customElement = require('customElement').create();
     var $ = require('jquery');
     var viewPort = require('viewport');
+
+    var isIframe = false;
+    // 判断是否在iframe中
+    if (self !== top) {
+        isIframe = true;
+    }
     // 提示层
     function tipMask(msg, duration) {
         duration = duration || 2000;
@@ -24,7 +30,7 @@ define(function (require) {
     }
 
     // 下拉加载更多
-    function moveLoadMore(element, datas) {
+    function moveLoadMore(element, datas, scrollEle) {
         if (datas.action !== 'scroll') {
             $(element).on(datas.action, datas.btn, function () {
                 $.ajax({
@@ -62,7 +68,7 @@ define(function (require) {
                 pageCount = datas.params.page_count;
             }
             var pageSize = datas.params.page_size;
-            $(window).scroll(function () {
+            $(scrollEle).scroll(function () {
                 // 当前页码数大于总页码则不加载
                 if (datas.params.page_num > pageCount) {
                     $(datas.loadclass).hide();
@@ -123,6 +129,16 @@ define(function (require) {
             thisObj.innerHTML = '';
             return false;
         }
+        var UA = window.navigator.userAgent;
+        var IsAndroid = (/Android|HTC/i.test(UA));
+        var IsIPad = !IsAndroid && /iPad/i.test(UA);
+        var IsIPhone = !IsAndroid && /iPod|iPhone/i.test(UA);
+        var IsIOS = IsIPad || IsIPhone;
+        var docEle = window;
+        // 判断是苹果系统并且在iframe里
+        if (IsIOS && isIframe) {
+            docEle = document.body;
+        }
         if (typeof (data.type) !== 'undefined' && data.type === 'masonry') {
             // 加载瀑布流插件
             var scriptDom = document.createElement('script');
@@ -135,11 +151,11 @@ define(function (require) {
                     });
                 });
             });
-            $(window).scroll(function () {
+            $(docEle).scroll(function () {
                 $(data.containerclass).masonry().masonry('reload');
             });
         }
-        moveLoadMore(thisObj, data);
+        moveLoadMore(thisObj, data, docEle);
         // 翻页
         $(data.flipclass).find('.pagination-pages').change(function () {
             if ($(this).val() !== '...') {
@@ -149,6 +165,7 @@ define(function (require) {
                 $(data.flipclass).find('.more').text(textval);
             }
         });
+
     };
 
     return customElement;
