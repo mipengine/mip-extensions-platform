@@ -1,0 +1,14 @@
+{
+    "name": "mip-xuexb-like",
+    "version": "1.0.0",
+    "description": "前端小武博客通用喜欢、阅读数、点赞，可包含登录逻辑。",
+    "contributors": [
+        {
+            "name": "xuexb",
+            "email": "fe.xiaowu@gmail.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

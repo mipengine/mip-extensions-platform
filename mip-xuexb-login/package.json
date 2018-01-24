@@ -1,0 +1,14 @@
+{
+    "name": "mip-xuexb-login",
+    "version": "1.0.0",
+    "description": "前端小武博客异步登录组件，支持跨源站和 MIP-Cache 页的登录解决方案。",
+    "contributors": [
+        {
+            "name": "xuexb",
+            "email": "fe.xiaowu@gmail.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
