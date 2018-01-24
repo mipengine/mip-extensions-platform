@@ -26,36 +26,33 @@ define(function (require) {
                 }
                 if (loginuser === 0)
 				{
-                    $('#btnadd').hide();
-                    $('#teleph').show();
-                    $('#btn_authentication').on('click', function () {
-                            var mobilephone = $('#format_mobilePhone').val();
-                            var reg = /([0\+]\d{2,3}-)?(1[3|4|5|8|7]\d{9})/;
-                            var r = mobilephone.match(reg);
-                            if (r != null) {
-                                $.ajax({
-                                    type: 'POST',
-                                    url: '/najax/Authentication/MobilePhoneLogin/',
-                                    data: {
-                                        'mobilePhone': mobilephone,
-                                        'verificationCode': '',
-                                        'password': '',
-                                        'content': quescontent,
-                                        'lawyerId': lawyerId,
-                                        'cityId': cityId,
-                                        'type': type
-                                    },
-                                    success: function (data) {
-                                        if (data.UserId > 0) {
-                                            $('#btn_addAsk').trigger('click');
-                                        }
-                                    }
-                                });
-                            } else {
-                                alert('请输入正确的电话号码');
-                                return;
+                    var mobilephone = $('#format_mobilePhone').val();
+                    var reg = /([0\+]\d{2,3}-)?(1[3|4|5|8|7]\d{9})/;
+                    var r = mobilephone.match(reg);
+                    if (r != null) {
+                        $.ajax({
+                            type: 'POST',
+                            url: '/najax/Authentication/MobilePhoneLogin/',
+                            data: {
+                                'mobilePhone': mobilephone,
+                                'verificationCode': '',
+                                'password': '',
+                                'content': quescontent,
+                                'lawyerId': lawyerId,
+                                'cityId': cityId,
+                                'type': type
+                            },
+                            success: function (res) {
+                                if (res > 0) {
+                                    alert('发布成功');
+                                    window.location.href = 'http://m2.64365.com/ask/askok.aspx?askid=' + res + '&typeid=0&questioncontent=' + quescontent;
+                                }
                             }
                         });
+                    } else {
+                        alert('请输入正确的电话号码');
+                        return;
+                    }
                 } else {
                     if (islawyer === 0) {
                         alert('律师不能提问');
@@ -68,38 +65,23 @@ define(function (require) {
                                 'content': quescontent,
                                 'lawyerId': lawyerId,
                                 'cityId': cityId,
-                                'type': type,
-                                'cks': getCookie('ba1')
+                                'type': type
                             },
                             beforeSend: function (xhr) {
                                 xhr.withCredentials = true;
                             },
                             crossDomain: true,
-                            success: function (data) {
-                                if (data.Data.QuestionId > 0)
+                            success: function (res) {
+                                if (res > 0)
 								{
-                                    window.location.href = 'http://m2.64365.com/ask/askok.aspx?askid=' + data.QuestionId + '&typeid=0&questioncontent=' + data.Title;
+                                    window.location.href = 'http://m2.64365.com/ask/askok.aspx?askid=' + res + '&typeid=0&questioncontent=' + quescontent;
                                 } else {
                                 }
-                            },
-                            error: function (e) {
-                                alert(e);
                             }
                         });
                     }
                 }
             });
     };
-    function getCookie(name) {
-        var strCookie = document.cookie;
-        var arrCookie = strCookie.split('; ');
-        for (var i = 0; i < arrCookie.length; i++) {
-            var arr = arrCookie[i].split('=');
-            if (arr[0] === name) {
-                return arr[1];
-            }
-        }
-        return '';
-    }
     return customElement;
 });

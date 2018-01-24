@@ -20,7 +20,7 @@ define(function (require) {
         window._zpv_cfg = cfg; // eslint-disable-line
 
         var zpv = document.createElement('script');
-        zpv.src = '//js.zol.com.cn/pvn/pv.js';
+        zpv.src = '//js.zol.com.cn/pvn/z.pv';
         zpv.charset = 'utf-8';
         element.appendChild(zpv);
     };

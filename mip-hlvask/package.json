@@ -1,0 +1,14 @@
+{
+    "name": "mip-hlvask",
+    "version": "1.0.0",
+    "description": "组件介绍",
+    "contributors": [
+        {
+            "name": "hitaozh",
+            "email": "676096662@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
