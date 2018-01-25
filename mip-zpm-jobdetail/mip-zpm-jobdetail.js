@@ -175,8 +175,11 @@ define(function (require) {
         window.za('creat', 'A24');
         var basic = {};
         var $chnlname;
-        if (typeof(window.sessionStorage.getItem('chnlname')) === 'string') {
+        if (typeof (window.sessionStorage.getItem('chnlname')) === 'string') {
             $chnlname = window.sessionStorage.getItem('chnlname');
+        } else if ((document.referrer).indexOf('//mip.zhaopin.com/') >= 0) {
+            $chnlname = '';
+            window.sessionStorage['chnlname'] = '';
         } else {
             $chnlname = document.referrer;
             // 储存document.referrer

@@ -4,36 +4,37 @@
 
 mip-close-dom {
     &.close-btn {
-        background-color: #ff0000;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+        background -color: #ff0000;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.4);
         color: #fff;
         font-size: 40px;
-
-        position: absolute;
+        position: relative;
         right: -20px;
         top: -20px;
         width: 40px;
         height: 40px;
         border-radius: 50%;
     }
-    &.close-btn::before,
-    &.close-btn::after {
+    &.close-btn:before,
+    &.close-btn:after {
         content: '';
         width: 2px;
         height: 25px;
         display: inline-block;
         position: absolute;
-        background-color: #fff;
+        background: #fff;
         top: 8px;
         left: 19px;
     }
-    &.close-btn::before {
+    &.close-btn:before {
         transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
     }
-    &.close-btn::after {
+    &.close-btn:after {
         transform: rotate(-45deg);
-    }
+        -webkit-transform: rotate(-45deg);
+   }
     &.close-btn.touchdown {
-        background-color: #cc0000;
+        background: #cc0000;
     }
 }

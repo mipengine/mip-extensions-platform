@@ -268,7 +268,7 @@ define(function (require) {
         }
         // jssdk 这个是统计代码，需要挂载到window上
         // 每个文件的code不一样所以需要在每个文件中单独引用
-		// 是否登录
+        // 是否登录
         var $userID = $('#S_user').attr('data-uid');
         var a = window;
         var e = document;
@@ -287,8 +287,11 @@ define(function (require) {
         window.za('creat', 'A24');
         var basic = {};
         var $chnlname;
-        if (typeof(window.sessionStorage.getItem('chnlname')) === 'string') {
+        if (typeof (window.sessionStorage.getItem('chnlname')) === 'string') {
             $chnlname = window.sessionStorage.getItem('chnlname');
+        } else if ((document.referrer).indexOf('//mip.zhaopin.com/') >= 0) {
+            $chnlname = '';
+            window.sessionStorage['chnlname'] = '';
         } else {
             $chnlname = document.referrer;
             // 储存document.referrer
