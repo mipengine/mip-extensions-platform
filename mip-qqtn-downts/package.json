@@ -1,0 +1,15 @@
+{
+    "name": "mip-qqtn-downts",
+    "version": "1.0.0",
+    "description": "对没有下载资源的根据访问设备进行提示",
+    "contributors": [
+        {
+            "name": "gom",
+            "email": "gom3250@qq.com",
+            "url": "https://m.qqtn.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.0.0"
+    }
+}
