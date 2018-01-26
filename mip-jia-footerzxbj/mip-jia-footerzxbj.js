@@ -47,7 +47,7 @@ define(function (require) {
         isIndex: 0,
         init: function (data, ele) {
             // 报完名不显示弹窗
-            if (storage.get('us_pop') === null) {
+            if (!storage.get('us_pop')) {
                 zxbjPage.method.bottomTonglan(data, ele);
             }
             else {
@@ -232,7 +232,7 @@ define(function (require) {
                 }
                 else if ((bottom + scrHeight - zxbjPage.vot) >= boxHeight) {
                     // 完全展开
-                    if (storage.get('usFlag') === 'false' || storage.get('usFlag') === undefined) {
+                    if (storage.get('usFlag') === 'false' || !storage.get('usFlag')) {
                         $this.find('.toutiao-ask-zxbj')
                             .css('bottom', zxbjPage.isIndex + boxHeight + 'px')
                             .addClass('box-conversion');
@@ -250,7 +250,6 @@ define(function (require) {
                         $this.find('.toutiao-ask-zxbj')
                             .css('bottom', (zxbjPage.isIndex + bottom + scrHeight - zxbjPage.vot) + 'px');
                     }
-
                 }
                 else if (scrHeight < zxbjPage.vot && (bottom + scrHeight - zxbjPage.vot) > 0) {
                     // 收起中...
