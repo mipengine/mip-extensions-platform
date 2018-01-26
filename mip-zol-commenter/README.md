@@ -6,7 +6,7 @@
 ----|----
 类型|业务
 支持布局|N,S|
-所需脚本|https://c.mipcdn.com/static/v1/mip-zol-commenter/mip-zol-commenter.js
+所需脚本|https://mipcache.bdstatic.com/static/v1/mip-zol-commenter/mip-zol-commenter.js
 
 ## 示例
 
@@ -31,11 +31,11 @@
 取值范围：> 0
 默认值：4
 
-### data-data: {}
-说明：提交评论时的追加信息
+### data-data-xxx: ''
+说明：提交评论时的追加信息,name="xxx"
 必选项：否
-类型：json对象
-默认值：{}
+类型：字符串
+默认值：''
 
 ### data-onSuccess: null
 说明：评论成功后的回调函数

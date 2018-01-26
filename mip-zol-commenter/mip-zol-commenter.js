@@ -26,7 +26,6 @@ define(function (require, exports, module) {
                 this.options[variable] = this.defaults[variable];
             }
         }
-        this.options.data && (this.options.data = JSON.parse(this.options.data));
         this.init();
     }
     Commenter.prototype = {
@@ -233,7 +232,7 @@ define(function (require, exports, module) {
         checkCodePic && (checkCodePic.src = getCheckCode.getUrl());
     }
     getCheckCode.getUrl = function () {
-        return 'http://service.zol.com.cn/captchasrc.php?param=a0a5L_Ehd9HSfJWrXl0cwfE5-FiO'
+        return '//service.zol.com.cn/captchasrc.php?param=a0a5L_Ehd9HSfJWrXl0cwfE5-FiO'
         + '8kIuZyUC9DEO6RM1wKbUiwOSGRscrur_nLoOv_0gm13pp4G0q3Ak2lvbCT7dZXLwug&t='
         + (new Date()).getTime();
     };
@@ -291,7 +290,31 @@ define(function (require, exports, module) {
         var gesture = new Gesture(element);
 
         element.addEventListener('click', function () {
+            var dataset = element.dataset;
             if (!element._commenter) {
+                var customData;
+                try {
+                    var script = document.querySelector('[data-name="comment-config"]');
+                    if (script) {
+                        customData = JSON.parse(script.textContent);
+                    }
+                }
+                catch (e) {
+                    console.warn('json is illegal'); // eslint-disable-line
+                    console.warn(e); // eslint-disable-line
+                }
+                customData && (options.data = customData);
+                for (var key in dataset) {
+                    if (dataset.hasOwnProperty(key)) {
+                        if (/^data([A-Z][\w]+)/.test(key)) {
+                            var pkey = key;
+                            pkey = pkey.replace(/^data[A-Z]/, pkey.slice(4, 5).toLowerCase());
+                            if (customData) {
+                                customData[pkey] = dataset[key];
+                            }
+                        }
+                    }
+                }
                 element._commenter = new Commenter(options);
             } else {
                 element._commenter.refresh();
