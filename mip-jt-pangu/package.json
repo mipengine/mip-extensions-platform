@@ -1,0 +1,14 @@
+{
+    "name": "mip-jt-pangu",
+    "version": "1.0.0",
+    "description": "统计功能组件",
+    "contributors": [
+        {
+            "name": "woke",
+            "email": "498867012@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
