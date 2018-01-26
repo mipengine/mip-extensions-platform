@@ -9,6 +9,7 @@ define(function (require) {
     var customElement = require('customElement').create();
     customElement.prototype.build = function () {
         var $element = $(this.element);
+        var vSrc = $element.attr('v-src');
         var Src = $element.attr('src');
         var popSelecter = $element.attr('pop-selecter');
         var pausePop = $element.attr('pause-pop');
@@ -24,7 +25,7 @@ define(function (require) {
                 'controls': '',
                 'class': className,
                 'poster': poster,
-                'src': Src,
+                'src': Src ? Src : vSrc,
                 'preload': 'none'
             });
             $element[0].appendChild(video);
