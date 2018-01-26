@@ -303,7 +303,6 @@ define(function (require, exports, module) {
                     console.warn('json is illegal'); // eslint-disable-line
                     console.warn(e); // eslint-disable-line
                 }
-                customData && (options.data = customData);
                 for (var key in dataset) {
                     if (dataset.hasOwnProperty(key)) {
                         if (/^data([A-Z][\w]+)/.test(key)) {
@@ -315,6 +314,7 @@ define(function (require, exports, module) {
                         }
                     }
                 }
+                customData && (options.data = customData);
                 element._commenter = new Commenter(options);
             } else {
                 element._commenter.refresh();

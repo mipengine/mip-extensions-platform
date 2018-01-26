@@ -14,7 +14,7 @@ define(function (require, exports, module) {
     };
     function praise(options, callback) {
         var url = options.url;
-        var data = options.data ? JSON.parse(options.data) : {};
+        var data = options.data ? options.data : {};
         typeof ZOL_USER_INFO !== 'undefined' && (data.userId = window.ZOL_USER_INFO.userid);
         if (!data.userId) {
             location.href = '//service.zol.com.cn/user/mlogin.php?backurl=' + encodeURIComponent(location.href);
@@ -51,6 +51,32 @@ define(function (require, exports, module) {
         var me = this;
         var element = this.element;
         var options = util.fn.extend({}, element.dataset);
+        var customData;
+        try {
+            var script = document.querySelector('[data-name="praize-config"]');
+            if (script) {
+                customData = JSON.parse(script.textContent);
+            }
+        }
+        catch (e) {
+            console.warn('json is illegal'); // eslint-disable-line
+            console.warn(e); // eslint-disable-line
+        }
+
+        for (var key in element.dataset) {
+            if (element.dataset.hasOwnProperty(key)) {
+                if (/^data([A-Z][\w]+)/.test(key)) {
+                    var pkey = key;
+                    pkey = pkey.replace(/^data[A-Z]/, pkey.slice(4, 5).toLowerCase());
+
+                    if (customData || (customData = {})) {
+                        customData[pkey] = element.dataset[key];
+                    }
+                }
+            }
+        }
+
+        customData && (options.data = customData);
 
         element.addEventListener('click', function () {
             if (element.classList.contains(options.likedclass)) {
