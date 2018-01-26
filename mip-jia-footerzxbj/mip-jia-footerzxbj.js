@@ -94,7 +94,7 @@ define(function (require) {
                 zxbjPage.method.bottomTonglan(data, ele);
             }
             else {
-                $('.footerzxbj-wrap').remove();
+                $('.footerzxbj-box,.footerzxbj-wrap').remove();
             }
         },
         method: {
@@ -255,7 +255,7 @@ define(function (require) {
                 }
                 // 滚动条到最底部的时候
                 if (domHeight <= ($(window).height() + scrHeight) || scrHeight > zxbjPage.screenNum) {
-                    storage.set('usFlag', true);
+                    storage.set('usFlag', 'true', 21600000);
                     showpopmask($this);
                     $this.find('.toutiao-ask-zxbj').addClass('show');
                 }
@@ -277,7 +277,7 @@ define(function (require) {
                 var $ele = $(ele).find('.toutiao-ask-zxbj');
                 // 点击展开按钮
                 $this.on('click', function () {
-                    storage.set('usFlag', true);
+                    storage.set('usFlag', 'true', 21600000);
                     showpopmask($ele.parent());
                     $ele.addClass('show');
                 });
