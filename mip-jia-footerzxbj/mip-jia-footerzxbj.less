@@ -5,13 +5,17 @@
 mip-jia-footerzxbj {
     .toutiao-ask-zxbj {
         position: fixed;
-        bottom: -.91rem;
+        bottom: 0;
         left: 0;
         right: 0;
-        transition: all .3s;
-        -webkit-transition: all .3s;
         z-index: 10002;
+        display: none;
         font-size: .14rem;
+        -webkit-animation: bottomShow .3s;
+        animation: bottomShow .3s
+    }
+    .toutiao-ask-zxbj.show {
+        display: block;
     }
     .toutiao-ask-zxbj .ask-zxbj-loading {
         display: none;
@@ -24,8 +28,8 @@ mip-jia-footerzxbj {
         bottom: -.9rem;
         left: 50%;
         margin-left: -.15rem }
-    .toutiao-ask-zxbj a.ask-zxbj-up {
-        display: block;
+    .toutiao-ask-zxbj .ask-zxbj-up {
+        padding-top: .43rem;
     }
     .toutiao-ask-zxbj .ask-zxbj-banner {
         height: .5rem;
@@ -271,12 +275,6 @@ mip-jia-footerzxbj {
     }
     .toutiao-ask-zxbj .ask-zxbj-box {
         background: #fbf1e3;
-        transition: all .5s;
-        -webkit-transition: all .5s;
-        position: absolute;
-        top: .5rem;
-        left: 0;
-        right: 0;
     }
     .ask-zxbj-box .zxbj-wrap {
         padding: .18rem .12rem;
@@ -293,7 +291,6 @@ mip-jia-footerzxbj {
         background: #fff;
         height: .2rem;
         padding: .085rem 2.75%;
-        position: relative;
         margin-bottom: .09rem;
     }
     .ask-zxbj-box .apply-input .input-city {
@@ -346,9 +343,6 @@ mip-jia-footerzxbj {
         border: none;
         height: .2rem;
         background: #fff;
-        appearance: none;
-        -moz-appearance: none;
-        -webkit-appearance: none;
     }
     .ask-zxbj-box .apply-input .cityChoice {
         display: block;
@@ -507,5 +501,34 @@ mip-jia-footerzxbj {
         margin-top: .1rem;
         background: #fff;
         font-size: .14rem;
+    }
+    .popmask {
+        display: none;
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        background-color: rgba(0, 0, 0, .4);
+        z-index: 10001;
+    }
+}
+@-webkit-keyframes bottomShow {
+    from {
+        -webkit-transform: translateY(100%);
+        transform: translateY(100%)
+    }
+    to {
+        -webkit-transform: translateY(0);
+        transform: translateY(0)
+    }
+}
+@keyframes bottomShow {
+    from {
+        -webkit-transform: translateY(100%);
+        transform: translateY(100%) }
+    to {
+        -webkit-transform: translateY(0);
+        transform: translateY(0)
     }
 }

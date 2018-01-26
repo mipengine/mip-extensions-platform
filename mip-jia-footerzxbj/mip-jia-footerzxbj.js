@@ -6,10 +6,28 @@
 define(function (require) {
     var $ = require('zepto');
     var util = require('util');
+    var fixedElement = require('fixed-element');
     var customElement = require('customElement').create();
     var CustomStorage = util.customStorage;
     var storage = new CustomStorage(0);
+    var platform = util.platform;
+    var isIframe = false;
+    // 判断是否在iframe中
+    if (self !== top) {
+        isIframe = true;
+    }
 
+    var docEle = window;
+    // 判断是苹果系统并且在iframe里
+    if (platform.isIos() && isIframe) {
+        docEle = document.body;
+    }
+
+    var scrollTop = {
+        body: 0,
+        documentElement: 0,
+        offset: 0
+    };
 
     // 获取城市
     function cityFn(callback) {
@@ -36,6 +54,31 @@ define(function (require) {
         }
     }
 
+    function showpopmask(ele) {
+        fixedElement.hideFixedLayer(fixedElement._fixedLayer);
+        // 保存页面当前滚动状态，因为设置overflow:hidden后页面会滚动到顶部
+        scrollTop.body = document.body.scrollTop;
+        scrollTop.documentElement = document.documentElement.scrollTop;
+        scrollTop.offset = window.pageYOffset;
+        document.documentElement.classList.add('mip-no-scroll');
+        ele.find('.popmask').show();
+    }
+
+    function hidepopmask(ele) {
+        fixedElement.showFixedLayer(fixedElement._fixedLayer);
+        document.documentElement.classList.remove('mip-no-scroll');
+        // 恢复页面滚动状态到弹层打开之前
+        if (typeof (document.body.scrollTo) === 'function') {
+            // 先判断存在，因为safari浏览器没有document.body.scrollTo方法
+            document.body.scrollTo(0, scrollTop.body);
+        }
+        if (typeof (document.documentElement.scrollTo) === 'function') {
+            // 先判断存在，因为safari浏览器没有document.documentElement.scrollTo方法
+            document.documentElement.scrollTo(0, scrollTop.documentElement);
+        }
+        window.scrollTo(0, scrollTop.offset);
+        ele.find('.popmask').hide();
+    }
 
     // 加密
 
@@ -51,16 +94,17 @@ define(function (require) {
                 zxbjPage.method.bottomTonglan(data, ele);
             }
             else {
-                $('.footerzxbj-wrap').hide();
+                $('.footerzxbj-wrap').remove();
             }
         },
         method: {
             bottomTonglan: function (data, ele) {
                 var $this = $(ele);
                 var str = '';
-                str += '<section class="toutiao-ask-zxbj">';
+                str += '<div class="popmask"></div>';
+                str += '<mip-fixed type="bottom" class="bottom-base toutiao-ask-zxbj box-conversion">';
                 str += '<div class="ask-zxbj-loading"></div>';
-                str += '<a href="javascript:;" class="ask-zxbj-up">';
+                str += '<div class="ask-zxbj-up">';
                 str += '<div class="ask-zxbj-banner">';
                 str += '<div class="op-bg"></div>';
                 str += '<div class="huangxiaoming"></div>';
@@ -79,10 +123,10 @@ define(function (require) {
                 str += '<h2 class="tit">装修该花多少钱？</h2>';
                 str += '<p class="des"><em>5秒</em>获取免费报价</p>';
                 str += '</aside>';
-                str += '<div class="jiantou up"><i></i></div>';
+                str += '<div class="jiantou"><i></i></div>';
                 str += '<span class="calculate-btn">立即计算</span>';
                 str += '</div>';
-                str += '</a>';
+                str += '</div>';
                 str += '<div class="ask-zxbj-box">';
                 str += '<div class="zxbj-wrap zxbj-js cur">';
                 str += '<div class="ysbj-counter-screen T-counter-screen">';
@@ -147,20 +191,16 @@ define(function (require) {
                 str += '</div>';
 
                 str += '</div>';
-                str += '</section>';
+                str += '</mip-fixed>';
                 $this.append(str);
-                setTimeout(function () {
-                    $this.find('.toutiao-ask-zxbj').css('bottom', zxbjPage.isIndex);
-                }, 1000);
 
                 cityFn();
 
-                zxbjPage.method.randomNumber($this.find('.bom-screen-nexine span'));
                 zxbjPage.method.randomNumber($this.find('.ysbj-screen-nexine span'));
                 zxbjPage.method.windowScroll(ele);
 
                 // 点击展开按钮
-                zxbjPage.method.clickUpFun(ele);
+                zxbjPage.method.clickUpFun(data, ele);
 
                 // 点击报名按钮
                 zxbjPage.method.zxbjSubmitBtn(data, ele);
@@ -206,70 +246,25 @@ define(function (require) {
             scrollFun: function (ele) {
                 var $this = $(ele);
                 // 滚动效果
-                var scrHeight = $(window).scrollTop();
+                var scrHeight = $(docEle).scrollTop();
                 // 滚动条滚动的距离
-                var domHeight = $(document).height();
-                var boxHeight = $this.find('.ask-zxbj-box').height();
-                var bottom = parseInt($this.find('.toutiao-ask-zxbj').css('bottom'), 10);
+                var domHeight = $(document.body)[0].scrollHeight;
                 // 如果用户自行做了操作 则此处不影响用户操作
                 if (zxbjPage.usFlag || storage.get('usFlag') === 'true') {
                     return false;
                 }
                 // 滚动条到最底部的时候
-                if (bottom >= boxHeight && (domHeight <= ($(window).height() + scrHeight))) {
-                    $this.find('.toutiao-ask-zxbj')
-                        .css('bottom', zxbjPage.isIndex + boxHeight + 'px')
-                        .addClass('box-conversion');
-                    $this.find('.ask-zxbj-up').find('.jiantou').removeClass('up');
-                }
-                if ((bottom + scrHeight - zxbjPage.vot) < 0) {
-                    // 完全收起
-                    $this.find('.toutiao-ask-zxbj').css('bottom', zxbjPage.isIndex).removeClass('box-conversion');
-                    $this.find('.ask-zxbj-up').find('.jiantou').addClass('up');
-                    if (bottom > zxbjPage.isIndex) {
-                        storage.set('usFlag', true);
-                    }
-                }
-                else if ((bottom + scrHeight - zxbjPage.vot) >= boxHeight) {
-                    // 完全展开
-                    if (storage.get('usFlag') === 'false' || !storage.get('usFlag')) {
-                        $this.find('.toutiao-ask-zxbj')
-                            .css('bottom', zxbjPage.isIndex + boxHeight + 'px')
-                            .addClass('box-conversion');
-                        $this.find('.ask-zxbj-up').find('.jiantou').removeClass('up');
-                    }
+                if (domHeight <= ($(window).height() + scrHeight) || scrHeight > zxbjPage.screenNum) {
                     storage.set('usFlag', true);
+                    showpopmask($this);
+                    $this.find('.toutiao-ask-zxbj').addClass('show');
                 }
-                else if (scrHeight > zxbjPage.screenNum) {
-                    // 展开中...
-                    if ((domHeight <= ($(window).height() + scrHeight))) {
-                        $this.find('.toutiao-ask-zxbj')
-                            .css('bottom', zxbjPage.isIndex + boxHeight + 'px');
-                    }
-                    else {
-                        $this.find('.toutiao-ask-zxbj')
-                            .css('bottom', (zxbjPage.isIndex + bottom + scrHeight - zxbjPage.vot) + 'px');
-                    }
-                }
-                else if (scrHeight < zxbjPage.vot && (bottom + scrHeight - zxbjPage.vot) > 0) {
-                    // 收起中...
-                    if (bottom === zxbjPage.isIndex) {
-                        zxbjPage.usFlag = true;
-                        return false;
-                    }
-                    if (scrHeight === 0) {
-                        $this.find('.toutiao-ask-zxbj').css('bottom', zxbjPage.isIndex);
-                        zxbjPage.usFlag = true;
-                    }
-                    else {
-                        $this.find('.toutiao-ask-zxbj').css('bottom', (bottom + scrHeight - zxbjPage.vot) + 'px');
-                    }
-                }
+
                 zxbjPage.vot = scrHeight;
             },
             windowScroll: function (ele) {
                 // 滚动事件
-                $(window).scroll(function () {
+                $(docEle).scroll(function () {
                     if (storage.get('usFlag') === 'true') {
                         return false;
                     }
@@ -277,23 +272,22 @@ define(function (require) {
                 });
                 zxbjPage.method.scrollFun(ele);
             },
-            clickUpFun: function (ele) {
-                var $this = $(ele);
+            clickUpFun: function (data, ele) {
+                var $this = $(data.ele);
+                var $ele = $(ele).find('.toutiao-ask-zxbj');
                 // 点击展开按钮
-                $this.find('.ask-zxbj-up').on('click', function () {
-                    var thatJt = $(this).find('.jiantou');
+                $this.on('click', function () {
                     storage.set('usFlag', true);
-                    if (thatJt.hasClass('up')) {
-                        thatJt.removeClass('up');
-                        $this.find('.toutiao-ask-zxbj')
-                            .css('bottom', zxbjPage.isIndex + $this.find('.ask-zxbj-box').height() + 'px')
-                            .addClass('box-conversion');
-                    }
-                    else {
-                        thatJt.addClass('up');
-                        $this.find('.toutiao-ask-zxbj').css('bottom', zxbjPage.isIndex).removeClass('box-conversion');
-                    }
-
+                    showpopmask($ele.parent());
+                    $ele.addClass('show');
+                });
+                $ele.find('.ask-zxbj-up').on('click', function () {
+                    hidepopmask($ele.parent());
+                    $ele.removeClass('show');
+                });
+                $this.find('.popmask').on('click', function () {
+                    hidepopmask($ele.parent());
+                    $ele.removeClass('show');
                 });
             },
             zxbjSubmitBtn: function (data, ele) {
@@ -381,7 +375,7 @@ define(function (require) {
                     success: function (e) {
                         if (e.status === 200) {
                             storage.set('us_pop', 'true', 21600000);
-                            $('.popmask,.loading-common,.ask-zxbj-loading').hide();
+                            $('.loading-common,.ask-zxbj-loading').hide();
                             window.top.location.href = 'https://m.jia.com/JiaZhuangxiuTmp/yusuan_success_20160825/?qj_from=new&type=app&yusuanRequest='
                                 + '{%22pro%22:%22' + detailData.pro + '%22,%22areaname%22:%22'
                                 + detailData.areaname + '%22,%22area%22:%22' + detailData.area
@@ -391,12 +385,12 @@ define(function (require) {
                                 + detailData.cfjnum + '%22,%22yt_num%22:%22' + detailData.ytnum + '%22}';
                         }
                         else {
-                            $('.popmask,.footer-tc-box,.ask-zxbj-loading,.loading-common').hide();
+                            $('.footer-tc-box,.ask-zxbj-loading,.loading-common').hide();
                             tipMask(e.info);
                         }
                     },
                     error: function () {
-                        $('.popmask,.footer-tc-box,.ask-zxbj-loading,.loading-common').hide();
+                        $('.footer-tc-box,.ask-zxbj-loading,.loading-common').hide();
                         tipMask('网络异常');
                     }
                 });
@@ -432,6 +426,7 @@ define(function (require) {
             return false;
         }
         zxbjPage.init(data, thisObj);
+        zxbjPage.method.randomNumber($(data.ele).find('.bom-screen-nexine span'));
     };
 
     return customElement;
