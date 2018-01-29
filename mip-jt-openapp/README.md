@@ -15,20 +15,23 @@ mip-jt-openapp 金投网APP打开按钮
 <div class="open-app">
 	<a class="fixed-btn" id="openapp">APP内打开</a>
 </div>
-<mip-jt-openapp>
+<mip-jt-openapp doc = false docId = '5635940'>
 </mip-jt-openapp>
 ```
 
 ## 属性
 
-### {属性名}
+### doc
 
-说明：{说明}
-必选项：{是|否}
-类型：{类型}
-取值范围：{取值范围}
-单位：{单位}
-默认值：{默认值}
+说明：当前值为true时,代表页面为doc页
+必选项：否
+类型：布尔值
+
+### docId
+
+说明：当前文章的id
+必选项：否
+类型：字符串
 
 ## 注意事项
 无

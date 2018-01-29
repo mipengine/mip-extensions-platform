@@ -233,12 +233,14 @@ define(function (require) {
         }
         return flag;
     }
-	// 第一次进入可视区回调，只会执行一次
-    customElem.prototype.firstInviewCallback = function () {
+	// 元素插入到文档时执行，仅会执行一次，用于解析_maq配置
+    customElem.prototype.build = function () {
 		// this.element 可取到当前实例对应的 dom 元素
         var element = this.element;
-        startReqAction();
-        loadQuit();
+        $(function () {
+            startReqAction();
+            loadQuit();
+        });
     };
     return customElem;
 });

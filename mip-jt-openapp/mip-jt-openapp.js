@@ -9,34 +9,30 @@ define(function (require) {
     var customElement = require('customElement').create();
 
     customElement.prototype.firstInviewCallback = function () {
-        // 创建iframe
-        var createIframe = (function () {
-                var iframe;
-                return function () {
-                    if (iframe) {
-                        return iframe;
-                    }
-                    iframe = document.createElement('iframe');
-                    iframe.style.display = 'none';
-                    document.body.appendChild(iframe);
-                    return iframe;
-                };
-            })();
+        var ele = this.element;
+        var docFlag = ele.getAttribute('doc');
             // 创建baseScheme
         var baseSchemeAdr = 'jtw://com.jijinhao.jtw/startapp?startapp=0';
         var baseSchemeIOS = 'jtw://com.jijinhao.jtw/';
-        var downLoadUrl = 'https://tg.cngold.org/jtw/download/m/share_m.html';
+        var downLoadUrl = 'https://tg.cngold.org/jtw/download/m/open_app.html';
+        if (docFlag === 'true') {
+            var docId = ele.getAttribute('docId');
+            var baseSchemeDoc = 'jtw://com.jijinhao.jtw/news/detail?sourceType=1&id=' + docId;
+        }
         var u = navigator.userAgent;
         var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; // android终端
         var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); // ios终端
-        var isChrome = window.navigator.userAgent.indexOf('Chrome') !== -1;
         // 打开APP
         var openApp = function () {
-            var openIframe = createIframe();
             var loadDateTime = Date.now();
             if (isiOS) {
-                // 判断是否是ios,具体的判断函数自行百度
-                window.location.href = baseSchemeIOS;
+                // 判断是否是ios
+                if (docFlag === 'true') {
+                    window.location.href = baseSchemeDoc;
+                }
+                else {
+                    window.location.href = baseSchemeIOS;
+                }
                 setTimeout(function () {
                     var timeOutDateTime = Date.now();
                     if (timeOutDateTime - loadDateTime < 4000) {
@@ -45,14 +41,14 @@ define(function (require) {
                 }, 3000);
             }
             else if (isAndroid) {
-                // 判断是否是android，具体的判断函数自行百度
-                if (isChrome) {
-                    // chrome浏览器用iframe打不开得直接去打开，算一个坑
-                    window.location.href = baseSchemeAdr;
+                // 判断是否是android
+                if (docFlag === 'true') {
+                    document.getElementById('openapp').href = baseSchemeDoc;
+                    document.getElementById('openapp').click();
                 }
                 else {
-                    // 抛出你的scheme
-                    openIframe.src = baseSchemeAdr;
+                    document.getElementById('openapp').href = baseSchemeAdr;
+                    document.getElementById('openapp').click();
                 }
                 setTimeout(function () {
                     var timeOutDateTime = Date.now();
@@ -63,7 +59,7 @@ define(function (require) {
             }
             else {
                 // 主要是给winphone的用户准备的
-                openIframe.src = baseSchemeIOS;
+                window.location.href = baseSchemeIOS;
                 setTimeout(function () {
                     window.location.href = downLoadUrl;
                 }, 500);

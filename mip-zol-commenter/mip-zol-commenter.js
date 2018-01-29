@@ -123,7 +123,8 @@ define(function (require, exports, module) {
 
 
     function postComment(data, callback) {
-        fetchJsonp(makeUrl('//comment.zol.com.cn/index.php?c=Api_DocComment&a=Post', data), {}).then(function (res) {
+        fetchJsonp(makeUrl('//comment.zol.com.cn/index.php?c=Api_DocComment&typeId=2&a=Post', data), {})
+        .then(function (res) {
             return res.json();
         }).then(function (request) {
             callback && callback(request);
