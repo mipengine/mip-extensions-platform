@@ -253,8 +253,8 @@ define(function (require) {
                 if (zxbjPage.usFlag || storage.get('usFlag') === 'true') {
                     return false;
                 }
-                // 滚动条到最底部的时候
-                if (domHeight <= ($(window).height() + scrHeight) || scrHeight > zxbjPage.screenNum) {
+                // 滚动超过一屏
+                if (scrHeight > zxbjPage.screenNum) {
                     storage.set('usFlag', 'true', 21600000);
                     showpopmask($this);
                     $this.find('.toutiao-ask-zxbj').addClass('show');
@@ -285,7 +285,7 @@ define(function (require) {
                     hidepopmask($ele.parent());
                     $ele.removeClass('show');
                 });
-                $this.find('.popmask').on('click', function () {
+                $(ele).find('.popmask').on('click', function () {
                     hidepopmask($ele.parent());
                     $ele.removeClass('show');
                 });
