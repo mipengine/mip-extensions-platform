@@ -6,7 +6,7 @@ mip-hc-popup 弹出框提示组件
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/static/v1/mip-hc-popup/mip-hc-popup.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-hc-popup/mip-hc-popup.js
 
 ## 示例
 

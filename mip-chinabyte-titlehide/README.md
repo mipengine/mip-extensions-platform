@@ -6,7 +6,7 @@ mip-chinabyte-titlehide 如果结果页在iframe里，修改元素样式
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/static/v1/mip-chinabyte-titlehide/mip-chinabyte-titlehide.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-chinabyte-titlehide/mip-chinabyte-titlehide.js
 
 ## 示例
 

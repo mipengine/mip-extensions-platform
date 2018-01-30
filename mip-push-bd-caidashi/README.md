@@ -5,7 +5,7 @@ mip-push-bd-caidashi 百度主动推送
 标题|内容
 ----|----
 类型|通用
-所需脚本|https://c.mipcdn.com/static/v1/mip-push-bd-caidashi/mip-push-bd-caidashi.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-push-bd-caidashi/mip-push-bd-caidashi.js
 
 ## 示例
 

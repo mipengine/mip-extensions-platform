@@ -6,7 +6,7 @@ mip-header-qiehuan 点击一个元素,隐藏此元素,显示另一个元素,实�
 ----|----
 类型|通用
 支持布局|fixed
-所需脚本|https://c.mipcdn.com/static/v1/mip-header-qiehuan/mip-header-qiehuan.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-header-qiehuan/mip-header-qiehuan.js
 
 ## 示例
 

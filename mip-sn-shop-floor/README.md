@@ -6,7 +6,7 @@ mip-sn-shop-floor 实现了自定义实现了sn获取接口数据后，渲染列
 ----|----
 类型|定制
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|http://c.mipcdn.com/extensions/platform/v1/mip-sn-shop-floor/mip-sn-shop-floor.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-sn-shop-floor/mip-sn-shop-floor.js
 
 ## 示例
 

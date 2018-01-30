@@ -5,7 +5,7 @@ mip-njt-ad 组件说明
 标题|内容
 ----|----
 类型|不通用
-所需脚本|https://mipcache.bdstatic.com/static/v1/mip-njt-ad/mip-njt-ad.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-njt-ad/mip-njt-ad.js
 
 ## 示例
 

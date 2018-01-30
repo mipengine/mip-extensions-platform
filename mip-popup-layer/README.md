@@ -6,7 +6,7 @@ mip-popup-layer 在指定的位置弹出层(需要在css中自己定义位置)
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/static/v1/mip-close-dom/mip-popup-layer.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-close-dom/mip-popup-layer.js
 
 ## 示例
 

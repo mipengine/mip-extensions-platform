@@ -6,7 +6,7 @@ mip-display-column  点击显示栏目栏,再次点击任意处关闭栏目栏
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/static/v1/mip-display-column/mip-display-column.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-display-column/mip-display-column.js
 
 ## 示例
 

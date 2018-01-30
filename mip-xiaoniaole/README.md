@@ -6,7 +6,7 @@ mip-xiaoniaole 用于xiaoniaole.cn站点投放汇米广告固定位广告的组�
 ----|----
 类型|广告
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|http://c.mipcdn.com/extensions/platform/v1/mip-xiaoniaole/mip-xiaoniaole.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-xiaoniaole/mip-xiaoniaole.js
 
 ## 示例
 

@@ -6,7 +6,7 @@ mip-ys137-ad 管理页面上的所有广告位
 ----|----
 类型|定制
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|http://c.mipcdn.com/extensions/platform/v1/mip-ys137-ad/mip-ys137-ad.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-ys137-ad/mip-ys137-ad.js
 
 ## 示例
 

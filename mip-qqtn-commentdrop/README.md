@@ -6,7 +6,7 @@ mip-qqtn-commentdrop 判断假如没有li则将外层隐藏
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-qqtn-commentdrop/mip-qqtn-commentdrop.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-qqtn-commentdrop/mip-qqtn-commentdrop.js
 
 ## 示例
 
@@ -61,7 +61,7 @@ mip-qqtn-commentdrop 判断假如没有li则将外层隐藏
 </mip-cr173-tags>
 
 
-<script src="https://mipcache.bdstatic.com/static/v1/mip-cr173-tags/mip-cr173-tags.js"></script>
+<script src="https://c.mipcdn.com/static/v1/mip-cr173-tags/mip-cr173-tags.js"></script>
 </mip-qqtn-commentdrop>
 ```
 

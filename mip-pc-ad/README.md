@@ -6,7 +6,7 @@ mip-pc-ad 广告位组件
 ----|----
 类型|广告
 支持布局|N/S
-所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-pc-ad/mip-pc-ad.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-pc-ad/mip-pc-ad.js
         
 
 ## 示例

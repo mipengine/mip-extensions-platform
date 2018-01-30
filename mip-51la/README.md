@@ -6,7 +6,7 @@ mip-51la 组件说明
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|http://c.mipcdn.com/static/v1/mip-51la/mip-51la.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-51la/mip-51la.js
 
 ## 示例
 

@@ -10,7 +10,7 @@
 标题|内容
 ----|----
 类型|通用 
-所需脚本|http://c.mipcdn.com/static/v1/mip-fn-comment-post/mip-fn-comment-post.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-fn-comment-post/mip-fn-comment-post.js
 
 ## 属性
 ### url

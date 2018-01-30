@@ -106,7 +106,7 @@ define(function (require) {
                 '<meta charset="UTF-8">',
                 '<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">',
                 '<title>MIP</title>',
-                '<link rel="stylesheet" href="https://mipcache.bdstatic.com/static/v1/mip.css">',
+                '<link rel="stylesheet" href="https://c.mipcdn.com/static/v1/mip.css">',
                 '<style>',
                     '.preview-heading {',
                         'font-size: 14px;',
@@ -121,7 +121,7 @@ define(function (require) {
                 '{{ preset }}',
                 '{{ title }}',
                 '{{ content }}',
-                '<script src="https://mipcache.bdstatic.com/static/v1/mip.js"></script>',
+                '<script src="https://c.mipcdn.com/static/v1/mip.js"></script>',
                 '{{ deps }}',
             '</body>',
             '</html>'

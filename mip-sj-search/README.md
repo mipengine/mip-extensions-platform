@@ -5,7 +5,7 @@ mip-sj-search 组件说明
 标题|内容
 ----|----
 类型|通用
-所需脚本|http://c.mipcdn.com/static/v1/mip-sj-search/mip-sj-search.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-sj-search/mip-sj-search.js
 
 ## 示例
 

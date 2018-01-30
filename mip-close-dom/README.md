@@ -6,7 +6,7 @@ mip-close-dom 关闭组件点击关闭外层dom
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/static/v1/mip-close-dom/mip-close-dom.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-close-dom/mip-close-dom.js
 
 ## 示例
 

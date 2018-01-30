@@ -35,13 +35,13 @@ define(function (require) {
      */
     function showPreview(e) {
         var heading = getPreHeading(e.target);
-        var mipCss = '<link rel="stylesheet" type="text/css" href="https://mipcache.bdstatic.com/static/v1/mip.css">';
+        var mipCss = '<link rel="stylesheet" type="text/css" href="https://c.mipcdn.com/static/v1/mip.css">';
         var customCss = '.preview-heading{color: white; background:#2d3c59; padding: 10px 2px; font-weight:300;}';
         var customCssDom = '<style mip-custom>' + customCss + '</style>';
         var presetDom = document.getElementsByClassName('example-preset')[0];
         var preset = presetDom ? decodeURIComponent(presetDom.dataset.string) : '';
         var htmlStr = e.target.nextElementSibling.innerText;
-        var mipjs = '<script src="https://mipcache.bdstatic.com/static/v1/mip.js"></script>';
+        var mipjs = '<script src="https://c.mipcdn.com/static/v1/mip.js"></script>';
         var jsStr = getDependencyJs();
 
         var iframeText = heading + mipCss + customCssDom + preset + htmlStr + mipjs + jsStr;

@@ -6,7 +6,7 @@ mip-netease-article-recommend 为网易移动站文章页实现了底部相关�
 ----|----
 类型|业务
 支持布局|不使用布局
-所需脚本|http://c.mipcdn.com/static/v1/mip-netease-article-recommend/mip-netease-article-recommend.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-netease-article-recommend/mip-netease-article-recommend.js
 
 ## 示例
 

@@ -6,7 +6,7 @@ mip-169kangad 用来添加搜狗广告。
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|http://c.mipcdn.com/static/v1/mip-169kangad/mip-169kangad.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-169kangad/mip-169kangad.js
 
 ## 示例
 

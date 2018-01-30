@@ -6,7 +6,7 @@ mip-jt-comment 评论组件
 | ---- | ---------------------------------------- |
 | 类型   | 通用                                       |
 | 支持布局 | responsive,fixed-height,fill,container,fixed |
-| 所需脚本 | https://c.mipcdn.com/static/v1/mip-jt-comment/mip-jt-comment.js |
+| 所需脚本 | https://c.mipcdn.com/extensions/platform/v1/mip-jt-comment/mip-jt-comment.js |
 
 ## 示例a
 

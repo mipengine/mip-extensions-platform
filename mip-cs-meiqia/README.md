@@ -6,7 +6,7 @@ mip-cs-meiqia 组件说明：美洽在线客服组件——美洽是一个流行
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|http://c.mipcdn.com/extensions/platform/v1/mip-cs-meiqia/mip-cs-meiqia.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-cs-meiqia/mip-cs-meiqia.js
 
 ## 示例
 

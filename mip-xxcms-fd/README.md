@@ -6,7 +6,7 @@ mip-xxcms-fd 汇米广告联盟广告投放插件
 ----|----
 类型|广告
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|http://c.mipcdn.com/extensions/platform/v1/mip-xxcms-fd/mip-xxcms-fd.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-xxcms-fd/mip-xxcms-fd.js
 
 ## 示例
 

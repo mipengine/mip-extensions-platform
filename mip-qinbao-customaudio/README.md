@@ -6,7 +6,7 @@ mip-qinbao-customaudio 文字语音播报
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/static/v1/mip-qinbao-customaudio/mip-qinbao-customaudio.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-qinbao-customaudio/mip-qinbao-customaudio.js
 
 ## 示例
 
