@@ -10,7 +10,7 @@ define(function (require) {
     var $ = require('zepto');
     var fetchJsonp = require('fetch-jsonp');
     var util = require('util');
-    var Gesture = util.Gesture;
+    var viewport = require('viewport');
     var CustomStorage = util.customStorage;
     var storage = new CustomStorage(0);
     var scrollTop = {
@@ -26,23 +26,13 @@ define(function (require) {
      * @param  {Object} event [事件对象]
      */
     function open(event) {
-
-        var self = this;
-
         fixedElement.hideFixedLayer(fixedElement._fixedLayer);
         event.preventDefault();
-        if (!self.scroll) {
-            new Gesture(self.element, {
-                preventY: true
-            });
-        }
-
         // 保存页面当前滚动状态，因为设置overflow:hidden后页面会滚动到顶部
         scrollTop.body = document.body.scrollTop;
         scrollTop.documentElement = document.documentElement.scrollTop;
         scrollTop.offset = window.pageYOffset;
         document.documentElement.classList.add('mip-no-scroll');
-
     }
 
 
@@ -56,7 +46,6 @@ define(function (require) {
         if (event) {
             event.preventDefault();
         }
-
         document.documentElement.classList.remove('mip-no-scroll');
 
         // 恢复页面滚动状态到弹层打开之前
@@ -181,12 +170,6 @@ define(function (require) {
     // 添加红包html
     RedPacket.prototype.appendEle = function () {
         var str = [
-            /*'<mip-fixed type="right" class="fixed-hb">',
-            '    <div class="hb-box">',
-            '        <mip-img layout="responsive" width="' + this.cfg.fixedImgW + '" height="',
-            this.cfg.fixedImgH + '" src="' + this.cfg.fixedImg + '"></mip-img>',
-            '    </div>',
-            '</mip-fixed>',*/
             '<div class="hb-popup">',
             '    <div class="popup-box">',
             '        <em class="close"></em>',
@@ -200,11 +183,12 @@ define(function (require) {
             '            <p class="event">' + this.cfg.desc + '</p>',
             '            <h3 class="title">' + this.cfg.couponText + '</h3>',
             '            <div class="input-box">',
-            '                <input type="tel" class="form-input" maxlength="11" placeholder="输入手机号，限领一次" />',
+            '                <input type="tel" class="form-input" maxlength="11"',
+            ' placeholder="输入手机号，限领一次" bdsl-key="phone" bdsl-name-articleHbBottom="" />',
             '            </div>',
             '        </div>',
             '        <div class="circle-wrap"><div class="circle-box"></div></div>',
-            '        <span class="headline-btn"></span>',
+            '        <span class="headline-btn" bdsl-extra="{id:10003}" bdsl-submit="articleHbBottom"></span>',
             '        <div class="bottom"><i></i></div>',
             '    </div>',
             '</div>',
@@ -237,11 +221,13 @@ define(function (require) {
                     || data.obtainResult === 'OBTAINING'
                     || data.obtainResult === 'USER_NOT_EXIST') {
                     return resolve();
-                } else if (data.obtainResult === 'REACH_OBTAIN_UPPER_LIMIT') {
+                }
+                else if (data.obtainResult === 'REACH_OBTAIN_UPPER_LIMIT') {
                     tipMask('您已领取过该红包~');
                     $(selF.element).find('.popmask, .hb-popup').css('display', 'none');
                     close();
-                } else {
+                }
+                else {
                     tipMask(data.message);
                 }
             });
@@ -268,11 +254,13 @@ define(function (require) {
                         var city = data.result.site.area_info;
                         storage.set('city', JSON.stringify(city), 21600000);
                         return resolve(city.area_py);
-                    } else {
+                    }
+                    else {
                         console.log(data.msg);
                     }
                 });
-            } else {
+            }
+            else {
                 var city = JSON.parse(storage.get('city')).area_py;
                 return resolve(city);
             }
@@ -298,12 +286,38 @@ define(function (require) {
             }).then(function (data) {
                 if (data.status === 200) {
                     return resolve();
-                } else {
+                }
+                else {
                     tipMask(data.info);
                 }
             });
         });
     };
+
+    /**
+     * [onScroll mip 页面滑动事件]
+     *
+     * @param {string} ele 操作元素
+     */
+    RedPacket.prototype.scrollFn = function (ele) {
+        // 滚动事件
+        viewport.on('scroll', function () {
+            // 滚动条滚动的距离
+            var scrollTop = viewport.getScrollTop();
+            // 内容高度
+            var domHeight = viewport.getScrollHeight();
+            // 视口高度
+            var viewHei = viewport.getHeight();
+            // 滚动超过一屏
+            if (scrollTop > domHeight * .2 && scrollTop < domHeight * .65) {
+                $(ele).parent().addClass('hide');
+            }
+            else {
+                $(ele).parent().removeClass('hide');
+            }
+        });
+    };
+
 
 
     /**
@@ -321,6 +335,7 @@ define(function (require) {
 
         // 显示弹层
         $(cfg.class).click(function (event) {
+            $(this).parent().removeClass('hide');
             $(ele).find('.popmask, .hb-popup').css('display', 'block');
             open.call(self, event);
         });
@@ -331,7 +346,8 @@ define(function (require) {
             close.call(self, event);
         });
 
-
+        // 滚动
+        redPacket.scrollFn(cfg.class);
 
         // 点击报名
         $(ele).find('.headline-btn').click(function () {

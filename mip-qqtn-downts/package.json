@@ -1,7 +1,7 @@
 {
     "name": "mip-qqtn-downts",
-    "version": "1.0.0",
-    "description": "对没有下载资源的根据访问设备进行提示",
+    "version": "1.0.1",
+    "description": "对没有下载资源的根据访问设备进行提示,1.0.1 升级了当页面加载完后获取",
     "contributors": [
         {
             "name": "gom",

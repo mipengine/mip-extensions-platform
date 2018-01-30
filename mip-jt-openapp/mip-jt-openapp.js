@@ -22,6 +22,7 @@ define(function (require) {
         var u = navigator.userAgent;
         var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; // android终端
         var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); // ios终端
+        var openapp = document.getElementById('openapp');
         // 打开APP
         var openApp = function () {
             var loadDateTime = Date.now();
@@ -65,9 +66,36 @@ define(function (require) {
                 }, 500);
             }
         };
-        document.getElementById('openapp').onclick = function () {
+        openapp.onclick = function () {
             openApp();
         };
+        // 判断滚动条滚动方向
+        function scroll(fn) {
+            var beforeScrollTop = document.body.scrollTop;
+            fn = fn || function () {};
+            window.addEventListener('scroll', function () {
+                var afterScrollTop = document.body.scrollTop;
+                var delta = afterScrollTop - Math.abs(beforeScrollTop);
+                // if( delta === 0 ) return false;
+                fn(delta > 0 ? 'down' : 'up');
+                beforeScrollTop = afterScrollTop;
+            }, false);
+        }
+        scroll(function (direction) {
+            var comHeight = document.getElementById('comment_html_div').clientHeight;
+            if (direction === 'down') {
+                // 当有评论框时
+                if (comHeight > 0) {
+                    document.getElementsByClassName('fixed-btn')[0].style.bottom = '.6rem';
+                }
+            }
+            else {
+                // 当有评论框时
+                if (comHeight > 0) {
+                    document.getElementsByClassName('fixed-btn')[0].style.bottom = '1.2rem';
+                }
+            }
+        });
     };
 
     return customElement;

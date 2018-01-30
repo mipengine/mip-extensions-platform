@@ -1,0 +1,14 @@
+{
+    "name": "mip-tab-change",
+    "version": "1.0.0",
+    "description": "tab切换",
+    "contributors": [
+        {
+            "name": "xujun",
+            "email": "3161390272@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

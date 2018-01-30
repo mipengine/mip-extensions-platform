@@ -175,10 +175,10 @@ define(function (require) {
                 str += '</div>';
                 str += '</div>';
                 str += '<div class="apply-input"><input type="tel" name="area" maxlength="4" value="80"';
-                str += ' placeholder="请输入您的房屋面积 " /><em>m&sup2;</em></div>';
+                str += ' placeholder="请输入您的房屋面积 " bdsl-key="area" bdsl-name-articleZx="" /><em>m&sup2;</em></div>';
                 str += '<ul class="zxbj-work clearfix">';
                 str += '<li>';
-                str += '<select name="ws" id="ws">';
+                str += '<select name="ws" id="ws" bdsl-key="shi" bdsl-name-articleZx="">';
                 str += '<option value="1">1室</option>';
                 str += '<option value="2" selected>2室</option>';
                 str += '<option value="3">3室</option>';
@@ -188,7 +188,7 @@ define(function (require) {
                 str += '<label for="ws"></label>';
                 str += '</li>';
                 str += '<li>';
-                str += '<select name="kt" id="kt">';
+                str += '<select name="kt" id="kt" bdsl-key="ting" bdsl-name-articleZx="">';
                 str += '<option value="1" selected>1厅</option>';
                 str += '<option value="2">2厅</option>';
                 str += '<option value="3">3厅</option>';
@@ -198,7 +198,7 @@ define(function (require) {
                 str += '<label for="kt"></label>';
                 str += '</li>';
                 str += '<li>';
-                str += '<select name="wsj" id="wsj">';
+                str += '<select name="wsj" id="wsj" bdsl-key="wei" bdsl-name-articleZx="">';
                 str += '<option value="1" selected>1卫</option>';
                 str += '<option value="2">2卫</option>';
                 str += '<option value="3">3卫</option>';
@@ -208,7 +208,7 @@ define(function (require) {
                 str += '<label for="wsj"></label>';
                 str += '</li>';
                 str += '<li>';
-                str += '<select name="cf" id="cf">';
+                str += '<select name="cf" id="cf" bdsl-key="chu" bdsl-name-articleZx="">';
                 str += '<option value="1" selected>1厨</option>';
                 str += '<option value="2">2厨</option>';
                 str += '<option value="3">3厨</option>';
@@ -219,8 +219,10 @@ define(function (require) {
                 str += '</li>';
                 str += '</ul>';
                 str += '<div class="apply-input">';
-                str += '<input type="tel" name="zxbjMobile" maxlength="11" placeholder="输入手机号，短信接收详细报价清单" /></div>';
-                str += '<div class="apply-button"><a href="javascript:;" class="zxbj-submit-btn">立即计算</a></div>';
+                str += '<input type="tel" name="zxbjMobile" maxlength="11" bdsl-key="phone"';
+                str += ' bdsl-name-articlezx="" placeholder="输入手机号，短信接收详细报价清单" /></div>';
+                str += '<div class="apply-button"><a href="javascript:;" class="zxbj-submit-btn"';
+                str += ' bdsl-extra="{id:10001}" bdsl-submit="articleZx">立即计算</a></div>';
                 str += '</div>';
 
                 str += '</div>';
@@ -332,15 +334,12 @@ define(function (require) {
                     var re = /^1[3|4|5|7|8]\d{9}$/;
                     if (!zxbjPage.method.isPositiveNum(area)) {
                         tipMask('请输入正确的面积');
-                        return false;
                     }
                     else if (mobile === '') {
                         tipMask('请输入您的电话');
-                        return false;
                     }
                     else if (!re.test(mobile)) {
                         tipMask('请输入正确的手机号');
-                        return false;
                     }
                     else {
                         $this.find('.ask-zxbj-loading').show();
@@ -409,7 +408,7 @@ define(function (require) {
                         if (e.status === 200) {
                             storage.set('us_pop', 'true', 21600000);
                             $('.loading-common,.ask-zxbj-loading').hide();
-                            window.top.location.href = 'https://m.jia.com/JiaZhuangxiuTmp/yusuan_success_20160825/?qj_from=new&type=app&yusuanRequest='
+                            window.top.location.href = 'https://m.jia.com/newzx/yusuan_success/?qj_from=new&type=app&yusuanRequest='
                                 + '{%22pro%22:%22' + detailData.pro + '%22,%22areaname%22:%22'
                                 + detailData.areaname + '%22,%22area%22:%22' + detailData.area
                                 + '%22,%22areaflag%22:%22' + detailData.areaflag + '%22,%22fj_num%22:%22'

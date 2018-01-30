@@ -12,9 +12,10 @@ mip-qqtn-downts
 ### 基本用法
 ```html
 
+
+
 <mip-ychlyxgs-data>
 <mip-ychlyxgs-adddata>
-
 <mip-qqtn-downts data-nodownurl="http://m.qqtn.com">
 <div class="g-box m-down-msg" id="m-down-msg">
     <header class="info">
@@ -28,7 +29,7 @@ mip-qqtn-downts
         </div>
         <div id="downAddress">
             <ul class="m-down-ul f-downbtn-url">
-                <li class="m-down-last"><a href="http://m.qqtn.com" class="span9 m-game-down down f-eject-btn" data-flag="downbtn" id="address">点击下载</a></li>
+                <li class="m-down-last"><a href="aaa.zip" class="span9 m-game-down down f-eject-btn" data-flag="downbtn" id="address">点击下载</a></li>
             </ul>
         </div>        
     </header>
@@ -39,7 +40,8 @@ mip-qqtn-downts
 </mip-ychlyxgs-data>
 
 
-<script src="https://c.mipcdn.com/extensions/platform/v1/mip-ychlyxgs-adddata/mip-ychlyxgs-adddata.js"></script>
-<script src="https://c.mipcdn.com/extensions/platform/v1/mip-ychlyxgs-data/mip-ychlyxgs-data.js"></script>
 
 
+
+<script src="https://mipcache.bdstatic.com/extensions/platform/v1/mip-ychlyxgs-adddata/mip-ychlyxgs-adddata.js"></script>
+<script src="https://mipcache.bdstatic.com/extensions/platform/v1/mip-ychlyxgs-data/mip-ychlyxgs-data.js"></script>
