@@ -2,7 +2,7 @@
  * @file mip-pangu 组件
  * @author woke
  */
-/* global cStart, cngoldStat, cEnd, cName, _maq, maqParam
+/* global cStart, cngoldStat, cEnd, cName
  */
 define(function (require) {
     // 该组件需要依赖jquery
@@ -171,25 +171,6 @@ define(function (require) {
         if (navigator) {
             params.lang = navigator.language || '';
         }
-
-        var maqParam = {};
-		// 解析_maq配置
-        if (_maq) {
-            for (var i in _maq) {
-                switch (_maq[i][0]) {
-                    case '_setAccount':
-                        params.account = _maq[i][1];
-                        maqParam._setAccount = _maq[i][1];
-                        break;
-                    default:
-                        break;
-                }
-                if (_maq[i] instanceof Array) {
-                    maqParam[_maq[i][0]] = _maq[i][1];
-                }
-            }
-        }
-
         var args = '';
         for (var i in params) {
             if (args !== '') {
@@ -198,9 +179,6 @@ define(function (require) {
             args += i + '=' + encodeURIComponent(params[i]);
         }
         var p = vlstatInitLE(cookieId, null, null, null, null);
-        for (var key in maqParam) {
-            p = p + '&' + key + '=' + maqParam[key];
-        }
         var img = new Image(1, 1);
         img.src = 'https://tj.zpath8888.cn/ma.gif?' + p + '&type=0';
     }

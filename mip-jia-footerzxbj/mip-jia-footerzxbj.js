@@ -6,22 +6,11 @@
 define(function (require) {
     var $ = require('zepto');
     var util = require('util');
+    var viewport = require('viewport');
     var fixedElement = require('fixed-element');
     var customElement = require('customElement').create();
     var CustomStorage = util.customStorage;
     var storage = new CustomStorage(0);
-    var platform = util.platform;
-    var isIframe = false;
-    // 判断是否在iframe中
-    if (self !== top) {
-        isIframe = true;
-    }
-
-    var docEle = window;
-    // 判断是苹果系统并且在iframe里
-    if (platform.isIos() && isIframe) {
-        docEle = document.body;
-    }
 
     var scrollTop = {
         body: 0,
@@ -80,7 +69,51 @@ define(function (require) {
         ele.find('.popmask').hide();
     }
 
-    // 加密
+    // [装修、团购、旺铺] 公钥
+    var keyArr = {
+        'zx': 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC8hgXGmTam'
+        + '/ZBj9q8UteZ+1Z0sja7g7gQBR1RxfVJBbxGMwLgmW2uc+ij4F'
+        + 'fFsr6poM2IO64JfDxl+9H1tmEq6kEmuju7ue4b/4KcMTftKGjr+'
+        + 'DtbNiwtFhLKIU6iQRKjetWor8pj7/arhR5weSh04AWwEFQNsQchqM2eA7gEs2wIDAQAB',
+        'tg': 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDCC0w+gQPas'
+        + 'CFul1A/LVYfU4A2C0niMgcb9t+nftc5behMmf5l0aT6fmMa1e+'
+        + 'wdfmzleVljEaFcnVi/yOY13HqPa5fymwkVC6k+7beVnFUTDUSK5'
+        + 'SJTep+jSHmNCKPM+nVhm2xQu+SjZbxbeIiFdm0mfSJH/8faNXdiWU4rv9NuwIDAQAB',
+        'wp': 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAurXXoxX'
+        + 'AHK4vwRMDDQRFhkQH6tDbVN/k69JGBAGxm2N4+2TVDCKWrBqKjgm'
+        + 'jQSqubHiURa9O3bfAXUDYyV7S3/Vajc+NP0kU0l6Fl8q4AldSsQkSf'
+        + 'Lq5NrcxU0QsXJbfRCEIyS+lfG9/O+XGVrvpy21hOqs6Zmgvsa5//d6BT'
+        + 'C31FOb/d9H4C/iFgIXqAvcEJms+agPpXTMDDjxbB6/6P8qZoqKR1iztv3'
+        + 'bzwowU7YRpMVwwdr74K+ka7p0Y+KnnE4oiX3b5rDfQ/GOdG9OJhpGMAUkpR'
+        + 'jXy01hu9bT+ep7sYTlhVPhwr+8OICO7tsxNoNW7InOix26oY0IvqWcGjwIDAQAB'
+    };
+
+    // 手机号加密
+    function loadEncrypt() {
+        if (typeof JSEncryptExports !== 'object') {
+            var loadNode = document.createElement('script');
+            loadNode.type = 'text/javascript';
+
+            // 手机号加密js,AMD方式jsencrypt.js无法通过校验,请知晓
+            loadNode.src = '//mued2.jia.com/js/mobile/jsencrypt.js';
+            document.body.appendChild(loadNode);
+        }
+    }
+
+    /**
+     * 加密手机号
+     *
+     * @class
+     * @param {number or string} phone 手机号
+     * @param {string} type 接口类型：zx(装修)、tg(团购)、wp(旺铺)
+     */
+
+    function mobileEncrypt(phone, type) {
+        /* global JSEncryptExports */
+        var JSEncrypt = new JSEncryptExports.JSEncrypt();
+        JSEncrypt.setKey(keyArr[type]);
+        return JSEncrypt.encrypt(phone);
+    }
 
 
     var zxbjPage = {
@@ -245,32 +278,32 @@ define(function (require) {
             },
             scrollFun: function (ele) {
                 var $this = $(ele);
-                // 滚动效果
-                var scrHeight = $(docEle).scrollTop();
                 // 滚动条滚动的距离
-                var domHeight = $(document.body)[0].scrollHeight;
+                var scrollTop = viewport.getScrollTop();
+                // 内容高度
+                var domHeight = viewport.getScrollHeight();
+                // 视口高度
+                var viewHei = viewport.getHeight();
                 // 如果用户自行做了操作 则此处不影响用户操作
                 if (zxbjPage.usFlag || storage.get('usFlag') === 'true') {
                     return false;
                 }
                 // 滚动超过一屏
-                if (scrHeight > zxbjPage.screenNum) {
+                if (scrollTop > viewHei) {
                     storage.set('usFlag', 'true', 21600000);
                     showpopmask($this);
                     $this.find('.toutiao-ask-zxbj').addClass('show');
                 }
-
-                zxbjPage.vot = scrHeight;
             },
             windowScroll: function (ele) {
                 // 滚动事件
-                $(docEle).scroll(function () {
+                viewport.on('scroll', function () {
                     if (storage.get('usFlag') === 'true') {
                         return false;
                     }
                     zxbjPage.method.scrollFun(ele);
                 });
-                zxbjPage.method.scrollFun(ele);
+                // zxbjPage.method.scrollFun(ele);
             },
             clickUpFun: function (data, ele) {
                 var $this = $(data.ele);
@@ -338,7 +371,7 @@ define(function (require) {
                 var applyData = {
                     city: $city['area_py'],
                     baojia: '',
-                    mobile: mobile,
+                    mobile: mobileEncrypt(mobile, 'zx'),
                     memo: area + '平方,' + yusuanPostD.fjnum + '室,' + yusuanPostD.ktnum + '厅,' + yusuanPostD.wsjnum + '卫'
                 };
                 for (var x in data) {
@@ -427,6 +460,8 @@ define(function (require) {
         }
         zxbjPage.init(data, thisObj);
         zxbjPage.method.randomNumber($(data.ele).find('.bom-screen-nexine span'));
+        // 加密
+        loadEncrypt();
     };
 
     return customElement;

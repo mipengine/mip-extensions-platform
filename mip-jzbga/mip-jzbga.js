@@ -18,7 +18,7 @@ define(function (require) {
             a.src = g;
             m.parentNode.insertBefore(a, m);
             var ga = i[r];
-            ga('create', 'UA-25393064-2', 'auto');
+            ga('create', this.element.getAttribute('data-gaid'), 'auto');
             ga('send', 'pageview');
         })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
     };

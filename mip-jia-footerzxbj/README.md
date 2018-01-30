@@ -33,5 +33,22 @@ mip-jia-footerzxbj 组件说明
 类型：{string}
 默认值：{mip裝修}
 
+### {code}
+
+必选项：{否}
+类型：{string}
+
+### {source}
+
+说明：{来源}
+必选项：{否}
+类型：{string}
+
+### {self_url}
+
+说明：{url}
+必选项：{否}
+类型：{string}
+
 ## 注意事项
 
