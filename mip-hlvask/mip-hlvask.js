@@ -19,13 +19,16 @@ define(function (require) {
         $('#doask').on('click', function () {
             var askcontent = $('#askContent').val();
             var asktel = $('#askTel').val();
-            $.post('http://mip.66law.cn/ajax/question_ajax.aspx', {type: 'ask', pid: pid, cid: cid, guid: guid, content: askcontent, tel: asktel}, function (res) {
+            $.post('https://mip.66law.cn/ajax/question_ajax.aspx', {type: 'ask', pid: pid, cid: cid, guid: guid, content: askcontent, tel: asktel}, function (res) {
                 if (res.state === 1) {
                     window.location.href = 'http://m.66law.cn/user/public_admin/myquestion.aspx';
-                } else {
-                    alert(res.msg);
                 }
+                $('#show-tj').find('span').text(res.msg);
+                $('#show-tj').show();
             }, 'json');
+            setTimeout(function () {
+                $('#show-tj').hide();
+            }, 4000);
         });
     };
     return customElement;
