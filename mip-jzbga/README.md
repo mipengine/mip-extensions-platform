@@ -12,14 +12,14 @@ mip-jzbga 组件说明
 
 ### 基本用法
 ```html
-<mip-jzbga data-gaid=''></mip-jzbga>
+<mip-jzbga data-gaid='ua-234234-1'></mip-jzbga>
 ```
 
 ## 属性
 
 ### {属性名}
 
-说明：{说明}
+说明：修复问题
 必选项：{是|否}
 类型：{类型}
 取值范围：{取值范围}

@@ -6,6 +6,7 @@
 define(function (require) {
     var customElement = require('customElement').create();
     customElement.prototype.firstInviewCallback = function () {
+        var gaid = this.element.getAttribute('data-gaid');
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
             i[r] = i[r] || function () {
@@ -18,7 +19,7 @@ define(function (require) {
             a.src = g;
             m.parentNode.insertBefore(a, m);
             var ga = i[r];
-            ga('create', this.element.getAttribute('data-gaid'), 'auto');
+            ga('create', gaid, 'auto');
             ga('send', 'pageview');
         })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
     };
