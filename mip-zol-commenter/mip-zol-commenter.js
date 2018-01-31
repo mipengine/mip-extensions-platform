@@ -95,6 +95,7 @@ define(function (require, exports, module) {
                     case '1008':
                         msg = '\u8bc4\u8bba\u6210\u529f~\u60a8\u7684\u91d1\u8c46\u5df2'
                         + '\u8fbe\u4e0a\u9650\uff0c\u4e0d\u518d\u589e\u52a0';
+                        isCloseContainer = true;
                         break;
                     case '1002':
                         goLogin(data);
@@ -205,8 +206,7 @@ define(function (require, exports, module) {
         } catch (e) {
 
         }
-        var href = 'http://service.zol.com.cn/user/mlogin.php?backurl=' + location.href;
-        location.href = href;
+        window.ZOL_USER_INFO && window.ZOL_USER_INFO.checkLogState();
     }
 
     goLogin.getData = function () {
