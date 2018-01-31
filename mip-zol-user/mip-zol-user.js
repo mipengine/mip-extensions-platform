@@ -12,7 +12,7 @@ define(function (require, exports) {
         // 检查登录状态，登录时返回true，未登录时返回false并跳转登录页
         checkLogState: function () {
             var flag = !!window.ZOL_USER_INFO.userid;
-            if (flag) {
+            if (!flag) {
                 location.href = '//service.zol.com.cn/user/mlogin.php?backurl=' + encodeURIComponent(location.href);
             }
             return flag;
