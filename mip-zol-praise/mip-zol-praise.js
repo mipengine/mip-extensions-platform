@@ -16,8 +16,7 @@ define(function (require, exports, module) {
         var url = options.url;
         var data = options.data ? options.data : {};
         typeof ZOL_USER_INFO !== 'undefined' && (data.userId = window.ZOL_USER_INFO.userid);
-        if (!data.userId) {
-            location.href = '//service.zol.com.cn/user/mlogin.php?backurl=' + encodeURIComponent(location.href);
+        if (!window.ZOL_USER_INFO.checkLogState()) {
             return;
         }
         if (praise.posting) {

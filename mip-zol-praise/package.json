@@ -1,7 +1,7 @@
 {
     "name": "mip-zol-praise",
-    "version": "1.0.0",
-	"description": "zol用户点赞",
+    "version": "1.1.0",
+	"description": "zol m站通用点赞模块",
     
     "author": {
         "name": "mulianju",

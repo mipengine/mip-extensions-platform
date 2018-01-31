@@ -1,0 +1,14 @@
+{
+    "name": "mip-wygx-webp",
+    "version": "1.0.0",
+    "description": "我要个性图片webp支持",
+    "contributors": [
+        {
+          "name": "qiu_rj",
+          "email": "east_qiu@gmail.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

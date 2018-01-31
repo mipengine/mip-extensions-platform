@@ -44,12 +44,10 @@ define(function (require) {
             else if (isAndroid) {
                 // 判断是否是android
                 if (docFlag === 'true') {
-                    document.getElementById('openapp').href = baseSchemeDoc;
-                    document.getElementById('openapp').click();
+                    window.location.href = baseSchemeDoc;
                 }
                 else {
-                    document.getElementById('openapp').href = baseSchemeAdr;
-                    document.getElementById('openapp').click();
+                    window.location.href = baseSchemeAdr;
                 }
                 setTimeout(function () {
                     var timeOutDateTime = Date.now();

@@ -13,9 +13,9 @@ mip-jt-openapp 金投网APP打开按钮
 ### 基本用法
 ```html
 <div class="open-app">
-	<a class="fixed-btn" id="openapp">APP内打开</a>
+	<span class="fixed-btn" id="openapp">APP内打开</span>
 </div>
-<mip-jt-openapp doc = false docId = '5635940'>
+<mip-jt-openapp doc = true docId = '5635940'>
 </mip-jt-openapp>
 ```
 

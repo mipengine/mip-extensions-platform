@@ -8,7 +8,16 @@ define(function (require, exports) {
     var fetchJsonp = require('fetch-jsonp');
     var customElement = require('customElement').create();
 
-    window.ZOL_USER_INFO = {};
+    window.ZOL_USER_INFO = {
+        // 检查登录状态，登录时返回true，未登录时返回false并跳转登录页
+        checkLogState: function () {
+            var flag = !!window.ZOL_USER_INFO.userid;
+            if (flag) {
+                location.href = '//service.zol.com.cn/user/mlogin.php?backurl=' + encodeURIComponent(location.href);
+            }
+            return flag;
+        }
+    };
     var setUserInfo = function (userinfo) {
         for (var item in userinfo) {
             if (userinfo.hasOwnProperty(item) && userinfo[item]) {
