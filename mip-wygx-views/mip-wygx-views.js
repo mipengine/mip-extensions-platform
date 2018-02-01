@@ -1,7 +1,7 @@
 /**
  * @file mip-wygx-views 组件.
  * @author east_qiu@gmail.com.
- * @version 1.0.3
+ * @version 1.1.0
  */
 
 define(function (require) {
@@ -190,7 +190,9 @@ define(function (require) {
     customElement.prototype.firstInviewCallback = function () {
         // 模板渲染，事件绑定
         var element = this.element;
-        var imgNodes = element.querySelectorAll('mip-img');
+        var bindElement = element.getAttribute('bind-element');
+        var bEleStr = bindElement === '' ? 'mip-img' : bindElement;
+        var imgNodes = element.querySelectorAll(bEleStr);
         var nodes = Array.prototype.slice.call(imgNodes);
 
         nodes.map(function (node) {

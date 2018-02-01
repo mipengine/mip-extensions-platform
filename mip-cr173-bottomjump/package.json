@@ -1,0 +1,15 @@
+{
+    "name": "mip-cr173-bottomjump",
+    "version": "1.0.0",
+    "description": "滑动到底部时，获取网址、跳转到相关的页面",
+    "contributors": [
+        {
+            "name": "gom",
+            "email": "gom3250@qq.com",
+            "url": "https://m.cr173.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.0.0"
+    }
+}
