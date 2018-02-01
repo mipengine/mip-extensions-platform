@@ -16,20 +16,42 @@ define(function (require) {
         var ele = this.element;
         var str1 = ele.getAttribute('lName');
         var str2 = ele.getAttribute('cName');
+        var str3 = ele.getAttribute('choose');
+        var id = ele.getAttribute('id');
         ele.addEventListener('click', function (e) {
-            var childArr = ele.children;
-            for (var i = 0, j = childArr.length; i < j; i++) {
-                childArr[i].className = str1;
-            }
-            var num = e.target.dataset.and;
-            e.target.className = str1 + ' active';
-            var content = document.getElementById(ele.getAttribute('target'));
-            var contentArr = content.children;
-            for (i = 0; i < j; i++) {
-                if (i !== num - 0) {
-                    contentArr[i].className = str2;
-                } else {
-                    contentArr[i].className = str2 + ' active';
+            if (! str3) {
+                var childArr = ele.children;
+                for (var i = 0, j = childArr.length; i < j; i++) {
+                    childArr[i].className = str1;
+                }
+                var num = e.target.dataset.and;
+                e.target.className = str1 + ' active';
+                var content = document.getElementById(ele.getAttribute('target'));
+                var contentArr = content.children;
+                for (i = 0; i < j; i++) {
+                    if (i !== num - 0) {
+                        contentArr[i].className = str2;
+                    } else {
+                        contentArr[i].className = str2 + ' active';
+                    }
+                }
+            } else {
+                if (e.target.className === str1) {
+                    var childArr = document.querySelectorAll('#' + id + ' .' + str3);
+                    for (var i = 0, j = childArr.length; i < j; i++) {
+                        childArr[i].className = str1;
+                    }
+                    var num = e.target.dataset.and;
+                    e.target.className = str1 + ' active';
+                    var content = document.getElementById(ele.getAttribute('target'));
+                    var contentArr = content.children;
+                    for (i = 0; i < j; i++) {
+                        if (i !== num - 0) {
+                            contentArr[i].className = str2;
+                        } else {
+                            contentArr[i].className = str2 + ' active';
+                        }
+                    }
                 }
             }
         });
