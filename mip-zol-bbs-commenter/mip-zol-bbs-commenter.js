@@ -53,8 +53,7 @@ define(function (require, exports, module) {
         createCommentForm.show();
     }
     createCommentForm.show = function (notSetState) {
-        if (!window.ZOL_USER_INFO.userid) {
-            goLogin();
+        if (!window.ZOL_USER_INFO.checkLogState()) {
             return;
         }
         clearTimeout(createCommentForm.timer);
@@ -113,8 +112,7 @@ define(function (require, exports, module) {
 
 
     createCommentForm.init = function () {
-        if (!window.ZOL_USER_INFO.userid) {
-            goLogin();
+        if (!window.ZOL_USER_INFO.checkLogState()) {
             return;
         }
         createCommentForm.container.innerHTML = '\
@@ -169,9 +167,8 @@ define(function (require, exports, module) {
 
     function postComment(e) {
         e.preventDefault();
-        var data = {
-                imgs: ''
-            };
+        var data = options.data || {};
+        data.imgs = '';
         var contentText = createCommentForm.container.querySelector('textarea');
 
         contentText && (data.content = contentText.value);
@@ -195,18 +192,36 @@ define(function (require, exports, module) {
         });
     }
 
-    function goLogin() {
-        var href = '//service.zol.com.cn/user/mlogin.php?backurl=' + encodeURIComponent(location.href);
-        location.href = href;
-    }
-
     customElement.prototype.firstInviewCallback = function () {
         var me = this;
         var element = this.element;
+        var dataset = element.dataset;
 
         element.addEventListener('click', function () {
-            options = util.fn.extend({}, element.dataset);
-            typeof options.data === 'string' && (bbsData = JSON.parse(options.data));
+            options = util.fn.extend({}, dataset);
+            var customData;
+            try {
+                var script = document.querySelector('[data-name="bbs-comment-config"]');
+                if (script) {
+                    customData = JSON.parse(script.textContent);
+                }
+            }
+            catch (e) {
+                console.warn('json is illegal'); // eslint-disable-line
+                console.warn(e); // eslint-disable-line
+            }
+            for (var key in dataset) {
+                if (dataset.hasOwnProperty(key)) {
+                    if (/^data([A-Z][\w]+)/.test(key)) {
+                        var pkey = key;
+                        pkey = pkey.replace(/^data[A-Z]/, pkey.slice(4, 5).toLowerCase());
+                        if (customData || (customData = {})) {
+                            customData[pkey] = dataset[key];
+                        }
+                    }
+                }
+            }
+            customData && (options.data = customData);
             if (!createCommentForm.container) {
                 createCommentForm();
             } else {

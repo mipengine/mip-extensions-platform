@@ -6,7 +6,7 @@
 ----|----
 类型|业务
 支持布局|N,S|
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-zol-bbs-commenter/mip-zol-bbs-commenter.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-zol-bbs-commenter/mip-zol-bbs-commenter.js
 
 ## 示例
 
@@ -32,3 +32,13 @@
 说明：提交评论时的追加信息
 必选项：否
 类型：json对象
+
+### [data-name="bbs-comment-config"]
+说明：包含此属性名的script/json数据，做评论提交时作为附加数据提交给后端
+必选项：否
+类型：json对象
+
+### data-data-xxx
+说明：此类型的数据可用作提交评论时的附加数据，自动转换为xxx:value形式
+必选项：否
+类型：字符串

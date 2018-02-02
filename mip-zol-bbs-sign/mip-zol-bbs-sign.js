@@ -15,10 +15,9 @@ define(function (require, exports, module) {
 
     function signIn(options, callback) {
         var url = options.signUrl;
-        var data = typeof options.data === 'string' ? JSON.parse(options.data) : {};
+        var data = options.data;
         typeof ZOL_USER_INFO !== 'undefined' && (data.userId = window.ZOL_USER_INFO.userid);
-        if (!data.userId) {
-            location.href = '//service.zol.com.cn/user/mlogin.php?backurl=' + encodeURIComponent(location.href);
+        if (!window.ZOL_USER_INFO.checkLogState()) {
             return;
         }
 
@@ -52,7 +51,31 @@ define(function (require, exports, module) {
     }
     customElement.prototype.firstInviewCallback = function () {
         var element = this.element;
+        var dataset = element.dataset;
         var options = util.fn.extend({}, element.dataset);
+        var customData;
+        try {
+            var script = document.querySelector('[data-name="bbs-sign-config"]');
+            if (script) {
+                customData = JSON.parse(script.textContent);
+            }
+        }
+        catch (e) {
+            console.warn('json is illegal'); // eslint-disable-line
+            console.warn(e); // eslint-disable-line
+        }
+        for (var key in dataset) {
+            if (dataset.hasOwnProperty(key)) {
+                if (/^data([A-Z][\w]+)/.test(key)) {
+                    var pkey = key;
+                    pkey = pkey.replace(/^data[A-Z]/, pkey.slice(4, 5).toLowerCase());
+                    if (customData || (customData = {})) {
+                        customData[pkey] = dataset[key];
+                    }
+                }
+            }
+        }
+        customData && (options.data = customData);
 
         element.addEventListener('click', function () {
             signIn(options, function (request) {
