@@ -106,7 +106,8 @@ define(function (require) {
                 });
             });
             ctHeightList = [];
-            continueVideo();
+            // 暂时取消视频继续播放
+            // continueVideo();
         }
         // 暂停视频
         function pauseVideo() {
