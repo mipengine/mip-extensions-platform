@@ -1,0 +1,14 @@
+{
+    "name": "mip-zol-comment-floor",
+    "version": "1.0.0",
+    "description": "zol业务组件：zol资讯文章页评论列表模块，楼层嵌套交互处理",
+    "contributors": [
+        {
+            "name": "mulianju",
+            "email": "mulianju@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
