@@ -1,0 +1,14 @@
+{
+    "name": "mip-zol-article-merchant",
+    "version": "1.0.0",
+    "description": "zol业务组件：zol资讯文章页首图下方的经销商推广位，业务组件，非公用",
+    "contributors": [
+        {
+            "name": "mulianju",
+            "email": "mulianju@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

@@ -38,7 +38,7 @@ define(function (require) {
             if (searchCtn === '') {
                 return;
             }
-            window.location.href = prefix + 'project/search/1_0_0.shtml?q=' + searchCtn;
+            window.location.href = prefix + '?q=' + searchCtn;
         });
 
         // 绑定事件，其它元素可通过 on="xxx" 触发

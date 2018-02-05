@@ -9,7 +9,10 @@ define(function (require, exports, module) {
     var fetchJsonp = require('fetch-jsonp');
     var customElement = require('customElement').create();
     var Gesture = util.Gesture;
-    var toast = require('./mip-zol-toast');
+    var mipToast = require('./mip-zol-toast');
+    var toast = function (msg, t) {
+        mipToast('<div class="mip-zol-toast-container">' + msg + '</div>', t);
+    };
     var windowGesture = new Gesture(window);
     var container;
     var form;
