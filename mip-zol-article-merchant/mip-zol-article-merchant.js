@@ -44,7 +44,7 @@ define(function (require) {
                         </figure>\
                         <h3>' + request.info.goodsName + '</h3>\
                         <div class="divrice">\u00A5' + request.info.priceStr + '</div>'
-                    + (request.info.distance ? '<div class="introduction">\u8DDD\u79BB\u60A8'
+                    + (request.info.distance ? '<div class="introduction">'
                         + request.info.distance + '</div>' : '')
                     + '<div class="tags">\
                             <span class="price">\u5B9E\u4F53\u5E97</span>\
