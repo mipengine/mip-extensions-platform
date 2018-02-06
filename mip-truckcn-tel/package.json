@@ -1,0 +1,14 @@
+{
+    "name": "mip-truckcn-tel",
+    "version": "1.0.0",
+    "description": "根据url里的a的hash值，改变页面的电话号码",
+    "contributors": [
+        {
+            "name": "jglxzhl",
+            "email": "jglxzhl@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

@@ -1,0 +1,15 @@
+{
+    "name": "mip-qqtn-shield",
+    "version": "1.0.0",
+    "description": "获取下载地址，根据不同下载地址显示不同的提示,提示内容放入模版里的https json中。用$('title')是因为需要更改标题。",
+    "contributors": [
+        {
+            "name": "gom",
+            "email": "gom3250@qq.com",
+            "url": "https://m.qqtn.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.0.0"
+    }
+}
