@@ -30,7 +30,7 @@ mip-qqtn-shield
         </div>
         <div id="downAddress">
             <ul class="m-down-ul f-downbtn-url">
-                <li class="m-down-last"><a href="http://tj.tt1386.com/0006/4142" class="span9 m-game-down down f-eject-btn" data-flag="downbtn" id="address">点击下载</a></li>
+                <li class="m-down-last"><a href="http://tj.tt1386.com/0006/4119" class="span9 m-game-down down f-eject-btn" data-flag="downbtn" id="address">点击下载</a></li>
             </ul>
         </div>
         

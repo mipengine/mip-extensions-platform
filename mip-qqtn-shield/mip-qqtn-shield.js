@@ -51,8 +51,10 @@ define(function (require) {
                                     var prevImgHtml = '';
                                     var s = 0;
                                     for (s = 0; s < prevImgSize; s++) {
-                                        var previmg = $(ele).find('.g-previmg-show li mip-img,.g-previmg-show li img');
-                                        previmg.attr('src', data.mgcArrayHtml[i][3][s]);
+                                        var previmg = $(ele).find('.g-previmg-show li img');
+                                        previmg.eq(s).attr('src', data.mgcArrayHtml[i][3][s]);
+                                        var prevmipimg = $(ele).find('.g-previmg-show mip-img');
+                                        prevmipimg.eq(s).attr('src', data.mgcArrayHtml[i][3][s]);
                                     }
                                     $(ele).find('.f-maincms-cont').html('<p>' + data.mgcArrayHtml[i][4] + '</p>');
                                     if (platform.isIos()) {
@@ -64,7 +66,8 @@ define(function (require) {
                                             $(this).find('a').attr('href', data.mgcArrayHtml[i][6]);
                                         });
                                     }
-                                    $(ele).find('.g-tags-box,.g-key-ohter').hide();
+                                    $(ele).find('.f-tags-box,.g-key-ohter').hide();
+                                    $(ele).find('.f-tags-box').remove();
                                     $(ele).find('#g-recomd-game,.g-down-information ul').hide();
                                     $(ele).find('.f-admorediv').hide();
                                     var shieldmore = $(ele).find('mip-showmore');
