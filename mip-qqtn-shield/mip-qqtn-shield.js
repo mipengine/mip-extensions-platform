@@ -46,15 +46,15 @@ define(function (require) {
                                 if (pkurlm.indexOf(data.mgcArrayText[i][n]) !== -1) {
                                     $('title').html(data.mgcArrayHtml[i][0]);
                                     $(ele).find('h1').html(data.mgcArrayHtml[i][1]);
-                                    $(ele).find('.pic div img,.pic div mip-img').attr('src', data.mgcArrayHtml[i][2]);
+                                    $(ele).find('.f-game-img').each(function () {
+                                        $(ele).find(this).find('img').attr('src', data.mgcArrayHtml[i][2]);
+                                    });
                                     var prevImgSize = data.mgcArrayHtml[i][3].length;
                                     var prevImgHtml = '';
                                     var s = 0;
                                     for (s = 0; s < prevImgSize; s++) {
                                         var previmg = $(ele).find('.g-previmg-show li img');
                                         previmg.eq(s).attr('src', data.mgcArrayHtml[i][3][s]);
-                                        var prevmipimg = $(ele).find('.g-previmg-show mip-img');
-                                        prevmipimg.eq(s).attr('src', data.mgcArrayHtml[i][3][s]);
                                     }
                                     $(ele).find('.f-maincms-cont').html('<p>' + data.mgcArrayHtml[i][4] + '</p>');
                                     if (platform.isIos()) {
