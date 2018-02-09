@@ -13,36 +13,55 @@ mip-truckcn-hash 组件说明
 ## 示例1
 
 url：https://www.mipengine.org#tel=13333333333*&text=url里的文字*
-<mip-truckcn-tel style="tel" default-tel="19999999999"></mip-truckcn-tel>
+<mip-truckcn-hash type="tel" default-tel="19999999999"></mip-truckcn-hash>
 返回代码：<a href="tel:13333333333">13333333333</a>
-<mip-truckcn-hash style="text" default-text="自定义文字"></mip-truckcn-hash>
+<mip-truckcn-hash type="text" default-text="自定义文字"></mip-truckcn-hash>
 返回代码：url里的文字
 
 ## 示例2
 
 url：https://www.mipengine.org
-<mip-truckcn-tel style="tel" default-tel="19999999999"></mip-truckcn-tel>
+<mip-truckcn-hash type="tel" default-tel="19999999999"></mip-truckcn-hash>
 返回代码：<a href="tel:19999999999">19999999999</a>
 <mip-truckcn-hash style="text" default-text="自定义文字"></mip-truckcn-hash>
 返回代码：自定义文字
 
+## 示例3
+
+<mip-fixed type="top" id="topid">
+  <div><mip-truckcn-hash type="fixed-top" default-tel="19999999999"></mip-truckcn-hash></div>
+  <div class="btn_style" on="tap:topid.close"></div>
+</mip-fixed>
+
+## 示例4
+
+<mip-fixed type="bottom" id="bottomid">
+  <div><mip-truckcn-hash type="fixed-bottom" default-tel="19999999999"></mip-truckcn-hash></div>
+  <div class="btn_style" on="tap:bottomid.close"></div>
+</mip-fixed>
+
+## 示例5
+
+<mip-truckcn-hash type="name" default-name="张经理"></mip-truckcn-hash>
+
 ### 基本用法
 ```html
-<mip-truckcn-tel style="tel" default-tel="19999999999"></mip-truckcn-tel>
+<mip-truckcn-hash style="tel" default-tel="19999999999"></mip-truckcn-hash>
 <mip-truckcn-hash style="text" default-text="自定义文字"></mip-truckcn-hash>
 ```
 
 ## 属性
 
-### style
+### type
 
 说明：数据类型
 必选项：是
 类型：字符串
-取值范围：tel, text
+取值范围：tel, text, name, fixed-top, fixed-bottom
 
 ## 注意事项
-当style="tel"时，对应的默认是default-tel;
-当style="text"时，对应的默认是default-text.
-
+当type="tel"时，对应的默认是default-tel;
+当type="name"时，对应的默认是default-name;
+当type="text"时，对应的默认是default-text.
+fixed-top, fixed-bottom配合mip-fixed使用
 
