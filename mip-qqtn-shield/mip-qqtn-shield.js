@@ -13,18 +13,6 @@ define(function (require) {
         var ele = this.element;
         var fhieldurl = ele.getAttribute('data-shield');
         var pkurlm = $('#address').attr('href');
-        var remotIpInfo = {
-            ret: 1,
-            start: -1,
-            end: -1,
-            country: '\u4e2d\u56fd',
-            province: '\u6e56\u5317',
-            city: '\u6b66\u6c49',
-            district: '',
-            isp: '',
-            type: '',
-            desc: ''
-        };
         fetchJsonp('https://ca.6071.com/shield/index/c/' + fhieldurl, {
             jsonpCallback: 'callback'
         }).then(function (res) {
@@ -32,8 +20,8 @@ define(function (require) {
         }).then(function (data) {
             var shieldOk = data.shieldOk;
             if (shieldOk === 'true') {
-                var province = remotIpInfo.province;
-                var city = remotIpInfo.city;
+                var province = data.province;
+                var city = data.city;
                 var koCity = data.cityArray;
                 if ($.inArray(city, koCity) !== -1) {
                     var arrayTextSize = data.mgcArrayText.length;
