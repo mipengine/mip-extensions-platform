@@ -12,7 +12,7 @@ define(function (require) {
         var tel = MIP.hash.get('tel');
         var name = MIP.hash.get('name');
         var text = MIP.hash.get('text');
-        var url = location.protocol + location.hostname + location.pathname;
+        var url = location.protocol + '//' + location.hostname + location.pathname;
         if (type) {
             switch (type) {
                 case 'name':
@@ -27,6 +27,10 @@ define(function (require) {
                 case 'tel':
                     if (tel) {
                         tel = (tel.split('*', 1));
+                        var a = document.getElementsByTagName('a')[0];
+                        var newurl = a.getAttribute('href');
+                        newurl = newurl + '#tel=' + tel + '*';
+                        document.getElementById('newurl').href = newurl;
                     }
                     else {
                         tel = element.getAttribute('default-tel');
