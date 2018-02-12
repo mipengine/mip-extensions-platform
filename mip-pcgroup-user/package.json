@@ -1,0 +1,14 @@
+{
+    "name": "mip-pcgroup-user",
+    "version": "1.0.0",
+    "description": "太平洋网络账号登录状态获取接口",
+    "contributors": [
+        {
+            "name": "xuhuanlin",
+            "email": "xuhuanlin@pconline.com.cn"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
