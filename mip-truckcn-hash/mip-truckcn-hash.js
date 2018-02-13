@@ -18,19 +18,20 @@ define(function (require) {
                 case 'name':
                     if (name) {
                         name = (name.split('*', 1));
+                        name = '<div class="name">' + name + '：</div>';
                     }
-                    else {
+                    else if (tel) {
+                        name = '';
+                    }
+					else {
                         name = element.getAttribute('default-name');
+                        name = '<div class="name">' + name + '：</div>';
                     }
-                    element.innerHTML = '<div class="name">' + name + '：</div>';
+                    element.innerHTML = name;
                     break;
                 case 'tel':
                     if (tel) {
                         tel = (tel.split('*', 1));
-                        var a = document.getElementsByTagName('a')[0];
-                        var newurl = a.getAttribute('href');
-                        newurl = newurl + '#tel=' + tel + '*';
-                        document.getElementById('newurl').href = newurl;
                     }
                     else {
                         tel = element.getAttribute('default-tel');
