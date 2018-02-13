@@ -1,0 +1,14 @@
+{
+    "name": "mip-and-resize",
+    "version": "1.0.0",
+    "description": "自动调节",
+    "contributors": [
+        {
+            "name": "xujun",
+            "email": "3161390272@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
