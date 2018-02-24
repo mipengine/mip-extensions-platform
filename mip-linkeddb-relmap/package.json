@@ -1,0 +1,14 @@
+{
+    "name": "mip-linkeddb-relmap",
+    "version": "1.0.0",
+    "description": "用来添加linkeddb网站人物关系图绘制、分页数据加载的通用组件",
+    "contributors": [
+        {
+            "name": "linkeddb",
+            "email": "1046251808@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

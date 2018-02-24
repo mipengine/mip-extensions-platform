@@ -6,7 +6,7 @@ mip-pcgroup-user 太平洋网络判断登录组件
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/static/v1/mip-pcgroup-user/mip-pcgroup-user.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-pcgroup-user/mip-pcgroup-user.js
 
 ## 示例
 

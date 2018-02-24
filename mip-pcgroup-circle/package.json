@@ -1,0 +1,14 @@
+{
+    "name": "mip-pcgroup-circle",
+    "version": "1.0.0",
+    "description": "根据自定义属性动态画出百分比圆环",
+    "contributors": [
+        {
+            "name": "JJdad2016",
+            "email": "sfzheng.ok@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

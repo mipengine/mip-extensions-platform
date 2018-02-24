@@ -891,7 +891,7 @@ define(function (require) {
         *   @param {num} index 页面多个组件时，用来区分的。
         *
         */
-        prependNewComment(data, index) {
+        prependNewComment: function (data, index) {
             var t = this;
             var c = t.config[index];
             var divEle = document.createElement('div');

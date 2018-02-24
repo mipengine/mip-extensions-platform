@@ -6,7 +6,7 @@ mip-pcgroup-commentshow 太平洋网络网站群的评论组件，有展示、�
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/static/v1/mip-pcgroup-commentshow/mip-pcgroup-commentshow.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-pcgroup-commentshow/mip-pcgroup-commentshow.js
 
 ## 示例
 
