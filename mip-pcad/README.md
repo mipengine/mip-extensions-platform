@@ -12,7 +12,7 @@ mip-pcad 广告位组件
 ## 示例
 
 ### 基本用法
-```html
+```html     
 <mip-pcad class="test.gxq."></mip-pcad>
 ```
 

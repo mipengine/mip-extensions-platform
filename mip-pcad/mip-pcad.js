@@ -110,7 +110,7 @@ define(function (require) {
         xhr.open('get', url, true);
         xhr.send(null);
         xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {
+            if (xhr.readyState === 4 && sccuessFn) {
                 if (xhr.status === 200) {
                     sccuessFn(xhr.responseText);
                 }
@@ -125,7 +125,9 @@ define(function (require) {
         target = this.element;
         loc = target.className.replace(/^([^\s]+\.).*/, '$1');
         var url = '//ivy.pconline.com.cn/show?id=' + loc + '&media=html&mip';
+        var testUrl = '//jwz.3conline.com/adpuba/baby_default_show?id=pckids.mip.test15.&media=js&channel=dynamic&mip';
         ajax(url, setLocationAd);
+        ajax(testUrl);
     };
     return customElement;
 });
