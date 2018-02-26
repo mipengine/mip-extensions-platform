@@ -1,7 +1,7 @@
 {
-    "name": "mip-linkeddb-relmap",
-    "version": "1.0.1",
-    "description": "用来添加linkeddb网站人物关系图绘制、分页数据加载的通用组件",
+    "name": "mip-linkeddb-mad",
+    "version": "1.0.0",
+    "description": "用来添加linkeddb网站广告的组件",
     "contributors": [
         {
             "name": "linkeddb",

@@ -28,6 +28,7 @@ mip-linkeddb-relmap 用来添加linkeddb网站人物关系图绘制、分页数�
     data-personType=""
     data-args=""
     data-letter=""
+    data-categoryId=""
     >
 </mip-linkeddb-relmap>
 ```
@@ -121,5 +122,11 @@ mip-linkeddb-relmap 用来添加linkeddb网站人物关系图绘制、分页数�
 ### data-letter
 
 说明：当前页类型 music
+必选项：是
+类型：string
+
+### data-categoryId
+
+说明：当前页类型 document
 必选项：是
 类型：string

@@ -1,0 +1,14 @@
+{
+    "name": "mip-sy-close-dom",
+    "version": "1.0.0",
+    "description": "关闭组件，点击关闭外层dom",
+    "contributors": [
+        {
+            "name": "smallY",
+            "email": "zhangyingnan19@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

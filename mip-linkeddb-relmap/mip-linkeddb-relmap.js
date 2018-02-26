@@ -33,6 +33,7 @@ define(function (require) {
         var type = element.getAttribute('data-personType');
         var args = element.getAttribute('data-args');
         var letter = element.getAttribute('data-letter');
+        var categoryId = element.getAttribute('data-categoryId');
 
         var body = document.getElementsByTagName('body')[0];
 
@@ -45,6 +46,8 @@ define(function (require) {
             case 'person': getPersonMap();
                 break;
             case 'music': getMusic();
+                break;
+            case 'document': getDocument();
                 break;
         }
 
@@ -78,6 +81,14 @@ define(function (require) {
                 case 'works': personWorks();
                     break;
                 case 'interpersonal': personInterpersonal();
+                    break;
+            }
+        }
+
+        // 不同分类的不同页面执行不同逻辑 Document
+        function getDocument() {
+            switch (pageType) {
+                case 'list': documentList();
                     break;
             }
         }
@@ -278,7 +289,6 @@ define(function (require) {
             var pageNum = 1;
             $(element).parent().parent().find('#more-btn').on('click', function () {
                 pageNum = pageNum + 1;
-                console.log(111);
                 $.get('https://www.linkeddb.com/music/letter/' + letter + '/p' + pageNum + '/',
                     function (html) {
                         if (html) {
@@ -287,6 +297,23 @@ define(function (require) {
                             $(element).parent().parent().find('#more-btn').hide();
                         }
                     });
+            });
+        }
+
+        // document list 页
+        function documentList() {
+            var pageNum = 1;
+            $(element).parent().parent().find('#more-btn').on('click', function () {
+                pageNum = pageNum + 1;
+                $.post('https://www.linkeddb.com/document/category/' + categoryId + '/p' + pageNum + '/',
+                    function (html) {
+                        if (html) {
+                            $(html).appendTo($(element).parent().parent().find('#news-list'));
+                        } else {
+                            $(element).parent().parent().find('#more-btn').hide();
+                        }
+                    });
+                return false;
             });
         }
 
