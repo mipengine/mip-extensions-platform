@@ -106,26 +106,14 @@ define(function (require) {
             var pageNum = 1;
             $(element).parent().parent().find('#more-btn').on('click', function () {
                 pageNum = pageNum + 1;
-                $.post('https://www.linkeddb.com/tv/list/' + args + '/p' + pageNum + '/', function (html) {
+                $.post('https://mip.linkeddb.com/tv/list/' + args + '/p' + pageNum + '/', function (html) {
                     if (html) {
                         $(html).appendTo($(element).parent().parent().find('#tv-list'));
-                        // $(html).appendTo($('#tv-list'));
                     } else {
                         $(element).parent().parent().find('#more-btn').hide();
                     }
                 });
             });
-            // $('#more-btn').on('click', function () {
-            //     pageNum = pageNum + 1;
-            //     $.post('https://www.linkeddb.com/tv/list/' + args + '/p' + pageNum + '/',
-            //         function (html) {
-            //         if (html) {
-            //             $(html).appendTo($('#tv-list'));
-            //         } else {
-            //             $('#more-btn').hide();
-            //         }
-            //     });
-            // });
         }
 
         // tv rel 页
@@ -184,13 +172,6 @@ define(function (require) {
                     'https://www.linkeddb.com/tv/' + tvOid + '-' + currentEpno
                     + '/rolegragh.json?role_id=' + $roleId, 'target');
             });
-            // $('#nodesRoleList').on('click', 'li', function () {
-            //     var $roleId = $(this).find('a').attr('data-roleId');
-            //     // 更新svg图谱
-            //     initData('mainPersonRel',
-            //         '/tv/' + tvOid + '-' + currentEpno + '/rolegragh.json?role_id=' + $roleId,
-            //         'target');
-            // });
 
             updataPageFormEpno(10000);
         }
@@ -212,7 +193,7 @@ define(function (require) {
             var pageNum = 1;
             $(element).parent().parent().find('#more-btn').on('click', function () {
                 pageNum = pageNum + 1;
-                $.post('https://www.linkeddb.com/movie/list/' + args + '/p' + pageNum + '/',
+                $.post('https://mip.linkeddb.com/movie/list/' + args + '/p' + pageNum + '/',
                     function (html) {
                         if (html) {
                             $(html).appendTo($(element).parent().parent().find('#mv-list'));
@@ -289,7 +270,7 @@ define(function (require) {
             var pageNum = 1;
             $(element).parent().parent().find('#more-btn').on('click', function () {
                 pageNum = pageNum + 1;
-                $.get('https://www.linkeddb.com/music/letter/' + letter + '/p' + pageNum + '/',
+                $.get('https://mip.linkeddb.com/music/letter/' + letter + '/p' + pageNum + '/',
                     function (html) {
                         if (html) {
                             $(html).appendTo($(element).parent().parent().find('.itemsCont'));
@@ -305,7 +286,7 @@ define(function (require) {
             var pageNum = 1;
             $(element).parent().parent().find('#more-btn').on('click', function () {
                 pageNum = pageNum + 1;
-                $.post('https://www.linkeddb.com/document/category/' + categoryId + '/p' + pageNum + '/',
+                $.post('https://mip.linkeddb.com/document/category/' + categoryId + '/p' + pageNum + '/',
                     function (html) {
                         if (html) {
                             $(html).appendTo($(element).parent().parent().find('#news-list'));
@@ -727,7 +708,7 @@ define(function (require) {
                     } else {
                         if (d.role_id) {
                             var url = $('.tv-oid').attr('data-oid');
-                            window.location.href = 'https://www.linkeddb.com/tv/'
+                            window.location.href = 'https://mip.linkeddb.com/tv/'
                                 + url + '/role/' + d.role_id + '/';
                         }
                     }
@@ -746,7 +727,6 @@ define(function (require) {
         //  @param id
         function initSVG(id) {
             $('body').find('#' + id).empty();
-            // $('#' + id).empty();
             if (nodesData.length <= (pageNum + 1)) {
                 new MakeSvgClass(id, {
                     nodes: nodesData,
@@ -759,12 +739,9 @@ define(function (require) {
                     nodes: nodesData.slice(0, (pageNum * pageIndex + 1)),
                     links: linksData.slice(0, (pageNum * pageIndex)),
                     svgWidth: $('body').find('#' + id).width()
-                    // svgWidth: $('#' + id).width()
                 });
                 $('body').find('#' + id)
                     .append('<a href="###" class="showMoreData" data-container-id="' + id + '">查看更多关系</a>');
-                // $('#' + id)
-                // .append('<a href="###" class="showMoreData" data-container-id="' + id + '">查看更多关系</a>');
             }
         }
 
@@ -801,17 +778,13 @@ define(function (require) {
         $('body').on('click', '.showMoreData', function () {
             var id = $(this).attr('data-container-id');
             $('body').find('#' + id).empty();
-            // $('#' + id).empty();
             new MakeSvgClass(id, {
                 nodes: nodesData,
                 links: linksData,
                 svgWidth: $('body').find('#' + id).width()
-                // svgWidth: $('#' + id).width()
             });
             $('body').find('#' + id)
                 .append('<a href="###" class="hideMoreData" data-container-id="' + id + '">隐藏更多关系</a>');
-            // $('#' + id)
-            // .append('<a href="###" class="hideMoreData" data-container-id="' + id + '">隐藏更多关系</a>');
         });
 
         // 隐藏更多

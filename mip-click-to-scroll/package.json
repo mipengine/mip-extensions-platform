@@ -1,0 +1,13 @@
+{
+    "name": "mip-click-to-scroll",
+    "version": "1.0.0",
+    "description": "使点击的元素滚动至页面顶部",
+    "author": {
+        "name": "idongde",
+        "url": "http://m.idongde.com",
+        "email": "751718620@qq.com"
+    },
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

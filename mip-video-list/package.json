@@ -1,0 +1,14 @@
+{
+    "name": "mip-video-list",
+    "version": "1.0.0",
+    "description": "获取视频资源",
+    "contributors": [
+        {
+            "name": "xujun",
+            "email": "3161390272@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
