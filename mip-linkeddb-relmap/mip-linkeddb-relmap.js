@@ -169,8 +169,8 @@ define(function (require) {
                 var $roleId = $(this).find('a').attr('data-roleId');
                 // 更新svg图谱
                 initData('mainPersonRel',
-                    'https://www.linkeddb.com/tv/' + tvOid + '-' + currentEpno
-                    + '/rolegragh.json?role_id=' + $roleId, 'target');
+                    'https://www.linkeddb.com/tv/' + tvOid + '-' + currentEpno + '/rolegragh.json',
+					{roleid: $roleId}, 'target');
             });
 
             updataPageFormEpno(10000);
@@ -197,7 +197,6 @@ define(function (require) {
                     function (html) {
                         if (html) {
                             $(html).appendTo($(element).parent().parent().find('#mv-list'));
-                            // $(html).appendTo($('#mv-list'));
                         } else {
                             $(element).parent().parent().find('#more-btn').hide();
                         }
@@ -215,6 +214,7 @@ define(function (require) {
 
         // person works 页
         function personWorks() {
+            // 作品图谱分类
             $(element).parent().parent().find('#relMapClass').on('click', 'li', function () {
                 $(this).addClass('active').siblings().removeClass('active');
                 var relType = $(this).attr('data-type');
@@ -222,14 +222,6 @@ define(function (require) {
                     'https://www.linkeddb.com/person/' + personOid + '/work_gragh.json',
                     {type: relType}, 'target');
             });
-            // 作品图谱分类
-            // $('#relMapClass').on('click', 'li', function () {
-            //     $(this).addClass('active').siblings().removeClass('active');
-            //     var relType = $(this).attr('data-type');
-            //     initData('mainPersonWorks', '/person/' + personOid + '/work_gragh.json',
-            //         {type: relType},
-            //         'target');
-            // });
 
             // 作品图谱
             initData('mainPersonWorks',
