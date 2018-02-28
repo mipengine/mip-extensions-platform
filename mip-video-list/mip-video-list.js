@@ -370,7 +370,6 @@ define(function (require) {
         var num = this.element.dataset.and;
         var id = this.element.dataset.id;
         num = ((parseInt(num, 10) + 278) / 117 - 515) / 21;
-        console.log(num);
         var name = 'flv' + num;
         var dom = document.querySelectorAll('#' + id);
         dom[0].setAttribute('src', 'http://www.5etv.com/video/flv/' + videoList[name]);

@@ -175,7 +175,8 @@ define(function (require) {
                 str += '</div>';
                 str += '</div>';
                 str += '<div class="apply-input"><input type="tel" name="area" maxlength="4" value="80"';
-                str += ' placeholder="请输入您的房屋面积 " bdsl-key="area" bdsl-name-articleZx="" /><em>m&sup2;</em></div>';
+                str += ' placeholder="请输入您的房屋面积 " bdsl-key="area" bdsl-name-articleZx=""';
+                str += ' bdsl-required /><em>m&sup2;</em></div>';
                 str += '<ul class="zxbj-work clearfix">';
                 str += '<li>';
                 str += '<select name="ws" id="ws" bdsl-key="shi" bdsl-name-articleZx="">';
@@ -220,6 +221,7 @@ define(function (require) {
                 str += '</ul>';
                 str += '<div class="apply-input">';
                 str += '<input type="tel" name="zxbjMobile" maxlength="11" bdsl-key="phone"';
+                str += ' bdsl-required="^1[3|4|5|7|8]\\d{9}$"';
                 str += ' bdsl-name-articlezx="" placeholder="输入手机号，短信接收详细报价清单" /></div>';
                 str += '<div class="apply-button"><a href="javascript:;" class="zxbj-submit-btn"';
                 str += ' bdsl-extra="{id:10001}" bdsl-submit="articleZx">立即计算</a></div>';
