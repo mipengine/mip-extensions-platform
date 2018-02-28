@@ -22,25 +22,13 @@ define(function (require) {
         var downUrl = $(ele).find('.f-downbtn-url a').first().attr('href'); // 下载链接
         var downBtnLink = $(ele).find('.f-downbtn-url').find('a');
         var androidEjectData = ''; // 安卓弹出层内容初始化
-        var province = '';
-        var city = '';
-        var remotIpInfo = {
-            ret: 1,
-            start: -1,
-            end: -1,
-            country: '\u4e2d\u56fd',
-            province: '\u6e56\u5317',
-            city: '\u6b66\u6c49',
-            district: '',
-            isp: '',
-            type: '',
-            desc: ''
-        };
+
         fetchJsonp('https://ca.6071.com/web/index/c/' + pageInfo.phpUrl, {
             jsonpCallback: 'callback'
         }).then(function (res) {
             return res.json();
         }).then(function (data) {
+            console.log(data);
             var iossopurl = data['iossp-url'];
             var iosclassid = data['ios-classid'];
             var datawebUrl = data.webUrl;
@@ -53,19 +41,52 @@ define(function (require) {
             var tagSpOk = data.tagSpOk;
             var adaptationOk = data.adaptationOk;
             var mgcFilterOk = data.mgcFilterOk;
+            var nodownOK = data.nodownopen;
+            var nodownsize = data.nodownsize;
+            var notagsurl = data.swnotagurl;
+            var incity = data.ipInfo.city;
             if (ifSwbOk === 'true') {
                 ifSwb(data['f-noAdf-hide']); // 判断商务包
             }
+
             if (tagSpOk === 'true') {
-                tagSp(data.webUrl); // tags适配
+                var mm = 0;
+                if (notagsurl.length > 0) {
+                    for (var zz = 0; zz < notagsurl.length; zz++) {
+                        if (downUrl === notagsurl[zz]) {
+                            mm++;
+                            break;
+                        }
+
+                    }
+                }
+
+                if (mm === 0) {
+                    tagSp(data.webUrl); // tags适配
+                }
             }
 
             if (adaptationOk === 'true') {
                 adaptation(iossopurl, iosclassid, datawebUrl, azspurl, androidclassid, dataIpok, datahzUrl, dataOpen); // 设备适配
             }
 
+            mgcFilterOk = 'true';
             if (mgcFilterOk === 'true') {
-                mgcFilter(data['f-mg-gl'], data.replaceHtml, data['eject-city']); // 敏感词过滤
+                mgcFilter(data['f-mg-gl'], data.replaceHtml, data['eject-city'], incity); // 敏感词过滤
+            }
+
+            if (nodownOK === true) {
+                if ($(ele).find('.f-nodown').length <= 0) {
+                    return false;
+                }
+
+                var gamesize = $(ele).find('.f-nodown').text().toUpperCase();
+                for (var i = 0; i < nodownsize.length; i++) {
+                    if (gamesize === nodownsize[i]) {
+                        $('.f-downbtn-url').html('<li class="f-nodown-btn">暂无下载</li>');
+                    }
+
+                }
             }
 
         });
@@ -152,8 +173,6 @@ define(function (require) {
                 }
             }
             else { // 安卓
-
-
                 var idArray = [];
                 idArray = downUrl.split('.');
                 if (downUrl.indexOf('mo.L5645.net') !== -1 && $(ele).find('.f-tags-box ul li').length <= 0) {
@@ -207,8 +226,7 @@ define(function (require) {
                 }
             }
         }
-        function mgcFilter(dataMggl, dataReplaceHtml, dataEjectCity) { // 敏感词过滤
-
+        function mgcFilter(dataMggl, dataReplaceHtml, dataEjectCity, incity) { // 敏感词过滤
             var mgcHtml = dataMggl;
             var titleHtml = $('title').html();
             var forNum = mgcHtml.length;
@@ -222,8 +240,7 @@ define(function (require) {
                     });
                     $(ele).find('.f-previmg-cont').html(dataReplaceHtml[3]);
                     $(ele).find('.f-maincms-cont').html(dataReplaceHtml[4]);
-                    province = remotIpInfo.province;
-                    city = remotIpInfo.city;
+                    var city = incity;
                     var koCity = dataEjectCity;
                     if ($.inArray(city, koCity) !== -1) { // 在指定城市
                         $(ele).find('.f-downbtn-url').each(function () {

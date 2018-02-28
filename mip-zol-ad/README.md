@@ -17,7 +17,7 @@ mip-zol-ad 是zol广告组件。
 
 ### 嵌入代码
 ```html
-<mip-zol-ad pid="24939"></mip-zol-ad>
+<mip-zol-ad pid="5154"></mip-zol-ad>
 ```
 
 ## 属性

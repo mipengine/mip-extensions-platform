@@ -6,6 +6,7 @@ mip-ychlyxgs-data 一个本企业独立使用的多功能组件，通过接口�
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
+
 所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-ychlyxgs-data/mip-ychlyxgs-data.js
 
 ## 示例
