@@ -9,7 +9,7 @@ define(function (require, exports, module) {
         adIcon: '//pic.zol-img.com.cn/201801/ad_0125.png',
         adIconWidth: '22',
         adIconHeight: '12',
-        view: '//ca.w8.com.cn/view?g=',
+        view: '//ca.zol.com.cn/view?g=',
         extension: '//p.zol-img.com.cn/da/',
         ipareaUrl: '//stat.zol.com.cn/adrs/iparea.php',
         pvtest: '//impa.zol.com.cn/?t={time}&event={event}&ip_ck={ipck}&url={url}',

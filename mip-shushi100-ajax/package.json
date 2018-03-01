@@ -1,0 +1,14 @@
+{
+    "name": "mip-shushi100-ajax",
+    "version": "1.0.0",
+    "description": "http://www.shushi100.com;提交自定义json参数到指定服务地址",
+    "contributors": [
+        {
+            "name": "engineer_van",
+            "email": "engineer_van@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
