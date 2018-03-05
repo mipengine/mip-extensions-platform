@@ -1,6 +1,6 @@
 {
     "name": "mip-cambrian",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "description": "寒武纪组件",
     "contributors": [
         {
@@ -13,6 +13,6 @@
         }
     ],
     "engines": {
-        "mip": ">=1.1.0"
+        "mip": ">=1.1.1"
     }
 }

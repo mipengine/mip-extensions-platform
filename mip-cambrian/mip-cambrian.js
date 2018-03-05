@@ -1,8 +1,9 @@
 /**
  * @file mip-cambrian 寒武纪组件
+ *
  * @author liulangyu huangjing02
  * @date 2017-04-20
- * @version 1.1.0
+ * @version 1.1.1
  */
 
 define(function (require) {
@@ -13,11 +14,17 @@ define(function (require) {
 
     // viewer 窗口
     var viewer = require('viewer');
+    // 是否已经使用过，在一个page内组件只允许调用一次
+    var ifBuild = false;
 
     /**
      * 构造元素，只会运行一次
      */
     customElement.prototype.build = function () {
+        // 组件只允许调用一次
+        if (ifBuild) {
+            return;
+        }
 
         // 获取script标签里的内容
         var el = $('[type$=json]');
@@ -33,8 +40,26 @@ define(function (require) {
                 config = {};
             }
         }
+
+
         var id = this.element.getAttribute('site-id');
-        id && viewer.sendMessage('cambrian-header', {id: id, title: config.title, images: config.images});
+
+        if (id) {
+            // 获取页面描述
+            var description = $('meta[name=description]').attr('content');
+
+            ifBuild = true;
+
+            viewer.sendMessage(
+                'cambrian-header',
+                {
+                    id: id,
+                    title: config.title || document.title,
+                    images: config.images,
+                    description: config.description || description
+                }
+            );
+        }
     };
 
     return customElement;
