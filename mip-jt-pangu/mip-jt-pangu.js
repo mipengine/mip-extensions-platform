@@ -146,7 +146,7 @@ define(function (require) {
         var vlstatAction = 'index.php';
         p = 'cookieId=' + vlstatCookieId + '&cngoldId=' + cngoldId + '&ua='
 			+ vlstatUA + '&ip=' + vlstatIPAddress + '&refurl='
-			+ vlstatREFURL + '&url=' + vlstatURL + '&screenX=' + vlstatScreenX
+			+ vlstatREFURL + '&url=' + handelUrl(vlstatURL) + '&screenX=' + vlstatScreenX
 			+ '&screenY=' + vlstatScreenY
 			+ '&os=' + vlstatOS + '&brower=' + vlstatBrower + '&browerLang='
 			+ vlstatBrowerLanguage
@@ -194,7 +194,7 @@ define(function (require) {
     }
 
     function myUnloadHandler() {
-        var url = 'https://tj.zpath888.cn/ma.gif?cookieId=' + panguUv + '&type=1&url=' + encodeURIComponent(document.URL);
+        var url = 'https://tj.zpath888.cn/ma.gif?cookieId=' + panguUv + '&type=1&url=' + handelUrl(encodeURIComponent(document.URL));
         var img = new Image(1, 1);
         img.src = url;
     }
@@ -210,6 +210,12 @@ define(function (require) {
             }
         }
         return flag;
+    }
+    function handelUrl(url) {
+        url = url.indexOf('mip.cngold.org') > 0 ? 'https://' + url.substring(url.indexOf('mip.cngold.org')) : url;
+        url = url.indexOf('#') > 0 ? url.substring(0, url.indexOf('#')) + '/' : url;
+        url = url.indexOf('?') > 0 ? url.substring(0, url.indexOf('?')) : url;
+        return url;
     }
 	// 元素插入到文档时执行，仅会执行一次，用于解析_maq配置
     customElem.prototype.build = function () {

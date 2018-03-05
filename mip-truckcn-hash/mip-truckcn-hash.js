@@ -18,6 +18,7 @@ define(function (require) {
                 case 'name':
                     if (name) {
                         name = (name.split('*', 1));
+                        name = decodeURIComponent(name);
                         name = '<div class="name">' + name + '：</div>';
                     }
                     else if (tel) {
@@ -61,6 +62,7 @@ define(function (require) {
                 case 'text':
                     if (text) {
                         text = (text.split('*', 1));
+                        text = decodeURIComponent(text);
                     }
                     else {
                         text = element.getAttribute('default-text');

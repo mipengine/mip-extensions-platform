@@ -61,7 +61,7 @@ define(function (require) {
     }
 
     var TYPE = 'script[type="application/json"]';
-    var regPhone = /^1[3|4|5|7|8]\d{9}$/;
+    var regPhone = /^1[3|4|5|6|7|8|9]\d{9}$/;
 
     function jsonParse(json) {
         try {

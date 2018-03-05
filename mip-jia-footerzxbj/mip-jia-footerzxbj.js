@@ -333,7 +333,7 @@ define(function (require) {
                 $this.find('.zxbj-submit-btn').on('click', function () {
                     var area = $this.find('input[name=area]').val();
                     var mobile = $this.find('input[name=zxbjMobile]').val();
-                    var re = /^1[3|4|5|7|8]\d{9}$/;
+                    var re = /^1[3|4|5|6|7|8|9]\d{9}$/;
                     if (!zxbjPage.method.isPositiveNum(area)) {
                         tipMask('请输入正确的面积');
                     }
