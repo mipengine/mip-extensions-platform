@@ -15,17 +15,25 @@ define(function (require) {
     customElement.prototype.firstInviewCallback = function () {
         // 获取mip-cy-ad元素
         var $ele = $(this.element);
+        var clinicNo = $ele.attr('clinic-no');
+        var url = '/ad/get_ad_info/?ad_pos=seo_mip_qa_top_banner';
+        if (clinicNo) {
+            url = url + '&clinic_info=' + clinicNo;
+        }
+
         // 从春雨后台获取广告信息
         $.ajax({
-            url: '/ad/get_ad_info/?ad_pos=seo_mip_qa_top_banner',
+            url: url,
             success: function (res) {
                 var ad = res.ad_list && res.ad_list[0];
-                if (res.success && ad) {
+                if (res.success && ad && ad.title && ad.share_info && ad.share_info.url) {
                     var html = [
-                        '<div class="mip-cy-ad">',
-                        '  <a href="' + ad.ad_url + '">',
-                        '    <span class="ad-tag">广告</span>',
-                        '    <img class="ad-img" src="' + ad.image_url + '" >',
+                        '<div style="background-image:url('
+                            + ad.image_url + ');" class="mip-cy-ad">',
+                        '  <a class="doc" href="' + ad.ad_url + '">',
+                        '    <mip-img class="doc-img" width="38" height="38"',
+                        '        src="' + ad.share_info.url + '"></mip-img>',
+                        '    <div class="doc-info">' + ad.title + '</div>',
                         '  </a>',
                         '  <button class="ad-close">关闭</button>',
                         '</div>'
