@@ -1,0 +1,14 @@
+{
+    "name": "mip-jqtab-change",
+    "version": "1.0.0",
+    "description": "使用jqeury的tab切换",
+    "contributors": [
+        {
+            "name": "xujun",
+            "email": "3161390272@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
