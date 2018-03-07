@@ -134,7 +134,7 @@ define(function (require) {
         var vlstatIPAddress = document.localName;
         vlstatIPAddress = !vlstatIPAddress ? '' : vlstatIPAddress;
         var vlstatREFURL = encodeURIComponent(document.referrer);
-        var vlstatURL = encodeURIComponent(document.URL);
+        var vlstatURL = document.URL;
         var vlstatScreenX = screen.width;
         var vlstatScreenY = screen.height;
         var vlstatOS = getPlatform();
@@ -180,7 +180,7 @@ define(function (require) {
         }
         var p = vlstatInitLE(cookieId, null, null, null, null);
         var img = new Image(1, 1);
-        img.src = 'https://tj.zpath8888.cn/ma.gif?' + p + '&type=0';
+        img.src = 'https://tj.zpath.cn/ma.gif?' + p + '&type=0';
     }
 
     function loadQuit() {
@@ -194,7 +194,7 @@ define(function (require) {
     }
 
     function myUnloadHandler() {
-        var url = 'https://tj.zpath888.cn/ma.gif?cookieId=' + panguUv + '&type=1&url=' + handelUrl(encodeURIComponent(document.URL));
+        var url = 'https://tj.zpath.cn/ma.gif?cookieId=' + panguUv + '&type=1&url=' + handelUrl(document.URL);
         var img = new Image(1, 1);
         img.src = url;
     }
@@ -213,9 +213,9 @@ define(function (require) {
     }
     function handelUrl(url) {
         url = url.indexOf('mip.cngold.org') > 0 ? 'https://' + url.substring(url.indexOf('mip.cngold.org')) : url;
-        url = url.indexOf('#') > 0 ? url.substring(0, url.indexOf('#')) + '/' : url;
+        url = url.indexOf('#') > 0 ? url.substring(0, url.indexOf('#')) : url;
         url = url.indexOf('?') > 0 ? url.substring(0, url.indexOf('?')) : url;
-        return url;
+        return encodeURIComponent(url);
     }
 	// 元素插入到文档时执行，仅会执行一次，用于解析_maq配置
     customElem.prototype.build = function () {

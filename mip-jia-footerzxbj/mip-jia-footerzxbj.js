@@ -221,7 +221,7 @@ define(function (require) {
                 str += '</ul>';
                 str += '<div class="apply-input">';
                 str += '<input type="tel" name="zxbjMobile" maxlength="11" bdsl-key="phone"';
-                str += ' bdsl-required="^1[3|4|5|7|8]\\d{9}$"';
+                str += ' bdsl-required="^1[3|4|5|6|7|8|9]\\d{9}$"';
                 str += ' bdsl-name-articlezx="" placeholder="输入手机号，短信接收详细报价清单" /></div>';
                 str += '<div class="apply-button"><a href="javascript:;" class="zxbj-submit-btn"';
                 str += ' bdsl-extra="{id:10001}" bdsl-submit="articleZx">立即计算</a></div>';

@@ -111,7 +111,7 @@ define(function (require) {
         var params = JSON.parse(ele.dataset['requestParams'].replace(/'/g, '"'));
         // console.log(params)
         var type = parseInt(params['order-typ'], 10);
-        var regPhone = /^1[3|4|5|7|8]\d{9}$/;
+        var regPhone = /^1[3|4|5|6|7|8|9]\d{9}$/;
 
         // 加载不同的弹层
         if (!!type) {

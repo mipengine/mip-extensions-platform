@@ -56,7 +56,7 @@ define(function (require) {
                     tipMask(result);
                 }
                 $('[emptyvalue="true"]').each(function () {
-                    if (/^1[3|4|5|7|8]\d{9}$/.test($(this).val())) {
+                    if (/^1[3|4|5|6|7|8|9]\d{9}$/.test($(this).val())) {
                         $(this).val('');
                     }
                 });
@@ -297,7 +297,7 @@ define(function (require) {
                 }
             }
             // 手机号加密
-            if (/^1[3|4|5|7|8]\d{9}$/.test(params[key])) {
+            if (/^1[3|4|5|6|7|8|9]\d{9}$/.test(params[key])) {
                 params[key] = mobileEncrypt(params[key], params.encrypt || 'zx');
             }
         }

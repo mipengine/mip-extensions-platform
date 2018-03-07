@@ -185,7 +185,7 @@ define(function (require) {
             '            <div class="input-box">',
             '                <input type="tel" class="form-input" maxlength="11"',
             ' placeholder="输入手机号，限领一次" bdsl-key="phone" bdsl-name-articleHbBottom=""',
-            ' bdsl-required="^1[3|4|5|7|8]\\d{9}$" />',
+            ' bdsl-required="^1[3|4|5|6|7|8|9]\\d{9}$" />',
             '            </div>',
             '        </div>',
             '        <div class="circle-wrap"><div class="circle-box"></div></div>',
