@@ -1,0 +1,15 @@
+{
+    "name": "mip-xilu-ad",
+    "version": "1.0.0",
+    "description": "第三方广告：淘宝",
+    "contributors": [
+        {
+            "name": "xiezhengyong",
+			"email": "xiezhengyong_java@163.com",
+			"url": "http://www.xilu.com/"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
