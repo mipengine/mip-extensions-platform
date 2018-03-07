@@ -1,0 +1,14 @@
+{
+    "name": "mip-mipengine-preview-v3",
+    "version": "1.0.0",
+    "description": "MIP 页面 `iframe` 嵌入式预览组件，包括切换浏览模式、打开、关闭、处理嵌入页面的跳转（不让以上级窗口跳转）。",
+    "contributors": [
+        {
+            "name": "xuexb",
+            "email": "fe.xiaowu@gmail.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
