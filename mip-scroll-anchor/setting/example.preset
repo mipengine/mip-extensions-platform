@@ -1,0 +1,21 @@
+<style>
+p {
+    line-height: 100px;
+}
+ul {
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: #fff;
+    list-style: none;
+}
+a {
+    display: block;
+    line-height: 20px;
+    padding: 0 10px;
+}
+.current {
+    background-color: #09f;
+    color: #fff;
+}
+</style>
