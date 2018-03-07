@@ -7,8 +7,9 @@ mip-cook-voicerecipe {
     position: fixed !important;
     height: 0;
     left: -10000px;
-    bottom: 0;
-    right: 0;
+    bottom: -1px;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
 
     .mip-cook-voicerecipe-tips {
         position: absolute;
@@ -62,6 +63,20 @@ mip-cook-voicerecipe {
             border-radius: 3px;
             box-sizing: content-box;
         }
+    }
+
+    .mip-cook-voicerecipe-ios-appear {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+        visibility: visible;
+        transition: transform 240ms ease-in-out;
+    }
+
+    .mip-cook-voicerecipe-ios-disappear {
+        -webkit-transform: translate3d(0, 100%, 0);
+        transform: translate3d(0, 100%, 0);
+        visibility: hidden;
+        transition: transform 0ms;
     }
 
     .mip-cook-voicerecipe-dialog {

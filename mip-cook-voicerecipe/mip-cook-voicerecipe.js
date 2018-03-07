@@ -69,6 +69,54 @@ define(function (require) {
         }).start();
     }
 
+    function hackIosFixed(element) {
+
+        var wrapper = element.find('.mip-cook-voicerecipe-wrapper');
+        var scrolling = false;
+        var timer = null;
+        var showTimer = null;
+
+        var hackShow = function () {
+            // 慢速滚动时防抖
+            showTimer = setTimeout(function () {
+                if (!scrolling) {
+                    wrapper
+                        .removeClass('mip-cook-voicerecipe-ios-disappear')
+                        .addClass('mip-cook-voicerecipe-ios-appear');
+                }
+            }, 250);
+        };
+
+        $(document.body)
+            .on('scroll', function (e) {
+
+                if (!scrolling) {
+                    wrapper
+                        .removeClass('mip-cook-voicerecipe-ios-appear')
+                        .addClass('mip-cook-voicerecipe-ios-disappear');
+                    scrolling = true;
+                }
+
+                if (showTimer) {
+                    clearTimeout(showTimer);
+                    showTimer = null;
+                }
+
+                if (timer) {
+                    clearTimeout(timer);
+                    timer = null;
+                }
+
+                timer = setTimeout(function () {
+                    if (scrolling) {
+                        hackShow();
+                        scrolling = false;
+                    }
+                    timer = null;
+                }, 2500);
+            });
+    }
+
     /**
      * tips 相关
      *
@@ -137,18 +185,19 @@ define(function (require) {
         element.on('click', '[data-action=start]', function () {
             var pageUrl = util.parseCacheUrl(location.href);
             pageUrl = pageUrl.replace(/\#.*?$/, '');
-            pageUrl = pageUrl.replace(/\&rqid\=\d*$/, '');
+            pageUrl = pageUrl.replace(/\&rqid\=\d{19}/, '');
             var url = 'https://m.baidu.com/sf?pd=life_cookbook&openapi=1&dspName=iphone&from_sf=1&resource_id=4669&word='
                 + encodeURIComponent(pageUrl) + '&title=菜谱语音助手&ms=1';
 
             // iframe 内部跳转需要使用特殊处理
-            // 否则只是在 iframe 里面跳
+            // 否则只是在iframe里面跳
             window.top.location.href = url;
         });
 
         element.css({
             left: '0px',
-            height: '59px'
+            height: '59px',
+            width: '100%'
         });
 
         var store = Storage.get();
@@ -158,6 +207,10 @@ define(function (require) {
             Storage.set({
                 visited: true
             });
+        }
+
+        if (platform.isIos() && parseInt(platform.getOsVersion(), 10) >= 11) {
+            hackIosFixed(element);
         }
     };
 

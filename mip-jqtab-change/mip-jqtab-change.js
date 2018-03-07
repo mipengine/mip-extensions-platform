@@ -15,7 +15,7 @@ define(function (require) {
     customElement.prototype.firstInviewCallback = function () {
         // TODO
         var ele = this.element;
-        var str1 = ele.getAttribute('lName');
+        var str1 = ele.getAttribute('lname');
         var id = ele.getAttribute('target');
         var $p = $('#' + id);
         $(ele).on('click', str1, function () {
