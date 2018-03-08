@@ -127,7 +127,7 @@ define(function (require) {
         var url = '//ivy.pconline.com.cn/show?id=' + loc + '&media=html&mip';
         var testUrl = '//jwz.3conline.com/adpuba/baby_default_show?id=pckids.mip.test15.&media=js&channel=dynamic&mip';
         ajax(url, setLocationAd);
-        ajax(testUrl);
+        ajax(testUrl, setLocationAd);
     };
     return customElement;
 });
