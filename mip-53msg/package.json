@@ -1,0 +1,14 @@
+{
+    "name": "mip-53msg",
+    "version": "1.0.0",
+    "description": "用来进行提交留言的小组件",
+    "contributors": [
+        {
+            "name": "LaoWang",
+            "email": "891995590@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
