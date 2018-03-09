@@ -29,6 +29,7 @@ define(function (require) {
             });
             function response(result) {
                 var html = '';
+                console.log(result);
                 $.each(result, function (i, o) {
                     if (i % 2 === 0) {
                         html += '<div class="mainDetailModel lf">';
@@ -49,6 +50,7 @@ define(function (require) {
                     html += o.tag_pinyin;
                     html += '.html">[详情]</a></p></div>';
                 });
+                console.log(html);
                 $('#' + target).html(html);
             }
         });

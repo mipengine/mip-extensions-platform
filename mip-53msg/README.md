@@ -11,13 +11,16 @@ mip-53msg 用于提交联系方式的组件
 ## 示例
 
 ### 基本用法
+
 ```html
-<mip-53msg vid="txts333" sid="sub" tid="123">
-    <input type="text" id="txts333" value ="" />
-    <input type="submit" value="立即获取资料" id="sub" />
+<mip-53msg popContact="Mcontact" popTel="Mtel" popInfo="Minfo" popButton="Mbutton" projectId="123">
+	<input type="text" id="Mcontact" value="" />    
+    <input type="text" id="Mtel" value="" />
+   
+    <input type="text" id="Minfo" value="" />
+    <input type="button" id="Mbutton" value="立即提交" />
 </mip-53msg>
 ```
-
 ## 属性
 
 ### {属性名}
