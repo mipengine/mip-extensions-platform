@@ -25,11 +25,11 @@ define(function (require) {
                 type: type
             };
             $.post(url, data, function (result) {
-                response($.parseHTML(result));
+                response(result);
             });
             function response(result) {
                 var html = '';
-                $(result).each(function (i, o) {
+                $.each(result, function (i, o) {
                     if (i % 2 === 0) {
                         html += '<div class="mainDetailModel lf">';
                     } else {
