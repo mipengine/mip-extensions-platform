@@ -25,28 +25,7 @@ define(function (require) {
                 type: type
             };
             $.post(url, data, function (result) {
-                // var html = '';
-                // $(result).each(function (i, o) {
-                //     if (i % 2 === 0) {
-                //         html += '<div class="mainDetailModel lf">';
-                //     } else {
-                //         html += '<div class="mainDetailModel rt">';
-                //     }
-                //     html += '<div class="mainDetailPic"><a href="/special/';
-                //     html += o.tag_pinyin;
-                //     html += '.html"><img src="http://www.aidigong.com/uploadfile/';
-                //     html += o.path;
-                //     html += '" alt=""></a></div>';
-                //     html += '<p class="mainDetailTitle">';
-                //     html += o.name;
-                //     html += '</p>';
-                //     html += '<p class="mainDetailText">';
-                //     html += o.seo_describe;
-                //     html += '<a href="/special/';
-                //     html += o.tag_pinyin;
-                //     html += '.html">[详情]</a></p></div>';
-                // });
-                response(result);
+                response($.parseHTML(result));
             });
             function response(result) {
                 var html = '';
