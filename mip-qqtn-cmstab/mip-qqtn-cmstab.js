@@ -3,6 +3,7 @@
  * ==========经线上测试，firstinviewcallback无法满足效果，必须使用build，请通过=======
  * 用于给选项卡里边的内容增加点击加载内容，每个选项卡对应不同的接口，接口id和接口地址通过模版获取，接口网址为https.,
  * 1.0.1 补充文字。
+ * 1.0.2 修改结构,将加载的A标签地址换成mip页面路径
  * @author
  */
 define(function (require) {
@@ -29,11 +30,12 @@ define(function (require) {
                     var data = (new Function('', 'return' + data))();
                     for (var o = 0; o < data.Title.length; ++o) {
                         html += '<li>';
-                        html += '<a href="/c/' + data.Id[o] + '">' + data.Title[o] + '</a>';
+                        html += '<a data-type="mip" href="/mipc/' + data.Id[o] + '.html">' + data.Title[o] + '</a>';
                         var date0 = data.DateAndTime[o].replace(/\//ig, '-');
                         var date = date0.substring(0, data.DateAndTime[o].lastIndexOf(' '));
-                        html += '<span>' + date + '</span>';
-                        html += '</li>';
+                        html += '<div class="listInfo"><p class="cl"><span>' + date + '</span><span>';
+                        html += '<a data-type="mip" href="/mipc/' + data.Id[o] + '.html" class="m-t2">';
+                        html += '查看全部</a></span></p></div></li>';
                     }
                     $(ele).find('#tab-div ul').eq(tabnum).append(html);
                     $(ele).find('#more').html('\u70b9\u51fb\u67e5\u770b\u66f4\u591a\u002e\u002e\u002e');

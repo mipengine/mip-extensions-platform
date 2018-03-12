@@ -26,14 +26,22 @@ define(function (require) {
             url: url,
             success: function (res) {
                 var ad = res.ad_list && res.ad_list[0];
-                if (res.success && ad && ad.title && ad.share_info && ad.share_info.url) {
+                var docHtml = [];
+                if (res.success && ad && ad.ad_url
+                    && (ad.image_url || ad.title && ad.share_info && ad.share_info.url)) {
+                    if (ad.title && ad.share_info && ad.share_info.url) {
+                        docHtml = [
+                            '    <mip-img class="doc-img" width="38" height="38"',
+                            '        src="' + ad.share_info.url + '"></mip-img>',
+                            '    <div class="doc-info">' + ad.title + '</div>'
+                        ];
+                    }
                     var html = [
-                        '<div style="background-image:url('
-                            + ad.image_url + ');" class="mip-cy-ad">',
-                        '  <a class="doc" href="' + ad.ad_url + '">',
-                        '    <mip-img class="doc-img" width="38" height="38"',
-                        '        src="' + ad.share_info.url + '"></mip-img>',
-                        '    <div class="doc-info">' + ad.title + '</div>',
+                        '<div class="mip-cy-ad">',
+                        '  <a class="doc" style="background-image:',
+                        '    url(' + ad.image_url + ');"',
+                        '    href="' + ad.ad_url + '">',
+                        docHtml.join(''),
                         '  </a>',
                         '  <button class="ad-close">关闭</button>',
                         '</div>'
@@ -45,6 +53,7 @@ define(function (require) {
                         $ele.remove();
                     });
                 }
+
             },
             error: function (xhr, errorType, error) {
                 // 出错关闭广告位置
