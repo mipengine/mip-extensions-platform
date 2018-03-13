@@ -9,6 +9,7 @@ define(function (require) {
     var platform = util.platform;
     var customElement = require('customElement').create();
     var fetchJsonp = require('fetch-jsonp');
+    // build说明：适配组件，在首屏展示，需要尽快加载
     customElement.prototype.build = function () {
         var ele = this.element;
         var pageInfo = {
@@ -28,6 +29,7 @@ define(function (require) {
         }).then(function (res) {
             return res.json();
         }).then(function (data) {
+
             var iossopurl = data['iossp-url'];
             var iosclassid = data['ios-classid'];
             var datawebUrl = data.webUrl;
@@ -44,6 +46,12 @@ define(function (require) {
             var nodownsize = data.nodownsize;
             var notagsurl = data.swnotagurl;
             var incity = data.ipInfo.city;
+            var intDownUrl = data.mgDownUrl;
+
+            if (data.mgUrlOpen === true) {
+                mgUrlReplace(intDownUrl, data.mgUrlReplace, data['eject-city'], incity);
+            }
+
             if (ifSwbOk === 'true') {
                 ifSwb(data['f-noAdf-hide']); // 判断商务包
             }
@@ -69,7 +77,6 @@ define(function (require) {
                 adaptation(iossopurl, iosclassid, datawebUrl, azspurl, androidclassid, dataIpok, datahzUrl, dataOpen); // 设备适配
             }
 
-            mgcFilterOk = 'true';
             if (mgcFilterOk === 'true') {
                 mgcFilter(data['f-mg-gl'], data.replaceHtml, data['eject-city'], incity); // 敏感词过滤
             }
@@ -233,7 +240,7 @@ define(function (require) {
             for (q = 0; q < forNum; q++) {
                 if (titleHtml.indexOf(mgcHtml[q]) !== -1) {
                     $('title').html(dataReplaceHtml[0]);
-                    $(ele).find('.f-game-h1').html(dataReplaceHtml[1]);
+                    $(ele).find('.f-game-h1').html('<i></i>' + dataReplaceHtml[1]);
                     $(ele).find('.f-game-img').each(function () {
                         $(ele).find(this).find('img').attr('src', dataReplaceHtml[2]);
                     });
@@ -243,6 +250,7 @@ define(function (require) {
                     var koCity = dataEjectCity;
                     if ($.inArray(city, koCity) !== -1) { // 在指定城市
                         $(ele).find('.f-downbtn-url').each(function () {
+
                             $(ele).find(this).find('a').attr('href', dataReplaceHtml[5]);
                         });
                     }
@@ -263,6 +271,44 @@ define(function (require) {
                     });
                 }
 
+            }
+        }
+
+        function mgUrlReplace(url, dataReplaceHtml, cityall, incity) {
+            var city = incity;
+            var koCity = cityall;
+            if ($.inArray(city, koCity) !== -1) { // 在指定城市
+                for (var i = 0; i < url.length; i++) {
+                    if (downUrl === url[i]) {
+                        $('title').html(dataReplaceHtml[0]);
+                        $(ele).find('.f-game-h1').html('<i></i>' + dataReplaceHtml[1]);
+                        $(ele).find('.f-game-img').each(function () {
+                            $(ele).find(this).find('img').attr('src', dataReplaceHtml[2]);
+                        });
+                        $(ele).find('.f-previmg-cont').html(dataReplaceHtml[3]);
+                        $(ele).find('.f-maincms-cont').html(dataReplaceHtml[4]);
+
+                        $(ele).find('.f-downbtn-url').each(function () {
+                            $(ele).find(this).find('a').attr('href', dataReplaceHtml[5]);
+                        });
+
+                        var replaceHtmlSize = Math.ceil(dataReplaceHtml.length);
+                        if (replaceHtmlSize > 6) {
+                            var numb = 6;
+                            for (numb = 6; numb < replaceHtmlSize; numb++) {
+                                $(ele).find('.f-replace-html' + numb).html(dataReplaceHtml[numb]);
+                            }
+                        }
+
+                        $(ele).find('.f-hide-box').each(function () {
+                            $(this).hide();
+                        });
+                        $(ele).find('.f-remove-box').each(function () {
+                            $(this).remove();
+                        });
+                    }
+
+                }
             }
         }
     };
