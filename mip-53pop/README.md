@@ -1,6 +1,6 @@
 # mip-53pop
 
-mip-53pop 组件说明
+mip-53pop 一款弹出功能小组件
 
 标题|内容
 ----|----
@@ -19,20 +19,11 @@ mip-53pop 组件说明
 <mip-53pop   id="my-53pop"
     layout="nodisplay"
     class="mip-hidden"  divId = "lightbox" popContact="Mcontact" popTel="Mtel" popInfo="Minfo" popButton="Mbutton" projectId="123">
-    <div class="lightbox" id="lightbox">
-        
+    <div class="lightbox" id="lightbox">       
        <input type="text" id="Mcontact" value="" />
-        
-      
-       <input type="text" id="Mtel" value="" />
-       
+       <input type="text" id="Mtel" value="" />       
        <input type="text" id="Minfo" value="" />
-       
-       
-       <input type="button" id="Mbutton" value="立即提交" />
-       
-        
-         
+       <input type="button" id="Mbutton" value="立即提交" />     
     </div>
 </mip-53pop>
  
@@ -40,14 +31,9 @@ mip-53pop 组件说明
 
 ## 属性
 
-### {属性名}
+### mip-53pop
 
-说明：{说明}
-必选项：{是|否}
-类型：{类型}
-取值范围：{取值范围}
-单位：{单位}
-默认值：{默认值}
+说明：一款弹出功能小组件
+必选项：否
 
-## 注意事项
 
