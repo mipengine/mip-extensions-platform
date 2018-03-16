@@ -43,6 +43,8 @@ define(function (require) {
             var popButton = this.element.getAttribute('popButton');
             var projectId = this.element.getAttribute('projectId');
             var popId = this.element.getAttribute('id');
+            //  获取当前宽高比例
+            var popWidth = this.element.getAttribute('Dwidth');
             // 获取当前的属性值
             var projectIdValue = '';
             // 获取联系方式的属性值
@@ -51,13 +53,11 @@ define(function (require) {
             var popContactValue = '';
             // 获取留言内容的属性值
             var popInfoValue = '';
-            // 获取弹出层盒子高度
-            var boxH = (($(window).height() - $('#' + divId + '').height()) / 2);
             // bottom 不能为0，不然会覆盖遮盖曾，导致无法关闭lightbox
             util.css(self.element, {
                 'position': 'fixed',
                 'z-index': 10001,
-                'top': boxH,
+                'top': (($(window).height() - $(window).width() * popWidth) / 2),
                 'right': 0,
                 'left': 0,
                 'transition': 'opacity 0.1s ease-in'
@@ -79,10 +79,10 @@ define(function (require) {
                 var reTel = /^1\d{10}$/;
                 var reg = /^0\d{2,3}-\d{7,8}(-\d{1,6})?$/;
                 // 判断名字是否为空
-                if (popContact !== ' ') {
-                    if ($.trim($('#' + popContact + ' ').val()) === ' ') {
-                        $('#' + popContact + ' ').attr('placeholder', '请输入你的姓名');
-                        $('#' + popContact + ' ').css('border-color', '#FF0000');
+                if (popContact !== '') {
+                    if ($.trim($('#' + popContact + '').val()) === '') {
+                        $('#' + popContact + '').attr('placeholder', '请输入你的姓名');
+                        $('#' + popContact + '').css('border-color', '#FF0000');
                     }
                 else {
                         $('#' + popContact + ' ').css('border-color', '#d2d2d2');
@@ -129,10 +129,8 @@ define(function (require) {
                             alert(data);
                             $('#' + popTel + '').val('');
                             $('#' + popId + '').toggle();
-                            $('#MIP-53POP-MASK').toggle();
-                            if ($('#MIP-53POP-MASK').css('display') === 'none') {
-                                self.open = false;
-                            }
+                            $('.MIP-53POP-MASK').css('display', 'none');
+                            self.open = false;
                         } else {
                             alert('留言失败');
                         }
@@ -267,6 +265,7 @@ define(function (require) {
             if (!self.maskElement) {
                 const mask = document.createElement('div');
                 mask.id = 'MIP-53POP-MASK';
+                mask.className = 'MIP-53POP-MASK';
                 mask.setAttribute('on', 'tap:' + self.id + '.close');
                 mask.style.display = 'block';
 
@@ -299,7 +298,6 @@ define(function (require) {
          * 初始化
          *
          */
-    customElement.prototype.build = render;
     customElement.prototype.detachedCallback = function () {
         clearInterval(this.interval);
         document.documentElement.classList.remove('mip-no-scroll');

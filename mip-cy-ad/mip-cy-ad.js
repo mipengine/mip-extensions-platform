@@ -15,51 +15,42 @@ define(function (require) {
     customElement.prototype.firstInviewCallback = function () {
         // 获取mip-cy-ad元素
         var $ele = $(this.element);
-        var clinicNo = $ele.attr('clinic-no');
-        var url = '/ad/get_ad_info/?ad_pos=seo_mip_qa_top_banner';
-        if (clinicNo) {
-            url = url + '&clinic_info=' + clinicNo;
-        }
+        var url = $ele.attr('url');
+        var docImage = $ele.attr('doc-image');
+        var docInfo = $ele.attr('doc-info');
+        var bgUrl = $ele.attr('bg-url');
+        var html = '';
+        var docHtml = '';
 
-        // 从春雨后台获取广告信息
-        $.ajax({
-            url: url,
-            success: function (res) {
-                var ad = res.ad_list && res.ad_list[0];
-                var docHtml = [];
-                if (res.success && ad && ad.ad_url
-                    && (ad.image_url || ad.title && ad.share_info && ad.share_info.url)) {
-                    if (ad.title && ad.share_info && ad.share_info.url) {
-                        docHtml = [
-                            '    <mip-img class="doc-img" width="38" height="38"',
-                            '        src="' + ad.share_info.url + '"></mip-img>',
-                            '    <div class="doc-info">' + ad.title + '</div>'
-                        ];
-                    }
-                    var html = [
-                        '<div class="mip-cy-ad">',
-                        '  <a class="doc" style="background-image:',
-                        '    url(' + ad.image_url + ');"',
-                        '    href="' + ad.ad_url + '">',
-                        docHtml.join(''),
-                        '  </a>',
-                        '  <button class="ad-close">关闭</button>',
-                        '</div>'
-                    ].join('');
-                    $ele.append(html);
-                    // 添加关闭公告事件
-                    $('button', $ele).on('click', function () {
-                        // 关闭广告位置
-                        $ele.remove();
-                    });
-                }
-
-            },
-            error: function (xhr, errorType, error) {
-                // 出错关闭广告位置
+        if (docImage && docInfo) {
+            docHtml = [
+                '    <mip-img class="doc-img" width="38" height="38"',
+                '        src="' + docImage + '"></mip-img>',
+                '    <div class="doc-info">' + docInfo + '</div>'
+            ].join('');
+        };
+        if (url && (docHtml || bgUrl)) {
+            html = [
+                '<div class="mip-cy-ad">',
+                '  <a class="doc" style="background-image:',
+                '    url(' + bgUrl + ');"',
+                '    href="' + url + '">',
+                docHtml,
+                '  </a>',
+                '  <button class="ad-close">关闭</button>',
+                '</div>'
+            ].join('');
+        };
+        if (html) {
+            $ele.append(html);
+            // 添加关闭公告事件
+            $('button', $ele).on('click', function () {
+                // 关闭广告位置
                 $ele.remove();
-            }
-        });
+            });
+        } else {
+            $ele.remove();
+        }
     };
 
     return customElement;

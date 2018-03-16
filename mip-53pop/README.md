@@ -13,12 +13,12 @@ mip-53pop 一款弹出功能小组件
 ### 基本用法
 ```html
 <button on="tap:my-53pop.toggle" id="btn-open" role="button" tabindex="0">
-    Open lightbox
+    sOpen lightbox
 </button>
 
 <mip-53pop   id="my-53pop"
     layout="nodisplay"
-    class="mip-hidden"  divId = "lightbox" popContact="Mcontact" popTel="Mtel" popInfo="Minfo" popButton="Mbutton" projectId="123">
+    class="mip-hidden"  Dwidth= '0.53'  divId = "lightbox" popContact="Mcontact" popTel="Mtel" popInfo="Minfo" popButton="Mbutton" projectId="123">
     <div class="lightbox" id="lightbox">       
        <input type="text" id="Mcontact" value="" />
        <input type="text" id="Mtel" value="" />       

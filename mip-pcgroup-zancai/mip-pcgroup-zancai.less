@@ -1,0 +1,64 @@
+/**
+ * @file mip-pcgroup-zancai样式文件
+ */
+
+mip-pcgroup-zancai {
+
+    .art-tools {
+        margin: 0 .3rem;
+        text-align: center;
+        padding: 10px 0 0;
+    }
+
+    .art-tools i {
+        font-style: normal;
+    }
+
+    .art-tools .sup-tip {
+        width: 100%;
+        height: 20px;
+        line-height: 20px;
+        text-align: center;
+        color: #777;
+    }
+
+    .art-tools .against,
+    .art-tools .agree {
+        width: 80px;
+        display: inline-block;
+        position: relative
+    }
+
+    .art-tools .agree {
+        margin-right: 20px;
+    }
+
+    .art-tools .against p,
+    .art-tools .agree p {
+        line-height: 35px
+    }
+
+    .art-tools .agree::before {
+        height: 75px;
+        width: 75px;
+        margin: 0 auto;
+        background-position: 0 0;
+        content: ' ';
+        display: block;
+        opacity: .9
+    }
+    .art-tools .against::before {
+        height: 75px;
+        width: 75px;
+        margin: 0 auto;
+        background-position: -78px 0;
+        content: ' ';
+        display: block;
+        opacity: .9
+    }
+    .against::before,
+    .agree::before {
+        background: url('//www1.pconline.com.cn/wap/2016/index/images/bipbg.png') no-repeat;
+        background-size: 153px 75px;
+    }
+}
