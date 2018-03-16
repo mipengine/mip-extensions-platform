@@ -1,0 +1,14 @@
+{
+    "name": "mip-pcgroup-pconline-artproduct",
+    "version": "1.0.0",
+    "description": "太平洋网络电脑网wap文章页产品库模块组件",
+    "contributors": [
+        {
+            "name": "xuhuanlin",
+            "email": "xuhuanlin@pconline.com.cn"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
