@@ -52,7 +52,7 @@ define(function (require) {
         }
 
         function updateSubStatus(keyId, type, name, status) {
-            if (openId === 'true') {
+            if (openId === 'null') {
                 getCode(filepath);
                 return false;
             }

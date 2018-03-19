@@ -72,7 +72,7 @@ define(function (require) {
         });
 
         function updateSubStatus(keyId, type, name, status) {
-            if (openId === 'true') {
+            if (openId === 'null') {
                 getCode(filepath);
                 return false;
             }
@@ -107,7 +107,6 @@ define(function (require) {
             + 'xQmDDOrkl5nGPsDswxZesNot9gM2Ar8k&redirect_uri=' + encodeURIComponent(url)
             + '&scope=snsapi_userinfo&state=state';
         }
-
 
         checkCookie();
         sub === 'true' ? $(element).addClass('active').html('已订阅') : $(element).addClass('before');
