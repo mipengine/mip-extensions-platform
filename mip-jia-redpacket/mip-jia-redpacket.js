@@ -309,12 +309,21 @@ define(function (require) {
             var domHeight = viewport.getScrollHeight();
             // 视口高度
             var viewHei = viewport.getHeight();
-            // 滚动超过一屏
-            if (scrollTop > domHeight * .2 && scrollTop < domHeight * .65) {
-                $(ele).parent().addClass('hide');
-            }
-            else {
-                $(ele).parent().removeClass('hide');
+            if ($(ele.scrollClass).length > 0) {
+                var eleTop = $('.related-reading').offset().top;
+                if (scrollTop > 10 && eleTop > viewHei / 2) {
+                    $(ele.class).parent().addClass('hide');
+                }
+                else {
+                    $(ele.class).parent().removeClass('hide');
+                }
+
+                if (eleTop <= viewHei / 2) {
+                    $(ele.class).parent().addClass('shake');
+                }
+                else {
+                    $(ele.class).parent().removeClass('shake');
+                }
             }
         });
     };
@@ -335,7 +344,7 @@ define(function (require) {
         redPacket.appendEle();
 
         // 显示弹层
-        $(cfg.class).click(function (event) {
+        $(cfg.class + ',' + cfg.eventClass).live('click', function (event) {
             $(this).parent().removeClass('hide');
             $(ele).find('.popmask, .hb-popup').css('display', 'block');
             open.call(self, event);
@@ -348,7 +357,7 @@ define(function (require) {
         });
 
         // 滚动
-        redPacket.scrollFn(cfg.class);
+        redPacket.scrollFn(cfg);
 
         // 点击报名
         $(ele).find('.headline-btn').click(function () {

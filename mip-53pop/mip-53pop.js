@@ -298,6 +298,7 @@ define(function (require) {
          * 初始化
          *
          */
+    customElement.prototype.build = render;
     customElement.prototype.detachedCallback = function () {
         clearInterval(this.interval);
         document.documentElement.classList.remove('mip-no-scroll');

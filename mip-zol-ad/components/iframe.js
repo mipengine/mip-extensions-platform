@@ -27,7 +27,12 @@ define(function (require, exports, module) {
         div.appendChild(iframe);
         util.ad.addAdIcon(div, adBar);
         return {elements: [div], height: fodder.height, appendAfterFn: function () {
-            util.ad.zolImpTrack(div, adBar);
+            util.ad.zpv({
+                range: 'bms_ad',
+                dom: div,
+                type: 'inview',
+                name: 'bms_' + adBar.loc_id + '_' + adBar.bid + '_show'
+            });
         }};
     };
     module.exports = Iframe;

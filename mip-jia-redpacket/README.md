@@ -21,7 +21,9 @@ mip-jia-redpacket 组件说明
     	"logoText": "黄晓明",
     	"desc": "给您发了一个装修红包",
     	"couponText": "领取1000元装修优惠券！",
-    	"class":".hb-wrap .hb-box",
+    	"class":".fixed-hb .hb-box",
+        "eventClass":".footer_xrhb",
+        "scrollClass":".related-reading",
     	"redRequest": {
     		"url": "//mall.jia.com/api/promotion/sync-obtain-by-encrypted-mobile",
     		"parms": {

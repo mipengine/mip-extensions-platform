@@ -11,12 +11,11 @@ define(function (require, exports, module) {
         Code: require('./components/code'),
         Pic: require('./components/picture'),
         Iframe: require('./components/iframe'),
-        MFeed: require('./components/m_feed'),
         Iframecode: require('./components/iframe_code')
     };
     var templates = {
+        txt: require('./templates/txt'),
         code: require('./templates/code'),
-        mInfoFlow: require('./templates/feed'),
         normal: require('./templates/normal')
     };
     // 页面广告注释节点数组
@@ -44,7 +43,7 @@ define(function (require, exports, module) {
         nodeValue = util.fun.trim(comment.nodeValue);
         if (nodeValue && nodeValue.substr(0, keyword.length) === keyword) {
             obj = util.fun.parseJSON(nodeValue.replace(keyword, ''));
-            pid = obj.place;
+            pid = obj.place ? ('' + obj.place).replace(/#/g, '`') : '';
             if (obj.id && beforFun[obj.id]) {
                 pid = ('' + beforFun[obj.id](obj.place));
             }
@@ -65,6 +64,20 @@ define(function (require, exports, module) {
             if (pid) {
                 ids.push(pid);
                 adComments.push(comment);
+                // 广告位加载统计
+                util.ad.zpv({
+                    range: 'bms_placeholder',
+                    dom: comment.parentNode,
+                    type: 'load',
+                    name: 'bms_' + pid + '_load'
+                });
+                // 广告位展现统计
+                util.ad.zpv({
+                    range: 'bms_placeholder',
+                    dom: comment.parentNode,
+                    type: 'inview',
+                    name: 'bms_' + pid + '_show'
+                });
             }
         });
         return ids;

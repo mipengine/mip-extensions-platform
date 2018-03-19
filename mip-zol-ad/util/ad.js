@@ -233,6 +233,17 @@ define(function (require, exports, module) {
          */
         zolImpTrack: function (element, adBar) {
             this.impTrack(element, utilUser.pvtest('bms_' + adBar.loc_id + '_' + adBar.bid + '_show'));
+        },
+
+        /**
+         * 数据中心统计
+         *
+         * @param {Object} params 参数
+         */
+        zpv: function (params) {
+            if (params.dom) {
+                (window['_zpv_events'] = window['_zpv_events'] || []).push(params);
+            }
         }
     };
 });

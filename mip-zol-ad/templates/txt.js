@@ -1,26 +1,18 @@
 /**
- * @file 图片广告，所有广告需添加gmine_ad样式名
+ * @file 文字广告模板
  * @author jiang.weiwei@zol.com.cn
  */
 
 define(function (require, exports, module) {
-    function Picture(adBar) {
+    function Txt(adBar) {
         this.adBar = adBar;
     }
-    Picture.prototype.create = function (util) {
+    Txt.prototype.create = function (util) {
         var adBar = this.adBar;
-        var fodder = this.adBar.conf;
-        var a = util.dom.createElement('a', {
-            'class': 'gmine_ad',
-            'href': fodder.click_url,
-            'target': fodder.is_self === '1' ? '_self' : '_blank'
-        }, {
-            display: 'block'
-        });
-        util.ad.addAdMargin(a, fodder);
-        var pic = new Image(fodder.width, fodder.height);
-        pic.src = fodder.src;
-        a.appendChild(pic);
+        var fodder = adBar.conf;
+        var href = fodder.click_url || 'javascript:;';
+        var a = util.dom.createElement('a', {href: href, target: fodder.is_self ? '_self' : '_blank'});
+        a.innerHTML = fodder.title;
         util.ad.addAdIcon(a, adBar);
         return {elements: [a], height: fodder.height, appendAfterFn: function () {
             util.ad.zpv({
@@ -37,5 +29,7 @@ define(function (require, exports, module) {
             });
         }};
     };
-    module.exports = Picture;
+    module.exports = function (adBar, components) {
+        return Txt;
+    };
 });
