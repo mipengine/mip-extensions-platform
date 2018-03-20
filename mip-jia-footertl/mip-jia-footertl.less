@@ -1,0 +1,355 @@
+/**
+ * @file mip-jia-footertl样式文件
+ */
+
+mip-jia-footertl {
+    .fixed-footer {
+        position: fixed;
+        z-index: 99999;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        max-width: 640px;
+        height: .52rem;
+    }
+    mip-fixed[type="bottom"].fixed-footer {
+        overflow: visible;
+    }
+    .fixed-footer-box {
+        position: relative;
+        z-index: 999;
+        height: .42rem;
+        padding: .05rem;
+        background: #fff;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+    }
+    .fixed-footer-box::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 1px;
+        background: #e0e0e0;
+    }
+    .fixed-footer.sheji .fixed-footer-box::before {
+        height: 2px;
+        background: #ee2d1b;
+    }
+    .fixed-footer.baojia .fixed-footer-box::before {
+        height: 2px;
+        background: #3388ff;
+    }
+    .fixed-footer.mxd .fixed-footer-box::before {
+        height: 2px;
+        background: #ff8518;
+    }
+    .fixed-footer.qjdz .fixed-footer-box::before {
+        height: 2px;
+        background: #7266f9;
+    }
+    .fixed-footer-box .item {
+        text-align: center;
+        line-height: 1;
+        -webkit-box-flex: 1;
+        -webkit-flex: 1 0 0;
+        -ms-flex: 1 0 0;
+        flex: 1 0 0;
+    }
+    .fixed-footer-box .item .icon {
+        display: inline-block;
+        margin-top: .05rem;
+        width: .17rem;
+        height: .19rem;
+        background: url(//mued3.jia.com/image/mobile/toutiao/fix-icons.png) 0 0 no-repeat;
+        background-size: 100%;
+        vertical-align: top;
+    }
+    .fixed-footer-box .item .pos1 {
+        background-position: 0 0;
+    }
+    .fixed-footer-box .item .pos2 {
+        background-position: 0 33.33%;
+    }
+    .fixed-footer-box .item .pos3 {
+        background-position: 0 66.67%;
+    }
+    .fixed-footer-box .item .pos4 {
+        background-position: 0 100%;
+    }
+    .fixed-footer-box .item .txt {
+        margin-top: .02rem;
+        font-size: .12rem;
+        line-height: .16rem;
+        color: #666;
+    }
+    .fixed-footer-box .item:nth-of-type(1).cur .txt {
+        color: #ee2d1b;
+    }
+    .fixed-footer-box .item:nth-of-type(2).cur .txt {
+        color: #3388ff;
+    }
+    .fixed-footer-box .item:nth-of-type(4).cur .txt {
+        color: #ff8518;
+    }
+    .fixed-footer-box .item:nth-of-type(5).cur .txt {
+        color: #7266f9;
+    }
+    .fixed-footer-box .hb-wrap {
+        position: static;
+        display: block !important;
+        width: .51rem;
+        height: .41rem;
+        background: url(//mued3.jia.com/image/mobile/toutiao/fix-hb-1.png) 0 0 no-repeat;
+        background-size: 100%;
+    }
+    .fixed-footer-box .item.cur {
+        position: relative;
+    }
+    .fixed-footer-box .item.cur::before {
+        content: '';
+        position: absolute;
+        z-index: 105;
+        top: -.05rem;
+        left: 50%;
+        margin-top: 0;
+        margin-left: -8px;
+        border-width: 6px 8px;
+        border-style: solid dashed dashed dashed;
+        border-color: #3388ff transparent transparent transparent;
+    }
+    .fixed-footer-box .item.cur::after {
+        content: '';
+        position: absolute;
+        z-index: 106;
+        top: -.05rem;
+        left: 50%;
+        margin-top: -2px;
+        margin-left: -8px;
+        border-width: 6px 8px;
+        border-style: solid dashed dashed dashed;
+        border-color: #fff transparent transparent transparent;
+    }
+    .fixed-footer-box .item:nth-of-type(1).cur::before {
+        border-top-color: #ee2d1b
+    }
+    .fixed-footer-box .item:nth-of-type(2).cur::before {
+        border-top-color: #3388ff
+    }
+    .fixed-footer-box .item:nth-of-type(4).cur::before {
+        border-top-color: #ff8518
+    }
+    .fixed-footer-box .item:nth-of-type(5).cur::before {
+        border-top-color: #7266f9
+    }
+    .fixed-footer-pop {
+        position: fixed;
+        bottom: .52rem;
+        left: 0;
+        z-index: 99;
+        width: 100%;
+        -webkit-transform: translate(0, 100%);
+        -moz-transform: translate(0, 100%);
+        -ms-transform: translate(0, 100%);
+        -o-transform: translate(0, 100%);
+        transform: translate(0, 100%);
+        -webkit-transition: transform .5s;
+        -moz-transition: transform .5s;
+        -ms-transition: transform .5s;
+        -o-transition: transform .5s;
+        transition: transform .5s;
+    }
+    .fixed-footer-pop.show {
+        -webkit-transform: translate(0, 0);
+        -moz-transform: translate(0, 0);
+        -ms-transform: translate(0, 0);
+        -o-transform: translate(0, 0);
+        transform: translate(0, 0);
+    }
+    .fixed-footer-pop .fixed-footer-pop-box {
+        position: relative;
+    }
+    .fixed-footer-pop .pop-box {
+        margin-top: -1px;
+        padding: .1rem .1rem .15rem;
+        background: #fff;
+    }
+    .fixed-footer-pop .fixed-footer-pop-box .close {
+        position: absolute;
+        right: .08rem;
+        top: .08rem;
+        width: .15rem;
+        height: .15rem;
+        background: url(//mued3.jia.com/image/mobile/toutiao/pop-close.png) 0 0 no-repeat;
+        background-size: 100%;
+    }
+    .fixed-footer-pop .pop-box .title {
+        font-size: .16rem;
+        text-align: center;
+        color: #ee2d1b;
+        line-height: 2;
+    }
+    .fixed-footer-pop .pop-box .tit {
+        margin-bottom: .18rem;
+        text-align: center;
+    }
+    .fixed-footer-pop .pop-box .tit span {
+        display: inline-block;
+        padding: 0 .1rem;
+        line-height: .18rem;
+        font-size: .1rem;
+        color: #ee2d1b;
+        vertical-align: top;
+        border-radius: .18rem;
+        border: 1px solid #ee2d1b;
+    }
+    .fixed-footer-pop .form-dl {
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        padding: .1rem 0;
+        line-height: .2rem;
+        border-bottom: 1px solid #e8e8e8;
+    }
+    .fixed-footer-pop .form-dt {
+        font-size: .13rem;
+    }
+    .fixed-footer-pop .form-dd {
+        position: relative;
+        -webkit-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+    }
+    .fixed-footer-pop .form-dd.area {
+        padding-right: .3rem;
+    }
+    .fixed-footer-pop .form-dd em {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        margin-top: -.1rem;
+        font-size: .13rem;
+    }
+    .fixed-footer-pop .form-input {
+        display: block;
+        width: 100%;
+        height: .2rem;
+        line-height: .2rem;
+        font-size: .13rem;
+        text-align: right;
+    }
+    .fixed-footer-pop .btn-box {
+        margin-top: .15rem;
+    }
+    .fixed-footer-pop .footer-btn {
+        position: relative;
+        z-index: 105;
+        display: block;
+        padding: .08rem;
+        line-height: .2rem;
+        text-align: center;
+        font-size: .136rem;
+        color: #fff;
+        background: #ee2d1b;
+        border-radius: .04rem;
+    }
+    .fixed-footer-pop .fixed-footer-pop-box.sheji .title {
+        color: #ee2d1b;
+    }
+    .fixed-footer-pop .fixed-footer-pop-box.sheji .tit span {
+        color: #ee2d1b;
+        border-color: #ee2d1b;
+    }
+    .fixed-footer-pop .fixed-footer-pop-box.sheji .footer-btn {
+        background: #ee2d1b;
+    }
+    .fixed-footer-pop .fixed-footer-pop-box.baojia .title {
+        color: #3388ff;
+    }
+    .fixed-footer-pop .fixed-footer-pop-box.baojia .tit span {
+        color: #3388ff;
+        border-color: #3388ff;
+    }
+    .fixed-footer-pop .fixed-footer-pop-box.baojia .footer-btn {
+        background: #3388ff;
+    }
+
+    .fixed-footer-pop .fixed-footer-pop-box.mxd .title {
+        color: #ff8518;
+    }
+    .fixed-footer-pop .fixed-footer-pop-box.mxd .tit span {
+        color: #ff8518;
+        border-color: #ff8518;
+    }
+    .fixed-footer-pop .fixed-footer-pop-box.mxd .footer-btn {
+        background: #ff8518;
+    }
+    .fixed-footer-pop .fixed-footer-pop-box.qjdz .title {
+        color: #7266f9;
+    }
+    .fixed-footer-pop .fixed-footer-pop-box.qjdz .tit span {
+        color: #7266f9;
+        border-color: #7266f9;
+    }
+    .fixed-footer-pop .fixed-footer-pop-box.qjdz .footer-btn {
+        background: #7266f9;
+    }
+    .fixed-footer-pop-box.sheji .topimg {
+        padding-top: 24.27%;
+        background: url(//mued3.jia.com/image/mobile/toutiao/footer-top-1.png) 0 0 no-repeat;
+        background-size: 100%;
+    }
+    .fixed-footer-pop-box .topimg,
+    .fixed-footer-pop-box.baojia .topimg {
+        padding-top: 25.6%;
+        background: url(//mued3.jia.com/image/mobile/toutiao/footer-top-2.png) 0 0 no-repeat;
+        background-size: 100%;
+    }
+    .fixed-footer-pop-box.mxd .topimg {
+        padding-top: 24.27%;
+        background: url(//mued3.jia.com/image/mobile/toutiao/footer-top-3.png) 0 0 no-repeat;
+        background-size: 100%;
+    }
+    .fixed-footer-pop-box.qjdz .topimg {
+        padding-top: 23.47%;
+        background: url(//mued3.jia.com/image/mobile/toutiao/footer-top-4.png) 0 0 no-repeat;
+        background-size: 100%;
+    }
+
+    .fixed-footer-pop-box.sheji .close {
+        top: .18rem;
+    }
+    .fixed-footer-pop-box.baojia .close {
+        top: .24rem;
+    }
+    .fixed-footer-pop-box.mxd .close {
+        top: .16rem;
+    }
+    .fixed-footer-pop-box.qjdz .close {
+        top: .14rem;
+    }
+    .popmask {
+        display: none;
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        background-color: rgba(0, 0, 0, .4);
+        z-index: 10001;
+    }
+    .ask-zxbj-loading {
+        display: none;
+        width: .3rem;
+        height: .3rem;
+        background: url(//fastued3.jia.com/image/mobile/new/loading.gif) no-repeat;
+        background-size: .3rem auto;
+        z-index: 101;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-left: -.15rem
+    }
+}

@@ -349,11 +349,13 @@ define(function (require) {
             $(ele).find('.popmask, .hb-popup').css('display', 'block');
             open.call(self, event);
         });
-        $(cfg.eventClass).live('click', function (event) {
-            $(this).parent().removeClass('hide');
-            $(ele).find('.popmask, .hb-popup').css('display', 'block');
-            open.call(self, event);
-        });
+        if (cfg.eventClass) {
+            $(cfg.eventClass).live('click', function (event) {
+                $(this).parent().removeClass('hide');
+                $(ele).find('.popmask, .hb-popup').css('display', 'block');
+                open.call(self, event);
+            });
+        }
 
         // 关闭弹层
         $(ele).find('.close, .popmask').click(function (event) {
