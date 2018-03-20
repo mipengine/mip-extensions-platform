@@ -344,7 +344,12 @@ define(function (require) {
         redPacket.appendEle();
 
         // 显示弹层
-        $(cfg.class + ',' + cfg.eventClass).live('click', function (event) {
+        $(cfg.class).on('click', function (event) {
+            $(this).parent().removeClass('hide');
+            $(ele).find('.popmask, .hb-popup').css('display', 'block');
+            open.call(self, event);
+        });
+        $(cfg.eventClass).live('click', function (event) {
             $(this).parent().removeClass('hide');
             $(ele).find('.popmask, .hb-popup').css('display', 'block');
             open.call(self, event);

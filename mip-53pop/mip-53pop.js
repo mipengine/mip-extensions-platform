@@ -130,6 +130,7 @@ define(function (require) {
                             $('#' + popTel + '').val('');
                             $('#' + popId + '').toggle();
                             $('.MIP-53POP-MASK').css('display', 'none');
+                            document.documentElement.classList.remove('mip-no-scroll');
                             self.open = false;
                         } else {
                             alert('留言失败');
