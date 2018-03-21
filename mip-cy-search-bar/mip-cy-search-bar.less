@@ -1,0 +1,46 @@
+/**
+ * @file mip-cy-search-bar样式文件
+ */
+
+mip-cy-search-bar {
+    padding: .07rem .08rem;
+    background-color: #fff;
+
+    input,
+    button {
+        display: inline-block;
+        border: none;
+        outline: 0;
+        background-color: transparent;
+
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
+    }
+
+    .mip-cy-search-wrap {
+        position: relative;
+        display: flex;
+        overflow: hidden;
+        font-family: PingFangSC-Light;
+        font-size: .14rem;
+        color: #666;
+        border-radius: .04rem;
+        background-color: #f4f4f4;
+        input {
+            line-height: .30rem;
+            text-indent: .14rem;
+
+            flex-grow: 1;
+        }
+        button {
+            width: .45rem;
+            background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAiCAYAAAA6RwvCAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAslJREFUWMPNmM9LVFEUxx9kPzZGuTYwCRJq40YMs4WbFm5Mof4AsYTKAndOLox2QlBURJFEu0ALosiFSKuhYWJ+MjQ6ySyEEgXJajOVM30PvBuvL/e9eb8udOFwF3PeOZ97zrn3njuWFWDkcrkT2Wx2CvIakoFsQGqQdUgK8gI6V4rF4hEr7tFoNPbC+NVMJvMJ0gggH/L5/EgsEAA4j1WuBQT4R/D9e0hf6CjAyMMoACS/AXM9EESpVGrDR+9cVlfHnMacgAwiYt2YOzD3YB6CzEJWPYCeYJEtviLhBgGZR86P+1kM9Pqhn3RZzP2mBlzSsQXDA2FSDKdjsqvYJiI47lmYGoiPgDgaseBPA2ab7P6Uo0BXF/s0u2MrKoQjVQOw94vsv9KlZIKjETYdHmmfZB+FQuEMK/FhNW/gYGxB1Fdc/WDlJ3mL+t0dIerlAvn6XqlU9qvKThBl2jI0qtXqAfj7QTCDCuQN/ZCwDA74WCB/txRIVktoDmSa/M0pkA06bLoNg4xSKSwqkBoRdpgEwUKHyV9KgaxTRHoMg4xTRN4qkBQRDhkGuUkgz9yqeNZwjSwRyLSKyGUCWTUFAduH+M75273hFG3X3DP9hqIxQRDfpAdyKqQJJhk3RLlcboXjTQK557mlbKWxmNPygOzvov04pgtbkhRr0tTEtFMuahb6VKuM3uCUdNukvB21LwHEJU1T9EWadN/FZIsYmfTVfTsGrveDnA6H3PWTy0cu3feK9BNylXt9j8gehu41aTU9Hl11zwba7qT2QOmOhxHpJxagc0MuMCl0MWqfmEuaNISHUU8B6bZjeul9hr3b9gONu8Hm72OEuQvKLyO8e3fldScnquOdwzDLQc6APshzfLjjE+KrpBcL6XR5dNUdII8Db0V5/8DBWciMGLDbzKT9f8mc/HeCUPdKnTXZ0ueknmRjSHFb/9P4A/LoLVuTjrgnAAAAAElFTkSuQmCC") no-repeat center transparent;
+            background-size: .164rem .164rem;
+
+            flex-shrink: 0;
+
+            &:active {
+                background-color: #e7e7e7;
+            }
+        }
+    }
+}

@@ -7,7 +7,6 @@
 
 define(function (require) {
     'use strict';
-
     // mip 组件开发支持 zepto
     var $ = require('zepto');
     var customElement = require('customElement').create();
@@ -164,7 +163,7 @@ define(function (require) {
             var self = this;
             var nodes = [];
             var index = 0;
-            const CHILDRENS = self.element.childNodes;
+            var CHILDRENS = self.element.childNodes;
 
             for (index = 0; index < CHILDRENS.length; index++) {
                 if (CHILDRENS[index].nodeType === 1) {
@@ -264,7 +263,7 @@ define(function (require) {
             var self = this;
             // 不存在遮盖层时先创建
             if (!self.maskElement) {
-                const mask = document.createElement('div');
+                var mask = document.createElement('div');
                 mask.id = 'MIP-53POP-MASK';
                 mask.className = 'MIP-53POP-MASK';
                 mask.setAttribute('on', 'tap:' + self.id + '.close');

@@ -1,7 +1,6 @@
 /**
- * @file mip-zol-shopspec 组件
+ * @file mip-zmall-buy 组件
  * @author viewJY
- * @time 2017-11-22
  */
 
 define(function (require) {
@@ -38,7 +37,7 @@ define(function (require) {
     var emptUrl = '';
 
     // 初次请求商品信息数据
-    function init() {
+    function init(callback) {
         var that = this;
         var element = that.element;
 
@@ -80,6 +79,10 @@ define(function (require) {
                     allSuitInfo = res.suitInfo;
                     loadSuccess.call(that, res);
                     suitEmpty.call(that, customParams, emptUrl);
+                }
+
+                if (typeof callback === 'function') {
+                    callback(res);
                 }
             },
             error: function (err) {}
@@ -917,6 +920,16 @@ define(function (require) {
         return true;
     }
 
+    // 商品下架
+    function noGoodsTip() {
+        var self = this;
+        self.elementClone.classList.add('mip-zmall-buy-show');
+        toast.call(self.elementClone, '该商品已经下架!');
+        setTimeout(function () {
+            self.elementClone.classList.remove('mip-zmall-buy-show');
+        }, 800);
+    }
+
     // build 方法，元素插入到文档时执行，仅会执行一次
     customElement.prototype.build = function () {
 
@@ -935,27 +948,30 @@ define(function (require) {
         }
 
         // 预载入购买弹层
-        init.call(self);
+        init.call(self, function (res) {
+            // 循环绑定事件
+            [].forEach.call(entrys, function (entry, index) {
+                entry.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    e.preventDefault();
 
-        // 循环绑定事件
-        [].forEach.call(entrys, function (entry, index) {
-            entry.addEventListener('click', function (e) {
-                e.stopPropagation();
-                e.preventDefault();
-
-                // 判断登录
-                var isLogin = islogin();
-                if (!isLogin) {
-                    var href = encodeURIComponent(location.href);
-                    window.location.href = '//cashier.zol.com/paygate/baidu/oauth?callbackurl=' + href;
-                    return;
-                }
-
-                // 显示
-                couponLayer.classList.add('mip-zmall-buy-show');
-
+                    // 判断登录
+                    var isLogin = islogin();
+                    if (!isLogin) {
+                        var href = encodeURIComponent(location.href);
+                        window.location.href = '//cashier.zol.com/paygate/baidu/oauth?callbackurl=' + href;
+                        return;
+                    }
+                    if (!parseInt(res.flag, 10)) {
+                        noGoodsTip.call(self);
+                        return;
+                    }
+                    // 显示
+                    couponLayer.classList.add('mip-zmall-buy-show');
+                });
             });
         });
+
     };
 
     return customElement;

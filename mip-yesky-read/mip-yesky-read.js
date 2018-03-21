@@ -16,6 +16,10 @@ define(function (require) {
         var ajaxUrl = $(element).attr('data-ajax-url');
         var cStart = '';
         var cEnd = '';
+        function isNull(data) {
+            return (data === '' || data === undefined || data === null) ? true : false;
+        }
+
         function setCookie(cName, value, expiredays) {
             var exdate = new Date();
             var myExpiredays = expiredays == null ? '' : ';expires=' + exdate.toGMTString();
@@ -41,7 +45,7 @@ define(function (require) {
 
         function checkCookie() {
             var clickkeyword = getCookie('clickkeyword' + articleId);
-            var clickcategory = getCookie('clickcategory' + articleId);
+            var clickcategory = getCookie('clickcategory' + cId);
             if (clickcategory !== null && clickcategory !== '') {
                 if (sub === 'false') {
                     if (updateSubStatus(cId, 1, sitemapname, 1) === true) {
@@ -52,7 +56,7 @@ define(function (require) {
         }
 
         function updateSubStatus(keyId, type, name, status) {
-            if (openId === 'null') {
+            if (isNull(openId) === true) {
                 getCode(filepath);
                 return false;
             }

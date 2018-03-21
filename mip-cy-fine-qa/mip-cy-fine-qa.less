@@ -1,0 +1,76 @@
+/**
+ * @file mip-cy-fine-qa样式文件
+ */
+
+mip-cy-fine-qa {
+    .positive-tags {
+        padding: .12rem .12rem 0;
+        overflow: hidden;
+        .positive-list {
+            float: left;
+            font-size: .14rem;
+            color: #666;
+            background-color: #f0f2f5;
+            padding: .04rem .20rem;
+            margin-right: .20rem;
+            margin-bottom: .10rem;
+            border-radius: .04rem;
+            &.cur {
+                color: #fff;
+                background-color: #2ec561;
+            }
+        }
+    }
+
+    .fine-qa-list {
+        padding: 0 .15rem;
+    }
+
+    .fine-qa {
+        position: relative;
+        display: block;
+        padding: .20rem 0;
+        font-family: PingFangSC-Regular;
+
+        &::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: -.15rem;
+            bottom: 0;
+            border-bottom: 1px solid #F1F1F1;
+        }
+        &-title {
+            display: flex;
+            flex-wrap: nowrap;
+            font-size: .15rem;
+        }
+        &-ask-tag {
+            margin-top: .02rem;
+            margin-right: .05rem;
+            width: .16rem;
+            height: .16rem;
+            flex-grow: 0;
+            flex-shrink: 0;
+            font-size: .13rem;
+            color: #FFFFFF;
+            text-align: center;
+            line-height: .16rem;
+            background: #FFA800;
+            border-radius: .02rem;
+        }
+        &-content {
+            margin-top: .15rem;
+            font-family: PingFangSC-Light;
+            font-size: .14rem;
+            color: #323232;
+            letter-spacing: 0;
+        }
+    }
+
+    .no-content {
+        color: #cecece;
+        text-align: center;
+        line-height: .4rem;
+    }
+}
