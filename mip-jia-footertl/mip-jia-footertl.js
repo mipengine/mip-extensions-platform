@@ -51,6 +51,7 @@ define(function (require) {
         scrollTop.offset = window.pageYOffset;
         document.documentElement.classList.add('mip-no-scroll');
         ele.find('.popmask').show();
+        ele.find('.fixed-footer').show();
     }
 
     function hidepopmask(ele) {
@@ -67,6 +68,7 @@ define(function (require) {
         }
         window.scrollTo(0, scrollTop.offset);
         ele.find('.popmask').hide();
+        ele.find('.fixed-footer').hide();
         ele.find('.fixed-footer').attr('class', 'fixed-footer').find('.item').removeClass('cur');
     }
 
@@ -259,8 +261,13 @@ define(function (require) {
                     .attr('class', 'fixed-footer ' + obj['class']);
             },
             clickUpFun: function (data, ele) {
-                var $this = $(data.ele);
+                var $this = $(ele).find('.item');
                 var $ele = $(ele).find('.fixed-footer-pop');
+                // 点击show弹层
+                $(data.ele).on('click', function () {
+                    var index = $(data.ele).index(this);
+                    $(ele).find('.item').eq(index).trigger('click');
+                });
                 // 点击展开按钮
                 $this.on('click', function () {
                     var index = $this.index(this);
@@ -346,7 +353,7 @@ define(function (require) {
                 var mobile = $.trim($(ele).find('.form-input.phone').val());
                 var area = $.trim($(ele).find('.form-input.area').val()) || '80';
                 var $city = JSON.parse(storage.get('city'));
-                var index = $(data.ele).index($this.find('.item.cur'));
+                var index = $this.find('.item').index($this.find('.item.cur'));
 
                 var applyData = {
                     city: $city['area_py'],
@@ -392,7 +399,7 @@ define(function (require) {
                 var mobile = $.trim($(ele).find('.form-input.phone').val());
                 var area = $.trim($(ele).find('.form-input.area').val()) || '80';
                 var $city = JSON.parse(storage.get('city'));
-                var index = $(data.ele).index($this.find('.item.cur'));
+                var index = $this.find('.item').index($this.find('.item.cur'));
                 var yusuanPostD = {
                     areaname: $city['area_cn'],
                     pro: $city['city_cn'],
