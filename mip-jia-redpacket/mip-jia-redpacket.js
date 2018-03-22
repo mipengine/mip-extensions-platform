@@ -311,7 +311,7 @@ define(function (require) {
             var viewHei = viewport.getHeight();
             if ($(ele.scrollClass).length > 0) {
                 var eleTop = $(ele.scrollClass).offset().top;
-                if (location.host === 'm.jia.com') {
+                if (location.host === 'm.jia.com' || util.platform.isAndroid()) {
                     if (scrollTop > 10 && eleTop > scrollTop + viewHei / 2) {
                         $(ele.class).parent().addClass('hide');
                     }

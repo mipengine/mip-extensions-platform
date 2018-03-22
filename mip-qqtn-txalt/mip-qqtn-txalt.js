@@ -1,5 +1,5 @@
 /**
- * @file mip-qqtn-txalt 组件.点击图片放大，一键下载图片，只有安卓显示。
+ * @file mip-qqtn-txalt 组件.点击图片放大，一键下载图片，只有安卓显示。版本1.1.1 配合升级到https协议后的图片路径进行重新获取
  * @author gom3250@qq.com.
  * @version 1.0.1
  *  */
@@ -20,13 +20,14 @@ define(function (require) {
         // 增加专属属性供JS使用
         $(ele).find('mip-qqtn-txalt mip-img').each(function (i) {
             var myimgurl = $(this).attr('src');
+            var myihao = myimgurl.split('!')[0];
             if (myimgurl.indexOf('pic1') !== -1) {
                 var zhimgurl = myimgurl.replace('http://pic1.qqtn.com/qqtn/mb/', 'http://pic.qqtn.com/');
                 var zhimgurl = zhimgurl.split('_');
                 var impgeshi = (zhimgurl.pop()).split('.');
                 $(this).attr({'data-index': i, 'data-original': zhimgurl[0] + '.' + impgeshi.pop()});
             } else {
-                $(this).attr({'data-index': i, 'data-original': myimgurl});
+                $(this).attr({'data-index': i, 'data-original': myihao});
             }
         });
         var ui = {

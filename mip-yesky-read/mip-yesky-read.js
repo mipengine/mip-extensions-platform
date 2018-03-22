@@ -17,20 +17,16 @@ define(function (require) {
         var cStart = '';
         var cEnd = '';
         function isNull(data) {
-            return (data === '' || data === undefined || data === null) ? true : false;
+            return data === '' || data === undefined || data === null ? true : false;
         }
-
         function setCookie(cName, value, expiredays) {
             var exdate = new Date();
-            var myExpiredays = expiredays == null ? '' : ';expires=' + exdate.toGMTString();
-            exdate.setDate(exdate.getDate() + expiredays);
-            document.cookie = cName + ' = '
-            + escape(value) + myExpiredays;
+            exdate.setDate(exdate.getDate() + expiredays * 30 * 24 * 60 * 60 * 1000);
+            document.cookie = cName + '=' + escape(value) + ';expires=' + exdate;
         }
-
         function getCookie(cName) {
             if (document.cookie.length > 0) {
-                cStart = document.cookie.indexOf(cName + ' = ');
+                cStart = document.cookie.indexOf(cName + '=');
                 if (cStart !== -1) {
                     cStart = cStart + cName.length + 1;
                     cEnd = document.cookie.indexOf(';', cStart);
@@ -42,9 +38,7 @@ define(function (require) {
             }
             return '';
         }
-
         function checkCookie() {
-            var clickkeyword = getCookie('clickkeyword' + articleId);
             var clickcategory = getCookie('clickcategory' + cId);
             if (clickcategory !== null && clickcategory !== '') {
                 if (sub === 'false') {
@@ -54,7 +48,6 @@ define(function (require) {
                 }
             }
         }
-
         function updateSubStatus(keyId, type, name, status) {
             if (isNull(openId) === true) {
                 getCode(filepath);
@@ -86,13 +79,10 @@ define(function (require) {
             return i;
         }
         function getCode(url) {
-            window.location.href = 'https://openapi.baidu.com/oauth/2.0/authorize?response_type=code&client_id='
-            + 'xQmDDOrkl5nGPsDswxZesNot9gM2Ar8k&redirect_uri=' + encodeURIComponent(url)
-            + '&scope=snsapi_userinfo&state=state';
+            window.location.href = 'https://openapi.baidu.com/oauth/2.0/authorize?response_type=code&client_id=' + 'xQmDDOrkl5nGPsDswxZesNot9gM2Ar8k&redirect_uri=' + encodeURIComponent(url) + '&scope=snsapi_userinfo&state=state';
         }
         checkCookie();
         sub === 'true' ? $(element).addClass('active').html('已订阅') : $(element).addClass('before');
-
         $(element).click(function () {
             if (sub === 'false') {
                 var cookiename = $(this).attr('id') + cId;
@@ -103,7 +93,7 @@ define(function (require) {
                 }
             }
         });
-
     };
     return customElement;
 });
+

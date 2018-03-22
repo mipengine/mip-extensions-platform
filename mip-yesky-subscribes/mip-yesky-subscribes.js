@@ -21,15 +21,13 @@ define(function (require) {
         }
         function setCookie(cName, value, expiredays) {
             var exdate = new Date();
-            var myExpiredays = expiredays == null ? '' : ';expires=' + exdate.toGMTString();
-            exdate.setDate(exdate.getDate() + expiredays);
-            document.cookie = cName + ' = '
-            + escape(value) + myExpiredays;
+            exdate.setDate(exdate.getDate() + expiredays * 30 * 24 * 60 * 60 * 1000);
+            document.cookie = cName + '=' + escape(value) + ';expires=' + exdate;
         }
 
         function getCookie(cName) {
             if (document.cookie.length > 0) {
-                cStart = document.cookie.indexOf(cName + ' = ');
+                cStart = document.cookie.indexOf(cName + '=');
                 if (cStart !== -1) {
                     cStart = cStart + cName.length + 1;
                     cEnd = document.cookie.indexOf(';', cStart);

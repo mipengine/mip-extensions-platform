@@ -6,7 +6,6 @@
 define(function (require) {
     var customElement = require('customElement').create();
     customElement.prototype.build = function () {
-        var $ = require('jquery');
         var element = this.element;
         var pt = element.getAttribute('type');
         var id = element.getAttribute('pid');
@@ -14,12 +13,15 @@ define(function (require) {
         var title = element.getAttribute('titl');
         var href = location.href;
         if (pt && id && at) {
-            window.pb = function (data) {
+            var url = 'https://syspb.391k.com/getpb.do?pt=' + pt + '&id=' + id + '&at=' + at + '&title=' + title;
+            var fetchJsonp = require('fetch-jsonp');
+            fetchJsonp(url).then(function (res) {
+                return res.json();
+            }).then(function (data) {
                 if (data) {
                     window.location = '/404?pb=' + at + '&href=' + href;
                 }
-            };
-            $.getScript('http://pb.sys.pp8.com/getpb.do?pt=' + pt + '&id=' + id + '&at=' + at + '&callback=pb&title=' + title);
+            });
         }
     };
     return customElement;

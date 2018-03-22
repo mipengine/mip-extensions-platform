@@ -1,12 +1,12 @@
 {
     "name": "mip-pbcontent",
     "version": "1.0.0",
-    "description": "组件介绍",
+    "description": "屏蔽特定id",
     "author": "xiaohua",
     "contributors": [
         {
-            "name": "xiaohua",
-            "email": "asfd@qq.com"
+            "name": "Dylan",
+            "email": "1060304921@qq.com"
         }
     ],
     "engines": {
