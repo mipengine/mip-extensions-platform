@@ -69,6 +69,7 @@ define(function (require) {
         window.scrollTo(0, scrollTop.offset);
         ele.find('.popmask').hide();
         ele.find('.fixed-footer').hide();
+        ele.find('.form-input.phone').blur();
         ele.find('.fixed-footer').attr('class', 'fixed-footer').find('.item').removeClass('cur');
     }
 
@@ -273,6 +274,7 @@ define(function (require) {
                     var index = $this.index(this);
                     zxbjPage.method.changeHtml(zxbjPage.arr[index], ele);
                     $ele.removeAttr('style');
+                    $(ele).find('.form-input.phone').blur();
                     if ($(this).hasClass('cur')) {
                         hidepopmask($(ele));
                         $(this).removeClass('cur');

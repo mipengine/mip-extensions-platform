@@ -310,19 +310,36 @@ define(function (require) {
             // 视口高度
             var viewHei = viewport.getHeight();
             if ($(ele.scrollClass).length > 0) {
-                var eleTop = $('.related-reading').offset().top;
-                if (scrollTop > 10 && eleTop > viewHei / 2) {
-                    $(ele.class).parent().addClass('hide');
-                }
-                else {
-                    $(ele.class).parent().removeClass('hide');
-                }
+                var eleTop = $(ele.scrollClass).offset().top;
+                if (location.host === 'm.jia.com') {
+                    if (scrollTop > 10 && eleTop > scrollTop + viewHei / 2) {
+                        $(ele.class).parent().addClass('hide');
+                    }
+                    else {
+                        $(ele.class).parent().removeClass('hide');
+                    }
 
-                if (eleTop <= viewHei / 2) {
-                    $(ele.class).parent().addClass('shake');
+                    if (eleTop <= scrollTop + viewHei / 2) {
+                        $(ele.class).parent().addClass('shake');
+                    }
+                    else {
+                        $(ele.class).parent().removeClass('shake');
+                    }
                 }
                 else {
-                    $(ele.class).parent().removeClass('shake');
+                    if (scrollTop > 10 && eleTop > viewHei / 2) {
+                        $(ele.class).parent().addClass('hide');
+                    }
+                    else {
+                        $(ele.class).parent().removeClass('hide');
+                    }
+
+                    if (eleTop <= viewHei / 2) {
+                        $(ele.class).parent().addClass('shake');
+                    }
+                    else {
+                        $(ele.class).parent().removeClass('shake');
+                    }
                 }
             }
         });
@@ -387,13 +404,29 @@ define(function (require) {
             var bmPramas = {};
 
             // 回调拆分一
-            function stepOne(key) {
-                var redPhone = mobileEncrypt(tel.val(), key);
-                redParms.mobileNumber = redPhone;
+            function stepOne() {
 
+                // 获取旺铺加密KEY
+                getRsaPubKey(cfg.keyUrl).then(function (res) {
+                    res.text().then(function (key) {
+                        var redPhone = mobileEncrypt(tel.val(), key);
+                        redParms.mobileNumber = redPhone;
+                        stepThree();
+                    });
+                });
+
+            }
+
+            function stepThree() {
                 // 领取红包
                 redPacket.getRed(cfg.redRequest.url, redParms).then(function () {
-                    stepTwo();
+                    // stepTwo();
+                    // 种cookie并跳转到成功页
+                    bmPramas['refer_url'] = window.location.href;
+                    bmPramas['from_source'] = signParms.source;
+                    bmPramas = JSON.stringify(bmPramas);
+                    storage.set('bm_pramas', bmPramas);
+                    window.top.location.href = cfg.signRequest.skipUrl;
                 });
             }
 
@@ -409,23 +442,11 @@ define(function (require) {
 
                     // 装修报名
                     redPacket.signUp(cfg.signRequest.url, pArray.join('&')).then(function () {
-
-                        // 种cookie并跳转到成功页
-                        bmPramas['refer_url'] = window.location.href;
-                        bmPramas['from_source'] = signParms.source;
-                        bmPramas = JSON.stringify(bmPramas);
-                        storage.set('bm_pramas', bmPramas);
-                        window.top.location.href = cfg.signRequest.skipUrl;
+                        stepOne();
                     });
                 });
             }
-
-            // 获取旺铺加密KEY
-            getRsaPubKey(cfg.keyUrl).then(function (res) {
-                res.text().then(function (key) {
-                    stepOne(key);
-                });
-            });
+            stepTwo();
         });
 
     };
