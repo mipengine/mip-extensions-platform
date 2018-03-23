@@ -68,7 +68,7 @@ define(function (require) {
             var cookieval = $(element).attr('id');
             setCookie(cookiename, cookieval, expiredays);
             if (updateSubStatus(uK, uT, uN, 1) === true) {
-                $(this).html('已订阅').addClass('active');
+                $(this).html('已订阅').addClass('cur2');
             }
         });
 
@@ -110,7 +110,7 @@ define(function (require) {
         }
 
         checkCookie();
-        sub === 'true' ? $(element).addClass('active').html('已订阅') : $(element).addClass('before');
+        sub === 'true' ? $(element).addClass('cur2').html('已订阅') : $(element).addClass('before');
         checkl(element);
 
     };

@@ -367,10 +367,15 @@ define(function (require) {
             open.call(self, event);
         });
         if (cfg.eventClass) {
-            $(cfg.eventClass).live('click', function (event) {
-                $(this).parent().removeClass('hide');
-                $(ele).find('.popmask, .hb-popup').css('display', 'block');
-                open.call(self, event);
+            cfg.eventClass = cfg.eventClass.replace('.', '');
+            var parent = document;
+            parent.addEventListener('click', function (e) {
+                var el = e.target;
+                if ($(el).hasClass(cfg.eventClass)) {
+                    $(el).parent().removeClass('hide');
+                    $(ele).find('.popmask, .hb-popup').css('display', 'block');
+                    open.call(self, e);
+                }
             });
         }
 

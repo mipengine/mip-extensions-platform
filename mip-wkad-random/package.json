@@ -1,0 +1,12 @@
+{
+    "name": "mip-wkad-random",
+    "version": "1.0.0",
+    "description": "寻医问药分流广告组件",
+    "author": {
+        "name": "tinkbell",
+		"email": "343836944@qq.com"
+    },
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
