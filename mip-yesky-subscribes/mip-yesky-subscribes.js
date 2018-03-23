@@ -41,14 +41,18 @@ define(function (require) {
         }
 
         function checkCookie() {
-            var clickkeyword = getCookie('clickkeyword' + articleId);
+            var cookieId = $(element).attr('id') + articleId;
+            var clickkeyword = getCookie(cookieId);
             if (clickkeyword !== null && clickkeyword !== '') {
                 if (sub === 'false') {
                     var uid = $(element).attr('data-keyId');
                     var uT = $(element).attr('data-type');
                     var uname = $(element).attr('data-name');
                     if (updateSubStatus(uid, uT, uname, 1) === true) {
-                        $(element).html('已订阅').addClass('cur2');
+                        if ($(element).attr('id') === clickkeyword) {
+                            $(element).html('已订阅').addClass('cur2');
+                        }
+
                     }
                 }
             }
@@ -110,7 +114,6 @@ define(function (require) {
         }
 
         checkCookie();
-        sub === 'true' ? $(element).addClass('cur2').html('已订阅') : $(element).addClass('before');
         checkl(element);
 
     };

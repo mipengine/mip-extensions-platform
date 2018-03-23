@@ -1,7 +1,7 @@
 {
     "name": "mip-yesky-subscribes",
-    "version": "1.0.1",
-    "description": "是一个实现文章订阅功能的组件 点击可是实现订阅功能 ",
+    "version": "1.0.2",
+    "description": "优化多标签点击效果 ",
     "contributors": [
         {
             "name": "小半截子",

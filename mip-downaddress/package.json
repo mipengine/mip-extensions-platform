@@ -1,0 +1,14 @@
+{
+    "name": "mip-downaddress",
+    "version": "1.0.0",
+    "description": "点击下载按钮",
+    "contributors": [
+        {
+            "name": "391k",
+            "email": "1060304921@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
