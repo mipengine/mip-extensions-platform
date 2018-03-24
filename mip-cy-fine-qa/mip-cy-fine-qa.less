@@ -4,17 +4,17 @@
 
 mip-cy-fine-qa {
     .positive-tags {
-        padding: .12rem .12rem 0;
         overflow: hidden;
+        padding: .12rem .12rem 0;
         .positive-list {
             float: left;
-            font-size: .14rem;
-            color: #666;
-            background-color: #f0f2f5;
-            padding: .04rem .20rem;
             margin-right: .20rem;
             margin-bottom: .10rem;
+            padding: .04rem .20rem;
+            font-size: .14rem;
+            color: #666;
             border-radius: .04rem;
+            background-color: #f0f2f5;
             &.cur {
                 color: #fff;
                 background-color: #2ec561;
@@ -33,44 +33,46 @@ mip-cy-fine-qa {
         font-family: PingFangSC-Regular;
 
         &::after {
-            content: '';
+            content: "";
             position: absolute;
-            left: 0;
             right: -.15rem;
             bottom: 0;
-            border-bottom: 1px solid #F1F1F1;
+            left: 0;
+            border-bottom: 1px solid #f1f1f1;
         }
         &-title {
             display: flex;
-            flex-wrap: nowrap;
             font-size: .15rem;
+
+            flex-wrap: nowrap;
         }
         &-ask-tag {
-            margin-top: .02rem;
-            margin-right: .05rem;
             width: .16rem;
             height: .16rem;
+            margin-top: .02rem;
+            margin-right: .05rem;
+            font-size: .13rem;
+            line-height: .16rem;
+            text-align: center;
+            color: #fff;
+            border-radius: .02rem;
+            background: #ffa800;
+
             flex-grow: 0;
             flex-shrink: 0;
-            font-size: .13rem;
-            color: #FFFFFF;
-            text-align: center;
-            line-height: .16rem;
-            background: #FFA800;
-            border-radius: .02rem;
         }
         &-content {
             margin-top: .15rem;
             font-family: PingFangSC-Light;
             font-size: .14rem;
-            color: #323232;
             letter-spacing: 0;
+            color: #323232;
         }
     }
 
     .no-content {
-        color: #cecece;
+        line-height: 1rem;
         text-align: center;
-        line-height: .4rem;
+        color: #cecece;
     }
 }

@@ -9,7 +9,7 @@ define(function (require) {
     var customElement = require('customElement').create();
     var positiveCaches = {};
     var $ = require('zepto');
-    var domain = 'https://biztest.chunyu.me';
+    var domain = 'https://m.chunyuyisheng.com';
     var $qaWrap = '';
 
     customElement.prototype.build = function () {
@@ -37,6 +37,13 @@ define(function (require) {
         $.ajax({
             url: domain + '/m/doctor/' + doctorId + '/qa/',
             dataType: 'json',
+            // xhrFields:{
+            //     withCredentials:false
+            // },
+            // crossDomain: true,
+            // headers: {
+            //     "X-Requested-With": "XMLHttpRequest"
+            // },
             data: {
                 'is_json': 1,
                 'page_count': 3,
@@ -58,6 +65,7 @@ define(function (require) {
                     if (item.title) {
                         html.push(item.title);
                     }
+
                     html.push('</div>');
                     html.push('<p class="fine-qa-content">');
                     html.push(item.ask);
@@ -66,6 +74,7 @@ define(function (require) {
                 if (len === 0) {
                     html.push('<div class="no-content">没有相关内容</div>');
                 }
+
                 html.push('</div>');
                 positiveCaches[type] = html.join('');
                 $qaWrap.html(positiveCaches[type]);

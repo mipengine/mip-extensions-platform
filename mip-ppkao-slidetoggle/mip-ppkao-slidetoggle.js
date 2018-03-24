@@ -19,7 +19,7 @@ define(function (require) {
         });
         var questionsContainer = showmore.parents('.kaoshi-fenlei').find('.questions-container');
         var xscs = true;
-        var url = '//dynamic.ppkao.com/Interface/PageAPI.ashx?action=GetSpecialsTJZD';
+        var url = '//data.api.ppkao.com/Interface/PageAPI.ashx?action=GetSpecialsTJZD';
         showmore.find('.kemulist li').on('click', function () {
             button.find('b').text($(this).text());
             var CategoryID = $(this).data('categoryid');

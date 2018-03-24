@@ -169,7 +169,7 @@ define(function (require) {
                         self.addEventAction('more', function () {
                             pushResult.call(self, src);
                         });
-                        $(element).after('<div class="mip-list-more" on="tap:mip-list.more">点击查看更多</div>');
+                        $(element).after('<div class="mip-list-more" on="tap:mip-cy-list.more">点击查看更多</div>');
                     }
                 }
 

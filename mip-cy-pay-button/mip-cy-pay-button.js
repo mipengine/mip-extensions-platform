@@ -9,6 +9,7 @@ define(function (require) {
     var $ = require('zepto');
     require('./initJs');
     var customElement = require('customElement').create();
+    var domain = 'https://m.chunyuyisheng.com';
 
     /**
      * 第一次进入可视区回调，只会执行一次
@@ -40,9 +41,10 @@ define(function (require) {
                         if ($ele.hasClass('disabled')) {
                             return;
                         }
+
                         $ele.addClass('disabled');
                         $.ajax({
-                            url: 'https://biztest.chunyu.me/weixin/pay/create_order/',
+                            url: domain + '/weixin/pay/create_order/',
                             type: 'post',
                             cache: false,
                             data: {

@@ -18,21 +18,23 @@ define(function (require) {
         var inputVal = $ele.attr('input-val') || '';
         var replace = $ele.attr('replace');
         var html = [
-            '<div class="mip-cy-search-wrap">',
+            '<form action="" id="mip-cy-search" class="mip-cy-search-wrap">',
             '<input type="search" id="mip-cy-query" ',
             'placeholder="' + placeholder + '"',
             'value="' + inputVal + '">',
-            '<button id="mip-cy-search"></button>',
-            '</div>'
+            '<button></button>',
+            '</form>'
         ].join('');
 
         $ele.html(html);
-        $('#mip-cy-search').on('click', function () {
+        $('#mip-cy-search', $ele).on('submit', function (event) {
+            event.preventDefault();
             var url = $.trim($ele.attr('url')) || '';
             var index = url.indexOf('?');
             var paramName = $ele.attr('param-name') || 'query';
             var query = $.trim($('#mip-cy-query').val());
             var param = paramName + '=' + query;
+            $('#mip-cy-query', $ele).blur();
             if (index === -1) {
                 url += '?';
             }

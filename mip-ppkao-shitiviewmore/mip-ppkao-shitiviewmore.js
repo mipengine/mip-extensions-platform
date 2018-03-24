@@ -14,7 +14,7 @@ define(function (require) {
     customElement.prototype.firstInviewCallback = function () {
         var ele = this.element;
         var button = $(ele);
-        var url = '//dynamic.ppkao.com/Interface/PageAPI.ashx?action=' + ele.dataset.action;
+        var url = '//data.api.ppkao.com/Interface/PageAPI.ashx?action=' + ele.dataset.action;
         if (ele.dataset.tid) {
             url += '&tid=' + ele.dataset.tid;
         }

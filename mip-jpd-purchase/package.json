@@ -1,0 +1,14 @@
+{
+    "name": "mip-jpd-purchase",
+    "version": "1.0.0",
+        "description": "JPD自定义加减组件",
+    "contributors": [
+        {
+            "name": "zc",
+            "email": "1961722391@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

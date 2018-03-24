@@ -27,8 +27,8 @@ define(function (require) {
                     'partner': partner
                 });
                 window.MIP.setData({
-                    'orderType': 'qa_upgrade',
-                    'infoDict': infoDict
+                    orderType: 'qa_upgrade',
+                    infoDict: infoDict
                 });
             }
             else {
@@ -39,8 +39,8 @@ define(function (require) {
                     'partner': partner
                 });
                 window.MIP.setData({
-                    'orderType': 'paid_clinic',
-                    'infoDict': infoDict
+                    orderType: 'paid_clinic',
+                    infoDict: infoDict
                 });
             }
             $ele.find('#total-price').text('¥ ' + totalPrice);

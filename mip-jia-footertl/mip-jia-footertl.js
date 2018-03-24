@@ -163,22 +163,22 @@ define(function (require) {
 
                 str += '<mip-fixed type="bottom" class="fixed-footer">';
                 str += '<div class="fixed-footer-box">';
-                str += '<a class="item" href="javascript:;" bdsl-click-service="" bdsl-extra="{id:10002}">';
+                str += '<a class="item sj" href="javascript:;" bdsl-click-service="" bdsl-extra="{id:10002}">';
                 str += '<i class="icon pos1"></i>';
                 str += '<p class="txt">免费设计</p>';
                 str += '</a>';
-                str += '<a class="item" href="javascript:;" bdsl-click-service="" bdsl-extra="{id:10001}">';
+                str += '<a class="item bj" href="javascript:;" bdsl-click-service="" bdsl-extra="{id:10001}">';
                 str += '<i class="icon pos2"></i>';
                 str += '<p class="txt">智能报价</p>';
                 str += '</a>';
                 str += '<a class="hb-wrap footer_xrhb" href="javascript:;"';
                 str += 'bdsl-click-service="" bdsl-extra="{id:10003}">';
                 str += '</a>';
-                str += '<a class="item" href="javascript:;" bdsl-click-service="" bdsl-extra="{id:10007}">';
+                str += '<a class="item dk" href="javascript:;" bdsl-click-service="" bdsl-extra="{id:10007}">';
                 str += '<i class="icon pos3"></i>';
                 str += '<p class="txt">免息贷</p>';
                 str += '</a>';
-                str += '<a class="item" href="javascript:;" bdsl-click-service="" bdsl-extra="{id:10008}">';
+                str += '<a class="item qj" href="javascript:;" bdsl-click-service="" bdsl-extra="{id:10008}">';
                 str += '<i class="icon pos4"></i>';
                 str += '<p class="txt">全景定制</p>';
                 str += '</a>';
@@ -215,15 +215,21 @@ define(function (require) {
 
                 cityFn();
 
-                zxbjPage.method.windowScroll(ele);
+                zxbjPage.method.windowScroll(data, ele);
 
                 // 点击展开按钮
                 zxbjPage.method.clickUpFun(data, ele);
 
                 // 点击报名按钮
                 zxbjPage.method.zxbjSubmitBtn(data, ele);
+
+                // 加载图片
+                zxbjPage.method.loadImg('//mued3.jia.com/image/mobile/toutiao/footer-top-1.png');
+                zxbjPage.method.loadImg('//mued3.jia.com/image/mobile/toutiao/footer-top-2.png');
+                zxbjPage.method.loadImg('//mued3.jia.com/image/mobile/toutiao/footer-top-3.png');
+                zxbjPage.method.loadImg('//mued3.jia.com/image/mobile/toutiao/footer-top-4.png');
             },
-            scrollFun: function (ele) {
+            scrollFun: function (data, ele) {
                 var $this = $(ele);
                 // 滚动条滚动的距离
                 var scrollTop = viewport.getScrollTop();
@@ -236,19 +242,29 @@ define(function (require) {
                     return false;
                 }
                 // 滚动超过一屏
-                if (scrollTop > viewHei) {
-                    storage.set('usFlag', 'true', 21600000);
-                    // showpopmask($this);
-                    $this.find('.footer_xrhb').trigger('click');
+                if ($(data.scrollClass).length > 0) {
+                    var eleTop = $(data.scrollClass).offset().top;
+                    if (location.host === 'm.jia.com' || util.platform.isAndroid()) {
+                        if (eleTop <= scrollTop + viewHei / 2) {
+                            storage.set('usFlag', 'true', 21600000);
+                            $this.find('.footer_xrhb').trigger('click');
+                        }
+                    }
+                    else {
+                        if (eleTop <= viewHei / 2) {
+                            storage.set('usFlag', 'true', 21600000);
+                            $this.find('.footer_xrhb').trigger('click');
+                        }
+                    }
                 }
             },
-            windowScroll: function (ele) {
+            windowScroll: function (data, ele) {
                 // 滚动事件
                 viewport.on('scroll', function () {
                     if (storage.get('usFlag') === 'true') {
                         return false;
                     }
-                    zxbjPage.method.scrollFun(ele);
+                    zxbjPage.method.scrollFun(data, ele);
                 });
             },
             changeHtml: function (obj, ele) {
@@ -260,6 +276,14 @@ define(function (require) {
                     .siblings('.tit').html('<span>' + obj.tit + '</span>');
                 $(ele).find('.fixed-footer')
                     .attr('class', 'fixed-footer ' + obj['class']);
+            },
+            loadImg: function (url) {
+                var img = new Image();
+                img.onload = function () {
+                    img.onload = img.onerror = img.onabort = null;
+                    img = null;
+                };
+                img.src = url;
             },
             clickUpFun: function (data, ele) {
                 var $this = $(ele).find('.item');

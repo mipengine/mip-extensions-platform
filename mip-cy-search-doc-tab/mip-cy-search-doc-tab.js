@@ -9,6 +9,7 @@ define(function (require) {
     var $ = require('zepto');
     var Modal = require('./modal');
     var customElement = require('customElement').create();
+    var domain = 'https://m.chunyuyisheng.com';
 
     /**
      * 第一次进入可视区回调，只会执行一次
@@ -97,7 +98,9 @@ define(function (require) {
         $('#mip-cy-query', $ele).bind('input propertychange', function () {
             setData('query', $.trim($('#mip-cy-query').val()));
         });
-        $('#mip-cy-search', $ele).on('click', function () {
+        $('#mip-cy-search', $ele).on('submit', function (event) {
+            event.preventDefault();
+            $('#mip-cy-query', $ele).blur();
             renderDocList(getSrc());
             modal.close();
         });
@@ -121,7 +124,7 @@ define(function (require) {
         }
 
         function getSrc() {
-            var url = 'https://biztest.chunyu.me/mip/search_doctor/?';
+            var url = domain + '/mip/search_doctor/?';
             var paras = [
                 'clinic_no=' + getData('clinicId'),
                 '&second_class_clinic_no=' + getData('scnId'),
@@ -137,7 +140,7 @@ define(function (require) {
             var html = [
                 '<mip-cy-list template="mip-cy-doc-list"',
                 ' src=' + src,
-                ' id="mip-list" has-more pnName="page" preLoad>',
+                ' id="mip-cy-list" has-more pnName="page" preLoad>',
                 '</mip-cy-list>'
             ].join('');
 

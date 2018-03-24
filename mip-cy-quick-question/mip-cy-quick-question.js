@@ -9,7 +9,7 @@ define(function (require) {
     var $ = require('zepto');
     require('./initJs');
     var customElement = require('customElement').create();
-    var domain = 'https://biztest.chunyu.me';
+    var domain = 'https://m.chunyuyisheng.com';
 
     /**
      * 第一次进入可视区回调，只会执行一次
@@ -42,27 +42,25 @@ define(function (require) {
                     url: domain + '/files/upload_multi_image/?type=image&return_full=true',
                     auto: true,
                     type: 'file',
-                    fileVal: 'fileVal',
-                    compress: {
-                        width: 1600,
-                        height: 1600,
-                        quality: .8
-                    },
+                    fileVal: 'images',
                     onBeforeQueued: function (files) {
                         // `this` 是轮询到的文件, `files` 是所有文件
                         if (['image/jpg', 'image/jpeg', 'image/png', 'image/gif'].indexOf(this.type) < 0) {
                             alert('请上传图片');
                             return false;
                         }
+
                         if (this.size > 10 * 1024 * 1024) {
                             alert('请上传不超过10M的图片');
                             return false;
                         }
+
                         // 防止一下子选择过多文件
                         if (files.length > 5) {
                             alert('最多只能上传5张图片，请重新选择');
                             return false;
                         }
+
                         if (uploadCount + 1 > 5) {
                             alert('最多只能上传5张图片');
                             return false;
@@ -72,17 +70,23 @@ define(function (require) {
                         $ele.find('#uploadCount').html(uploadCount);
                     },
                     onQueued: function () {
-                        console.log(this);
+                        // console.log(this);
                     },
                     onBeforeSend: function (data, headers) {
-                        console.log(this, data, headers);
+                        // console.log(this, data, headers);
                     },
                     onProgress: function (procent) {
-                        console.log(this, procent);
+                        // console.log(this, procent);
                     },
-                    onSuccess: function (ret) {
+                    onSuccess: function (files, ret) {
                         toast('图片上传成功');
-                        console.log(this, ret);
+                        var id = this.id;
+                        if (files.files && files.files[0]) {
+                            var file = files.files[0];
+                            var dom = $ele.find('.cyui-uploader__file[data-id="' + id + '"]');
+                            dom.append('<input type="hidden" class="j-uploader-image" value="' + file + '">');
+                        }
+
                     },
                     onError: function (err) {
                         toast('图片上传失败，请重试');
@@ -96,6 +100,7 @@ define(function (require) {
                     if (url) {
                         url = url.match(/url\((.*?)\)/)[1].replace(/'/g, '');
                     }
+
                     // gallery 展示图片，删除图片
                     var gallery1 = gallery(url, {
                         className: 'custom-classname',
@@ -111,11 +116,12 @@ define(function (require) {
                             });
                         }
                     });
+                    $('.cyui-gallery__img').css('background-image', 'url(' + url + ')');
                 });
 
                 $ele.find('#showDatePicker').on('click', function () {
                     datePicker({
-                        start: 1990,
+                        start: 1909,
                         end: getDateStr(),
                         onConfirm: function (result) {
                             var str = '';
@@ -138,9 +144,11 @@ define(function (require) {
                     if (askBtn.hasClass('disabled')) {
                         return;
                     }
+
                     if (validateFrom()) {
                         submitFrom();
                     }
+
                 });
 
                 $ele.find('.j-check-label').on('click', function () {
@@ -187,26 +195,36 @@ define(function (require) {
                 }
 
                 function submitFrom() {
-                    askBtn.addClass('disabled');
-                    var partner = 'chunyu_xzh';
-                    var content = JSON.stringify([{
+                    var content = [{
                         type: 'text',
                         text: descriptionDom.val()
                     }, {
                         type: 'patient_meta',
                         sex: $ele.find('input[name=sex]:checked').val(),
                         age: dateDom.val()
-                    }]);
+                    }];
+
+                    $.each($ele.find('.j-uploader-image'), function (index, item) {
+                        content.push({
+                            type: 'image',
+                            file: $(item).val()
+                        });
+                    });
+
+                    askBtn.addClass('disabled');
+                    content = JSON.stringify(content);
+
+                    var postData = {
+                        partner: 'chunyu_xzh',
+                        content: content
+                    };
 
                     $.ajax({
                         url: domain + '/cooperation/wap/create_free_problem/',
                         dataType: 'json',
                         type: 'post',
                         cache: false,
-                        data: {
-                            partner: partner,
-                            content: content
-                        },
+                        data: postData,
                         complete: function () {
                             askBtn.removeClass('disabled');
                         },
@@ -238,7 +256,6 @@ define(function (require) {
                     + '-' + (day < 10 ? '0' + day : day);
                     return nowDay;
                 }
-
             }
             else {
                 setTimeout(init, 0);

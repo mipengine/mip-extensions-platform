@@ -1,15 +1,21 @@
 /**
  * @file mip-cy-root 组件
- * @author
+ * @author 春雨前端开发组
  */
 
 define(function (require) {
     'use strict';
 
     var customElement = require('customElement').create();
+    var FastClick = require('./fastclick');
+    var $ = require('zepto');
 
     customElement.prototype.build = function () {
         flexible();
+        // 消除点击300ms延迟
+        $(function () {
+            FastClick.attach(document.body);
+        });
     };
 
     /**
@@ -39,9 +45,11 @@ define(function (require) {
                 doc.documentElement.classList.add('hairline');
             }
         }
+
         if (!doc.addEventListener) {
             return;
         }
+
         window.addEventListener(resizeEvt, recalc, false);
         doc.addEventListener('DOMContentLoaded', recalc, false);
     }
