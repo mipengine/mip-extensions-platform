@@ -341,7 +341,7 @@ define(function () {
 	 * Check whether the given target element is a child of a scrollable layer and if so, set a flag on it.
 	 *
 	 * @param {EventTarget|Element} targetElement
-	* @return
+     */
     FastClick.prototype.updateScrollParent = function (targetElement) {
         var scrollParent,
             parentElement;
