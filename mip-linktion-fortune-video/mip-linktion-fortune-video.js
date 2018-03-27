@@ -29,6 +29,8 @@ define(function (require) {
                 }
             }
             this.addEventAction('open', function (event) {
+                var stringOption = 'tap:modal-video.close tap:video.close';
+                $el.find('#MIP-LLIGTBOX-MASK').attr('on', stringOption);
                 var video = modelCloseBtn[0];
                 if (videoPopBtn.hasClass('more')) {
                     video.play();

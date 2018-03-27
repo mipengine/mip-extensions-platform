@@ -18,6 +18,21 @@ define(function (require) {
         if (ele.dataset.tid) {
             url += '&tid=' + ele.dataset.tid;
         }
+        if (ele.dataset.categoryid) {
+            url += '&CategoryID=' + ele.dataset.categoryid;
+        }
+        if (ele.dataset.channelid) {
+            url += '&ChannelID=' + ele.dataset.channelid;
+        }
+        if (ele.dataset.type) {
+            url += '&Type=' + ele.dataset.type;
+        }
+        if (ele.dataset.prov) {
+            url += '&prov=' + ele.dataset.prov;
+        }
+        if (ele.dataset.numid) {
+            url += '&numID=' + ele.dataset.numid;
+        }
         var page = 1;
         button.on('click', function () {
             viewMore();
@@ -45,7 +60,7 @@ define(function (require) {
                     if (data.name === null || data.name === '') {
                         button.html('暂无更多内容');
                     } else {
-                        $('#zx_item').append(data.name);
+                        $(ele).find('#zx_item').append(data.name);
                     }
                 },
                 error: function (err) {
