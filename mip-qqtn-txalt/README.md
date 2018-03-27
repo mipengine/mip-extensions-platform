@@ -13,18 +13,6 @@ mip-qqtn-txalt 内容页图片展示放大组件
 ```html
 <mip-qqtn-txalt>
 <div class="g-cont" id="content">
-<p >
-    <mip-img src="http://pic1.qqtn.com/qqtn/mb/up/2018-1/15160673702911863_400_400.jpg" ></mip-img>
-</p>
-
-</p>
-<p >
-    我们真的走到尽头了，你的眼泪告诉我，我是多么的失败。
-</p>
-<p >
-    既然无法给你幸福，那么我祝福你幸福！
-</p>
-<p ><mip-img src="http://pic.qqtn.com/up/2017-12/2017120416270028431.jpg"></mip-img></p><p ><mip-img src="http://pic.qqtn.com/up/2017-12/2017120416270086248.jpg"></mip-img></p><p ><mip-img src="http://pic.qqtn.com/up/2017-12/2017120416270138294.jpg"></mip-img></p><p ><mip-img src="http://pic.qqtn.com/up/2017-12/2017120416270177554.jpg"></mip-img></p>喜欢养小动物的人，都是内心非常有爱心的，也是比较孤独的。</p><p >宠物可以为他们的生活增添乐趣，让他们日子更加丰富和精彩。</p>
-<p align="center"><mip-img src="https://pic.qqtn.com/up/2018-3/15204970642968168.jpg!360_360"></mip-img></p><p align="center"><mip-img src="https://pic.qqtn.com/up/2018-3/15204970641899198.jpg!360_360"></mip-img></p>
+<p ><mip-img src="http://pic1.qqtn.com/qqtn/mb/up/2018-3/15220533667263822_400_400.jpg"></mip-img></p><p ><mip-img src="https://pic.qqtn.com/up/2018-3/15220533664459562.jpg!360_360"></mip-img></p><p ><mip-img src="https://pic.qqtn.com/up/2018-3/15220533662362958.jpg!360_360"></mip-img></p><p ><mip-img src="https://pic.qqtn.com/up/2018-3/15220533678810972.jpg!360_360"></mip-img></p><p ><mip-img src="https://pic.qqtn.com/up/2018-3/15220533677636534.jpg!360_360"></mip-img></p><p ><mip-img src="https://pic.qqtn.com/up/2018-3/15220533675713102.jpg!360_360"></mip-img></p><p ><mip-img src="https://pic.qqtn.com/up/2018-3/15220533688644255.jpg!360_360"></mip-img></p><p ><mip-img src="https://pic.qqtn.com/up/2018-3/15220533685132337.jpg!360_360"></mip-img></p><p ><mip-img src="https://pic.qqtn.com/up/2018-3/15220533684597852.jpg!360_360"></mip-img></p><p ><mip-img src="https://pic.qqtn.com/up/2018-3/15220533689005568.jpg!360_360"></mip-img></p><p ><mip-img src="https://pic.qqtn.com/up/2018-3/15220533682689390.jpg!360_360"></mip-img></p><p ><mip-img src="https://pic.qqtn.com/up/2018-3/15220533685520017.jpg!360_360"></mip-img></p><p >喜欢甜甜的恋爱，又不想随意将就，所以我总是相信，我等的人，</p><p >他是最好的，最爱我的我最爱的，他在不远的未来呀。</p>
 </div>
 </mip-qqtn-txalt>

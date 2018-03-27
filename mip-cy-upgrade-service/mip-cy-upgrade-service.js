@@ -18,9 +18,9 @@ define(function (require) {
 
         $ele.find('.cyui-switch').on('click', function (event) {
             if ($(this).prop('checked')) {
+                $ele.find('.cyui-switch').not(this).prop('checked', false);
                 var price = $ele.find('.cyui-switch:checked').val();
                 var totalPrice = 2 + Number(price);
-                $ele.find('.cyui-switch').not(this).prop('checked', false);
                 var infoDict = JSON.stringify({
                     'upgrade_type': $ele.find('.cyui-switch:checked').data('upgrade-type'),
                     'problem_id': problemId,

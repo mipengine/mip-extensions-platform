@@ -17,10 +17,10 @@ define(function (require) {
         var doctorId = $ele.attr('doctor-id') || '';
         $qaWrap = $ele.find('.J-cy-mip-fine-qa-wrap');
 
-        getFineQA('all', doctorId);
+        getFineQA('', doctorId);
         $ele.find('.J-cy-mip-fine-qa').on('click', function () {
             var $this = $(this);
-            var type = $this.data('type') || 'undefined';
+            var type = $this.data('type') || '';
             var html = positiveCaches[type];
             $ele.find('.J-cy-mip-fine-qa').removeClass('cur');
             $this.addClass('cur');
@@ -37,13 +37,6 @@ define(function (require) {
         $.ajax({
             url: domain + '/m/doctor/' + doctorId + '/qa/',
             dataType: 'json',
-            // xhrFields:{
-            //     withCredentials:false
-            // },
-            // crossDomain: true,
-            // headers: {
-            //     "X-Requested-With": "XMLHttpRequest"
-            // },
             data: {
                 'is_json': 1,
                 'page_count': 3,

@@ -7,15 +7,9 @@ define(function (require) {
     'use strict';
 
     var customElement = require('customElement').create();
-    var FastClick = require('./fastclick');
-    var $ = require('zepto');
 
     customElement.prototype.build = function () {
         flexible();
-        // 消除点击300ms延迟
-        $(function () {
-            FastClick.attach(document.body);
-        });
     };
 
     /**

@@ -1,0 +1,15 @@
+{
+    "name": "mip-qqtn-imgenlarge",
+    "version": "1.0.0",
+    "description": "图片放大，放大后切换",
+    "contributors": [
+        {
+            "name": "qqtn",
+            "email": "gom3250@qq.com",
+            "url": "https://m.qqtn.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.0.0"
+    }
+}

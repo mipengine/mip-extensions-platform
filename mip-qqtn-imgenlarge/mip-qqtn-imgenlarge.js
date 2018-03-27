@@ -1,7 +1,7 @@
 /**
- * @file mip-qqtn-txalt 组件.点击图片放大，一键下载图片，只有安卓显示。版本1.1.1 配合升级到https协议后的图片路径进行重新获取。1.1.2去掉一层判断，优化代码
+ * @file mip-qqtn-imgenlarge 图片点击放大后切换效果。
  * @author gom3250@qq.com.
- * @version 1.1.2
+ * @version 1.0.0
  *  */
 
 define(function (require) {
@@ -18,18 +18,16 @@ define(function (require) {
         var dWidth = viewport.getWidth();
         var dHeight = viewport.getHeight();
         // 增加专属属性供JS使用
-        $(ele).find('mip-qqtn-txalt mip-img').each(function (i) {
+        $(ele).find('mip-qqtn-imgenlarge mip-img').each(function (i) {
             var myimgurl = $(this).attr('src');
             var myihao = myimgurl.split('!')[0];
-            $(this).attr({'data-index': i, 'data-original': myimgurl});
+            $(this).attr({'data-index': i, 'data-original': myihao});
         });
         var ui = {
             defaultSetting: {
                 app: 'false',
-                appurl: 'http://nz.qqtn.com/zbsq/Apk/gxtx_qqtn.apk',
                 nexturl: '',
-                download: '保存图片',
-                txtxt: '设为头像'
+                download: '保存图片'
             },
             slider: '',
             downloadBtn: '',
@@ -56,7 +54,6 @@ define(function (require) {
                             left: 0,
                             top: (dHeight - img.height * dWidth / img.width) / 2 + 'px'
                         });
-
                         slide.appendChild(img);
                         self.slider.appendChild(slide);
                     };
@@ -66,39 +63,21 @@ define(function (require) {
             createWrap: function () {
                 var overlay = document.createElement('div');
                 overlay.id = 'mip-txalt-overlay';
-
                 var slider = document.createElement('div');
                 slider.id = 'mip-txalt-slider';
                 this.slider = slider;
                 // 设置slider宽度
                 css(slider, {width: this.eLen * dWidth + 'px'});
-
                 var picdownload = document.createElement('a');
                 picdownload.id = 'mip-txalt-download';
                 picdownload.innerHTML = ui.defaultSetting.download;
                 this.downloadBtn = picdownload;
-
                 var overlayClose = document.createElement('a');
                 overlayClose.id = 'mip-txalt-close';
-
-                var downapk = document.createElement('a');
-                downapk.id = 'mip-txalt-appdown';
-                downapk.innerHTML = ui.defaultSetting.txtxt;
-                downapk.href = this.defaultSetting.appurl;
-
                 overlay.appendChild(slider);
                 overlay.appendChild(overlayClose);
                 overlay.appendChild(picdownload);
-
-                // 判断设备,安卓才下APK
-                if (/android/i.test(navigator.userAgent)) {
-                    overlay.appendChild(downapk);
-                    picdownload.setAttribute('style', 'right:auto;left:15%');
-                }
-
                 document.body.appendChild(overlay);
-
-
                 // 关闭按钮事件监听
                 overlayClose.addEventListener('click', function () {
                     document.body.removeChild(overlay);
@@ -109,7 +88,6 @@ define(function (require) {
                 slide.className = 'mip-txalt-slide';
                 // 初始化slide样式
                 css(slide, {width: dWidth, height: dHeight});
-
                 return slide;
             },
             actions: function () {
