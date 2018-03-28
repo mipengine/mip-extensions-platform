@@ -1,0 +1,14 @@
+{
+    "name": "mip-flexible",
+    "version": "1.0.0",
+    "description": "mip rem 自适应方案",
+    "contributors": [
+        {
+            "name": "ibesty",
+            "email": "i@tangkunhou.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
