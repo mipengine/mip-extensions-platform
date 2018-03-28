@@ -23,28 +23,31 @@ define(function (require) {
             body.type = tryBtn.data('type');
             var checkboxWrap = tryBtn.parents().siblings('.select-checkbox').children('.form-group');
             var checked = checkboxWrap.children('input[type=radio]:checked').val();
-            if (body.name === '') {
-                alert('请填写姓名');
-            }
-            else if (body.mobile === '') {
-                alert('请填写电话');
-            }
-            else {
-                body.state = checked;
-                if (!body.state) {
-                    alert('请选择我的家庭情况');
+            var aipUrl = tryBtn.data('url');
+            if (aipUrl.length !== 0) {
+                if (body.name === '') {
+                    alert('请填写姓名');
+                }
+                else if (body.mobile === '') {
+                    alert('请填写电话');
                 }
                 else {
-                    $.ajax({
-                        type: 'post',
-                        data: body,
-                        url: 'https://47.100.7.250:8080/product/saveCustomization'
-                    }).done(function (data) {
-                        if (data) {
-                            $el.find('.form-close').trigger('click');
-                            $el.find('.try-btn-end').trigger('click');
-                        }
-                    });
+                    body.state = checked;
+                    if (!body.state) {
+                        alert('请选择我的家庭情况');
+                    }
+                    else {
+                        $.ajax({
+                            url: aipUrl,
+                            type: 'post',
+                            data: body
+                        }).done(function (data) {
+                            if (data) {
+                                $el.find('.form-close').trigger('click');
+                                $el.find('.try-btn-end').trigger('click');
+                            }
+                        });
+                    }
                 }
             }
         });

@@ -51,7 +51,7 @@ mip-linktion-try 弹框ajax提交信息并后续弹框提示操作结果
 	            </div>
 	          </div>
 	          <div class="form-group-but">
-	            <button type="button" class="insurance-but"  id="try-btn"  data-type="3" on="tap:try.open" data-url="http://47.100.7.250:8080/product/saveCustomization">提交</button>
+	            <button type="button" class="insurance-but"  id="try-btn"  data-type="3" on="tap:try.open" data-url="http://47.100.7.250:8080/memberCustomization/saveCustomization">提交</button>
 	          </div>
 	      </div>
 	    </div>
