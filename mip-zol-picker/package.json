@@ -1,0 +1,14 @@
+{
+    "name": "mip-zol-picker",
+    "version": "1.0.0",
+    "description": "日期和城市选择器",
+    "contributors": [
+        {
+            "name": "liuxianggui",
+            "email": "liu.xianggui@zol.com.cn"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

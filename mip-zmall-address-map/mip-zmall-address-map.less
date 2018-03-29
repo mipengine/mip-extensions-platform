@@ -1,0 +1,217 @@
+mip-zmall-address-map {
+    height: 100%;
+    .onePxLine (
+        @pos: top,
+        @background: #ccc
+    ) {
+        content: '';
+        position: absolute;
+        z-index: 4;
+        left: 0;
+        width: 1000%;
+        height: .1rem;
+        -webkit-transform: scale(.1);
+        transform: scale(.1);
+        -webkit-transform-origin: left @pos;
+        transform-origin: left @pos;
+        background: @background;
+    }
+    .onePxLineTop (@background: #ccc) {
+        top: 0;
+        .onePxLine(top, @background);
+    }
+    .onePxLineBottom (@background: #ccc) {
+        bottom: 0;
+        .onePxLine(bottom, @background);
+    }
+    .map-fix {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        padding: 1.65rem 0 1.59rem 0;
+        z-index: 99999;
+        background: #fff;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        overflow: hidden;
+        -webkit-transition: top .2s ease-in-out;
+        transition: top .2s ease-in-out;
+    }
+    .map-fix.show {
+        top: 0;
+    }
+    .map-fix__search {
+        position: absolute;
+        z-index: 2;
+        left: 0;
+        top: 0;
+        width: 100%;
+        padding: .3rem .56rem;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        .search-box {
+            height: .7rem;
+            padding: .15rem .3rem .15rem 1.33rem;
+            border: 1px solid #ccc;
+            border-radius: .55rem;
+            -webkit-border-radius: .55rem;
+            overflow: hidden;
+            background: url('//icon.zol-img.com.cn/newshop/mip/search.png') no-repeat .6rem center;
+            background-size: .42rem .42rem;
+        }
+        .search-keyword {
+            display: block;
+            width: 100%;
+            height: .7rem;
+            line-height: .7rem;
+            font-size: .48rem;
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            border: 0 none;
+            padding: 0;
+            outline: 0 none;
+        }
+    }
+    .map-fix__box {
+        height: 100%;
+        position: relative;
+        padding-top: 6rem;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        -webkit-transition: padding .3s ease-in-out;
+        transition: padding .3s ease-in-out;
+    }
+    .map-fix__box::before {
+        .onePxLineTop(#ccc);
+    }
+    .map-fix__box.searching {
+        padding-top: 0;
+    }
+    .map-fix__map {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 6rem;
+    }
+    .map-fix__map::after {
+        .onePxLineBottom(#ccc);
+    }
+    .map-fix__map::before {
+        content: '';
+        position: absolute;
+        z-index: 99;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        width: .36rem;
+        height: .48rem;
+        background: url('//icon.zol-img.com.cn/newshop/mip/location-blue.png?v=1') no-repeat left center;
+        -webkit-background-size: .36rem .48rem;
+        background-size: .36rem .48rem;
+    }
+    .map-fix__scroller {
+        position: relative;
+        z-index: 2;
+        height: 100%;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+        background: #fff;
+    }
+    .search__empty {
+        height: 1.56rem;
+        line-height: 1.56rem;
+        text-align: center;
+        font-size: .48rem;
+        color: #999;
+    }
+    .search__empty::before {
+        content: '';
+        vertical-align: top;
+        display: inline-block;
+        margin: .51rem .15rem 0 0;
+        width: .36rem;
+        height: .48rem;
+        background: url('//icon.zol-img.com.cn/newshop/mip/location-gray.png') no-repeat left center;
+        -webkit-background-size: .36rem .48rem;
+        background-size: .36rem .48rem;
+    }
+    .search__fail {
+        display: none;
+        position: absolute;
+        left: 0;
+        top: 20%;
+        width: 100%;
+        height: 1rem;
+        line-height: 1rem;
+        font-size: .54rem;
+        color: #999;
+        text-align: center;
+    }
+    .searching .search__fail {
+        display: block;
+    }
+    .search-result__list {
+        position: relative;
+        > li {
+            position: relative;
+            transform: translate3d(0, 0, 0);
+            padding: .44rem 1.42rem .44rem 0;
+            margin-left: .53rem;
+            h4 {
+                line-height: .74rem;
+                font-size: .54rem;
+                color: #333;
+            }
+            p {
+                line-height: .66rem;
+                font-size: .48rem;
+                color: #999;
+            }
+        }
+        > li::before {
+            .onePxLineTop(#ccc);
+        }
+        > li::after {
+            position: absolute;
+            right: .56rem;
+            top: 50%;
+            content: '';
+            width: .24rem;
+            height: .24rem;
+            margin-top: -.14rem;
+            border: 1px solid #666;
+            border-left: 0 none;
+            border-top: 0 none;
+            transform: rotate(-45deg);
+            -webkit-transform: rotate(-45deg);
+            transition: .5s all linear;
+            -webkit-transition: .5s all linear;
+        }
+        > li:first-child::before {
+            content: none;
+        }
+    }
+    .search-result__list::after {
+        .onePxLineBottom(#ccc);
+    }
+    .map-fix__back {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 1.59rem;
+        line-height: 1.59rem;
+        text-align: center;
+        font-size: .54rem;
+        color: #666;
+        background-color: #f2f2f2;
+    }
+    .map-fix__back::after {
+        .onePxLineTop(#e0e0e0);
+    }
+}

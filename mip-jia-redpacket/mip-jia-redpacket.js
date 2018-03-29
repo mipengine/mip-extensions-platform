@@ -28,11 +28,13 @@ define(function (require) {
     function open(event) {
         fixedElement.hideFixedLayer(fixedElement._fixedLayer);
         event.preventDefault();
-        // 保存页面当前滚动状态，因为设置overflow:hidden后页面会滚动到顶部
-        scrollTop.body = document.body.scrollTop;
-        scrollTop.documentElement = document.documentElement.scrollTop;
-        scrollTop.offset = window.pageYOffset;
-        document.documentElement.classList.add('mip-no-scroll');
+        if (!document.documentElement.classList.contains('mip-no-scroll')) {
+            // 保存页面当前滚动状态，因为设置overflow:hidden后页面会滚动到顶部
+            scrollTop.body = document.body.scrollTop;
+            scrollTop.documentElement = document.documentElement.scrollTop;
+            scrollTop.offset = window.pageYOffset;
+            document.documentElement.classList.add('mip-no-scroll');
+        }
     }
 
 
@@ -233,6 +235,67 @@ define(function (require) {
                 }
             });
         });
+    };
+
+    /**
+     * 编译参数
+     *
+     * @class
+     * @param {Object} data 参数对象
+     * @return {string} 返回参数
+     */
+    RedPacket.prototype.dataFormat = function (data) {
+        if (typeof data !== 'object') {
+            return '';
+        }
+        else {
+            var str = '?';
+            for (var i in data) {
+                str += i + '=' + data[i] + '&';
+            }
+            str = str.slice(0, -1);
+            return str;
+        };
+    };
+
+    /**
+     * 领取红包
+     *
+     * @class
+     * @param {string} url 接口地址
+     * @param {string} parms 接口参数
+     * @return {Promise}
+     */
+    RedPacket.prototype.getRedNew = function (url, parms) {
+        var selF = this;
+        var tips = $(this.element).find('.loading-icon');
+        tips.css('display', 'block');
+        return new Promise(function (resolve, reject) {
+            fetchJsonp(url + selF.dataFormat(parms), {
+                jsonpCallback: 'callback'
+            }).then(function (res) {
+                tips.css('display', 'none');
+                return res.json();
+            }).then(function (data) {
+                if (data.status === 200) {
+                    var res = data.info;
+                    if (res.status === 'ACTIVE') {
+                        return resolve();
+                    }
+                    else if (res.status === 'OVER_CLAIM_TIMES') {
+                        tipMask('您已领取过该红包~');
+                        $(selF.element).find('.popmask, .hb-popup').css('display', 'none');
+                        close();
+                    }
+                    else {
+                        tipMask({text: res.msg});
+                    }
+                }
+                else {
+                    tipMask({text: data.info});
+                }
+            });
+        });
 
     };
 
@@ -346,7 +409,6 @@ define(function (require) {
     };
 
 
-
     /**
      * 第一次进入可视区回调，只会执行一次
      */
@@ -435,6 +497,17 @@ define(function (require) {
                 });
             }
 
+            function stepFour() {
+                // 领取红包
+                redPacket.getRedNew(cfg.newRedRequest, redParms).then(function () {
+                    bmPramas['refer_url'] = window.location.href;
+                    bmPramas['from_source'] = signParms.source;
+                    bmPramas = JSON.stringify(bmPramas);
+                    storage.set('bm_pramas', bmPramas);
+                    window.top.location.href = cfg.signRequest.skipUrl;
+                });
+            }
+
             // 回调拆分二
             function stepTwo() {
                 // 获取城市
@@ -447,10 +520,17 @@ define(function (require) {
 
                     // 装修报名
                     redPacket.signUp(cfg.signRequest.url, pArray.join('&')).then(function () {
-                        stepOne();
+                        if (cfg.newRedRequest) {
+                            redParms.mobile = zxPhone;
+                            stepFour();
+                        }
+                        else {
+                            stepOne();
+                        }
                     });
                 });
             }
+
             stepTwo();
         });
 

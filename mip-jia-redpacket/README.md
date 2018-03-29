@@ -90,6 +90,42 @@ mip-jia-redpacket 组件说明
 必选项：是
 类型：string
 
+### eventClass
+
+说明：触发弹窗的class
+必选项：否
+类型：string
+
+### scrollClass
+
+说明：滚动到指定位置的class
+必选项：否
+类型：string
+
+### redRequest
+
+说明：接口参数对象
+必选项：是
+类型：Object
+
+### signRequest
+
+说明：接口参数对象
+必选项：是
+类型：Object
+
+### keyUrl
+
+说明：获取key接口url
+必选项：是
+类型：string
+
+### cityUrl
+
+说明：城市接口url
+必选项：是
+类型：string
+
 
 ## 注意事项
 

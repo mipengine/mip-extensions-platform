@@ -247,12 +247,14 @@ define(function (require) {
                     if (location.host === 'm.jia.com' || util.platform.isAndroid()) {
                         if (eleTop <= scrollTop + viewHei / 2) {
                             storage.set('usFlag', 'true', 21600000);
+                            zxbjPage.usFlag = true;
                             $this.find('.footer_xrhb').trigger('click');
                         }
                     }
                     else {
                         if (eleTop <= viewHei / 2) {
                             storage.set('usFlag', 'true', 21600000);
+                            zxbjPage.usFlag = true;
                             $this.find('.footer_xrhb').trigger('click');
                         }
                     }
@@ -321,11 +323,11 @@ define(function (require) {
                     }
                 });
 
-                $(ele).find('.hb-wrap').on('click', function () {
+                /*$(ele).find('.hb-wrap').on('click', function () {
                     scrollTop.body = document.body.scrollTop;
                     scrollTop.documentElement = document.documentElement.scrollTop;
                     scrollTop.offset = window.pageYOffset;
-                });
+                });*/
 
                 $ele.find('.close').on('click', function () {
                     hidepopmask($(ele));
@@ -338,7 +340,10 @@ define(function (require) {
                     $ele.removeClass('show');
                 });
                 $(ele).find('.hb-wrap').on('click', function () {
-                    hidepopmask($(ele));
+                    $(ele).find('.popmask').hide();
+                    $(ele).find('.fixed-footer').hide();
+                    $(ele).find('.form-input.phone').blur();
+                    $(ele).find('.fixed-footer').attr('class', 'fixed-footer').find('.item').removeClass('cur');
                     $ele.removeAttr('style');
                     $ele.removeClass('show');
                 });

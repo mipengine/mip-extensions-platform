@@ -1,0 +1,14 @@
+{
+    "name": "mip-zmall-address-list",
+    "version": "1.0.0",
+    "description": "同城购地址列表",
+    "contributors": [
+        {
+            "name": "liuxianggui",
+            "email": "liu.xianggui@zol.com.cn"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

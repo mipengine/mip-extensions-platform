@@ -1,0 +1,14 @@
+{
+    "name": "mip-zmall-yunfei",
+    "version": "1.0.0",
+    "description": "运费组件，获取商品的运费",
+    "contributors": [
+        {
+            "name": "liuxianggui",
+            "email": "liu.xianggui@zol.com.cn"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

@@ -814,7 +814,7 @@ define(function (require) {
 
         from.addEventListener('submit', function (evt) {
             evt.stopPropagation();
-
+            evt.preventDefault();
             for (var n = 0; n < inputArr.length; n++) {
                 if (inputArr[n].getAttribute('data-is-checked') === '1') {
                     if (inputArr[n].getAttribute('report-eventtype') === 'productType') {
@@ -851,6 +851,17 @@ define(function (require) {
                 toast.call(that.elementClone, '请选择商品套装');
                 return false;
             }
+
+            // 获取确认订单页地址
+            var confirmUrl = that.element.dataset.form;
+            var suitSetId = specMenu.querySelector('#suitSetIdInput').value;
+            var number = specMenu.querySelector('#goodsNumberInput').value;
+            var skuId = specMenu.querySelector('#skuIdInput').value;
+            confirmUrl = confirmUrl.replace('{{SKU}}', skuId);
+            confirmUrl = confirmUrl.replace('{{SUITSET}}', suitSetId);
+            confirmUrl = confirmUrl.replace('{{NUM}}', number);
+            // 采用跳转方式提交
+            window.location.href = confirmUrl;
         });
     }
 
