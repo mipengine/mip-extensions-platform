@@ -1,0 +1,14 @@
+{
+    "name": "mip-k73shield-data",
+    "version": "1.0.0",
+    "description": "组件介绍",
+    "contributors": [
+        {
+            "name": "yx",
+            "email": "yuanxin778@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

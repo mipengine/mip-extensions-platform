@@ -97,7 +97,8 @@ define(function (require) {
 
         var specMenuBox = that.elementClone.querySelector('#zmall_buy_panel');
         var formUrl = dataset.form;
-        var menuDom = createMenu(res, formUrl);
+        var newUrl = dataset.confirm;
+        var menuDom = createMenu(res, formUrl, newUrl);
 
         if (specMenuBox) {
             appendBox(specMenuBox, menuDom);
@@ -132,6 +133,27 @@ define(function (require) {
         closeDia.call(that);
 
         submitFunc.call(that);
+
+        changeConfirmUrl.call(that);
+    }
+
+    // 改变确认订单页链接
+    function changeConfirmUrl() {
+        // 新的确认订单页按钮
+        var confirmLinkBtn = this.elementClone.querySelector('#js_confirm_link');
+        if (confirmLinkBtn) {
+            var element = this.element;
+            var specMenuBox = this.elementClone.querySelector('#zmall_buy_panel');
+            var numInput = specMenuBox.querySelector('#goodsNumberInput');
+            var skuInput = specMenuBox.querySelector('#skuIdInput');
+            var suitSetInput = specMenuBox.querySelector('#suitSetIdInput');
+
+            var confirmUrl = element.dataset.confirm;
+            confirmUrl = confirmUrl.replace('{{SKU}}', skuInput.value);
+            confirmUrl = confirmUrl.replace('{{SUITSET}}', suitSetInput.value);
+            confirmUrl = confirmUrl.replace('{{NUM}}', numInput.value);
+            confirmLinkBtn.setAttribute('href', confirmUrl);
+        }
     }
 
     // 关闭弹窗
@@ -165,6 +187,7 @@ define(function (require) {
                 showNum.value = showNum.value - 1;
                 numInput.value = showNum.value;
                 text.innerHTML = parseInt(obj.suitPrice.showPrice, 10) * showNum.value;
+                changeConfirmUrl.call(that);
             }
         });
 
@@ -178,12 +201,13 @@ define(function (require) {
                 showNum.value = parseInt(showNum.value, 10) + 1;
                 numInput.value = showNum.value;
                 text.innerHTML = parseInt(obj.suitPrice.showPrice, 10) * showNum.value;
+                changeConfirmUrl.call(that);
             }
         });
     }
 
     // 创建商品信息弹窗结构
-    function createMenu(data, url) {
+    function createMenu(data, url, newUrl) {
         var specMenu = '';
         var imgStr = '';
         var itemStr = '';
@@ -197,6 +221,11 @@ define(function (require) {
 
         if (Object.keys(skuList).length > 0) {
             itemStr = createItem(skuList);
+        }
+
+        var confirmLink = '';
+        if (newUrl && newUrl !== '') {
+            confirmLink = '<a id="js_confirm_link" class="suction-link" data-type="mip" href="' + newUrl + '"></a>';
         }
 
         specMenu = '<aside class="select-package">'
@@ -231,7 +260,7 @@ define(function (require) {
             + '<input type="hidden" id="goodsNumberInput" name="goodsNumber" value="1"/>'
             + '<input type="submit" value="确 定" class="suction-buy" id="zmall_buy_submit" data-stats-baidu-obj='
             + '"%7B%22type%22%3A%22click%22%2C%22data%22%3A%22%5B_trackPageview%2C%20%2Fbuy%5D%22%7D" />'
-            + '</form>'
+            + confirmLink + '</form>'
             + '</aside>'
             + '<div class="mip-zmall-buy-mask"></div>';
 
@@ -520,10 +549,6 @@ define(function (require) {
             skuId.value = obj.skuId;
         }
 
-        if (skuId && obj.skuId) {
-            skuId.value = obj.skuId;
-        }
-
         if (suitSetId && obj.suitTypeId) {
             suitSetId.value = obj.suitTypeId;
         }
@@ -535,6 +560,8 @@ define(function (require) {
         if (isBaidu) {
             isBaidu.value = 1;
         }
+
+        changeConfirmUrl.call(that);
     }
 
     // 限购件数
@@ -663,6 +690,9 @@ define(function (require) {
 
         var buyBtn = specMenu.querySelector('#zmall_buy_submit');
 
+        // 新的确认订单页按钮
+        var confirmLinkBtn = specMenu.querySelector('#js_confirm_link');
+
         var obj = {};
 
         [].map.call(inputArr, function (dom, index) {
@@ -691,6 +721,7 @@ define(function (require) {
 
                     buyBtn.setAttribute('disabled', 'disabled');
 
+                    confirmLinkBtn.classList.add('disabled');
 
                     clearInputVal.call(that);
 
@@ -776,6 +807,9 @@ define(function (require) {
 
         var buyBtn = that.elementClone.querySelector('#zmall_buy_submit');
 
+        // 新的确认订单页按钮
+        var confirmLinkBtn = that.elementClone.querySelector('#js_confirm_link');
+
         var dataNumObj = {};
 
         for (var x = 0; x < allSuitInfo.length; x++) {
@@ -797,6 +831,8 @@ define(function (require) {
 
                 buyBtn.removeAttribute('disabled');
 
+                confirmLinkBtn.classList.remove('disabled');
+
                 setNum.call(that, dataNumObj);
 
                 hasSuitDesc.call(that, dataNumObj);
@@ -814,7 +850,6 @@ define(function (require) {
 
         from.addEventListener('submit', function (evt) {
             evt.stopPropagation();
-            evt.preventDefault();
             for (var n = 0; n < inputArr.length; n++) {
                 if (inputArr[n].getAttribute('data-is-checked') === '1') {
                     if (inputArr[n].getAttribute('report-eventtype') === 'productType') {
@@ -851,17 +886,6 @@ define(function (require) {
                 toast.call(that.elementClone, '请选择商品套装');
                 return false;
             }
-
-            // 获取确认订单页地址
-            var confirmUrl = that.element.dataset.form;
-            var suitSetId = specMenu.querySelector('#suitSetIdInput').value;
-            var number = specMenu.querySelector('#goodsNumberInput').value;
-            var skuId = specMenu.querySelector('#skuIdInput').value;
-            confirmUrl = confirmUrl.replace('{{SKU}}', skuId);
-            confirmUrl = confirmUrl.replace('{{SUITSET}}', suitSetId);
-            confirmUrl = confirmUrl.replace('{{NUM}}', number);
-            // 采用跳转方式提交
-            window.location.href = confirmUrl;
         });
     }
 

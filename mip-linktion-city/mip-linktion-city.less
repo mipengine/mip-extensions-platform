@@ -1,0 +1,207 @@
+/**
+ * @file mip-linktion-city样式文件
+ */
+
+mip-linktion-city {
+    .modal-content {
+        position: relative;
+        background-color: #fff;
+        -webkit-background-clip: padding-box;
+        background-clip: padding-box;
+        border: 1px solid #999;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        border-radius: 6px;
+        outline: 0;
+        -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+    }
+    .select-city {
+        width: 628px;
+        .modal-content {
+            .modal-body {
+                padding: 30px 36px;
+                .select-city-info {
+                    padding-bottom: 31px;
+                    border-bottom: 1px solid #ededed;
+                    .info-head {
+                        font-size: 18px;
+                        line-height: 18px;
+                        color: #333;
+                        margin-bottom: 12px;
+                    }
+                    .info-txt {
+                        font-size: 14px;
+                        line-height: 14px;
+                        color: #999;
+                        margin-bottom: 29px;
+                    }
+                    .info-location {
+                        color: #333;
+                        font-size: 18px;
+                        line-height: 18px;
+                        button {
+                            font-size: 18px;
+                            line-height: 18px;
+                            color: #4285f4;
+                            border: 1px solid #4285f4;
+                            padding: 11px 23px;
+                            background-color: #fff;
+                            margin: 0 12px;
+                        }
+                    }
+
+                }
+                .city-card {
+                    padding-top: 31px;
+                    h2 {
+                        font-size: 24px;
+                        line-height: 24px;
+                        color: #333;
+                        margin-bottom: 29px;
+                    }
+                    .city-label {
+                        display: none;
+                        border: 1px solid #4285f4;
+                        margin-right: 16px;
+                        margin-bottom: 10px;
+                        p {
+                            display: table-cell;
+                            font-size: 12px;
+                            line-height: 12px;
+                            color: #4285f4;
+                            padding: 7px 18px;
+                        }
+                        button {
+                            display: table-cell;
+                            font-size: 18px;
+                            line-height: 18px;
+                            color: #fff;
+                            background-color: #4285f4;
+                            border-color: #4285f4;
+                            padding: 2px 9px 6px 9px;
+                            position: relative;
+                            right: -1px;
+                        }
+                    }
+                    .select-city-tabs {
+                        border: 1px solid #ccc;
+                        margin-top: 20px;
+                        .mip-vd-tabs-row-tile {
+                            .mip-vd-tabs-nav {
+                                padding: 0;
+                                li {
+                                    padding: 0;
+                                    background-color: #efefef;
+                                    color: #999;
+                                    font-size: 14px;
+                                    line-height: 14px;
+                                    padding: 13px 0;
+                                    height: 40px;
+                                }
+                                .mip-vd-tabs-nav-selected {
+                                    border-bottom: none;
+                                    background-color: #fff;
+                                    color: #4285f4;
+                                }
+                            }
+                        }
+                        .mip-vd-tabs-content {
+                            padding: 30px 25px 30px 30px;
+                            min-height: 270px;
+                            overflow-y: auto;
+                            max-height: 272px;
+                        }
+                        .tab-line {
+                            padding-bottom: 15px;
+                            h4 {
+                                padding-right: 0;
+                                font-size: 14px;
+                                line-height: 14px;
+                                color: #333;
+                                display: inline-block;
+                                vertical-align: top;
+                                margin-top: 3px;
+                                font-family: 'SourceHanSansCN-Medium';
+                            }
+                            .line-box {
+                                display: inline-block;
+                                vertical-align: middle;
+                                width: 90%;
+                                li {
+                                    display: inline-block;
+                                    .location-but {
+                                        margin-bottom: 15px;
+                                        background-color: #fff;
+                                        border: none;
+                                        color: #333;
+                                        display: inline-block;
+                                        margin-left: 30px;
+                                        text-align: left;
+                                        font-size: 14px;
+                                        line-height: 14px;
+                                    }
+                                    .but-province {
+                                        width: 42px;
+                                    }
+                                    .but-city {
+                                        width: 70px;
+                                    }
+                                    .but-area {
+                                        width: 70px;
+                                    }
+                                    .but-street {
+                                        width: auto;
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    #select-city-phone {
+        bottom: 0;
+    }
+    .select-city-phone {
+        margin: 0;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        .modal-header {
+            .modal-center-h {
+                text-align: center;
+            }
+            .modal-center-span {
+                position: absolute;
+                right: 12px;
+                top: 12px;
+            }
+        }
+        .modal-body {
+            padding: 0;
+            .select-city-phonetab {
+                .mip-vd-tabs-row-tile {
+                    .mip-vd-tabs-nav {
+                        border-bottom: 1px solid #ededed;
+                    }
+                }
+                .mip-vd-tabs-content {
+                    .phone-city-ul {
+                        padding: 12px 30px;
+                        min-height: 270px;
+                        overflow-y: auto;
+                        max-height: 294px;
+                        .phone-city-but {
+                            font-size: 14px;
+                            line-height: 14px;
+                            color: #333;
+                            padding: 12px 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

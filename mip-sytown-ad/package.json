@@ -1,0 +1,15 @@
+{
+    "name": "mip-sytown-ad",
+    "version": "1.0.0",
+    "description": "尚一堂广告",
+    "contributors": [
+        {
+        	"name": "sytown authors",
+            "email": "luweibo@sytown.cn",
+            "url": "http://m.sytown.cn"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
