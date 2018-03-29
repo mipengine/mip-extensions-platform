@@ -1,0 +1,14 @@
+{
+    "name": "mip-zol-input",
+    "version": "1.0.0",
+    "description": "用于需要输入表单，但不想用mip-form的情况",
+    "contributors": [
+        {
+            "name": "liuxianggui",
+            "email": "liu.xianggui@zol.com.cn"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
