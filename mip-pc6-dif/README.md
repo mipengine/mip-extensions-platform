@@ -5,7 +5,7 @@ mip-pc6-dif 软件、手游区分
 标题|内容
 ----|----
 类型|通用
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-pc6-dif/mip-pc6-dif.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-pc6-dif/mip-pc6-dif.js
 
 ## 示例
 

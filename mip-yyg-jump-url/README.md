@@ -6,7 +6,7 @@
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-yyg-jump-url/mip-yyg-jump-url.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-yyg-jump-url/mip-yyg-jump-url.js
 
 ## 示例
 

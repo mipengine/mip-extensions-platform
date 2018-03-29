@@ -8,7 +8,7 @@ mip-truckcn-hash 组件说明
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-truckcn-hash/mip-truckcn-hash.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-truckcn-hash/mip-truckcn-hash.js
 
 ## 示例1
 

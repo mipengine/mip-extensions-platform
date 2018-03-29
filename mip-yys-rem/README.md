@@ -6,7 +6,7 @@ mip-yys-rem 用于移动端rem布局适配
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-yys-rem/mip-yys-rem.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-yys-rem/mip-yys-rem.js
 
 ## 示例
 

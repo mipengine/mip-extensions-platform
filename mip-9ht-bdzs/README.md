@@ -5,7 +5,7 @@ mip-9ht-bdzs 百度站搜表单提交
 标题|内容
 ----|----
 类型|通用
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-9ht-bdzs/mip-9ht-bdzs.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-9ht-bdzs/mip-9ht-bdzs.js
 
 ## 示例
 

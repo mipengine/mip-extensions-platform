@@ -5,7 +5,7 @@
 标题|内容
 ----|----
 类型|公司业务组件
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-zmall-address/mip-zmall-address.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-zmall-address/mip-zmall-address.js
 
 ## 示例
 

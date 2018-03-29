@@ -6,7 +6,7 @@ rem设置，以及百分比class名字的预设
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-zol-rem/mip-zol-rem.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-zol-rem/mip-zol-rem.js
 
 ## 示例
 

@@ -6,7 +6,7 @@ Z商城map业务组件|在地图中心显示店铺位置并计算用户与店铺
 ----|----
 类型|指定位置可用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-zmall-map/mip-zmall-map.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-zmall-map/mip-zmall-map.js
 
 ## 最新版本
 

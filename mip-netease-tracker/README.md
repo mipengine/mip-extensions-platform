@@ -6,7 +6,7 @@ mip-netease-tracker 为网易移动站文章页实现了统计功能
 ----|----
 类型|业务
 支持布局|不使用布局
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-netease-tracker/mip-netease-tracker.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-netease-tracker/mip-netease-tracker.js
 
 ## 示例
 

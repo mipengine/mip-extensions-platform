@@ -6,7 +6,7 @@ mip-cy-search-bar组件是春雨搜索bar
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-cy-search-bar/mip-cy-search-bar.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-cy-search-bar/mip-cy-search-bar.js
 
 ## 示例
 

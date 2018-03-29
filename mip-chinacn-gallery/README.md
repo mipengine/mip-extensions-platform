@@ -6,7 +6,7 @@ mip-chinacn-gallery 可滑动的图片列表
 ----|----
 类型|业务
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-chinacn-gallery/mip-chinacn-gallery.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-chinacn-gallery/mip-chinacn-gallery.js
 
 ## 示例
 

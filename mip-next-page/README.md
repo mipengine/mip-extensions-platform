@@ -6,7 +6,7 @@ mip-next-page 用来支持下载详情页统计功能
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-next-page/mip-next-page.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-next-page/mip-next-page.js
 ## 示例
 
 ### 替换下一页

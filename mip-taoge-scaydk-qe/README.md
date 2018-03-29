@@ -6,7 +6,7 @@ wap.scaydk.com网贷款额度计算组件
 ----|----
 类型|通用
 支持布局|不支持
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-taoge-scaydk-qe/mip-taoge-scaydk-qe.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-taoge-scaydk-qe/mip-taoge-scaydk-qe.js
 
 ## 示例
 

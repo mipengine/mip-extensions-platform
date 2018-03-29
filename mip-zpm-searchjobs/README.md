@@ -6,7 +6,7 @@ mip-zpm-searchjobs 搜索结果需求
 ----|----
 类型|通用
 支持布局|N/S
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-zpm-searchjobs/mip-zpm-searchjobs.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-zpm-searchjobs/mip-zpm-searchjobs.js
 
 
 ## 示例

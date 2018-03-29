@@ -6,7 +6,7 @@ mip-yuanxiaoku-xuanzhuanye 院校库选专业
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-yuanxiaoku-xuanzhuanye/mip-yuanxiaoku-xuanzhuanye.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-yuanxiaoku-xuanzhuanye/mip-yuanxiaoku-xuanzhuanye.js
 
 ## 示例
 

@@ -6,7 +6,7 @@ mip-linktion-city 级联城市组件
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|htthttps://c.mipcdn.com/extensions/platform/v1/mip-linktion-city/mip-linktion-city.js<br>https://c.mipcdn.com/static/v1/mip-lightbox/mip-lightbox.js<br>https://c.mipcdn.com/static/v1/mip-vd-tabs/mip-vd-tabs.js
+所需脚本|htthttps://c.mipcdn.com/static/v1/mip-linktion-city/mip-linktion-city.js<br>https://c.mipcdn.com/static/v1/mip-lightbox/mip-lightbox.js<br>https://c.mipcdn.com/static/v1/mip-vd-tabs/mip-vd-tabs.js
 
 ## 示例
 

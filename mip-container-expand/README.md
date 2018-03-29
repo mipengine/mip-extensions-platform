@@ -5,7 +5,7 @@ mip-container-expand 可以在页面任意位置展开组件里的内容
 ----|----
 类型|业务,定制
 支持布局|responsive,flex,container
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-container-expand/mip-container-expand.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-container-expand/mip-container-expand.js
 
 ## 示例
 

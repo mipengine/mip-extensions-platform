@@ -5,7 +5,7 @@ mip-xzw-picker 星座屋mip弹层功能组件
 ----|----
 类型|通用
 支持布局|responsive,fix-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-xzw-picker/mip-xzw-picker.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-xzw-picker/mip-xzw-picker.js
 
 ## 示例
 

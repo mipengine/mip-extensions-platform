@@ -5,7 +5,7 @@ mip-xzw-rem 星座屋mip自适应组件,该组件主要用来支持rem单位的�
 ----|----
 类型|通用
 支持布局|responsive,fix-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-xzw-rem/mip-xzw-rem.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-xzw-rem/mip-xzw-rem.js
 
 ## 示例
 

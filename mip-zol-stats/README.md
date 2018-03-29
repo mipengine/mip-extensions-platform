@@ -5,7 +5,7 @@ ZOL统计组件
 标题|内容
 :----|:----
 类型|通用
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-zol-stats/mip-zol-stats.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-zol-stats/mip-zol-stats.js
 
 ## 示例
 

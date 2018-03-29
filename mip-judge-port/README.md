@@ -6,7 +6,7 @@ mip-judge-port  判断访问是什么设备,给下载按钮,相应连接
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-judge-port/mip-judge-port.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-judge-port/mip-judge-port.js
 
 ## 示例
 

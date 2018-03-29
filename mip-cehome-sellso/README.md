@@ -6,7 +6,7 @@ mip-cehome-sellso 二手机交易板块下的出售帖子列表
 ----|----
 类型|不通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-cehome-sellso/mip-cehome-sellso.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-cehome-sellso/mip-cehome-sellso.js
 
 ## 示例
 

@@ -6,7 +6,7 @@ mip-zixun 根据关键词加载商务通咨询邀请框 <a data-link="swt">商�
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-zixun/mip-zixun.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-zixun/mip-zixun.js
 
 ## 示例
 根据关键词加载商务通咨询邀请框

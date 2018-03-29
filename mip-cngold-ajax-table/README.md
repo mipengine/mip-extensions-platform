@@ -6,7 +6,7 @@ mip-cngold-ajax-table 用于请求后寻找对应id渲染
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-cngold-ajax-table/mip-cngold-ajax-table.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-cngold-ajax-table/mip-cngold-ajax-table.js
 
 ## 示例
 

@@ -6,7 +6,7 @@ wap.scaydk.com 贷款顾问自定义组件
 ----|----
 类型|通用
 支持布局|不支持
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-taoge-scaydk-adviser/mip-taoge-scaydk-adviser.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-taoge-scaydk-adviser/mip-taoge-scaydk-adviser.js
 
 ## 示例
 

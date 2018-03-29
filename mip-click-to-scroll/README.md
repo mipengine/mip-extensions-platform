@@ -5,7 +5,7 @@ mip-click-to-scroll 可以使点击的元素滚动至页面顶部
 ----|----
 类型|业务
 布局|display: none
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-click-to-scroll/mip-click-to-scroll.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-click-to-scroll/mip-click-to-scroll.js
 
 ## 示例
 

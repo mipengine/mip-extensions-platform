@@ -6,7 +6,7 @@ mip-cy-list 组件是对百度mip-list扩展，以符合春雨的需求～
 ----|----
 类型|业务
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-cy-list/mip-cy-list.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-cy-list/mip-cy-list.js
 
 ## 示例
 

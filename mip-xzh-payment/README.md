@@ -6,7 +6,7 @@
 ----|----
 类型|通用
 支持布局|N/S
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-xzh-payment/mip-xzh-payment.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-xzh-payment/mip-xzh-payment.js
 
 ## 说明
 

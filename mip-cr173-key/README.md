@@ -6,7 +6,7 @@ mip-cr173-key 组件功能：滚动显示简介，点击显示简介。默认显
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-cr173-key/mip-cr173-key.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-cr173-key/mip-cr173-key.js
 ## 示例
 
 ```html

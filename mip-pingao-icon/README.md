@@ -6,7 +6,7 @@ mip-pingao-icon 品告推广连接，品告展示在网页的图片和连接进�
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-pingao-icon/mip-pingao-icon.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-pingao-icon/mip-pingao-icon.js
 
 ## 示例
 

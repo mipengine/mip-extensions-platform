@@ -5,7 +5,7 @@ mip-game4399-download 实现了简单的游戏下载控件。
 标题|内容
 ----|----
 类型|通用
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-game4399-download/mip-game4399-download.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-game4399-download/mip-game4399-download.js
 
 ## 示例
 

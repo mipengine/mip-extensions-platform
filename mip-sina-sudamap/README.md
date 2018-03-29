@@ -5,7 +5,7 @@ mip-sina-sudamap 新浪页面信息&点击统计组件
 标题|内容
 ----|----
 类型|定制
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-sina-sudamap/mip-sina-sudamap.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-sina-sudamap/mip-sina-sudamap.js
 
 ## 示例
 

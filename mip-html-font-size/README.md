@@ -6,7 +6,7 @@ mip-html-font-size 组件说明 将组件直接引用，可将html的font-size�
 ----|----
 类型|通用
 
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-html-font-size/mip-html-font-size.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-html-font-size/mip-html-font-size.js
 
 ## 示例
 

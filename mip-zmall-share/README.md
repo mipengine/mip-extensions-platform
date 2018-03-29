@@ -6,7 +6,7 @@ ZOl商成商品详情分享组件
 ----|----
 类型|业务组件
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/static/v1/mip-fixed/mip-fixed.js<br>https://c.mipcdn.com/static/v1/mip-share/mip-share.js<br>https://c.mipcdn.com/extensions/platform/v1/mip-zmall-share/mip-zmall-share.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-fixed/mip-fixed.js<br>https://c.mipcdn.com/static/v1/mip-share/mip-share.js<br>https://c.mipcdn.com/static/v1/mip-zmall-share/mip-zmall-share.js
 
 ## 版本更新
 

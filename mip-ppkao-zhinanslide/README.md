@@ -6,7 +6,7 @@ mip-ppkao-zhinanslide ppkao指南科目显示
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-ppkao-zhinanslide/mip-ppkao-zhinanslide.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-ppkao-zhinanslide/mip-ppkao-zhinanslide.js
 
 ## 示例
 

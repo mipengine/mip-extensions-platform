@@ -6,7 +6,7 @@ mip-cnkang-elect 康网下拉列表点选组件
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-cnkang-elect/mip-cnkang-elect.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-cnkang-elect/mip-cnkang-elect.js
 
 ## 示例
 

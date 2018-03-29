@@ -6,7 +6,7 @@ mip-cambrian 寒武纪组件，调用此组件，会向superframe postmessage，
 | ---- | ---------------------------------------- |
 | 类型   | 业务                                       |
 | 支持布局 | responsive,fixed-height,fill,container,fixed |
-| 所需脚本 | https://c.mipcdn.com/extensions/platform/v1/mip-cambrian/mip-cambrian.js |
+| 所需脚本 | https://c.mipcdn.com/static/v1/mip-cambrian/mip-cambrian.js |
 
 ## 示例
 

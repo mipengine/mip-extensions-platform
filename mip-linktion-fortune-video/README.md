@@ -6,7 +6,7 @@ mip-linktion-fortune-video 控制弹框视频在第一次点击全屏播放，�
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-linktion-fortune-video/mip-linktion-fortune-video.js<br>https://c.mipcdn.com/static/v1/mip-lightbox/mip-lightbox.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-linktion-fortune-video/mip-linktion-fortune-video.js<br>https://c.mipcdn.com/static/v1/mip-lightbox/mip-lightbox.js
 
 ## 示例
 

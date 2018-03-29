@@ -6,7 +6,7 @@ mip-cr173-comment 用来支持该程序下面的评论功能，对文章和下�
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-cr173-comment/mip-cr173-comment.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-cr173-comment/mip-cr173-comment.js
 ## 示例
 
 ### 评论功能实现。

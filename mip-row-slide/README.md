@@ -5,7 +5,7 @@ mip-row-slide 横向滑动区块组件,区块可展示每个区块的对应内�
 ----|----
 类型|业务,定制
 支持布局|responsive,flex,container
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-row-slide/mip-row-slide.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-row-slide/mip-row-slide.js
 
 ## 示例
 

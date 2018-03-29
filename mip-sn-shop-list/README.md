@@ -6,7 +6,7 @@ mip-sn-shop-list 实现了自定义实现了sn获取接口数据后，渲染列�
 ----|----
 类型|定制
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-sn-shop-list/mip-sn-shop-list.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-sn-shop-list/mip-sn-shop-list.js
 
 ## 示例
 

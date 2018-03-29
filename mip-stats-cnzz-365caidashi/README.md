@@ -5,7 +5,7 @@ mip-stats-cnzz-365caidashi 365caidashi项目专属cnzz统计，2017.11.20 xiaoji
 标题|内容
 ----|----
 类型|通用
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-stats-cnzz-365caidashi/mip-stats-cnzz-365caidashi.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-stats-cnzz-365caidashi/mip-stats-cnzz-365caidashi.js
 
 ## 示例
 

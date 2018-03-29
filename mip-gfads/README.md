@@ -6,7 +6,7 @@ mip-gfads 汇米广告联盟广告投放插件
 ----|----
 类型|广告
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-gfads/mip-gfads.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-gfads/mip-gfads.js
 
 ## 示例
 

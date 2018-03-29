@@ -6,7 +6,7 @@ mip-fh-async 用来支持整站全网异步接口渲染组件
 ----|----
 类型|通用
 支持布局|N/A
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-fh-async/mip-fh-async.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-fh-async/mip-fh-async.js
 
 ## 示例
 基本用法

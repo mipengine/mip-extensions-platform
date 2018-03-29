@@ -6,7 +6,7 @@ mip-25game-tabsplit 把字符串分割成html标签
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-25game-tabSplit/mip-25game-tabSplit.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-25game-tabSplit/mip-25game-tabSplit.js
 
 ## 示例
 

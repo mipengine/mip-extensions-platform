@@ -6,7 +6,7 @@ mip-qqtn-commentdrop 判断假如没有li则将外层隐藏
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-qqtn-commentdrop/mip-qqtn-commentdrop.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-qqtn-commentdrop/mip-qqtn-commentdrop.js
 
 ## 示例
 

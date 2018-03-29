@@ -5,7 +5,7 @@ mip-unique-visitor 可以统计每天的用户访问次数(UV)
 ----|----
 类型|业务,定制
 支持布局|nodiaplay
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-unique-visitor/mip-unique-visitor.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-unique-visitor/mip-unique-visitor.js
 
 ## 示例
 

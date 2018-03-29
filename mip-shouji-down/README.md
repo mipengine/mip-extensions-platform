@@ -6,7 +6,7 @@ mip-shouji-down 下载站定制组件，主要用于导航切换与下载按钮�
 ----|----
 类型|通用
 支持布局|N/S
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-shouji-down/mip-shouji-down.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-shouji-down/mip-shouji-down.js
 
 ## 示例
 

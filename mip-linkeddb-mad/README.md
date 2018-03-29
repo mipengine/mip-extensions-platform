@@ -6,7 +6,7 @@ mip-linkeddb-mad 用来添加linkeddb网站广告的组件
 ----|----
 类型|广告
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-linkeddb-mad/mip-linkeddb-mad.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-linkeddb-mad/mip-linkeddb-mad.js
 
 ## 示例
 

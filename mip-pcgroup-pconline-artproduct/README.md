@@ -6,7 +6,7 @@ mip-pcgroup-pconline-artproduct 太平洋网络电脑网wap文章页产品库模
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-pcgroup-pconline-artproduct/mip-pcgroup-pconline-artproduct.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-pcgroup-pconline-artproduct/mip-pcgroup-pconline-artproduct.js
 
 ## 示例
 

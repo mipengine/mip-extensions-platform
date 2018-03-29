@@ -5,7 +5,7 @@ mip-con-but 多功能控制按钮
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-con-but/mip-con-but.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-con-but/mip-con-but.js
 ## 示例
 
 ### 多功能控制按钮

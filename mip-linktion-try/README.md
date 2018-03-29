@@ -6,7 +6,7 @@ mip-linktion-try 弹框ajax提交信息并后续弹框提示操作结果
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-linktion-try/mip-linktion-try.js<br>https://c.mipcdn.com/static/v1/mip-lightbox/mip-lightbox.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-linktion-try/mip-linktion-try.js<br>https://c.mipcdn.com/static/v1/mip-lightbox/mip-lightbox.js
 
 ## 示例
 

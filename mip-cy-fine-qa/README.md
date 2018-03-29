@@ -6,7 +6,7 @@ mip-cy-fine-qa 组件获取医生的优质qa
 ----|----
 类型|业务
 支持布局|N/S
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-cy-fine-qa/mip-cy-fine-qa.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-cy-fine-qa/mip-cy-fine-qa.js
 
 ## 示例
 

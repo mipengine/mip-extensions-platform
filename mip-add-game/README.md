@@ -6,7 +6,7 @@ mip-add-game 动态加载游戏渲染到页面中
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-add-game/mip-add-game.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-add-game/mip-add-game.js
 
 ## 示例
 

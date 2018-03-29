@@ -6,7 +6,7 @@ mip-zol-article-merchant zol业务组件：zol资讯文章页首图下方的经�
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-zol-article-merchant/mip-zol-article-merchant.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-zol-article-merchant/mip-zol-article-merchant.js
 
 ## 示例
 

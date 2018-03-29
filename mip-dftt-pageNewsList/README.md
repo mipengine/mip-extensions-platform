@@ -6,7 +6,7 @@ mip-dftt-pageNewsList 东方头条新闻页面信息流组件
 ----|----
 类型|业务
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-dftt-pageNewsList/mip-dftt-pageNewsList.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-dftt-pageNewsList/mip-dftt-pageNewsList.js
 
 ## 示例
 

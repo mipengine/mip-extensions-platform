@@ -6,7 +6,7 @@ mip-cngold-madapt 页面样式尺寸转换
 ----|----
 类型|通用
 支持布局|container
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-cngold-madapt/mip-cngold-madapt.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-cngold-madapt/mip-cngold-madapt.js
 
 ## 示例
 

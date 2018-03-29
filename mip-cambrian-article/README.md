@@ -6,7 +6,7 @@ mip-cambrian-article 寒武纪文章落地页组件，调用此组件，会通�
 | ---- | ---------------------------------------- |
 | 类型   | 业务                                       |
 | 支持布局 | responsive,fixed-height,fill,container,fixed |
-| 所需脚本 | https://c.mipcdn.com/extensions/platform/v1/mip-cambrian-article/mip-cambrian-article.js<br/> https://c.mipcdn.com/static/v1/mip-mustache/mip-mustache.js |
+| 所需脚本 | https://c.mipcdn.com/static/v1/mip-cambrian-article/mip-cambrian-article.js<br/> https://c.mipcdn.com/static/v1/mip-mustache/mip-mustache.js |
 
 ## 示例
 

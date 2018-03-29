@@ -6,7 +6,7 @@ mip-xcy-hf 是ads8hf业务逻辑组件。
 ----|----
 类型|业务,广告
 支持布局|N/S
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-xcy-hf/mip-xcy-hf.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-xcy-hf/mip-xcy-hf.js
 
 ## 示例
 

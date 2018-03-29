@@ -6,7 +6,7 @@ mip-qbb-base64 支持base64编码,base64解码,utf16转utf8,utf8转utf16
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-qbb-base64/mip-qbb-base64.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-qbb-base64/mip-qbb-base64.js
 
 ## 示例
 ```html
