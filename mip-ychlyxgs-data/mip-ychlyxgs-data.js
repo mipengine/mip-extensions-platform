@@ -29,7 +29,6 @@ define(function (require) {
         }).then(function (res) {
             return res.json();
         }).then(function (data) {
-
             var iossopurl = data['iossp-url'];
             var iosclassid = data['ios-classid'];
             var datawebUrl = data.webUrl;
@@ -48,7 +47,7 @@ define(function (require) {
             var incity = data.ipInfo.city;
             var intDownUrl = data.mgDownUrl;
 
-            if (data.mgUrlOpen === true) {
+            if (data.mgUrlOpen === true) { // 敏感链接过滤
                 mgUrlReplace(intDownUrl, data.mgUrlReplace, data['eject-city'], incity);
             }
 
@@ -74,11 +73,15 @@ define(function (require) {
             }
 
             if (adaptationOk === 'true') {
-                adaptation(iossopurl, iosclassid, datawebUrl, azspurl, androidclassid, dataIpok, datahzUrl, dataOpen); // 设备适配
+                adaptation(iossopurl, iosclassid, datawebUrl, azspurl, androidclassid); // 设备适配
             }
 
             if (mgcFilterOk === 'true') {
                 mgcFilter(data['f-mg-gl'], data.replaceHtml, data['eject-city'], incity); // 敏感词过滤
+            }
+
+            if (dataOpen === 'true') { // 助手下载
+                zsdown(dataIpok, datahzUrl);
             }
 
             if (nodownOK === true) {
@@ -96,6 +99,7 @@ define(function (require) {
             }
 
         });
+
         function ifSwb(noAdf) { // 判断商务包
             var z = 0;
             for (z = 0; z < noAdf.length; z++) {
@@ -166,7 +170,7 @@ define(function (require) {
                 $(ele).find(this).html(liText);
             });
         }
-        function adaptation(iossopurl, iosclassid, datawebUrl, azspurl, androidclassid, dataIpok, datahzUrl, openZs) { // 设备适配
+        function adaptation(iossopurl, iosclassid, datawebUrl, azspurl, androidclassid) { // 设备适配
             if (platform.isIos()) { // IOS
                 var iosspUrlid = $.inArray(downUrl, iossopurl);
                 var ifiosSp = $.inArray(pageInfo.categroyId, iosclassid);
@@ -208,27 +212,23 @@ define(function (require) {
                 else {
                     $(ele).find('.g-show-title p').html('大家<span>还下载了</span>这些：');
                 }
-                if (!isAds) {
-                    var clickN = 0;
-                    var resTitle = $(ele).find('h1').text() || ''; // 资源的名称
-                    resTitle = resTitle.split(/(\s|\()/)[0];
-                    if (dataIpok === 'false' && openZs === 'true') {
-                        if ((downBtnLink.attr('issw') || downBtnLink.attr('ispc'))) {
-                            downBtnLink.click(function () {
-                                if (clickN <= 0) {
-                                    var hzUrl = datahzUrl[0].replace(/\&amp;/g, '&');
-                                    window.location.href = hzUrl;
-                                    clickN++;
-                                    return false;
-                                }
-                                else {
-                                    if (downBtnLink.attr('ispc')) {
-                                        downBtnLink.attr('href', 'javascript:;');
-                                    }
-                                }
-                            });
+            }
+        }
+        function zsdown(dataIpok, datahzUrl) {
+            if (!isAds) {
+                var clickN = 0;
+                var resTitle = $(ele).find('h1').text() || ''; // 资源的名称
+                resTitle = resTitle.split(/(\s|\()/)[0];
+                if (dataIpok === 'false') {
+                    downBtnLink.click(function () {
+                        if (clickN <= 0) {
+                            var hzUrl = datahzUrl[0].replace(/\&amp;/g, '&');
+                            window.top.location = hzUrl;
+                            clickN++;
+                            return false;
                         }
-                    }
+
+                    });
                 }
             }
         }

@@ -10,7 +10,7 @@ mip-yesky-read 是一个实现文章订阅功能的组件 点击可是实现订�
 
 ## 示例
 
- <mip-yesky-read class="nyhouseding" data-expiredays="30" data-sub="false" data-articleId="531427823" data-cId="23344" data-openId="true" data-url="http://g.yesky.com/car/323/531427823.shtml" data-name="生活" data-ajax-url="/wap/subscriptions.jhtml" id="clickcategory">+订阅</mip-yesky-read>
+ <mip-yesky-read class="nyhouseding" data-expiredays="30" data-sub="false" data-articleId="531427823" data-cId="23344" data-openId="true" data-url="http://g.yesky.com/car/323/531427823.shtml" data-name="生活" data-ajax-url="/wap/subscriptions.jhtml" id="clickcategory" data-siteType="139">+订阅</mip-yesky-read>
 
 ### 基本用法
 ```html
@@ -93,5 +93,10 @@ mip-yesky-read 是一个实现文章订阅功能的组件 点击可是实现订�
 单位：无
 默认值：无
 
-## 注意事项
+### data-siteType
+
+说明： 站点id
+必选项：是
+类型：number
+取值范围：无
 

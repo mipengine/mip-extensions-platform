@@ -1,5 +1,5 @@
 /**
- * @file mip-linktion-try 组件
+ * @file mip-linktion-fortune-guidetry 组件
  * @author
  */
 
@@ -24,7 +24,7 @@ define(function (require) {
             var checkboxWrap = tryBtn.parents().siblings('.select-checkbox').children('.form-group');
             var checked = checkboxWrap.children('input[type=radio]:checked').val();
             var aipUrl = tryBtn.data('url');
-            var formItem = tryBtn.parents('.modal-body').children('form')[0];
+            var formItem = tryBtn.parents('form')[0];
             if (aipUrl.length !== 0) {
                 if (body.name === '') {
                     formItem.reportValidity();
@@ -34,7 +34,13 @@ define(function (require) {
                 }
                 else {
                     body.state = checked;
-                    if (!body.state) {
+                    var checkedbox = checkboxWrap.children('input[type=checkbox]:checked');
+                    var checkedboxArry = [];
+                    checkedbox.each(function (index, item) {
+                        checkedboxArry.push(item.getAttribute('value'));
+                    });
+                    body.demand = checkedboxArry;
+                    if (body.demand.length === 0) {
                         formItem.reportValidity();
                     }
                     else {
@@ -56,5 +62,6 @@ define(function (require) {
             }
         });
     };
+
     return customElement;
 });

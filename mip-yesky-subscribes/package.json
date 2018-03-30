@@ -1,7 +1,7 @@
 {
     "name": "mip-yesky-subscribes",
-    "version": "1.0.2",
-    "description": "优化多标签点击效果 ",
+    "version": "1.0.3",
+    "description": "增加站点标识 ",
     "contributors": [
         {
             "name": "小半截子",

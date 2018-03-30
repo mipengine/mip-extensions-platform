@@ -14,6 +14,7 @@ define(function (require) {
         var cId = $(element).attr('data-cId');
         var openId = $(element).attr('data-openId');
         var ajaxUrl = $(element).attr('data-ajax-url');
+        var siteType = $(element).attr('data-siteType');
         var cStart = '';
         var cEnd = '';
         function isNull(data) {
@@ -42,13 +43,13 @@ define(function (require) {
             var clickcategory = getCookie('clickcategory' + cId);
             if (clickcategory !== null && clickcategory !== '') {
                 if (sub === 'false') {
-                    if (updateSubStatus(cId, 1, sitemapname, 1) === true) {
+                    if (updateSubStatus(cId, 1, sitemapname, 1, siteType) === true) {
                         $(element).addClass('active').html('已订阅');
                     }
                 }
             }
         }
-        function updateSubStatus(keyId, type, name, status) {
+        function updateSubStatus(keyId, type, name, status, siteType) {
             if (isNull(openId) === true) {
                 getCode(filepath);
                 return false;
@@ -59,7 +60,8 @@ define(function (require) {
                 name: name,
                 type: type,
                 status: status,
-                openId: openId
+                openId: openId,
+                siteType: siteType
             };
             $.ajax({
                 url: ajaxUrl,
@@ -88,7 +90,7 @@ define(function (require) {
                 var cookiename = $(this).attr('id') + cId;
                 var cookievalue = $(this).attr('id');
                 setCookie(cookiename, cookievalue, expiredays);
-                if (updateSubStatus(cId, 1, sitemapname, 1) === true) {
+                if (updateSubStatus(cId, 1, sitemapname, 1, siteType) === true) {
                     $(this).addClass('active').html('已订阅');
                 }
             }

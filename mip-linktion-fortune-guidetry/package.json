@@ -1,0 +1,14 @@
+{
+    "name": "mip-linktion-fortune-guidetry",
+    "version": "1.0.0",
+    "description": "ajax表单提交",
+    "contributors": [
+        {
+            "name": "tinng",
+            "email": "tinng@linktion.cn"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

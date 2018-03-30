@@ -1,0 +1,14 @@
+{
+    "name": "mip-131-load",
+    "version": "1.0.0",
+    "description": "修改阿里妈妈链接为https，第三方阿里妈妈、谷歌联盟广告插件和自定义广告",
+    "contributors": [
+        {
+            "name": "liufeng",
+            "email": "liufeng@131mm.cc"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

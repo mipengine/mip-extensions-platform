@@ -14,6 +14,7 @@ define(function (require) {
         var filepath = $(element).attr('data-url');
         var sub = $(element).attr('data-sub');
         var ajaxUrl = $(element).attr('data-ajax-url');
+        var siteType = $(element).attr('data-siteType');
         var cStart = '';
         var cEnd = '';
         function isNull(data) {
@@ -48,7 +49,7 @@ define(function (require) {
                     var uid = $(element).attr('data-keyId');
                     var uT = $(element).attr('data-type');
                     var uname = $(element).attr('data-name');
-                    if (updateSubStatus(uid, uT, uname, 1) === true) {
+                    if (updateSubStatus(uid, uT, uname, 1, siteType) === true) {
                         if ($(element).attr('id') === clickkeyword) {
                             $(element).html('已订阅').addClass('cur2');
                         }
@@ -71,12 +72,12 @@ define(function (require) {
             var cookiename = $(element).attr('id') + articleId;
             var cookieval = $(element).attr('id');
             setCookie(cookiename, cookieval, expiredays);
-            if (updateSubStatus(uK, uT, uN, 1) === true) {
+            if (updateSubStatus(uK, uT, uN, 1, siteType) === true) {
                 $(this).html('已订阅').addClass('cur2');
             }
         });
 
-        function updateSubStatus(keyId, type, name, status) {
+        function updateSubStatus(keyId, type, name, status, siteType) {
             if (isNull(openId) === true) {
                 getCode(filepath);
                 return false;
@@ -87,7 +88,8 @@ define(function (require) {
                 name: name,
                 type: type,
                 status: status,
-                openId: openId
+                openId: openId,
+                siteType: siteType
             };
             $.ajax({
                 url: ajaxUrl,

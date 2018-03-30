@@ -9,7 +9,7 @@ mip-yesky-subscribes 是一个实现文章订阅功能的组件 点击可是实�
 所需脚本|https://c.mipcdn.com/static/v1/mip-yesky-subscribes/mip-yesky-subscribes.js
 
 ## 示例
- <mip-yesky-subscribes id="lili0" class="span1" data-expiredays="30" data-sub="false" data-openId="true" data-keyId="711949234" data-type="2" data-name="转向灯" data-status="0" data-articleId="531427823" data-url="http://g.yesky.com/car/323/531427823.shtml" data-ajax-url="/wap/subscriptions.jhtml">转向灯</mip-yesky-subscribes>
+ <mip-yesky-subscribes id="lili0" class="span1" data-expiredays="30" data-sub="false" data-openId="true" data-keyId="711949234" data-type="2" data-name="转向灯" data-status="0" data-articleId="531427823" data-url="http://g.yesky.com/car/323/531427823.shtml" data-ajax-url="/wap/subscriptions.jhtml" data-siteType="139">转向灯</mip-yesky-subscribes>
 ### 基本用法
 ```html
 <mip-yesky-subscribes>
@@ -100,5 +100,12 @@ mip-yesky-subscribes 是一个实现文章订阅功能的组件 点击可是实�
 必选项：是
 类型：number
 取值范围：1|2 1是分类 2是关键词
+
+### data-siteType
+
+说明： 站点id
+必选项：是
+类型：number
+取值范围：无
 
 
