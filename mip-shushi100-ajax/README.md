@@ -6,7 +6,7 @@ mip-shushi100-ajax 提交自定义json参数到指定服务地址
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-shushi100-ajax/mip-shushi100-ajax.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-shushi100-ajax/mip-shushi100-ajax.js
 
 ## 示例
 

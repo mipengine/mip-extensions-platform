@@ -7,7 +7,7 @@ mip-k73shield-data 需要进入页面就执行，只执行一次，一个本网�
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
 
-所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-k73shield-data/mip-k73shield-data.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-k73shield-data/mip-k73shield-data.js
 
 ## 示例
 

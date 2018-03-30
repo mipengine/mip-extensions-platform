@@ -6,7 +6,7 @@ mip-trilobite-log-new 三叶虫统计
 ----|----
 类型|业务
 支持布局|nodisplay
-所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-trilobite-log-new/mip-trilobite-log-new.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-trilobite-log-new/mip-trilobite-log-new.js
 
 ## 示例
 

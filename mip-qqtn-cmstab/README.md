@@ -6,7 +6,7 @@ mip-qqtn-cmstab 用于给选项卡里边的内容增加点击加载内容，每�
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-qqtn-cmstab/mip-qqtn-cmstab.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-qqtn-cmstab/mip-qqtn-cmstab.js
 
 ## 示例
 
@@ -273,7 +273,7 @@ mip-qqtn-cmstab 用于给选项卡里边的内容增加点击加载内容，每�
     </mip-html-tabs>  
     <p id="more" class="f-ajul" >点击查看更多...</p>
 </section>
-<script src="https://mipcache.bdstatic.com/static/v1/mip-html-tabs/mip-html-tabs.js"></script>
+<script src="https://c.mipcdn.com/static/v1/mip-html-tabs/mip-html-tabs.js"></script>
 </mip-qqtn-cmstab>
 ```
 

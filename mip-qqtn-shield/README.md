@@ -78,5 +78,5 @@ mip-qqtn-shield
 
 
 <script src="https://c.mipcdn.com/static/v1/mip-showmore/mip-showmore.js"></script>
-<script src="https://mipcache.bdstatic.com/extensions/platform/v1/mip-ychlyxgs-adddata/mip-ychlyxgs-adddata.js"></script>
-<script src="https://mipcache.bdstatic.com/extensions/platform/v1/mip-qqtn-downts/mip-qqtn-downts.js"></script>
+<script src="https://c.mipcdn.com/static/v1/mip-ychlyxgs-adddata/mip-ychlyxgs-adddata.js"></script>
+<script src="https://c.mipcdn.com/static/v1/mip-qqtn-downts/mip-qqtn-downts.js"></script>

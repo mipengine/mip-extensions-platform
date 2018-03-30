@@ -5,7 +5,7 @@
 标题|内容
 ----|----
 类型|公司业务组件
-所需脚本|https://mipcache.bdstatic.com/static/v1/mip-mustache/mip-mustache.js<br>https://c.mipcdn.com/static/v1/mip-zmall-popup-window/mip-zmall-popup-window.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-mustache/mip-mustache.js<br>https://c.mipcdn.com/static/v1/mip-zmall-popup-window/mip-zmall-popup-window.js
 
 ## 示例
 
