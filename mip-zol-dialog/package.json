@@ -1,6 +1,6 @@
 {
     "name": "mip-zol-dialog",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "模态框UI组件，包括 toast, confirm 等",
     "contributors": [
         {

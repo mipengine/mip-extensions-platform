@@ -55,13 +55,13 @@ define(function (require) {
                     doc.body.style.fontSize = bodyFontSize * dpr + 'px';
                 }
             };
-            //   if (viewportEle) {
-            //     var matchArray = viewportEle
-            //       .getAttribute('content')
-            //       .match(/initial-scale=([\d\.]+)/);
-            //     scale = matchArray[1];
-            //     dpr = parseInt(1 / scale);
-            //   }
+            if (viewportEle) {
+                var matchArray = viewportEle
+                    .getAttribute('content')
+                    .match(/initial-scale=([\d\.]+)/);
+                scale = matchArray[1];
+                dpr = parseInt(1 / scale, 10);
+            }
             if (dpr === 0 && scale === 0) {
                 calcDprAndScale();
             }

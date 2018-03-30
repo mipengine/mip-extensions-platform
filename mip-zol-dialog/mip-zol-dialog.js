@@ -104,11 +104,11 @@ define(function (require) {
         var self = this;
 
         // 自定义事件给DOM来触发
-        self.addEventAction('toast', function (str) {
+        self.addEventAction('toast', function (e, str) {
             toast.call(self, str);
         });
 
-        self.addEventAction('confirm', function (str) {
+        self.addEventAction('confirm', function (e, str) {
             confirm.call(self, str);
         });
 

@@ -5,9 +5,13 @@
 标题|内容
 ----|----
 类型|公司通用组件
-所需脚本|https://c.mipcdn.com/static/v1/mip-zol-dialog/mip-zol-dialog.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-zol-dialog/mip-zol-dialog.js
 
 ## 示例
+
+### 此次更新
+
+- 解决通过 `<div on="tap:myDialog.toast(消息)"></div>` 方式调用时候的bug
 
 ### 基本用法
 

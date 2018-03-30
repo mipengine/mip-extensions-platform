@@ -1,13 +1,13 @@
 # mip-k73shield-data
 
-mip-k73shield-data 需要进入页面就执行，只执行一次，一个本网站独立使用的多功能组件，通过接口获取数据进行多种逻辑判断和处理，因为数据繁多，所以为了减少请求次数，把多种功能基于一个组件中；如果分开需要多次请求同一个接口，不仅增加了请求次数，也增大了我们这边服务器的压力；
+mip-k73shield-data 需要进入页面就执行，只执行一次，一个本网站独立使用的多功能组件，通过接口获取数据进行多种逻辑判断和处理，因为数据繁多，所以为了减少请求次数，把多种功能基于一个组件中；如果分开需要多次请求同一个接口，不仅增加了请求次数，也增大了我们这边服务器的压力(细节修改了一下)；
 
 标题|内容
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
 
-所需脚本|https://c.mipcdn.com/static/v1/mip-k73shield-data/mip-k73shield-data.js
+所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-k73shield-data/mip-k73shield-data.js
 
 ## 示例
 
