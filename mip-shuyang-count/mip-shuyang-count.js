@@ -19,10 +19,10 @@ define(function (require) {
         var url;
         if (op === 'count' && id && parseInt(id, 10).toString().length === id.length
             && modelid && parseInt(modelid, 10).toString().length === modelid.length) {
-            url = 'https://api.05273.com/?op=count&id=' + parseInt(id, 10) + '&modelid=' + parseInt(modelid, 10);
+            url = 'https://api.05273.cn/?op=count&id=' + parseInt(id, 10) + '&modelid=' + parseInt(modelid, 10);
         }
         else if (op === 'stats' && catid && parseInt(catid, 10).toString().length === catid.length) {
-            url = 'https://api.05273.com/?op=stats&catid=' + parseInt(catid, 10) + '&edi=mobile';
+            url = 'https://api.05273.cn/?op=stats&catid=' + parseInt(catid, 10) + '&edi=mobile';
         }
         if (url) {
             var i = new Image();

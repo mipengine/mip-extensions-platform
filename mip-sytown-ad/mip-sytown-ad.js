@@ -31,11 +31,12 @@ define(function (require) {
         },
 
         closeListen: function () {
-            var adElem = this.el.querySelector('#sytownAd');
+            var elDom = this.el;
+            var adElem = elDom.querySelector('#sytownAd');
             var adClose = adElem.querySelector('.ad-close');
             adClose.addEventListener('click', function () {
-                adElem.parent().hide();
-                adElem.hide();
+                elDom.style.display = 'none';
+                adElem.style.display = 'none';
             }, false);
         }
     };

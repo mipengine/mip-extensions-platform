@@ -18,70 +18,10 @@ define(function (require, exports, module) {
         code: require('./templates/code'),
         normal: require('./templates/normal')
     };
-    // 页面广告注释节点数组
-    var adComments = [];
     // 页面广告注释节点数组，一般在手动请求广告时用到
     var asyncAdComments = {};
     // 扩展js需要渲染的广告数组，比如a广告需要用js1，b广告需要用js2渲染
     var extensionJsBarConfs = {};
-    // 页面自行设置的方法，在解析广告注释的时候调用
-    var beforFun = window[config.beforFun] || {};
-    // 页面自行设置的方法，在渲染广告的时候调用
-    var afterFun = window[config.afterFun] || {};
-
-    /**
-     * 解析页面广告注释
-     *
-     * @param {Object} comment 页面注释节点
-     * @return {number} 广告位id
-     */
-    function parseComment(comment) {
-        var pid;
-        var obj;
-        var nodeValue;
-        var keyword = config.keyword;
-        nodeValue = util.fun.trim(comment.nodeValue);
-        if (nodeValue && nodeValue.substr(0, keyword.length) === keyword) {
-            obj = util.fun.parseJSON(nodeValue.replace(keyword, ''));
-            pid = obj.place ? ('' + obj.place).replace(/#/g, '`') : '';
-            if (obj.id && beforFun[obj.id]) {
-                pid = ('' + beforFun[obj.id](obj.place));
-            }
-            comment.pageFunId = obj.id;
-        }
-        return pid;
-    }
-
-    /**
-     * 获取页面所有广告注释id，并把注释节点保存到adComments中
-     *
-     * @return {Array} 广告id数组
-     */
-    function getAdComments() {
-        var ids = [];
-        util.fun.getComment(function (comment) {
-            var pid = parseComment(comment);
-            if (pid) {
-                ids.push(pid);
-                adComments.push(comment);
-                // 广告位加载统计
-                util.ad.zpv({
-                    range: 'bms_placeholder',
-                    dom: comment.parentNode,
-                    type: 'load',
-                    name: 'bms_' + pid + '_load'
-                });
-                // 广告位展现统计
-                util.ad.zpv({
-                    range: 'bms_placeholder',
-                    dom: comment.parentNode,
-                    type: 'inview',
-                    name: 'bms_' + pid + '_show'
-                });
-            }
-        });
-        return ids;
-    }
 
     /**
      * 请求广告数据
@@ -110,15 +50,6 @@ define(function (require, exports, module) {
             var ad = new Fn(adBarAndAdComment.adBar).create(util);
             for (var i = 0; i < ad.elements.length; i++) {
                 adBarAndAdComment.adComment.parentNode.appendChild(ad.elements[i]);
-            }
-            ad.appendAfterFn && ad.appendAfterFn();
-            if (!adBarAndAdComment.adComment.parentNode.adHeight) {
-                adBarAndAdComment.adComment.parentNode.adHeight = 0;
-            }
-            adBarAndAdComment.adComment.parentNode.adHeight += (+ad.height + 10);
-            // 特殊处理文章页360广告
-            if (adBarAndAdComment.adBar.loc_id === 27263 && document.getElementById('mv_ad_dom')) {
-                loadExtensionJs('qhad-article');
             }
         }
     }
@@ -152,7 +83,7 @@ define(function (require, exports, module) {
             adBar: adBar,
             adComment: adComment
         };
-        if (util.ad.checkOS(adBar) && util.ad.checkCity(adBar)) {
+        if (util.ad.checkOS(adBar) && util.ad.checkCity(adBar) && util.ad.checkProduct(adBar)) {
             if (templates[type]) {
                 insertAd(templates[type](adBar, components), adBarAndAdComment);
             } else {
@@ -183,48 +114,10 @@ define(function (require, exports, module) {
      * @param {number} id 当前返回和页面广告位对应标识，一般在手动请求广告时用
      */
     function adCallback(ads, id) {
-        var adComment;
         if (id && asyncAdComments[id]) {
             place(ads[0], asyncAdComments[id]);
-            return;
-        }
-        for (var i = 0; i < ads.length; i++) {
-            var adPlace = ads[i];
-            adComment = adComments.shift();
-            if (adComment.pageFunId && afterFun[adComment.pageFunId]) {
-                afterFun[adComment.pageFunId](new PageFun(adPlace, adComment));
-            } else {
-                place(adPlace, adComment);
-            }
         }
     }
-
-    /**
-     * 页面自定义方法参数，在bms_after_fun中调用
-     *
-     * @param {Object} adPlace 广告位数组
-     * @param {Object} adComment 当前广告位对应的广告注释节点
-     */
-    function PageFun(adPlace, adComment) {
-        this.adPlace = adPlace;
-        this.adComment = adComment;
-    }
-
-    /**
-     * 生产广告，页面需调用此方法才能生成广告
-     */
-    PageFun.prototype.render = function () {
-        place(this.adPlace, this.adComment);
-    };
-
-    /**
-     * 获取广告高度，需调用生成广告方法后调用
-     *
-     * @return {number} 广告高度
-     */
-    PageFun.prototype.getHeight = function () {
-        return this.adComment.parentNode.adHeight;
-    };
 
     /**
      * 广告扩展方法请求回调
@@ -250,41 +143,15 @@ define(function (require, exports, module) {
      * @param {number} pid 广告位id
      */
     function adGlobalFunction(adComment, pid) {
-        pid = pid || parseComment(adComment);
         if (pid) {
             asyncAdComments[pid] = adComment;
             requestAd([pid], pid);
         }
     }
 
-    /**
-     * 广告初始化，解析广告占位，发送数据请求
-     *
-     * @param {Object} template 外部传入的模版对象
-     * @param {Object} component 外部传入的组件对象
-     */
-    function init(template, component) {
-        var adComments;
-        if (template) {
-            templates = util.fun.merge(templates, template);
-        }
-        if (component) {
-            components = util.fun.merge(components, component);
-        }
-        if (!window[config.noGet]) {
-            adComments = getAdComments();
-        }
-        if (!window[config.noReq] && adComments) {
-            requestAd(adComments);
-        }
-    }
-    module.exports = {
-        init: init
-    };
     window._da_ = {
         cb: adCallback,
         ec: adExtensionCallback,
-        render: adGlobalFunction,
-        util: util
+        render: adGlobalFunction
     };
 });

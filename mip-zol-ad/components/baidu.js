@@ -4,45 +4,32 @@
  */
 
 define(function (require, exports, module) {
-    // 百度pc端代码
-    function baiduCpro(fodder, util) {
-        var div = util.dom.createElement('div', {
-            id: 'cpro_' + fodder.cpro_id
-        });
-        (window.cproArray = window.cproArray || []).push({
-            id: fodder.cpro_id
-        });
-        var script = util.dom.createElement('script');
-        script.src = '//cpro.zol.com.cn/cpro/ui/c.js';
-        return [div, script];
-    }
     // 百度移动端代码
-    function baiduMCpro(fodder, util) {
-        var div = util.dom.createElement('div', {
-            id: 'cpro_' + fodder.cpro_id
-        });
+    function baiduMCpro(fodder) {
+        var div = document.createElement('div');
+        div.id = 'cpro_' + fodder.cpro_id;
+        div.classList.add('gmine_ad');
         (window['cpro_mobile_slot'] = window['cpro_mobile_slot'] || []).push({
             id: fodder.cpro_id
         });
-        var script = util.dom.createElement('script');
+        var script = document.createElement('script');
         script.src = '//cpro.zol.com.cn/cpro/ui/cm.js';
         return [div, script];
     }
     // 百度图+移动端代码
-    function baiduImagePlus(fodder, util) {
-        var scriptText = util.dom.createElement('script');
+    function baiduImagePlus(fodder) {
+        var scriptText = document.createElement('script');
         scriptText.text = 'var cpro_id="' + fodder.cpro_id + '";';
-        var scriptSrc = util.dom.createElement('script');
+        var scriptSrc = document.createElement('script');
         scriptSrc.src = '//cpro.zol.com.cn/cpro/ui/mi.js';
         return [scriptText, scriptSrc];
     }
     // 百度反屏蔽代码
-    function zolCpro(fodder, util) {
-        var div = util.dom.createElement('div', {
-            'id': fodder.cpro_id,
-            'class': 'gmine_ad'
-        });
-        var script = util.dom.createElement('script');
+    function zolCpro(fodder) {
+        var div = document.createElement('div');
+        div.id = fodder.cpro_id;
+        div.classList.add('gmine_ad');
+        var script = document.createElement('script');
         script.src = fodder.script_src;
         return [div, script];
     }
@@ -51,25 +38,15 @@ define(function (require, exports, module) {
     }
     Baidu.prototype.create = function (util) {
         var elements = [];
-        var adBar = this.adBar;
         var fodder = this.adBar.conf;
-        if (fodder.baidu_type === 1) {
-            elements = baiduCpro(fodder, util);
-        } else if (fodder.baidu_type === 2) {
-            elements = baiduMCpro(fodder, util);
+        if (fodder.baidu_type === 2) {
+            elements = baiduMCpro(fodder);
         } else if (fodder.baidu_type === 3) {
-            elements = baiduImagePlus(fodder, util);
+            elements = baiduImagePlus(fodder);
         } else if (fodder.baidu_type === 4) {
-            elements = zolCpro(fodder, util);
+            elements = zolCpro(fodder);
         }
-        return {elements: elements, height: fodder.height, appendAfterFn: function () {
-            util.ad.zpv({
-                range: 'bms_ad',
-                dom: elements[0],
-                type: 'inview',
-                name: 'bms_' + adBar.loc_id + '_' + adBar.bid + '_show'
-            });
-        }};
+        return {elements: elements};
     };
     module.exports = Baidu;
 });

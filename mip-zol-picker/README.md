@@ -5,7 +5,12 @@
 标题|内容
 ----|----
 类型|公司通用组件
-所需脚本|https://c.mipcdn.com/static/v1/mip-zol-picker/mip-zol-picker.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-zol-picker/mip-zol-picker.js
+
+## 更新日志（2018-04-02）
+
+- 城市选择的时候，把城市数据存入本地，7天之内不请求城市数据。
+- 更换城市后，建筑物需要重新选择。
 
 ## 示例
 

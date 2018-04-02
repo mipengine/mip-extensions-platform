@@ -6,9 +6,7 @@
 define(function (require, exports, module) {
     module.exports = {
         ad: require('./util/ad'),
-        css: require('./util/css'),
         fun: require('./util/fun'),
-        dom: require('./util/dom'),
         user: require('./util/user')
     };
 });

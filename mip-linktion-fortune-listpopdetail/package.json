@@ -1,0 +1,14 @@
+{
+    "name": "mip-linktion-fortune-listpopdetail",
+    "version": "1.0.0",
+    "description": "列表信息带入弹框",
+    "contributors": [
+        {
+            "name": "tinng",
+            "email": "tinng@linktion.cn"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

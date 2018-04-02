@@ -1,15 +1,15 @@
 {
     "name": "mip-shuyang-count",
-    "version": "1.1.2",
-    "description": "站点：沭阳网  http://www.05273.com/ 组件功能：调用专用接口。",
+    "version": "1.1.4",
+    "description": "站点：沭阳网  http://www.05273.cn/ 组件功能：调用专用接口。老接口失效，更换新接口",
     "author": "EDI",
     "contributors": [
         {
             "name": "EDI",
-            "email": "web@05273.com"
+            "email": "web@05273.cn"
         }
     ],
     "engines": {
-        "mip": ">=1.1.2"
+        "mip": ">=1.1.4"
     }
 }

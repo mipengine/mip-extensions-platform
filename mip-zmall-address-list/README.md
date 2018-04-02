@@ -5,7 +5,11 @@
 标题|内容
 ----|----
 类型|公司业务组件
-所需脚本|https://c.mipcdn.com/static/v1/mip-mustache/mip-mustache.js<br>https://c.mipcdn.com/static/v1/mip-zmall-address-list/mip-zmall-address-list.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-mustache/mip-mustache.js<br>https://c.mipcdn.com/extensions/platform/v1/mip-zmall-address-list/mip-zmall-address-list.js
+
+## 更新日志
+
+- 解决手机上添加或者修改地址返回的时候，不刷新页面的数据问题
 
 ## 示例
 

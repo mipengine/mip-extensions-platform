@@ -4,36 +4,34 @@
  */
 
 define(function (require, exports, module) {
+    var mipUtil = require('util');
     function Iframe(adBar) {
         this.adBar = adBar;
     }
     Iframe.prototype.create = function (util) {
         var adBar = this.adBar;
         var fodder = this.adBar.conf;
-        var iframe = util.dom.createElement('iframe', {
-            src: fodder.src,
-            marginheight: 0,
-            marginwidth: 0,
-            frameBorder: 0,
-            scrolling: 'no'
-        }, {
+        var iframe = document.createElement('iframe');
+        iframe.setAttribute('src', fodder.src);
+        iframe.setAttribute('marginheight', 0);
+        iframe.setAttribute('marginwidth', 0);
+        iframe.setAttribute('frameBorder', 0);
+        iframe.setAttribute('scrolling', 'no');
+        mipUtil.css(iframe, {
+            display: 'block',
             width: fodder.width + 'px',
             height: fodder.height + 'px'
         });
-        var div = util.dom.createElement('div', {
-            'class': 'gmine_ad'
+        var div = document.createElement('div');
+        div.classList.add('gmine_ad');
+        mipUtil.css(div, {
+            width: fodder.width + 'px',
+            height: fodder.height + 'px'
         });
         util.ad.addAdMargin(div, fodder);
         div.appendChild(iframe);
         util.ad.addAdIcon(div, adBar);
-        return {elements: [div], height: fodder.height, appendAfterFn: function () {
-            util.ad.zpv({
-                range: 'bms_ad',
-                dom: div,
-                type: 'inview',
-                name: 'bms_' + adBar.loc_id + '_' + adBar.bid + '_show'
-            });
-        }};
+        return {elements: [div]};
     };
     module.exports = Iframe;
 });

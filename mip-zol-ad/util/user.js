@@ -40,11 +40,6 @@ define(function (require, exports, module) {
                 provStr: provStr
             };
             return location;
-        },
-        pvtest: function (event) {
-            var ipck = decodeURIComponent(utilFun.getCookie('ip_ck'));
-            var url = config.pvtest.replace('{ipck}', ipck).replace('{time}', Date.now());
-            return url.replace('{event}', event).replace('{url}', this.href);
         }
     };
 });

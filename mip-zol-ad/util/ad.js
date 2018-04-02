@@ -7,13 +7,8 @@ define(function (require, exports, module) {
     var adIcon;
     var utilFun = require('./fun');
     var utilUser = require('./user');
-    var utilCss = require('./css');
+    var mipUtil = require('util');
     var config = require('../config');
-    var innerHeight = 'innerHeight' in window ? window.innerHeight : document.documentElement.clientHeight;
-    function isImpTrack(element, rate) {
-        var rect = element.getBoundingClientRect();
-        return (!((rect.top + (rect.bottom - rect.top) * rate) > innerHeight) && !(rect.bottom < 0));
-    }
     module.exports = {
 
         /**
@@ -151,20 +146,20 @@ define(function (require, exports, module) {
             } else {
                 icon = new Image(config.adIconWidth, config.adIconHeight);
                 icon.src = config.adIcon;
-                utilCss(icon, {
-                    left: '0',
-                    bottom: '0',
-                    border: '0',
+                mipUtil.css(icon, {
+                    left: 0,
+                    bottom: 0,
+                    border: 0,
                     position: 'absolute',
                     width: config.adIconWidth + 'px',
                     height: config.adIconHeight + 'px'
                 });
                 adIcon = icon;
             }
-            utilCss(element, {
+            mipUtil.css(element, {
                 position: 'relative',
-                width: fodder.width + 'px',
-                height: fodder.height + 'px'
+                width: fodder.width,
+                height: fodder.height
             });
             element.appendChild(icon);
         },
@@ -177,73 +172,35 @@ define(function (require, exports, module) {
          */
         addAdMargin: function (element, fodder) {
             if (fodder.top > 0) {
-                utilCss(element, 'marginTop', fodder.top);
+                mipUtil.css(element, 'marginTop', fodder.top);
             } else if (fodder.bottom > 0) {
-                utilCss(element, 'marginBottom', fodder.bottom);
+                mipUtil.css(element, 'marginBottom', fodder.bottom);
             }
         },
 
         /**
-         * 点击监测
+         * 竞品广告投放
          *
-         * @param {Object} element 广告元素
-         * @param {Object} url 点击地址
-         */
-        clkTrack: function (element, url) {
-            utilFun.addEventListener(element, 'click', function () {
-                utilFun.log(url);
-            });
-        },
-
-        /**
-         * ZOL点击监测
-         *
-         * @param {Object} element 广告元素
          * @param {Object} adBar 广告条json对象
+         * @return {boolean}
          */
-        zolClkTrack: function (element, adBar) {
-            this.clkTrack(element, utilUser.pvtest('bms_' + adBar.loc_id + '_' + adBar.bid + '_click'));
-        },
-
-        /**
-         * 可视曝光监测
-         *
-         * @param {Object} element 广告元素
-         * @param {string} url 曝光地址
-         */
-        impTrack: function (element, url) {
-            if (isImpTrack(element, 0.2)) {
-                utilFun.log(url);
-            } else {
-                utilFun.addEventListener(window, 'scroll', scrollFn);
-            }
-            function scrollFn() {
-                if (isImpTrack(element, 0.2)) {
-                    utilFun.removeEventListener(window, 'scroll', scrollFn);
-                    utilFun.log(url);
+        checkProduct: function (adBar) {
+            var manuId;
+            var subcateId;
+            var status = 1;
+            var productId = adBar.product_id;
+            if (productId) {
+                status = 0;
+                for (var i = 0; i < productId.length; i++) {
+                    subcateId = '' + productId[i][0];
+                    manuId = '' + productId[i][1];
+                    if (window.temp_hardware_id === subcateId && window.temp_doc_manu_id === manuId) {
+                        status = 1;
+                        break;
+                    }
                 }
             }
-        },
-
-        /**
-         * ZOL可视曝光监测
-         *
-         * @param {Object} element 广告元素
-         * @param {Object} adBar 广告条json对象
-         */
-        zolImpTrack: function (element, adBar) {
-            this.impTrack(element, utilUser.pvtest('bms_' + adBar.loc_id + '_' + adBar.bid + '_show'));
-        },
-
-        /**
-         * 数据中心统计
-         *
-         * @param {Object} params 参数
-         */
-        zpv: function (params) {
-            if (params.dom) {
-                (window['_zpv_events'] = window['_zpv_events'] || []).push(params);
-            }
+            return status;
         }
     };
 });

@@ -19,6 +19,8 @@ define(function (require) {
     function loadAddressList(callback) {
         var self = this;
         var element = self.element;
+        var templateId = element.getAttribute('template');
+        var templateElement = element.querySelector('#' + templateId);
         var confirmUrl = element.getAttribute('url');
 
         fetchJsonp(element.api.list, {
@@ -33,10 +35,20 @@ define(function (require) {
                         return confirmUrl.replace('{{ADDRESSID}}', this.addressId);
                     };
                 }
-                templates.render(element, address).then(function (html) {
-                    element.innerHTML = html;
-                    callback(address);
-                });
+                if (templateElement) {
+                    templates.render(element, address).then(function (html) {
+                        element.innerHTML = html;
+                        callback(address);
+                    });
+                }
+                else {
+                    var templateType = element.templateType;
+                    templates._getTemplate(templateType).then(function (impl) {
+                        var html = impl.render(element.templateHtml, address);
+                        element.innerHTML = html;
+                        callback(address);
+                    });
+                }
             }
             else {
                 element.innerHTML = '<p class="empty-address">没有收货地址</p>';
@@ -112,6 +124,7 @@ define(function (require) {
                         addressItemNode.classList.add('removing');
                         setTimeout(function () {
                             element.removeChild(addressItemNode);
+                            setEmpty(element);
                             element.mipDialogComponent.customElement.toast('删除成功');
                         }, 201);
                     }
@@ -123,13 +136,46 @@ define(function (require) {
         });
     }
 
+    // 删除最后一个的时候设置空样式
+    function setEmpty(element) {
+        var items = element.querySelectorAll('.js_address_del');
+        if (!items.length) {
+            element.innerHTML = '<p class="empty-address">没有收货地址</p>';
+        }
+    }
+
+    // 回调函数
+    function bindEvents(element) {
+        // 设置为默认
+        var radios = element.querySelectorAll('input[name="default"]');
+        element.checkedRadio = element.querySelector('input[name="default"]:checked');
+        [].forEach.call(radios, function (item) {
+            item.addEventListener('change', function () {
+                setDefaultAddress(element, item);
+            });
+        });
+
+        // 删除地址
+        var delBtns = element.querySelectorAll('.js_address_del');
+        [].forEach.call(delBtns, function (item) {
+            // 为了一个动画效果
+            var addressItemNode = item.parentNode.parentNode;
+            var h = addressItemNode.clientHeight;
+            util.css(addressItemNode, {
+                height: h
+            });
+            item.addEventListener('click', function () {
+                delAddress(element, item);
+            });
+        });
+    }
+
     /**
      * 第一次进入可视区回调，只会执行一次
      */
     customElement.prototype.firstInviewCallback = function () {
         var self = this;
         var element = self.element;
-
         var userSettings = {};
 
         // 获取用户设置参数
@@ -152,30 +198,32 @@ define(function (require) {
         element.api = userSettings;
         element.mipDialogComponent = mipDialogComponent;
 
-        // 加载数据
-        loadAddressList.call(this, function (data) {
-            // 设置为默认
-            var radios = element.querySelectorAll('input[name="default"]');
-            element.checkedRadio = element.querySelector('input[name="default"]:checked');
-            [].forEach.call(radios, function (item) {
-                item.addEventListener('change', function () {
-                    setDefaultAddress(element, item);
-                });
-            });
+        // 缓存模板信息
+        var templateId = element.getAttribute('template');
+        var templateElement = element.querySelector('#' + templateId);
+        if (templateElement) {
+            var templateType = templateElement.getAttribute('type');
+            element.templateHtml = templateElement.innerHTML;
+            element.templateType = templateType;
+        }
+        else {
+            return;
+        }
 
-            // 删除地址
-            var delBtns = element.querySelectorAll('.js_address_del');
-            [].forEach.call(delBtns, function (item) {
-                // 为了一个动画效果
-                var addressItemNode = item.parentNode.parentNode;
-                var h = addressItemNode.clientHeight;
-                util.css(addressItemNode, {
-                    height: h
-                });
-                item.addEventListener('click', function () {
-                    delAddress(element, item);
-                });
-            });
+        // 加载数据
+        loadAddressList.call(this, function () {
+            bindEvents(element);
+            // 添加或者修改完成返回该页面的时候，刷新数据
+            window.addEventListener('pageshow', function () {
+                self.refresh();
+            }, false);
+        });
+    };
+
+    customElement.prototype.refresh = function () {
+        var element = this.element;
+        loadAddressList.call(this, function () {
+            bindEvents(element);
         });
     };
 

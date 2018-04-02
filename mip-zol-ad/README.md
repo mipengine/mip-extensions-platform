@@ -6,18 +6,18 @@ mip-zol-ad 是zol广告组件。
 ----|----
 类型|业务,广告
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/static/v1/mip-zol-ad/mip-zol-ad.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-zol-ad/mip-zol-ad.js
 
 ## 示例
 
 ### banner
 ```html
-<mip-zol-ad pid="26203"></mip-zol-ad>
+<mip-zol-ad pid="12967"></mip-zol-ad>
 ```
 
 ### 嵌入代码
 ```html
-<mip-zol-ad pid="25027"></mip-zol-ad>
+<mip-zol-ad pid="26143"></mip-zol-ad>
 ```
 
 ## 属性

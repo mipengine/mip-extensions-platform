@@ -4,6 +4,7 @@
  */
 
 define(function (require, exports, module) {
+    var mipUtil = require('util');
     function Code(adBar) {
         this.adBar = adBar;
     }
@@ -11,22 +12,19 @@ define(function (require, exports, module) {
         var node;
         var style;
         var script;
-        var zpvDom; // zpv.js统计监测的dom
         var styleTags;
         var scriptTags;
-        var zpvDomFlag = true;
         var elements = [];
-        var adBar = this.adBar;
         var fodder = this.adBar.conf;
-        var div = util.dom.createElement('div');
-        util.css(div, 'display', 'none');
+        var div = document.createElement('div');
+        mipUtil.css(div, 'display', 'none');
         // ie中第一个元素是script或style获取不到
         div.innerHTML = '<span style="display:none">code</span>' + fodder.code;
         document.getElementsByTagName('body')[0].appendChild(div);
         scriptTags = div.getElementsByTagName('script');
-        for (var i = 0, len = scriptTags.length; i < len; i++) {
+        for (var i = 0, scriptTagLength = scriptTags.length; i < scriptTagLength; i++) {
             node = scriptTags[i];
-            script = util.dom.createElement('script');
+            script = document.createElement('script');
             if (node.src) {
                 script.src = node.src;
             } else {
@@ -36,9 +34,9 @@ define(function (require, exports, module) {
             node.parentNode.removeChild(node);
         }
         styleTags = div.getElementsByTagName('style');
-        for (var i = 0, len = styleTags.length; i < len; i++) {
-            node = styleTags[i];
-            style = util.dom.createElement('style');
+        for (var j = 0, styleTagLength = styleTags.length; j < styleTagLength; j++) {
+            node = styleTags[j];
+            style = document.createElement('style');
             style.type = 'text/css';
             if (style.styleSheet) { // ie
                 style.styleSheet.cssText = node.innerHTML;
@@ -48,25 +46,12 @@ define(function (require, exports, module) {
             node.parentNode.appendChild(style);
             node.parentNode.removeChild(node);
         }
-        for (var i = 1; i < div.childNodes.length; i++) {
-            node = div.childNodes[i];
-            if (node.nodeName !== 'SCRIPT' && node.nodeName !== 'STYLE') {
-                if (zpvDomFlag) {
-                    zpvDomFlag = false;
-                    zpvDom = node;
-                }
-            }
+        for (var n = 1, childNodeLength = div.childNodes.length; n < childNodeLength; n++) {
+            node = div.childNodes[n];
             elements.push(node);
         }
         div.parentNode.removeChild(div);
-        return {elements: elements, height: fodder.height, appendAfterFn: function () {
-            util.ad.zpv({
-                range: 'bms_ad',
-                dom: zpvDom,
-                type: 'inview',
-                name: 'bms_' + adBar.loc_id + '_' + adBar.bid + '_show'
-            });
-        }};
+        return {elements: elements};
     };
     module.exports = Code;
 });
