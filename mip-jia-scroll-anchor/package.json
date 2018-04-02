@@ -1,0 +1,14 @@
+{
+    "name": "mip-jia-scroll-anchor",
+    "version": "1.0.0",
+    "description": "定位跳转及滚动",
+    "contributors": [
+        {
+            "name": "tao",
+            "email": "165526381@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

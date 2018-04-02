@@ -6,15 +6,15 @@ mip-linktion-city 级联城市组件
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|htthttps://c.mipcdn.com/static/v1/mip-linktion-city/mip-linktion-city.js<br>https://c.mipcdn.com/static/v1/mip-lightbox/mip-lightbox.js<br>https://c.mipcdn.com/static/v1/mip-vd-tabs/mip-vd-tabs.js
+所需脚本|htthttps://c.mipcdn.com/extensions/platform/v1/mip-linktion-city/mip-linktion-city.js<br>https://c.mipcdn.com/static/v1/mip-lightbox/mip-lightbox.js<br>https://c.mipcdn.com/static/v1/mip-vd-tabs/mip-vd-tabs.js
 
 ## 示例
 
 ```html
 <mip-linktion-city id="city">
 <!-- search的弹框 -->
-<a on="tap:select-city.toggle tap:city.open" id="btn-open" role="button" class="city-pop-btn" href="javascrpt:;"tabindex="0" data-domain="http://47.100.7.250:8080" data-submitUrl="http://47.100.7.250:8080/city"><i class="fa fa-map-marker"></i><p class="tre-location-txt">北京/海淀</p></a>
-<a href="javascript:;" on="tap:select-city-phone.toggle tap:city.open"data-domain="http://47.100.7.250:8080" data-submitUrl="http://47.100.7.250:8080/city" id="btn-open" role="button" class="city-pop-btn" href="javascrpt:;"tabindex="0" class="phone-clientele-head">北京/海淀 -phone</a>
+<a on="tap:select-city.toggle tap:city.open" id="btn-open" role="button" class="city-pop-btn" href="javascrpt:;" tabindex="0" data-domain="http://47.100.7.250:8080" data-submiturl="http://47.100.7.250:8080/city"><i class="fa fa-map-marker"></i><p class="tre-location-txt">北京/海淀</p></a>
+<a href="javascript:;" on="tap:select-city-phone.toggle tap:city.open" data-domain="http://47.100.7.250:8080" data-submitUrl="http://47.100.7.250:8080/city" id="btn-open" role="button" class="city-pop-btn" href="javascrpt:;"tabindex="0" class="phone-clientele-head">北京/海淀 -phone</a>
 <!-- 选城市弹框 -->
   <mip-lightbox id="select-city" layout="nodisplay" class="mip-hidden">
     <div class="modal-dialog select-city modal-blue-top" role="document">
@@ -147,7 +147,7 @@ mip-linktion-city 级联城市组件
               </div>
             </mip-vd-tabs>
           </div>
-          
+
         </div>
       </div>
     </div>

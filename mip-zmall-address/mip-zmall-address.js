@@ -45,13 +45,13 @@ define(function (require) {
             '</div></div>',
             '<div class="address-edit-item address-edit-arrow fix-flex" on="tap:myCityPicker.open">',
             '<div class="label">省份/城市</div><div class="flex-item">',
-            '<div class="address-edit-text" m-text="userSelectedCityName" ',
-            'm-bind:selected="userSelectedCityName!==\'\'?\'true\':\'\'">请选择省份/城市</div>',
+            '<div class="address-edit-text" placeholder="请选择省份/城市" m-text="userSelectedCityName" ',
+            'm-bind:selected="userSelectedCityName!==\'\'?\'true\':\'\'"></div>',
             '</div></div>',
             '<div class="address-edit-item address-edit-arrow fix-flex" id="js_map_picker">',
             '<div class="label">街道/建筑物</div><div class="flex-item">',
-            '<div class="address-edit-text" m-text="userSelectedPOI" ',
-            'm-bind:selected="userSelectedPOI!==\'\'?\'true\':\'\'">请选择街道/建筑物</div>',
+            '<div class="address-edit-text" placeholder="请选择街道/建筑物" m-text="userSelectedPOI" ',
+            'm-bind:selected="userSelectedPOI!==\'\'?\'true\':\'\'"></div>',
             '</div></div>',
             '<div class="address-edit-item address-edit-auto fix-flex">',
             '<div class="label">详细地址</div><div class="flex-item">',
@@ -60,7 +60,7 @@ define(function (require) {
             '</div></div></div>',
             '<div class="address-edit-item fix-flex">',
             '<div class="label">设为默认地址</div><div class="flex-item">',
-            '<input name="default" id="js_address_default" type="checkbox" value="1">',
+            '<input name="default" id="js_address_default" checked type="checkbox" value="1">',
             '<label for="js_address_default" class="address-edit-default">',
             '</label></div></div>',
             '</div>' + saveButton + '</div>' + fixedSaveButton,
@@ -243,7 +243,7 @@ define(function (require) {
             return;
         }
         else if (values.mobile.trim().length < 11 || !mobileReg.test(values.mobile.trim())) {
-            mipDialogComponent.customElement.toast('请填写正确手机号');
+            mipDialogComponent.customElement.toast('手机号码有误');
             return;
         }
         else if (values.provinceId === '' || values.cityId === '') {
@@ -283,8 +283,10 @@ define(function (require) {
                     window.MIP.setData({
                         address: {
                             status: 200,
+                            msg: '保存成功',
                             info: res.info
-                        }
+                        },
+                        userAddressInfo: res.info
                     });
                     // 回调
                     if (typeof callback === 'function') {
@@ -296,7 +298,7 @@ define(function (require) {
                 }
             },
             error: function (e) {
-                mipDialogComponent.customElement.toast('保存地址错误，请稍后');
+                mipDialogComponent.customElement.toast('保存地址错误，请稍后再试');
             }
         });
     }

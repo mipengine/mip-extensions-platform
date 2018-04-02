@@ -165,30 +165,31 @@ define(function (require) {
     }
 
     // 根据用户当前位置，自动匹配地址
-    function setUserLocation() {
+    function setUserLocation(map) {
 
         var element = this.element;
 
-        // 创建地图实例
-        var map = new window.BMap.Map('js_map');
-
         // 优先用户选择的城市, 通过mip-data拿到数据
         var userSelectedCityName = window.m.userSelectedCityName;
+        var userSelectedPid = window.m.userSelectedProvinceId;
+        var userSelectedCid = window.m.userSelectedCityId;
+        var userSelectedLat = window.m.userSelectedLat;
+        var userSelectedLng = window.m.userSelectedLng;
+        var lastUserSelectedCid = element.userSelectedCityId;
+        var lastUserSelectedPid = element.userSelectedProvinceId;
+
         if (userSelectedCityName !== '') {
-            var userSelectedLat = window.m.userSelectedLat;
-            var userSelectedLng = window.m.userSelectedLng;
-            var value = userSelectedCityName;
-            if (userSelectedLat && userSelectedLng) {
-                // 创建点坐标
-                var point = new window.BMap.Point(userSelectedLng, userSelectedLat);
-                map.centerAndZoom(point, 17);
-                value = window.m.userSelectedPOI;
+            if (userSelectedPid !== lastUserSelectedPid || userSelectedCid !== lastUserSelectedCid) {
+                map.centerAndZoom(userSelectedCityName, 17);
+                setUserPlace(map, userSelectedCityName, element);
             }
             else {
-                map.centerAndZoom(userSelectedCityName, 17);
-            }
-            if (value !== element.userSelectedCityName) {
-                setUserPlace(map, value, element);
+                var lat = userSelectedLat || element.userSelectedLat;
+                var lng = userSelectedLng || element.userSelectedLng;
+                // 创建点坐标
+                var point = new window.BMap.Point(lng, lat);
+                map.centerAndZoom(point, 17);
+                setUserPlace(map, window.m.userSelectedPOI, element);
             }
         }
         else {
@@ -250,7 +251,7 @@ define(function (require) {
     }
 
     // POI事件绑定
-    function bindSelectEvent(element, userSelectedCityName) {
+    function bindSelectEvent(element) {
         var container = element.querySelector('#js_map_scroller');
         container.addEventListener('click', function (e) {
             var targetElm = e.target;
@@ -266,7 +267,6 @@ define(function (require) {
             var lng = targetItem.getAttribute('data-lng');
             window.MIP.setData({
                 userSelectedPOI: title,
-                userSelectedCityName: userSelectedCityName,
                 userSelectedLat: lat,
                 userSelectedLng: lng
             });
@@ -280,8 +280,7 @@ define(function (require) {
 
     // 设置周边POI列表
     function setUserPlace(map, value, element, search) {
-        // 记录选择
-        element.userSelectedCityName = value;
+
         // 数据列表
         var resultPanel = element.querySelector('#js_map_scroller');
         // 空数据状态
@@ -293,20 +292,6 @@ define(function (require) {
         // 配置
         var options = {
             onSearchComplete: function (results) {
-                var userSelectedCityName = '';
-                if (!search) {
-                    var keyword = results.keyword;
-                    var keywordArr = keyword.split(', ');
-                    userSelectedCityName = keywordArr[0];
-                    userSelectedCityName += keywordArr[1] ? (' ' + keywordArr[1]) : '';
-                }
-                else {
-                    userSelectedCityName = results.province;
-                    if (results.city && results.city !== results.province) {
-                        userSelectedCityName += (' ' + results.city);
-                    }
-                }
-
                 // 判断状态是否正确
                 if (local.getStatus() === window.BMAP_STATUS_SUCCESS) {
                     var s = [];
@@ -321,6 +306,11 @@ define(function (require) {
                             '</li>'
                         ].join('');
                         s.push(itemHtml);
+                        // 记录当没有选择的时候的经纬度，下次进来能定位准确
+                        if (i === 0) {
+                            element.userSelectedLat = lat;
+                            element.userSelectedLng = lng;
+                        }
                     }
                     var html = s.length ? ('<ul class="search-result__list">' + s.join('') + '</ul>') : emptyStr;
                     resultPanel.innerHTML = html;
@@ -328,7 +318,7 @@ define(function (require) {
                 else {
                     resultPanel.innerHTML = emptyStr;
                 }
-                bindSelectEvent(element, userSelectedCityName);
+                bindSelectEvent(element);
             }
         };
         local = new window.BMap.LocalSearch(map, options);
@@ -337,6 +327,9 @@ define(function (require) {
 
     function close(element) {
         element.querySelector('#js_map_box').classList.remove('show');
+        // 记录当前选择的省份和城市ID
+        element.userSelectedCityId = window.m.userSelectedCityId;
+        element.userSelectedProvinceId = window.m.userSelectedProvinceId;
         setTimeout(function () {
             element.parentNode.style.height = 'auto';
         }, 300);
@@ -349,12 +342,16 @@ define(function (require) {
         if (mapLayer) {
             element.parentNode.style.height = '100%';
             mapLayer.classList.add('show');
-            setUserLocation.call(self);
+            setUserLocation.call(self, element.map);
         }
         else {
             create(element);
             initBaiduMapScript(element, function () {
-                setUserLocation.call(self);
+                // 创建地图实例
+                var map = new window.BMap.Map('js_map');
+                map.enableScrollWheelZoom(true);
+                element.map = map;
+                setUserLocation.call(self, map);
             });
         }
     }

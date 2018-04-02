@@ -1,0 +1,15 @@
+{
+    "name": "mip-fy-yuyue",
+    "version": "1.0.0",
+    "description": "当下载地址为指定地址的时候，增加预约功能",
+    "contributors": [
+        {
+            "name": "gom",
+            "email": "gom3250@qq.com",
+            "url": "https://m.cr173.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.0.0"
+    }
+}

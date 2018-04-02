@@ -182,7 +182,7 @@ define(function (require) {
                         if ((AGArry.length === 0) && (HKArry.length === 0)
                          && (LSArry.length === 0) && (TZArry.length === 0)) {
                             var areaid = $el.find('#area-tag').data('value');
-                            var areasubmitUrl = $el.find('.city-pop-btn').data('submitUrl');
+                            var areasubmitUrl = $el.find('.city-pop-btn').data('submiturl');
                             var bodya =  {cityId: areaid};
                             $.ajax({
                                 type: 'post',
@@ -197,7 +197,7 @@ define(function (require) {
                         else {
                             $el.find('.phone-city-but.but-street').on('click', function () {
                                 var phstreetid = $el.find('#area-tag').data('value');
-                                var phsubmitUrl = $el.find('.city-pop-btn').data('submitUrl');
+                                var phsubmitUrl = $el.find('.city-pop-btn').data('submiturl');
                                 var bodyb =  {cityId: phstreetid};
                                 ajaxUpload(phsubmitUrl, bodyb);
                             });
@@ -208,7 +208,7 @@ define(function (require) {
                          && (LSArry.length === 0) && (TZArry.length === 0)) {
                             if ($el.find('#area-tag').data('value') !== '') {
                                 var pcareacityid = $el.find('#area-tag').data('value');
-                                var citySubmitUrl = $el.find('.city-pop-btn').data('submitUrl');
+                                var citySubmitUrl = $el.find('.city-pop-btn').data('submiturl');
                                 var bodyc = {cityId: pcareacityid};
                                 $.ajax({
                                     type: 'post',
@@ -228,7 +228,7 @@ define(function (require) {
                         $el.find('#street-tag').css('display', 'inline-table');
                         if ($el.find('#street-tag').data('value')  !== '') {
                             var pccityid = $el.find('#street-tag').data('value');
-                            var pcsubmitUrl = $el.find('.city-pop-btn').data('submitUrl');
+                            var pcsubmitUrl = $el.find('.city-pop-btn').data('submiturl');
                             var bodyd =  {cityId: pccityid};
                             ajaxUpload(pcsubmitUrl, bodyd);
                         }

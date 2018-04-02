@@ -6,7 +6,7 @@ mip-linktion-try 弹框ajax提交信息并后续弹框提示操作结果
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/static/v1/mip-linktion-try/mip-linktion-try.js<br>https://c.mipcdn.com/static/v1/mip-lightbox/mip-lightbox.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-linktion-try/mip-linktion-try.js<br>https://c.mipcdn.com/static/v1/mip-lightbox/mip-lightbox.js
 
 ## 示例
 
@@ -33,26 +33,20 @@ mip-linktion-try 弹框ajax提交信息并后续弹框提示操作结果
                 <input type="number" placeholder="请输入手机号码" id="mobile" required="required">
               </div>
             </div>
-            <div class="select-checkbox">
-              <h3 class="checkbox-h">我属于</h3>
+            <div class="select-checkbox" data-choicetype="checkbox" id="demand">
+              <h3 class="checkbox-h">我需要</h3>
               <div class="form-group">
-                <input type="radio" name="myinfo" value="单身" id="single" required="required"><label for="single">单身</label>
+                <input type="checkbox" name="myinfo" value="保险规划" id="card_insurance" checked><label for="card_insurance">保险规划</label>
               </div>
               <div class="form-group">
-                <input type="radio" name="myinfo" value="俩人世界" id="couple" required="required"><label for="couple">俩人世界</label>
+                <input type="checkbox" name="myinfo" value="投资" id="card_invest"><label for="card_invest">投资</label>
               </div>
               <div class="form-group">
-                <input type="radio" name="myinfo" value="家有儿女" id="haschildren" required="required"><label for="haschildren">家有儿女</label>
-              </div>
-              <div class="form-group">
-                <input type="radio" name="myinfo" id="midAged" value="人到中年" required="required"><label for="midAged">人到中年</label>
-              </div>
-              <div class="form-group">
-                <input type="radio" name="myinfo" id="retired" required="required"><label for="retired" value="退休养老">退休养老</label>
+                <input type="checkbox" name="myinfo" value="贷款" id="card_loans"><label for="card_loans">贷款</label>
               </div>
             </div>
             <div class="form-group-but">
-              <button type="button" class="insurance-but"  id="try-btn"  data-type="3" on="tap:try.open" data-url="http://47.100.7.250:8080/memberCustomization/saveCustomization">提交</button>
+              <button type="button" class="insurance-but"  id="try-btn"  data-type="5" on="tap:try.open" data-url="http://47.100.7.250:8080/memberCustomization/saveCustomization">提交</button>
             </div>
           </form>
 	      </div>
