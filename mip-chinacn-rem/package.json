@@ -1,0 +1,12 @@
+{
+	"name": "mip-chinacn-rem",
+	"version": "1.0.0",
+    "description": "根字号计算(页面以rem为单位时)",
+	"author": {
+		"name": "shenfanzui",
+		"email": "dulx2012@126.com"
+	},
+	"engines": {
+		"mip": ">=1.1.0"
+	} 
+}

@@ -1,0 +1,14 @@
+{
+    "name": "mip-linktion-fortune-consults",
+    "version": "1.0.0",
+    "description": "弹框和下拉框提交数据",
+    "contributors": [
+        {
+            "name": "tinng",
+            "email": "tinng@linktion.cn"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
