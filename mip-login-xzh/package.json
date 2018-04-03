@@ -1,0 +1,17 @@
+{
+  "name": "mip-login-xzh",
+  "version": "1.0.0",
+  "description": "MIP 网站中熊掌号登录",
+  "contributors": [
+    {
+      "name": "xuexb",
+      "email": "fe.xiaowu@gmail.com"
+    }
+  ],
+  "engines": {
+    "mip": ">=1.1.0"
+  },
+  "main": "mip-login-xzh.js",
+  "author": "xuexb <fe.xiaowu@gmail.com>",
+  "license": "MIT"
+}
