@@ -1,0 +1,14 @@
+{
+    "name": "mip-chinacn-getvideourl",
+    "version": "1.1.0",
+    "description": "获取视频播放地址组件",
+    "contributors": [
+        {
+            "name": "wangsha",
+            "email": "wangsha@mail.china.cn"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

@@ -6,7 +6,7 @@ mip-cr173-downthe .搜索框的跳转到站内搜索功能。没有下载地址�
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/static/v1/mip-cr173-downthe/mip-cr173-downthe.js
+所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-cr173-downthe/mip-cr173-downthe.js
 ## 示例
 
 ```html

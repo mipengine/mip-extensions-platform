@@ -1,5 +1,6 @@
 /**
  * @file  根据下载大小判断是否有下载，如果没有下载地址去掉下载按钮效果，并且无法点击。
+ * 1.0.2 升级，优化改变形式，避免影响页面原有样式。
  * @author gom
  */
 
@@ -13,8 +14,8 @@ define(function (require) {
         var weburl = ele.getAttribute('data-downurl');
         if (downurla !== undefined && downsize !== undefined) {
             if (downurla === weburl || downsize === '0KB' || downsize === '1KB') {
-                var notxt = '<a href="javascript:;" class="f-notxt">暂无下载</a>';
-                $(ele).find('.m-down-ul li').addClass('nodown').html(notxt);
+                $(ele).find('.m-down-ul li').addClass('nodown');
+                $(ele).find('.m-down-ul li a').text('暂无下载').attr('href', 'javascript:;');
             };
         };
         var themeSize = $(ele).find('.g-keyword-cont').length;

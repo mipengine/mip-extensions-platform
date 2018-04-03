@@ -1,0 +1,166 @@
+mip-audio-frequency {
+    width: 100%;
+    height: calc(590px / 3);
+    .frequency-wrapper {
+        width: 100%;
+        height: calc(590px / 3);
+        position: relative;
+        background: url(./audio-background.png);
+        background-size: cover;
+        .frequency {
+            width: calc(590px / 3);
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            overflow: hidden;
+            .top {
+                width: 100%;
+                height: calc(120px / 3);
+                ul {
+                    height: 100%;
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: flex-start;
+                    flex-wrap: nowrap;
+                    overflow: hidden;
+                    position: relative;
+                    transform: rotate(180deg);
+                    li {
+                        margin-right: calc(9px / 3);
+                        overflow: hidden;
+                        div {
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: flex-end;
+                            flex-wrap: nowrap;
+                            align-items: center;
+                        }
+                        span {
+                            width: calc(7px / 3);
+                            height: calc(5px / 3);
+                            margin-top: calc(3px / 3);
+                            background: #fff;
+                        }
+                    }
+                }
+            }
+            .bottom {
+                width: 100%;
+                height: calc(120px / 3);
+                ul {
+                    height: 100%;
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: flex-start;
+                    flex-wrap: nowrap;
+                    overflow: hidden;
+                    position: relative;
+                    transform: scale(-1, 1);
+                    li {
+                        margin-right: calc(9px / 3);
+                        overflow: hidden;
+                        div {
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: flex-end;
+                            flex-wrap: nowrap;
+                            align-items: center;
+                        }
+                        span {
+                            width: calc(7px / 3);
+                            height: calc(5px / 3);
+                            margin-top: calc(3px / 3);
+                            background: #595a63;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.mip-audio-layout-wrap {
+    background: #ddd;
+    position: relative;
+    .audio-poster {
+        width: 100%;
+        height: auto;
+        img {
+            width: 100%;
+            height: auto;
+        }
+    }
+    .controller-wrap {
+        width: 100%;
+        padding-right: px(30px / 3);
+        background-color: #000;
+        // position: relative;
+        .time-wrap {
+            width: 100%;
+            padding: 0 calc(20px / 3);
+            position: absolute;
+            bottom: calc(25px / 3);
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: transparent;
+        }
+    }
+    .mip-audio-stopped-icon {
+        width: calc(240px / 3);
+        height: calc(75px / 3);
+        position: absolute;
+        top: 60%;
+        left: 50%;
+        transform: translateX(-50%);
+        background-image: url('/icon-audio-play.png');
+        background-size: contain;
+        
+    }
+    .mip-audio-playing-icon {
+        width: calc(240px / 3);
+        height: calc(75px / 3);
+        position: absolute;
+        top: 60%;
+        left: 50%;
+        transform: translateX(-50%);
+        background-image: url('/icon-audio-stop.png');
+        background-size: contain;
+    }
+    .seekbar {
+        width: 100%;
+        height: calc(10px / 3);
+        background-color: #000;
+        position: relative;
+        .seekbar-fill {
+            background: #7e8084;
+            height: calc(12px / 3);
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .seekbar-button {
+            width: calc(30px / 3);
+            background-color: #fff;
+            height: calc(55px / 3);
+            border-radius: calc(15px / 3);
+            position: absolute;
+            left: 0%;
+            top: 50%;
+            transform: translateY(-50%);
+            box-shadow: 0 0 calc(5px / 3) rgba(0, 0, 0, .8);
+            margin-left: calc(0);
+        }
+    }
+    .current-time {
+        font-size: calc(33px / 3);
+        line-height: calc(60px / 3);
+        color: #fff;
+    }
+    .total-time {
+        font-size: calc(33px / 3);
+        color: #fff;
+    }
+}
