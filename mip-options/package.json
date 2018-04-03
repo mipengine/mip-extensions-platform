@@ -1,0 +1,14 @@
+{
+    "name": "mip-options",
+    "version": "1.0.0",
+    "description": "组件介绍",
+    "contributors": [
+        {
+            "name": "susc",
+            "email": "susc_1993@gmail.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

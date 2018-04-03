@@ -38,3 +38,5 @@ jspm_packages
 
 # Editor config files
 .idea
+
+.DS_Store
