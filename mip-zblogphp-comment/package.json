@@ -1,0 +1,26 @@
+{
+  "name": "mip-zblogphp-comment",
+  "version": "1.0.0",
+  "description": "Z-BlogPHP post-comment component for MIP",
+  "main": "mip-zblogphp-comment.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zsxsoft/mip-zblogphp.git"
+  },
+  "author": "zsx <zsx@zsxsoft.com>",
+  "contributors": [{
+    "name": "zsx",
+    "email": "zsx@zsxsoft.com"
+  }],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zsxsoft/mip-zblogphp/issues"
+  },
+  "homepage": "https://github.com/zsxsoft/mip-zblogphp#readme",
+  "engines": {
+    "mip": ">= 1.1.0"
+  }
+}
