@@ -14,9 +14,9 @@ mip-options 组件说明
 ```html
 <mip-options id="myoptions">
     <div class="price">
-        <span on="tap:myoptions.setParam(order,DESC")>降序</span>
-        <span on="tap:myoptions.setParam(order,ASC)">升序</span>
-        <span on="tap:myoptions.setParam(order,DEFAULT)">默认</span>
+        <span on="tap:myoptions.setParam(order,desc)">降序</span>
+        <span on="tap:myoptions.setParam(order,asc)">升序</span>
+        <span on="tap:myoptions.setParam(order,default)">默认</span>
     </div>
     <div class="color">
         <span on="tap:myoptions.setParam(color,red)">红色</span>
@@ -25,12 +25,21 @@ mip-options 组件说明
     </div>
     <div class="size">
         <span on="tap:myoptions.setParam(size,big)">大</span>
-        <span on="tap:myoptions.setParam(color,middle)">中</span>
-        <span on="tap:myoptions.setParam(color,small)">小</span>
+        <span on="tap:myoptions.setParam(size,middle)">中</span>
+        <span on="tap:myoptions.setParam(size,small)">小</span>
     </div>
 </mip-options>
 
 ```
+
+## 属性
+
+### data-class
+
+说明：点击某一列时给对应列父元素添加的类名
+必选项：否
+类型：string
+默认值：active
 
 ## 方法
 组件自身提供的方法有：

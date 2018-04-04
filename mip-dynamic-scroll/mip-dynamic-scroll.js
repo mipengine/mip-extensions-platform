@@ -30,6 +30,13 @@ define(function (require) {
         return url;
     }
 
+    customElement.prototype.build = function () {
+        var me = this;
+        me.addEventAction('refreshlist', function (e) {
+            refreshContent.call(me, Array.prototype.slice.call(arguments, 1));
+        });
+    };
+    
     /**
      * 构造元素，只会运行一次
      */
@@ -133,20 +140,23 @@ define(function (require) {
     // 属性改变后重新渲染构建下拉
     customElement.prototype.attributeChangedCallback = function (attributeName, oldValue, newValue, namespace) {
         console.log(attributeName, oldValue, newValue, namespace);
-        debugger;
         if (attributeName === 'data-src' && oldValue !== newValue) {
-            infiniteScroll 
-            if (infiniteScroll) {
-                var options = infiniteScroll.options;
-                options.$result.empty();
-            }
-            insDestrory();
-            this.firstInviewCallback();
+            refreshContent.call(this);
         }
     };
 
+    // 刷新列表
+    function refreshContent() {
+        if (infiniteScroll) {
+            var options = infiniteScroll.options;
+            options.$result.empty();
+        }
+        insDestrory();
+        this.firstInviewCallback();
+    }
+
     function insDestrory() {
-        infiniteScroll && infiniteScroll.destroy();
+        // infiniteScroll && infiniteScroll.destroy();
         infiniteScroll = null;
     }
 
