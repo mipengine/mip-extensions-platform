@@ -1,7 +1,7 @@
 {
     "name": "mip-fy-yuyue",
     "version": "1.0.0",
-    "description": "当下载地址为指定地址的时候，增加预约功能",
+    "description": "当下载地址为指定地址的时候，增加预约功能。1.0.1 增加一种判断方式。增加提示文字。",
     "contributors": [
         {
             "name": "gom",

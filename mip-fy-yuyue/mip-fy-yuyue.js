@@ -4,6 +4,7 @@
  * 本JS没有console.log。
  * 本功能需要在其他组件执行完以后再执行，所以必须用load ，麻烦过一下，谢谢。
  * addEventListener 无法满足效果，测试必须只有使用onload才行，请通过
+ * 1.0.1 增加一种判断方式。增加提示文字。
  * @author gom3250@qq.com.
  * @version 1.0.0
  *  */
@@ -23,10 +24,11 @@ define(function (require) {
         window.addEventListener('load', function () {
             // 页面加载完成
             var drurl = $(ele).find('#address').attr('href');
+            var downsize = $(ele).find('.f-game-size').text();
             var qqun = '';
-            if (drurl === fromnodown || drurl === 'javascript:;') {
+            if (drurl === fromnodown || drurl === 'javascript:;' || downsize === '0KB') {
                 // 判断下载地址
-                $(ele).find('#address').css({'background': btncolor, 'color': '#fff'});
+                $(ele).find('#address').css('background', btncolor).text('立即预约');
                 $(ele).find('#address').attr('href', 'javascript:;').addClass('m-yuyueok');
                 addyuyue();
             }
