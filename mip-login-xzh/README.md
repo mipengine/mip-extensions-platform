@@ -36,7 +36,7 @@ MIP 网站中熊掌号登录
 
 <mip-login-xzh
     id="user"
-    data-endpoint="https://xzh.mip.xuexb.com/api/userinfo.php"
+    data-endpoint="https://www.example.com/api/userinfo.php"
     data-client-id="testid"
     on="login:comment.login logout:comment.exit"
 >
@@ -274,7 +274,11 @@ define(function (require) {
 
 ```json
 {
-    "status": 0
+    "status": 0,
+    "data" {
+        "url": "https://www.example.com 退出成功跳转的链接地址 可选",
+        "title": "主页 自定义标题 可选"
+    }
 }
 ```
 
@@ -305,5 +309,8 @@ define(function (require) {
 - 页面触发  `登录组件ID.logout` 事件
     - 未登录 - 忽略
     - 已登录
-        - 触发 `logout` 事件
-        - 使用空数据（`{}`）渲染模板
+        - 后端返回 `response.data.url`
+            * 跳转到 `response.data.url`
+        - 后端没有返回 `response.data.url`
+            - 触发 `logout` 事件
+            - 使用空数据（`{}`）渲染模板

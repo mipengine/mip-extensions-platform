@@ -49,6 +49,14 @@ define(function (require) {
      * 开始处理页面数据
      */
     Login.prototype.build = function () {
+        var self = this;
+        if (self.config.autologin) {
+            return this.getUserinfo().then(function () {
+                if (!self.isLogin) {
+                    self.login();
+                }
+            });
+        }
         this.render();
         this.getUserinfo();
     };
@@ -74,8 +82,22 @@ define(function (require) {
 
         util.post(self.config.endpoint, {
             type: 'logout'
-        }).then(function (data) {
-            self.loginHandle('logout', false);
+        }).then(function (res) {
+            if (res.data && res.data.url) {
+                if (self.isIframe()) {
+                    viewer.sendMessage('loadiframe', {
+                        title: res.data.title || '',
+                        click: '',
+                        url: res.data.url
+                    });
+                }
+                else {
+                    location.assign(res.data.url);
+                }
+            }
+            else {
+                self.loginHandle('logout', false);
+            }
         }).catch(function (data) {
             self.loginHandle('logout', false);
         });
@@ -228,7 +250,7 @@ define(function (require) {
             data.type = 'login';
         }
 
-        util.post(self.config.endpoint, data).then(function (res) {
+        return util.post(self.config.endpoint, data).then(function (res) {
             if (data.type === 'login') {
                 if (res.status === 0 && res.data) {
                     self.loginHandle('login', true, res.data);
