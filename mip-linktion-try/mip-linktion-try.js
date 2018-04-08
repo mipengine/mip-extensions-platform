@@ -14,11 +14,17 @@ define(function (require) {
      */
     customElement.prototype.firstInviewCallback = function () {
         var $el = $(this.element);
+        var that = this;
         var tryBtn = $el.find('#try-btn');
         var inputWrap = tryBtn.parents().siblings('.modal-input-info').children('.form-group');
         var inputs = inputWrap.children('input');
         var formItem = tryBtn.parents('.modal-body').children('form')[0];
-        this.addEventAction('open', function (event) {
+        function hideTry(that) {
+            that.addEventAction('close', function (event) {
+                $el.css('display', 'none');
+            });
+        }
+        that.addEventAction('open', function (event) {
             if (formItem.reportValidity()) {
                 var body = {};
                 body.type = tryBtn.data('type');
@@ -57,6 +63,7 @@ define(function (require) {
                         else if (data) {
                             $el.find('.form-close').trigger('click');
                             $el.find('.try-btn-end').trigger('click');
+                            hideTry(that);
                         }
                     });
                 }

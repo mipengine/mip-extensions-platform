@@ -58,14 +58,14 @@ mip-linktion-try 弹框ajax提交信息并后续弹框提示操作结果
       <div class="modal-content">
         <div class="modal-header">
           <p>专人+专业的理财指导</p>
-          <button type="button" class="close" on="tap:insurance-modal-end.toggle tap:insurance-modal-end.close tap:insurance-modal.close">&times;</button>
+          <button type="button" class="close" on="tap:insurance-modal-end.toggle tap:insurance-modal-end.close tap:insurance-modal.close tap:try.close">&times;</button>
         </div>
         <div class="modal-body clearfix">
           <div class="insurance-modal-complete">
             <h3>您的申请我们已经收到，会尽快与您联系！</h3>
           </div>
           <div class="form-group-but">
-            <button type="button" class="insurance-but" on="tap:insurance-modal-end.toggle tap:insurance-modal-end.close tap:insurance-modal.close">确认</button>
+            <button type="button" class="insurance-but" on="tap:insurance-modal-end.toggle tap:insurance-modal-end.close tap:insurance-modal.close tap:try.close">确认</button>
           </div>
         </div>
       </div>

@@ -229,9 +229,11 @@ define(function (require) {
                     tipMask('您已领取过该红包~');
                     $(selF.element).find('.popmask, .hb-popup').css('display', 'none');
                     close();
+                    reject();
                 }
                 else {
                     tipMask(data.message);
+                    reject();
                 }
             });
         });
@@ -255,7 +257,7 @@ define(function (require) {
             }
             str = str.slice(0, -1);
             return str;
-        };
+        }
     };
 
     /**
@@ -280,18 +282,21 @@ define(function (require) {
                 if (data.status === 200) {
                     var res = data.info;
                     if (res.status === 'ACTIVE') {
-                        return resolve();
+                        resolve(data);
                     }
                     else if (res.status === 'OVER_CLAIM_TIMES') {
                         tipMask('您已领取过该红包~');
                         $(selF.element).find('.popmask, .hb-popup').css('display', 'none');
                         close();
+                        reject(data);
                     }
                     else {
+                        reject(data);
                         tipMask({text: res.msg});
                     }
                 }
                 else {
+                    reject(data);
                     tipMask({text: data.info});
                 }
             });
@@ -418,6 +423,7 @@ define(function (require) {
         var datas = this.element.querySelector(TYPE);
         var cfg = jsonParse(datas.textContent);
         var redPacket = new RedPacket(ele, cfg);
+        var clickflag = false;
 
         // 添加
         redPacket.appendEle();
@@ -452,11 +458,15 @@ define(function (require) {
 
         // 点击报名
         $(ele).find('.headline-btn').click(function () {
+            if (clickflag) {
+                return false;
+            }
             var tel = $(ele).find('.form-input');
             if (!regPhone.test(tel.val())) {
                 tipMask('请输入正确的手机号~');
                 return;
             }
+            clickflag = true;
             var redParms = cfg.redRequest.parms;
 
             var signParms = cfg.signRequest.parms;
@@ -489,22 +499,28 @@ define(function (require) {
                 redPacket.getRed(cfg.redRequest.url, redParms).then(function () {
                     // stepTwo();
                     // 种cookie并跳转到成功页
+                    clickflag = false;
                     bmPramas['refer_url'] = window.location.href;
                     bmPramas['from_source'] = signParms.source;
                     bmPramas = JSON.stringify(bmPramas);
                     storage.set('bm_pramas', bmPramas);
                     window.top.location.href = cfg.signRequest.skipUrl;
+                }, function () {
+                    clickflag = false;
                 });
             }
 
             function stepFour() {
                 // 领取红包
-                redPacket.getRedNew(cfg.newRedRequest, redParms).then(function () {
+                redPacket.getRedNew(cfg.newRedRequest, redParms).then(function (a) {
+                    clickflag = false;
                     bmPramas['refer_url'] = window.location.href;
                     bmPramas['from_source'] = signParms.source;
                     bmPramas = JSON.stringify(bmPramas);
                     storage.set('bm_pramas', bmPramas);
                     window.top.location.href = cfg.signRequest.skipUrl;
+                }, function (b) {
+                    clickflag = false;
                 });
             }
 

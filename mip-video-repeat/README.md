@@ -5,7 +5,7 @@ mip-video-repeat 实现了带片头片尾和重播功能的视频组件
 ----|----
 类型|业务,定制
 支持布局|responsive,flex,container
-所需脚本|https://c.mipcdn.com/static/v1/mip-video-repeat/mip-video-repeat.js
+所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-video-repeat/mip-video-repeat.js
 
 ## 示例
 
@@ -84,8 +84,8 @@ mip-video-repeat 实现了带片头片尾和重播功能的视频组件
 
 ### auto-play
 说明：自动播放，true为自动播放，false为不自动播放                                                                           
-必选项：是                              
-类型：Boolean
+必选项：否                              
+类型：string
 
 ### rec-video
 说明：片尾结束显示的相关推荐视频                        

@@ -46,20 +46,24 @@ define(function (require) {
             }
             function sendData(consultUrl) {
                 var bodyData = {
-                    productId: productId,
-                    userName: inputName,
-                    userMobile: inputPhone,
-                    contactTime: checkboxR,
-                    plannerId: plannerId
+                    'productId': productId,
+                    'userName': inputName,
+                    'userMobile': inputPhone,
+                    'contactTime': checkboxR,
+                    'plannerId': plannerId
                 };
                 fetch(consultUrl, {
                     method: 'POST', // or 'PUT'
-                    body: JSON.stringify(bodyData) // data can be `string` or {object}!
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(bodyData)// data can be `string` or {object}!
                 }).then(function (res) {
                     return res.json();
                 }).then(function (data) {
-                    if (data) {
+                    if (data.code === 0) {
                         window.location.reload();
+                    }
+                    else {
+                        console.log(data.error);
                     }
                 });
             }

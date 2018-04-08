@@ -1,0 +1,14 @@
+{
+    "name": "mip-kmway-count",
+    "version": "1.0.0",
+    "description": "快马加盟网站内统计",
+    "contributors": [
+        {
+            "name": "yang",
+            "email": "3094316744@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

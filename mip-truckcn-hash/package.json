@@ -1,6 +1,6 @@
 {
     "name": "mip-truckcn-hash",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "根据url里的hash值，改变页面的内容",
     "contributors": [
         {

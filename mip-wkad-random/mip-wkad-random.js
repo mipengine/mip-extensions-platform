@@ -2,18 +2,18 @@
 * 寻医问药mip改造 分流广告组件
 * @file 脚本支持
 * @author jqthink@gmail.com
-* @time 2018.03.22
-* @version 1.0.0
+* @time 2018.04.08
+* @version 1.0.1
 */
 define(function (require) {
     var $ = require('zepto');
     var customElem = require('customElement').create();
     var ratioRnd = function () {
         var rand = Math.random();
-        if (rand < 0.02) {
+        if (rand < 0.04) {
             return 0;
         }
-        if (rand < 0.12) {
+        if (rand < 0.14) {
             return 1;
         }
         else {

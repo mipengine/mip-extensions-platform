@@ -51,13 +51,14 @@ define(function (require) {
                 case 'fixed-bottom':
                     if (tel) {
                         tel = (tel.split('*', 1));
+                        element.innerHTML = '<div class="fixed"><a href=tel:' + tel + '>拨打电话  马上咨询</a></div>';
                     }
                     else {
                         tel = element.getAttribute('default-tel');
+                        var sms = '<a class="sms" href="sms:' + tel + '?body=咨询车辆,网址:' + url + ',请回电!"> 发送短信</a>';
+                        tel = '<a class="tel" href=tel:' + tel + '>拨打电话</a>';
+                        element.innerHTML = '<div class="fixed">' + tel + sms + '</div>';
                     }
-                    var sms = '<a class="sms" href="sms:' + tel + '?body=咨询车辆,网址:' + url + ',请回电!"> 发送短信</a>';
-                    tel = '<a class="tel" href=tel:' + tel + '>拨打电话</a>';
-                    element.innerHTML = '<div class="fixed">' + tel + sms + '</div>';
                     break;
                 case 'text':
                     if (text) {

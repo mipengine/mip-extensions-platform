@@ -4,7 +4,7 @@
  */
 
 define(function (require) {
-    var $ = require('jquery');
+    var $ = require('zepto');
     var util = require('util');
     var platform = util.platform;
     var customElem = require('customElement').create();
@@ -16,14 +16,14 @@ define(function (require) {
         var targetSrc = $element.attr('target-src');
         var posterSrc = $element.attr('poster-src');
         var autoPlay = $element.attr('auto-play');
-        var playBtn = $('.video-play-button');
+        var playBtn = $element.find('.video-play-button');
         var curIndex;
         //  初始化播放器
         var video = document.createElement('video');
         //  初始化video的属性
         $(video).attr({
-            'playsinline': '',
-            'webkit-playsinline': '',
+            'playsinline': 'playsinline',
+            'webkit-playsinline': 'webkit-playsinline',
             'controls': '',
             'preload': 'no',
             'poster': posterSrc ? posterSrc : ''
@@ -37,8 +37,8 @@ define(function (require) {
         //  初始化video的尺寸大小
         $(video).css('width', document.documentElement.clientWidth + 'px');
         $element[0].appendChild(video);
-        $('.rec-video-wrapper').hide();
-        $('.video-mask').hide();
+        $element.find('.rec-video-wrapper').hide();
+        $element.find('.video-mask').hide();
         // 检查手机系统及浏览器
         checkSystemAndBrowser();
         //  当前视频播放完毕
@@ -85,21 +85,21 @@ define(function (require) {
             }
         }
         function showReplayPage() {
-            $('.video-mask').show();
+            $element.find('.video-mask').show();
             // 监听事件
             replayEvent();
         }
         function showReplayPageWithRecommend() {
-            $('.rec-video-wrapper').show();
+            $element.find('.rec-video-wrapper').show();
             // 获取推荐视频信息
             getRecVideoData();
             replayEvent();
             bindClickNewVideo();
         }
         function replayEvent() {
-            $('.video-replay-button').on('click', function () {
-                $('.rec-video-wrapper').hide();
-                $('.video-mask').hide();
+            playBtn.on('click', function () {
+                $element.find('.rec-video-wrapper').hide();
+                $element.find('.video-mask').hide();
                 if (platform.isIos() && platform.isUc()) {
                     video.src = targetSrc;
                     curIndex = 2;
@@ -123,14 +123,14 @@ define(function (require) {
                 var title = recVideoData[i].recTitle;
                 var thumb = recVideoData[i].recThumb;
                 var url = recVideoData[i].recUrl;
-                var recVideo = $('.rec-video');
+                var recVideo = $element.find('.rec-video');
                 recVideo.eq(i).find('img').attr('src', thumb);
                 recVideo.eq(i).find('.video-title').text(title);
                 recVideo.eq(i).attr('href', url);
             }
         }
         function bindClickNewVideo() {
-            $('.rec-video').on('click', function (e) {
+            $element.find('.rec-video').on('click', function (e) {
                 event.preventDefault();
                 var newUrl = $(e.currentTarget).attr('href');
                 targetSrc = newUrl;
@@ -143,7 +143,7 @@ define(function (require) {
                     video.src = targetSrc;
                     curIndex = 2;
                 }
-                $('.rec-video-wrapper').hide();
+                $element.find('.rec-video-wrapper').hide();
                 removeNode('.rec-video-wrapper');
                 video.play();
             });
@@ -167,15 +167,18 @@ define(function (require) {
             //  如果是IOS上的UC浏览器 则不播放片头片尾
             if (platform.isIos() && platform.isUc()) {
                 video.src = targetSrc;
+                video.poster = posterSrc;
                 curIndex = 2;
             }
             else {
                 //  如果有片头并且非IOS上的QQ浏览器 则播放片头
                 if (vSrc && !(platform.isIos() && platform.isQQ())) {
                     video.src = vSrc;
+                    video.poster = posterSrc;
                     curIndex = 1;
                 }
-                else {  //  否则直接播放内容
+                //  否则直接播放内容
+                else {
                     video.src = targetSrc;
                     curIndex = 2;
                 }
