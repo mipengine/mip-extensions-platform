@@ -136,6 +136,7 @@ define(function (require) {
                     if ($(window).width() < 768) {
                         $el.find('.phone-city-but.but-province').on('click', function () {
                             initLocationData('city', $(this).attr('id'));
+                            $el.find('#phone-province-tab').data('val', $(this).attr('id'));
                             $el.find('#phone-city-tab').click();
                         });
                     }
@@ -151,6 +152,7 @@ define(function (require) {
                     if ($(window).width() < 768) {
                         $el.find('.phone-city-but.but-city').on('click', function () {
                             initLocationData('area', $(this).attr('id'));
+                            $el.find('#phone-city-tab').data('val', $(this).attr('id'));
                             $el.find('#phone-area-tab').click();
                         });
                     }
@@ -166,6 +168,7 @@ define(function (require) {
                     if ($(window).width() < 768) {
                         $el.find('.phone-city-but.but-area').on('click', function () {
                             initLocationData('street', $(this).attr('id'));
+                            $el.find('#phone-area-tab').data('val', $(this).attr('id'));
                             $el.find('#phone-street-tab').click();
                         });
                     }
@@ -181,7 +184,7 @@ define(function (require) {
                     if ($(window).width() < 768) {
                         if ((AGArry.length === 0) && (HKArry.length === 0)
                          && (LSArry.length === 0) && (TZArry.length === 0)) {
-                            var areaid = $el.find('#area-tag').data('value');
+                            var areaid = $el.find('#phone-area-tab').data('val');
                             var areasubmitUrl = $el.find('.city-pop-btn').data('submiturl');
                             var bodya =  {cityId: areaid};
                             $.ajax({
@@ -195,8 +198,8 @@ define(function (require) {
                             });
                         }
                         else {
-                            $el.find('.phone-city-but.but-street').on('click', function () {
-                                var phstreetid = $el.find('#area-tag').data('value');
+                            $el.find('.phone-city-but.but-street').on('click', function (event) {
+                                var phstreetid = $(this).attr('id');
                                 var phsubmitUrl = $el.find('.city-pop-btn').data('submiturl');
                                 var bodyb =  {cityId: phstreetid};
                                 ajaxUpload(phsubmitUrl, bodyb);
@@ -262,6 +265,25 @@ define(function (require) {
                 $el.find('.city-label.forth-tag').data('value', '');
                 $el.find('.city-label.forth-tag').css('display', 'none');
             }
+            // 移动端添加tab点击事件
+            $el.find('#phone-city-tab').on('click', function () {
+                if ($el.find('#phone-province-tab').data('val') === '') {
+                    alert('请先选择省级');
+                    $el.find('#phone-province-tab').click();
+                }
+            });
+            $el.find('#phone-area-tab').on('click', function () {
+                if ($el.find('#phone-city-tab').data('val') === '') {
+                    alert('请先选择市级');
+                    $el.find('#phone-city-tab').click();
+                }
+            });
+            $el.find('#phone-street-tab').on('click', function () {
+                if ($el.find('#phone-area-tab').data('val') === '') {
+                    alert('请先选择区县');
+                    $el.find('#phone-area-tab').click();
+                }
+            });
             // 城市删除按钮
             $el.find('.city-label button').on('click', function () {
                 var location = $(this).data('location');

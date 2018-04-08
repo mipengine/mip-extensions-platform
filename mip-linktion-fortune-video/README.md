@@ -13,9 +13,11 @@ mip-linktion-fortune-video 控制弹框视频在第一次点击全屏播放，�
 
 ```html
 <mip-linktion-fortune-video id="video">
-	<a href="javascrpt:;" on="tap:modal-video.toggle tap:video.open" id="btn-open" role="button" tabindex="0" class="slick-video-img">
-	push it
-	</a>
+  <div class="slick-video">
+  	<a href="javascrpt:;" on="tap:modal-video.toggle tap:video.open" id="btn-open" role="button" tabindex="0" class="slick-video-img">
+  	push it
+  	</a>
+  </div>
 	<mip-lightbox id="modal-video" layout="nodisplay" class="mip-hidden">
   	<div class="modal-dialog modal-video" role="document">
     	<div class="modal-content">

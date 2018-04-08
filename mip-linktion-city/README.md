@@ -162,10 +162,10 @@ mip-linktion-city 级联城市组件
 	        <div class="modal-body">
 	          <mip-vd-tabs class="select-city-phonetab">
 	            <section>
-	              <li id="phone-province-tab">省份</li>
-	              <li id="phone-city-tab" >城市</li>
-	              <li id="phone-area-tab">县/区</li>
-	              <li id="phone-street-tab" >街道</li>
+	              <li data-val="" class="city-label-phone " id="phone-province-tab">省份</li>
+	              <li data-val="" class="city-label-phone second-tag" id="phone-city-tab" >城市</li>
+	              <li data-val="" class="city-label-phone second-tag third-tag" id="phone-area-tab">县/区</li>
+	              <li data-val="" class="city-label-phone second-tag third-tag forth-tag" id="phone-street-tab" >街道</li>
 	            </section>
 	            <div>
 	              <ul class="phone-city-ul" id="phone-province">

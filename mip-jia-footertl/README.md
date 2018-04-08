@@ -1,6 +1,6 @@
 # mip-jia-footertl
 
-mip-jia-footertl 组件说明
+底部通栏
 
 标题|内容
 ----|----

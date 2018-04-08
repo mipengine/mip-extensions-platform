@@ -402,7 +402,7 @@ define(function (require) {
                 }
                 $.ajax({
                     type: 'get',
-                    url: 'https://m.jia.com/new_zhuangxiu/AjaxSaveNewShopApplyNoCodeJsonp',
+                    url: 'https://mip.m.jia.com/new_zhuangxiu/AjaxSaveNewShopApplyNoCodeJsonp',
                     data: applyData,
                     dataType: 'jsonp',
                     success: function (data) {
@@ -479,7 +479,7 @@ define(function (require) {
             zxbmFun: function (ele, applyData, detailData, url) {
                 $.ajax({
                     type: 'get',
-                    url: 'https://m.jia.com/new_zhuangxiu/AjaxSaveNewShopApplyNoCodeJsonp',
+                    url: 'https://mip.m.jia.com/new_zhuangxiu/AjaxSaveNewShopApplyNoCodeJsonp',
                     data: applyData,
                     dataType: 'jsonp',
                     jsonp: 'callback',
