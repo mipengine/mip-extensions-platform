@@ -1,0 +1,14 @@
+{
+    "name": "mip-kmway-change",
+    "version": "1.0.0",
+    "description": "换一批",
+    "contributors": [
+        {
+            "name": "zhaoliang",
+            "email": "54360128@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

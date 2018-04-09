@@ -1,0 +1,14 @@
+{
+    "name": "mip-5hshield-data",
+    "version": "1.0.0",
+    "description": "问题已经修改了，是按照mip组件分离原则来写的",
+    "contributors": [
+        {
+            "name": "yx",
+            "email": "yuanxin778@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
