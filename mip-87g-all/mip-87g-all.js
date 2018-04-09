@@ -11,8 +11,13 @@ define(function (require) {
         if (gtype === 'g87_news') {
             var siteurl = '//www.87g.com/';
             // 点击量统计
-            $.getJSON(siteurl + 'api.php?op=count&modelid=' + t.getAttribute('modelid')
-            + '&id=' + t.getAttribute('my_id'));
+            var module = t.getAttribute('module');
+            var hitsurl = siteurl + 'api.php?op=count&modelid=' + t.getAttribute('modelid')
+            + '&id=' + t.getAttribute('my_id');
+            if (module !== '') {
+                hitsurl += '&module=' + module;
+            }
+            $.getJSON(hitsurl);
             // 内容缩进
             var con = $(t);
             var txt = con.text();

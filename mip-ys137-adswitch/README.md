@@ -6,7 +6,7 @@ mip-ys137-adswitch 控制广告展现
 ----|----
 类型|定制
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|http://mipcache.bdstatic.com/extensions/platform/v1/mip-ys137-ad/mip-ys137-adswitch.js
+所需脚本|http://mipcache.bdstatic.com/extensions/platform/v1/mip-ys137-adswitch/mip-ys137-adswitch.js
 
 #adHTML,start_date,end_date,keyword,path,defaultHTML
 

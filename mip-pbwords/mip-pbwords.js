@@ -10,7 +10,8 @@ define(function (require) {
         var ele = this.element;
         var href = location.href;
         var title = ele.getAttribute('titl');
-        var url = 'https://m.391k.com/api/op.ashx/getpb404word?title=' + title;
+        var at = ele.getAttribute('at') || '391k';
+        var url = 'https://m.391k.com/api/op.ashx/getpb404word?title=' + title + '&at=' + at;
         var fetchJsonp = require('fetch-jsonp');
         fetchJsonp(url).then(function (res) {
             return res.json();

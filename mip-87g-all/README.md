@@ -14,7 +14,7 @@
 
 ### 基本用法
 ```html
-<mip-87g-all g_type="87g" modelid="1" my_id="1">
+<mip-87g-all g_type="87g" modelid="1" my_id="1" module="c-1">
 </mip-87g-all>
 ```
 
@@ -40,6 +40,14 @@
 说明：文章id
 必选项：否   
 类型：数字 
+单位：无   
+取值：无   
+默认值：无
+
+### module  
+说明：专题id
+必选项：否   
+类型：字符串   
 单位：无   
 取值：无   
 默认值：无

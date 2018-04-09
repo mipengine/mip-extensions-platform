@@ -12,7 +12,7 @@ mip-pbwords 关键词屏蔽
 
 ### 基本用法
 ```html
-<mip-pbwords titl="名称" class="pbword"></mip-pbwords>
+<mip-pbwords titl="名称" class="pbword" at="391k"></mip-pbwords>
 ```
 
 ## 属性
@@ -23,3 +23,9 @@ mip-pbwords 关键词屏蔽
 必选项：是
 类型：字符串
 
+### at
+
+说明：网站归属
+必选项：是
+类型：字符串
+默认值："391k"

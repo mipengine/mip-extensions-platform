@@ -102,10 +102,6 @@ define(function (require) {
         //  path：指定路径展现，相对路径，如：/slys/，表示此目录下时才展现广告，多个目录之间用英文逗号分隔
         //  defaultHTML:不展现自定义广告时，显示的填充信息
         show: function (adHTML, startDate, endDate, keyword, path, defaultHTML) {
-            if (this.isEmpty(adHTML)) {
-                return '';
-            }
-
             var isExpired = false; // 是否显示广告
 
             // 判断广告是否在有效展现时间内
@@ -148,10 +144,6 @@ define(function (require) {
                 return adHTML;
             }
             else {
-                if (this.isEmpty(defaultHTML)) {
-                    // defaultHTML = '<!--ad undisplayed-->';
-                }
-
                 return defaultHTML;
             }
         }
