@@ -6,7 +6,7 @@ mip-ppkao-tiku ppkao题库选择
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/static/v1/mip-ppkao-tiku/mip-ppkao-tiku.js
+所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-ppkao-tiku/mip-ppkao-tiku.js
 
 ## 示例
 

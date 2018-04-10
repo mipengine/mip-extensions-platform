@@ -34,33 +34,39 @@ define(function (require) {
         },
         // 关键词是否包含在标题中
         keywordIsContain: function (keyword) {
-            var title = document.querySelector('meta[property="og:title"]').getAttribute('content') + ','
-            + document.querySelector('meta[name="Keywords"]').getAttribute('content');
+            var titleArr = [];
+            if (document.querySelector('meta[property="og:title"]')) {
+                titleArr.push(document.querySelector('meta[property="og:title"]').getAttribute('content'));
+            }
+            else {
+                if (document.title) {
+                    titleArr.push(document.title);
+                }
+            }
+            if (document.querySelector('meta[name="Keywords"]')) {
+                titleArr.push(document.querySelector('meta[name="Keywords"]').getAttribute('content'));
+            }
+            var title = '';
+            if (titleArr.length > 0) {
+                title = titleArr.join(',');
+            }
             var t = this;
             if (this.isEmpty(title)) {
                 return false;
             }
-
             var exists = false; // 是否存在
             if (!this.isEmpty(keyword)) {
                 var arr = keyword.split(',');
                 arr.every(function (val, index) {
-
                     if (!t.isEmpty(val)) {
                         if (title.indexOf(val) !== -1) {
-                            console.log(val + ':true');
                             exists = true;
                             return false;
                         }
-                        else {
-                            console.log(val + ':false');
-                            return true;
-                        }
+                        return true;
                     }
-
                 });
             }
-
             return exists;
         },
         // 路径是否包含
@@ -70,11 +76,9 @@ define(function (require) {
             if (this.isEmpty(path)) {
                 return false;
             }
-
             var exists = false; // 是否存在
             if (!this.isEmpty(path)) {
                 var arr = path.split(',');
-
                 arr.every(function (val, index) {
                     if (!t.isEmpty(val)) {
                         var reg = new RegExp('^' + val);
@@ -86,13 +90,10 @@ define(function (require) {
                             return true;
                         }
                     }
-
                 });
             }
-
             return exists;
         },
-
         //  switchAdshow
         //  根据条件展现广告
         //  adHTML：广告HTML
@@ -102,20 +103,14 @@ define(function (require) {
         //  path：指定路径展现，相对路径，如：/slys/，表示此目录下时才展现广告，多个目录之间用英文逗号分隔
         //  defaultHTML:不展现自定义广告时，显示的填充信息
         show: function (adHTML, startDate, endDate, keyword, path, defaultHTML) {
-            var isExpired = false; // 是否显示广告
-
+            var isValid = true; // 广告是否在有效展现时间内
             // 判断广告是否在有效展现时间内
-            if (!this.isEmpty(startDate) && this.getTime(startDate) <= this.nowTime()) {
-                isExpired = true;
+            if (!this.isEmpty(startDate) && this.getTime(startDate) > this.nowTime()) {
+                isValid = false;
             }
-            else {
-                isExpired = false;
-            }
-
             if (!this.isEmpty(endDate) && this.getTime(endDate) < this.nowTime()) {
-                isExpired = false;
+                isValid = false;
             }
-
             var keywordHit = true; // 条件命中
             if (!this.isEmpty(keyword)) {
                 // 判断标题是否存在相关的关键词
@@ -127,7 +122,6 @@ define(function (require) {
                     keywordHit = false;
                 }
             }
-
             var pathHit = true; // 条件命中
             if (!this.isEmpty(path)) {
                 // 判断标题是否存在相关的关键词
@@ -139,8 +133,10 @@ define(function (require) {
                     pathHit = false;
                 }
             }
-
-            if (isExpired === true && keywordHit === true && pathHit === true) {
+            if (this.isEmpty(adHTML)) {
+                isValid = false;
+            }
+            if (isValid === true && keywordHit === true && pathHit === true) {
                 return adHTML;
             }
             else {
