@@ -246,7 +246,8 @@ define(function (require) {
 {
     "status": 0,
     "data": {
-        "name": "mipengine"
+        "name": "mipengine",
+        "accessToken": "用户唯一 token 凭证，必须返回"
     }
 }
 ```
@@ -281,6 +282,13 @@ define(function (require) {
     }
 }
 ```
+
+<a id="accessToken" name="accessToken" href="#accessToken"></a>
+### 后端登录 accessToken
+
+由于在 iOS 高版本对跨域透传 `cooke` 的限制（<https://webkit.org/blog/7675/intelligent-tracking-prevention/>），在登录成功后需要把用户唯一凭证 `response.data.accessToken` 返回前端，前端组件将在 `localStorage` 中缓存下来，在下次发后端接口请求时携带该凭证，后端就当优先使用 `cookie/session` 验证，不存在时获取 `POST` 参数中的 `accessToken` 去校验。
+
+**注意：** 本地 `localStorage` 是以 `data-endpoint` 为粒度去缓存。
 
 
 ### 组件内部模板 `<template>` 渲染和触发事件

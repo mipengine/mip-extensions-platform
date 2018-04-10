@@ -83,6 +83,9 @@ define(function (require) {
         util.post(self.config.endpoint, {
             type: 'logout'
         }).then(function (res) {
+            // 清空 accessToken
+            localStorage.removeItem(self.config.endpoint);
+
             if (res.data && res.data.url) {
                 if (self.isIframe()) {
                     viewer.sendMessage('loadiframe', {
@@ -99,6 +102,9 @@ define(function (require) {
                 self.loginHandle('logout', false);
             }
         }).catch(function (data) {
+            // 清空 accessToken
+            localStorage.removeItem(self.config.endpoint);
+
             self.loginHandle('logout', false);
         });
     };
@@ -253,6 +259,15 @@ define(function (require) {
         return util.post(self.config.endpoint, data).then(function (res) {
             if (data.type === 'login') {
                 if (res.status === 0 && res.data) {
+                    if (!res.data.accessToken) {
+                        return self.error('后端数据必须返回 response.data.accessToken 用户唯一凭证参数。');
+                    }
+                    // 记录 accessToken 到 ls 中，修复在 iOS 高版本下跨域 CORS 透传 cookie 失效问题
+                    try {
+                        localStorage.setItem(self.config.endpoint, res.data.accessToken);
+                    }
+                    catch (e) {}
+
                     self.loginHandle('login', true, res.data);
                 }
                 else {

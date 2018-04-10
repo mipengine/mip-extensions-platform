@@ -7,6 +7,8 @@ define(function (require) {
     'use strict';
 
     var parseCacheUrl = require('util').parseCacheUrl;
+    var extend = require('util').fn.extend;
+
     /**
      * 熊掌号授权链接
      *
@@ -94,7 +96,9 @@ define(function (require) {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
-            body: util.querystring.stringify(data || {}),
+            body: util.querystring.stringify(extend({}, data || {}, {
+                accessToken: localStorage.getItem(url)
+            })),
             credentials: 'include'
         }).then(function (res) {
             return res.json();
