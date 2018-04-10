@@ -74,7 +74,7 @@ define(function (require) {
         self.$section = $(selector.join(','));
 
         viewport.on('scroll', self.scrollHandle.bind(self));
-        //self.scrollHandle();
+        self.scrollHandle();
     };
 
     return customElement;
