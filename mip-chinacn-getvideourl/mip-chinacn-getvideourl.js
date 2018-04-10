@@ -4,7 +4,7 @@
  * @file mip-chinacn-getvideourl 组件
  */
 define(function (require) {
-    var md5 = require('./md5');
+    var md5 = require('./md5.min');
     var fetchJsonp = require('fetch-jsonp');
     var myVideo = document.getElementById('media');
     myVideo.addEventListener('play', function () {

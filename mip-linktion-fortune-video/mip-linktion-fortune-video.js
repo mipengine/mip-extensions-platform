@@ -30,7 +30,7 @@ define(function (require) {
             var modelCloseBtn = $el.find('#modal-video video');
 
             this.addEventAction('open', function (event) {
-                $el.find('.slick-video').css('z-index', 10001);
+                $el.css('z-index', 10001);
                 var stringOption = 'tap:modal-video.close tap:video.close';
                 $el.find('#MIP-LLIGTBOX-MASK').attr('on', stringOption);
                 var video = modelCloseBtn[0];
@@ -44,7 +44,7 @@ define(function (require) {
                 }
             });
             this.addEventAction('close', function (event) {
-                $el.find('.slick-video').css('z-index', 1);
+                $el.css('z-index', 1);
                 modelCloseBtn[0].pause();
             });
         }

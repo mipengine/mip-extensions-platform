@@ -1,6 +1,6 @@
-# mip-chinacn-getvideourl 异步获取视频播放地址
+# mip-chinacn-getvideourl
 
-mip-chinacn-getvideourl异步获取视频播放地址
+mip-chinacn-getvideourl
 
 标题|内容
 ----|----
