@@ -84,7 +84,7 @@ define(function (require) {
             type: 'logout'
         }).then(function (res) {
             // 清空 accessToken
-            localStorage.removeItem(self.config.endpoint);
+            util.store.remove(self.config.endpoint);
 
             if (res.data && res.data.url) {
                 if (self.isIframe()) {
@@ -103,7 +103,7 @@ define(function (require) {
             }
         }).catch(function (data) {
             // 清空 accessToken
-            localStorage.removeItem(self.config.endpoint);
+            util.store.remove(self.config.endpoint);
 
             self.loginHandle('logout', false);
         });
@@ -263,10 +263,7 @@ define(function (require) {
                         return self.error('后端数据必须返回 response.data.accessToken 用户唯一凭证参数。');
                     }
                     // 记录 accessToken 到 ls 中，修复在 iOS 高版本下跨域 CORS 透传 cookie 失效问题
-                    try {
-                        localStorage.setItem(self.config.endpoint, res.data.accessToken);
-                    }
-                    catch (e) {}
+                    util.store.set(self.config.endpoint, res.data.accessToken);
 
                     self.loginHandle('login', true, res.data);
                 }

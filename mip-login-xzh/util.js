@@ -83,6 +83,90 @@ define(function (require) {
     };
 
     /**
+     * 小小的封装下 ls < cokie
+     *
+     * @type {Object}
+     */
+    util.store = {
+
+        /**
+         * 检查是否支持 ls
+         *
+         * @type {boolean}
+         */
+        support: function () {
+            var support = true;
+            try {
+                window.localStorage.setItem('lsExisted', '1');
+                window.localStorage.removeItem('lsExisted');
+            } catch (e) {
+                support = false;
+            }
+            return support;
+        }(),
+
+        /**
+         * 获取缓存数据
+         *
+         * @param  {string} key 数据名称
+         * @return {string}
+         */
+        get: function (key) {
+            if (util.store.support) {
+                return localStorage.getItem(key);
+            }
+
+            if (document.cookie.match(new RegExp('(^| )' + encodeURIComponent(key) + '=([^;]*)(;|$)')) !== null) {
+                return decodeURIComponent(RegExp.$2);
+            }
+
+            return '';
+        },
+
+        /**
+         * 设置缓存数据
+         *
+         * @param {string} key   数据名称
+         * @param {string} value 数据值
+         * @param {UTC} expires 过期时间
+         * @return {string}
+         */
+        set: function (key, value, expires) {
+            if (util.store.support) {
+                return localStorage.setItem(key, value);
+            }
+
+            var arr = [];
+
+            arr.push(encodeURIComponent(key) + '=' + encodeURIComponent(value));
+            arr.push('path=/');
+
+            if (expires) {
+                arr.push('expires=' + expires);
+            }
+
+            document.cookie = arr.join(';');
+        },
+
+        /**
+         * 删除缓存数据
+         *
+         * @param  {string} key 数据名称
+         * @return {string}
+         */
+        remove: function (key) {
+            if (util.store.support) {
+                return localStorage.removeItem(key);
+            }
+
+            var date = new Date();
+            date.setTime(date.getTime() - 100);
+
+            return util.store.set(key, 'null', date.toUTCString());
+        }
+    };
+
+    /**
      * 发送 POST 请求
      *
      * @param  {string} url  接口链接
@@ -97,7 +181,7 @@ define(function (require) {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             body: util.querystring.stringify(extend({}, data || {}, {
-                accessToken: localStorage.getItem(url)
+                accessToken: util.store.get(url)
             })),
             credentials: 'include'
         }).then(function (res) {
