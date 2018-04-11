@@ -75,9 +75,13 @@ define(function (require) {
      * @return {string}
      */
     util.getSourceUrl = function () {
-        // 修复 MIP-Cache 环境实别
+        var url = location.href;
+
+        // 修复 MIP-Cache 环境实实别，因为核心代码里只识别了 // https://
         // https://github.com/mipengine/mip/blob/master/src/util.js#L58
-        var url = location.href.replace(/^https?:/, '');
+        if (url.indexOf('.com/c/s/') > -1 && url.indexOf('http://') === 0) {
+            url = url.replace(/^http:/, '');
+        }
 
         return parseCacheUrl(url)
             .replace(/#.*$/, '')
