@@ -83,7 +83,7 @@ define(function (require) {
     };
 
     /**
-     * 小小的封装下 ls < cokie
+     * 小小的封装下 ls
      *
      * @type {Object}
      */
@@ -115,12 +115,6 @@ define(function (require) {
             if (util.store.support) {
                 return localStorage.getItem(key);
             }
-
-            if (document.cookie.match(new RegExp('(^| )' + encodeURIComponent(key) + '=([^;]*)(;|$)')) !== null) {
-                return decodeURIComponent(RegExp.$2);
-            }
-
-            return '';
         },
 
         /**
@@ -133,19 +127,8 @@ define(function (require) {
          */
         set: function (key, value, expires) {
             if (util.store.support) {
-                return localStorage.setItem(key, value);
+                localStorage.setItem(key, value);
             }
-
-            var arr = [];
-
-            arr.push(encodeURIComponent(key) + '=' + encodeURIComponent(value));
-            arr.push('path=/');
-
-            if (expires) {
-                arr.push('expires=' + expires);
-            }
-
-            document.cookie = arr.join(';');
         },
 
         /**
@@ -158,11 +141,6 @@ define(function (require) {
             if (util.store.support) {
                 return localStorage.removeItem(key);
             }
-
-            var date = new Date();
-            date.setTime(date.getTime() - 100);
-
-            return util.store.set(key, 'null', date.toUTCString());
         }
     };
 

@@ -262,6 +262,7 @@ define(function (require) {
                     if (!res.data.accessToken) {
                         return self.error('后端数据必须返回 response.data.accessToken 用户唯一凭证参数。');
                     }
+
                     // 记录 accessToken 到 ls 中，修复在 iOS 高版本下跨域 CORS 透传 cookie 失效问题
                     util.store.set(self.config.endpoint, res.data.accessToken);
 
