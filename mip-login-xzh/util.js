@@ -75,7 +75,11 @@ define(function (require) {
      * @return {string}
      */
     util.getSourceUrl = function () {
-        return parseCacheUrl(location.href)
+        // 修复 MIP-Cache 环境实别
+        // https://github.com/mipengine/mip/blob/master/src/util.js#L58
+        var url = location.href.replace(/^https?:/, '');
+
+        return parseCacheUrl(url)
             .replace(/#.*$/, '')
             .replace(/([&?])((code|state)=[^&$]+)/g, function (matched, prefix) {
                 return prefix === '?' ? '?': '';

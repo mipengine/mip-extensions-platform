@@ -138,8 +138,8 @@ define(function (require) {
             return;
         }
 
-        // 如果是 SF 则调用接口
-        if (self.isIframe()) {
+        // 如果是 SF 且支持 ls
+        if (self.isIframe() && util.store.support) {
             return viewer.sendMessage('login-xzh', {
                 state: Date.now() + '',
                 clientId: self.config.clientId
@@ -147,13 +147,14 @@ define(function (require) {
         }
 
         var sourceUrl = util.getSourceUrl();
-        location.assign(util.getOauthUrl({
+
+        window.top.location.href = util.getOauthUrl({
             'client_id': self.config.clientId,
             'state': encodeURIComponent(JSON.stringify({
                 url: sourceUrl
             })),
             'redirect_uri': encodeURIComponent(sourceUrl)
-        }));
+        });
     };
 
     /**
