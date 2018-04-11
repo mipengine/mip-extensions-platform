@@ -141,7 +141,7 @@ define(function (require) {
                 'extra': '{id:10001}'
             },
             {
-                'title': '装修免息贷 0元拎包入住',
+                'title': '装修专享贷 0元拎包入住',
                 'tit': '0利息 0手续费 无抵押 仅限100户',
                 'btn': '查看我的贷款额度',
                 'class': 'mxd',
@@ -176,7 +176,7 @@ define(function (require) {
                 str += '</a>';
                 str += '<a class="item dk" href="javascript:;" bdsl-click-service="" bdsl-extra="{id:10007}">';
                 str += '<i class="icon pos3"></i>';
-                str += '<p class="txt">免息贷</p>';
+                str += '<p class="txt">专享贷</p>';
                 str += '</a>';
                 str += '<a class="item qj" href="javascript:;" bdsl-click-service="" bdsl-extra="{id:10008}">';
                 str += '<i class="icon pos4"></i>';

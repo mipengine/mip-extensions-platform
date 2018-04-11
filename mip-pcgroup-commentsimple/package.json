@@ -1,0 +1,14 @@
+{
+    "name": "mip-pcgroup-commentsimple",
+    "version": "1.0.0",
+    "description": "太平洋网络评论组件通用版本",
+    "contributors": [
+        {
+            "name": "xuhuanlin",
+            "email": "xuhuanlin@pconline.com.cn"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
