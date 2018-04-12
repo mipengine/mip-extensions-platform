@@ -1,0 +1,13 @@
+{
+    "name": "mip-huajun-xiazq",
+    "version": "1.0.5",
+    "description": "huajunxiazq",
+    "author": {
+        "name": "huajun",
+        "email": "87390193@qq.com",
+        "url": "http://www.onlinedown.net"
+    },
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

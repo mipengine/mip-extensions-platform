@@ -1,0 +1,169 @@
+<style mip-custom>
+    /* 自定义样式 */
+   
+   .flo-left {
+   	float: left;
+   }
+   
+   .flo-right {
+   	float: right;
+   }
+   
+   .clearfix:after {
+   	content: ".";
+   	display: block;
+   	height: 0;
+   	clear: both;
+   	visibility: hidden;
+   	zoom: 1;
+   }
+   
+   .transAnimate {
+   	transition: all 0.5s;
+   	-webkit-transition: all 0.5s;
+   	-moz-transition: all 0.5s;
+   }
+   
+   
+   body {
+   	background-color: #C1C1C1 !important
+   }
+   
+   ul,
+   ol,
+   li {
+   	list-style: none;
+   }
+   
+   header {
+   	height: 10rem;
+   	width: 62.5rem;
+   	line-height: 10rem;
+   	background-color: #e74c3c;
+   	position: fixed;
+   	top: 0;
+   	z-index: 999
+   }
+   
+   header .contenter {
+   	font-size: 3.33333333rem;
+   	height: 10rem;
+   	position: relative
+   }
+   
+   header .contenter mip-img {
+   	width: 3.08333333rem;
+   	height: 3.33333333rem;
+   	vertical-align: middle;
+   	background-color: inherit;
+   	display: inline-block
+   }
+   
+   header .contenter b {
+   	vertical-align: middle
+   }
+   
+   header .contenter a {
+   	color: #fff
+   }
+   
+   header .contenter input {
+   	margin-top: 3.5rem;
+   	width: 4.5rem;
+   	height: 3.16666667rem
+   }
+   
+   header .contenter .title {
+   	display: block;
+   	width: 48.33333333rem;
+   	height: 10rem;
+   	text-align: center;
+   	position: absolute;
+   	top: 0;
+   	left: 50%;
+   	margin-left: -26.66666667rem
+   }
+   
+   header nav {
+   	height: 7.33333333rem;
+   	line-height: 7.33333333rem;
+   	background-color: #fefefe;
+   	font-size: 2.66666667rem;
+   	position: absolute;
+   	width: 0;
+   	z-index: 1;
+   	overflow: hidden;
+   	right: 0
+   }
+   
+   header nav ul {
+   	width: 62.5rem;
+   	padding-left: 2rem
+   }
+   
+   header nav li {
+   	margin: 0 3.58333333rem 0 0
+   }
+   
+   header nav .mar {
+   	margin: 0
+   }
+   
+   header .show_nav {
+   	right: 0;
+   	width: 62.5rem
+   }
+   
+   header .back {
+   	display: block;
+   	float: left;
+   	height: 3.33333333rem;
+   	width: 1.75rem
+   }
+   
+   header .back img {
+   	height: 3.33333333rem;
+   	width: 1.75rem
+   }
+   
+   .headers {
+   	position: fixed;
+   	top: 0;
+   	width: 62.5rem;
+   	height: 0;
+   	z-index: 99;
+   	overflow: hidden;
+   	z-index: 999
+   }
+   
+   .headers header {
+   	height: 10rem;
+   	line-height: 10rem
+   }
+   
+   .headers .contenter {
+   	height: 17.33333333rem
+   }
+   
+   .headers .contenter mip-img {
+   	width: 3.08333333rem;
+   	height: 3.33333333rem;
+   	vertical-align: middle;
+   	display: inline-block
+   }
+   
+   .headers .contenter b {
+   	vertical-align: middle
+   }
+   
+   .headers .contenter input {
+   	margin-top: 3.5rem;
+   	width: 4.5rem;
+   	height: 3.16666667rem
+   }
+   
+   .headers nav {
+   	top: 10rem
+   }
+    </style>
+    

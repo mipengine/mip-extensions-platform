@@ -13,10 +13,7 @@ mip-chinacn-getvideourl
 ### 基本使用
 
 ```html
-<mip-chinacn-getvideourl id="media" poster="视频封面" controls
-  layout="responsive" width="640" height="360" 
-  src="视频地址">
-</mip-chinacn-getvideourl>
+<mip-chinacn-getvideourl></mip-chinacn-getvideourl>
 ```
 ## 属性
 
