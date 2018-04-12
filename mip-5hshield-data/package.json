@@ -1,7 +1,7 @@
 {
     "name": "mip-5hshield-data",
-    "version": "1.0.0",
-    "description": "问题已经修改了，是按照mip组件分离原则来写的",
+    "version": "1.0.1",
+    "description": "有个小bug修复了下",
     "contributors": [
         {
             "name": "yx",

@@ -19,7 +19,7 @@ define(function (require) {
             myVideo.pause();
             var id = element.querySelector('#id').value;
             var k = md5('chinavideoplay');
-            fetchJsonp('https://www.china.cn/video_api.php?a = play&k = ' + k + '&t = mip&id = ' + id + '', {
+            fetchJsonp('https://www.china.cn/video_api.php?a=play&k=' + k + '&t=mip&id=' + id + '', {
                 method: 'POST',
                 jsonpCallback: 'cb'
             }).then(function (mip) {

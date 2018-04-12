@@ -79,7 +79,7 @@ define(function (require) {
                                 });
                                 $(ele).find('.f-downbtn-url').empty();
                                 var downurl = '<li><a href=' + mgcArrayHtml[i][7] + '>立即下载</a></li>';
-                                $(ele).find('.f-downbtn-url').html('');
+                                $(ele).find('.f-downbtn-url').html(downurl);
                                 $(ele).find('.prent').html(mgcArrayHtml[i][5]);
                                 var prevImgSize = mgcArrayHtml[i][3].length;
                                 var prevImgHtml = '';
