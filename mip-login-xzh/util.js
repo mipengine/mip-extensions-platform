@@ -167,7 +167,7 @@ define(function (require) {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             body: util.querystring.stringify(extend({}, data || {}, {
-                accessToken: util.store.get(url)
+                sessionId: util.store.get(url)
             })),
             credentials: 'include'
         }).then(function (res) {

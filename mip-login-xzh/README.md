@@ -8,7 +8,7 @@ MIP 网站中熊掌号登录
 支持布局|responsive,fixed-height,fill,container,fixed
 所需脚本|https://c.mipcdn.com/static/v1/mip-mustache/mip-mustache.js <br> https://c.mipcdn.com/static/v1/mip-login-xzh/mip-login-xzh.js
 
-**注意：** 使用该组件必须在引用本组件链接前引用 `<script src="https://c.mipcdn.com/static/v1/mip-mustache/mip-mustache.js"></script>` 。
+注意：使用该组件必须在引用本组件链接前引用 `<script src="https://c.mipcdn.com/static/v1/mip-mustache/mip-mustache.js"></script>` 。
 
 ## 流程图
 
@@ -156,20 +156,20 @@ define(function (require) {
 必选项：是  
 类型：`string`  
 示例：`data-endpoint="https://api.example.com/user/info.php"`  
-说明：[后端跨域说明](#cors) 、[后端数据说明](#data)
+说明：[后端跨域说明](#cors) 、[后端数据说明](#data) 、[后端登录返回 sessionId](#sessionId)
 
 ## 组件方法和事件
 
-#### 登录方法 - `<div on="tap:组件id.login">`
+#### 登录方法 - `<div on="tap:登录组件id.login">`
 
 在其他元素中绑定点击时跳转登录页面。
 
-**注意: ** 该方法会重新打开一个熊掌号登录页面，在登录成功后会透传 `code` 返回到当前页面，组件重新使用 `code` 参数去请求后端接口，这将导致当前页面未存储的数据丢失，如：表单用户填写内容。
+注意：该方法会重新打开一个熊掌号登录页面，在登录成功后会透传 `code` 返回到当前页面，组件重新使用 `code` 参数去请求后端接口，这将导致当前页面未存储的数据丢失，如：表单用户填写内容。
 
-#### 退出方法 - `<div on="tap:组件id.logout">`
+#### 退出方法 - `<div on="tap:登录组件id.logout">`
 在其他元素中绑定点击时请求退出接口。
 
-**注意: ** 该方法不会跳转页面，异步的调用 `data-endpoint` 接口去退出，并触发登录组件元素中的 `logout:其他组件id.其他组件行为` 事件。
+注意：该方法不会跳转页面，异步的调用 `data-endpoint` 接口去退出，并触发登录组件元素中的 `logout:其他组件id.其他组件行为` 事件。
 
 #### 登录成功事件 - `<mip-login-xzh on="login:其他组件id.其他组件行为">`
 在登录成功时调用其他组件的组件行为。
@@ -182,8 +182,17 @@ define(function (require) {
 
 ## 注意事项
 
+### 1. 配置百度熊掌号-网页授权域名
+
+在[熊掌号运营管理平台](https://xiongzhang.baidu.com/mp/dashboard/devsetting)添加两个网页授权域名：
+
+1. 网站主域名 - 需要在登录组件的域名
+2. MIP-Cache 域名，规则：`域名（.换成-）.mipcdn.com`，如：
+    - `www.mipengine.org` -> `www-mipengine-org.mipcdn.com`
+    - `demo.www.mipengine.org` -> `demo-www-mipengine-org.mipcdn.com`
+
 <a id="cors" name="cors" href="#cors"></a>
-### 后端需要支持 CORS + `withCredentials`
+### 2. 后端需要支持 CORS + `withCredentials`
 
 - [CORS 文档](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS)
 - [`withCredentials` 附带身份凭证的请求](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS#%E9%99%84%E5%B8%A6%E8%BA%AB%E4%BB%BD%E5%87%AD%E8%AF%81%E7%9A%84%E8%AF%B7%E6%B1%82)
@@ -193,10 +202,10 @@ define(function (require) {
 - `Access-Control-Allow-Credentials: true`
 - `Access-Control-Allow-Origin: 对应请求的 origin`
 
-注意 `Access-Control-Allow-Origin` 请做好**安全来源限制**，并且不能为 `*` 。
+注意：出于安全考虑请对来源的 `origin` 进行判断，并正确的返回 `Access-Control-Allow-Origin` 字段，不能为 `*` 。
 
 <a id="data" name="data" href="#data"></a>
-### 后端数据说明
+### 3. 后端数据说明
 
 #### 页面加载完成检查用户数据
 
@@ -247,7 +256,7 @@ define(function (require) {
     "status": 0,
     "data": {
         "name": "mipengine",
-        "accessToken": "用户唯一 token 凭证，必须返回"
+        "sessionId": "用户唯一 token 凭证，必须返回"
     }
 }
 ```
@@ -276,22 +285,22 @@ define(function (require) {
 ```json
 {
     "status": 0,
-    "data" {
+    "data": {
         "url": "https://www.example.com 退出成功跳转的链接地址 可选",
         "title": "主页 自定义标题 可选"
     }
 }
 ```
 
-<a id="accessToken" name="accessToken" href="#accessToken"></a>
-### 后端登录 accessToken
+<a id="sessionId" name="sessionId" href="#sessionId"></a>
+### 4. 后端登录返回 sessionId
 
-由于在 iOS 高版本对跨域透传 `cooke` 的限制（<https://webkit.org/blog/7675/intelligent-tracking-prevention/>），在登录成功后需要把用户唯一凭证 `response.data.accessToken` 返回前端，前端组件将在 `localStorage` 中缓存下来，在下次发后端接口请求时携带该凭证，后端就当优先使用 `cookie/session` 验证，不存在时获取 `POST` 参数中的 `accessToken` 去校验。
+由于在 iOS 高版本对跨域透传 `cooke` 的限制（<https://webkit.org/blog/7675/intelligent-tracking-prevention/>），在登录成功后需要把用户唯一凭证 `response.data.sessionId` 返回前端，前端组件将在 `localStorage` 中缓存下来，在下次发后端接口请求时携带该凭证，后端就当优先使用 `cookie/session` 验证，不存在时获取 `POST` 参数中的 `sessionId` 去校验。
 
-**注意：** 本地 `localStorage` 是以 `data-endpoint` 为粒度去缓存。
+注意：本地 `localStorage` 是以 `data-endpoint` 为粒度去缓存。
 
 
-### 组件内部模板 `<template>` 渲染和触发事件
+### 5. 组件内部模板 `<template>` 渲染和触发事件
 
 组件内支持多个 `<template type="mip-mustache">` 模板标签，在渲染时会把渲染的结果输出到 `<div>` 元素中，并且插入到 `<template>` 元素下方，如：
 
