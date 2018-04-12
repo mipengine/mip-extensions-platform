@@ -258,15 +258,13 @@ define(function (require) {
         }
 
         return util.post(self.config.endpoint, data).then(function (res) {
+            // 记录 sessionId 到 ls 中，修复在 iOS 高版本下跨域 CORS 透传 cookie 失效问题
+            if (res.sessionId) {
+                util.store.set(self.config.endpoint, res.sessionId);
+            }
+
             if (data.type === 'login') {
                 if (res.status === 0 && res.data) {
-                    if (!res.data.sessionId) {
-                        return self.error('后端数据必须返回 response.data.sessionId 用户唯一凭证参数。');
-                    }
-
-                    // 记录 sessionId 到 ls 中，修复在 iOS 高版本下跨域 CORS 透传 cookie 失效问题
-                    util.store.set(self.config.endpoint, res.data.sessionId);
-
                     self.loginHandle('login', true, res.data);
                 }
                 else {

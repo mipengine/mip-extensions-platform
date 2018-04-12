@@ -156,7 +156,7 @@ define(function (require) {
 必选项：是  
 类型：`string`  
 示例：`data-endpoint="https://api.example.com/user/info.php"`  
-说明：[后端跨域说明](#cors) 、[后端数据说明](#data) 、[后端登录返回 sessionId](#sessionId)
+说明：[后端跨域说明](#cors) 、[后端数据说明](#data) 、[会话凭证 sessionId](#sessionId)
 
 ## 组件方法和事件
 
@@ -222,6 +222,7 @@ define(function (require) {
 ```json
 {
     "status": 0,
+    "sessionId": "会话凭证，必须返回",
     "data": null
 }
 ```
@@ -231,6 +232,7 @@ define(function (require) {
 ```json
 {
     "status": 0,
+    "sessionId": "会话凭证，必须返回",
     "data": {
         "name": "mipengine"
     }
@@ -247,16 +249,16 @@ define(function (require) {
 请求类型 | POST
 请求参数 | `{type: 'login', code: '熊掌号授权code', redirect_uri: '回调链接'}`
 
-源站后端服务需要使用 `code` 和 `redirect_uri` 参数去请求 [获取网页授权access_token](http://xiongzhang.baidu.com/open/wiki/chapter2/section2.2.html?t=1522129995153) 、[获取授权用户信息](http://xiongzhang.baidu.com/open/wiki/chapter2/section2.4.html?t=1522129995153) 接口，并和源站的用户关联、记录用户登录状态。
+源站后端服务需要使用 `code` 和 `redirect_uri` 参数去请求 [获取网页授权 access_token](http://xiongzhang.baidu.com/open/wiki/chapter2/section2.2.html?t=1522129995153) 、[获取授权用户信息](http://xiongzhang.baidu.com/open/wiki/chapter2/section2.4.html?t=1522129995153) 接口，并和源站的用户关联、记录用户登录状态。
 
 处理成功，认为已登录，整个返回值的 `data` 字段将认为是用户数据，在模板渲染时使用该数据渲染：
 
 ```json
 {
     "status": 0,
+    "sessionId": "会话凭证，必须返回",
     "data": {
-        "name": "mipengine",
-        "sessionId": "用户唯一 token 凭证，必须返回"
+        "name": "mipengine"
     }
 }
 ```
@@ -267,8 +269,6 @@ define(function (require) {
     "status": 403
 }
 ```
-
-
 
 #### 退出
 
@@ -293,12 +293,11 @@ define(function (require) {
 ```
 
 <a id="sessionId" name="sessionId" href="#sessionId"></a>
-### 4. 后端登录返回 sessionId
+### 4. 会话凭证 sessionId
 
-由于在 iOS 高版本对跨域透传 `cooke` 的限制（<https://webkit.org/blog/7675/intelligent-tracking-prevention/>），在登录成功后需要把用户唯一凭证 `response.data.sessionId` 返回前端，前端组件将在 `localStorage` 中缓存下来，在下次发后端接口请求时携带该凭证，后端就当优先使用 `cookie/session` 验证，不存在时获取 `POST` 参数中的 `sessionId` 去校验。
+由于在 iOS 高版本对跨域透传 `cooke` 的限制（<https://webkit.org/blog/7675/intelligent-tracking-prevention/>），在前端组件请求后端接口时（`type=check` 和 `type=login`），由后端生成当前会话唯一凭证并记录到服务端，把凭证返回前端 `response.sessionId`，前端组件将在 `localStorage` 中缓存下来，在下次发后端接口请求时携带该凭证，后端就当优先使用 `cookie/session` 验证，不存在时获取 `POST` 参数中的 `sessionId` 去校验。
 
 注意：本地 `localStorage` 是以 `data-endpoint` 为粒度去缓存。
-
 
 ### 5. 组件内部模板 `<template>` 渲染和触发事件
 
