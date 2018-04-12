@@ -18,8 +18,6 @@ define(function (require) {
             var para = config;
             var n = para.name;
             var x = null;
-            // 这里用widnow，我是参考你们的案例 mip-stats-baidu 做的，因为我们跟百度统计这个是一样的
-            // mip组件哥说，让我标记下，他会跟审核的人说下可以通过
             window['sensorsDataAnalytic201505'] = n;
             if (!window[n]) {
                 window[n] = function (a) {
