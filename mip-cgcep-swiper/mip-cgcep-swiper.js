@@ -12,9 +12,10 @@ define(function (require) {
 
     /**
      * 构造元素，只会运行一次
+     * 元素构建完成后马上初始化swiper
      */
 
-    customElement.prototype.firstInViewcallback = function () {
+    customElement.prototype.build = function () {
         var element = this.element;
         var container = element.getAttribute('container') || '.swiper-container';
         var script = element.querySelector('script[type="application/json"]');

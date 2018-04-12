@@ -22,8 +22,9 @@ define(function (require) {
 
     /**
      * 构造元素，只会运行一次
+     * 元素构建完成后就绑定事件
      */
-    customElement.prototype.firstInViewcallback = function () {
+    customElement.prototype.build = function () {
         var selef = this.element;
         var goalclass = '.' + selef.getAttribute('goalclass');
         var taclass = selef.getAttribute('taclass');
