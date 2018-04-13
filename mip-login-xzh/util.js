@@ -77,7 +77,7 @@ define(function (require) {
     util.getSourceUrl = function () {
         var url = location.href;
 
-        // 修复 MIP-Cache 环境实实别，因为核心代码里只识别了 // https://
+        // 修复 MIP-Cache 环境识别，因为核心代码里只识别了 // 或 https://
         // https://github.com/mipengine/mip/blob/master/src/util.js#L58
         if (url.indexOf('.com/c/s/') > -1 && url.indexOf('http://') === 0) {
             url = url.replace(/^http:/, '');
@@ -96,6 +96,24 @@ define(function (require) {
      * @type {Object}
      */
     util.store = {
+
+        /**
+         * 存储 key 前缀
+         *
+         * @type {string}
+         */
+        prefix: 'mip-login-xzh:sessionId:',
+
+        /**
+         * 获取 key
+         *
+         * @param  {string} key 键值
+         *
+         * @return {string}
+         */
+        getKey: function (key) {
+            return util.store.prefix + key;
+        },
 
         /**
          * 检查是否支持 ls
@@ -121,7 +139,7 @@ define(function (require) {
          */
         get: function (key) {
             if (util.store.support) {
-                return localStorage.getItem(key);
+                return localStorage.getItem(util.store.getKey(key));
             }
         },
 
@@ -135,7 +153,7 @@ define(function (require) {
          */
         set: function (key, value, expires) {
             if (util.store.support) {
-                localStorage.setItem(key, value);
+                localStorage.setItem(util.store.getKey(key), value);
             }
         },
 
@@ -147,7 +165,7 @@ define(function (require) {
          */
         remove: function (key) {
             if (util.store.support) {
-                return localStorage.removeItem(key);
+                return localStorage.removeItem(util.store.getKey(key));
             }
         }
     };

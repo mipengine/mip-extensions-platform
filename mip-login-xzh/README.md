@@ -295,7 +295,7 @@ define(function (require) {
 <a id="sessionId" name="sessionId" href="#sessionId"></a>
 ### 4. 会话凭证 sessionId
 
-由于在 iOS 高版本对跨域透传 `cooke` 的限制（<https://webkit.org/blog/7675/intelligent-tracking-prevention/>），在前端组件请求后端接口时（`type=check` 和 `type=login`），由后端生成当前会话唯一凭证并记录到服务端，把凭证返回前端 `response.sessionId`，前端组件将在 `localStorage` 中缓存下来，在下次发后端接口请求时携带该凭证，后端就当优先使用 `cookie/session` 验证，不存在时获取 `POST` 参数中的 `sessionId` 去校验。
+由于在 iOS 对跨域透传 `cooke` 的限制（<https://webkit.org/blog/7675/intelligent-tracking-prevention/>），在前端组件请求后端接口时（`type=check` 和 `type=login`），由后端生成当前会话唯一凭证并记录到服务端，把凭证返回前端 `response.sessionId`，前端组件将在 `localStorage` 中缓存下来，在下次发后端接口请求时携带该凭证，后端就当优先使用 `cookie/session` 验证，不存在时获取 `POST` 参数中的 `sessionId` 去校验。
 
 注意：本地 `localStorage` 是以 `data-endpoint` 为粒度去缓存。
 

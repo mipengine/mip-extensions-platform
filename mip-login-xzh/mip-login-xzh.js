@@ -8,6 +8,7 @@ define(function (require) {
     'use strict';
 
     var util = require('./util');
+    var platform = require('util').platform;
     var mustache = require('mip-mustache/mustache');
     var viewer = require('viewer');
     var hash = require('hash');
@@ -38,6 +39,7 @@ define(function (require) {
          */
         this.config = this.element.dataset;
 
+        // 检查配置数据
         this.checkConfig();
 
         // 绑定事件
@@ -138,16 +140,17 @@ define(function (require) {
             return;
         }
 
-        // 如果是 SF 且支持 ls
-        if (self.isIframe() && util.store.support) {
+        // 如果是 iframe + 支持 ls + 非 QQ 浏览器时使用结果页接口
+        // 目前大多设备的隐身模式不支持 ls
+        if (self.isIframe() && util.store.support && !platform.isQQ()) {
             return viewer.sendMessage('login-xzh', {
                 state: Date.now() + '',
                 clientId: self.config.clientId
             });
         }
 
+        // 否则跳转链接
         var sourceUrl = util.getSourceUrl();
-
         window.top.location.href = util.getOauthUrl({
             'client_id': self.config.clientId,
             'state': encodeURIComponent(JSON.stringify({
@@ -268,15 +271,16 @@ define(function (require) {
                     self.loginHandle('login', true, res.data);
                 }
                 else {
-                    self.loginHandle('error', false);
+                    throw new Error('登录失败', res);
                 }
             }
             else if (res.status === 0 && res.data) {
                 self.loginHandle('login', true, res.data);
             }
-        }).catch(function (res) {
+        }).catch(function (err) {
             if (data.type === 'login') {
                 self.loginHandle('error', false);
+                throw err;
             }
         });
     };
