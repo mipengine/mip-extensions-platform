@@ -18,6 +18,7 @@ define(function (require) {
             var para = config;
             var n = para.name;
             var x = null;
+// 使用window说明： 为了使用第三方统计神策数据JSSDK(www.sensorsdata.cn)里暴露的全局变量
             window['sensorsDataAnalytic201505'] = n;
             if (!window[n]) {
                 window[n] = function (a) {

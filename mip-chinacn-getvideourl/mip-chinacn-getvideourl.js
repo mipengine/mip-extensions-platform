@@ -15,22 +15,27 @@ define(function (require) {
         var self = this;
         var element = self.element;
         var myVideo = element.querySelector('video');
+        var request = false;
         myVideo.addEventListener('play', function () {
-            myVideo.pause();
-            var id = element.querySelector('#id').value;
-            var k = md5('chinavideoplay');
-            fetchJsonp('https://www.china.cn/video_api.php?a=play&k=' + k + '&t=mip&id=' + id + '', {
-                method: 'POST',
-                jsonpCallback: 'cb'
-            }).then(function (mip) {
-                return mip.json();
-            }).then(function (data) {
-                var videoUrl = data.data;
-                myVideo.setAttribute('src', videoUrl);
-                myVideo.play();
-            }).catch(function (e) {
-                console.log(e);
-            });
+            if (request === true) {
+                return;
+            } else {
+                myVideo.pause();
+                var id = element.querySelector('#id').value;
+                var k = md5('chinavideoplay');
+                fetch('https://www.china.cn/video_api.php?a=play&k=' + k + '&t=mip&id=' + id + '')
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(function (myJson) {
+                        request = true;
+                        var videoUrl = myJson.data;
+                        myVideo.setAttribute('src', videoUrl);
+                        myVideo.play();
+                    }).catch(function (e) {
+                        console.log(e);
+                    });
+            }
         });
     };
     return customElement;

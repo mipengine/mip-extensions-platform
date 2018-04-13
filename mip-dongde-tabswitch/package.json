@@ -1,6 +1,6 @@
 {
     "name": "mip-dongde-tabswitch",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "对mip-fixed和mip-vd-tabs的功能扩展和融合",
     "author": {
         "name": "idongde",

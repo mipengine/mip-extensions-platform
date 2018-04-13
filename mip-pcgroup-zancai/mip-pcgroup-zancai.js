@@ -38,9 +38,9 @@ define(function (require) {
             function showTips(str) {
                 clearTimeout(timer);
                 tips.innerHTML = str;
-                tips.style.dsiplay = 'block';
+                tips.style.display = 'block';
                 timer = setTimeout(function () {
-                    tips.style.dsiplay = 'none';
+                    tips.style.display = 'none';
                     tips.innerHTML = '';
                 }, 1000);
             }
