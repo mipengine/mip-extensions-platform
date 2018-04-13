@@ -142,7 +142,17 @@ define(function (require) {
 
         // 如果是 iframe + 支持 ls + 非 QQ 浏览器时使用结果页接口
         // 目前大多设备的隐身模式不支持 ls
-        if (self.isIframe() && util.store.support && !platform.isQQ()) {
+        var toSF = true;
+        if (!self.isIframe()) {
+            toSF = false;
+        }
+        else if (!util.store.support) {
+            toSF = false;
+        }
+        else if (platform.isIos() && platform.isQQ()) {
+            toSF = false;
+        }
+        if (toSF) {
             return viewer.sendMessage('login-xzh', {
                 state: Date.now() + '',
                 clientId: self.config.clientId
