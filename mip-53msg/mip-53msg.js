@@ -4,8 +4,8 @@
  */
 
 define(function (require) {
-    'use strict';
-    var jquery = require('jquery');
+    // mip 组件开发支持 zepto
+    var jquery = require('zepto');
     var customElement = require('customElement').create();
 
      /**
@@ -29,20 +29,20 @@ define(function (require) {
 
         // 点击按钮
         $('#' + popButton + '').click(function () {
-            var tval = $('#' + popTel + '').val();
+            var tval = $('#' + popTel + '').text();
             var add = true;
             var reTel = /^1\d{10}$/;
             var reg = /^0\d{2,3}-\d{7,8}(-\d{1,6})?$/;
             // 判断名字是否为空
             if (popContact !== '') {
-                if ($.trim($('#' + popContact + ' ').val()) === '') {
+                if ($.trim($('#' + popContact + ' ').text()) === '') {
                     $('#' + popContact + ' ').attr('placeholder', '请输入你的姓名');
                     $('#' + popContact + ' ').css('border-color', '#FF0000');
                 }
                 else {
                     $('#' + popContact + '').css('border-color', '#d2d2d2');
-                    popContactValue = $.trim($('#' + popContact + '').val());
-                    $('#' + popContact + '').val('');
+                    popContactValue = $.trim($('#' + popContact + '').text());
+                    $('#' + popContact + '').text('');
                 }
             }
             // 判断联系方式是否为空
@@ -53,7 +53,7 @@ define(function (require) {
             }
             else if (reTel.test(tval) === false && reg.test(tval) === false) {
                 $('#' + popTel + '').css('border-color', '#FF0000');
-                $('#' + popTel + '').val('');
+                $('#' + popTel + '').text('');
                 $('#' + popTel + '').attr('placeholder', '输入的联系方式不正确');
                 return;
             }
@@ -62,8 +62,8 @@ define(function (require) {
                 popTelValue = $.trim(tval);
             }
             if (popInfo !== '') {
-                popInfoValue = $.trim($('#' + popInfo + '').val());
-                $('#' + popInfo + '').val('');
+                popInfoValue = $.trim($('#' + popInfo + '').text());
+                $('#' + popInfo + '').text('');
             }
             var loginReqbody = {
                 'tid': projectId,
@@ -83,7 +83,7 @@ define(function (require) {
                 success: function (data, status) {
                     if (status = 'success' && data !== '') {
                         alert(data);
-                        $('#' + popTel + '').val('');
+                        $('#' + popTel + '').text('');
                     } else {
                         alert('留言失败3');
                     }

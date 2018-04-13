@@ -6,7 +6,7 @@ mip-53msg 用于提交联系方式的组件
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/static/v1/mip-53msg/mip-53msg.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-53msg/mip-53msg.js
 
 ## 示例
 
@@ -14,11 +14,11 @@ mip-53msg 用于提交联系方式的组件
 
 ```html
 <mip-53msg popContact="Mcontact" popTel="Mtel" popInfo="Minfo" popButton="Mbutton" projectId="123">
-	<input type="text" id="Mcontact" value="" />    
-    <input type="text" id="Mtel" value="" />
+	<p contenteditable="true" id="Mcontact" placeholder="请输入您的手机号码~" ></p>  
+    <p contenteditable="true" id="Mtel" placeholder="请输入您的姓名~" ></p>
    
-    <input type="text" id="Minfo" value="" />
-    <input type="button" id="Mbutton" value="立即提交" />
+    <p contenteditable="true" id="Minfo" placeholder="请输入您的手机号码~" ></p>
+    <span id="Mbutton" value="立即提交" ></span>
 </mip-53msg>
 ```
 ## 属性

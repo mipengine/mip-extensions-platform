@@ -6,7 +6,7 @@ mip-53pop 一款弹出功能小组件
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/static/v1/mip-53pop/mip-53pop.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-53pop/mip-53pop.js
 
 ## 示例
 
@@ -20,10 +20,10 @@ mip-53pop 一款弹出功能小组件
     layout="nodisplay"
     class="mip-hidden"  Dwidth= '0.53'  divId = "lightbox" popContact="Mcontact" popTel="Mtel" popInfo="Minfo" popButton="Mbutton" projectId="123">
     <div class="lightbox" id="lightbox">       
-       <input type="text" id="Mcontact" value="" />
-       <input type="text" id="Mtel" value="" />       
-       <input type="text" id="Minfo" value="" />
-       <input type="button" id="Mbutton" value="立即提交" />     
+	    <p contenteditable="true" id="Mcontact" placeholder="请输入您的手机号码~" ></p>  
+	    <p contenteditable="true" id="Mtel" placeholder="请输入您的姓名~" ></p>
+	    <p contenteditable="true" id="Minfo" placeholder="请输入您的手机号码~" ></p>
+	    <span id="Mbutton" value="立即提交" ></span>   
     </div>
 </mip-53pop>
  
