@@ -76,6 +76,9 @@ define(function (require) {
 
             // 获取用户信息
             event.userinfo;
+
+            // 后端交互会话标识
+            event.sessionId;
         });
     };
 
@@ -95,7 +98,7 @@ define(function (require) {
         {{/demoname}}
 
         {{^demoname}}
-            <a href="#" on="tap:userlogin.login">购买</a>
+            <a href="#" on="tap:userlogin.login">请先登录</a>
         {{/demoname}}
     </template>
     ...

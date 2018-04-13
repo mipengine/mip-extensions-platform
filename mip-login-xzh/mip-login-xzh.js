@@ -26,6 +26,13 @@ define(function (require) {
         this.userinfo = null;
 
         /**
+         * 会话标识
+         *
+         * @type {string}
+         */
+        this.sessionId = null;
+
+        /**
          * 默认为未登录
          *
          * @type {boolean}
@@ -178,7 +185,8 @@ define(function (require) {
      */
     Login.prototype.trigger = function (name) {
         var event = {
-            userinfo: this.userinfo
+            userinfo: this.userinfo,
+            sessionId: this.sessionId
         };
         viewer.eventAction.execute(name, this.element, event);
     };
@@ -273,6 +281,7 @@ define(function (require) {
         return util.post(self.config.endpoint, data).then(function (res) {
             // 记录 sessionId 到 ls 中，修复在 iOS 高版本下跨域 CORS 透传 cookie 失效问题
             if (res.sessionId) {
+                self.sessionId = res.sessionId;
                 util.store.set(self.config.endpoint, res.sessionId);
             }
 
