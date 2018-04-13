@@ -1,0 +1,14 @@
+{
+    "name": "mip-cgcep-shipei",
+    "version": "1.0.0",
+    "description": "组件介绍",
+    "contributors": [
+        {
+            "name": "evan",
+            "email": "121838148@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
