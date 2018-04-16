@@ -81,6 +81,8 @@ define(function (require) {
                                 var downurl = '<li><a href=' + mgcArrayHtml[i][7] + '>立即下载</a></li>';
                                 $(ele).find('.f-downbtn-url').html(downurl);
                                 $(ele).find('.prent').html(mgcArrayHtml[i][5]);
+                                $(ele).find('.m-related').hide();
+                                $(ele).find('.m-click').hide();
                                 var prevImgSize = mgcArrayHtml[i][3].length;
                                 var prevImgHtml = '';
                                 for (var s = 0; s < prevImgSize; s++) {

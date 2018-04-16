@@ -15,16 +15,16 @@ define(function (require) {
             return this.getTime('');
         },
         getTime: function (datestr) {
-            var timestamp = 0;
             var date = new Date();
             if (this.isEmpty(datestr)) {
                 date = new Date();
             }
             else {
+                // 修复在safari下获取时间戳为NaN
+                datestr = datestr.replace(/-/g, '/');
                 date = new Date(datestr);
             }
-            timestamp = Date.parse(date);
-            return timestamp / 1000;
+            return Math.round(date.getTime() / 1000);
         },
         isEmpty: function (obj) {
             if (typeof obj === 'undefined' || obj === null || obj === '') {
@@ -86,9 +86,7 @@ define(function (require) {
                             exists = true;
                             return false;
                         }
-                        else {
-                            return true;
-                        }
+                        return true;
                     }
                 });
             }
