@@ -467,8 +467,8 @@ define(function (require) {
                 return;
             }
             clickflag = true;
+            $(redPacket.element).find('.loading-icon').css('display', 'block');
             var redParms = cfg.redRequest.parms;
-
             var signParms = cfg.signRequest.parms;
             var pArray = [];
             for (var key in signParms) {
@@ -513,6 +513,8 @@ define(function (require) {
             function stepFour() {
                 // 领取红包
                 redPacket.getRedNew(cfg.newRedRequest, redParms).then(function (a) {
+                    tipMask('领取成功~');
+                    tel.val('');
                     clickflag = false;
                     bmPramas['refer_url'] = window.location.href;
                     bmPramas['from_source'] = signParms.source;
@@ -520,6 +522,7 @@ define(function (require) {
                     storage.set('bm_pramas', bmPramas);
                     window.top.location.href = cfg.signRequest.skipUrl;
                 }, function (b) {
+                    tel.val('');
                     clickflag = false;
                 });
             }
