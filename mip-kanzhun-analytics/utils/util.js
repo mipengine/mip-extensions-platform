@@ -20,6 +20,7 @@ define(function (require) {
         // 做一次签名。 后续的code，需要判断这个签名
         var __a = params['__a'];
         var __t = Math.floor(params['_'] / 100);
+        var protocol = location.href.indexOf('https') === 0 ? 'https://' : 'http://';
 
         if (__a && __t) {
             var s = __a + __t;
@@ -32,7 +33,7 @@ define(function (require) {
             params['_'] = __t * 100 + sign % 100;
         }
 
-        img.src = 'http://' + DOMAIN + src + '?' + Path.packParams(params);
+        img.src = protocol + DOMAIN + src + '?' + Path.packParams(params);
     }
 
     return {

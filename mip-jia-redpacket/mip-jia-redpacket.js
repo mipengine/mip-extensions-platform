@@ -282,6 +282,7 @@ define(function (require) {
                 if (data.status === 200) {
                     var res = data.info;
                     if (res.status === 'ACTIVE') {
+                        $(selF.element).find('.popmask, .hb-popup').css('display', 'none');
                         resolve(data);
                     }
                     else if (res.status === 'OVER_CLAIM_TIMES') {
