@@ -171,7 +171,8 @@ define(function (require) {
         window.top.location.href = util.getOauthUrl({
             'client_id': self.config.clientId,
             'state': encodeURIComponent(JSON.stringify({
-                url: sourceUrl
+                url: sourceUrl,
+                r: Date.now()
             })),
             'redirect_uri': encodeURIComponent(sourceUrl)
         });
