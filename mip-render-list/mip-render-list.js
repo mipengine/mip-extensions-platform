@@ -134,10 +134,30 @@ define(function (require) {
         return url;
     }
 
+    customElement.prototype.build = function () {
+        var self = this;
+        self.addEventAction('refresh', function (e) {
+            refreshContent.call(self);
+        });
+    };
+
+    customElement.prototype.attributeChangedCallback = function (attributeName, oldValue, newValue, namespace) {
+        setTimeout(function() {
+            if (attributeName === 'src' && oldValue !== newValue) {
+                console.log('attrbutechange', oldValue, newValue);
+                viewer.eventAction.execute('refresh', this.element, {e: this.element});
+            }
+        }.bind(this), 0);
+    };
+    
     /**
      * 构造元素，只会运行一次
      */
     customElement.prototype.firstInviewCallback = function () {
+        refreshContent.call(this);
+    };
+
+    function refreshContent() {
         var self = this;
         var element = this.element;
 
@@ -191,7 +211,7 @@ define(function (require) {
                 }
             });
         }
-    };
+    }
 
     return customElement;
 });

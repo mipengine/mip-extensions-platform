@@ -1,0 +1,108 @@
+/**
+ * @file mip-showcase-dialog样式文件
+ */
+mip-showcase-dialog{
+    display: none!important;
+}
+//mip-showcase-dialog {
+    // TODO
+    /**
+    * @file 弹出层
+    */
+    /* 父容器 mask */
+    .sc-dialog {
+        position: relative;
+        z-index: 1000;
+        font-size: 14px; 
+    }
+
+    /* mask层 */
+    .sc-dialog-mask {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.4);
+        z-index: 1; 
+        opacity: 0;
+        display: none; 
+    }
+    /* 对话框layout */
+    .sc-dialog-layout {
+        opacity: 0; 
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        background-color: #e8e8e8;
+        border-radius: 6px;
+        z-index: 2; 
+        width: 80%;
+        text-align: center; 
+        overflow: hidden; 
+    }
+
+    .sc-dialog-content {
+        padding: 15px;
+        font-size: 14px;
+        line-height: 22px;
+    }
+
+    .sc-dialog-title {
+        font-size: 18px;
+        line-height: 26px;
+        margin-bottom: 4px; 
+    }
+
+    .sc-dialog-buttons {
+        color: #09f;
+        line-height: 40px;
+        border-top: 1px solid #d9d9d9;
+    }
+
+    /* 按钮水平布局 */
+    .sc-dialog-layout .c-flexbox .sc-dialog-button {
+        min-width: 35px;
+        -webkit-box-flex: 1;
+        -webkit-flex: 1 1 auto;
+        border-left: 1px solid #d9d9d9;
+    }
+    .sc-dialog-layout .c-flexbox .sc-dialog-button:first-child {
+        border-left: 0 none;
+    }
+
+    /* 按钮垂直布局 */
+    .sc-dialog-vertical-buttons .sc-dialog-button {
+        border-top: 1px solid #d9d9d9;
+    }
+    .sc-dialog-vertical-buttons .sc-dialog-button:first-child {
+        border-top: 0 none;
+    }
+
+    /*
+    * 按行截断
+    */
+    .c-line-clamp1 {
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    /*盒子*/
+    .c-flexbox {
+        -webkit-align-content: flex-start;
+        -webkit-align-items: stretch;
+        -webkit-box-align: stretch;
+        -webkit-box-direction: normal;
+        -webkit-box-lines: single;
+        -webkit-box-orient: horizontal;
+        -webkit-box-pack: justify;
+        display: -webkit-flex;
+        display: -webkit-box;
+        -webkit-flex-direction: row;
+        -webkit-flex-wrap: nowrap;
+        -webkit-justify-content: space-between;
+        width: auto;
+    }
+//}

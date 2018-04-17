@@ -1,0 +1,91 @@
+/**
+ * @file mip-showcase-order样式文件
+ */
+
+body {
+	background: #f5f5f5;
+}
+mip-showcase-order {
+	font-size: 16px;	
+	.list {		
+		overflow: hidden;
+	}
+	.area {		
+		padding: 0 10px;
+		background: #fff;
+		box-shadow: 1px 1px 0 rgba(0,0,0,.05);
+		margin-bottom: 10px;
+		overflow: hidden;
+		display: block;
+	}
+	.list input {
+		font-size: 16px;
+		width: 100%;
+	}
+	.list li {
+		padding: 10px 0;
+		overflow: hidden;
+	}	
+	.list > :first-child {
+		border-bottom: 1px solid #000;	
+	}
+	.list span {
+		display: inline-block;
+	}
+	.list li > :first-child {
+		width: 50%;
+	}
+	.list li > :nth-child(2) {
+		width: 10%;
+	}
+	.list li > :nth-child(3) {
+		width: 10%;
+	}
+	.list li > :nth-child(4) {
+		width: 15%;
+	}
+	.list li > :nth-child(5) {
+		width: 15%;
+	}
+    .desc {
+    	display: inline-block;
+    }
+    .desc span {
+    	display: block;
+    }
+    .cancel,
+    .clear-all,
+    .clear {
+    	border-style: none;
+    	background: #572b07;
+    	padding: 5px 10px;    	
+    	border-radius: 3px;
+    	color: #fff;    	
+    }
+    .clear {
+    	float: left;
+    }
+    .total {
+    	float: right;
+    	padding: 5px 0;
+    }
+    .deal {
+    	overflow: hidden;
+    }
+    .cart-item {
+    	display: -webkit-flex;
+	    display: flex;
+	    -webkit-align-items: center;
+	    align-items: center;
+	    -webkit-justify-content: space-between;
+	    justify-content: space-between;	    
+	    color: #333;
+	    padding: 10px 0px;
+    }
+    .cartitem-right {
+    	text-align: right;
+    	direction: rtl;
+    	font-size: 16px;
+	    font-size: 14px;
+    }
+}
