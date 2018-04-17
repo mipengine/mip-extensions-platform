@@ -87,7 +87,7 @@ define(function (require) {
             this.isScroll = true;
             // 要滚动的元素本身没有滚动条，所以只能滚动屏幕了。。。
             $('html,body').animate({
-                scrollTop: this.tabContentScrollTop
+                scrollTop: this.tabNavScrollTop
             }, 300, function () {
                 this.isScroll = false;
             });

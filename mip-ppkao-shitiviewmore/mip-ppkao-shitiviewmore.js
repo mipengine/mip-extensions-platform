@@ -14,7 +14,7 @@ define(function (require) {
     customElement.prototype.firstInviewCallback = function () {
         var ele = this.element;
         var button = $(ele);
-        var url = '//data.api.ppkao.com/Interface/PageAPI.ashx?action=' + ele.dataset.action;
+        var url = 'https://data.api.ppkao.com/Interface/PageAPI.ashx?action=' + ele.dataset.action;
         if (ele.dataset.tid) {
             url += '&tid=' + ele.dataset.tid;
         }
@@ -33,16 +33,17 @@ define(function (require) {
         if (ele.dataset.numid) {
             url += '&numID=' + ele.dataset.numid;
         }
-        var page = 1;
-        button.on('click', function () {
+        var page = 0;
+        viewMore();
+        button.find('.check-more').on('click', function () {
             viewMore();
         });
         // 页面 scroll 事件
-        viewport.on('scroll', function () {
-            if (viewport.getHeight() >= viewport.getScrollHeight() - viewport.getScrollTop() - 50) {
-                viewMore();
-            }
-        });
+        // viewport.on('scroll', function () {
+        //     if (viewport.getHeight() >= viewport.getScrollHeight() - viewport.getScrollTop() - 50) {
+        //         viewMore();
+        //     }
+        // });
 
         function viewMore() {
             page = page + 1;
@@ -58,7 +59,7 @@ define(function (require) {
                 success: function (data) {
                     // 返回的数据用data.d获取内容
                     if (data.name === null || data.name === '') {
-                        button.html('暂无更多内容');
+                        button.find('.check-more').html('暂无更多内容');
                     } else {
                         $(ele).find('#zx_item').append(data.name);
                     }

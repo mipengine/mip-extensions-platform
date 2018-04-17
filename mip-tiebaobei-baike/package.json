@@ -1,0 +1,14 @@
+{
+    "name": "mip-tiebaobei-baike",
+    "version": "1.0.0",
+    "description": "铁甲百科",
+    "contributors": [
+        {
+            "name": "weiss",
+            "email": "630039491@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

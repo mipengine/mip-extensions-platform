@@ -18,9 +18,25 @@ define(function (require) {
     customElement.prototype.build = function () {
         var element = this.element;
         var container = element.getAttribute('container') || '.swiper-container';
+        var pag = element.getAttribute('pag') || '';
+        var pager = element.getAttribute('pager') || '.swiper-pagination-bullet';
+        var pageron = element.getAttribute('pageron') || 'swiper-pagination-bullet-active';
         var script = element.querySelector('script[type="application/json"]');
         var data = script ? JSON.parse(script.textContent.toString()) : {};
-        var swiper = new Swiper(container, data);
+        var swiper;
+        if (pag) {
+            var pager = $(pag).children(pager);
+            data.onSlideChangeEnd = function (swiper) {
+                pager.removeClass(pageron).eq(swiper.activeIndex).addClass(pageron);
+            };
+            pager.on('click', function () {
+                var self = $(this);
+                var index = self.index();
+                swiper.slideTo(index, 500, false);
+                pager.removeClass(pageron).eq(index).addClass(pageron);
+            });
+        };
+        swiper = new Swiper(container, data);
     };
 
     return customElement;
