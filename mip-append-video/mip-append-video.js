@@ -22,13 +22,14 @@ define(function (require) {
         // domAdTip.className = 'ad-tip';
         // 初始化播放器
         var video = document.createElement('video');
+        var src = (adSrc && !(platform.isIos() && platform.isQQ())) ? adSrc : targetSrc;
         // 初始化video的属性
         $(video).attr({
-            'id': 'vide',
-            'controls': '',
-            'src': '',
-            'poster': poster,
-            'preload': 'no'
+            id: 'vide',
+            controls: '',
+            src: src,
+            poster: poster,
+            preload: 'no'
         });
         //  初始化video的尺寸大小
         $(video).css('height', window.innerWidth / 16 * 9 + 'px');
@@ -45,7 +46,6 @@ define(function (require) {
         };
         // 如果有广告并且非IOS上的QQ浏览器 则播放广告
         if (adSrc && !(platform.isIos() && platform.isQQ())) {
-            video.src = adSrc;
             $element[0].appendChild(domAdTip);
             // 广告播放完毕
             video.onended = function () {
@@ -54,8 +54,9 @@ define(function (require) {
                     domAdTip.style.display = 'block';
                     video.src = adSrcEnd;
                     video.autoplay = false;
-                } else {
-					// 隐藏广告提示
+                }
+                else {
+                    // 隐藏广告提示
                     domAdTip.style.display = 'none';
                     video.src = targetSrc;
                     video.autoplay = true;
@@ -68,9 +69,9 @@ define(function (require) {
                 $('.box2, .box3').addClass('hide');
                 $('.play').addClass('hide');
             });
-        } else {
-			// 否则直接播放内容
-            video.src = targetSrc;
+        }
+        else {
+            // 否则直接播放内容
             video.onended = function () {
                 this.webkitExitFullScreen();
                 $('.box2, .box3').removeClass('hide');
@@ -84,9 +85,9 @@ define(function (require) {
         }
     };
     $('.close').click(function () {
-            $('.box2, .box3').addClass('hide');
-            $('.play').addClass('hide');
-        });
+        $('.box2, .box3').addClass('hide');
+        $('.play').addClass('hide');
+    });
     var constant = $('.changliang').html();
     var constant1 = $('.changliang1').html();
     $.ajax({

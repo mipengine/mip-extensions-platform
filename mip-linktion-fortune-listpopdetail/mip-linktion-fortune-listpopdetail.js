@@ -14,7 +14,8 @@ define(function (require) {
     customElement.prototype.firstInviewCallback = function () {
         var $el = $(this.element);
         var lists = $el.find('#lists').children('li');
-        lists.on('click', function () {
+         // var lists = $el.find('#lists').children('li');
+        lists.on('click touchend', function () {
             var listsImgSrc = $(this).children('img').attr('src');
             var listsWord = $(this).children('.card-txt').children('p').text();
             var popName = $(this).data('name');

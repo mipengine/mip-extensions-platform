@@ -15,7 +15,7 @@ mip-linktion-fortune-listpopdetail 列表信息带入弹框
   <div class=" lists-box planner-relation job-relation">
     <h3>来自成员的心声</h3>
     <ul id="lists">
-        <li class="member-card" on="tap:partner-comment.toggle tap:listpop.open" data-name="小王子1" data-position="产品经理1">
+      <li class="member-card" on="tap:partner-comment.toggle tap:listpop.open" data-name="小王子1" data-position="产品经理1">
         <mip-img src=""></mip-img>
         <div class="card-txt">
           <p>1我是个活泼可爱的星星我是个活泼可爱的星星我是个活泼可爱的星星</p>

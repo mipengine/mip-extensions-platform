@@ -1,11 +1,11 @@
 {
     "name": "mip-append-video",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "实现了一个简单的广告（非必填）+视频的播放",
     "contributors": [
         {
-	    "name": "sunruinian",
-	    "email": "1098142239@qq.com"
+            "name": "shaoshilei",
+            "email": "shaoshilei@youlai.com.cn"
         }
     ],
     "engines": {
