@@ -1,0 +1,75 @@
+/**
+ * @file mip-linkeddb-showmore样式文件
+ */
+
+mip-linkeddb-showmore {
+    .msg-text {
+        margin-top: .5rem;
+        .text {
+            margin: 0;
+            line-height: 1.5rem;
+            font-size: .85rem;
+            color: color-333;
+            overflow: hidden;
+            text-indent: 2em;
+            &.limit-height {
+                height: 4.5rem;
+            }
+            &.show {
+                height: auto;
+            }
+        }
+        .view-more {
+            display: block;
+            height: 2rem;
+            line-height: 2rem;
+            text-align: center;
+            font-size: .8rem;
+            position: relative;
+            background: #fff;
+        }
+        .view-more .icon {
+            font-weight: 700;
+            color: #999;
+        }
+        .view-more .icon.icon-down {
+            color: #658ccd;
+            font-weight: 700;
+            font-size: .95rem;
+        }
+        .view-more .icon.icon-down:before {
+            content: '';
+            display: inline-block;
+            height: 1rem;
+            font-size: 1rem;
+            vertical-align: middle;
+            color: #999;
+            width: 1rem;
+            height: .55rem;
+            background: url("https://static.linkeddb.com/m/images/icon-down.png") no-repeat center left;
+            -webkit-background-size: 100%;
+            background-size: 100%;
+        }
+        .view-more .icon.icon-up {
+            color: #658ccd;
+            font-weight: 700;
+            font-size: .95rem;
+        }
+        .view-more .icon.icon-up:before {
+            content: '';
+            display: inline-block;
+            height: 1rem;
+            font-size: 1rem;
+            vertical-align: middle;
+            color: #999;
+            width: 1rem;
+            height: .55rem;
+            background: url("https://static.linkeddb.com/m/images/icon-up.png") no-repeat center left;
+            -webkit-background-size: 100%;
+            background-size: 100%;
+        }
+        .view-more.hide {
+            display: none;
+        }
+    }
+}

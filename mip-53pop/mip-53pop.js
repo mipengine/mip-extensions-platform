@@ -53,10 +53,18 @@ define(function (require) {
             // 获取留言内容的属性值
             var popInfoValue = '';
             // bottom 不能为0，不然会覆盖遮盖曾，导致无法关闭lightbox
+            var Ptop = 0;
+            if ($(window).width() >= 640) {
+                Ptop = 150;
+            }
+            else
+            {
+                Ptop = (($(window).height() - $(window).width() * popWidth) / 2);
+            }
             util.css(self.element, {
                 'position': 'fixed',
                 'z-index': 10001,
-                'top': (($(window).height() - $(window).width() * popWidth) / 2),
+                'top': Ptop,
                 'right': 0,
                 'left': 0,
                 'transition': 'opacity 0.1s ease-in'

@@ -1,0 +1,47 @@
+/**
+ * @file mip-custom-showmore样式文件
+ */
+
+mip-custom-showmore {
+    visibility: hidden;
+    overflow: hidden;
+    transform: translateZ(0);
+    padding-bottom: 40px;
+
+    .mip-custom-showmore {
+        &-originalhtml,
+        &-btnhide,
+        &-btnshow {
+            display: none;
+        }
+    }
+    &.mip-custom-showmore-gradient {
+    }
+    &.mip-custom-showmore-gradient:after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        display: block;
+        width: 100%;
+        height: 130px;
+        background:    -moz-linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);
+        background: -webkit-linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);
+        background:         linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);
+    }
+}
+
+.mip-custom-showmore-btn {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: block;
+    text-align: center;
+    left: 0;
+    padding: 15px 0;
+    margin-bottom: -15px;
+    background: rgba(255,255,255,0.8);
+    z-index: 10;
+}
+.mip-custom-showmore-btn-unfold {
+    background: rgba(255,255,255,0);
+}

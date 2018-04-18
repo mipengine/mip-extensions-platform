@@ -1,0 +1,14 @@
+{
+    "name": "mip-linkeddb-showmore",
+    "version": "1.0.0",
+    "description": "隐藏过长的文章，点击按钮显示更多内容",
+    "contributors": [
+        {
+            "name": "liyajun",
+            "email": "340236524@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

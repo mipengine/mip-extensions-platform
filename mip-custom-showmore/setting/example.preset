@@ -1,0 +1,16 @@
+<style>
+body {
+	margin: 10px;
+	margin-bottom: 100px;
+	background: #ececec;
+}
+div {
+	padding: 40px 10px;
+	border: 1px solid #ccc;
+	margin: 8px 0;
+	background: #fff
+}
+span {
+	outline: 1px solid #ddd;
+}
+</style>
