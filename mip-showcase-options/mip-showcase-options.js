@@ -20,11 +20,11 @@ define(function (require) {
      */
     customElement.prototype.build = function () {
         var me = this;
-        me.getData();
         me.addEventAction('refresh', function() {
             var id = arguments[1];
             if (id) {
                 me.getData(id);
+                me.id = id;
             }
         });
     };
@@ -43,9 +43,12 @@ define(function (require) {
                 return res.json();
             }).then(function (data) {
                 if (!data.status && data.data) {
-                    var str = me.getHTMLStr(data.data);
-                    if (str) {
-                        me.renders(str);
+                    me.skulist = data.data.skuList || [];
+                    if (data.data.types) {
+                        var str = me.getHTMLStr(data.data.types);
+                        if (str) {
+                            me.renders(str);
+                        }
                     }
                 }
             });
@@ -58,19 +61,21 @@ define(function (require) {
      */
     customElement.prototype.getHTMLStr = function(data) {
         var html = [];
+        var scal = [];
         if (Array.isArray(data)) {
             data.forEach(function (it) {
                 var content = '';
                 var list = it.list;
-                var type = it.types || '';
+                var types = it.type || {};
+                var type = types.name || '';
                 if (Array.isArray(list)) {
                     list.forEach(function (i) {
                         var n = i || '';
                         if (it.default === n) {
-                            content += '<div class="menuitem menuitemact" data-type="'+ type +'">' + n + '</div>';
+                            content += '<div class="menuitem menuitemact" data-type="'+ types.key +'">' + n + '</div>';
                         }
                         else {
-                            content += '<div class="menuitem" data-type="'+ type +'">' + n + '</div>';
+                            content += '<div class="menuitem" data-type="'+ types.key +'">' + n + '</div>';
                         }
                     });
                 }
@@ -84,6 +89,7 @@ define(function (require) {
                 html.push(htmlCodes);
             });
         }
+        html.push('<div class="diaprice">¥<span class="diapricetext"></span></div>');
         return html.join('');
     }
 
@@ -115,15 +121,68 @@ define(function (require) {
     customElement.prototype.bindEvent = function() {
         var me = this;
         var ele = this.element;
+
+        var d = me.getOptions();
+        var goodsInfo = me.getPrice();
+
         $(ele).on('click', '.' + itemClass, function (e) {
             var $target = $(e.target);
             $target.siblings().removeClass(activeClass);
             $target.addClass(activeClass);
 
             var d = me.getOptions();
-            viewer.eventAction.execute(change, ele, d);
+            var goodsInfo = me.getPrice();
+            goodsInfo.options = d;
+            goodsInfo.itemid = me.id;
+            viewer.eventAction.execute(change, ele, goodsInfo);
         });
+
     };
+
+    customElement.prototype.getPrice = function() {
+        var pctt = {};
+        $('.menuitemact').each(function(i, it) {
+            var $target = $(it);
+            var t = $target.attr('data-type') || '';
+            if (!/^_\w+$/.test(t)) {
+                pctt[t] = $target.text();
+            }
+        });
+        var skulist = this.skulist;
+        if (Array.isArray(skulist)) {
+            var flag = false;
+            for(var i=0; i<skulist.length;i++) {
+                var it = skulist[i];
+                var spec = it.spec || {};
+                if (ojbIsEquel(spec, pctt)) {
+                    var p = it.price || 0;
+                    $(this.element).find('.diapricetext').text(p);
+                    return {
+                        id: it.id,
+                        price: p
+                    }
+                }
+            }
+        }
+        return {id: '', price: 0};
+    };
+
+    function ojbIsEquel(a, b){
+        var fKeys = Object.keys(a);
+        var sKeys = Object.keys(b);
+        if (fKeys.length !== sKeys.length) {
+            return false;
+        }
+        for (var item in a) {
+            if (!(item in b)) {
+                return false;
+            }
+            if (a[item] !== b[item]) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     /**
      * 获取选项信息

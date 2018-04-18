@@ -20,12 +20,6 @@ define(function (require) {
         if (url) {
             me.addEventAction('post', function(e) {
                 console.log(arguments);
-                $.ajax({
-                    url: url,
-                    method: method,
-                }).then(function(d) {
-                    console.log(d);
-                });
             });
         }
     };

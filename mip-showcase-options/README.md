@@ -12,8 +12,8 @@ mip-showcase-options 组件说明
 
 ### 基本用法
 ```html
-<mip-showcase-options url="http://localhost:3000/json/options">
-    自定义内容，可以嵌套其他组件
+<mip-showcase-options url="https://weecoffee-backend.oott123.com/store/1/product/options">
+    
 </mip-showcase-options>
 ```
 

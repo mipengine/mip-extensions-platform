@@ -5,6 +5,7 @@
 
 define(function (require) {
     'use strict';
+    var viewer = require('viewer');
     var Dialog = require('./dialog');
     var customElement = require('customElement').create();
 
@@ -24,9 +25,11 @@ define(function (require) {
                 content: content,
                 element: ele,
                 cancel:  function () {
-                    console.log('cancel', arg);
+                    viewer.eventAction.execute('cancel', ele, {});
                 },
                 ok: function () {
+                    // 确认订单
+                    viewer.eventAction.execute('ok', ele, {});
                     console.log('ok', arg);
                 },
                 lock: true,
