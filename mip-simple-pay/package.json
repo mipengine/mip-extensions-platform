@@ -1,0 +1,16 @@
+{
+  "name": "mip-simple-pay",
+  "version": "1.0.0",
+  "description": "MIP 支付组件",
+  "contributors": [
+    {
+      "name": "xuexb",
+      "email": "fe.xiaowu@gmail.com"
+    }
+  ],
+  "engines": {
+    "mip": ">=1.1.0"
+  },
+  "author": "xuexb <fe.xiaowu@gmail.com>",
+  "license": "MIT"
+}

@@ -218,7 +218,7 @@ define(function (require) {
 --- | ---
 请求链接 | `data-endpoint`
 请求类型 | POST
-请求参数 | `{type: 'check'}`
+请求参数 | `{type: 'check', sessionId: '会话凭证'}`
 
 未登录返回值说明：
 

@@ -1,0 +1,16 @@
+{
+  "name": "mip-xuexb-order",
+  "version": "1.0.0",
+  "description": "订单组件示例",
+  "contributors": [
+    {
+      "name": "xuexb",
+      "email": "fe.xiaowu@gmail.com"
+    }
+  ],
+  "engines": {
+    "mip": ">=1.1.0"
+  },
+  "author": "xuexb <fe.xiaowu@gmail.com>",
+  "license": "MIT"
+}
