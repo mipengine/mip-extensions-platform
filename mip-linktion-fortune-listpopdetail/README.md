@@ -15,26 +15,26 @@ mip-linktion-fortune-listpopdetail 列表信息带入弹框
   <div class=" lists-box planner-relation job-relation">
     <h3>来自成员的心声</h3>
     <ul id="lists">
-      <li class="member-card" on="tap:partner-comment.toggle tap:listpop.open" data-name="小王子1" data-position="产品经理1">
-        <mip-img src=""></mip-img>
+      <li class="member-card" on="tap:partner-comment.toggle" data-name="小王子1" data-position="产品经理1">
+        <mip-img src="" datd-src="123.png"></mip-img>
         <div class="card-txt">
           <p>1我是个活泼可爱的星星我是个活泼可爱的星星我是个活泼可爱的星星</p>
         </div>
       </li>
-      <li class="member-card" on="tap:partner-comment.toggle tap:listpop.open" data-name="小王子2" data-position="产品经理2">
-        <mip-img src=""></mip-img>
+      <li class="member-card" on="tap:partner-comment.toggle" data-name="小王子2" data-position="产品经理2">
+        <mip-img src="" datd-src="1234.png"></mip-img>
         <div class="card-txt">
           <p>2我是个活泼可爱的星星我是个活泼可爱的星星我是个活泼可爱的星星</p>
         </div>
       </li>
-      <li class="member-card" on="tap:partner-comment.toggle tap:listpop.open" data-name="小王子3" data-position="产品经理3">
-        <mip-img src=""></mip-img>
+      <li class="member-card" on="tap:partner-comment.toggle" data-name="小王子3" data-position="产品经理3">
+        <mip-img src="" datd-src="1235.png"></mip-img>
         <div class="card-txt">
           <p>3我是个活泼可爱的星星我是个活泼可爱的星星我是个活泼可爱的星星</p>
         </div>
       </li>
-      <li class="member-card" on="tap:partner-comment.toggle tap:listpop.open" data-name="小王子4" data-position="产品经理4">
-        <mip-img src=""></mip-img>
+      <li class="member-card" on="tap:partner-comment.toggle" data-name="小王子4" data-position="产品经理4">
+        <mip-img src="" datd-src="1236.png"></mip-img>
         <div class="card-txt">
           <p>4我是个活泼可爱的星星我是个活泼可爱的星星我是个活泼可爱的星星</p>
         </div>

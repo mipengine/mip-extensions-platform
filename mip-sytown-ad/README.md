@@ -10,9 +10,38 @@ mip-sytown-ad 尚一堂广告组件
 
 ## 示例
 
-只需要一个`<mip-sytown-ad>`标签，无须其他填充dom
+### 普通用法
 
-### 基本用法
 ```html
-<mip-sytown-ad></mip-sytown-ad>
+<mip-sytown-ad ad-id="详情id" type="类型"></mip-sytown-ad>
 ```
+
+### 嵌套mip-ad
+
+```html
+<mip-sytown-ad ad-id="详情id" type="类型">
+	<div class="mip-adbd">
+	    <mip-ad layout="responsive" type="ad-baidu" cproid="u1234567"></mip-ad>
+	</div>
+</mip-sytown-ad>
+```
+
+## 属性
+
+### ad-id
+
+说明：详情页的id  
+必选项：是
+类型：字符串
+
+### type
+
+说明：文章类型
+必选项：是  
+类型：数字  
+取值范围：文章：1, 视频：2, 音频：3 
+
+## 注意事项  
+
+mip-sytown-ad中嵌套mip-ad组件，默认展示mip-ad广告, 当接口返回数据后显示mip-sytown-ad广告
+

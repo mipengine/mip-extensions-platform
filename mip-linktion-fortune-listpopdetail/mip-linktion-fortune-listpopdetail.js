@@ -16,7 +16,7 @@ define(function (require) {
         var lists = $el.find('#lists').children('li');
          // var lists = $el.find('#lists').children('li');
         lists.on('click touchend', function () {
-            var listsImgSrc = $(this).children('img').attr('src');
+            var listsImgSrc = $(this).children('mip-img').attr('src');
             var listsWord = $(this).children('.card-txt').children('p').text();
             var popName = $(this).data('name');
             var popDetail = $(this).data('position');

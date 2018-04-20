@@ -49,7 +49,7 @@ define(function (require) {
                     html += o.tag_pinyin;
                     html += '.html">[详情]</a></p></div>';
                 });
-                $(ele.querySelectorAll('#' + target)).html(html);
+                $(ele.querySelectorAll('#' + target)[0]).html(html);
             }
         });
     };

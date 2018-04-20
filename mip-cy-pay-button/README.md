@@ -6,7 +6,7 @@ mip-cy-pay-button 组件用于创建订单并进行百度支付
 ----|----
 类型|业务
 支持布局|N/S
-所需脚本|https://c.mipcdn.com/static/v1/mip-cy-pay-button/mip-cy-pay-button.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-cy-pay-button/mip-cy-pay-button.js
 
 ## 示例
 
