@@ -1,7 +1,7 @@
 {
     "name": "mip-ajax-one",
-    "version": "1.0.4",
-    "description": "组件介绍",
+    "version": "1.0.5",
+    "description": "处理ajax申请回来的数据",
     "contributors": [
         {
             "name": "xujun",

@@ -11,7 +11,7 @@ define(function (require) {
     /**
      * 第一次进入可视区回调，只会执行一次
      */
-    var $ = require('jquery');
+    var $ = require('zepto');
     customElement.prototype.firstInviewCallback = function () {
         // TODO
         var ele = this.element;
@@ -26,10 +26,9 @@ define(function (require) {
             };
             $.post(url, data, function (result) {
                 response(result);
-            });
+            }, 'json');
             function response(result) {
                 var html = '';
-                console.log(result);
                 $.each(result, function (i, o) {
                     if (i % 2 === 0) {
                         html += '<div class="mainDetailModel lf">';
@@ -50,8 +49,7 @@ define(function (require) {
                     html += o.tag_pinyin;
                     html += '.html">[详情]</a></p></div>';
                 });
-                console.log(html);
-                $('#' + target).html(html);
+                $(ele.querySelectorAll('#' + target)).html(html);
             }
         });
     };
