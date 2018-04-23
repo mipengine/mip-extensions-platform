@@ -30,7 +30,7 @@ MIP 网站中熊掌号登录
     </ul>
 
     <div class="my-comment-editor">
-        当前没有登录，<button class="tap:user.login">登录</button>。
+        当前没有登录，<button on="tap:user.login">登录</button>。
     </div>
 </mip-my-comment>
 
@@ -42,7 +42,7 @@ MIP 网站中熊掌号登录
 >
     <template type="mip-mustache">
         {{#name}}hi，{{name}}，欢迎回来。{{/name}}
-        {{^name}}你没有<button class="tap:user.login">登录</button>哦。{{/name}}
+        {{^name}}你没有<button on="tap:user.login">登录</button>哦。{{/name}}
     </template>
 
     <h3>上面只是一个登录状态的渲染片段</h3>
@@ -88,7 +88,7 @@ define(function (require) {
 
 ### 实现购买按钮逻辑
 ```html
-<mip-xzh-login
+<mip-login-xzh
     id="userlogin"
     ...>
     ...
@@ -102,12 +102,12 @@ define(function (require) {
         {{/demoname}}
     </template>
     ...
-</mip-xzh-login>
+</mip-login-xzh>
 ```
 
 ### 实现个人中心
 ```html
-<mip-xzh-login
+<mip-login-xzh
     id="userlogin"
     data-autologin="true"
     ...>
@@ -126,7 +126,7 @@ define(function (require) {
         </ul>
     </template>
     ...
-</mip-xzh-login>
+</mip-login-xzh>
 ```
 
 ## 属性
