@@ -1,6 +1,6 @@
 # mip-jia-redpacket
 
-mip-jia-redpacket 组件说明
+红包领取
 
 标题|内容
 ----|----

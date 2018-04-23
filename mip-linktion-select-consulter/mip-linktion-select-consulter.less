@@ -1,0 +1,408 @@
+/**
+ * @file mip-linktion-select-consulter样式文件
+ */
+
+mip-linktion-select-consulter {
+    .planner-more {
+        width: 756px;
+        .modal-header {
+            padding: 18px 30px;
+            border-bottom: 1px solid #ededed;
+            mip-form {
+                display: inline-block;
+                .more-all {
+                    background-color: #4285f4;
+                    color: #fff;
+                    font-size: 14px;
+                    line-height: 14px;
+                    padding: 5px 8px;
+                    display: inline-block;
+                    vertical-align: middle;
+                }
+                .more-grade {
+                    display: inline-block;
+                    position: relative;
+                    .planner-grade {
+                        margin-left: 32px;
+                        vertical-align: middle;
+                        border: none;
+                        background-color: #fff;
+                        color: #666;
+                        appearance: none;
+                        -moz-appearance: none;
+                        -webkit-appearance: none;
+                    }
+                    .select-icon {
+                        width: 11px;
+                        height: 5px;
+                        display: inline-block;
+                        position: absolute;
+                        top: 8px;
+                        right: -15px;
+                    }
+                }
+
+                .more-vitality {
+                    color: #666;
+                    font-size: 14px;
+                    line-height: 14px;
+                    margin-left: 32px;
+                    vertical-align: middle;
+                    display: inline-block;
+                    padding: 3px 0;
+                }
+            }
+        }
+        .modal-body {
+            padding: 0 20px 20px 20px;
+            .financial-planner-modal {
+                padding: 0;
+                .planner-txt {
+                    .planner-label {
+                        height: 88px;
+                    }
+                }
+            }
+        }
+    }
+    .consult-box {
+        overflow: hidden;
+    }
+    .person-card {
+        border: 1px solid #ededed;
+        border-radius: 2px;
+        padding: 28px 22px 20px 22px;
+        text-align: center;
+        position: relative;
+        .recommend-icon {
+            width: 36px;
+            position: absolute;
+            top: 0;
+            right: 15%;
+        }
+        .card-box {
+            padding-bottom: 24px;
+        }
+    }
+    .person-icon {
+        margin-bottom: 8px;
+        text-align: center;
+        mip-img {
+            display: inline-block;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+    }
+    .consult-describe {
+        font-size: 12px;
+        line-height: 12px;
+        color: #fff;
+        height: 32px;
+    }
+    .person-info-txt {
+        display: none;
+    }
+    .planner-label .card-label {
+        color: #999;
+        background-color: #f4f4f4;
+        display: inline-block;
+        padding: 2px 2px;
+        font-size: 12px;
+        line-height: 22px;
+        border-radius: 2px;
+        margin-right: 4px;
+        line-height: 12px;
+    }
+    .card-but {
+        display: block;
+        .but-about {
+            color: #4285f4;
+            border: 1px solid #4285f4;
+            font-size: 14px;
+            line-height: 24px;
+            margin-right: 3px;
+            border-radius: 4px;
+            padding: 7px 31px;
+            display: inline-block;
+        }
+        .but-advisory {
+            color: #ff7e00;
+            border: 1px solid #ff7e00;
+            font-size: 14px;
+            line-height: 24px;
+            margin-left: 3px;
+            border-radius: 4px;
+            padding: 7px 31px;
+            display: inline-block;
+        }
+    }
+    .card-phone-but {
+        display: none;
+        margin-top: 10px;
+        text-align: center;
+        .but-about {
+            color: #4285f4;
+            border: 1px solid #4285f4;
+            font-size: 12px;
+            line-height: 12px;
+            margin-right: 5px;
+            border-radius: 4px;
+            padding: 8px 40px;
+            display: inline-block;
+        }
+        .but-advisory {
+            color: #ff7e00;
+            border: 1px solid #ff7e00;
+            font-size: 12px;
+            line-height: 12px;
+            margin-left: 5px;
+            border-radius: 4px;
+            padding: 8px 29px;
+            display: inline-block;
+        }
+    }
+    .slide {
+        background-color: rgba(0, 255, 0, .3);
+        padding: 5px;
+    }
+    .click-lightbox.slide-up {
+        transform: translateY(-101%);
+        transition: all  .5s cubic-bezier(0, 1, 0.5, 1);
+    }
+    .click-lightbox.slide {
+        transition: all  .5s cubic-bezier(0, 1, 0.5, 1);
+        transform: translateY(0);
+    }
+    .click-lightbox {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        top: 0;
+        background-color: rgba(66, 133, 244, 0.9);
+        text-align: center;
+        width: 100%;
+        // padding: 12px 22px;
+        z-index: 1;
+        border-radius: 2px;
+
+        // display: none;
+        .click-hidden {
+            float: right;
+            background-color: transparent;
+            color: #fff;
+            border: none;
+            font-size: 30px;
+            line-height: 10px;
+        }
+        h3 {
+            color: #fff;
+            font-size: 18px;
+            line-height: 18px;
+            margin-bottom: 16px;
+            text-align: center;
+            margin-top: 10px;
+        }
+        .consult-describe {
+            font-size: 12px;
+            line-height: 12px;
+            color: #fff;
+            height: 32px;
+        }
+        .consult-form {
+            .form-group-input {
+                border-radius: 2px;
+                border: 1px solid #fff;
+                background-color: #fff;
+                padding: 8px 16px;
+                display: inline-block;
+                margin-bottom: 10px;
+                label {
+                    font-size: 12px;
+                    line-height: 12px;
+                    color: #4285f4;
+                    display: inline-block;
+                    margin-right: 20px;
+                }
+                input {
+                    border: none;
+                    background-color: #fff;
+                    font-size: 12px;
+                    line-height: 12px;
+                    padding: 0;
+                }
+            }
+            .checkbox-head {
+                font-size: 14px;
+                line-height: 14px;
+                color: #fff;
+                margin-top: 15px;
+                margin-bottom: 24px;
+            }
+            .checkbox-flex {
+                display: flex;
+                justify-content: center;
+                margin-bottom: 24px;
+                .form-group-checkbox {
+                    margin: 0 10px;
+                    display: inline-block;
+                    label {
+                        font-size: 12px;
+                        line-height: 12px;
+                        margin-left: 2px;
+                        // color: #fff;
+                    }
+                }
+            }
+        }
+        .but-submit {
+            display: block;
+            color: #fff;
+            background-color: #ff7e00;
+            padding-top: 13px;
+            padding-bottom: 13px;
+            width: 100%;
+            border: 1px solid #ff7e00;
+            border-radius: 4px;
+        }
+    }
+    .but-submit {
+        display: block;
+        color: #fff;
+        background-color: #ff7e00;
+        padding-top: 13px;
+        padding-bottom: 13px;
+        width: 100%;
+        border: 1px solid #ff7e00;
+        border-radius: 4px;
+    }
+    .financial-planner-box {
+        border: 1px solid #ededed;
+        border-radius: 2px;
+        padding: 30px 0;
+        text-align: center;
+        position: relative;
+        .planner-head {
+            display: inline-block;
+            margin-bottom: 9px;
+            mip-img {
+                width: 64px;
+                height: 64px;
+                overflow: hidden;
+                border-radius: 50%;
+            }
+        }
+        .planner-txt {
+            display: block;
+            .planner-name {
+                font-size: 18px;
+                line-height: 18px;
+                color: #333;
+                margin-bottom: 5px;
+            }
+            .planner-post {
+                font-size: 12px;
+                line-height: 12px;
+                color: #999;
+                margin-bottom: 20px;
+            }
+
+            .planner-label {
+                height: 100px;
+                .txt-major {
+                    display: block;
+                    font-size: 12px;
+                    line-height: 12px;
+                    color: #333;
+                    margin-top: 0;
+                    margin-bottom: 10px;
+                }
+            }
+        }
+        .planner-submit {
+            font-size: 14px;
+            line-height: 14px;
+            color: #4285f4;
+            padding: 12px 57px;
+            border: 1px solid #4285f4;
+            border-radius: 4px;
+            position: absolute;
+            background-color: #fff;
+            bottom: 30px;
+            left: 36px;
+        }
+        .planner-submit-about {
+            font-size: 14px;
+            line-height: 14px;
+            padding: 13px 18px;
+            color: #4285f4;
+            border: 1px solid #4285f4;
+            border-radius: 4px;
+            background-color: #fff;
+            display: inline-block;
+        }
+        .planner-submit-consult {
+            display: inline-block;
+            font-size: 14px;
+            line-height: 14px;
+            padding: 13px 18px;
+            color: #ff7e00;
+            border: 1px solid #ff7e00;
+            border-radius: 4px;
+            background-color: #fff;
+            margin-left: 6px;
+        }
+        .planner-submit-consult2 {
+            display: none;
+        }
+        .planner-submit-consult3 {
+            display: inline-block;
+            font-size: 14px;
+            line-height: 14px;
+            padding: 13px 18px;
+            color: #ff7e00;
+            border: 1px solid #ff7e00;
+            border-radius: 4px;
+            background-color: #fff;
+            margin-left: 6px;
+        }
+    }
+    .modal-body {
+        background-color: #fff;
+    }
+    .modal-blue-top {
+        .modal-header {
+            background-color: #4285f4;
+            padding: 20px 32px;
+            line-height: 18px;
+            p {
+                font-size: 18px;
+                line-height: 18px;
+                color: #fff;
+                display: inline-block;
+                font-family: "SourceHanSansCN-Light";
+            }
+            .close {
+                margin-top: -1px;
+                color: #fff;
+                opacity: 1;
+            }
+        }
+    }
+    @media (max-width: 450px) {
+        .financial-planner-box {
+            .card-but {
+                display: none;
+            }
+            .card-phone-but {
+                display: block;
+                .planner-submit-consult2 {
+                    display: inline-block;
+                }
+            }
+        }
+
+    }
+}
+

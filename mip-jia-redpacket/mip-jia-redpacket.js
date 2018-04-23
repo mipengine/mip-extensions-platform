@@ -293,7 +293,7 @@ define(function (require) {
                     }
                     else {
                         reject(data);
-                        tipMask({text: res.msg});
+                        tipMask({text: res.info.msg});
                     }
                 }
                 else {
