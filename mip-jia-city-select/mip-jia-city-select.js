@@ -215,7 +215,8 @@ define(function (require) {
         }, duration);
     }
 
-    customElement.prototype.firstInviewCallback = function () {
+    // 页面渲染后就处理,获取城市地理位置
+    customElement.prototype.build = function () {
         var thisObj = this.element;
         var elemObj = thisObj.querySelector('script[type="application/json"]');
         try {

@@ -1,6 +1,6 @@
 # mip-jia-city-select
 
-mip-jia-city-select 组件说明
+齐家城市选择列表
 
 标题|内容
 ----|----
