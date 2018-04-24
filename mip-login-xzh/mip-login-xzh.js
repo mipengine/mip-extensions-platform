@@ -4,11 +4,13 @@
  */
 
 /* eslint-disable fecs-camelcase */
+/* global MIP */
 define(function (require) {
     'use strict';
 
     var util = require('./util');
     var platform = require('util').platform;
+    var fn = require('util').fn;
     var mustache = require('mip-mustache/mustache');
     var viewer = require('viewer');
     var hash = require('hash');
@@ -23,7 +25,7 @@ define(function (require) {
          *
          * @type {Object}
          */
-        this.userinfo = null;
+        this.userInfo = null;
 
         /**
          * 会话标识
@@ -56,18 +58,23 @@ define(function (require) {
 
     /**
      * 开始处理页面数据
+     *
+     * @return {undefined}
      */
     Login.prototype.build = function () {
         var self = this;
+
+        // 如果是自动登录，在检查完用户信息后没有登录时要求立即登录
         if (self.config.autologin) {
-            return this.getUserinfo().then(function () {
+            return this.getUserInfo().then(function () {
                 if (!self.isLogin) {
                     self.login();
                 }
             });
         }
+
         this.render();
-        this.getUserinfo();
+        this.getUserInfo();
     };
 
     /**
@@ -109,6 +116,9 @@ define(function (require) {
             }
             else {
                 self.loginHandle('logout', false);
+
+                // 设置数据
+                self.setData();
             }
         }).catch(function (data) {
             // 清空 sessionId
@@ -129,7 +139,7 @@ define(function (require) {
         var self = this;
 
         self.isLogin = isLogin;
-        self.userinfo = data || null;
+        self.userInfo = data || null;
         self.trigger(name);
         self.render();
     };
@@ -169,12 +179,12 @@ define(function (require) {
         // 否则跳转链接
         var sourceUrl = util.getSourceUrl();
         window.top.location.href = util.getOauthUrl({
-            'client_id': self.config.clientId,
-            'state': encodeURIComponent(JSON.stringify({
+            client_id: self.config.clientId,
+            state: encodeURIComponent(JSON.stringify({
                 url: sourceUrl,
                 r: Date.now()
             })),
-            'redirect_uri': encodeURIComponent(sourceUrl)
+            redirect_uri: encodeURIComponent(sourceUrl)
         });
     };
 
@@ -185,8 +195,10 @@ define(function (require) {
      * @param  {Object} event 事件对象
      */
     Login.prototype.trigger = function (name) {
+        // 大小写为了兼容老版本
         var event = {
-            userinfo: this.userinfo,
+            userinfo: this.userInfo,
+            userInfo: this.userInfo,
             sessionId: this.sessionId
         };
         viewer.eventAction.execute(name, this.element, event);
@@ -206,12 +218,12 @@ define(function (require) {
      */
     Login.prototype.render = function () {
         var self = this;
-        var data = self.userinfo || {};
+        var data = self.userInfo || {};
         var elements = self.element.querySelectorAll('template[type="mip-mustache"]');
 
         [].slice.call(elements).forEach(function (el) {
             var html = mustache.render(el.innerHTML, data).trim();
-            self.getElementByTemplat(el).innerHTML = html;
+            self.getElementByTemplate(el).innerHTML = html;
         });
     };
 
@@ -221,7 +233,7 @@ define(function (require) {
      * @param  {HTMLElement} el 模板元素
      * @return {HTMLElement}
      */
-    Login.prototype.getElementByTemplat = function (el) {
+    Login.prototype.getElementByTemplate = function (el) {
         if (el.dataset.id && el.nextElementSibling && el.nextElementSibling.id === el.dataset.id) {
             return el.nextElementSibling;
         }
@@ -245,9 +257,34 @@ define(function (require) {
     };
 
     /**
-     * 获取用户信息
+     * 配合 mip-bind 设置数据
      */
-    Login.prototype.getUserinfo = function () {
+    Login.prototype.setData = function () {
+        if ('function' !== typeof MIP.setData) {
+            return;
+        }
+
+        // 设置源数据
+        var data = {};
+        data[this.element.id] = {
+            isLogin: this.isLogin,
+            sessionId: this.sessionId
+        };
+
+        // fix 因为直接使用 null 时 mip-bind 报错
+        if (this.userInfo) {
+            data[this.element.id].userInfo = this.userInfo;
+        }
+
+        MIP.setData(data);
+    };
+
+    /**
+     * 获取用户信息
+     *
+     * @return {Promise} 用户信息
+     */
+    Login.prototype.getUserInfo = function () {
         var self = this;
         var data = {
             type: 'check'
@@ -287,7 +324,7 @@ define(function (require) {
             }
 
             if (data.type === 'login') {
-                if (res.status === 0 && res.data) {
+                if (res.status === 0 && fn.isPlainObject(res.data)) {
                     self.loginHandle('login', true, res.data);
                 }
                 else {
@@ -297,6 +334,9 @@ define(function (require) {
             else if (res.status === 0 && res.data) {
                 self.loginHandle('login', true, res.data);
             }
+
+            // 设置数据
+            self.setData();
         }).catch(function (err) {
             if (data.type === 'login') {
                 self.loginHandle('error', false);
@@ -309,24 +349,31 @@ define(function (require) {
      * 检查配置
      */
     Login.prototype.checkConfig = function () {
-        var config = this.config;
+        var self = this;
+        var config = self.config;
         var hasError = false;
 
         if (!config.clientId) {
-            this.error('组件必选属性名 data-client-id 为空');
+            self.error('组件必选属性名 data-client-id 为空');
             hasError = true;
         }
         if (!config.endpoint) {
-            this.error('组件必选属性名 data-endpoint 为空');
+            self.error('组件必选属性名 data-endpoint 为空');
             hasError = true;
         }
         else if (!/^(https:)?\/\//.test(config.endpoint)) {
-            this.error('组件必选属性名 data-endpoint 必须以 https:// 或者 // 开头');
+            self.error('组件必选属性名 data-endpoint 必须以 https:// 或者 // 开头');
+            hasError = true;
+        }
+
+        // 如果有 mip-bind 则必须有组件id
+        if ('function' === typeof MIP.setData && !self.element.id) {
+            self.error('和 mip-bind 配合使用必须设置登录组件 id');
             hasError = true;
         }
 
         if (hasError) {
-            throw new TypeError('[mip-login-xzh] 组件必选属性检查失败');
+            throw new TypeError('[mip-login-xzh] 组件参数检查失败');
         }
     };
 

@@ -75,7 +75,7 @@ define(function (require) {
             // 这里可以输出登录之后的数据
 
             // 获取用户信息
-            event.userinfo;
+            event.userInfo;
 
             // 后端交互会话标识
             event.sessionId;
@@ -127,6 +127,54 @@ define(function (require) {
     </template>
     ...
 </mip-login-xzh>
+```
+
+### 和 mip-bind 配合使用
+
+```html
+<mip-data>
+    <script type="application/json">
+    {
+        "user": {}
+    }
+    </script>
+</mip-data>
+
+<p>
+    是否登录：
+        <input m-bind:checked="user.isLogin" type="checkbox">
+        <span m-text="String(user.isLogin || false)"></span>
+</p>
+<p>
+    会话标识：<span m-text="user.sessionId || '空'"></span>
+</p>
+<p>
+    头像地址：<span m-text="user.userInfo.avatar || '空'"></span>
+</p>
+
+<mip-login-xzh
+    id="user"
+    ...></mip-login-xzh>
+
+<script src="https://c.mipcdn.com/static/v1/mip-bind/mip-bind.js"></script>
+<script src="https://c.mipcdn.com/static/v1/mip-mustache/mip-mustache.js"></script>
+<script src="https://c.mipcdn.com/static/v1/mip-login-xzh/mip-login-xzh.js"></script>
+```
+
+和 mip-bind 配合使用注意：
+
+1. `mip-bind.js` 必须在登录组件前引用
+1. 必须设置登录组件的 `id` 属性
+2. 必须在 `<mip-data>` 配置数据中设置一个以组件 `id` 为键名（`key`）的对象数据
+3. 在请求登录（`type=login`）、检查是否登录（`type=check`）、退出（`type=logout`）成功时，会调用 `MIP.setData` 设置数据，数据结构为：
+```json
+{
+    "组件id": {
+        "isLogin": Boolean,
+        "userInfo": Response.data,
+        "sessionId": String
+    }
+}
 ```
 
 ## 属性
@@ -237,10 +285,13 @@ define(function (require) {
     "status": 0,
     "sessionId": "会话凭证，必须返回",
     "data": {
-        "name": "mipengine"
+        "name": "mipengine",
+        "key2": "value2"
     }
 }
 ```
+
+注意：上面 `data.name` 只是示例，具体什么数据请前、后端统一约定。
 
 #### 熊掌号登录
 
@@ -261,7 +312,8 @@ define(function (require) {
     "status": 0,
     "sessionId": "会话凭证，必须返回",
     "data": {
-        "name": "mipengine"
+        "name": "mipengine",
+        "key2": "value2"
     }
 }
 ```
