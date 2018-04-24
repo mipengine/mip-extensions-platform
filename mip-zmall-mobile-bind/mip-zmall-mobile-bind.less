@@ -1,0 +1,126 @@
+/**
+ * @file mip-zmall-mobile-bind样式文件
+ */
+
+mip-zmall-mobile-bind {
+    .mobile-bind-layer {
+        display: none;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        z-index: 10;
+        width: 7.6rem;
+        padding: .2rem .8rem .8rem;
+        margin: -3.8rem 0 0 -4.6rem;
+        background-color: #fff;
+        border-radius: .36rem;
+    }
+    .mobile-bind-layer.visible {
+        display: block;
+    }
+    .mobile-bind-close {
+        position: absolute;
+        right: 0;
+        top: .2rem;
+        width: 2.02rem;
+        height: 1.7rem;
+        background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAApCAYAAABDV7v1AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAYNJREFUeNrM2TtOw0AQxvFh8BXMAWhzgpT0VEgUmCMAFdAgSloO4AOAxOMMUFjiKhRcIZH4VmzQyvJjHzPeHemfwlopv8KJxvJe27aEqdADekQ/VMbU6Brdo01lkc/oFB2jowKwBvmJVugQNYyPNTqxB1b2QF0IkqxtbaAdOkfbArB95NbaOrYXXgrAjiGNjdg5mBM7iexDc2FnkUPQpbFeyDHoUlhv5BRUGxuEnINqYYORPlBpbBTSFyqFjUaGQFOxSchQaCw2GRkDDcWKIGOhvlgxZAp0DiuK3G32lIg184T2HSxJIiWgY1hykA16Tf0SJpkx2MuB6xcSSEloPQK9klpkWAjZ/+GILzKsgGw0tq5KAenek/1/g+hHcVZEiq6IrIQUx7IiUhTLykgxLC+AFMHyQshkLC+ITMJOQQ8UkNFYnkB+KCGjsJwJGYzljMggLGdGemO5AKQXdge9yYycwt660Dv0nhk5hH2ztv99dIPO6O8NSUf5x2C/0Ze10a8AAwAEReAHghCbOgAAAABJRU5ErkJggg==) no-repeat center;
+        background-size: .42rem .41rem;
+        -webkit-background-size: .42rem .41rem;
+    }
+    .mobile-bind-head {
+        height: 1.7rem;
+        line-height: 1.7rem;
+        font-size: .54rem;
+        color: #333;
+    }
+    .mobile-bind-input {
+        height: 1.3rem;
+        margin-bottom: .5rem;
+        border: 1px solid #d5d6d5;
+        border-radius: .08rem;
+    }
+    .mobile-bind-input-number {
+        display: block;
+        width: 100%;
+        height: 1.3rem;
+        padding: .3rem;
+        line-height: .7rem;
+        font-size: .42rem;
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        border: 0 none;
+        outline: 0 none;
+    }
+    .mobile-bind-input-code {
+        width: 4.9rem;
+        height: 1.3rem;
+        padding: .3rem;
+        line-height: .7rem;
+        font-size: .42rem;
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        border: 0 none;
+        outline: 0 none;
+    }
+    .mobile-bind-code {
+        position: relative;
+    }
+    .mobile-bind-code::before {
+        content: '';
+        position: absolute;
+        z-index: 2;
+        left: 0;
+        top: .2rem;
+        width: .1rem;
+        height: 9rem;
+        -webkit-transform: scale(.1);
+        transform: scale(.1);
+        -webkit-transform-origin: left top;
+        transform-origin: left top;
+        background: #d5d6d5;
+    }
+    .mobile-bind-code-get {
+        display: block;
+        width: 100%;
+        height: 1.3rem;
+        line-height: 1.3rem;
+        text-align: center;
+        font-size: .42rem;
+        color: #f60;
+    }
+    .mobile-bind-code-get.sending {
+        color: #999;
+    }
+    .mobile-bind-button {
+        display: block;
+        width: 100%;
+        height: 1.32rem;
+        line-height: 1.32rem;
+        text-align: center;
+        font-size: .54rem;
+        color: #fff;
+        outline: 0 none;
+        background-color: #aaa;
+        border-radius: .08rem;
+        border: 0 none;
+    }
+    .mobile-bind-button.enable {
+        background-color: #f60;
+    }
+    .mobile-bind-mask {
+        position: absolute;
+        z-index: 1;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        opacity: 0;
+        -webkit-transition: opacity .3s ease-in-out;
+        transition: opacity .3s ease-in-out;
+    }
+    .mobile-bind-layer.visible + .mobile-bind-mask {
+        opacity: .4;
+    }
+}

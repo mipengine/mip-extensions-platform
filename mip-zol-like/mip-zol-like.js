@@ -93,13 +93,21 @@ define(function (require) {
         var isNeedCallback = (data.callback && data.callback === 'true');
         var likeElm = ele.querySelector('._js_mip_like');
         var numElm = likeElm.querySelector('em');
+        var tpl = data.tpl;
+        var text = data.text;
 
         if (status !== null && status === '1') {
             likeElm.classList.add(doneClass);
         }
 
         var changeLikeNum = function () {
-            var voteNum = numElm.innerText || numElm.textContent;
+            var voteNum = '';
+            if (tpl) {
+                voteNum = likeElm.innerText || numElm.textContent;
+            }
+            else {
+                voteNum = numElm && (numElm.innerText || numElm.textContent);
+            }
             voteNum = voteNum.match(/\d+/);
             voteNum = voteNum ? parseInt(voteNum[0], 10) : 0;
             if (likeElm.classList.contains(doneClass)) {
@@ -107,14 +115,25 @@ define(function (require) {
                     return;
                 }
                 var num = (voteNum - 1 > 0) ? voteNum - 1 : 0;
-                numElm.innerHTML = num ? '(' + num + ')' : '';
+                if (tpl) {
+                    likeElm.innerHTML = num ? tpl.replace('{NUM}', num) : text;
+                }
+                else {
+                    numElm && (numElm.innerHTML = num ? '(' + num + ')' : '');
+                }
+
                 // 改变状态
                 likeElm.classList.remove(doneClass);
                 ele.setAttribute('data-status', '0');
             }
             else {
-                var numStr = '(' + (voteNum + 1) + ')';
-                numElm.innerHTML = numStr;
+                if (tpl) {
+                    likeElm.innerHTML = tpl.replace('{NUM}', (voteNum + 1));
+                }
+                else {
+                    var numStr = '(' + (voteNum + 1) + ')';
+                    numElm && (numElm.innerHTML = numStr);
+                }
                 // 改变状态
                 likeElm.classList.add(doneClass);
                 ele.setAttribute('data-status', '1');

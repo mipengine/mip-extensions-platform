@@ -90,6 +90,9 @@ define(function (require) {
         // 设置获取数据的 url
         self.url = getQueryUrl(src, self.params.query);
 
+        // 是否从第一页开始
+        self.params.isFirstPage = (self.params.query.page === 1);
+
         // 如果需要token
         if (isNeedToken) {
             // token 获取
@@ -167,7 +170,7 @@ define(function (require) {
     /**
      * build 方法，元素插入到文档时执行，仅会执行一次
      */
-    customElement.prototype.build = function () {
+    customElement.prototype.firstInviewCallback = function () {
         // 参数初始化
         init.call(this);
 
@@ -195,7 +198,6 @@ define(function (require) {
                                 that.parentNode.classList.add('load-over');
                                 loadOverText.innerHTML = self.params.over;
                             }
-
                         });
                     }
 
@@ -247,15 +249,21 @@ define(function (require) {
         var element = self.element;
         var loadBox = element.querySelector('.load-more-box');
         var loadOverText = element.querySelector('.load-over-text');
-        var isLoadOver = loadBox.classList.contains('load-over');
+        var isLoadOver = loadBox.classList.contains('load-over') || loadBox.classList.contains('load-empty');
+        var loadEmptyText = element.querySelector('.load-empty-text');
 
         if (inViewport && self.params.type === 'scroll' && !isLoadOver) {
-            // 当加载更多元素进入窗口可视区的时候进行加载
             element.isLoading = false;
+            // 当加载更多元素进入窗口可视区的时候进行加载
             if (!element.isLoading) {
                 element.isLoading = true;
                 load.call(self, function (data) {
-                    if (data.isEnd) {
+                    if (!data.items.length && data.page === 1) {
+                        loadBox.classList.remove('loading');
+                        loadBox.classList.add('load-empty');
+                        loadEmptyText.innerHTML = self.params.empty;
+                    }
+                    else if (data.isEnd) {
                         loadBox.classList.remove('loading');
                         loadBox.classList.add('load-over');
                         loadOverText.innerHTML = self.params.over;

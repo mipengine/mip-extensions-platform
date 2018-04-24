@@ -1,0 +1,14 @@
+{
+    "name": "mip-zmall-countdown",
+    "version": "1.0.0",
+    "description": "倒计时组件",
+    "contributors": [
+        {
+            "name": "wenxudong",
+            "email": "bordertop@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

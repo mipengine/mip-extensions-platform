@@ -17,6 +17,7 @@ define(function (require) {
         var posterSrc = $element.attr('poster-src');
         var autoPlay = $element.attr('auto-play');
         var playBtn = $element.find('.video-play-button');
+        var replayBtn = $element.find('.video-replay-button');
         var curIndex;
         //  初始化播放器
         var video = document.createElement('video');
@@ -97,7 +98,7 @@ define(function (require) {
             bindClickNewVideo();
         }
         function replayEvent() {
-            playBtn.on('click', function () {
+            replayBtn.on('click', function () {
                 $element.find('.rec-video-wrapper').hide();
                 $element.find('.video-mask').hide();
                 if (platform.isIos() && platform.isUc()) {

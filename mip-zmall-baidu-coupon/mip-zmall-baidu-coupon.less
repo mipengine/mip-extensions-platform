@@ -1,0 +1,206 @@
+/**
+ * @file mip-zmall-baidu-coupon样式文件
+ */
+
+mip-zmall-baidu-coupon {
+    .receive-coupon-success {
+        display: none;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        z-index: 10;
+        width: 8.8rem;
+        padding: .3rem .81rem .72rem;
+        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        background-color: #fff;
+        border-radius: .36rem;
+    }
+    .receive-coupon-success.visible {
+        display: block;
+    }
+
+    .receive-coupon-header {
+        position: relative;
+        height: 1.52rem;
+        line-height: 1.52rem;
+        font-size: .54rem;
+        color: #333;
+    }
+    .receive-coupon-header::after {
+        content: '';
+        position: absolute;
+        z-index: 2;
+        left: 0;
+        bottom: 0;
+        width: 1000%;
+        height: .1rem;
+        -webkit-transform: scale(.1);
+        transform: scale(.1);
+        -webkit-transform-origin: left bottom;
+        transform-origin: left bottom;
+        background: #d5d5d5;
+    }
+    .receive-coupon-close {
+        position: absolute;
+        z-index: 5;
+        right: .3rem;
+        top: .24rem;
+        width: 1.52rem;
+        height: 1.52rem;
+        background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAApCAYAAABDV7v1AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAYNJREFUeNrM2TtOw0AQxvFh8BXMAWhzgpT0VEgUmCMAFdAgSloO4AOAxOMMUFjiKhRcIZH4VmzQyvJjHzPeHemfwlopv8KJxvJe27aEqdADekQ/VMbU6Brdo01lkc/oFB2jowKwBvmJVugQNYyPNTqxB1b2QF0IkqxtbaAdOkfbArB95NbaOrYXXgrAjiGNjdg5mBM7iexDc2FnkUPQpbFeyDHoUlhv5BRUGxuEnINqYYORPlBpbBTSFyqFjUaGQFOxSchQaCw2GRkDDcWKIGOhvlgxZAp0DiuK3G32lIg184T2HSxJIiWgY1hykA16Tf0SJpkx2MuB6xcSSEloPQK9klpkWAjZ/+GILzKsgGw0tq5KAenek/1/g+hHcVZEiq6IrIQUx7IiUhTLykgxLC+AFMHyQshkLC+ITMJOQQ8UkNFYnkB+KCGjsJwJGYzljMggLGdGemO5AKQXdge9yYycwt660Dv0nhk5hH2ztv99dIPO6O8NSUf5x2C/0Ze10a8AAwAEReAHghCbOgAAAABJRU5ErkJggg==) no-repeat center center;
+        background-size: .42rem .41rem;
+        -webkit-background-size: .42rem .41rem;
+    }
+    .receive-coupon-code {
+        height: 1.14rem;
+        line-height: 1.14rem;
+        font-size: .42rem;
+        padding-top: .12rem;
+        color: #333;
+    }
+    .receive-coupon-qrcode {
+        width: 3.98rem;
+        height: 3.98rem;
+        margin: 0 auto;
+        position: relative;
+    }
+    .receive-coupon-qrcode::after {
+        content: '';
+        position: absolute;
+        z-index: 9;
+        left: 0;
+        top: 0;
+        width: 1000%;
+        height: 1000%;
+        border: .1rem solid #e5e5e5;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        -webkit-transform: scale(.1);
+        transform: scale(.1);
+        -webkit-transform-origin: left top;
+        transform-origin: left top;
+    }
+    .receive-coupon-qrcode img {
+        width: 100%!important;
+        height: 100%!important;
+    }
+    .receive-coupon-qrcode-tip {
+        height: 1.1rem;
+        line-height: 1.1rem;
+        font-size: .36rem;
+        color: #999;
+    }
+    .receive-coupon-arrive {
+        margin-top: .42rem;
+        position: relative;
+        padding-left: 1.69rem;
+        dt {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 1.4rem;
+            height: .52rem;
+            line-height: .56rem;
+            text-align: center;
+            overflow: hidden;
+            background-color: #ffeee2;
+            font-size: .36rem;
+            color: #f60;
+            border-radius: .02rem;
+        }
+        dt::after,
+        dt::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: .12rem;
+            height: .12rem;
+            margin-top: -.06rem;
+            background-color: #fff;
+            border-radius: 50%;
+        }
+        dt::after {
+            left: -.06rem;
+        }
+        dt::before {
+            right: -.06rem;
+        }
+        dd {
+            margin-bottom: .06rem;
+            line-height: .54rem;
+            font-size: .36rem;
+            color: #666;
+            word-break: break-all;
+        }
+        dd:last-child {
+            margin-bottom: 0;
+        }
+    }
+    .receive-coupon-item {
+        margin-top: .42rem;
+        height: 2.7rem;
+        background-color: #ffeee2;
+        border-radius: .08rem;
+    }
+    .receive-coupon-worth {
+        width: 2.56rem;
+        padding-right: .3rem;
+        text-align: center;
+        background: url('//icon.zol-img.com.cn/newshop/mip/coupon.png') no-repeat right top;
+        background-size: .3rem 2.7rem;
+        text-align: center;
+    }
+    .receive-coupon-explain {
+        padding: 0 .2rem 0 .3rem;
+    }
+    .receive-coupon-price {
+        height: 1.34rem;
+        margin-top: .32rem;
+        line-height: 1.34rem;
+        font-size: .78rem;
+        color: #f60;
+    }
+    .receive-coupon-condition {
+        height: .56rem;
+        line-height: .56rem;
+        font-size: .39rem;
+        color: #f60;
+    }
+    .receive-coupon-type {
+        height: 1.34rem;
+        line-height: 1.34rem;
+        margin-top: .32rem;
+        font-size: .6rem;
+        color: #f60;
+        font-weight: bold;
+    }
+    .receive-coupon-text {
+        height: .56rem;
+        line-height: .56rem;
+        font-size: .39rem;
+        color: #f60;
+    }
+    .receive-coupon-tip {
+        height: .52rem;
+        line-height: .52rem;
+        margin-top: .42rem;
+        font-size: .36rem;
+        color: #999;
+    }
+    .receive-coupon-mask {
+        position: absolute;
+        z-index: 1;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        opacity: 0;
+        -webkit-transition: opacity .3s ease-in-out;
+        transition: opacity .3s ease-in-out;
+    }
+    .receive-coupon-success.visible + .receive-coupon-mask {
+        opacity: .4;
+    }
+}

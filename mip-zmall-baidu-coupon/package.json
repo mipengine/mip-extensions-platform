@@ -1,0 +1,14 @@
+{
+    "name": "mip-zmall-baidu-coupon",
+    "version": "1.0.0",
+    "description": "百度优惠券领取成功",
+    "contributors": [
+        {
+            "name": "liuxg",
+            "email": "liu.xianggui@zol.com.cn"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

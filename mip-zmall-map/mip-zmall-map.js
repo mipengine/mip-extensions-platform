@@ -193,5 +193,29 @@ define(function (require) {
         });
     };
 
+    customElement.prototype.attributeChangedCallback = function (attributeName, oldValue, newValue) {
+        if (newValue && oldValue !== newValue) {
+            var self = this;
+            var element = self.element;
+            var type = element.getAttribute('data-type');
+            setTimeout(function () {
+                var zMap = new ZMap(element);
+                switch (type) {
+                    case 'map':
+                        zMap.map();
+                        zMap.skipLink();
+                        break;
+                    case 'distance':
+                    case 'distance-fixed':
+                        zMap.distance();
+                        zMap.skipLink();
+                        break;
+                    default:
+                        break;
+                }
+            }, 400);
+        }
+    };
+
     return customElement;
 });

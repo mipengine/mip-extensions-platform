@@ -1,0 +1,14 @@
+{
+    "name": "mip-gm-ad",
+    "version": "1.0.0",
+    "description": "统计更美问答页面banner点击量",
+    "contributors": [
+        {
+            "name": "liuqingtao",
+            "email": "liuqingtao@igengmei.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

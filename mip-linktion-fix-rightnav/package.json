@@ -1,0 +1,14 @@
+{
+    "name": "mip-linktion-fix-rightnav",
+    "version": "1.0.0",
+    "description": "页面右下角固定导航并用ajax提交反馈数据",
+    "contributors": [
+        {
+            "name": "tinng",
+            "email": "tinng@linktion.cn"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

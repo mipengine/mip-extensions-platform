@@ -68,11 +68,17 @@ mip-zol-loadmore {
         }
     }
     .loading .load-status,
+    .load-empty .load-status,
     .load-over .load-status {
         display: block;
     }
     .load-over .load-anim-icon,
     .load-over .load-loading-text {
+        display: none;
+    }
+    .load-empty .load-anim-icon,
+    .load-empty .load-loading-text,
+    .load-empty .load-over-text {
         display: none;
     }
 }

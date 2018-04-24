@@ -1,0 +1,14 @@
+{
+    "name": "mip-cy-follow-doctor",
+    "version": "1.0.0",
+    "description": "组件介绍",
+    "contributors": [
+        {
+            "name": "春雨前端开发组",
+            "email": "web@chunyu.me"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

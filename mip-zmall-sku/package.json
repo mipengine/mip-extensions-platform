@@ -1,0 +1,14 @@
+{
+    "name": "mip-zmall-sku",
+    "version": "1.0.0",
+    "description": "sku 选择框",
+    "contributors": [
+        {
+            "name": "liuxg",
+            "email": "liu.xianggui@zol.com.cn"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

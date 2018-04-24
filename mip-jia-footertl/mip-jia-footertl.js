@@ -367,7 +367,7 @@ define(function (require) {
                             zxbjPage.method.shejiAajx(data, ele, data.skipto[0]);
                         }
                         else if ($(this).parents('.fixed-footer-pop-box').hasClass('mxd')) {
-                            zxbjPage.method.shejiAajx(data, ele, data.skipto[2]);
+                            zxbjPage.method.mxdAajx(data, ele, data.skipto[2]);
                         }
                         else if ($(this).parents('.fixed-footer-pop-box').hasClass('qjdz')) {
                             zxbjPage.method.shejiAajx(data, ele, data.skipto[3]);
@@ -403,6 +403,45 @@ define(function (require) {
                 $.ajax({
                     type: 'get',
                     url: 'https://mip.m.jia.com/new_zhuangxiu/AjaxSaveNewShopApplyNoCodeJsonp',
+                    data: applyData,
+                    dataType: 'jsonp',
+                    success: function (data) {
+                        $this.find('.ask-zxbj-loading').hide();
+                        if (data.status === 200) {
+                            window.top.location.href = url;
+                        }
+                        else {
+                            tipMask(data.info);
+                        }
+                    },
+                    complete: function () {
+                        $this.find('.ask-zxbj-loading').hide();
+                    },
+                    error: function () {
+                        $this.find('.ask-zxbj-loading').hide();
+                        tipMask('系统繁忙，请稍后再试！');
+                    }
+                });
+            },
+
+            mxdAajx: function (data, ele, url) {
+                var $this = $(ele);
+                var mobile = $.trim($(ele).find('.form-input.phone').val());
+                var area = $.trim($(ele).find('.form-input.area').val()) || '80';
+                var $city = JSON.parse(storage.get('city'));
+                var applyData = {
+                    city: $city['area_py'],
+                    mobile: mobileEncrypt(mobile, 'zx'),
+                    memo: area + '平方'
+                };
+                applyData['areaflag_name'] = $city['area_cn'];
+                applyData['inversion_point'] = '免息贷MIP站';
+                applyData['username'] = '免息贷';
+                applyData['source'] = data.source;
+                applyData['selfUrl'] = data.self_url;
+                $.ajax({
+                    type: 'get',
+                    url: 'https://m.jia.com/JiaZhuangxiuTouFang/ajaxDaikuanApply',
                     data: applyData,
                     dataType: 'jsonp',
                     success: function (data) {
