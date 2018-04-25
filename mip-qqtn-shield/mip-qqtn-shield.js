@@ -19,9 +19,9 @@ define(function (require) {
             return res.json();
         }).then(function (data) {
             var shieldOk = data.shieldOk;
+            var province = data.province;
+            var city = data.city;
             if (shieldOk === 'true') {
-                var province = data.province;
-                var city = data.city;
                 var koCity = data.cityArray;
                 if ($.inArray(city, koCity) !== -1) {
                     var arrayTextSize = data.mgcArrayText.length;
@@ -63,6 +63,18 @@ define(function (require) {
                                 }
                             }
                         }
+                    }
+                }
+            }
+            var lowerOk = data.lowerOk;
+            if (lowerOk === 'true') {
+                var lowerkoCity = data.cityLower;
+                if ($.inArray(city, lowerkoCity) !== -1) {
+                    var lowerurlSize = data.lowerurl.length;
+                    if ($.inArray(pkurlm, data.lowerurl) !== -1) {
+                        $(ele).find('.m-down-last').html('<p class="m-xiajia">该应用已下架</p>');
+                        $(ele).find('.m-xiajia').css({'background': '#ccc', 'color': '#fff'});
+                        $('title').html($('title').html().replace(/下载/g, ''));
                     }
                 }
             }

@@ -1,19 +1,17 @@
 # mip-qqtn-shield
 
-mip-qqtn-shield 
+mip-qqtn-shield 根据下载地址来进行判断，规则1：假如包含A类地址，更换页面内容。规则2：包含B地址，将该应用进行下架处理
 
 标题|内容
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/static/v1/mip-qqtn-shield/mip-qqtn-shield.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-qqtn-shield/mip-qqtn-shield.js
 ## 示例
 
 ### 基本用法
+
 ```html
-
-
-
 <mip-ychlyxgs-adddata>
 <mip-qqtn-downts>
 <mip-qqtn-shield data-shield="qqtn">
@@ -30,7 +28,7 @@ mip-qqtn-shield
         </div>
         <div id="downAddress">
             <ul class="m-down-ul f-downbtn-url">
-                <li class="m-down-last"><a href="http://tj.tt1386.com/0006/4119" class="span9 m-game-down down f-eject-btn" data-flag="downbtn" id="address">点击下载</a></li>
+                <li class="m-down-last"><a href="http://tj.tt1386.com/0006/5084" class="span9 m-game-down down f-eject-btn" data-flag="downbtn" id="address">点击下载</a></li>
             </ul>
         </div>
         
@@ -66,17 +64,25 @@ mip-qqtn-shield
         </ul>
     </section>
 </section>
-
-
 <div class="f-information f-hide" data-id="304971" data-path="down" data-categroyId="202" data-rootid="16" data-commendid="0" data-system="Android" data-ppaddress="" data-ismoney="0" data-CommentTpye="0" data-Username="hjw" data-Type="0" data-DateTime="2018/1/24" data-phpurl="2"></div>
 </mip-qqtn-shield>
 </mip-qqtn-downts>
 </mip-ychlyxgs-adddata>
-
-
-
-
-
 <script src="https://c.mipcdn.com/static/v1/mip-showmore/mip-showmore.js"></script>
-<script src="https://c.mipcdn.com/static/v1/mip-ychlyxgs-adddata/mip-ychlyxgs-adddata.js"></script>
-<script src="https://c.mipcdn.com/static/v1/mip-qqtn-downts/mip-qqtn-downts.js"></script>
+<script src="https://mipcache.bdstatic.com/extensions/platform/v1/mip-ychlyxgs-adddata/mip-ychlyxgs-adddata.js"></script>
+<script src="https://mipcache.bdstatic.com/extensions/platform/v1/mip-qqtn-downts/mip-qqtn-downts.js"></script>
+```
+## 用法
+- 用来判断的相关`href`的`ID`必须命名为`address`，然后通过获取json数据来进行比对，如果相同则不进行下载，并且提示下架。
+
+## 属性
+
+###  data-shield
+- 说明：作用为不同站点获取不同接口地址，必须属性，否则无法获取到数据
+- 取值：各站点自定义。
+- 必选项：是
+- 类型：接口地址
+
+## 注意事项
+
+- 接口地址必须是 `https` 否则会报错。
