@@ -265,15 +265,18 @@ define(function (require) {
         }
 
         // 设置源数据
+        var self = this;
         var data = {};
-        data[this.element.id] = {
-            isLogin: this.isLogin,
-            sessionId: this.sessionId
+        data[self.element.id] = {
+            isLogin: self.isLogin
         };
 
         // fix 因为直接使用 null 时 mip-bind 报错
-        if (this.userInfo) {
-            data[this.element.id].userInfo = this.userInfo;
+        if (self.userInfo) {
+            data[self.element.id].userInfo = self.userInfo;
+        }
+        if (self.sessionId) {
+            data.sessionId = self.sessionId;
         }
 
         MIP.setData(data);
