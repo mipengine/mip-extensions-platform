@@ -1,0 +1,14 @@
+{
+    "name": "mip-linkeddb-relation",
+    "version": "1.0.0",
+    "description": "解析Base64 生成图谱 可拖动",
+    "contributors": [
+        {
+            "name": "linkeddb",
+            "email": "340236524@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "name": "mip-jia-index-link",
+    "version": "1.0.0",
+    "description": "mip首页获取城市、更改跳转链接",
+    "contributors": [
+        {
+            "name": "tao",
+            "email": "165526381@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

@@ -1,0 +1,15 @@
+{
+    "name": "mip-cr173-lower",
+    "version": "1.0.0",
+    "description": "获取页面信息，是否包含接口内容，包含则将应用下架处理。用$('title')是因为需要更改标题。",
+    "contributors": [
+        {
+            "name": "gom",
+            "email": "gom3250@qq.com",
+            "url": "https://m.cr173.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.0.0"
+    }
+}

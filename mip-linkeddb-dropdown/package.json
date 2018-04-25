@@ -1,0 +1,14 @@
+{
+    "name": "mip-linkeddb-dropdown",
+    "version": "1.0.0",
+    "description": "当用户滚动到页面底部时，加载一段新的网页。",
+    "contributors": [
+        {
+            "name": "linkeddb",
+            "email": "340236524@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
