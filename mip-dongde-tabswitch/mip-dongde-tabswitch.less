@@ -7,11 +7,19 @@ mip-dongde-tabswitch {
     section {
         background: #fff;
         z-index: 99;
+        position: static;
         .tab-nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
+    }
+    section.fixed {
+        position: fixed;
+        left: 50%;
+        right: 0;
+        top: 0;
+        transform: translateX(-50%);
     }
     .tab-content {
         display: none;

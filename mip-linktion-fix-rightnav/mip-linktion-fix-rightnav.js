@@ -61,10 +61,11 @@ define(function (require) {
                 }).then(function (res) {
                     return res.json();
                 }).then(function (data) {
-                    if (data.code === '1009') {
+                    if (data.code === 1009) {
                         alert('请登录');
                     }
-                    else {
+                    else if (data.code === 0) {
+                        $el.find('#reply-hidden').trigger('click');
                         alert('提交成功');
                     }
                 });

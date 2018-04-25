@@ -191,12 +191,12 @@ define(function (require) {
             };
 
         })($);
+
         var pageNum = 2;
         var pageType = $(this.element).find('.all-list').attr('data-type');
         var loading = false;
         var getUrl;
-
-        $(this.element).find('.assembly').infinite().on('infinite', function () {
+        $(this.element).parent().infinite().on('infinite', function () {
             // 如果正在加载，则退出
             if (loading) {
                 return;
@@ -222,9 +222,9 @@ define(function (require) {
                     // $.refreshScroller();
                 } else {
                     // 加载完毕，则注销无限加载事件，以防不必要的加载
-                    $(this.element).find('.assembly').destroyInfinite();
+                    $(this.element).parent().destroyInfinite();
                     // 删除加载提示符
-                    $(this.element).find('.assembly .weui-loadmore').remove();
+                    $(this.element).find('.weui-loadmore').remove();
 
                     $(this.element).find('.no-more').removeClass('hide');
                     setTimeout(function () {

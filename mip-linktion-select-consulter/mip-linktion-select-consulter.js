@@ -13,12 +13,16 @@ define(function (require) {
      */
     customElement.prototype.firstInviewCallback = function () {
         var $el = $(this.element);
-        var templateBbox = $el.find('#template_box')[0];
+        var templateBox = $el.find('#template_box');
         var templates = require('templates');
-        var src = $el.find('#planner_more').data('src');
+        var domainsrc = $el.find('#planner_more').data('src');
+        var type = $el.find('#planner_more').data('type');
         var change = $el.find('#change');
-        function sendData(consultUrl, bodyData) {
+        var synthesize = $el.find('#synthesize');
+        var hot = $el.find('#hot');
+        var level = $el.find('#level');
 
+        function sendData(consultUrl, bodyData) {
             fetch(consultUrl, {
                 method: 'POST', // or 'PUT'
                 headers: {'Content-Type': 'application/json'},
@@ -34,19 +38,119 @@ define(function (require) {
                 }
             });
         }
-        function fetchfun($el, templateBbox, templates, src) {
+        function fetchfun($el, templateBox, templates, src, type) {
             fetch(src)
             .then(function (res) {
                 return res.json();
             }).then(function (data) {
                 if (data.data) {
-                    var items = data.data.items;
-                    templates.render(templateBbox, items).then(function (html) {
-                        templateBbox.innerHTML = html;
-                        valifypopValue($el);
+                    var items = [];
+                    if (type === 'items' && data.status === 0) {
+                        items = data.data.items;
+                    }
+                    else if (type === 'planners' && data.code === 0) {
+                        items = data.data.planners;
+                    }
+                    var html = '';
+                    var taghtml = '';
+                    items.forEach(function (items) {
+                        taghtml = foreachTags(items);
+                        html += '<div class="col-lg-4 col-xs-6 col-sm-4 financial-card financial-search-card clearfix">'
+                                + '<div class="person-card consult-box financial-planner-box" '
+                                + 'data-plannerid=' + items.id + 'data-productid=' + items.id
+                                    + 'data-consulturl="http://www.caifu.org/product/consult">'
+                                    + '<div class="click-lightbox slide-up">'
+                                        + '<button type="button" class="click-hidden">&times;</button>'
+                                        + '<h3>咨询TA</h3>'
+                                        + '<p class="consult-describe">请留下您的信息，方便这位理财师联系您。</p>'
+                                        + '<mip-form class="consult-form pc-form" url="https://">'
+                                            + '<div class="form-group-input">'
+                                                + '<label>姓名</label>'
+                                                + '<input type="text" name="name" placeholder="请输入姓名"'
+                                                    + 'value="" required="required">'
+                                            + '</div>'
+                                            + '<div class="form-group-input">'
+                                                + '<label>手机</label>'
+                                                + '<input type="number" name="phone" placeholder="请输入手机号"'
+                                                        + 'value="" required="required">'
+                                            + '</div>'
+                                            + '<h4 class="checkbox-head">首选联系时间</h4>'
+                                            + '<div class="checkbox-flex">'
+                                                + '<div class="form-group-checkbox">'
+                                                    + '<input type="radio" name=' + items.id + 'day'
+                                                    + 'value="1" id=' + items.id + 'day required="required">'
+                                                    + '<label for="times-am">白天</label>'
+                                                + '</div>'
+                                                + '<div class="form-group-checkbox">'
+                                                    + '<input type="radio" name=' + items.id
+                                                    + 'night value="2" id=' + items.id + 'night required="required">'
+                                                    + '<label for="times-pm">晚间</label>'
+                                                + '</div>'
+                                                + '<div class="form-group-checkbox">'
+                                                    + '<input type="radio" name=' + items.id
+                                                    + 'anytimes value="3" id=' + items.id
+                                                    + 'anytimes required="required">'
+                                                    + '<label for="anytimes">任何时刻</label>'
+                                                + '</div>'
+                                            + '</div>'
+                                            + '<button type="button" class="but-submit consult-submit">提交</button>'
+                                        + '</mip-form>'
+                                    + '</div>'
+                                    + '<div class="card-box">'
+                                        + '<div class="planner-head">'
+                                            + '<mip-img src=' + items.avatar + '></mip-img>'
+                                        + '</div>'
+                                        + '<div class="info-text">'
+                                            + '<div class="text-name">'
+                                                + '<p class="planner-name">'
+                                                    + items.name + '</p>'
+                                                + '<p class="planner-post">咨询顾问</p>'
+                                            + '</div>'
+                                            + '<div class="planner-label">'
+                                                + '<p class="txt-major">专业领域</p>'
+                                                + taghtml
+                                            + '</div>'
+                                        + '</div>'
+                                        + '<div class="person-info-txt">'
+                                            + '<p>推荐理财师的范围均为购买了此营销视频的理财师；若，15天内，此理财师已经</p>'
+                                        + '</div>'
+                                    + '</div>'
+                                    + '<div class="card-but">'
+                                        + '<a href="/planner/' + items.id + '"><button class="planner-submit-about"'
+                                            + '>了解TA'
+                                        + '</button><a>'
+                                        + '<button class="planner-submit-consult but-advisory">咨询TA'
+                                        + '</button>'
+                                        + '<button class="planner-submit-consult3">咨询中'
+                                        + '</button> '
+                                    + '</div>'
+                                    + '<div class="card-phone-but">'
+                                        + '<button class="planner-submit-consult2 but-advisory"'
+                                                + 'th:if="${planner != null && planner.consulStatus != 0}"'
+                                                + 'on="tap:planner-more.toggle tap:modal-consult.toggle'
+                                                + 'tap:MIP.setData({plannerid:' + items.id
+                                                + ',productid:' + items.id + '})">'
+                                            + '咨询TA'
+                                        + '</button>'
+                                        + '<!-- 移动端咨询中 -->'
+                                        + '<!-- <button class="planner-submit-consult2">咨询中</button> -->'
+                                    + '</div>'
+                                + '</div>'
+                            + '</div>';
                     });
+                    templateBox.html(html);
                 }
             });
+        }
+        function foreachTags(items) {
+            var taghtml = '';
+            if (items.plannerInfo) {
+                var workDomains =  items.plannerInfo.workDomains;
+                workDomains.forEach(function (itemtag) {
+                    taghtml += '<p class="card-label">' + itemtag + ' </p>';
+                });
+            }
+            return taghtml;
         }
         function valifypopValue($el) {
             $el.find('.card-but .but-advisory').on('click', function () {
@@ -82,11 +186,14 @@ define(function (require) {
                 else {
                     if (inputName === '') {
                         alert('请填写姓名');
-                    } else if (inputPhone === '') {
+                    }
+                    else if (inputPhone === '') {
                         alert('请填写电话');
-                    } else if (checkboxR === undefined) {
+                    }
+                    else if (checkboxR === undefined) {
                         alert('请选择时间');
-                    } else {
+                    }
+                    else {
                         var bodyData = {
                             productId: productId,
                             userName: inputName,
@@ -100,10 +207,28 @@ define(function (require) {
 
             });
         }
-        change.on('click', function () {
-            fetchfun($el, templateBbox, templates, src);
-        });
-        fetchfun($el, templateBbox, templates, src);
+        if (type === 'change') {
+            // fetchfun($el, templateBox, templates, src, 'items');
+            change.on('click', function () {
+                fetchfun($el, templateBox, templates, domainsrc, 'items');
+            });
+        }
+        else if (type === 'planners') {
+            // fetchfun($el, templateBox, templates, src, 'planners');
+            hot.on('click', function () {
+                var src = domainsrc + '?hot=1';
+                fetchfun($el, templateBox, templates, src, 'planners');
+            });
+            level.on('change', function () {
+                if ($(this).val() !== '') {
+                    var src = domainsrc + '?level=' + $(this).val();
+                    fetchfun($el, templateBox, templates, src, 'planners');
+                }
+            });
+            synthesize.on('click', function () {
+                fetchfun($el, templateBox, templates, domainsrc, 'planners');
+            });
+        }
     };
     return customElement;
 });

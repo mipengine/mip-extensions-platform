@@ -66,20 +66,13 @@ define(function (require) {
         };
         // tab悬浮效果
         Tabswitch.prototype.fixTabNav = function () {
-            this.tabNav.css({
-                'position': 'fixed',
-                'left': 0,
-                'right': 0,
-                'top': 0
-            });
+            this.tabNav.addClass('fixed');
             $element.css({'padding-top': this.tabNavHeight});
         };
         // 解除tab悬浮效果
         Tabswitch.prototype.recoveryTabNav = function () {
             $element.css({'padding-top': 0});
-            this.tabNav.css({
-                'position': 'static'
-            });
+            this.tabNav.removeClass('fixed');
         };
         // 切换tab时，设置content的初始位置
         Tabswitch.prototype.setTabContentPosition = function () {

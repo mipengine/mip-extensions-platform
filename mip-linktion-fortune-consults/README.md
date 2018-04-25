@@ -15,12 +15,11 @@ mip-linktion-fortune-consults ajax移动端弹框提交表单，pc端下滑卡�
     <script type="application/json">
     {
       "plannerid": 0,
-      "productid": 0
     }
     </script>
   </mip-data>
   <div class="col-lg-4 col-xs-12 col-sm-4 consult-box">
-    <div class="person-card consult-box" data-plannerid="1" data-productid="2" data-consulturl="http://47.100.7.250:8080/product/consult">
+    <div class="person-card consult-box" data-plannerid="1"  data-consulturl="http://47.100.7.250:8080/product/consult">
       <div class="click-lightbox slide-up">
         <button type="button" class="click-hidden">&times;</button>
         <h3>咨询TA</h3>
@@ -83,7 +82,7 @@ mip-linktion-fortune-consults ajax移动端弹框提交表单，pc端下滑卡�
         <a class="but-advisory">咨询TA</a>
       </div>
       <div class="card-phone-but">
-        <a href="javascript:;" class="but-about" on="tap:modal-consult.toggle tap:MIP.setData({plannerid:5,productid:6})" id="" role="button" tabindex="0">咨询TAp</a>
+        <a href="javascript:;" class="but-about" on="tap:modal-consult.toggle tap:MIP.setData({plannerid:5})" id="" role="button" tabindex="0">咨询TAp</a>
 
         <!-- 未登录用户的咨询TA弹框 -->
         <!-- <a href=javascript:;"" class="but-about" on="tap:modal-consult-visitor.toggle" id="" role="button" tabindex="0">咨询TA</a> -->

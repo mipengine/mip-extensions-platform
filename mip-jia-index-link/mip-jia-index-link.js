@@ -10,6 +10,11 @@ define(function (require) {
     var customElement = require('customElement').create();
     var storage = new CustomElement(0);
 
+    // 插入隐藏域,给其他需要城市的地方使用
+    function appendcity(ele, obj) {
+        $(ele).append('<input type="hidden" id="jiacity" value="' + obj.area_py + '" />');
+    }
+
     // 获取城市
     function cityFn(callback) {
         if (!storage.get('city')) {
@@ -37,9 +42,9 @@ define(function (require) {
 
 
     /**
-     * 第一次进入可视区回调，只会执行一次
+     * build 方法，元素插入到文档时执行，仅会执行一次
      */
-    customElement.prototype.firstInviewCallback = function () {
+    customElement.prototype.build = function () {
         var thisObj = this.element;
         var elemObj = thisObj.querySelector('script[type="application/json"]');
         try {
@@ -68,6 +73,7 @@ define(function (require) {
                     }
                 });
             }
+            appendcity(thisObj, obj);
         });
     };
 

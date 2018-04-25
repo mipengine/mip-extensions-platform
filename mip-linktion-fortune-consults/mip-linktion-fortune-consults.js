@@ -53,6 +53,8 @@ define(function (require) {
                     'plannerId': plannerId
                 };
                 fetch(consultUrl, {
+                    crossDomain: true,
+                    credentials: 'include',
                     method: 'POST', // or 'PUT'
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify(bodyData)// data can be `string` or {object}!
