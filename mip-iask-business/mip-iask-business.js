@@ -819,7 +819,7 @@ define(function (require) {
     };
     // 加载url中的js
     var loadURLJS = function (tags, params, sourceType, questionId, $thatParam, $thatLog) {
-        var url = 'https://mipp.iask.cn/mib/tag';
+        var url = 'https://mipp.iask.cn/mib/tag/';
         var arry = tags.split(':');
         var youlaiTag = '';
         var runhaiTag = '';
