@@ -16,7 +16,6 @@ define(function (require) {
      * 第一次进入可视区回调，只会执行一次
      */
     customElement.prototype.firstInviewCallback = function () {
-
         var graph = $(this.element).find('#roleMap').data('graph');
         if (graph) {
             var base = new Base64();

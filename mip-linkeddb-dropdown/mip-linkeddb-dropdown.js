@@ -196,6 +196,7 @@ define(function (require) {
         var pageType = $(this.element).find('.all-list').attr('data-type');
         var loading = false;
         var getUrl;
+        var that = this;
         $(this.element).parent().infinite().on('infinite', function () {
             // 如果正在加载，则退出
             if (loading) {
@@ -206,29 +207,28 @@ define(function (require) {
             if (pageType === 'person') {
                 getUrl = 'https://mip.linkeddb.com/person/?page=' + pageNum;
             } else if (pageType === 'tv' || pageType === 'movie') {
-                getUrl = 'https://mip.linkeddb.com/movie/?page=' + pageType + '/?page=' + pageNum;
+                getUrl = 'https://mip.linkeddb.com/' + pageType + '/?page=' + pageNum;
             } else {
                 getUrl = 'https://mip.linkeddb.com/movies/?page=' + pageNum;
             }
-
             $.get(getUrl, function (html) {
                 if (html) {
                     // 重置加载flag
                     loading = false;
                     // 添加新条目
-                    $(this.element).find('.infinite-list').append(html);
+                    $(that.element).find('.infinite-list').append(html);
                     pageNum++;
                     // 容器发生改变,如果是js滚动，需要刷新滚动
                     // $.refreshScroller();
                 } else {
                     // 加载完毕，则注销无限加载事件，以防不必要的加载
-                    $(this.element).parent().destroyInfinite();
+                    $(that.element).parent().destroyInfinite();
                     // 删除加载提示符
-                    $(this.element).find('.weui-loadmore').remove();
+                    $(that.element).find('.weui-loadmore').remove();
 
-                    $(this.element).find('.no-more').removeClass('hide');
+                    $(that.element).find('.no-more').removeClass('hide');
                     setTimeout(function () {
-                        $(this.element).find('.no-more').addClass('hide');
+                        $(that.element).find('.no-more').addClass('hide');
                     }, 1500);
                     return false;
                 }

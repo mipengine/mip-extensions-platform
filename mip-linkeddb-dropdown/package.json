@@ -1,6 +1,6 @@
 {
     "name": "mip-linkeddb-dropdown",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "当用户滚动到页面底部时，加载一段新的网页。",
     "contributors": [
         {

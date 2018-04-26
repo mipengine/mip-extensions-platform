@@ -1,0 +1,14 @@
+{
+    "name": "mip-video-iframe",
+    "version": "1.0.0",
+    "description": "searchVideo iframe mip版",
+    "contributors": [
+        {
+            "name": "IShinji",
+            "email": "icanghai@foxmail.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
