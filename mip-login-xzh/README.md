@@ -238,7 +238,8 @@ define(function (require) {
 在[熊掌号运营管理平台](https://xiongzhang.baidu.com/mp/dashboard/devsetting)添加两个网页授权域名：
 
 1. 网站主域名 - 需要在登录组件的域名
-2. MIP-Cache 域名，规则：`域名（.换成-）.mipcdn.com`，如：
+2. MIP-Cache 域名：`mipcache.bdstatic.com`
+3. MIP-Cache 站点域名，规则：`域名（.换成-）.mipcdn.com`，如：
     - `www.mipengine.org` -> `www-mipengine-org.mipcdn.com`
     - `demo.www.mipengine.org` -> `demo-www-mipengine-org.mipcdn.com`
 
