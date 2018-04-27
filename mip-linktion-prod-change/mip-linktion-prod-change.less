@@ -1,0 +1,85 @@
+/**
+ * @file mip-linktion-prod-change样式文件
+ */
+
+mip-linktion-prod-change {
+    .card-module {
+        margin-bottom: 20px;
+        .card-module-box {
+            border-bottom: 1px solid #ededed;
+            margin-top: 21px;
+            display: block;
+            .module-img {
+                height: 178px;
+                position: relative;
+                mip-img {
+                    width: 100%;
+                    height: 100%;
+                    background-image: linear-gradient(0deg, #191919 0%, #191919 100%),
+                    linear-gradient(#878787, #878787);
+                }
+                p {
+                    position: absolute;
+                    bottom: 20px;
+                    left: 21px;
+                    font-size: 18px;
+                    color: #fff;
+                    font-family: "SourceHanSansCN-Regular";
+                }
+            }
+            .module-txt {
+                padding: 20px 0;
+                .module-guide-txt {
+                    font-size: 18px;
+                    line-height: 18px;
+                    color: #333;
+                    text-align: center;
+                }
+                .module-portrait {
+                    display: flex;
+                    flex-wrap: nowrap;
+                    flex-direction: row;
+                    justify-content: center;
+                    padding-bottom: 11px;
+                    .module-portrait-icon {
+                        display: inline-block;
+                        margin: 0 8px;
+                        mip-img {
+                            width: 32px;
+                            height: 32px;
+                            border-radius: 50%;
+                            overflow: hidden;
+                        }
+                    }
+                }
+                .module-total {
+                    text-align: center;
+                    line-height: 12px;
+                    p {
+                        display: inline-block;
+                        font-size: 12px;
+                    }
+                    span {
+                        color: #ff7e00;
+                        font-size: 12px;
+                    }
+                    .module-total-nub {
+                        color: #ff7e00;
+                    }
+                    .black {
+                        color: #333;
+                    }
+                    .module-total-assistant {
+                        color: #999;
+                    }
+                    .close-up {
+                        margin-left: -4px;
+                    }
+                }
+            }
+        }
+        .card-module-box:hover {
+            box-shadow: 0 8px 10px #ededed;
+        }
+    }
+}

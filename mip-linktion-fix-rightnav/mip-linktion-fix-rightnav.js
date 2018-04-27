@@ -55,6 +55,8 @@ define(function (require) {
                 });
                 var consultUrl = $(this).data('src');
                 fetch(consultUrl, {
+                    crossDomain: true,
+                    credentials: 'include',
                     method: 'POST', // or 'PUT'
                     headers: {'Content-Type': 'application/json'},
                     body: bodyData// data can be `string` or {object}!

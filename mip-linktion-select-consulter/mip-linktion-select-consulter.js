@@ -14,6 +14,7 @@ define(function (require) {
     customElement.prototype.firstInviewCallback = function () {
         var $el = $(this.element);
         var templateBox = $el.find('#template_box');
+        var changeTemplateBox = $el.find('#change_template_box');
         var templates = require('templates');
         var domainsrc = $el.find('#planner_more').data('src');
         var type = $el.find('#planner_more').data('type');
@@ -21,6 +22,7 @@ define(function (require) {
         var synthesize = $el.find('#synthesize');
         var hot = $el.find('#hot');
         var level = $el.find('#level');
+        var productid = $el.find('#dataoption');
 
         function sendData(consultUrl, bodyData) {
             fetch(consultUrl, {
@@ -38,109 +40,213 @@ define(function (require) {
                 }
             });
         }
-        function fetchfun($el, templateBox, templates, src, type) {
+        function fetchfun($el, templateBox, templates, src, type, productid) {
             fetch(src)
             .then(function (res) {
                 return res.json();
             }).then(function (data) {
                 if (data.data) {
-                    var items = [];
                     if (type === 'items' && data.status === 0) {
-                        items = data.data.items;
+                        var changeItems = data.data.items;
+                        var changehtml = '';
+                        var changeTagHtml = '';
+                        var changeReturnHtml = '';
+                        changeItems.forEach(function (items) {
+                            changeTagHtml = foreachTags(items);
+                            changeReturnHtml = ifConsulting(items);
+                            changehtml += '<div class="consult-box">'
+                                        + ' <div class="person-card consult-box" data-plannerid=' + items.id
+                                        + ' data-productid=' + productid
+                                        + 'data-consulturl="http://www.caifu.org/product/consult">'
+                                        + '<div class="click-lightbox slide-up">'
+                                            + '<button type="button" class="click-hidden">&times;</button>'
+                                            + '<h3>咨询TA</h3>'
+                                            + '<p class="consult-describe">请留下您的信息，方便这位理财师联系您。</p>'
+                                            + '<form class="consult-form pc-form">'
+                                                + '<div class="form-group-input">'
+                                                    + '<label>姓名</label>'
+                                                    + '<input type="text" name="name" placeholder="请输入姓名"'
+                                                    + 'required="required"}">'
+                                                + '</div>'
+                                                + '<div class="form-group-input">'
+                                                    + '<label>手机</label>'
+                                                    + '<input type="number" name="phone" placeholder="请输入手机号"'
+                                                    + 'required="required"}">'
+                                                + '</div>'
+                                                + '<h4 class="checkbox-head">首选联系时间</h4>'
+                                                + '<div class="checkbox-flex">'
+                                                    + '<div class="form-group-checkbox">'
+                                                        + '<input type="radio" name="times" id="' + items.id
+                                                        + 'day" value="1" required="required">'
+                                                        + '<label for="' + items.id + 'day">白天</label>'
+                                                    + '</div>'
+                                                    + '<div class="form-group-checkbox">'
+                                                        + '<input type="radio" name="times" id="' + items.id
+                                                        + 'night " value="2" required="required">'
+                                                        + '<label for="' + items.id + 'night ">晚间</label>'
+                                                    + '</div>'
+                                                    + '<div class="form-group-checkbox">'
+                                                        + '<input type="radio" name="times" id="' + items.id
+                                                        + 'anytime" value="3" required="required">'
+                                                        + '<label for="' + items.id + 'anytime">任何时刻</label>'
+                                                    + '</div>'
+                                                + '</div>'
+                                                + '<button type="button" class="but-submit consult-submit">提交</button>'
+                                            + '</form>'
+                                        + '</div>'
+                                        + '<div class="card-box">'
+                                            + '<div class="person-icon">'
+                                                + '<mip-img src=' + items.avatar + '></mip-img>'
+                                            + '</div>'
+                                            + '<div class="info-text">'
+                                                + '<div class="text-name">'
+                                                    + '<p class="person-name">' + items.name + '</p>'
+                                                    + '<p class="person-info">咨询顾问</p>'
+                                                + '</div>'
+                                                + '<div class="info-label">'
+                                                    + '<p class="txt-major">专业领域</p>'
+                                                    + changeTagHtml
+                                                + '</div>'
+                                            + '</div>'
+                                            + '<div class="person-info-txt">'
+                                                + '<p>推荐理财师的范围均为购买了此营销视频的理财师；若，15天内，此理财师已经</p>'
+                                            + '/div>'
+                                        + '</div>'
+                                        + '<div class="card-but">'
+                                            + '<a href="/planner/' + items.id + 'class="but-about">了解TA</a>'
+                                            + changeReturnHtml
+                                        + '</div>'
+                                    + '</div>'
+                                + '</div>';
+                        });
+                        changeTemplateBox.html(changehtml);
+                        valifypopValue($el);
                     }
                     else if (type === 'planners' && data.code === 0) {
-                        items = data.data.planners;
-                    }
-                    var html = '';
-                    var taghtml = '';
-                    items.forEach(function (items) {
-                        taghtml = foreachTags(items);
-                        html += '<div class="col-lg-4 col-xs-6 col-sm-4 financial-card financial-search-card clearfix">'
-                                + '<div class="person-card consult-box financial-planner-box" '
-                                + 'data-plannerid=' + items.id + 'data-productid=' + items.id
-                                    + 'data-consulturl="http://www.caifu.org/product/consult">'
-                                    + '<div class="click-lightbox slide-up">'
-                                        + '<button type="button" class="click-hidden">&times;</button>'
-                                        + '<h3>咨询TA</h3>'
-                                        + '<p class="consult-describe">请留下您的信息，方便这位理财师联系您。</p>'
-                                        + '<mip-form class="consult-form pc-form" url="https://">'
-                                            + '<div class="form-group-input">'
-                                                + '<label>姓名</label>'
-                                                + '<input type="text" name="name" placeholder="请输入姓名"'
-                                                    + 'value="" required="required">'
-                                            + '</div>'
-                                            + '<div class="form-group-input">'
-                                                + '<label>手机</label>'
-                                                + '<input type="number" name="phone" placeholder="请输入手机号"'
+                        var items = data.data.planners;
+                        var html = '';
+                        var taghtml = '';
+                        var returnHtml = '';
+                        var returnPhoneHtml = '';
+                        items.forEach(function (items) {
+                            taghtml = foreachTags(items);
+                            returnHtml = ifConsultingPlanner(items);
+                            returnPhoneHtml = ifPhoneConsultingPlanner(items);
+                            html += '<div class="col-lg-4 col-xs-6 col-sm-4 financial-card'
+                                    + ' financial-search-card clearfix">'
+                                    + '<div class="person-card consult-box financial-planner-box" '
+                                    + 'data-plannerid=' + items.id + ' data-productid=' +  productid
+                                        + ' data-consulturl="http://www.caifu.org/product/consult">'
+                                        + '<div class="click-lightbox slide-up">'
+                                            + '<button type="button" class="click-hidden">&times;</button>'
+                                            + '<h3>咨询TA</h3>'
+                                            + '<p class="consult-describe">请留下您的信息，方便这位理财师联系您。</p>'
+                                            + '<mip-form class="consult-form pc-form" url="https://">'
+                                                + '<div class="form-group-input">'
+                                                    + '<label>姓名</label>'
+                                                    + '<input type="text" name="name" placeholder="请输入姓名"'
                                                         + 'value="" required="required">'
-                                            + '</div>'
-                                            + '<h4 class="checkbox-head">首选联系时间</h4>'
-                                            + '<div class="checkbox-flex">'
-                                                + '<div class="form-group-checkbox">'
-                                                    + '<input type="radio" name=' + items.id + 'day'
-                                                    + 'value="1" id=' + items.id + 'day required="required">'
-                                                    + '<label for="times-am">白天</label>'
                                                 + '</div>'
-                                                + '<div class="form-group-checkbox">'
-                                                    + '<input type="radio" name=' + items.id
-                                                    + 'night value="2" id=' + items.id + 'night required="required">'
-                                                    + '<label for="times-pm">晚间</label>'
+                                                + '<div class="form-group-input">'
+                                                    + '<label>手机</label>'
+                                                    + '<input type="number" name="phone" placeholder="请输入手机号"'
+                                                            + 'value="" required="required">'
                                                 + '</div>'
-                                                + '<div class="form-group-checkbox">'
-                                                    + '<input type="radio" name=' + items.id
-                                                    + 'anytimes value="3" id=' + items.id
-                                                    + 'anytimes required="required">'
-                                                    + '<label for="anytimes">任何时刻</label>'
+                                                + '<h4 class="checkbox-head">首选联系时间</h4>'
+                                                + '<div class="checkbox-flex">'
+                                                    + '<div class="form-group-checkbox">'
+                                                        + '<input type="radio" name="picktime"'
+                                                        + 'value="1" id=' + items.id + 'day required="required">'
+                                                        + '<label for=' + items.id + 'day>白天</label>'
+                                                    + '</div>'
+                                                    + '<div class="form-group-checkbox">'
+                                                        + '<input type="radio" name="picktime"'
+                                                        + 'night value="2" id=' + items.id
+                                                        + 'night required="required">'
+                                                        + '<label for=' + items.id + 'night>晚间</label>'
+                                                    + '</div>'
+                                                    + '<div class="form-group-checkbox">'
+                                                        + '<input type="radio" name="picktime"'
+                                                        + 'anytimes value="3" id=' + items.id
+                                                        + 'anytimes required="required">'
+                                                        + '<label for=' + items.id + 'anytimes>任何时刻</label>'
+                                                    + '</div>'
+                                                + '</div>'
+                                                + '<button type="button" class="but-submit consult-submit">提交</button>'
+                                            + '</mip-form>'
+                                        + '</div>'
+                                        + '<div class="card-box">'
+                                            + '<div class="planner-head">'
+                                                + '<mip-img src=' + items.avatar + ' ></mip-img>'
+                                            + '</div>'
+                                            + '<div class="info-text">'
+                                                + '<div class="text-name">'
+                                                    + '<p class="planner-name">'
+                                                        + items.name + '</p>'
+                                                    + '<p class="planner-post">咨询顾问</p>'
+                                                + '</div>'
+                                                + '<div class="planner-label">'
+                                                    + '<p class="txt-major">专业领域</p>'
+                                                    + taghtml
                                                 + '</div>'
                                             + '</div>'
-                                            + '<button type="button" class="but-submit consult-submit">提交</button>'
-                                        + '</mip-form>'
-                                    + '</div>'
-                                    + '<div class="card-box">'
-                                        + '<div class="planner-head">'
-                                            + '<mip-img src=' + items.avatar + '></mip-img>'
-                                        + '</div>'
-                                        + '<div class="info-text">'
-                                            + '<div class="text-name">'
-                                                + '<p class="planner-name">'
-                                                    + items.name + '</p>'
-                                                + '<p class="planner-post">咨询顾问</p>'
-                                            + '</div>'
-                                            + '<div class="planner-label">'
-                                                + '<p class="txt-major">专业领域</p>'
-                                                + taghtml
+                                            + '<div class="person-info-txt">'
+                                                + '<p>推荐理财师的范围均为购买了此营销视频的理财师；若，15天内，此理财师已经</p>'
                                             + '</div>'
                                         + '</div>'
-                                        + '<div class="person-info-txt">'
-                                            + '<p>推荐理财师的范围均为购买了此营销视频的理财师；若，15天内，此理财师已经</p>'
+                                        + '<div class="card-but">'
+                                            + '<a href="/planner/' + items.id + '"><button class="planner-submit-about"'
+                                                + '>了解TA'
+                                            + '</button></a>'
+                                            + returnHtml
+                                        + '</div>'
+                                        + '<div class="card-phone-but">'
+                                        + returnPhoneHtml
                                         + '</div>'
                                     + '</div>'
-                                    + '<div class="card-but">'
-                                        + '<a href="/planner/' + items.id + '"><button class="planner-submit-about"'
-                                            + '>了解TA'
-                                        + '</button><a>'
-                                        + '<button class="planner-submit-consult but-advisory">咨询TA'
-                                        + '</button>'
-                                        + '<button class="planner-submit-consult3">咨询中'
-                                        + '</button> '
-                                    + '</div>'
-                                    + '<div class="card-phone-but">'
-                                        + '<button class="planner-submit-consult2 but-advisory"'
-                                                + 'th:if="${planner != null && planner.consulStatus != 0}"'
-                                                + 'on="tap:planner-more.toggle tap:modal-consult.toggle'
-                                                + 'tap:MIP.setData({plannerid:' + items.id
-                                                + ',productid:' + items.id + '})">'
-                                            + '咨询TA'
-                                        + '</button>'
-                                        + '<!-- 移动端咨询中 -->'
-                                        + '<!-- <button class="planner-submit-consult2">咨询中</button> -->'
-                                    + '</div>'
-                                + '</div>'
-                            + '</div>';
-                    });
-                    templateBox.html(html);
+                                + '</div>';
+                        });
+                        templateBox.html(html);
+                        valifypopValue($el);
+                    }
                 }
             });
+        }
+        function ifPhoneConsultingPlanner(items) {
+            var returnPhoneHtml = '';
+            if (items.consulStatus === 0) {
+                returnPhoneHtml = '<button class="planner-submit-consult2 but-advisory"'
+                            + 'th:if="${planner != null && planner.consulStatus != 0}"'
+                            + 'on="tap:planner-more.toggle tap:modal-consult.toggle'
+                            + 'tap:MIP.setData({plannerid:' + items.id
+                            + ',productid:' + items.id + '})">'
+                            + '咨询TA'
+                            + '</button>';
+            }
+            else if (items.consulStatus === 1) {
+                returnPhoneHtml = '<button class="planner-submit-consult2">咨询中</button>';
+            }
+            return returnPhoneHtml;
+        }
+        function ifConsultingPlanner(items) {
+            var returnPlannerHtml = '';
+            if (items.consulStatus === 0) {
+                returnPlannerHtml = ' <button class="planner-submit-consult but-advisory" type="button" >咨询TA</button>';
+            }
+            else if (items.consulStatus === 1) {
+                returnPlannerHtml = ' <button class="planner-submit-consult3" type="button">咨询中</button>';
+            }
+            return returnPlannerHtml;
+        }
+        function ifConsulting(items) {
+            var returnHtml = '';
+            if (items.consulStatus === 0) {
+                returnHtml = ' <button class="but-advisory" type="button">咨询TA</button>';
+            }
+            else if (items.consulStatus === 1) {
+                returnHtml = ' <button type="button">咨询中</button>';
+            }
+            return returnHtml;
         }
         function foreachTags(items) {
             var taghtml = '';
@@ -173,14 +279,14 @@ define(function (require) {
                 var phoneForm = $el.find('.phone-form')[0];
                 if ($(window).width() < 769) {
                     if (phoneForm.reportValidity()) {
-                        var bodyData = {
+                        var bodyPhoneData = {
                             productId: productId,
                             userName: inputName,
                             userMobile: inputPhone,
                             contactTime: checkboxR,
                             plannerId: plannerId
                         };
-                        sendData(consultUrl, bodyData);
+                        sendData(consultUrl, bodyPhoneData);
                     }
                 }
                 else {
@@ -210,23 +316,23 @@ define(function (require) {
         if (type === 'change') {
             // fetchfun($el, templateBox, templates, src, 'items');
             change.on('click', function () {
-                fetchfun($el, templateBox, templates, domainsrc, 'items');
+                fetchfun($el, templateBox, templates, domainsrc, 'items', productid);
             });
         }
         else if (type === 'planners') {
             // fetchfun($el, templateBox, templates, src, 'planners');
             hot.on('click', function () {
                 var src = domainsrc + '?hot=1';
-                fetchfun($el, templateBox, templates, src, 'planners');
+                fetchfun($el, templateBox, templates, src, 'planners', productid);
             });
             level.on('change', function () {
                 if ($(this).val() !== '') {
                     var src = domainsrc + '?level=' + $(this).val();
-                    fetchfun($el, templateBox, templates, src, 'planners');
+                    fetchfun($el, templateBox, templates, src, 'planners', productid);
                 }
             });
             synthesize.on('click', function () {
-                fetchfun($el, templateBox, templates, domainsrc, 'planners');
+                fetchfun($el, templateBox, templates, domainsrc, 'planners', productid);
             });
         }
     };
