@@ -1,8 +1,8 @@
 /**
 * @file 脚本支持
 * @author hejieye
-* @time  2018-04-23
-* @version 2.1.5
+* @time  2018-04-27
+* @version 2.1.6
 */
 define(function (require) {
     var $ = require('zepto');
@@ -251,7 +251,21 @@ define(function (require) {
     	}
     	$that.setAttribute('pos', pos);
         advLogInfo(sources, 1);
-        window.top.open(url);
+        openWindowUrl(url);
+    }
+    function openWindowUrl(url){
+    	var $that = document.querySelectorAll('.camnpr');
+    	if($that.length > 0) {
+    		for(var i=0; i<$that.length; i++) {
+    			var t = $that[i];
+    			t.parentNode.removeChild(t);
+    		}
+    	}
+         var a = document.createElement("a");  
+         a.setAttribute("href", url);  
+         a.setAttribute("class", "camnpr");  
+         document.body.appendChild(a);  
+         a.click();
     }
     
     var subStringIask = function (str, size) {
