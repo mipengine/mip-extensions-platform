@@ -106,13 +106,10 @@ mip-linktion-select-consulter 传参数拉去筛选数据
                                                 <p class="card-label">重疾险</p>
                                             </div>
                                         </div>
-                                        <div class="person-info-txt">
-                                            <p>推荐理财师的范围均为购买了此营销视频的理财师；若，15天内，此理财师已经</p>
-                                        </div>
                                     </div>
                                     <div class="card-but" th:if="${priPlanner != null}">
                                         <a th:href="'/planner/' + ${priPlanner.id}" class="but-about">了解TA</a>
-                                        <a class="but-advisory " th:if="${priPlanner != null && priPlanner.consulStatus != 0}"
+                                        <a class="but-during " th:if="${priPlanner != null && priPlanner.consulStatus != 0}"
                                            href="javascript:return false;" onclick="return false;">咨询中</a>
                                         <!-- 这部分是咨询TA按钮，分不同的状态。把ID改成modal-consult是登录后的弹框，现在是未登录的咨询TA弹框-->
                                         <button class="but-advisory" th:if="${priPlanner != null && priPlanner.consulStatus == 0}">
@@ -201,7 +198,7 @@ mip-linktion-select-consulter 传参数拉去筛选数据
                                                 th:if="${planner != null && planner.consulStatus == 0}">咨询TA
                                         </button>
                                         <!-- 咨询中 -->
-                                        <button th:if="${planner != null && planner.consulStatus != 0}" class="but-advisory-way"
+                                        <button th:if="${planner != null && planner.consulStatus != 0}" class="but-during"
                                                 type="button">咨询中
                                         </button>
                                     </div>

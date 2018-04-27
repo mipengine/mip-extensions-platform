@@ -171,9 +171,11 @@ define(function (require) {
                 str += '<i class="icon pos2"></i>';
                 str += '<p class="txt">智能报价</p>';
                 str += '</a>';
-                str += '<a class="hb-wrap footer_xrhb" href="javascript:;"';
-                str += 'bdsl-click-service="" bdsl-extra="{id:10003}">';
-                str += '</a>';
+                if (data.hbdisplay !== 'hidden') {
+                    str += '<a class="hb-wrap footer_xrhb" href="javascript:;"';
+                    str += 'bdsl-click-service="" bdsl-extra="{id:10003}">';
+                    str += '</a>';
+                }
                 str += '<a class="item dk" href="javascript:;" bdsl-click-service="" bdsl-extra="{id:10007}">';
                 str += '<i class="icon pos3"></i>';
                 str += '<p class="txt">专享贷</p>';

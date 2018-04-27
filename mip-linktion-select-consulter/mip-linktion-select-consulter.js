@@ -110,10 +110,10 @@ define(function (require) {
                                             + '</div>'
                                             + '<div class="person-info-txt">'
                                                 + '<p>推荐理财师的范围均为购买了此营销视频的理财师；若，15天内，此理财师已经</p>'
-                                            + '/div>'
+                                            + '</div>'
                                         + '</div>'
                                         + '<div class="card-but">'
-                                            + '<a href="/planner/' + items.id + 'class="but-about">了解TA</a>'
+                                            + '<a href="/planner/' + items.id + '" class="but-about">了解TA</a>'
                                             + changeReturnHtml
                                         + '</div>'
                                     + '</div>'
@@ -190,9 +190,6 @@ define(function (require) {
                                                     + taghtml
                                                 + '</div>'
                                             + '</div>'
-                                            + '<div class="person-info-txt">'
-                                                + '<p>推荐理财师的范围均为购买了此营销视频的理财师；若，15天内，此理财师已经</p>'
-                                            + '</div>'
                                         + '</div>'
                                         + '<div class="card-but">'
                                             + '<a href="/planner/' + items.id + '"><button class="planner-submit-about"'
@@ -244,7 +241,7 @@ define(function (require) {
                 returnHtml = ' <button class="but-advisory" type="button">咨询TA</button>';
             }
             else if (items.consulStatus === 1) {
-                returnHtml = ' <button type="button">咨询中</button>';
+                returnHtml = ' <button type="button" class="but-during">咨询中</button>';
             }
             return returnHtml;
         }

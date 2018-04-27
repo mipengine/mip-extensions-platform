@@ -33,8 +33,13 @@ define(function (require) {
         window.addEventListener('orientationchange', function () {
             me._initHeight();
         }, false);
+        var windowWidth = window.innerWidth;
         window.addEventListener('resize', function () {
-            me._initHeight();
+            // 判断resize是否改变窗口宽度，因为手机百度顶bar会自动收起，但其实窗口宽度不变，不需要重新布局
+            if (window.innerWidth !== windowWidth) {
+                me._initHeight();
+                windowWidth = window.innerWidth;
+            }
         }, false);
     };
 

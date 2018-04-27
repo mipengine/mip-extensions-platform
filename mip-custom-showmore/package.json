@@ -1,6 +1,6 @@
 {
     "name": "mip-custom-showmore",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "折叠组件，1.5屏折叠内容。特殊情况下0.5屏折叠。",
     "contributors": [
         {
