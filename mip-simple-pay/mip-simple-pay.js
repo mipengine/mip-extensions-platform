@@ -6,6 +6,7 @@
 define(function (require) {
     'use strict';
 
+    var platform = require('util').platform;
     var Pay = require('customElement').create();
     var fn = require('util').fn;
     var viewer = require('viewer');
@@ -95,7 +96,17 @@ define(function (require) {
      * @return {Object}
      */
     Pay.prototype.redirect = function (url) {
-        if (util.isIframe()) {
+        var toSF = true;
+        // 非 SF
+        if (!util.isIframe()) {
+            toSF = false;
+        }
+        // iOS 的手百降级
+        else if (platform.isIos() && platform.isBaiduApp()) {
+            toSF = false;
+        }
+
+        if (toSF) {
             return viewer.sendMessage('simple-pay', {
                 url: url
             });

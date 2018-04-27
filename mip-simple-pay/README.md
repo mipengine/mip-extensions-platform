@@ -85,6 +85,7 @@ Demo.prototype.build = function () {
 };
 ```
 
+<a id="action-pay" href="#action-pay"></a>
 #### 提交支付方法 - `<mip-demo on="事件名称:支付组件id.pay">`
 
 触发提交支付数据，常见于订单生成功后添加数据到支付组件后调用，也可由用户点击按钮时调用。
@@ -157,3 +158,8 @@ https://www-mipengine-org.mipcdn.com/static/oob/simple-pay.html?state=xxxxx&redi
 
 由于在 iOS 对跨域透传 `cooke` 的限制（<https://webkit.org/blog/7675/intelligent-tracking-prevention/>），由登录组件统一记录会话标识，并透传给支付组件，在发送支付请求时携带，后端应该优先使用 `cookie > sessionId` 校验登录状态。
 
+### 4. 百度搜索结果页降级处理
+
+在百度搜索页打开使用该组件页面时，由于有些支付密码输入框在 `iframe` 框架下有问题，在调用[提交支付接口](#action-pay)时做了降级处理，处理方式为跳转源站。包括以下设备、浏览器：
+
+- iOS设备下的手百App
