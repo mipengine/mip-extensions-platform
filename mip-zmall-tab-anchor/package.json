@@ -1,0 +1,14 @@
+{
+    "name": "mip-zmall-tab-anchor",
+    "version": "1.0.0",
+    "description": "锚点tab",
+    "contributors": [
+        {
+            "name": "wenxudong",
+            "email": "bordertop@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

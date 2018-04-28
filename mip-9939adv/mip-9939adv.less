@@ -1,0 +1,59 @@
+/**
+ * @file mip-9939adv样式文件
+ */
+
+mip-9939adv {
+    .close-btn {
+        width: 20px;
+        height: 20px;
+        background: rgba(0,0,0,.3) ;
+        background-size: 10px 10px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index:1000;
+    }
+    .close-btn:before,
+    .close-btn:after {
+        content: "";
+        width: 2px;
+        height: 15px;
+        display: inline-block;
+        position: absolute;
+        background: #fff;
+        top: 3px;
+        left: 9px;
+	}
+    .close-btn:before {
+        transform: rotate(45deg);
+	}
+    .close-btn:after {
+        transform: rotate(-45deg);
+	}
+    &.rel-adv {
+        width: 100%;
+        position: relative;
+        left: 0;
+        bottom: inherit;
+        top: 0;
+        z-index: 998;
+    }
+    &.fixed-adv {
+        width: 100%;
+        position: fixed;
+        left: 0;
+        bottom: inherit;
+        top: 0;
+        z-index: 998;
+    }
+    .rel-adv-con {
+        width: 100%;
+        max-width: 640px;
+        overflow: hidden;
+        margin: 0 auto;
+        }
+    .rel-adv-con img {
+        width: 100%;
+        max-width: 640px;    
+    }
+}

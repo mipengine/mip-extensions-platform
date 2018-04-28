@@ -1,0 +1,14 @@
+{
+    "name": "mip-9939adv",
+    "version": "1.0.0",
+    "description": "关闭组件，点击关闭广告",
+    "contributors": [
+        {
+            "name": "zzc",
+            "email": "zhuzicheng@9939.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

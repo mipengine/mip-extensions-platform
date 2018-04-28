@@ -4,10 +4,10 @@
  */
 define(function (require) {
     var $ = require('zepto');
-    var element = this.element;
+    var element = this.Element;
     var customElem = require('customElement').create();
     customElem.prototype.firstInviewCallback = function () {
-        var ele = this.element;
+        var ele = this.Element;
     };
     // build 方法，元素插入到文档时执行，仅会执行一次
     customElem.prototype.build = function () {
@@ -175,7 +175,10 @@ define(function (require) {
         });
         //  由于文章在微信页面内显示异常，故增加跳转。
         if (navigator.userAgent.toLowerCase().indexOf('micromessenger') > -1) {
-            window.top.location.href = 'http://www.360doc27.net/wxarticlenew/' + getID() + '.html';
+            var artid = getID();
+            if (artid !== null) {
+                window.top.location.href = 'http://www.360doc27.net/wxarticlenew/' + artid + '.html';
+            }
         }
     }
     //  获取文章id
