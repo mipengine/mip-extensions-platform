@@ -6,8 +6,9 @@
  * addEventListener 无法满足效果，测试必须只有使用onload才行，请通过
  * 1.0.1 增加一种判断方式。增加提示文字。
  * 1.0.2 增加一种不处理的判断。
+ * 1.0.3 增加了根据设备和对应栏目ID判断，获取安卓分类ID，苹果分类ID，非同设备访问同资源显示暂无对应设备资源，对应设备访问则预约。
+ * 1.0.4 增加了很对访问PC端资源的判断，根据不同设备访问PC资源，给出不同的提示。
  * @author gom3250@qq.com.
- * @version 1.0.0
  *  */
 
 define(function (require) {
@@ -22,22 +23,80 @@ define(function (require) {
         var btncolor = ele.getAttribute('data-color');
         var yuyueid = ele.getAttribute('data-id');
         var yuyueurl = ele.getAttribute('data-yuyueurl');
-        window.addEventListener('load', function () {
+        var phpurl = $(ele).find('.f-information').attr('data-phpurl');
+        if (phpurl !== undefined) {
+            window.addEventListener('load', function () {
             // 页面加载完成
-            var drurl = $(ele).find('#address').attr('href');
-            var downsize = $(ele).find('.f-game-size').text();
-            var qqun = '';
-            var lowerOk = $(ele).find('#address').attr('lowerok');
-            if (drurl === fromnodown || drurl === 'javascript:;' || downsize === '0KB') {
-                // 判断下载地址
-                if (lowerOk !== 'yes') {
-                     // 判断是否低级
-                    $(ele).find('#address').css('background', btncolor).text('立即预约');
-                    $(ele).find('#address').attr('href', 'javascript:;').addClass('m-yuyueok');
-                    addyuyue();
-                }
-            }
-        }, false);
+                fetchJsonp('https://ca.6071.com/web/index/c/' + phpurl, {
+                    jsonpCallback: 'callback'
+                }).then(function (res) {
+                    return res.json();
+                }).then(function (data) {
+                    var azclassid = data['android-classid'];
+                    var iosclassid = data['ios-classid'];
+                    var downsize = $(ele).find('.f-game-size').text();
+                    var classid = $(ele).find('.f-information').attr('data-categroyId');
+                    var classidnum = Number(classid);
+                    var qqun = '';
+                    var lowerOk = $(ele).find('#address').attr('lowerok');
+                    var drurl = $(ele).find('#address').attr('href');
+                    if (drurl === fromnodown || drurl === 'javascript:;' || downsize === '0KB' || drurl === '') {
+                        // 判断 是 没有下载地址
+                        if (platform.isIos()) {
+                            // 苹果设备访问
+                            if (lowerOk !== 'yes' && $.inArray(classidnum, iosclassid) !== -1) {
+                                $(ele).find('#address').css('background', btncolor).text('立即预约');
+                                $(ele).find('#address').attr('href', 'javascript:;').addClass('m-yuyueok');
+                                addyuyue();
+                            } else {
+                                $(ele).find('#address').text('暂无苹果版').attr('href', 'javascript:;');
+                                $(ele).find('#address').css({'background': '#ccc', 'color': '#fff'});
+                            }
+                        } else {
+                            if (lowerOk !== 'yes' && $.inArray(classidnum, azclassid) !== -1) {
+                                $(ele).find('#address').css('background', btncolor).text('立即预约');
+                                $(ele).find('#address').attr('href', 'javascript:;').addClass('m-yuyueok');
+                                addyuyue();
+                            } else {
+                                $(ele).find('#address').text('暂无安卓版').attr('href', 'javascript:;');
+                                $(ele).find('#address').css({'background': '#ccc', 'color': '#fff'});
+                            }
+                        }
+                        if ($.inArray(classidnum, iosclassid) === -1 && $.inArray(classidnum, azclassid) === -1) {
+                            //  没有下载地址，并且是PC端资源
+                            var systxt = '';
+                            if (platform.isIos()) {
+                                // 是苹果设备
+                                $(ele).find('#address').text('暂无安卓版');
+                                var systxt = '该软件没有对应苹果版';
+
+                            } else {
+                                var systxt = '该软件没有对应安卓版';
+                            }
+                            $(ele).find('#address').text(systxt);
+                        }
+                    } else {
+                        // 有对应设备的下载地址
+                        if ($.inArray(classidnum, iosclassid) === -1 && $.inArray(classidnum, azclassid) === -1) {
+                            // 是PC端资源
+                            var sys = '';
+                            if (platform.isIos()) {
+                                // 是苹果设备
+                                var sys = '苹果';
+                            } else {
+                                var sys = '安卓';
+                            }
+                            var firname = $(ele).find('.f-tags-box li').eq(0).find('p').text();
+                            var titshi = '<p class="m-tisp1">本页面是PC端资源，为了适配';
+                            titshi += '<span>' + sys + '</span>用户的下载需求</p>';
+                            titshi += '<p class="m-tisp2">该地址下载的是：';
+                            titshi += '<span>' + firname + '</span></p>';
+                            $(ele).find('#downAddress ul li').append(titshi);
+                        }
+                    }
+                });
+            }, false);
+        };
         function addyuyue() {
             // 获取数据
             fetchJsonp(yuyueurl + '/ajax.asp?action=33&id=0', {

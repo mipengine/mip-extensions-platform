@@ -1,0 +1,14 @@
+{
+    "name": "mip-jia-infinite",
+    "version": "1.0.0",
+    "description": "无限加载数据",
+    "contributors": [
+        {
+            "name": "ll",
+            "email": "liulei@qeeka.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

@@ -22,7 +22,7 @@ define(function (require) {
         var synthesize = $el.find('#synthesize');
         var hot = $el.find('#hot');
         var level = $el.find('#level');
-        var productid = $el.find('#dataoption');
+        var productid = $el.find('#dataoption').data('productid');
 
         function sendData(consultUrl, bodyData) {
             fetch(consultUrl, {
@@ -54,10 +54,10 @@ define(function (require) {
                         changeItems.forEach(function (items) {
                             changeTagHtml = foreachTags(items);
                             changeReturnHtml = ifConsulting(items);
-                            changehtml += '<div class="consult-box">'
-                                        + ' <div class="person-card consult-box" data-plannerid=' + items.id
+                            changehtml += '<div class="consult-box" data-plannerid=' + items.id
                                         + ' data-productid=' + productid
-                                        + 'data-consulturl="http://www.caifu.org/product/consult">'
+                                        + ' data-consulturl="http://www.caifu.org/product/consult">'
+                                        + '<div class="person-card">'
                                         + '<div class="click-lightbox slide-up">'
                                             + '<button type="button" class="click-hidden">&times;</button>'
                                             + '<h3>咨询TA</h3>'
@@ -120,7 +120,7 @@ define(function (require) {
                                 + '</div>';
                         });
                         changeTemplateBox.html(changehtml);
-                        valifypopValue($el);
+                        valifypopValue($el, productid);
                     }
                     else if (type === 'planners' && data.code === 0) {
                         var items = data.data.planners;
@@ -132,9 +132,9 @@ define(function (require) {
                             taghtml = foreachTags(items);
                             returnHtml = ifConsultingPlanner(items);
                             returnPhoneHtml = ifPhoneConsultingPlanner(items);
-                            html += '<div class="col-lg-4 col-xs-6 col-sm-4 financial-card'
-                                    + ' financial-search-card clearfix">'
-                                    + '<div class="person-card consult-box financial-planner-box" '
+                            html += '<div class="col-lg-4 col-xs-6 col-sm-4'
+                                    + ' clearfix">'
+                                    + '<div class="person-card consult-box"'
                                     + 'data-plannerid=' + items.id + ' data-productid=' +  productid
                                         + ' data-consulturl="http://www.caifu.org/product/consult">'
                                         + '<div class="click-lightbox slide-up">'
@@ -176,7 +176,7 @@ define(function (require) {
                                             + '</mip-form>'
                                         + '</div>'
                                         + '<div class="card-box">'
-                                            + '<div class="planner-head">'
+                                            + '<div class="person-icon">'
                                                 + '<mip-img src=' + items.avatar + ' ></mip-img>'
                                             + '</div>'
                                             + '<div class="info-text">'
@@ -192,7 +192,7 @@ define(function (require) {
                                             + '</div>'
                                         + '</div>'
                                         + '<div class="card-but">'
-                                            + '<a href="/planner/' + items.id + '"><button class="planner-submit-about"'
+                                            + '<a href="/planner/' + items.id + '"><button class="but-about"'
                                                 + '>了解TA'
                                             + '</button></a>'
                                             + returnHtml
@@ -255,7 +255,7 @@ define(function (require) {
             }
             return taghtml;
         }
-        function valifypopValue($el) {
+        function valifypopValue($el, productid) {
             $el.find('.card-but .but-advisory').on('click', function () {
                 $(this).parent().siblings('.click-lightbox').removeClass('slide-up').addClass('slide');
             });
@@ -271,13 +271,13 @@ define(function (require) {
                 var checkboxArry = $(this).siblings('.checkbox-flex').children('.form-group-checkbox');
                 var checkboxR = checkboxArry.children('input[type=radio]:checked').val();
                 var plannerId = $(this).parents('.consult-box').data('plannerid');
-                var productId = $(this).parents('.consult-box').data('productid');
+                // var productId = $(this).parents('.consult-box').data('productid');
                 var consultUrl = $(this).parents('.consult-box').data('consulturl');
                 var phoneForm = $el.find('.phone-form')[0];
                 if ($(window).width() < 769) {
                     if (phoneForm.reportValidity()) {
                         var bodyPhoneData = {
-                            productId: productId,
+                            productId: productid,
                             userName: inputName,
                             userMobile: inputPhone,
                             contactTime: checkboxR,
@@ -298,7 +298,7 @@ define(function (require) {
                     }
                     else {
                         var bodyData = {
-                            productId: productId,
+                            productId: productid,
                             userName: inputName,
                             userMobile: inputPhone,
                             contactTime: checkboxR,

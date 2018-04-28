@@ -2,6 +2,7 @@
  * @file mip-linkeddb-relation 组件
  * @author
  */
+// import { Base64 } from './base64js.min';
 
 define(function (require) {
     'use strict';
@@ -10,6 +11,8 @@ define(function (require) {
     var $ = require('zepto');
     var d3 = require('./d3.min');
     var Base64 = require('./base64.min');
+
+    // var Base64 = require('./base64.min').Base64;
     var MakeSvgPicClass = require('./d3-rolesMap.min').MakeSvgPicClass;
 
     /**
@@ -18,8 +21,7 @@ define(function (require) {
     customElement.prototype.firstInviewCallback = function () {
         var graph = $(this.element).find('#roleMap').data('graph');
         if (graph) {
-            var base = new Base64();
-            var rolesData = JSON.parse(base.decode(graph));
+            var rolesData = JSON.parse(Base64.decode(graph));
             var configs = {
                 nodes: rolesData.nodes,
                 links: rolesData.links,
