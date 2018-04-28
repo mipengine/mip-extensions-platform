@@ -43,7 +43,7 @@ define(function (require) {
             '<div class="label">电话</div><div class="flex-item">',
             '<input type="tel" name="mobile" placeholder="请填写收货人手机号" maxlength="15" value="">',
             '</div></div>',
-            '<div class="address-edit-item address-edit-arrow fix-flex" on="tap:myCityPicker.open">',
+            '<div class="address-edit-item address-edit-arrow fix-flex" on="click:myCityPicker.open">',
             '<div class="label">省份/城市</div><div class="flex-item">',
             '<div class="address-edit-text" placeholder="请选择省份/城市" m-text="userSelectedCityName" ',
             'm-bind:selected="userSelectedCityName!==\'\'?\'true\':\'\'"></div>',

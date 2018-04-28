@@ -4,7 +4,6 @@
 
 mip-zmall-baidu-coupon {
     .receive-coupon-success {
-        display: none;
         position: absolute;
         left: 50%;
         top: 50%;
@@ -15,9 +14,12 @@ mip-zmall-baidu-coupon {
         -webkit-transform: translate(-50%, -50%);
         background-color: #fff;
         border-radius: .36rem;
+        -webkit-transition: opacity .3s ease-in-out;
+        transition: opacity .3s ease-in-out;
+        opacity: 0;
     }
     .receive-coupon-success.visible {
-        display: block;
+        opacity: 1;
     }
 
     .receive-coupon-header {
@@ -51,6 +53,15 @@ mip-zmall-baidu-coupon {
         background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAApCAYAAABDV7v1AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAYNJREFUeNrM2TtOw0AQxvFh8BXMAWhzgpT0VEgUmCMAFdAgSloO4AOAxOMMUFjiKhRcIZH4VmzQyvJjHzPeHemfwlopv8KJxvJe27aEqdADekQ/VMbU6Brdo01lkc/oFB2jowKwBvmJVugQNYyPNTqxB1b2QF0IkqxtbaAdOkfbArB95NbaOrYXXgrAjiGNjdg5mBM7iexDc2FnkUPQpbFeyDHoUlhv5BRUGxuEnINqYYORPlBpbBTSFyqFjUaGQFOxSchQaCw2GRkDDcWKIGOhvlgxZAp0DiuK3G32lIg184T2HSxJIiWgY1hykA16Tf0SJpkx2MuB6xcSSEloPQK9klpkWAjZ/+GILzKsgGw0tq5KAenek/1/g+hHcVZEiq6IrIQUx7IiUhTLykgxLC+AFMHyQshkLC+ITMJOQQ8UkNFYnkB+KCGjsJwJGYzljMggLGdGemO5AKQXdge9yYycwt660Dv0nhk5hH2ztv99dIPO6O8NSUf5x2C/0Ze10a8AAwAEReAHghCbOgAAAABJRU5ErkJggg==) no-repeat center center;
         background-size: .42rem .41rem;
         -webkit-background-size: .42rem .41rem;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+    .receive-coupon-scroller {
+        position: relative;
+        z-index: 2;
+        max-height: 10rem;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
     }
     .receive-coupon-code {
         height: 1.14rem;
@@ -86,8 +97,9 @@ mip-zmall-baidu-coupon {
         height: 100%!important;
     }
     .receive-coupon-qrcode-tip {
-        height: 1.1rem;
-        line-height: 1.1rem;
+        padding-top: .2rem;
+        height: .9rem;
+        line-height: .9rem;
         font-size: .36rem;
         color: #999;
     }
@@ -139,26 +151,26 @@ mip-zmall-baidu-coupon {
     }
     .receive-coupon-item {
         margin-top: .42rem;
-        height: 2.7rem;
+        height: 2rem;
         background-color: #ffeee2;
-        border-radius: .08rem;
+        border-radius: .15rem;
     }
     .receive-coupon-worth {
-        width: 2.56rem;
-        padding-right: .3rem;
+        width: 2.66rem;
+        padding-right: .22rem;
         text-align: center;
-        background: url('//icon.zol-img.com.cn/newshop/mip/coupon.png') no-repeat right top;
-        background-size: .3rem 2.7rem;
+        background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAADICAYAAADsgBFkAAAENElEQVR42u1c7ZKiMBD0/R9yIbjqnptAEEQQQ9+PgRVdDEkIdXd7sSpllR9dAZLpmZ6ZbAAwAJnnwTZQqoXvl1LtBteL9A58vcgNzpl/4HMmN5B7iU75A+0UIPdyAx5JXE7+gC8ngEdyA8Eksi2grh4e2hXItoBgcoM0keAxkB+w6JZ0ijB4DKRJD5wmAI/oi5vDzG/XHjQC0uQJeADP3oG6ANCZTJN+m72PQSeA0wQQjC4n/wCqHGjrx1vUKfqsyuk3PKb/jDEmgcez5zGQbgG5A+S+Hzv6jMfPszQEHl+BiJ8Gg/Y/RsBuIwAH4AAcgD0C8wjgbzRE5AFYxPReCmKKugBK/vidNbCIgWwHXC9Tng7R0WvwV8CMRlu9prum6hmGWQDzCDgd57n09OsVPb0CfgPOqYGPJui3dsBiHrjklsAiBvI90Gl8i64jxp5+gLpVEQGXXOeqOtK/YDQqCajbyPFrCVSwVyvCZIP0XpHcAcWRhtz1M2UetrSI+y0dze24YDYDcAD+L1m6D2zyD2LqUtyjT+FqhIY/Xk6PBr9TZKdFogOfof+6mIvyLYFFRJc/F+7mB0tqWo1MTenfHjgiZ2Tu9SglWDy85vwatC5cfLfBKdx+B+86oC7nPE4DN1YwYudK0jj9MlEAbFn6LbB0AA7APwBY9HKjP8eb3RXa/EAj23oIFTgjlhhrym0DFHxJkB4BVaYJx1IXlo5J0tVJ650idcCapcu1WLoyYWnhwNLF5wqywpcQ0ujySbqwd4al5X46fdE2ugdnso5j2hxVRjO8VhSgD+L/oi09+MjjLR3E/wAcgP99YDZHoLa24kkjHmzHIuAhrdycSYZUNwps5GGBdeMRBTVTimynSLi2Z2lGdlhXIXFryS4LZsvSfJ7zik8HKb1aRUqPDGd8tJyxYOT8jQXpyXucWN7jwXcrjtM1AJ3qQ99oyTr+AJqyX8ftaB1Hvnbe9r68Fu+8sZ0YkgFm9iLY4wAcgP9SYMHIij0E6cwDS2fvpBBeK08xyFzUJPc6cF2clwC3WhPn1Q5xHn8zjEyPfw1LG0b/xadDwlvu9AlvpXQVCwsUllK4Jrz7mZcCuDVPmtDnwlharKVirae7BbMZgAPwj0t4P+fzjqSEuye8YyB9n05vNmUfj7imNrU509KB/o2zvB//R1naTO6/68jNcmJpbbVCvqAsLU2A+vS9jv6SeyhLE73g5K0iJCS8A3AADglv21BB7omdT0Nt7NKyNMEocnqo5r3dq3ndytJm6o8r6VqWdtB3YzlR058vS3OR0k3q6K0dlpQBaTzdTvDlv511+pBBr0I71atQLXAKv3VXlPfuCrGku+JB7Q4sHYADcAAOwD88D+Kzrdl7I/ZU67hSjxK6dev4Ks3uq7Tnr3KgwGpHIKx2aMNqx0ysdjDGakd5rHb4yErHpfwGXo3crRBeUMoAAAAASUVORK5CYII=) no-repeat right top;
+        -webkit-background-size: .22rem 2rem;
+        background-size: .22rem 2rem;
         text-align: center;
     }
     .receive-coupon-explain {
-        padding: 0 .2rem 0 .3rem;
+        padding: 0 .1rem 0 .3rem;
     }
     .receive-coupon-price {
-        height: 1.34rem;
-        margin-top: .32rem;
-        line-height: 1.34rem;
-        font-size: .78rem;
+        height: 1.2rem;
+        line-height: 1.2rem;
+        font-size: .6rem;
         color: #f60;
     }
     .receive-coupon-condition {
@@ -168,10 +180,9 @@ mip-zmall-baidu-coupon {
         color: #f60;
     }
     .receive-coupon-type {
-        height: 1.34rem;
-        line-height: 1.34rem;
-        margin-top: .32rem;
-        font-size: .6rem;
+        height: 1.2rem;
+        line-height: 1.2rem;
+        font-size: .48rem;
         color: #f60;
         font-weight: bold;
     }

@@ -64,7 +64,7 @@ define(function (require) {
         }
 
         // 登录信息
-        if (window.ZOL_USER_INFO.sid) {
+        if (window.ZOL_USER_INFO && window.ZOL_USER_INFO.sid) {
             query += '&userId=' + window.ZOL_USER_INFO.sid;
         }
 

@@ -7,6 +7,10 @@
 类型| 公司业务组件
 所需脚本|https://c.mipcdn.com/static/v1/mip-zmall-store/mip-zmall-store.js
 
+## 更新
+
+- 1.0.1 修复 tap 穿透问题，改用 click
+
 ## 示例
 
 ### 基本用法

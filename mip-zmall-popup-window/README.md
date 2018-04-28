@@ -5,7 +5,11 @@
 标题|内容
 ----|----
 类型|公司业务组件
-所需脚本|https://c.mipcdn.com/static/v1/mip-mustache/mip-mustache.js<br>https://c.mipcdn.com/static/v1/mip-zmall-popup-window/mip-zmall-popup-window.js
+所需脚本|https://mipcache.bdstatic.com/static/v1/mip-mustache/mip-mustache.js<br>https://c.mipcdn.com/extensions/platform/v1/mip-zmall-popup-window/mip-zmall-popup-window.js
+
+## 更新
+
+- 1.0.1 去掉向外曝露的click事件，因mip官方已经提供支持。增加禁止滚动功能
 
 ## 示例
 

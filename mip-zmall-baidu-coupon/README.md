@@ -7,6 +7,12 @@
 类型|业务组件
 所需脚本|https://c.mipcdn.com/static/v1/mip-zmall-baidu-coupon/mip-zmall-baidu-coupon.js
 
+## 更新
+
+### 1.0.1 更新日志
+
+增加限高滚动，缩小优惠券的字体大小，增加淡出效果
+
 ## 示例
 
 ### 基本用法

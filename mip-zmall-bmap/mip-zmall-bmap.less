@@ -1,0 +1,42 @@
+/**
+ * @file mip-zmall-bmap样式文件
+ */
+
+mip-zmall-bmap {
+    .zmall-bmap {
+        width: 100%;
+        height: 100%;
+    }
+    .zmall-bmap-container {
+        background-color: #ededed;
+    }
+    .zmall-bmap-distance {
+        opacity: 0;
+        height: 1.32rem;
+        padding: 0 .54rem;
+        line-height: 1.32rem;
+        font-size: .42rem;
+        color: #333;
+        background: rgba(255, 247, 175, .9)!important;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        -webkit-transition: .3s all ease-in-out;
+        transition: .3s all ease-in-out;
+    }
+    .zmall-bmap-distance.visible {
+        display: block;
+        opacity: 1;
+    }
+    .zmall-bmap-distance p {
+        float: left;
+        max-width: 70%;
+        height: 1.32rem;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+    .zmall-bmap-distance span {
+        float: right;
+    }
+}

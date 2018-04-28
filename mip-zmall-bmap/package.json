@@ -1,7 +1,7 @@
 {
-    "name": "mip-zmall-baidu-coupon",
-    "version": "1.0.1",
-    "description": "百度优惠券领取成功",
+    "name": "mip-zmall-bmap",
+    "version": "1.0.0",
+    "description": "新版百度地图组件",
     "contributors": [
         {
             "name": "liuxg",

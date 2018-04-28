@@ -5,12 +5,11 @@
 标题|内容
 ----|----
 类型| 公司业务组件
-所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-zmall-address-map/mip-zmall-address-map.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-zmall-address-map/mip-zmall-address-map.js
 
 ## 更新日志（2018-04-02）
 
-- 地图可缩放
-- 修改POI选择和城市选择的联动关系：选择POI的时候，修改成不可更改城市
+- 1.0.2 修复 tap 穿透问题， 改成 click
 
 ## 示例
 

@@ -51,7 +51,7 @@ define(function (require) {
             '</div></div><div class="map-fix__box">',
             '<div id="js_map" class="map-fix__map"></div>',
             '<div id="js_map_scroller" class="map-fix__scroller"></div>',
-            '</div><span class="map-fix__back" on="tap:myMapPicker.close">返回</span>',
+            '</div><span class="map-fix__back" on="click:myMapPicker.close">返回</span>',
             '</div>'
         ].join('');
 

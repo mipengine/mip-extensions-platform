@@ -11,6 +11,10 @@ define(function (require) {
     var templates = require('templates');
     var viewer = require('viewer');
 
+    function preventTouch(e) {
+        e.preventDefault();
+    }
+
     // 设置遮罩层
     function setPopupWindowCover(element) {
         var elementParentNode = element.parentNode;
@@ -22,6 +26,7 @@ define(function (require) {
         util.css(element, {
             height: '100%'
         });
+        element.addEventListener('touchmove', preventTouch);
     }
 
     // 移除遮罩层
@@ -37,6 +42,7 @@ define(function (require) {
                 height: 'auto'
             });
         }, 300);
+        element.removeEventListener('touchmove', preventTouch);
     }
 
     // 关闭
@@ -141,7 +147,6 @@ define(function (require) {
                     selectedElement.classList.remove('label-radio--checked');
                     item.querySelector('.label-radio').classList.add('label-radio--checked');
                 }
-                viewer.eventAction.execute('click', event.target, event);
             });
         });
     }
