@@ -4,16 +4,21 @@
  */
 define(function (require) {
     var $ = require('zepto');
+    var element = this.element;
     var customElem = require('customElement').create();
+    customElem.prototype.firstInviewCallback = function () {
+        var ele = this.element;
+    };
     // build 方法，元素插入到文档时执行，仅会执行一次
     customElem.prototype.build = function () {
-        if ($('.mip-360doc-script-wxggalink') !== null) {
-            $('.mip-360doc-script-wxggalink').html('<span class=\'mip-360doc-script-pic\'><img src=\'https://pubimage.360doc.com/transfer/images/zhaishou2.png\' class=\'pic2\'/></span><span class=\'mip-360doc-script-pic\'><img src=\'https://pubimage.360doc.com/transfer/images/xiazai2.png\'  class=\'pic2\'/></span>');
-            var picn = $('.mip-360doc-script-pic').length;
+        if ($(element).find('.mip-360doc-script-wxggalink') !== null) {
+            $(element).find('.mip-360doc-script-wxggalink').html('<span class=\'mip-360doc-script-pic\'><img src=\'https://pubimage.360doc.com/transfer/images/zhaishou2.png\' class=\'pic2\'/></span><span class=\'mip-360doc-script-pic\'><img src=\'https://pubimage.360doc.com/transfer/images/xiazai2.png\'  class=\'pic2\'/></span>');
+            var picn = $(element).find('.mip-360doc-script-pic').length;
             if (picn > 1) {
-                $('.mip-360doc-script-pic').eq(0).css('display', 'inline').siblings('.mip-360doc-script-pic').hide();
+                $(element).find('.mip-360doc-script-pic').eq(0).css('display', 'inline')
+                    .siblings('.mip-360doc-script-pic').hide();
             }
-            $('.mip-360doc-script-box960').css('display', '');
+            $(element).find('.mip-360doc-script-box960').css('display', '');
             setone();
         }
         getRefNum();// 鲜花
@@ -24,43 +29,43 @@ define(function (require) {
             check();
             clearTimeout(t);
         }, 10000);
-        if ($('.mip-360doc-script-plg2') !== null) {
-            $('.mip-360doc-script-plg2').on('click', function (event) {
+        if ($(element).find('.mip-360doc-script-plg2') !== null) {
+            $(element).find('.mip-360doc-script-plg2').on('click', function (event) {
                 sendlog('Componentclick?id=1');
             });
         }
-        if ($('.mip-360doc-script-p_header_sc') !== null) {
-            $('.mip-360doc-script-p_header_sc').on('click', function (event) {
+        if ($(element).find('.mip-360doc-script-p_header_sc') !== null) {
+            $(element).find('.mip-360doc-script-p_header_sc').on('click', function (event) {
                 sendlog('Componentclick?id=2');
             });
         }
-        if ($('.mip-360doc-scropt-plzs') !== null) {
-            $('.mip-360doc-scropt-plzs').on('click', function (event) {
+        if ($(element).find('.mip-360doc-scropt-plzs') !== null) {
+            $(element).find('.mip-360doc-scropt-plzs').on('click', function (event) {
                 sendlog('Componentclick?id=4');
             });
         }
-        if ($('.mip-360doc-script-gz1') !== null) {
-            $('.mip-360doc-script-gz1').on('click', function (event) {
+        if ($(element).find('.mip-360doc-script-gz1') !== null) {
+            $(element).find('.mip-360doc-script-gz1').on('click', function (event) {
                 sendlog('Componentclick?id=5');
             });
         }
-        if ($('.mip-360doc-script-xh1') !== null) {
-            $('.mip-360doc-script-xh1').on('click', function (event) {
+        if ($(element).find('.mip-360doc-script-xh1') !== null) {
+            $(element).find('.mip-360doc-script-xh1').on('click', function (event) {
                 sendlog('Componentclick?id=6');
             });
         }
-        if ($('.mip-360doc-script-reflectionurl') !== null) {
-            $('.mip-360doc-script-reflectionurl').on('click', function (event) {
+        if ($(element).find('.mip-360doc-script-reflectionurl') !== null) {
+            $(element).find('.mip-360doc-script-reflectionurl').on('click', function (event) {
                 sendlog('Componentclick?id=7');
             });
         }
-        if ($('.mip-360doc-script-p_footer_sc') !== null) {
-            $('.mip-360doc-script-p_footer_sc').on('click', function (event) {
+        if ($(element).find('.mip-360doc-script-p_footer_sc') !== null) {
+            $(element).find('.mip-360doc-script-p_footer_sc').on('click', function (event) {
                 sendlog('Componentclick?id=8');
             });
         }
         getBlockArt();
-        if ($('.mip-360doc-script-keyword') !== null) {
+        if ($(element).find('.mip-360doc-script-keyword') !== null) {
             parseSearchWord();
         }
     };
@@ -68,7 +73,7 @@ define(function (require) {
         var deny1 = true;
         var deny2 = true;
         var node;
-        if ($('.like_content') && $('.like_content').eq(0)) {
+        if ($(element).find('.like_content') && $(element).find('.like_content').eq(0)) {
             node = document.getElementsByClassName('like_content')[0];
             if (node.getElementsByTagName('iframe') && node.getElementsByTagName('iframe')[0]
             && node.getElementsByTagName('iframe')[0].src
@@ -78,7 +83,7 @@ define(function (require) {
             }
         }
 
-        if ($('.like_content') && $('.like_content').eq(1)) {
+        if ($(element).find('.like_content') && $(element).find('.like_content').eq(1)) {
             node = document.getElementsByClassName('like_content')[1];
             if (node.getElementsByTagName('iframe') && node.getElementsByTagName('iframe')[0]
             && node.getElementsByTagName('iframe')[0].src
@@ -129,7 +134,7 @@ define(function (require) {
         }, 4000);
     }
     function show(index) {
-        $('.mip-360doc-script-pic').eq(index).css('display', 'inline')
+        $(element).find('.mip-360doc-script-pic').eq(index).css('display', 'inline')
         .siblings('.mip-360doc-script-pic').css('display', 'none');
     }
     //  获取评论数
@@ -145,12 +150,12 @@ define(function (require) {
             success: function (data) {
                 var useridref = data.split('|');
                 if (useridref[1] !== null && useridref[1] !== '') {
-                    $('.mip-360doc-script-refnum').html(useridref[1]);
+                    $(element).find('.mip-360doc-script-refnum').html(useridref[1]);
                 }
                 else {
-                    $('.mip-360doc-script-refnum').html('0');
+                    $(element).find('.mip-360doc-script-refnum').html('0');
                 }
-                $('.mip-360doc-script-xh1').html('献花(' + useridref[3] + ')');
+                $(element).find('.mip-360doc-script-xh1').html('献花(' + useridref[3] + ')');
             },
             error: function () { }
         });
@@ -164,14 +169,18 @@ define(function (require) {
             return response.json();
         }).then(function (data) {
             if (data.result === 1) {
-                $('.mip-360doc-script-tit').html('');
-                $('.mip-360doc-script-con').html('对不起，该文章已被删除！');
+                $(element).find('.mip-360doc-script-tit').html('');
+                $(element).find('.mip-360doc-script-con').html('对不起，该文章已被删除！');
             }
         });
+        //  由于文章在微信页面内显示异常，故增加跳转。
+        if (navigator.userAgent.toLowerCase().indexOf('micromessenger') > -1) {
+            window.top.location.href = 'http://www.360doc27.net/wxarticlenew/' + getID() + '.html';
+        }
     }
     //  获取文章id
     function getID() {
-        var artid = $('.mip-360doc-script-saveid').html();
+        var artid = $(element).find('.mip-360doc-script-saveid').html();
         return artid;
     }
     //  获取搜索词
@@ -192,7 +201,7 @@ define(function (require) {
                 if (index2 > 0) {
                     keyword = url.substring(index + 5, index2);
                     if (keyword.length > 0) {
-                        $('.mip-360doc-script-keyword').val(decodeURI(keyword));
+                        $(element).find('.mip-360doc-script-keyword').val(decodeURI(keyword));
                     }
                 }
             }

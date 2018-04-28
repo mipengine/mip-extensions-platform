@@ -1,6 +1,6 @@
 {
     "name": "mip-360docad-script",
-    "version": "1.1.5",
+    "version": "1.1.6",
     "description": "360doc业务逻辑组件",
     "contributors": [
         {
@@ -9,6 +9,6 @@
         }
     ],
     "engines": {
-        "mip": ">=1.1.0"
+        "mip": ">=1.1.1"
     }
 }
