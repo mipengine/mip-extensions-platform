@@ -14,8 +14,7 @@ define(function (require) {
         var delay = parseInt(ele.getAttribute('delay'), 10) || 0;
         var timmer;
         closeEle[0].addEventListener('click', function () {
-            var target = ele.parentElement;
-            target.parentElement.removeChild(target);
+            ele.parentElement.removeChild(ele);
         }, false);
 
 

@@ -212,10 +212,10 @@ define(function (require) {
         function ifPhoneConsultingPlanner(items) {
             var returnPhoneHtml = '';
             if (items.consulStatus === 0) {
-                returnPhoneHtml = '<button class="planner-submit-consult2 but-advisory"'
+                returnPhoneHtml = '<button class="planner-submit-consult2 but-about"'
                             + 'th:if="${planner != null && planner.consulStatus != 0}"'
                             + 'on="tap:planner-more.toggle tap:modal-consult.toggle'
-                            + 'tap:MIP.setData({plannerid:' + items.id
+                            + ' tap:MIP.setData({plannerid:' + items.id
                             + ',productid:' + items.id + '})">'
                             + '咨询TA'
                             + '</button>';

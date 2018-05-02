@@ -6,7 +6,7 @@ mip-9939adv 实现了一个顶部广告，页面到达指定高度时候变成�
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://mipcache.bdstatic.com/static/mip-9939adv/v1/mip-9939adv.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-9939adv/mip-9939adv.js
 
 ## 示例
 
