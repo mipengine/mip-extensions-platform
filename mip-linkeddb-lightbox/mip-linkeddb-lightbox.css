@@ -1,0 +1,33 @@
+/**
+ * @file mip-linkeddb-lightbox样式文件
+ */
+mip-linkeddb-lightbox .mip-lightbox {
+  position: fixed;
+  top: 2rem;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  z-index: 10;
+  background-color: #fff;
+  transform: translateY(-200%);
+}
+mip-linkeddb-lightbox .show {
+  transform: translateY(0);
+  opacity: 1;
+  transition: .5s;
+}
+.mip-opacity {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+  opacity: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+.mip-opacity-visible {
+  visibility: visible;
+  opacity: 1;
+}

@@ -1,7 +1,7 @@
 {
     "name": "mip-k73shield-data",
-    "version": "1.0.1",
-    "description": "组件介绍",
+    "version": "1.1.1",
+    "description": "新增预约功能,让用户可以预约下载资源",
     "contributors": [
         {
             "name": "yx",

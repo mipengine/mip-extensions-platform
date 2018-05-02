@@ -1,0 +1,14 @@
+{
+    "name": "mip-km28-ad1",
+    "version": "1.0.0",
+    "description": "开门彩广告1",
+    "contributors": [
+        {
+            "name": "zhaoliang",
+            "email": "54360128@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

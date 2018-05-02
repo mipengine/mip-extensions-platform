@@ -1,0 +1,14 @@
+{
+    "name": "mip-linkeddb-lightbox",
+    "version": "1.0.0",
+    "description": "弹出层 从上网下弹 transition 控制时间",
+    "contributors": [
+        {
+            "name": "linkeddb",
+            "email": "340236524@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

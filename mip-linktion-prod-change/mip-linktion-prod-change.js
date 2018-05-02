@@ -39,8 +39,8 @@ define(function (require) {
                 if (item.plannerTotal > 0) {
                     item.planners.forEach(function (planner) {
                         if (planner !== null) {
-                            plannerHtml = '<div class="module-portrait-icon" th:each="planner : ${product.planners}">'
-                                                + '<mip-img src="' + planner.image + '" ></mip-img>'
+                            plannerHtml += '<div class="module-portrait-icon" th:each="planner : ${product.planners}">'
+                                                + '<mip-img src="' + planner.avatar + '" ></mip-img>'
                                             + '</div>';
                         }
                     });
