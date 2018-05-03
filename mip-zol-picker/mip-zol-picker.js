@@ -145,8 +145,13 @@ define(function (require) {
                             element.myPicker = new Picker(params, element);
                             pickerMaskOpen(element);
                             // 存本地，避免下次请求
-                            storage.set('mip-picker-cities', JSON.stringify(res.data));
-                            storage.set('mip-picker-cities-date', +new Date());
+                            try {
+                                storage.set('mip-picker-cities', JSON.stringify(res.data));
+                                storage.set('mip-picker-cities-date', +new Date());
+                            }
+                            catch (e) {
+                                return false;
+                            }
                         }
                     });
                 }
