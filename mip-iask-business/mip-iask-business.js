@@ -876,19 +876,23 @@ define(function (require) {
                     try {
                         var res = $.parseJSON(datas);
                         if (res.succ === 'Y') { // 不等于空
-                        	var cmJsonData = $.parseJSON(res.html);
-                            if ('undefined' !== typeof cmJsonData) {
-                            	youlaiArray = loadData(param, cmJsonData);
-                            }
+			    try {
+				var cmJsonData = $.parseJSON(res.html);
+                                if ('undefined' !== typeof cmJsonData) {
+                            	    youlaiArray = loadData(param, cmJsonData);
+                                }
+			    }catch (e) {}
                         }
                         $.get(url+runhaiTag, function (result) {
                             try {
                                 var res = $.parseJSON(result);
                                 if (res.succ === 'Y') { // 不等于空
-                                	var cmJsonData = $.parseJSON(res.html);
-                                    if ('undefined' !== typeof cmJsonData) {
-                                        runhaiArray = loadData(param, cmJsonData);
-                                    }
+				    try {
+                                        var cmJsonData = $.parseJSON(res.html);
+                                        if ('undefined' !== typeof cmJsonData) {
+                                            runhaiArray = loadData(param, cmJsonData);
+                                        }
+			            }catch (e) {}
                                 }
                                 if(youlaiArray != null && youlaiArray.length > 0) {
                                 	for(var i = 0; i < youlaiArray.length; i ++) {
