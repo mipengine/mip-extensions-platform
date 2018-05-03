@@ -16,11 +16,11 @@ mip-jia-infinite 无限加载数据
     <script type="application/json">
         {
             "request": {
-                "isJsonp": false,
+                "isJsonp": true,
                 "jsonpCallback": "",
                 "resultType": "json",
-                "url": "http://qa.m.jia.com/wangpu/shanghai/shop/list/",
-                "method": "post",
+                "url": "//test.m.jia.com/JiaZhuangxiu/ajaxGetSjList",
+                "method": "get",
                 "init": {
                     "mode": "cors",
                     "credentials": "include"
@@ -31,17 +31,19 @@ mip-jia-infinite 无限加载数据
                 "body": {
                     "format": "stringify",
                     "data": {
-                        "pageNo": 20,
-                        "sort": "ORDER_SELF"
+                        "page": 2,
+                        "user_id": 0,
+                        "mip": 1
+
                     }
                 }
             },
             "response": {
-                "textIdCard": "<li>",
+                "textIdCard": "diary-house-item",
                 "parentBox": ".parent",
-                "Datatier": "shopList",
-                "size": 8,
-                "pageSizeKey": "pageNo",
+                "Datatier": "info",
+                "size": 5,
+                "pageSizeKey": "page",
                 "event": "click",
                 "button": ".button",
                 "bottomDistance": 10,
@@ -50,11 +52,7 @@ mip-jia-infinite 无限加载数据
         }
     </script>
     <template type="mip-mustache">
-        {{#.}}
-            <div>
-                {{shop_name}}
-            </div>
-        {{/.}}
+        {{{.}}}
     </template>
 </mip-jia-infinite>
 

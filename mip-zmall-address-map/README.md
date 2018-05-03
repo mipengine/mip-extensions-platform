@@ -7,8 +7,9 @@
 类型| 公司业务组件
 所需脚本|https://c.mipcdn.com/static/v1/mip-zmall-address-map/mip-zmall-address-map.js
 
-## 更新日志（2018-04-02）
+## 更新日志（2018-05-03）
 
+- 1.0.3 把click改成JS绑定，而不是通过 on="click:xxx.xxx" 来绑定
 - 1.0.2 修复 tap 穿透问题， 改成 click
 
 ## 示例

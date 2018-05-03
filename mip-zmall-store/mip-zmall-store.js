@@ -35,7 +35,7 @@ define(function (require) {
             '<p class="store-box__more disabled">正在为您加载更多门店...</p>',
             '<div class="store-box__list-empty"><p>很抱歉，当前地区没有门店</p></div>',
             '<div class="store-box__list-loading"></div>',
-            '</div><span class="store-box__back" on="click:myStorePicker.close">返回</span>',
+            '</div><span class="store-box__back">返回</span>',
             '</div>'
         ].join('');
 
@@ -50,6 +50,9 @@ define(function (require) {
         var backElm = element.querySelector('.store-box__back');
         backElm.addEventListener('touchmove', function (e) {
             e.preventDefault();
+        });
+        backElm.addEventListener('click', function (e) {
+            close(element);
         });
 
         // 排序筛选

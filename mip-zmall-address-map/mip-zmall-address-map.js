@@ -51,7 +51,7 @@ define(function (require) {
             '</div></div><div class="map-fix__box">',
             '<div id="js_map" class="map-fix__map"></div>',
             '<div id="js_map_scroller" class="map-fix__scroller"></div>',
-            '</div><span class="map-fix__back" on="click:myMapPicker.close">返回</span>',
+            '</div><span class="map-fix__back">返回</span>',
             '</div>'
         ].join('');
 
@@ -70,6 +70,10 @@ define(function (require) {
         });
         backElm.addEventListener('touchmove', function (e) {
             e.preventDefault();
+        });
+        backElm.addEventListener('click', function () {
+            // 关闭
+            close(element);
         });
 
         // 列表滚动根据情况来定

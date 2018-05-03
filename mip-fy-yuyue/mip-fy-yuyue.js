@@ -9,6 +9,7 @@
  * 1.0.3 增加了根据设备和对应栏目ID判断，获取安卓分类ID，苹果分类ID，非同设备访问同资源显示暂无对应设备资源，对应设备访问则预约。
  * 1.0.4 增加了很对访问PC端资源的判断，根据不同设备访问PC资源，给出不同的提示。
  * 1.0.5 根据主管需求，修改提示文字
+ * 1.1.0 新增：苹果设备访问安卓资源，安卓设备访问苹果资源给出的提示。
  * @author gom3250@qq.com.
  *  */
 
@@ -77,22 +78,39 @@ define(function (require) {
                             $(ele).find('#address').text(systxt);
                         }
                     } else {
-                        // 有对应设备的下载地址
+                        // 有下载地址
+                        var sys = '';
+                        var colsys = '';
+                        var tiyes = '';
+                        var firname = $(ele).find('.f-tags-box li').eq(0).find('p').text();
+                        if (platform.isIos()) {
+                            // 是苹果设备
+                            var sys = '苹果';
+                            if ($.inArray(classidnum, azclassid) !== -1) {
+                                // 访问的是安卓资源
+                                var colsys = '安卓';
+                                var tiyes = 'yes';
+                            }
+                        } else {
+                            // 是安卓设备
+                            var sys = '安卓';
+                            if ($.inArray(classidnum, iosclassid) !== -1) {
+                                // 访问的是ios资源
+                                var colsys = '苹果';
+                                var tiyes = 'yes';
+                            }
+                        }
                         if ($.inArray(classidnum, iosclassid) === -1 && $.inArray(classidnum, azclassid) === -1) {
                             // 是PC端资源
-                            var sys = '';
-                            if (platform.isIos()) {
-                                // 是苹果设备
-                                var sys = '苹果';
-                            } else {
-                                var sys = '安卓';
-                            }
-                            var firname = $(ele).find('.f-tags-box li').eq(0).find('p').text();
-                            var titshi = '<p class="m-tisp1">该软件为pc资源，没有';
-                            titshi += '<span>' + sys + '</span>版</p>';
-                            titshi += '<p class="m-tisp2">该地址下载的是：';
-                            titshi += '<span>' + firname + '</span></p>';
-                            $(ele).find('#downAddress ul li').append(titshi);
+                            var colsys = 'pc';
+                            var tiyes = 'yes';
+                        }
+                        var titshi = '<p class="m-tisp1"><i></i>该软件为' + colsys + '资源，没有';
+                        titshi += '<strong>' + sys + '</strong>版。';
+                        titshi += '该地址下载的是：<span>' + firname + '</span></p>';
+                        // 有地址的情况切换
+                        if (tiyes === 'yes') {
+                            $(ele).find('#downAddress ul').after(titshi);
                         }
                     }
                 });

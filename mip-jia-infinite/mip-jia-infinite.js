@@ -162,9 +162,9 @@ define(function (require) {
             // 计算返回数据条数
             var le = 0;
             var textIdCard = data.textIdCard;
-            if (typeof res === 'string') {
+            if (typeof msg === 'string') {
                 var reg = new RegExp(textIdCard, 'ig');
-                le = res.match(reg).length;
+                le = msg.match(reg).length;
             } else {
                 le = msg.length;
             }

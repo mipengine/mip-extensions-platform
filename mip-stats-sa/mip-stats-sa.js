@@ -4,6 +4,7 @@
  * @email 522370351@qq.com
  * 参考了mip-stats-baidu的实现方式
  */
+
 define(function (require) {
     var util = require('util');
     var Gesture = util.Gesture;
@@ -11,7 +12,9 @@ define(function (require) {
 
     var customElement = require('customElement').create();
 
-    customElement.prototype.firstInViewCallback = function () {
+    customElement.prototype.firstInviewCallback = function () {
+
+
         var elem = this.element;
         var config = this.getConfig();
         if (config) {

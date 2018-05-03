@@ -1,0 +1,14 @@
+{
+    "name": "mip-pu-copy",
+    "version": "1.0.0",
+    "description": "点击复制",
+    "contributors": [
+        {
+            "name": "pu",
+            "email": "u_u1997@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
