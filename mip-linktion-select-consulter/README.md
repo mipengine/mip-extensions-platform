@@ -40,6 +40,7 @@ mip-linktion-select-consulter 传参数拉去筛选数据
             <div class="modal-body clearfix">
                 <div class="financial-planner financial-planner-modal clearfix" th:each="planner : ${morePlanners}">
                     <mip-linktion-fortune-consults>
+                        <div class="hints"></div>
                         <mip-data>
                             <script type="application/json">
                                 {
@@ -60,12 +61,12 @@ mip-linktion-select-consulter 传参数拉去筛选数据
                                             <div class="form-group-input">
                                                 <label>姓名</label>
                                                 <input type="text" name="name" placeholder="请输入姓名"
-                                                       th:value="${session.currentUser != null ? session.currentUser.name : ''}">
+                                                       th:value="${session.currentUser != null ? session.currentUser.name : ''}" value="">
                                             </div>
                                             <div class="form-group-input">
                                                 <label>手机</label>
                                                 <input type="number" name="phone" placeholder="请输入手机号"
-                                                       th:value="${session.currentUser != null ? session.currentUser.mobile : ''}">
+                                                       th:value="${session.currentUser != null ? session.currentUser.mobile : ''}" value="">
                                             </div>
                                             <h4 class="checkbox-head">首选联系时间</h4>
                                             <div class="checkbox-flex">
@@ -143,12 +144,12 @@ mip-linktion-select-consulter 传参数拉去筛选数据
                                             <div class="form-group-input">
                                                 <label>姓名</label>
                                                 <input type="text" name="name" placeholder="请输入姓名" required="required"
-                                                       th:value="${session.currentUser != null ? session.currentUser.name : ''}">
+                                                       th:value="${session.currentUser != null ? session.currentUser.name : ''}" value="">
                                             </div>
                                             <div class="form-group-input">
                                                 <label>手机</label>
                                                 <input type="number" name="phone" placeholder="请输入手机号" required="required"
-                                                       th:value="${session.currentUser != null ? session.currentUser.mobile : ''}">
+                                                       th:value="${session.currentUser != null ? session.currentUser.mobile : ''}" value="">
                                             </div>
                                             <h4 class="checkbox-head">首选联系时间</h4>
                                             <div class="checkbox-flex">
@@ -220,12 +221,12 @@ mip-linktion-select-consulter 传参数拉去筛选数据
                                             <div class="form-group-input">
                                                 <label>姓名</label>
                                                 <input type="text" name="name" placeholder="请输入姓名" required="required"
-                                                       th:value="${session.currentUser != null ? session.currentUser.name : ''}">
+                                                       th:value="${session.currentUser != null ? session.currentUser.name : ''}" value="">
                                             </div>
                                             <div class="form-group-input">
                                                 <label>手机</label>
                                                 <input type="number" name="phone" placeholder="请输入手机号" required="required"
-                                                       th:value="${session.currentUser != null ? session.currentUser.mobile : ''}">
+                                                       th:value="${session.currentUser != null ? session.currentUser.mobile : ''}" value="">
                                             </div>
                                             <h4 class="checkbox-head">首选联系时间</h4>
                                             <div class="checkbox-flex">
@@ -254,7 +255,6 @@ mip-linktion-select-consulter 传参数拉去筛选数据
         </div>
     </div>
 </mip-linktion-select-consulter>
-```
 
 ## 属性
 

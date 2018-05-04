@@ -17,13 +17,11 @@ mip-jia-infinite 无限加载数据
         {
             "request": {
                 "isJsonp": true,
-                "jsonpCallback": "",
                 "resultType": "json",
                 "url": "//test.m.jia.com/JiaZhuangxiu/ajaxGetSjList",
                 "method": "get",
                 "init": {
-                    "mode": "cors",
-                    "credentials": "include"
+                    "timeout": "10000"
                 },
                 "headers": {
                     "Content-type": "application/json"
@@ -34,7 +32,6 @@ mip-jia-infinite 无限加载数据
                         "page": 2,
                         "user_id": 0,
                         "mip": 1
-
                     }
                 }
             },
@@ -74,16 +71,16 @@ mip-jia-infinite 无限加载数据
 必选项：是
 类型：boolean
 取值范围：true || false
-单位：{单位}
-默认值：{默认值}
 
 
-### jsonpCallback
 
-说明：jsonp回调名称
+### timeout
+
+说明：请求连接超时时间
 必选项：否
-类型：string
-默认值：空
+类型：number
+单位：ms
+
 
 
 ### resultType

@@ -75,7 +75,6 @@ define(function (require) {
             this.body = p.body;
             this.headers = p.headers;
             this.jsonp = p.isJsonp;
-            this.jsonpCallback = p.jsonpCallback || '';
             this.resultType = p.resultType.trim().toLocaleLowerCase();
 
             // 请求是否完成
@@ -203,7 +202,6 @@ define(function (require) {
 
             var response = null;
             if (type) {
-                init = {jsonpCallback: that.jsonpCallback};
                 // console.log(url, init)
                 response = that.fetchJsonpRequest(url, init);
             } else {

@@ -19,6 +19,7 @@ define(function (require) {
         var playBtn = $element.find('.video-play-button');
         var replayBtn = $element.find('.video-replay-button');
         var curIndex;
+        var changeDuration = false;
         //  初始化播放器
         var video = document.createElement('video');
         //  初始化video的属性
@@ -46,6 +47,16 @@ define(function (require) {
         video.onended = function () {
             curIndex += 1;
             whichShouldPlay();
+        };
+        video.onplay = function () {
+            if (changeDuration) {
+                video.src = vSrc;
+                $(playBtn).hide();
+                changeDuration = false;
+                video.oncanplay = function () {
+                    video.play();
+                };
+            }
         };
         // 判断是否连续播放，到片尾结束停止
         function whichShouldPlay() {
@@ -174,7 +185,9 @@ define(function (require) {
             else {
                 //  如果有片头并且非IOS上的QQ浏览器 则播放片头
                 if (vSrc && !(platform.isIos() && platform.isQQ())) {
-                    video.src = vSrc;
+                    changeDuration = true;
+                    // 先显示正片的时长
+                    video.src = targetSrc;
                     video.poster = posterSrc;
                     curIndex = 1;
                 }

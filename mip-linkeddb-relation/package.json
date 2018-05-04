@@ -1,6 +1,6 @@
 {
     "name": "mip-linkeddb-relation",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "解析Base64 生成图谱 可拖动",
     "contributors": [
         {

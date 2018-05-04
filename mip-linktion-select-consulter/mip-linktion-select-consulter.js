@@ -23,8 +23,7 @@ define(function (require) {
         var hot = $el.find('#hot');
         var level = $el.find('#level');
         var productid = $el.find('#dataoption').data('productid');
-
-        function sendData(consultUrl, bodyData) {
+        function sendData(consultUrl, bodyData, that) {
             fetch(consultUrl, {
                 method: 'POST', // or 'PUT'
                 headers: {'Content-Type': 'application/json'},
@@ -33,12 +32,27 @@ define(function (require) {
                 return res.json();
             }).then(function (data) {
                 if (data.code === 0) {
-                    window.location.reload();
+                    if ($(window).width() < 769) {
+                        // that.parents('.click-lightbox-phone').siblings('.modal-header').children('.close').trigger('click');
+                        // $el.find('.active-consult').text('咨询中').removeClass('but-advisory').addClass('consulting');
+                        showTips('发送成功', 'success');
+                        reload();
+                    } else {
+                        showTips('发送成功', 'success');
+                        that.parents('.click-lightbox').children('.click-hidden').click();
+                        that.parents('.click-lightbox').siblings('.card-but')
+                        .children('.but-advisory').text('咨询中').removeClass('but-advisory').addClass('consulting');
+                    }
                 }
                 else {
                     console.log(data.error);
                 }
             });
+        }
+        function reload() {
+            setTimeout(function () {
+                window.location.reload();
+            }, 3000);
         }
         function fetchfun($el, templateBox, templates, src, type, productid) {
             fetch(src)
@@ -62,7 +76,7 @@ define(function (require) {
                                             + '<button type="button" class="click-hidden">&times;</button>'
                                             + '<h3>咨询TA</h3>'
                                             + '<p class="consult-describe">请留下您的信息，方便这位理财师联系您。</p>'
-                                            + '<form class="consult-form pc-form">'
+                                            + '<mip-form class="consult-form pc-form" url="https://">'
                                                 + '<div class="form-group-input">'
                                                     + '<label>姓名</label>'
                                                     + '<input type="text" name="name" placeholder="请输入姓名"'
@@ -92,7 +106,7 @@ define(function (require) {
                                                     + '</div>'
                                                 + '</div>'
                                                 + '<button type="button" class="but-submit consult-submit">提交</button>'
-                                            + '</form>'
+                                            + '</mip-form>'
                                         + '</div>'
                                         + '<div class="card-box">'
                                             + '<div class="person-icon">'
@@ -104,7 +118,6 @@ define(function (require) {
                                                     + '<p class="person-info">咨询顾问</p>'
                                                 + '</div>'
                                                 + '<div class="info-label">'
-                                                    + '<p class="txt-major">专业领域</p>'
                                                     + changeTagHtml
                                                 + '</div>'
                                             + '</div>'
@@ -186,7 +199,6 @@ define(function (require) {
                                                     + '<p class="planner-post">咨询顾问</p>'
                                                 + '</div>'
                                                 + '<div class="planner-label">'
-                                                    + '<p class="txt-major">专业领域</p>'
                                                     + taghtml
                                                 + '</div>'
                                             + '</div>'
@@ -248,12 +260,33 @@ define(function (require) {
         function foreachTags(items) {
             var taghtml = '';
             if (items.plannerInfo) {
+                taghtml = '<p class="txt-major">专业领域</p>';
                 var workDomains =  items.plannerInfo.workDomains;
                 workDomains.forEach(function (itemtag) {
                     taghtml += '<p class="card-label">' + itemtag + ' </p>';
                 });
             }
             return taghtml;
+        }
+        function hideHints() {
+            setTimeout(function () {
+                $('.web-hint').fadeOut();
+            }, 6000);
+        }
+        function showTips(text, status) {
+            var hintsHtml = '';
+            if (status === 'err') {
+                hintsHtml = '<div class="web-error web-hint">'
+                            + '<p>' + text + '</p>'
+                            + '</div>';
+            }
+            else if (status === 'success') {
+                hintsHtml = '<div class="web-hint web-succeed">'
+                            + ' <p>' + text + '</p>'
+                            + ' </div>';
+            }
+            $el.find('.hints').html(hintsHtml);
+            hideHints();
         }
         function valifypopValue($el, productid) {
             $el.find('.card-but .but-advisory').on('click', function () {
@@ -266,49 +299,48 @@ define(function (require) {
                 $(this).siblings('.click-lightbox').removeClass('slideUp').addClass('slide');
             });
             $el.find('.but-submit.consult-submit').on('click', function () {
+                var plannerId = '';
+                var consultUrl = '';
                 var inputName = $(this).siblings('.form-group-input').children('input[name="name"]').val();
                 var inputPhone = $(this).siblings('.form-group-input').children('input[name="phone"]').val();
                 var checkboxArry = $(this).siblings('.checkbox-flex').children('.form-group-checkbox');
                 var checkboxR = checkboxArry.children('input[type=radio]:checked').val();
-                var plannerId = $(this).parents('.consult-box').data('plannerid');
-                // var productId = $(this).parents('.consult-box').data('productid');
-                var consultUrl = $(this).parents('.consult-box').data('consulturl');
-                var phoneForm = $el.find('.phone-form')[0];
-                if ($(window).width() < 769) {
-                    if (phoneForm.reportValidity()) {
-                        var bodyPhoneData = {
-                            productId: productid,
-                            userName: inputName,
-                            userMobile: inputPhone,
-                            contactTime: checkboxR,
-                            plannerId: plannerId
-                        };
-                        sendData(consultUrl, bodyPhoneData);
-                    }
+                plannerId = $(this).parents('.consult-box').data('plannerid');
+                consultUrl = $(this).parents('.consult-box').data('consulturl');
+                if (inputName === '') {
+                    showTips('请填写姓名', 'err');
+                }
+                else if (inputPhone === '') {
+                    showTips('请填写手机号码', 'err');
+                }
+                else if (checkboxR === undefined) {
+                    showTips('请选联系择时间', 'err');
+                }
+                else if ($(window).width() < 769) {
+                    plannerId = $(this).parents('.click-lightbox-phone').data('plannerid');
+                    var productId = $(this).parents('.click-lightbox-phone').data('productid');
+                    consultUrl = $(this).parents('.click-lightbox-phone').data('consulturl');
+                    var bodyData = {
+                        productId: productId,
+                        userName: inputName,
+                        userMobile: inputPhone,
+                        contactTime: checkboxR,
+                        plannerId: plannerId
+                    };
+                    sendData(consultUrl, bodyData, $(this));
                 }
                 else {
-                    if (inputName === '') {
-                        alert('请填写姓名');
-                    }
-                    else if (inputPhone === '') {
-                        alert('请填写电话');
-                    }
-                    else if (checkboxR === undefined) {
-                        alert('请选择时间');
-                    }
-                    else {
-                        var bodyData = {
-                            productId: productid,
-                            userName: inputName,
-                            userMobile: inputPhone,
-                            contactTime: checkboxR,
-                            plannerId: plannerId
-                        };
-                        sendData(consultUrl, bodyData);
-                    }
+                    var bodyData = {
+                        productId: productid,
+                        userName: inputName,
+                        userMobile: inputPhone,
+                        contactTime: checkboxR,
+                        plannerId: plannerId
+                    };
+                    sendData(consultUrl, bodyData, $(this));
                 }
-
             });
+
         }
         if (type === 'change') {
             // fetchfun($el, templateBox, templates, src, 'items');

@@ -1,0 +1,13 @@
+{
+    "name": "mip-huajun-360tj",
+    "version": "1.0.5",
+    "description": "huajun360tj",
+    "author": {
+        "name": "huajun",
+        "email": "87390193@qq.com",
+        "url": "http://www.onlinedown.net"
+    },
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
