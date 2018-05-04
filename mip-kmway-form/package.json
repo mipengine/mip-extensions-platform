@@ -1,0 +1,14 @@
+{
+    "name": "mip-kmway-form",
+    "version": "1.0.0",
+    "description": "快马加盟网留言提交组件",
+    "contributors": [
+        {
+            "name": "yang",
+            "email": "3094316744@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

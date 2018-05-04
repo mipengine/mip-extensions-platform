@@ -11,15 +11,17 @@ mip-linktion-fortune-consults ajax移动端弹框提交表单，pc端下滑卡�
 ## 示例
 ```html
 <mip-linktion-fortune-consults>
+<div class="hints"></div>
   <mip-data>
     <script type="application/json">
-    {
-      "plannerid": 0,
-    }
+        {
+            "plannerid": 0,
+            "productid": 0
+        }
     </script>
   </mip-data>
   <div class="col-lg-4 col-xs-12 col-sm-4 consult-box">
-    <div class="person-card consult-box" data-plannerid="1"  data-consulturl="http://47.100.7.250:8080/product/consult">
+    <div class="person-card consult-box" data-plannerid="1" data-productid="6"  data-consulturl="http://www.caifu.org/product/consult">
       <div class="click-lightbox slide-up">
         <button type="button" class="click-hidden">&times;</button>
         <h3>咨询TA</h3>
@@ -82,7 +84,7 @@ mip-linktion-fortune-consults ajax移动端弹框提交表单，pc端下滑卡�
         <a class="but-advisory">咨询TA</a>
       </div>
       <div class="card-phone-but">
-        <a href="javascript:;" class="but-about" on="tap:modal-consult.toggle tap:MIP.setData({plannerid:5})" id="" role="button" tabindex="0">咨询TAp</a>
+        <a href="javascript:;" class="but-about" on="tap:modal-consult.toggle tap:MIP.setData({plannerid:1,productid:6})" id="" role="button" tabindex="0">咨询TAp</a>
 
         <!-- 未登录用户的咨询TA弹框 -->
         <!-- <a href=javascript:;"" class="but-about" on="tap:modal-consult-visitor.toggle" id="" role="button" tabindex="0">咨询TA</a> -->
@@ -91,12 +93,12 @@ mip-linktion-fortune-consults ajax移动端弹框提交表单，pc端下滑卡�
     </div>
   </div>
   <div class="col-lg-4 col-xs-12 col-sm-4 consult-box">
-    <div class="person-card consult-box" data-plannerid="5" data-productid="6" data-consulturl="http://47.100.7.250:8080/product/consult">
+    <div class="person-card consult-box" data-plannerid="5" data-productid="6" data-consulturl="http://www.caifu.org/product/consult">
       <div class="click-lightbox slide-up">
         <button type="button" class="click-hidden">&times;</button>
         <h3>咨询TA</h3>
         <p class="consult-describe">请留下您的信息，方便这位理财师联系您。</p>
-        <form class="consult-form pc-form">
+        <mi-form class="consult-form pc-form" url="https://">
           <div class="form-group-input">
             <label>姓名</label>
             <input type="text" name="name" placeholder="请输入姓名" required="required">
@@ -121,7 +123,7 @@ mip-linktion-fortune-consults ajax移动端弹框提交表单，pc端下滑卡�
             </div>
           </div>
           <button type="button" class="but-submit consult-submit">提交</button>
-        </form>
+        </mip-form>
       </div>
       <div class="recommend-icon">
         <mip-img src=""></mip-img>
@@ -167,11 +169,12 @@ mip-linktion-fortune-consults ajax移动端弹框提交表单，pc端下滑卡�
       <div class="modal-content">
         <div class="modal-header">
           <p>咨询TA</p>
-          <button type="button" class="close" on="tap:modal-consult.toggle">&times;</button>
+          <button type="button" class="close" on="tap:modal-consult.toggle tap:consult.close">&times;</button>
         </div>
-        <div class="modal-body click-lightbox-phone clearfix consult-box" m-bind:data-plannerid="plannerid" m-bind:data-productid="productid" data-consulturl="http://47.100.7.250:8080/product/consult">
+        <div class="modal-body click-lightbox-phone clearfix consult-box"
+        m-bind:data-plannerid="plannerid" m-bind:data-productid="productid" data-consulturl="http://www.caifu.org/product/consult">
           <p class="consult-describe">请留下您的信息，方便这位理财师联系您。</p>
-          <form class="consult-form phone-form">
+          <mip-form class="consult-form phone-form" url="https://">
             <div class="form-group-input">
               <label>姓名</label>
               <input type="text" name="name" placeholder="请输入姓名" required="required">
@@ -196,7 +199,7 @@ mip-linktion-fortune-consults ajax移动端弹框提交表单，pc端下滑卡�
               </div>
             </div>
             <button type="button" class="but-submit consult-submit">提交</button>
-          </form>
+          </mip-form>
         </div>
       </div>
     </div>

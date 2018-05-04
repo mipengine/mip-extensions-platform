@@ -263,6 +263,7 @@ define(function (require) {
                 }
             },
             windowScroll: function (data, ele) {
+                storage.rm('usFlag');
                 // 滚动事件
                 viewport.on('scroll', function () {
                     if (storage.get('usFlag') === 'true') {

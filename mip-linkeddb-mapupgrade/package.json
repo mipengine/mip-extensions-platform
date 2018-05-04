@@ -1,0 +1,14 @@
+{
+    "name": "mip-linkeddb-mapupgrade",
+    "version": "1.0.0",
+    "description": "图谱 点击人物查看一度人脉",
+    "contributors": [
+        {
+            "name": "linkeddb",
+            "email": "340236524@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
