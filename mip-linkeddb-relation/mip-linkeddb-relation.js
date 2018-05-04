@@ -11,7 +11,7 @@ define(function (require) {
     var $ = require('zepto');
     var d3 = require('./d3.min');
     // var Base64 = require('./base64.min');
-    var MakeSvgPicClass = require('./d3-rolesMap.min').MakeSvgPicClass;
+    // var MakeSvgPicClass = require('./d3-rolesMap.min').MakeSvgPicClass;
 
     /**
      * 第一次进入可视区回调，只会执行一次
@@ -242,7 +242,7 @@ define(function (require) {
                         + d.source.url + '" >' + d.source.name + '</a>';
 
                     Html += ' &gt; <a class="external linkname" data-no-cache="true" href=" '
-                        + d.target.url + '" >' + d.target.name + '</a> : "' + d.type + '"';
+                        + d.target.url + '" >' + d.target.name + '</a> : ' + d.type + '';
 
                     d3.selectAll('.tooltip').remove();
                     var Div = d3.select('#' + id).append('div')
@@ -353,11 +353,11 @@ define(function (require) {
                     d3.event.stopPropagation ? (d3.event.stopPropagation()) : (d3.event.cancelBubble = true);
                     d3.event.preventDefault ? (d3.event.preventDefault()) : (d3.event.returnValue = false);
 
-                    var Html = '<a href="' + d.url + '" class="external linkname" data-no-cache="true">"'
-                        + d.name + '"</a>';
+                    var Html = '<a href="' + d.url + '" class="external linkname" data-no-cache="true">'
+                        + d.name + '</a>';
                     if (d.exdata) {
                         this.Html += '&nbsp;&nbsp;(<a class="external linkname" data-no-cache="true" href="'
-                            + d.exdata.url + '" >"' + d.exdata.name + '"</a> 饰)';
+                            + d.exdata.url + '" >' + d.exdata.name + '</a> 饰)';
                     }
 
 
