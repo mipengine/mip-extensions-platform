@@ -1,0 +1,14 @@
+{
+    "name": "mip-jia-tukuscreen",
+    "version": "1.0.0",
+    "description": "图库筛选",
+    "contributors": [
+        {
+            "name": "luoyong",
+            "email": "luoyong1@qeeka.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

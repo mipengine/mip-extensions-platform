@@ -40,6 +40,44 @@ define(function (require) {
         }
     }
 
+    customElement.prototype.urlSearch = function () {
+        var hrefUrlArr = [];
+        var obj = {};
+        window.location.search.substr(1) && window.location.search.substr(1).length > 2 && (function () {
+            hrefUrlArr = window.location.search.substr(1).split('&');
+            for (var i = 0; i < hrefUrlArr.length; i++) {
+                var arr = hrefUrlArr[i].split('=');
+                obj[arr[0]] = arr[1];
+            }
+        })();
+        return obj;
+    };
+
+
+    customElement.prototype.bindEvent = function () {
+        var self = this;
+        var obj = self.urlSearch();
+        $(self.$button).click(function () {
+            var href = $(this).attr('href');
+            var url = $(this).data('href');
+            var from = obj.from;
+            var city = obj.city;
+            var datas = $(this)[0].dataset;
+            var $obj = {};
+            $obj['area_py'] = datas['area_py'];
+            $obj['area_cn'] = datas['area_cn'];
+            $obj['city_cn'] = datas['city_cn'];
+            $obj['city_py'] = datas['city_py'];
+            var $url;
+            from ? ($url = from, city && ($url = $url.replace(city, datas.area_py)))
+                : href ? ($url = href) : url ? ($url = url) : self.clicklink
+                ? ($url = self.clicklink + datas.area_py) : ($url = null);
+            $obj.area_py && $obj.area_cn && storage.set('city', JSON.stringify($obj), 2592000000);
+            $url && (window.top.location.href = $url);
+            return false;
+        });
+    };
+
 
     /**
      * build 方法，元素插入到文档时执行，仅会执行一次
@@ -57,6 +95,9 @@ define(function (require) {
         var linkto = data.linkto;
         var changetxt = data.changetxt;
         var changelink = data.changelink;
+        this.$button = data.button;
+        this.clicklink = data.clicklink;
+
 
         cityFn(function (obj) {
             if (linkto) {
@@ -67,14 +108,20 @@ define(function (require) {
                 $(changelink).length && $(changelink).each(function (index, item) {
                     var href = $(item).attr('href');
                     if (href !== undefined) {
-                        href = href.replace(/\/$/, '');
-                        href = href + '/' + obj.area_py + '/';
+                        if (href.indexOf('{{city}}') > -1) {
+                            href = href.replace(/\{\{city\}\}/g, obj.area_py);
+                        }
+                        else {
+                            href = href.replace(/\/$/, '');
+                            href = href + '/' + obj.area_py + '/';
+                        }
                         $(this).attr('href', href);
                     }
                 });
             }
             appendcity(thisObj, obj);
         });
+        this.bindEvent();
     };
 
     return customElement;

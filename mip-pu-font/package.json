@@ -1,0 +1,14 @@
+{
+    "name": "mip-pu-font",
+    "version": "1.0.0",
+    "description": "设置页面的font-size，适应所有屏幕",
+    "contributors": [
+        {
+            "name": "pu",
+            "email": "u_u1997@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

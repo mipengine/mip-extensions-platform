@@ -115,7 +115,7 @@ define(function (require) {
                                             + '<div class="info-text">'
                                                 + '<div class="text-name">'
                                                     + '<p class="person-name">' + items.name + '</p>'
-                                                    + '<p class="person-info">咨询顾问</p>'
+                                                    + '<p class="person-info"> ' + items.gradeName + '</p>'
                                                 + '</div>'
                                                 + '<div class="info-label">'
                                                     + changeTagHtml
@@ -196,7 +196,7 @@ define(function (require) {
                                                 + '<div class="text-name">'
                                                     + '<p class="planner-name">'
                                                         + items.name + '</p>'
-                                                    + '<p class="planner-post">咨询顾问</p>'
+                                                    + '<p class="planner-post"> ' + items.gradeName + '</p>'
                                                 + '</div>'
                                                 + '<div class="planner-label">'
                                                     + taghtml
