@@ -6,14 +6,17 @@ mip-custom-showmore {
     visibility: hidden;
     overflow: hidden;
     transform: translateZ(0);
-    padding-bottom: 40px;
     box-sizing: border-box;
+    padding-bottom: 40px;
     .mip-custom-showmore {
         &-originalhtml,
         &-btnhide,
         &-btnshow {
             display: none;
         }
+    }
+    &.mip-custom-showmore-nofold {
+        padding-bottom: 0;
     }
     &.mip-custom-showmore-gradient {
     }
@@ -37,8 +40,6 @@ mip-custom-showmore {
     display: block;
     text-align: center;
     left: 0;
-    padding: 15px 0;
-    margin-bottom: -15px;
     background: rgba(255, 255, 255, .8);
     z-index: 10;
 }

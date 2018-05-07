@@ -270,7 +270,7 @@ define(function (require) {
         }
         function hideHints() {
             setTimeout(function () {
-                $('.web-hint').fadeOut();
+                $el.find('.web-hint').fadeOut();
             }, 6000);
         }
         function showTips(text, status) {

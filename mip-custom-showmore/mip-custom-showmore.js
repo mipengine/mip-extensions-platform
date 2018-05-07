@@ -116,6 +116,7 @@ define(function (require) {
             util.css(showmoreEle, 'height', 'auto');
             // 改变按钮的样式 - 不需要折叠，隐藏按钮
             util.css(this.button, 'display', 'none');
+            showmoreEle.classList.add('mip-custom-showmore-nofold');
         }
         // 显示默认隐藏的showmore, 避免初始加载闪现
         util.css(showmoreEle, {

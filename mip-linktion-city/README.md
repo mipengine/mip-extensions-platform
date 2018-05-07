@@ -19,6 +19,13 @@ mip-linktion-city 级联城市组件
   <mip-lightbox id="select-city" layout="nodisplay" class="mip-hidden">
     <div class="modal-dialog select-city modal-blue-top" role="document">
       <div class="modal-content">
+        <div class="hints"></div>
+        <div class="load-mask">
+          <div class="loading">
+            <mip-img src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.16.1/images/loader-large.gif" class="loading-img"></mip-img>
+            提交中...
+          </div>
+        </div>
         <div class="modal-header">
           <p>切换城市</p>
           <button type="button" class="close" on="tap:select-city.toggle"><span>&times;</span></button>
@@ -147,7 +154,6 @@ mip-linktion-city 级联城市组件
               </div>
             </mip-vd-tabs>
           </div>
-
         </div>
       </div>
     </div>
@@ -157,6 +163,13 @@ mip-linktion-city 级联城市组件
   <mip-lightbox id="select-city-phone" layout="nodisplay" class="mip-hidden">
     <div class="modal-dialog select-city-phone" role="document">
       <div class="modal-content">
+        <div class="hints"></div>
+        <div class="load-mask">
+          <div class="loading">
+            <mip-img src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.16.1/images/loader-large.gif" class="loading-img"></mip-img>
+            提交中...
+          </div>
+        </div>
         <div class="modal-header">
           <p class="modal-center-h">切换城市</p>
 	        <div class="modal-body">

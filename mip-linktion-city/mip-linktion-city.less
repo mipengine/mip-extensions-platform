@@ -3,6 +3,30 @@
  */
 
 mip-linktion-city {
+    .hints {
+        z-index: 10002;
+        text-align: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+    .web-hint {
+        text-align: center;
+        padding: 30px 0;
+        width: 100%;
+        p {
+            font-size: 18px;
+            line-height: 20px;
+            color: #fff;
+        }
+    }
+    .web-error {
+        background-color: rgba(255, 126, 0, 0.9);
+    }
+    .web-succeed {
+        background-color: rgba(66, 133, 244, 0.9);
+    }
     .modal-content {
         position: relative;
         background-color: #fff;
@@ -14,6 +38,30 @@ mip-linktion-city {
         outline: 0;
         -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
         box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+        .load-mask {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color:rgba(0,0,0,0.5);
+            z-index: 1;
+            .loading {
+                color: #fff;
+                text-align: center;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%);
+                .loading-img {
+                    width: 20px;
+                    margin: 0 auto;
+                    margin-bottom: 5px;
+                    height: 20px;
+                }
+            }
+        }
     }
     .select-city {
         width: 628px;
@@ -107,8 +155,8 @@ mip-linktion-city {
                         }
                         .mip-vd-tabs-content {
                             padding: 30px 25px 30px 30px;
-                            min-height: 270px;
-                            overflow-y: auto;
+                            height: 270px;
+                            overflow-y: scroll;
                             max-height: 272px;
                         }
                         .tab-line {
@@ -190,8 +238,8 @@ mip-linktion-city {
                 .mip-vd-tabs-content {
                     .phone-city-ul {
                         padding: 12px 30px;
-                        min-height: 270px;
-                        overflow-y: auto;
+                        height: 270px;
+                        overflow-y: scroll;
                         max-height: 294px;
                         .phone-city-but {
                             font-size: 14px;

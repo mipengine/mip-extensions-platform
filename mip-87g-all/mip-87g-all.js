@@ -8,8 +8,8 @@ define(function (require) {
     customElement.prototype.build = function () {
         var t = this.element;
         var gtype = t.getAttribute('g_type');
+        var siteurl = '//www.87g.com/';
         if (gtype === 'g87_news') {
-            var siteurl = '//www.87g.com/';
             // 点击量统计
             var module = t.getAttribute('module');
             var hitsurl = siteurl + 'api.php?op=count&modelid=' + t.getAttribute('modelid')
@@ -43,6 +43,31 @@ define(function (require) {
                     con.removeClass('wraptext');
                     newcon.removeClass('snbg').removeAttr('style');
                     $(this).remove();
+                });
+            }
+        } else if (gtype === 'g87_youxi_content_hideshow') {
+            // 内容缩进
+            var con = $(t);
+            var txt = con.text();
+            var pic = con.find('img');
+            var zs = txt.length;
+            var piclen = pic.length;
+            var tj = con.height();
+            if ((zs > 300 || piclen > 3) && tj > 834) {
+                var newcon = con.find('.m-con');
+                newcon.addClass('wraptext');
+                newcon.addClass('snbg');
+                var btn = con.find('.m-show');
+                btn.click(function () {
+                    if ($(this).hasClass('show')) {
+                        newcon.addClass('wraptext');
+                        newcon.addClass('snbg');
+                        $(this).removeClass('show');
+                    } else {
+                        newcon.removeClass('wraptext');
+                        newcon.removeClass('snbg');
+                        $(this).addClass('show');
+                    }
                 });
             }
         }

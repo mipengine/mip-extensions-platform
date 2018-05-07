@@ -12,6 +12,7 @@ mip-linktion-try 弹框ajax提交信息并后续弹框提示操作结果
 
 ```html
 <mip-linktion-try id="try">
+  <div class="hints"></div>
   <button type="button" class="try-btn" on="tap:insurance-modal.toggle">试一试</button>
   <button type="button" class="try-btn-end" on="tap:insurance-modal-end.toggle"></button>
   <mip-lightbox id="insurance-modal" layout="nodisplay" class="mip-hidden">
@@ -22,7 +23,7 @@ mip-linktion-try 弹框ajax提交信息并后续弹框提示操作结果
 	        <button type="button" class="close form-close" on="tap:insurance-modal.toggle">&times;</button>
 	      </div>
 	      <div class="modal-body clearfix">
-          <form>
+          <mip-form>
             <div class="modal-input-info">
               <div class="form-group">
                 <label>我的姓名</label>
@@ -46,9 +47,9 @@ mip-linktion-try 弹框ajax提交信息并后续弹框提示操作结果
               </div>
             </div>
             <div class="form-group-but">
-              <button type="button" class="insurance-but"  id="try-btn"  data-type="5" on="tap:try.open" data-url="http://47.100.7.250:8080/memberCustomization/saveCustomization">提交</button>
+              <button type="button" class="insurance-but"  id="try-btn"  data-type="5" on="tap:try.open" data-url="http://www.caifu.org/memberCustomization/saveCustomization">提交</button>
             </div>
-          </form>
+          </mip-form>
 	      </div>
 	    </div>
 	  </div>
