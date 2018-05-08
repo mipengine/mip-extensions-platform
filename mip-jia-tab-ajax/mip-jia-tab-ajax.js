@@ -489,7 +489,7 @@ define(function (require) {
         self.show = element.getAttribute('tab-con-show') || 'show';
         self.hide = element.getAttribute('tab-con-hide') || 'hide';
         self.url = element.getAttribute('tab-url');
-        self.timeout = element.getAttribute('timeout') || 5000;
+        self.timeout = element.getAttribute('timeout') || 8000;
         self.templateFlag = element.getAttribute('tab-template');
         self.swiper = element.getAttribute('swiper-params');
         self.multiple = element.getAttribute('tab-multiple');

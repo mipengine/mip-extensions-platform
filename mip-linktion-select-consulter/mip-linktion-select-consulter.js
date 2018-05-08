@@ -41,7 +41,8 @@ define(function (require) {
                         showTips('发送成功', 'success');
                         that.parents('.click-lightbox').children('.click-hidden').click();
                         that.parents('.click-lightbox').siblings('.card-but')
-                        .children('.but-advisory').text('咨询中').removeClass('but-advisory').addClass('consulting');
+                        .children('.but-advisory').text('咨询中').removeClass('but-advisory')
+                        .addClass('consulting').off('click');
                     }
                 }
                 else {

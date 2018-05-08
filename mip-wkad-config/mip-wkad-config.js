@@ -2,8 +2,8 @@
 * 寻医问药mip改造 广告配置组件
 * @file 脚本支持
 * @author jqthink@gmail.com
-* @time 2018.01.22
-* @version 1.1.0
+* @time 2018.05.07
+* @version 1.1.1
 */
 define(function (require) {
     var $ = require('zepto');
@@ -25,15 +25,25 @@ define(function (require) {
     };
     var showPoster = function (key, val) {
         var ggArr = {};
+        var exggArr = {};
         var string = '';
-        $.each(adStore, function (index, value) {
+        var exString = '';
+        $.each(window.adStore, function (index, value) {
             string = string + '|' + value;
         });
+        $.each(window.exAdStore, function (index, value) {
+            exString = exString + '|' + value;
+        });
         ggArr['ad_key'] = string.substr(1);
-        val !== undefined ? ggArr[key] = val : 0;
-        ggArr['charset'] = 'utf8';
-        mobileAd.getAd(ggArr);
-        mobileAd.getParseWordInp();
+        exggArr['ad_key'] = exString.substr(1);
+        val !== undefined ? (ggArr[key] = val, exggArr[key] = val) : 0;
+        if (typeof mobileAd !== 'undefined') {
+            window.mobileAd.getAd(ggArr);
+            window.mobileAd.getParseWordInp();
+        }
+        if (typeof exactAd !== 'undefined') {
+            window.exactAd.getAd(exggArr);
+        }
     };
     // build说明: 广告组件，在页面展示，需要尽快加载
     customElem.prototype.build = function () {
@@ -42,17 +52,18 @@ define(function (require) {
         var channel = $(elem).attr('channel');
         var department = $(elem).attr('department');
         var column = $(elem).attr('column');
+        var exact = $(elem).attr('exact');
         var departId = $(elem).attr('depart_id');
         var departSid = $(elem).attr('depart_sid');
         // display_load.js说明：站内广告投放js，必须
-        var posterUrl = 'https://a.xywy.com/display/display_load.js';
+        var posterUrl = exact === 'exactad' ? 'https://a.xywy.com/display/exactad_load.js' : 'https://a.xywy.com/display/display_load.js';
         // news.php说明：站内广告反屏蔽策略(非百度联盟反屏蔽)，必须
         var bdmUrl = 'https://3g.club.xywy.com/zhuanti/news.php?from=mip&f=';
         if (departId) {
             window['subject_pid'] = departId;
         }
         if (departSid) {
-            window['subject'] = departSid;
+            window.subject = departSid;
         }
         switch (attr) {
             case 'take_ip':
@@ -60,7 +71,7 @@ define(function (require) {
                 loadJs(elem, 'https://ipdisplay.xywy.com/take_ip', function () {
                     if (typeof channel === 'undefined') {
                         loadJs(elem, posterUrl, function () {
-                            if (typeof mobileAd === 'undefined') {
+                            if (typeof mobileAd === 'undefined' && typeof exactAd === 'undefined') {
                                 loadJs(elem, bdmUrl);
                             }
                             else {
@@ -70,7 +81,7 @@ define(function (require) {
                     }
                     else if (channel === 'newclub') {
                         loadJs(elem, posterUrl, function () {
-                            if (typeof mobileAd === 'undefined') {
+                            if (typeof mobileAd === 'undefined' && typeof exactAd === 'undefined') {
                                 loadJs(elem, bdmUrl + 'department&v=' + department);
                             }
                             else {
@@ -80,7 +91,7 @@ define(function (require) {
                     }
                     else if (channel === 'yimei') {
                         loadJs(elem, posterUrl, function () {
-                            if (typeof mobileAd === 'undefined') {
+                            if (typeof mobileAd === 'undefined' && typeof exactAd === 'undefined') {
                                 loadJs(elem, bdmUrl + 'column&v=' + column);
                             }
                             else {

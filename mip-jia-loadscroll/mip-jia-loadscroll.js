@@ -90,7 +90,7 @@ define(function (require) {
             var data = that.cfg.response;
             var tier = data.params && data.params.trim();
             if (!res) {
-                console.log('网络错误');
+                that.$loading.html('网络错误，请连网后刷新');
                 return;
             }
             // 获取数据
@@ -100,9 +100,10 @@ define(function (require) {
                 for (var i = 0; i < tier.length; i++) {
                     msg = msg[tier[i]];
                 }
-            }
-            else {
-                that.loadEnd = true;
+                if (!msg) {
+                    that.loadEnd = true;
+                    that.$parentBox.siblings('.loading-none').show();
+                }
             }
 
             // append元素
@@ -110,6 +111,10 @@ define(function (require) {
                 var $mul = that.multiple.split('.');
                 $mul.forEach(function (item, index) {
                     that.$parentBox.find('.multiple-box').eq(index).append(that.replaceFn(msg[item]));
+                    if (msg[item] === '') {
+                        that.loadEnd = true;
+                        that.$parentBox.find('.loading-none').show();
+                    }
                 });
             }
             else {
@@ -140,6 +145,7 @@ define(function (require) {
                 dataType: 'jsonp',
                 jsonpCallback: that.jsonpCallback,
                 data: that.params,
+                timeout: 10000,
                 success: function (render) {
                     that.render(render);
                 },

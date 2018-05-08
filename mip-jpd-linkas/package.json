@@ -1,0 +1,14 @@
+{
+    "name": "mip-jpd-linkas",
+    "version": "1.0.0",
+    "description": "jpd自定义链接组件",
+    "contributors": [
+        {
+            "name": "zc",
+            "email": "1961722391@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
