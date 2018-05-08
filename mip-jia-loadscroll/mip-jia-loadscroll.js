@@ -54,6 +54,7 @@ define(function (require) {
             this.$btn = $(r.button);
             this.$loading = $(r.loadingBox);
             this.$parentBox = $(r.parentBox);
+            this.multiple = r.multiple;
         },
         bindEvent: function () {
             var that = this;
@@ -105,8 +106,22 @@ define(function (require) {
             }
 
             // append元素
+            if (that.multiple) {
+                var $mul = that.multiple.split('.');
+                $mul.forEach(function (item, index) {
+                    that.$parentBox.find('.multiple-box').eq(index).append(that.replaceFn(msg[item]));
+                });
+            }
+            else {
+                that.$parentBox.append(that.replaceFn(msg));
+            }
 
-            that.$parentBox.append(that.replaceFn(msg));
+            // 处理图片
+            that.$parentBox.find('img.loading,img.lazy_img').each(function (index, item) {
+                var $src = $(item).attr('imgSrc') || $(item).attr('data-src');
+                $src && $(item).attr('src', $src);
+            });
+
             that.requestEnd = true;
             that.$loading.hide();
             !that.loadEnd && that.$btn.show();

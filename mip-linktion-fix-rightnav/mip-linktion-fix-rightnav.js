@@ -40,9 +40,6 @@ define(function (require) {
         $el.find('#reply-hidden').on('click', function () {
             $(this).parent().parent('.erweima-reply').fadeOut();
         });
-        $el.find('#list-top').click(function () {
-            $('html,body').animate({scrollTop: 0}, 500);
-        });
         $el.find('.retroaction-form button').on('click', function () {
             var retroactionText = $(this).siblings('textarea').val();
             if (retroactionText === '') {

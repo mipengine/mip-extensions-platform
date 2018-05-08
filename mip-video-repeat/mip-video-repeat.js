@@ -53,7 +53,7 @@ define(function (require) {
                 video.src = vSrc;
                 $(playBtn).hide();
                 changeDuration = false;
-                video.oncanplay = function () {
+                video.ondurationchange = function () {
                     video.play();
                 };
             }

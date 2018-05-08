@@ -164,32 +164,59 @@ define(function (require) {
                 if ($eleNode.length === 0) {
                     $eleNode = null;
                 }
-                if (self.items) {
-                    var datas = self.items.split('.');
-                    var len = datas.length;
-                    var $datas = null;
-                    for (var i = 0; i < len; i++) {
-                        $datas = data[datas[i]];
-                    }
-                    $datas = self.replaceFn($datas);
-                    if (!$eleNode && $ele.find('.html-list').length > 0) {
-                        $ele.find('.html-list').append($datas);
+                if (self.multiple) {
+                    var multipleArr = self.multiple.split('.');
+                    if (self.items) {
+                        var datas = self.items.split('.');
+                        var len = datas.length;
+                        var $datas = null;
+                        for (var i = 0; i < len; i++) {
+                            $datas = data[datas[i]];
+                        }
+                        for (var j = 0; j < multipleArr.length; j++) {
+                            var $htmls = $datas[multipleArr[j]];
+                            $ele.find('.multiple-box').eq(j).append(self.replaceFn($htmls));
+                        }
                     }
                     else {
-                        ($eleNode || $ele).append($datas);
+                        for (var j = 0; j < multipleArr.length; j++) {
+                            var $htmls = data[multipleArr[j]];
+                            $ele.find('.multiple-box').eq(j).append(self.replaceFn($htmls));
+                        }
                     }
                 }
                 else {
-                    var $datas = self.replaceFn(data);
-                    if (!$eleNode && $ele.find('.html-list').length > 0) {
-                        $ele.find('.html-list').append($datas);
+                    if (self.items) {
+                        var datas = self.items.split('.');
+                        var len = datas.length;
+                        var $datas = null;
+                        for (var i = 0; i < len; i++) {
+                            $datas = data[datas[i]];
+                        }
+                        $datas = self.replaceFn($datas);
+                        if (!$eleNode && $ele.find('.html-list').length > 0) {
+                            $ele.find('.html-list').append($datas);
+                        }
+                        else {
+                            ($eleNode || $ele).append($datas);
+                        }
                     }
                     else {
-                        ($eleNode || $ele).append($datas);
+                        var $datas = self.replaceFn(data);
+                        if (!$eleNode && $ele.find('.html-list').length > 0) {
+                            $ele.find('.html-list').append($datas);
+                        }
+                        else {
+                            ($eleNode || $ele).append($datas);
+                        }
                     }
                 }
                 self.swiperFn($ele, self.activeIndex, false);
                 $ele.removeClass('loading');
+                $ele.find('img.loading,img.lazy_img').each(function (index, item) {
+                    var $src = $(item).attr('imgSrc') || $(item).attr('data-src');
+                    $src && $(item).attr('src', $src);
+                });
             }
             else if (self.templateFlag === '1') {
                 if (self.items) {
@@ -465,6 +492,7 @@ define(function (require) {
         self.timeout = element.getAttribute('timeout') || 5000;
         self.templateFlag = element.getAttribute('tab-template');
         self.swiper = element.getAttribute('swiper-params');
+        self.multiple = element.getAttribute('tab-multiple');
         if (!self.ele || !self.contain) {
             console.error('mip-jia-tab-ajax 的 tab-element 和 tab-contain 属性不能为空');
             return;

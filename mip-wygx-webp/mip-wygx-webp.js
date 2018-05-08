@@ -21,9 +21,15 @@ define(function (require) {
             } else {
                 return null;
             }
+
         }
     };
     var hasWebp = (function () {
+        // if has webp cookie
+        if (lazyCookie.getCookie('lyWebp')) {
+            return true;
+        }
+
         // if support webp
         var cwebp = document.createElement('canvas').toDataURL('image/webp').indexOf('data:image/webp');
         var isSupportWebp = !![].map && cwebp === 0;
@@ -31,12 +37,7 @@ define(function (require) {
             return false;
         }
 
-        // if has webp cookie
-        if (lazyCookie.getCookie('lyWebp')) {
-            return true;
-        }
-
-        // or
+        // setcookie
         lazyCookie.setCookie();
         return true;
     })();
@@ -65,15 +66,22 @@ define(function (require) {
      */
     customElement.prototype.firstInviewCallback = function () {
         var child = this.element.querySelector('img');
+        var self = this;
         if (child) {
             return;
         }
 
         var Img = new Image();
         this.applyFillContent(Img, true);
-        var ele = this.element;
 
+        // 图片链接处理
+        var ele = this.element;
         var src = getImageUrl(ele);
+
+        Img.addEventListener('load', function () {
+            self.placeholder && self.placeholder.remove();
+        });
+
         Img.src = src;
 
         if (ele.getAttribute('alt')) {
@@ -82,5 +90,31 @@ define(function (require) {
         ele.appendChild(Img);
         imgLoadError(ele, Img);
     };
+
+    // 图片占位符
+    var Placeholder = function (element) {
+        this.target = element;
+    };
+
+    Placeholder.prototype.create = function () {
+        var placeholder = this.placeholder = document.createElement('div');
+        placeholder.classList.add('mip-wygx-placeholder');
+        this.target.appendChild(placeholder);
+    };
+
+    Placeholder.prototype.remove = function () {
+        var parent = this.placeholder.parentElement;
+        parent && parent.removeChild(this.placeholder);
+    };
+
+    /**
+     * 初次渲染
+     */
+    customElement.prototype.attachedCallback = function () {
+        var element = this.element;
+        this.placeholder = new Placeholder(element);
+        this.placeholder.create();
+    };
+
     return customElement;
 });

@@ -70,6 +70,68 @@ define(function (require) {
                     }
                 });
             }
+        } else if (gtype === 'g87_youxi_tab') {
+            var con = $(t);
+            var anchor1 = con.find('.m-anchor').find('li').eq(0);
+            var anchor2 = con.find('.m-anchor').find('li').eq(1);
+            var anchor3 = con.find('.m-anchor').find('li').eq(2);
+            var anchor4 = con.find('.m-anchor').find('li').eq(3);
+            anchor1.click(function () {
+                con.find('.app_intro').show();
+                con.find('.app_soft').show();
+                con.find('.ztshow').show();
+                con.find('.ztshow').next().show();
+                con.find('.con-box').show();
+                con.find('.app_guess').show();
+                con.find('.Qtag').show();
+                con.find('.app_appmore').show();
+                $(this).addClass('on');
+                anchor2.removeClass('on');
+                anchor3.removeClass('on');
+                anchor4.removeClass('on');
+            });
+            anchor2.click(function () {
+                con.find('.app_intro').hide();
+                con.find('.app_soft').show();
+                con.find('.ztshow').show();
+                con.find('.ztshow').next().show();
+                con.find('.con-box').show();
+                con.find('.app_guess').show();
+                con.find('.Qtag').show();
+                con.find('.app_appmore').show();
+                $(this).addClass('on');
+                anchor1.removeClass('on');
+                anchor3.removeClass('on');
+                anchor4.removeClass('on');
+            });
+            anchor3.click(function () {
+                con.find('.app_intro').hide();
+                con.find('.app_soft').hide();
+                con.find('.ztshow').hide();
+                con.find('.ztshow').next().hide();
+                con.find('.con-box').hide();
+                con.find('.app_guess').show();
+                con.find('.Qtag').show();
+                con.find('.app_appmore').show();
+                $(this).addClass('on');
+                anchor1.removeClass('on');
+                anchor2.removeClass('on');
+                anchor4.removeClass('on');
+            });
+            anchor4.click(function () {
+                con.find('.app_intro').hide();
+                con.find('.app_soft').hide();
+                con.find('.ztshow').hide();
+                con.find('.ztshow').next().hide();
+                con.find('.con-box').hide();
+                con.find('.app_guess').hide();
+                con.find('.Qtag').hide();
+                con.find('.app_appmore').hide();
+                $(this).addClass('on');
+                anchor1.removeClass('on');
+                anchor2.removeClass('on');
+                anchor3.removeClass('on');
+            });
         }
     };
     return customElement;

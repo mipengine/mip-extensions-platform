@@ -13,11 +13,11 @@ mip-wygx-webp 我要个性网  图片webp支持
 ### 基本用法
 ```html
 <mip-wygx-webp
-src="http://img2.woyaogexing.com/2018/01/30/7445fad8fea9d58e!400x400_big.jpg"
-webp-src="http://img2.woyaogexing.com/2018/01/30/7445fad8fea9d58e!400x400_big.webp" alt="测试">
+src="//img2.woyaogexing.com/2018/01/30/7445fad8fea9d58e!400x400_big.jpg"
+webp-src="//img2.woyaogexing.com/2018/01/30/7445fad8fea9d58e!400x400_big.webp" alt="测试">
 </mip-wygx-webp>
 <mip-wygx-webp
-src="http://pic.qqtn.com/up/2018-1/15168522607905699.jpg" webp-src="http://pic.qqtn.com/up/2018-1/15168522607905699.jpg" >
+src="//pic.qqtn.com/up/2018-1/15168522607905699.jpg" webp-src="//pic.qqtn.com/up/2018-1/15168522607905699.jpg" >
 </mip-wygx-webp>
 ```
 
@@ -50,3 +50,8 @@ src="http://pic.qqtn.com/up/2018-1/15168522607905699.jpg" webp-src="http://pic.q
 ## 注意事项
 
 1.src属性必须写
+
+## 更新日志
+
+2018/05/08 图片占位符优化
+

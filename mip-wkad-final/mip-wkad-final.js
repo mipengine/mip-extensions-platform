@@ -2,8 +2,8 @@
 * 寻医问药mip改造 新版广告组件
 * @file 脚本支持
 * @author jqthink@gmail.com
-* @time 2017.12.13
-* @version 1.0.6
+* @time 2018.05.07
+* @version 1.0.7
 */
 define(function (require) {
     var $ = require('zepto');
@@ -24,11 +24,19 @@ define(function (require) {
                 return '"]';
             }
         });
-        if (typeof window.adStore === 'undefined') {
-            window.adStore = {};
-        }
         json = JSON.parse(res);
-        arr.push('adStore["' + json[0] + '"]');
+        if (className.lastIndexOf('exdiv') > -1) {
+            if (typeof window.exAdStore === 'undefined') {
+                window.exAdStore = {};
+            }
+            arr.push('exAdStore["' + json[0] + '"]');
+        }
+        else {
+            if (typeof window.adStore === 'undefined') {
+                window.adStore = {};
+            }
+            arr.push('adStore["' + json[0] + '"]');
+        }
         arr.push('=');
         arr.push('"' + json[1] + '"');
         el.className = className;
