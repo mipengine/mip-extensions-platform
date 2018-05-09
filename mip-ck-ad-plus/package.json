@@ -1,7 +1,7 @@
 {
     "name": "mip-ck-ad-plus",
-    "version": "1.0.0",
-    "description": "直销广告组件",
+    "version": "1.0.1",
+    "description": "直销广告组件-优化代码结构，替换$.getJSON方法",
     "author": {
         "name": "laoono",
         "email": "laoono@163.com"

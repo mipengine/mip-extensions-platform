@@ -132,6 +132,97 @@ define(function (require) {
                 anchor2.removeClass('on');
                 anchor3.removeClass('on');
             });
+        } else if (gtype === 'g87_youxi_downhref') {
+            var con = $(t);
+            var downaddressa = con.find('#address');
+            downaddressa.attr('href', downaddressa.attr('android'));
+            var ua = navigator.userAgent.toLowerCase();
+            var isiphone = /iphone|ipad|ipod/.test(ua);
+            // 如果是苹果设备
+            if (isiphone) {
+                downaddressa.addClass('downaddressa1');
+                if (downaddressa.attr('itunes') !== '') {
+                    downaddressa.attr('href', downaddressa.attr('itunes'));
+                } else if (downaddressa.attr('ios') !== '') {
+                    downaddressa.attr('href', downaddressa.attr('ios'));
+                }
+                if (downaddressa.attr('itunes') === '' && downaddressa.attr('ios') === ''
+                    && downaddressa.attr('h5') === '' && downaddressa.attr('is_subscribe') !== ',1,') {
+                    downaddressa.addClass('downaddressa2');
+                    downaddressa.attr('href', 'javascript:;');
+                    downaddressa.text('暂不支持iOS系统');
+                }
+            } else {
+                if (downaddressa.attr('android') === '' && downaddressa.attr('h5') === ''
+                    && downaddressa.attr('is_subscribe') !== ',1,') {
+                    downaddressa.addClass('downaddressa3');
+                    downaddressa.attr('href', 'javascript:;');
+                    downaddressa.text('暂不支持安卓系统');
+                }
+            }
+            // 判断H5地址
+            if (downaddressa.attr('h5') !== '') {
+                downaddressa.attr('href', downaddressa.attr('h5'));
+                downaddressa.text('立即开始游戏');
+                downaddressa.addClass('downaddressa4');
+            }
+            if (((downaddressa.attr('android') === '' && downaddressa.attr('itunes') === ''
+                && downaddressa.attr('ios') === '' && downaddressa.attr('h5') === '')
+                || downaddressa.attr('hz_error_url') === ',1,'
+                || downaddressa.attr('is_stop_gm') === ',1,') && downaddressa.attr('is_subscribe') !== ',1,') {
+                downaddressa.attr('href', 'javascript:;');
+                downaddressa.css('background', 'rgb(204, 204, 204)');
+                downaddressa.text('暂无下载');
+                if (downaddressa.attr('is_stop_gm') === ',1,') {
+                    downaddressa.text('游戏已停止运营');
+                }
+            }
+            // 如果是订阅
+            if (downaddressa.attr('is_subscribe') === ',1,') {
+                var subhtml = '<div id="js-pack-get-dialog" class="pack-get-dialog hide"';
+                subhtml += ' style="top: 20%; left: 10%;width:300px;height:351px;">';
+                subhtml += '<div id="js-get-dialog-tab" class="get-dialog-hd" style="padding-left: 10px;">';
+                subhtml += '<a href="javascript:;" class="js-pack-site-tab" style="padding-left:0px;">';
+                subhtml += '订阅：' + downaddressa.attr('down_title') + '</a></div> ';
+                subhtml += '<div class="get-dialog-bd" style="height: 313px;"><div class="pack-by-weixin clearfix" ';
+                subhtml += 'style="padding: 10px 30px;">';
+                subhtml += '<div class="weixin-qrcode" style="float: unset;width:auto;"> ';
+                subhtml += '<img src="//www.87g.com/statics/images/qrcode_for_dy.jpg" alt="">';
+                subhtml += ' <b style="color:#666;line-height: 1.5;">请用手机微信扫描二维码订阅~</b>';
+                subhtml += ' <b style="color:#666;line-height: 1.5;">订阅后可及时接受活动、礼包、开测和开放下载的提醒！</b>';
+                subhtml += '<b style="line-height: 1.5;">订阅功能说明</b></div></div> </div> <a class="pack-get-close" ';
+                subhtml += 'href="javascript:;">关闭</a> </div>';
+                subhtml += '<div class="fancybox-overlay fancybox-overlay-fixed hide" ';
+                subhtml += 'style="width: auto; height: auto;;"></div>';
+                downaddressa.text('订阅游戏');
+                downaddressa.attr('href', 'javascript:;');
+                downaddressa.addClass('downaddressa5');
+                downaddressa.addClass('subscribe_btn');
+                downaddressa.parent().after(subhtml);
+                downaddressa.click(function () {
+                    if (con.find('.pack-get-dialog').hasClass('hide')) {
+                        con.find('.pack-get-dialog').removeClass('hide');
+                        con.find('.fancybox-overlay').removeClass('hide');
+                    } else {
+                        con.find('.pack-get-dialog').addClass('hide');
+                        con.find('.fancybox-overlay').addClass('hide');
+                    }
+                });
+                var packgetclose = con.find('.pack-get-close');
+                packgetclose.click(function () {
+                    con.find('.pack-get-dialog').addClass('hide');
+                    con.find('.fancybox-overlay').addClass('hide');
+                });
+            }
+        } else if (gtype === 'g87_youxi_imgs') {
+            var con = $(t);
+            if (con.find('.m-slide1 ul li').eq(0).find('img').height()
+                < con.find('.m-slide1 ul li').eq(0).find('img').width()) {
+                con.find('.m-slide1').addClass('banner_pics');
+                con.find('.m-slide1').css('height', '150px');
+            } else {
+                con.find('.m-slide1').css('height', '255px');
+            }
         }
     };
     return customElement;

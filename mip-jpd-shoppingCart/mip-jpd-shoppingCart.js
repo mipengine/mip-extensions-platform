@@ -118,7 +118,7 @@ define(function (require) {
             console.log(datalist);
             $.ajax({
                 type: 'post',
-                url: APP.URLS.add2shopcart_url,
+                url: APP.URLS.oGwcs,
                 data: datalist,
                 dataType: 'json',
                 json: 'callback',

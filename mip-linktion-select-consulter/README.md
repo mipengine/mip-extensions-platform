@@ -17,7 +17,7 @@ mip-linktion-select-consulter 传参数拉去筛选数据
     <h3>更多推荐</h3>
     <a href="javascrpt:;" id="change">换一批</a>
   </div>
-    <div class="modal-dialog planner-more" role="document" id="planner_more" data-src="https://www.caifu.org/planner/more" data-type="planners">
+    <div class="modal-dialog planner-more" role="document" id="planner_more" data-src="https://www.caifu.org/user/planner" data-type="change">
         <div class="modal-content">
             <div class="modal-header">
                 <mip-form url="https://">

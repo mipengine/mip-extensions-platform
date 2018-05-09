@@ -30,7 +30,7 @@ define(function (require) {
     }
 
     // 直投广告请求url
-    var adUrl = config.url || '//s.cnkang.com/yyk/showcodejsonp?callback=?';
+    var adUrl = config.url || '//s.cnkang.com/yyk/showcodejsonp';
     // 动态配置参数
     var adData = config.data || {};
 
@@ -106,6 +106,45 @@ define(function (require) {
         return res;
     }
 
+    // 广告请求成功回调
+    function getAdSuccess(res, element, uid, query) {
+        var isHasCkAd;
+        var data = $.parseJSON(res.result);
+
+        // 遍历直投广告ID
+        $.each(data, function (k, v) {
+
+            // 获取投放直销广告的节点
+            element = $('mip-ck-ad-plus[pid="' + k + '"]');
+            uid = element.attr('ck-ad-uid');
+
+            // 根据医生id判断物料类型
+            v = (query.uid && $.isPlainObject(v)) ? v[uid] : v;
+
+            // 有特定广告位id的直投广告 先隐藏网盟 再显示直投
+            if ($.trim(v)) {
+                element.children(':first-child').remove();
+                element.html(v);
+
+                $body.addClass('view-ck-ad-' + (+k));
+
+                isHasCkAd = true;
+            }
+            // 无特定广告位id直投广告显示网盟
+            else {
+                element.children(':first-child').show();
+
+                $body.addClass('view-ck-ad-' + (+k) + '-union');
+            }
+        });
+
+        // 所有的直投广告位均无直投广告
+        if (!isHasCkAd) {
+            $body.addClass('view-ck-ad-union');
+            $emptyShowEle.show();
+        }
+    }
+
     function getAd(opt) {
         opt = opt || {};
         var adUrl = opt.adUrl;
@@ -113,44 +152,14 @@ define(function (require) {
         var element = opt.element;
         var uid = '';
 
-        $.getJSON(adUrl, query, function (res) {
-            var isHasCkAd;
-            var data = $.parseJSON(res.result);
-
-            // 遍历直投广告ID
-            $.each(data, function (k, v) {
-
-                // 获取投放直销广告的节点
-                element = $('mip-ck-ad-plus[pid="' + k + '"]');
-                uid = element.attr('ck-ad-uid');
-
-                // 根据医生id判断物料类型
-                v = (query.uid && $.isPlainObject(v)) ? v[uid] : v;
-
-                // 有特定广告位id的直投广告 先隐藏网盟 再显示直投
-                if ($.trim(v)) {
-                    element.children(':first-child').remove();
-                    element.html(v);
-
-                    $body.addClass('view-ck-ad-' + (+k));
-
-                    isHasCkAd = true;
-                }
-                // 无特定广告位id直投广告显示网盟
-                else {
-                    element.children(':first-child').show();
-
-                    $body.addClass('view-ck-ad-' + (+k) + '-union');
-                }
-            });
-
-            // 所有的直投广告位均无直投广告
-            if (!isHasCkAd) {
-                $body.addClass('view-ck-ad-union');
-                $emptyShowEle.show();
+        $.ajax({
+            url: adUrl,
+            data: query,
+            dataType: 'jsonp',
+            success: function (res) {
+                getAdSuccess(res, element, uid, query);
             }
         });
-
     }
 
     function getIP(opt, cb) {

@@ -1,0 +1,14 @@
+{
+    "name": "mip-jia-enrolSuccess",
+    "version": "1.0.0",
+    "description": "报名成功页",
+    "contributors": [
+        {
+            "name": "luoyong",
+            "email": "luoyong1@qeeka.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

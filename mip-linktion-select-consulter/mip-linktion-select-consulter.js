@@ -66,9 +66,11 @@ define(function (require) {
                         var changehtml = '';
                         var changeTagHtml = '';
                         var changeReturnHtml = '';
+                        var changeHasAvatar = '';
                         changeItems.forEach(function (items) {
                             changeTagHtml = foreachTags(items);
                             changeReturnHtml = ifConsulting(items);
+                            changeHasAvatar = hasAvatar(items);
                             changehtml += '<div class="consult-box" data-plannerid=' + items.id
                                         + ' data-productid=' + productid
                                         + ' data-consulturl="http://www.caifu.org/product/consult">'
@@ -111,7 +113,7 @@ define(function (require) {
                                         + '</div>'
                                         + '<div class="card-box">'
                                             + '<div class="person-icon">'
-                                                + '<mip-img src=' + items.avatar + '></mip-img>'
+                                                + '<mip-img src=' + changeHasAvatar + '></mip-img>'
                                             + '</div>'
                                             + '<div class="info-text">'
                                                 + '<div class="text-name">'
@@ -142,14 +144,16 @@ define(function (require) {
                         var taghtml = '';
                         var returnHtml = '';
                         var returnPhoneHtml = '';
+                        var returnAvatar = '';
                         items.forEach(function (items) {
                             taghtml = foreachTags(items);
                             returnHtml = ifConsultingPlanner(items);
                             returnPhoneHtml = ifPhoneConsultingPlanner(items);
+                            returnAvatar = hasAvatar(items);
                             html += '<div class="col-lg-4 col-xs-6 col-sm-4'
                                     + ' clearfix">'
                                     + '<div class="person-card consult-box"'
-                                    + 'data-plannerid=' + items.id + ' data-productid=' +  productid
+                                    + ' data-plannerid=' + items.id + ' data-productid=' +  productid
                                         + ' data-consulturl="http://www.caifu.org/product/consult">'
                                         + '<div class="click-lightbox slide-up">'
                                             + '<button type="button" class="click-hidden">&times;</button>'
@@ -159,29 +163,29 @@ define(function (require) {
                                                 + '<div class="form-group-input">'
                                                     + '<label>姓名</label>'
                                                     + '<input type="text" name="name" placeholder="请输入姓名"'
-                                                        + 'value="" required="required">'
+                                                        + ' value="" required="required">'
                                                 + '</div>'
                                                 + '<div class="form-group-input">'
                                                     + '<label>手机</label>'
                                                     + '<input type="number" name="phone" placeholder="请输入手机号"'
-                                                            + 'value="" required="required">'
+                                                            + ' value="" required="required">'
                                                 + '</div>'
                                                 + '<h4 class="checkbox-head">首选联系时间</h4>'
                                                 + '<div class="checkbox-flex">'
                                                     + '<div class="form-group-checkbox">'
                                                         + '<input type="radio" name="picktime"'
-                                                        + 'value="1" id=' + items.id + 'day required="required">'
+                                                        + ' value="1" id=' + items.id + 'day required="required">'
                                                         + '<label for=' + items.id + 'day>白天</label>'
                                                     + '</div>'
                                                     + '<div class="form-group-checkbox">'
                                                         + '<input type="radio" name="picktime"'
-                                                        + 'night value="2" id=' + items.id
+                                                        + ' value="2" id=' + items.id
                                                         + 'night required="required">'
                                                         + '<label for=' + items.id + 'night>晚间</label>'
                                                     + '</div>'
                                                     + '<div class="form-group-checkbox">'
                                                         + '<input type="radio" name="picktime"'
-                                                        + 'anytimes value="3" id=' + items.id
+                                                        + ' value="3" id=' + items.id
                                                         + 'anytimes required="required">'
                                                         + '<label for=' + items.id + 'anytimes>任何时刻</label>'
                                                     + '</div>'
@@ -191,7 +195,7 @@ define(function (require) {
                                         + '</div>'
                                         + '<div class="card-box">'
                                             + '<div class="person-icon">'
-                                                + '<mip-img src=' + items.avatar + ' ></mip-img>'
+                                                + '<mip-img src=' + returnAvatar + ' ></mip-img>'
                                             + '</div>'
                                             + '<div class="info-text">'
                                                 + '<div class="text-name">'
@@ -222,11 +226,19 @@ define(function (require) {
                 }
             });
         }
+        function hasAvatar(items) {
+            var returnAvatar = '';
+            if (items.avatar) {
+                returnAvatar = items.avatar;
+            } else {
+                returnAvatar = '/img/head.jpg';
+            }
+            return returnAvatar;
+        }
         function ifPhoneConsultingPlanner(items) {
             var returnPhoneHtml = '';
             if (items.consulStatus === 0) {
                 returnPhoneHtml = '<button class="planner-submit-consult2 but-about"'
-                            + 'th:if="${planner != null && planner.consulStatus != 0}"'
                             + 'on="tap:planner-more.toggle tap:modal-consult.toggle'
                             + ' tap:MIP.setData({plannerid:' + items.id
                             + ',productid:' + items.id + '})">'
