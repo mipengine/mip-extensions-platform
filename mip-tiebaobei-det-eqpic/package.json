@@ -1,0 +1,14 @@
+{
+    "name": "mip-tiebaobei-det-eqpic",
+    "version": "1.0.0",
+    "description": "设备实拍",
+    "contributors": [
+        {
+            "name": "weiss",
+            "email": "630039491@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
