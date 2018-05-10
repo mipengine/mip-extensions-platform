@@ -246,7 +246,7 @@ define(function (require) {
     	if (sysource === 'COMMERCIAL_ZWZD') {
     		sysource = 'COOPERATE_COMMERCIAL';
         }
-    	if(newSource != '') {
+    	if(newSource != '' && newSource != undefined) {
     		sources = newSource;
     	}
     	$that.setAttribute('pos', pos);
