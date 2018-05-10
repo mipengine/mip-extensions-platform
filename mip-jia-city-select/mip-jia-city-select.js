@@ -233,6 +233,11 @@ define(function (require) {
             // 第一次点击调取城市接口、后面则更新swiper
             cityPageZxbj.method.cityCommonPop($(thisObj));
         });
+        $(thisObj).find('.input-city').on({
+            focus: function () {
+                $(this).blur();
+            }
+        });
     };
     return customElement;
 });

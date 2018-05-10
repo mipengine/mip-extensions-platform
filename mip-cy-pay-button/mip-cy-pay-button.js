@@ -11,11 +11,9 @@ define(function (require) {
     var customElement = require('customElement').create();
     var domain = 'https://m.chunyuyisheng.com';
 
-    /**
-     * 第一次进入可视区回调，只会执行一次
-     */
     customElement.prototype.build = function () {
         var $ele = $(this.element);
+        var autoPay = $ele.attr('auto-pay') === '1';
 
         /**
          * 初始化依赖第三方组件的部分
@@ -26,7 +24,6 @@ define(function (require) {
             if (window.CYUI) {
                 $ele.on('click', function () {
                     var loginUrl = $ele.attr('login-url') || '';
-                    var doctorId = $ele.attr('doctor-id') || '';
                     var orderName = $ele.attr('order-name') || '';
                     var orderDesc = $ele.attr('order-desc') || '';
                     var orderType = $ele.attr('order-type') || '';
@@ -57,7 +54,12 @@ define(function (require) {
                             },
                             success: function (res) {
                                 if (res && res.baidu_pay_url) {
-                                    window.location.href = res.baidu_pay_url;
+                                    if (autoPay) {
+                                        window.location.replace(res.baidu_pay_url);
+                                    }
+                                    else {
+                                        window.location.href = res.baidu_pay_url;
+                                    }
                                 }
                                 else {
                                     window.CYUI.toast(res.error_msg);
@@ -69,6 +71,9 @@ define(function (require) {
                         });
                     }
                 });
+                if (autoPay) {
+                    $ele.trigger('click');
+                }
             }
             else {
                 setTimeout(init, 0);

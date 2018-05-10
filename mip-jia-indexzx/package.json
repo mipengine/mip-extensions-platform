@@ -1,0 +1,14 @@
+{
+    "name": "mip-jia-indexzx",
+    "version": "1.0.0",
+    "description": "mip首页装修",
+    "contributors": [
+        {
+            "name": "tao",
+            "email": "165526381@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

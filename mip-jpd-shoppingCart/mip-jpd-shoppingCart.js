@@ -115,22 +115,22 @@ define(function (require) {
             $(omyLin3).css('display', 'none');
         });
         function ajaxs(datalist) {
-            console.log(datalist);
+            // console.log(datalist);
             $.ajax({
                 type: 'post',
                 url: APP.URLS.oGwcs,
                 data: datalist,
                 dataType: 'json',
-                json: 'callback',
                 success: function (data) {
-                    // console.log(data);
+                    console.log(data);
                     // console.log(typeof(data.Status));
                     if (data.Status === 0) {
                         omyLin3.style.display = 'none';
                         alert('已加入购物车');
                     }
                     else {
-                        alert('加入购物车失败，请从新购买');
+                        // alert('加入购物车失败，请重新购买');
+                        alert('添加购物车失败');
                     }
                 }
             });

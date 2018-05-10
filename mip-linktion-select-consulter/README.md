@@ -15,12 +15,12 @@ mip-linktion-select-consulter 传参数拉去筛选数据
 <mip-linktion-select-consulter>
     <div class="person-head">
     <h3>更多推荐</h3>
-    <a href="javascrpt:;" id="change">换一批</a>
+    <a href="javascrpt:;" id="change" data-productid="1">换一批</a>
   </div>
-    <div class="modal-dialog planner-more" role="document" id="planner_more" data-src="https://www.caifu.org/user/planner" data-type="change">
+    <div class="modal-dialog planner-more" role="document" id="planner_more" data-src="https://www.caifu.org/planner/more" data-type="planners">
         <div class="modal-content">
             <div class="modal-header">
-                <mip-form url="https://">
+                <mip-form url="https://" class="more-wrap-productid" data-productid=2>
                     <a href="javascrpt::" class="more-all" id="synthesize">综合</a>
                     <div class="more-grade">
                         <select class="planner-grade" id="level">
@@ -51,8 +51,8 @@ mip-linktion-select-consulter 传参数拉去筛选数据
                         </mip-data>
                         <div class="template-box" id="template_box">
                             <div class="col-lg-4 col-xs-12 col-sm-4 consult-box">
-                                <div class="person-card consult-box" data-plannerid="1" data-productid="2"
-                                     data-consulturl="http://www.caifu.org/product/consult" id="dataoption">
+                                <div class="person-card consult-box"  data-plannerid="2" data-productid="2"
+                                     data-consulturl="http://www.caifu.org/product/consult" >
                                     <div class="click-lightbox slide-up">
                                         <button type="button" class="click-hidden">&times;</button>
                                         <h3>咨询TA</h3>
@@ -131,11 +131,11 @@ mip-linktion-select-consulter 传参数拉去筛选数据
                                 </div>
                             </div>
                         </div>
-                        <div class="template-box" id="change_template_box">
+                        <div class="template-box" id="change_template_box" >
                             <div class="consult-box">
-                                <div class="person-card consult-box" th:attr="data-plannerid=${planner.id}"
-                                     th:attr="data-productid=${product.id}"
-                                     data-consulturl="http://www.caifu.org/product/consult" id="dataoption">
+                                <div class="person-card consult-box" th:attr="data-plannerid=${planner.id} "
+                                     data-plannerid="1" data-productid="2"
+                                     data-consulturl="http://www.caifu.org/product/consult" >
                                     <div class="click-lightbox slide-up">
                                         <button type="button" class="click-hidden">&times;</button>
                                         <h3>咨询TA</h3>

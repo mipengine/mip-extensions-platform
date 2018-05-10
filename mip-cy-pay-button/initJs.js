@@ -2,7 +2,7 @@
  * @file 引入春雨内部UI通用组件
  * @author 春雨前端开发组
  */
-define(function (require) {
+define(function () {
     'use strict';
     var scriptId = 'CYUI_DUP_JS';
     var jsSrc = 'https://media2.chunyuyisheng.com/@/cyui/0.0.1/cyui.window.js';

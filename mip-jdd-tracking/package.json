@@ -1,0 +1,14 @@
+{
+    "name": "mip-jdd-tracking",
+    "version": "1.0.0",
+    "description": "jdd私有业务-埋点",
+    "contributors": [
+        {
+            "name": "guhanqing",
+            "email": "hanson_s@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

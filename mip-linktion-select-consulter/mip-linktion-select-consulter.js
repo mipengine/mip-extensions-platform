@@ -22,7 +22,6 @@ define(function (require) {
         var synthesize = $el.find('#synthesize');
         var hot = $el.find('#hot');
         var level = $el.find('#level');
-        var productid = $el.find('#dataoption').data('productid');
         function sendData(consultUrl, bodyData, that) {
             fetch(consultUrl, {
                 method: 'POST', // or 'PUT'
@@ -221,7 +220,7 @@ define(function (require) {
                                 + '</div>';
                         });
                         templateBox.html(html);
-                        valifypopValue($el);
+                        valifypopValue($el, productid);
                     }
                 }
             });
@@ -356,25 +355,49 @@ define(function (require) {
 
         }
         if (type === 'change') {
-            // fetchfun($el, templateBox, templates, src, 'items');
-            change.on('click', function () {
-                fetchfun($el, templateBox, templates, domainsrc, 'items', productid);
+            change.on('click', function (e) {
+                var productid = $(this).data('productid');
+                console.log(productid);
+                if (productid !== undefined) {
+                    var src = domainsrc + '?&productid=' + productid;
+                } else {
+                    var src = domainsrc;
+                }
+                fetchfun($el, templateBox, templates, src, 'items', productid);
             });
         }
         else if (type === 'planners') {
-            // fetchfun($el, templateBox, templates, src, 'planners');
             hot.on('click', function () {
-                var src = domainsrc + '?hot=1';
+                var productid = $(this).parents('.more-wrap-productid').data('productid');
+                console.log(productid);
+                if (productid !== undefined) {
+                    var src = domainsrc + '?hot=1' + '&productid=' +  productid;
+                } else {
+                    var src = domainsrc + '?hot=1';
+                }
                 fetchfun($el, templateBox, templates, src, 'planners', productid);
             });
             level.on('change', function () {
                 if ($(this).val() !== '') {
-                    var src = domainsrc + '?level=' + $(this).val();
+                    var productid = $(this).parents('.more-wrap-productid').data('productid');
+                    console.log(productid);
+                    if (productid !== undefined) {
+                        var src = domainsrc + '?level=' + $(this).val() + '&productid=' + productid;
+                    } else {
+                        var src = domainsrc + '?level=' + $(this).val();
+                    }
                     fetchfun($el, templateBox, templates, src, 'planners', productid);
                 }
             });
             synthesize.on('click', function () {
-                fetchfun($el, templateBox, templates, domainsrc, 'planners', productid);
+                var productid = $(this).parents('.more-wrap-productid').data('productid');
+                console.log(productid);
+                if (productid !== undefined) {
+                    var src = domainsrc + '?&productid=' + productid;
+                } else {
+                    var src = domainsrc;
+                }
+                fetchfun($el, templateBox, templates, src, 'planners', productid);
             });
         }
     };
