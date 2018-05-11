@@ -21,7 +21,9 @@ define(function (require) {
                 Element[data.params.swiper] = new Swipers(Element, data.params);
             }
             else {
-                new Swipers(Element, data.params);
+                if ($(Element).find('.swiper-wrapper').length > 0) {
+                    new Swipers(Element, data.params);
+                }
             }
         }
         catch (e) {

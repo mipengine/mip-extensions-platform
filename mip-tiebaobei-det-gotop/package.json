@@ -1,0 +1,14 @@
+{
+    "name": "mip-tiebaobei-det-gotop",
+    "version": "1.0.0",
+    "description": "返回顶部",
+    "contributors": [
+        {
+            "name": "weiss",
+            "email": "630039491@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

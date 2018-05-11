@@ -172,9 +172,9 @@ define(function (require) {
     };
 
     /**
-     * 第一次进入可视区回调，只会执行一次
+     * build 方法，元素插入到文档时执行，仅会执行一次
      */
-    customElement.prototype.firstInviewCallback = function () {
+    customElement.prototype.build = function () {
         var element = this.element;
 
         var scriptEle = element.querySelector('script[type="application/json"]');

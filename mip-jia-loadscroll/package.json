@@ -1,6 +1,6 @@
 {
     "name": "mip-jia-loadscroll",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "ajax上拉加载数据插入html",
     "contributors": [
         {

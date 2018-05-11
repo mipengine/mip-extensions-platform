@@ -54,15 +54,11 @@ define(function (require) {
 
     customElement.prototype.request = function () {
         var self = this;
-        var params = {
-            ztzx: self.ztzx,
-            zxcoupon: self.zxcoupon
-        };
         $.ajax({
             url: self.url,
             type: 'get',
             dataType: 'jsonp',
-            data: params,
+            data: self.params,
             timeout: 10000,
             success: function (render) {
                 self.htmlFun(render);
@@ -88,8 +84,7 @@ define(function (require) {
             return;
         }
         self.url = data.url;
-        self.ztzx = data.ztzx;
-        self.zxcoupon = data.zxcoupon;
+        self.params = data.params;
         self.request();
     };
 
