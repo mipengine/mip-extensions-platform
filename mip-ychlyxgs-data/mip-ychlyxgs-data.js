@@ -149,7 +149,6 @@ define(function (require) {
             $(ele).find('.f-tags-position').after(tagsHtml);
             $(ele).find('.f-tags-box').show();
             if (pageInfo.system.indexOf(systemName) === -1) {
-                $(ele).find('.f-tags-system').text('系统：' + firstSystem);
                 var urlArray = datawebUrl;
                 var windowUrl = window.location.href;
                 var i = 0;

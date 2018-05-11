@@ -1,19 +1,22 @@
 # mip-ychlyxgs-data
 
-mip-ychlyxgs-data 一个本企业独立使用的多功能组件，通过接口获取数据进行多种逻辑判断和处理，因为数据繁多，所以为了减少请求次数，把多种功能基于一个组件中；如果分开需要多次请求同一个接口，不仅增加了请求次数，也增大了我们这边服务器的压力；
+功能介绍：一个本企业独立使用的多功能组件，通过接口获取数据进行多种逻辑判断和处理，因为数据繁多，所以为了减少请求次数，把多种功能基于一个组件中；如果分开需要多次请求同一个接口，不仅增加了请求次数，也增大了我们这边服务器的压力；根据百度体验要求，去掉根据设备修改设备属性。
+
+
 
 标题|内容
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-
-所需脚本|https://c.mipcdn.com/static/v1/mip-ychlyxgs-data/mip-ychlyxgs-data.js
-
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-p-ychlyxgs-data/mip-p-ychlyxgs-data.js
 ## 示例
 
 ### 基本用法
 ```html
+
+
 <mip-ychlyxgs-data>
+<mip-ychlyxgs-adddata>
 <section class="info">
     <mip-img class="tu f-game-img" src="http://pic1.uzzf.com/uzzf/mb/up/2017-7/20177121836493238_120_120.png"></mip-img>
     <h1 class="f-game-h1">网易终结者2审判日官方版1.104236.104289安卓正式版</h1>
