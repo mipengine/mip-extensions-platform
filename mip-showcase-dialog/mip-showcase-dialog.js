@@ -5,35 +5,34 @@
 
 define(function (require) {
     'use strict';
-    var viewer = require('viewer');
     var Dialog = require('./dialog');
     var customElement = require('customElement').create();
+    var viewer = require('viewer');
 
-    /**
-     * 第一次进入可视区回调，只会执行一次
-     */
-    customElement.prototype.build = function () {
+    customElement.prototype.firstInviewCallback = function () {
         var me = this;
         var ele = me.element;
         var ok = ele.getAttribute('ok');
         var cancel = ele.getAttribute('cancel');
-
+        var hiddenBtn = ele.getAttribute('hiddenBtn');
         var content = ele.innerHTML || '';
         me.addEventAction('open', function () {
-            var arg = arguments;
-            me.ins = new Dialog({
+            var config = {
                 content: content,
                 element: ele,
-                cancel:  function () {
+                cancelValue: cancel || '取消',
+                okValue: ok || '确定',
+                lock: true
+            };
+            if (hiddenBtn === null) {
+                config.cancel = function () {
                     viewer.eventAction.execute('cancel', ele, {});
-                },
-                ok: function () {
-                    // 确认订单
+                };
+                config.ok = function () {
                     viewer.eventAction.execute('ok', ele, {});
-                    console.log('ok', arg);
-                },
-                lock: true,
-            });
+                };
+            }
+            me.ins = new Dialog(config);
         });
         ele.innerHTML = '';
 

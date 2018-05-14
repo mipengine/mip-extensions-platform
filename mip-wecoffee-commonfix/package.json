@@ -1,7 +1,7 @@
 {
-    "name": "mip-wecoffee-saveinfo",
+    "name": "mip-wecoffee-commonfix",
     "version": "1.0.0",
-    "description": "商品加入购物车存储逻辑",
+    "description": "滚动边界问题",
     "contributors": [
         {
             "name": "zhuguoxi",

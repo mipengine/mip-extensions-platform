@@ -1,6 +1,6 @@
 # mip-showcase-dialog
 
-mip-showcase-dialog 组件说明
+weecoffee 商品详情弹窗逻辑
 
 标题|内容
 ----|----

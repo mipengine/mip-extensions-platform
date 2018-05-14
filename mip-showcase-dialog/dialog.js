@@ -34,11 +34,11 @@ define(function (require) {
         duration: 200
     };
 
-    function Dialog (options) {
+    function Dialog(options) {
         var self = this;
 
         // 重新获取配置
-        var options = self.options = $.extend({}, defaults, options);
+        options = self.options = $.extend({}, defaults, options);
 
         // 如果按钮组不是数组
         if (!Array.isArray(options.button)) {
@@ -62,12 +62,15 @@ define(function (require) {
                 callback: options.cancel
             });
         }
+
         self._is = {};
         self.cbs = {};
         self._init();
     }
 
-    $.extend(Dialog.prototype, {
+    $.extend(Dialog.prototype, /** @lends Dialog.prototype **/
+    {
+
         /**
          * 设置按钮组
          *
@@ -89,20 +92,22 @@ define(function (require) {
                 var id = val.id || val.value;
 
                 html.push([
-                    '<span class="sc-dialog-button c-line-clamp1" data-id="' + id + '">' + val.value + '</span>'
+                    '<span class="sc-dialog-button c-line-clamp1" ripple ripple-color="#cec1b3"  data-id="' + id + '">'
+                    + val.value + '</span>'
                 ].join(''));
-
 
                 // 如果回调是方法
                 if ('function' === typeof val.callback) {
                     // self.on('button:' + id, val.callback);
                     self.cbs['button:' + id] = val.callback;
                 }
+
             });
 
             // 绑定事件
             // 点击按钮时触发事件并关闭窗口
             self.$wrap.find('.sc-dialog-buttons').html(html.join('')).show().children().on('click', function (e) {
+
                 /**
                  * 按钮点击回调
                  * @event button:id
@@ -112,6 +117,7 @@ define(function (require) {
                 if (typeof fn === 'function') {
                     fn.call(self, e);
                 }
+
                 self.close();
                 return false;
             });
@@ -157,26 +163,33 @@ define(function (require) {
             }
 
             // 开始动画显示
-            self.$wrap.find('.sc-dialog-layout').css({
-                transform: 'translate(-50%, -50%) scale3d(1.2, 1.2, 1)'
-            }).animate({
-                transform: 'translate(-50%, -50%) scale3d(1, 1, 1)',
-                opacity: 1
-            }, options.duration, 'ease-out', function () {
-                /**
-                 * 显示弹出层
-                 * @event show
-                 */
-                // self.trigger('show');
-                viewer.eventAction.execute('show', self.element);
+            var $dialogLayout = self.$wrap.find('.sc-dialog-layout');
+            $dialogLayout.css({
+                transform: 'translate(-50%, -50%) scale3d(0.8, 0.8, 1)'
             });
+            setTimeout(function () {
+                $dialogLayout.animate({
+                    transform: 'translate(-50%, -50%) scale3d(1, 1, 1)',
+                    opacity: 1
+                }, options.duration, 'ease-out', function () {
 
-            // 如果有自动关闭的时间
-            if (options.time && 'number' === typeof options.time) {
-                self.one('show', function () {
-                    setTimeout(self.close.bind(self), options.time);
+                    /**
+                     * 显示弹出层
+                     * @event show
+                     */
+                    // self.trigger('show');
+                    viewer.eventAction.execute('show', self.options.element, {});
                 });
-            }
+                viewer.eventAction.execute('show', self.options.element, {});
+
+                // 如果有自动关闭的时间
+                if (options.time && 'number' === typeof options.time) {
+                    self.one('show', function () {
+                        setTimeout(self.close.bind(self), options.time);
+                    });
+                }
+
+            });
         },
 
         /**
@@ -207,12 +220,13 @@ define(function (require) {
                  * 关闭弹出层
                  * @event close
                  */
+
                 /**
                  * 销毁弹出层
                  * @event destroy
                  */
-                viewer.eventAction.execute('close', self.element);
-                viewer.eventAction.execute('destroy', self.element);
+                viewer.eventAction.execute('close', self.options.element, {});
+                viewer.eventAction.execute('destroy', self.options.element, {});
             });
 
             // 如果有遮罩层让其隐藏

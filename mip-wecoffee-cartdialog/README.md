@@ -1,21 +1,20 @@
-# mip-wecoffee-saveinfo
+# mip-wecoffee-cartdialog
 
-mip-wecoffee-saveinfo 商品加入购物车存储逻辑
+mip-wecoffee-cartdialog 购物车逻辑弹窗
 
 标题|内容
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/static/v1/mip-wecoffee-saveinfo/mip-wecoffee-saveinfo.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-wecoffee-cartdialog/mip-wecoffee-cartdialog.js
 
 ## 示例
 
 ### 基本用法
 ```html
-<mip-wecoffee-saveinfo id="ordersave">
+<mip-wecoffee-cartdialog>
     自定义内容，可以嵌套其他组件
-</mip-wecoffee-saveinfo>
-<div on="tab:ordersave.save tab:ordersave.update"></div>
+</mip-wecoffee-cartdialog>
 ```
 
 ## 属性

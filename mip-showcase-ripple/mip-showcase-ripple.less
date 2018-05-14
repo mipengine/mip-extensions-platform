@@ -1,0 +1,36 @@
+/**
+ * @file mip-showcase-loading样式文件
+ */
+
+mip-showcase-ripple {
+    // todo
+}
+
+[data-toggle=ripple] {
+    position: relative;
+}
+
+.ripple-effect {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none; /* 需点透 */
+    width: 50px;
+    height: 50px;
+    background: #FFF;
+    animation: ripple-animation 1s;
+    animation-iteration-count: 1;
+    opacity: 0;
+}
+
+@keyframes ripple-animation {
+    from {
+      transform: scale(1);
+      opacity: .4;
+    }
+    to {
+      transform: scale(100);
+      opacity: 0;
+    }
+}
+
+

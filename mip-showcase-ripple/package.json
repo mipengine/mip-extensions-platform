@@ -1,7 +1,7 @@
 {
-    "name": "mip-showcase-dialog",
-    "version": "1.0.1",
-    "description": "weecoffee 商品详情弹窗逻辑",
+    "name": "mip-showcase-ripple",
+    "version": "1.0.0",
+    "description": "点击效果",
     "contributors": [
         {
             "name": "susc",

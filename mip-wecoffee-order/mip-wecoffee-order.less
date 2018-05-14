@@ -1,0 +1,129 @@
+/**
+ * @file mip-wecoffee-address样式文件
+ */
+
+mip-wecoffee-order {
+    font-size: 4.2vw;
+    * {
+        box-sizing: border-box;
+    }
+    input {
+        border: 0;
+        font-size: 4.2vw;
+        outline: 0;
+        background: transparent;
+        background-image: none;
+
+        -webkit-appearance: none;
+    }
+    input::-webkit-input-placeholder {
+        color: #c7c5c7;
+    }
+    input::-moz-placeholder {
+        /* Mozilla Firefox 19+ */
+        color: #c7c5c7;
+    }
+    input:-moz-placeholder {
+        /* Mozilla Firefox 4 to 18 */
+        color: #c7c5c7;
+    }
+    input:-ms-input-placeholder {
+        /* Internet Explorer 10-11 */
+        color: #c7c5c7;
+    }
+    .list {
+        overflow: hidden;
+    }
+    .area {
+        display: block;
+        overflow: hidden;
+        margin-bottom: 10px;
+        padding: 0 4vw;
+        background: #fff;
+        box-shadow: 1px 1px 0 rgba(0, 0, 0, .05);
+    }
+    .list input {
+        width: 100%;
+        font-size: 16px;
+    }
+    .list li {
+        overflow: hidden;
+        padding: 10px 0;
+    }
+    .list > :first-child {
+        border-bottom: 1px solid #000;
+    }
+    .list span {
+        display: inline-block;
+    }
+    .list li > :first-child {
+        width: 50%;
+    }
+    .list li > :nth-child(2) {
+        width: 10%;
+    }
+    .list li > :nth-child(3) {
+        width: 10%;
+    }
+    .list li > :nth-child(4) {
+        width: 15%;
+    }
+    .list li > :nth-child(5) {
+        width: 15%;
+    }
+    .desc {
+        display: inline-block;
+    }
+    .desc span {
+        display: block;
+    }
+    .cancel,
+    .clear-all,
+    .clear {
+        padding: 5px 10px;
+        border-style: none;
+        color: #fff;
+        border-radius: 3px;
+        background: #572b07;
+    }
+    .clear {
+        float: left;
+    }
+    .total {
+        float: right;
+        padding: 5px 0;
+    }
+    .deal {
+        overflow: hidden;
+    }
+    .cart-item {
+        display: -webkit-flex;
+        display:         flex;
+        height: 13.3vw;
+        border-bottom: .7px solid rgba(0, 0, 0, .08);
+        color: #3a3a3a;
+
+        -webkit-align-items: center;
+        align-items: center;
+        -webkit-justify-content: space-between;
+        justify-content: space-between;
+        label {
+            display: flex;
+            height: 100%;
+
+            align-items: center;
+            flex: 1;
+
+            input {
+                display: flex;
+                padding: 0 1.33vw 0 10vw;
+
+                flex: 1;
+            }
+        }
+    }
+    .cartitem-right {
+        text-align: right;
+        // direction: rtl;
+    }
+}

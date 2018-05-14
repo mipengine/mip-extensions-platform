@@ -1,7 +1,7 @@
 {
-    "name": "mip-wecoffee-saveinfo",
+    "name": "mip-wecoffee-options",
     "version": "1.0.0",
-    "description": "商品加入购物车存储逻辑",
+    "description": "weecoffee 商品详细逻辑，包括选择加入购物车等",
     "contributors": [
         {
             "name": "zhuguoxi",

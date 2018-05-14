@@ -1,0 +1,181 @@
+/**
+ * @file mip-showcase-options样式文件
+ */
+.sc-dialog-content {
+    padding: 0 !important;
+}
+mip-wecoffee-options {
+    .menuPicTitle {
+        position: relative;
+        width: 100%;
+        height: 22vh;
+        background-color: #f3f3f3;
+        box-shadow: 1px 0 14px rgba(0, 0, 0, .21);
+        &__bg {
+            position: absolute;
+            z-index: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            opacity: 0;
+            background-position: 50% 50%;
+            // display: none;
+            background-size: cover;
+            transition: 1s;
+        }
+        &__zh,
+        &__en {
+            position: absolute;
+            left: 4vw;
+            line-height: 1;
+            color: #fff;
+        }
+        &__zh {
+            bottom: 10vw;
+            font-size: 6vw;
+        }
+        &__en {
+            bottom: 4.5vw;
+            font-size: 3.2vw;
+        }
+        &__closeBox {
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 3.6vw;
+            border-radius: 13.2vw;
+        }
+        &__close {
+            box-sizing: border-box;
+            width: 6vw;
+            height: 6vw;
+            padding: 3px;
+            border: 1px solid #fff;
+            color: #fff;
+            border-radius: 6vw;
+        }
+    }
+    .menuContentBox {
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: 100%;
+        max-height: 40vh;
+        padding: 5.6vw 4vw 4vw 4vw;
+        padding-right: 0;
+    }
+    .menuheader {
+        width: 11.3vw;
+        margin-top: 15px;
+        font-size: 3.2vw;
+        text-align: left;
+    }
+    .menuheader:first-of-type {
+        margin-top: 0;
+    }
+    .itemlist-box {
+        display: flex;
+    }
+    .itemlist {
+        display: flex;
+        margin-right: -4vw;
+        margin-bottom: 2vw;
+
+        flex: 1;
+        flex-wrap: wrap;
+    }
+
+    [role=listitem] {
+        margin-bottom: 4.666667vw;
+    }
+    .menuitem {
+        width: 21.3vw;
+        height: 8vw;
+        margin: 0 2.6vw 2.6vw 0;
+        border: 1px solid #cec1b3;
+        font-size: 3.2vw;
+        line-height: 8vw;
+        text-align: center;
+        // padding: 0 2.4vw;
+        color: #a9937d;
+        border-radius: 5.333333vw;
+    }
+    .menuitemact {
+        // font-weight: 700;
+        color: #fff;
+        // border-color: hsl(206, 80%, 55%);
+        background-color: #cec1b3;
+    }
+
+    .productDesc {
+        display: flex;
+        flex-direction: column;
+        margin-right: 4vw;
+        padding: 4vw 0;
+        border-top: 1px solid #e5e5e5;
+        font-size: 3.4vw;
+
+        align-items: flex-start;
+        justify-content: flex-start;
+        &__title {
+            padding-bottom: 2.4vw;
+            color: #333;
+        }
+        &__con {
+            text-align: left;
+            color: #8c8c8c;;
+        }
+    }
+
+    .diaprice {
+        // margin-top: 15px;
+        padding: 4vw 4vw 2.6vw;
+        text-align: left;
+        color: #333;
+        // border-top: 1px solid #e5e5e5;
+        box-shadow: -1px -9px 19px rgba(0, 0, 0, .03);
+        &__total {
+            font-size: 4.8vw;
+        }
+        &__detail {
+            font-size: 3.2vw;
+            opacity: .5;
+        }
+    }
+    .diapricetext {
+        font-weight: 700;
+    }
+    .menuSubmitBox {
+        display: flex;
+        padding: 4vw;
+        border-top: 1px solid #e5e5e5;
+
+        justify-content: flex-end;
+        &__cancel,
+        &__add {
+            display: flex;
+            box-sizing: border-box;
+            width: 26.6vw;
+            height: 8.6vw;
+            border: 1px solid #89afd6;
+            font-size: 3.2vw;
+            border-radius: 3px;
+
+            align-items: center;
+            justify-content: center;
+        }
+        &__cancel {
+            color: #89afd6;
+            background-color: #f3f3f3;;
+        }
+        &__add {
+            margin-left: 1.6vw;
+            color: #fff;
+            background-color: #89afd6;;
+        }
+        .rt-svg-icon {
+            width: 15px;
+            margin-right: 5px;
+        }
+    }
+}

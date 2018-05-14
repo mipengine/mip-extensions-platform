@@ -1,0 +1,51 @@
+/**
+ * @file mip-wecoffee-cartdialog样式文件
+ */
+body {
+    overflow: hidden;
+}
+mip-wecoffee-cartdialog {
+    // TODO
+}
+.cartdialog {
+    position: absolute !important;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    transform: translateY(-100vh);
+}
+.cart-dialog {
+    position: absolute;
+    z-index: 520;
+    top: 0;
+    display: none;
+    display: block;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    opacity: 0;
+    background-color: #000;
+}
+.cart-dialog-back {
+    position: absolute;
+    bottom: -.2vw;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    background-color: #000;
+}
+.cart-dialog-content {
+    position: absolute;
+    z-index: 530;
+    bottom: 0;
+    display: none;
+    width: 100%;
+    padding-bottom: 8vh;
+    opacity: 0;
+    background-color: #fff;
+}
+.cart-item-contain {
+    overflow-y: auto;
+    max-height: 60vh;
+    padding-bottom: 12px;
+}
