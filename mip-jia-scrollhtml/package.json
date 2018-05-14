@@ -1,0 +1,14 @@
+{
+    "name": "mip-jia-scrollhtml",
+    "version": "1.0.0",
+    "description": "ajax上拉加载数据插入html",
+    "contributors": [
+        {
+            "name": "tao",
+            "email": "165526381@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
