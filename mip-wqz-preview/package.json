@@ -1,0 +1,14 @@
+{
+    "name": "mip-wqz-preview",
+    "version": "1.0.0",
+    "description": "预览网页",
+    "contributors": [
+        {
+            "name": "wangqizheng",
+            "email": "jenkey2011@gmail.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
