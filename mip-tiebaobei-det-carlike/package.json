@@ -1,0 +1,14 @@
+{
+    "name": "mip-tiebaobei-det-carlike",
+    "version": "1.0.0",
+    "description": "猜你喜欢",
+    "contributors": [
+        {
+            "name": "weiss",
+            "email": "630039491@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
