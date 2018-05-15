@@ -19,11 +19,9 @@ define(function (require) {
         var inputWrap = tryBtn.parents().siblings('.modal-input-info').children('.form-group');
         var inputs = inputWrap.children('input');
         var formItem = tryBtn.parents('.modal-body').children('form')[0];
-        function hideTry(that) {
-            that.addEventAction('close', function (event) {
-                $el.css('display', 'none');
-            });
-        }
+        that.addEventAction('close', function (event) {
+            $el.css('display', 'none');
+        });
         function hideHints() {
             setTimeout(function () {
                 $el.find('.web-hint').fadeOut();
@@ -66,7 +64,6 @@ define(function (require) {
                         } else {
                             $el.find('.form-close').trigger('click');
                             $el.find('.try-btn-end').trigger('click');
-                            hideTry(that);
                         }
 
                     }

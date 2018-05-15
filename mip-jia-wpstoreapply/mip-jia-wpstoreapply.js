@@ -10,13 +10,6 @@ define(function (require) {
     var $ = require('zepto');
     var MRULE = /^1[3|4|5|6|7|8|9]\d{9}$/;
     var TYPE = 'script[type="application/json"]';
-    var KEY = 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAurXXoxX'
-            + 'AHK4vwRMDDQRFhkQH6tDbVN/k69JGBAGxm2N4+2TVDCKWrBqKjgm'
-            + 'jQSqubHiURa9O3bfAXUDYyV7S3/Vajc+NP0kU0l6Fl8q4AldSsQkSf'
-            + 'Lq5NrcxU0QsXJbfRCEIyS+lfG9/O+XGVrvpy21hOqs6Zmgvsa5//d6BT'
-            + 'C31FOb/d9H4C/iFgIXqAvcEJms+agPpXTMDDjxbB6/6P8qZoqKR1iztv3'
-            + 'bzwowU7YRpMVwwdr74K+ka7p0Y+KnnE4oiX3b5rDfQ/GOdG9OJhpGMAUkpR'
-            + 'jXy01hu9bT+ep7sYTlhVPhwr+8OICO7tsxNoNW7InOix26oY0IvqWcGjwIDAQAB';
 
     function jsonParse(json) {
         try {
@@ -45,32 +38,6 @@ define(function (require) {
         }, duration);
     }
 
-    /**
-     * 加密手机号
-     *
-     * @class
-     * @param {string} phone 手机号
-     * @param {string} key 加密key
-     */
-    function mobileEncrypt(phone, key) {
-        /* global JSEncryptExports */
-        var JSEncrypt = new JSEncryptExports.JSEncrypt();
-        JSEncrypt.setKey(key);
-
-        // base64编码在传输到后端的时候，+会变成空格，因此替换掉
-        var ep = JSEncrypt.encrypt(phone).replace(/\+/g, '%2B');
-
-        return ep;
-    }
-
-
-    customElement.prototype.build = function () {
-
-        // 加密依赖(必须加载该js进行加密处理)
-        var scriptDom = document.createElement('script');
-        scriptDom.src = '//mued2.jia.com/js/mobile/jsencrypt.js';
-        document.body.appendChild(scriptDom);
-    };
 
     /**
      * 第一次进入可视区回调，只会执行一次
@@ -78,26 +45,19 @@ define(function (require) {
     customElement.prototype.firstInviewCallback = function () {
         var ele = this.element;
 
-        var msg = document.querySelector(TYPE);
+        var msg = ele.querySelector(TYPE);
         var cfg = jsonParse(msg.textContent);
-
-        var bEle = document.querySelector(cfg.btn);
-        var mEle = document.querySelector(cfg.tel);
-        var loading = document.querySelector(cfg.loading);
-
         var isEnd = true;
-
-        function apply() {
-            var tel = mEle.value;
+        $(cfg.btn).on('click', function () {
+            var tel = $(cfg.tel).val();
             if (!MRULE.test(tel)) {
                 tipMask('请输入正确的电话号码~');
                 return;
             }
-            tel = mobileEncrypt(tel, KEY);
             if (isEnd) {
                 isEnd = false;
-                loading.style.display = 'inherit';
-                fetch('//m.jia.com/wangpu/shop/reservation/add', {
+                $(cfg.loading).show();
+                fetch(cfg.url, {
                     mode: 'cors',
                     method: 'post',
                     headers: {'Content-type': 'application/json;charset=UTF-8'},
@@ -108,7 +68,7 @@ define(function (require) {
                     }),
                     credentials: 'include'
                 }).then(function (res) {
-                    loading.style.display = 'none';
+                    $(cfg.loading).hide();
                     isEnd = true;
                     return res.json();
                 }).then(function (res) {
@@ -118,15 +78,12 @@ define(function (require) {
                         tipMask(res.msg);
                     }
                 }).catch(function (err) {
-                    loading.style.display = 'none';
+                    $(cfg.loading).hide();
                     isEnd = true;
                     console.log('Fetch错误:' + err);
                 });
             }
-        }
-
-
-        bEle.addEventListener('click', apply, false);
+        });
     };
 
     return customElement;

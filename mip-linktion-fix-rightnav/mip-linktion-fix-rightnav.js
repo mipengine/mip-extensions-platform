@@ -43,7 +43,7 @@ define(function (require) {
         $el.find('.retroaction-form button').on('click', function () {
             var retroactionText = $(this).siblings('textarea').val();
             if (retroactionText === '') {
-                alert('请输入反馈内容！');
+                showTips('请输入反馈内容！', 'err');
             }
             else {
                 // console.log(retroactionText);
@@ -61,15 +61,35 @@ define(function (require) {
                     return res.json();
                 }).then(function (data) {
                     if (data.code === 1009) {
-                        alert('请登录');
+                        showTips('请登录', 'err');
                     }
                     else if (data.code === 0) {
                         $el.find('#reply-hidden').trigger('click');
-                        alert('提交成功');
+                        showTips('提交成功', 'success');
                     }
                 });
             }
         });
+        function hideHints() {
+            setTimeout(function () {
+                $el.find('.web-hint').fadeOut();
+            }, 6000);
+        }
+        function showTips(text, status) {
+            var hintsHtml = '';
+            if (status === 'err') {
+                hintsHtml = '<div class="web-error web-hint">'
+                            + '<p>' + text + '</p>'
+                            + '</div>';
+            }
+            else if (status === 'success') {
+                hintsHtml = '<div class="web-hint web-succeed">'
+                            + ' <p>' + text + '</p>'
+                            + ' </div>';
+            }
+            $el.find('.hints').html(hintsHtml);
+            hideHints();
+        }
     };
     return customElement;
 });

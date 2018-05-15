@@ -19,78 +19,41 @@ define(function (require) {
         });
 
         function jiYanCode(openUrl) {
-            $.ajax({
-                type: 'POST',
-                async: false,
-                cache: false,
-                url: '//user.ppkao.com/Interface/IsLogin.ashx?action=GetUserIP',
-                dataType: 'jsonp',
-                crossDomain: true,
-                contentType: 'application/x-www-form-urlencoded;charset=utf-8',
-                jsonp: 'callback',
-                jsonpCallback: 'callback',
-                success: function (data) {
-                    if (data.name === '-1') {
-                        location.href = '//user.ppkao.com/';
-                        return false;
-                    } else if (data.name === '0') {
-                        location.href = '//user.ppkao.com/3g/upvip/index_taste.aspx';
-                        return false;
-                    } else if (data.name === '4') {
-                        location.href = openUrl;
-                        var result = '';
-                        return false;
-                    } else if (data.name === '1') {
-                        location.href = openUrl;
-                        var result = '';
-                        return false;
-                    } else {
-                        location.href = '//user.ppkao.com/3g/upvip/index_taste.aspx';
-                        return false;
+            var num = window.sessionStorage.getItem('JR_NUM');
+            if (num === null || num === '') {
+                num = 1;
+            }
+            if (num === null || num === '' || num < 20) {
+                window.sessionStorage.setItem('JR_NUM', ++num / 1);
+                window.top.location.href = openUrl;
+            } else {
+                var handlerEmbed = function (captchaObj) {
+                    captchaObj.getValidate();
+                    captchaObj.appendTo('#embed-captcha');
+                    captchaObj.onReady(function () {
+                        captchaObj.verify();
+                    });
+                    captchaObj.onSuccess(function () {
+                        window.sessionStorage.setItem('JR_NUM', 1);
+                        window.top.location = openUrl;
+                    });
+                };
+                $.ajax({
+                    url: '//data.api.ppkao.com/Interface/GeetestSDK/GeetestSDK.ashx?action=getCaptcha&t='
+                    + (new Date()).getTime(),
+                    type: 'get',
+                    dataType: 'json',
+                    success: function (data) {
+                        window.initGeetest({
+                            gt: data.gt,
+                            challenge: data.challenge,
+                            product: 'bind',
+                            offline: !data.success,
+                            newCaptcha: data.new_captcha
+                        }, handlerEmbed);
                     }
-                },
-                error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    var result = openUrl.replace('//user.ppkao.com/', '//api.ppkao.com/');
-                    location.href = result;
-                    result = '';
-                    return false;
-                }
-            });
-            // var num = window.sessionStorage.getItem('JR_NUM');
-            // if (num === null || num === '') {
-            //     num = 1;
-            // }
-            // if (num === null || num === '' || num < 20) {
-            //     window.sessionStorage.setItem('JR_NUM', ++num / 1);
-            //     window.location.href = url;
-            // } else {
-            //     var handlerEmbed = function (captchaObj) {
-            //         captchaObj.getValidate();
-            //         captchaObj.appendTo('#embed-captcha');
-            //         captchaObj.onReady(function () {
-            //             captchaObj.verify();
-            //         });
-            //         captchaObj.onSuccess(function () {
-            //             window.sessionStorage.setItem('JR_NUM', 1);
-            //             window.location = url;
-            //         });
-            //     };
-            //     $.ajax({
-            //         url: '//data.api.ppkao.com/Interface/GeetestSDK/GeetestSDK.ashx?action=getCaptcha&t='
-            //         + (new Date()).getTime(),
-            //         type: 'get',
-            //         dataType: 'json',
-            //         success: function (data) {
-            //             window.initGeetest({
-            //                 gt: data.gt,
-            //                 challenge: data.challenge,
-            //                 product: 'bind',
-            //                 offline: !data.success,
-            //                 newCaptcha: data.new_captcha
-            //             }, handlerEmbed);
-            //         }
-            //     });
-            // }
+                });
+            }
 
         }
 
@@ -315,7 +278,7 @@ define(function (require) {
                 if (userConfig.https) {
                     config.protocol = 'https://';
                 } else if (!userConfig.protocol) {
-                    config.protocol = window.location.protocol + '//';
+                    config.protocol = window.top.location.protocol + '//';
                 }
                 jsonp([config.apiServer || config.apiserver], config.typePath, config, function (newConfig) {
                     var type = newConfig.type;

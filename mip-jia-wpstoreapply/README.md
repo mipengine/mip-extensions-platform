@@ -15,6 +15,7 @@ mip-jia-wpstoreapply 旺铺店铺预约
 <mip-jia-wpstoreapply>
     <script type="application/json">
         {
+            "url": "//m.jia.com/wangpu/shop/reservation/add",
             "shopId": "64868",
             "sourceReferrer": "http://qa.m.jia.com/wangpu/shanghai/",
             "btn": "#appointmentStore .ap-btn",
@@ -31,6 +32,12 @@ mip-jia-wpstoreapply 旺铺店铺预约
 ```
 
 ## 属性
+
+### url
+
+说明：请求url
+必选项：是
+类型：url
 
 ### btn
 

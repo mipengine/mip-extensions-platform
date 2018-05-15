@@ -1,0 +1,14 @@
+{
+    "name": "mip-blog-search",
+    "version": "1.0.0",
+    "description": "博客搜索功能组件",
+    "contributors": [
+        {
+            "name": "laoono",
+            "email": "laoono@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

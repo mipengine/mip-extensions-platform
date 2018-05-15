@@ -7,8 +7,8 @@ define(function (require) {
 
     var customElement = require('customElement').create();
     var templates = require('templates');
-    var fetchJsonp = require('fetch-jsonp');
     var $ = require('zepto');
+    var Mswiper = require('./swiper');
 
     /**
      * [reFn 处理数据]
@@ -155,7 +155,10 @@ define(function (require) {
      */
     customElement.prototype.htmlFun = function (data) {
         var self = this;
-
+        if (!data) {
+            console.error('网络错误');
+            return;
+        }
         if (self.contype === 'multiple') {
             $(self.ele).eq(self.activeIndex).data('load', true);
             if (self.templateFlag === '0') {
@@ -371,14 +374,20 @@ define(function (require) {
         else {
             $(self.contain).addClass('loading');
         }
-        fetchJsonp(url, {
-            jsonpCallback: 'callback',
-            timeout: self.timeout
-        }).then(function (res) {
-            return res.json();
-        }).then(function (data) {
-            self.htmlFun(data);
+
+        $.ajax({
+            url: url,
+            type: 'get',
+            dataType: 'jsonp',
+            timeout: 10000,
+            success: function (render) {
+                self.htmlFun(render);
+            },
+            error: function () {
+                self.htmlFun('');
+            }
         });
+
     };
 
     /**
@@ -407,11 +416,11 @@ define(function (require) {
                 if (data[index].noswiper !== 'true') {
                     if (data[index].myele) {
                         $(data[index].myele).forEach(function (item) {
-                            item.swiper = new Swiper(item, data[index]);
+                            item.swiper = new Mswiper(item, data[index]);
                         });
                     }
                     else {
-                        ele[0].swiper = new Swiper(ele[0], data[index]);
+                        ele[0].swiper = new Mswiper(ele[0], data[index]);
                     }
                 }
             }
@@ -419,11 +428,11 @@ define(function (require) {
                 if (data.noswiper !== 'true') {
                     if (data.myele) {
                         $(data[index].myele).forEach(function (item) {
-                            item.swiper = new Swiper(item, data);
+                            item.swiper = new Mswiper(item, data);
                         });
                     }
                     else {
-                        ele[0].swiper = new Swiper(ele[0], data);
+                        ele[0].swiper = new Mswiper(ele[0], data);
                     }
                 }
             }

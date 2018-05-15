@@ -15,6 +15,8 @@ mip-linktion-try 弹框ajax提交信息并后续弹框提示操作结果
   <div class="hints"></div>
   <button type="button" class="try-btn" on="tap:insurance-modal.toggle">试一试</button>
   <button type="button" class="try-btn-end" on="tap:insurance-modal-end.toggle"></button>
+  <button type="button"  on="tap:try.close">x</button>
+
   <mip-lightbox id="insurance-modal" layout="nodisplay" class="mip-hidden">
 	  <div class="modal-dialog insurance-modal-ad modal-blue-top" role="document">
 	    <div class="modal-content">

@@ -13,6 +13,7 @@ mip-linktion-fix-rightnav 页面右下角固定导航并用ajax提交反馈数�
 
 ```html
 <mip-linktion-fix-rightnav>
+    <div class="hints"></div>
     <div class="fixed-nav clearfix">
         <ul class="nav-ul">
           <li class="list-li" id="list-service">
@@ -40,8 +41,10 @@ mip-linktion-fix-rightnav 页面右下角固定导航并用ajax提交反馈数�
                 <button type="button" id="reply-hidden">&times;</button>
               </div>
               <div class="box-info retroaction-form">
-                <textarea placeholder="告诉我们你的建议或遇到的问题" class="info-textarea"></textarea>
-                <button type="button" class="info-submit" data-src="http://www.caifu.org/feedback/addFeedback">提交</button>
+                <mip-form url="https://www.caifu.org/feedback/addFeedback">
+                  <textarea placeholder="告诉我们你的建议或遇到的问题" class="info-textarea"></textarea>
+                  <button type="button" class="info-submit" data-src="https://www.caifu.org/feedback/addFeedback">提交</button>
+                </mip-form>
               </div>
             </div>
           </li>
