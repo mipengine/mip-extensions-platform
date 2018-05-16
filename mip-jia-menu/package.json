@@ -1,0 +1,14 @@
+{
+    "name": "mip-jia-menu",
+    "version": "1.0.0",
+    "description": "头部点击菜单",
+    "contributors": [
+        {
+            "name": "zlj",
+            "email": "zhenglijun@qeeka.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

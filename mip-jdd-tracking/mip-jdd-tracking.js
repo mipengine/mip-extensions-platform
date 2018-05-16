@@ -5,15 +5,19 @@
  *
  */
 define(function (require) {
+    var $ = require('zepto');
     var utils = require('util');
     var customElement = require('customElement').create();
     var cookies = require('./js-cookie');
 
-    customElement.prototype.createdCallback = function () {
+    // build说明：埋点组件，需要第一时间加载，  不显示在页面上
+    customElement.prototype.build = function () {
         var el = this.element;
         var config = getConfig(el);
         var trackList = getCustomTrackEvents();
-        bindEvent(trackList, config);
+        pageTrack(config);
+        bindEvent.call(this, trackList, config);
+
     };
 
     /**
@@ -25,7 +29,9 @@ define(function (require) {
     function getConfig(element) {
         var defaultConfig = {
             url: '',
-            appName: ''
+            appName: '',
+            pageId: '',
+            extra: ''
         };
 
         try {
@@ -79,8 +85,20 @@ define(function (require) {
 
             trackList.push(item);
         }
-
         return trackList;
+    }
+
+    /**
+     * 页面埋点
+     *
+     * @param {Object} config 配置
+     */
+    function pageTrack(config) {
+        if (config.pageId) {
+            doTrack(config.pageId, {
+                extra: config.extra
+            }, config);
+        }
     }
 
     /**
@@ -90,16 +108,45 @@ define(function (require) {
      * @param {Object} config 配置
      */
     function bindEvent(trackList, config) {
-        for (var index = 0; index < trackList.length; index++) {
-            var current = trackList[index];
-            if (current.type === 'click') {
-                current.dom.addEventListener('click', function () {
-                    doTrack(current.id, {
-                        extra: current.extra
-                    }, config);
-                });
+        function getParam(attr) {
+            if (attr === '') {
+                return {};
             }
 
+            var data = attr.split('|');
+            var item = {
+                id: data[0],
+                type: data[1],
+                extra: null
+            };
+            if (data[2]) {
+                var extra = convertQueryStringToJSON(data[2]);
+                if (!isEmptyObject(extra)) {
+                    item.extra = extra;
+                }
+            }
+
+            return item;
+        }
+        this.addEventAction('doTrack', function (event, str) {
+            var item = getParam(str);
+            doTrack(item.id, {
+                extra: item.extra
+            }, config);
+        });
+
+        for (var index = 0; index < trackList.length; index++) {
+            (function (i) {
+                var current = trackList[i];
+                if (current.type === 'click') {
+                    current.dom.addEventListener('click', function () {
+                        doTrack(current.id, {
+                            extra: current.extra
+                        }, config);
+                    });
+                }
+
+            })(index);
         }
     }
 
@@ -152,14 +199,12 @@ define(function (require) {
         form.append('json', JSON.stringify(params));
         form.append('appName', config.appName);
 
-        setTimeout(function () {
-            fetch(config.url, {
-                method: 'POST',
-                body: form
-            }).catch(function (error) {
-                console.warn(error);
-            });
-        }, 150);
+        fetch(config.url, {
+            method: 'POST',
+            body: form
+        }).catch(function (error) {
+            console.warn(error);
+        });
     }
 
     /**

@@ -1,0 +1,26 @@
+/**
+ * @file mip-jdd-fixed样式文件
+ */
+mip-jdd-fixed {
+    position: relative;
+    width: 100%;
+}
+.mip-fixedlayer div[mip-semi-fixed-scrollStatus],
+mip-jdd-fixed div[mip-semi-fixed-scrollStatus] {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    -webkit-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+.mip-fixedlayer mip-semi-fixed {
+    position: fixed!important;
+    width: 100%;
+}
+.mip-fixedlayer div[mip-semi-fixed-fixedStatus],
+mip-jdd-fixed div[mip-semi-fixed-fixedStatus] {
+    position: fixed;
+    z-index: 999;
+    width: 100%;
+}

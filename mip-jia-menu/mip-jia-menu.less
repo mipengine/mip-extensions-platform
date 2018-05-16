@@ -1,0 +1,328 @@
+/**
+ * @file mip-jia-menu样式文件
+ */
+
+mip-jia-menu {
+    .head-main-nav,
+    .head-main-nav .bg {
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+    }
+
+    .head-main-nav {
+        display: none;
+        position: fixed;
+        z-index: 999;
+    }
+
+    .head-main-nav .bg {
+        position: absolute;
+        background-color: rgba(0, 0, 0, .5);
+    }
+
+    .head-main-nav .close-btn {
+        display: inline-block;
+        width: .14rem;
+        height: .14rem;
+        background: url(//mued3.jia.com/image/mobile/headerCom/Hclose.png) no-repeat;
+        background-size: 100%;
+        position: absolute;
+        left: .12rem;
+        top: .12rem;
+        z-index: 3;
+    }
+
+    .head-main-nav .content {
+        padding: .03rem .15rem .24rem;
+        position: relative;
+        background-color: #fff;
+        -webkit-animation: headNavDown .5s;
+        animation: headNavDown .5s;
+    }
+
+    @-webkit-keyframes headNavDown {
+        0% {
+            opacity: 0;
+            -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+        }
+        100% {
+            opacity: 1;
+            -webkit-transform: translateY(0);
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes headNavDown {
+        0% {
+            opacity: 0;
+            -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+        }
+        100% {
+            opacity: 1;
+            -webkit-transform: translateY(0);
+            transform: translateY(0);
+        }
+    }
+
+    .head-main-nav .content h3 {
+        padding: .09rem 0;
+        text-align: center;
+        font-size: 0;
+    }
+
+    .head-main-nav .content h3 .logo {
+        display: inline-block;
+        width: .66rem;
+        height: .15rem;
+        background: url(//mued3.jia.com/image/mobile/headerCom/JiaLogo.png) no-repeat;
+        background-size: 100%
+    }
+
+    .head-main-nav .tab-list {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    }
+
+    .head-main-nav .tab-list li {
+        -ms-flex-negative: 0;
+        flex-shrink: 0;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        width: 22.42%;
+        height: .265rem;
+        border: 1px solid #d5d5d5;
+        border-radius: .265rem;
+        margin: .18rem 3.44% 0 0;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        font-size: .1245rem;
+        color: #333;
+        background-color: #f5f5f5;
+        overflow: hidden;
+    }
+
+    .head-main-nav .tab-list li:nth-child(4n+4) {
+        margin-right: 0;
+    }
+
+    .head-main-nav .tab-list li.special {
+        background-color: #fdeae8;
+        border-color: #fdeae8;
+    }
+
+    .head-main-nav .tab-list li.special a {
+        color: #ee2d1b;
+    }
+
+    .head-main-nav .station-list {
+        margin-top: .24rem;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+    }
+
+    .head-main-nav .station-list li {
+        font-size: 0;
+        text-align: center;
+    }
+
+    .head-main-nav .station-list li span {
+        display: inline-block;
+        width: .39rem;
+        height: .39rem;
+        background: url(//mued3.jia.com/image/mobile/headerCom/station-icons.png) no-repeat;
+        background-size: 100%;
+    }
+
+    .head-main-nav .station-list li .znbj {
+        background-position: 0 0;
+    }
+
+    .head-main-nav .station-list li .mfsj {
+        background-position: 0 25%;
+    }
+
+    .head-main-nav .station-list li .qjjz {
+        background-position: 0 50%;
+    }
+
+    .head-main-nav .station-list li .mxdk {
+        background-position: 0 75%;
+    }
+
+    .head-main-nav .station-list li .zxhb {
+        background-position: 0 100%;
+    }
+
+    .head-main-nav .station-list li p {
+        font-size: .095rem;
+        color: #666;
+        line-height: .15rem;
+    }
+
+    .head-main-nav.no-logo .content {
+        padding-top: .34rem;
+    }
+
+    .head-main-nav .tab-list.three li {
+        margin: .15rem 8.6% 0 0;
+        width: 27.6%;
+    }
+
+    .head-main-nav .tab-list.three li:nth-child(3n+3) {
+        margin-right: 0;
+    }
+
+    .head-main-nav .title-text {
+        font-size: .1425rem;
+        color: #333;
+        padding-top: .2rem;
+    }
+
+    .head-main-nav .invitations {
+        margin-top: .05rem;
+    }
+
+    .head-main-nav .topic-list li {
+        padding: .09rem 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    .head-main-nav .topic-list .desc {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+    }
+
+    .head-main-nav .topic-list .desc .label {
+        padding: .02rem;
+        text-align: center;
+        font-weight: 300;
+        font-size: .09rem;
+        line-height: 1;
+        vertical-align: middle;
+        display: inline-block;
+        color: #ee2d1b;
+        background-color: #fef4f3;
+        position: relative;
+        z-index: 0;
+        margin-right: .05rem;
+    }
+
+    .head-main-nav .topic-list .desc .label:after {
+        content: "";
+        position: absolute;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        top: 0;
+        left: 0;
+        border: 1px solid #f7a49c;
+        border-radius: 4px;
+        width: 200%;
+        height: 200%;
+        z-index: -1;
+        -webkit-transform: scale(.5);
+        -ms-transform: scale(.5);
+        transform: scale(.5);
+        -webkit-transform-origin: left top;
+        -ms-transform-origin: left top;
+        transform-origin: left top;
+    }
+
+    .head-main-nav .topic-list .desc .label.pink {
+        color: #7800ff;
+        background-color: #f8f2ff;
+    }
+
+    .head-main-nav .topic-list .desc .label.pink:after {
+        border-color: #cfa5ff;
+    }
+
+    .head-main-nav .topic-list .desc .text {
+        font-size: .124rem;
+        color: #333;
+        -webkit-box-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+        margin-right: .05rem;
+        white-space: nowrap;
+        -o-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .head-main-nav .topic-list .desc .statistics {
+        font-size: .106rem;
+        color: #999;
+    }
+
+    .head-main-nav .topic-list .desc .statistics i {
+        display: inline-block;
+        width: .125rem;
+        height: .125rem;
+        background: url(//mued3.jia.com/image/mobile/headerCom/message-icon.png) no-repeat;
+        background-size: 100%;
+        vertical-align: middle;
+        margin-right: .05rem;
+    }
+
+    .head-main-nav .more-area {
+        text-align: center;
+        margin-top: .13rem;
+    }
+
+    .head-main-nav .more-area a {
+        display: inline-block;
+        color: #666;
+    }
+
+    .head-main-nav .more-area .desc {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        font-size: .112rem;
+        border: 1px solid #e0e0e0;
+        height: .27rem;
+        border-radius: .27rem;
+        padding: 0 .18rem;
+    }
+
+    .head-main-nav .arrows {
+        display: inline-block;
+        border-style: solid;
+        border-color: #666 transparent transparent #666;
+        border-width: 1px 0 0 1px;
+        width: .06rem;
+        height: .06rem;
+        -webkit-transform: rotate(135deg);
+        -ms-transform: rotate(135deg);
+        transform: rotate(135deg);
+    }
+}

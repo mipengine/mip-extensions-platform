@@ -7,6 +7,7 @@ define(function (require) {
 
     var customElement = require('customElement').create();
     var $ = require('zepto');
+    var Mswiper = require('./swiper');
 
     /**
      * [replaceFn 处理数据]
@@ -41,9 +42,8 @@ define(function (require) {
             'slidesPerView': 2.5,
             'spaceBetween': 10
         };
-        /* global Swiper */
-        new Swiper(obj1, params);
-        new Swiper(obj2, params);
+        new Mswiper(obj1, params);
+        new Mswiper(obj2, params);
         self.replaceFn();
     };
 
@@ -70,9 +70,9 @@ define(function (require) {
     };
 
     /**
-     * build 方法，元素插入到文档时执行，仅会执行一次
+     * 第一次进入可视区回调，只会执行一次
      */
-    customElement.prototype.build = function () {
+    customElement.prototype.firstInviewCallback = function () {
         var self = this;
         var thisObj = this.element;
         var elemObj = thisObj.querySelector('script[type="application/json"]');

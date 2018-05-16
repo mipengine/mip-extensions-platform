@@ -12,6 +12,7 @@ define(function (require) {
 
     customElement.prototype.build = function () {
         var $ele = $(this.element);
+        var $wrap = $ele.closest('body');
         var toast = require('./toast');
         var auto = $ele.attr('auto') || 0;
         var doctorId = $ele.attr('doctor-id') || '';
@@ -25,9 +26,16 @@ define(function (require) {
             if ($ele.hasClass('disabled')) {
                 return;
             }
-
             $ele.addClass('disabled');
+            $wrap.find('.tip-pop').hide();
             followDoctor();
+        });
+
+        $wrap.on('click', '.close-btn', function () {
+            $wrap.find('.attention-tip').addClass('hide');
+        });
+        $wrap.on('click', '.tip-pop-x', function (e) {
+            $wrap.find('.tip-pop').hide();
         });
 
         function followDoctor() {
@@ -50,17 +58,16 @@ define(function (require) {
                         }
                         return;
                     }
-
+                    // 取消关注
                     if ($ele.hasClass('mip-cy-followed-doctor')) {
                         $ele.removeClass('disabled');
                         $ele.removeClass('mip-cy-followed-doctor');
                         $ele.addClass('mip-cy-follow-doctor');
                         return;
                     }
-
+                    // 关注
                     $ele.removeClass('mip-cy-follow-doctor');
                     $ele.addClass('mip-cy-followed-doctor');
-                    // 调取熊掌号关注
                     xzSubscribe();
                 },
                 error: function () {
@@ -70,46 +77,52 @@ define(function (require) {
             });
         }
 
-        /**
-         * 百度熊掌号js-sdk提供的关注功能
-         */
+        // 百度熊掌号js-sdk提供的关注功能
         function xzSubscribe() {
-            var subscribe;
             if (window.cambrian) {
-                subscribe = window.cambrian.subscribe;
-                // 获取熊掌号失败
-                if (!subscribe) {
+                var subscribe = window.cambrian.subscribe;
+                var isSubscribe = window.cambrian.isSubscribe;
+
+                if (!subscribe && !isSubscribe) { // 获取熊掌号失败
                     $ele.removeClass('disabled');
                     return;
                 }
-
-                subscribe({
-                    data: {
-                        type: 'force', // 类型，optional-弱关注 force-强关注
-                        title: '确认关注', // 标题文字，字数限制：4-6个字
-                        describe: '可在百度首页>关注>春雨医生中查看医生', // 关注说明，字数限制：0-20个字
-                        button: '关注' // 按钮文字，字数限制：2-6个字
-                    },
-                    complete: function (res) {
-                        $ele.removeClass('disabled');
-                        if (!res.status) {
-                            $.ajax({
-                                url: 'https://m.chunyuyisheng.com/stat/h5/event_analyse/data_upload/',
-                                type: 'post',
-                                data: {
-                                    events: JSON.stringify([{
-                                        key: 'XZHDoctorNewfans',
-                                        segmentation: {
-                                            result: res.result
-                                        }
-                                    }])
-                                }
-                            });
+                // 是否已关注熊掌号
+                isSubscribe({
+                    success: function (res) { // result：true-已关注 false-未关注
+                        // 已关注熊掌号提示关注医生成功
+                        if (res.result) {
+                            $ele.removeClass('disabled');
+                            $wrap.find('.attention-tip').removeClass('hide');
+                            return;
                         }
-
-                        setTimeout(function () {
-                            location.href = 'https://m.chunyuyisheng.com/mip/my_doctors_list_page/';
-                        }, 0);
+                        // 未关注熊掌号，调取熊掌号关注
+                        subscribe({
+                            data: {
+                                type: 'force', // 类型，optional-弱关注 force-强关注
+                                title: '确认关注？', // 标题文字，字数限制：4-6个字
+                                describe: '将同时关注春雨医生熊掌号，方便您随时向医生咨询。', // 关注说明，字数限制：0-20个字
+                                button: '确认' // 按钮文字，字数限制：2-6个字
+                            },
+                            complete: function (res) { // status 0-未关注 1-新增关注 2-已关注
+                                $ele.removeClass('disabled');
+                                $wrap.find('.attention-tip').removeClass('hide');
+                                if (!res.status) {
+                                    $.ajax({
+                                        url: 'https://m.chunyuyisheng.com/stat/h5/event_analyse/data_upload/',
+                                        type: 'post',
+                                        data: {
+                                            events: JSON.stringify([{
+                                                key: 'XZHDoctorNewfans',
+                                                segmentation: {
+                                                    result: res.result
+                                                }
+                                            }])
+                                        }
+                                    });
+                                }
+                            }
+                        });
                     }
                 });
             }

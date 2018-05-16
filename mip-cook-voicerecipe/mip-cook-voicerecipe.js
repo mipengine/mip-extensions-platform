@@ -11,6 +11,7 @@ define(function (require) {
     var $ = require('zepto');
     var util = require('util');
     var Bdbox = require('./bdbox');
+    var fixedUtil = require('fixed-element');
 
     var CustomStorage = util.customStorage;
     var platform = util.platform;
@@ -67,54 +68,6 @@ define(function (require) {
             duration: 300,
             cb: cb
         }).start();
-    }
-
-    function hackIosFixed(element) {
-
-        var wrapper = element.find('.mip-cook-voicerecipe-wrapper');
-        var scrolling = false;
-        var timer = null;
-        var showTimer = null;
-
-        var hackShow = function () {
-            // 慢速滚动时防抖
-            showTimer = setTimeout(function () {
-                if (!scrolling) {
-                    wrapper
-                        .removeClass('mip-cook-voicerecipe-ios-disappear')
-                        .addClass('mip-cook-voicerecipe-ios-appear');
-                }
-            }, 250);
-        };
-
-        $(document.body)
-            .on('scroll', function (e) {
-
-                if (!scrolling) {
-                    wrapper
-                        .removeClass('mip-cook-voicerecipe-ios-appear')
-                        .addClass('mip-cook-voicerecipe-ios-disappear');
-                    scrolling = true;
-                }
-
-                if (showTimer) {
-                    clearTimeout(showTimer);
-                    showTimer = null;
-                }
-
-                if (timer) {
-                    clearTimeout(timer);
-                    timer = null;
-                }
-
-                timer = setTimeout(function () {
-                    if (scrolling) {
-                        hackShow();
-                        scrolling = false;
-                    }
-                    timer = null;
-                }, 2500);
-            });
     }
 
     /**
@@ -177,6 +130,11 @@ define(function (require) {
 
         var element = $(this.element);
 
+        element.attr({
+            type: 'bottom',
+            bottom: 0
+        });
+
         // 去掉这个类，否则弹窗和 tips 都显示不出来
         element.removeClass('mip-layout-size-defined');
 
@@ -209,8 +167,15 @@ define(function (require) {
             });
         }
 
-        if (platform.isIos() && parseInt(platform.getOsVersion(), 10) >= 11) {
-            hackIosFixed(element);
+        if (platform.isIos()) {
+            var eleId = 'Fixed' + (fixedUtil._count);
+            var fixedEle = {
+                id: eleId,
+                element: this.element
+            };
+            fixedUtil.moveToFixedLayer(fixedEle);
+            fixedUtil._count++;
+            fixedUtil._fixedElements.push(fixedEle);
         }
     };
 
