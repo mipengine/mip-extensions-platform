@@ -1,0 +1,14 @@
+{
+    "name": "mip-tiebaobei-newcar",
+    "version": "1.0.0",
+    "description": "首页最新好车",
+    "contributors": [
+        {
+            "name": "weiss",
+            "email": "630039491@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

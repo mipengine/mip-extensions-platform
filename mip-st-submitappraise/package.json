@@ -1,0 +1,14 @@
+{
+    "name": "mip-st-submitappraise",
+    "version": "1.0.0",
+    "description": "服务中心提交组件",
+    "contributors": [
+        {
+            "name": "liyinan",
+            "email": "liyinan@baidu.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

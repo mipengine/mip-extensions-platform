@@ -1,0 +1,14 @@
+{
+    "name": "mip-liveinau-loginRedirect",
+    "version": "1.0.0",
+    "description": "登录成功跳转页面",
+    "contributors": [
+        {
+            "name": "Jason",
+            "email": "jasonlee@e2say.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

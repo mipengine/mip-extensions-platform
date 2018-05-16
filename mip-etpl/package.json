@@ -1,0 +1,14 @@
+{
+    "name": "mip-etpl",
+    "version": "1.0.0",
+    "description": "etpl模版组件",
+    "contributors": [
+        {
+            "name": "liyinan",
+            "email": "liyinan@baidu.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

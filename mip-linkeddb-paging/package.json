@@ -1,0 +1,14 @@
+{
+    "name": "mip-linkeddb-paging",
+    "version": "1.0.0",
+    "description": "点击按钮 查看下一页",
+    "contributors": [
+        {
+            "name": "linkeddb",
+            "email": "340236524@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

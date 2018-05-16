@@ -1,0 +1,14 @@
+{
+    "name": "mip-st-dialog",
+    "version": "1.0.0",
+    "description": "服务中心对话框组件",
+    "contributors": [
+        {
+            "name": "susc",
+            "email": "susc95@gmail.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

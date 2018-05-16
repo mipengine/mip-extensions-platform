@@ -1,0 +1,13 @@
+{
+    "name": "mip-39-form",
+    "version": "1.0.0",
+    "description": "预约医生",
+    "author": {
+        "name": "39frontent",
+        "email": "490356762@qq.com",
+        "url": "https://www.mipengine.org"
+    },
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

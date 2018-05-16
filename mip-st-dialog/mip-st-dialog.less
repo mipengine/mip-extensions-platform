@@ -1,0 +1,102 @@
+mip-st-dialog {
+    
+}
+mip-showcase-dialog {
+    display: none!important;
+}
+.sc-dialog {
+    position: relative;
+    z-index: 1000;
+    font-size: 14px; 
+}
+
+.sc-dialog-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .4);
+    z-index: 1;
+    opacity: 0;
+    display: none; 
+}
+
+.sc-dialog-layout {
+    opacity: 0;
+    position: fixed;
+    left: 50%;
+    top: 45.23%;
+    background-color: #fff;
+    border-radius: 4px;
+    z-index: 2;
+    width: 80%;
+    text-align: center;
+    overflow: hidden; 
+}
+
+.sc-dialog-content {
+    font-size: 16px;
+    line-height: 27px;
+    color: #999;
+}
+
+.sc-dialog-title {
+    font-size: 24px;
+    line-height: 1;
+    margin-bottom: 19.5px;
+    padding-top: 28px;
+    color: #000;
+}
+
+.sc-dialog-text {
+    margin-top: 19.5px;
+    padding-bottom: 24.5px;
+}
+
+.sc-dialog-buttons {
+    font-size: 18px;
+    color: #000;
+    line-height: 48px;
+    border-top: 1px solid #eee;
+}
+
+.sc-dialog-layout .c-flexbox .sc-dialog-button {
+    min-width: 35px;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 auto;
+    border-left: 1px solid #d9d9d9;
+}
+.sc-dialog-layout .c-flexbox .sc-dialog-button:first-child {
+    border-left: 0 none;
+}
+
+.sc-dialog-vertical-buttons .sc-dialog-button {
+    border-top: 1px solid #d9d9d9;
+}
+.sc-dialog-vertical-buttons .sc-dialog-button:first-child {
+    border-top: 0 none;
+}
+
+.c-line-clamp1 {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.c-flexbox {
+    -webkit-align-content: flex-start;
+    -webkit-align-items: stretch;
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-lines: single;
+    -webkit-box-orient: horizontal;
+    -webkit-box-pack: justify;
+    display: -webkit-flex;
+    display: -webkit-box;
+    -webkit-flex-direction: row;
+    -webkit-flex-wrap: nowrap;
+    -webkit-justify-content: space-between;
+    width: auto;
+}
