@@ -1,0 +1,14 @@
+{
+    "name": "mip-chuangyejia-tabs",
+    "version": "1.0.0",
+    "description": "创业家tab组件",
+    "contributors": [
+        {
+            "name": "wangqizheng",
+            "email": "jenkey@gmail.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
