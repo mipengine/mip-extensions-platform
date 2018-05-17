@@ -6,6 +6,7 @@
 define(function (require) {
 
     var $ = require('zepto');
+    var util = require('util');
 
     var customElem = require('customElement').create();
     var $body = $('body');
@@ -15,8 +16,9 @@ define(function (require) {
     var $adKeywords = $('meta[name="ck-ad-keywords"]');
     // 是否开启ip调用
     var $locationEnabled = $('meta[name="location-enabled"]');
-    var locationEnabled = $locationEnabled.attr('content') || '';
+    var locationEnabled = $locationEnabled.attr('content') || 'true';
     locationEnabled = locationEnabled.length && locationEnabled !== 'false' || false;
+    locationEnabled = window.MIP.hash.get('ip') === 'true' ? true : false;
 
     var paramObj = $adKeywords.attr('content');
     // 增加配置对象
@@ -33,6 +35,81 @@ define(function (require) {
     var adUrl = config.url || '//s.cnkang.com/yyk/showcodejsonp';
     // 动态配置参数
     var adData = config.data || {};
+
+    // 为了加载高德地图脚本，编写的loadScript加载脚本方法
+    function loadScript(url, callback) {
+        var head = document.getElementsByTagName('head')[0];
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = url; // 用途：页面地理定位，获取省市地区。服务商：高德地图。JS地址：//webapi.amap.com/maps?v=1.3&key=41a6673dd49056f4f7d1d3a4816ed582'
+
+        script.onreadystatechange = callback;
+        script.onload = callback;
+
+        head.appendChild(script);
+    }
+
+    // 通过高德地图获取定位相关信息
+    function getAMapLocation(cb) {
+
+        cb = typeof cb === 'function' ? cb : function () {};
+        var map;
+        var geolocation;
+        var AMap = window.AMap;
+        // 加载地图，调用浏览器定位服务
+        map = new AMap.Map('container', {
+            resizeEnable: true
+        });
+
+        map.plugin('AMap.Geolocation', function () {
+            geolocation = new AMap.Geolocation({
+                enableHighAccuracy: true, // 是否使用高精度定位，默认:true
+                timeout: 1000 // 超过10秒后停止定位，默认：无穷大
+
+            });
+            geolocation.getCurrentPosition();
+            AMap.event.addListener(geolocation, 'complete', onComplete); // 返回定位信息
+            AMap.event.addListener(geolocation, 'error', onError); // 返回定位出错信息
+        });
+
+        // 解析定位结果
+        function onComplete(data) {
+            regeocoder(data.position.getLng(), data.position.getLat());
+        }
+
+        // 解析定位错误信息
+        function onError(data) {
+            cb();
+        }
+
+        // 解析
+        function regeocoder(getLng, getLat) { // 逆地理编码
+            var lnglatXY = [getLng, getLat]; // 已知点坐标
+
+            var geocoder = new AMap.Geocoder({
+                radius: 1000,
+                extensions: 'all'
+            });
+            geocoder.getAddress(lnglatXY, function (status, result) {
+                if (status === 'complete' && result.info === 'OK') {
+                    geocoderCallBack(result);
+                }
+                else {
+                    cb();
+                }
+            });
+        }
+
+        function geocoderCallBack(data) {
+            var locData = {
+                pro: data.regeocode.addressComponent.province, // 返回地址描述
+                city: data.regeocode.addressComponent.city, // 返回地址描述
+                district: data.regeocode.addressComponent.district // 区
+            };
+
+            cb(locData);
+        }
+    }
 
     // 初始化直 投广告
     var init = function (opt) {
@@ -74,7 +151,15 @@ define(function (require) {
         }
 
         if (locationEnabled) {
-            getIP(ckAdOpt, getAd);
+
+            // 页面配置了定位允许项，开始加载高德地图定位脚本
+            loadScript('//webapi.amap.com/maps?v=1.3&key=41a6673dd49056f4f7d1d3a4816ed582', function () {
+                getAMapLocation(function (data) {
+                    data = data || {};
+                    ckAdOpt.query = util.fn.extend(data, ckAdOpt.query);
+                    getIP(ckAdOpt, getAd);
+                });
+            });
         }
         else {
             getAd(ckAdOpt);
@@ -164,7 +249,6 @@ define(function (require) {
 
     function getIP(opt, cb) {
         opt = opt || {};
-
         if ((typeof cb).toLocaleLowerCase() === 'function') {
             cb(opt);
         }
@@ -174,7 +258,7 @@ define(function (require) {
     customElem.prototype.firstInviewCallback = function () {
     };
 
-    // build 方法，元素插入到文档时执行，仅会执行一次
+    // 该组件可能会投放在页面顶部，在首屏展示，需要尽快加载。而且有可能在页面多个位置引用该组件, 但展示位置是在首屏
     customElem.prototype.build = function () {
         // this.element 可取到当前实例对应的 dom 元素
         var opt = getOpt(this.element);

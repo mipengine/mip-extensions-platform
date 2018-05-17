@@ -334,8 +334,7 @@ define(function (require) {
 
         function devareComment() {
             var $this = this;
-            var replyOid = $($this).parent().parent().data('commentId');
-
+            var replyOid = $($this).parent().parent().parent().data('commentId');
             $.confirm('确定删除吗？', function () {
                 $.post('https://mip.linkeddb.com/del_comment/', {
                     'reply_oid': replyOid
@@ -450,7 +449,7 @@ define(function (require) {
         $(ele).find('.review-modal-overlay').on('click', function () {
             $(ele).find('.review-modal-overlay').toggleClass('review-modal-overlay-visible');
             $(ele).find('.write-comment').toggleClass('show');
-            $(ele).find('.content').toggleClass('z-index-11');
+            $(ele).parent().parent().find('.content').toggleClass('z-index-11');
         });
 
         $(ele).find('.review-cont').on('click', '.view-pic-img', function () {

@@ -1,18 +1,20 @@
 /**
  * @file mip-fh-thirdpartyAd 组件
  * @author sunxiaopeng
- * @version 1.0.0
- * 组件中引入第三方联盟广告代码，代码由搜狗网盟提供 https://theta.sogoucdn.com/wap/js/wp.js
+ * @version 1.1.0
+ * 组件中引入第三方联盟广告代码，代码由搜狗网盟提供 例如https://theta.sogoucdn.com/wap/js/wp.js
  */
 
 define(function (require) {
     var $ = require('zepto');
     var customElement = require('customElement').create();
-    customElement.prototype.firstInviewCallback = function () {
+    // 增加script外联 引入第三方联盟代码 动态加载js文件
+    customElement.prototype.createdCallback = function () {
         var el = this.element;
         var adtype = el.getAttribute('type');
         var token = el.getAttribute('token');
         var adId = el.getAttribute('ad-id');
+        var adSrc = el.getAttribute('src');
         var adWidth = el.getAttribute('ad-width');
         var adHeight = el.getAttribute('ad-height');
         var adFloat = el.getAttribute('ad-float');
@@ -40,9 +42,11 @@ define(function (require) {
                 if (!!adClose) {
                     html += 'var sogou_ad_close=' + adClose + ';';
                 }
-                script1.html(html);
 
-                script2.attr('src', 'https://theta.sogoucdn.com/wap/js/wp.js'); // 组件中引入第三方联盟广告代码，代码由搜狗网盟提供 https://theta.sogoucdn.com/wap/js/wp.js
+                script1.html(html);
+                script1.append('console.log("搜狗网盟广告!");');
+
+                script2.attr('src', adSrc); // 组件中引入第三方联盟广告代码，代码由搜狗网盟提供 例如https://theta.sogoucdn.com/wap/js/wp.js
                 $element.append(script1);
                 $element.append(script2);
                 break;

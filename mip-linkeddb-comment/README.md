@@ -13,7 +13,7 @@ mip-linkeddb-comment 评论`回复 功能
 ### 基本用法
 ```html
 <mip-linkeddb-comment>
-	<div class="review-cont top-border" data-page-type="{{pageType}}" data-oid="{{pageOid}}">
+	<div class="review-cont top-border" data-page-type="{{pageType}}" data-page-oid="{{pageOid}}">
     <div class="write-comment bgc-fff">
         <div class="weui-cells weui-cells_form comment-cont m0">
             <div class="weui-cell pl10 pr10">

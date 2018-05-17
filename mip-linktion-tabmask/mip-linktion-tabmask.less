@@ -1,0 +1,65 @@
+/**
+ * @file mip-linktion-tabmask样式文件
+ */
+
+mip-linktion-tabmask {
+    .tab-mask   {
+        display: none;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 90px;
+        background-color: rgba(0,0,0,0.5);
+        z-index: 1;
+    }
+    .sub-box {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        .phone-section {
+            flex: 1;
+            padding: 10px 0;
+            .all_select {
+                vertical-align: middle;
+                line-height: 25px;
+                color: #333;
+            }
+            .iconfont {
+                display: inline-block;
+                width: 8px;
+                height: 6px;
+                vertical-align: middle;
+            }
+            .select-list {
+                position: absolute;
+                top: 36px;
+                left: 0;
+                width: 100%;
+                background-color: #f9f9f9;
+                display: block;
+                z-index: 2;
+                padding: 15px 15px 10px 15px;
+                .list-span {
+                    font-size: 14px;
+                    line-height: 14px;
+                    color: #666;
+                    display: inline-block;
+                    text-align: center;
+                    width: 23%;
+                    padding: 8px 0;
+                    margin-left: 3px;
+                    background-color: #ededed;
+                    border-radius:4px;
+                    margin-bottom: 6px;
+                }
+                .active {
+                    color: #4285f4;
+                    border: 1px solid #4285f4;
+                    background-color: #fff;
+
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "name": "mip-linktion-tabmask",
+    "version": "1.0.0",
+    "description": "实现tab打开时body不可滚动",
+    "contributors": [
+        {
+            "name": "tinng",
+            "email": "tinng@linktion.cn"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

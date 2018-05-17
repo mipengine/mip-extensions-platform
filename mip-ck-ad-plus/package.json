@@ -1,7 +1,7 @@
 {
     "name": "mip-ck-ad-plus",
-    "version": "1.0.1",
-    "description": "直销广告组件-优化代码结构，替换$.getJSON方法",
+    "version": "1.0.2",
+    "description": "直销广告组件-增加高德地图定位/并配置调试hash参数,例#ip=(true|false)",
     "author": {
         "name": "laoono",
         "email": "laoono@163.com"

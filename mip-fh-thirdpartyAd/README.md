@@ -12,7 +12,7 @@ mip-fh-thirdpartyAd 用来支持淘宝，谷歌广告，搜狗广告联盟
 
 ### 基本用法
 ```html
-<mip-fh-thirdpartyAd token="909184">
+<mip-fh-thirdpartyAd type="sogou" token="909184" src="https://theta.sogoucdn.com/wap/js/wp.js">
     自定义内容，可以嵌套其他组件
 </mip-fh-thirdpartyAd>
 ```
@@ -35,6 +35,12 @@ mip-fh-thirdpartyAd 用来支持淘宝，谷歌广告，搜狗广告联盟
 ### ad-id
 
 说明：搜狗网盟id
+必选项：是
+类型：字符串
+
+### src
+
+说明：搜狗网盟js外链地址
 必选项：是
 类型：字符串
 
