@@ -14,6 +14,11 @@ define(function (require) {
     customElement.prototype.firstInviewCallback = function () {
         // 首页城市
         var $el = $(this.element);
+        var scrollWrapper = $('.scroll-wrapper');
+        var lightbox = $('#select-city-phone');
+        document.addEventListener('touchmove', function (e) {
+            e.returnValue = true;
+        }, false);
         this.addEventAction('open', function (event) {
             function initLocationData(locationClass, id) {
                 var domain = $el.find('.city-pop-btn').data('domain');

@@ -1,0 +1,132 @@
+/**
+ * @file mip-lxn-mapin样式文件
+ */
+
+mip-lxn-mapin {
+    .order-confirm {
+        width: 94%;
+        height: .76rem;
+        text-align: center;
+        line-height: .76rem;
+        display: block;
+        margin: 0 auto;
+        background: #36A0E9;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.30);
+        border-radius: 1px;
+        font-size: .34rem;
+        color: #FFFFFF;
+        letter-spacing: .04px;
+        margin-top: 30px;
+    }
+    
+    // 搬出地址选择 
+    .lxn-address-title {
+        padding: 0 .4rem;
+        height: .88rem;
+        line-height: .88rem;
+        display: flex;
+        font-size: .36rem;
+    }
+    .lxn-address-title>div.item {
+        flex: 1;
+    }
+    .lxn-address-title .left .span-one {
+        display: inline-block;
+        width: .2rem;
+        height: .2rem;
+        border: .04rem solid #333333;
+        border-top: none;
+        border-right: none;
+        transform: rotate(45deg);
+    }
+    .lxn-address-title .left .span-two {
+        height: .06rem;
+        width: .4rem;
+        background: #333333;
+        display: inline-block;
+        position: relative;
+        top: -.06rem;
+        left: -.18rem;
+    }
+    .lxn-address-title .center {
+        text-align: center;
+        font-size: .36rem;
+    }
+    .lxn-address-title .right {
+        text-align: right;
+    }
+    .ss-icon {
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 5px solid #000000;
+        position: relative;
+        top: .34rem;
+        margin-left: .05rem;
+    }
+    .detail {
+        border: 1px solid #e1e1e1;
+        border-left: none;
+        border-right: none;
+        font-size: 0;
+        padding: 0 .4rem;
+        background: #FFFFFF;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.10);
+    }
+    .detail ul li {
+        list-style: none;
+        font-size: .28rem;
+        padding: .18rem 0;
+        padding-top: .2rem;
+        border-bottom: 1px solid #e1e1e1;
+        // position: relative;
+    }
+    .detail ul li:last-child {
+        border: none;
+    }
+    .detail ul li span {
+        display: inline-block;
+        width: .4rem;
+        height: .4rem;
+        margin-right: .24rem;
+        background-size: .4rem .4rem;
+    }
+    .detail ul li.address span {
+        background-image: url('./Public/搬出地址@3x.png');
+    }
+    .detail ul li.address-sub span {
+        background-image: url('./Public/详细地址@3x.png');
+    }
+    .detail ul li.add-person span {
+        background-image: url('./Public/联系人.png');
+    }
+    .detail ul li.add-phone span {
+        background-image: url('./Public/联系电话@3x.png');
+    }
+    .detail ul li input {
+        border: none;
+        outline: none;
+        height: 100%;
+        font-size: .28rem;
+        position: relative;
+        top: -.1rem;
+        width: 90%;
+    }
+    .detail li .address-list {
+        display: none;
+        position: absolute;
+        background: #fff;
+        color: #666;
+        left: 0;
+        right: 0;
+        top: 90px;
+        z-index: 9999;
+        padding: 20px 30px;
+        max-height: 500px;
+        overflow: auto;
+        .query-list {
+            padding: 5px 0;
+            border-bottom: 1px solid #e1e1e1;
+        }
+    }
+}
+

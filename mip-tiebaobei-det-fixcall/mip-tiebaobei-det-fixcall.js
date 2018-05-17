@@ -8,6 +8,7 @@ define(function (require) {
     customElement.prototype.firstInviewCallback = function () {
         var urlHost = window.location.host;
         var ele = $(this.element);
+        var par = ele.closest('.lightbox-wrap');
         var basePhone = ele.find('#nativ_show').attr('data-tel');
         var baseEqid = ele.find('#nativ_show').attr('data-eqid');
         var baseEquipmentStatus = ele.find('#nativ_show').attr('data-equipmentStatus');
@@ -45,8 +46,8 @@ define(function (require) {
         var phoneClick = function (plateName, isSdqy) {
             // 弹出引导层或手机号输入框
             if (isSdqy) {
-                ele.find('#dialBox').show();
-                ele.find('#dialBox .inp input').focus();
+                par.find('#dialBox').show();
+                par.find('#dialBox .inp input').focus();
             }
             else {
                 var telLocal = window.localStorage.getItem('localTel');
@@ -54,8 +55,8 @@ define(function (require) {
                     newCall(telLocal);
                 }
                 else {
-                    ele.find('#dialBox').show();
-                    ele.find('#dialBox .inp input').focus();
+                    par.find('#dialBox').show();
+                    par.find('#dialBox .inp input').focus();
                 }
             }
         };
@@ -92,56 +93,56 @@ define(function (require) {
                 ele.find('.srlj-wrap-con .error-btn').hide();
                 ele.find('#checkYzm').val('');
                 if (result.ret === 0) {
-                    ele.find('#dialBox').hide();
+                    par.find('#dialBox').hide();
                 }
                 else if (result.ret === 1106) {
-                    ele.find('#dialBox').hide();
-                    ele.find('.srlj-wrap-con').show();
-                    ele.find('#checkYzm').focus();
-                    ele.find('#callOutPic').hide();
+                    par.find('#dialBox').hide();
+                    par.find('.srlj-wrap-con').show();
+                    par.find('#checkYzm').focus();
+                    par.find('#callOutPic').hide();
                 }
                 else if (result.ret === 1104) {
-                    ele.find('#callOutPic').find('.co_tt').text('');
+                    par.find('#callOutPic').find('.co_tt').text('');
                     // ele.find('#callOutPic').find('.co_t').text('验证失败，请在24小时后再发起通话');
-                    ele.find('#callOutPic').show();
+                    par.find('#callOutPic').show();
                 }
                 else {
                     // ele.find('#callOutPic .co_p img').attr('src', dialFailurePicUrl);
-                    ele.find('#callOutPic').find('.co_tt').text('');
-                    ele.find('#callOutPic').find('.co_t').text('信号不太好, 请再试一下吧');
-                    ele.find('#callOutPic').show();
+                    par.find('#callOutPic').find('.co_tt').text('');
+                    par.find('#callOutPic').find('.co_t').text('信号不太好, 请再试一下吧');
+                    par.find('#callOutPic').show();
                 }
             }).catch(function (ex) {
                // console.log('parsing failed', ex);
             });
         };
         var newCall = function (tel) {
-            var tel = tel ? tel : ele.find('#userPhone').val();
+            var tel = tel ? tel : par.find('#userPhone').val();
             if (!tel || !tel.match(/^1+\d{10}$/)) {
                 alert('请检查手机号是否正确输入');
                 return;
             }
-            ele.find('.zxgj-wrap-con .m-bd').show();
+            par.find('.zxgj-wrap-con .m-bd').show();
             try {
                 window.localStorage.setItem('localTel', tel);
             }
             catch (e) {
             }
-            ele.find('#dialBox').hide();
-            ele.find('#userPhone').val(tel);
-            ele.find('#telLocal').text(tel);
-            ele.find('.telInput').css('display', 'none');
-            ele.find('.telCall').css('display', 'block');
-            ele.find('#callOutPic .co_tt').html('您的手机 <span>' + tel + '</span> 将接到');
-            ele.find('#callOutPic .co_t').text('铁甲的来电请注意接听');
+            par.find('#dialBox').hide();
+            par.find('#userPhone').val(tel);
+            par.find('#telLocal').text(tel);
+            par.find('.telInput').css('display', 'none');
+            par.find('.telCall').css('display', 'block');
+            par.find('#callOutPic .co_tt').html('您的手机 <span>' + tel + '</span> 将接到');
+            par.find('#callOutPic .co_t').text('铁甲的来电请注意接听');
         };
         var telLocal = window.localStorage.getItem('localTel');
         if (telLocal && (telLocal !== 'undefined')) {
-            ele.find('#userPhone').val(telLocal);
-            ele.find('#telLocal').text(telLocal);
+            par.find('#userPhone').val(telLocal);
+            par.find('#telLocal').text(telLocal);
             // ele.find('#telInp').val(telLocal);
-            ele.find('.telInput').css('display', 'none');
-            ele.find('.telCall').css('display', 'block');
+            par.find('.telInput').css('display', 'none');
+            par.find('.telCall').css('display', 'block');
         }
         else {
             if (baseLoginCustomerTel !== '') {
@@ -150,13 +151,13 @@ define(function (require) {
                 } catch (e) {
                 }
                 telLocal = window.localStorage.getItem('localTel');
-                ele.find('#telLocal').text(telLocal);
-                ele.find('#userPhone').val(telLocal);
-                ele.find('.telInput').css('display', 'none');
-                ele.find('.telCall').css('display', 'block');
+                par.find('#telLocal').text(telLocal);
+                par.find('#userPhone').val(telLocal);
+                par.find('.telInput').css('display', 'none');
+                par.find('.telCall').css('display', 'block');
             }
             else {
-                ele.find('.telInput').css('display', 'block');
+                par.find('.telInput').css('display', 'block');
             }
         }
         // 绑定事件，其它元素可通过 on='xxx' 触发
@@ -166,8 +167,8 @@ define(function (require) {
         ele.find('#nativ_show').on('click', '.telInput, .telCall', function (e) {
             e.preventDefault();
             e.stopPropagation();
-            ele.find('#dialBox').show();
-            ele.find('#dialBox .inp input').focus();
+            par.find('#dialBox').show();
+            par.find('#dialBox .inp input').focus();
             // E270();
         });
         ele.find('#nativ_show').on('click', '.telNow', function (e) {
@@ -179,31 +180,52 @@ define(function (require) {
             else {
                 e.preventDefault();
                 e.stopPropagation();
-                ele.find('#dialBox').show();
-                ele.find('#dialBox .inp input').focus();
+                par.find('#dialBox').show();
+                par.find('#dialBox .inp input').focus();
                 // E270();
             }
         });
-        ele.find('#dialBox .Jclose').on('click', function (e) {
+        par.find('#dialBox .Jclose').on('click', function (e) {
             e.stopPropagation();
-            ele.find('#dialBox').hide();
+            par.find('#dialBox').hide();
             var uniqueSymbol = getRandomNum(10000, 99999) + '$' + getRandomNum(1000, 99999999);
             phoneSuccClick(uniqueSymbol, '关闭');
         });
         // 马上咨询 end
-        ele.find('.zxgj-wrap-con .cancel').click(function () {
-            ele.find('.zxgj-wrap-con .m-bd').hide();
+        par.find('.zxgj-wrap-con .cancel').click(function () {
+            par.find('.zxgj-wrap-con .m-bd').hide();
             phoneSuccClick(getRandomNum(10000, 99999) + '$' + getRandomNum(1000, 99999999), '取消');
         });
-        ele.find('.zxgj-wrap-con .ok').click(function () {
-            ele.find('#callOutPic').show();
+        par.find('.zxgj-wrap-con .ok').click(function () {
+            par.find('#callOutPic').show();
             phoneSuccClick(getRandomNum(10000, 99999) + '$' + getRandomNum(1000, 99999999), '咨询管家');
             callCityManager(basePhone, window.localStorage.getItem('localTel'), baseEqid, baseEquipmentCityId);
-            ele.find('.zxgj-wrap-con .m-bd').hide();
+            par.find('.zxgj-wrap-con .m-bd').hide();
         });
-        // 清空输入框
-        ele.find('#dialBox .clear').on('click', function () {
-            ele.find(this).closest('div').find('input').focus().val('');
+        par.find('.dialBtn').on('click', function (e) {
+            var tel = par.find('#userPhone').val().trim();
+            if (!tel || !tel.match(/^1+\d{10}$/)) {
+                alert('请检查手机号是否正确输入');
+                return;
+            }
+            try {
+                window.localStorage.setItem('localTel', tel);
+            }
+            catch (e) {
+            }
+            par.find('#userPhone').val(tel);
+            par.find('#telLocal').text(tel);
+            par.find('.telInput').css('display', 'none');
+            par.find('.telCall').css('display', 'block');
+            par.find('#callOutPic .co_tt').html('您的手机 <span>' + tel + '</span> 将接到');
+            par.find('#callOutPic .co_t').text('铁甲的来电请注意接听');
+            par.find('#callOutPic').show();
+            par.find('#dialBox').hide();
+            phoneSuccClick(getRandomNum(10000, 99999) + '$' + getRandomNum(1000, 99999999), '免费通话');
+            callCityManager(basePhone, tel, baseEqid, baseEquipmentCityId);
+        });
+        par.find('#dialBox .clear').on('click', function () {
+            par.find(this).closest('div').find('input').focus().val('');
         });
         // 气泡
         // 设备状态1.待审核 2.审核通过 3.审核未通过4.已售 5下架',tradedPic
@@ -224,37 +246,14 @@ define(function (require) {
         }
         ele.find('.pop-tip-mode img').attr('src', ele.find('#galleryBox a').eq(1).find('img').attr('src'));
         // 点击输入手机号弹层
-        ele.find('#dial .dial1, .dial2').on('click', function () {
-            ele.find(this).hide().parent().hide();
+        par.find('#dial .dial1, .dial2').on('click', function () {
+            par.find(this).hide().parent().hide();
         });
-        ele.find('#callOutPic .co_c').on('click', function () {
-            ele.find('#callOutPic').hide();
+        par.find('#callOutPic .co_c').on('click', function () {
+            par.find('#callOutPic').hide();
         });
-        ele.find('#dialBox .conBox').on('click', function (e) {
+        par.find('#dialBox .conBox').on('click', function (e) {
             e.stopPropagation();
-        });
-        // 呼叫
-        ele.find('.dialBtn').on('click', function (e) {
-            var tel = ele.find('#userPhone').val().trim();
-            if (!tel || !tel.match(/^1+\d{10}$/)) {
-                alert('请检查手机号是否正确输入');
-                return;
-            }
-            try {
-                window.localStorage.setItem('localTel', tel);
-            }
-            catch (e) {
-            }
-            ele.find('#userPhone').val(tel);
-            ele.find('#telLocal').text(tel);
-            ele.find('.telInput').css('display', 'none');
-            ele.find('.telCall').css('display', 'block');
-            ele.find('#callOutPic .co_tt').html('您的手机 <span>' + tel + '</span> 将接到');
-            ele.find('#callOutPic .co_t').text('铁甲的来电请注意接听');
-            ele.find('#callOutPic').show();
-            ele.find('#dialBox').hide();
-            phoneSuccClick(getRandomNum(10000, 99999) + '$' + getRandomNum(1000, 99999999), '免费通话');
-            callCityManager(basePhone, tel, baseEqid, baseEquipmentCityId);
         });
     };
     return customElement;

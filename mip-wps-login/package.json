@@ -1,0 +1,14 @@
+{
+    "name": "mip-wps-login",
+    "version": "1.0.0",
+    "description": "组件介绍",
+    "contributors": [
+        {
+            "name": "huangjing02",
+            "email": "huangjing02@baidu.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

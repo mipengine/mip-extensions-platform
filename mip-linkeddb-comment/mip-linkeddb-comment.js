@@ -182,7 +182,7 @@ define(function (require) {
 
         function getComment() {
 
-            $.post('https://www.linkeddb.com/comment_list/', {
+            $.post('https://mip.linkeddb.com/comment_list/', {
                 'obj_type': pageType,
                 'obj_oid': pageOid
             }, function (res) {
@@ -202,10 +202,10 @@ define(function (require) {
         });
 
         function checkLogin() {
-            $.get('https://www.linkeddb.com/check_user/', function (res) {
+            $.get('https://mip.linkeddb.com/check_user/', function (res) {
                 if (res.response === '-2') {
                     $.confirm('登录后评论', '登录提示', function () {
-                        window.top.location.href = 'https://www.linkeddb.com/sign_in/?callUrl=' + window.location.pathname;
+                        window.top.location.href = 'https://mip.linkeddb.com/sign_in/?callUrl=' + window.location.pathname;
                     }, function () {
 
                     });
@@ -296,7 +296,7 @@ define(function (require) {
 
             $.ajax({
                 type: 'POST',
-                url: 'https://www.linkeddb.com/reply/',
+                url: 'https://mip.linkeddb.com/reply/',
                 dataType: 'json',
                 data: formData,
                 cache: false, // 不缓存
@@ -337,7 +337,7 @@ define(function (require) {
             var replyOid = $($this).parent().parent().data('commentId');
 
             $.confirm('确定删除吗？', function () {
-                $.post('https://www.linkeddb.com/del_comment/', {
+                $.post('https://mip.linkeddb.com/del_comment/', {
                     'reply_oid': replyOid
                 }, function (res) {
                     if (res.response === '1') {
@@ -366,12 +366,12 @@ define(function (require) {
             var $this = this;
             var pOid = $(this).parent().parent().parent().data('commentId');
             if (!$($this).find('.icon-agree').hasClass('full')) {
-                $.post('https://www.linkeddb.com/reply_goods/', {
+                $.post('https://mip.linkeddb.com/reply_goods/', {
                     'reply_oid': pOid
                 }, function (res) {
                     if (res.response === '-2') {
                         $.confirm('请登录后操作', '登录提示', function () {
-                            window.top.location.href = 'https://www.linkeddb.com/sign_in/?callUrl='
+                            window.top.location.href = 'https://mip.linkeddb.com/sign_in/?callUrl='
                                 + window.location.pathname;
                         }, function () {
                             // $.toast('登录取消', 'text');

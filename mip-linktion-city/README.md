@@ -172,6 +172,7 @@ mip-linktion-city 级联城市组件
         </div>
         <div class="modal-header">
           <p class="modal-center-h">切换城市</p>
+          <button type="button" class="close modal-center-span" on="tap:select-city-phone.toggle tap:select-city-phone.close"><span>&times;</span></button>
 	        <div class="modal-body">
 	          <mip-vd-tabs class="select-city-phonetab">
 	            <section>
@@ -180,19 +181,19 @@ mip-linktion-city 级联城市组件
 	              <li data-val="" class="city-label-phone second-tag third-tag" id="phone-area-tab">县/区</li>
 	              <li data-val="" class="city-label-phone second-tag third-tag forth-tag" id="phone-street-tab" >街道</li>
 	            </section>
-	            <div>
+	            <div class="scroll-wrapper">
 	              <ul class="phone-city-ul" id="phone-province">
 	              </ul>
 	            </div>
-	            <div>
+	            <div class="scroll-wrapper">
 	              <ul class="phone-city-ul" id="phone-city">
 	              </ul>
 	            </div>
-	            <div>
+	            <div class="scroll-wrapper">
 	              <ul class="phone-city-ul" id="phone-area">
 	              </ul>
 	            </div>
-	            <div>
+	            <div class="scroll-wrapper">
 	              <ul class="phone-city-ul" id="phone-street">
 	              </ul>
 	            </div>

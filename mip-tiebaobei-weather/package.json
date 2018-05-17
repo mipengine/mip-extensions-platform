@@ -1,0 +1,14 @@
+{
+    "name": "mip-tiebaobei-weather",
+    "version": "1.0.0",
+    "description": "天气预报",
+    "contributors": [
+        {
+            "name": "weiss",
+            "email": "630039491@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
