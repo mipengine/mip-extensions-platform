@@ -1,0 +1,14 @@
+{
+    "name": "mip-tiebaobei-listfixcall",
+    "version": "1.0.0",
+    "description": "列表页拨打电话",
+    "contributors": [
+        {
+            "name": "weiss",
+            "email": "630039491@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "name": "mip-liveinau-form",
+    "version": "1.0.0",
+    "description":"表单提交。",
+    "author": {
+        "name": "Jason",
+        "email": "jasonlee@e2say.com"
+    },
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

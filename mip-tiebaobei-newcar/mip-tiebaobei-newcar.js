@@ -98,7 +98,7 @@ define(function (require) {
                     var datass = '?customerNumber=' + ele.find('#userPhone').val();
                     datass += '&pageFromType=S';
                     datass += '&uniqueSymbol=' +  uniqueSymbol;
-                    datass += '&channel:6';
+                    datass += '&channel:61';
                     datass += '&hotlineShare=""';
                     datass += '&currentUserId=""';
                     datass += '&currentUserWorkPhone=""';

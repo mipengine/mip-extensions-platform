@@ -78,7 +78,7 @@ define(function (require) {
             var datass = '?customerNumber=' + userPhone + '&eqId=' + eqId;
             datass += '&pageFromType=E';
             datass += '&uniqueSymbol=' + uniqueSymbol;
-            datass += '&channel=6';
+            datass += '&channel=61';
             datass += '&hotlineShare=' + hotline;
             datass += '&currentUserId=' + currentUserId;
             datass += '&currentUserWorkPhone=' + currentUserWorkPhone;

@@ -1,7 +1,7 @@
 {
-    "name": "mip-jdd-recent",
-    "version": "1.0.1",
-    "description": "jdd私有业务--最近查看",
+    "name": "mip-jdd-platwrapper",
+    "version": "1.0.0",
+    "description": "jdd根据平台隐藏显示",
     "contributors": [
         {
             "name": "guhanqing",

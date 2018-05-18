@@ -22,15 +22,10 @@ define(function (require) {
         var host = el.getAttribute('host');
         var list = getRecent(type === 'place' ? PLACE_KEY : HEIGHT_KEY);
         var html = createRecentHtml(list, host, type);
-        el.innerHTML = html;
-    };
-
-    // build说明：创建时绑定点击事件
-    customElement.prototype.build = function () {
-        var el = this.element;
-        var list = getLotteryItemList();
-        var type = el.getAttribute('type');
-        bindClickEvent(list, type);
+        var container = el.querySelector('.recent-placeholder');
+        container.innerHTML = html;
+        var lotteryItemList = getLotteryItemList(el);
+        bindClickEvent(lotteryItemList, type);
     };
 
     /**
@@ -56,8 +51,9 @@ define(function (require) {
                 a = '<a class="view-txt" recent="lotteryName=' + list[index].lotteryName + '&lotteryId=';
                 b = list[index].lotteryId + '&lotteryType=' + list[index].lotteryType + '&';
                 c = (type === 'place' ? ('issueNo=' + list[index].issueNo) : ('issueDay=' + list[index].issueDay));
-                issue = list[index].lotteryId, type === 'height' ? list[index].issueDay : list[index].issueNo;
-                d = '" href="' + getJumpUrl(host, type, issue);
+                issue = list[index].lotteryId;
+                issue = type === 'height' ? list[index].issueDay : list[index].issueNo;
+                d = '" href="' + getJumpUrl(host, type, list[index].lotteryId, issue);
                 e = '">' + list[index].lotteryName + '</a>';
                 html += (a + b + c + d + e);
             }
@@ -108,10 +104,11 @@ define(function (require) {
     /**
      * 获取列表
      *
-     * @return {Array}
+     * @param {any} el 元素
+     * @return {Array} 彩种列表
      */
-    function getLotteryItemList() {
-        var nodeList = document.querySelectorAll('[recent]');
+    function getLotteryItemList(el) {
+        var nodeList = el.querySelectorAll('[recent]');
         var lotteryItemList = [];
         for (var i = 0; i < nodeList.length; i++) {
             var current = nodeList[i];
@@ -172,7 +169,6 @@ define(function (require) {
      * @return {Array}
      */
     function getRecent(type) {
-        // return [{ "lotteryName": "浙江飞鱼", "lotteryId": "2033", "lotteryType": "2", "issueDay": "2018-04-09" }, { "lotteryName": "江苏快三", "lotteryId": "2071", "lotteryType": "2", "issueDay": "2018-04-04" }, { "lotteryName": "北京11选5", "lotteryId": "2020", "lotteryType": "2", "issueDay": "2018-04-04" }, { "lotteryName": "江苏11选5", "lotteryId": "2011", "lotteryType": "2", "issueDay": "2018-04-04" }, { "lotteryName": "重庆快乐十分", "lotteryId": "2084", "lotteryType": "2", "issueDay": "2018-04-18" }, { "lotteryName": "山东十一运夺金", "lotteryId": "2001", "lotteryType": "2", "issueDay": "2018-05-07" }, { "lotteryName": "江西11选5", "lotteryId": "2088", "lotteryType": "2", "issueDay": "2018-04-19" }, { "lotteryName": "江西快3", "lotteryId": "2035", "lotteryType": "2", "issueDay": "2018-04-18" }];
         var data = [];
         try {
             data = JSON.parse(localStorage.get(type)) || [];

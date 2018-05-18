@@ -24,7 +24,7 @@ define(function (require) {
             var titleHtml = ''; // titleHtml 评论区域头部
             var spanNum = ''; // 评论数量文本
             if (res.data.total_cnt) {
-                spanNum += '<i>"+res.data.total_cnt+"</i>条评论';
+                spanNum += '<i>' + res.data.total_cnt + '</i>条评论';
             } else {
                 spanNum += '暂无评论';
             }
@@ -67,8 +67,8 @@ define(function (require) {
                         + '</div>'
                         + '</div>'
                         + '<div class="reply-icon pull-right">'
-                        + '+removeHtml+'
-                        + '+iconCommentHtml+'
+                        + '' + removeHtml + ''
+                        + '' + iconCommentHtml + ''
                         + '<a href="###" class="mr5 color-999 agree">'
                         + '<span class="icon icon-agree"></span>'
                         + '<i class="num">' + parent.goods_cnt + '</i>'
@@ -92,7 +92,7 @@ define(function (require) {
                         + '<div class="item-title">'
                         + '<h4><span>' + parent.content + '</span></h4>'
                         + '<div class="pics-wrap mt5">'
-                        + '+parentPics+'
+                        + '' + parentPics + ''
                         + '</div>'
                         + '</div>'
                         + '</div>'
@@ -138,18 +138,18 @@ define(function (require) {
                                 + '<div class="item-title">'
                                 + '<a href="###" class="name">' + child.User.nick_name + ':</a>'
                                 + '<h5>'
-                                + '"+other+"'
-                                + '"+content+"'
+                                + '' + other + ''
+                                + '' + content + ''
                                 + '</h5>'
                                 + '<div class="pics-wrap mt5">'
-                                + '"+childPics+"'
+                                + '' + childPics + ''
                                 + '</div>'
                                 + '</div>'
                                 + '</div>'
                                 + '<div class="item-text">'
                                 + '<span class="time color-999">' + child.add_time + '</span>'
-                                + '"+childReplyHtml+"'
-                                + '"+childRemoveHtml+"'
+                                + '' + childReplyHtml + ''
+                                + '' + childRemoveHtml + ''
                                 + '</div>'
                                 + '</div>'
                                 + '</div>'
@@ -171,7 +171,7 @@ define(function (require) {
 
                     reviewItem += '<div class="review-item" data-comment-id="' + parent.oid + '"'
                         + 'data-goods-num="' + parent.goods_cnt + '"'
-                        + 'data-user-id="' + parent.User.oid + '">"' + headerHtml + '""' + listBlock + '"</div>';
+                        + 'data-user-id="' + parent.User.oid + '">' + headerHtml + '' + listBlock + '</div>';
 
                     $(reviewFragment).append(reviewItem);
                     setReviewLength();
@@ -205,7 +205,8 @@ define(function (require) {
             $.get('https://mip.linkeddb.com/check_user/', function (res) {
                 if (res.response === '-2') {
                     $.confirm('登录后评论', '登录提示', function () {
-                        window.top.location.href = 'https://mip.linkeddb.com/sign_in/?callUrl=' + window.location.pathname;
+                        window.top.location.href = 'https://mip.linkeddb.com/sign_in/?callUrl='
+                            + window.location.origin + window.location.pathname;
                     }, function () {
 
                     });
@@ -213,7 +214,7 @@ define(function (require) {
                 } else {
                     $(ele).find('.review-modal-overlay').toggleClass('review-modal-overlay-visible');
                     $(ele).find('.write-comment').toggleClass('show');
-                    $(ele).find('.content').toggleClass('z-index-11');
+                    $(ele).parent().parent().parent().find('.content').toggleClass('z-index-11');
                 }
             });
         }
@@ -312,13 +313,14 @@ define(function (require) {
                         $.toast(res.message);
                         $(ele).find('.review-modal-overlay').toggleClass('review-modal-overlay-visible');
                         $(ele).find('.write-comment').toggleClass('show'); // 输入框隐藏
-                        $(ele).find('.content').toggleClass('z-index-11');
                         $(ele).find('.write-comment').find('#textarea').val(''); // 输入内容置空
                         $(ele).find('.write-comment').find('.weui-textarea-counter').find('span').text(0); // 字数统计重置为0
                         $(ele).find('.write-comment .pic-pop').find('.pic-pop-flex').empty(); // 图片容器置空
                         $(ele).find('.write-comment .pic-pop').removeClass('show'); // 图片容器隐藏
                         commentPicNumFlag = true; // 添加评论图片标志置为 true 允许下次选取
-                        $(ele).find('input[type="file"]:last').siblings('.comment-pic').remove(); // 删除已经参与上传图片的input框
+                        if ($(ele).find('input[type="file"]:last').siblings('.comment-pic').length !== 0) {
+                            $(ele).find('input[type="file"]:last').siblings('.comment-pic').remove(); // 删除已经参与上传图片的input框
+                        }
                         $(ele).find('.review-cont').find('.review-title').remove(); // 删除评论区域头部
                         $(ele).find('.review-cont').find('.review-item').remove(); // 删除评论区域所有内容
                         getComment();
@@ -326,7 +328,7 @@ define(function (require) {
                         $.toast(res.message, 'forbidden');
                     }
                 },
-                compvare: function () {
+                complete: function () {
                     $(ele).find('.review-cont .write-comment').find('.ok').removeAttr('disabled');
                 }
             });
@@ -371,7 +373,7 @@ define(function (require) {
                     if (res.response === '-2') {
                         $.confirm('请登录后操作', '登录提示', function () {
                             window.top.location.href = 'https://mip.linkeddb.com/sign_in/?callUrl='
-                                + window.location.pathname;
+                                + window.location.origin + window.location.pathname;
                         }, function () {
                             // $.toast('登录取消', 'text');
                         });
@@ -401,7 +403,7 @@ define(function (require) {
             // 下面函数执行的效果是一样的，只是需要针对不同的浏览器执行不同的 js 函数而已
             if (window.createObjectURL !== undefined) { // basic
                 url = window.createObjectURL(file);
-            } else if (window.URL !== undefined) { // mozilla(firefox)
+            } else if (window.URL.createObjectURL !== undefined) { // mozilla(firefox)
                 url = window.URL.createObjectURL(file);
             } else if (window.webkitURL !== undefined) { // webkit or chrome
                 url = window.webkitURL.createObjectURL(file);
@@ -425,7 +427,7 @@ define(function (require) {
                             $(ele).find('.write-comment .pic-pop-flex')
                                 .append('<mip-img src="' + URL + '" alt=""></mip-img>');
                             inputNum++;
-                            $(ele).find('.write-comment .footer').append('<input class="comment-pic hidden"'
+                            $(ele).find('.write-comment .pic-input').append('<input class="comment-pic hidden"'
                                 + 'id="comment-pic' + inputNum + '" type="file"'
                                 + 'accept="image/png, image/jpeg, image/gif, image/jpg" name="comment-pic">');
                             $(ele).find('.write-comment .pic-pop').addClass('show');
@@ -449,7 +451,7 @@ define(function (require) {
         $(ele).find('.review-modal-overlay').on('click', function () {
             $(ele).find('.review-modal-overlay').toggleClass('review-modal-overlay-visible');
             $(ele).find('.write-comment').toggleClass('show');
-            $(ele).parent().parent().find('.content').toggleClass('z-index-11');
+            $(ele).parent().parent().parent().find('.content').toggleClass('z-index-11');
         });
 
         $(ele).find('.review-cont').on('click', '.view-pic-img', function () {

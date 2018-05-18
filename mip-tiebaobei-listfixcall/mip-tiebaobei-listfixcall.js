@@ -1,5 +1,5 @@
 /**
- * @file mip-tiebaobei-zhuanticall 组件
+ * @file mip-tiebaobei-listfixcall 组件
  * @author weiss
  */
 
@@ -9,11 +9,6 @@ define(function (require) {
         var urlHost = window.location.host;
         var ele = $(this.element);
         var par = ele.closest('.lightbox-wrap');
-        var basePhone = ele.find('#nativ_show').attr('data-tel');
-        var baseEqid = ele.find('#nativ_show').attr('data-eqid');
-        var baseEquipmentStatus = ele.find('#nativ_show').attr('data-equipmentStatus');
-        var baseEquipmentCityId = ele.find('#nativ_show').attr('data-equipmentCityId');
-        var baseLoginCustomerTel = ele.find('#nativ_show').attr('data-loginCustomerTel');
         var apiUrl = '';
         if (urlHost === 'm.tiebaobei.com' || (urlHost === 'h5.tiebaobei.com')) {
             apiUrl = 'https://api2.tiebaobei.com/';
@@ -44,6 +39,7 @@ define(function (require) {
         ele.find('.fix-free-tel').on('click', function (e) {
             e.preventDefault();
             e.stopPropagation();
+            par.find('#dialBox .Jclose,.dialBtn').addClass('isFreeTel');
             par.find('#dialBox').show();
             par.find('#dialBox .inp input').focus();
         });
@@ -57,6 +53,16 @@ define(function (require) {
         par.find('#callOutPic .co_c').on('click', function () {
             par.find('#callOutPic').hide();
         });
+        this.addEventAction('telBtn_event', function (event/* 对应的事件对象 */, str /* 事件参数 */) {
+            event.stopPropagation();
+            event.preventDefault();
+            par.find('#dialBox').show();
+            par.find('#dialBox .inp input').focus();
+            par.find('#dialBox .Jclose,.dialBtn').removeClass('isFreeTel');
+            par.find('.dialBtn').attr({
+                'eqid': str
+            });
+        });
         // 拨打电话提交按钮
         par.find('.dialBtn').on('click', function (e) {
             // e.stopPropagation();
@@ -68,16 +74,30 @@ define(function (require) {
                 par.find('#callOutPic').show();
                 par.find('#dialBox').hide();
                 var uniqueSymbol = getRandomNum(10000, 99999) + '$' + getRandomNum(10000, 99999999);
-                // scFnE28('免费通话');
-                var datass = '?customerNumber=' + par.find('#userPhone').val();
-                datass += '&pageFromType=L';
-                datass += '&uniqueSymbol=' +  uniqueSymbol;
-                datass += '&channel:61';
-                datass += '&hotlineShare=""';
-                datass += '&currentUserId=""';
-                datass += '&currentUserWorkPhone=""';
-                datass += '&code=""';
-                datass += '&distinctId=' + getRandomNum(10000, 99999999);
+                var datass = '';
+                if (ths.hasClass('isFreeTel')) {
+                    datass = '?customerNumber=' + par.find('#userPhone').val();
+                    datass += '&pageFromType=L';
+                    datass += '&uniqueSymbol=' +  uniqueSymbol;
+                    datass += '&channel:61';
+                    datass += '&hotlineShare=""';
+                    datass += '&currentUserId=""';
+                    datass += '&currentUserWorkPhone=""';
+                    datass += '&code=""';
+                    datass += '&distinctId=' + getRandomNum(10000, 99999999);
+                }
+                else {
+                    datass = '?customerNumber=' + par.find('#userPhone').val();
+                    datass = '?eqId=' + ths.attr('eqid');
+                    datass += '&pageFromType=L';
+                    datass += '&uniqueSymbol=' +  uniqueSymbol;
+                    datass += '&channel:61';
+                    datass += '&hotlineShare=""';
+                    datass += '&currentUserId=""';
+                    datass += '&currentUserWorkPhone=""';
+                    datass += '&code=""';
+                    datass += '&distinctId=' + getRandomNum(10000, 99999999);
+                }
                 fetchJsonp(apiUrl + 'api/app/callCenter' + datass, {
                     jsonpCallback: 'callback'
                 }).then(function (response) {
