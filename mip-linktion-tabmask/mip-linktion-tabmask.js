@@ -14,7 +14,7 @@ define(function (require) {
      */
     customElement.prototype.firstInviewCallback = function () {
         var $el = $(this.element);
-        $el.find('.phone-section').on('click', function () {
+        $el.find('.phone-section').on('touchend', function () {
             var expanded = $(this).attr('expanded');
             if (expanded === undefined) {
                 $('body').css('overflow', 'hidden');
