@@ -1,0 +1,14 @@
+{
+    "name": "mip-jdd-render",
+    "version": "1.0.0",
+    "description": "jdd私有组件-渲染",
+    "contributors": [
+        {
+            "name": "yangtong",
+            "email": "540951254@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

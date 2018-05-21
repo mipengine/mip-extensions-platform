@@ -1,0 +1,14 @@
+{
+    "name": "mip-lxn-picker",
+    "version": "1.0.1",
+    "description": "日期和城市选择器",
+    "contributors": [
+        {
+            "name": "geyuanyuan",
+            "email": "geyuanyuan@lanxiniu.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

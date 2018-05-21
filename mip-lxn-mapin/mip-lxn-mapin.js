@@ -8,7 +8,7 @@ define(function (require) {
     var customElement = require('customElement').create();
     var $ = require('zepto');
     var MAPURL = 'https://api.map.baidu.com/api?';
-
+    var mapData = [];
     // var TYPE = 'script[type="application/json"]';
     setHtmlRem();
 
@@ -205,6 +205,7 @@ define(function (require) {
         }
 
         var ele = document.createElement('script');
+        // 外链 百度地图 脚本将脚本引入页面
         ele.src = this.mapUrl;
         document.body.appendChild(ele);
     };
@@ -235,8 +236,6 @@ define(function (require) {
         return 'mapCallback';
     };
 
-
-
     /**
      * 处理请求返回后的结果，之后扩展逻辑均在该方法中实现
      *
@@ -244,11 +243,18 @@ define(function (require) {
     BaiduMap.prototype.handleResult = function () {
 
         /* global BMap */
-        this.map = new BMap.Map('l-map');
-        this.map.centerAndZoom('北京', 12);
+        var city = localStorage.getItem('focuscity');
+        if (city === null) {
+            city = '北京';
+        }
+
+        var map = new BMap.Map('l-map');
+        map.centerAndZoom(city, 12);
 
         var ele = this.ele;
-        var addressSearch = new AddressSearch('北京',
+        var moveOutAddress = ele.querySelector('#move-in-address');
+        var suggest = ele.querySelector('#suggestId');
+        var addressSearch = new AddressSearch(city,
             '', 20, function (searchData) {
                 if (!searchData || !searchData.data || !searchData.data.length) {
                     // 无匹配地址
@@ -258,13 +264,12 @@ define(function (require) {
                 // // 查询成功
                 var html = '';
                 var searchedData = searchData.data;
+                mapData = searchedData;
                 // console.log(JSON.stringify(searchedData,null,2))
                 for (var i = 0; i < searchedData.length; i++) {
                     var item = searchedData[i];
-                    // console.log(item)
-                    var strItem = JSON.stringify(item);
                     html += '<div class="query-list" data-items='
-                        + strItem
+                        + i
                         + '>'
                         + '<h4>' + item.title
                         + '</h4>' + '<p>' + item.address
@@ -278,6 +283,48 @@ define(function (require) {
             addressSearch.search($(this).val());
         });
 
+        $(moveOutAddress).on('click', function () {
+            if ($(suggest).val() === '') {
+                alert('地址不能为空');
+            }
+            else {
+
+                // 详细信息
+                var mOutXx = ele.querySelector('#move-in-xx').value;
+                // 联系人
+                var mOutPerson = ele.querySelector('#move-in-person').value;
+                // 联系电话
+                var mOutPhone = ele.querySelector('#move-in-phone').value;
+                // 搬出搬入数据
+                var moveAddress = JSON.parse(localStorage.getItem('moveAddress'));
+                // 判断是否存在搬出地址
+                var moveOutKeys = Object.keys(moveAddress.moveout);
+                // 判断是否存在搬入地址
+                var moveInKeys = Object.keys(moveAddress.movein);
+                if (moveOutKeys.length > 0 && moveInKeys.length > 0) {
+                    // console.log('地址可以计算');
+                    var moveOutItem = moveAddress.moveout.location;
+                    var moveInItem = moveAddress.movein.location;
+                    var pointOut = new BMap.Point(moveOutItem.lng, moveOutItem.lat);
+                    var pointIn = new BMap.Point(moveInItem.lng, moveInItem.lat);
+                    localStorage.setItem('distance', map.getDistance(pointOut, pointIn).toFixed(2));
+                }
+                else {
+                    // console.log('地址不完全');
+                }
+
+                // 配置其他信息
+                moveAddress.movein.other = {
+                    mOutXx: mOutXx,
+                    mOutPerson: mOutPerson,
+                    mOutPhone: mOutPhone
+                };
+                localStorage.setItem('moveAddress', JSON.stringify(moveAddress));
+                setTimeout(function () {
+                    window.top.location.href = 'order.html';
+                }, 500);
+            }
+        });
     };
 
     /**
@@ -288,7 +335,7 @@ define(function (require) {
         var ele = this.element;
         var addressList = ele.querySelector('.address-list');
         var suggest = ele.querySelector('#suggestId');
-        var moveOutAddress = ele.querySelector('#move-in-address');
+
         var cfg = {
             ak: '1c738e7908b5e8ec79742527c9796514'
         };
@@ -297,8 +344,7 @@ define(function (require) {
         $(addressList).on('click', '.query-list', function () {
             $(suggest).val($(this).find('h4').text());
             $(addressList).hide();
-            var items = $(this).data('items');
-            console.log(items);
+            var items = mapData[$(this).data('items')];
             var moveAddress = localStorage.getItem('moveAddress');
             if (moveAddress === null) {
                 var data = {
@@ -317,29 +363,6 @@ define(function (require) {
             }
 
         });
-
-        $(moveOutAddress).on('click', function () {
-            if ($(suggest).val() === '') {
-                alert('地址不能为空');
-            }
-            else {
-                // 详细信息
-                var mOutXx = ele.querySelector('#move-in-xx').innerHTML;
-                // 联系人
-                var mOutPerson = ele.querySelector('#move-in-person').innerHTML;
-                // 联系电话
-                var mOutPhone = ele.querySelector('#move-in-phone').innerHTML;
-                var moveAddress = JSON.parse(localStorage.getItem('moveAddress'));
-                moveAddress.movein.other = {
-                    mOutXx: mOutXx,
-                    mOutPerson: mOutPerson,
-                    mOutPhone: mOutPhone
-                };
-                localStorage.setItem('moveAddress', JSON.stringify(moveAddress));
-                window.top.location.href = 'order.html';
-            }
-        });
-
     };
     return customElement;
 });

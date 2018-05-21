@@ -1,7 +1,7 @@
 {
     "name": "mip-ck-ad-plus",
-    "version": "1.0.2",
-    "description": "直销广告组件-增加高德地图定位/并配置调试hash参数,例#ip=(true|false)",
+    "version": "1.0.3",
+    "description": "直销广告组件-修复前台配置定位项失效bug",
     "author": {
         "name": "laoono",
         "email": "laoono@163.com"

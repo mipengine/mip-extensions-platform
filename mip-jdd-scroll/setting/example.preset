@@ -1,0 +1,37 @@
+<style>
+mip-jdd-scroll {
+	position: relative;
+	height: 200px;
+	width: 100%;
+	border:1px solid black;
+	overflow:hidden;
+	box-sizing: border-box;
+}
+
+mip-jdd-scroll .chart-top{
+	position: absolute;
+	left: 50px;
+	top: 0;
+	right: 0;
+	height:20px;
+	overflow:hidden; 
+}
+
+mip-jdd-scroll .chart-left{
+	position: absolute;
+	left: 0;
+	top: 20px;
+	bottom: 0;
+	width:50px;
+	overflow:hidden; 
+}
+
+mip-jdd-scroll .chart-body{
+	position: absolute;
+	left: 50px;
+	top: 20px;
+	right: 0;
+	bottom: 0;
+	overflow:scroll;
+}
+</style>

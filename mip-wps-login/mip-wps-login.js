@@ -97,7 +97,7 @@ define(function (require) {
                 viewer.sendMessage(
                     'loadiframe',
                     {
-                        url: 'https://opensc.pae.baidu.com/wps/smsLogin',
+                        url: 'https://xiongzhang.baidu.com/opensc/wps/smsLogin',
                         query: {
                             state: state,
                             nocache: 1,
@@ -110,7 +110,7 @@ define(function (require) {
                 );
             }
             else {
-                location.replace('https://opensc.pae.baidu.com/wps/smsLogin' + window.top.location.search);
+                location.replace('https://xiongzhang.baidu.com/opensc/wps/smsLogin' + window.top.location.search);
             }
         }, false);
 
@@ -134,7 +134,7 @@ define(function (require) {
                 loginTip: '',
                 autosuggest: true,
                 overseas: 0,
-                staticPage: 'https://opensc.pae.baidu.com/static/wps/v3Jump.html'
+                staticPage: 'https://xiongzhang.baidu.com/opensc/static/wps/v3Jump.html'
             });
             /* eslint-enable babel/new-cap*/
 

@@ -1,0 +1,14 @@
+{
+    "name": "mip-tiebaobei-listscr",
+    "version": "1.0.0",
+    "description": "列表页滚动加载",
+    "contributors": [
+        {
+            "name": "weiss",
+            "email": "630039491@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

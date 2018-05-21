@@ -18,7 +18,10 @@ define(function (require) {
     var $locationEnabled = $('meta[name="location-enabled"]');
     var locationEnabled = $locationEnabled.attr('content') || 'true';
     locationEnabled = locationEnabled.length && locationEnabled !== 'false' || false;
-    locationEnabled = window.MIP.hash.get('ip') === 'true' ? true : false;
+    var hashIp = window.MIP.hash.get('ip');
+    if (hashIp) {
+        locationEnabled = hashIp === 'true' ? true : false;
+    }
 
     var paramObj = $adKeywords.attr('content');
     // 增加配置对象
