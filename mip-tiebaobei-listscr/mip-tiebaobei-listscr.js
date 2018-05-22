@@ -6,23 +6,14 @@
 define(function (require) {
     'use strict';
     var customElement = require('customElement').create();
+    var $ = require('zepto');
     customElement.prototype.firstInviewCallback = function () {
-        var urlHost = window.location.host;
-        var baseUrl = '';
         var ele = $(this.element);
-        var apiUrl = '';
-        if (urlHost === 'm.tiebaobei.com' || (urlHost === 'h5.tiebaobei.com')) {
-            baseUrl = 'https://m.tiebaobei.com/';
-            apiUrl = 'https://api2.tiebaobei.com/';
-        }
-        else if (urlHost === 'm.test.tiebaobei.com' || (urlHost === 'h5.test.tiebaobei.com')) {
-            baseUrl = 'https://m.tiebaobei.com/';
-            apiUrl = '//api2.test.tiebaobei.com/';
-        }
-        else {
-            baseUrl = 'https://m.tiebaobei.com/';
-            apiUrl = '//api2.test.tiebaobei.com/';
-        }
+        var script = this.element.querySelector('script[type="application/json"]');
+        var textContent = JSON.parse(script.textContent);
+        var baseUrl = textContent.baseUrl;
+        var mipBaseUrl = textContent.mipBaseUrl;
+        var locBaseUrl = textContent.locBaseUrl;
         var fetchJsonp = require('fetch-jsonp');
         var getRandomNum = function (min, max) {
             var range = max - min;
@@ -32,7 +23,7 @@ define(function (require) {
         // //优选车源点击
         var scrollBoole = true;
         var listObj = {
-            jingP: 1,
+            jingP: 2,
             jingPBaseButtom: true,
             getData: true,
             export: function () {
@@ -144,7 +135,7 @@ define(function (require) {
                         reducedPriceStr += '已降' + data[i].reducedPriceStr;
                         reducedPriceStr += '</div>';
                     }
-                    var itemUrl = baseUrl + 'ue/' + data[i].categoryEnName + '/';
+                    var itemUrl = mipBaseUrl + 'ue/' + data[i].categoryEnName + '/';
                     var similarityUrl =  baseUrl + 'html/similarity.html?eqId="' + data[i].id;
                     itemUrl += data[i].brandEnName + '_' + data[i].modelEnName + '_' + data[i].id + '.html';
                     html += '<li><div class="log-tap-item col2">';
@@ -178,7 +169,7 @@ define(function (require) {
                 }
                 ths.getData = false;
                 scrollBoole = false;
-                fetch(window.top.location.href + aug + '/').then(function (res) {
+                fetch(locBaseUrl + aug + '/').then(function (res) {
                     return res.text();
                 }).then(function (res) {
                     if (res.isNoData || res.ret === -1) {

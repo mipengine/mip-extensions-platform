@@ -5,23 +5,29 @@
 
 define(function (require) {
     var customElement = require('customElement').create();
+    var $ = require('zepto');
     customElement.prototype.firstInviewCallback = function () {
-        var urlHost = window.location.host;
-        var baseUrl = '';
+        // var urlHost = window.location.host;
         var ele = $(this.element);
-        var apiUrl = '';
-        if (urlHost === 'm.tiebaobei.com' || (urlHost === 'h5.tiebaobei.com')) {
-            baseUrl = 'https://m.tiebaobei.com/';
-            apiUrl = 'https://api2.tiebaobei.com/';
-        }
-        else if (urlHost === 'm.test.tiebaobei.com' || (urlHost === 'h5.test.tiebaobei.com')) {
-            baseUrl = 'http://m.test.tiebaobei.com/';
-            apiUrl = 'http://api2.test.tiebaobei.com/';
-        }
-        else {
-            baseUrl = 'http://m.test.tiebaobei.com/';
-            apiUrl = 'http://api2.test.tiebaobei.com/';
-        }
+        // var baseUrl = '';
+        // var apiUrl = '';
+        // if (urlHost === 'm.tiebaobei.com' || (urlHost === 'h5.tiebaobei.com')) {
+        //     baseUrl = 'https://m.tiebaobei.com/';
+        //     apiUrl = 'https://api2.tiebaobei.com/';
+        // }
+        // else if (urlHost === 'm.test.tiebaobei.com' || (urlHost === 'h5.test.tiebaobei.com')) {
+        //     baseUrl = 'http://m.test.tiebaobei.com/';
+        //     apiUrl = 'http://api2.test.tiebaobei.com/';
+        // }
+        // else {
+        //     baseUrl = 'http://m.test.tiebaobei.com/';
+        //     apiUrl = 'http://api2.test.tiebaobei.com/';
+        // }
+        var script = this.element.querySelector('script[type="application/json"]');
+        var textContent = JSON.parse(script.textContent);
+        var baseUrl = textContent.baseUrl;
+        var apiUrl = textContent.apiUrl;
+        var mipBaseUrl = textContent.mipBaseUrl;
         var fetchJsonp = require('fetch-jsonp');
         var getRandomNum = function (min, max) {
             var range = max - min;
@@ -98,7 +104,7 @@ define(function (require) {
                     var datass = '?customerNumber=' + ele.find('#userPhone').val();
                     datass += '&pageFromType=S';
                     datass += '&uniqueSymbol=' +  uniqueSymbol;
-                    datass += '&channel:61';
+                    datass += '&channel=61';
                     datass += '&hotlineShare=""';
                     datass += '&currentUserId=""';
                     datass += '&currentUserWorkPhone=""';
@@ -109,16 +115,16 @@ define(function (require) {
                     }).then(function (response) {
                         return response.json();
                     }).then(function (result) {
-                        if (result.ret === 0) {
+                        if (parseInt(result.ret, 10) === 0) {
                             ele.find('#dialBox').hide();
                         }
-                        else if (result.ret === 1106) {
+                        else if (parseInt(result.ret, 10) === 1106) {
                             ele.find('#dialBox').hide();
                             ele.find('.srlj-wrap-con').show();
                             ele.find('#checkYzm').focus();
                             ele.find('#callOutPic').hide();
                         }
-                        else if (result.ret === 1104) {
+                        else if (parseInt(result.ret, 10) === 1104) {
                             ele.find('#callOutPic').find('.co_tt').text('');
                             ele.find('#callOutPic').find('.co_t').text('验证失败，请在24小时后再发起通话');
                             ele.find('#callOutPic').show();
@@ -260,7 +266,7 @@ define(function (require) {
                         reducedPriceStr += '已降' + data[i].reducedPriceStr;
                         reducedPriceStr += '</div>';
                     }
-                    var itemUrl = baseUrl + 'ue/' + data[i].categoryEnName + '/';
+                    var itemUrl = mipBaseUrl + 'ue/' + data[i].categoryEnName + '/';
                     var similarityUrl =  baseUrl + 'html/similarity.html?eqId="' + data[i].id;
                     itemUrl += data[i].brandEnName + '_' + data[i].modelEnName + '_' + data[i].id + '.html';
                     html += '<li><div class="log-tap-item col2">';

@@ -5,23 +5,13 @@
 
 define(function (require) {
     var customElement = require('customElement').create();
+    var $ = require('zepto');
     customElement.prototype.firstInviewCallback = function () {
-        var urlHost = window.location.host;
-        var baseUrl = '';
         var ele = $(this.element);
-        var apiUrl = '';
-        if (urlHost === 'm.tiebaobei.com' || (urlHost === 'h5.tiebaobei.com')) {
-            baseUrl = 'https://m.tiebaobei.com/';
-            apiUrl = 'https://api2.tiebaobei.com/';
-        }
-        else if (urlHost === 'm.test.tiebaobei.com' || (urlHost === 'h5.test.tiebaobei.com')) {
-            baseUrl = 'http://m.test.tiebaobei.com/';
-            apiUrl = 'http://api2.test.tiebaobei.com/';
-        }
-        else {
-            baseUrl = 'http://m.test.tiebaobei.com/';
-            apiUrl = 'http://api2.test.tiebaobei.com/';
-        }
+        var script = this.element.querySelector('script[type="application/json"]');
+        var textContent = JSON.parse(script.textContent);
+        var baseUrl = textContent.baseUrl;
+        var apiUrl = textContent.apiUrl;
         var fetchJsonp = require('fetch-jsonp');
         ele.find('.searchbg').click(function () {
             window.top.location.href = baseUrl + 'html/ueSearch.html';

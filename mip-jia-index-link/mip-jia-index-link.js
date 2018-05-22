@@ -17,7 +17,7 @@ define(function (require) {
 
     // 获取城市
     function cityFn(callback) {
-        if (!storage.get('city')) {
+        if (!storage.get('mipcity')) {
             $.ajax({
                 url: '//m.jia.com/city/getCurrentAreaNew',
                 type: 'get',
@@ -25,7 +25,7 @@ define(function (require) {
                 success: function (a) {
                     if (a.code > 0) {
                         var city = JSON.stringify(a.result.site.area_info);
-                        storage.set('city', city, 2592000000);
+                        storage.set('mipcity', city, 2592000000);
                         typeof callback === 'function' && callback(a.result.site.area_info);
                     }
                 },
@@ -35,7 +35,7 @@ define(function (require) {
             });
         }
         else {
-            var city = JSON.parse(storage.get('city'));
+            var city = JSON.parse(storage.get('mipcity'));
             typeof callback === 'function' && callback(city);
         }
     }
@@ -72,7 +72,7 @@ define(function (require) {
             from ? ($url = from, city && ($url = $url.replace(city, datas.area_py)))
                 : href ? ($url = href) : url ? ($url = url) : self.clicklink
                 ? ($url = self.clicklink + datas.area_py) : ($url = null);
-            $obj.area_py && $obj.area_cn && storage.set('city', JSON.stringify($obj), 2592000000);
+            $obj.area_py && $obj.area_cn && storage.set('mipcity', JSON.stringify($obj), 2592000000);
             $url && (window.top.location.href = $url);
             return false;
         });

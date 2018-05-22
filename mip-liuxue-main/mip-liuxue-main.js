@@ -1,5 +1,5 @@
 /**
- * @file 想下班 (〃'▽'〃)
+ * @file
  * @date 2018.1.9
  * @author jxl
  * @copyright 2016 Baidu.com, Inc. All Rights Reserved
@@ -15,15 +15,15 @@ define(function (require) {
         width > 766 ? html.style.fontSize = 766 / 7.66 + 'px' : html.style.fontSize = width / 7.66 + 'px';
     };
     customElement.prototype.firstInviewCallback = function () {
-        $('.show_ym li').click(function () {
+        $('header').fing('.bd').click(function () {
             $(this).addClass('active').siblings().removeClass('active');
-            $('.show_all div').eq($(this).index()).fadeIn().siblings().hide();
+            $('.wsxx').eq($(this).index()).fadeIn().siblings().hide();
         });
-        $('header .fr').click(function () {
-            $('.qiehuan').slideDown();
+        $('header').find('.fr').click(function () {
+            $('.qiehuan').show();
         });
-        $('.qiehuan p').click(function () {
-            $('.qiehuan').slideUp();
+        $('.shouqi').click(function () {
+            $('.qiehuan').hide();
         });
     };
     return customElement;

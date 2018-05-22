@@ -1,0 +1,14 @@
+{
+    "name": "mip-clipboard-mini",
+    "version": "1.0.0",
+    "description": "一个简单的点击复制或者剪切内容到粘贴板组件",
+    "contributors": [
+        {
+            "name": "yang",
+            "email": "309316744@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

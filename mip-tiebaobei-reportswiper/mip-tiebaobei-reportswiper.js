@@ -5,20 +5,12 @@
 
 define(function (require) {
     var customElement = require('customElement').create();
+    var $ = require('zepto');
     customElement.prototype.firstInviewCallback = function () {
-        var $ = require('zepto');
-        var urlHost = window.location.host;
         var ele = $(this.element);
-        var apiUrl = '';
-        if (urlHost === 'm.tiebaobei.com' || (urlHost === 'h5.tiebaobei.com')) {
-            apiUrl = 'https://api2.tiebaobei.com/';
-        }
-        else if (urlHost === 'm.test.tiebaobei.com' || (urlHost === 'h5.test.tiebaobei.com')) {
-            apiUrl = 'http://api2.test.tiebaobei.com/';
-        }
-        else {
-            apiUrl = 'http://api2.test.tiebaobei.com/';
-        }
+        var script = this.element.querySelector('script[type="application/json"]');
+        var textContent = JSON.parse(script.textContent);
+        var apiUrl = textContent.apiUrl;
         var fetchJsonp = require('fetch-jsonp');
         var util = require('util');
         // 类对象

@@ -5,24 +5,29 @@
 
 define(function (require) {
     var customElement = require('customElement').create();
+    var $ = require('zepto');
     customElement.prototype.firstInviewCallback = function () {
-        var urlHost = window.location.host;
-        var baseUrl = '';
+        // var urlHost = window.location.host;
+        // var baseUrl = '';
         var ele = $(this.element);
         var baseEqid = ele.find('.carLike').attr('data-eqid');
-        var apiUrl = '';
-        if (urlHost === 'm.tiebaobei.com' || (urlHost === 'h5.tiebaobei.com')) {
-            baseUrl = 'https://m.tiebaobei.com/';
-            apiUrl = 'https://api2.tiebaobei.com/';
-        }
-        else if (urlHost === 'm.test.tiebaobei.com' || (urlHost === 'h5.test.tiebaobei.com')) {
-            baseUrl = 'http://m.test.tiebaobei.com/';
-            apiUrl = 'http://api2.test.tiebaobei.com/';
-        }
-        else {
-            baseUrl = 'http://m.test.tiebaobei.com/';
-            apiUrl = 'http://api2.test.tiebaobei.com/';
-        }
+        // var apiUrl = '';
+        // if (urlHost === 'm.tiebaobei.com' || (urlHost === 'h5.tiebaobei.com')) {
+        //     baseUrl = 'https://m.tiebaobei.com/';
+        //     apiUrl = 'https://api2.tiebaobei.com/';
+        // }
+        // else if (urlHost === 'm.test.tiebaobei.com' || (urlHost === 'h5.test.tiebaobei.com')) {
+        //     baseUrl = 'http://m.test.tiebaobei.com/';
+        //     apiUrl = 'http://api2.test.tiebaobei.com/';
+        // }
+        // else {
+        //     baseUrl = 'http://m.test.tiebaobei.com/';
+        //     apiUrl = 'http://api2.test.tiebaobei.com/';
+        // }
+        var script = this.element.querySelector('script[type="application/json"]');
+        var textContent = JSON.parse(script.textContent);
+        var baseUrl = textContent.baseUrl;
+        var apiUrl = textContent.apiUrl;
         var fetchJsonp = require('fetch-jsonp');
         var templateFn = function (res) {
             var html = '';
@@ -77,8 +82,8 @@ define(function (require) {
                     reducedPriceStr += '已降' + data[i].reducedPriceStr;
                     reducedPriceStr += '</div>';
                 }
-
-                html += '<li><a class="item" eqId=' + data[i].id + ' href=' + data[i].detailUrl + '>';
+                var mipUrl = data[i].detailUrl.replace('//m.', '//mip.');
+                html += '<li><a class="item" eqId=' + data[i].id + ' href=' + mipUrl + '>';
                 html += '<div class="list-lt">';
                 html += '<img src=' + data[i].firstImgPathDto.pathMid + ' class="img-lazyload pd-img">';
                 html += showInspectVideo + reducedPriceStr + '</div>';

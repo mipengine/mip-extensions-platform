@@ -5,8 +5,8 @@
 
 define(function (require) {
     var customElement = require('customElement').create();
+    var $ = require('zepto');
     customElement.prototype.firstInviewCallback = function () {
-        var urlHost = window.location.host;
         var ele = $(this.element);
         var par = ele.closest('.lightbox-wrap');
         var basePhone = ele.find('#nativ_show').attr('data-tel');
@@ -14,16 +14,20 @@ define(function (require) {
         var baseEquipmentStatus = ele.find('#nativ_show').attr('data-equipmentStatus');
         var baseEquipmentCityId = ele.find('#nativ_show').attr('data-equipmentCityId');
         var baseLoginCustomerTel = ele.find('#nativ_show').attr('data-loginCustomerTel');
-        var apiUrl = '';
-        if (urlHost === 'm.tiebaobei.com' || (urlHost === 'h5.tiebaobei.com')) {
-            apiUrl = 'https://api2.tiebaobei.com/';
-        }
-        else if (urlHost === 'm.test.tiebaobei.com' || (urlHost === 'h5.test.tiebaobei.com')) {
-            apiUrl = 'http://api2.test.tiebaobei.com/';
-        }
-        else {
-            apiUrl = 'http://api2.test.tiebaobei.com/';
-        }
+        // var apiUrl = '';
+        // if (urlHost === 'm.tiebaobei.com' || (urlHost === 'h5.tiebaobei.com')) {
+        //     apiUrl = 'https://api2.tiebaobei.com/';
+        // }
+        // else if (urlHost === 'm.test.tiebaobei.com' || (urlHost === 'h5.test.tiebaobei.com')) {
+        //     apiUrl = 'http://api2.test.tiebaobei.com/';
+        // }
+        // else {
+        //     apiUrl = 'http://api2.test.tiebaobei.com/';
+        // }
+        var script = this.element.querySelector('script[type="application/json"]');
+        var textContent = JSON.parse(script.textContent);
+        var apiUrl = textContent.apiUrl;
+        var mipBaseUrl = textContent.mipBaseUrl;
         var fetchJsonp = require('fetch-jsonp');
         var getRandomNum = function (min, max) {
             var range = max - min;
@@ -72,7 +76,7 @@ define(function (require) {
                 var datass = '?customerNumber=' + par.find('#userPhone').val();
                 datass += '&pageFromType=L';
                 datass += '&uniqueSymbol=' +  uniqueSymbol;
-                datass += '&channel:61';
+                datass += '&channel=61';
                 datass += '&hotlineShare=""';
                 datass += '&currentUserId=""';
                 datass += '&currentUserWorkPhone=""';

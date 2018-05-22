@@ -368,7 +368,7 @@ define(function (require) {
         }
         else if (type === 'planners') {
             hot.on('click', function () {
-                var productid = $(this).parents('.more-wrap-productid').data('productid');
+                var productid = $(this).parents('.more-wrap-productId').data('productid');
                 console.log(productid);
                 if (productid !== undefined) {
                     var src = domainsrc + '?hot=1' + '&productid=' +  productid;
@@ -393,7 +393,7 @@ define(function (require) {
                 var productid = $(this).parents('.more-wrap-productid').data('productid');
                 console.log(productid);
                 if (productid !== undefined) {
-                    var src = domainsrc + '?&productid=' + productid;
+                    var src = domainsrc + '?&productId=' + productid;
                 } else {
                     var src = domainsrc;
                 }

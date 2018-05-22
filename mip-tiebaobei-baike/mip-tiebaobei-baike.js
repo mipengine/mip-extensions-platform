@@ -4,24 +4,29 @@
  */
 define(function (require) {
     var customElement = require('customElement').create();
+    var $ = require('zepto');
     customElement.prototype.firstInviewCallback = function () {
-        var $ = require('zepto');
         var ele = $(this.element);
-        var ext = {};
-        var getExtdata = function () {
-            var extdata = {};
-            $('script.json-inline').each(function (i, ele) {
-                var name = $(ele).attr('data-name');
-                var value = $(ele).text();
-                extdata[name] = JSON.parse(value);
-            });
-            return extdata;
-        };
-        ext = getExtdata();
-        var jumpHtmlUrl = ext.info.jumpHtmlUrl;
+        // var ext = {};
+        // var getExtdata = function () {
+        //     var extdata = {};
+        //     $('script.json-inline').each(function (i, ele) {
+        //         var name = $(ele).attr('data-name');
+        //         var value = $(ele).text();
+        //         extdata[name] = JSON.parse(value);
+        //     });
+        //     return extdata;
+        // };
+        // ext = getExtdata();
+        // var jumpHtmlUrl = ext.info.jumpHtmlUrl;
+        var script = this.element.querySelector('script[type="application/json"]');
+        var textContent = JSON.parse(script.textContent);
+        var jumpHtmlUrl = textContent.jumpHtmlUrl;
+
+
         var pPoints = function (key, pagePlate, buttonName, href) {
             if (href) {
-                window.location.href = href;
+                window.top.location.href = href;
                 // var hasCalled = false;
                 // setTimeout(track_a_click,1000);
                 // function track_a_click(){
@@ -63,7 +68,7 @@ define(function (require) {
         };
         $(function () {
             // 百科获取类型列表
-            baikeGetRequest({url: ext.info.esjTypeListUrl}, function (result) {
+            baikeGetRequest({url: textContent.esjTypeListUrl}, function (result) {
                 // console.log(result);
                 if (parseInt(result.ret, 10) === 0) {
                     var data = {};

@@ -5,20 +5,24 @@
 
 define(function (require) {
     var customElement = require('customElement').create();
+    var $ = require('zepto');
     customElement.prototype.firstInviewCallback = function () {
-        var urlHost = window.location.host;
+        // var urlHost = window.location.host;
         var ele = $(this.element);
         var par = ele.closest('.lightbox-wrap');
-        var apiUrl = '';
-        if (urlHost === 'm.tiebaobei.com' || (urlHost === 'h5.tiebaobei.com')) {
-            apiUrl = 'https://api2.tiebaobei.com/';
-        }
-        else if (urlHost === 'm.test.tiebaobei.com' || (urlHost === 'h5.test.tiebaobei.com')) {
-            apiUrl = 'http://api2.test.tiebaobei.com/';
-        }
-        else {
-            apiUrl = 'http://api2.test.tiebaobei.com/';
-        }
+        // var apiUrl = '';
+        // if (urlHost === 'm.tiebaobei.com' || (urlHost === 'h5.tiebaobei.com')) {
+        //     apiUrl = 'https://api2.tiebaobei.com/';
+        // }
+        // else if (urlHost === 'm.test.tiebaobei.com' || (urlHost === 'h5.test.tiebaobei.com')) {
+        //     apiUrl = 'http://api2.test.tiebaobei.com/';
+        // }
+        // else {
+        //     apiUrl = 'http://api2.test.tiebaobei.com/';
+        // }
+        var script = this.element.querySelector('script[type="application/json"]');
+        var textContent = JSON.parse(script.textContent);
+        var apiUrl = textContent.apiUrl;
         var fetchJsonp = require('fetch-jsonp');
         var getRandomNum = function (min, max) {
             var range = max - min;
@@ -79,7 +83,7 @@ define(function (require) {
                     datass = '?customerNumber=' + par.find('#userPhone').val();
                     datass += '&pageFromType=L';
                     datass += '&uniqueSymbol=' +  uniqueSymbol;
-                    datass += '&channel:61';
+                    datass += '&channel=61';
                     datass += '&hotlineShare=""';
                     datass += '&currentUserId=""';
                     datass += '&currentUserWorkPhone=""';
@@ -91,7 +95,7 @@ define(function (require) {
                     datass = '?eqId=' + ths.attr('eqid');
                     datass += '&pageFromType=L';
                     datass += '&uniqueSymbol=' +  uniqueSymbol;
-                    datass += '&channel:61';
+                    datass += '&channel=61';
                     datass += '&hotlineShare=""';
                     datass += '&currentUserId=""';
                     datass += '&currentUserWorkPhone=""';
@@ -103,16 +107,16 @@ define(function (require) {
                 }).then(function (response) {
                     return response.json();
                 }).then(function (result) {
-                    if (result.ret === 0) {
+                    if (parseInt(result.ret, 10) === 0) {
                         par.find('#dialBox').hide();
                     }
-                    else if (result.ret === 1106) {
+                    else if (parseInt(result.ret, 10) === 1106) {
                         par.find('#dialBox').hide();
                         par.find('.srlj-wrap-con').show();
                         par.find('#checkYzm').focus();
                         par.find('#callOutPic').hide();
                     }
-                    else if (result.ret === 1104) {
+                    else if (parseInt(result.ret, 10) === 1104) {
                         par.find('#callOutPic').find('.co_tt').text('');
                         par.find('#callOutPic').find('.co_t').text('验证失败，请在24小时后再发起通话');
                         par.find('#callOutPic').show();

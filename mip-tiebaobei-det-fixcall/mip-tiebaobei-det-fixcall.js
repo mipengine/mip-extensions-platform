@@ -5,8 +5,9 @@
 
 define(function (require) {
     var customElement = require('customElement').create();
+    var $ = require('zepto');
     customElement.prototype.firstInviewCallback = function () {
-        var urlHost = window.location.host;
+        // var urlHost = window.location.host;
         var ele = $(this.element);
         var par = ele.closest('.lightbox-wrap');
         var basePhone = ele.find('#nativ_show').attr('data-tel');
@@ -14,16 +15,19 @@ define(function (require) {
         var baseEquipmentStatus = ele.find('#nativ_show').attr('data-equipmentStatus');
         var baseEquipmentCityId = ele.find('#nativ_show').attr('data-equipmentCityId');
         var baseLoginCustomerTel = ele.find('#nativ_show').attr('data-loginCustomerTel');
-        var apiUrl = '';
-        if (urlHost === 'm.tiebaobei.com' || (urlHost === 'h5.tiebaobei.com')) {
-            apiUrl = 'https://api2.tiebaobei.com/';
-        }
-        else if (urlHost === 'm.test.tiebaobei.com' || (urlHost === 'h5.test.tiebaobei.com')) {
-            apiUrl = 'http://api2.test.tiebaobei.com/';
-        }
-        else {
-            apiUrl = 'http://api2.test.tiebaobei.com/';
-        }
+        // var apiUrl = '';
+        // if (urlHost === 'm.tiebaobei.com' || (urlHost === 'h5.tiebaobei.com')) {
+        //     apiUrl = 'https://api2.tiebaobei.com/';
+        // }
+        // else if (urlHost === 'm.test.tiebaobei.com' || (urlHost === 'h5.test.tiebaobei.com')) {
+        //     apiUrl = 'http://api2.test.tiebaobei.com/';
+        // }
+        // else {
+        //     apiUrl = 'http://api2.test.tiebaobei.com/';
+        // }
+        var script = this.element.querySelector('script[type="application/json"]');
+        var textContent = JSON.parse(script.textContent);
+        var apiUrl = textContent.apiUrl;
         var fetchJsonp = require('fetch-jsonp');
         var getRandomNum = function (min, max) {
             var range = max - min;
@@ -92,16 +96,16 @@ define(function (require) {
                 ele.find('.srlj-wrap-con .h-tips').html('');
                 ele.find('.srlj-wrap-con .error-btn').hide();
                 ele.find('#checkYzm').val('');
-                if (result.ret === 0) {
+                if (parseInt(result.ret, 10) === 0) {
                     par.find('#dialBox').hide();
                 }
-                else if (result.ret === 1106) {
+                else if (parseInt(result.ret, 10) === 1106) {
                     par.find('#dialBox').hide();
                     par.find('.srlj-wrap-con').show();
                     par.find('#checkYzm').focus();
                     par.find('#callOutPic').hide();
                 }
-                else if (result.ret === 1104) {
+                else if (parseInt(result.ret, 10) === 1104) {
                     par.find('#callOutPic').find('.co_tt').text('');
                     // ele.find('#callOutPic').find('.co_t').text('验证失败，请在24小时后再发起通话');
                     par.find('#callOutPic').show();
