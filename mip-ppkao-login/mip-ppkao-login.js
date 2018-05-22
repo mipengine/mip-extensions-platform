@@ -18,7 +18,7 @@ define(function (require) {
         $(document).ready(function () {
             $.ajax({
                 type: 'get',
-                url: '//user.ppkao.com/Interface/IsLogin.ashx?action=UserIsLogin',
+                url: '//data.api.ppkao.com/Interface/IsLogin.ashx?action=UserIsLogin&userid=ppkao&usertoken=ppkao',
                 dataType: 'jsonp',
                 contentType: 'application/x-www-form-urlencoded;charset=utf-8',
                 jsonp: 'callback',

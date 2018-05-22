@@ -1,0 +1,15 @@
+{
+    "name": "mip-fy-hits",
+    "version": "1.0.0",
+    "description": "通过接口获取点击次数",
+    "contributors": [
+        {
+            "name": "gom",
+            "email": "gom3250@qq.com",
+            "url": "https://m.qqtn.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.0.0"
+    }
+}

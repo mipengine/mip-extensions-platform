@@ -15,7 +15,7 @@ define(function (require) {
     customElement.prototype.build = function () {
         var element = this.element;
         var immediateScroll = this.element.hasAttribute('scroll');
-
+        this.hasinited = false;
         if (immediateScroll) {
             initScroll(this);
         }
@@ -27,6 +27,10 @@ define(function (require) {
          * 初始化滚动
          */
         function initScroll() {
+            if (this.hasinited) {
+                return;
+            }
+            this.hasinited = true;
             var left = element.querySelector('.' + leftEleClass);
             var top = element.querySelector('.' + topEleClass);
             var body = element.querySelector('.' + bodyEleClass);

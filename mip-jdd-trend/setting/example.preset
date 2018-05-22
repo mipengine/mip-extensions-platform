@@ -1,0 +1,22 @@
+<style>
+mip-jdd-trend {
+	position: relative;
+}
+
+mip-jdd-trend .ball-red{
+	background-color: red;
+}
+
+mip-jdd-trend .ball-blue{
+	background-color: rgb(96, 133, 203);
+}
+mip-jdd-trend span{
+	display: block;
+	text-align: center;
+}
+mip-jdd-trend i{
+	position: absolute;
+	border-top: 1px solid black;
+	transform-origin: 0 0;
+}
+</style>
