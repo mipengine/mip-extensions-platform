@@ -8,7 +8,14 @@ define(function (require) {
 
     var customElement = require('customElement').create();
     var $ = require('zepto');
-    var car = require('./jquery-weui.min');
+    require('./jquery-weui');
+    // jquery-weui-min 此为定制化精简模块,内部只包含本组件中使用的功能
+    // 一下列举定制化模块包含模块详情
+    // jquery-extend  jquery 依赖模块
+    // template7  模板模块
+    // $.confirm  使用 modal 提示用户操作的弹出层模块
+    // $.toptip  使用 toptip  顶部提示模块
+    // $.toast  使用 toast  信息提示框模块
 
 	/**
 	 * 第一次进入可视区回调，只会执行一次
@@ -206,7 +213,7 @@ define(function (require) {
                 if (res.response === '-2') {
                     $.confirm('登录后评论', '登录提示', function () {
                         window.top.location.href = 'https://mip.linkeddb.com/sign_in/?callUrl='
-                            + window.location.origin + window.location.pathname;
+                        + window.location.pathname;
                     }, function () {
 
                     });
@@ -286,7 +293,7 @@ define(function (require) {
             formData.append('call_user_oid', callUserOid ? callUserOid : '');
             if ($(ele).find('.write-comment .pic-pop').find('.pic-pop-flex').find('mip-img').length >= 1) {
                 if ($(ele).find('input[type="file"]').length >= 2) {
-                    formData.append('mip-img', $('input[type="file"]:last').prev('.comment-pic')[0].files[0]);
+                    formData.append('mip-img', $(ele).find('input[type="file"]:last').prev('.comment-pic')[0].files[0]);
                 } else {
                     formData.append('mip-img', $(ele).find('input[type="file"]')[0].files[0]
                         ? $(ele).find('input[type="file"]')[0].files[0] : '');
@@ -373,7 +380,7 @@ define(function (require) {
                     if (res.response === '-2') {
                         $.confirm('请登录后操作', '登录提示', function () {
                             window.top.location.href = 'https://mip.linkeddb.com/sign_in/?callUrl='
-                                + window.location.origin + window.location.pathname;
+                            + window.location.pathname;
                         }, function () {
                             // $.toast('登录取消', 'text');
                         });
