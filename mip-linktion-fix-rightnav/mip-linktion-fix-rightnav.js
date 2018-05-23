@@ -23,16 +23,16 @@ define(function (require) {
         $el.find('#erweima-reply').on('mouseenter', function () {
             $(this).children('.nav-icon').attr('src', '/img/icon/tickling_hover.png');
         });
-        $el.find('#erweima-reply').on('mouseenter', function () {
+        $el.find('#erweima-reply').on('mouseleave', function () {
             $(this).children('.nav-icon').attr('src', '/img/icon/tickling.png');
         });
         $el.find('#list-top').on('mouseenter', function () {
-            $(this).children('.nav-icon').attr('src', '/img/icon/top_hover.png');
-            $(this).children('.stack-txt').css('color', '#fff');
+            $(this).children('a').children('.nav-icon').attr('src', '/img/icon/top_hover.png');
+            $(this).children('a').children('.stack-txt').css('color', '#fff');
         });
         $el.find('#list-top').on('mouseleave', function () {
-            $(this).children('.nav-icon').attr('src', '/img/icon/top.png');
-            $(this).children('.stack-txt').css('color', '#ccc');
+            $(this).children('a').children('.nav-icon').attr('src', '/img/icon/top.png');
+            $(this).children('a').children('.stack-txt').css('color', '#ccc');
         });
         $el.find('#erweima-reply').on('click', function () {
             $(this).children('.erweima-reply').show();

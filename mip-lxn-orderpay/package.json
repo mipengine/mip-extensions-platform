@@ -1,0 +1,14 @@
+{
+    "name": "mip-lxn-orderpay",
+    "version": "1.0.0",
+    "description": "订单详情",
+    "contributors": [
+        {
+            "name": "lxn",
+            "email": "lanxiniu@lanxiniu.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

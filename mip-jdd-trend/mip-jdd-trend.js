@@ -97,7 +97,7 @@ define(function (require) {
             else {
                 rotate = (Math.atan((item.y - nextItem.y) / (item.x - nextItem.x)) / Math.PI * 180 - 180);
             }
-            let res = {
+            var res = {
                 x: item.x,
                 y: item.y,
                 width: Math.sqrt(Math.pow(item.x - nextItem.x, 2) + Math.pow(item.y - nextItem.y, 2)),

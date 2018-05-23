@@ -84,10 +84,6 @@ define(function (require) {
                     datass += '&pageFromType=L';
                     datass += '&uniqueSymbol=' +  uniqueSymbol;
                     datass += '&channel=61';
-                    datass += '&hotlineShare=""';
-                    datass += '&currentUserId=""';
-                    datass += '&currentUserWorkPhone=""';
-                    datass += '&code=""';
                     datass += '&distinctId=' + getRandomNum(10000, 99999999);
                 }
                 else {
@@ -96,10 +92,6 @@ define(function (require) {
                     datass += '&pageFromType=L';
                     datass += '&uniqueSymbol=' +  uniqueSymbol;
                     datass += '&channel=61';
-                    datass += '&hotlineShare=""';
-                    datass += '&currentUserId=""';
-                    datass += '&currentUserWorkPhone=""';
-                    datass += '&code=""';
                     datass += '&distinctId=' + getRandomNum(10000, 99999999);
                 }
                 fetchJsonp(apiUrl + 'api/app/callCenter' + datass, {

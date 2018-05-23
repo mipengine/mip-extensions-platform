@@ -39,7 +39,7 @@ define(function (require) {
         var kw = opt.kw || '';
         var element = opt.element;
         var uid = opt.uid;
-        var $plus = $('mip-fh-ad-plus');
+        var $plus = $('mip-fh-zhida-plus');
         var fhAdPutNum = $plus.length;
         var fhAdNum = $body.attr('fh-ad-num') || 0;
 
@@ -146,7 +146,7 @@ define(function (require) {
             $.each(data, function (k, v) {
 
                 // 获取投放直销广告的节点
-                element = $('mip-fh-ad-plus[fh-ad-pid="' + k + '"]');
+                element = $('mip-fh-zhida-plus[fh-ad-pid="' + k + '"]');
                 uid = element.attr('fh-ad-uid');
 
                 // 根据医生id判断物料类型

@@ -22,6 +22,12 @@ define(function (require) {
         that.addEventAction('close', function (event) {
             $el.css('display', 'none');
         });
+        $el.find('.try-but-hid').on('click', function () {
+            $el.css('display', 'none');
+        });
+        $el.find('.try-but-hid').on('touchend', function () {
+            $el.css('display', 'none');
+        });
         function hideHints() {
             setTimeout(function () {
                 $el.find('.web-hint').fadeOut();
@@ -79,7 +85,7 @@ define(function (require) {
             });
             return checkedboxArry;
         }
-        that.addEventAction('open', function (event) {
+        $el.find('#try-btn').on('click', function (event) {
             var body = {};
             body.type = tryBtn.data('type');
             inputs.each(function (i, item) {

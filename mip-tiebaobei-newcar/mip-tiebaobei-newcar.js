@@ -105,10 +105,6 @@ define(function (require) {
                     datass += '&pageFromType=S';
                     datass += '&uniqueSymbol=' +  uniqueSymbol;
                     datass += '&channel=61';
-                    datass += '&hotlineShare=""';
-                    datass += '&currentUserId=""';
-                    datass += '&currentUserWorkPhone=""';
-                    datass += '&code=""';
                     datass += '&distinctId=' + getRandomNum(10000, 99999999);
                     fetchJsonp(apiUrl + 'api/app/callCenter' + datass, {
                         jsonpCallback: 'callback'

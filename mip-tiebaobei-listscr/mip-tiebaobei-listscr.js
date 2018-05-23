@@ -172,7 +172,8 @@ define(function (require) {
                 fetch(locBaseUrl + aug + '/').then(function (res) {
                     return res.text();
                 }).then(function (res) {
-                    if (res.isNoData || res.ret === -1) {
+                    var res = JSON.parse(res);
+                    if (res.isNoData || parseInt(res.ret, 10) === -1) {
                         ele.find('.dropload-down').hide();
                         scrollBoole = false;
                         return false;

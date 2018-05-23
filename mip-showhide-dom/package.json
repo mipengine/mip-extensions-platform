@@ -1,0 +1,14 @@
+{
+    "name": "mip-showhide-dom",
+    "version": "1.0.0",
+    "description": "组件介绍",
+    "contributors": [
+        {
+            "name": "xjx",
+            "email": "794801836@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

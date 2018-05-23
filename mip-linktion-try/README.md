@@ -15,7 +15,7 @@ mip-linktion-try 弹框ajax提交信息并后续弹框提示操作结果
   <div class="hints"></div>
   <button type="button" class="try-btn" on="tap:insurance-modal.toggle">试一试</button>
   <button type="button" class="try-btn-end" on="tap:insurance-modal-end.toggle"></button>
-  <button type="button"  on="tap:try.close">x</button>
+  <button type="button" class="try-but-hid"  on="tap:try.close">x</button>
 
   <mip-lightbox id="insurance-modal" layout="nodisplay" class="mip-hidden">
 	  <div class="modal-dialog insurance-modal-ad modal-blue-top" role="document">
@@ -36,7 +36,7 @@ mip-linktion-try 弹框ajax提交信息并后续弹框提示操作结果
                 <input type="number" placeholder="请输入手机号码" id="mobile" required="required">
               </div>
             </div>
-            <div class="select-checkbox" data-choicetype="checkbox" id="demand">
+            <div class="select-checkbox" data-choicetype="checkbox" id="demands">
               <h3 class="checkbox-h">我需要</h3>
               <div class="form-group">
                 <input type="checkbox" name="myinfo" value="保险规划" id="card_insurance" checked><label for="card_insurance">保险规划</label>

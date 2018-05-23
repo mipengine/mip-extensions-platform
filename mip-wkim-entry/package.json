@@ -1,0 +1,12 @@
+{
+    "name": "mip-wkim-entry",
+    "version": "1.0.0",
+    "description": "寻医问药im问答入口组件",
+    "author": {
+        "name": "tinkbell",
+		"email": "343836944@qq.com"
+    },
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
