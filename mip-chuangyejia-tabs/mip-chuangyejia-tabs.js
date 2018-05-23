@@ -9,8 +9,10 @@ define(function (require) {
     var customElement = require('customElement').create();
     var Iscroll = require('./iscroll');
     var viewport = require('viewport');
+    var viewer = require('viewer');
     var util = require('util');
     var rect = util.rect;
+    var naboo = util.naboo;
 
     var tools = {
         query: function (selector, el) {
@@ -76,6 +78,7 @@ define(function (require) {
         var navItem = tools.queryAll('.tabs-slide', tabNav);
         var contentItem = tools.queryAll('.tabs-slide', contentWrapper);
         var body = document.body;
+        var initHeight = Math.floor(rect.getElementRect(body).height);
 
         // 初始化展开
         var tabNavArrow = tools.createTagWithClass('tab-nav-arrow');
@@ -113,6 +116,12 @@ define(function (require) {
             navContentItem[i].style.width = perNavWidth + 'px';
         }
 
+        var contSlideArr = [];
+        for (var n = 0; n < navItem.length; n++) {
+            contSlideArr[n] = initHeight;
+        }
+        // var contSlideArr = tools.fill(navItem.length, initHeight);
+
         util.css(tabLine, {
             width: perNavWidth / 5,
             marginLeft: 2 * (perNavWidth / 5)
@@ -122,8 +131,8 @@ define(function (require) {
         var contentWidth = perContentWidth * navItem.length;
         var tabsContent = tools.query('.tabs-content', contentWrapper);
         tabsContent.style.width = contentWidth + 'px';
-
-        for (var i = 0; i < contentItem.length; i++) {
+        var contLen = contentItem.length;
+        for (var i = 0; i < contLen; i++) {
             contentItem[i].style.width = perContentWidth + 'px';
         }
 
@@ -150,8 +159,8 @@ define(function (require) {
             // 第一个tab加active
             tools.addClass(navItem[0], 'active');
             tools.addClass(navContentItem[0], 'active');
+            contentItem[0].style.height = 'auto';
 
-            // console.log(contentItem)
             // 展开初始化
             navContent.style.width = wrapperWidth + 'px';
             var arrCon = Array.prototype.slice.call(navContentItem);
@@ -173,6 +182,7 @@ define(function (require) {
             // 点击nav 更新视图
             function updateTab(e) {
                 navActiveClass('remove');
+
                 var el = e.target;
                 if (!el.classList.contains('tabs-slide')) {
                     return;
@@ -224,8 +234,11 @@ define(function (require) {
             function resolveClass(prev, current) {
                 tools.removeClass(navItem[prev], tabData.activePageClass);
                 tools.removeClass(navContentItem[prev], tabData.activePageClass);
+                tools.removeClass(contentItem[prev], tabData.activePageClass);
+
                 tools.addClass(navItem[current], tabData.activePageClass);
                 tools.addClass(navContentItem[current], tabData.activePageClass);
+                tools.addClass(contentItem[current], tabData.activePageClass);
             }
 
             // 移动 nav
@@ -234,11 +247,31 @@ define(function (require) {
                 tabData.currentPage = current;
                 var currentIndex = current - 2;
                 navScroll.goToPage(currentIndex, 0, 300);
+                viewport.setScrollTop(changeTop);
                 var lineX = current * perNavWidth;
                 tabLine.style.transform = 'translateX(' + lineX + 'px)';
-                viewport.setScrollTop(changeTop);
+                contSlideArr[prev] = Math.floor(rect.getElementRect(body).height);
+                setHeight(contSlideArr[current]);
+                util.css(contentItem[current], {
+                    height: 'auto',
+                    overflow: 'visible'
+                });
+                setTimeout(function () {
+                    viewport.trigger('refresh');
+                    viewport.trigger('changed');
+                    viewport.trigger('scroll');
+                }, 300);
                 var posX = current * perContentWidth * (-1) + 'px';
                 tabsContent.style.transform = 'translate3d(' + posX + ', 0, 0)';
+            }
+
+            function setHeight(nowHeight) {
+                for (var i = 0; i < contLen; i++) {
+                    util.css(contentItem[i], {
+                        height: 0,
+                        overflow: 'hidden'
+                    });
+                }
             }
 
         }, 20);

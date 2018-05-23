@@ -43,12 +43,15 @@ define(function (require) {
             hideHints();
         }
         function sendData(body) {
+            var bodyoption = JSON.stringify(body);
             var aipUrl = tryBtn.data('url');
             if (aipUrl.length !== 0) {
                 $.ajax({
                     url: aipUrl,
                     type: 'post',
-                    data: body
+                    data: bodyoption,
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json'
                 }).done(function (data) {
                     if (data.code === 1009) {
                         showTips('请登录', 'err');
@@ -85,7 +88,11 @@ define(function (require) {
                 if (inputVal === '') {
                     showTips('请完整填写表单', 'err');
                     return false;
-                } else {
+                }
+                else if ($(item).attr('type') === 'number' && inputVal.length !== 11) {
+                    showTips('请完整填手机号码', 'err');
+                }
+                else {
                     body[inputKey] = inputVal;
                     if (i === inputs.length - 1) {
                         if ($el.find('.select-checkbox').length !== 0) {

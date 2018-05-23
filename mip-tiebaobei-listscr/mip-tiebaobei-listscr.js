@@ -58,7 +58,7 @@ define(function (require) {
             templateFn: function (res) {
                 var html = '';
                 var icon = '';
-                var data = res.datas;
+                var data = res.result.datas;
                 for (var i = 0; i < data.length; i++) {
                     icon = '';
                     if (data[i].showNewUpload) {

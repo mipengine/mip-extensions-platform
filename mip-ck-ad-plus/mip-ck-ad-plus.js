@@ -44,7 +44,7 @@ define(function (require) {
         var head = document.getElementsByTagName('head')[0];
         var script = document.createElement('script');
         script.type = 'text/javascript';
-        script.src = url; // 用途：页面地理定位，获取省市地区。服务商：高德地图。JS地址：//webapi.amap.com/maps?v=1.3&key=41a6673dd49056f4f7d1d3a4816ed582'
+        script.src = url; // 用途：页面地理定位，获取省市地区。服务商：高德地图。JS地址：//webapi.amap.com/maps?v=1.3&key=41a6673dd49056f4f7d1d3a4816ed582&callback=onApiLoaded'
 
         script.onreadystatechange = callback;
         script.onload = callback;
@@ -156,12 +156,16 @@ define(function (require) {
         if (locationEnabled) {
 
             // 页面配置了定位允许项，开始加载高德地图定位脚本
-            loadScript('//webapi.amap.com/maps?v=1.3&key=41a6673dd49056f4f7d1d3a4816ed582', function () {
-                getAMapLocation(function (data) {
-                    data = data || {};
-                    ckAdOpt.query = util.fn.extend(data, ckAdOpt.query);
-                    getIP(ckAdOpt, getAd);
-                });
+            loadScript('//webapi.amap.com/maps?v=1.3&key=41a6673dd49056f4f7d1d3a4816ed582&'
+            + 'callback=onApiLoaded', function () {
+                // 给JSAPI引用地址url加上callback参数
+                window.onApiLoaded = function () { // 使用原因：异步调用高德地图API,官方文档要求注册一个callback回调全局方法(onApiLoaded),文档示例链接：http://lbs.amap.com/api/javascript-api/example/map/asynchronous-loading-map/
+                    getAMapLocation(function (data) {
+                        data = data || {};
+                        ckAdOpt.query = util.fn.extend(data, ckAdOpt.query);
+                        getIP(ckAdOpt, getAd);
+                    });
+                };
             });
         }
         else {

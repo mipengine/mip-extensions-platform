@@ -14,7 +14,7 @@ mip-ck-ad-plus 用来支持整站页面的直投广告显示
 ### 基本用法
 ```html
 <meta name="ck-ad-keywords" content="白癜风">
-<meta name="location-enabled" content="false">
+<meta name="location-enabled" content="true">
 <meta name="ck-ad-config" content='{"data": {"tagid": "1,10"}}'>
 <mip-ck-ad-plus pid="63"></mip-ck-ad-plus>
 <mip-ck-ad-plus pid="52"></mip-ck-ad-plus>

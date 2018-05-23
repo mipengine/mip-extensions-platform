@@ -325,6 +325,9 @@ define(function (require) {
                 else if (inputPhone === '') {
                     showTips('请填写手机号码', 'err');
                 }
+                else if (inputPhone.length !== 11) {
+                    showTips('请填写完整的手机号码', 'err');
+                }
                 else if (checkboxR === undefined) {
                     showTips('请选联系择时间', 'err');
                 }
@@ -359,7 +362,7 @@ define(function (require) {
                 var productid = $(this).data('productid');
                 console.log(productid);
                 if (productid !== undefined) {
-                    var src = domainsrc + '?&productid=' + productid;
+                    var src = domainsrc + '?&productId=' + productid;
                 } else {
                     var src = domainsrc;
                 }
@@ -368,10 +371,10 @@ define(function (require) {
         }
         else if (type === 'planners') {
             hot.on('click', function () {
-                var productid = $(this).parents('.more-wrap-productId').data('productid');
+                var productid = $(this).parents('.more-wrap-productid').data('productid');
                 console.log(productid);
                 if (productid !== undefined) {
-                    var src = domainsrc + '?hot=1' + '&productid=' +  productid;
+                    var src = domainsrc + '?hot=1' + '&productId=' +  productid;
                 } else {
                     var src = domainsrc + '?hot=1';
                 }
@@ -382,7 +385,7 @@ define(function (require) {
                     var productid = $(this).parents('.more-wrap-productid').data('productid');
                     console.log(productid);
                     if (productid !== undefined) {
-                        var src = domainsrc + '?level=' + $(this).val() + '&productid=' + productid;
+                        var src = domainsrc + '?level=' + $(this).val() + '&productId=' + productid;
                     } else {
                         var src = domainsrc + '?level=' + $(this).val();
                     }

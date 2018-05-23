@@ -90,13 +90,13 @@ define(function (require) {
                     if (result.ret === 0) {
                         par.find('#dialBox').hide();
                     }
-                    else if (result.ret === 1106) {
+                    else if (parseInt(result.ret, 10) === 1106) {
                         par.find('#dialBox').hide();
                         par.find('.srlj-wrap-con').show();
                         par.find('#checkYzm').focus();
                         par.find('#callOutPic').hide();
                     }
-                    else if (result.ret === 1104) {
+                    else if (parseInt(result.ret, 10) === 1104) {
                         par.find('#callOutPic').find('.co_tt').text('');
                         par.find('#callOutPic').find('.co_t').text('验证失败，请在24小时后再发起通话');
                         par.find('#callOutPic').show();

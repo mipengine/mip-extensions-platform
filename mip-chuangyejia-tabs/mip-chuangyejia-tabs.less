@@ -38,6 +38,8 @@ mip-chuangyejia-tabs {
                 -ms-flex-negative: 0;
                 -webkit-flex-shrink: 0;
                 flex-shrink: 0;
+
+                display: inline-block;
             }
         }
     }
@@ -157,20 +159,21 @@ mip-chuangyejia-tabs {
         }
     }
     .tabs-nav-wrapper {
-        overflow: hidden;
         height: 30px;
         .tabs-slide {
             height: 30px;
         }
     }
     .tabs-content-wrapper {
-        height: auto;
+        overflow: visible;
         .tabs-content {
             transition: all .3s;
         }
         .tabs-slide {
-            overflow: auto;
-            height: auto;
+            overflow-x: hidden;
+            &.active {
+                overflow: auto;
+            }
         }
     }
     .nav-mark {

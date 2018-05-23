@@ -27,7 +27,6 @@
                 if (transform in elementStyle) {
                     return vendors[i].substr(0, vendors[i].length - 1);
                 }
-
             }
 
             return false;

@@ -41,6 +41,9 @@ define(function (require) {
             else if (inputPhone === '') {
                 showTips('请填写电话', 'err');
             }
+            else if (inputPhone.length !== 11) {
+                showTips('请填写完整的手机号码', 'err');
+            }
             else if (checkboxR === undefined) {
                 showTips('请选择时间', 'err');
             }

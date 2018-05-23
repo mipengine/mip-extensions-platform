@@ -1,0 +1,12 @@
+{
+    "name": "mip-fh-zhida-plus",
+    "version": "1.0.0",
+    "description": "自有业务直销广告组件",
+    "author": {
+        "name": "laoono",
+        "email": "laoono@163.com"
+    },
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
