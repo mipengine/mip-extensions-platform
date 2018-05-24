@@ -7,7 +7,9 @@ define(function (require) {
     var etpl = require('./etpl.min');
     var etplEngine = new etpl.Engine({
         commandOpen: '{%',
-        commandClose: '%}'
+        commandClose: '%}',
+        variableOpen: '{{',
+        variableClose: '}}'
     });
     var templates = require('templates');
     var Etpl = templates.inheritTemplate();
