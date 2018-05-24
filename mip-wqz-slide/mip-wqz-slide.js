@@ -50,7 +50,7 @@ define(function (require) {
     /**
      * 第一次进入可视区回调，只会执行一次
      */
-    customElement.prototype.firstInviewCallback = function () {
+    customElement.prototype.build = function () {
         var self = this;
         var el = this.element;
 
@@ -81,7 +81,6 @@ define(function (require) {
             },
             setRect: function (el) {
                 var slideItem = ut.queryAll('.' + classNameList.slideItem);
-
                 if (platform.isIos() || platform.isAndroid()) {
                     var perItemWidth = Math.floor(rect.getElementRect(slideItem[0]).width);
                     var space = parseInt(el.getAttribute('data-slide-space'), 10);
