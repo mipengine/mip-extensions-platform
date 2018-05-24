@@ -3,6 +3,7 @@
  */
 
 mip-chuangyejia-tabs {
+    overflow-x: hidden;
     .tabs-nav-wrapper,
     .tabs-content-wrapper {
         overflow-x: hidden;
@@ -34,7 +35,6 @@ mip-chuangyejia-tabs {
                 transition-property: -webkit-transform;
                 transition-property:         transform;
                 transition-property:         transform, -webkit-transform;
-
                 -ms-flex-negative: 0;
                 -webkit-flex-shrink: 0;
                 flex-shrink: 0;
@@ -165,12 +165,14 @@ mip-chuangyejia-tabs {
         }
     }
     .tabs-content-wrapper {
+        padding-top: 40px;
         overflow: visible;
         .tabs-content {
             transition: all .3s;
         }
         .tabs-slide {
             overflow-x: hidden;
+            transition: height .2s;
             &.active {
                 overflow: auto;
             }

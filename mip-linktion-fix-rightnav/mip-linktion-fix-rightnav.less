@@ -27,4 +27,177 @@ mip-linktion-fix-rightnav {
     .web-succeed {
         background-color: rgba(66, 133, 244, 0.9);
     }
+    .fixed-nav {
+        position: fixed;
+        bottom: 50px;
+        right: 40px;
+        z-index: 2;
+        .nav-ul {
+            display: inline-block;
+            .list-li {
+                cursor: pointer;
+                background-color:  #fafafa;
+                padding: 14px;
+                border-bottom: 1px solid #ededed;
+                border-left: 1px solid #ededed;
+                border-right: 1px solid #ededed;
+                height: 50px;
+                text-align: center;
+                position: relative;
+                .nav-icon {
+                    width: 22px;
+                    height: 22px;
+                    display: inline-block;
+                }
+                .erweima-service {
+                    display: none;
+                    position: absolute;
+                    left: -230px;
+                    top: -194px;
+                    width: 220px;
+                    border-radius: 2px;
+                    box-shadow: 4px 3px 12px #ededed;
+                    .box-head {
+                        border: 1px solid #4285f4;
+                        text-align: center;
+                        padding: 13px 0;
+                        background-color: #4285f4;
+                        line-height: 14px;
+                        p {
+                            font-size: 14px;
+                            line-height: 14px;
+                            color: #fff;
+                            display: inline-block;
+                        }
+                    }
+                    .box-info {
+                        padding-top: 20px;
+                        text-align: center;
+                        background-color: #fff;
+                        padding-bottom: 28px;
+                        mip-img {
+                            width: 100px;
+                            height: 100px;
+                            display: inline-block;
+                        }
+                        .list-ol {
+                            margin-top: 19px;
+                            margin-bottom: 5px;
+                            li {
+                                display: inline-block;
+                                font-size: 12px;
+                                line-height: 12px;
+                            }
+                        }
+                        .box-txt {
+                            font-size: 12px;
+                            line-height: 12px;
+                        }
+                    }
+                }
+                .erweima-service:after {
+                    content: " ";
+                    position: absolute;
+                    background-color: #fff;
+                    right: -5px;
+                    bottom: 20px;
+                    width: 10px;
+                    height: 10px;
+                    -webkit-transform: rotate(45deg);
+                    transition: rotate(45deg);
+                    border-top: 1px solid #ededed;
+                    border-right: 1px solid #ededed;
+                }
+                .nav-icon-stack {
+                    width: 12px;
+                    height: 6px;
+                }
+                .stack-txt {
+                    font-size: 12px;
+                    line-height: 12px;
+                    color: #ccc;
+                }
+                .erweima-reply {
+                    display: none;
+                    position: absolute;
+                    width: 360px;
+                    top: -196px;
+                    left: -370px;
+                    box-shadow: 0 12px 20px #ededed;
+                    .box-head {
+                        background-color: #4285f4;
+                        padding: 12px 0;
+                        position: relative;
+                        p {
+                            color: #fff;
+                            font-size: 14px;
+                            line-height: 14px;
+                        }
+                        button {
+                            display: inline-block;
+                            position: absolute;
+                            right: 12px;
+                            top: 12px;
+                            background-color: transparent;
+                            color: #fff;
+                            border: none;
+                        }
+                    }
+                    .box-info {
+                        background-color: #fff;
+                        padding: 30px;
+                        .info-textarea {
+                            width: 100%;
+                            height: 100px;
+                            margin-bottom: 30px;
+                            border: 1px solid #ededed;
+                            font-size: 14px;
+                            line-height: 28px;
+                            padding: 14px 22px;
+                            resize:none;
+                        }
+                        .info-submit {
+                            background-color: #4285f4;
+                            display: inline-block;
+                            font-size: 14px;
+                            line-height: 14px;
+                            color: #fff;
+                            border-radius: 4px;
+                            padding: 13px 86px;
+                            border-color: #4285f4;
+                        }
+                    }
+                }
+                .erweima-reply:after {
+                    content: " ";
+                    position: absolute;
+                    background-color: #fff;
+                    right: -5px;
+                    bottom: 20px;
+                    width: 10px;
+                    height: 10px;
+                    -webkit-transform: rotate(45deg);
+                    transition: rotate(45deg);
+                    border-top: 1px solid #ededed;
+                    border-right: 1px solid #ededed;
+                }
+            }
+            .list-li:first-child {
+                border-top: 1px solid #ededed;
+            }
+            .list-li:last-child {
+                border-top: 1px solid #ededed;
+                padding-top: 6px;
+                margin-top: 9px;
+            }
+            .list-li:hover {
+                background-color: #4285f4;
+            }
+            #list-service:hover {
+                .erweima-service {
+                    display: block;
+                }
+            }
+        }
+    }
 }

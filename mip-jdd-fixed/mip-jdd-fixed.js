@@ -65,7 +65,6 @@ define(function (require) {
         var offsetTop = util.rect.getElementOffset(element).top;
 
         if (-offsetTop >= scrollThreshold) {
-            console.log(-offsetTop >= scrollThreshold);
             if (container.className.indexOf(scrollThresholdClassNames) < 0) {
                 container.className += scrollThresholdClassNames;
             }
@@ -159,7 +158,7 @@ define(function (require) {
                 });
             }
             catch (e) {
-                console.error(e);
+                // console.error(e);
             }
 
             viewport.on('scroll', function () {

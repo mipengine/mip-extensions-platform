@@ -326,8 +326,8 @@ define(function (require) {
                         $(ele).find('.write-comment .pic-pop').find('.pic-pop-flex').empty(); // 图片容器置空
                         $(ele).find('.write-comment .pic-pop').removeClass('show'); // 图片容器隐藏
                         commentPicNumFlag = true; // 添加评论图片标志置为 true 允许下次选取
-                        if ($(ele).find('input[type="file"]:last').siblings('.comment-pic').length !== 0) {
-                            $(ele).find('input[type="file"]:last').siblings('.comment-pic').remove(); // 删除已经参与上传图片的input框
+                        if ($(ele).find('input[type="file"]:last-child').siblings('.comment-pic').length !== 0) {
+                            $(ele).find('input[type="file"]:last-child').siblings('.comment-pic').remove(); // 删除已经参与上传图片的input框
                         }
                         $(ele).find('.review-cont').find('.review-title').remove(); // 删除评论区域头部
                         $(ele).find('.review-cont').find('.review-item').remove(); // 删除评论区域所有内容
@@ -398,14 +398,14 @@ define(function (require) {
                     }
                 });
             } else {
-                // $.confirm('确定取消点赞吗?', function() {
-                //     //点击确认后的回调函数
-                // }, function() {
-                //     //点击取消后的回调函数
-                //     // $.toast('取消收藏', 1000);
-                //     $($this).find('.num').html(+$($this).parent().parent().find('.num').html() - 1);
-                //     $($this).find('.icon-agree').toggleClass('full');
-                // });
+                $.confirm('确定取消点赞吗?', function () {
+                    // 点击确认后的回调函数
+                }, function () {
+                    // 点击取消后的回调函数
+                    // $.toast('取消收藏', 1000);
+                    $($this).find('.num').html(+$($this).parent().parent().find('.num').html() - 1);
+                    $($this).find('.icon-agree').toggleClass('full');
+                });
             }
         });
         // 建立一個可存取到該file的url

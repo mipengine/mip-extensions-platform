@@ -47,7 +47,7 @@ define(function (require) {
 
         }
         catch (error) {
-            console.warn(error);
+            // console.warn(error);
         }
 
         return defaultConfig;
@@ -161,7 +161,7 @@ define(function (require) {
         try {
             userInfo = JSON.parse(cookies.get('userInfo'));
         } catch (error) {
-            console.warn(error);
+            // console.warn(error);
         }
         var frm = cookies.get('from') || getParamsCode('frm');
         var params = {
@@ -207,7 +207,7 @@ define(function (require) {
             method: 'POST',
             body: form
         }).catch(function (error) {
-            console.warn(error);
+            // console.warn(error);
         });
     }
 

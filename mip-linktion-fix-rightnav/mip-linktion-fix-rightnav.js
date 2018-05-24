@@ -16,6 +16,7 @@ define(function (require) {
         var $el = $(this.element);
         $el.find('#list-service').on('mouseenter', function () {
             $(this).children('.nav-icon').attr('src', '/img/icon/service_hover.png');
+            $el.find('.erweima-reply').hide();
         });
         $el.find('#list-service').on('mouseleave', function () {
             $(this).children('.nav-icon').attr('src', '/img/icon/service.png');
@@ -61,7 +62,7 @@ define(function (require) {
                     return res.json();
                 }).then(function (data) {
                     if (data.code === 1009) {
-                        showTips('请登录', 'err');
+                        showTips('请先登录', 'err');
                     }
                     else if (data.code === 0) {
                         $el.find('#reply-hidden').trigger('click');

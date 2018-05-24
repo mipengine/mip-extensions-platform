@@ -79,11 +79,21 @@ define(function (require) {
                 });
             }
         }
-        function eachCheckBox(checkedbox, checkedboxArry) {
-            checkedbox.each(function (index, item) {
-                checkedboxArry.push(item.getAttribute('value'));
-            });
-            return checkedboxArry;
+        function eachCheckBox(checkedbox, choiceKey) {
+            if (choiceKey === 'demand') {
+                var checkedboxString = '';
+                checkedbox.each(function (index, item) {
+                    checkedboxString += item.getAttribute('value') + ',';
+                });
+                checkedboxString = checkedboxString.substr(0, checkedboxString.length - 1);
+                return checkedboxString;
+            } else {
+                var checkedboxArry = [];
+                checkedbox.each(function (index, item) {
+                    checkedboxArry.push(item.getAttribute('value'));
+                });
+                return checkedboxArry;
+            }
         }
         $el.find('#try-btn').on('click', function (event) {
             var body = {};
@@ -116,12 +126,12 @@ define(function (require) {
                             }
                             else if (choiceType === 'checkbox') {
                                 var checkedbox = checkboxWrap.children('input[type=checkbox]:checked');
-                                var checkedboxArry = [];
-                                checkedboxArry = eachCheckBox(checkedbox, checkedboxArry);
-                                if (checkedboxArry.length === '') {
+                                var checkedboxValue;
+                                checkedboxValue = eachCheckBox(checkedbox, choiceKey);
+                                if (checkedboxValue.length === '') {
                                     showTips('请完至少勾选一个选项', 'err');
                                 } else {
-                                    body[choiceKey] = checkedboxArry;
+                                    body[choiceKey] = checkedboxValue;
                                     sendData(body);
                                 }
                             }

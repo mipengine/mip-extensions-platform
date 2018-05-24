@@ -1,0 +1,14 @@
+{
+    "name": "mip-compassedu-djzx",
+    "version": "1.0.0",
+    "description": "点击隐藏",
+    "contributors": [
+        {
+            "name": "xjx",
+            "email": "794801836@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

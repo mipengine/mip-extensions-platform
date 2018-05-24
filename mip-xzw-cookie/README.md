@@ -1,5 +1,5 @@
 # mip-xzw-cookie
-mip-xzw-cookie 星座屋mip自适应组件,该组件主要用来支持rem单位的使用,保证在不同手机屏幕页面效果保持一致
+mip-xzw-cookie 星座屋cookie主要用于读取页面的cookie值~
 
 标题|内容
 ----|----

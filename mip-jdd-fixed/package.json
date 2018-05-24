@@ -1,6 +1,6 @@
 {
     "name": "mip-jdd-fixed",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "jdd-滑动悬浮组件，新增根据滚动距离增加class功能",
     "contributors": [
         {

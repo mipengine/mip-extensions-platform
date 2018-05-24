@@ -2,12 +2,12 @@
 * 星座屋mip改造
 * @file 星座屋cookie组件
 * @author mipxzw@163.com
-* @version 1.0.0
+* @version 1.0.1
 */
 define(function (require) {
     var $ = require('zepto');
     var customElem = require('customElement').create();
-    customElem.prototype.build = function () {
+    customElem.prototype.firstInviewCallback = function () {
         var element = $(this.element);
         var ele = this.element;
         var k = ele.getAttribute('data-cookie');
@@ -24,7 +24,7 @@ define(function (require) {
                             return false;
                         }
 
-                        $(element.find('.username')).text(userinfo.name);
+                        $(element.find('.username')).text('欢迎您！' + userinfo.name);
                     }
 
                 }

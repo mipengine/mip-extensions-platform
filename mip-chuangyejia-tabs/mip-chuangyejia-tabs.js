@@ -78,8 +78,11 @@ define(function (require) {
         var navItem = tools.queryAll('.tabs-slide', tabNav);
         var contentItem = tools.queryAll('.tabs-slide', contentWrapper);
         var body = document.body;
-        var initHeight = Math.floor(rect.getElementRect(body).height);
-
+        var footer = document.querySelector('.footer');
+        // var viewerHeight = rect.getElementRect(body)
+        // var initHeight = viewport.getScrollHeight() - util.rect.getElementOffset(contentItem[0]).top - 10;
+        // console.log(util.rect.getElementOffset(contentItem[0]).top)
+        // var initHeight = 0 ;
         // 初始化展开
         var tabNavArrow = tools.createTagWithClass('tab-nav-arrow');
         var navContent = tools.createTagWithClass('nav-content');
@@ -117,10 +120,11 @@ define(function (require) {
         }
 
         var contSlideArr = [];
+        var footerHeight = footer ? util.rect.getElementOffset(footer).height : 0;
+        var initHeight = viewport.getScrollHeight() - util.rect.getElementOffset(contentItem[0]).top - footerHeight;
         for (var n = 0; n < navItem.length; n++) {
             contSlideArr[n] = initHeight;
         }
-        // var contSlideArr = tools.fill(navItem.length, initHeight);
 
         util.css(tabLine, {
             width: perNavWidth / 5,
@@ -250,28 +254,41 @@ define(function (require) {
                 viewport.setScrollTop(changeTop);
                 var lineX = current * perNavWidth;
                 tabLine.style.transform = 'translateX(' + lineX + 'px)';
-                contSlideArr[prev] = Math.floor(rect.getElementRect(body).height);
+                contSlideArr[prev] = initHeight;
                 setHeight(contSlideArr[current]);
                 util.css(contentItem[current], {
                     height: 'auto',
                     overflow: 'visible'
                 });
-                setTimeout(function () {
-                    viewport.trigger('refresh');
-                    viewport.trigger('changed');
-                    viewport.trigger('scroll');
-                }, 300);
                 var posX = current * perContentWidth * (-1) + 'px';
                 tabsContent.style.transform = 'translate3d(' + posX + ', 0, 0)';
+                contentWrapper.addEventListener('transitionend', contenHandler, false);
             }
 
-            function setHeight(nowHeight) {
+            function contenHandler() {
                 for (var i = 0; i < contLen; i++) {
                     util.css(contentItem[i], {
-                        height: 0,
+                        height: initHeight,
                         overflow: 'hidden'
                     });
                 }
+                var currenCont = tools.queryAll('.tabs-slide.active', contentWrapper)[0];
+                util.css(currenCont, {
+                    height: 'auto',
+                    overflow: 'visible'
+                });
+                viewport.trigger('refresh');
+                viewport.trigger('scroll');
+                contentWrapper.removeEventListener('transitionend', contenHandler, false);
+            }
+
+            function setHeight(nowHeight) {
+                // for (var i = 0; i < contLen; i++) {
+                //     util.css(contentItem[i], {
+                //         height: initHeight,
+                //         overflow: 'hidden'
+                //     });
+                // }
             }
 
         }, 20);
