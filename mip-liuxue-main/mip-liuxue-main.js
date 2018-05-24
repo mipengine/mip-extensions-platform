@@ -15,14 +15,14 @@ define(function (require) {
         width > 766 ? html.style.fontSize = 766 / 7.66 + 'px' : html.style.fontSize = width / 7.66 + 'px';
     };
     customElement.prototype.firstInviewCallback = function () {
-        $('header').fing('.bd').click(function () {
+        $('header').find('.bd').on('click', function () {
             $(this).addClass('active').siblings().removeClass('active');
             $('.wsxx').eq($(this).index()).fadeIn().siblings().hide();
         });
-        $('header').find('.fr').click(function () {
+        $('header').find('.fr').on('click', function () {
             $('.qiehuan').show();
         });
-        $('.shouqi').click(function () {
+        $('.shouqi').on('click', function () {
             $('.qiehuan').hide();
         });
     };

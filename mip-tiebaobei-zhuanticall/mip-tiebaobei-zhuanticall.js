@@ -83,7 +83,7 @@ define(function (require) {
                 }).then(function (response) {
                     return response.json();
                 }).then(function (result) {
-                    if (result.ret === 0) {
+                    if (parseInt(result.ret, 10) === 0) {
                         par.find('#dialBox').hide();
                     }
                     else if (parseInt(result.ret, 10) === 1106) {

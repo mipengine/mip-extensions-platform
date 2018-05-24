@@ -88,7 +88,7 @@ define(function (require) {
                 }
                 else {
                     datass = '?customerNumber=' + par.find('#userPhone').val();
-                    datass = '?eqId=' + ths.attr('eqid');
+                    datass = '&eqId=' + ths.attr('eqid');
                     datass += '&pageFromType=L';
                     datass += '&uniqueSymbol=' +  uniqueSymbol;
                     datass += '&channel=61';

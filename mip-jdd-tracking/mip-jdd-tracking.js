@@ -17,7 +17,6 @@ define(function (require) {
         var trackList = getCustomTrackEvents();
         pageTrack(config);
         bindEvent.call(this, trackList, config);
-
     };
 
     /**
@@ -158,7 +157,12 @@ define(function (require) {
      * @param {Object} config 配置信息.
      */
     function doTrack(id, data, config) {
-        var userInfo = cookies.get('userInfo');
+        var userInfo = null;
+        try {
+            userInfo = JSON.parse(cookies.get('userInfo'));
+        } catch (error) {
+            console.warn(error);
+        }
         var frm = cookies.get('from') || getParamsCode('frm');
         var params = {
             deviceid: '',

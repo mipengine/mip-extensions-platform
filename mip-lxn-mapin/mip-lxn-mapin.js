@@ -321,7 +321,7 @@ define(function (require) {
                 };
                 localStorage.setItem('moveAddress', JSON.stringify(moveAddress));
                 setTimeout(function () {
-                    window.top.location.href = 'order.html';
+                    window.top.location.href = 'order';
                 }, 500);
             }
         });

@@ -72,7 +72,7 @@ define(function (require) {
                 localStorage.setItem('cartype', JSON.stringify({
                     licls: licls,
                     tabcls: tabs,
-                    cartype: option
+                    cartype: JSON.parse(option)
                 }));
 
                 calPrice(ele);
@@ -136,7 +136,9 @@ define(function (require) {
             url: 'https://www.lanxiniu.com//Order/calPrice', // url
             data: data,
             success: function (result) {
-                price.innerHTML = result.data.showPay; // 设置显示数据
+                var price = result.data.showPay;
+                price.innerHTML = price; // 设置显示数据
+                localStorage.setItem('orderprice', price);
             }
         });
     }
@@ -245,9 +247,8 @@ define(function (require) {
                     saveData[endStairsNum] = moveFloor.push;// 搬家 目的地楼层数
 
                     localStorage.setItem('ordermsg', JSON.stringify(saveData));
-                    window.top.location.href = 'orderList.html';
+                    window.top.location.href = 'orderList';
                 }
-
             }
         });
     }
@@ -257,6 +258,7 @@ define(function (require) {
      */
     customElement.prototype.firstInviewCallback = function () {
         var ele = this.element;
+
         tabClick(ele);
         // 当前城市开放的车型总列表
         var carType = ele.querySelector('#car-type');
@@ -271,7 +273,7 @@ define(function (require) {
         // lxn-tab-item
         var lxnTabItem = ele.querySelectorAll('.lxn-tab-item');
         // 确认下单
-        // var orderConfirm = ele.querySelector('#order-confirm');
+        var orderConfirm = ele.querySelector('#order-confirm');
         // 搬出地址
         var moveOut = ele.querySelector('#move-out-address');
         // 搬出楼层
@@ -282,6 +284,8 @@ define(function (require) {
         var moveInFloor = ele.querySelector('#move-in-floor');
         // 搬家时间
         var moveTime = ele.querySelector('#move-time');
+        // 订单价格
+        var price = ele.querySelector('#real-price');
 
         // 城市
         var city = localStorage.getItem('focuscity');
@@ -296,6 +300,8 @@ define(function (require) {
         var moveAddress = localStorage.getItem('moveAddress');
         // 搬家时间 本地保存的数据
         var moveTimeData = localStorage.getItem('move_time_formate');
+        // 本地存储的价格
+        var localPrice = localStorage.getItem('orderprice');
 
         // 设置地址
         if (moveAddress !== null) {
@@ -318,11 +324,16 @@ define(function (require) {
             moveTime.value = moveTimeData;
         }
 
+        // 价格
+        if (localPrice !== null) {
+            price.innerHTML = localPrice;
+        }
+
         moveOut.addEventListener('click', function (e) {
-            window.top.location.href = 'moveout.html';
+            window.top.location.href = 'moveout';
         });
         moveIn.addEventListener('click', function (e) {
-            window.top.location.href = 'movein.html';
+            window.top.location.href = 'movein';
         });
         // 确认下单登录
         this.addEventAction('login', function (event) {
@@ -330,11 +341,19 @@ define(function (require) {
             // event.userInfo;
             // 后端交互会话标识
             // event.sessionId;
+            checkData(event.sessionId);
+        });
 
-            // var actionLogin = ele.querySelector('#action-login');
-            // $('#action-login').click();
-            // var util = require('util');
-            // actionLogin.dispatchEvent(event, util.event.create('tab', 1));
+        // 确认下单按钮点击方法
+        orderConfirm.addEventListener('click', function (e) {
+            var keys = 'mip-login-xzh:sessionId://www.lanxiniu.com/Baidu/back';
+            var sessionid = localStorage.getItem(keys);
+            if (sessionid !== null) {
+                checkData(sessionid);
+            }
+        });
+        //  提交订单前检查数据
+        function checkData(sessionId) {
             var moveOutValue = moveOut.value;
             var moveOutFloorValue = moveOutFloor.value;
             var moveInValue = moveIn.value;
@@ -345,7 +364,7 @@ define(function (require) {
                     if (moveInValue !== '') {
                         if (moveInFloorValue !== '') {
                             if (moveTimeValue !== '') {
-                                upOrder(ele, event.sessionId);
+                                upOrder(ele, sessionId);
                             }
                             else {
                                 alert('时间不能为空');
@@ -366,8 +385,8 @@ define(function (require) {
             else {
                 alert('搬出地址不能为空!');
             }
+        }
 
-        });
 
         // 请求当前城市的车型列表
         $.ajax({
@@ -377,7 +396,6 @@ define(function (require) {
                 city: city
             },
             success: function (result) {
-                // console.log(result);
                 // 车型
                 var cartype = localStorage.getItem('cartype');
                 // tab 车辆信息
@@ -388,7 +406,6 @@ define(function (require) {
                         car = service[i].car;
                         break;
                     }
-
                 }
                 if (car.length > 2) {
                     carType.classList.add('lxn-tab-three');
@@ -450,19 +467,8 @@ define(function (require) {
                 localStorage.setItem('open_citys', JSON.stringify(result.data.open_citys));
             }
         });
-
     };
-
     return customElement;
 });
 
-// couponsId 优惠券  0
 
-// channel 下单渠道   15
-// orderTime  搬家时间   时间戳
-// orderType 订单类型  5
-
-// serverType 服务类型   100(默认)
-
-// square  默认0
-// cityCode (setting 里面取)

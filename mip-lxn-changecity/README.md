@@ -15,7 +15,7 @@
 <mip-lxn-changecity>
     <div class="change-city">
         <div class="city-title">当前城市</div>
-        <div id="currentCity" class="focus-city"></div>
+        <div id="current-city" class="focus-city"></div>
         <div class="city-title">当前开通服务的城市</div>
         <div class="city-list">
             <ul id="citylist"></ul>

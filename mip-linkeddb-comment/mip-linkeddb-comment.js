@@ -293,7 +293,8 @@ define(function (require) {
             formData.append('call_user_oid', callUserOid ? callUserOid : '');
             if ($(ele).find('.write-comment .pic-pop').find('.pic-pop-flex').find('mip-img').length >= 1) {
                 if ($(ele).find('input[type="file"]').length >= 2) {
-                    formData.append('mip-img', $(ele).find('input[type="file"]:last').prev('.comment-pic')[0].files[0]);
+                    formData.append('mip-img', $(ele).find('input[type="file"]:last-child')
+                    .prev('.comment-pic')[0].files[0]);
                 } else {
                     formData.append('mip-img', $(ele).find('input[type="file"]')[0].files[0]
                         ? $(ele).find('input[type="file"]')[0].files[0] : '');
@@ -344,6 +345,9 @@ define(function (require) {
         function devareComment() {
             var $this = this;
             var replyOid = $($this).parent().parent().parent().data('commentId');
+            // $.alert(111,function(){
+            //     console.log(1111)
+            // });
             $.confirm('确定删除吗？', function () {
                 $.post('https://mip.linkeddb.com/del_comment/', {
                     'reply_oid': replyOid

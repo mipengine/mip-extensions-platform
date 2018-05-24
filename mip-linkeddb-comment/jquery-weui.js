@@ -2717,7 +2717,7 @@
         var buttons = params.buttons;
 
         var buttonsHtml = buttons.map(function (d, i) {
-            return '<a href="javascript:; class="weui-dialog__btn ' + (d.className || '') + '">' + d.text + '</a>';
+            return '<a href="javascript:;"  class="weui-dialog__btn ' + (d.className || '') + '">' + d.text + '</a>';
         }).join('');
 
         var tpl = '<div class="weui-dialog">'
@@ -2829,12 +2829,14 @@
                     text: defaults.buttonCancel,
                     className: 'default',
                     onClick: config.onCancel
+
                 },
                 {
                     text: defaults.buttonOK,
                     className: 'primary',
                     onClick: config.onOK
-                }]
+                }
+            ]
         });
     };
 

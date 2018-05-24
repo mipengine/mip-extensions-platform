@@ -39,7 +39,7 @@ define(function (require) {
 
         var goBack = ele.querySelector('#back-order');
         goBack.addEventListener('click', function () {
-            window.top.location.href = 'order.html';
+            window.top.location.href = 'order';
         }, false);
     };
 

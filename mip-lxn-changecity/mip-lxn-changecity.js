@@ -15,10 +15,9 @@ define(function (require) {
      */
     customElement.prototype.firstInviewCallback = function () {
         // TODO
-
         var ele = this.element;
         // 显示当前城市
-        var currentCity = ele.querySelector('#currentCity');
+        var currentCity = ele.querySelector('#current-city');
         // 显示城市列表
         var cityList = ele.querySelector('#citylist');
         console.log(cityList);
@@ -43,7 +42,7 @@ define(function (require) {
         $(cityList).on('click', 'li', function () {
             var currents = $(this).text();
             localStorage.setItem('focuscity', currents);
-            window.top.location.href = 'order.html';
+            window.top.location.href = 'order';
         });
 
     };
