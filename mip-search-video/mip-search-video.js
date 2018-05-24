@@ -19,15 +19,21 @@ define(function (require) {
         'muted',
         'preload',
         'poster',
-        'src',
-        'width'
+        'video-src',
+        'width',
+        'src'
     ];
     var windowInIframe = viewer.isIframed;
 
     customElem.prototype.firstInviewCallback = function () {
         this.attributes = getAttributeSet(this.element.attributes);
         this.sourceDoms = this.element.querySelectorAll('source');
-        this.src = this.attributes.src;
+        if (this.attributes.src) {
+            this.src = this.attributes.src;
+        }
+        else {
+            this.src = this.attributes['video-src'];
+        }
 
         // if window is https
         var windowProHttps = !!window.location.protocol.match(/^https:/);
@@ -64,7 +70,12 @@ define(function (require) {
         var videoEl = document.createElement('video');
         for (var k in this.attributes) {
             if (this.attributes.hasOwnProperty(k) && videoAttributes.indexOf(k) > -1) {
-                videoEl.setAttribute(k, this.attributes[k]);
+                if (k !== 'video-src') {
+                    videoEl.setAttribute(k, this.attributes[k]);
+                }
+                else {
+                    videoEl.setAttribute('src', this.attributes[k]);
+                }
             }
         }
 

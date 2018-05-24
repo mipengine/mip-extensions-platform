@@ -12,7 +12,7 @@ mip-video-iframe 组件说明
 
 ## 示例
 
-### 基本用法
+### 旧用法
 ```html
 <mip-video-iframe
     allowfullscreen 
@@ -23,9 +23,28 @@ mip-video-iframe 组件说明
 </mip-video-iframe>
 ```
 
+### 新用法
+```html
+<mip-video-iframe
+    allowfullscreen 
+    iframe-src="https://www.mipengine.org/article/instant-pageview.html" 
+    width="400"
+    height="300" 
+    allowtransparency="true">
+</mip-video-iframe>
+```
+
 ## 属性
 
 ###src
+说明：与原生 `<iframe>` 的 src 属性作用一致。（废弃，请不要使用）
+必选项：否
+类型：URL
+单位：无
+取值：必须要使用 HTTPS 地址
+默认值：无
+
+###iframe-src
 说明：与原生 `<iframe>` 的 src 属性作用一致。
 必选项：是
 类型：URL

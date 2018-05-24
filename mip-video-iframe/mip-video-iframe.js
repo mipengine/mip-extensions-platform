@@ -13,7 +13,12 @@ define(function (require) {
 
     customElement.prototype.build = function () {
         var element = this.element;
-        var src = element.getAttribute('src');
+        if (element.getAttribute('src')) {
+            var src = element.getAttribute('src');
+        }
+        else {
+            var src = element.getAttribute('iframe-src');
+        }
         var srcdoc = element.getAttribute('srcdoc');
         if (srcdoc) {
             src = 'data:text/html;charset=utf-8;base64,' + window.btoa(srcdoc);
