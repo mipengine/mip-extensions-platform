@@ -217,7 +217,7 @@ define(function (require) {
 
                 cityFn();
 
-                zxbjPage.method.windowScroll(data, ele);
+                // zxbjPage.method.windowScroll(data, ele);
 
                 // 点击展开按钮
                 zxbjPage.method.clickUpFun(data, ele);
@@ -327,10 +327,10 @@ define(function (require) {
                 });
 
                 /*$(ele).find('.hb-wrap').on('click', function () {
-                    scrollTop.body = document.body.scrollTop;
-                    scrollTop.documentElement = document.documentElement.scrollTop;
-                    scrollTop.offset = window.pageYOffset;
-                });*/
+                 scrollTop.body = document.body.scrollTop;
+                 scrollTop.documentElement = document.documentElement.scrollTop;
+                 scrollTop.offset = window.pageYOffset;
+                 });*/
 
                 $ele.find('.close').on('click', function () {
                     hidepopmask($(ele));

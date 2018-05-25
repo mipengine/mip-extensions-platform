@@ -98,28 +98,33 @@ define(function (require) {
         var element = this.element;
         var offsetTop = util.rect.getElementOffset(element).top;
 
-        if (offsetTop <= this.threshold) {
-            util.css(this.fixedContainer.parentNode, {
-                display: 'block'
-            });
-            util.css(this.fixedContainer, {
-                opacity: 1
-            });
-            util.css(this.container, {
-                opacity: 0
-            });
+        try {
+            if (offsetTop <= this.threshold) {
+                util.css(this.fixedContainer.parentNode, {
+                    display: 'block'
+                });
+                util.css(this.fixedContainer, {
+                    opacity: 1
+                });
+                util.css(this.container, {
+                    opacity: 0
+                });
+            }
+            else {
+                util.css(this.fixedContainer.parentNode, {
+                    display: 'none'
+                });
+                util.css(this.fixedContainer, {
+                    opacity: 0
+                });
+                util.css(this.container, {
+                    opacity: 1
+                });
+            }
+        } catch (error) {
+
         }
-        else {
-            util.css(this.fixedContainer.parentNode, {
-                display: 'none'
-            });
-            util.css(this.fixedContainer, {
-                opacity: 0
-            });
-            util.css(this.container, {
-                opacity: 1
-            });
-        }
+
     }
 
     // build说明：必须在初始化加载
@@ -192,16 +197,20 @@ define(function (require) {
         else if (util.platform.isIos() && viewer.isIframed
 
             && offsetTop <= self.threshold) {
+            try {
+                util.css(this.fixedContainer.parentNode, {
+                    display: 'block'
+                });
+                util.css(this.fixedContainer, {
+                    opacity: 1
+                });
+                util.css(this.container, {
+                    opacity: 0
+                });
+            } catch (error) {
 
-            util.css(this.fixedContainer.parentNode, {
-                display: 'block'
-            });
-            util.css(this.fixedContainer, {
-                opacity: 1
-            });
-            util.css(this.container, {
-                opacity: 0
-            });
+            }
+
         }
 
         /**

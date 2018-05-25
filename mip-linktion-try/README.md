@@ -16,13 +16,12 @@ mip-linktion-try 弹框ajax提交信息并后续弹框提示操作结果
   <button type="button" class="try-btn" on="tap:insurance-modal.toggle">试一试</button>
   <button type="button" class="try-btn-end" on="tap:insurance-modal-end.toggle"></button>
   <button type="button" class="try-but-hid"  on="tap:try.close">x</button>
-
   <mip-lightbox id="insurance-modal" layout="nodisplay" class="mip-hidden">
 	  <div class="modal-dialog insurance-modal-ad modal-blue-top" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <p>专人+专业的理财指导</p>
-	        <button type="button" class="close form-close" on="tap:insurance-modal.toggle">&times;</button>
+	        <button type="button" class="close form-close" on="tap:insurance-modal.toggle" style="color: #fff">&times;</button>
 	      </div>
 	      <div class="modal-body clearfix">
           <mip-form>
@@ -49,7 +48,7 @@ mip-linktion-try 弹框ajax提交信息并后续弹框提示操作结果
               </div>
             </div>
             <div class="form-group-but">
-              <button type="button" class="insurance-but"  id="try-btn"  data-type="5" on="tap:try.open" data-url="http://www.caifu.org/memberCustomization/saveCustomization">提交</button>
+              <button type="button" class="insurance-but"  id="try-btn"  data-type="5" on="tap:try.open" data-url="http://www.caifu.org/memberCustomization/saveCustomization" style="color: #fff">提交</button>
             </div>
           </mip-form>
 	      </div>
@@ -75,4 +74,56 @@ mip-linktion-try 弹框ajax提交信息并后续弹框提示操作结果
     </div>
   </mip-lightbox>
 </mip-linktion-try>
+<div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
+  <div>阿克江德生科技反馈了时代峻峰</div>
 ```

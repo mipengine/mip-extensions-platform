@@ -1,11 +1,11 @@
 {
-    "name": "mip-lxn-changecity",
+    "name": "mip-lxn-title",
     "version": "1.0.0",
-    "description": "修改城市",
+    "description": "头部组件",
     "contributors": [
         {
             "name": "lxn",
-            "email": "lxn@lanxiniu.com"
+            "email": "lanxiniu@lanxiniu.com"
         }
     ],
     "engines": {

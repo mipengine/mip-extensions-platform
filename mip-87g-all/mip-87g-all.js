@@ -69,6 +69,8 @@ define(function (require) {
                         $(this).addClass('show');
                     }
                 });
+            } else {
+                con.find('.m-show').hide();
             }
         } else if (gtype === 'g87_youxi_tab') {
             var con = $(t);
@@ -132,6 +134,15 @@ define(function (require) {
                 anchor2.removeClass('on');
                 anchor3.removeClass('on');
             });
+            var txtlist1 = con.find('.txt-list1');
+            if ($.trim(txtlist1.html()) === '') {
+                txtlist1.parent().remove();
+            }
+            var appsoft = con.find('.app_soft');
+            if ($.trim(appsoft.find('#r_main .apptxt').html()) === '') {
+                appsoft.find('.hd_article span').eq(1).remove();
+                appsoft.find('.hd_article').css('width', '50%');
+            }
         } else if (gtype === 'g87_youxi_downhref') {
             var con = $(t);
             var downaddressa = con.find('#address');
@@ -216,13 +227,15 @@ define(function (require) {
             }
         } else if (gtype === 'g87_youxi_imgs') {
             var con = $(t);
-            if (con.find('.m-slide1 ul li').eq(0).find('img').height()
-                < con.find('.m-slide1 ul li').eq(0).find('img').width()) {
-                con.find('.m-slide1').addClass('banner_pics');
-                con.find('.m-slide1').css('height', '150px');
-            } else {
-                con.find('.m-slide1').css('height', '255px');
-            }
+            setTimeout(function () {
+                if (con.find('.m-slide1 ul li').eq(0).find('img').height()
+                    < con.find('.m-slide1 ul li').eq(0).find('img').width()) {
+                    con.find('.m-slide1').addClass('banner_pics');
+                    con.find('.m-slide1').css('height', '150px');
+                } else {
+                    con.find('.m-slide1').css('height', '310px');
+                }
+            }, 500);
         }
     };
     return customElement;

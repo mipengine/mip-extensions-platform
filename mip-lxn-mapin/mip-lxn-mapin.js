@@ -27,6 +27,13 @@ define(function (require) {
         a.changePage();
         setInterval(a.changePage, 1000);
     }
+    // 校验电话号码
+    function checkPhone(phone) {
+        if (!(/^1(3|4|5|7|8)\d{9}$/.test(phone))) {
+            return false;
+        }
+        return true;
+    }
     function AddressSearch(cityName, provinceFilter, pageSize, searchComplete) {
         var that = this;
         that.data = {};
@@ -253,7 +260,10 @@ define(function (require) {
 
         var ele = this.ele;
         var moveOutAddress = ele.querySelector('#move-in-address');
+        // 地址
         var suggest = ele.querySelector('#suggestId');
+        // 电话号码
+        var phoneNum = ele.querySelector('#move-in-phone');
         var addressSearch = new AddressSearch(city,
             '', 20, function (searchData) {
                 if (!searchData || !searchData.data || !searchData.data.length) {
@@ -284,8 +294,14 @@ define(function (require) {
         });
 
         $(moveOutAddress).on('click', function () {
-            if ($(suggest).val() === '') {
+            if (suggest.value === '') {
                 alert('地址不能为空');
+            }
+            else if (phoneNum.value === '') {
+                alert('联系电话不能为空');
+            }
+            else if (!checkPhone(phoneNum.value)) {
+                alert('号码不符合规范');
             }
             else {
 

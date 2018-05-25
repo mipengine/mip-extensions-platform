@@ -87,8 +87,8 @@ define(function (require) {
     */
     function calPrice(obj) {
         var ele = obj;
-        var price = ele.querySelector('#real-price');
-        console.log(price);
+        var priceValue = ele.querySelector('#real-price');
+        // console.log(price);
         var cartypeData = JSON.parse(localStorage.getItem('cartype'));
         var orderMove = localStorage.getItem('move');
         // 搬家时间
@@ -130,14 +130,13 @@ define(function (require) {
         };
         data[startStairsNum] = moveOut;
         data[endStairsNum] = moveIn;
-
         $.ajax({
             type: 'POST',
             url: 'https://www.lanxiniu.com//Order/calPrice', // url
             data: data,
             success: function (result) {
                 var price = result.data.showPay;
-                price.innerHTML = price; // 设置显示数据
+                priceValue.innerHTML = price; // 设置显示数据
                 localStorage.setItem('orderprice', price);
             }
         });
@@ -150,9 +149,9 @@ define(function (require) {
      * @param {number} sessionid sessionid用于记录用户
     */
     function upOrder(obj, sessionid) {
-        var ele = obj;
-        var price = ele.querySelector('#real-price');
-        console.log(price);
+        // var ele = obj;
+        // var price = ele.querySelector('#real-price');
+        // console.log(price);
         var cartypeData = JSON.parse(localStorage.getItem('cartype'));
         // var orderMove = localStorage.getItem('move');
         // 搬家时间
@@ -217,7 +216,7 @@ define(function (require) {
 
         };
         data[startStairsNum] = moveFloor.pop.code; // 搬家 发货地楼层数
-        data[endStairsNum] = moveFloor.push.code;// 搬家 目的地楼层数
+        data[endStairsNum] = moveFloor.push.code; // 搬家 目的地楼层数
         var updata = {
             token: sessionid,
             couponsId: 0, // 所用的优惠券id(默认0)
@@ -244,11 +243,12 @@ define(function (require) {
                         // end_stairs_num: moveFloor.push, // 搬家 目的地楼层数
                     };
                     saveData[startStairsNum] = moveFloor.pop; // 搬家 发货地楼层数
-                    saveData[endStairsNum] = moveFloor.push;// 搬家 目的地楼层数
+                    saveData[endStairsNum] = moveFloor.push; // 搬家 目的地楼层数
 
                     localStorage.setItem('ordermsg', JSON.stringify(saveData));
                     window.top.location.href = 'orderList';
                 }
+
             }
         });
     }
@@ -258,7 +258,6 @@ define(function (require) {
      */
     customElement.prototype.firstInviewCallback = function () {
         var ele = this.element;
-
         tabClick(ele);
         // 当前城市开放的车型总列表
         var carType = ele.querySelector('#car-type');
@@ -306,10 +305,16 @@ define(function (require) {
         // 设置地址
         if (moveAddress !== null) {
             var moveAddressd = JSON.parse(moveAddress);
-            console.log(JSON.stringify(moveAddressd, null, 2));
+            var moveOutKeys = Object.keys(moveAddressd.moveout);
+            var moveInKeys = Object.keys(moveAddressd.movein);
+            // console.log(JSON.stringify(moveAddressd, null, 2));
+            if (moveOutKeys.length === 2) {
+                moveOut.value = moveAddressd.moveout.location.title;
+            }
 
-            moveOut.value = moveAddressd.moveout.location.title;
-            moveIn.value = moveAddressd.movein.location.title;
+            if (moveInKeys.length === 2) {
+                moveIn.value = moveAddressd.movein.location.title;
+            }
         }
 
         // 设置楼层
@@ -341,7 +346,58 @@ define(function (require) {
             // event.userInfo;
             // 后端交互会话标识
             // event.sessionId;
-            checkData(event.sessionId);
+
+             // 城市
+            var city = localStorage.getItem('focuscity');
+            if (city === null) {
+                city = '北京';
+                localStorage.setItem('focuscity', '北京');
+            }
+
+            // 搬出搬入楼层 本地保存的数据
+            var orderMove = localStorage.getItem('move');
+            // 搬出搬入地址 本地保存的数据
+            var moveAddress = localStorage.getItem('moveAddress');
+            // 搬家时间 本地保存的数据
+            var moveTimeData = localStorage.getItem('move_time_formate');
+            // 本地存储的价格
+            var localPrice = localStorage.getItem('orderprice');
+
+            // 设置地址
+            if (moveAddress !== null) {
+                var moveAddressd = JSON.parse(moveAddress);
+                var moveOutKeys = Object.keys(moveAddressd.moveout);
+                var moveInKeys = Object.keys(moveAddressd.movein);
+                // console.log(JSON.stringify(moveAddressd, null, 2));
+                if (moveOutKeys.length === 2) {
+                    moveOut.value = moveAddressd.moveout.location.title;
+                }
+
+                if (moveInKeys.length === 2) {
+                    moveIn.value = moveAddressd.movein.location.title;
+                }
+            }
+
+            // 设置楼层
+            if (orderMove !== null) {
+                var ordermoves = JSON.parse(orderMove);
+                moveOutFloor.value = ordermoves.data.pop.name;
+                moveInFloor.value = ordermoves.data.push.name;
+            }
+
+            // 时间
+            if (moveTime !== null) {
+                moveTime.value = moveTimeData;
+            }
+
+           // 价格
+            if (localPrice !== null) {
+                price.innerHTML = localPrice;
+            }
+            setTimeout(function () {
+                checkData(event.sessionId);
+            }, 300);
+
         });
 
         // 确认下单按钮点击方法
@@ -351,6 +407,7 @@ define(function (require) {
             if (sessionid !== null) {
                 checkData(sessionid);
             }
+
         });
         //  提交订单前检查数据
         function checkData(sessionId) {
@@ -387,7 +444,6 @@ define(function (require) {
             }
         }
 
-
         // 请求当前城市的车型列表
         $.ajax({
             url: 'https://www.lanxiniu.com/Setting/getCityData',
@@ -406,6 +462,7 @@ define(function (require) {
                         car = service[i].car;
                         break;
                     }
+
                 }
                 if (car.length > 2) {
                     carType.classList.add('lxn-tab-three');
@@ -470,5 +527,3 @@ define(function (require) {
     };
     return customElement;
 });
-
-

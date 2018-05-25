@@ -58,7 +58,6 @@ define(function (require) {
         return format;
     }
 
-
     /**
      * 第一次进入可视区回调，只会执行一次
      */
@@ -176,6 +175,7 @@ define(function (require) {
                     opt.value = PARAMS[x];
                     temp.appendChild(opt);
                 }
+
             }
 
             document.body.appendChild(temp);

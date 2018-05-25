@@ -6,6 +6,7 @@
 define(function (require) {
     'use strict';
     var $ = require('jquery');
+    var viewer = require('viewer');
 
     var customElement = require('customElement').create();
 
@@ -67,6 +68,7 @@ define(function (require) {
                             showTips('提交成功', 'success');
                             $el.find('#insurance-modal').hide();
                             $el.find('#MIP-LLIGTBOX-MASK').hide();
+                            $('html').removeClass('mip-no-scroll');
                             setTimeout(function () {
                                 $el.css('display', 'none');
                             }, 3000);
@@ -74,26 +76,16 @@ define(function (require) {
                             $el.find('.form-close').trigger('click');
                             $el.find('.try-btn-end').trigger('click');
                         }
-
                     }
                 });
             }
         }
-        function eachCheckBox(checkedbox, choiceKey) {
-            if (choiceKey === 'demand') {
-                var checkedboxString = '';
-                checkedbox.each(function (index, item) {
-                    checkedboxString += item.getAttribute('value') + ',';
-                });
-                checkedboxString = checkedboxString.substr(0, checkedboxString.length - 1);
-                return checkedboxString;
-            } else {
-                var checkedboxArry = [];
-                checkedbox.each(function (index, item) {
-                    checkedboxArry.push(item.getAttribute('value'));
-                });
-                return checkedboxArry;
-            }
+        function eachCheckBox(checkedbox) {
+            var checkedboxArry = [];
+            checkedbox.each(function (index, item) {
+                checkedboxArry.push(item.getAttribute('value'));
+            });
+            return checkedboxArry;
         }
         $el.find('#try-btn').on('click', function (event) {
             var body = {};
@@ -127,7 +119,7 @@ define(function (require) {
                             else if (choiceType === 'checkbox') {
                                 var checkedbox = checkboxWrap.children('input[type=checkbox]:checked');
                                 var checkedboxValue;
-                                checkedboxValue = eachCheckBox(checkedbox, choiceKey);
+                                checkedboxValue = eachCheckBox(checkedbox);
                                 if (checkedboxValue.length === '') {
                                     showTips('请完至少勾选一个选项', 'err');
                                 } else {
