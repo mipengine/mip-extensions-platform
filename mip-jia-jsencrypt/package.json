@@ -1,7 +1,7 @@
 {
-    "name": "mip-jia-footertlplus",
-    "version": "1.0.1",
-    "description": "齐家底通",
+    "name": "mip-jia-jsencrypt",
+    "version": "1.0.0",
+    "description": "加密组件",
     "contributors": [
         {
             "name": "tao",

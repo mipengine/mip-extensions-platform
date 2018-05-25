@@ -1,0 +1,14 @@
+{
+    "name": "mip-xxd-vertical-carousel",
+    "version": "1.0.0",
+    "description": "选校帝垂直轮播组件",
+    "contributors": [
+        {
+            "name": "xwchris",
+            "email": "xwchris.zhang@gmail.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

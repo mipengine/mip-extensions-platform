@@ -12,16 +12,7 @@ mip-search-video
 
 ## 示例
 
-### 旧用法
-```html
-<mip-search-video width="640" height="360"
-	src="https://mip-doc.bj.bcebos.com/MIPSampleVideo.mp4"
-	poster="https://mip-doc.bj.bcebos.com/mip-video-poster.jpg"
-	controls>
-</mip-search-video>
-```
-
-### 新用法
+### 基本用法
 ```html
 <mip-search-video width="640" height="360"
 	video-src="https://mip-doc.bj.bcebos.com/MIPSampleVideo.mp4" 
@@ -32,15 +23,7 @@ mip-search-video
 
 ## 属性
 
-下面是的<mip--search-video>属性。
-
-### src
-
-说明：视频源地址，必须是 HTTPS 资源（废弃，请不要使用）
-必选项：否  
-类型：字符串  
-取值范围：URL  
-默认值：无  
+下面是的<mip--search-video>属性。 
 
 ### video-src
 

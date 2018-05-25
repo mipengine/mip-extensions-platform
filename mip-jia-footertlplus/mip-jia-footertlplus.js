@@ -206,7 +206,7 @@ define(function (require) {
 
                 cityFn();
 
-                zxbjPage.method.windowScroll(data, ele);
+                // zxbjPage.method.windowScroll(data, ele);
 
                 // 点击展开按钮
                 zxbjPage.method.clickUpFun(data, ele);

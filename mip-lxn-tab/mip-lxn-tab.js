@@ -102,7 +102,7 @@ define(function (require) {
         // 收货楼层
         var moveIn = '';
         // 公里数
-        var kilometer = localStorage.getItem('kilometer');
+        var kilometer = localStorage.getItem('distance');
 
         if (orderMove !== null) {
             var ordermoves = JSON.parse(orderMove);
@@ -121,7 +121,7 @@ define(function (require) {
             carType: carType, // 车型（影响费用）
             channel: 15, // 下单渠道(默认15)
             orderTime: date, // 服务时间(时间戳 单位s)
-            orderType: 1, // 订单类型
+            orderType: 5, // 订单类型
             orderCity: focusCity, // 下单城市
             serverType: 100, // 服务类型(默认100)
             kilometer: kilometer, // 公里数
@@ -161,11 +161,11 @@ define(function (require) {
         // 下单城市
         var focusCity = localStorage.getItem('focuscity');
         // 公里数
-        var kilometer = localStorage.getItem('kilometer');
+        var kilometer = localStorage.getItem('distance');
         // 楼层
         var moveFloor = JSON.parse(localStorage.getItem('move'));
         // 地址
-        var moveAddress = JSON.parse(localStorage('moveAddress'));
+        var moveAddress = JSON.parse(localStorage.getItem('moveAddress'));
 
         var startStairsNum = 'start_stairs_num';
         var endStairsNum = 'end_stairs_num';
@@ -208,7 +208,7 @@ define(function (require) {
             userLog: '', // 	用户所在 经度
             // start_stairs_num: moveFloor.pop.code, // 搬家 发货地楼层数
             // end_stairs_num: moveFloor.push.code, // 搬家 目的地楼层数
-            orderType: '', // 订单类型
+            orderType: 5, // 订单类型
             usedServeType: '', // 服务类型
             carringType: 0, // 是否需要搬运， 0 无需
             receiptType: 0, // 是否需要回单， 0 不需要回单
@@ -347,7 +347,7 @@ define(function (require) {
             // 后端交互会话标识
             // event.sessionId;
 
-             // 城市
+            // 城市
             var city = localStorage.getItem('focuscity');
             if (city === null) {
                 city = '北京';
@@ -390,10 +390,11 @@ define(function (require) {
                 moveTime.value = moveTimeData;
             }
 
-           // 价格
+            // 价格
             if (localPrice !== null) {
                 price.innerHTML = localPrice;
             }
+
             setTimeout(function () {
                 checkData(event.sessionId);
             }, 300);

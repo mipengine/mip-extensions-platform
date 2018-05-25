@@ -7,11 +7,76 @@ define(function (require) {
 
     var customElement = require('customElement').create();
     var util = require('util');
+    // var $ = require('zepto');
     // var fetchJsonp = require('fetch-jsonp');
     var Picker = require('./picker');
     // var CustomStorage = util.customStorage;
     // var storage = new CustomStorage(0);
 
+    /**
+     * 计算订单价格
+     *
+     * @param {string} obj 组件对象
+    */
+    function calPrice(obj) {
+        // var ele = obj;
+
+        // 这里使用全局选择器,因为这个时间组件单独的 它的操作 会影响到其他组件的显示
+
+        var priceValue = document.getElementById('real-price');
+        // console.log(price);
+        var cartypeData = JSON.parse(localStorage.getItem('cartype'));
+        var orderMove = localStorage.getItem('move');
+        // 搬家时间
+        var date = localStorage.getItem('move_time');
+        // 车型
+        var carType = cartypeData.cartype.type;
+        // 下单城市
+        var focusCity = localStorage.getItem('focuscity');
+        // 发货楼层
+        var moveOut = '';
+        // 收货楼层
+        var moveIn = '';
+        // 公里数
+        var kilometer = localStorage.getItem('distance');
+
+        if (orderMove !== null) {
+            var ordermoves = JSON.parse(orderMove);
+            moveOut = Number(ordermoves.data.pop.code);
+            moveIn = Number(ordermoves.data.push.code);
+        }
+
+        if (date !== null) {
+            date = Number(date);
+        }
+
+        var startStairsNum = 'start_stairs_num';
+        var endStairsNum = 'end_stairs_num';
+        var data = {
+            couponsId: 0, // 所用的优惠券id(默认0)
+            carType: carType, // 车型（影响费用）
+            channel: 15, // 下单渠道(默认15)
+            orderTime: date, // 服务时间(时间戳 单位s)
+            orderType: 5, // 订单类型
+            orderCity: focusCity, // 下单城市
+            serverType: 100, // 服务类型(默认100)
+            kilometer: kilometer, // 公里数
+            square: 0, // 平米数(默认0)
+            cityCode: 12 // 城市code
+        };
+        data[startStairsNum] = moveOut;
+        data[endStairsNum] = moveIn;
+        $.ajax({
+            type: 'POST',
+            url: 'https://www.lanxiniu.com//Order/calPrice', // url
+            data: data,
+            success: function (result) {
+                var price = result.data.showPay;
+                priceValue.innerHTML = price; // 设置显示数据
+                localStorage.setItem('orderprice', price);
+            }
+        });
+    }
     function pickerMaskOpen(element) {
         var elementParentNode = element.parentNode;
         if (elementParentNode.tagName === 'MIP-FIXED') {
@@ -73,6 +138,7 @@ define(function (require) {
 
                     // 时间组件 选择值后 赋值给 组件外的dom(该dom不能写在组件里)
                     document.getElementById('move-time').value = val.value;
+                    calPrice();
                     pickerMaskClose(element);
                 },
                 cancelCallback: function () {
@@ -109,7 +175,7 @@ define(function (require) {
                             break;
                     }
                     localStorage.setItem('move', JSON.stringify(move));
-
+                    calPrice();
                     pickerMaskClose(element);
                 },
                 cancelCallback: function () {

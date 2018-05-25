@@ -23,9 +23,9 @@ define(function (require) {
     customElement.prototype.firstInviewCallback = function () {
         var ele = this.element;
         // 页面类型
-        var pageType = $(ele).parent().find('.review-cont').data('pageType');
+        var pageType = $(ele).find('.review-cont').data('pageType');
         // 页面 oid
-        var pageOid = $(ele).parent().find('.review-cont').data('pageOid');
+        var pageOid = $(ele).find('.review-cont').data('pageOid');
 
         function setCommentModule(res) {
             var titleHtml = ''; // titleHtml 评论区域头部
@@ -213,7 +213,7 @@ define(function (require) {
                 if (res.response === '-2') {
                     $.confirm('登录后评论', '登录提示', function () {
                         window.top.location.href = 'https://mip.linkeddb.com/sign_in/?callUrl='
-                        + window.location.pathname;
+                        + window.top.location.pathname;
                     }, function () {
 
                     });
@@ -374,37 +374,47 @@ define(function (require) {
         $(ele).find('.review-cont').on('click', '.child-remove', devareComment);
 
         // -------------------- 点赞
-        $(ele).find('.review-cont').on('click', '.agree', function () {
-            var $this = this;
-            var pOid = $(this).parent().parent().parent().data('commentId');
+        $('.review-cont').on('click', '.agree', function () {
+            let $this = this;
+            let pOid = $(this).parent().parent().parent().data('commentId');
+            // console.log(pOid);
             if (!$($this).find('.icon-agree').hasClass('full')) {
-                $.post('https://mip.linkeddb.com/reply_goods/', {
-                    'reply_oid': pOid
+                $.toast('res.message');
+                // setAgreeStatus (0, function (res) {
+                //     $.toast(res.message);
+                //     // console.log($($this).find('.num'));
+                //     $($this).find('.num').html(+$($this).find('.num').html() + 1);
+                //     $($this).find('.icon-agree').toggleClass('full');
+                // });
+            } else {
+                $.confirm('确定取消点赞吗?', function () {
+                    setAgreeStatus(-1, function () {
+                        // $.toast(res.message);
+                        // console.log($($this).find('.num'));
+                        $($this).find('.num').html(+$($this).find('.num').html() - 1);
+                        $($this).find('.icon-agree').toggleClass('full');
+                    });
+                }, function () {
+
+                });
+            }
+            function setAgreeStatus(flag, fn) {
+                $.post('/reply_goods/', {
+                    'reply_oid': pOid,
+                    f: flag
                 }, function (res) {
                     if (res.response === '-2') {
                         $.confirm('请登录后操作', '登录提示', function () {
-                            window.top.location.href = 'https://mip.linkeddb.com/sign_in/?callUrl='
-                            + window.location.pathname;
+                            window.top.location.href = '/sign_in/?callUrl=' + window.top.location.pathname;
                         }, function () {
                             // $.toast('登录取消', 'text');
                         });
                         return false;
                     } else if (res.response === '1') {
-                        $.toast(res.message);
-                        $($this).find('.num').html(+$($this).find('.num').html() + 1);
-                        $($this).find('.icon-agree').toggleClass('full');
+                        fn(res);
                     } else {
                         $.toast(res.message, 'forbidden');
                     }
-                });
-            } else {
-                $.confirm('确定取消点赞吗?', function () {
-                    // 点击确认后的回调函数
-                }, function () {
-                    // 点击取消后的回调函数
-                    // $.toast('取消收藏', 1000);
-                    $($this).find('.num').html(+$($this).parent().parent().find('.num').html() - 1);
-                    $($this).find('.icon-agree').toggleClass('full');
                 });
             }
         });
@@ -477,7 +487,7 @@ define(function (require) {
             $(ele).find('.review-cont').find('.review-item').each(function () {
                 var ul = $(this).find('.list-block').find('ul');
                 if (ul.find('li').length > 3) {
-                    var height = +$(ul).find('li:first').height() + +$(ul).find('li:nth-child(2)')
+                    var height = +$(ul).find('li:first-child').height() + +$(ul).find('li:nth-child(2)')
                         .height() + +$(ul).find('li:nth-child(3)').height();
                     ul.height(height);
                     ul.attr('data-height', height);

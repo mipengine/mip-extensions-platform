@@ -1,0 +1,14 @@
+{
+    "name": "mip-xxd-input-item",
+    "version": "1.0.0",
+    "description": "选校帝工具页表单输入框组件",
+    "contributors": [
+        {
+            "name": "xwchris",
+            "email": "xwchris.zhang@gmail.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

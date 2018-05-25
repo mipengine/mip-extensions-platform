@@ -101,6 +101,7 @@ define(function (require) {
             // console.log(submitData);
             var options = JSON.parse(JSON.stringify(config.options));
             options.body = toQueryString(submitData);
+            options.credentials = 'include';
             fetch(config.url, options).then(function (res) {
                 return res.json();
             }).then(function (res) {

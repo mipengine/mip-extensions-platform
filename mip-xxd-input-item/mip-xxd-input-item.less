@@ -1,0 +1,191 @@
+/**
+ * @file mip-xxd-input-item样式文件
+ */
+
+mip-xxd-input-item {
+
+    * {
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+
+    input::-webkit-input-placeholder {
+        color: #c4c9cc;
+    }
+
+    input:-moz-placeholder {
+        color: #c4c9cc;
+    }
+
+    input::-moz-placeholder {
+        color: #c4c9cc;
+    }
+
+    input:-ms-input-placeholder {
+        color: #c4c9cc;
+    }
+
+    textarea::-webkit-input-placeholder {
+        color: #c4c9cc;
+        line-height: 1.5;
+    }
+
+    textarea:-moz-placeholder {
+        color: #c4c9cc;
+        line-height: 1.5;
+    }
+
+    textarea::-moz-placeholder {
+        color: #c4c9cc;
+        line-height: 1.5;
+    }
+
+    textarea:-ms-input-placeholder {
+        color: #c4c9cc;
+        line-height: 1.5;
+    }
+
+    .mip-xxd-input-item-box {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 6.5rem;
+        padding-right: 2rem;
+        border-bottom: 1px solid #f7f9fa;
+        font-size: 1.6rem;
+
+        .input-area {
+            display: flex;
+            align-items: center;
+        }
+
+        .mip-xxd-input-item-title {
+            flex: 0 0 7rem;
+            width: 7rem;
+            margin-right: 5.9rem;
+            white-space: nowrap;
+            color: #949ba1;
+
+            &.is-select {
+                position: relative;
+                flex: 0 0 11.3rem;
+                width: 11.3rem;
+                height: 3.1rem;
+                margin-right: 1.6rem;
+                padding-left: .6rem;
+                border: 1px solid #c4c9cc;
+                border-radius: .4rem;
+                line-height: 3.1rem;
+
+                .icon-box {
+                    position: absolute;
+                    display: block;
+                    top: 0;
+                    right: 0;
+                    z-index: 2;
+                    width: 1.9rem;
+                    height: 100%;
+                    border-left: 1px solid #c4c9cc;
+                    border-radius: 0 .4rem .4rem 0;
+                    font-size: 0;
+                    text-align: center;
+                    line-height: 3.1rem;
+                    background-color: #fbf7f8;
+
+                    &:after {
+                        content: "";
+                        display: inline-block;
+                        width: 0;
+                        border-top: .5rem solid #4e4a4b;
+                        border-left: .5rem solid transparent;
+                        border-right: .5rem solid transparent;
+                        vertical-align: middle;
+                    }
+                }
+            }
+        }
+
+        .mip-xxd-input-item-input {
+            flex: 1;
+            height: 100%;
+            padding-right: 2.4rem;
+            border: none;
+            outline: none;
+            font-size: 1.6rem;
+            background-color: transparent;
+            color: #26343f;
+
+            &.item-select {
+                padding-right: 0;
+                -webkit-appearance: none;
+            }
+
+            &:disabled {
+                opacity: 1;
+            }
+        }
+
+        .is-after {
+            flex: 0 0 8rem;
+            width: 8rem;
+
+            .captcha-image {
+                width: 100%;
+                height: 3.6rem;
+            }
+
+            .send-captcha-btn {
+                color: #078cf1;
+                font-size: 1.6rem;
+                line-height: 1;
+                text-align: right;
+                white-space: nowrap;
+            }
+        }
+
+        .has-after {
+            height: 6.5rem;
+            width: 13rem;
+        }
+
+        .mip-xxd-input-item-arrow {
+            width: 1.2rem;
+            height: 1.2rem;
+            margin: 0 1rem 0 .3rem;
+            border-bottom: .2rem solid #ddd;
+            border-right: .2rem solid #ddd;
+            transform: rotate(-45deg);
+            transform-origin: 50% 50%;
+        }
+
+        .mip-xxd-input-item-select {
+            position: relative;
+            font-size: 1.6rem;
+            z-index: 6;
+            width: 100%;
+            padding: 0;
+            border: 0;
+            outline: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-color: transparent;
+            color: #949ba1;
+        }
+    }
+
+    .mip-xxd-input-item-textarea {
+        padding: .9rem 1.2rem;
+        height: 21.6rem;
+        width: 100%;
+        background-color: #f7f9fa;
+        border: 1px solid #edf0f2;
+        font-size: 1.6rem;
+        line-height: 2.2rem;
+        resize: none;
+        outline: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        box-shadow: inset transparent;
+    }
+}
