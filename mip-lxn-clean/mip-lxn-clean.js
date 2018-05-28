@@ -36,6 +36,8 @@ define(function (require) {
         cleacLs('open_citys');
         // 订单信息
         cleacLs('orderMsg');
+        // 价格
+        cleacLs('orderprice');
 
         var goBack = ele.querySelector('#back-order');
         goBack.addEventListener('click', function () {

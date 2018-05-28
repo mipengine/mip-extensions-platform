@@ -215,8 +215,8 @@ define(function (require) {
             returnMoneyType: '' // 是否需要回款
 
         };
-        data[startStairsNum] = moveFloor.pop.code; // 搬家 发货地楼层数
-        data[endStairsNum] = moveFloor.push.code; // 搬家 目的地楼层数
+        data[startStairsNum] = moveFloor.data.pop.code; // 搬家 发货地楼层数
+        data[endStairsNum] = moveFloor.data.push.code; // 搬家 目的地楼层数
         var updata = {
             token: sessionid,
             couponsId: 0, // 所用的优惠券id(默认0)
@@ -225,7 +225,6 @@ define(function (require) {
             poiList: poiList, // 配送地点信息
             data: data // 订单信息
         };
-
         $.ajax({
             type: 'POST',
             url: 'https://www.lanxiniu.com//Order/update', // url
@@ -242,8 +241,8 @@ define(function (require) {
                         // start_stairs_num: moveFloor.pop, // 搬家 发货地楼层数
                         // end_stairs_num: moveFloor.push, // 搬家 目的地楼层数
                     };
-                    saveData[startStairsNum] = moveFloor.pop; // 搬家 发货地楼层数
-                    saveData[endStairsNum] = moveFloor.push; // 搬家 目的地楼层数
+                    saveData[startStairsNum] = moveFloor.data.pop; // 搬家 发货地楼层数
+                    saveData[endStairsNum] = moveFloor.data.push; // 搬家 目的地楼层数
 
                     localStorage.setItem('ordermsg', JSON.stringify(saveData));
                     window.top.location.href = 'orderList';
@@ -528,3 +527,4 @@ define(function (require) {
     };
     return customElement;
 });
+

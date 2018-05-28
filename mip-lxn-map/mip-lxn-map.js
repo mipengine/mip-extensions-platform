@@ -321,7 +321,7 @@ define(function (require) {
                     var moveInItem = moveAddress.movein.location;
                     var pointOut = new BMap.Point(moveOutItem.lng, moveOutItem.lat);
                     var pointIn = new BMap.Point(moveInItem.lng, moveInItem.lat);
-                    localStorage.setItem('distance', map.getDistance(pointOut, pointIn).toFixed(2));
+                    localStorage.setItem('distance', (map.getDistance(pointOut, pointIn).toFixed(2)) / 1000);
                 }
                 else {
                     // console.log('地址不完全');

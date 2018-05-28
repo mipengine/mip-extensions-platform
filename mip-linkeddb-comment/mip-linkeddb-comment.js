@@ -375,8 +375,8 @@ define(function (require) {
 
         // -------------------- 点赞
         $('.review-cont').on('click', '.agree', function () {
-            let $this = this;
-            let pOid = $(this).parent().parent().parent().data('commentId');
+            var $this = this;
+            var pOid = $(this).parent().parent().parent().data('commentId');
             // console.log(pOid);
             if (!$($this).find('.icon-agree').hasClass('full')) {
                 $.toast('res.message');
