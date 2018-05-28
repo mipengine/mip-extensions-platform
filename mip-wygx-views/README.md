@@ -76,6 +76,8 @@ data-nexturl = "http://mip.woyaogexing.com/touxiang/nv/2017/541178.html"
 3. 组件内的图片必须含有data-original属性
 
 ## 更新
+1.2.0 增加toast提示，切入效果
+
 1.1.0 增加绑定元素
 
 1.0.4 修改下载地址到mip服务器，webp链接转换

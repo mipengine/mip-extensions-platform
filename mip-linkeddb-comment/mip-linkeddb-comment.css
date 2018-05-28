@@ -1,0 +1,430 @@
+/**
+* @file mip-linkeddb-comment样式文件
+*/
+mip-linkeddb-comment {
+  /* 评论 */
+  /* icon 图标 */
+}
+mip-linkeddb-comment .review-cont {
+  padding-left: .75rem;
+  padding-right: .75rem;
+  position: relative;
+  background-color: #eee;
+}
+mip-linkeddb-comment .review-cont .write-comment {
+  text-align: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  z-index: 100;
+  -webkit-border-radius: .25rem;
+  -moz-border-radius: .25rem;
+  border-radius: .25rem;
+  -webkit-transform: translateY(-200%);
+  -moz-transform: translateY(-200%);
+  -ms-transform: translateY(-200%);
+  -o-transform: translateY(-200%);
+  transform: translateY(-200%);
+  -webkit-transition: all .3s;
+  -moz-transition: all .3s;
+  -ms-transition: all .3s;
+  -o-transition: all .3s;
+  transition: all .3s;
+}
+mip-linkeddb-comment .review-cont .write-comment textarea {
+  padding: 0;
+}
+mip-linkeddb-comment .review-cont .write-comment .footer {
+  font-size: .7rem;
+  position: relative;
+}
+mip-linkeddb-comment .review-cont .write-comment .footer .updata-pic {
+  padding: .25rem 1rem .25rem 0;
+}
+mip-linkeddb-comment .review-cont .write-comment .footer .updata-pic .icon:before {
+  content: '';
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  font-size: 1rem;
+  vertical-align: middle;
+  color: #999;
+  background: url("https://static.linkeddb.com/m/images/icon-pic.png") no-repeat center;
+  -webkit-background-size: 100%;
+  background-size: 100%;
+}
+mip-linkeddb-comment .review-cont .write-comment .footer .cancel-ok .ok,
+mip-linkeddb-comment .review-cont .write-comment .footer .cancel-ok .cancel {
+  font-size: .7rem;
+  line-height: 1.5;
+  padding: .25rem 1rem;
+  -webkit-border-radius: .25rem;
+  -moz-border-radius: .25rem;
+  border-radius: .25rem;
+  border: none;
+  background-color: #fff;
+}
+mip-linkeddb-comment .review-cont .write-comment .footer .cancel-ok .ok {
+  background-color: #658ccd;
+}
+mip-linkeddb-comment .review-cont .write-comment .footer .pic-pop {
+  background-color: #fff;
+  position: absolute;
+  padding: .35rem;
+  -webkit-border-radius: .25rem;
+  -moz-border-radius: .25rem;
+  border-radius: .25rem;
+  top: 2.25rem;
+  left: .5rem;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+  display: none;
+}
+mip-linkeddb-comment .review-cont .write-comment .footer .pic-pop .pic-pop-flex {
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  -webkit-border-radius: .25rem;
+  -moz-border-radius: .25rem;
+  border-radius: .25rem;
+}
+mip-linkeddb-comment .review-cont .write-comment .footer .pic-pop .pic-pop-flex img {
+  width: 100%;
+}
+mip-linkeddb-comment .review-cont .write-comment .footer .pic-pop .icon-delete {
+  display: inline-block;
+  position: absolute;
+  top: .05rem;
+  right: .05rem;
+  background-color: #fff;
+  border-radius: 50%;
+}
+mip-linkeddb-comment .review-cont .write-comment .footer .pic-pop .icon-delete:before {
+  content: '';
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  font-size: 1rem;
+  vertical-align: middle;
+  color: #999;
+  background: url("https://static.linkeddb.com/m/images/icon-delete.png") no-repeat center;
+  -webkit-background-size: 100%;
+  background-size: 100%;
+}
+mip-linkeddb-comment .review-cont .write-comment .footer .pic-pop.show {
+  display: inline-block;
+}
+mip-linkeddb-comment .review-cont .write-comment .footer .pic-pop:before {
+  content: '';
+  display: inline-block;
+  width: .75rem;
+  height: .75rem;
+  background-color: #fff;
+  position: absolute;
+  top: -0.15rem;
+  left: 50%;
+  z-index: -1;
+  -webkit-transform: translateX(-50%) rotate(45deg);
+  -moz-transform: translateX(-50%) rotate(45deg);
+  -ms-transform: translateX(-50%) rotate(45deg);
+  -o-transform: translateX(-50%) rotate(45deg);
+  transform: translateX(-50%) rotate(45deg);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+}
+mip-linkeddb-comment .review-cont .write-comment.show {
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+  -ms-transform: translateY(0);
+  -o-transform: translateY(0);
+  transform: translateY(0);
+  opacity: 1;
+}
+mip-linkeddb-comment .review-cont .review-title {
+  font-size: .8rem;
+  line-height: 1;
+  padding-bottom: 1rem;
+}
+mip-linkeddb-comment .review-cont .review-title .num {
+  font-weight: 400;
+}
+mip-linkeddb-comment .review-cont .review-title .icon-write::before {
+  content: '';
+  display: inline-block;
+  width: 1.2rem;
+  height: 1.2rem;
+  font-size: 1rem;
+  vertical-align: middle;
+  color: #999;
+  background: url("https://static.linkeddb.com/m/images/icon-write.png") no-repeat center;
+  -webkit-background-size: 95%;
+  background-size: 95%;
+}
+mip-linkeddb-comment .review-cont .review-item {
+  overflow: hidden;
+}
+mip-linkeddb-comment .review-cont .review-item .items-title {
+  line-height: 1.6rem;
+  margin-bottom: .5rem;
+}
+mip-linkeddb-comment .review-cont .review-item .items-title .use .use-msg {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+mip-linkeddb-comment .review-cont .review-item .items-title .use .use-msg div {
+  flex: 1;
+}
+mip-linkeddb-comment .review-cont .review-item .items-title .use .use-msg .use-pic {
+  vertical-align: middle;
+  width: 1.6rem;
+  height: 1.6rem;
+  border: 1px solid #e8e8e8;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}
+mip-linkeddb-comment .review-cont .review-item .items-title .use .use-msg .name {
+  font-size: .8rem;
+  font-weight: 700;
+}
+mip-linkeddb-comment .review-cont .review-item .items-title .use .use-msg .official {
+  margin-right: .5rem;
+  padding: .125rem;
+  font-size: .6rem;
+  color: #658ccd;
+  border: 1px solid #658ccd;
+  -webkit-border-radius: .15rem;
+  -moz-border-radius: .15rem;
+  border-radius: .15rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: inline-block;
+  vertical-align: middle;
+  max-width: 4.5rem;
+}
+mip-linkeddb-comment .review-cont .review-item .items-title .use .use-msg .attention {
+  height: 1.2rem;
+  background-color: #658ccd;
+  line-height: 1.1rem;
+  border: 1px solid #658ccd;
+  text-align: center;
+  -webkit-border-radius: .25rem;
+  -moz-border-radius: .25rem;
+  border-radius: .25rem;
+  font-size: .6rem;
+  display: inline-block;
+  padding: 0 .5rem;
+}
+mip-linkeddb-comment .review-cont .review-item .items-title .use .use-msg .attention.off {
+  background-color: #fff;
+  border: 1px solid #e8e8e8;
+  color: #999;
+}
+mip-linkeddb-comment .review-cont .review-item .items-title .use .use-msg .release {
+  padding: .5rem 1rem;
+  font-size: .8rem;
+  background-color: #658ccd;
+  -webkit-border-radius: .25rem;
+  -moz-border-radius: .25rem;
+  border-radius: .25rem;
+  line-height: 1;
+}
+mip-linkeddb-comment .review-cont .review-item .items-title .use .edit-time {
+  font-size: .6rem;
+}
+mip-linkeddb-comment .review-cont .review-item .items-title .use .like {
+  font-size: .7rem;
+}
+mip-linkeddb-comment .review-cont .review-item .items-title .use .like .icon-heart:before {
+  content: '';
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  font-size: 1rem;
+  vertical-align: middle;
+  color: #999;
+  background: url("https://static.linkeddb.com/m/images/heart.png") no-repeat center bottom;
+  -webkit-background-size: 100%;
+  background-size: 100%;
+}
+mip-linkeddb-comment .review-cont .review-item .items-title .reply-icon .icon.icon-remove:before {
+  content: '';
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  font-size: 1rem;
+  vertical-align: middle;
+  color: #999;
+  background: url("https://static.linkeddb.com/m/images/icon-remove.png") no-repeat center;
+  -webkit-background-size: 100%;
+  background-size: 100%;
+}
+mip-linkeddb-comment .review-cont .review-item .items-title .reply-icon .icon.icon-comment:before {
+  content: '';
+  display: inline-block;
+  width: 0.85rem;
+  height: 0.8rem;
+  font-size: 1rem;
+  vertical-align: middle;
+  color: #999;
+  background: url("https://static.linkeddb.com/m/images/icon-comment.png") no-repeat center;
+  -webkit-background-size: 100%;
+  background-size: 100%;
+}
+mip-linkeddb-comment .review-cont .review-item .items-title .reply-icon .icon.icon-agree:before {
+  content: '';
+  display: inline-block;
+  width: 0.85rem;
+  height: 0.85rem;
+  font-size: 1rem;
+  vertical-align: middle;
+  color: #999;
+  background: url("https://static.linkeddb.com/m/images/icon-agree-empty.png") no-repeat center;
+  -webkit-background-size: 100%;
+  background-size: 100%;
+}
+mip-linkeddb-comment .review-cont .review-item .items-title .reply-icon .icon.icon-agree.full:before {
+  background: url("https://static.linkeddb.com/m/images/icon-agree-full.png") no-repeat center;
+  -webkit-background-size: 100%;
+  background-size: 100%;
+}
+mip-linkeddb-comment .review-cont .review-item .items-title .reply-icon .agree i {
+  vertical-align: sub;
+}
+mip-linkeddb-comment .review-cont .review-item .list-block ul {
+  overflow: hidden;
+}
+mip-linkeddb-comment .review-cont .review-item .list-block .items .item-inner {
+  border-bottom: 1px solid #ddd;
+}
+mip-linkeddb-comment .review-cont .review-item .list-block .items .item-title {
+  line-height: 1.35rem;
+  white-space: normal;
+  word-break: break-all;
+}
+mip-linkeddb-comment .review-cont .review-item .list-block .items .item-title .name {
+  font-size: .75rem;
+}
+mip-linkeddb-comment .review-cont .review-item .list-block .items .item-title h4,
+mip-linkeddb-comment .review-cont .review-item .list-block .items .item-title h5 {
+  display: inline;
+  font-weight: 400;
+}
+mip-linkeddb-comment .review-cont .review-item .list-block .items .item-title .pics-wrap {
+  display: flex;
+  justify-content: space-between;
+}
+mip-linkeddb-comment .review-cont .review-item .list-block .items .item-title .comment-pics {
+  width: 33%;
+  max-height: 5rem;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+mip-linkeddb-comment .review-cont .review-item .list-block .items .item-title .comment-pics img {
+  width: 100%;
+}
+mip-linkeddb-comment .review-cont .review-item .list-block .items .item-text {
+  height: 1.5rem;
+  line-height: 1.5rem;
+  font-size: .6rem;
+}
+mip-linkeddb-comment .review-cont .review-item .view-more-reply {
+  display: block;
+  line-height: 2rem;
+  font-size: .7rem;
+  text-align: left;
+  color: #658ccd;
+}
+mip-linkeddb-comment .review-cont .review-item .view-more-reply.hide {
+  display: none;
+}
+mip-linkeddb-comment .review-cont .view-pic-wrap {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  background-color: #000;
+  overflow: scroll;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  -webkit-transition: all .3s;
+  -moz-transition: all .3s;
+  -ms-transition: all .3s;
+  -o-transition: all .3s;
+  transition: all .3s;
+  -webkit-animation: opacity .3s;
+  -o-animation: opacity .3s;
+  animation: opacity .3s;
+}
+mip-linkeddb-comment .review-cont .view-pic-wrap.dis-flex {
+  display: flex;
+}
+mip-linkeddb-comment .review-cont .view-pic-wrap img {
+  width: auto;
+  max-width: 100%;
+  -webkit-animation: imgBig .3s;
+  -o-animation: imgBig .3s;
+  animation: imgBig .3s;
+  -webkit-transition: all .3s;
+  -moz-transition: all .3s;
+  -ms-transition: all .3s;
+  -o-transition: all .3s;
+  transition: all .3s;
+}
+@keyframes imgBig {
+  0% {
+    -webkit-transform: scale(0.5);
+    -moz-transform: scale(0.5);
+    -ms-transform: scale(0.5);
+    -o-transform: scale(0.5);
+    transform: scale(0.5);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
+  }
+}
+@keyframes opacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+mip-linkeddb-comment .review-cont .review-modal-overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 99;
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition-duration: .4s;
+  transition-duration: .4s;
+}
+mip-linkeddb-comment .review-cont .review-modal-overlay.review-modal-overlay-visible {
+  visibility: visible;
+  opacity: 1;
+}
+mip-linkeddb-comment .review-cont .weui-toast.show {
+  opacity: 1 !important;
+  visibility: visible !important;
+}

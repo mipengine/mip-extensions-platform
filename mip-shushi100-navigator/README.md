@@ -24,3 +24,4 @@ mip-shushi100-navigator 触发事件后跳转链接
 必选项：是
 类型：字符串
 
+

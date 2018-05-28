@@ -1,7 +1,7 @@
 /**
  * @file mip-wygx-views 组件.
  * @author east_qiu@gmail.com.
- * @version 1.1.0
+ * @version 1.2.0
  */
 
 define(function (require) {
@@ -31,6 +31,7 @@ define(function (require) {
         downloadBtn: '',
         index: '',
         eLen: 0,
+        isFirst: true,
         init: function (index) {
             this.index = index;
             this.eLen = elements.length + 1;
@@ -67,8 +68,10 @@ define(function (require) {
             }, 800);
         },
         createWrap: function () {
+            var self = this;
             var overlay = document.createElement('div');
             overlay.id = 'mip-wygx-overlay';
+            overlay.className = 'mip-wygx-overlay';
 
             var slider = document.createElement('div');
             slider.id = 'mip-wygx-slider';
@@ -90,11 +93,21 @@ define(function (require) {
 
             document.body.appendChild(overlay);
 
-
             // 关闭按钮事件监听
             overlayClose.addEventListener('click', function () {
-                document.body.removeChild(overlay);
+                overlay.classList.remove('overlay-in');
+                setTimeout(function () {
+                    document.body.removeChild(overlay);
+                }, 100);
+
+                self.isFirst = true;
             });
+            // 下载按钮绑定事件
+            picdownload.addEventListener('click', this.picdown.bind(this), false);
+
+            setTimeout(function () {
+                overlay.classList.add('overlay-in');
+            }, 20);
         },
         createSlide: function () {
             var slide = document.createElement('div');
@@ -119,7 +132,7 @@ define(function (require) {
                         currentIndex = self.index >= self.eLen - 1 ? self.eLen - 1 : ++self.index;
                         break;
                     case 'right':
-                        currentIndex = self.index <= 0 ? 0 : --self.index;
+                        currentIndex = --self.index;
                         break;
                 }
 
@@ -129,33 +142,70 @@ define(function (require) {
         setSlide: function (index) {
             var self = this;
             var currentX = index * dWidth;
-            // 实例化动画
-            naboo.animate(self.slider,
-            {
-                'transform': 'translateX(-' + currentX + 'px)'
-            }, {
-                duration: '0.6s',
-                ease: 'ease-out',
-                delay: 0,
-                mode: 'transition'
-            }).start();
 
+
+            if (index < 0) {
+                self.toastShow('向左划查看更多图片');
+                index = 0;
+            }
+
+            if (self.isFirst) {
+                self.slider.style.transform = 'translateX(-' + currentX + 'px)';
+                self.isFirst = false;
+            }
+            else {
+                // 实例化动画
+                naboo.animate(self.slider,
+                    {
+                        'transform': 'translateX(-' + currentX + 'px)'
+                    }, {
+                        duration: '0.6s',
+                        ease: 'ease-out',
+                        delay: 0,
+                        mode: 'transition'
+                    }).start();
+            }
             // 设置下载链接
             this.picdownload(index);
         },
+        picdown: function () {
+            var self = this;
+            if (self.index === self.eLen - 1) {
+                return false;
+            }
+            self.toastShow('长按图片保存');
+        },
         picdownload: function (index) {
             var download = this.downloadBtn;
-
             if (index === this.eLen - 1) {
                 download.innerHTML = '下一组';
                 download.setAttribute('href', this.defaultSetting.nexturl);
-                download.removeAttribute('download');
             }
             else {
                 download.innerHTML = this.defaultSetting.download;
-                download.setAttribute('href', downloadUrl[index]);
-                download.setAttribute('download', true);
+                download.setAttribute('href', 'javascript:void(0);');
             }
+        },
+        toastShow: function (msg) {
+            var self = this;
+            // toast build
+            var toast = self.toastUI(msg);
+
+            toast.classList.add('toast-show');
+            setTimeout(function () {
+                self.toastHide();
+            }, 1000);
+        },
+        toastHide: function () {
+            var toast = document.querySelector('.toast-box');
+            document.querySelector('#mip-wygx-overlay').removeChild(toast);
+        },
+        toastUI: function (msg) {
+            var toast = document.createElement('div');
+            toast.className = 'toast-box';
+            toast.innerHTML = msg;
+            document.querySelector('#mip-wygx-overlay').appendChild(toast);
+            return toast;
         },
         appdownload: function () {
 

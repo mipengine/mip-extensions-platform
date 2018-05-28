@@ -379,13 +379,12 @@ define(function (require) {
             var pOid = $(this).parent().parent().parent().data('commentId');
             // console.log(pOid);
             if (!$($this).find('.icon-agree').hasClass('full')) {
-                $.toast('res.message');
-                // setAgreeStatus (0, function (res) {
-                //     $.toast(res.message);
-                //     // console.log($($this).find('.num'));
-                //     $($this).find('.num').html(+$($this).find('.num').html() + 1);
-                //     $($this).find('.icon-agree').toggleClass('full');
-                // });
+                setAgreeStatus(0, function (res) {
+                    $.toast(res.message);
+                    // console.log($($this).find('.num'));
+                    $($this).find('.num').html(+$($this).find('.num').html() + 1);
+                    $($this).find('.icon-agree').toggleClass('full');
+                });
             } else {
                 $.confirm('确定取消点赞吗?', function () {
                     setAgreeStatus(-1, function () {

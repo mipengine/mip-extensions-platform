@@ -1,0 +1,14 @@
+{
+    "name": "mip-jia-design",
+    "version": "1.0.0",
+    "description": "百度提单页订单组件",
+    "contributors": [
+        {
+            "name": "tao",
+            "email": "165526381@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
