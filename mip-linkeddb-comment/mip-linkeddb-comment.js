@@ -315,6 +315,7 @@ define(function (require) {
                     // $.toast('评论已提交稍后自动刷新页面');
                     $.toptip('评论已提交稍后自动刷新页面', 'success');
                     $(ele).find('.review-cont .write-comment').find('.ok').attr('disabled', 'disabled');
+                    $(ele).parent().parent().parent().find('.content').removeClass('z-index-11');
                 },
                 success: function (res) {
                     if (res.response === '1') {
@@ -506,7 +507,7 @@ define(function (require) {
                 $(this).addClass('down');
                 $(this).find('.text').text($(this).find('.text').attr('data-up'));
             } else {
-                $(this).parent().find('ul').height($(this).parent().find('ul').attr('data-height'));
+                $(this).parent().find('ul').height(+$(this).parent().find('ul').attr('data-height'));
                 $(this).removeClass('down');
                 $(this).find('.text').text($(this).find('.text').attr('data-down'));
             }
