@@ -45,18 +45,18 @@ define(function (require) {
             return;
         }
         else {
-            $(that.data.button).click(function () {
+            util.event.delegate(that.element, that.data.button, 'click', function () {
                 if (that.$click) {
                     return;
                 }
                 that.$click = true;
                 that.paramsFn();
             });
-            that.getStorageObj();
+            util.event.delegate(that.element, that.data.loginbtn, 'click', function () {
+                that.setStorageObj();
+            });
         }
-        $(that.data.loginbtn).click(function () {
-            that.setStorageObj();
-        });
+        that.getStorageObj();
     };
 
     customElement.prototype.paramsFn = function () {
@@ -160,7 +160,7 @@ define(function (require) {
                         window.top.location.href = result.cashier_url;
                     }
                     else {
-                        window.top.location.href = $url;
+                        window.top.location.href = $url + '&bid=' + result.bid_id;
                     }
                 }
                 else {
@@ -202,7 +202,7 @@ define(function (require) {
                 }
 
             }
-            $(that.data.button).trigger('click');
+            // $(that.data.button).trigger('click');
             storage.rm('obj');
         }
     };

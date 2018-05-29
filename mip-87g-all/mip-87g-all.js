@@ -5,7 +5,7 @@
 
 define(function (require) {
     var customElement = require('customElement').create();
-    customElement.prototype.build = function () {
+    customElement.prototype.firstInviewCallback = function () {
         var t = this.element;
         var gtype = t.getAttribute('g_type');
         var siteurl = '//www.87g.com/';
@@ -24,8 +24,7 @@ define(function (require) {
             var pic = con.find('img');
             var zs = txt.length;
             var piclen = pic.length;
-            var tj = con.height();
-            if ((zs > 300 || piclen > 3) && tj > 834) {
+            if (con.height() > 200) {
                 var muban = '<section class="click_more"><div class="slide-btn">';
                 muban += '<span>展开，查看全部</span><i></i></div></section>';
                 var newcon = con.find('.artbody');
@@ -48,12 +47,7 @@ define(function (require) {
         } else if (gtype === 'g87_youxi_content_hideshow') {
             // 内容缩进
             var con = $(t);
-            var txt = con.text();
-            var pic = con.find('img');
-            var zs = txt.length;
-            var piclen = pic.length;
-            var tj = con.height();
-            if ((zs > 300 || piclen > 3) && tj > 834) {
+            if (con.height() > 200) {
                 var newcon = con.find('.m-con');
                 newcon.addClass('wraptext');
                 newcon.addClass('snbg');
@@ -138,6 +132,10 @@ define(function (require) {
             if ($.trim(txtlist1.html()) === '') {
                 txtlist1.parent().remove();
             }
+            var hdarticle = con.find('.app_guess .hd_article');
+            if ($.trim(hdarticle.html()) === '') {
+                hdarticle.parent().remove();
+            }
             var appsoft = con.find('.app_soft');
             if ($.trim(appsoft.find('#r_main .apptxt').html()) === '') {
                 appsoft.find('.hd_article span').eq(1).remove();
@@ -160,14 +158,14 @@ define(function (require) {
                 if (downaddressa.attr('itunes') === '' && downaddressa.attr('ios') === ''
                     && downaddressa.attr('h5') === '' && downaddressa.attr('is_subscribe') !== ',1,') {
                     downaddressa.addClass('downaddressa2');
-                    downaddressa.attr('href', 'javascript:;');
+                    downaddressa.attr('href', '#');
                     downaddressa.text('暂不支持iOS系统');
                 }
             } else {
                 if (downaddressa.attr('android') === '' && downaddressa.attr('h5') === ''
                     && downaddressa.attr('is_subscribe') !== ',1,') {
                     downaddressa.addClass('downaddressa3');
-                    downaddressa.attr('href', 'javascript:;');
+                    downaddressa.attr('href', '#');
                     downaddressa.text('暂不支持安卓系统');
                 }
             }
@@ -181,7 +179,7 @@ define(function (require) {
                 && downaddressa.attr('ios') === '' && downaddressa.attr('h5') === '')
                 || downaddressa.attr('hz_error_url') === ',1,'
                 || downaddressa.attr('is_stop_gm') === ',1,') && downaddressa.attr('is_subscribe') !== ',1,') {
-                downaddressa.attr('href', 'javascript:;');
+                downaddressa.attr('href', '#');
                 downaddressa.css('background', 'rgb(204, 204, 204)');
                 downaddressa.text('暂无下载');
                 if (downaddressa.attr('is_stop_gm') === ',1,') {
@@ -193,20 +191,20 @@ define(function (require) {
                 var subhtml = '<div id="js-pack-get-dialog" class="pack-get-dialog hide"';
                 subhtml += ' style="top: 20%; left: 10%;width:300px;height:351px;">';
                 subhtml += '<div id="js-get-dialog-tab" class="get-dialog-hd" style="padding-left: 10px;">';
-                subhtml += '<a href="javascript:;" class="js-pack-site-tab" style="padding-left:0px;">';
+                subhtml += '<a href="#" class="js-pack-site-tab" style="padding-left:0px;">';
                 subhtml += '订阅：' + downaddressa.attr('down_title') + '</a></div> ';
                 subhtml += '<div class="get-dialog-bd" style="height: 313px;"><div class="pack-by-weixin clearfix" ';
                 subhtml += 'style="padding: 10px 30px;">';
                 subhtml += '<div class="weixin-qrcode" style="float: unset;width:auto;"> ';
-                subhtml += '<img src="//www.87g.com/statics/images/qrcode_for_dy.jpg" alt="">';
+                subhtml += '<mip-img src="//www.87g.com/statics/images/qrcode_for_dy.jpg"></mip-img>';
                 subhtml += ' <b style="color:#666;line-height: 1.5;">请用手机微信扫描二维码订阅~</b>';
                 subhtml += ' <b style="color:#666;line-height: 1.5;">订阅后可及时接受活动、礼包、开测和开放下载的提醒！</b>';
                 subhtml += '<b style="line-height: 1.5;">订阅功能说明</b></div></div> </div> <a class="pack-get-close" ';
-                subhtml += 'href="javascript:;">关闭</a> </div>';
+                subhtml += 'href="#">关闭</a> </div>';
                 subhtml += '<div class="fancybox-overlay fancybox-overlay-fixed hide" ';
                 subhtml += 'style="width: auto; height: auto;;"></div>';
                 downaddressa.text('订阅游戏');
-                downaddressa.attr('href', 'javascript:;');
+                downaddressa.attr('href', '#');
                 downaddressa.addClass('downaddressa5');
                 downaddressa.addClass('subscribe_btn');
                 downaddressa.parent().after(subhtml);
@@ -228,12 +226,13 @@ define(function (require) {
         } else if (gtype === 'g87_youxi_imgs') {
             var con = $(t);
             setTimeout(function () {
-                if (con.find('.m-slide1 ul li').eq(0).find('img').height()
-                    < con.find('.m-slide1 ul li').eq(0).find('img').width()) {
+                var firstImgHeight = con.find('.m-slide1 ul li').eq(0).find('img').height();
+                var firstImgWidth = con.find('.m-slide1 ul li').eq(0).find('img').width();
+                if (firstImgHeight < firstImgWidth) {
                     con.find('.m-slide1').addClass('banner_pics');
                     con.find('.m-slide1').css('height', '150px');
                 } else {
-                    con.find('.m-slide1').css('height', '310px');
+                    con.find('.m-slide1').css('height', firstImgHeight);
                 }
             }, 500);
         }

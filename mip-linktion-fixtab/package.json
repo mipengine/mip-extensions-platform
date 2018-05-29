@@ -1,0 +1,14 @@
+{
+    "name": "mip-linktion-fixtab",
+    "version": "1.0.0",
+    "description": "实现tab导航在页面一定高度时固定",
+    "contributors": [
+        {
+            "name": "tinng",
+            "email": "tinng@linktion.cn"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

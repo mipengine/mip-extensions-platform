@@ -1,0 +1,78 @@
+/**
+ * @file mip-xxd-logic-form样式文件
+ */
+
+mip-xxd-logic-form {
+
+    .mip-xxd-logic-form-tip {
+        position: fixed;
+        z-index: 2000;
+        width: 100%;
+        padding: 0 1.5rem;
+        left: 0;
+        bottom: 2.0rem;
+        text-align: center;
+
+        &.hidden {
+            bottom: -9999px;
+            opacity: 0;
+        }
+
+        .tip-wrap {
+            display: inline-block;
+            padding: 1.2rem 1.5rem;
+            background-color: #F2DEDE;
+            border-radius: 3px;
+            border: 1px solid #EBCCD1;
+
+            span {
+                display: inline-block;
+                color: #d53929;
+            }
+
+            .tip-text {
+                margin-left: .6rem;
+            }
+
+            .tip-cross {
+                position: relative;
+                margin-left: 1.2rem;
+                width: 1.2rem;
+                height: 1.2rem;
+
+                &:before,
+                &:after {
+                    content: '';
+                    display: block;
+                    position: absolute;
+                    top: 0;
+                    width: 2px;
+                    height: 1.5rem;
+                    background-color: #bbbccc;
+                }
+
+                &:before {
+                    right: .5rem;
+                    transform: rotate(45deg);
+                }
+
+                &:after {
+                    left: .5rem;
+                    transform: rotate(-45deg);
+                }
+            }
+
+            .component-icon-cross {
+                fill: #bbbccc;
+                width: 1.2rem;
+                margin-left: 1.2rem;
+                cursor: pointer;
+                float: right;
+                margin-top: .1rem;
+                &:hover {
+                    fill: #999;
+                }
+            }
+        }
+    }
+}

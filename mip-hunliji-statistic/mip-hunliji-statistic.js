@@ -12,7 +12,7 @@ define(function (require) {
     function sdkData(appName, data, met, error) {
         var obj = '{"events":[' + JSON.stringify(data) + ']}';
         $.ajax({
-            url: 'https://www.hunliji.com/v1/api/app/tracker/batch.json',
+            url: '//www.hunliji.com/v1/api/app/tracker/batch.json',
             type: 'POST',
             data: obj,
             headers: {appName: appName},
@@ -44,7 +44,7 @@ define(function (require) {
     function sdk(obj, type) {
         var ip;
         $.ajax({
-            url: 'https://www.hunliji.com/sms/ip',
+            url: '//www.hunliji.com/sms/ip',
             type: 'get',
             success: function (result) {
                 ip = result;
@@ -66,7 +66,7 @@ define(function (require) {
     /**
      * 第一次进入可视区回调，只会执行一次
      */
-    customElement.prototype.build = function () {
+    customElement.prototype.firstInviewCallback = function () {
         var element = this.element;
         var type = element.getAttribute('type') || waptype;
         sdk(type);
