@@ -354,7 +354,13 @@ define(function (require) {
             if (json.status === 0) {
                 var data = json.data;
                 var nonce = data.nonce;
-                element.dataset.nonce = nonce;
+
+                // 记录该值
+                var nonceElement = _$('#nonceItem');
+                if (nonceElement) {
+                    nonceElement.dataset.value = nonce;
+                }
+
                 // 生成图形验证码
                 var image = data.image;
                 var container = _$('.is-after', element);
@@ -430,7 +436,7 @@ define(function (require) {
             // 获取图形验证码
             var phone = _$('#phoneItem').dataset.value;
             var picCaptcha = _$('#captchaPicItem').dataset.value;
-            var nonce = _$('#captchaPicItem').dataset.nonce;
+            var nonce = _$('#nonceItem').dataset.value;
 
             // 校验手机号和图片验证码
             if (!/^1\d{10}/.test(phone)) {
@@ -508,6 +514,7 @@ define(function (require) {
         }
     };
 
+    // build说明：需要尽早绑定action
     customElement.prototype.build = function () {
         var self = this;
 
