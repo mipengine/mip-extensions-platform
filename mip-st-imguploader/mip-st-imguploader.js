@@ -56,7 +56,7 @@ define(function (require) {
         }, false);
         input.addEventListener('change', function (e) {
             // hack img size
-            if (e.target.files[0].size > 10 * 1024 * 1024) {
+            if (e.target.files[0].size > 10 * 1000 * 1000) {
                 viewer.eventAction.execute('showMsg', element, {
                     text: '上传的图片大小不得超过10M'
                 });
@@ -103,6 +103,7 @@ define(function (require) {
                 method: 'POST',
                 form: element.querySelector('form'),
                 url: url,
+                ratio: 0.1,
                 onprogress: function (e) {
                     // 显示固定文字
                     // var percent = parseInt(e.loaded * 100 / e.total, 10);

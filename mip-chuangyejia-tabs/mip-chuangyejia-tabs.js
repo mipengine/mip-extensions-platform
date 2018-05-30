@@ -65,13 +65,17 @@ define(function (require) {
     };
 
     /**
-     * 第一次进入可视区回调，只会执行一次
+     * tab一定会出现在首屏，需要在插入文档时就执行
      */
-    customElement.prototype.firstInviewCallback = function () {
+    customElement.prototype.build = function () {
+        // 检测是否支持触摸
+        var touch = 'ontouchstart' in window;
+        var eClick = touch ? 'touchstart' : 'click';
 
         // 初始化外层容器
         var self = this;
         var tabs = self.element;
+        var semiFixedTabs = tools.queryAll('mip-semi-fixed .tabs-nav-wrapper');
         var navWrapper = tools.query('.tabs-nav-wrapper', tabs);
         var tabNav = tools.query('.tabs-nav', navWrapper);
         var contentWrapper = tools.query('.tabs-content-wrapper', tabs);
@@ -79,10 +83,21 @@ define(function (require) {
         var contentItem = tools.queryAll('.tabs-slide', contentWrapper);
         var body = document.body;
         var footer = document.querySelector('.footer');
-        // var viewerHeight = rect.getElementRect(body)
-        // var initHeight = viewport.getScrollHeight() - util.rect.getElementOffset(contentItem[0]).top - 10;
-        // console.log(util.rect.getElementOffset(contentItem[0]).top)
-        // var initHeight = 0 ;
+        // 初始宽高
+        var wrapperWidth = Math.floor(rect.getElementRect(contentWrapper).width);
+        var cols = parseInt(tabs.getAttribute('tabs-col'), 10);
+        var changeTop = parseInt(tabs.getAttribute('tabs-change-top'), 10);
+        var perNavWidth = wrapperWidth / cols;
+        var navWidth = perNavWidth * navItem.length + 30;
+        tools.query('.tabs-nav', navWrapper).style.width = navWidth + 'px';
+
+        var navLength = navItem.length;
+        for (var i = 0; i < navLength; i++) {
+            var navItemNow = navItem[i];
+            navItemNow.style.width = perNavWidth + 'px';
+            navItemNow.classList.add('nav-slide');
+            navItemNow.setAttribute('nav-index', i);
+        }
         // 初始化展开
         var tabNavArrow = tools.createTagWithClass('tab-nav-arrow');
         var navContent = tools.createTagWithClass('nav-content');
@@ -106,18 +121,6 @@ define(function (require) {
 
         // 给item绑定index
         var arrNav = Array.prototype.slice.call(navItem);
-
-        // 初始宽高 好多重复代码啊，后面抽象出来吧
-        var wrapperWidth = Math.floor(rect.getElementRect(contentWrapper).width);
-        var cols = parseInt(tabs.getAttribute('tabs-col'), 10);
-        var changeTop = parseInt(tabs.getAttribute('tabs-change-top'), 10);
-        var perNavWidth = wrapperWidth / cols;
-        var navWidth = perNavWidth * navItem.length + 30;
-        tools.query('.tabs-nav', navWrapper).style.width = navWidth + 'px';
-        for (var i = 0; i < navItem.length; i++) {
-            navItem[i].style.width = perNavWidth + 'px';
-            navContentItem[i].style.width = perNavWidth + 'px';
-        }
 
         var contSlideArr = [];
         var footerHeight = footer ? util.rect.getElementOffset(footer).height : 0;
@@ -146,6 +149,30 @@ define(function (require) {
             visitedPageClass: 'visited'
         };
 
+        // 当iframe下打开时
+        var navScrollIframe = null;
+        if (semiFixedTabs.length > 1) {
+            var temp = semiFixedTabs[1];
+            var semiFixedIframe = temp.parentNode;
+            semiFixedIframe.innerHTML = '';
+            var navWrapperIframe = navWrapper.cloneNode(true);
+            navWrapperIframe.setAttribute('id', 'navWrapperIframe');
+            semiFixedIframe.appendChild(navWrapperIframe);
+            var tabIframe = navWrapperIframe.querySelector('.tabs-nav');
+            var navItem = navWrapperIframe.querySelector('.tabs-slide');
+            // 拦截默认滑动
+            navWrapperIframe.addEventListener('touchmove', function (e) {
+                e.preventDefault();
+            }, false);
+        }
+
+        // 第一个tab加active
+        var firstTab = document.querySelectorAll('[nav-index="0"]');
+        for (var k = 0; k < firstTab.length; k++) {
+            firstTab[k].classList.add('active');
+        }
+        contentItem[0].style.height = 'auto';
+        var tabLineAll = document.querySelectorAll('.tab-line');
         // 初始化 iscroll
         setTimeout(function () {
             var navScroll = null;
@@ -160,18 +187,15 @@ define(function (require) {
                 });
             }, 100);
 
-            // 第一个tab加active
-            tools.addClass(navItem[0], 'active');
-            tools.addClass(navContentItem[0], 'active');
-            contentItem[0].style.height = 'auto';
-
             // 展开初始化
-            navContent.style.width = wrapperWidth + 'px';
+            var navArrowAll = document.querySelectorAll('.tab-nav-arrow');
+            var navContentAll = document.querySelectorAll('.nav-content');
+            util.css(navContentAll, {
+                width: wrapperWidth
+            });
+
             var arrCon = Array.prototype.slice.call(navContentItem);
-            tabNav.addEventListener('tap', updateTab, false);
-            navContent.addEventListener('tap', updateTab2, false);
-            navMark.addEventListener('click', toggle, false);
-            navArrow.addEventListener('tap', toggle, false);
+            document.addEventListener(eClick, updateTab, false);
 
             // 切换展开与关闭
             function toggle() {
@@ -185,42 +209,37 @@ define(function (require) {
 
             // 点击nav 更新视图
             function updateTab(e) {
-                navActiveClass('remove');
-
                 var el = e.target;
-                if (!el.classList.contains('tabs-slide')) {
-                    return;
+                if (el.classList.contains('nav-slide')) {
+                    var navIndex = el.getAttribute('nav-index') * 1;
+                    addActiveClass(navIndex);
                 }
 
-                var currentPage = arrNav.indexOf(el);
-                addActiveClass(currentPage);
-            }
-
-            // 点击展开 更新视图
-            function updateTab2(e) {
                 navActiveClass('remove');
-
-                var el = e.target;
-                if (!el.classList.contains('tabs-slide')) {
-                    return;
+                if (el.classList.contains('tab-nav-arrow') || el.classList.contains('nav-arrow')) {
+                    toggle();
                 }
-
-                var currentPage = arrCon.indexOf(el);
-                addActiveClass(currentPage);
             }
 
             // 展开时增减class
             function navActiveClass(str) {
                 if (str === 'add') {
-                    tools.addClass(tabNavArrow, 'active');
+                    for (var na = 0; na < navArrowAll.length; na++) {
+                        navArrowAll[na].classList.add('active');
+                    }
+
                     tools.addClass(navMark, 'active');
                     tools.addClass(body, 'no-scroll');
                 }
                 else if (str === 'remove') {
-                    tools.removeClass(tabNavArrow, 'active');
+                    for (var na = 0; na < navArrowAll.length; na++) {
+                        navArrowAll[na].classList.remove('active');
+                    }
                     tools.removeClass(navMark, 'active');
                     tools.removeClass(body, 'no-scroll');
                 }
+
+                return false;
             }
 
             // 增减 active class
@@ -236,13 +255,17 @@ define(function (require) {
 
             // 统一处理 class 并移动 tab
             function resolveClass(prev, current) {
-                tools.removeClass(navItem[prev], tabData.activePageClass);
-                tools.removeClass(navContentItem[prev], tabData.activePageClass);
-                tools.removeClass(contentItem[prev], tabData.activePageClass);
 
-                tools.addClass(navItem[current], tabData.activePageClass);
-                tools.addClass(navContentItem[current], tabData.activePageClass);
-                tools.addClass(contentItem[current], tabData.activePageClass);
+                var prevTab = document.querySelectorAll('[nav-index="' + prev + '"]');
+                for (var p = 0; p < prevTab.length; p++) {
+                    prevTab[p].classList.remove('active');
+                }
+                contentItem[prev].classList.remove('active');
+                var currentTab = document.querySelectorAll('[nav-index="' + current + '"]');
+                for (var c = 0; c < currentTab.length; c++) {
+                    currentTab[c].classList.add('active');
+                }
+                contentItem[current].classList.add('active');
             }
 
             // 移动 nav
@@ -251,9 +274,16 @@ define(function (require) {
                 tabData.currentPage = current;
                 var currentIndex = current - 2;
                 navScroll.goToPage(currentIndex, 0, 300);
+                if (semiFixedTabs.length > 1 && current >= 2 && current <= navLength - 2) {
+                    var tabIframeX = perNavWidth * (current - 2) * -1;
+                    tabIframe.style.transform = 'translateX(' + tabIframeX + 'px)';
+                }
+
                 viewport.setScrollTop(changeTop);
                 var lineX = current * perNavWidth;
-                tabLine.style.transform = 'translateX(' + lineX + 'px)';
+                util.css(tabLineAll, {
+                    transform: 'translateX(' + lineX + 'px)'
+                });
                 contSlideArr[prev] = initHeight;
                 setHeight(contSlideArr[current]);
                 util.css(contentItem[current], {
@@ -283,12 +313,12 @@ define(function (require) {
             }
 
             function setHeight(nowHeight) {
-                // for (var i = 0; i < contLen; i++) {
-                //     util.css(contentItem[i], {
-                //         height: initHeight,
-                //         overflow: 'hidden'
-                //     });
-                // }
+                for (var i = 0; i < contLen; i++) {
+                    util.css(contentItem[i], {
+                        height: initHeight,
+                        overflow: 'hidden'
+                    });
+                }
             }
 
         }, 20);

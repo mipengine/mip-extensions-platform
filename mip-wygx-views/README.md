@@ -76,6 +76,10 @@ data-nexturl = "http://mip.woyaogexing.com/touxiang/nv/2017/541178.html"
 3. 组件内的图片必须含有data-original属性
 
 ## 更新
+1.2.2 dom操作抽离，点击bug修复
+
+1.2.1 下一页页面链接修复
+
 1.2.0 增加toast提示，切入效果
 
 1.1.0 增加绑定元素

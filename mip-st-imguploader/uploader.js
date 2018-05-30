@@ -9,6 +9,7 @@
 define(function (require) {
     function upload(file, options) {
         var form = options.form;
+        var ratio = options.ratio || 0.1;
         options.callback = options.callback || function () {};
         if (!/image/.test(file.type)) {
             return;
@@ -36,50 +37,53 @@ define(function (require) {
                         drawImage.call(ctx, drawImg, sx, sy);
                     }
                 };
-                var height = img.height;
-                var width = img.width;
+                var height = img.height * ratio;
+                var width = img.width * ratio;
                 canvas.height = height;
                 canvas.width = width;
                 ctx.drawImage(img, 0, 0, width, height);
-                var base64 = canvas.toDataURL('image/png');
+                // var base64 = canvas.toDataURL('image/png');
                 var info = {
                     file: file,
                     name: file.name,
                     size: file.size,
                     type: file.type,
-                    data: base64
+                    data: e.target.result
                 };
                 if (options.onparse) {
                     options.onparse(null, info);
                 }
-                if (!options.validate || options.validate(info)) {
-                    // fetch 没有progress功能，只好用xhr
-                    var xhr = new XMLHttpRequest();
-                    var method = options.method || 'get';
-                    var formData = new FormData(form);
-                    xhr.onreadystatechange = function () {
-                        if (xhr.readyState === 4) {
-                            if (xhr.status === 200) {
-                                try {
-                                    var res = JSON.parse(xhr.responseText);
-                                    if (!res.code) {
-                                        res.data.base64 = base64;
-                                        options.callback(null, res.data);
+                canvas.toBlob(function (blob) {
+                    if (!options.validate || options.validate(info)) {
+                        // fetch 没有progress功能，只好用xhr
+                        var xhr = new XMLHttpRequest();
+                        var method = options.method || 'get';
+                        var formData = new FormData();
+                        formData.append('file', new File([blob], file.name, {type: file.type}));
+                        xhr.onreadystatechange = function () {
+                            if (xhr.readyState === 4) {
+                                if (xhr.status === 200) {
+                                    try {
+                                        var res = JSON.parse(xhr.responseText);
+                                        if (!res.code) {
+                                            // res.data.base64 = base64;
+                                            options.callback(null, res.data);
+                                        }
+                                        else {
+                                            options.callback(res.msg);
+                                        }
                                     }
-                                    else {
-                                        options.callback(res.msg);
+                                    catch (e) {
+                                        options.callback(e);
                                     }
-                                }
-                                catch (e) {
-                                    options.callback(e);
                                 }
                             }
-                        }
-                    };
-                    xhr.onprogress = options.onprogress;
-                    xhr.open(method, options.url, true);
-                    xhr.send(formData);
-                }
+                        };
+                        xhr.onprogress = options.onprogress;
+                        xhr.open(method, options.url, true);
+                        xhr.send(formData);
+                    }
+                });
             };
             img.src = e.target.result;
         };
@@ -91,7 +95,9 @@ define(function (require) {
             throw 'uploader param url missing';
         }
         var files = e.target.files;
-        for (var i = 0; i < files.length; i++) {
+        // hack
+        for (var i = 0; i < 1; i++) {
+
             var f = files[i];
             if (!f || !f.size) {
                 continue;

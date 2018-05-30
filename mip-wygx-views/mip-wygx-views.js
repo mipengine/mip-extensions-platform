@@ -1,7 +1,7 @@
 /**
  * @file mip-wygx-views 组件.
  * @author east_qiu@gmail.com.
- * @version 1.2.0
+ * @version 1.2.2
  */
 
 define(function (require) {
@@ -15,6 +15,9 @@ define(function (require) {
     var downloadUrl = [];
     var Gesture = Util.Gesture;
     var css = Util.css;
+
+    // 创建的组件
+    var docbody = document.body;
 
     var dWidth = viewport.getWidth(); // 设备宽度
     var dHeight = viewport.getHeight(); // 设备高度
@@ -32,6 +35,7 @@ define(function (require) {
         index: '',
         eLen: 0,
         isFirst: true,
+        toastIsShow: false,
         init: function (index) {
             this.index = index;
             this.eLen = elements.length + 1;
@@ -72,6 +76,7 @@ define(function (require) {
             var overlay = document.createElement('div');
             overlay.id = 'mip-wygx-overlay';
             overlay.className = 'mip-wygx-overlay';
+            this.overlay = overlay;
 
             var slider = document.createElement('div');
             slider.id = 'mip-wygx-slider';
@@ -91,13 +96,13 @@ define(function (require) {
             overlay.appendChild(overlayClose);
             overlay.appendChild(picdownload);
 
-            document.body.appendChild(overlay);
+            docbody.appendChild(overlay);
 
             // 关闭按钮事件监听
             overlayClose.addEventListener('click', function () {
                 overlay.classList.remove('overlay-in');
                 setTimeout(function () {
-                    document.body.removeChild(overlay);
+                    docbody.removeChild(overlay);
                 }, 100);
 
                 self.isFirst = true;
@@ -179,6 +184,7 @@ define(function (require) {
             var download = this.downloadBtn;
             if (index === this.eLen - 1) {
                 download.innerHTML = '下一组';
+                download.setAttribute('data-type', 'mip');
                 download.setAttribute('href', this.defaultSetting.nexturl);
             }
             else {
@@ -188,6 +194,10 @@ define(function (require) {
         },
         toastShow: function (msg) {
             var self = this;
+            // toast is show
+            if (this.toastIsShow) {
+                return;
+            }
             // toast build
             var toast = self.toastUI(msg);
 
@@ -197,14 +207,17 @@ define(function (require) {
             }, 1000);
         },
         toastHide: function () {
-            var toast = document.querySelector('.toast-box');
-            document.querySelector('#mip-wygx-overlay').removeChild(toast);
+            this.overlay.removeChild(this.toast);
+            this.toastIsShow = false;
         },
         toastUI: function (msg) {
             var toast = document.createElement('div');
             toast.className = 'toast-box';
             toast.innerHTML = msg;
-            document.querySelector('#mip-wygx-overlay').appendChild(toast);
+            this.toast = toast;
+            this.overlay.appendChild(toast);
+
+            this.toastIsShow = true;
             return toast;
         },
         appdownload: function () {

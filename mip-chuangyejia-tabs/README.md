@@ -1,6 +1,7 @@
 # mip-chuangyejia-tabs
 
-mip-chuangyejia-tabs 是创业家网的业务组件
+- mip-chuangyejia-tabs 是创业家网的业务组件，不通用
+- `mip-semi-fixed`组件在SF中打开会复制到另外一个`body`，而这些元素需要绑定事件并同步更新。故其中有大量的全局选择器。后续后讨论解决~ 
 
 标题|内容
 ----|----

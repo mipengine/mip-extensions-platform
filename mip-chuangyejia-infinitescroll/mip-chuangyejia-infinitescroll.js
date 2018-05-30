@@ -32,9 +32,9 @@ define(function (require) {
     }
 
     /**
-     * 构造元素，只会运行一次
+     * 创业家内有多个无限滚动组件，需要在进入页面时初始化，不然在切换到这个组建时，可能会无法加载数据
      */
-    customElement.prototype.firstInviewCallback = function () {
+    customElement.prototype.build = function () {
         var self = this;
         var element = self.element;
         var src = element.getAttribute('data-src') || '';
@@ -132,6 +132,9 @@ define(function (require) {
         });
     };
 
+    /**
+     * 移除组件时，销毁实例，减少开销
+     */
     customElement.prototype.detachedCallback = function () {
         infiniteScroll = null;
     };
