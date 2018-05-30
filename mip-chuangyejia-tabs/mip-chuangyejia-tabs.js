@@ -82,13 +82,12 @@ define(function (require) {
         var navItem = tools.queryAll('.tabs-slide', tabNav);
         var contentItem = tools.queryAll('.tabs-slide', contentWrapper);
         var body = document.body;
-        var footer = document.querySelector('.footer');
         // 初始宽高
         var wrapperWidth = Math.floor(rect.getElementRect(contentWrapper).width);
         var cols = parseInt(tabs.getAttribute('tabs-col'), 10);
         var changeTop = parseInt(tabs.getAttribute('tabs-change-top'), 10);
         var perNavWidth = wrapperWidth / cols;
-        var navWidth = perNavWidth * navItem.length + 30;
+        var navWidth = perNavWidth * navItem.length;
         tools.query('.tabs-nav', navWrapper).style.width = navWidth + 'px';
 
         var navLength = navItem.length;
@@ -123,8 +122,7 @@ define(function (require) {
         var arrNav = Array.prototype.slice.call(navItem);
 
         var contSlideArr = [];
-        var footerHeight = footer ? util.rect.getElementOffset(footer).height : 0;
-        var initHeight = viewport.getScrollHeight() - util.rect.getElementOffset(contentItem[0]).top - footerHeight;
+        var initHeight = viewport.getScrollHeight() - util.rect.getElementOffset(contentItem[0]).top;
         for (var n = 0; n < navItem.length; n++) {
             contSlideArr[n] = initHeight;
         }
@@ -274,12 +272,13 @@ define(function (require) {
                 tabData.currentPage = current;
                 var currentIndex = current - 2;
                 navScroll.goToPage(currentIndex, 0, 300);
-                if (semiFixedTabs.length > 1 && current >= 2 && current <= navLength - 2) {
-                    var tabIframeX = perNavWidth * (current - 2) * -1;
+                if (semiFixedTabs.length > 1 && current >= 2 && current <= navLength) {
+                    var finalCurrent = current < navLength - 3 ? current : navLength - 3;
+                    var tabIframeX = perNavWidth * (finalCurrent - 2) * -1;
                     tabIframe.style.transform = 'translateX(' + tabIframeX + 'px)';
                 }
 
-                viewport.setScrollTop(changeTop);
+
                 var lineX = current * perNavWidth;
                 util.css(tabLineAll, {
                     transform: 'translateX(' + lineX + 'px)'
@@ -296,6 +295,7 @@ define(function (require) {
             }
 
             function contenHandler() {
+                viewport.setScrollTop(changeTop);
                 for (var i = 0; i < contLen; i++) {
                     util.css(contentItem[i], {
                         height: initHeight,
