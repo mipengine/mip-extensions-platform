@@ -1,14 +1,14 @@
 /**
 * @file 脚本支持
 * @author hejieye
-* @time  2018-05-15
-* @version 2.1.7
+* @time  2018-05-29
+* @version 2.1.8
 */
 define(function (require) {
     var $ = require('zepto');
     var customElem = require('customElement').create();
     var busUid = '';
-    
+    var fetchJsonp = require('fetch-jsonp');
     var utf8Encode = function (string) {
         string = string.replace(/\r\n/g, '\n');
         var utftext = '';
@@ -882,56 +882,37 @@ define(function (require) {
                     nowTime: getSysTime()
                 });
                 if(visitFlag) {
-                	// 友来包月
-                	$.getJSON(url+youlaiTag, function (datas) {
-                		var youlaiArray = null;
-                		var runhaiArray = null;
-                		try {
-                			if (datas.succ === 'Y') { // 不等于空
-                				try {
-                					var json = datas.html;
-                					json = json.substring(3, json.length-1);
-                					var cmJsonData = $.parseJSON(json);
-                					if ('undefined' !== typeof cmJsonData) {
-                						youlaiArray = loadData(param, cmJsonData);
-                					}
-                				}catch (e) {}
-                			}
-                			$.getJSON(url+runhaiTag, function (result) {
-                				try {
-                					if (result.succ === 'Y') { // 不等于空
-                						try {
-                							var json = result.html;
-                							json = json.substring(3, json.length-1);
-                							var cmJsonData = $.parseJSON(json);
-                							if ('undefined' !== typeof cmJsonData) {
-                								runhaiArray = loadData(param, cmJsonData);
-                							}
-                						}catch (e) {}
-                					}
-                					if(youlaiArray != null && youlaiArray.length > 0) {
-                						for(var i = 0; i < youlaiArray.length; i ++) {
-                							adPut(ele, youlaiArray[i]);
-                						}
-                						advLogInfo(ele, sourceType, 0);
-                					}
-                					if(runhaiArray != null && runhaiArray.length > 0) {
-                						removeBaiduAd(ele);
-                						var runhaiData = runhaiArray[Math.floor(Math.random()*runhaiArray.length)];
-                						runhaiPut(ele, runhaiData);
-                						advLogInfo(ele, 'COOPERATE_RUNHAI', 0);
-                					}
-                					if((runhaiArray == null || runhaiArray.length == 0)
-                							&& (youlaiArray == null || youlaiArray.length == 0)) {
-                						loadEffect(ele, questionId, $thatParam, $thatLog, $tokenDiv, token); // 加载效果广告
-                					}else{
-                						loadStatsToken($tokenDiv, token);
-                					}
-                				} catch (e) {
-                					console.log(e);
-                				}
-                			});
-                		} catch (e) {}
+                	fetchJsonp(url+youlaiTag, {
+                	    jsonpCallback: 'callback'
+                	}).then(function (res) {
+                	    return res.json();
+                	}).then(function (data) {
+                	    youlaiArray = loadData(param, data);
+                	    fetchJsonp(url+runhaiTag, {
+                    	    jsonpCallback: 'callback'
+                    	}).then(function (res) {
+                    	    return res.json();
+                    	}).then(function (datas) {
+                    	    runhaiArray = loadData(param, datas);
+                    	    if(youlaiArray != null && youlaiArray.length > 0) {
+        						for(var i = 0; i < youlaiArray.length; i ++) {
+        							adPut(ele, youlaiArray[i]);
+        						}
+        						advLogInfo(ele, sourceType, 0);
+        					}
+        					if(runhaiArray != null && runhaiArray.length > 0) {
+        						removeBaiduAd(ele);
+        						var runhaiData = runhaiArray[Math.floor(Math.random()*runhaiArray.length)];
+        						runhaiPut(ele, runhaiData);
+        						advLogInfo(ele, 'COOPERATE_RUNHAI', 0);
+        					}
+        					if((runhaiArray == null || runhaiArray.length == 0)
+        							&& (youlaiArray == null || youlaiArray.length == 0)) {
+        						loadEffect(ele, questionId, $thatParam, $thatLog, $tokenDiv, token); // 加载效果广告
+        					}else{
+        						loadStatsToken($tokenDiv, token);
+        					}
+                    	});
                 	});
                 }
                 if(!visitFlag) {
