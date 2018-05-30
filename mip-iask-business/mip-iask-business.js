@@ -850,7 +850,6 @@ define(function (require) {
         	if(youlaiTag === '') {
         		visitFlag = false;
         	}
-        	youlaiTag = youlaiTag + "?callback=cb"; 
         	runhaiTag = "runhai"+ youlaiTag;
         }
         try {
