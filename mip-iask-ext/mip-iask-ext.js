@@ -114,7 +114,7 @@ define(function (require) {
             /*该参数是作为组件外部参数,所以需要用到全局选择器*/
             var $that = document.querySelector('.paramDiv');
     	    var cid = $that.getAttribute("cid");
-            var checkLoginUrl = 'https://mipp.iask.cn/checkLogin?mip=' + Math.random() + '&cid=' + cid;;
+            var checkLoginUrl = 'https://mipp.iask.cn/checkLogin?mip=' + Math.random() + '&iask_cookie=0000&cid=' + cid;;
             $.get(checkLoginUrl);
         },
         userInfoHide: function () {
