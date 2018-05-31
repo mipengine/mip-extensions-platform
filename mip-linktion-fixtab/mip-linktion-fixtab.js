@@ -20,12 +20,15 @@ define(function (require) {
             var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
             if (scrollTop > tabTop) {
                 if ($(window).width() < 769) {
-                    $el.find('.mip-vd-tabs-nav').css({'position': 'fixed', 'top': '0', 'width': tabWidth});
+                    $el.find('.mip-vd-tabs-nav').css({'position': 'fixed', 'top': '0', 'width':
+                        + tabWidth, 'z-index': '1'});
                 } else {
-                    $el.find('.mip-vd-tabs-nav').css({'position': 'fixed', 'top': '96px', 'width': tabWidth});
+                    $el.find('.mip-vd-tabs-nav').css({'position': 'fixed', 'top': '96px', 'width':
+                        + tabWidth, 'z-index': '1'});
                 }
             } else if (scrollTop < tabTop) {
-                $el.find('.mip-vd-tabs-nav').css({'position': 'relative', 'top': 'auto', 'width': tabWidth});
+                $el.find('.mip-vd-tabs-nav').css({'position': 'relative', 'top': 'auto', 'width':
+                    + tabWidth, 'z-index': '1'});
             }
         };
     };

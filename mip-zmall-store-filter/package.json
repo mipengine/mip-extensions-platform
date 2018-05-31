@@ -1,0 +1,14 @@
+{
+    "name": "mip-zmall-store-filter",
+    "version": "1.0.0",
+    "description": "店铺首页全国店铺切换，带城市筛选",
+    "contributors": [
+        {
+            "name": "liuxianggui",
+            "email": "liu.xianggui@zol.com.cn"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

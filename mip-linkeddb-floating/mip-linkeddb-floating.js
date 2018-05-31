@@ -14,19 +14,19 @@ define(function (require) {
      */
     customElement.prototype.firstInviewCallback = function () {
         var ele = this.element;
-        console.log($);
-        var topNavListTop = $(ele).find('#topNavList').prev().innerHeight();
+        var topNavListTop = $(ele).prev().innerHeight();
         var topNavListHeight = $(ele).find('#topNavList').innerHeight();
         console.log(topNavListTop);
-        console.log($(this).scrollTop());
         $(window).on('scroll', function () {
             console.log($(this).scrollTop());
             if ($(this).scrollTop() > topNavListTop) {
-                $(ele).find('#topNavList').addClass('fixed').next().css({
+                $(ele).find('#topNavList').addClass('fixed');
+                $(ele).next().css({
                     marginTop: topNavListHeight
                 });
             } else {
-                $(ele).find('#topNavList').removeClass('fixed').next().css({
+                $(ele).find('#topNavList').removeClass('fixed');
+                $(ele).next().css({
                     marginTop: 0
                 });
             }

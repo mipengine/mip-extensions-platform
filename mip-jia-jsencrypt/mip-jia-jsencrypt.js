@@ -4685,7 +4685,7 @@ define(function (require) {
         };
 
         JSEncrypt.version = '2.3.0';
-        exports.JSEncrypt = window.jiaJSEncrypt = JSEncrypt;
+        exports.JSEncrypt = window.JiaJSEncrypt = JSEncrypt;
     };
 
     /**

@@ -1,0 +1,14 @@
+{
+    "name": "mip-linktion-fix-scroll-content",
+    "version": "1.0.0",
+    "description": "实现列表根据页面滚动到底部是固定，回滚时滚到顶部固定",
+    "contributors": [
+        {
+            "name": "tinng",
+            "email": "tinng@linktion.cn"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
