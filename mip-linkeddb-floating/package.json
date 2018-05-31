@@ -1,0 +1,14 @@
+{
+    "name": "mip-linkeddb-floating",
+    "version": "1.0.0",
+    "description": "当标题滑动到顶端时，会浮动在顶端",
+    "contributors": [
+        {
+            "name": "linkeddb",
+            "email": "340236524@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

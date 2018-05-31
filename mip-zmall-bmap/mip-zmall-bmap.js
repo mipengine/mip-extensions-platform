@@ -69,8 +69,14 @@ define(function (require) {
     MyBaiduMap.prototype.init = function () {
 
         var element = this.element;
+        this.linkGPS();
         // 类型
         var type = this.element.dataset.type;
+
+        if (type === 'gps') {
+            return;
+        }
+
         // 创建地图容器
         var mapContainer = document.createElement('div');
         var mapContainerId = 'js_map_container';
@@ -81,7 +87,14 @@ define(function (require) {
         var map = new window.BMap.Map(mapContainerId);
         this.point = new window.BMap.Point(this.x, this.y);
         map.centerAndZoom(this.point, this.zoom);
-        var marker = new window.BMap.Marker(this.point);
+
+        var iconUrl = '//icon.zol-img.com.cn/newshop/mip/map-marker.png';
+        var icon = new window.BMap.Icon(iconUrl, new window.BMap.Size(20, 25), {
+            anchor: new window.BMap.Size(10, 25)
+        });
+        var marker = new window.BMap.Marker(this.point, {
+            icon: icon
+        });
         map.addOverlay(marker);
         map.disableDoubleClickZoom();
         map.disableDragging();
@@ -91,14 +104,12 @@ define(function (require) {
 
         if (type === 'map') {
             mapContainer.classList.add('zmall-bmap-container');
+            element.classList.add('map-loaded');
         }
         else if (type === 'distance') {
             element.removeChild(mapContainer);
             this.setDistance();
         }
-
-        // 跳转
-        this.linkGPS();
     };
 
     // 计算距离
@@ -118,7 +129,6 @@ define(function (require) {
                 var usePoint = new window.BMap.Point(userLng, userLat);
                 // 商家坐标
                 var distance = self.map.getDistance(self.point, usePoint);
-                distance = self.distanceFormat(distance);
                 self.distanceRender({distance: distance});
             }
         }, {
@@ -127,14 +137,16 @@ define(function (require) {
     };
 
     // 格式化距离
-    MyBaiduMap.prototype.distanceFormat = function (distance) {
+    MyBaiduMap.prototype.distanceFormat = function (distance, english) {
         distance = Math.ceil(distance);
         var str = '';
+        var kmSuffix = english ? 'km' : '千米';
+        var mSuffix = english ? 'm' : '米';
         if (distance > 1000) {
-            str = (distance / 1000).toFixed(1) + '千米';
+            str = (distance / 1000).toFixed(1) + kmSuffix;
         }
         else {
-            str = distance + '米';
+            str = distance + mSuffix;
         }
         return str;
     };
@@ -143,19 +155,29 @@ define(function (require) {
     MyBaiduMap.prototype.distanceRender = function (data) {
         var element = this.element;
         var address = element.dataset.address;
+        var isEnglish = !!element.dataset.english;
         data.address = address;
+
+        data.distance = this.distanceFormat(data.distance, isEnglish);
         var template = [
             '<div class="zmall-bmap-distance">',
             '<p>{{address}}</p>',
             '<span>距您约{{distance}}</span>',
             '</div>'
         ].join('');
+
+        var templateElement = element.querySelector('template[type="mip-mustache"]');
+        if (templateElement) {
+            template = templateElement.innerHTML.trim();
+        }
+
         var html = mustache.render(template, data);
         element.innerHTML = html;
+        element.classList.add('map-distance-loaded');
 
         var distanceElement = element.querySelector('.zmall-bmap-distance');
         setTimeout(function () {
-            distanceElement.classList.add('visible');
+            distanceElement && distanceElement.classList.add('visible');
         }, 50);
     };
 

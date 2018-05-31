@@ -67,6 +67,7 @@ define(function (require) {
     /**
      * tab一定会出现在首屏，需要在插入文档时就执行
      */
+    /**/
     customElement.prototype.build = function () {
         // 检测是否支持触摸
         var touch = 'ontouchstart' in window;
@@ -86,6 +87,8 @@ define(function (require) {
         var wrapperWidth = Math.floor(rect.getElementRect(contentWrapper).width);
         var cols = parseInt(tabs.getAttribute('tabs-col'), 10);
         var changeTop = parseInt(tabs.getAttribute('tabs-change-top'), 10);
+        var buffer = parseInt(tabs.getAttribute('tabs-buffer'), 10);
+        var bufferFinal = buffer ? buffer : 0;
         var perNavWidth = wrapperWidth / cols;
         var navWidth = perNavWidth * navItem.length;
         tools.query('.tabs-nav', navWrapper).style.width = navWidth + 'px';
@@ -120,9 +123,8 @@ define(function (require) {
 
         // 给item绑定index
         var arrNav = Array.prototype.slice.call(navItem);
-
         var contSlideArr = [];
-        var initHeight = viewport.getScrollHeight() - util.rect.getElementOffset(contentItem[0]).top;
+        var initHeight = viewport.getScrollHeight() - util.rect.getElementOffset(contentItem[0]).top - bufferFinal;
         for (var n = 0; n < navItem.length; n++) {
             contSlideArr[n] = initHeight;
         }
@@ -278,7 +280,7 @@ define(function (require) {
                     tabIframe.style.transform = 'translateX(' + tabIframeX + 'px)';
                 }
 
-
+                viewport.setScrollTop(changeTop);
                 var lineX = current * perNavWidth;
                 util.css(tabLineAll, {
                     transform: 'translateX(' + lineX + 'px)'
@@ -295,7 +297,6 @@ define(function (require) {
             }
 
             function contenHandler() {
-                viewport.setScrollTop(changeTop);
                 for (var i = 0; i < contLen; i++) {
                     util.css(contentItem[i], {
                         height: initHeight,
@@ -323,6 +324,5 @@ define(function (require) {
 
         }, 20);
     };
-
     return customElement;
 });

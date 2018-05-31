@@ -1,10 +1,10 @@
 {
-    "name": "mip-zmall-bmap",
-    "version": "1.0.1",
-    "description": "新版百度地图组件",
+    "name": "mip-zol-mrender",
+    "version": "1.0.0",
+    "description": "渲染mip-data请求回来的数据",
     "contributors": [
         {
-            "name": "liuxg",
+            "name": "liuxianggui",
             "email": "liu.xianggui@zol.com.cn"
         }
     ],
