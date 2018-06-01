@@ -64,9 +64,9 @@ define(function (require) {
     }
 
     /**
-     * 第一次进入可视区回调，只会执行一次
+     * 统计组件，需要尽快加载
      */
-    customElement.prototype.firstInviewCallback = function () {
+    customElement.prototype.build = function () {
         var element = this.element;
         var type = element.getAttribute('type') || waptype;
         sdk(type);

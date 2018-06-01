@@ -21,7 +21,7 @@ define(function (require) {
             if (scrollTop > tabTop) {
                 if ($(window).width() < 769) {
                     $el.find('.mip-vd-tabs-nav').css({'position': 'fixed', 'top': '0', 'width':
-                        + tabWidth, 'z-index': '1'});
+                        + tabWidth, 'z-index': '1', 'left': '0'});
                 } else {
                     $el.find('.mip-vd-tabs-nav').css({'position': 'fixed', 'top': '96px', 'width':
                         + tabWidth, 'z-index': '1'});
