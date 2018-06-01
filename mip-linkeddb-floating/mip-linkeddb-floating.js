@@ -16,9 +16,7 @@ define(function (require) {
         var ele = this.element;
         var topNavListTop = $(ele).prev().innerHeight();
         var topNavListHeight = $(ele).find('#topNavList').innerHeight();
-        console.log(topNavListTop);
-        $(window).on('scroll', function () {
-            console.log($(this).scrollTop());
+        $(ele).parent().parent().parent().find('.content').on('scroll', function () {
             if ($(this).scrollTop() > topNavListTop) {
                 $(ele).find('#topNavList').addClass('fixed');
                 $(ele).next().css({
@@ -32,6 +30,7 @@ define(function (require) {
             }
         });
     };
+
 
     return customElement;
 });

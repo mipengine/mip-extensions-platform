@@ -11,7 +11,6 @@ define(function (require) {
     var customElement = require('customElement').create();
     var CustomStorage = util.customStorage;
     var storage = new CustomStorage(0);
-    var Jsencrypt = require('./jsencrypt');
 
     var scrollTop = {
         body: 0,
@@ -102,7 +101,8 @@ define(function (require) {
      */
 
     function mobileEncrypt(phone, type) {
-        var JSEncrypt = new Jsencrypt();
+        /* global JiaJSEncrypt */
+        var JSEncrypt = new JiaJSEncrypt();
         JSEncrypt.setKey(keyArr[type]);
         return JSEncrypt.encrypt(phone);
     }
@@ -152,27 +152,27 @@ define(function (require) {
 
                 str += '<mip-fixed type="bottom" class="fixed-footer">';
                 str += '<div class="fixed-footer-box">';
-                str += '<a class="item sj" href="javascript:;" bdsl-click-service="" bdsl-extra="{id:10002}">';
+                str += '<div class="item sj" bdsl-click-service="" bdsl-extra="{id:10002}">';
                 str += '<i class="icon pos1"></i>';
                 str += '<p class="txt">免费设计</p>';
-                str += '</a>';
-                str += '<a class="item bj" href="javascript:;" bdsl-click-service="" bdsl-extra="{id:10001}">';
+                str += '</div>';
+                str += '<div class="item bj" bdsl-click-service="" bdsl-extra="{id:10001}">';
                 str += '<i class="icon pos2"></i>';
                 str += '<p class="txt">智能报价</p>';
-                str += '</a>';
+                str += '</div>';
                 if (data.hbdisplay !== 'hidden') {
-                    str += '<a class="hb-wrap footer_xrhb" href="javascript:;"';
+                    str += '<div class="hb-wrap footer_xrhb"';
                     str += 'bdsl-click-service="" bdsl-extra="{id:10003}">';
-                    str += '</a>';
+                    str += '</div>';
                 }
-                str += '<a class="item dk" href="javascript:;" bdsl-click-service="" bdsl-extra="{id:10007}">';
+                str += '<div class="item dk" bdsl-click-service="" bdsl-extra="{id:10007}">';
                 str += '<i class="icon pos3"></i>';
                 str += '<p class="txt">专享贷</p>';
-                str += '</a>';
-                str += '<a class="item qj" href="javascript:;" bdsl-click-service="" bdsl-extra="{id:10008}">';
+                str += '</div>';
+                str += '<div class="item qj" bdsl-click-service="" bdsl-extra="{id:10008}">';
                 str += '<i class="icon pos4"></i>';
                 str += '<p class="txt">全景定制</p>';
-                str += '</a>';
+                str += '</div>';
                 str += '</div>';
                 str += '<div class="fixed-footer-pop">';
                 str += '<div class="fixed-footer-pop-box">';
@@ -206,7 +206,7 @@ define(function (require) {
 
                 cityFn();
 
-                // zxbjPage.method.windowScroll(data, ele);
+                zxbjPage.method.windowScroll(data, ele);
 
                 // 点击展开按钮
                 zxbjPage.method.clickUpFun(data, ele);

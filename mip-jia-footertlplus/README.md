@@ -28,35 +28,35 @@
 
 ## 属性
 
-### {username}
+### username
 
-说明：{用户名}
-必选项：{是}
-类型：{string}
-默认值：{mip裝修}
+说明：用户名
+必选项：是
+类型：string
+默认值：mip裝修
 
-### {code}
+### code
 
-必选项：{否}
-类型：{string}
+必选项：否
+类型：string
 
-### {source}
+### source
 
-说明：{来源}
-必选项：{否}
-类型：{string}
+说明：来源
+必选项：否
+类型：string
 
-### {ele}
+### ele
 
-说明：{show出弹层元素}
-必选项：{否}
-类型：{string}
+说明：show出弹层元素
+必选项：否
+类型：string
 
-### {self_url}
+### self_url
 
-说明：{url}
-必选项：{否}
-类型：{string}
+说明：url
+必选项：否
+类型：string
 
 ## 注意事项
 

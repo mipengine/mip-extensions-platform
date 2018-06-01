@@ -12,13 +12,15 @@ mip-linkeddb-floating 当标题滑动到顶端时，会浮动在顶端 mip自身
 
 ### 基本用法
 ```html
-<div class="car1"></div>
-<mip-linkeddb-floating>
-    <div id="topNavList">
-        <p>hello world</p>
-    </div>   
-</mip-linkeddb-floating>
-<div class="car2"></div>
+<div class="content">
+    <div class="car1"></div>
+    <mip-linkeddb-floating>
+        <div id="topNavList">
+            <p>hello world</p>
+        </div>   
+    </mip-linkeddb-floating>
+    <div class="car2"></div>
+</div>
 ```
 
 ## 注意事项

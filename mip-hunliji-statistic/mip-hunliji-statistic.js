@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @file mip-hunliji-statistic 用于婚礼纪网站访问数据统计wap版
  * @author niu_niu
  */
@@ -6,7 +6,6 @@
 define(function (require) {
     'use strict';
     var $ = require('zepto');
-    var waptype = 'wap';
     var customElement = require('customElement').create();
 
     function sdkData(appName, data, met, error) {
@@ -15,7 +14,6 @@ define(function (require) {
             url: '//www.hunliji.com/v1/api/app/tracker/batch.json',
             type: 'POST',
             data: obj,
-            headers: {appName: appName},
             success: function (result) {
                 if (met) {
                     met();
@@ -68,7 +66,7 @@ define(function (require) {
      */
     customElement.prototype.build = function () {
         var element = this.element;
-        var type = element.getAttribute('type') || waptype;
+        var type = 'wap';
         sdk(type);
     };
 
