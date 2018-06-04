@@ -40,7 +40,7 @@ define(function (require) {
         // 开始下滑后需要再滚动多长的距离固定
         var FixHeight =  -(fixedHeight  - screenHeight + footerHeight);
         var beforeScroll = document.documentElement.scrollTop || document.body.scrollTop;
-        $el.find('.details-fix-top>.scroll-wrap').css({'width': $el.find('.details-fix-top').width()});
+        $el.find('.details-fix-top>.scroll-wrap').css({'width': $el.find('.details-fix-top').width() - 30});
         $(window).on('scroll', function () {
             var bodyScroll = document.documentElement.scrollTop || document.body.scrollTop;
             // 判断页面滚动的方向
@@ -65,7 +65,7 @@ define(function (require) {
                     if (lastScrollTop - bodyScroll >  fixedHeight - screenHeight + footerHeight
                         + navHeight && bodyScroll > fixedTop - navHeight) {
                         $el.find('.details-fix-top>.scroll-wrap').css({'position': 'fixed', 'top':
-                        + navHeight, 'width': $el.find('.details-fix-top').width(), 'marginTop': 0});
+                        + navHeight, 'width': $el.find('.details-fix-top').width() - 30, 'marginTop': 0});
                         downFlag = true;
                         ifFix = true;
                         uplastScrollTop = bodyScroll;
@@ -73,7 +73,7 @@ define(function (require) {
                     else if (bodyScroll < fixedTop  - navHeight) {
                         // 上滑归为到顶部
                         $el.find('.details-fix-top>.scroll-wrap').css({'position': 'unset', 'width':
-                            + $el.find('.details-fix-top').width(), 'marginTop': 0});
+                            + $el.find('.details-fix-top').width() - 30, 'marginTop': 0});
                         downFlag = false;
                         ifFix = false;
                     }
@@ -86,7 +86,7 @@ define(function (require) {
                   // 判断页面是否上滑过，没有上滑自动到位固定
                     if (downFlag === false) {
                         $el.find('.details-fix-top>.scroll-wrap').css({'position': 'fixed', 'top':
-                            + FixHeight, 'width': $el.find('.details-fix-top').width(), 'marginTop': 0});
+                            + FixHeight, 'width': $el.find('.details-fix-top').width() - 30, 'marginTop': 0});
                         flag = false;
                     }
                     else {
@@ -94,7 +94,7 @@ define(function (require) {
                         if (ifFix === false) {
                             if (bodyScroll >  boxMtopNum + fixedHeight + footerHeight - screenHeight + fixedTop) {
                                 $el.find('.details-fix-top>.scroll-wrap').css({'position': 'fixed', 'top':
-                                + FixHeight, 'width': $el.find('.details-fix-top').width(), 'marginTop': 0});
+                                + FixHeight, 'width': $el.find('.details-fix-top').width() - 30, 'marginTop': 0});
                                 flag = false;
                             }
                         }
@@ -114,7 +114,7 @@ define(function (require) {
                             // console.log(fixedHeight + $el.find('.details-fix-top').css('marginTop') + fixedTop - scrollHeight)
                             if (bodyScroll > boxMtopNum + fixedHeight + footerHeight - screenHeight + fixedTop) {
                                 $el.find('.details-fix-top>.scroll-wrap').css({'position': 'fixed', 'top':
-                                    + FixHeight, 'width': $el.find('.details-fix-top').width(), 'marginTop': 0});
+                                    + FixHeight, 'width': $el.find('.details-fix-top').width() - 30, 'marginTop': 0});
                                 flag = false;
                             }
                         }

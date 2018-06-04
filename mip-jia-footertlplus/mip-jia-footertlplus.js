@@ -20,7 +20,7 @@ define(function (require) {
 
     // 获取城市
     function cityFn(callback) {
-        if (!storage.get('city')) {
+        if (!storage.get('city') || storage.get('city') === 'false') {
             $.ajax({
                 url: '//mip.m.jia.com/city/getCurrentAreaNew',
                 type: 'get',
@@ -28,7 +28,7 @@ define(function (require) {
                 success: function (a) {
                     if (a.code > 0) {
                         var city = JSON.stringify(a.result.site.area_info);
-                        storage.set('city', city, 21600000);
+                        storage.set('city', city, 3600000);
                         typeof callback === 'function' && callback(a.result.site.area_info);
                     }
                 },
