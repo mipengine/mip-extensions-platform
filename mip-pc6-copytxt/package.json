@@ -1,0 +1,14 @@
+{
+    "name": "mip-pc6-copytxt",
+    "version": "1.0.0",
+    "description": "复制文本并提示",
+    "contributors": [
+        {
+            "name": "lj",
+            "email": "lj@952.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

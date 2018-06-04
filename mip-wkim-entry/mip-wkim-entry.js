@@ -2,8 +2,8 @@
 * 寻医问药mip改造 im入口组件
 * @file 脚本支持
 * @author jqthink@gmail.com
-* @time 2018.06.01
-* @version 1.0.1
+* @time 2018.06.04
+* @version 1.0.2
 */
 define(function (require) {
     var $ = require('zepto');
@@ -26,6 +26,7 @@ define(function (require) {
     customElem.prototype.build = function () {
      // this.element 可取到当前实例对应的 dom 元素
         var tagA = document.createElement('a');
+        var self = this;
         tagA.className = 'XYWYBD_jump';
         tagA.href = '';
         tagA.innerHTML = 'XYWYBD_jump';
@@ -33,7 +34,7 @@ define(function (require) {
         $(this.element).append(tagA);
         util.event.delegate(document, 'mip-img', 'touchend', function (e) {
             var docId = $(e.target.parentNode).attr('docId');
-            docId !== undefined ? jumpToFn(docId, this.element) : null;
+            docId !== undefined ? jumpToFn(docId, self.element) : null;
         });
     };
     return customElem;

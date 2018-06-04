@@ -14,6 +14,7 @@ define(function (require) {
             url: '//www.hunliji.com/v1/api/app/tracker/batch.json',
             type: 'POST',
             data: obj,
+            headers: {appName: 'wap'},
             success: function (result) {
                 if (met) {
                     met();
