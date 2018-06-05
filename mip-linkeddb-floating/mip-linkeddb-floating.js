@@ -22,7 +22,23 @@ define(function (require) {
                 $(ele).next().css({
                     marginTop: topNavListHeight
                 });
-            } else {
+            }
+            else {
+                $(ele).find('#topNavList').removeClass('fixed');
+                $(ele).next().css({
+                    marginTop: 0
+                });
+            }
+        });
+        window.addEventListener('scroll', function () {
+            var t = document.documentElement.scrollTop || document.body.scrollTop;
+            if (t > topNavListTop) {
+                $(ele).find('#topNavList').addClass('fixed');
+                $(ele).next().css({
+                    marginTop: topNavListHeight
+                });
+            }
+            else {
                 $(ele).find('#topNavList').removeClass('fixed');
                 $(ele).next().css({
                     marginTop: 0

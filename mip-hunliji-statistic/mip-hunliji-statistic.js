@@ -11,7 +11,7 @@ define(function (require) {
     function sdkData(appName, data, met, error) {
         var obj = '{"events":[' + JSON.stringify(data) + ']}';
         $.ajax({
-            url: '//www.hunliji.com/v1/api/app/tracker/batch.json',
+            url: '//m.hunliji.com/v1/api/app/tracker/batch.json',
             type: 'POST',
             data: obj,
             headers: {appName: 'wap'},
