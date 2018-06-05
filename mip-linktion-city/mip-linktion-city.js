@@ -7,18 +7,22 @@ define(function (require) {
     'use strict';
     var $ = require('jquery');
     var customElement = require('customElement').create();
+    var viewer = require('viewer');
 
     /**
      * 第一次进入可视区回调，只会执行一次
      */
     customElement.prototype.firstInviewCallback = function () {
-        // 首页城市
         var $el = $(this.element);
-        var scrollWrapper = $('.scroll-wrapper');
-        var lightbox = $('#select-city-phone');
-        document.addEventListener('touchmove', function (e) {
-            e.returnValue = true;
-        }, false);
+        // 游客进入45秒后弹出弹框
+        setTimeout(function () {
+            if ($el.data('login') === false) {
+                $el.find('#btn-open')[0].click();
+                if ($(window).width() < 768) {
+                    $el.find('#phone-btn-open').trigger('tap');
+                }
+            };
+        }, 4500);
         this.addEventAction('open', function (event) {
             function initLocationData(locationClass, id) {
                 var domain = $el.find('.city-pop-btn').data('domain');

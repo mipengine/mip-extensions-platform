@@ -239,6 +239,7 @@ define(function (require) {
         $(ele).find('.review-cont .write-comment').on('click', '.cancel', function () {
             $(ele).find('.review-modal-overlay').toggleClass('review-modal-overlay-visible');
             $(ele).find('.write-comment').toggleClass('show');
+            $(ele).parent().parent().parent().find('.content').toggleClass('z-index-11');
         });
 
         function replyComment(pOid, otherUserOid) {

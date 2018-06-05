@@ -1,0 +1,16 @@
+{
+  "name": "mip-multi-pay",
+  "version": "1.0.1",
+  "description": "MIP 多种支付方式组件",
+  "contributors": [
+    {
+      "name": "zhuguoxi",
+      "email": "mip-support@baidu.com"
+    }
+  ],
+  "engines": {
+    "mip": ">=1.1.0"
+  },
+  "author": "zhuguoxi",
+  "license": "MIT"
+}
