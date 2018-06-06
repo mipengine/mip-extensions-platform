@@ -1,6 +1,6 @@
 /**
- * @file MIP 支付组件
- * @author xuexb <fe.xiaowu@gmail.com>
+ * @file MIP 多种支付组件
+ * @author zhuguoxi <mip-support@baidu.com>
  */
 
 define(function (require) {
