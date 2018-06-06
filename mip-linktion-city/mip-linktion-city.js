@@ -22,7 +22,7 @@ define(function (require) {
                     $el.find('#phone-btn-open').trigger('tap');
                 }
             };
-        }, 4500);
+        }, 45000);
         this.addEventAction('open', function (event) {
             function initLocationData(locationClass, id) {
                 var domain = $el.find('.city-pop-btn').data('domain');

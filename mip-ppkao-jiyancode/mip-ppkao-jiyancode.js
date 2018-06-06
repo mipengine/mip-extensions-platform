@@ -19,7 +19,36 @@ define(function (require) {
         });
 
         function jiYanCode(openUrl) {
-            var num = window.sessionStorage.getItem('JR_NUM');
+            $.ajax({
+                type: 'POST',
+                async: false,
+                cache: false,
+                url: '//data.api.ppkao.com/user/IsLogin.ashx?action=GetUserIP',
+                dataType: 'jsonp',
+                crossDomain: true,
+                contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+                jsonp: 'callback',
+                jsonpCallback: 'callback',
+                success: function (data) {
+                    if (data.name === '1') {
+                        window.top.location.href = openUrl;
+                        return false;
+                    } else {
+                        window.top.location.href = 'https://user.ppkao.com/3g/upvip/index_taste.aspx';
+                        return false;
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    var result = openUrl.replace('//user.ppkao.com/', '//api.ppkao.com/');
+                    // if (isIE()) {
+                    //     window.top.location.href = result;
+                    //     result = '';
+                    //     return false;
+                    // }
+                    return false;
+                }
+            });
+           /* var num = window.sessionStorage.getItem('JR_NUM');
             if (num === null || num === '') {
                 num = 1;
             }
@@ -53,7 +82,7 @@ define(function (require) {
                         }, handlerEmbed);
                     }
                 });
-            }
+            }*/
 
         }
 

@@ -15,7 +15,7 @@ define(function (require) {
     customElement.prototype.firstInviewCallback = function () {
         var $el = $(this.element);
         var tabTop = $el.find('mip-vd-tabs').offset().top;
-        var tabWidth = $el.find('.tab-content').width();
+        var tabWidth = $el.find('.tab-content').width() + 30;
         window.onscroll = function () {
             var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
             if (scrollTop > tabTop) {

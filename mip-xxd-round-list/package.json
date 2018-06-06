@@ -1,0 +1,14 @@
+{
+    "name": "mip-xxd-round-list",
+    "version": "1.0.0",
+    "description": "选校帝列表轮换组件",
+    "contributors": [
+        {
+            "name": "linkeo",
+            "email": "linkeo@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

@@ -2,7 +2,8 @@
 
 MIP 多种支付方式组件，支付流程：
 
-![MIP 支付流程图](https://user-images.githubusercontent.com/3872051/38978569-648ca01a-43ea-11e8-9042-1e1c414a89e1.png)
+![MIP 支付流程图](https://user-images.githubusercontent.com/7043799/40895000-9e81be22-67df-11e8-8eee-b32980948e08.png)
+
 
 标题|内容
 ----|----
