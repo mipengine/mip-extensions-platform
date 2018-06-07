@@ -30,7 +30,7 @@ define(function (require) {
                 jsonp: 'callback',
                 jsonpCallback: 'callback',
                 success: function (data) {
-                    if (data.name === '1') {
+                    if (data.name === '1' || data.name === '4') {
                         window.top.location.href = openUrl;
                         return false;
                     } else {
@@ -40,11 +40,7 @@ define(function (require) {
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
                     var result = openUrl.replace('//user.ppkao.com/', '//api.ppkao.com/');
-                    // if (isIE()) {
-                    //     window.top.location.href = result;
-                    //     result = '';
-                    //     return false;
-                    // }
+                    window.top.location.href = result;
                     return false;
                 }
             });
