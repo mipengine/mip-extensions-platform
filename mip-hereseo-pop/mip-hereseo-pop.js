@@ -79,9 +79,16 @@ define(function (require) {
                 toggle.call(self, event);
             });
             // $('#' + popButton + '').click(function () {
+            var popIdObject = $(this.element).find('#' + popId + '');
             var popTelObject = $(this.element).find('#' + popTel + '');
-            var popInfoObject = $(this.element).find('#' + popInfo + '');
-            var popContactObject = $(this.element).find('#' + popContact + '');
+            var popInfoObject = null;
+            var popContactObject = null;
+            if (popInfo !== '') {
+                popInfoObject = $(this.element).find('#' + popInfo + '');
+            }
+            if (popContact !== '') {
+                popContactObject = $(this.element).find('#' + popContact + '');
+            }
             $(this.element).find('#' + popButton + '').on('click', function (e) {
                 var tval = popTelObject.text();
                 var add = true;
@@ -92,30 +99,32 @@ define(function (require) {
                     if ($.trim(popContactObject.text()) === '') {
                         // $('#' + popContact + '').attr('placeholder', '请输入你的姓名');
                         // $('#' + popContact + '').css('border-color', '#FF0000');
+                        popContactObject.attr('placeholder', '请输入你的姓名');
+                        popContactObject.css('border-color', '#FF0000');
                         alert('请输入你的姓名');
                         return;
                     }
                 else {
-                        // $('#' + popContact + ' ').css('border-color', '#d2d2d2');
+                        popContactObject.css('border-color', '#d2d2d2');
                         popContactValue = $.trim(popContactObject.text());
                     }
                 }
                 // 判断联系方式是否为空
-                if ($.trim(tval) === ' ') {
-                    // $('#' + popTel + '').css('border-color', '#FF0000');
-                    // $('#' + popTel + '').attr('placeholder', '请输入你的手机号码');
+                if ($.trim(tval) === '') {
+                    popTelObject.css('border-color', '#FF0000');
+                    popTelObject.attr('placeholder', '请输入你的手机号码');
                     alert('请输入你的手机号码');
                     return;
                 }
                 else if (reTel.test(tval) === false && reg.test(tval) === false) {
-                    // $('#' + popTel + '').css('border-color', '#FF0000');
+                    popTelObject.css('border-color', '#FF0000');
                     popTelObject.text('');
-                    // $('#' + popTel + '').attr('placeholder', '输入的联系方式不正确');
+                    popTelObject.attr('placeholder', '输入的联系方式不正确');
                     alert('输入的联系方式不正确');
                     return;
                 }
                 else {
-                    // $('#' + popTel + '').css('border-color', '#d2d2d2');
+                    popTelObject.css('border-color', '#d2d2d2');
                     popTelValue = $.trim(tval);
                 }
                 if (popInfo !== ' ') {
@@ -126,23 +135,26 @@ define(function (require) {
                     'Tel': popTelValue,
                     'Message': popInfoValue,
                     'Name': popContactValue,
-                    'MessageSource': 'MIP-POP001'
+                    'MessageSource': 'MIP-POP001',
+                    'URL': window.location.href,
+                    'URLTitle': document.title
                 };
                 // 获取数据
                 $.ajax({
-                    url: 'http://m.hereseo.net/mguestbook.jspx',
+                    url: 'https://mip.hereseo.net/mipguestbook.jspx',
                     type: 'POST',
                     async: false,
-                    data: JSON.stringify(loginReqbody),
+                    // data: JSON.stringify(loginReqbody),
+                    data: loginReqbody,
                     error: function () {
                         alert('留言失败');
                     },
                     success: function (data, status) {
                         if (status = '0' && data !== '') {
                             alert('我们会马上贺你电话取得联系！');
-                            // $('#' + popTel + '').text('');
-                            // $('#' + popId + '').toggle();
-                            // $('.MIP-hereseo-pop-MASK').css('display', 'none');
+                            popTelObject.text('');
+                            popIdObject.toggle();
+                            $('.MIP-hereseo-pop-MASK').css('display', 'none');
                             // $('.MIP-hereseo-pop-MASK').style.display = 'none';
                             document.documentElement.classList.remove('mip-no-scroll');
                             self.open = false;

@@ -29,8 +29,14 @@ define(function (require) {
         // 点击按钮
         // $('#' + popButton + '').click(function () {
         var popTelObject = $(this.element).find('#' + popTel + '');
-        var popInfoObject = $(this.element).find('#' + popInfo + '');
-        var popContactObject = $(this.element).find('#' + popContact + '');
+        var popInfoObject = null;
+        var popContactObject = null;
+        if (popInfo !== '') {
+            popInfoObject = $(this.element).find('#' + popInfo + '');
+        }
+        if (popContact !== '') {
+            popContactObject = $(this.element).find('#' + popContact + '');
+        }
         $(this.element).find('#' + popButton + '').on('click', function (e) {
             var tval = popTelObject.text();
             var add = true;
@@ -39,28 +45,29 @@ define(function (require) {
             // 判断名字是否为空
             if (popContact !== '') {
                 if ($.trim(popContactObject.text()) === '') {
-                    // $('#' + popContact + ' ').attr('placeholder', '请输入你的姓名');
-                    // $('#' + popContact + ' ').css('border-color', '#FF0000');
+                    popContactObject.attr('placeholder', '请输入你的姓名');
+                    popContactObject.css('border-color', '#FF0000');
                     alert('请输入你的姓名');
                     return;//
                 }
                 else {
                     // $('#' + popContact + '').css('border-color', '#d2d2d2');
+                    popContactObject.css('border-color', '#d2d2d2');
                     popContactValue = $.trim(popContactObject.text());
                     popContactObject.text('');
                 }
             }
             // 判断联系方式是否为空
-            if ($.trim(tval) === ' ') {
-                // $('#' + popTel + '').css('border-color', '#FF0000');
-                // $('#' + popTel + '').attr('placeholder', '请输入你的手机号码');
+            if ($.trim(tval) === '') {
+                popTelObject.css('border-color', '#FF0000');
+                popTelObject.attr('placeholder', '请输入你的手机号码');
                 alert('请输入你的手机号码');
                 return;
             }
             else if (reTel.test(tval) === false && reg.test(tval) === false) {
-                // $('#' + popTel + '').css('border-color', '#FF0000');
-                $('#' + popTel + '').text('');
-                // $('#' + popTel + '').attr('placeholder', '输入的联系方式不正确');
+                popTelObject.css('border-color', '#FF0000');
+                popTelObject.text('');
+                popTelObject.attr('placeholder', '输入的联系方式不正确');
                 alert('输入的联系方式不正确');
                 return;
             }
@@ -77,13 +84,17 @@ define(function (require) {
                 'Tel': popTelValue,
                 'Message': popInfoValue,
                 'Name': popContactValue,
-                'MessageSource': 'MIP-MSG001'
+                'MessageSource': 'MIP-MSG001',
+                'URL': window.location.href,
+                'URLTitle': document.title
             };
             $.ajax({
-                url: 'http://m.hereseo.net/mguestbook.jspx',
+                url: 'https://m.hereseo.net/mguestbook.jspx',
                 type: 'POST',
                 async: false,
-                data: JSON.stringify(loginReqbody),
+				// dataType:"json",
+                data: loginReqbody,
+                // data: JSON.stringify(loginReqbody);
                 error: function () {
                     alert('留言失败2');
                 },

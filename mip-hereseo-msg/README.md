@@ -13,13 +13,18 @@ mip-hereseo-msg 用于提交联系方式的组件
 ### 基本用法
 
 ```html
-<mip-hereseo-msg popContact="Mcontact" popTel="Mtel" popInfo="Minfo" popButton="Mbutton" projectId="123">
-	<p contenteditable="true" id="Mcontact" placeholder="请输入您的手机号码~" ></p>  
-    <p contenteditable="true" id="Mtel" placeholder="请输入您的姓名~" ></p>
-   
-    <p contenteditable="true" id="Minfo" placeholder="请输入您的手机号码~" ></p>
-    <span id="Mbutton" value="立即提交" ></span>
-</mip-hereseo-msg>
+    <div class="leavemsgBox"> 
+     <p class="laveMsg-tit">在线留言</p> 
+     <div class="laveMsg-srk"> 
+      <mip-hereseo-msg popcontact="Mcontact3" poptel="Mtel3" popinfo="Minfo3" popbutton="Mbutton3" projectid="1234"> 
+       <p contenteditable="true" name="Mcontact3" id="Mcontact3" validatetarget="meContact" validatetype="must" placeholder="请输入您的姓名~"></p> 
+       <p contenteditable="true" name="Mtel3" id="Mtel3" validatetarget="meTel" validatetype="must" placeholder="请输入您的手机~"></p> 
+       <p contenteditable="true" class="msgTxt" name="Minfo3" id="Minfo3" placeholder="请输入留言内容~"></p> 
+       <span id="Mbutton3">提交留言</span> 
+      </mip-hereseo-msg> 
+     </div> 
+    </div> 
+   </div>
 ```
 ## 属性
 

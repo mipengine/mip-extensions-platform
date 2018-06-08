@@ -12,6 +12,7 @@ mip-hereseo-pop 悬浮留言组件
 
 ### 基本用法
 ```html
+
 <button on="tap:my-hereseo-pop.toggle" id="btn-open" role="button" tabindex="0">
     sOpen lightbox
 </button>
@@ -26,7 +27,6 @@ mip-hereseo-pop 悬浮留言组件
 	    <span id="Mbutton" value="立即提交" ></span>   
     </div>
 </mip-hereseo-pop>
- 
 ```
 
 ## 属性
