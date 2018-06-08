@@ -5,15 +5,15 @@
 
 define(function (require) {
     var customEle = require('customElement').create();
+    var $ = require('jquery'); // 引入jq
     customEle.prototype.firstInviewCallback = function () {
 
-        var shiche = 'true'; // 记录是车还是人
+        var shiche = 'false'; // 记录是车还是人
         var mianjian = 'true'; // 记录是免检还是没有免检
         var weizhang = 'true'; // 记录有违章还是没违章
         var baofei = 'true'; // 是否达到报废条件
         var chaxun = 'true'; // 查询是否有结果
         var weihu = 'false'; // 查询系统是否维护中
-        var $ = require('jquery'); // 引入jq
         var a = $(this.element).find('.bottom1_right');
         var b = $(this.element).find('#staus_right'); // 正常或达到报废标准的显示文本
         var c = $(this.element).find('#license');
