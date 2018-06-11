@@ -1,0 +1,14 @@
+{
+    "name": "mip-sdw-flexible",
+    "version": "1.0.0",
+    "description": "深度网mip组件;实配各种屏幕大小",
+    "contributors": [
+        {
+            "name": "Abner Wang",
+            "email": "yry5683@foxmail.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
