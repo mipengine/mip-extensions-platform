@@ -1,0 +1,14 @@
+{
+    "name": "mip-sdw",
+    "version": "1.0.0",
+    "description": "深度网组件",
+    "contributors": [
+        {
+            "name": "Abner Wang",
+            "email": "yry5683@foxmail.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

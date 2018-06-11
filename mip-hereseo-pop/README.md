@@ -13,19 +13,35 @@ mip-hereseo-pop 悬浮留言组件
 ### 基本用法
 ```html
 
+<style>
+	.bordertwo{ border:2px solid #FFFFFF;height:20px;}
+	#Mbutton1{height:50px;writh:100px;background-color:#FFFFFF;}
+</style>
+
 <button on="tap:my-hereseo-pop.toggle" id="btn-open" role="button" tabindex="0">
     sOpen lightbox
 </button>
 
-<mip-hereseo-pop   id="my-hereseo-pop"
-    layout="nodisplay"
-    class="mip-hidden"  Dwidth= '0.53'  divId = "lightbox" popContact="Mcontact" popTel="Mtel" popInfo="Minfo" popButton="Mbutton" projectId="123">
-    <div class="lightbox" id="lightbox">       
-	    <p contenteditable="true" id="Mcontact" placeholder="请输入您的手机号码~" ></p>  
-	    <p contenteditable="true" id="Mtel" placeholder="请输入您的姓名~" ></p>
-	    <p contenteditable="true" id="Minfo" placeholder="请输入您的手机号码~" ></p>
-	    <span id="Mbutton" value="立即提交" ></span>   
-    </div>
+
+<mip-hereseo-pop id="my-hereseo-pop" dwidth="0.9" layout="nodisplay" class="mip-hidden" divid="lightbox1" popcontact="" poptel="Mtel1" popinfo="" popbutton="Mbutton1" projectid="222223"> 
+<div class="Bgbox"> 
+ <div class="srkIMGBox" id="lightbox1"> 
+  <div class="srkImgTit"> 
+   <div>
+	 马上联系项目招商经理
+   </div> 
+   <button on="tap:my-hereseopop1.toggle" role="button" tabindex="0" id="btn-open" class="close"></button> 
+  </div> 
+  <div class="srkIMG"> 
+   <mip-img src="https://m.hereseo.net/r/www/mobile/img/form_left_img.png"> 
+   </mip-img>
+  </div> 
+  <p class="srtSlogen">我们立即与您沟通</p> 
+  <div contenteditable="true" type="text" name="meTel" id="Mtel1"  class="bordertwo" value="" validatetarget="username" validatetype="must" placeholder="请输入您的手机号码~"></div> 
+  <span type="submit" id="Mbutton1"  class="bordertwo">点击免费通话</span> 
+  <p class="srkTips">温馨提示：提交后，企业招商经理立即给您回拨~</p> 
+ </div> 
+</div> 
 </mip-hereseo-pop>
 ```
 

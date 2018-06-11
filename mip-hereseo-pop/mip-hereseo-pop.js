@@ -104,7 +104,7 @@ define(function (require) {
                         alert('请输入你的姓名');
                         return;
                     }
-                else {
+                    else {
                         popContactObject.css('border-color', '#d2d2d2');
                         popContactValue = $.trim(popContactObject.text());
                     }
@@ -127,7 +127,7 @@ define(function (require) {
                     popTelObject.css('border-color', '#d2d2d2');
                     popTelValue = $.trim(tval);
                 }
-                if (popInfo !== ' ') {
+                if (popInfo !== '') {
                     popInfoValue = $.trim(popInfoObject.text());
                 }
                 var loginReqbody = {
@@ -143,7 +143,7 @@ define(function (require) {
                 $.ajax({
                     url: 'https://mip.hereseo.net/mipguestbook.jspx',
                     type: 'POST',
-                    async: false,
+                    async: true,
                     // data: JSON.stringify(loginReqbody),
                     data: loginReqbody,
                     error: function () {

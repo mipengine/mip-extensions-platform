@@ -1,0 +1,14 @@
+{
+    "name": "mip-xsj-close",
+    "version": "1.0.0",
+    "description": "关闭组件",
+    "contributors": [
+        {
+            "name": "Green",
+            "email": "826918565@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

@@ -1,0 +1,13 @@
+{
+    "name": "mip-36mh-gg",
+    "version": "1.0.0",
+    "description":"36漫画广告轮播组件",
+    "author": {
+        "name": "Shen.L",
+        "email": "shen@shenl.com",
+        "url": "https://www.shenl.com"
+    },
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

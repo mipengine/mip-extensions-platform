@@ -89,9 +89,9 @@ define(function (require) {
                 'URLTitle': document.title
             };
             $.ajax({
-                url: 'https://m.hereseo.net/mguestbook.jspx',
+                url: 'https://mip.hereseo.net/mguestbook.jspx',
                 type: 'POST',
-                async: false,
+                async: true,
 				// dataType:"json",
                 data: loginReqbody,
                 // data: JSON.stringify(loginReqbody);

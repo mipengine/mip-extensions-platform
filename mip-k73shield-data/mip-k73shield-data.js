@@ -125,6 +125,9 @@ define(function (require) {
                 var dom3 = '<input type="text" id="yPhone" placeholder="输入手机号码">';
                 var dom4 = '<div class="yAlert_b"><div class="yAlert_bs">确定</div><div class="yAlert_br">取消</div></div>';
                 var yAlert = dom1 + '<div class="yAlert">' + dom2 + dom3 + dom4 + '</div>';
+                var title = $(ele).find('.f-game-h1').html();
+                var newtitle = title.replace('下载', '');
+                $(ele).find('.f-game-h1').html(newtitle);
                 $(ele).find('.f-downbtn-url').find('a').addClass('reser').html('立即预约');
                 $('body').on('click', '.reser', function (e) {
                     e.preventDefault();
