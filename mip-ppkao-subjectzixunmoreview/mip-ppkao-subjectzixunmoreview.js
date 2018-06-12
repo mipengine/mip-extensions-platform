@@ -23,6 +23,10 @@ define(function (require) {
         if (ele.dataset.classid) {
             url += '&classID=' + ele.dataset.classid;
         }
+        if (ele.dataset.dqid) {
+            url += '&dqID=' + ele.dataset.dqid;
+        }
+
         var page = 1;
         button.on('click', function () {
             viewMore();

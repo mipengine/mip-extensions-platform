@@ -5,6 +5,9 @@
 define(function (require) {
     var customElement = require('customElement').create();
     var $ = require('zepto');
+    var $href = window.location.href;
+    var num = $href.lastIndexOf('/');
+    var $host = $href.slice(0, num);
     customElement.prototype.firstInviewCallback = function () {
         var element = this.element;
         var supportobj = $(element);
@@ -13,14 +16,14 @@ define(function (require) {
             e.stopPropagation();
             $.ajax({
                 type: 'GET',
-                url: 'https://www.evask360.com/index.php?answer/ajaxhassupport/' + answerid,
+                url: $host + '/index.php?answer/ajaxhassupport/' + answerid,
                 cache: false,
                 success: function (hassupport) {
                     if (hassupport !== '1') {
                         $.ajax({
                             type: 'GET',
                             cache: false,
-                            url: 'https://www.evask360.com/index.php?answer/ajaxaddsupport/' + answerid,
+                            url: $host + '/index.php?answer/ajaxaddsupport/' + answerid,
                             success: function (comments) {
                                 supportobj.find('.agree-num').html(comments);
                             }

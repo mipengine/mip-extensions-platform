@@ -1,0 +1,14 @@
+{
+    "name": "mip-article-show",
+    "version": "1.0.0",
+    "description": "文章显示",
+    "contributors": [
+        {
+            "name": "haner",
+            "email": "liuzhiqing@eastmoney.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

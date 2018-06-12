@@ -1,0 +1,39 @@
+/**
+ * @file mip-linkeddb-column样式文件
+ */
+
+mip-linkeddb-column {
+    .column-list {
+        white-space: nowrap;
+        overflow: auto;
+        display: flex;
+    }
+    .column {
+        display: flex;
+        -ms-flex-direction: column;
+        -webkit-flex-direction: column;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        min-width: 10%;
+        overflow: hidden;
+        margin: 0 .25rem
+    }
+    .column-rule {
+        display: inline-block;
+        width: .75rem;
+        background-color: #658ccd;
+        position: relative;
+        margin-top: 1rem;
+        -webkit-animation: height 2s;
+        -o-animation: height 2s;
+        animation: height 2s
+    }
+    .column-rule i {
+        position: absolute;
+        top: -1rem;
+        font-size: .65rem;
+        left: 50%;
+        transform: translateX(-50%)
+    }
+}

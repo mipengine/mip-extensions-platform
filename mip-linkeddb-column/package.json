@@ -1,0 +1,14 @@
+{
+    "name": "mip-linkeddb-column",
+    "version": "1.0.0",
+    "description": "获取数字 然后以柱状图的形式表现出来",
+    "contributors": [
+        {
+            "name": "linkeddb",
+            "email": "340236524@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
