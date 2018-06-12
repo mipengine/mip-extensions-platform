@@ -1,0 +1,14 @@
+{
+    "name": "mip-pc6-stepaudio",
+    "version": "1.0.0",
+    "description": "分步阅读音频",
+    "contributors": [
+        {
+            "name": "lj",
+            "email": "lj@952.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

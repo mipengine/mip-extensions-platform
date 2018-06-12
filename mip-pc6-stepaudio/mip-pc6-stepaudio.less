@@ -1,0 +1,48 @@
+/**
+ * @file mip-pc6-stepaudio样式文件
+ */
+mip-pc6-stepaudio {
+    #audio-sound {
+        top: 45px;
+        position: fixed;
+        width: 100%;
+        z-index: 999;
+    }
+    .v_audio {
+        position: relative;
+        height: 30px;
+        font-size: 15px;
+    }
+    .v_audio >.audio_icon {
+        float: right;
+        padding-left: 72px;
+        height: 30px;
+        right: 0;
+        top: 0;
+        z-index: 9;
+        border-radius: 5px;
+        line-height: 30px;
+        color: #3fd0ce;
+        cursor: pointer;
+        background: url(https://m.pc6.com/public/img/audio_icon.png) no-repeat top center;
+        margin: 0 5px 0 0;
+    }
+    .v_audio .num {
+        float: left;
+        height: 30px;
+        line-height: 30px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        color: #333;
+    }
+    .v_audio .num span:nth-child(1) {
+        margin-right: 2px;
+        padding-right: 2px;
+        color: #3fd0ce;
+    }
+    .v_audio .num span:nth-child(2) {
+        margin-left: 2px;
+        padding-left: 2px;
+    }
+}
