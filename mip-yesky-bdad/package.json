@@ -1,0 +1,14 @@
+{
+    "name": "mip-yesky-bdad",
+    "version": "1.0.0",
+    "description": "百度广告",
+    "contributors": [
+        {
+            "name": "张",
+            "email": "1179585662@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
