@@ -1,0 +1,14 @@
+{
+    "name": "mip-yesky-tbad",
+    "version": "1.0.1",
+    "description": "淘宝广告",
+    "contributors": [
+        {
+            "name": "天极",
+            "email": "2296104031@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

@@ -12,7 +12,7 @@ mip-article-show 文章显示组件
 
 ### 基本用法
 ```html
-<mip-article-show ajaxUrl="" aTitleId="" aTimeId="" aSourceId="" aDigestId=""></mip-article-show>
+<mip-article-show ajaxUrl="" aTitleId="" aTimeId="" aSourceId="" aDigestId="" newsid=""></mip-article-show>
 ```
 
 ## 属性
@@ -45,6 +45,12 @@ mip-article-show 文章显示组件
 
 说明：文章摘要显示元素id
 必选项：否
+类型：字符串
+
+### newsid
+
+说明：文章id
+必选项：是
 类型：字符串
 
 ## 注意事项

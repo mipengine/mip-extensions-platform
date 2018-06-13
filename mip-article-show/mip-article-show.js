@@ -25,6 +25,8 @@ define(function (require) {
         var aSourceId = ele.attr('aSourceId');
         // 文章摘要
         var aDigestId = ele.attr('aDigestId');
+        // 文章id
+        var newsid = ele.attr('newsid');
 
         // 解析并获取链接带的参数
         var obj = {};
@@ -36,7 +38,7 @@ define(function (require) {
             obj.param[temp[0]] = temp[1];
         });
 
-        var newsid = obj.param['newsid'];
+        // var newsid = obj.param['newsid'];
 
         // 当文章id 和 接口地址存在时才请求数据
         if (newsid && ajaxUrl) {

@@ -24,7 +24,7 @@ define(function (require) {
             var pic = con.find('img');
             var zs = txt.length;
             var piclen = pic.length;
-            if (con.height() > 200) {
+            if (con.height() > 834) {
                 var muban = '<section class="click_more"><div class="slide-btn">';
                 muban += '<span>展开，查看全部</span><i></i></div></section>';
                 var newcon = con.find('.artbody');
