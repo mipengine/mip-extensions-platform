@@ -14,6 +14,10 @@ define(function (require) {
      */
     customElement.prototype.firstInviewCallback = function () {
         var $el = $(this.element);
+
+        document.addEventListener('touchmove', function (e) {
+            e.returnValue = true;
+        }, false);
         // 游客进入45秒后弹出弹框
         setTimeout(function () {
             if ($el.data('login') === false) {
@@ -22,7 +26,7 @@ define(function (require) {
                     $el.find('#phone-btn-open').trigger('tap');
                 }
             };
-        }, 45000);
+        }, 1000);
         this.addEventAction('open', function (event) {
             function initLocationData(locationClass, id) {
                 var domain = $el.find('.city-pop-btn').data('domain');

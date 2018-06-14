@@ -1,6 +1,6 @@
 # mip-chinacn-statistics
 
-mip-chinacn-statistics 中国供应商统计组件
+mip-chinacn-statistics 中国供应商统计
 
 标题|内容
 ----|----
@@ -12,7 +12,7 @@ mip-chinacn-statistics 中国供应商统计组件
 
 ### 基本用法
 ```html
-<mip-chinacn-statistics src="https://api.china.cn/dms/s.php?">
+<mip-chinacn-statistics src="https://api.china.cn/dms/s.php?" page="search">
 
 </mip-chinacn-statistics>
 ```
@@ -20,6 +20,11 @@ mip-chinacn-statistics 中国供应商统计组件
 
 ### src
 说明：请求后台地址
+必选项：是
+类型：string
+
+### page
+说明：页面类型
 必选项：是
 类型：string
 

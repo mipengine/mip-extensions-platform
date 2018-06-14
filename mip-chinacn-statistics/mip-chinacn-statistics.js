@@ -21,10 +21,12 @@ define(function (require) {
         data.userAgent = navigator.userAgent;
         // 请求地址
         var src = this.element.getAttribute('src');
+        // 页面类型
+        var page = this.element.getAttribute('page');
         // 请求
         fetch(src, {
             method: 'POST',
-            body: 'type=mip&str=' + JSON.stringify(data),
+            body: 'type=mip&page=' + page + '&str=' + JSON.stringify(data),
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
