@@ -1,0 +1,14 @@
+{
+    "name": "mip-html-number",
+    "version": "1.0.0",
+    "description": "获取li数量添加数字",
+    "contributors": [
+        {
+            "name": "dgm",
+            "email": "1028212667@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

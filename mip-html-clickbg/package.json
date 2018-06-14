@@ -1,0 +1,14 @@
+{
+    "name": "mip-html-clickbg",
+    "version": "1.0.0",
+    "description": "判断当前页面地址与URL一致附加样式",
+    "contributors": [
+        {
+            "name": "dgm",
+            "email": "1028212667@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

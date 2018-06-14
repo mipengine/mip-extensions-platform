@@ -1,0 +1,13 @@
+{
+    "name": "mip-dongde-share",
+    "version": "1.0.0",
+    "description": "m.iongde.com的分享功能",
+    "author": {
+        "name": "idongde",
+        "url": "http://m.idongde.com",
+        "email": "751718620@qq.com"
+    },
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
