@@ -26,7 +26,7 @@ define(function (require) {
                     $el.find('#phone-btn-open').trigger('tap');
                 }
             };
-        }, 1000);
+        }, 45000);
         this.addEventAction('open', function (event) {
             function initLocationData(locationClass, id) {
                 var domain = $el.find('.city-pop-btn').data('domain');
