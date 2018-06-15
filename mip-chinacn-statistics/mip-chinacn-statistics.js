@@ -19,12 +19,10 @@ define(function (require) {
         data.referrer = document.referrer;
         // ua
         data.userAgent = navigator.userAgent;
-        // 请求地址
-        var src = this.element.getAttribute('src');
         // 页面类型
         var page = this.element.getAttribute('page');
         // 请求
-        fetch(src, {
+        fetch('https://api.china.cn/dms/s.php?', {
             method: 'POST',
             body: 'type=mip&page=' + page + '&str=' + JSON.stringify(data),
             headers: {

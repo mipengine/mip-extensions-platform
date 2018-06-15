@@ -15,8 +15,8 @@ mip-html-clickbg 判断当前页面地址与URL一致附加样式
 	<mip-html-clickbg>
 		<div class="m-class-nav">
 			<ul class="clearfix g-gxhot-nav">
-	        <li><a data-type="mip" href="/thememip/ss/sgss/">伤感</a></li>
-			<li><a data-type="mip" href="/thememip/ss/xqss/">心情</a></li>
+	        <li><a data-type="mip" href="http://192.8.9.112:8000/local-extension-debug/mip-html-clickbg">伤感</a></li>
+			<li><a data-type="mip" href="http://192.8.9.112:8000/thememip/ss/xqss/">心情</a></li>
 			<li><a data-type="mip" href="/thememip/ss/gxss/">搞笑</a></li>
 			<li><a data-type="mip" href="/thememip/ss/jdss/">经典</a></li>
 			<li><a data-type="mip" href="/thememip/ss/kjss/">空间</a></li>

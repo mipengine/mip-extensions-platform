@@ -10,9 +10,9 @@ define(function (require) {
         var ele = this.element;
         var mentext = window.location.href;
         $(ele).find('.g-gxhot-nav li a').each(function () {
-            var menturl =  $('this').attr('href');
+            var menturl =  $(this).attr('href');
             if (mentext.indexOf(menturl) !== -1) {
-                $('this').addClass('hover');
+                $(this).addClass('hover');
             }
         });
     };

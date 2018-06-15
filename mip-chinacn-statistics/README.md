@@ -12,16 +12,11 @@ mip-chinacn-statistics 中国供应商统计
 
 ### 基本用法
 ```html
-<mip-chinacn-statistics src="https://api.china.cn/dms/s.php?" page="search">
+<mip-chinacn-statistics page="search">
 
 </mip-chinacn-statistics>
 ```
 ## 属性
-
-### src
-说明：请求后台地址
-必选项：是
-类型：string
 
 ### page
 说明：页面类型

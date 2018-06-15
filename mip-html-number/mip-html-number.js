@@ -9,8 +9,8 @@ define(function (require) {
     customElement.prototype.firstInviewCallback = function () {
         var ele = this.element;
         $(ele).find('#f-number li').each(function () {
-            var lengli = $('this').length;
-            $('this').find('b').html(lengli);
+            var lengli = $(this).index() + 1;
+            $(this).find('li b').append(lengli);
         });
     };
     return customElement;
