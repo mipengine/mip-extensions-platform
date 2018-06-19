@@ -8,6 +8,7 @@ define(function (require) {
 
     var customElement = require('customElement').create();
     var mustache = require('mip-mustache/mustache');
+    var viewer = require('viewer');
 
     window.HOST_TYPE = 2;
 
@@ -211,16 +212,42 @@ define(function (require) {
     };
 
     /**
-     * 第一次进入可视区回调，只会执行一次
+     * 组件触发本身的事件
+     *
+     * @param {string} eventStr 事件串
      */
-    customElement.prototype.firstInviewCallback = function () {
-        var self = this;
-        var element = self.element;
-        new MyBaiduMap(element);
+    customElement.prototype.eventExcute = function (eventStr) {
+        var element = this.element;
+        // 触发组件本身的事件
+        if (eventStr.indexOf('loaded:') > -1) {
+            viewer.eventAction.execute('loaded', element, {element: element});
+        }
+        if (eventStr.indexOf('distance:') > -1) {
+            viewer.eventAction.execute('distance', element, {element: element});
+        }
+        if (eventStr.indexOf('link:') > -1) {
+            viewer.eventAction.execute('link', element, {element: element});
+        }
     };
 
     /**
-     * 属性发生变化时
+     * 第一次进入可视区回调，只会执行一次
+     */
+    customElement.prototype.firstInviewCallback = function () {
+        var element = this.element;
+        var onAttr = element.getAttribute('on');
+        if (onAttr && onAttr !== '') {
+            this.eventExcute(onAttr);
+            element.rendered = true;
+        }
+        else {
+            // 等后续页面缓存更新后移除
+            new MyBaiduMap(element);
+        }
+    };
+
+    /**
+     * 属性发生变化时, 因为有的时候需要用 mip-bind 来绑定属性
      *
      * @param {string} attributeName 属性名
      * @param {string} oldValue 旧值
@@ -228,6 +255,7 @@ define(function (require) {
      */
     customElement.prototype.attributeChangedCallback = function (attributeName, oldValue, newValue) {
         var element = this.element;
+        var onAttr = element.getAttribute('on');
         var lat = element.getAttribute('data-lat');
         var lng = element.getAttribute('data-lng');
         // 经纬度都发生变化的时候才执行
@@ -239,7 +267,16 @@ define(function (require) {
         }
 
         if ((attributeName === 'data-lng' || attributeName === 'data-lat') && element.changed) {
-            new MyBaiduMap(element);
+            if (onAttr && onAttr !== '') {
+                if (!element.rendered) {
+                    this.eventExcute(onAttr);
+                    element.rendered = true;
+                }
+            }
+            else {
+                // 等后续页面缓存更新后移除
+                new MyBaiduMap(element);
+            }
         }
     };
 

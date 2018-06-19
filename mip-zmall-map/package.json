@@ -1,11 +1,11 @@
 {
     "name": "mip-zmall-map",
-    "version": "1.0.6",
-    "description": "商品详情页商家地址定位",
+    "version": "2.0.0",
+    "description": "百度地图组件",
     "contributors": [
         {
-            "name": "jy",
-            "email": "jiao.yang@zol.com.cn"
+            "name": "liuxianggui",
+            "email": "liu.xianggui@zol.com.cn"
         }
     ],
     "engines": {

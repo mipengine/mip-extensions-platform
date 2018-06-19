@@ -7,6 +7,7 @@ define(function (require) {
 
     var customElement = require('customElement').create();
     var fetchJsonp = require('fetch-jsonp');
+    var viewer = require('viewer');
 
     /**
      * 创建门店列表层
@@ -110,52 +111,6 @@ define(function (require) {
 
         // 防止多次重复绑定
         container.isBindScroll = true;
-    }
-
-    // 载入百度地图API
-    // 主要是为了获取用户经纬度
-    function initBaiduMapScript(ele, callback) {
-        var akAttr = ele.getAttribute('data-ak');
-        var ak = akAttr ? akAttr : 'N5KBzk1oUZc92TCC0lzwlcv1wOEwsYIO';
-        var scriptElement = document.createElement('script');
-        scriptElement.onload = scriptElement.onreadystatechange = function () {
-            if (!this.readyState || this.readyState === 'loaded' || this.readyState === 'complete') {
-                if (typeof callback === 'function') {
-                    callback();
-                }
-                if (scriptElement.parentNode) {
-                    scriptElement.parentNode.removeChild(scriptElement);
-                }
-                scriptElement.onload = scriptElement.onreadystatechange = null;
-            }
-        };
-        // 使用Lite版
-        scriptElement.src = '//api.map.baidu.com/getscript?v=3.0&ak=' + ak;
-        // 往组件里插入百度地图API
-        ele.appendChild(scriptElement);
-    }
-
-    // 获取用户经纬度
-    function getUserLocation(element) {
-        // 判断支持性
-        if (!navigator.geolocation) {
-            return;
-        }
-        var geolocation = new window.BMap.Geolocation();
-
-        geolocation.getCurrentPosition(function (PositionOptions) {
-            if (this.getStatus() === window.BMAP_STATUS_SUCCESS) {
-                // 用户坐标
-                var userLng = PositionOptions.longitude;
-                var userLat = PositionOptions.latitude;
-                var userProvince = PositionOptions.address.province;
-                element.setAttribute('lat', userLat);
-                element.setAttribute('lng', userLng);
-                element.setAttribute('province', userProvince);
-            }
-        }, {
-            enableHighAccuracy: true
-        });
     }
 
     // 渲染城市
@@ -294,6 +249,31 @@ define(function (require) {
         });
     }
 
+    // 渲染省份下面城市数据
+    function renderCityByProvince(id, element) {
+        var provinceData = element.province;
+        var cityHtml = '';
+        var cityNum = 0;
+        provinceData.forEach(function (item) {
+            if (id === item.id) {
+                item.cityList.forEach(function (citem) {
+                    cityHtml += [
+                        '<li data-pid="' + item.id + '" data-cid="' + citem.id + '">',
+                        citem.name + '</li>'
+                    ].join('');
+                    cityNum++;
+                });
+            }
+        });
+        var cityFilterElement = element.querySelector('#js_store_city');
+        cityFilterElement.innerHTML = cityHtml;
+        var cityScrollerElement = cityFilterElement.parentNode;
+        if (cityNum > 5) {
+            cityScrollerElement.classList.add('scroll');
+            smartScroll(cityScrollerElement, true);
+        }
+    }
+
     // 绑定省份筛选
     function bindProvinceEvent(element) {
         var orderFilterElement = element.querySelector('#js_store_filter_province');
@@ -312,28 +292,8 @@ define(function (require) {
                 cityPanelTrigger.parentNode.setAttribute('pid', id);
                 cityPanelTrigger.innerText = '选择城市/区';
 
-                // 渲染选择省份下的城市
-                var provinceData = element.province;
-                var cityHtml = '';
-                var cityNum = 0;
-                provinceData.forEach(function (item) {
-                    if (id === item.id) {
-                        item.cityList.forEach(function (citem) {
-                            cityHtml += [
-                                '<li data-pid="' + item.id + '" data-cid="' + citem.id + '">',
-                                citem.name + '</li>'
-                            ].join('');
-                            cityNum++;
-                        });
-                    }
-                });
-                var cityFilterElement = element.querySelector('#js_store_city');
-                cityFilterElement.innerHTML = cityHtml;
-                var cityScrollerElement = cityFilterElement.parentNode;
-                if (cityNum > 5) {
-                    cityScrollerElement.classList.add('scroll');
-                    smartScroll(cityScrollerElement, true);
-                }
+                // 渲染当前选择省份下的城市
+                renderCityByProvince(id, element);
 
                 selected.classList.remove('selected');
                 targetElement.classList.add('selected');
@@ -462,6 +422,11 @@ define(function (require) {
         var self = this;
         var element = self.element;
 
+        var onAttr = element.getAttribute('on');
+        if (onAttr && onAttr !== '') {
+            viewer.eventAction.execute('point', element, {element: element});
+        }
+
         // 因为该组件内部有一个DOM绑定了点击事件
         // 在需要某条件下触发 mip-zol-dialog 对外暴露的方法
         // 所以暂时不能用 on="组件ID.方法" 的方式来做
@@ -469,15 +434,6 @@ define(function (require) {
         // 通过它的 .customElement 来获取方法
         var mipDialogComponent = document.querySelector('mip-zol-dialog');
         element.mipDialogComponent = mipDialogComponent;
-
-        if (window.BMap) {
-            getUserLocation(element);
-        }
-        else {
-            initBaiduMapScript(element, function () {
-                getUserLocation(element);
-            });
-        }
 
         self.addEventAction('open', function () {
             open.call(self);

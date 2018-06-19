@@ -43,16 +43,19 @@ mip-zmall-tab-anchor {
             text-align: center;
             -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
         }
+        .tab-anchor-active {
+            color: #f60;
+        }
         .tab-anchor-active::after {
             content: '';
             position: absolute;
             z-index: 2;
-            left: 0;
+            left: 50%;
             bottom: 0;
-            width: 1000%;
+            width: 250%;
             height: .6rem;
-            -webkit-transform: scale(.1);
-            transform: scale(.1);
+            -webkit-transform: scale(.1) translateX(-50%);
+            transform: scale(.1) translateX(-50%);
             -webkit-transform-origin: left bottom;
             transform-origin: left bottom;
             background: #f60;

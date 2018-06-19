@@ -1,0 +1,14 @@
+{
+    "name": "mip-mipengine-reverse",
+    "version": "1.0.0",
+    "description": "给小说目录页逆序",
+    "contributors": [
+        {
+            "name": "caoru",
+            "email": "1461719319@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

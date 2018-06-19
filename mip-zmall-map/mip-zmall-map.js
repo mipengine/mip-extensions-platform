@@ -1,220 +1,286 @@
 /**
- * @file mip-zol-map 组件
- * @author viewJY
- * @time 2017-11-17
+ * @file mip-zmall-bmap 组件
+ * @author
  */
 
 define(function (require) {
+    'use strict';
 
     var customElement = require('customElement').create();
-
-    var baiduMapApiLoaded = false;
+    var mustache = require('mip-mustache/mustache');
 
     window.HOST_TYPE = 2;
 
-    function initMap(ele) {
-
+    // 载入百度地图API
+    function initBaiduMapScript(ele, callback) {
         var akAttr = ele.getAttribute('data-ak');
         var ak = akAttr ? akAttr : 'N5KBzk1oUZc92TCC0lzwlcv1wOEwsYIO';
-
         var scriptElement = document.createElement('script');
-        scriptElement.id = 'baiduMap';
-        scriptElement.src = '//api.map.baidu.com/getscript?v=2.0&ak=' + ak;
-        // 因为页面三个地方需要用到百度地图api,但只想插入一次
-        if (baiduMapApiLoaded) {
-            return;
-        }
+        scriptElement.onload = scriptElement.onreadystatechange = function () {
+            if (!this.readyState || this.readyState === 'loaded' || this.readyState === 'complete') {
+                ele.mapScriptLoaded = true;
+                if (typeof callback === 'function') {
+                    callback();
+                }
+                if (scriptElement.parentNode) {
+                    scriptElement.parentNode.removeChild(scriptElement);
+                }
+                scriptElement.onload = scriptElement.onreadystatechange = null;
+            }
+        };
+        // 使用Lite版
+        scriptElement.src = '//api.map.baidu.com/getscript?v=3.0&ak=' + ak;
         // 往组件里插入百度地图API
         ele.appendChild(scriptElement);
-        baiduMapApiLoaded = true;
     }
 
     /**
-     * ZMap 构造函数
+     * 地图类
      *
-     * @param {Object} ele Node元素
-     * @constructor
+     * @class
+     * @param {HTMLElement} element mip元素
      */
-    function ZMap(ele) {
-        this.mapEle = ele;
-
-        this.zmap = '';
-
-        this.x = ele.dataset.lng ? ele.dataset.lng : '';
-
-        this.y = ele.dataset.lat ? ele.dataset.lat : '';
-
-        this.title = ele.dataset.title ? ele.dataset.title : '';
-
-        this.zoom = ele.dataset.zoom || 18;
+    function MyBaiduMap(element) {
+        this.element = element;
     }
 
-    ZMap.prototype.map = function () {
+    MyBaiduMap.prototype.init = function (callback) {
+        var element = this.element;
+        var self = this;
+        initBaiduMapScript(element, function () {
+            self.BMap = window.BMap;
+            self.BMAP_STATUS_SUCCESS = window.BMAP_STATUS_SUCCESS;
+            self.Geolocation = new window.BMap.Geolocation();
+            if (typeof callback === 'function') {
+                callback();
+            }
+        });
+    };
 
-        var id = this.mapEle.firstElementChild.id || 'z_map';
+    MyBaiduMap.prototype.setMap = function (element) {
+        var x = element.dataset.lng;
+        var y = element.dataset.lat;
+        if (!x || x === '' || !y || y === '') {
+            return;
+        }
+        // 经纬度
+        this.x = parseFloat(x);
+        this.y = parseFloat(y);
 
-        if (this.x === '' || this.y === '') {
+        // 缩放级别
+        var zoom = element.dataset.zoom;
+        this.zoom = (zoom && zoom !== '') ? parseInt(zoom, 10) : 14;
+        // 创建地图容器
+        var mapContainer = document.createElement('div');
+        var mapContainerId = 'js_map_container' + (+new Date());
+        mapContainer.id = mapContainerId;
+        mapContainer.className = 'zmall-map-container zmall-bmap';
+        element.appendChild(mapContainer);
+
+        // 创建地图
+        var map = new window.BMap.Map(mapContainerId);
+        var point = new window.BMap.Point(this.x, this.y);
+        map.centerAndZoom(point, this.zoom);
+
+        var iconUrl = '//icon.zol-img.com.cn/newshop/mip/map-marker.png';
+        var icon = new window.BMap.Icon(iconUrl, new window.BMap.Size(20, 25), {
+            anchor: new window.BMap.Size(10, 25)
+        });
+        var marker = new window.BMap.Marker(point, {
+            icon: icon
+        });
+        map.addOverlay(marker);
+        map.disableDoubleClickZoom();
+        map.disableDragging();
+        map.disableInertialDragging();
+        map.disablePinchToZoom();
+
+        mapContainer.classList.add('zmall-bmap-container');
+        element.classList.add('map-loaded');
+
+        this.map = map;
+    };
+
+    // 计算距离
+    MyBaiduMap.prototype.setDistance = function (element) {
+        var self = this;
+        // 判断支持性
+        if (!navigator.geolocation) {
             return;
         }
 
-        this.zmap = new window.BMap.Map(id);
+        var lat = element.dataset.lat;
+        var lng = element.dataset.lng;
+        var targetPoint = new this.BMap.Point(lng, lat);
 
-        var point = new window.BMap.Point(this.x, this.y);
+        if (!self.map) {
+            self.setMap(element);
+            var mapContainer = element.querySelector('.zmall-bmap-container');
+            mapContainer && element.removeChild(mapContainer);
+        }
 
-        this.zmap.centerAndZoom(point, this.zoom);
-
-        this.zmap.disableDragging();
-
-        var marker = new window.BMap.Marker(point);
-
-        this.zmap.addOverlay(marker);
+        self.Geolocation.getCurrentPosition(function (PositionOptions) {
+            if (this.getStatus() === self.BMAP_STATUS_SUCCESS) {
+                // 用户坐标
+                var userLng = PositionOptions.longitude;
+                var userLat = PositionOptions.latitude;
+                var userPoint = new self.BMap.Point(userLng, userLat);
+                self.point = userPoint;
+                // 商家坐标
+                var distance = self.map.getDistance(targetPoint, userPoint);
+                self.distanceRender(element, {distance: distance});
+            }
+        }, {
+            enableHighAccuracy: true
+        });
     };
 
-    ZMap.prototype.distance = function () {
-        var userLng = '';
-        var userLat = '';
-
-        var self = this;
-
-        var countStr = '';
-
-        var id = self.mapEle.firstElementChild.id || 'z_map';
-
-        self.zmap = new window.BMap.Map(id);
-
-        if (navigator.geolocation) {
-            var geolocation = new window.BMap.Geolocation();
-
-            geolocation.getCurrentPosition(function (PositionOptions) {
-                if (this.getStatus() === window.BMAP_STATUS_SUCCESS) {
-                    userLng = PositionOptions.longitude;
-                    userLat = PositionOptions.latitude;
-
-                    var point = new window.BMap.Point(self.x, self.y);
-
-                    var usePoint = new window.BMap.Point(userLng, userLat);
-
-                    var distances = self.zmap.getDistance(point, usePoint);
-
-                    self.dis = calculate(distances);
-
-                    self.createEle(self.dis);
+    MyBaiduMap.prototype.getUserPoint = function (callback) {
+        if (this.point) {
+            callback(this.point);
+        }
+        else {
+            var self = this;
+            self.Geolocation.getCurrentPosition(function (PositionOptions) {
+                if (this.getStatus() === self.BMAP_STATUS_SUCCESS) {
+                    // 用户坐标
+                    var userLng = PositionOptions.longitude;
+                    var userLat = PositionOptions.latitude;
+                    var userPoint = new self.BMap.Point(userLng, userLat);
+                    self.point = userPoint;
+                    callback(userPoint);
                 }
             }, {
                 enableHighAccuracy: true
             });
         }
-        else {
-            self.zmap.addControl(new window.BMap.GeolocationControl());
-        }
-
-        function calculate(dis) {
-            var count = parseInt(dis, 10);
-
-            if (count > 1000) {
-                countStr = (count / 1000).toFixed(1) + '千米';
-            }
-            else {
-                countStr = count + '米';
-            }
-
-            return countStr;
-        }
     };
 
-    ZMap.prototype.createEle = function (text) {
-        var type = this.mapEle.getAttribute('data-type');
-
-        var address = this.mapEle.getAttribute('data-address');
-
-        var dom = this.mapEle.firstElementChild;
-
-        if (type === 'distance') {
-            dom.innerText = '距您现在位置约' + text;
+    // 格式化距离
+    MyBaiduMap.prototype.distanceFormat = function (distance, english) {
+        distance = Math.ceil(distance);
+        var str = '';
+        var kmSuffix = english ? 'km' : '千米';
+        var mSuffix = english ? 'm' : '米';
+        if (distance > 1000) {
+            str = (distance / 1000).toFixed(1) + kmSuffix;
         }
         else {
-            dom.innerHTML = '<p>' + address + '</p><span>距您约' + text + '</span>';
-            dom.classList.add('mip-fixed-adress-show');
+            str = distance + mSuffix;
         }
+        return str;
     };
 
-    ZMap.prototype.skipLink = function () {
-        var attr = this.mapEle.getAttribute('data-skip');
+    // 渲染distance
+    MyBaiduMap.prototype.distanceRender = function (element, data) {
+        var address = element.dataset.address;
+        var isEnglish = !!element.dataset.english;
+        data.address = address;
 
-        if (attr === 'false') {
+        data.distance = this.distanceFormat(data.distance, isEnglish);
+        var template = [
+            '<div class="zmall-bmap-distance">',
+            '<p>{{address}}</p>',
+            '<span>距您约{{distance}}</span>',
+            '</div>'
+        ].join('');
+
+        var templateElement = element.querySelector('template[type="mip-mustache"]');
+        if (templateElement) {
+            template = templateElement.innerHTML.trim();
+        }
+
+        var html = mustache.render(template, data);
+        element.innerHTML = html;
+        element.classList.add('map-distance-loaded');
+
+        var distanceElement = element.querySelector('.zmall-bmap-distance');
+        setTimeout(function () {
+            distanceElement && distanceElement.classList.add('visible');
+        }, 50);
+    };
+
+    // 地图跳转
+    MyBaiduMap.prototype.setGPSLink = function (element) {
+
+        var gps = element.dataset.gps;
+        var isGPSLink = gps === 'true';
+        if (!isGPSLink) {
             return;
         }
 
-        var link = this.mapEle.getAttribute('data-link');
+        var x = element.dataset.lng;
+        var y = element.dataset.lat;
+        if (!x || x === '' || !y || y === '') {
+            return;
+        }
+        // 经纬度
+        x = parseFloat(x);
+        y = parseFloat(y);
 
-        var address = this.mapEle.getAttribute('data-address');
+        var link = element.getAttribute('data-link');
+        var address = element.getAttribute('data-address');
+        var title = element.getAttribute('data-title');
 
         if (link === '' || link === null) {
             link = '//api.map.baidu.com/marker?location='
-                 + this.y + ',' + this.x
-                 + '&title=' + this.title
+                 + y + ',' + x
+                 + '&title=' + title
                  + '&content=' + address
                  + '&output=html&autoOpen=true/vt=map';
         }
 
-        this.mapEle.addEventListener('click', function (evt) {
+        element.addEventListener('click', function (evt) {
             evt.stopPropagation();
             evt.preventDefault();
-
-            window.location.href = link;
+            window.top.location.href = link;
         });
     };
 
-    // build说明: 商家定位(需要请求百度地图API)，有多处用到，故用build
+    MyBaiduMap.prototype.timer = function (element, func) {
+        if (element.mapScriptLoaded) {
+            func();
+            return;
+        }
+        setTimeout(function () {
+            MyBaiduMap.prototype.timer(element, func);
+        }, 100);
+    };
+
+    /**
+     * 业务里边有多个区块需要使用百度地图，所以通过此组件来提供百度地图API的使用
+     * 因此，需要build的时候就把百度地图javascript API 载入
+     */
     customElement.prototype.build = function () {
         var self = this;
-
-        var ele = self.element;
-
-        var type = ele.getAttribute('data-type');
-
-        initMap(ele);
-
-        window.addEventListener('load', function () {
-            var zMap = new ZMap(ele);
-            switch (type) {
-                case 'map':
-                    zMap.map();
-                    zMap.skipLink();
-                    break;
-                case 'distance':
-                case 'distance-fixed':
-                    zMap.distance();
-                    zMap.skipLink();
-                    break;
-                default:
-                    break;
-            }
+        var element = self.element;
+        var map = new MyBaiduMap(element);
+        map.init();
+        // 自定义事件给DOM来触发
+        self.addEventAction('map', function (e) {
+            map.timer(element, function () {
+                map.setMap(e.element);
+            });
         });
-    };
 
-    customElement.prototype.attributeChangedCallback = function (attributeName, oldValue, newValue) {
-        if (newValue && oldValue !== newValue) {
-            var self = this;
-            var element = self.element;
-            var type = element.getAttribute('data-type');
-            setTimeout(function () {
-                var zMap = new ZMap(element);
-                switch (type) {
-                    case 'map':
-                        zMap.map();
-                        zMap.skipLink();
-                        break;
-                    case 'distance':
-                    case 'distance-fixed':
-                        zMap.distance();
-                        zMap.skipLink();
-                        break;
-                    default:
-                        break;
-                }
-            }, 400);
-        }
+        self.addEventAction('distance', function (e) {
+            map.timer(element, function () {
+                map.setDistance(e.element);
+            });
+        });
+
+        self.addEventAction('gps', function (e) {
+            map.setGPSLink(e.element);
+        });
+
+        self.addEventAction('point', function (e) {
+            map.timer(element, function () {
+                map.getUserPoint(function (point) {
+                    e.element.setAttribute('lat', point.lat);
+                    e.element.setAttribute('lng', point.lng);
+                });
+            });
+        });
     };
 
     return customElement;
