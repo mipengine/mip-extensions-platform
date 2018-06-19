@@ -1,6 +1,6 @@
 # mip-huajun-xiazq
 
-mip-huajun-xiazq 组件说明
+mip-huajun-xiazq 用来支持本站特点id的操作
 
 标题|内容
 ----|----
@@ -37,15 +37,8 @@ mip-huajun-xiazq 组件说明
 </mip-huajun-xiazq>
 ### 基本用法
 ```html
-<mip-test>
+<mip-huajun-xiazq>
     自定义内容，可以嵌套其他组件
-</mip-test>
+</mip-huajun-xiazq>
 ```
-
-## 属性
-
-### {属性名}
-
-
-## 注意事项
 

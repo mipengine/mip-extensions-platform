@@ -169,7 +169,7 @@ define(function (require) {
             plateform: 'h5',
             subplateform: 'h5',
             version: '4.0.2',
-            channel: 'h5_' + (frm || 'zz'),
+            channel: 'h5_' + (frm || 'ald'),
             client: '',
             os: '',
             logs: '',

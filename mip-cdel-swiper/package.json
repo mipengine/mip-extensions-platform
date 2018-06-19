@@ -1,0 +1,14 @@
+{
+    "name": "mip-cdel-swiper",
+    "version": "1.0.0",
+    "description": "swiper插件",
+    "contributors": [
+      {
+        "name": "SimonLee",
+        "email": "331536354@qq.com"
+      }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
