@@ -218,11 +218,15 @@ define(function (require) {
      */
     customElement.prototype.eventExcute = function (eventStr) {
         var element = this.element;
+        var lat = element.dataset.lat;
+        var lng = element.dataset.lng;
+        var isEmptyLatAndLng = !lat || lat === '' || !lng || lng === '';
+
         // 触发组件本身的事件
         if (eventStr.indexOf('loaded:') > -1) {
             viewer.eventAction.execute('loaded', element, {element: element});
         }
-        if (eventStr.indexOf('distance:') > -1) {
+        if (eventStr.indexOf('distance:') > -1 && !isEmptyLatAndLng) {
             viewer.eventAction.execute('distance', element, {element: element});
         }
         if (eventStr.indexOf('link:') > -1) {
@@ -238,7 +242,6 @@ define(function (require) {
         var onAttr = element.getAttribute('on');
         if (onAttr && onAttr !== '') {
             this.eventExcute(onAttr);
-            element.rendered = true;
         }
         else {
             // 等后续页面缓存更新后移除
@@ -268,10 +271,10 @@ define(function (require) {
 
         if ((attributeName === 'data-lng' || attributeName === 'data-lat') && element.changed) {
             if (onAttr && onAttr !== '') {
-                if (!element.rendered) {
-                    this.eventExcute(onAttr);
-                    element.rendered = true;
-                }
+                var self = this;
+                setTimeout(function () {
+                    self.eventExcute(onAttr);
+                }, 0);
             }
             else {
                 // 等后续页面缓存更新后移除

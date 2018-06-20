@@ -5,65 +5,65 @@
 
 define(function (require) {
     function getUrlParam(name) {
-        let reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)'); // 构造一个含有目标参数的正则表达式对象
-        let r = window.location.search.substr(1).match(reg); // 匹配目标参数
+        var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)'); // 构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg); // 匹配目标参数
         if (r != null) {
             return (r[2]);
         }
         return null; // 返回参数值
     }
-
-
-    let customEle = require('customElement').create();
-    let $ = require('jquery'); // 引入jq
+    var customEle = require('customElement').create();
+    var $ = require('zepto'); // 引入jq
     customEle.prototype.firstInviewCallback = function () {
-        let reg = /[^0-9a-zA-Z]/g;
-        let reg1 = /[0-9a-zA-Z]/g;
-        let shiche = 'false'; // 记录是车还是人
-        let mianjian = ''; // 记录是免检还是没有免检
-        let weizhang = 'true'; // 记录有违章还是没违章
-        let baofei = 'true'; // 是否达到报废条件
-        let chaxun = 'none'; // 查询是否有结果
-        let weihu = 'false'; // 查询系统是否维护中
-        let chaxuned = 'false'; // 记录是否查询过
-        let a = $(this.element).find('.bottom1_right'); // 六年免检按钮
-        let b = $(this.element).find('#staus_right'); // 正常或达到报废标准的显示文本
-        let c = $(this.element).find('#license');
-        let d = $(this.element).find('#idcard');
-        let e = $(this.element).find('#id_staus_right'); // 驾驶人证的正常或违规未处理的显示文本
-        let f = $(this.element).find('.cxjgresult');
-        let g = $(this.element).find('.ljblwz'); // 无违章时立即办理违章处灰色
-        let h = $(this.element).find('#noerror'); // 维护时不显示车牌等信息
-        let i = $(this.element).find('#haserror'); // 违章中时的信息
-        let j = $(this.element).find('.noresult'); // 没有查询结果时显示这个
-        let k = $(this.element).find('#carid'); // 显示行驶证的地方
-        let l = $(this.element).find('#id_carid'); // 显示驾驶证的地方
-        let m = $(this.element).find('.weizhangcishu');
-        let n = $(this.element).find('.fakuanshu');
-        let o = $(this.element).find('.koufenshu');
-        let p = $(this.element).find('.tyyxqz');
-        let q = $(this.element).find('.qzbfsj');
-        let r = $(this.element).find('#leijijifen');
-        let s = $(this.element).find('.cxjg');
-        let t = $(this.element).find('#carid');
-        let u = $(this.element).find('.chufajuedingshu');
-        let v = $(this.element).find('#tip1');
-        let bottom = $(this.element).find('#fix_bottom');
-        let modal = $(this.element).find('#modal');
+        var reg = /[^0-9a-zA-Z]/g;
+        var reg1 = /[0-9a-zA-Z]/g;
+        var shiche = 'false'; // 记录是车还是人
+        var mianjian = ''; // 记录是免检还是没有免检
+        // var weizhang = 'true';  记录有违章还是没违章
+        var baofei = 'true'; // 是否达到报废条件
+        var chaxun = 'none'; // 查询是否有结果
+        var weihu = 'false'; // 查询系统是否维护中
+        var chaxuned = 'false'; // 记录是否查询过
+        var a = $(this.element).find('.bottom1_right'); // 六年免检按钮
+        var b = $(this.element).find('#staus_right'); // 正常或达到报废标准的显示文本
+        var c = $(this.element).find('#license');
+        var d = $(this.element).find('#idcard');
+        var e = $(this.element).find('#id_staus_right'); // 驾驶人证的正常或违规未处理的显示文本
+        var f = $(this.element).find('.cxjgresult');
+        var g = $(this.element).find('.ljblwz'); // 无违章时立即办理违章处灰色
+        var h = $(this.element).find('#noerror'); // 维护时不显示车牌等信息
+        var i = $(this.element).find('#haserror'); // 违章中时的信息
+        var j = $(this.element).find('.noresult'); // 没有查询结果时显示这个
+        var k = $(this.element).find('#carid'); // 显示行驶证的地方
+        var l = $(this.element).find('#id_carid'); // 显示驾驶证的地方
+        var m = $(this.element).find('.weizhangcishu');
+        var n = $(this.element).find('.fakuanshu');
+        var o = $(this.element).find('.koufenshu');
+        var p = $(this.element).find('.tyyxqz');
+        var q = $(this.element).find('.qzbfsj');
+        var r = $(this.element).find('#leijijifen');
+        var s = $(this.element).find('.cxjg');
+        var t = $(this.element).find('#carid');
+        var u = $(this.element).find('.chufajuedingshu');
+        var v = $(this.element).find('#tip1');
+        var bottom = $(this.element).find('#fix_bottom');
+        var modal = $(this.element).find('#modal');
         // 如果能获取到驾驶证号则使用驾驶证接口
         if (getUrlParam('license_no')) {
             getUrlParam('file_no');
             shiche = 'false';
             fetch('https://gdjmt.gdsecurity.cn:8081/jmt-api/aladdin/getLicenseInfo?license_no='
                 + getUrlParam('license_no') + '&file_no='
-                + getUrlParam('file_no')).then(res => res.json()).then(function (res) {
+                + getUrlParam('file_no')).then(function (res) {
+                    return res.json();
+                }).then(function (res) {
                     // console.log(res);
-                    let realLicense =  res.result.license_no.replace(reg, '');
-                    let licenseLength = realLicense.length;
-                    let one = realLicense.substring(0, licenseLength - 10);
-                    let two = realLicense.substring(licenseLength - 10, licenseLength - 1).replace(reg1, '*');
-                    let three = realLicense.substring(licenseLength - 1);
-                    let chulied = one.concat(two, three);
+                    var realLicense =  res.result.license_no.replace(reg, '');
+                    var licenseLength = realLicense.length;
+                    var one = realLicense.substring(0, licenseLength - 10);
+                    var two = realLicense.substring(licenseLength - 10, licenseLength - 1).replace(reg1, '*');
+                    var three = realLicense.substring(licenseLength - 1);
+                    var chulied = one.concat(two, three);
                     e.html(res.result.status);
                     l.html(chulied);
                     m.html(res.result.undeal_count);
@@ -75,8 +75,8 @@ define(function (require) {
                     v.html('是否确定清除驾驶人信息');
                     if (res.result_set.length > 0) {
                         chaxun = 'true';
-                        let divdom = '';
-                        for (let a = 0; a < res.result_set.length; a++) {
+                        var divdom = '';
+                        for (var a = 0; a < res.result_set.length; a++) {
                             divdom = divdom + '<div class="eachresult"><div class="cxjgitem_1">'
                             + res.result_set[a].cljgmc
                             + '</div>' + '<div class="cxjgfgx"></div>'
@@ -122,7 +122,9 @@ define(function (require) {
             fetch('https://gdjmt.gdsecurity.cn:8081/jmt-api/aladdin/getCarInfo?plate_no='
                 + getUrlParam('plate_no') + '&car_type='
                 + getUrlParam('car_type') + '&eng_no='
-                + getUrlParam('eng_no')).then(res => res.json()).then(function (res) {
+                + getUrlParam('eng_no')).then(function (res) {
+                    return res.json();
+                }).then(function (res) {
                     // console.log(res);
                     if (res.result.online === 1) {
                         mianjian = 'true';
@@ -135,11 +137,11 @@ define(function (require) {
                     b.html(res.result.status);
                     p.html('检验有效期至：' + res.result.valid_date);
                     q.html('强制报废时间：' + res.result.invalidated_date);
-                    let divdom = '';
+                    var divdom = '';
                     if (res.result_set.length > 0) {
                     // console.log('违法记录有' + res.result_set.length + '条');
                         chaxun = 'true';
-                        for (let a = 0; a < res.result_set.length; a++) {
+                        for (var a = 0; a < res.result_set.length; a++) {
                             divdom = divdom + '<div class="eachresult"><div class="cxjgitem_1">'
                             + res.result_set[a].cjjgmc + '</div>'
                             + '<div class="cxjgfgx"></div>' + '<div class="weifadetail"><div class="weifashijian">'
@@ -175,11 +177,6 @@ define(function (require) {
                     }
                 });
         }
-
-
-
-
-
         if (mianjian === 'true') {
             $(a[0]).show();
         }
@@ -189,14 +186,14 @@ define(function (require) {
         if (shiche === 'true') {
             c.show();
             d.hide();
-            /*            $(f[0]).show();
-                        $(f[1]).hide();*/
+          // $(f[0]).show();
+          // $(f[1]).hide();
         }
         if (shiche === 'false') {
             c.hide();
             d.show();
-            /* $(f[0]).hide();
-             $(f[1]).show();*/
+            // $(f[0]).hide();
+            // $(f[1]).show();
         }
         if (chaxun === 'false') {
             $(j).show();
@@ -217,7 +214,8 @@ define(function (require) {
                 modal.hide();
                 if (shiche === 'false') {
                     window.top.location.href = 'https://www.baidu.com/s?wd=驾驶人违法查询';
-                } else
+                }
+                else
                 {
                     window.top.location.href = 'https://www.baidu.com/s?wd=违章查询';
                 }

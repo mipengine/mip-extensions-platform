@@ -35,8 +35,10 @@ define(function (require) {
         var exp = this.element.getAttribute('data');
         // 获取数据
         var data = getWithResult(exp)();
+        // 检查是否有模板
+        var templateElm = element.querySelector('template');
         // 渲染模板
-        if (data) {
+        if (data && templateElm) {
             templates.render(element, data).then(function (html) {
                 element.innerHTML = html;
                 element.renderComplete = true;

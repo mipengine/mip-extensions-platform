@@ -1,7 +1,7 @@
 {
-    "name": "mip-anlian-public",
-    "version": "1.1.0",
-    "description": "搜索组件",
+    "name": "mip-anlian-search",
+    "version": "1.0.0",
+    "description": "导航搜索组件",
     "contributors": [
         {
             "name": "wang",

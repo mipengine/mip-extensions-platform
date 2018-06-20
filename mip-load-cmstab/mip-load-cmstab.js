@@ -32,7 +32,7 @@ define(function (require) {
                         html += '' + data.Title[o] + '</a>';
                         var date0 = data.DateAndTime[o].replace(/\//ig, '-');
                         var date = date0.substring(0, data.DateAndTime[o].lastIndexOf(' '));
-                        html += '<span class="u-deta">发布时间：' + data + '</span></li>';
+                        html += '<span class="u-deta">发布时间：' + date + '</span></li>';
                     }
                     $(ele).find('#tab-div ul').eq(tabnum).append(html);
                     $(ele).find('#more').html('\u70b9\u51fb\u67e5\u770b\u66f4\u591a\u002e\u002e\u002e');
