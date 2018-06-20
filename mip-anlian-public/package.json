@@ -1,0 +1,14 @@
+{
+    "name": "mip-anlian-public",
+    "version": "1.0.0",
+    "description": "搜索组件",
+    "contributors": [
+        {
+            "name": "wang",
+            "email": "1242482124@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
