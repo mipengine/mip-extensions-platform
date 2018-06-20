@@ -1,0 +1,14 @@
+{
+    "name": "mip-load-cmstab",
+    "version": "1.0.2",
+    "description": " 经线上测试，firstinviewcallback无法满足效果，必须使用build，请通过=======用于给选项卡里边的内容增加点击加载内容，每个选项卡对应不同的接口，接口id和接口地址通过模版获取，接口网址为https.。",
+    "contributors": [
+        {
+            "name": "dgm",
+            "email": "1028212667@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.0.1"
+    }
+}

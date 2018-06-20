@@ -1,0 +1,14 @@
+{
+    "name": "mip-catalog-reverse",
+    "version": "1.0.0",
+    "description": "小说目录页逆序",
+    "contributors": [
+        {
+            "name": "曹茹",
+            "email": "1461719319@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
