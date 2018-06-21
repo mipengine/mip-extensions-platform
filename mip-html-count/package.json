@@ -1,0 +1,14 @@
+{
+    "name": "mip-html-count",
+    "version": "1.0.0",
+    "description": "获取ul下面li的个数然后赋值",
+    "contributors": [
+        {
+            "name": "dgm",
+            "email": "1028212667@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
