@@ -1,0 +1,14 @@
+{
+    "name": "mip-alading-autoscreen",
+    "version": "1.0.0",
+    "description": "用于页面内容大小随着手机屏幕大小而改变的rem转px自适应,优化了刷新时也适应",
+    "contributors": [
+        {
+            "name": "黄伟荣",
+            "email": "79682884@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
