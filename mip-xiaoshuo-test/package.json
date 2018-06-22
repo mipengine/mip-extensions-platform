@@ -1,0 +1,14 @@
+{
+    "name": "mip-xiaoshuo-test",
+    "version": "1.0.0",
+    "description": "小说阅读页控制组件，包括四套主题皮肤、五种字号、上下章节、目录等功能。",
+    "contributors": [
+        {
+            "name": "xuexb",
+            "email": "1461719319@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
