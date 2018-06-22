@@ -12,8 +12,9 @@ define(function (require) {
         }
         return null; // 返回参数值
     }
+
     var customEle = require('customElement').create();
-    var $ = require('zepto'); // 引入jq
+    var $ = require('zepto');// 引入zepto
     customEle.prototype.firstInviewCallback = function () {
         var reg = /[^0-9a-zA-Z]/g;
         var reg1 = /[0-9a-zA-Z]/g;
@@ -75,6 +76,8 @@ define(function (require) {
                     v.html('是否确定清除驾驶人信息');
                     if (res.result_set.length > 0) {
                         chaxun = 'true';
+                        $(s).css('display', 'inline-block');
+                        $(f).show();
                         var divdom = '';
                         for (var a = 0; a < res.result_set.length; a++) {
                             divdom = divdom + '<div class="eachresult"><div class="cxjgitem_1">'
@@ -111,6 +114,11 @@ define(function (require) {
                         $(g[0]).css('color', 'rgba(51,51,51,0.2)');
                         chaxun = 'false';
                         $(u).html('查询车辆违章');
+                        j.show();
+                        $(s).css('display', 'inline-block');
+                    }
+                    if ($(document.body).height() + 50 > $(window).height()) {
+                        $(bottom).css('position', 'inherit');
                     }
                 });
         }
@@ -141,6 +149,8 @@ define(function (require) {
                     if (res.result_set.length > 0) {
                     // console.log('违法记录有' + res.result_set.length + '条');
                         chaxun = 'true';
+                        $(s).css('display', 'inline-block');
+                        $(f).show();
                         for (var a = 0; a < res.result_set.length; a++) {
                             divdom = divdom + '<div class="eachresult"><div class="cxjgitem_1">'
                             + res.result_set[a].cjjgmc + '</div>'
@@ -174,6 +184,11 @@ define(function (require) {
                         $(g[0]).css('color', 'rgba(51,51,51,0.2)');
                         chaxun = 'false';
                         $(u).html('我有处罚决定书');
+                        j.show();
+                        $(s).css('display', 'inline-block');
+                    }
+                    if ($(document.body).height() + 50 > $(window).height()) {
+                        $(bottom).css('position', 'inherit');
                     }
                 });
         }

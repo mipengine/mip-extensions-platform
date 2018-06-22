@@ -1,0 +1,14 @@
+{
+    "name": "mip-click-dome",
+    "version": "1.0.0",
+    "description": "选项卡效果",
+    "contributors": [
+        {
+            "name": "dgm",
+            "email": "1028212667@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "name": "mip-html-name",
+    "version": "1.0.0",
+    "description": "获取标签值然后判断",
+    "contributors": [
+        {
+            "name": "dgm",
+            "email": "1028212667@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

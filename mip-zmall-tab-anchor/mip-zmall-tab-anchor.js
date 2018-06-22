@@ -35,6 +35,7 @@ define(function (require) {
             var panel = document.querySelector(item);
             if (!panel) {
                 settings.tabAnchorText.splice(index, 1);
+                settings.tabPanelIds.splice(index, 1);
             }
         });
 
