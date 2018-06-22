@@ -1,13 +1,14 @@
 /**
 * @file 脚本支持
 * @author hejieye
-* @time  2018-05-29
-* @version 2.1.8
+* @time  2018-06-20
+* @version 2.1.9
 */
 define(function (require) {
     var $ = require('zepto');
     var customElem = require('customElement').create();
     var busUid = '';
+    var httpPath = 'https://mipp.iask.cn';
     var fetchJsonp = require('fetch-jsonp');
     var utf8Encode = function (string) {
         string = string.replace(/\r\n/g, '\n');
@@ -130,6 +131,7 @@ define(function (require) {
     	$tokenDiv.innerHTML = '<mip-stats-baidu token="' + token + '"></mip-stats-baidu>';
     };
     var ipLoad = function (callback) {
+//        var url = 'http://ipip.iask.cn/iplookup/search?format=json&callback=?';
     	var url = 'https://mipp.iask.cn/iplookup/search?format=json&callback=?';
         try {
             $.getJSON(url, function (data) {
@@ -222,7 +224,7 @@ define(function (require) {
             }
             pv = encodeURI('pv=' + mode + '_' + qid + '_' + ip + '_' + province + '_' + city + '_' + materialTag
             + '_' + qcid + '_' + cid + '_' + source + '_' + uid + '_' + pos);
-            var url = 'https://mipp.iask.cn/advLogInfo?' + pv;
+            var url = httpPath + '/advLogInfo?' + pv;
             $.get(url);
         });
     };
@@ -421,7 +423,7 @@ define(function (require) {
         	}
         }
         addClass($that, 'show');
-        advLogInfoClick(ele, '.youlai_feed_div .href_log', ele.querySelector('.paramDiv'), '');
+        advLogInfoClick('.youlai_feed_div .href_log', ele.querySelector('.paramDiv'), '');
     };
     // 商业广告
     var busBottomAM = function (ele, $tokenDiv, token) {
@@ -752,7 +754,7 @@ define(function (require) {
         var link = divData.getAttribute('link');
         var introduce = divData.getAttribute('introduce');
         var uid =  divData.getAttribute('uid');
-    	var brandLink = 'https://mipp.iask.cn/brand/' + uid + '.html';
+    	var brandLink = httpPath + '/brand/' + uid + '.html';
     	putBrandQiyeInfo(ele, brandname, introduce, link, imgsrc, statsBaidu, '', brandLink);
         var tImgSrc = commercialStandardHover.getAttribute('imgsrc');
         var tLink = commercialStandardHover.getAttribute('link');
@@ -787,7 +789,7 @@ define(function (require) {
         else if (type === '') {
             return;
         }
-        var url = 'https://mipp.iask.cn/t/wlsh?openCorporationId=' + openId + '&type=' + type +"&questionId=" + questionId + "&version=" + version;
+        var url = httpPath + '/t/wlsh?openCorporationId=' + openId + '&type=' + type +"&questionId=" + questionId + "&version=" + version;
         $.get(url,
         function (data) {
             var base = new Base64();
@@ -837,9 +839,10 @@ define(function (require) {
             }
         });
     };
+    
     // 加载url中的js
     var loadURLJS = function (ele, tags, params, sourceType, questionId, $thatParam, $thatLog,$tokenDiv, token) {
-        var url = 'https://mipp.iask.cn/mib/tag/';
+        var url = httpPath + '/mib/tag/';
         var arry = tags.split(':');
         var youlaiTag = '';
         var runhaiTag = '';
@@ -1277,41 +1280,105 @@ define(function (require) {
         loadAd(ele, sourceType, openId, questionId, version);
         advLogInfo(ele, sourceType, 0);
     };
+    // 南方网通底部悬浮广告
     var southnetwork = function (ele, openId) {
     	var $thatHotList = ele.querySelector('.hot-tui-list');
     	var $thatHotDiv = ele.querySelector('.hot_recomd_div');
     	var $that = ele.querySelector('.mip_as_bottm_div');
     	var $tokenDiv = ele.querySelector('.mip-stats-token-div');
     	var token = ele.querySelector('.mip-token-value').innerHTML;
-        var url = 'https://imgv2-ssl.g3user.com/api/iask.php?uid=' + openId + '&type=m&callback=?';
+        var type = 'SOUTH';
         try {
-            $.getJSON(url, function (data) {
-            	removeBaiduAd(ele);
-                var baiduStr = {"type":"click", "data":["_trackEvent", "MIP_SY_100", "skip", "MIP_SY_100_sj"]};
-                var baiduObj = 'data-stats-baidu-obj="' + encodeURIStr(baiduStr) + '"';
-                var htmls = putMXfAd(data.mobile.link, data.mobile.pic, baiduObj, '');
-            	$that.innerHTML = htmls;
-                advLogInfoClick(ele, '.mip_as_bottm_div .href_log', ele.querySelector('.paramDiv'));
-                if(data.logo !== null && data.logo !== undefined) {
-                	putQiyeInfo(ele, data.logo.brand, data.logo.intro, data.logo.link, data.logo.pic, baiduObj, '');
+            var url = httpPath + '/t/wlsh?openCorporationId=' + openId + '&type=' + type;
+            $.get(url,
+            function (data) {
+                var base = new Base64();
+                var res = $.parseJSON(data);
+                if (res.succ === 'Y') {
+                	removeBaiduAd(ele);
+                    var json = $.parseJSON(base.decode(res.html));
+                    console.log(json);
+                    var baiduStr = '{"type":"click", "data":["_trackEvent", "MIP_SY_100", "skip", "MIP_SY_100_sj"]}';
+                    var baiduObj = 'data-stats-baidu-obj="' + encodeURIStr(baiduStr) + '"';
+                    
+                    for (var i in json.adList) {
+                    	var material = json.adList[i];
+                    	if(material.materialType === '5') {
+                    		var htmls = putMXfAd(material.picLink, material.picUrl, baiduObj, '');
+                        	$that.innerHTML = htmls;
+                        	advLogInfoClick(ele, '.mip_as_bottm_div .href_log', ele.querySelector('.paramDiv'));
+                    	}
+                    	else if(material.type === '3') {
+                    		putQiyeInfo(ele, material.companyName, material.descb, json.website, material.picUrl, baiduObj, '');
+                    	}
+                    	else if(material.type === '8') {
+                    		var str = '';
+                        	for(var index in material.adDetailList) {
+                        		var picLink = material.picLink;
+                        		var picUrl = material.adDetailList[index].picUrl;
+                        		var picDesc = material.adDetailList[index].describe;
+                        		str += hotRecommend(picLink, picUrl, picDesc, baiduObj, '');
+                        	}
+                        	$thatHotList.innerHTML = str;
+                        	addClass($thatHotDiv, 'show');
+                        	advLogInfoClick(ele, '.hot-tui-list .href_log', ele.querySelector('.paramDiv'));
+                    	}
+                    }
+                    advLogInfo(ele, 'COOPERATE_SOUTHNETWORK', 0);
+                    loadStatsToken($tokenDiv, token);
                 }
-                if(data.feed !== null && data.feed.length > 0) {
-                	var str = '';
-                	for(var index in data.feed) {
-                		var picLink = data.feed[index].link;
-                		var picUrl = data.feed[index].pic;
-                		var picDesc = data.feed[index].title;
-                		str += hotRecommend(picLink, picUrl, picDesc, baiduObj, '');
-                	}
-                	$thatHotList.innerHTML = str;
-                	addClass($thatHotDiv, 'show');
-                	advLogInfoClick(ele, '.hot-tui-list .href_log', ele.querySelector('.paramDiv'));
-                }
-                advLogInfo(ele, 'COOPERATE_SOUTHNETWORK', 0);
-                loadStatsToken($tokenDiv, token);
             });
         }
         catch (e) {}
+    };
+    //云网客广告
+    var yunwangke = function (ele, openId, questionId, version) {
+    	var $thatHotList = ele.querySelector('.hot-tui-list');
+    	var $thatHotDiv = ele.querySelector('.hot_recomd_div');
+    	var $that = ele.querySelector('.mip_as_bottm_div');
+    	var $tokenDiv = ele.querySelector('.mip-stats-token-div');
+    	var token = ele.querySelector('.mip-token-value').innerHTML;
+    	var url = httpPath + "/t/wlsh?openCorporationId=" + openId + "&type=YWK&questionId=" + questionId + "&version=" + version;
+    	$.get(url, function (data) {
+        	var base = new Base64();
+            var res = $.parseJSON(data);
+            if (res.succ === 'Y') {
+            	//有广告数据才删除百度广告，否则展示百度广告
+            	removeBaiduAd(ele);
+                var json = $.parseJSON(base.decode(res.html));
+                var basedata = json.adList;
+                var baiduStr = {"type":"click", "data":["_trackEvent", "MIP_SY_103", "skip", "MIP_sy_103_sy"]};
+                var baiduObj = 'data-stats-baidu-obj="' + encodeURIStr(baiduStr) + '"';
+                for(var key in basedata){
+                	var obj = basedata[key];
+                	if(obj.type == 1 && obj.materialType == 5){//顶部悬浮
+                		var htmls = putMXfAd(obj.picLink, obj.picUrl, baiduObj, '');
+                     	$that.innerHTML = htmls;
+                        advLogInfoClick(ele, '.mip_as_bottm_div .href_log', ele.querySelector('.paramDiv'));
+                	}else if (obj.type == 3){//企业
+                		var website = json.website;//企业链接地址
+        				var companyName = obj.companyName || "";
+        			    var drName   = obj.descb  || "";
+                		putQiyeInfo(ele, companyName, drName, website, obj.picUrl, baiduObj, '');
+                	}else if (obj.type == 8){ //feed广告
+                		var str = '';
+                		var picList = obj.adDetailList;//图片和说明集合
+                		var picLink = obj.picLink; //跳转链接
+                		for(var i = 0;i<picList.length;i++){
+                            var pic = picList[i].picUrl;
+                            var picDesc = picList[i].describe;
+                    		str += hotRecommend(picLink, pic, picDesc, baiduObj, '');
+                    	}
+                    	$thatHotList.innerHTML = str;
+                    	addClass($thatHotDiv, 'show');
+                    	advLogInfoClick(ele, '.hot-tui-list .href_log', ele.querySelector('.paramDiv'));
+                	}
+                }
+                advLogInfo(ele, 'COOPERATE_YUNWANG', 0);
+                loadStatsToken($tokenDiv, token);
+                removeBaiduAd(ele);
+            }
+        });
     };
     var getmainCategoryPics = function (ele){
     	var list = {};
@@ -1433,7 +1500,7 @@ define(function (require) {
     var effectAvertisement = function (ele, questionId, sourceType,$tokenDiv, token) {
         ipLoad(function (data) {
             var provinceCode = data.provinceCode;
-            var url = 'https://mipp.iask.cn/mib/tag/test?q=' + questionId + '&c=' + provinceCode;
+            var url = httpPath + '/mib/tag/test?q=' + questionId + '&c=' + provinceCode;
             try {
                 $.getJSON(url, function (res) {
                     if (res.jsonData != null) {
@@ -1451,6 +1518,7 @@ define(function (require) {
             }
         });
     };
+    
     
     var advEffectCallBack = function (ele, materiel) {
     	var $that = ele.querySelector('.paramDiv');
@@ -1491,7 +1559,7 @@ define(function (require) {
             	brandLink = json.materialLink;  // 南方网通效果广告-链接跳转自己的物料链接
             }
             else {
-            	brandLink = 'https://mipp.iask.cn/brand/' + uid + '.html';
+            	brandLink = httpPath + '/brand/' + uid + '.html';
             }
             putBrandQiyeInfo(ele, json.brandName, json.shortIntroduce, json.materialLink, json.materialImg, baiduObj, '', brandLink);
             return;
@@ -1582,6 +1650,7 @@ define(function (require) {
         },
         answerInfo: function (ele, opts, dsbo) {
             var statsBaidu = 'data-stats-baidu-obj="' + dsbo + '"';
+//            putQiyeInfo(opts.drName, opts.companyName, opts.website, opts.picUrl, statsBaidu, opts.type);
             putBaoXiangQiyeInfo(ele, opts.phone, 'http://pic.iask.cn/fimg/1508386968_1196.jpg', statsBaidu, opts.type);
         },
         feed: function (ele, opts, dsbo) {
@@ -1744,9 +1813,39 @@ define(function (require) {
             }
         }
     };
+    
+    var checkDate = function (thetime) {
+    	var curDate = new Date().Format("yyyy-MM-dd");
+    	var d1 = new Date(thetime.Format("yyyy-MM-dd").replace(/\-/g, "\/"));    
+    	var d2 = new Date(curDate.replace(/\-/g, "\/"));  
+    	return d1 < d2 ? false : true;
+    };
+    var addDateYear= function (time, num) {
+    	var d1=new Date(time); 
+    	var d2=new Date(d1); 
+    	d2.setFullYear(d2.getFullYear()+num); 
+    	d2.setDate(d2.getDate()-1); 
+    	return d2;
+    };
+    Date.prototype.Format = function (fmt) {
+        var o = {
+            "M+": this.getMonth() + 1, //月份 
+            "d+": this.getDate(), //日 
+            "h+": this.getHours(), //小时 
+            "m+": this.getMinutes(), //分 
+            "s+": this.getSeconds(), //秒 
+            "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
+            "S": this.getMilliseconds() //毫秒 
+        };
+        if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        for (var k in o)
+        if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        return fmt;
+    };
+    
     // 选择投放广告
     var selectAS = function () {
-	/*因为广告参数定义到了组件外部所以我们这里需要用到全局选择器*/
+    	/*因为参数都定义在了组件外部，所以需要使用全局选择器*/
     	var ele = this.document;
     	var $thatParam = ele.querySelector('.paramDiv');
     	var $thatHover = ele.querySelector('.commercialStandardHover');
@@ -1760,6 +1859,7 @@ define(function (require) {
         var mainTags  = $thatParam.getAttribute('maintags');
         var questionId = $thatParam.getAttribute('qid');
         var qcid = $thatParam.getAttribute('qcid');
+        var postDate = $thatParam.getAttribute('postDate');
         var $tokenDiv = ele.querySelector('.mip-stats-token-div');
     	var token = ele.querySelector('.mip-token-value').innerHTML;
         if (sources === 'COMMERCIAL_IAD' || sources === 'COMMERCIAL_ZWZD' || sources === 'COMMERCIAL_CAD') {
@@ -1796,19 +1896,25 @@ define(function (require) {
             }
             currencyAM(ele, sourceType, openId, questionId, version);
         }
-        else if (sourceType === 'COOPERATE_SOUTHNETWORK') {
-            // 南方网通广告
-            southnetwork(ele, openId);
+        else if (sourceType === 'COOPERATE_SOUTHNETWORK' && checkDate(addDateYear(postDate, 1))) {
+        	// 南方网通广告
+        	  southnetwork(ele, openId);
+        }
+        else if (sourceType === 'COOPERATE_YUNWANG') {
+        	/*// 需要删除百度广告
+            removeBaiduAd(ele);*/
+            // 云网客广告
+            yunwangke(ele, openId, questionId, version);
         }
         else if ('82' === qcid && (mainTags.indexOf('意外险') > -1
         || mainTags.indexOf('品牌词') > -1 || mainTags.indexOf('少儿险') > -1
         || mainTags.indexOf('重疾险') > -1 || mainTags.indexOf('保险') > -1)) {
             var nowTime = getSysTime();
-            var startTime = ele.querySelectorAll('.bxStartTime')[0].innerText;
-            var endTime   = ele.querySelectorAll('.bxEndTime')[0].innerText;
+            var startTime = ele.querySelector('.bxStartTime').innerText;
+            var endTime   = ele.querySelector('.bxEndTime').innerText;
             if (startTime <= nowTime && nowTime < endTime) {
                 // 商业广告-保险标签投放
-                var url = 'https://mipp.iask.cn/t/wlsh?type=BX&bxt=';
+            	var url = httpPath + '/t/wlsh?type=BX&bxt=';
                 if (mainTags.indexOf('少儿险') > -1) {
                     url += 'jl';
                 }
@@ -1828,13 +1934,12 @@ define(function (require) {
             if (tags) {
             	sourceType = 'COOPERATE_HUASHENG_BY';
                 $thatParam.setAttribute('sources', sourceType);
-                loadURLJS(ele, tags, params, sourceType, questionId, $thatParam, $thatLog);
+                loadURLJS(ele, tags, params, sourceType, questionId, $thatParam,$tokenDiv, $thatLog);
             }
         }
     };
     
     var selectCommercail = function() {
-	/*因为广告参数定义到了组件外部所以我们这里需要用到全局选择器*/
     	var ele = this.document;
     	var $thatDiv = ele.querySelectorAll('.mip_as_bottm_div');
     	var $that = ele.querySelectorAll('.paramDiv');
@@ -1850,7 +1955,7 @@ define(function (require) {
                 var putUrl = ele.querySelector('.yongyouPutUrl').innerText;
                 var picUrl = ele.querySelector('.yongyouPicUrl').innerText;
                 $thatDiv.innerHTML = putTestButHtml(putUrl, picUrl);
-                var urlr = 'https://mipp.iask.cn/t/mipdf?t=yongyou';
+                var urlr = httpPath + '/t/mipdf?t=yongyou';
                 $.ajax({
                     type: 'GET',
                     url: urlr,
