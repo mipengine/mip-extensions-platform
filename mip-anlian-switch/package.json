@@ -1,0 +1,14 @@
+{
+    "name": "mip-anlian-switch",
+    "version": "1.0.0",
+    "description": "组件内切换",
+    "contributors": [
+        {
+            "name": "wang",
+            "email": "1242482124@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

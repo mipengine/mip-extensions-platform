@@ -1,0 +1,12 @@
+{
+  "name": "mip-365-verification",
+  "version": "1.0.0",
+  "description": "获取手机验证码",
+  "author": {
+    "name": "yinpeng",
+    "email": "yinpeng@64365.com"
+  },
+  "engines": {
+    "mip": ">=1.1.0"
+  }
+}
