@@ -1,0 +1,14 @@
+{
+    "name": "mip-ajaxform",
+    "version": "1.0.0",
+    "description": "报课预约",
+    "contributors": [
+        {
+            "name": "anshdiai",
+            "email": "287639598@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
