@@ -19,7 +19,7 @@ define(function (require) {
         var reg = /[^0-9a-zA-Z]/g;
         var reg1 = /[0-9a-zA-Z]/g;
         var shiche = 'false'; // 记录是车还是人
-        var mianjian = ''; // 记录是免检还是没有免检
+        var mianjian = 'false'; // 记录是免检还是没有免检
         // var weizhang = 'true';  记录有违章还是没违章
         var baofei = 'true'; // 是否达到报废条件
         var chaxun = 'none'; // 查询是否有结果
@@ -49,6 +49,7 @@ define(function (require) {
         var v = $(this.element).find('#tip1');
         var bottom = $(this.element).find('#fix_bottom');
         var modal = $(this.element).find('#modal');
+        var but = $(this.element).find('.bottom1_right');
         // 如果能获取到驾驶证号则使用驾驶证接口
         if (getUrlParam('license_no')) {
             getUrlParam('file_no');
@@ -110,8 +111,8 @@ define(function (require) {
                         }
                     }
                     if (res.result_set.length === 0) {
-                        $(g[0]).css('background', 'rgba(229,229,229,1)');
-                        $(g[0]).css('color', 'rgba(51,51,51,0.2)');
+                        $(g).css('background', 'rgba(229,229,229,1)');
+                        $(g).css('color', 'rgba(51,51,51,0.2)');
                         chaxun = 'false';
                         $(u).html('查询车辆违章');
                         j.show();
@@ -133,11 +134,6 @@ define(function (require) {
                 + getUrlParam('eng_no')).then(function (res) {
                     return res.json();
                 }).then(function (res) {
-                    // console.log(res);
-                    if (res.result.online === 1) {
-                        mianjian = 'true';
-                        $(a[0]).show();
-                    }
                     t.html(res.result.hphm);
                     m.html(res.result.undeal_count);
                     n.html(res.result.undeal_amount_of_money);
@@ -180,8 +176,8 @@ define(function (require) {
                         }
                     }
                     if (res.result_set.length === 0) {
-                        $(g[0]).css('background', 'rgba(229,229,229,1)');
-                        $(g[0]).css('color', 'rgba(51,51,51,0.2)');
+                        $(g).css('background', 'rgba(229,229,229,1)');
+                        $(g).css('color', 'rgba(51,51,51,0.2)');
                         chaxun = 'false';
                         $(u).html('我有处罚决定书');
                         j.show();
@@ -190,10 +186,12 @@ define(function (require) {
                     if ($(document.body).height() + 50 > $(window).height()) {
                         $(bottom).css('position', 'inherit');
                     }
+                    if (res.result.online === 1) {
+                        but.css('display', 'block');
+                    }
                 });
         }
         if (mianjian === 'true') {
-            $(a[0]).show();
         }
         if (baofei === 'true') {
             b.html('达到报废标准公告牌证作废');

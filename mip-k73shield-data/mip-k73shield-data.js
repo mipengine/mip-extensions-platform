@@ -14,6 +14,7 @@ define(function (require) {
         var ele = this.element;
         var pageInfo = {
             id: $(ele).find('.f-information').attr('data-id'),
+            rootid: Math.ceil($(ele).find('.f-information').attr('data-rootid')),
             categroyId: Math.ceil($(ele).find('.f-information').attr('data-categroyId')),
             ismoney: $(ele).find('.f-information').attr('data-ismoney'),
             system: $(ele).find('.f-information').attr('data-system').toUpperCase(),
@@ -45,6 +46,13 @@ define(function (require) {
             var notagsurl = data.swnotagurl;
             var incity = data.ipInfo.city;
             mgcFilter(data.ffTitle, data.mgcArrayHtml, data['eject-city'], incity);
+            var rootIdArr = [33, 85, 81, 34, 37, 129, 513, 120, 130, 36, 131, 121, 60, 101, 96];
+            var rootId = pageInfo.rootid;
+            if (rootIdArr.indexOf(rootId) !== -1) {
+                var tips = '<p class="f-tips">资源无法直接在手机上使用！</p>';
+                $(ele).find('#fhuadong2').after(tips);
+            }
+
             downAddress();
             if (nodownOK === true) {
                 if ($(ele).find('.f-nodown').length <= 0) {
@@ -69,7 +77,9 @@ define(function (require) {
             var koCity = dataEjectCity;
             var arrayTextSize = mgcHtml.length;
             var arrayHtmlSize = mgcArrayHtml.length;
+            console.log(city);
             if ($.inArray(city, koCity) !== -1) {
+                console.log('333333');
                 if (arrayTextSize === arrayHtmlSize) {
                     for (var i = 0; i < arrayTextSize; i++) {
                         for (var n = 0; n < mgcHtml[i].length; n++) {

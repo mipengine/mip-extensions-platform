@@ -15,6 +15,8 @@ define(function (require) {
 
         opt.$result = $(opt.$result);
         opt.$loading = $(opt.$loading);
+        opt.$wrapper = $(opt.$wrapper);
+        opt.$scroller = $(opt.$scroller);
 
         // 设置默认值
         me.options = $.extend({

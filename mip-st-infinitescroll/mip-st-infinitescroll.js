@@ -115,6 +115,15 @@ define(function (require) {
         };
 
         infiniteScroll = new InfiniteScroll({
+            /*
+                修复实现Tab组件横滑动画时，定高了body
+                导致无限滚动组件无法正确依据window与body判断是否已到底的问题
+                修复方案为支持外部传递滚动的内容与滚动的容器元素
+             */
+            $wrapper: self.params.wrapSelector
+                ? document.querySelector(self.params.wrapSelector) : window,
+            $scroller: self.params.wrapSelector
+                ? document.querySelector(self.params.scrollerSelector) : document.body,
             $result: element.querySelector('.mip-infinitescroll-results'),
             $loading: element.querySelector('.mip-infinitescroll-loading'),
             loadingHtml: self.params.loadingHtml,

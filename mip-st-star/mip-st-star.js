@@ -44,14 +44,14 @@ define(function (require) {
             stars: stars
         });
 
-        // var html = '<div class="star-wrapper">';
-        // for (i = 1; i <= total; i++) {
-        //     html += '<mip-img height="' + size + '" width="' + size + '" m-bind:src="stars.star'
-        //         + i + '" src=\'' + (i <= value ? starImg1 : starImg0) + '\'></mip-img>';
-        // }
-        // html += '</div>';
+        var html = '<div class="star-wrapper">';
+        for (i = 1; i <= total; i++) {
+            html += '<mip-img height="' + size + '" width="' + size + '" m-bind:src="stars.star'
+                + i + '" src=\'' + (i <= value ? starImg1 : starImg0) + '\'></mip-img>';
+        }
+        html += '</div>';
 
-        // element.innerHTML = html;
+        element.innerHTML = html;
         var imgs = element.querySelectorAll('mip-img');
         for (i = 1; i <= imgs.length; i++) {
             (function (i) {
