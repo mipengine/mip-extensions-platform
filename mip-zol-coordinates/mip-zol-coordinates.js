@@ -15,7 +15,7 @@ define(function (require) {
         var item = element.querySelectorAll('.item')[0];
 
         // console.log(item);
-        item.style.left = parseInt(item.getAttribute('data-val'), 2) + '%';
+        item.style.left = parseInt(item.getAttribute('data-val'), 10) + '%';
     };
     return customElement;
 });
