@@ -1,0 +1,14 @@
+{
+  "name": "mip-zol-coordinates",
+  "version": "1.0.0",
+  "description": "横向坐标轴组件",
+  "contributors": [
+    {
+      "name": "dongxiaohui",
+      "email": "dong.xiaohui@zol.com.cn"
+    }
+  ],
+  "engines": {
+    "mip": ">=1.1.0"
+  }
+}

@@ -89,9 +89,14 @@ define(function (require) {
             if (data.status === 0) {
                 submitData.response = data.data;
                 var token = data.token;
-                var redirectUrl = redirect.replace(/#([^#]*)#/g, function ($1, $2) {
-                    return submitData[$2] || defaultValue;
+                var redirectUrl = redirect.replace(/#([^#]*)#/g, function ($0, $1) {
+                    return submitData[$1] || defaultValue;
                 });
+
+                redirectUrl = redirectUrl.replace(/{{(.+?)}}/g, function ($0, $1) {
+                    return encodeURIComponent($1);
+                });
+
                 window.location = handleUrl(redirectUrl, {token: token});
             }
             else {
@@ -142,8 +147,12 @@ define(function (require) {
         else {
 
             // 直接转跳
-            var redirectUrl = redirect.replace(/#([^#]*)#/g, function ($1, $2) {
-                return submitData[$2] || '';
+            var redirectUrl = redirect.replace(/#([^#]*)#/g, function ($0, $1) {
+                return submitData[$1] || '';
+            });
+
+            redirectUrl = redirectUrl.replace(/{{(.+?)}}/g, function ($0, $1) {
+                return encodeURIComponent($1);
             });
             window.location = redirectUrl;
         }
