@@ -9,6 +9,21 @@
 define(function (require) {
     var customElem = require('customElement').create();
     var $ = require('zepto');
+
+    var getCurrentUrl = function () {
+        var a = '';
+        try {
+            a = top.document.location;
+        } catch (b) {
+            try {
+                a = document.location;
+            } catch (c) {}
+        }
+        return encodeURIComponent(a);
+    };
+    var getDocumentTitle = function () {
+        return encodeURIComponent(document.title);
+    };
     // 初始化插件
     var init = function (element) {
         var argId = element.getAttribute('id') || 0;
@@ -21,6 +36,8 @@ define(function (require) {
             'https://api.ys137.com/all_adv?',
             'id=' + argId,
             '&from=' + argFrom,
+            '&url=' + getCurrentUrl(),
+            '&title=' + getDocumentTitle(),
             '&v=' + timestamp
         ].join('');
         var fetchJsonp = require('fetch-jsonp');
@@ -29,12 +46,11 @@ define(function (require) {
         }).then(function (res) {
             return res.json();
         }).then(function (data) {
-            if (data) {
-                $(element).append(data);
+            if (data && data !== null) {
+                $(element).empty().append(data);
             }
         });
     };
-
     // build 方法，元素插入到文档时执行，仅会执行一次
     customElem.prototype.build = function () {
         // this.element 可取到当前实例对应的 dom 元素

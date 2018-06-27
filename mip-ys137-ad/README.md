@@ -13,11 +13,13 @@ mip-ys137-ad 管理页面上的所有广告位
 ### 普通广告
 ```html
 <mip-ys137-ad id="1">
+    我是默认广告
 </mip-ys137-ad>
 ```
 ### mip渠道投放广告
 ```html
 <mip-ys137-ad id="1" from='mip'>
+    我是默认广告
 </mip-ys137-ad>
 ```
 
