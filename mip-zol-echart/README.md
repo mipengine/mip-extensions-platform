@@ -9,6 +9,8 @@ mip-zol-echart 图表组件
 所需脚本|https://c.mipcdn.com/static/v1/mip-zol-echart/mip-zol-echart.js
 
 ## 示例
+### 1.0.1新增
+图表最大值的取值部分处理
 
 ### 基本用法
 ```html

@@ -1,0 +1,14 @@
+{
+    "name": "mip-index-tabcontent",
+    "version": "1.0.0",
+    "description": "点击实现对应的消息框组件",
+    "contributors": [
+        {
+            "name": "lin",
+            "email": "840399305@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.0.0"
+    }
+}

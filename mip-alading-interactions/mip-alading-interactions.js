@@ -18,9 +18,10 @@ define(function (require) {
     customEle.prototype.firstInviewCallback = function () {
         var reg = /[^0-9a-zA-Z]/g;
         var reg1 = /[0-9a-zA-Z]/g;
-        var shiche = 'false'; // 记录是车还是人
+        var shiche = ''; // 记录是车还是人
         var mianjian = 'false'; // 记录是免检还是没有免检
         // var weizhang = 'true';  记录有违章还是没违章
+        var newsture = ''; // 记录查询信息是否有误 true为信息正确，false为信息错误
         var baofei = 'true'; // 是否达到报废条件
         var chaxun = 'none'; // 查询是否有结果
         var weihu = 'false'; // 查询系统是否维护中
@@ -31,6 +32,7 @@ define(function (require) {
         var d = $(this.element).find('#idcard');
         var e = $(this.element).find('#id_staus_right'); // 驾驶人证的正常或违规未处理的显示文本
         var f = $(this.element).find('.cxjgresult');
+        var myorder = $(this.element).find('.ckwddd');
         var g = $(this.element).find('.ljblwz'); // 无违章时立即办理违章处灰色
         var h = $(this.element).find('#noerror'); // 维护时不显示车牌等信息
         var i = $(this.element).find('#haserror'); // 违章中时的信息
@@ -50,16 +52,28 @@ define(function (require) {
         var bottom = $(this.element).find('#fix_bottom');
         var modal = $(this.element).find('#modal');
         var but = $(this.element).find('.bottom1_right');
+        var newsfalsetip = $(this.element).find('#newerror');
         // 如果能获取到驾驶证号则使用驾驶证接口
         if (getUrlParam('license_no')) {
             getUrlParam('file_no');
-            shiche = 'false';
             fetch('https://gdjmt.gdsecurity.cn:8081/jmt-api/aladdin/getLicenseInfo?license_no='
                 + getUrlParam('license_no') + '&file_no='
                 + getUrlParam('file_no')).then(function (res) {
                     return res.json();
                 }).then(function (res) {
                     // console.log(res);
+                    shiche = 'false';
+                    console.log(res.errcode);
+                    if (res.errcode === 0) {
+                        d.show();
+                        myorder.show();
+                        g.show();
+                    }
+                    if (res.errcode === -200) {
+                        $(h).css('display', 'none');
+                        newsfalsetip.show();
+
+                    }
                     var realLicense =  res.result.license_no.replace(reg, '');
                     var licenseLength = realLicense.length;
                     var one = realLicense.substring(0, licenseLength - 10);
@@ -119,7 +133,7 @@ define(function (require) {
                         $(s).css('display', 'inline-block');
                     }
                     if ($(document.body).height() + 50 > $(window).height()) {
-                        $(bottom).css('position', 'inherit');
+                        $(bottom).css('position', 'inherit'); // 根据页面最大高度与当前窗口高度决定底部是否悬浮
                     }
                 });
         }
@@ -127,13 +141,23 @@ define(function (require) {
         if (getUrlParam('plate_no')) {
             getUrlParam('car_type');
             getUrlParam('eng_no');
-            shiche = 'true';
             fetch('https://gdjmt.gdsecurity.cn:8081/jmt-api/aladdin/getCarInfo?plate_no='
                 + getUrlParam('plate_no') + '&car_type='
                 + getUrlParam('car_type') + '&eng_no='
                 + getUrlParam('eng_no')).then(function (res) {
                     return res.json();
                 }).then(function (res) {
+                    console.log(res.errcode);
+                    if (res.errcode === 0) {
+                        c.show();
+                        myorder.show();
+                        g.show();
+                    }
+                    if (res.errcode === -200) {
+                        $(h).css('display', 'none');
+                        newsfalsetip.show();
+
+                    }
                     t.html(res.result.hphm);
                     m.html(res.result.undeal_count);
                     n.html(res.result.undeal_amount_of_money);
@@ -186,10 +210,15 @@ define(function (require) {
                     if ($(document.body).height() + 50 > $(window).height()) {
                         $(bottom).css('position', 'inherit');
                     }
-                    if (res.result.online === 1) {
-                        but.css('display', 'block');
-                    }
+                    // if (res.result.online === 1) {
+                       //  but.css('display', 'block');
+                    // }  第一版本不上6年免检 屏蔽6年免检按钮
                 });
+        }
+
+        if (!getUrlParam('plate_no') && !getUrlParam('license_no')) {
+            $(h).css('display', 'none');
+            newsfalsetip.show();
         }
         if (mianjian === 'true') {
         }
@@ -197,14 +226,14 @@ define(function (require) {
             b.html('达到报废标准公告牌证作废');
         }
         if (shiche === 'true') {
-            c.show();
-            d.hide();
+            // c.show();
+            // d.hide();
           // $(f[0]).show();
           // $(f[1]).hide();
         }
         if (shiche === 'false') {
-            c.hide();
-            d.show();
+            /*c.hide();*/
+            // d.show();
             // $(f[0]).hide();
             // $(f[1]).show();
         }
@@ -219,9 +248,28 @@ define(function (require) {
         }
 
         this.addEventAction('custom_event', function (event /* 对应的事件对象 */, str /* 事件参数 */) {
-             // console.log(str);
+            console.log(str);
             if (str === 'delete') {
                 modal.show();
+            }
+            if (str === 'ckwddd') {
+                window.top.location.href = 'http://test.xx-motor.com/yzcw-web-admin/login/xmd/xmd_baidu_xzh/myOrder/auth';
+            }
+            if (str === 'ljblwz') {
+                if (g[0].style.background === 'rgb(229, 229, 229)') {
+
+                }
+                else {
+                    if (getUrlParam('license_no')) {
+                        window.top.location.href = 'https://yz-alipay.fundway.net/yzcw-web-admin/login/xmd/xmd_baidu_xzh/illegal_result/auth';
+                    }
+                    if (getUrlParam('plate_no')) {
+                        window.top.location.href = 'https://yz-alipay.fundway.net/yzcw-web-admin/login/'
+                        + 'xmd/xmd_baidu_xzh/illegal_result/auth?'
+                        + 'PLATENUMBER=' + getUrlParam('plate_no') + '&FDJH=' + getUrlParam('eng_no')
+                        + '&PLATETYPE=' + getUrlParam('car_type');
+                    }
+                }
             }
             if (str === 'sure') {
                 modal.hide();
@@ -233,6 +281,14 @@ define(function (require) {
                     window.top.location.href = 'https://www.baidu.com/s?wd=违章查询';
                 }
 
+            }
+            if (str === 'inputagain') {
+                if (getUrlParam('license_no')) {
+                    window.top.location.href = 'https://www.baidu.com/s?wd=驾驶人违法查询';
+                }
+                else {
+                    window.top.location.href = 'https://www.baidu.com/s?wd=违章查询';
+                }
             }
             if (str === 'cancel') {
                 modal.hide();

@@ -17,6 +17,8 @@ define(function (require) {
         var element = this.element;
         var chartType = element.getAttribute('type');
         var chartVal = element.getAttribute('data-val');
+        var maxFlage = true;
+        var count = 0;
 
         // console.log(chartVal);
 
@@ -65,7 +67,7 @@ define(function (require) {
                 radar: [{
                     nameGap: 5,
                     center: ['50%', '57%'],
-                    radius: '80%',
+                    radius: '75%',
                     splitArea: {
                         areaStyle: {
                             color: ['#fff', '#fff', '#fff', '#fff']
@@ -76,13 +78,16 @@ define(function (require) {
                         formatter: function (value, indicator) {
                             var npercent = indicator.num;
                             var maxNum = dataVal[0];
+                            var maxNumIndex = 0;
+                            var minNumIndex = [];
                             var minNum = dataVal[0];
+                            count ++;
 
-                            // console.log(npercent);
-
+                            // console.log(count);
+                            // console.log(indicator);
                             // console.log(value);
                             for (var i = 0; i < dataVal.length; i++) {
-                                if (maxNum < dataVal[i]) {
+                                if (maxNum <= dataVal[i]) {
                                     maxNum = dataVal[i];
                                 };
                                 if (minNum > dataVal[i]) {
@@ -90,25 +95,55 @@ define(function (require) {
                                 };
                             }
 
-                            // console.log(minNum);
+                            if (maxNum === dataVal[2]) {
+                                maxNumIndex = 2;
+                            } else if (maxNum === dataVal[3]) {
+                                maxNumIndex = 3;
+                            } else if (maxNum === dataVal[4]) {
+                                maxNumIndex = 4;
+                            } else if (maxNum === dataVal[0]) {
+                                maxNumIndex = 0;
+                            } else if (maxNum === dataVal[1]) {
+                                maxNumIndex = 1;
+                            }
 
+                            if (minNum === dataVal[1]) {
+                                minNumIndex = 1;
+                            } else if (minNum === dataVal[0]) {
+                                minNumIndex = 0;
+                            } else if (minNum === dataVal[4]) {
+                                minNumIndex = 4;
+                            } else if (minNum === dataVal[3]) {
+                                minNumIndex = 3;
+                            } else if (minNum === dataVal[2]) {
+                                minNumIndex = 2;
+                            }
+
+                            // console.log(maxNumIndex);
                             // console.log(npercent);
-
                             // 判断最大值最小值放置位置
                             if (maxNum === npercent) {
-                                if (value === data[1].text || value === data[2].text) {
-                                    return '{c|最优} {a|' + value + '} {e|\n' + npercent + '}';
+                                if (maxNumIndex === (count - 1)) {
+                                    if (maxNumIndex > 2 || maxNumIndex === 0) {
+                                        return ' {a|' + value + '} {c|最优} {g|\n' + npercent + '} ';
+                                    } else {
+                                        return ' {c|最优} {a|' + value + '} {e|\n' + npercent + '} ';
+                                    }
                                 } else {
-                                    return '{a|' + value + '} {c|最优} {g|\n' + npercent + '}';
+                                    return '{a|' + value + '} {e|\n' + npercent + '} ';
                                 }
                             } else if (minNum === npercent) {
-                                if (value === data[1].text || value === data[2].text) {
-                                    return '{d|有点菜} {a|' + value + '}{h|\n' + npercent + '}';
+                                if (minNumIndex === (count - 1)) {
+                                    if (minNumIndex > 2 || minNumIndex === 0) {
+                                        return ' {a|' + value + '} {d|有点菜} {f|\n' + npercent + '} ';
+                                    } else {
+                                        return ' {d|有点菜} {a|' + value + '} {h|\n' + npercent + '} ';
+                                    }
                                 } else {
-                                    return '{a|' + value + '} {d|有点菜} {f|\n' + npercent + '}';
+                                    return '{a|' + value + '} {e|\n' + npercent + '} ';
                                 }
                             } else {
-                                return '{a|' + value + '}{b|\n' + npercent + '}';
+                                return ' {a|' + value + '} {b|\n' + npercent + '} ';
                             }
                         },
                         rich: {
@@ -192,7 +227,7 @@ define(function (require) {
                 series: [{
                     name: '',
                     type: 'radar',
-                    radius: 90,
+                    radius: 85,
                     lineStyle: {
                         width: 0
                     },
