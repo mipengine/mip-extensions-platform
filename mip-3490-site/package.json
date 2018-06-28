@@ -1,0 +1,14 @@
+{
+    "name": "mip-3490-site",
+    "version": "1.0.0",
+    "description": "二级联动切换插件",
+    "contributors": [
+        {
+            "name": "Gniuniu",
+            "email": "1304939897@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

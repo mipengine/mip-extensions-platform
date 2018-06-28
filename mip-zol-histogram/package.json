@@ -1,0 +1,15 @@
+{
+    "name": "mip-zol-histogram",
+    "version": "1.0.0",
+    "description": "横向柱状图组件",
+    "contributors": [
+        {
+            "name": "dongxiaohui",
+            "email": "dong.xiaohui@zol.com.cn"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
+
