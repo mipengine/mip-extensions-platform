@@ -1,0 +1,15 @@
+{
+    "name": "mip-www3490cn-area",
+    "version": "1.0.0",
+    "description": "好妞妞招商网省市二级联动",
+    "contributors": [
+        {
+            "name": "roadingon",
+            "email": "pao19831027@126.com",
+			"url": "https://www.3490.cn"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

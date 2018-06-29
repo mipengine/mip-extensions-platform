@@ -4,7 +4,7 @@
  */
 
 define(function (require) {
-    function getUrlParam(name) {
+    function getUrlParam(name) { // 用于获取url的参数后置参数
         var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)'); // 构造一个含有目标参数的正则表达式对象
         var r = window.location.search.substr(1).match(reg); // 匹配目标参数
         if (r != null) {
@@ -52,7 +52,8 @@ define(function (require) {
         var bottom = $(this.element).find('#fix_bottom');
         var modal = $(this.element).find('#modal');
         var but = $(this.element).find('.bottom1_right');
-        var newsfalsetip = $(this.element).find('#newerror');
+        var newsfalsetip = $(this.element).find('#newerror'); // 驾驶证查询信息错误时显示这个
+        var newsfalsetip2 = $(this.element).find('#newerror2'); // 机动车证查询信息错误时显示这个
         // 如果能获取到驾驶证号则使用驾驶证接口
         if (getUrlParam('license_no')) {
             getUrlParam('file_no');
@@ -155,7 +156,7 @@ define(function (require) {
                     }
                     if (res.errcode === -200) {
                         $(h).css('display', 'none');
-                        newsfalsetip.show();
+                        newsfalsetip2.show();
 
                     }
                     t.html(res.result.hphm);
@@ -248,7 +249,13 @@ define(function (require) {
         }
 
         this.addEventAction('custom_event', function (event /* 对应的事件对象 */, str /* 事件参数 */) {
-            console.log(str);
+            // console.log(str);
+            if (str === 'cxclwz') {
+                window.top.location.href = 'http://test.xx-motor.com/yzcw-web-admin/login/xmd/xmd_baidu_xzh/illegal_payment/auth';
+            }
+            if (str === 'wyjfjds') {
+                window.top.location.href = 'http://test.xx-motor.com/yzcw-web-admin/login/xmd/xmd_baidu_xzh/site_illegal_payment/auth';
+            }
             if (str === 'delete') {
                 modal.show();
             }
@@ -261,10 +268,10 @@ define(function (require) {
                 }
                 else {
                     if (getUrlParam('license_no')) {
-                        window.top.location.href = 'https://yz-alipay.fundway.net/yzcw-web-admin/login/xmd/xmd_baidu_xzh/illegal_result/auth';
+                        window.top.location.href = 'http://test.xx-motor.com/yzcw-web-admin/login/xmd/xmd_baidu_xzh/illegal_result/auth';
                     }
                     if (getUrlParam('plate_no')) {
-                        window.top.location.href = 'https://yz-alipay.fundway.net/yzcw-web-admin/login/'
+                        window.top.location.href = 'http://test.xx-motor.com/yzcw-web-admin/login/'
                         + 'xmd/xmd_baidu_xzh/illegal_result/auth?'
                         + 'PLATENUMBER=' + getUrlParam('plate_no') + '&FDJH=' + getUrlParam('eng_no')
                         + '&PLATETYPE=' + getUrlParam('car_type');
