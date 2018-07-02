@@ -50,7 +50,7 @@ define(function (require) {
         }).then(function (data) {
             if ($.trim(data)) {
                 $(element).children(':first-child').remove();
-                $(element).html(data);
+                $(element).html(data).show();
             } else {
                 $(element).children(':first-child').show();
             }

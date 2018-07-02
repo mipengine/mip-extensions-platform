@@ -77,52 +77,52 @@ define(function (require) {
                     name: {
                         formatter: function (value, indicator) {
                             var npercent = indicator.num;
-                            var maxNum = dataVal[0];
+                            var maxNum = parseInt(dataVal[0], 10);
                             var maxNumIndex = 0;
-                            var minNumIndex = [];
-                            var minNum = dataVal[0];
+                            var minNumIndex = 0;
+                            var minNum = parseInt(dataVal[0], 10);
                             count ++;
 
                             // console.log(count);
                             // console.log(indicator);
                             // console.log(value);
                             for (var i = 0; i < dataVal.length; i++) {
-                                if (maxNum <= dataVal[i]) {
-                                    maxNum = dataVal[i];
+                                if (maxNum <= parseInt(dataVal[i], 10)) {
+                                    maxNum = parseInt(dataVal[i], 10);
                                 };
-                                if (minNum > dataVal[i]) {
-                                    minNum = dataVal[i];
+                                if (minNum > parseInt(dataVal[i], 10)) {
+                                    minNum = parseInt(dataVal[i], 10);
                                 };
                             }
 
-                            if (maxNum === dataVal[2]) {
+                            if (maxNum === parseInt(dataVal[2], 10)) {
                                 maxNumIndex = 2;
-                            } else if (maxNum === dataVal[3]) {
+                            } else if (maxNum === parseInt(dataVal[3], 10)) {
                                 maxNumIndex = 3;
-                            } else if (maxNum === dataVal[4]) {
+                            } else if (maxNum === parseInt(dataVal[4], 10)) {
                                 maxNumIndex = 4;
-                            } else if (maxNum === dataVal[0]) {
+                            } else if (maxNum === parseInt(dataVal[0], 10)) {
                                 maxNumIndex = 0;
-                            } else if (maxNum === dataVal[1]) {
+                            } else if (maxNum === parseInt(dataVal[1], 10)) {
                                 maxNumIndex = 1;
                             }
 
                             if (minNum === dataVal[1]) {
                                 minNumIndex = 1;
-                            } else if (minNum === dataVal[0]) {
+                            } else if (minNum === parseInt(dataVal[0], 10)) {
                                 minNumIndex = 0;
-                            } else if (minNum === dataVal[4]) {
+                            } else if (minNum === parseInt(dataVal[4], 10)) {
                                 minNumIndex = 4;
-                            } else if (minNum === dataVal[3]) {
+                            } else if (minNum === parseInt(dataVal[3], 10)) {
                                 minNumIndex = 3;
-                            } else if (minNum === dataVal[2]) {
+                            } else if (minNum === parseInt(dataVal[2], 10)) {
                                 minNumIndex = 2;
                             }
 
-                            // console.log(maxNumIndex);
+                            // console.log(minNum);
                             // console.log(npercent);
                             // 判断最大值最小值放置位置
-                            if (maxNum === npercent) {
+                            if (maxNum === parseInt(npercent, 10)) {
                                 if (maxNumIndex === (count - 1)) {
                                     if (maxNumIndex > 2 || maxNumIndex === 0) {
                                         return ' {a|' + value + '} {c|最优} {g|\n' + npercent + '} ';
@@ -132,7 +132,7 @@ define(function (require) {
                                 } else {
                                     return '{a|' + value + '} {b|\n' + npercent + '} ';
                                 }
-                            } else if (minNum === npercent) {
+                            } else if (minNum === parseInt(npercent, 10)) {
                                 if (minNumIndex === (count - 1)) {
                                     if (minNumIndex > 2 || minNumIndex === 0) {
                                         return ' {a|' + value + '} {d|有点菜} {f|\n' + npercent + '} ';
@@ -161,11 +161,11 @@ define(function (require) {
                                 lineHeight: 19
                             },
                             c: {
-                                fontSize: 10,
+                                fontSize: 12,
                                 color: '#65B12C',
                                 align: 'center',
                                 fontFamily: 'PingFangSC-Regular',
-                                lineHeight: 10,
+                                lineHeight: 12,
                                 borderWidth: 1,
                                 borderColor: '#65B12C',
                                 borderRadius: 2,
@@ -174,13 +174,13 @@ define(function (require) {
                                 padding: [2, 2, 2, 2]
                             },
                             d: {
-                                fontSize: 10,
+                                fontSize: 12,
                                 color: '#999999',
                                 align: 'center',
                                 borderColor: '#999999',
                                 borderWidth: 1,
                                 fontFamily: 'PingFangSC-Regular',
-                                lineHeight: 10,
+                                lineHeight: 12,
                                 borderRadius: 2,
                                 verticalAlign: 'middle',
                                 align: 'center',
@@ -377,7 +377,7 @@ define(function (require) {
                     label: {
                         show: true,
                         color: '#3388FF',
-                        padding: [0, 0, 3, 15],
+                        padding: [0, 0, 3, 10],
                         formatter: '{@score}%'
                     },
                     itemStyle: {

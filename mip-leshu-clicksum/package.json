@@ -1,0 +1,14 @@
+{
+    "name": "mip-leshu-clicksum",
+    "version": "1.0.0",
+    "description": "点击汇总",
+    "contributors": [
+        {
+            "name": "leshuadmin",
+            "email": "wanghao@leshu.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

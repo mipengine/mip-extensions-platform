@@ -8,14 +8,14 @@ define(function (require) {
         var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)'); // 构造一个含有目标参数的正则表达式对象
         var r = window.location.search.substr(1).match(reg); // 匹配目标参数
         if (r != null) {
-            return (r[2]);
+            return decodeURI(r[2]);
         }
         return null; // 返回参数值
     }
-
     var customEle = require('customElement').create();
     var $ = require('zepto');// 引入zepto
     customEle.prototype.firstInviewCallback = function () {
+        var baseUrl = 'http://test.xx-motor.com/';
         var reg = /[^0-9a-zA-Z]/g;
         var reg1 = /[0-9a-zA-Z]/g;
         var shiche = ''; // 记录是车还是人
@@ -250,29 +250,35 @@ define(function (require) {
 
         this.addEventAction('custom_event', function (event /* 对应的事件对象 */, str /* 事件参数 */) {
             // 不要用event做判断，IOS跟安卓不一样
-            if (str === 'cxclwz') { // 驾驶证无违章时显示的查询车辆违章按钮跳转到这个页面
-                window.top.location.href = 'http://test.xx-motor.com/yzcw-web-admin/login/xmd/xmd_baidu_xzh/illegal_payment/auth';
-            }
-            if (str === 'wyjfjds') { // 机动车证无违章时显示的我有处罚决定书按钮跳转到这个页面
-                window.top.location.href = 'http://test.xx-motor.com/yzcw-web-admin/login/xmd/xmd_baidu_xzh/site_illegal_payment/auth';
+            if (str === 'cxclwzOrwyjfjds') {  // ‘查询车辆违章’或者‘我有处罚决定’
+                if (getUrlParam('license_no')) {
+                    window.top.location.href = baseUrl + 'yzcw-web-admin/login/xmd/xmd_baidu_xzh/illegal_payment/auth';
+                }
+                if (getUrlParam('plate_no')) {
+                    window.top.location.href = baseUrl
+                    + 'yzcw-web-admin/login/xmd/xmd_baidu_xzh/site_illegal_payment/auth';
+                }
             }
             if (str === 'delete') {  // 驾驶证/机动车证的右上角按钮
                 modal.show();
             }
             if (str === 'ckwddd') { // 两种证的查看我的订单按钮都跳转到同一个页面
-                window.top.location.href = 'http://test.xx-motor.com/yzcw-web-admin/login/xmd/xmd_baidu_xzh/myOrder/auth';
+                window.top.location.href = baseUrl + 'yzcw-web-admin/login/xmd/xmd_baidu_xzh/myOrder/auth';
             }
             if (str === 'ljblwz') { // 两种证的立即办理违章跳转不同页面
                 if (g[0].style.background === 'rgb(229, 229, 229)') { // 当没有违章时按钮是灰的,这个时候点击没用
                 }
                 else {
                     if (getUrlParam('license_no')) {
-                        window.top.location.href = 'http://test.xx-motor.com/yzcw-web-admin/login/xmd/xmd_baidu_xzh/illegal_result/auth';
+                        window.top.location.href = baseUrl
+                        + 'yzcw-web-admin/login/xmd/xmd_baidu_xzh/site_illegal_payment/auth';
                     }
                     if (getUrlParam('plate_no')) {
-                        window.top.location.href = 'http://test.xx-motor.com/yzcw-web-admin/login/'
+                        var plateNo = getUrlParam('plate_no');
+                        plateNo = plateNo.substr(0, 1) === '粤' ? plateNo : '粤' + plateNo;
+                        window.top.location.href = baseUrl + 'yzcw-web-admin/login/'
                         + 'xmd/xmd_baidu_xzh/illegal_result/auth?'
-                        + 'PLATENUMBER=' + getUrlParam('plate_no') + '&FDJH=' + getUrlParam('eng_no')
+                        + 'PLATENUMBER=' + plateNo + '&FDJH=' + getUrlParam('eng_no')
                         + '&PLATETYPE=' + getUrlParam('car_type');
                     }
                 }
@@ -313,9 +319,6 @@ define(function (require) {
                         $(f[1]).hide();
                         $(f[0]).show();
                     }
-                }
-                if ($(document.body).height() + 50 > $(window).height()) {
-                    $(bottom).css('position', 'inherit');
                 }
             }
         });
