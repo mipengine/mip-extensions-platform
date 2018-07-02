@@ -38,11 +38,12 @@ define(function (require) {
      */
     customElement.prototype.build = function () {
         var self = this;
+        self.setConfig(this.getConfig());
         self._hidden = true;
         self.appendHtml();
         self.addEvent();
         self.stopHandler();
-        self.setConfig(this.getConfig());
+
     };
 
     /**
@@ -116,9 +117,11 @@ define(function (require) {
     customElement.prototype.stopHandler = function () {
         var self = this;
         var element = self.element;
-        element.querySelector('.page-end').addEventListener('click', function (event) {
-            event.stopPropagation();
-        });
+        if (element.querySelector('.page-end')) {
+            element.querySelector('.page-end').addEventListener('click', function (event) {
+                event.stopPropagation();
+            });
+        }
     };
 
 
@@ -132,7 +135,8 @@ define(function (require) {
         storage.set(LOCAL_KEY, JSON.stringify(config));
         if (config.theme) {
             document.documentElement.setAttribute('mip-xiaoshuo-read-theme', config.theme);
-        };
+        }
+        ;
         if (config.fontSize) {
             document.documentElement.setAttribute('mip-xiaoshuo-read-font-size', config.fontSize);
         }
