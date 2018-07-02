@@ -117,7 +117,7 @@ define(function (require) {
                             + '</strong>分</div></div>' + '<div class="zhinajin">'
                             + '<div class="zhinajin_left_item">滞纳金</div>'
                             + '<div class="zhinajin_right_item"><strong class="amount">'
-                            + res.result_set[a].wfjfs + '</strong>元</div>'
+                            + res.result_set[a].znj + '</strong>元</div>'
                             + '</div><div class="juedingshubianhao">'
                             + '<div class="juedingshu_left_item">决定书编号</div><div class="juedingshu_right_item">'
                             + res.result_set[a].jdsbh + '</div></div></div></div>';
@@ -249,22 +249,21 @@ define(function (require) {
         }
 
         this.addEventAction('custom_event', function (event /* 对应的事件对象 */, str /* 事件参数 */) {
-            // console.log(str);
-            if (str === 'cxclwz') {
+            // 不要用event做判断，IOS跟安卓不一样
+            if (str === 'cxclwz') { // 驾驶证无违章时显示的查询车辆违章按钮跳转到这个页面
                 window.top.location.href = 'http://test.xx-motor.com/yzcw-web-admin/login/xmd/xmd_baidu_xzh/illegal_payment/auth';
             }
-            if (str === 'wyjfjds') {
+            if (str === 'wyjfjds') { // 机动车证无违章时显示的我有处罚决定书按钮跳转到这个页面
                 window.top.location.href = 'http://test.xx-motor.com/yzcw-web-admin/login/xmd/xmd_baidu_xzh/site_illegal_payment/auth';
             }
-            if (str === 'delete') {
+            if (str === 'delete') {  // 驾驶证/机动车证的右上角按钮
                 modal.show();
             }
-            if (str === 'ckwddd') {
+            if (str === 'ckwddd') { // 两种证的查看我的订单按钮都跳转到同一个页面
                 window.top.location.href = 'http://test.xx-motor.com/yzcw-web-admin/login/xmd/xmd_baidu_xzh/myOrder/auth';
             }
-            if (str === 'ljblwz') {
-                if (g[0].style.background === 'rgb(229, 229, 229)') {
-
+            if (str === 'ljblwz') { // 两种证的立即办理违章跳转不同页面
+                if (g[0].style.background === 'rgb(229, 229, 229)') { // 当没有违章时按钮是灰的,这个时候点击没用
                 }
                 else {
                     if (getUrlParam('license_no')) {
@@ -289,7 +288,7 @@ define(function (require) {
                 }
 
             }
-            if (str === 'inputagain') {
+            if (str === 'inputagain') { // 当用户信息输入错误时点击重新输入
                 if (getUrlParam('license_no')) {
                     window.top.location.href = 'https://www.baidu.com/s?wd=驾驶人违法查询';
                 }
@@ -300,7 +299,7 @@ define(function (require) {
             if (str === 'cancel') {
                 modal.hide();
             }
-            if (str === 'ckwddd') {
+            if (str === 'ckwddd') { // 这个没用了
                 $(s).css('display', 'inline-block');
                 if (chaxuned === 'false' && chaxun === 'false') {
                     j.show();

@@ -9,7 +9,6 @@
 define(function (require) {
     var customElem = require('customElement').create();
     var $ = require('zepto');
-
     var getCurrentUrl = function () {
         var a = '';
         try {
@@ -28,6 +27,8 @@ define(function (require) {
     var init = function (element) {
         var argId = element.getAttribute('id') || 0;
         var argFrom = element.getAttribute('from') || 'mobile';
+        var argDebug = element.getAttribute('debug') || false;
+
         if (argId < 1) {
             return;
         }
@@ -38,6 +39,7 @@ define(function (require) {
             '&from=' + argFrom,
             '&url=' + getCurrentUrl(),
             '&title=' + getDocumentTitle(),
+            '&debug=' + argDebug,
             '&v=' + timestamp
         ].join('');
         var fetchJsonp = require('fetch-jsonp');
@@ -46,8 +48,11 @@ define(function (require) {
         }).then(function (res) {
             return res.json();
         }).then(function (data) {
-            if (data && data !== null) {
-                $(element).empty().append(data);
+            if ($.trim(data)) {
+                $(element).children(':first-child').remove();
+                $(element).html(data);
+            } else {
+                $(element).children(':first-child').show();
             }
         });
     };

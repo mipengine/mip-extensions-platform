@@ -130,7 +130,7 @@ define(function (require) {
                                         return ' {c|最优} {a|' + value + '} {e|\n' + npercent + '} ';
                                     }
                                 } else {
-                                    return '{a|' + value + '} {e|\n' + npercent + '} ';
+                                    return '{a|' + value + '} {b|\n' + npercent + '} ';
                                 }
                             } else if (minNum === npercent) {
                                 if (minNumIndex === (count - 1)) {
@@ -140,7 +140,7 @@ define(function (require) {
                                         return ' {d|有点菜} {a|' + value + '} {h|\n' + npercent + '} ';
                                     }
                                 } else {
-                                    return '{a|' + value + '} {e|\n' + npercent + '} ';
+                                    return '{a|' + value + '} {b|\n' + npercent + '} ';
                                 }
                             } else {
                                 return ' {a|' + value + '} {b|\n' + npercent + '} ';

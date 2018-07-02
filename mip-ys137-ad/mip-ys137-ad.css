@@ -1,27 +1,4 @@
-/*图加样式*/
-.photo-plus-container {
-    position: relative;
-    overflow: hidden;
-}
-.photo-plus-container .div-link {
-    position: absolute;
-    bottom: 0;
-    overflow: hidden;
-    width: 100%!important;
-    height: 60px!important;
-    margin: 0;
-    padding: 0!important;
-}
-.photo-plus-container .div-link .close-l {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    width: 30px!important;
-    height: 32px!important;
-    margin: 0!important;
-    padding: 0!important;
-    border-left: 1px solid rgba(255,255,255,.7);
-    line-height: 32px!important;
-    text-align: center!important;
-    color: #fff!important;
+/*组件样式*/
+mip-ys137-ad>:first-child{
+    display: none;
 }

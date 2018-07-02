@@ -16,7 +16,7 @@ define(function (require) {
     var $adKeywords = $('meta[name="ck-ad-keywords"]');
     // 是否开启ip调用
     var $locationEnabled = $('meta[name="location-enabled"]');
-    var locationEnabled = $locationEnabled.attr('content') || 'true';
+    var locationEnabled = $locationEnabled.attr('content') || 'false';
     locationEnabled = locationEnabled.length && locationEnabled !== 'false' || false;
     var hashIp = window.MIP.hash.get('ip');
     if (hashIp) {

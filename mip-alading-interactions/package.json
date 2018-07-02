@@ -1,6 +1,6 @@
 {
     "name": "mip-alading-interactions",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "用于百度阿拉丁项目的交互，根据参数显示不同页面",
     "contributors": [
         {

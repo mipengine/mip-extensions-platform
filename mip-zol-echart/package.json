@@ -1,14 +1,14 @@
 {
-  "name": "mip-zol-echart",
-  "version": "1.0.1",
-  "description": "echart图表插件",
-  "contributors": [
-    {
-      "name": "dongxiaohui",
-      "email": "dong.xiaohui@zol.com.cn"
+    "name": "mip-zol-echart",
+    "version": "1.0.1",
+    "description": "echart图表插件",
+    "contributors": [
+        {
+          "name": "dongxiaohui",
+          "email": "dong.xiaohui@zol.com.cn"
+        }
+    ],
+    "engines": {
+      "mip": ">=1.1.0"
     }
-  ],
-  "engines": {
-    "mip": ">=1.1.0"
-  }
 }

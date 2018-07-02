@@ -1,7 +1,7 @@
 {
     "name": "mip-ck-ad-plus",
-    "version": "1.0.4",
-    "description": "直销广告组件-bugfixed:修复高德地图初次加载执行实例化操作报错",
+    "version": "1.0.5",
+    "description": "默认关闭定位服务",
     "author": {
         "name": "laoono",
         "email": "laoono@163.com"
