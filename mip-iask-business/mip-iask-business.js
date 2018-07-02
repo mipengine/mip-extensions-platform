@@ -1,8 +1,8 @@
 /**
 * @file 脚本支持
 * @author hejieye
-* @time  2018-06-20
-* @version 2.1.9
+* @time  2018-07-02
+* @version 2.2.0
 */
 define(function (require) {
     var $ = require('zepto');
@@ -928,7 +928,7 @@ define(function (require) {
 
     // 加载效果广告
     var loadEffect = function (ele, questionId, $thatParam, $thatLog, $tokenDiv, token) {
-    	if ($thatLog.length === 0) {
+    	if ($thatLog.length === undefined || $thatLog.length === 0) {
             var sourceType = 'COOPERATE_EFFECT';
             $thatParam.setAttribute('sources', sourceType);
             // 商业效果广告
