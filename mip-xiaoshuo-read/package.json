@@ -1,11 +1,15 @@
 {
     "name": "mip-xiaoshuo-read",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "小说阅读页控制组件，包括四套主题皮肤、五种字号、上下章节、目录等功能。",
     "contributors": [
         {
             "name": "xuexb",
             "email": "fe.xiaowu@gmail.com"
+        },
+        {
+            "name": "caoru",
+            "email": "caoru@baidu.com"
         }
     ],
     "engines": {

@@ -6,7 +6,7 @@
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/static/v1/mip-xiaoshuo-read/mip-xiaoshuo-read.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-xiaoshuo-read/mip-xiaoshuo-test.js
 
 ## 示例
 

@@ -13,6 +13,14 @@ mip-catalog-reverse 小说目录页逆序
 ### 基本用法
 ```html
 <mip-catalog-reverse>
+ <div class="catalog-list">
+    <ul class="catalog-li">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+ </div>
 </mip-catalog-reverse>
 ```
 
