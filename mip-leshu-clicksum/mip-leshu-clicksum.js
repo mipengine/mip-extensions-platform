@@ -28,13 +28,15 @@ define(function (require) {
                 * a链接，url点击统计
                 */
                 if (self.attr('modeid') === ',12,' && data.recomdCity) {
-                    if (self.attr('href') !== 'undefined' && self.attr('class') === 'ios') {
-                        self.attr('href', data.locaUrl[0]);
+                    if (self.attr('datahref') !== 'undefined' && self.attr('class') === 'ios') {
                         window.top.location.href = data.locaUrl[0];
                     }
-                    if (self.attr('href') !== 'undefined' && self.attr('class') === 'android') {
-                        self.attr('href', data.locaUrl[1]);
+                    if (self.attr('datahref') !== 'undefined' && self.attr('class') === 'android') {
                         window.top.location.href = data.locaUrl[1];
+                    }
+                } else {
+                    if (self.attr('datahref') !== 'undefined') {
+                        window.top.location.href = self.attr('datahref');
                     }
                 }
             });

@@ -11,13 +11,14 @@ define(function (require) {
     function render(element) {
         // 获取所有运动元素
         var elementItem = element.querySelectorAll('.global-gradient');
-        elementItem.forEach(function (item) {
+        [].forEach.call(elementItem, function (item) {
 
             // 获取当前元素分数
 
             // console.log(item);
             var elementpercentage = item.getAttribute('data-val');
             item.style.width = 0;
+            // console.log(elementpercentage);
             setTimeout(function () {
                 item.style.width = parseInt(elementpercentage, 10) + '%';
             }, 30);

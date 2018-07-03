@@ -14,7 +14,7 @@ define(function (require) {
             this.addListener();
         };
         Share.prototype.init = function () {
-            this.shareBtn = $($element.attr('share-btn-class'));
+            this.shareBtn = $('.' + $element.attr('share-btn-class'));
             this.shareCloseBtn = $element.find('.share-close-button');
             this.shareWrap = $element.find('.share-wrap');
             this.shareBtnsWrap = this.shareWrap.find('.share-buttons-wrap');
@@ -35,7 +35,7 @@ define(function (require) {
                 qq: 'https://connect.qq.com/widget/shareqq/index.html'
             };
             // 内容页标题
-            this.title = $($element.attr('title-class')).text();
+            this.title = $('.' + $element.attr('title-class')).find('.title').text();
             // 内容页网址路径
             this.url = document.URL;
         };

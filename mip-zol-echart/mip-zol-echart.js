@@ -65,9 +65,9 @@ define(function (require) {
                     containLabel: true
                 },
                 radar: [{
-                    nameGap: 5,
+                    nameGap: 3,
                     center: ['50%', '57%'],
-                    radius: '75%',
+                    radius: '70%',
                     splitArea: {
                         areaStyle: {
                             color: ['#fff', '#fff', '#fff', '#fff']
@@ -227,7 +227,7 @@ define(function (require) {
                 series: [{
                     name: '',
                     type: 'radar',
-                    radius: 85,
+                    radius: 83,
                     lineStyle: {
                         width: 0
                     },
