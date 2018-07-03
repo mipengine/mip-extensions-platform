@@ -77,52 +77,54 @@ define(function (require) {
                     name: {
                         formatter: function (value, indicator) {
                             var npercent = indicator.num;
-                            var maxNum = parseInt(dataVal[0], 10);
+                            var maxNum = Number(dataVal[0]);
                             var maxNumIndex = 0;
                             var minNumIndex = 0;
-                            var minNum = parseInt(dataVal[0], 10);
+                            var minNum = Number(dataVal[0]);
                             count ++;
 
                             // console.log(count);
                             // console.log(indicator);
                             // console.log(value);
                             for (var i = 0; i < dataVal.length; i++) {
-                                if (maxNum <= parseInt(dataVal[i], 10)) {
-                                    maxNum = parseInt(dataVal[i], 10);
+                                if (maxNum <= Number(dataVal[i])) {
+                                    maxNum = Number(dataVal[i]);
                                 };
-                                if (minNum > parseInt(dataVal[i], 10)) {
-                                    minNum = parseInt(dataVal[i], 10);
+                                if (minNum > Number(dataVal[i])) {
+                                    minNum = Number(dataVal[i]);
                                 };
                             }
 
-                            if (maxNum === parseInt(dataVal[2], 10)) {
+                            // console.log(maxNum)
+                            // console.log(minNum)
+                            if (maxNum === Number(dataVal[2])) {
                                 maxNumIndex = 2;
-                            } else if (maxNum === parseInt(dataVal[3], 10)) {
+                            } else if (maxNum === Number(dataVal[3])) {
                                 maxNumIndex = 3;
-                            } else if (maxNum === parseInt(dataVal[4], 10)) {
+                            } else if (maxNum === Number(dataVal[4])) {
                                 maxNumIndex = 4;
-                            } else if (maxNum === parseInt(dataVal[0], 10)) {
+                            } else if (maxNum === Number(dataVal[0])) {
                                 maxNumIndex = 0;
-                            } else if (maxNum === parseInt(dataVal[1], 10)) {
+                            } else if (maxNum === Number(dataVal[1])) {
                                 maxNumIndex = 1;
                             }
 
                             if (minNum === dataVal[1]) {
                                 minNumIndex = 1;
-                            } else if (minNum === parseInt(dataVal[0], 10)) {
+                            } else if (minNum === Number(dataVal[0])) {
                                 minNumIndex = 0;
-                            } else if (minNum === parseInt(dataVal[4], 10)) {
+                            } else if (minNum === Number(dataVal[4])) {
                                 minNumIndex = 4;
-                            } else if (minNum === parseInt(dataVal[3], 10)) {
+                            } else if (minNum === Number(dataVal[3])) {
                                 minNumIndex = 3;
-                            } else if (minNum === parseInt(dataVal[2], 10)) {
+                            } else if (minNum === Number(dataVal[2])) {
                                 minNumIndex = 2;
                             }
 
                             // console.log(minNum);
                             // console.log(npercent);
                             // 判断最大值最小值放置位置
-                            if (maxNum === parseInt(npercent, 10)) {
+                            if (maxNum === Number(npercent)) {
                                 if (maxNumIndex === (count - 1)) {
                                     if (maxNumIndex > 2 || maxNumIndex === 0) {
                                         return ' {a|' + value + '} {c|最优} {g|\n' + npercent + '} ';
@@ -132,7 +134,7 @@ define(function (require) {
                                 } else {
                                     return '{a|' + value + '} {b|\n' + npercent + '} ';
                                 }
-                            } else if (minNum === parseInt(npercent, 10)) {
+                            } else if (minNum === Number(npercent)) {
                                 if (minNumIndex === (count - 1)) {
                                     if (minNumIndex > 2 || minNumIndex === 0) {
                                         return ' {a|' + value + '} {d|有点菜} {f|\n' + npercent + '} ';
