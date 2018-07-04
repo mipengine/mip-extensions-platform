@@ -1,0 +1,14 @@
+{
+    "name": "mip-jupeixun-sogou-ad",
+    "version": "1.0.0",
+    "description": "搜狗广告",
+    "contributors": [
+        {
+            "name": "anshdiai",
+            "email": "287639598@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

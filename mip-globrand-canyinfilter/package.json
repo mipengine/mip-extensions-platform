@@ -1,0 +1,14 @@
+{
+    "name": "mip-globrand-canyinfilter",
+    "version": "1.0.0",
+    "description": "全球品牌网餐饮下拉框",
+    "contributors": [
+        {
+            "name": "ldf",
+            "email": "759952225@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
