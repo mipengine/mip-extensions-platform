@@ -2,7 +2,6 @@
  * @file mip-globrand-canyinfilter 组件
  * @author ldf
  */
-
 define(function (require) {
     'use strict';
     var customElement = require('customElement').create();
@@ -21,21 +20,16 @@ define(function (require) {
         var isOpen = false;
 
         function bindEvent() {
-            util.event.delegate(boxtab,
-                boxtab.querySelectorAll('.box-tab-item'),
-                'click',
-                clickTab);
-
+            boxtab.addEventListener('click', clickTab);
             pop.addEventListener('click', hide);
-
-            util.event.delegate(container,
-                container.querySelectorAll('ul li'),
-                'click',
-                clickItem);
+            container.addEventListener('click', clickItem);
         }
 
         function clickTab() {
             var targetDom = event.target;
+            if (targetDom.nodeName !== 'SPAN') {
+                targetDom = targetDom.parentNode;
+            }
             var targetId = targetDom.getAttribute('data-target');
             if (targetDom.classList.contains('selected')) {
                 // 点击展开的 关闭
@@ -63,6 +57,9 @@ define(function (require) {
 
         function clickItem() {
             var targetDom = event.target;
+            if (targetDom.nodeName !== 'LI') {
+                return;
+            }
             var targetId = targetDom.getAttribute('data-id');
             var key = targetDom.parentNode.getAttribute('data-id');
             var url = '?isAjax=1&' + key + '=' + targetId;
@@ -75,7 +72,7 @@ define(function (require) {
         }
 
         function hide() {
-            filter.style.top = '0px';
+            comp.style.top = '0px';
             forEach(boxtab.querySelectorAll('.box-tab-item'), function (dom) {
                 dom.classList.remove('selected');
             });
@@ -96,11 +93,11 @@ define(function (require) {
             html.style.overflow = 'hidden';
             pop.classList.add('bgfixedoff');
 
-            var mTop = filter.offsetTop;
+            var mTop = comp.offsetTop;
             var sTop = window.scrollY;
-            var result = mTop - sTop;
+            var result = sTop - mTop;
 
-            filter.style.top = '-' + result + 'px';
+            comp.style.top = result + 'px';
             container.style.height = '0px';
             container.classList.remove('hidden');
 

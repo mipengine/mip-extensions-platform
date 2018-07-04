@@ -1,0 +1,14 @@
+{
+    "name": "mip-ilaw66-lawyer-appointment",
+    "version": "1.0.0",
+    "description": "订单预约数据交互",
+    "contributors": [
+        {
+            "name": "lin",
+            "email": "840399305@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

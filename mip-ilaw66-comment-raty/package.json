@@ -1,0 +1,14 @@
+{
+    "name": "mip-ilaw66-comment-raty",
+    "version": "1.0.0",
+    "description": "评分星星组件",
+    "contributors": [
+        {
+            "name": "lin",
+            "email": "840399305@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.0.0"
+    }
+}

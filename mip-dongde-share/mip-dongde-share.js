@@ -6,7 +6,7 @@
 define(function (require) {
     var $ = require('zepto');
     var customElem = require('customElement').create();
-    customElem.prototype.firstInviewCallback = function () {
+    customElem.prototype.build = function () {
         // this.element 可取到当前实例对应的 dom 元素
         var $element = $(this.element);
         var Share = function () {

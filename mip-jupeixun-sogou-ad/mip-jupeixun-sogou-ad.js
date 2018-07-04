@@ -28,7 +28,6 @@ define(function (require) {
 
         var scriptTag2 = document.createElement('script');
         scriptTag2.src = adSrc,
-        scriptTag2.setAttribute('async', 'true');
 
         ele.appendChild(scriptTag1);
         ele.appendChild(scriptTag2);
