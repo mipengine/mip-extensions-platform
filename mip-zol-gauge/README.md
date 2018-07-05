@@ -9,6 +9,8 @@ mip-zol-gauge 指针图表插件
 所需脚本|https://c.mipcdn.com/static/v1/mip-zol-gauge/mip-zol-gauge.js
 
 ## 示例
+### 1.0.1修改
+组件单位调整
 
 ### 基本用法
 ```html

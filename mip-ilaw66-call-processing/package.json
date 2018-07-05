@@ -1,0 +1,14 @@
+{
+    "name": "mip-ilaw66-call-processing",
+    "version": "1.0.0",
+    "description": "根据返回的数据判断页面之中的各种状态的交互",
+    "contributors": [
+        {
+            "name": "lin",
+            "email": "840399305@11.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.0.0"
+    }
+}

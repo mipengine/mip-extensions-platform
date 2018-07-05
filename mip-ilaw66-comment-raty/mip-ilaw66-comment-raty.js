@@ -9,7 +9,7 @@ define(function (require) {
     var customElement = require('customElement').create();
     customElement.prototype.firstInviewCallback = function () {
         var $el = $(this.element);
-        function sufuStar() {
+        var sufuStar = (function () {
             // 工具函数
             function gbyId(id) {
                 return document.getElementById(id);
@@ -91,8 +91,7 @@ define(function (require) {
             return {
                 star: star
             };
-        }
-        sufuStar();
+        })();
         // 这里的()表示函数立即执行,这样变量sufuStar才能调用匿名函数的返回值star
         // 调用执行: sufuStar.star(num,myMsg),参数可为空,参数num,myMsg将设为默认值
         sufuStar.star();

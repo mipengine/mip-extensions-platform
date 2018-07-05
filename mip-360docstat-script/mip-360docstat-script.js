@@ -22,8 +22,11 @@ define(function (require) {
             setone();
         }
         getRefNum();// 鲜花
-        //  统计
-        record();
+        // 只统计非搜索引擎访问
+        if (navigator.userAgent.toLowerCase().indexOf('spider') === -1
+        && navigator.userAgent.toLowerCase().indexOf('bot') === -1) {
+            record();
+        }
         //  检测广告
         var t = setTimeout(function () {
             check();

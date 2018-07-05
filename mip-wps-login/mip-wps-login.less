@@ -30,6 +30,24 @@ mip-wps-login {
             width: 24px;
         }
 
+        .pass-form-item-verifyCodeWrapper {
+            margin-top: 10px;
+            border: 0;
+        }
+
+        .pass-verifyCode-img {
+            width: 100px;
+            height: 50px
+        }
+
+        .pass-change-verifyCode {
+            width: 20px;
+            height: 20px;
+            margin-left: 3px;
+            margin-top: 17px;
+            background-size: 20px 20px;
+        }
+
         .pass-form-item-submit {
             border: 0;
             width: auto;
@@ -77,6 +95,84 @@ mip-wps-login {
         input[type=submit] {
             -webkit-tap-highlight-color: rgba(0,0,0,0);
             -webkit-appearance: none;
+        }
+    }
+
+    .tang-pass-smsLogin {
+        .pass-form-inputWrapper {
+            border: 1px solid #ccc;
+            flex: 1;
+            height: 53px;
+            padding: 0 15px;
+            background: #fff;
+            border-radius: 2px;
+            background: #fff;
+        }
+
+        .pass-button-send {
+            border-radius: 2px;
+            border: 1px solid #ccc;
+            background: #fff;
+            color: #666;
+        }
+
+        .pass-button-send-active {
+            background: #f7f7f7;
+        }
+
+        .pass-button-send-disabled {
+            background: #eee;
+            color: #999;
+        }
+
+
+        .pass-clear {
+            height: auto;
+            width: 24px;
+        }
+
+        .pass-form-item-submit {
+            border: 0;
+            width: auto;
+            position: static;
+            display: block;
+        }
+
+        .pass-button-submit {
+            color: #fff;
+            font-size: 20px;
+            width: 100%;
+            line-height: 46px;
+            height: 46px;
+            box-sizing: border-box;
+            display: block;
+            text-align: center;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            -webkit-tap-highlight-color: rgba(255, 0, 0, 0);
+            border-radius: 2px;
+            border: 1px solid #3c76ff;
+            background: #3c76ff;
+            margin: 27px 0 26px;
+        }
+
+        .pass-button-submit-disabled {
+            color: #90b6ff;
+            opacity: 1;
+        }
+
+        input[type=text],
+        input[type=tel] {
+            border: 0;
+            display: block;
+            -webkit-appearance: none;
+            -webkit-tap-highlight-color: rgba(255,0,0,0);
+            font-size: 17px;
+            height: 20px;
+            padding-top: 16px;
+            padding-bottom: 14px;
+            color: #333;
+            background: transparent;
         }
     }
 }

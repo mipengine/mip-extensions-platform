@@ -15,7 +15,8 @@ define(function (require) {
     var customEle = require('customElement').create();
     var $ = require('zepto');// 引入zepto
     customEle.prototype.firstInviewCallback = function () {
-        var baseUrl = 'http://test.xx-motor.com/';
+        // var baseUrl = 'http://test.xx-motor.com/';
+        var baseUrl = 'https://yz-alipay.fundway.net/';
         var reg = /[^0-9a-zA-Z]/g;
         var reg1 = /[0-9a-zA-Z]/g;
         var shiche = ''; // 记录是车还是人
@@ -54,12 +55,14 @@ define(function (require) {
         var but = $(this.element).find('.bottom1_right');
         var newsfalsetip = $(this.element).find('#newerror'); // 驾驶证查询信息错误时显示这个
         var newsfalsetip2 = $(this.element).find('#newerror2'); // 机动车证查询信息错误时显示这个
+        var options = {headers: {'X-CLIENT-SOURCE': escape('百度'),
+        'X-CHANNEL-ID': '4291', 'X-CHANNEL-NAME': escape('百度阿拉丁')}};
         // 如果能获取到驾驶证号则使用驾驶证接口
         if (getUrlParam('license_no')) {
             getUrlParam('file_no');
             fetch('https://gdjmt.gdsecurity.cn:8081/jmt-api/aladdin/getLicenseInfo?license_no='
                 + getUrlParam('license_no') + '&file_no='
-                + getUrlParam('file_no')).then(function (res) {
+                + getUrlParam('file_no'), options).then(function (res) {
                     return res.json();
                 }).then(function (res) {
                     // console.log(res);
@@ -145,7 +148,7 @@ define(function (require) {
             fetch('https://gdjmt.gdsecurity.cn:8081/jmt-api/aladdin/getCarInfo?plate_no='
                 + getUrlParam('plate_no') + '&car_type='
                 + getUrlParam('car_type') + '&eng_no='
-                + getUrlParam('eng_no')).then(function (res) {
+                + getUrlParam('eng_no'), options).then(function (res) {
                     return res.json();
                 }).then(function (res) {
                     console.log(res.errcode);
