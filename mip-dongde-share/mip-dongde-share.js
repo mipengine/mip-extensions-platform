@@ -25,14 +25,14 @@ define(function (require) {
             this.wechatMomentsShareBtn = this.shareBtnsWrap.find('.icon-share-wechat-moments');
             // 微信
             this.wechatShareBtn = this.shareBtnsWrap.find('.icon-share-wechat');
-            // QQ
-            this.qqShareBtn = this.shareBtnsWrap.find('.icon-share-qq');
+            // QQ空间
+            this.qzoneShareBtn = this.shareBtnsWrap.find('.icon-share-qzone');
             // 微博
             this.weiboShareBtn = this.shareBtnsWrap.find('.icon-share-weibo');
             // 分享接口
             this.api = {
                 weibo: 'https://service.weibo.com/share/share.php',
-                qq: 'https://connect.qq.com/widget/shareqq/index.html'
+                qzone: 'https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey'
             };
             // 分享的图片链接
             this.shareImg = this.shareWrap.find('.share-img').attr('src');
@@ -56,18 +56,19 @@ define(function (require) {
             this.wechatShareBtn.on('click', function () {
                 self.changeTipVisibility();
             });
-            this.qqShareBtn.on('click', function () {
-                self.qqShare();
+            this.qzoneShareBtn.on('click', function () {
+                self.qzoneShare();
             });
             this.weiboShareBtn.on('click', function () {
                 self.weiboShare();
             });
         };
-        Share.prototype.qqShare = function () {
+        Share.prototype.qzoneShare = function () {
             this.tipShow = false;
             this.tip.removeClass('active');
-            var href = this.api.qq + '?url=' + this.url + '&title=' + this.title + '&pics=' + this.shareImg;
-            this.qqShareBtn.attr('href', href);
+            var href = this.api.qzone
+                + '?url=' + this.url + '?sharesource=qzone' + '&title=' + this.title + '&pics=' + this.shareImg;
+            this.qzoneShareBtn.attr('href', href);
         };
         Share.prototype.weiboShare = function () {
             this.tipShow = false;

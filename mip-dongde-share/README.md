@@ -48,7 +48,7 @@ mip-dongde-share 是针对mip落地页，增加主流社交平台的分享功能
                             height="38">
                         </mip-img>
                     </span>
-                    <a href="" target="_blank" rel="notfollow" class="icon icon-share-qq">
+                    <a href="" target="_blank" rel="notfollow" class="icon icon-share-qzone">
                         <mip-img 
                             src="" alt=""
                             layout="responsive" 

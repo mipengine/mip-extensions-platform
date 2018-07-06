@@ -1,0 +1,14 @@
+{
+    "name": "mip-ruby-scrollup",
+    "version": "1.0.0",
+    "description": "组件介绍",
+    "contributors": [
+        {
+            "name": "zl",
+            "email": "zl@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

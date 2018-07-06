@@ -9,7 +9,7 @@ define(function (require) {
     var customElement = require('customElement').create();
     customElement.prototype.firstInviewCallback = function () {
         var $el = $(this.element);
-        var sufuStar = (function () {
+        var sufuStar = function () {
             // 工具函数
             function gbyId(id) {
                 return document.getElementById(id);
@@ -91,10 +91,11 @@ define(function (require) {
             return {
                 star: star
             };
-        })();
+        };
+        sufuStar();
         // 这里的()表示函数立即执行,这样变量sufuStar才能调用匿名函数的返回值star
         // 调用执行: sufuStar.star(num,myMsg),参数可为空,参数num,myMsg将设为默认值
-        sufuStar.star();
+        sufuStar().star();
         // 取消内容显示样式
         function ToastUp(option) {
             this.init(option);
@@ -192,8 +193,8 @@ define(function (require) {
         //   $el.find('.star_block').raty({
         //       score : 0
         //   });
-        var wH = $el.find(window).height();
-        $el.find('body').css('height', wH + 'px');
+        var wH = $(window).height();
+        $('body').css('height', wH + 'px');
         //  订单管理
         $el.find('.backfirst-list-alt').click(function () {
             window.top.location.href = 'orderlist';
@@ -296,7 +297,7 @@ define(function (require) {
             if (statueVal < 1) {
                 toastOr('请您评价律师服务');
             } else {
-                var csrfToken = $el.find('#_csrf').val();
+                var csrfToken = $el.find('#csrf').val();
                 var requestId = $el.find('#requestId').val();
                 var questionType = $el.find('#questionType').val();
                 var starLevel = statueVal;
@@ -307,11 +308,11 @@ define(function (require) {
                 if (type) {
                     url = 'addReviewV3?requestId=' + requestId + '&applyLawyer=' + applyLawyer
 + '&comment=' + comment + '&starLevel=' + starLevel + '&lawyerLebel=' + lawyerLebel
-+ '&questionType=' + questionType + '&_csrf=' + csrfToken + '&type=' + type;
++ '&questionType=' + questionType + '&csrf=' + csrfToken + '&type=' + type;
                 } else {
                     url = 'addReviewV3?requestId=' + requestId + '&applyLawyer='
 + applyLawyer + '&comment=' + comment + '&starLevel=' + starLevel + '&lawyerLebel='
-+ lawyerLebel + '&questionType=' + questionType + '&_csrf=' + csrfToken;
++ lawyerLebel + '&questionType=' + questionType + '&csrf=' + csrfToken;
                 }
                 gotoCommitCommentMsg(url, requestId);
             }
