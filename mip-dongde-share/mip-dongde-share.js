@@ -34,6 +34,8 @@ define(function (require) {
                 weibo: 'https://service.weibo.com/share/share.php',
                 qq: 'https://connect.qq.com/widget/shareqq/index.html'
             };
+            // 分享的图片链接
+            this.shareImg = this.shareWrap.find('.share-img').attr('src');
             // 内容页标题
             this.title = $('.' + $element.attr('title-class')).find('.title').text();
             // 内容页网址路径
@@ -64,13 +66,13 @@ define(function (require) {
         Share.prototype.qqShare = function () {
             this.tipShow = false;
             this.tip.removeClass('active');
-            var href = this.api.qq + '?url=' + this.url + '&title=' + this.title;
+            var href = this.api.qq + '?url=' + this.url + '&title=' + this.title + '&pics=' + this.shareImg;
             this.qqShareBtn.attr('href', href);
         };
         Share.prototype.weiboShare = function () {
             this.tipShow = false;
             this.tip.removeClass('active');
-            var href = this.api.weibo + '?url=' + this.url + '&title=' + this.title;
+            var href = this.api.weibo + '?url=' + this.url + '&title=' + this.title + '&pic=' + this.shareImg;
             this.weiboShareBtn.attr('href', href);
         };
         Share.prototype.changeTipVisibility = function () {

@@ -14,7 +14,30 @@ define(function (require) {
             // 创建baseScheme
         var baseSchemeAdr = 'jtw://com.jijinhao.jtw/startapp?startapp=0';
         var baseSchemeIOS = 'jtw://com.jijinhao.jtw/';
-        var downLoadUrl = 'https://tg.cngold.org/jtw/download/m/open_app.html';
+
+        var downLoadUrl;
+        var websiteUrl = window.location.href.split('/')[3];
+        if (websiteUrl === '' || websiteUrl === 'gold' || websiteUrl === 'ag') {// 主站、黄金、白银
+            downLoadUrl = 'https://tg.cngold.org/jtw/download/m/open_app_gjs.html';
+        } else if (websiteUrl === 'forex') {// 外汇
+            downLoadUrl = 'https://tg.cngold.org/jtw/download/m/open_app_forex.html';
+        } else if (websiteUrl === 'energy') {// 原油
+            downLoadUrl = 'https://tg.cngold.org/jtw/download/m/open_app_energy.html';
+        } else if (websiteUrl === 'futures') {// 期货
+            downLoadUrl = 'https://tg.cngold.org/jtw/download/m/open_app_futures.html';
+        } else if (websiteUrl === 'stock' || websiteUrl === 'hkstock' || websiteUrl === 'usstock') {// 股票、港股、美股
+            downLoadUrl = 'https://tg.cngold.org/jtw/download/m/open_app_stock.html';
+        } else if (websiteUrl === 'jiage') {// 价格
+            downLoadUrl = 'https://tg.cngold.org/jtw/download/m/open_app_price.html';
+        } else if (websiteUrl === 'xianhuo') {// 现货
+            downLoadUrl = 'https://tg.cngold.org/jtw/download/m/open_app_xianhuo.html';
+        } else if (websiteUrl === 'credit') {// 信用卡
+            downLoadUrl = 'https://tg.cngold.org/jtw/download/m/open_app_credit.html';
+        } else {
+            downLoadUrl = 'https://tg.cngold.org/jtw/download/m/open_app.html';
+        }
+
+
         if (docFlag === 'true') {
             var docId = ele.getAttribute('docId');
             var baseSchemeDoc = 'jtw://com.jijinhao.jtw/news/detail?sourceType=1&id=' + docId;

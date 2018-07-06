@@ -1,0 +1,14 @@
+{
+    "name": "mip-comp-canyinfilter",
+    "version": "1.0.0",
+    "description": "用于下拉框与列表联动",
+    "contributors": [
+        {
+            "name": "ldf",
+            "email": "759952225@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

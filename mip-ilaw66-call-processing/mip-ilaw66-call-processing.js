@@ -41,7 +41,7 @@ define(function (require) {
         var dateOrder = dateTime.getHours();
         var minOrder = dateTime.getMinutes();
         var secOrder = dateTime.getSeconds();
-        var t1 = setInterval('fnDate()', 1000);
+        var t1 = setInterval(fnDate(), 1000);
 
         //   加载头像
         $.ajax({
