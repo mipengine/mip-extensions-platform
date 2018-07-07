@@ -1,0 +1,14 @@
+{
+    "name": "mip-guanbi-dom",
+    "version": "1.1.18",
+    "description": "点击关闭外层dom的组件",
+    "contributors": [
+        {
+            "name": "2jian",
+            "email": "1471878870@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

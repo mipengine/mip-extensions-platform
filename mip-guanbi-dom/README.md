@@ -1,0 +1,39 @@
+# mip-guanbi-dom
+
+mip-guanbi-dom 关闭组件，点击关闭外层dom
+
+标题|内容
+类型|通用
+支持布局|responsive,fixed-height,fill,container,fixed
+所需脚本|https://c.mipcdn.com/static/v1/mip-guanbi-dom/mip-guanbi-dom.js
+
+## 示例
+
+### 基本用法
+```html
+<style>
+	body {
+		padding:50px;
+	}
+	.guanbi-section{
+		padding:20px;
+		background-color:#fff;
+		box-shadow:0px 5px 20px rgba(0, 0, 0, 0.3);
+		position:relative;
+	}
+</style>
+<section class="guanbi-section">
+	<mip-guanbi-dom class="guanbi-btn" target="outer"></mip-guanbi-dom>
+</section>
+```
+
+
+## 属性
+
+### target
+
+说明：指向需要被关闭的dom，支持queryselector
+必选项：否
+类型：字符串
+取值范围：'outer',queryselector 内容
+默认值：outer

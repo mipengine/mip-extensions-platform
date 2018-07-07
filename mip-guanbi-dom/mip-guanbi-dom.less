@@ -1,0 +1,40 @@
+/**
+ * @file mip-guanbi-dom样式文件
+ */
+
+mip-guanbi-dom {
+    &.guanbi-btn {
+        background-color: #ff0000;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+        color: #fff;
+        font-size: 40px;
+        position: absolute;
+        right: -20px;
+        top: -20px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+    }
+    &.guanbi-btn:before,
+    &.guanbi-btn:after {
+        content: '';
+        width: 2px;
+        height: 25px;
+        display: inline-block;
+        position: absolute;
+        background: #fff;
+        top: 8px;
+        left: 19px;
+    }
+    &.guanbi-btn:before {
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+    }
+    &.guanbi-btn:after {
+        transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+    }
+    &.guanbi-btn.touchdown {
+        background: #cc0000;
+    }
+}
