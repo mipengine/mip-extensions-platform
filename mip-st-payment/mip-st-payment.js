@@ -71,7 +71,8 @@ define(function (require) {
                         }, false);
                         var button = element.querySelector('.button');
                         button.addEventListener('click', function () {
-                            var checked = subscribe.classList.contains('checked');
+                            // var checked = subscribe.classList.contains('checked');
+                            var checked = [].slice.call(subscribe.classList).indexOf('checked') >= 0;
                             if (checked) {
                                 cambrian.follow({
                                     data: {

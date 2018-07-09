@@ -1,7 +1,6 @@
 # mip-st-payment
 
-mip-st-payment 组件说明
-业务组件，极速服务支付完成页面逻辑
+mip-st-payment 业务组件，极速服务支付完成页面逻辑
 
 标题|内容
 ----|----

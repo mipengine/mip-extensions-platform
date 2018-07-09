@@ -1,7 +1,7 @@
 {
     "name": "mip-st-payment",
     "version": "1.0.0",
-    "description": "组件介绍",
+    "description": "业务组件，极速服务支付完成页面逻辑",
     "contributors": [
         {
             "name": "liyinan",
