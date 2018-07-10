@@ -1,0 +1,14 @@
+{
+    "name": "mip-ilaw66-linking",
+    "version": "1.0.0",
+    "description": "根据时间付律师辛苦费",
+    "contributors": [
+        {
+            "name": "lin",
+            "email": "840399305@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
