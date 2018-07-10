@@ -7,6 +7,7 @@ define(function (require) {
 
     var customElement = require('customElement').create();
     var templates = require('templates');
+    var viewer = require('viewer');
 
     /**
      * Simplified variable writing, such as m.name.firstName, we can write as name.firstName
@@ -44,6 +45,25 @@ define(function (require) {
                 element.renderComplete = true;
             });
         }
+    };
+
+    // 绑定找到组件下面元素的方法，并返回给其他组件使用
+    customElement.prototype.firstInviewCallback = function () {
+        var element = this.element;
+        this.addEventAction('findElement', function (e) {
+            var roleSelector = e.itemRole;
+            var roleElements = [];
+            roleSelector.forEach(function (item) {
+                var roleElm = element.querySelector('#' + item);
+                if (roleElm) {
+                    roleElements.push(roleElm);
+                }
+            });
+            viewer.eventAction.execute('elementFinded', element, {
+                roleElement: roleElements,
+                targetElement: e.targetElement
+            });
+        });
     };
 
     /**

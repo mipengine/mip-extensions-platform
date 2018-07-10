@@ -1,0 +1,14 @@
+{
+    "name": "mip-zmall-spu-filter",
+    "version": "1.0.0",
+    "description": "商品列表SPU筛选组件",
+    "contributors": [
+        {
+            "name": "liuxianggui",
+            "email": "liu.xianggui@zol.com.cn"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

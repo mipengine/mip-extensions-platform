@@ -66,6 +66,82 @@ define(function (require) {
         });
     }
 
+    function selector(options) {
+        var element = this.element;
+        var title = options.title;
+        var buttonText = options.buttonText;
+        var optionsList = '';
+        var type = options.type ? options.type : 'radio';
+        options.list.forEach(function (item) {
+            var value = item.value;
+            var name = item.name;
+            var checked = item.checked ? ' checked' : '';
+            var customInput = '';
+            if (item.custom) {
+                customInput = [
+                    '<div class="ui-mip-selecor-area">',
+                    '<textarea id="_ui_options_custom_content"></textarea>',
+                    '</div>'
+                ].join('');
+            }
+            optionsList += [
+                '<div class="ui-mip-selecor-item">',
+                '<input name="selector" type="' + type + '" id="_ui_options_' + value + '" ',
+                'data-name="' + name + '" value="' + value + '"' + checked + ' />',
+                '<label for="_ui_options_' + value + '">' + name + '</label>',
+                customInput + '</div>'
+            ].join('');
+        });
+        var uiSelectorHtml = [
+            '<div id="_ui_selector" class="mip-dialog-selector">',
+            '<div class="ui-mip-selecor-title">' + title + '</div>',
+            '<div id="_ui_selector_close" class="ui-mip-selecor-close"></div>',
+            '<div class="ui-mip-selecor-options">' + optionsList + '</div>',
+            '<div id="_ui_selector_button" class="ui-mip-selecor-button">' + buttonText + '</div>',
+            '</div>'
+        ].join('');
+
+        uiSelectorHtml += '<div class="mip-dialog-mask"></div>';
+
+        element.innerHTML = uiSelectorHtml;
+        setDailogElementCover(element);
+
+        var uiSelectorElement = element.querySelector('#_ui_selector');
+        setTimeout(function () {
+            uiSelectorElement.classList.add('show');
+        }, 0);
+
+        var closeElm = element.querySelector('#_ui_selector_close');
+        closeElm.addEventListener('click', function () {
+            removeDailogElementCover(element);
+        });
+
+        var button = element.querySelector('#_ui_selector_button');
+        button.addEventListener('click', function () {
+            var checkedInput = uiSelectorElement.querySelectorAll('input:checked');
+            var selectedResult = getSelectedFormData(checkedInput);
+            removeDailogElementCover(element);
+            if (options.callback && typeof options.callback === 'function') {
+                options.callback(selectedResult);
+            }
+        });
+    }
+
+    function getSelectedFormData(selectedElement) {
+        var formData = [];
+        [].forEach.call(selectedElement, function (item) {
+            var ret = {};
+            ret.value = item.value;
+            ret.name = item.dataset.name;
+            var textarea = item.parentNode.querySelector('textarea');
+            if (textarea) {
+                ret.content = textarea.value;
+            }
+            formData.push(ret);
+        });
+        return formData;
+    }
+
     function setDailogElementCover(element) {
         var elementParentNode = element.parentNode;
         if (elementParentNode.tagName === 'MIP-FIXED') {
@@ -120,6 +196,9 @@ define(function (require) {
     };
     customElement.prototype.confirm = function (str, options) {
         confirm.call(this, str, options);
+    };
+    customElement.prototype.selector = function (options) {
+        selector.call(this, options);
     };
 
     return customElement;

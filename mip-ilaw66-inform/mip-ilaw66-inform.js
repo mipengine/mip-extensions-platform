@@ -4,7 +4,8 @@
  */
 // informLawyer
 define(function (require) {
-    var $ = require('zepto');
+    var $ = require('jquery');
+    // zepto不支持is方法
     var customElement = require('customElement').create();
     customElement.prototype.firstInviewCallback = function () {
         var $el = $(this.element);
@@ -23,20 +24,20 @@ define(function (require) {
 
         // 公共的
         $el.find('.backfirst-list-alt').click(function () {
-            location.href = 'orderlist';
+            window.top.location.href = 'orderlist';
         });
         $el.find('.backfirst-home').click(function () {
-            location.href = 'index.html';
+            window.top.location.href = 'index.html';
         });
 
         $el.find('.icon_orderlist').click(function () {
-            location.href = 'orderlist';
+            window.top.location.href = 'orderlist';
         });
         $el.find('.backfirst').click(function () {
             if (location.host === '127.0.0.1:9082' || location.host === 'localhost:9082') {
                 window.history.go(- 1);
             } else {
-                location.href = getBaseUrl();
+                window.top.location.href = getBaseUrl();
             }
         });
 
@@ -75,7 +76,7 @@ define(function (require) {
                 // $el.find('body').css('overflow','auto');
                 $el.find('.success_result').hide();
                 $el.find('.error_result').hide();
-                location.href = 'conment.html';
+                window.top.location.href = 'conment.html';
             },
             3000);
         });
@@ -115,14 +116,14 @@ define(function (require) {
 
         // 公共的
         $el.find('.backfirst-list-alt').click(function () {
-            location.href = 'orderlist';
+            window.top.location.href = 'orderlist';
         });
         $el.find('.backfirst-home').click(function () {
-            location.href = 'index.html';
+            window.top.location.href = 'index.html';
         });
 
         $el.find('.icon_orderlist').click(function () {
-            location.href = 'orderlist';
+            window.top.location.href = 'orderlist';
         });
 
         // 支付页面
@@ -148,12 +149,12 @@ define(function (require) {
                 // $el.find('body').css('overflow','auto');
                 $el.find('.success_result').hide();
                 $el.find('.error_result').hide();
-                location.href = 'conment.html';
+                window.top.location.href = 'conment.html';
             },
             3000);
         });
         function getDirectUrl() {
-            var currentUrl = location.href;
+            var currentUrl = window.top.location.href;
             var index = currentUrl.indexOf('/tulip/');
             var redirectUrl = currentUrl.substring(0, index + 7);
             return redirectUrl;
@@ -184,11 +185,11 @@ define(function (require) {
 === 'WxiaoApp' || fromChannel === 'fengniao' || $el.find('#channel').val()
 === 'fengniao') {
 
-                                location.href = 'request_wx?data=' + data
+                                window.top.location.href = 'request_wx?data=' + data
 + '&questionType=' + questionType + '&lawyerId=' + lawyerId;
                             } else {
 
-                                location.href = 'request?data=' + data + '&questionType='
+                                window.top.location.href = 'request?data=' + data + '&questionType='
 + questionType + '&lawyerId=' + lawyerId;
                             }
                         } else {
@@ -196,11 +197,11 @@ define(function (require) {
                             if (fromChannel === 'WxiaoApp' || $el.find('#channel').val()
 === 'WxiaoApp' || fromChannel === 'fengniao' || $el.find('#channel').val() === 'fengniao') {
 
-                                location.href = 'request_wx?data=' + data
+                                window.top.location.href = 'request_wx?data=' + data
 + '&questionType=' + questionType;
                             } else {
 
-                                location.href = 'request?data=' + data
+                                window.top.location.href = 'request?data=' + data
 + '&questionType=' + questionType;
                             }
                         }
@@ -231,10 +232,10 @@ define(function (require) {
                         // 传入lawyerId
                         if (fromChannel === 'WxiaoApp' || $el.find('#channel').val() === 'WxiaoApp' || fromChannel
 === 'fengniao' || $el.find('#channel').val() === 'fengniao') {
-                            location.href = 'request_wx?data=' + id + '&questionType=' + questionType
+                            window.top.location.href = 'request_wx?data=' + id + '&questionType=' + questionType
 + '&askingType=' + askingType + '&lawyerId=' + lawyerId;
                         } else {
-                            location.href = 'request?data=' + id + '&questionType=' + questionType
+                            window.top.location.href = 'request?data=' + id + '&questionType=' + questionType
 + '&askingType=' + askingType + '&lawyerId=' + lawyerId;
                         }
 
@@ -278,7 +279,7 @@ define(function (require) {
                     localStorage.setItem('reAskSex', data.sex);
                     if (id !== '') {
                         // 传入lawyerId
-                        location.href = 'informLawyer?data=' + id + '&questionType='
+                        window.top.location.href = 'informLawyer?data=' + id + '&questionType='
 + questionType + '&askingType=' + askingType + '&lawyerId=' + lawyerId;
                     } else {
                         $el.find('.loadingArea').hide();
@@ -324,7 +325,7 @@ define(function (require) {
                     localStorage.setItem('goodCommentRate', data.goodCommentRate);
                     if (id !== '') {
                         // 传入lawyerId
-                        location.href = 'informLawyer?data=' + id + '&questionType=' + questionType
+                        window.top.location.href = 'informLawyer?data=' + id + '&questionType=' + questionType
 + '&askingType=' + askingType + '&lawyerId=' + lawyerId + '&PABackJumpFlg=index';
                     } else {
                         // 1.律师正在服务中 2.律师已下线
@@ -392,12 +393,12 @@ define(function (require) {
                     if (b === 'ST002') {
                         // 百度统计
                         // window._hmt && window._hmt.push(['_trackEvent', $el.find('#channel').val() + '_falvvip', 'click']);
-                        location.href = 'consulting_testament';
+                        window.top.location.href = 'consulting_testament';
 
                     } else if (b === 'ST003') {
                         // 百度统计
                         // window._hmt && window._hmt.push(['_trackEvent', $el.find('#channel').val() + '_tehui', 'click']);
-                        location.href = 'preferential?serviceType=' + questionType;
+                        window.top.location.href = 'preferential?serviceType=' + questionType;
 
                     }
 
@@ -708,15 +709,16 @@ define(function (require) {
 + '&lawyerName=' + data.lawyerName + '&requestId=' + id + '&askingType=' + askingType
 + '&lawyerId=' + lawyerId + '&tel=' + data.tel);
                             }
-                            location.href = url;
+                            window.top.location.href = url;
                         } else if (dataStatus === 4 || dataStatus === 1 || dataStatus === 3 || dataStatus
 === 9 || dataStatus === 10 || dataStatus === 'ERROR' || dataStatus === 'ERROR1' || countdown >= 65) {
                             clearInterval(timer);
                             if (fromRoute) {
-                                location.href = 'informLawyer_failed' + '?lawyerId=' + lawyerId + '&requestId='
+                                window.top.location.href = 'informLawyer_failed'
++ '?lawyerId=' + lawyerId + '&requestId='
 + id + '&questionType=' + questionType + '&askingType=' + askingType + '&fromRoute=clerical';
                             } else {
-                                location.href = 'informLawyer_failed' + '?lawyerId='
+                                window.top.location.href = 'informLawyer_failed' + '?lawyerId='
 + lawyerId + '&requestId=' + id + '&questionType=' + questionType + '&askingType='
 + askingType + '&secondAskFlg=' + data.reCallNoAnswerTimes;
                             }
@@ -770,13 +772,13 @@ define(function (require) {
                     if (data === 'NG') {
                         toastOr('取消晚了，律师正在联系您');
                         setTimeout(function () {
-                            location.href = jumpTo;
+                            window.top.location.href = jumpTo;
                         },
                         2000);
                     } else if (data === 'OK') {
                         toastOr('取消成功');
                         setTimeout(function () {
-                            location.href = jumpTo;
+                            window.top.location.href = jumpTo;
                         },
                         2000);
                     }
@@ -875,6 +877,9 @@ define(function (require) {
                 channel = channelInUrl;
             }
         }
+        $el.find('#gobackHandle').click(function () {
+            gobackHandle();
+        });
     };
 
     return customElement;

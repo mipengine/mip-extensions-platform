@@ -1,7 +1,9 @@
 # mip-ilaw66-resposeajax
 
 mip-ilaw66-resposeajax 组件说明
-通知律师状态未回应时，点击继续通知律师,重新发送请求，律师咨询，点击预约咨询，跳转预约页面
+通知律师状态未回应时，有两种状态可供选择
+1，点击继续通知律师,重新发送请求
+2，点击预约咨询，跳转到预约流程
 标题|内容
 ----|----
 类型|通用
@@ -13,7 +15,7 @@ mip-ilaw66-resposeajax 组件说明
 ### 基本用法
 ```html
 <mip-ilaw66-resposeajax>
-<input type="hidden" id="_csrf" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+ <input type="hidden" id="_csrf" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
     <input type="hidden" id="channel" name="channel" th:value="${session.channel}" />
 			<div class="header_block">
 				<span class="glyphicon glyphicon-menu-left pull-left" onclick="location.href='./'"></span>通知律师

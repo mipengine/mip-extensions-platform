@@ -1,0 +1,14 @@
+{
+    "name": "mip-zmall-tab-ajax",
+    "version": "1.0.0",
+    "description": "公用的ajax切换数据的选项卡",
+    "contributors": [
+        {
+            "name": "liuxianggui",
+            "email": "liu.xianggui@zol.com.cn"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

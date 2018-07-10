@@ -29,7 +29,7 @@ define(function (require) {
                 var e = event || window.event;
                 var t = e.target || e.srcElement;
                 if (t.tagName.toLowerCase() === 'a') {
-                    return parseInt(0, t.innerHTML);
+                    return parseInt(t.innerHTML, 16);
                 }
             }
 
