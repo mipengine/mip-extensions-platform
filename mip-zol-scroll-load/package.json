@@ -1,7 +1,7 @@
 {
-    "name": "mip-zmall-tab-ajax",
-    "version": "1.0.1",
-    "description": "公用的ajax切换数据的选项卡",
+    "name": "mip-zol-scroll-load",
+    "version": "1.0.0",
+    "description": "滚动加载组件",
     "contributors": [
         {
             "name": "liuxianggui",

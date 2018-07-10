@@ -1,7 +1,7 @@
 {
-    "name": "mip-zmall-tab-ajax",
-    "version": "1.0.1",
-    "description": "公用的ajax切换数据的选项卡",
+    "name": "mip-zmall-goodsorder",
+    "version": "1.0.0",
+    "description": "商城订单处理组件，包括删除、确认收货、取消订单等",
     "contributors": [
         {
             "name": "liuxianggui",
