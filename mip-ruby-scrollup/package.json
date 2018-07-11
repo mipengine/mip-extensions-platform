@@ -1,7 +1,7 @@
 {
     "name": "mip-ruby-scrollup",
-    "version": "1.0.0",
-    "description": "组件介绍",
+    "version": "1.0.1",
+    "description": "用来支持 MIP 中内容向上滚动展示，支持图片",
     "contributors": [
         {
             "name": "zl",

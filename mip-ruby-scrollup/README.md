@@ -1,6 +1,6 @@
 # mip-ruby-scrollup
 
-mip-ruby-scrollup 组件说明
+mip-ruby-scrollup 用来支持 MIP 中内容向上滚动展示，支持图片。
 
 标题|内容
 ----|----

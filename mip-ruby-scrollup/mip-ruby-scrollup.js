@@ -4,7 +4,7 @@
  */
 define(function (require) {
     'use strict';
-    var $ = require('jquery');
+    var $ = require('zepto');
     var customElement = require('customElement').create();
 
     /**
@@ -20,14 +20,45 @@ define(function (require) {
         this.o = document.getElementById(id);
         this.h = this.o.innerHTML;
         var that = this;
-        var len = $('#join_stats ul:last-child').find('li').length;
+        var ele = this.element;
+        var len = ele.querySelectorAll('li').length;
+        var sel = ele.querySelector('#' + id);
+
         var i = 1;
         var j = 1;
+
+        function animate(obj, step, interval, speedFactor, func) {
+            clearInterval(obj.timer);
+            function getStyle(obj, prop) {
+                if (obj.currentStyle) {
+                    return obj.currentStyle[prop];
+                } else {
+                    return document.defaultView.getComputedStyle(obj, null)[prop];
+                }
+            }
+            obj.timer = setInterval(function () {
+                var flag = true;
+                var cur = 0;
+                cur = parseInt(getStyle(obj, 'margin-top'), 10);
+                var speed = (step - cur) * speedFactor;
+                speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+                if (cur !== step) {
+                    flag = false;
+                }
+                obj.style['margin-top'] = cur + speed + 'px';
+                if (flag) {
+                    if (func) {
+                        func();
+                    }
+                    clearInterval(obj.timer);
+                }
+            }, interval);
+        }
+
         this.start = function () {
-                $('#join_stats').append(this.h);
+                sel.innerHTML += this.h;
                 if (!this.p) {
-                // $('#join_stats').animate({'margin-top': '-'+step+'px'},delay);
-                    $('#join_stats').css('margin-top', -step);
+                    animate(sel, -step, 10, 0.01);
                 }
                 i = 1;
                 this.t = setInterval(function () {
@@ -37,18 +68,22 @@ define(function (require) {
         this.scrolling = function () {
                 j ++;
                 i ++;
-                $('#join_stats').css('margin-top', -(step * j));
-                // $('#join_stats').animate({'margin-top': '-'+(step*j)+'px'},delay);
+                animate(sel, -(step * j), 10, 0.01);
                 if (i >= (len / liNum)) {
                     i = 1;
-                    $('#join_stats').append(this.h);
+                    sel.innerHTML += this.h;
                 }
-                if (j === 199) {
+                if (j >= 99) {
                     i = 1;
                     j = 0;
-                    $('#join_stats ul').not(':first-child').remove();
-                    $('#join_stats').css('margin-top', 0);
-                    // $('#join_stats').stop(false,false).animate({'margin-top': '0px'},delay);
+                    sel.style.marginTop = 0;
+                    animate(sel, 0, 10, 0.01, function () {
+                        var ul = sel.querySelectorAll('ul');
+                        var len = ul.length;
+                        for (var i = 1; i < len; i++) {
+                            ul[i].parentNode.removeChild(ul[i]);
+                        }
+                    });
                 }
             };
         setTimeout(function () {
