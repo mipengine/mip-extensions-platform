@@ -59,23 +59,23 @@ define(function (require) {
         });
         //  支付页面
         $el.find('.pay_txt').click(function () {
-            var no = $el.find(this).data('no');
+            var no = $(this).data('no');
             $el.find('.pay_txt .allow_icon2').show();
             $el.find('.pay_txt .allow_icon1').hide();
-            $el.find(this).children('.allow_icon2').hide();
-            $el.find(this).children('.allow_icon1').show();
+            $(this).children('.allow_icon2').hide();
+            $(this).children('.allow_icon1').show();
             $el.find('input[name="paytype"]').val(no);
             // 将所选的支付方式放入隐藏表单
         });
         $el.find('.btn_pay').click(function () {
             //  支付结果
-            $el.find('body').scrollTop(0);
-            $el.find('body').css('overflow', 'hidden');
+            $('body').scrollTop(0);
+            $('body').css('overflow', 'hidden');
             $el.find('.success_result').show();
             //  支付成功
             //  $el.find('.error_result').show();//  支付失败
             setTimeout(function () {
-                //  $el.find('body').css('overflow','auto');
+                //  $('body').css('overflow','auto');
                 $el.find('.success_result').hide();
                 $el.find('.error_result').hide();
                 window.top.location.href = 'conment.html';
@@ -85,14 +85,6 @@ define(function (require) {
 
         //  评价页面
 
-        /*$el.find('.btn_conment').click(function (){
-		$el.find('body').scrollTop(0);
-		$el.find('body').css('overflow','hidden');
-		$el.find('.conment_result').show();
-		setTimeout(function (){
-			window.top.location.href='index.html';
-		},3000)
-	});*/
 
         function getQueryString(name) {
             var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
@@ -144,23 +136,23 @@ define(function (require) {
 
         //  支付页面
         $el.find('.pay_txt').click(function () {
-            var no = $el.find(this).data('no');
+            var no = $(this).data('no');
             $el.find('.pay_txt .allow_icon2').show();
             $el.find('.pay_txt .allow_icon1').hide();
-            $el.find(this).children('.allow_icon2').hide();
-            $el.find(this).children('.allow_icon1').show();
+            $(this).children('.allow_icon2').hide();
+            $(this).children('.allow_icon1').show();
             $el.find('input[name="paytype"]').val(no);
             // 将所选的支付方式放入隐藏表单
         });
         $el.find('.btn_pay').click(function () {
             //  支付结果
-            $el.find('body').scrollTop(0);
-            $el.find('body').css('overflow', 'hidden');
+            $('body').scrollTop(0);
+            $('body').css('overflow', 'hidden');
             $el.find('.success_result').show();
             //  支付成功
             //  $el.find('.error_result').show();//  支付失败
             setTimeout(function () {
-                //  $el.find('body').css('overflow','auto');
+                //  $('body').css('overflow','auto');
                 $el.find('.success_result').hide();
                 $el.find('.error_result').hide();
                 window.top.location.href = 'conment.html';
@@ -179,7 +171,7 @@ define(function (require) {
             var fromChannel = localStorage.getItem('fromChannel');
             $.ajax({
                 type: 'POST',
-                url: 'greeting?questionType' + questionType + '&_csrf=' + csrfToken,
+                url: 'greeting?questionType=' + questionType + '&_csrf=' + csrfToken,
                 success: function (data) {
                     if (data === 'ERROR' || data === 'ERROR1') {
                         $el.find('#err_msg').html('系统异常，请返回重新咨询');

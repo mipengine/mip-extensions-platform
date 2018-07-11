@@ -4,7 +4,8 @@
  */
 
 define(function (require) {
-    var $ = require('zepto');
+    var $ = require('jquery');
+    // zepto 不支持is方法属性选择器，所以要用到jquery
     var customElement = require('customElement').create();
     customElement.prototype.firstInviewCallback = function () {
         var $el = $(this.element);
@@ -29,12 +30,12 @@ define(function (require) {
             var activationid = $el.find('#activationid').val();
             var activationidagain = $el.find('#activationidagain').val();
             if (!activationid) {
-                popbg.style.display = 'block';
+                popbg.css('display', 'block');
             } else if (!activationidagain) {
-                popbg.style.display = 'block';
+                popbg.css('display', 'block');
                 $el.find('#telephonecontent').html('请再次输入朋友的手机号');
             } else if (activationid !== activationidagain) {
-                popbg.style.display = 'block';
+                popbg.css('display', 'block');
                 $el.find('#telephonecontent').html('输入号码不一致，请确认');
             } else {
                 var cardType = getQueryString('cardtype');
@@ -53,19 +54,19 @@ define(function (require) {
                             stateflg = false;
                         }
                         $el.find('#gocheck').html('确定');
-                        statebg.style.display = 'block';
+                        statebg.css('display', 'block');
                         // 显示激活状态内容
                         $el.find('#statemsg').html(data.message);
 
                         var gocheck = $el.find('#gocheck');
                         // 点击【去查看】
-                        gocheck.addEventListener('click',
+                        gocheck.on('click',
                         function () {
                             if (stateflg) {
-                                statebg.style.display = 'none';
+                                statebg.css('display', 'none');
                                 window.top.location.href = 'mycardandcoupons';
                             } else {
-                                statebg.style.display = 'none';
+                                statebg.css('display', 'none');
                             }
                         });
 
@@ -74,16 +75,16 @@ define(function (require) {
                         if (jqXHR.status === 403) {
                             window.location.reload();
                         }
-//                      loadStatus = 'error';
+                        var loadStatus = 'error';
                     }
                 });
             }
         });
 
         // “请输入朋友的手机号”点击【好的】
-        gotype.addEventListener('click',
+        gotype.on('click',
         function () {
-            popbg.style.display = 'none';
+            popbg.css('display', 'none');
         });
         // 未使用卡券赠送页面，点击送卡跳转end
         // 解析url参数值
