@@ -14,20 +14,20 @@ define(function (require) {
         $el.find('.header_block').hide();
 
         // 未使用卡券赠送页面，点击送卡跳转start
-        var csrfToken = document.getElementById('csrf').value;
+        var csrfToken = $el.find('#_csrf').val();
         //  激活按钮获取
-        var immediatelyactivation = document.getElementById('sendtoanyone');
-        var stateimg = document.getElementById('stateimg');
+        var immediatelyactivation = $el.find('#sendtoanyone');
+        var stateimg = $el.find('#stateimg');
         //  激活状态获取
-        var statebg = document.getElementById('statebg');
+        var statebg = $el.find('#statebg');
         //  输入提示获取
-        var popbg = document.getElementById('popbg');
-        var gotype = document.getElementById('gotype');
+        var popbg = $el.find('#popbg');
+        var gotype = $el.find('#gotype');
 
         var stateflg = true;
         $el.find('.mycardandcoupons_sendanyone__btn').click(function (event) {
-            var activationid = document.getElementById('activationid').value;
-            var activationidagain = document.getElementById('activationidagain').value;
+            var activationid = $el.find('#activationid').val();
+            var activationidagain = $el.find('#activationidagain').val();
             if (!activationid) {
                 popbg.style.display = 'block';
             } else if (!activationidagain) {
@@ -41,15 +41,9 @@ define(function (require) {
                 var cardid = getQueryString('cardid');
 
                 $.ajax({
-                    url: 'card/sendCard',
+                    url: 'card/sendCard?id=' + cardid + '&type=' + cardType + '&phone='
++ activationid + '&channel=' + channel + '&_csrf=' + csrfToken,
                     type: 'post',
-                    data: {
-                        id: cardid,
-                        type: cardType,
-                        phone: activationid,
-                        channel: channel,
-                        csrf: $el.find('#csrf').val()
-                    },
                     success: function (data) {
                         if (data.code === 200) {
                             stateimg.src = 'images/wx_bg_success.png';
@@ -63,7 +57,7 @@ define(function (require) {
                         // 显示激活状态内容
                         $el.find('#statemsg').html(data.message);
 
-                        var gocheck = document.getElementById('gocheck');
+                        var gocheck = $el.find('#gocheck');
                         // 点击【去查看】
                         gocheck.addEventListener('click',
                         function () {
@@ -102,6 +96,9 @@ define(function (require) {
                 return null;
             }
         }
+        $el.find('.glyphicon').on('click', function () {
+            window.history.back(-1);
+        });
     };
 
     return customElement;

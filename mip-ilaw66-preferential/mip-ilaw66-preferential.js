@@ -75,7 +75,7 @@ define(function (require) {
                         var tocardtype = $el.find(this).data('cardtype');
                         var loadStatus;
                         var tocardid = $el.find(this).data('cardid');
-                        location.href = 'buyyearcard?cardType=' + tocardtype + '&id=' + tocardid;
+                        window.top.location.href = 'buyyearcard?cardType=' + tocardtype + '&id=' + tocardid;
                         event.preventDefault();
                     });
                 },
@@ -92,7 +92,7 @@ define(function (require) {
         var dropdown = document.querySelectorAll('.dropdown');
         var dropdownArray = Array.prototype.slice.call(dropdown, 0);
         dropdownArray.forEach(function (el) {
-            var button = el.querySelector('a[data-toggle="dropdown"]');
+            var button = el.querySelector('p[data-toggle="dropdown"]');
             var menu = el.querySelector('.dropdown-menu');
             var arrow = button.querySelector('i.icon-arrow');
 
@@ -125,7 +125,7 @@ define(function (require) {
 
         $el.find('.glyphicon').on('click',
         function () {
-            location.href = getBaseUrl();
+            window.top.location.href = getBaseUrl();
         });
 
         function callingInterface(recordarr) {
@@ -174,20 +174,20 @@ define(function (require) {
 
         //  公共的
         $el.find('.backfirst-list-alt').click(function () {
-            location.href = 'orderlist';
+            window.top.location.href = 'orderlist';
         });
         $el.find('.backfirst-home').click(function () {
-            location.href = 'index.html';
+            window.top.location.href = 'index.html';
         });
 
         $el.find('.icon_orderlist').click(function () {
-            location.href = 'orderlist';
+            window.top.location.href = 'orderlist';
         });
         $el.find('.backfirst').click(function () {
             if (location.host === '127.0.0.1:9082' || location.host === 'localhost:9082') {
                 window.history.go(-1);
             } else {
-                location.href = getBaseUrl();
+                window.top.location.href = getBaseUrl();
             }
         });
 
@@ -226,7 +226,7 @@ define(function (require) {
                 //  $el.find('body').css('overflow','auto');
                 $el.find('.success_result').hide();
                 $el.find('.error_result').hide();
-                location.href = 'conment.html';
+                window.top.location.href = 'conment.html';
             },
             3000);
         });
@@ -276,14 +276,14 @@ define(function (require) {
 
         //  公共的
         $el.find('.backfirst-list-alt').click(function () {
-            location.href = 'orderlist';
+            window.top.location.href = 'orderlist';
         });
         $el.find('.backfirst-home').click(function () {
-            location.href = 'index.html';
+            window.top.location.href = 'index.html';
         });
 
         $el.find('.icon_orderlist').click(function () {
-            location.href = 'orderlist';
+            window.top.location.href = 'orderlist';
         });
 
         //  支付页面
@@ -308,13 +308,13 @@ define(function (require) {
                 //  $el.find('body').css('overflow','auto');
                 $el.find('.success_result').hide();
                 $el.find('.error_result').hide();
-                location.href = 'conment.html';
+                window.top.location.href = 'conment.html';
             },
             3000);
         });
 
         function getDirectUrl() {
-            var currentUrl = location.href;
+            var currentUrl = window.top.location.href;
             var index = currentUrl.indexOf('/tulip/');
             var redirectUrl = currentUrl.substring(0, index + 7);
             return redirectUrl;
@@ -344,11 +344,11 @@ define(function (require) {
                             if (fromChannel === 'WxiaoApp' || $el.find('#channel').val() === 'WxiaoApp' || fromChannel
 === 'fengniao' || $el.find('#channel').val() === 'fengniao') {
 
-                                location.href = 'request_wx?data=' + data + '&questionType='
+                                window.top.location.href = 'request_wx?data=' + data + '&questionType='
 + questionType + '&lawyerId=' + lawyerId;
                             } else {
 
-                                location.href = 'request?data=' + data + '&questionType='
+                                window.top.location.href = 'request?data=' + data + '&questionType='
 + questionType + '&lawyerId=' + lawyerId;
                             }
                         } else {
@@ -356,10 +356,10 @@ define(function (require) {
                             if (fromChannel === 'WxiaoApp' || $el.find('#channel').val() === 'WxiaoApp' || fromChannel
 === 'fengniao' || $el.find('#channel').val() === 'fengniao') {
 
-                                location.href = 'request_wx?data=' + data + '&questionType=' + questionType;
+                                window.top.location.href = 'request_wx?data=' + data + '&questionType=' + questionType;
                             } else {
 
-                                location.href = 'request?data=' + data + '&questionType=' + questionType;
+                                window.top.location.href = 'request?data=' + data + '&questionType=' + questionType;
                             }
                         }
                     }
@@ -389,10 +389,10 @@ define(function (require) {
                         //  传入lawyerId
                         if (fromChannel === 'WxiaoApp' || $el.find('#channel').val() === 'WxiaoApp' || fromChannel
 === 'fengniao' || $el.find('#channel').val() === 'fengniao') {
-                            location.href = 'request_wx?data=' + id + '&questionType=' + questionType
+                            window.top.location.href = 'request_wx?data=' + id + '&questionType=' + questionType
 + '&askingType=' + askingType + '&lawyerId=' + lawyerId;
                         } else {
-                            location.href = 'request?data=' + id + '&questionType=' + questionType
+                            window.top.location.href = 'request?data=' + id + '&questionType=' + questionType
 + '&askingType=' + askingType + '&lawyerId=' + lawyerId;
                         }
 
@@ -435,7 +435,7 @@ define(function (require) {
                     localStorage.setItem('reAskSex', data.sex);
                     if (id !== '') {
                         //  传入lawyerId
-                        location.href = 'informLawyer?data=' + id + '&questionType=' + questionType
+                        window.top.location.href = 'informLawyer?data=' + id + '&questionType=' + questionType
 + '&askingType=' + askingType + '&lawyerId=' + lawyerId;
                     } else {
                         $el.find('.loadingArea').hide();
@@ -481,7 +481,7 @@ define(function (require) {
                     localStorage.setItem('goodCommentRate', data.goodCommentRate);
                     if (id !== '') {
                         //  传入lawyerId
-                        location.href = 'informLawyer?data=' + id + '&questionType=' + questionType
+                        window.top.location.href = 'informLawyer?data=' + id + '&questionType=' + questionType
 + '&askingType=' + askingType + '&lawyerId=' + lawyerId + '&PABackJumpFlg=index';
                     } else {
                         if (state === 1 || state === 2) {
@@ -548,7 +548,7 @@ define(function (require) {
                     console.log(data);
                     if (b === 'ST002') {
                         // 百度统计
-                        location.href = 'consulting_testament';
+                        window.top.location.href = 'consulting_testament';
 
                     } else if (b === 'ST003') {
                         // 百度统计

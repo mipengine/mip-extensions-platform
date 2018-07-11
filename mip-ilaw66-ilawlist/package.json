@@ -1,0 +1,14 @@
+{
+    "name": "mip-ilaw66-ilawlist",
+    "version": "1.0.0",
+    "description": "订单列表",
+    "contributors": [
+        {
+            "name": "zoe",
+            "email": "915404383@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
