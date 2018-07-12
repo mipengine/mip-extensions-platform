@@ -1,0 +1,14 @@
+{
+    "name": "mip-ilaw66-helpflow",
+    "version": "1.0.0",
+    "description": "操作流程",
+    "contributors": [
+        {
+            "name": "lin",
+            "email": "840399305@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
