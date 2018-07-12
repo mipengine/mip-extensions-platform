@@ -1,0 +1,14 @@
+{
+    "name": "mip-rz-photoswipe",
+    "version": "1.0.0",
+    "description": "图片全屏放大轮播插件",
+    "contributors": [
+        {
+            "name": "v_zhenjintao",
+            "email": "v_zhenjintao@baidu.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
