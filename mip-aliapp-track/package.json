@@ -1,0 +1,14 @@
+{
+  "name": "mip-aliapp-track",
+  "version": "1.0.0",
+  "description": "统计发送接口",
+  "contributors": [
+    {
+      "name": "tfguys",
+      "email": "tfguys@alibaba-inc.com"
+    }
+  ],
+  "engines": {
+    "mip": ">=1.1.0"
+  }
+}

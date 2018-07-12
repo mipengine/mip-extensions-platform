@@ -1,0 +1,14 @@
+{
+    "name": "mip-rz-data-template",
+    "version": "1.0.0",
+    "description": "请求数据渲染模板",
+    "contributors": [
+        {
+            "name": "v_zhenjintao",
+            "email": "v_zhenjintao@baidu.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
