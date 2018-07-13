@@ -13,7 +13,7 @@ define(function (require) {
     var photoSwipeUIDefault = require('./js/photoswipe-ui-default.min');
 
     function writeDom(element) {
-        let str = '<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">'
+        var str = '<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">'
             + '<div class="pswp__bg"></div>'
                 + '<div class="pswp__scroll-wrap">'
                     + '<div class="pswp__container">'

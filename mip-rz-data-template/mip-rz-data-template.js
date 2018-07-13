@@ -6,43 +6,43 @@
 define(function (require) {
     'use strict';
 
-    let customElement = require('customElement').create();
-    let templates = require('templates');
-    let util = require('util');
-    let viewer = require('viewer');
+    var customElement = require('customElement').create();
+    var templates = require('templates');
+    var util = require('util');
+    var viewer = require('viewer');
     // 复制剪切
-    let ClipboardJS = require('./clipboard.min');
+    var ClipboardJS = require('./clipboard.min');
     function getQuery(url) {
         url = url || location.href;
-        let query = url.split('?')[1] || '';
+        var query = url.split('?')[1] || '';
         if (!query) {
             return {};
         }
         return query.split('&').reduce(function (obj, item) {
-            let data = item.split('=');
+            var data = item.split('=');
             obj[data[0]] = decodeURIComponent(data[1]);
             return obj;
         }, {});
     }
 
     function copyfun(element) {
-        let diyclipboard = new ClipboardJS('.wechatcopybtn');
+        var diyclipboard = new ClipboardJS('.wechatcopybtn');
         diyclipboard.on('success', function (e) {
-            let toastdiv = element.getElementsByClassName('diy-toast')[0];
+            var toastdiv = element.getElementsByClassName('diy-toast')[0];
             toastdiv.innerHTML = '已复制，请打开微信搜索公众号';
             toastdiv.classList.add('diy-toast-show');
-            setTimeout(() => {
+            setTimeout(function () {
                 toastdiv.classList.remove('diy-toast-show');
             }, 1500);
         });
         diyclipboard.on('error', function (e) {
-            console.log(e);
+            // console.log(e);
         });
     }
 
     function handTime(time) {
         if (time.indexOf('-') !== -1) {
-            let arr = time.split('-');
+            var arr = time.split('-');
             return arr[0] + '年' + arr[1] + '月' + arr[2] + '日';
         } else {
             return time;
@@ -50,11 +50,11 @@ define(function (require) {
     }
     function talkfull(element, arr, order, num) {
         if (arr) {
-            let tempw = window.innerWidth || document.documentElement.clientWidth;
-            let tempw2 = tempw * 0.88;
-            let temparr = [];
+            var tempw = window.innerWidth || document.documentElement.clientWidth;
+            var tempw2 = tempw * 0.88;
+            var temparr = [];
             arr.forEach(function (item, index) {
-                let tempobj = {
+                var tempobj = {
                     w: tempw2,
                     h: tempw2 * .75
                 };
@@ -73,22 +73,25 @@ define(function (require) {
             });
         };
     }
+    function levelfull(element, data, item) {
+        item.querySelector('mip-img').addEventListener('click', function () {
+            var order = Number(item.dataset['order']);
+            if (item.classList.contains('liveshot-img')) {
+                // 实拍照片
+                talkfull(element, data.compPhotos, order, 1);
+            } else if (item.classList.contains('qualhonor-img')) {
+                // 资质荣誉
+                talkfull(element, data.honorCertificate, order, 2);
+            }
+        }, false);
+    }
     function realfull(element, data) {
-        let imgitem = element.querySelectorAll('.img-item');
+        var imgitem = element.querySelectorAll('.img-item');
         setTimeout(function () {
             if (imgitem) {
-                for (let index = 0; index < imgitem.length; index++) {
-                    imgitem[index].querySelector('mip-img').addEventListener('click', function () {
-                        let order = Number(imgitem[index].dataset['order']);
-                        if (imgitem[index].classList.contains('liveshot-img')) {
-                            // 实拍照片
-                            talkfull(element, data.compPhotos, order, 1);
-                        } else if (imgitem[index].classList.contains('qualhonor-img')) {
-                            // 资质荣誉
-                            talkfull(element, data.honorCertificate, order, 2);
-                        }
-                    }, false);
-                }
+                imgitem.forEach(function (item, index) {
+                    levelfull(element, data, item);
+                });
             }
         });
     }
@@ -97,9 +100,9 @@ define(function (require) {
      * 第一次进入可视区回调，只会执行一次
      */
     customElement.prototype.firstInviewCallback = function () {
-        let element = this.element;
+        var element = this.element;
         // 获取当前页面的所有query
-        let query = getQuery();
+        var query = getQuery();
         fetch('https://v123.baidu.com/xzhpageajax', {
             method: 'POST',
             body: 'camId=' + query.id,
@@ -130,7 +133,7 @@ define(function (require) {
                 templates.render(element, res.data).then(function (html) {
                     element.innerHTML = html;
                     if (res.data.brandBackground) {
-                        let pageTitle = element.querySelectorAll('.top-title')[0];
+                        var pageTitle = element.querySelectorAll('.top-title')[0];
                         util.css(pageTitle, 'backgroundImage', 'url(' + res.data.brandBackground + ')');
                     };
                     copyfun(element);

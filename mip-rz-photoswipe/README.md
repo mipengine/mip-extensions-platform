@@ -13,21 +13,35 @@ mip-rz-photoswipe 组件说明
 
 ### 基本用法
 ```html
-<mip-rz-photoswipe>
-    自定义内容，可以嵌套其他组件
+<mip-rz-photoswipe id="diyphotoswipe">
+    不可以自定义内容，不可以嵌套其他组件
 </mip-rz-photoswipe>
+<mip-xx on="eventName:diyphotoswipe.openfull"></mip-xx>
+mip-xx组件的js
+viewer.eventAction.execute('eventName', element, {
+    order: order,
+    items: items
+});
 ```
 
-## 属性
+## 参数
+### order
 
-### {属性名}
+说明：从第几个图片开始轮播
+必选项：是
 
-说明：{说明}
-必选项：{是|否}
-类型：{类型}
-取值范围：{取值范围}
-单位：{单位}
-默认值：{默认值}
+### items
+
+说明：轮播的图片数组   
+必选项：是   
+举例：items = [   
+        {   
+            src:'',//图片地址   
+            w: 281,//宽度   
+            h: 211,//高度   
+            title: ''//标题   
+        },   
+    ];   
 
 ## 注意事项
 
