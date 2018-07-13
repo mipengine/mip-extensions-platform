@@ -102,7 +102,7 @@ define(function (require) {
         let query = getQuery();
         fetch('https://v123.baidu.com/xzhpageajax', {
             method: 'POST',
-            body: 'camId=' + query.camId,
+            body: 'camId=' + query.id,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }

@@ -6,7 +6,7 @@ mip-aliapp-track 为阿里应用分发移动端页实现了统计功能
 ----|----
 类型|业务
 支持布局|不使用布局
-所需脚本|https://c.mipcdn.com/static/v1/mip-netease-tracker/mip-aliapp-track.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-aliapp-track/mip-aliapp-track.js
 
 ## 示例
 
