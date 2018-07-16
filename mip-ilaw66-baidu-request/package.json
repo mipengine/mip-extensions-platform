@@ -1,0 +1,14 @@
+{
+    "name": "mip-ilaw66-baidu-request",
+    "version": "1.0.0",
+    "description": "下单后匹配律师接单",
+    "contributors": [
+        {
+            "name": "xiaying.gong",
+            "email": "xiaying.gong@ilaw66.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
