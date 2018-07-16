@@ -21,7 +21,8 @@ define(function (require) {
             // 工作时间
             $el.find('.main_text_busy').show();
             $el.find('.main_text_nonworking').hide();
-        } else {
+        }
+        else {
             // 非工作时间
             $el.find('.main_text_busy').hide();
             $el.find('.main_text_nonworking').show();
@@ -30,33 +31,31 @@ define(function (require) {
         var questionType = getQueryString('questionType');
         var csrfToken = $el.find('#_csrf').val();
         // 点击继续通知律师按钮
-        $el.find('#js-continueAsk').on('touchstart',
-        function () {
+        $el.find('#js-continueAsk').on('touchstart', function () {
             $.ajax({
                 type: 'POST',
-//              data: {
-//                  questionType: questionType,
-//                  csrf: csrfToken
-//              },
                 url: 'greeting?questionType=' + questionType + '_csrf=' + csrfToken,
                 success: function (data) {
                     if (data === 'ERROR' || data === 'ERROR1') {
                         $el.find('#err_msg').html('系统异常，请返回重新咨询');
                         $el.find('.popUp_sysErr').fadeIn();
-                    } else if (data === 'ERROR2') {
+                    }
+                    else if (data === 'ERROR2') {
                         $el.find('#err_msg').html('您有订单未支付，请支付后再咨询');
                         $el.find('.popUp_sysErr').fadeIn();
-                    } else if (data === 'ERROR3') {
+                    }
+                    else if (data === 'ERROR3') {
                         $el.find('#err_msg').html('您有订单未结束，请等待1分钟后再试');
                         $el.find('.popUp_sysErr').fadeIn();
-                    } else {
+                    }
+                    else {
                         if (lawyerId) {
-                            window.top.location.href = 'request?data=' + data + '&questionType='
-+ questionType + '&lawyerId=' + lawyerId;
-
-                        } else {
-                            window.top.location.href = 'request?data=' + data
-+ '&questionType=' + questionType;
+                            window.top.location.href = 'mip_request?data=' + data + '&questionType='
+                                + questionType + '&lawyerId=' + lawyerId;
+                        }
+                        else {
+                            window.top.location.href = 'mip_request?data=' + data
+                                + '&questionType=' + questionType;
                         }
                     }
                 },
@@ -64,12 +63,13 @@ define(function (require) {
                     if (jqXHR.status === 403) {
                         window.location.reload();
                     }
+
                 }
             });
         });
 
         $el.find('.ruleask').click(function () {
-            window.top.location.href = 'reservation?questionType=' + questionType;
+            window.top.location.href = 'mip_reservation?questionType=' + questionType;
         });
 
         // 点击弹窗错误按钮
@@ -83,6 +83,7 @@ define(function (require) {
             if (r !== null) {
                 return unescape(r[2]);
             }
+
             return null;
         }
 
@@ -105,7 +106,7 @@ define(function (require) {
 
         if (head && head.is(':hidden')) {
             $el.find('.content_inputCodeText').css({
-                'top': '4.8rem'
+                top: '4.8rem'
             });
         }
 
@@ -115,6 +116,7 @@ define(function (require) {
             if (r !== null) {
                 return unescape(r[2]);
             }
+
             return null;
         }
 
@@ -131,7 +133,8 @@ define(function (require) {
             var url = window.location.host;
             if (ishttps) {
                 url = 'https://' + url;
-            } else {
+            }
+            else {
                 url = 'http://' + url;
             }
             return url + '/jasmine/';
@@ -139,19 +142,20 @@ define(function (require) {
 
         // 公共的
         $el.find('.backfirst-list-alt').click(function () {
-            window.top.location.href = 'orderlist';
+            window.top.location.href = 'mip_orderlist';
         });
         $el.find('.backfirst-home').click(function () {
-            window.top.location.href = 'index.html';
+            window.top.location.href = 'mip_index.html';
         });
 
         $el.find('.icon_orderlist').click(function () {
-            window.top.location.href = 'orderlist';
+            window.top.location.href = 'mip_orderlist';
         });
         $el.find('.backfirst').click(function () {
             if (location.host === '127.0.0.1:9082' || location.host === 'localhost:9082') {
-                window.history.go(- 1);
-            } else {
+                window.history.go(-1);
+            }
+            else {
                 window.top.location.href = getBaseUrl();
             }
         });
@@ -162,7 +166,8 @@ define(function (require) {
                 $el.find('input[name="allow"]').val('');
                 $el.find('.allow_icon2').show();
                 $el.find('.allow_icon1').hide();
-            } else {
+            }
+            else {
                 $el.find('input[name="allow"]').val('allowed');
                 $el.find('.allow_icon1').show();
                 $el.find('.allow_icon2').hide();
@@ -170,11 +175,11 @@ define(function (require) {
         });
         // 支付页面
         $el.find('.pay_txt').click(function () {
-            var no = $el.find(this).data('no');
+            var no = $(this).data('no');
             $el.find('.pay_txt .allow_icon2').show();
             $el.find('.pay_txt .allow_icon1').hide();
-            $el.find(this).children('.allow_icon2').hide();
-            $el.find(this).children('.allow_icon1').show();
+            $(this).children('.allow_icon2').hide();
+            $(this).children('.allow_icon1').show();
             // 将所选的支付方式放入隐藏表单
             $el.find('input[name="paytype"]').val(no);
         });
@@ -193,7 +198,7 @@ define(function (require) {
                 $el.find('.error_result').hide();
                 window.top.location.href = 'conment.html';
             },
-            3000);
+                3000);
         });
 
         function getQueryString(name) {
@@ -202,6 +207,7 @@ define(function (require) {
             if (r !== null) {
                 return unescape(r[2]);
             }
+
             return null;
         }
 
@@ -216,6 +222,7 @@ define(function (require) {
                     theRequest[strs[i].split('=')[0]] = strs[i].split('=')[1];
                 }
             }
+
             return theRequest;
         }
 
@@ -224,30 +231,31 @@ define(function (require) {
             var ua = window.navigator.userAgent.toLowerCase();
             if (ua.match(/MicroMessenger/i) === 'micromessenger') {
                 return true;
-            } else {
+            }
+            else {
                 return false;
             }
         }
 
         // 公共的
         $el.find('.backfirst-list-alt').click(function () {
-            window.top.location.href = 'orderlist';
+            window.top.location.href = 'mip_orderlist';
         });
         $el.find('.backfirst-home').click(function () {
-            window.top.location.href = 'index.html';
+            window.top.location.href = 'mip_index.html';
         });
 
         $el.find('.icon_orderlist').click(function () {
-            window.top.location.href = 'orderlist';
+            window.top.location.href = 'mip_orderlist';
         });
 
         // 支付页面
         $el.find('.pay_txt').click(function () {
-            var no = $el.find(this).data('no');
+            var no = $(this).data('no');
             $el.find('.pay_txt .allow_icon2').show();
             $el.find('.pay_txt .allow_icon1').hide();
-            $el.find(this).children('.allow_icon2').hide();
-            $el.find(this).children('.allow_icon1').show();
+            $(this).children('.allow_icon2').hide();
+            $(this).children('.allow_icon1').show();
             // 将所选的支付方式放入隐藏表单
             $el.find('input[name="paytype"]').val(no);
         });
@@ -266,7 +274,7 @@ define(function (require) {
                 $el.find('.error_result').hide();
                 window.top.location.href = 'conment.html';
             },
-            3000);
+                3000);
         });
 
         function getDirectUrl() {
@@ -277,47 +285,51 @@ define(function (require) {
         }
 
         function startConsulting(questionType, csrfToken, lawyerId) {
-            var fromChannel;
+            var fromChannel = localStorage.getItem('fromChannel');
             $.ajax({
                 type: 'POST',
-//              data: {
-//                  questionType: questionType,
-//                  csrf: csrfToken
-//              },
                 url: 'greeting?questionType=' + questionType + '&_csrf=' + csrfToken,
                 success: function (data) {
                     if (data === 'ERROR' || data === 'ERROR1') {
                         $el.find('#err_msg').html('系统异常，请返回重新咨询');
                         $el.find('.popUp_sysErr').fadeIn();
-                    } else if (data === 'ERROR2') {
+                    }
+                    else if (data === 'ERROR2') {
                         $el.find('#err_msg').html('您有订单未支付，请支付后再咨询');
                         $el.find('.popUp_sysErr').fadeIn();
-                    } else if (data === 'ERROR3') {
+                    }
+                    else if (data === 'ERROR3') {
                         $el.find('#err_msg').html('您有订单未结束，请等待1分钟后再试');
                         $el.find('.popUp_sysErr').fadeIn();
-                    } else {
+                    }
+                    else {
                         if (lawyerId) {
-                            if (fromChannel === 'WxiaoApp' || $el.find('#channel').val() === 'WxiaoApp' || fromChannel
-=== 'fengniao' || $el.find('#channel').val() === 'fengniao') {
+                            if (fromChannel === 'WxiaoApp' || $el.find('#channel').val()
+                                === 'WxiaoApp' || fromChannel
+                                === 'fengniao' || $el.find('#channel').val() === 'fengniao') {
 
                                 window.top.location.href = 'request_wx?data=' + data + '&questionType='
-+ questionType + '&lawyerId=' + lawyerId;
-                            } else {
-
-                                window.top.location.href = 'request?data=' + data
-+ '&questionType=' + questionType + '&lawyerId=' + lawyerId;
+                                    + questionType + '&lawyerId=' + lawyerId;
                             }
-                        } else {
+                            else {
 
-                            if (fromChannel === 'WxiaoApp' || $el.find('#channel').val() === 'WxiaoApp' || fromChannel
-=== 'fengniao' || $el.find('#channel').val() === 'fengniao') {
+                                window.top.location.href = 'mip_request?data=' + data
+                                    + '&questionType=' + questionType + '&lawyerId=' + lawyerId;
+                            }
+                        }
+                        else {
+
+                            if (fromChannel === 'WxiaoApp' || $el.find('#channel').val()
+                                === 'WxiaoApp' || fromChannel
+                                === 'fengniao' || $el.find('#channel').val() === 'fengniao') {
 
                                 window.top.location.href = 'request_wx?data='
-+ data + '&questionType=' + questionType;
-                            } else {
+                                    + data + '&questionType=' + questionType;
+                            }
+                            else {
 
-                                window.top.location.href = 'request?data=' + data
-+ '&questionType=' + questionType;
+                                window.top.location.href = 'mip_request?data=' + data
+                                    + '&questionType=' + questionType;
                             }
                         }
                     }
@@ -326,6 +338,7 @@ define(function (require) {
                     if (jqXHR.status === 403) {
                         window.location.reload();
                     }
+
                 }
             });
         }
@@ -336,33 +349,36 @@ define(function (require) {
                 async: true,
                 type: 'POST',
                 url: 'continueAsk?lawyerId=' + lawyerId + '&questionType='
-+ questionType + '&_csrf=' + csrfToken,
+                    + questionType + '&_csrf=' + csrfToken,
                 dataType: 'json',
                 success: function (data) {
                     $el.find('.loadingArea').hide();
                     var id = data.data;
                     var state = data.state;
                     var flg;
-                    var fromChannel;
+                    var fromChannel = localStorage.getItem('fromChannel');
                     if (id !== '') {
                         // 传入lawyerId
-                        if (fromChannel === 'WxiaoApp' || $el.find('#channel').val() === 'WxiaoApp' || fromChannel
-=== 'fengniao' || $el.find('#channel').val() === 'fengniao') {
+                        if (fromChannel === 'WxiaoApp' || $el.find('#channel').val()
+                            === 'WxiaoApp' || fromChannel
+                            === 'fengniao' || $el.find('#channel').val() === 'fengniao') {
                             window.top.location.href = 'request_wx?data=' + id + '&questionType='
-+ questionType + '&askingType='
-+ askingType + '&lawyerId=' + lawyerId;
-                        } else {
-                            window.top.location.href = 'request?data=' + id + '&questionType=' + questionType
-+ '&askingType=' + askingType + '&lawyerId=' + lawyerId;
+                                + questionType + '&askingType='
+                                + askingType + '&lawyerId=' + lawyerId;
                         }
-
-                    } else {
+                        else {
+                            window.top.location.href = 'mip_request?data=' + id + '&questionType=' + questionType
+                                + '&askingType=' + askingType + '&lawyerId=' + lawyerId;
+                        }
+                    }
+                    else {
                         if (state === 1) {
                             // 点击继续问，b律师正在服务中,设为true
                             flg = true;
                             $el.find('.popUp_confirm').fadeIn();
                             $el.find('#still_reAsk').attr('lawyerId', lawyerId);
-                        } else {
+                        }
+                        else {
                             var msg = data.error;
                             $el.find('#tips').html(msg);
                             $el.find('.popUp_confirm').hide();
@@ -375,6 +391,7 @@ define(function (require) {
                     if (jqXHR.status === 403) {
                         window.location.reload();
                     }
+
                 }
             });
         }
@@ -384,7 +401,7 @@ define(function (require) {
                 async: true,
                 type: 'POST',
                 url: 'continueAsk?lawyerId=' + lawyerId + '&questionType='
-+ questionType + '&_csrf=' + csrfToken,
+                    + questionType + '&_csrf=' + csrfToken,
                 dataType: 'json',
                 success: function (data) {
                     $el.find('.loadingArea').hide();
@@ -396,16 +413,18 @@ define(function (require) {
                     localStorage.setItem('reAskSex', data.sex);
                     if (id !== '') {
                         // 传入lawyerId
-                        window.top.location.href = 'informLawyer?data=' + id + '&questionType='
-+ questionType + '&askingType=' + askingType + '&lawyerId=' + lawyerId;
-                    } else {
+                        window.top.location.href = 'mip_informLawyer?data=' + id + '&questionType='
+                            + questionType + '&askingType=' + askingType + '&lawyerId=' + lawyerId;
+                    }
+                    else {
                         $el.find('.loadingArea').hide();
                         if (state === 1) {
                             // 点击继续问，b律师正在服务中,设为true
                             flg = true;
                             $el.find('.popUp_confirm').fadeIn();
                             $el.find('#still_reAsk').attr('lawyerId', lawyerId);
-                        } else {
+                        }
+                        else {
                             var msg = data.error;
                             $el.find('#tips').html(msg);
                             $el.find('.popUp_confirm').hide();
@@ -418,6 +437,7 @@ define(function (require) {
                     if (jqXHR.status === 403) {
                         window.location.reload();
                     }
+
                 }
             });
         }
@@ -428,7 +448,7 @@ define(function (require) {
                 async: true,
                 type: 'POST',
                 url: 'continueAskV3?lawyerId=' + lawyerId + '&questionType=' + questionType
-+ '&_csrf=' + csrfToken + '&continueAskPage=' + continueAskPage,
+                    + '&_csrf=' + csrfToken + '&continueAskPage=' + continueAskPage,
                 dataType: 'json',
                 success: function (data) {
                     console.log('继续问2', data);
@@ -442,10 +462,11 @@ define(function (require) {
                     localStorage.setItem('goodCommentRate', data.goodCommentRate);
                     if (id !== '') {
                         // 传入lawyerId
-                        window.top.location.href = 'informLawyer?data=' + id + '&questionType='
-+ questionType + '&askingType=' + askingType + '&lawyerId='
-+ lawyerId + '&PABackJumpFlg=index';
-                    } else {
+                        window.top.location.href = 'mip_informLawyer?data=' + id + '&questionType='
+                            + questionType + '&askingType=' + askingType + '&lawyerId='
+                            + lawyerId + '&PABackJumpFlg=index';
+                    }
+                    else {
                         if (state === 1 || state === 2) {
                             // 1.律师正在服务中 2.律师已下线
                             document.body.scrollTop = document.documentElement.scrollTop = 0;
@@ -454,24 +475,18 @@ define(function (require) {
                             var yes = '立刻推荐其他律师';
                             var no = '稍后继续问';
                             var backOr;
-                            backOr(title, main, yes, no,
-                            function () {
+                            backOr(title, main, yes, no, function () {
                                 startConsulting(questionType);
-                            },
-                            function () {
+                            }, function () {
                                 $.ajax({
                                     url: 'createContinueAskLater?lawyerId=' + lawyerId
-+ '&questionType=' + questionType + '&_csrf=' + csrfToken,
+                                        + '&questionType=' + questionType + '&_csrf=' + csrfToken,
                                     type: 'POST',
-//                                  data: {
-//                                      lawyerId: lawyerId,
-//                                      questionType: questionType,
-//                                      csrf: csrfToken
-//                                  },
                                     success: function (data) {
                                         if (data === 'ERROR') {
                                             alert('系统异常');
-                                        } else {
+                                        }
+                                        else {
                                             console.log(data);
                                         }
                                     },
@@ -479,10 +494,12 @@ define(function (require) {
                                         if (jqXHR.status === 403) {
                                             window.location.reload();
                                         }
+
                                     }
                                 });
                             });
-                        } else {
+                        }
+                        else {
                             var msg = data.error;
                             $el.find('#tips').html(msg);
                             $el.find('.popUp_confirm').hide();
@@ -495,10 +512,10 @@ define(function (require) {
                     if (jqXHR.status === 403) {
                         window.location.reload();
                     }
+
                 }
             });
         }
-
         function toLogin(b) {
             var openId = $el.find('#openId').val();
             $.ajax({
@@ -508,17 +525,16 @@ define(function (require) {
                     openId: openId
                 },
                 success: function (data) {
-                    console.log(data);
                     if (b === 'ST002') {
-                        // 百度统计
-                        // window._hmt && window._hmt.push(['_trackEvent', $el.find('#channel').val()+'_falvvip', 'click']);
+                        window._hmt
+&& window._hmt.push(['_trackEvent', $el.find('#channel').val() + '_falvvip', 'click']);
                         window.top.location.href = 'consulting_testament';
-
-                    } else if (b === 'ST003') {
+                    }
+                    else if (b === 'ST003') {
                         // 百度统计
-                        // window._hmt && window._hmt.push(['_trackEvent', $el.find('#channel').val()+'_tehui', 'click']);
-                        window.top.location.href = 'preferential?serviceType=' + questionType;
-
+                        window._hmt
+&& window._hmt.push(['_trackEvent', $el.find('#channel').val() + '_tehui', 'click']);
+                        window.top.location.href = 'mip_preferential?serviceType=' + questionType;
                     }
 
                 },
@@ -526,6 +542,7 @@ define(function (require) {
                     if (jqXHR === 403) {
                         window.reload();
                     }
+
                 }
             });
         }

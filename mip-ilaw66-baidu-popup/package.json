@@ -1,0 +1,12 @@
+{
+    "name": "mip-ilaw66-baidu-popup",
+    "version": "1.0.0",
+    "description": "法率一个弹出框组件",
+    "contributors": [{
+        "name": "jessli",
+        "email": "306651535@qq.com"
+    }],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "name": "mip-couponPay",
+    "version": "1.0.0",
+    "description": "支付详情页",
+    "contributors": [
+        {
+            "name": "skylyth",
+            "email": "skylyth@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

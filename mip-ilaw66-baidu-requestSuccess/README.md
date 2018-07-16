@@ -7,7 +7,9 @@ mip-ilaw66-baidu-requestSuccess 组件说明
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/static/v1/mip-ilaw66-baidu-request/mip-ilaw66-baidu-request.js
+所需脚本|https://mipcache.bdstatic.com/static/v1/mip-mustache/mip-mustache.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-cdel-swiper/mip-cdel-swiper.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-ilaw66-baidu-popup/mip-ilaw66-baidu-popup.js
 所需脚本|https://c.mipcdn.com/static/v1/mip-ilaw66-baidu-requestSuccess/mip-ilaw66-baidu-requestSuccess.js
 
 ## 示例
@@ -27,27 +29,33 @@ mip-ilaw66-baidu-requestSuccess 组件说明
     
         <div class="requestcontent_div">
             <b>匹配成功，律师正在联系您</b>
-            <div class="requestconntent_lawyer">
-                <img class="requestconntent_lawyerimg" src="images/icon_no.png"/>
-                <p>吕律师</p>
-                <table>
-                    <tr>
-                        <td>擅长类型</td>
-                        <td>服务次数</td>
-                        <td>用户评价</td>
-                    </tr>
-                    <tr>
-                        <td>婚姻家庭</td>
-                        <td>xxxx次</td>
-                        <td>
-                            <span class="star_blockindex star_blockindex0" data-score="2" title="优">
-                                <img src="./images/icon_star_c_c.png" alt="1" title="优"/><img src="./images/icon_star_c_c.png" alt="2" title="优"/><img src="./images/icon_star_c_c.png" alt="3" title="优"/><img src="./images/icon_star_c_c.png" alt="4" title="优"/><img src="./images/icon_star.png" alt="5" title="优"/>5.0
-                                <input type="hidden" class="common_arg" name="score" value="5" readonly="readonly"/>
-                            </span>
-                        </td>
-                    </tr>
-                </table>
-                <p>律师执业证号：13101****10862612</p>
+            <div class="requestconntent_lawyer" id="mip-template-lawyerMsg">
+                <template type="mip-mustache">
+                    <mip-img class="requestconntent_lawyerimg" src="{{imgUrl}}"></mip-img>
+                    <p>{{lawyerName}}</p>
+                    <table>
+                        <tr>
+                            <td>擅长类型</td>
+                            <td>服务次数</td>
+                            <td>用户评价</td>
+                        </tr>
+                        <tr>
+                            <td>{{questionType}}</td>
+                            <td>{{count}}次</td>
+                            <td>
+                                <span class="star_blockindex star_blockindex0" data-score="{{score.length}}" title="优">
+                                    {{#score}}
+                                        <mip-img src="./images/icon_star_c_c.png" alt="1" title="优"></mip-img>
+                                    {{/score}}
+                                    <!--<mip-img src="./images/icon_star.png" alt="5" title="优"></mip-img>-->
+                                    {{score.length}}.0
+                                    <input type="hidden" class="common_arg" name="score" value="{{score.length}}" readonly="readonly"/>
+                                </span>
+                            </td>
+                        </tr>
+                    </table>
+                    <p>律师执业证号：{{cardId}}</p>
+                </template>
             </div>
         </div>
 </mip-ilaw66-baidu-requestSuccess>
