@@ -1,0 +1,14 @@
+{
+    "name": "mip-ilaw66-falv-formtel",
+    "version": "1.0.0",
+    "description": "修改手机号",
+    "contributors": [
+        {
+            "name": "falv",
+            "email": "840399305@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "name": "mip-ilaw66-falv-buycard",
+    "version": "1.0.0",
+    "description": "购买卡劵",
+    "contributors": [
+        {
+            "name": "falv",
+            "email": "840399305@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
