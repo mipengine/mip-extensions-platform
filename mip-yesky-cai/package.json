@@ -1,0 +1,14 @@
+{
+    "name": "mip-yesky-cai",
+    "version": "1.0.0",
+    "description": "实现踩效果",
+    "contributors": [
+        {
+            "name": "zhangpp",
+            "email": "1179585662@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

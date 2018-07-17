@@ -1,0 +1,14 @@
+{
+    "name": "mip-ilaw66-falv-sendcards",
+    "version": "1.0.0",
+    "description": "通过判断激活状态跳转页面，表单验证",
+    "contributors": [
+        {
+            "name": "falv",
+            "email": "840399305@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

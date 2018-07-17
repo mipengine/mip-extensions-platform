@@ -1,0 +1,14 @@
+{
+    "name": "mip-ilaw66-falv-inform",
+    "version": "1.0.0",
+    "description": "通知分配律师接听客户电话",
+    "contributors": [
+        {
+            "name": "falv",
+            "email": "840399305@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

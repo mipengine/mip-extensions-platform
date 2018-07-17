@@ -1,0 +1,14 @@
+{
+    "name": "mip-ilaw66-falv-fvindex",
+    "version": "1.0.0",
+    "description": "弹框浮层点击显示",
+    "contributors": [
+        {
+            "name": "falv",
+            "email": "840399305@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

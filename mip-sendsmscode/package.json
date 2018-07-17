@@ -1,0 +1,14 @@
+{
+    "name": "mip-sendsmscode",
+    "version": "1.0.0",
+    "description": "发送手机短信验证码",
+    "contributors": [
+        {
+            "name": "langYue",
+            "email": "langyueSoft@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
