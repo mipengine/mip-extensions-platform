@@ -186,7 +186,12 @@ define(function (require) {
         }
     };
 
-    customElement.prototype.firstInviewCallback = function () {
+    /**
+     * 构造元素，只会运行一次，初始化日志配置及发送日志功能
+     *
+     * @return {undefined}
+     */
+    customElement.prototype.build = function () {
         try {
             var script = this.element.querySelector('script[type="application/json"]');
             config = JSON.parse(script.textContent.toString());
