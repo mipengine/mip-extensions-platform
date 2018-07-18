@@ -9,7 +9,13 @@ define(function (require) {
     window.onload = function () {
         document.documentElement.style.fontSize = window.innerWidth / 6.4 + 'px';
     };
+    window.onresize = function () {
+        document.documentElement.style.fontSize = window.innerWidth / 6.4 + 'px';
+    };
     customElement.prototype.firstInviewCallback = function () {
+        window.onload = function () {
+            document.documentElement.style.fontSize = window.innerWidth / 6.4 + 'px';
+        };
         window.onresize = function () {
             document.documentElement.style.fontSize = window.innerWidth / 6.4 + 'px';
         };

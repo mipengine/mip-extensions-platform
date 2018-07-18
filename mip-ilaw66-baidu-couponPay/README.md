@@ -7,6 +7,8 @@ mip-ilaw66-baidu-couponPay 组件说明
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
+所需脚本|https://c.mipcdn.com/static/v1/mip-sina-rem/mip-sina-rem.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-stats-baidu/mip-stats-baidu.js
 所需脚本|https://c.mipcdn.com/static/v1/mip-ilaw66-baidu-couponPay/mip-ilaw66-baidu-couponPay.js
 
 ## 示例
@@ -14,9 +16,15 @@ mip-ilaw66-baidu-couponPay 组件说明
 ### 基本用法
 ```html
 <mip-ilaw66-baidu-couponPay>
-    <div class="header_block">
-		<span class="glyphicon glyphicon-menu-left pull-left" style="left:5px" ></span>支付详情
-	</div>
+<mip-sina-rem>
+<mip-stats-baidu>
+    <script type="application/json">
+        {
+            "token": "d5a24ec2321d65ed4b781d2fce73c834"
+        }
+    </script>
+</mip-stats-baidu>
+    <mip-form url='https://www.baidu.com'>
     <input type="hidden" id="_csrf" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
     <input type="hidden" id="code" name="code"/>
     <input type="hidden" id="requestId" name="requestId" />
@@ -31,6 +39,7 @@ mip-ilaw66-baidu-couponPay 组件说明
     <input type="hidden" name="couponId" id="couponId" />
     <input type="hidden" name="paytype" id="coupon_paytype" />
     <input type="hidden" id="channel" name="channel" th:value="${session.channel}" />
+    </mip-form>
     <div class="layerAsk clearfix">
         <div class="layerAsk__callMinutes">
             <span>通话(<i id="price"></i>元/分钟)</span>
@@ -104,6 +113,7 @@ mip-ilaw66-baidu-couponPay 组件说明
     <footer class="clearfix">
         <div id="js-pay-button">立即支付 ¥ <i id="unpaidAmount"></i></div>
     </footer>
+</mip-sina-rem>
 </mip-ilaw66-baidu-couponPay>
 ```
 
