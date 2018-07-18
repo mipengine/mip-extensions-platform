@@ -121,75 +121,35 @@ define(function (require) {
                 data._csrf = $el.find('#_csrf').val();
                 data.questionType = $el.find('#questionType').val();
                 data.userCouponId = $el.find('#couponId').val();
+                var data = {};
+                data._csrf = $el.find('#_csrf').val();
+                data.questionType = $el.find('#questionType').val();
+                data.requestId = $el.find('#requestId').val();
+                data.userCouponId = $el.find('#couponId').val();
+                if ($el.find('#cardId').val()) {
+                    data.cardId = $el.find('#cardId').val();
+                }
 
-                if (CouponPaytype === 3) { // 支付宝支付
-                    if ($el.find('#cardId').val()) {
-                        data.cardId = $el.find('#cardId').val();
-                    }
-
-                    data.returnUrl = window.location.origin + '/jasmine/comment?requestId='
-                    + $el.find('#requestId').val() + '&questionType=' + $el.find('#questionType').val();
-                    $.ajax({
-                        type: 'POST',
-                        url: 'pay/alipay_wap',
-                        data: data,
-                        success: function (data) {
-                            if (data === 'ERROR') {
-                                alert('连接异常');
-                            }
-                            else if (data === 'ERROR1') {
-                                alert('用户不欠款，不需要支付');
-                            }
-                            else if (data === 'ERROR2') {
-                                alert('支付接口异常');
-                            }
-                            else if (data === 'ERROR3') {
-                                alert('无效的优惠券');
-                            }
-                            else {
-                                $el.find('#couponPay_body').html(data);
-                            }
-                        },
-                        error: function (jqXHR) {
-                            if (jqXHR.status === 403) {
-                                window.location.reload();
-                            }
-
+                $.ajax({
+                    type: 'POST',
+                    url: 'pay/baidupay',
+                    data: data,
+                    success: function (data) {
+                        if (data && data.cashier_url) {
+                            window.top.location.href = data.cashier_url;
+                        }
+                        else {
+                            //                              toastOr('报错了，请稍后尝试，或者联系客服');
                         }
 
-                    });
-                }
-                else if (CouponPaytype === 8) { // 百度支付
-                    var data = {};
-                    data._csrf = $el.find('#_csrf').val();
-                    data.questionType = $el.find('#questionType').val();
-                    data.requestId = $el.find('#requestId').val();
-                    data.userCouponId = $el.find('#couponId').val();
-                    if ($el.find('#cardId').val()) {
-                        data.cardId = $el.find('#cardId').val();
-                    }
-
-                    $.ajax({
-                        type: 'POST',
-                        url: 'pay/baidupay',
-                        data: data,
-                        success: function (data) {
-                            if (data && data.cashier_url) {
-                                window.top.location.href = data.cashier_url;
-                            }
-                            else {
-                                //                              toastOr('报错了，请稍后尝试，或者联系客服');
-                            }
-
-                        },
-                        error: function (jqXHR) {
-                            if (jqXHR.status === 403) {
-                                window.location.reload();
-                            }
-
+                    },
+                    error: function (jqXHR) {
+                        if (jqXHR.status === 403) {
+                            window.location.reload();
                         }
-                    });
-                }
+
+                    }
+                });
             }
 
         });

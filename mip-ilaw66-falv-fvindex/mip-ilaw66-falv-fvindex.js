@@ -754,7 +754,7 @@ define(function (require) {
             isCheckedConsulting(type);
         });
         $el.find('.rulePA').on('click', function () {
-            window.top.location.href = 'rule_clearbaoxianshi';
+            window.top.location.href = 'mip_rule_clearbaoxianshi';
         });
         $el.find('.tab-content__close').on('click', function () {
             $(this).parent().parent().removeClass().addClass('tab-pane');
@@ -929,7 +929,7 @@ define(function (require) {
         });
 
         function numtransform(str) {
-            var newStr = new Array(str.length + parseInt(str.length / 3, 16));
+            var newStr = new Array(str.length + parseInt(str.length / 3, 10));
             var strArray = str.split('');
             newStr[newStr.length - 1] = strArray[strArray.length - 1];
             var currentIndex = strArray.length - 1;
@@ -1140,14 +1140,14 @@ define(function (require) {
             questionType = $(this).data('type');
             if (questionType === 'ST002') {
                 // 百度统计
-                window._hmt
-                && window._hmt.push(['_trackEvent', $el.find('#channel').val() + '_falvvip', 'click']);
+//              window._hmt
+//              && window._hmt.push(['_trackEvent', $el.find('#channel').val() + '_falvvip', 'click']);
                 window.top.location.href = 'consulting_testament';
             }
             else if (questionType === 'ST003') {
                 // 百度统计
-                window._hmt
-                && window._hmt.push(['_trackEvent', $el.find('#channel').val() + '_tehui', 'click']);
+//              window._hmt
+//              && window._hmt.push(['_trackEvent', $el.find('#channel').val() + '_tehui', 'click']);
                 window.top.location.href = 'preferential?serviceType=' + questionType;
             }
             else {
@@ -1197,14 +1197,14 @@ define(function (require) {
             function start() {
                 t = setInterval(scrolling, speed);
                 if (!p) {
-                    o.style.marginTop = parseInt(o.style.marginTop, 16) - 1 + 'px';
+                    o.style.marginTop = parseInt(o.style.marginTop, 10) - 1 + 'px';
                 }
             }
 
             function scrolling() {
                 if (parseInt(o.style.marginTop, 10) % lineH !== 0) {
-                    o.style.marginTop = parseInt(o.style.marginTop, 16) - 1 + 'px';
-                    if (Math.abs(parseInt(o.style.marginTop, 16)) >= o.scrollHeight / 2) {
+                    o.style.marginTop = parseInt(o.style.marginTop, 10) - 1 + 'px';
+                    if (Math.abs(parseInt(o.style.marginTop, 10)) >= o.scrollHeight / 2) {
                         o.style.marginTop = 0;
                     }
                 }

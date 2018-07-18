@@ -10,6 +10,8 @@ define(function (require) {
 
     var customElement = require('customElement').create();
 
+    var util = require('util');
+
     var templates = require('templates');
 
     function getQuery(url) {
@@ -23,6 +25,28 @@ define(function (require) {
             obj[data[0]] = decodeURIComponent(data[1]);
             return obj;
         }, {});
+    }
+
+    function obj2query(obj) {
+        var arr = [];
+        for (var key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                arr.push(key + '=' + encodeURIComponent(obj[key]));
+            }
+        }
+        return arr.join('&');
+    }
+
+    function log(xzhid) {
+        var url = 'https://rqs.baidu.com/service/api/rqs';
+        // 发送打点请求
+        var img = document.createElement('img');
+        img.src = url + '?' + obj2query({
+            rqt: 300,
+            action: 'pay_success',
+            url: util.parseCacheUrl(location.href),
+            xzhid: xzhid
+        });
     }
 
     /**
@@ -59,7 +83,7 @@ define(function (require) {
                         element.innerHTML = html;
                         var subscribe = element.querySelector('.subscribe');
                         subscribe.addEventListener('click', function () {
-                            var checked = subscribe.classList.contains('checked');
+                            var checked = [].slice.call(subscribe.classList).indexOf('checked') >= 0;
                             if (checked) {
                                 subscribe.classList.remove('checked');
                                 subscribe.classList.add('unchecked');
@@ -103,6 +127,7 @@ define(function (require) {
         };
         script.src = 'https://xiongzhang.baidu.com/sdk/c.js?appid=' + querys.id + '&timestamp=' + (+new Date());
         document.body.appendChild(script);
+        log(querys.id);
     };
 
     return customElement;

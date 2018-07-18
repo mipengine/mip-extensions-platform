@@ -47,7 +47,7 @@ define(function (require) {
                 if (/^1\d{10}$/.test(m)) {
                     xmlhttp.open('POST', url, true);
                     xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-                    xmlhttp.setRequestHeader('HTTP_X_REQUESTED_WITH', 'XMLHttpRequest');
+                    xmlhttp.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
                     xmlhttp.onreadystatechange = function () {
                         var data;
                         if (xmlhttp.readyState === 4) {

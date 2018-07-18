@@ -10,6 +10,7 @@ define(function (require) {
     var templates = require('templates');
     var util = require('util');
     var viewer = require('viewer');
+
     // 复制剪切
     var ClipboardJS = require('./clipboard.min');
     function getQuery(url) {
@@ -39,7 +40,6 @@ define(function (require) {
             // console.log(e);
         });
     }
-
     function handTime(time) {
         if (time.indexOf('-') !== -1) {
             var arr = time.split('-');
@@ -53,20 +53,20 @@ define(function (require) {
             var tempw = window.innerWidth || document.documentElement.clientWidth;
             var tempw2 = tempw * 0.88;
             var temparr = [];
-            arr.forEach(function (item, index) {
+            for (var index = 0; index < arr.length; index++) {
                 var tempobj = {
                     w: tempw2,
                     h: tempw2 * .75
                 };
                 if (num === 1) {
-                    tempobj.src = item.pic;
-                    tempobj.title = item.desp;
+                    tempobj.src = arr[index].pic;
+                    tempobj.title = arr[index].desp;
                 } else if (num === 2) {
-                    tempobj.src = item.orgPic;
-                    tempobj.title = item.honorName;
+                    tempobj.src = arr[index].orgPic;
+                    tempobj.title = arr[index].honorName;
                 };
                 temparr.push(tempobj);
-            });
+            }
             viewer.eventAction.execute('usefull', element, {
                 order: order,
                 items: temparr
@@ -89,9 +89,9 @@ define(function (require) {
         var imgitem = element.querySelectorAll('.img-item');
         setTimeout(function () {
             if (imgitem) {
-                imgitem.forEach(function (item, index) {
-                    levelfull(element, data, item);
-                });
+                for (var index = 0; index < imgitem.length; index++) {
+                    levelfull(element, data, imgitem[index]);
+                }
             }
         });
     }
@@ -130,14 +130,20 @@ define(function (require) {
                 if (res.data.effTime) {
                     res.data.effTime = handTime(res.data.effTime);
                 };
-                templates.render(element, res.data).then(function (html) {
+                var replacedata = JSON.stringify(res.data).replace(/http\:\/\/trustcdn.baidu.com/g, 'https://ss0.bdstatic.com/6KYTfyqn1Ah3otqbppnN2DJv')
+                .replace(/http:\/\/himg.bdimg.com/g, '//himg.bdimg.com')
+                .replace(/http:\/\/kbbos.baidu.com/g, '//kbbos.baidu.com')
+                .replace(/http:\/\/trustrcv.baidu.com/g, 'https://sp1.baidu.com/6KYTfyq72xB3otqbppnN2DJv')
+                .replace(/http:\/\/qyyqbos.baidu.com/g, '//qyyqbos.baidu.com');
+                var tempdata = JSON.parse(replacedata);
+                templates.render(element, tempdata).then(function (html) {
                     element.innerHTML = html;
-                    if (res.data.brandBackground) {
+                    if (tempdata.brandBackground) {
                         var pageTitle = element.querySelectorAll('.top-title')[0];
-                        util.css(pageTitle, 'backgroundImage', 'url(' + res.data.brandBackground + ')');
+                        util.css(pageTitle, 'backgroundImage', 'url(' + tempdata.brandBackground + ')');
                     };
                     copyfun(element);
-                    realfull(element, res.data);
+                    realfull(element, tempdata);
                 });
             }
         });

@@ -7,6 +7,8 @@ mip-ilaw66-baidu-request 组件说明
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
+所需脚本|https://c.mipcdn.com/static/v1/mip-sina-rem/mip-sina-rem.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-stats-baidu/mip-stats-baidu.js
 所需脚本|https://mipcache.bdstatic.com/static/v1/mip-mustache/mip-mustache.js
 所需脚本|https://c.mipcdn.com/static/v1/mip-cdel-swiper/mip-cdel-swiper.js
 所需脚本|https://c.mipcdn.com/static/v1/mip-ilaw66-baidu-popup/mip-ilaw66-baidu-popup.js
@@ -17,12 +19,22 @@ mip-ilaw66-baidu-request 组件说明
 ### 基本用法
 ```html
 <mip-ilaw66-baidu-request>
+<mip-sina-rem>
+<mip-stats-baidu>
+    <script type="application/json">
+        {
+            "token": "d5a24ec2321d65ed4b781d2fce73c834"
+        }
+    </script>
+</mip-stats-baidu>
+<mip-form url='https://www.baidu.com'>
     <input type="hidden" id="lawyerId" name="lawyerId" />
         <input type="hidden" id="requestId" name="requestId" />
         <input type="hidden" id="questionType" name="questionType" />
         <input type="hidden" id="askingType" name="askingType" />
         <input type="hidden" id="_csrf" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
         <input type="hidden" id="channel" name="channel" th:value="${session.channel}" />   
+</mip-form>
     			<div class="top_header">
                         <span class="glyphicon glyphicon-menu-left pull-left"></span>
                         <div class="div_header">问律师</div>
@@ -94,6 +106,7 @@ mip-ilaw66-baidu-request 组件说明
                             </div>
                         </div>
                     </div>
+</mip-sina-rem>
 </mip-ilaw66-baidu-request>
 ```
 

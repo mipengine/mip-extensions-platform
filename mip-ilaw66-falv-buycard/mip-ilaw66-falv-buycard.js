@@ -270,7 +270,7 @@ define(function (require) {
 
             return null;
         }
-        $el.find('#wantbuynumber').onkeypress(function () {
+        $el.find('#wantbuynumber').keypress(function () {
             return (/[\d.]/.test(String.fromCharCode(event.keyCode)));
         });
 

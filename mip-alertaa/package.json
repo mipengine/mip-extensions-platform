@@ -1,0 +1,14 @@
+{
+    "name": "mip-alertaa",
+    "version": "1.0.0",
+    "description": "mip-alertaa 用来支持 MIP页面 用户操作步骤提醒功能，提醒用户操作成功或者失败",
+    "contributors": [
+        {
+            "name": "sy",
+            "email": "18076106705@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

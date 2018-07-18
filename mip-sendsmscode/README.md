@@ -12,7 +12,7 @@
 
 ### 基本用法
 ```html
-<mip-sendsmscode url="/Api/sendsmscode.html">
+<mip-sendsmscode url="#api-url-send-sms-code">
     <input id="mobile" name="mobile" type="tel">
 	<button type="button">发送</button>
 </mip-sendsmscode>

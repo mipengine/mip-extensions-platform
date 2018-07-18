@@ -1,6 +1,6 @@
 {
     "name": "mip-sendsmscode",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "发送手机短信验证码",
     "contributors": [
         {

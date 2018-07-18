@@ -1,0 +1,14 @@
+{
+    "name": "mip-faniu-filter",
+    "version": "1.0.0",
+    "description": "律师筛选",
+    "contributors": [
+        {
+            "name": "langYue",
+            "email": "langyuesoft@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

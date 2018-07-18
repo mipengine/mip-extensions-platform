@@ -1,0 +1,14 @@
+{
+    "name": "mip-pullup-load",
+    "version": "1.0.0",
+    "description": "上拉加载分页",
+    "contributors": [
+        {
+            "name": "langYue",
+            "email": "langyuesoft@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

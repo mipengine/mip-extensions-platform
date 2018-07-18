@@ -2,7 +2,7 @@
  * @file mip-ilaw66-falv-preferential 组件
  * @author
  */
-// preferential_hep
+// preferential_help
 define(function (require) {
     var $ = require('zepto');
     var customElement = require('customElement').create();
@@ -12,6 +12,7 @@ define(function (require) {
         if (window.appBridge && window.appBridge.checkAppFeature('CHANGE_WEBVIEW_TITLE')) {
             window.appBridge.changeWebviewTitle('超值优惠');
         }
+
         // 各项目区分颜色
         var channel = localStorage.getItem('channel');
         if (channel === 'eleme') {
@@ -90,35 +91,16 @@ define(function (require) {
                         window.location.reload();
                     }
 
-                    // loadStatus = 'error';
+                    var loadStatus = 'error';
                 }
             });
         }
 
         /*帮助信息详细内容操作*/
-        var dropdown = document.querySelectorAll('.dropdown');
-        var dropdownArray = Array.prototype.slice.call(dropdown, 0);
-        dropdownArray.forEach(function (el) {
-            var button = el.querySelector('p[data-toggle="dropdown"]');
-            var menu = el.querySelector('.dropdown-menu');
-            var arrow = button.querySelector('i.icon-arrow');
 
-            button.onclick = function (event) {
-                if (!menu.hasClass('show')) {
-                    menu.classList.add('show');
-                    menu.classList.remove('hide');
-                    arrow.classList.add('open');
-                    arrow.classList.remove('close');
-                    event.preventDefault();
-                }
-                else {
-                    menu.classList.remove('show');
-                    menu.classList.add('hide');
-                    arrow.classList.remove('open');
-                    arrow.classList.add('close');
-                    event.preventDefault();
-                }
-            };
+        $el.find('.dropdown').click(function () {
+            $(this).find('ul').toggleClass('show');
+            $(this).find('i.icon-arrow').toggleClass('open');
         });
 
         Element.prototype.hasClass = function (className) {
@@ -510,7 +492,7 @@ define(function (require) {
                             }, function () {
                                 $.ajax({
                                     url: 'createContinueAskLater?lawyerId=' + lawyerId
-                                    + '&questionType=' + questionType + '&_csrf=' + csrfToken,
+                                        + '&questionType=' + questionType + '&_csrf=' + csrfToken,
                                     type: 'POST',
                                     success: function (data) {
                                         if (data === 'ERROR') {
