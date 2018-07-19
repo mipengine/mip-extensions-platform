@@ -1,0 +1,12 @@
+{
+    "name": "mip-ilaw66-baidu-order",
+    "version": "1.0.0",
+    "description": "法律网订单详情",
+    "contributors": [{
+        "name": "jessli",
+        "email": "306651535@qq.com"
+    }],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

@@ -13,136 +13,6 @@ define(function (require) {
      */
     customElement.prototype.firstInviewCallback = function () {
         var $el = $(this.element);
-
-        function PopUp(option) {
-            this.init(option);
-            return this;
-        }
-
-        function PopUp(option) {
-            this.init(option);
-            return this;
-        }
-
-        PopUp.prototype = {
-            constructor: PopUp,
-            init: function (option) {
-                var This = this;
-                This.option = {
-                    title: '弹窗标题',
-                    main: '弹窗内容',
-                    yes: '确定',
-                    no: '取消',
-                    popYes: function () {},
-                    popNo: function () {}
-                };
-                $.extend(true, this.option, option || {});
-                This.dom();
-                This.bindEvent();
-            },
-            dom: function () {
-                var This = this;
-                This.body = $('body');
-                var btnN = '<div class="back-leave" id="js-back-leave">'
-                    + This.option.yes + '</div>' + '<div class="back-continue" id="js-back-continue">'
-                    + This.option.no + '</div>';
-                if (!This.option.yes) {
-                    btnN = '<div class="back-continue back-continue__one" id="js-back-continue">'
-                        + This.option.no + '</div>';
-                }
-
-                This.main = '<div class="back__pop popUP" style="display:none;" id="back__pop">'
-                    + '<div class="layer__wrapper"></div>' + '<div class="back__popLayer">' + '<span>'
-                    + This.option.title + '</span>' + '<span>' + This.option.main
-                    + '</span>' + btnN + '</div>' + '</div>';
-                This.body.append(This.main);
-                This.PopUp = $el.find('.popUP');
-                This.PopUp.show();
-            },
-            bindEvent: function () {
-                var This = this;
-                //  点击离开事件
-                This.PopUp.on('click', '#js-back-leave', function () {
-                    This.PopUp.remove();
-                    This.option.popYes();
-                });
-                //  点击确认事件
-                This.PopUp.on('click', '#js-back-continue', function () {
-                    This.PopUp.remove();
-                    This.option.popNo();
-
-                });
-                //  点击遮罩层事件 --- 点击不关闭，必须点按钮
-
-                /*This.PopUp.on('click', '.layer__wrapper', function () {
-                 This.PopUp.remove();
-                 })*/
-
-            }
-        };
-
-        window.PopUp = PopUp;
-
-        // 取消内容显示样式
-        function ToastUp(option) {
-            this.init(option);
-            return this;
-        }
-        ToastUp.prototype = {
-            constructor: ToastUp,
-            init: function (option) {
-                var This = this;
-                This.option = {
-                    main: '显示内容'
-                };
-                $.extend(true, this.option, option || {});
-                This.dom();
-                This.bindEvent();
-            },
-            dom: function () {
-                var This = this;
-                This.body = $('body');
-                This.main = '<div class="back__pop ToastUp" style="display:none;" id="back__pop">'
-                    + '<div class="layer__wrapper layer__wrapper__toast"></div>'
-                    + '<div class="back__popLayer__toast">' + '<span>'
-                    + This.option.main + '</span>' + '</div>' + '</div>';
-                This.body.append(This.main);
-                This.ToastUp = $el.find('.ToastUp');
-                This.ToastUp.show();
-            },
-            bindEvent: function () {
-                var This = this;
-                //  显示内容2秒
-                setTimeout(function () {
-                    This.ToastUp.remove();
-                },
-                    2000);
-            }
-        };
-
-        window.ToastUp = ToastUp;
-
-        function backOr(f, a, e, d, c, b) {
-            new PopUp({
-                title: f,
-                main: a,
-                yes: e,
-                no: d,
-                popYes: function (g) {
-                    c.call(this, g);
-                },
-                popNo: function (g) {
-                    b.call(this, g);
-                }
-            });
-        }
-
-        function toastOr(a) {
-            new ToastUp({
-                main: a
-            });
-        }
-
         var countTimeInSec = 0;
         var dateTime = new Date();
         var begin = dateTime.getHours();
@@ -161,40 +31,6 @@ define(function (require) {
             fnDate();
         }, 1000);
 
-        getInfo(); // 加载头像等
-
-        /*       var temp = {
-                   avatar: 'http://images.ilaw66.com/images/authorize/banner_new_first.png',
-                   lawyerName: '某律师',
-                   lawyerField: '婚姻家庭',
-                   serviceTimes: 2541,
-                   lightStar: [0,0,0],
-                   grayStar: [0,0],
-                   authorizedNo: '13101xxxX0862612'
-               };
-               $el.find(".linking_avatar").attr("src", temp.avatar);
-               $el.find(".linking_lawyerName").text(temp.lawyerName);
-               $el.find(".linking_lawyerField").text(temp.lawyerField);
-               $el.find(".linking_serviceTimes").text(temp.serviceTimes + "次");
-               if (temp.authorizedNo) {
-                   $el.find(".linkingconntent_lawyerid").text(temp.authorizedNo);
-               } else {
-                   $el.find(".linkingconntent_lawyerid").hide();
-               }
-               var starHtml = "";
-               starHtml += '<span class="star_blockindex">';
-               temp.lightStar.forEach(function () {
-                   starHtml += '<mip-img src="./images/icon_star_c_c.png"></mip-img>';
-               });
-               temp.grayStar.forEach(function () {
-                   starHtml += '<mip-img src="./images/icon_star.png"></mip-img>';
-               });
-               starHtml += " " + temp.lightStar.length + ".0";
-               starHtml += '<input type="hidden" class="common_arg" name="score" value="'+temp.lightStar.length+'" readonly="readonly"/>';
-               starHtml += '</span>';
-               $el.find(".linking_star").html(starHtml);
-*/
-
         if (tel) {
             // 加载的时候显示号码
             $el.find('.link_phone span').html(tel);
@@ -205,6 +41,8 @@ define(function (require) {
 
         $el.find('.outOfUnusual').show();
         $el.find('.inOfUnusual').hide();
+        getInfo(); // 加载头像等
+
         $el.find('.glyphicon').click(function () {
             cancelRequestOr();
         });
@@ -221,8 +59,11 @@ define(function (require) {
             $el.find('.pop_unusual').hide();
         });
         $el.find('.type_dropline, .type_nocall, .type_disconnect').click(function () {
-            toastOr('感谢反馈，我们会尽快改进服务');
+            $el.find('.pop_unusual').hide();
+            $el.find('.toast_txt').text('感谢反馈，我们会尽快改进服务');
+            $el.find('.toast_div').show();
             setTimeout(function () {
+                $el.find('.toast_div').hide();
                 window.top.location.href = './';
             }, 2000);
         });
@@ -236,6 +77,11 @@ define(function (require) {
                 url: 'timer?id=' + timerRequestId + '&lawyerId=' + lawyerId,
                 dataType: 'json',
                 success: function (data) {
+                    if (!data || data.status === 'ERROR') {
+                        alert(data.status);
+                        return;
+                    }
+
                     timerRequestId = data.requestId;
                     // 未上传头像则选择默认头像
                     if (!data.avatar) {
@@ -338,14 +184,23 @@ define(function (require) {
                             var main = '抱歉，' + data.lawyerName + '临时有事，无法为您服务系统可以为您推荐其他律师';
                             var yes = '退出本页';
                             var no = '推荐其他律师';
-                            backOr(title, main, yes, no, function () {
-                                if (!sessionStorage.getItem('loginFlg') && sessionStorage.getItem('loginFlg') === 0) {
+                            $el.find('.backOr_div .back__popLayer span:nth-of-type(1)').text(title);
+                            $el.find('.backOr_div .back__popLayer span:nth-of-type(2)').text(main);
+                            $el.find('.backOr_div .back__popLayer .back-leave').text(yes);
+                            $el.find('.backOr_div .back__popLayer .back-continue').text(no);
+                            $el.find('.backOr_div').show();
+                            $el.find('.backOr_div .back__popLayer .back-leave').click(function () {
+                                $el.find('.backOr_div').hide();
+                                var backUrl = localStorage.getItem('loginFlg');
+                                if (!backUrl || backUrl !== 1) {
                                     window.top.location.href = 'mipilaw66baidu_login';
                                 }
                                 else {
                                     window.top.location.href = './';
                                 }
-                            }, function () {
+                            });
+                            $el.find('.backOr_div .back__popLayer .back-continue').click(function () {
+                                $el.find('.backOr_div').hide();
                                 t1 = setInterval(function () {
                                     fnDate();
                                 }, 1000);
@@ -378,7 +233,7 @@ define(function (require) {
         }
         function cancelRequestOr() {
             $.ajax({
-                url: 'cancelRequest?requestId=' + timerRequestId + '&_csrf=' + $el.find('$_csrf').val(),
+                url: 'cancelRequest?requestId=' + timerRequestId + '&_csrf=' + $el.find('#_csrf').val(),
                 type: 'POST',
                 success: function (data) {
                     clearInterval(t1);
@@ -393,7 +248,13 @@ define(function (require) {
                             var yes = '离开本页';
                             var no = '礼貌等待';
                         }
-                        backOr(title, main, yes, no, function () { // 离开本页时
+                        $el.find('.backOr_div .back__popLayer span:nth-of-type(1)').text(title);
+                        $el.find('.backOr_div .back__popLayer span:nth-of-type(2)').text(main);
+                        $el.find('.backOr_div .back__popLayer .back-leave').text(yes);
+                        $el.find('.backOr_div .back__popLayer .back-continue').text(no);
+                        $el.find('.backOr_div').show();
+                        $el.find('.backOr_div .back__popLayer .back-leave').click(function () {
+                            $el.find('.backOr_div').hide();
                             var backUrl = localStorage.getItem('loginFlg');
                             if (!backUrl || backUrl !== 1) {
                                 window.top.location.href = 'mipilaw66baidu_login';
@@ -401,20 +262,27 @@ define(function (require) {
                             else {
                                 window.top.location.href = './';
                             }
-                        }, function () {
+                        });
+                        $el.find('.backOr_div .back__popLayer .back-continue').click(function () {
+                            $el.find('.backOr_div').hide();
                             t1 = setInterval(function () {
                                 fnDate();
                             }, 1000);
                         });
                     }
                     else if (data === 'OK') {
-                        var title = '温馨提示';
-                        var main = '请支付律师辛苦费，若不支付费用则无法再次咨询律师';
-                        var yes = '离开本页';
-                        var no = '我知道了';
-                        backOr(title, main, yes, no, function () { // yes
+                        $el.find('.backOr_div .back__popLayer span:nth-of-type(1)').text(title);
+                        $el.find('.backOr_div .back__popLayer span:nth-of-type(2)').text(main);
+                        $el.find('.backOr_div .back__popLayer .back-leave').text(yes);
+                        $el.find('.backOr_div .back__popLayer .back-continue').text(no);
+                        $el.find('.backOr_div').show();
+                        $el.find('.backOr_div .back__popLayer .back-leave').click(function () {
+                            $el.find('.backOr_div').hide();
                             window.top.location.href = './';
-                        }, function () {});
+                        });
+                        $el.find('.backOr_div .back__popLayer .back-continue').click(function () {
+                            $el.find('.backOr_div').hide();
+                        });
                     }
                     else {
                     }
@@ -446,14 +314,20 @@ define(function (require) {
                     console.log(data);
                     var state = data.result.state;
                     if (state === '6') {
-                        toastOr('通话不足60秒，无需支付');
+                        $el.find('.toast_txt').text('通话不足60秒，无需支付');
+                        $el.find('.toast_div').show();
                         setTimeout(function () {
+                            $el.find('.toast_div').hide();
                             window.top.location.href = './';
                         }, 2000);
                     }
                     else if (state === '4') {
                         // 表示您和律师还在通话中，请咨询结束后，再支付律师辛苦费
-                        toastOr(data.result.error);
+                        $el.find('.toast_txt').text(data.result.error);
+                        $el.find('.toast_div').show();
+                        setTimeout(function () {
+                            $el.find('.toast_div').hide();
+                        }, 2000);
                         localStorage.setItem('linkingOrding', 'linkingOrding');
                     }
                     else {
