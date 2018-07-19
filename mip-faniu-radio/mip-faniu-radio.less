@@ -1,0 +1,32 @@
+/**
+ * @file mip-faniu-radio样式文件
+ */
+
+mip-faniu-radio {
+    &.mip-layout-container {
+        display: flex;
+        flex-wrap: wrap;
+        text-align: center;
+    }
+    & > label {
+        flex: 0 0 25%;
+        box-sizing: border-box;
+        padding: .5rem;
+    }
+    & > label mip-img {
+        display: block;
+        width: 50%;
+        margin: 0 auto;
+    }
+    & > label mip-img:nth-child(3) img {
+        display: none;;
+    }
+
+    & > label.mip-faniu-radio-check > mip-img:nth-child(2) img {
+        display: none;
+    }
+
+    & > label.mip-faniu-radio-check > mip-img:nth-child(3) img {
+        display: block;
+    }
+}

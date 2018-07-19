@@ -79,7 +79,7 @@ define(function (require) {
 
                     preferentiallistDate = callingInterface(datastatus.datashow);
                     // 填充模板--已使用（过期）卡券
-                    var thisData = $el.find('#preferentiallist_content');
+                    var thisData = $el.find('#preferentiallist_content')[0];
                     templates.render(thisData, preferentiallistDate).then(function (html) {
                         thisData.innerHTML = html;
                     });

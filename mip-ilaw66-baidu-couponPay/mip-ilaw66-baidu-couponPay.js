@@ -222,7 +222,7 @@ define(function (require) {
                                 + '</div>';
                         }
                         $el.find('.callList').html(listStr);
-                        $el.find('.callList').show();
+                        // $el.find('.callList').show();
                     }
 
                     $el.find('#questionOfType').text(questionType);

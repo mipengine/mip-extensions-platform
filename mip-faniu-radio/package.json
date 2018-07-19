@@ -1,0 +1,14 @@
+{
+    "name": "mip-faniu-radio",
+    "version": "1.0.1",
+    "description": "图标单选框",
+    "contributors": [
+        {
+            "name": "langYue",
+            "email": "langyuesoft@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

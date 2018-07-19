@@ -1,0 +1,14 @@
+{
+    "name": "mip-lc-demo",
+    "version": "1.0.0",
+    "description": "自定义返显几个彩种的预测",
+    "contributors": [
+        {
+            "name": "songxd",
+            "email": "songxd2012@126.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
