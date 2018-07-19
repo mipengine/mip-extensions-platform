@@ -5,21 +5,18 @@
 
 define(function (require) {
     'use strict';
-
+    var util = require('util');
     var customElement = require('customElement').create();
 
     customElement.prototype.firstInviewCallback = function () {
-        var me = this.element.firstElementChild.parentElement;
+        var me = this.element;
         var url = me.getAttribute('url');
-        var frm = me.getElementsByTagName('form')[0];
+        var frm = me.querySelector('form');
         var parms = {};
         var href;
-
-        for (var i = 0; i < frm.length; i++) {
-            frm[i].addEventListener('change', function () {
-                doFilter();
-            });
-        }
+        util.event.delegate(me, 'select,input', 'change', function () {
+            doFilter();
+        });
 
         function doFilter() {
             parms = {};
@@ -34,7 +31,7 @@ define(function (require) {
                     href += (href.indexOf('?') < 0 ? '?' : '&') + i + '=' + parms[i];
                 }
             }
-            console.log(href);
+            window.top.location.href = href;
         }
     };
 

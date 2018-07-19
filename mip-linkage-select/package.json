@@ -1,0 +1,14 @@
+{
+    "name": "mip-linkage-select",
+    "version": "1.0.1",
+    "description": "多级联动select",
+    "contributors": [
+        {
+            "name": "langYue",
+            "email": "langyuesoft@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

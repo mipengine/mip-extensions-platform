@@ -1,0 +1,20 @@
+/**
+ * @file mip-linkage-select样式文件
+ */
+
+mip-linkage-select {
+    &.mip-linkage-select {
+        display: flex;
+    }
+    & > select {
+        box-sizing: border-box;
+        flex: 1 1 50%;
+        margin-right: .5rem;
+    }
+    & > select:last-child {
+        margin-right: 0;
+    }
+    & > select.ls-hide {
+        visibility: hidden;
+    }
+}

@@ -122,8 +122,8 @@ define(function (require) {
                 var This = this;
                 //  显示内容2秒
                 setTimeout(function () {
-                        This.ToastUp.remove();
-                    },
+                    This.ToastUp.remove();
+                },
                     2000);
             }
         };
@@ -151,23 +151,26 @@ define(function (require) {
             });
         }
 
-           /*     var temp = {};
-                temp.list = [];
-                temp.list.push({
-                    value: 0,
-                    name: '某律师0',
-                    identifyPhoto: 'http://images.ilaw66.com/images/authorize/banner_new_first.png'
-                });
-                temp.list.push({
-                    value: 1,
-                    name: '某律师1',
-                    identifyPhoto: 'http://images.ilaw66.com/images/authorize/banner_new_first.png'
-                });
-                // var tp = $el.find('#mip-template-lawyerImg');
-                var tp = document.getElementById('mip-template-lawyerImg');
-                templates.render(tp, temp).then(function (html) {
-                    tp.innerHTML = html;
-                });*/
+        /*var temp = {};
+        temp.list = [];
+        temp.list.push({
+            value: 0,
+            name: '某律师0',
+            identifyPhoto: 'http://images.ilaw66.com/images/authorize/banner_new_first.png'
+        });
+        temp.list.push({
+            value: 1,
+            name: '某律师1',
+            identifyPhoto: 'http://images.ilaw66.com/images/authorize/banner_new_first.png'
+        });
+        var tempHtml = "";
+        temp.list.forEach(function (item) {
+            tempHtml += '<div class="swiper-slide">'+
+                '<mip-img class="mip_img" src="'+item.identifyPhoto+'"></mip-img>'+
+                '<p>'+item.name+'</p>'+
+                '</div>';
+            $el.find('#mip-template-lawyerImg').html(tempHtml);
+        });*/
 
         $el.find('.jingxuan_top').css('background-image', 'url("images/bg_jingxuanlvshi.png")');
         $el.find('.jingxuan_top>img').attr('src', 'images/bg_touxiangjx.png');
@@ -179,7 +182,7 @@ define(function (require) {
             $el.find('.countdownTime').text(i);
             var date = new Date();
             countdown = (date.getHours() - begin) * 3600 + (date.getMinutes() - min) * 60 + (date.getSeconds() - sec);
-            settime();
+            // settime();
             if (i >= 120) {
                 pauseAnimation();
                 clearInterval(timer);
@@ -358,8 +361,8 @@ define(function (require) {
             }
         }
         function getLawyerImgs() {
-            var b = {};
-            b.list = [];
+            var temp = {};
+            temp.list = [];
             $.ajax({
                 type: 'post',
                 url: 'lawyerOnlines?_csrf=' + $el.find('#_csrf').val()
@@ -372,11 +375,18 @@ define(function (require) {
                     else {
                         for (var h = 0; h < data.length; h++) {
                             var a = data[h];
-                            b.list.push(a);
+                            temp.list.push({
+                                name: a.name,
+                                identifyPhoto: a.identifyPhoto
+                            });
                         }
-                        var tp = $el.find('#mip-template-lawyerImg');
-                        templates.render(tp, b).then(function (html) {
-                            tp.innerHTML = html;
+                        var tempHtml = '';
+                        temp.list.forEach(function (item) {
+                            tempHtml += '<div class="swiper-slide">'
+                                + '<mip-img class="mip_img" src="' + item.identifyPhoto + '"></mip-img>'
+                                + '<p>' + item.name + '</p>'
+                                + '</div>';
+                            $el.find('#mip-template-lawyerImg').html(tempHtml);
                         });
                     }
                 },

@@ -9,7 +9,6 @@ mip-ilaw66-baidu-request 组件说明
 支持布局|responsive,fixed-height,fill,container,fixed
 所需脚本|https://c.mipcdn.com/static/v1/mip-sina-rem/mip-sina-rem.js
 所需脚本|https://c.mipcdn.com/static/v1/mip-stats-baidu/mip-stats-baidu.js
-所需脚本|https://mipcache.bdstatic.com/static/v1/mip-mustache/mip-mustache.js
 所需脚本|https://c.mipcdn.com/static/v1/mip-cdel-swiper/mip-cdel-swiper.js
 所需脚本|https://c.mipcdn.com/static/v1/mip-ilaw66-baidu-popup/mip-ilaw66-baidu-popup.js
 所需脚本|https://c.mipcdn.com/static/v1/mip-ilaw66-baidu-request/mip-ilaw66-baidu-request.js
@@ -66,14 +65,6 @@ mip-ilaw66-baidu-request 组件说明
                                 </script>
                                 <div class="swiper-container">
                                     <div class="swiper-wrapper" id="mip-template-lawyerImg">
-                                        <template type="mip-mustache">
-                                            {{#list}}
-                                            <div class="swiper-slide">
-                                                <mip-img class="mip_img" src="{{identifyPhoto}}"></mip-img>
-                                                <p>{{name}}</p>
-                                            </div>
-                                            {{/list}}
-                                        </template>
                                     </div>
                                 </div>
                             </mip-cdel-swiper>

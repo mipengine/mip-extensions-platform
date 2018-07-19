@@ -163,28 +163,37 @@ define(function (require) {
 
         getInfo(); // 加载头像等
 
-        /*
-
-                var temp = {
-                    avatar: 'http://images.ilaw66.com/images/authorize/banner_new_first.png',
-                    lawyerName: '某律师',
-                    lawyerField: '婚姻家庭',
-                    serviceTimes: 2541,
-                    lightStar: [0,0,0],
-                    grayStar: [0,0],
-                    authorizedNo: '13101xxxX0862612'
-                };
-                // var tp = document.getElementById('mip-template-content');
-                // var tpdone = document.getElementById('mip-template-contentdone');
-                var tp = $el.find('#mip-template-content');
-                var tpdone = $el.find('#mip-template-contentdone');
-                templates.render(tp, temp).then(function (html) {
-                    tp.innerHTML = html;
-                });
-                templates.render(tpdone, temp).then(function (html) {
-                    tpdone.innerHTML = html;
-                });
-        */
+        /*       var temp = {
+                   avatar: 'http://images.ilaw66.com/images/authorize/banner_new_first.png',
+                   lawyerName: '某律师',
+                   lawyerField: '婚姻家庭',
+                   serviceTimes: 2541,
+                   lightStar: [0,0,0],
+                   grayStar: [0,0],
+                   authorizedNo: '13101xxxX0862612'
+               };
+               $el.find(".linking_avatar").attr("src", temp.avatar);
+               $el.find(".linking_lawyerName").text(temp.lawyerName);
+               $el.find(".linking_lawyerField").text(temp.lawyerField);
+               $el.find(".linking_serviceTimes").text(temp.serviceTimes + "次");
+               if (temp.authorizedNo) {
+                   $el.find(".linkingconntent_lawyerid").text(temp.authorizedNo);
+               } else {
+                   $el.find(".linkingconntent_lawyerid").hide();
+               }
+               var starHtml = "";
+               starHtml += '<span class="star_blockindex">';
+               temp.lightStar.forEach(function () {
+                   starHtml += '<mip-img src="./images/icon_star_c_c.png"></mip-img>';
+               });
+               temp.grayStar.forEach(function () {
+                   starHtml += '<mip-img src="./images/icon_star.png"></mip-img>';
+               });
+               starHtml += " " + temp.lightStar.length + ".0";
+               starHtml += '<input type="hidden" class="common_arg" name="score" value="'+temp.lightStar.length+'" readonly="readonly"/>';
+               starHtml += '</span>';
+               $el.find(".linking_star").html(starHtml);
+*/
 
         if (tel) {
             // 加载的时候显示号码
@@ -255,15 +264,29 @@ define(function (require) {
                         grayStar: data.grayStar,
                         authorizedNo: data.authorizedNo
                     };
-                    var templates = require('templates');
-                    var tp = $el.find('#mip-template-content');
-                    var tpdone = $el.find('#mip-template-contentdone');
-                    templates.render(tp, temp).then(function (html) {
-                        tp.innerHTML = html;
+                    $el.find('.linking_avatar').attr('src', temp.avatar);
+                    $el.find('.linking_lawyerName').text(temp.lawyerName);
+                    $el.find('.linking_lawyerField').text(temp.lawyerField);
+                    $el.find('.linking_serviceTimes').text(temp.serviceTimes + '次');
+                    if (temp.authorizedNo) {
+                        $el.find('.linkingconntent_lawyerid').text(temp.authorizedNo);
+                    }
+                    else {
+                        $el.find('.linkingconntent_lawyerid').hide();
+                    }
+                    var starHtml = '';
+                    starHtml += '<span class="star_blockindex">';
+                    temp.lightStar.forEach(function () {
+                        starHtml += '<mip-img src="./images/icon_star_c_c.png"></mip-img>';
                     });
-                    templates.render(tpdone, temp).then(function (html) {
-                        tpdone.innerHTML = html;
+                    temp.grayStar.forEach(function () {
+                        starHtml += '<mip-img src="./images/icon_star.png"></mip-img>';
                     });
+                    starHtml += ' ' + temp.lightStar.length + '.0';
+                    starHtml += '<input type="hidden" class="common_arg" name="score" value="'
+                        + temp.lightStar.length + '" readonly="readonly"/>';
+                    starHtml += '</span>';
+                    $el.find('.linking_star').html(starHtml);
                 },
                 error: function (jqXHR) {
                     if (jqXHR.status === 403) {

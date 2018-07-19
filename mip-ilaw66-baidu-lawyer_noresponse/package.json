@@ -1,0 +1,14 @@
+{
+    "name": "mip-ilaw66-baidu-lawyer_noresponse",
+    "version": "1.0.0",
+    "description": "精选律师无人应答页面",
+    "contributors": [
+        {
+            "name": "skylyth",
+            "email": "skylyth@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

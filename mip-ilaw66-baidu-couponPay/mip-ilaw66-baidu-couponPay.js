@@ -110,7 +110,7 @@ define(function (require) {
             if ($el.find('#unpaidAmount').text() && $el.find('#unpaidAmount').text() > 0) {
                 console.log('现金支付');
                 // 调用接口
-                var CouponPaytype = document.getElementById('CouponPaytype').value;
+                var CouponPaytype = document.getElementById('coupon_paytype').value;
                 var data = {};
                 if ($el.find('#requestId').val().indexOf(',') > 0) {
                     data.requestId = -1;
@@ -120,11 +120,7 @@ define(function (require) {
                 }
                 data._csrf = $el.find('#_csrf').val();
                 data.questionType = $el.find('#questionType').val();
-                data.userCouponId = $el.find('#couponId').val();
-                var data = {};
-                data._csrf = $el.find('#_csrf').val();
-                data.questionType = $el.find('#questionType').val();
-                data.requestId = $el.find('#requestId').val();
+                data.questionType = 'CT001';
                 data.userCouponId = $el.find('#couponId').val();
                 if ($el.find('#cardId').val()) {
                     data.cardId = $el.find('#cardId').val();
@@ -160,7 +156,7 @@ define(function (require) {
             var cardId = $el.find('#cardId').val();
 
             var cardType = $el.find('#cardType').val();
-            var ifUseCard = $el.find('#ifUseCard').val();
+            var ifUseCard = '-1';
             var requestId = $el.find('#requestId').val();
             // 因为合并支付时跳转过来的url中requestId会用逗号分隔
             if (requestId.indexOf(',') > 0) {
