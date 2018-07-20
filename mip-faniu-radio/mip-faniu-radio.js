@@ -31,25 +31,27 @@ define(function (require) {
                 + (validatetarget ? ' validatetarget="' + validatetarget + '"' : '')
                 + '/>';
             for (var i in res) {
-                html += '<label>'
-                    + '<input name="mip-faniu-radio-' + name + '" value="' + res[i]['id'] + '" type="hidden" />'
+                html += '<label' + (res[i]['id'] === value ? ' class="mip-faniu-radio-check"' : '') + '>'
+                    + '<input value="' + res[i]['id'] + '"'
+                    + (res[i]['id'] === value ? ' checked' : '')
+                    + ' type="radio" />'
                     + '<mip-img src="' + res[i]['icon'] + '"></mip-img>'
                     + '<mip-img src="' + res[i]['icon_on'] + '"></mip-img>'
                     + '<span>' + res[i]['name'] + '</span>'
                     + '</label>';
             }
             me.innerHTML = html;
-
             util.event.delegate(me, 'label', 'click', function () {
                 var es = me.querySelectorAll('label');
                 me.querySelector('[name="' + name + '"]').value = this.querySelector('input').value;
                 for (var i = 0; i < es.length; i++) {
                     es[i].classList.remove('mip-faniu-radio-check');
+                    if (!this.isSameNode(es[i])) {
+                        es[i].querySelector('input').checked = false;
+                    }
                 }
                 this.classList.add('mip-faniu-radio-check');
             });
-
-            me.querySelector('label input[value="' + value + '"]').parentNode.click();
         });
     };
 
