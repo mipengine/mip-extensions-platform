@@ -44,16 +44,16 @@ define(function (require) {
         load();
         // 现金支付的按钮选中效果
         $el.find('.sel_pay').click(function () {
-            var no = $el.find(this).data('no');
+            var no = $(this).data('no');
             $el.find('.payType_cash .allow_icon2').show();
             $el.find('.payType_cash .allow_icon1').hide();
 
-            /*$el.find(this).css({ "background": "none" })
+            /*$(this).css({ "background": "none" })
                 .siblings(".sel_pay")
                 .css({ "background": "rgba(0,0,0,0.02)" });*/
-            $el.find(this).children('.allow_icon2').hide();
-            $el.find(this).children('.allow_icon1').show();
-            $el.find(this).children('.allow_icon1').css('display', '-webkit-box');
+            $(this).children('.allow_icon2').hide();
+            $(this).children('.allow_icon1').show();
+            $(this).children('.allow_icon1').css('display', '-webkit-box');
             // 将所选的支付方式放入隐藏表单
             $el.find('input[name=\'paytype\']').val(no);
             console.log($el.find('input[name=\'paytype\']').val());
@@ -380,7 +380,7 @@ define(function (require) {
         }
         // 解析url参数值
         function getQueryString(name) {
-            var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$el.find)', 'i');
+            var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
             var r = window.location.search.substr(1).match(reg);
             if (r != null) {
                 return unescape(r[2]);

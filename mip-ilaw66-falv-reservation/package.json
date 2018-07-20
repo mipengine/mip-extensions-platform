@@ -1,0 +1,14 @@
+{
+    "name": "mip-ilaw66-falv-reservation",
+    "version": "1.0.0",
+    "description": "预约律师",
+    "contributors": [
+        {
+            "name": "falv",
+            "email": "840399305@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

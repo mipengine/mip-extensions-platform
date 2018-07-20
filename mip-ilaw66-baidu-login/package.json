@@ -1,7 +1,7 @@
 {
-    "name": "mip-ilaw66-baidu-lawyer_noresponse",
-    "version": "1.0.1",
-    "description": "精选律师无人应答页面",
+    "name": "mip-ilaw66-baidu-login",
+    "version": "1.0.0",
+    "description": "法率网登录页",
     "contributors": [
         {
             "name": "skylyth",
