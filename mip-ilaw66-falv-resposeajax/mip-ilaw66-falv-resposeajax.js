@@ -34,7 +34,7 @@ define(function (require) {
         $el.find('#js-continueAsk').on('touchstart', function () {
             $.ajax({
                 type: 'POST',
-                url: 'greeting?questionType=' + questionType + '_csrf=' + csrfToken,
+                url: 'greeting?questionType=' + questionType + '&_csrf=' + csrfToken,
                 success: function (data) {
                     if (data === 'ERROR' || data === 'ERROR1') {
                         $el.find('#err_msg').html('系统异常，请返回重新咨询');
@@ -526,14 +526,10 @@ define(function (require) {
                 },
                 success: function (data) {
                     if (b === 'ST002') {
-                        window._hmt
-&& window._hmt.push(['_trackEvent', $el.find('#channel').val() + '_falvvip', 'click']);
                         window.top.location.href = 'consulting_testament';
                     }
                     else if (b === 'ST003') {
                         // 百度统计
-                        window._hmt
-&& window._hmt.push(['_trackEvent', $el.find('#channel').val() + '_tehui', 'click']);
                         window.top.location.href = 'mip_preferential?serviceType=' + questionType;
                     }
 

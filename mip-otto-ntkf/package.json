@@ -1,0 +1,14 @@
+{
+    "name": "mip-otto-ntkf",
+    "version": "1.0.0",
+    "description": "网校小能客服",
+    "contributors": [
+        {
+            "name": "xinbao",
+            "email": "fa@ijust.cc"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

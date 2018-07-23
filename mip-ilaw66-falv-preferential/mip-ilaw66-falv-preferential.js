@@ -101,6 +101,7 @@ define(function (require) {
         $el.find('.dropdown').click(function () {
             $(this).find('ul').toggleClass('show');
             $(this).find('i.icon-arrow').toggleClass('open');
+            $(this).siblings('.dropdown').find('ul').removeClass('show');
         });
 
         Element.prototype.hasClass = function (className) {
@@ -214,14 +215,6 @@ define(function (require) {
 
         //  评价页面
 
-        /*$el.find('.btn_conment').click(function (){
-	$('body').scrollTop(0);
-	$('body').css('overflow','hidden');
-	$el.find('.conment_result').show();
-	setTimeout(function (){
-		location.href='index.html';
-	},3000)
-});*/
         // 手机号码修改
         function getQueryString(name) {
             var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
@@ -261,14 +254,14 @@ define(function (require) {
 
         //  公共的
         $el.find('.backfirst-list-alt').click(function () {
-            window.top.location.href = 'orderlist';
+            window.top.location.href = 'mip_orderlist';
         });
         $el.find('.backfirst-home').click(function () {
-            window.top.location.href = 'index.html';
+            window.top.location.href = 'mip_index.html';
         });
 
         $el.find('.icon_orderlist').click(function () {
-            window.top.location.href = 'orderlist';
+            window.top.location.href = 'mip_orderlist';
         });
 
         //  支付页面
@@ -542,14 +535,10 @@ define(function (require) {
                     console.log(data);
                     if (b === 'ST002') {
                         // 百度统计
-                        window._hmt
-                        && window._hmt.push(['_trackEvent', $('#channel').val() + '_falvvip', 'click']);
                         window.top.location.href = 'consulting_testament';
                     }
                     else if (b === 'ST003') {
                         // 百度统计
-                        window._hmt
-                        && window._hmt.push(['_trackEvent', $('#channel').val() + '_tehui', 'click']);
                         window.top.location.href = 'mip_preferential?serviceType=' + questionType;
                     }
 

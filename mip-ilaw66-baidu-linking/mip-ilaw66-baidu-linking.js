@@ -33,6 +33,7 @@ define(function (require) {
 
         if (tel) {
             // 加载的时候显示号码
+            $el.find('title').text('等待接通');
             $el.find('.link_phone span').html(tel);
         }
         else {
@@ -112,8 +113,23 @@ define(function (require) {
                     };
                     $el.find('.linking_avatar').attr('src', temp.avatar);
                     $el.find('.linking_lawyerName').text(temp.lawyerName);
-                    $el.find('.linking_lawyerField').text(temp.lawyerField);
-                    $el.find('.linking_serviceTimes').text(temp.serviceTimes + '次');
+                    var questionType = $el.find('#questionType').val();
+                    var tp = getType(questionType);
+                    if (tp && temp.lawyerField.indexOf(tp) >= 0) {
+                        $el.find('.linking_lawyerField').text(questionType);
+                    }
+                    else {
+                        $el.find('.linkingconntentnotel tr:nth-child(1) td:nth-child(1)').hide();
+                        $el.find('.linking_lawyerField').hide();
+                    }
+                    if (!temp.serviceTimes || temp.serviceTimes === 0) {
+                        $el.find('.linkingconntentnotel tr:nth-child(1) td:nth-child(2)').hide();
+                        $el.find('.linking_serviceTimes').hide();
+                    }
+                    else {
+                        $el.find('.linking_serviceTimes').text(temp.serviceTimes + '次');
+                    }
+
                     if (temp.authorizedNo) {
                         $el.find('.linkingconntent_lawyerid').text(temp.authorizedNo);
                     }
@@ -287,12 +303,14 @@ define(function (require) {
         function backToUnusual() {
             $el.find('.link_middle').hide();
             $el.find('.link_bottom').hide();
+            $el.find('title').text('服务完成');
             $el.find('#pop_consulationEnd').show();
             $el.find('.outOfUnusual').show();
             $el.find('.inOfUnusual').hide();
         }
         function settime() {
             $el.find('.linkingDom').hide();
+            $el.find('title').text('服务完成');
             $el.find('#pop_consulationEnd').show();
         }
         function gobackHandle() {
@@ -347,6 +365,27 @@ define(function (require) {
                     window.location.reload();
                 }
             });
+        }
+        function getType(questionType) {
+            switch (questionType) {
+                case 'CT001':
+                    return '婚姻家庭';
+                case 'CT002':
+                    return '房产物业';
+                case 'CT003':
+                    return '交通意外';
+                case 'CT006':
+                    return '民间借贷';
+                case 'CT004':
+                    return '劳动用工';
+                case 'CT008':
+                    return '合同纠纷';
+                case 'CT007':
+                    return '其他问题';
+                default:
+                    return false;
+                    break;
+            }
         }
     };
 
