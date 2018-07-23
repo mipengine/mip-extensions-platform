@@ -74,6 +74,16 @@ define(function (require) {
         //		});
 
         // load
+        function timestampToTime(timestamp) {
+            var date = new Date(timestamp); // 时间戳为10位需*1000，时间戳为13位的话不需乘1000
+            var Y = date.getFullYear() + '/';
+            var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '/';
+            var D = date.getDate() + ' ';
+            var h = date.getHours() + ':';
+            var m = date.getMinutes() + ':';
+            var s = date.getSeconds();
+            return Y + M + D + h + m + s;
+        }
         function load() {
             var requestId = $el.find('#requestId').val();
             var questionType = $el.find('#questionType').val();
@@ -121,8 +131,8 @@ define(function (require) {
                         + '<div class="orderlist__status">'
                         + '<div class="order_info">'
                         + '<p>联系方式：' + data.userPhone + '</p>'
-                        + '<p>咨询️时间: ' + data.consultingTime + '</p>'
-                        + '<p>订单金额：' + data.defaultPrice + '</p>'
+                        + '<p>咨询️时间: ' + timestampToTime(data.consultingTime) + '</p>'
+                        + '<p>订单金额：' + data.defaultPrice + ' 元</p>'
                         + '</div>'
                         + '</div>';
                     $el.find('#orderInfo').html(
@@ -171,7 +181,7 @@ define(function (require) {
                                 url: 'checkFreeBill',
                                 success: function (data) {
                                     if (data.result !== 2) {
-                                        location.href = 'couponPay?requestId='
+                                        window.top.location.href = 'mipilaw66baidu_couponPay?requestId='
                                             + requestId + '&questionType=' + questionType;
                                     }
 
@@ -237,7 +247,7 @@ define(function (require) {
                     });
 
                     $el.find('.link_btn_unpaidErrConfirm').click(function () {
-                        location.href = 'orderlist';
+                        window.top.location.href = 'orderlist';
                     });
                 }
             });
@@ -339,7 +349,7 @@ define(function (require) {
                     var id = data.data;
                     var state = data.state;
                     if (id !== '') {
-                        window.top.location.href = 'mip-ilaw66-baidu-request?data='
+                        window.top.location.href = 'mipilaw66baidu_request?data='
                             + id + '&questionType=' + questionType + '&askingType='
                             + askingType + '&lawyerId=' + lawyerId;
                     }
@@ -383,7 +393,7 @@ define(function (require) {
                     localStorage.setItem('reAskSex', data.sex);
                     if (id !== '') {
                         // 传入lawyerId
-                        window.top.location.href = 'informLawyer?data='
+                        window.top.location.href = 'mipilaw66baidu_informLawyer?data='
                             + id + '&questionType=' + questionType + '&askingType='
                             + askingType + '&lawyerId=' + lawyerId;
                     }
@@ -433,7 +443,7 @@ define(function (require) {
                     localStorage.setItem('goodCommentRate', data.goodCommentRate);
                     if (id !== '') {
                         // 传入lawyerId
-                        window.top.location.href = 'informLawyer?data='
+                        window.top.location.href = 'mipilaw66baidu_informLawyer?data='
                             + id + '&questionType='
                             + questionType + '&askingType=' + askingType + '&lawyerId='
                             + lawyerId + '&PABackJumpFlg=index';

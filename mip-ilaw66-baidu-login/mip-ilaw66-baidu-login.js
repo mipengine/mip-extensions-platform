@@ -92,7 +92,7 @@ define(function (require) {
 
         if (head && head.is(':hidden')) {
             $el.find('.content_inputCodeText').css({
-                top: '4.8rem'
+                top: '3.76rem'
             });
         }
 
@@ -574,7 +574,8 @@ define(function (require) {
                         return false;
                     }
                     else {
-                        if (userId) {
+                        var flag = sessionStorage.getItem('loginFlg');
+                        if (userId && flag === 0) {
                             // 修改手机号
                             updateTel();
                         }
@@ -593,10 +594,10 @@ define(function (require) {
         });
 
         function login() {
-            var frmLogin = $el.find('#frmLogin');
-            $(frmLogin).attr('action', 'login');
-            $(frmLogin).attr('method', 'post');
-            $(frmLogin).attr('target', '_self');
+            var frmLogin = $el.find('#frmLogin form');
+            //          $(frmLogin).attr('action', 'login');
+            //          $(frmLogin).attr('method', 'post');
+            //          $(frmLogin).attr('target', '_self');
             $(frmLogin).submit();
         }
 

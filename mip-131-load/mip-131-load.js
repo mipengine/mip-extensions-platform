@@ -50,7 +50,7 @@ define(function (require) {
                 html.push('<script>');
                 html.push('$(function(){');
                 // 下面链接用途是调用自身广告 没有则不显示内容，当选择type为diy才用到。
-                html.push('$.get(\'//www.131mm.cc/share/getmip.php\',');
+                html.push('$.get(\'//mip.131mm.cc/share/getmip.php\',');
                 html.push('{');
                 html.push('act:"' + token + '",');
                 html.push('},');

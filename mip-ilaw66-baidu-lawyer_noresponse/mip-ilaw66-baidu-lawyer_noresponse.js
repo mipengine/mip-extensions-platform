@@ -25,8 +25,8 @@ define(function (require) {
             }
 
             $el.find('.glyphicon-menu-left').on('click', function () {
-                if (!sessionStorage.getItem('loginFlg') && sessionStorage.getItem('loginFlg') === 0) {
-                    window.top.location.href = 'mipilaw66baidu_login';
+                if (!parseInt(sessionStorage.getItem('loginFlg'), 10) && sessionStorage.getItem('loginFlg') === '0') {
+                    window.top.location.href = 'login';
                 }
                 else {
                     window.top.location.href = './';

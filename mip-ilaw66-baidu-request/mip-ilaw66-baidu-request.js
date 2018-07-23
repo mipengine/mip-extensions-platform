@@ -42,6 +42,7 @@ define(function (require) {
                 '</div>';
             $el.find('#mip-template-lawyerImg').html(tempHtml);
         });*/
+
         /*$el.find(".toast_txt").text('取消晚了,律师正在联系您');
         $el.find(".toast_div").show();
         setTimeout(function () {
@@ -58,7 +59,7 @@ define(function (require) {
             $el.find('.countdownTime').text(i);
             var date = new Date();
             countdown = (date.getHours() - begin) * 3600 + (date.getMinutes() - min) * 60 + (date.getSeconds() - sec);
-            // settime();
+            settime();
             if (i >= 120) {
                 pauseAnimation();
                 clearInterval(timer);
@@ -111,12 +112,13 @@ define(function (require) {
         }
 
         function settime() {
+
             var id = $el.find('#requestId').val();
             var questionType = $el.find('#questionType').val();
             var askingType = $el.find('#askingType').val();
             if (countdown > 60) {
                 clearInterval(timer);
-                window.top.location.href = 'mip_lawyer_noresponse?questionType=' + questionType;
+                window.top.location.href = 'mipilaw66baidu_lawyer_noresponse?questionType=' + questionType;
             }
             else {
                 if (countdown % 5 === 0) {
@@ -125,6 +127,7 @@ define(function (require) {
                         url: 'timer?id=' + id,
                         dataType: 'json',
                         success: function (data) {
+                            //                      	debugger
                             var dataStatus = data.status;
                             if (dataStatus === 2 || dataStatus === 5 || dataStatus === 6
                                 || dataStatus === 7 || dataStatus === 8
@@ -141,7 +144,8 @@ define(function (require) {
                                 || dataStatus === 9 || dataStatus === 10
                                 || dataStatus === 'ERROR' || dataStatus === 'ERROR1') {
                                 clearInterval(timer);
-                                window.top.location.href = 'mip_lawyer_noresponse?questionType=' + questionType;
+                                window.top.location.href = 'mipilaw66baidu_lawyer_noresponse?questionType='
+                                + questionType;
                             }
 
                         },
@@ -230,8 +234,8 @@ define(function (require) {
             }, 15000);
         }
         function gobackHandle() {
-            if (!sessionStorage.getItem('loginFlg') && sessionStorage.getItem('loginFlg') === 0) {
-                window.top.location.href = 'mipilaw66baidu_login';
+            if (!parseInt(sessionStorage.getItem('loginFlg'), 10) && sessionStorage.getItem('loginFlg') === '0') {
+                window.top.location.href = 'login';
             }
             else {
                 window.top.location.href = './';
@@ -246,6 +250,7 @@ define(function (require) {
                     + '&questionType=' + getQueryString('questionType'),
                 async: false,
                 success: function (data) {
+                    var data = data.data;
                     if (!data || data.length === 0) {
                     // no lawyer msg
                     }

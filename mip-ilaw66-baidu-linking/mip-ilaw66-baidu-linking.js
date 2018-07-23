@@ -191,19 +191,12 @@ define(function (require) {
                             $el.find('.backOr_div').show();
                             $el.find('.backOr_div .back__popLayer .back-leave').click(function () {
                                 $el.find('.backOr_div').hide();
-                                var backUrl = localStorage.getItem('loginFlg');
-                                if (!backUrl || backUrl !== 1) {
-                                    window.top.location.href = 'mipilaw66baidu_login';
-                                }
-                                else {
-                                    window.top.location.href = './';
-                                }
+                                gobackHandle();
                             });
                             $el.find('.backOr_div .back__popLayer .back-continue').click(function () {
                                 $el.find('.backOr_div').hide();
-                                t1 = setInterval(function () {
-                                    fnDate();
-                                }, 1000);
+                                window.top.location.href = 'baidusearch/authorize?questionType='
+                                    + questionType + '&urlstring=mipilaw66baidu_request';
                             });
                         }
                         else {
@@ -215,7 +208,9 @@ define(function (require) {
                                 if (flag === 0) {
                                     flag = 1;
                                     clearInterval(t1);
-                                    setTimeout('settime()', 20000);
+                                    setTimeout(function () {
+                                        settime();
+                                    }, 20000);
                                     isback = false;
                                 }
                             }
@@ -239,14 +234,14 @@ define(function (require) {
                     clearInterval(t1);
                     if (data === 'NG') {
                         if (!isback) {
-                            window.top.location.href = './';
-                            return false;
-                        }
-                        else {
                             var title = '';
                             var main = '律师正在联系你，若不想咨询，可接通后礼貌告知律师，1分钟内结束咨询不计费。';
                             var yes = '离开本页';
                             var no = '礼貌等待';
+                        }
+                        else {
+                            window.top.location.href = './';
+                            return false;
                         }
                         $el.find('.backOr_div .back__popLayer span:nth-of-type(1)').text(title);
                         $el.find('.backOr_div .back__popLayer span:nth-of-type(2)').text(main);
@@ -255,13 +250,7 @@ define(function (require) {
                         $el.find('.backOr_div').show();
                         $el.find('.backOr_div .back__popLayer .back-leave').click(function () {
                             $el.find('.backOr_div').hide();
-                            var backUrl = localStorage.getItem('loginFlg');
-                            if (!backUrl || backUrl !== 1) {
-                                window.top.location.href = 'mipilaw66baidu_login';
-                            }
-                            else {
-                                window.top.location.href = './';
-                            }
+                            gobackHandle();
                         });
                         $el.find('.backOr_div .back__popLayer .back-continue').click(function () {
                             $el.find('.backOr_div').hide();
@@ -306,14 +295,21 @@ define(function (require) {
             $el.find('.linkingDom').hide();
             $el.find('#pop_consulationEnd').show();
         }
+        function gobackHandle() {
+            if (!parseInt(sessionStorage.getItem('loginFlg'), 10) && sessionStorage.getItem('loginFlg') === '0') {
+                window.top.location.href = 'login';
+            }
+            else {
+                window.top.location.href = './';
+            }
+        }
         function checkTalking(checkRequestId, questionType) {
             $.ajax({
                 type: 'GET',
                 url: 'checkTalkingOrder?requestId=' + checkRequestId,
                 success: function (data) {
-                    console.log(data);
                     var state = data.result.state;
-                    if (state === '6') {
+                    if (state === 6) {
                         $el.find('.toast_txt').text('通话不足60秒，无需支付');
                         $el.find('.toast_div').show();
                         setTimeout(function () {
@@ -321,7 +317,7 @@ define(function (require) {
                             window.top.location.href = './';
                         }, 2000);
                     }
-                    else if (state === '4') {
+                    else if (state === 4) {
                         // 表示您和律师还在通话中，请咨询结束后，再支付律师辛苦费
                         $el.find('.toast_txt').text(data.result.error);
                         $el.find('.toast_div').show();
