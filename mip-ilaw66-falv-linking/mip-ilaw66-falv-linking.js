@@ -52,7 +52,7 @@ define(function (require) {
                     + '<span>' + This.option.main + '</span>'
                     + btnN + '</div>' + '</div>';
                 This.body.append(This.main);
-                This.PopUp = $el.find('.popUp');
+                This.PopUp = This.body.find('.popUp');
                 This.PopUp.show();
             },
             bindEvent: function () {
@@ -104,7 +104,7 @@ define(function (require) {
                     + '<span>' + This.option.main + '</span>'
                     + '</div>' + '</div>';
                 This.body.append(This.main);
-                This.ToastUp = $el.find('.toastUp');
+                This.ToastUp = This.body.find('.toastUp');
                 This.ToastUp.show();
             },
             bindEvent: function () {
@@ -185,8 +185,6 @@ define(function (require) {
         var lawyerId = getQueryString('lawyerId');
         var fromChannel = localStorage.getItem('fromChannel');
         var flag = 0;
-        console.log(channel);
-        console.log(fromChannel);
 
         if (window.appBridge && window.appBridge.checkAppFeature('CHANGE_WEBVIEW_TITLE')) {
             window.appBridge.changeWebviewTitle('等待接通');
@@ -324,8 +322,7 @@ define(function (require) {
                                 // 正常下单时出现【推荐其他律师】，再通知一次未接通时【再通知一次】操作
                                 if (dataStatus === 3 || data.reCallNoAnswerTimes > 0) {
                                     window.top.location.href = 'mip_informLawyer_failed?lawyerId='
-                                    + lawyerId
-                                    + '&requestId=' + timerRequestId + '&questionType=' + questionType
+                                    + lawyerId + '&requestId=' + timerRequestId + '&questionType=' + questionType
                                     + '&secondAskFlg=' + data.reCallNoAnswerTimes;
                                 }
                                 else {
@@ -755,14 +752,10 @@ define(function (require) {
                     console.log(data);
                     if (b === 'ST002') {
                         // 百度统计
-                        window._hmt
-                        && window._hmt.push(['_trackEvent', $el.find('#channel').val() + '_falvvip', 'click']);
                         window.top.location.href = 'consulting_testament';
                     }
                     else if (b === 'ST003') {
                         // 百度统计
-                        window._hmt
-                        && window._hmt.push(['_trackEvent', $el.find('#channel').val() + '_tehui', 'click']);
                         window.top.location.href = 'mip_preferential?serviceType=' + questionType;
                     }
 
@@ -794,8 +787,6 @@ define(function (require) {
         //  通话异常按钮事件
         $el.find('.end_unusual').on('click', function () {
             // 百度统计
-            window._hmt
-            && window._hmt.push(['_trackEvent', 'telUnusual', 'click']);
             $el.find('.pop_unusual').show();
         });
         //  点击遮罩层事件
@@ -806,8 +797,6 @@ define(function (require) {
         //  意外掉线
         $el.find('.type_dropline').on('click', function () {
             // 百度统计
-            window._hmt
-            && window._hmt.push(['_trackEvent', 'lineUnusual', 'click']);
             $el.find('.pop_unusual').hide();
             $el.find('.outOfUnusual').hide();
             $el.find('.inOfUnusual').show();
@@ -815,8 +804,6 @@ define(function (require) {
         //  没有电话打进
         $el.find('.type_nocall').on('click', function () {
             // 百度统计
-            window._hmt
-            && window._hmt.push(['_trackEvent', 'noCall', 'click']);
             window.top.location.href = 'mip_confirmTel?requestId=' + timerRequestId
                 + '&questionType=' + timerQuestionType;
         });
@@ -828,8 +815,6 @@ define(function (require) {
         //  重新呼叫
         $el.find('.outGotoPay__recall').on('click', function () {
             // 百度统计
-            window._hmt
-            && window._hmt.push(['_trackEvent', 'recall', 'click']);
             //  不调用checkTalkingOrder接口，在continueAsk里面判断4的状态
             $.ajax({
                 type: 'POST',

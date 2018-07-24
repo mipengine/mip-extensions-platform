@@ -1,0 +1,14 @@
+{
+    "name": "mip-otto-rem",
+    "version": "1.0.0",
+    "description": "网校rem适配方案",
+    "contributors": [
+        {
+            "name": "xinbao",
+            "email": "fa@ijust.cc"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

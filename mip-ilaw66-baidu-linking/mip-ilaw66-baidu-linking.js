@@ -34,6 +34,7 @@ define(function (require) {
         if (tel) {
             // 加载的时候显示号码
             $el.find('title').text('等待接通');
+            $el.find('div_header').text('等待接通');
             $el.find('.link_phone span').html(tel);
         }
         else {
@@ -248,12 +249,12 @@ define(function (require) {
                 type: 'POST',
                 success: function (data) {
                     clearInterval(t1);
+                    var title = '';
+                    var main = '律师正在联系你，若不想咨询，可接通后礼貌告知律师，1分钟内结束咨询不计费。';
+                    var yes = '离开本页';
+                    var no = '礼貌等待';
                     if (data === 'NG') {
                         if (!isback) {
-                            var title = '';
-                            var main = '律师正在联系你，若不想咨询，可接通后礼貌告知律师，1分钟内结束咨询不计费。';
-                            var yes = '离开本页';
-                            var no = '礼貌等待';
                         }
                         else {
                             window.top.location.href = './';
@@ -304,6 +305,7 @@ define(function (require) {
             $el.find('.link_middle').hide();
             $el.find('.link_bottom').hide();
             $el.find('title').text('服务完成');
+            $el.find('div_header').text('服务完成');
             $el.find('#pop_consulationEnd').show();
             $el.find('.outOfUnusual').show();
             $el.find('.inOfUnusual').hide();
@@ -311,6 +313,7 @@ define(function (require) {
         function settime() {
             $el.find('.linkingDom').hide();
             $el.find('title').text('服务完成');
+            $el.find('div_header').text('服务完成');
             $el.find('#pop_consulationEnd').show();
         }
         function gobackHandle() {

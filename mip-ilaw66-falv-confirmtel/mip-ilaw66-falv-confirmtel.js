@@ -408,15 +408,11 @@ define(function (require) {
                     console.log(data);
                     if (b === 'ST002') {
                         // 百度统计
-                        window._hmt
-                        && window._hmt.push(['_trackEvent', $('#channel').val() + '_falvvip', 'click']);
                         window.top.location.href = 'consulting_testament';
                     }
                     else if (b === 'ST003') {
                         // 百度统计
-                        window._hmt
-                        && window._hmt.push(['_trackEvent', $('#channel').val() + '_tehui', 'click']);
-                        window.top.location.href = 'preferential?serviceType=' + questionType;
+                        window.top.location.href = 'mip_preferential?serviceType=' + questionType;
                     }
 
                 },

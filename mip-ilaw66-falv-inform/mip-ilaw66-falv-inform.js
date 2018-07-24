@@ -357,7 +357,6 @@ define(function (require) {
                             var main = data.error + '，您可以稍后继续问，或由系统推荐其他律师';
                             var yes = '立刻推荐其他律师';
                             var no = '稍后继续问';
-                            var backOr;
                             backOr(title, main, yes, no, function () {
                                 startConsulting(questionType);
                             }, function () {
@@ -412,14 +411,10 @@ define(function (require) {
                     console.log(data);
                     if (b === 'ST002') {
                         // 百度统计
-                        window._hmt
-                        && window._hmt.push(['_trackEvent', $el.find('#channel').val() + '_falvvip', 'click']);
                         window.top.location.href = 'consulting_testament';
                     }
                     else if (b === 'ST003') {
                         // 百度统计
-                        window._hmt
-                        && window._hmt.push(['_trackEvent', $el.find('#channel').val() + '_tehui', 'click']);
                         window.top.location.href = 'mip_preferential?serviceType=' + questionType;
                     }
 
@@ -473,7 +468,7 @@ define(function (require) {
                     + This.option.title + '</span>' + '<span>' + This.option.main
                     + '</span>' + btnN + '</div>' + '</div>';
                 This.body.append(This.main);
-                This.PopUp = $el.find('.PopUp');
+                This.PopUp = This.body.find('.PopUp');
                 This.PopUp.show();
             },
             bindEvent: function () {
@@ -523,7 +518,7 @@ define(function (require) {
                     + '<div class="layer__wrapper layer__wrapper__toast"></div>' + '<div class="back__popLayer__toast">'
                     + '<span>' + This.option.main + '</span>' + '</div>' + '</div>';
                 This.body.append(This.main);
-                This.ToastUp = $el.find('.ToastUp');
+                This.ToastUp = This.body.find('.ToastUp');
                 This.ToastUp.show();
             },
             bindEvent: function () {
@@ -606,38 +601,34 @@ define(function (require) {
         var clericalName = localStorage.getItem('clericalName');
         var clericalAvatar = localStorage.getItem('clericalAvatar');
         var timer;
-        $el.find(function () {
-            lawyerId = getQueryString('lawyerId');
-            // 更改律师头像及姓氏
-            if (fromRoute) {
-                changeAvatar(clericalName, clericalAvatar, 'male');
+        // 更改律师头像及姓氏
+        if (fromRoute) {
+            changeAvatar(clericalName, clericalAvatar, 'male');
+        }
+        else {
+            changeAvatar(nameOfLawyer, avatarOfLawyer, sexOfLawyer);
+        }
+
+        $el.find('#requestId').val(getQueryString('data'));
+        $el.find('#questionType').val(getQueryString('questionType'));
+        $el.find('#askingType').val(getQueryString('askingType'));
+        $el.find('.header_block').hide();
+
+        timer = setInterval(function () {
+            var date = new Date();
+            countdown = (date.getHours() - begin) * 3600 + (date.getMinutes() - min) * 60
+                + (date.getSeconds() - sec);
+            $el.find('.inform_time').text(countdown + '秒');
+            settime();
+            if (countdown >= 60) {
+                clearInterval(timer);
+                $el.find('.countdownTime').html('60秒');
             }
             else {
-                changeAvatar(nameOfLawyer, avatarOfLawyer, sexOfLawyer);
+                $el.find('.countdownTime').html(countdown + '秒');
             }
-
-            $el.find('#requestId').val(getQueryString('data'));
-            $el.find('#questionType').val(getQueryString('questionType'));
-            $el.find('#askingType').val(getQueryString('askingType'));
-            $el.find('.header_block').hide();
-
-            timer = setInterval(function () {
-                var date = new Date();
-                countdown = (date.getHours() - begin) * 3600 + (date.getMinutes() - min) * 60
-                    + (date.getSeconds() - sec);
-                $el.find('.inform_time').text(countdown + '秒');
-                settime();
-                if (countdown >= 60) {
-                    clearInterval(timer);
-                    $el.find('.countdownTime').html('60秒');
-                }
-                else {
-                    $el.find('.countdownTime').html(countdown + '秒');
-                }
-            },
-                1000);
-
-        });
+        },
+            1000);
 
         function getQueryString(name) {
             var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
@@ -841,7 +832,6 @@ define(function (require) {
                     var main = '累计取消三次，当天将无法再次 咨询，确定取消本次咨询吗？';
                     var yes = '确定取消';
                     var no = '点错了';
-                    var backOr;
                     backOr(title, main, yes, no, function () {
                         // 确认取消时
                         toastOr('正在取消咨询');
@@ -859,7 +849,6 @@ define(function (require) {
                 var main = '累计取消三次，当天将无法再次咨询，确定取消本次咨询吗？';
                 var yes = '确定取消';
                 var no = '点错了';
-                var backOr;
                 backOr(title, main, yes, no, function () {
                     // 确认取消时
                     toastOr('正在取消咨询');

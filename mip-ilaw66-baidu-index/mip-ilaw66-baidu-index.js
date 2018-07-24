@@ -380,11 +380,11 @@ define(function (require) {
                                 tempMoreHtml += '<li><div class="total_user">'
                                     + '<mip-img src="tempbaidu/images/bab.png"></mip-img>'
                                     + '累积服务人数&nbsp;<i class="userTotalNum">'
-                                    + numtransform(b.countAll) + '人</i> </div></li>';
+                                    + numtransform(b.countAll) + ' </i> 人</div></li>';
                                 tempMoreHtml += '<li><div class="total_user">'
                                     + '<mip-img src="tempbaidu/images/bab.png"></mip-img>'
                                     + '今日咨询人数&nbsp;<i class="userTodayNum">'
-                                    + numtransform(b.countToday) + '人</i> </div></li>';
+                                    + numtransform(b.countToday) + ' </i> 人 </div></li>';
                                 showSlogonMsg(tempMoreHtml, 2000);
                             }
                             //                          else if (!b.payState && rvFlg) { // 未咨询过、有预约的用户
@@ -396,7 +396,9 @@ define(function (require) {
                             //                              $el.find('.slogonMsg').addClass('slogonMsg_new');
                             //                              $el.find('.slogonMsg').html(tempHtml);
                             //                          }
+
                             else {
+
                                 if (b.payState === 6) { // 咨询过，欠费的用户
                                     var tempHtml = '<ul>';
                                     tempHtml += '<li><div class="topay">'
@@ -462,11 +464,11 @@ define(function (require) {
                                     tempMoreHtml += '<li><div class="total_user">'
                                         + '<mip-img  src="tempbaidu/images/bab.png"></mip-img >'
                                         + '累积服务人数&nbsp;<i class="userTotalNum">'
-                                        + numtransform(b.countAll) + '人</i> </div></li>';
+                                        + numtransform(b.countAll) + ' </i> 人 </div></li>';
                                     tempMoreHtml += '<li><div class="total_user">'
                                         + '<mip-img  src="tempbaidu/images/bab.png"></mip-img >'
                                         + '今日咨询人数&nbsp;<i class="userTodayNum">'
-                                        + numtransform(b.countToday) + '人</i> </div></li>';
+                                        + numtransform(b.countToday) + ' </i> 人</div></li>';
                                     showSlogonMsg(tempMoreHtml, 2000);
                                     //                                  }
                                 }

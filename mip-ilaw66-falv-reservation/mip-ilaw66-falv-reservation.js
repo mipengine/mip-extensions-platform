@@ -56,7 +56,7 @@ define(function (require) {
                 + '<span>' + This.option.main + '</span>'
                 + btnN + '</div>' + '</div>';
                 This.body.append(This.main);
-                This.PopUp = $el.find('.popUp');
+                This.PopUp = This.body.find('.popUp');
                 This.PopUp.show();
             },
             bindEvent: function () {
@@ -108,7 +108,7 @@ define(function (require) {
                 + '<span>' + This.option.main + '</span>'
                 + '</div>' + '</div>';
                 This.body.append(This.main);
-                This.ToastUp = $el.find('.toastUp');
+                This.ToastUp = This.body.find('.toastUp');
                 This.ToastUp.show();
             },
             bindEvent: function () {
@@ -246,7 +246,7 @@ define(function (require) {
                     console.log(g);
                     if (g.status === 0) {
                         localStorage.setItem('reservationSuccess', true);
-                        location.href = './';
+                        window.top.location.href = './';
                     }
                     else if (g.status === 1) {
                         toastOr(g.message);
@@ -378,16 +378,16 @@ define(function (require) {
                     if (g.RQ && g.RQ.payState === 6) { // 6:欠费时
                         backOr('', '因您有1个未支付订单，预约已暂停。支付后预约立刻恢复', '', '去支付', function () {}, function () {
                             // location.href = 'order?requestId=' + g.RQ.requestId + '&questionType=' + g.RQ.questionType;
-                            location.href = 'mip_couponPay?requestId='
+                            window.top.location.href = 'mip_couponPay?requestId='
                             + g.RQ.requestId + '&questionType=' + g.RQ.questionType;
                         });
                     }
                     else {
-                        if (g.RV) {
+                        if (!g.RV) {
                             $el.find('#reservationquestionTypeContent').text(g.RV.questionTypeString);
                             $el.find('#reservationTime').text(g.RV.reservationTimeString);
                             $el.find('.reservationbtn_change').click(function () { // 修改预约
-                                location.href = 'mip_reservation?questionType=' + g.RV.questionType
+                                window.top.location.href = 'mip_reservation?questionType=' + g.RV.questionType
                                 + '&reservationTime=' + g.RV.reservationTime
                                 + '&id=' + g.RV.id;
                             });
@@ -418,7 +418,7 @@ define(function (require) {
                     console.log(data);
                     if (data.info) {
                         backOr('', '您已经预约过了，如有需要可以修改', '', '我知道了', function () {}, function () {
-                            location.href = 'mip_myreservation';
+                            window.top.location.href = 'mip_myreservation';
                         });
                     }
 
@@ -445,7 +445,7 @@ define(function (require) {
                         if (g.status === 0) {
                             toastOr('预约已取消');
                             setTimeout(function () {
-                                location.href = './';
+                                window.top.location.href = './';
                             }, 2000);
                         }
                         else if (g.status === 1) {
