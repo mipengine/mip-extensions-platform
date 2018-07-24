@@ -33,6 +33,10 @@ define(function (require) {
             channel = channelInUrl;
         }
 
+        setTimeout(function () {
+            $el.find('.loading_pop').hide();
+        }, 2000);
+
         choose(channel);
         if (channel === 'eleme') {
             $el.find('.header_block').css('background', '#089EFF');
@@ -594,10 +598,11 @@ define(function (require) {
         });
 
         function login() {
+            var action = window.location.origin + '/jasmine/login';
             var frmLogin = $el.find('#frmLogin form');
-            //          $(frmLogin).attr('action', 'login');
-            //          $(frmLogin).attr('method', 'post');
-            //          $(frmLogin).attr('target', '_self');
+            $(frmLogin).attr('action', action);
+            $(frmLogin).attr('method', 'post');
+            $(frmLogin).attr('target', '_self');
             $(frmLogin).submit();
         }
 

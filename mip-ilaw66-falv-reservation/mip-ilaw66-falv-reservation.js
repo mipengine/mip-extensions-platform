@@ -240,8 +240,9 @@ define(function (require) {
         function commitReservationMsg(reservationquestionType, reservationTime) {
             $.ajax({
                 type: 'post',
-                url: 'reservation/addRequestReservation?questionType=' + reservationquestionType
-                + '&reservationTimeString=' + reservationTime + '&_csrf=' + $el.find('#_csrf').val(),
+                url: 'reservation/addRequestReservation',
+                data: 'questionType=' + reservationquestionType + '&reservationTimeString='
+                + reservationTime + '&_csrf=' + $el.find('#_csrf').val(),
                 success: function (g) {
                     console.log(g);
                     if (g.status === 0) {
@@ -438,8 +439,8 @@ define(function (require) {
             backOr(title, main, yes, no, function () {}, function () {
                 $.ajax({
                     type: 'POST',
-                    url: 'reservation/cancelRequestReservation?id='
-                    + cancelid + '&_csrf=' + $el.find('#_csrf').val(),
+                    url: 'reservation/cancelRequestReservation',
+                    data: 'id=' + cancelid + '&_csrf=' + $el.find('#_csrf').val(),
                     success: function (g) {
                         console.log(g);
                         if (g.status === 0) {

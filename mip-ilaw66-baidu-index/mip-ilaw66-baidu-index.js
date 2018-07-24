@@ -353,7 +353,7 @@ define(function (require) {
                 url: 'getOrderCount',
                 dataType: 'json',
                 success: function (a) {
-                    console.log(a);
+                    //                  console.log(a);
                     var rvFlg = false;
                     if (!a) {
                         return;
@@ -374,19 +374,29 @@ define(function (require) {
                             timestamp3 = a.RV.reservationTimeString;
                         }
 
-                        if (pathnamePage.indexOf('articleNav') < 1) { // 首页加载视频时src="tempbaidu/images/bab.png
-                            if (b.countAll && b.countToday && !b.payState && !rvFlg) { // 未咨询过、未预约过的用户
-                                var tempMoreHtml = '';
-                                tempMoreHtml += '<li><div class="total_user">'
-                                    + '<mip-img src="tempbaidu/images/bab.png"></mip-img>'
-                                    + '累积服务人数&nbsp;<i class="userTotalNum">'
-                                    + numtransform(b.countAll) + ' </i> 人</div></li>';
-                                tempMoreHtml += '<li><div class="total_user">'
-                                    + '<mip-img src="tempbaidu/images/bab.png"></mip-img>'
-                                    + '今日咨询人数&nbsp;<i class="userTodayNum">'
-                                    + numtransform(b.countToday) + ' </i> 人 </div></li>';
-                                showSlogonMsg(tempMoreHtml, 2000);
-                            }
+                        if (pathnamePage.indexOf('articleNav') < 1) { // 首页加载视频时
+                            var tempMoreHtml = '';
+                            tempMoreHtml += '<li><div class="total_user">'
+                                + '<mip-img src="tempbaidu/images/bab.png"></mip-img>'
+                                + '累积服务人数&nbsp;<i class="userTotalNum">'
+                                + numtransform(b.countAll) + ' </i> 人</div></li>';
+                            tempMoreHtml += '<li><div class="total_user">'
+                                + '<mip-img src="tempbaidu/images/bab.png"></mip-img>'
+                                + '今日咨询人数&nbsp;<i class="userTodayNum">'
+                                + numtransform(b.countToday) + ' </i> 人 </div></li>';
+                            showSlogonMsg(tempMoreHtml, 2000);
+                            //                          if (b.countAll && b.countToday && !b.payState && !rvFlg) { // 未咨询过、未预约过的用户
+                            //                              var tempMoreHtml = '';
+                            //                              tempMoreHtml += '<li><div class="total_user">'
+                            //                                  + '<mip-img src="tempbaidu/images/bab.png"></mip-img>'
+                            //                                  + '累积服务人数&nbsp;<i class="userTotalNum">'
+                            //                                  + numtransform(b.countAll) + ' </i> 人</div></li>';
+                            //                              tempMoreHtml += '<li><div class="total_user">'
+                            //                                  + '<mip-img src="tempbaidu/images/bab.png"></mip-img>'
+                            //                                  + '今日咨询人数&nbsp;<i class="userTodayNum">'
+                            //                                  + numtransform(b.countToday) + ' </i> 人 </div></li>';
+                            //                              showSlogonMsg(tempMoreHtml, 2000);
+                            //                          }
                             //                          else if (!b.payState && rvFlg) { // 未咨询过、有预约的用户
                             //                              var tempHtml = '<ul>';
                             //                              tempHtml += '<li><div class="tocheckreservation">您预约了'
@@ -397,82 +407,83 @@ define(function (require) {
                             //                              $el.find('.slogonMsg').html(tempHtml);
                             //                          }
 
-                            else {
+                            //                          else {
 
-                                if (b.payState === 6) { // 咨询过，欠费的用户
-                                    var tempHtml = '<ul>';
-                                    tempHtml += '<li><div class="topay">'
-                                        + '<mip-img src="tempbaidu/images/bab.png"></mip-img>'
-                                        + '您有一个未支付订单&nbsp;<p id="topay">去支付&nbsp;&#9658</p></div></li>';
-                                    //                                  if (rvFlg) {
-                                    //                                      tempHtml += '<li><div class="tocheckreservation">您预约了'
-                                    //                                          + timestamp3
-                                    //                                          + '的咨询&nbsp;<p id="tocheckreservation">'
-                                    //                                          + '查看预约&nbsp;&#9658</p></div></li>';
-                                    //                                  }
-
-                                    tempHtml += '</ul>';
-                                    $el.find('.slogonMsg').addClass('slogonMsg_new');
-                                    if (rvFlg) {
-                                        showSlogonMsg(tempHtml, 4000);
-                                    }
-                                    else {
-                                        $el.find('.slogonMsg').html(tempHtml);
-                                    }
-                                    haveNoPaidOrder(b);
-                                }
-                                else if (b.payState === 8) { // 咨询过、未欠费的用户
-                                    var a = +b.starLevle;
-                                    //                                  if (!a || a >= 3) {
-                                    //                                      var j = '';
-                                    //                                      var lawyerName;
-                                    //                                      if (b.name) {
-                                    //                                          j = b.name.substring(0, 1);
-                                    //                                          lawyerName = b.name.substring(0, 1);
-                                    //                                      }
-                                    //
-                                    //                                      var tempHtml = '<ul>';
-                                    //                                      tempHtml += '<li><div class="toask">'
-                                    //                                          + '<mip-img src="tempbaidu/images/bab.png"></mip-img>温馨提示：向上次咨询'
-                                    //                                          + j + '律师提问&nbsp;<p id="toask">继续问&nbsp;&#9658</p></div></li>';
-                                    //                                      if (rvFlg) {
-                                    //                                          tempHtml += '<li><div class="tocheckreservation">您预约了'
-                                    //                                              + timestamp3 + '的咨询&nbsp;<p id="tocheckreservation">'
-                                    //                                              + '查看预约&nbsp;&#9658</p></div></li>';
-                                    //                                      }
-                                    //
-                                    //                                      tempHtml += '</ul>';
-                                    //                                      $el.find('.slogonMsg').addClass('slogonMsg_new');
-                                    //                                      if (rvFlg) {
-                                    //                                          showSlogonMsg(tempHtml, 4000);
-                                    //                                      }
-                                    //                                      else {
-                                    //                                          $el.find('.slogonMsg').html(tempHtml);
-                                    //                                      }
-                                    //
-                                    //                                      var csrfToken = $el.find('#_csrf').val();
-                                    //                                      var askingType = '01';
-                                    //                                      var continueAskPage = 'index';
-                                    //                                      $el.find('#toask').click(function () {
-                                    //                                          $el.find('.loadingArea').show();
-                                    //                                          continueAskNew(b.lawyerId, b.questionType,
-                                    //                                              askingType, csrfToken, continueAskPage);
-                                    //                                      });
-                                    //                                  }
-                                    //                                  else {
-                                    var tempMoreHtml = '';
-                                    tempMoreHtml += '<li><div class="total_user">'
-                                        + '<mip-img  src="tempbaidu/images/bab.png"></mip-img >'
-                                        + '累积服务人数&nbsp;<i class="userTotalNum">'
-                                        + numtransform(b.countAll) + ' </i> 人 </div></li>';
-                                    tempMoreHtml += '<li><div class="total_user">'
-                                        + '<mip-img  src="tempbaidu/images/bab.png"></mip-img >'
-                                        + '今日咨询人数&nbsp;<i class="userTodayNum">'
-                                        + numtransform(b.countToday) + ' </i> 人</div></li>';
-                                    showSlogonMsg(tempMoreHtml, 2000);
-                                    //                                  }
-                                }
+                            if (b.payState === 6) { // 咨询过，欠费的用户
+                                var tempHtml = '<ul>';
+                                tempHtml += '<li><div class="topay">'
+                                    + '<mip-img src="tempbaidu/images/paytipicon.png"></mip-img>'
+                                    + '您有一个订单未支付<p id="topay">去支付</p></div></li>';
+                                //                                  if (rvFlg) {
+                                //                                      tempHtml += '<li><div class="tocheckreservation">您预约了'
+                                //                                          + timestamp3
+                                //                                          + '的咨询&nbsp;<p id="tocheckreservation">'
+                                //                                          + '查看预约&nbsp;&#9658</p></div></li>';
+                                //                                  }
+                                tempHtml += '</ul>';
+                                $el.find('.slogonMsg').addClass('slogonMsg_new');
+                                //                                  if (rvFlg) {
+                                //                                      showSlogonMsg(tempHtml, 4000);
+                                //                                  }
+                                //                                  else {
+                                $el.find('.userinteractive, .headerbf').show();
+                                $el.find('.userinteractive').html(tempHtml);
+                                //                                  }
+                                haveNoPaidOrder(b);
                             }
+
+                            //                              else if (b.payState === 8) { // 咨询过、未欠费的用户
+                            //                                  var a = +b.starLevle;
+                            //                                  //                                  if (!a || a >= 3) {
+                            //                                  //                                      var j = '';
+                            //                                  //                                      var lawyerName;
+                            //                                  //                                      if (b.name) {
+                            //                                  //                                          j = b.name.substring(0, 1);
+                            //                                  //                                          lawyerName = b.name.substring(0, 1);
+                            //                                  //                                      }
+                            //                                  //
+                            //                                  //                                      var tempHtml = '<ul>';
+                            //                                  //                                      tempHtml += '<li><div class="toask">'
+                            //                                  //                                          + '<mip-img src="tempbaidu/images/bab.png"></mip-img>温馨提示：向上次咨询'
+                            //                                  //                                          + j + '律师提问&nbsp;<p id="toask">继续问&nbsp;&#9658</p></div></li>';
+                            //                                  //                                      if (rvFlg) {
+                            //                                  //                                          tempHtml += '<li><div class="tocheckreservation">您预约了'
+                            //                                  //                                              + timestamp3 + '的咨询&nbsp;<p id="tocheckreservation">'
+                            //                                  //                                              + '查看预约&nbsp;&#9658</p></div></li>';
+                            //                                  //                                      }
+                            //                                  //
+                            //                                  //                                      tempHtml += '</ul>';
+                            //                                  //                                      $el.find('.slogonMsg').addClass('slogonMsg_new');
+                            //                                  //                                      if (rvFlg) {
+                            //                                  //                                          showSlogonMsg(tempHtml, 4000);
+                            //                                  //                                      }
+                            //                                  //                                      else {
+                            //                                  //                                          $el.find('.slogonMsg').html(tempHtml);
+                            //                                  //                                      }
+                            //                                  //
+                            //                                  //                                      var csrfToken = $el.find('#_csrf').val();
+                            //                                  //                                      var askingType = '01';
+                            //                                  //                                      var continueAskPage = 'index';
+                            //                                  //                                      $el.find('#toask').click(function () {
+                            //                                  //                                          $el.find('.loadingArea').show();
+                            //                                  //                                          continueAskNew(b.lawyerId, b.questionType,
+                            //                                  //                                              askingType, csrfToken, continueAskPage);
+                            //                                  //                                      });
+                            //                                  //                                  }
+                            //                                  //                                  else {
+                            //                                  var tempMoreHtml = '';
+                            //                                  tempMoreHtml += '<li><div class="total_user">'
+                            //                                      + '<mip-img  src="tempbaidu/images/bab.png"></mip-img >'
+                            //                                      + '累积服务人数&nbsp;<i class="userTotalNum">'
+                            //                                      + numtransform(b.countAll) + ' </i> 人 </div></li>';
+                            //                                  tempMoreHtml += '<li><div class="total_user">'
+                            //                                      + '<mip-img  src="tempbaidu/images/bab.png"></mip-img >'
+                            //                                      + '今日咨询人数&nbsp;<i class="userTodayNum">'
+                            //                                      + numtransform(b.countToday) + ' </i> 人</div></li>';
+                            //                                  showSlogonMsg(tempMoreHtml, 2000);
+                            //                                  //                                  }
+                            //                              }
+                            //                          }
                             $el.find('#tocheckreservation').click(function () {
                                 checkReservationExpired();
                             });

@@ -302,7 +302,8 @@ define(function (require) {
             var fromChannel = localStorage.getItem('fromChannel');
             $.ajax({
                 type: 'POST',
-                url: 'greeting?questionType=' + questionType + '&_csrf=' + csrfToken,
+                url: 'greeting',
+                data: 'questionType=' + questionType + '&_csrf=' + csrfToken,
                 success: function (data) {
                     if (data === 'ERROR' || data === 'ERROR1') {
                         $el.find('#err_msg').html('系统异常，请返回重新咨询');
@@ -358,8 +359,9 @@ define(function (require) {
             $.ajax({
                 async: true,
                 type: 'POST',
-                url: 'continueAsk?lawyerId=' + lawyerId + '&questionType=' + questionType + '&_csrf=' + csrfToken,
+                url: 'continueAsk',
                 dataType: 'json',
+                data: 'lawyerId=' + lawyerId + '&questionType=' + questionType + '&_csrf=' + csrfToken,
                 success: function (data) {
                     $el.find('.loadingArea').hide();
                     var id = data.data;
@@ -407,8 +409,9 @@ define(function (require) {
             $.ajax({
                 async: true,
                 type: 'POST',
-                url: 'continueAsk?lawyerId=' + lawyerId + '&questionType=' + questionType + '&_csrf=' + csrfToken,
+                url: 'continueAsk',
                 dataType: 'json',
+                data: 'lawyerId=' + lawyerId + '&questionType=' + questionType + '&_csrf=' + csrfToken,
                 success: function (data) {
                     $el.find('.loadingArea').hide();
                     var id = data.data;
@@ -453,9 +456,10 @@ define(function (require) {
             $.ajax({
                 async: true,
                 type: 'POST',
-                url: 'continueAskV3?lawyerId=' + lawyerId + '&questionType=' + questionType
-                    + '&_csrf=' + csrfToken + '&continueAskPage=' + continueAskPage,
+                url: 'continueAskV3',
                 dataType: 'json',
+                data: 'lawyerId=' + lawyerId + '&questionType=' + questionType
+                + '&_csrf=' + csrfToken + '&continueAskPage=' + continueAskPage,
                 success: function (data) {
                     console.log('继续问2', data);
                     $el.find('.loadingArea').hide();
@@ -484,9 +488,10 @@ define(function (require) {
                                 startConsulting(questionType);
                             }, function () {
                                 $.ajax({
-                                    url: 'createContinueAskLater?lawyerId=' + lawyerId
-                                        + '&questionType=' + questionType + '&_csrf=' + csrfToken,
+                                    url: 'createContinueAskLater',
                                     type: 'POST',
+                                    data: 'lawyerId=' + lawyerId
+                                    + '&questionType=' + questionType + '&_csrf=' + csrfToken,
                                     success: function (data) {
                                         if (data === 'ERROR') {
                                             alert('系统异常');

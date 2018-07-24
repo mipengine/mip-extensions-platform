@@ -45,9 +45,10 @@ define(function (require) {
                 var cardid = getQueryString('cardid');
 
                 $.ajax({
-                    url: 'card/sendCard?id=' + cardid + '&type=' + cardType + '&phone='
-+ activationid + '&channel=' + channel + '&_csrf=' + csrfToken,
+                    url: 'card/sendCard',
                     type: 'post',
+                    data: 'id=' + cardid + '&type=' + cardType + '&phone='
++ activationid + '&channel=' + channel + '&_csrf=' + csrfToken,
                     success: function (data) {
                         if (data.code === 200) {
                             stateimg.src = 'images/wx_bg_success.png';

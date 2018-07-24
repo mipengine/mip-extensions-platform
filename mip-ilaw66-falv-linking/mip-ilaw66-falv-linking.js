@@ -5,6 +5,7 @@
 // linking
 define(function (require) {
     var $ = require('jquery');
+    var viewport = require('viewport');
     // zepto不支持属性选择器type和is，所以使用jquery
     var customElement = require('customElement').create();
     customElement.prototype.firstInviewCallback = function () {
@@ -192,8 +193,8 @@ define(function (require) {
 
         $el.find('.header_block').hide();
 
-        var wH = $(window).height();
-        var wW = $(window).width();
+        var wW = viewport.getWidth();
+        var wH = viewport.getHeight();
         $el.find('.main_block_linking').css('height', wH + 'px');
 
         $el.find('#requestId').val(timerRequestId);
@@ -516,7 +517,8 @@ define(function (require) {
         function startConsulting(questionType, csrfToken, lawyerId) {
             $.ajax({
                 type: 'POST',
-                url: 'greeting?questionType=' + questionType + '&_csrf=' + csrfToken,
+                url: 'greeting',
+                data: 'questionType=' + questionType + '&_csrf=' + csrfToken,
                 success: function (data) {
                     if (data === 'ERROR' || data === 'ERROR1') {
                         $el.find('#err_msg').html('系统异常，请返回重新咨询');
@@ -575,9 +577,9 @@ define(function (require) {
             $.ajax({
                 async: true,
                 type: 'POST',
-                url: 'continueAsk?lawyerId=' + lawyerId + '&questionType='
-                    + questionType + '&_csrf=' + csrfToken,
+                url: 'continueAsk',
                 dataType: 'json',
+                data: 'lawyerId=' + lawyerId + '&questionType=' + questionType + '&_csrf=' + csrfToken,
                 success: function (data) {
                     $el.find('.loadingArea').hide();
                     var id = data.data;
@@ -624,9 +626,9 @@ define(function (require) {
             $.ajax({
                 async: true,
                 type: 'POST',
-                url: 'continueAsk?lawyerId=' + lawyerId + '&questionType='
-                    + questionType + '&_csrf=' + csrfToken,
+                url: 'continueAsk',
                 dataType: 'json',
+                data: 'lawyerId=' + lawyerId + '&questionType=' + questionType + '&_csrf=' + csrfToken,
                 success: function (data) {
                     $el.find('.loadingArea').hide();
                     var id = data.data;
@@ -670,9 +672,10 @@ define(function (require) {
             $.ajax({
                 async: true,
                 type: 'POST',
-                url: 'continueAskV3?lawyerId=' + lawyerId + '&questionType=' + questionType + '&_csrf='
-                    + csrfToken + '&continueAskPage=' + continueAskPage,
+                url: 'continueAskV3',
                 dataType: 'json',
+                data: 'lawyerId=' + lawyerId + '&questionType=' + questionType + '&_csrf='
+                + csrfToken + '&continueAskPage=' + continueAskPage,
                 success: function (data) {
                     console.log('继续问2', data);
                     $el.find('.loadingArea').hide();
@@ -701,9 +704,10 @@ define(function (require) {
                                 startConsulting(questionType);
                             }, function () {
                                 $.ajax({
-                                    url: 'createContinueAskLater?lawyerId=' + lawyerId + '&questionType='
-                                        + questionType + '&_csrf=' + csrfToken,
+                                    url: 'createContinueAskLater',
                                     type: 'POST',
+                                    data: 'lawyerId=' + lawyerId + '&questionType='
+                                    + questionType + '&_csrf=' + csrfToken,
                                     success: function (data) {
                                         if (data === 'ERROR') {
                                             alert('系统异常');
@@ -818,8 +822,9 @@ define(function (require) {
             //  不调用checkTalkingOrder接口，在continueAsk里面判断4的状态
             $.ajax({
                 type: 'POST',
-                url: 'continueAsk?lawyerId=' + getQueryString('lawyerId') + '&questionType='
-                    + timerQuestionType + '&_csrf=' + $el.find('#_csrf').val() + '&source=1',
+                url: 'continueAsk',
+                data: 'lawyerId=' + getQueryString('lawyerId') + '&questionType='
+                + timerQuestionType + '&_csrf=' + $el.find('#_csrf').val() + '&source=1',
                 success: function (data) {
                     console.log(data);
                     var id = data.data;

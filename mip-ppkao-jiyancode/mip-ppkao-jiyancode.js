@@ -34,7 +34,7 @@ define(function (require) {
                         window.top.location.href = openUrl;
                         return false;
                     } else {
-                        window.top.location.href = 'https://user.ppkao.com/3g/upvip/index_taste.aspx';
+                        window.top.location.href = 'https://data.api.ppkao.com/user/3g/upvip/index_taste.aspx';
                         return false;
                     }
                 },

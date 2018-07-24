@@ -56,7 +56,7 @@ define(function (require) {
             // 点击重新匹配律师按钮
             $el.find('#js-continueAsk').on('touchstart', function () {
                 $.ajax({
-                    type: 'get',
+                    type: 'post',
                     url: 'greeting?questionType=' + questionType + '&_csrf=' + csrfToken,
                     success: function (data) {
                         if (data === 'ERROR' || data === 'ERROR1') {

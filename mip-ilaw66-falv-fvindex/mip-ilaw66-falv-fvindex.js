@@ -5,11 +5,13 @@
 
 define(function (require) {
     var $ = require('jquery');
+    var viewport = require('viewport');
     // zepto不支持is方法以及某些属性选择器，所以选用jquery;
     var customElement = require('customElement').create();
     customElement.prototype.firstInviewCallback = function () {
         var $el = $(this.element);
-        var wW = $el.find(window).width();
+        var wW = viewport.getWidth();
+        var wH = viewport.getHeight();
         var wMenu = wW - 110;
         var channel = getQueryString('channel');
         if (!channel) {
@@ -218,7 +220,8 @@ define(function (require) {
             var fromChannel = localStorage.getItem('fromChannel');
             $.ajax({
                 type: 'POST',
-                url: 'greeting?questionType=' + questionType + '&_csrf=' + csrfToken,
+                url: 'greeting',
+                data: 'questionType=' + questionType + '&_csrf=' + csrfToken,
                 success: function (data) {
                     if (data === 'ERROR' || data === 'ERROR1') {
                         $el.find('#err_msg').html('系统异常，请返回重新咨询');
@@ -276,8 +279,8 @@ define(function (require) {
             $.ajax({
                 async: true,
                 type: 'POST',
-                url: 'continueAsk?lawyerId=' + lawyerId + '&questionType='
-                    + questionType + '&_csrf=' + csrfToken,
+                url: 'continueAsk',
+                data: 'lawyerId=' + lawyerId + '&questionType=' + questionType + '&_csrf=' + csrfToken,
                 dataType: 'json',
                 success: function (data) {
                     $el.find('.loadingArea').hide();
@@ -325,8 +328,8 @@ define(function (require) {
             $.ajax({
                 async: true,
                 type: 'POST',
-                url: 'continueAsk?lawyerId=' + lawyerId + '&questionType='
-                    + questionType + '&_csrf=' + csrfToken,
+                url: 'continueAsk',
+                data: 'lawyerId=' + lawyerId + '&questionType=' + questionType + '&_csrf=' + csrfToken,
                 dataType: 'json',
                 success: function (data) {
                     $el.find('.loadingArea').hide();
@@ -371,8 +374,9 @@ define(function (require) {
             $.ajax({
                 async: true,
                 type: 'POST',
-                url: 'continueAskV3?lawyerId=' + lawyerId + '&questionType=' + questionType + '&_csrf='
-                    + csrfToken + '&continueAskPage=' + continueAskPage,
+                url: 'continueAskV3',
+                data: 'lawyerId=' + lawyerId + '&questionType=' + questionType + '&_csrf='
+                + csrfToken + '&continueAskPage=' + continueAskPage,
                 dataType: 'json',
                 success: function (data) {
                     console.log('继续问2', data);
@@ -401,9 +405,10 @@ define(function (require) {
                                 startConsulting(questionType);
                             }, function () {
                                 $.ajax({
-                                    url: 'createContinueAskLater?lawyerId=' + lawyerId + '&questionType='
-                                        + questionType + '&_csrf=' + csrfToken,
+                                    url: 'createContinueAskLater',
                                     type: 'POST',
+                                    data: 'lawyerId=' + lawyerId + '&questionType='
+                                    + questionType + '&_csrf=' + csrfToken,
                                     success: function (data) {
                                         if (data === 'ERROR') {
                                             alert('系统异常');
@@ -451,14 +456,10 @@ define(function (require) {
                     console.log(data);
                     if (b === 'ST002') {
                         // 百度统计
-                        window._hmt
-                        && window._hmt.push(['_trackEvent', $el.find('#channel').val() + '_falvvip', 'click']);
                         window.top.location.href = 'consulting_testament';
                     }
                     else if (b === 'ST003') {
                         // 百度统计
-                        window._hmt
-                        && window._hmt.push(['_trackEvent', $el.find('#channel').val() + '_tehui', 'click']);
                         window.top.location.href = 'mip_preferential?serviceType=' + questionType;
                     }
 
@@ -511,7 +512,7 @@ define(function (require) {
                     + This.option.title + '</span>' + '<span>' + This.option.main + '</span>'
                     + btnN + '</div>' + '</div>';
                 This.body.append(This.main);
-                This.PopUp = $el.find('.popUP');
+                This.PopUp = This.body.find('.popUP');
                 This.PopUp.show();
             },
             bindEvent: function () {
@@ -557,7 +558,7 @@ define(function (require) {
                     + '<div class="layer__wrapper layer__wrapper__toast"></div>' + '<div class="back__popLayer__toast">'
                     + '<span>' + This.option.main + '</span>' + '</div>' + '</div>';
                 This.body.append(This.main);
-                This.ToastUp = $el.find('.ToastUp');
+                This.ToastUp = This.body.find('.ToastUp');
                 This.ToastUp.show();
             },
             bindEvent: function () {
@@ -672,8 +673,6 @@ define(function (require) {
         localStorage.setItem('channel', $el.find('#channel').val());
 
         //  $el.find('img.lazy').lazyload({ effect: 'fadeIn' });
-        var wH = $el.find(window).height();
-        var wW = $el.find(window).width();
         $el.find('.main_block').css('height', wH + 'px');
 
         var timeOutEvent = 0;
@@ -736,9 +735,8 @@ define(function (require) {
             });
         }
 
-        var agreeImgSrc = $el.find('.radio-rule').find('.radio-rule-iconCT015').attr('src');
+        var agreeImgSrc = $el.find('.radio-rule').find('#radio-rule-iconCT015').attr('src');
         $el.find('.radio-rule').on('click', function () {
-            console.log(agreeImgSrc);
             $(this).hasClass('rule-checked')
                 ? $(this).removeClass('rule-checked') : $(this).addClass('rule-checked');
             var type = $(this).data('type');
@@ -895,11 +893,13 @@ define(function (require) {
                                     var csrfToken = $el.find('#_csrf').val();
                                     var askingType = '01';
                                     var continueAskPage = 'index';
-                                    $el.find('#toask').click(function () {
-                                        $el.find('.loadingArea').show();
-                                        continueAskNew(b.lawyerId, b.questionType, askingType,
-                                            csrfToken, continueAskPage);
-                                    });
+                                    window.onload = function () {
+                                        $el.find('#toask').click(function () {
+                                            $el.find('.loadingArea').show();
+                                            continueAskNew(b.lawyerId, b.questionType, askingType,
+                                                csrfToken, continueAskPage);
+                                        });
+                                    };
                                 }
                                 else {
                                     var tempMoreHtml = '';
@@ -915,9 +915,11 @@ define(function (require) {
                                 }
                             }
                         }
-                        $el.find('#tocheckreservation').click(function () {
-                            checkReservationExpired();
-                        });
+                        window.onload = function () {
+                            $el.find('#tocheckreservation').click(function () {
+                                checkReservationExpired();
+                            });
+                        };
                     }
                 }
 
@@ -961,8 +963,9 @@ define(function (require) {
         else {
             // 调用接口显示赠送卡券的信息
             $.ajax({
-                url: 'card/getIfHasGift?_csrf=' + $el.find('#_csrf').val(),
+                url: 'card/getIfHasGift',
                 type: 'POST',
+                data: '_csrf=' + $el.find('#_csrf').val(),
                 success: function (data) {
                     console.log(data);
                     if (data.length === 0) {
@@ -1034,21 +1037,21 @@ define(function (require) {
 
         // 点击白底区域跳转
         $el.find('.sendcardstatus').on('touchend', function (event) {
-            window.top.location.href = 'mycardandcoupons';
+            window.top.location.href = 'mip_mycardandcoupons';
             event.stopPropagation();
         });
 
         // 从支付成功页面过来，可查看卡券---跳转
         $el.find('.checkcardstatus-go').on('touchend', function (event) {
-            window.top.location.href = 'mycardandcoupons';
+            window.top.location.href = 'mip_mycardandcoupons';
             event.stopPropagation();
         });
 
         // 点击白底以外区域关闭
-        $el.find(window).on('touchend', function (event) {
+        $('body').on('touchend', function (event) {
             $el.find('.sendcardstatus-bg').fadeOut();
             $el.find('.checkcardstatus-bg').fadeOut();
-            var tar = $el.find(event.target);
+            var tar = $(event.target);
             if (tar.parents('.myRelative-bg').length === 0) {
                 $el.find('.myRelative-bg').fadeOut();
             }
@@ -1111,10 +1114,6 @@ define(function (require) {
             questionType = $(this).data('type');
             var num = $(this).data('num');
             // 百度统计
-            window._hmt
-            && window._hmt.push(['_trackEvent', questionType, 'click']);
-            window._hmt
-            && window._hmt.push(['_trackEvent', questionType + '_' + $el.find('#channel').val() + '_' + num, 'click']);
         });
         // 触屏时底色变更
         var timeOutEvent = 0;
@@ -1131,7 +1130,7 @@ define(function (require) {
             }
         });
         // 滚动时恢复白色底
-        $el.find(window).scroll(function (event) {
+        viewport.on('scroll', function (event) {
             longPress();
             event.stopPropagation();
         });
@@ -1219,8 +1218,9 @@ define(function (require) {
         //  开始咨询调用接口
         function startConsulting(questionType) {
             $.ajax({
-                url: 'greeting?questionType=' + questionType + '&_csrf=' + $el.find('#_csrf').val(),
+                url: 'greeting',
                 type: 'POST',
+                data: 'questionType=' + questionType + '&_csrf=' + $el.find('#_csrf').val(),
                 success: function (data) {
                     console.log(data);
                     if (data === 'ERROR' || data === 'ERROR1') {
@@ -1320,7 +1320,7 @@ define(function (require) {
         function controlScroll() {
             flg = $el.find('.background_kuang').css('display') !== 'none' ? 1 : 0;
         }
-        $el.find(window).scroll(function (a) {
+        viewport.on('scroll', function (a) {
             controlScroll();
             if (flg === 1) {
                 document.body.scrollTop = document.documentElement.scrollTop = 0;
@@ -1399,16 +1399,16 @@ define(function (require) {
                 startConsulting(questionType);
             }
             else {
-                window.top.location.href = 'mip_blank?questionType='
+                window.top.location.href = 'blank?questionType='
                     + questionType + '&channel=' + channel;
             }
         }
 
         function startConsulting(questionType) {
             $.ajax({
-                url: 'greeting?questionType=' + questionType
-                    + '&_csrf=' + $el.find('#_csrf').val(),
+                url: 'greeting',
                 type: 'POST',
+                data: 'questionType=' + questionType + '&_csrf=' + $el.find('#_csrf').val(),
                 success: function (data) {
                     console.log(data);
                     if (data === 'ERROR' || data === 'ERROR1') {
@@ -1443,6 +1443,9 @@ define(function (require) {
                 }
             });
         }
+        $el.find('#mycardandcoupons').click(function () {
+            window.top.location.href = 'mip_mycardandcoupons';
+        });
     };
 
     return customElement;

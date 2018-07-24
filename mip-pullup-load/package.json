@@ -1,6 +1,6 @@
 {
     "name": "mip-pullup-load",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "上拉加载分页",
     "contributors": [
         {

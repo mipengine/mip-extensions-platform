@@ -76,7 +76,8 @@ define(function (require) {
                 $.ajax({
                     async: true,
                     type: 'POST',
-                    url: 'updateUserPhoneNumber?phoneNumber=' + phone + '&smsCode=' + smsCode + '&_csrf=' + csrfToken,
+                    url: 'updateUserPhoneNumber',
+                    data: 'phoneNumber=' + phone + '&smsCode=' + smsCode + '&_csrf=' + csrfToken,
                     dataType: 'json',
                     success: function (data) {
                         if (data.code === 1) {

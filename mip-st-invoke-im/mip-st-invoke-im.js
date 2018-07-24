@@ -29,7 +29,9 @@ define(function (require) {
      */
     customElement.prototype.firstInviewCallback = function () {
         var element = this.element;
-        var appid = getQuery().id;
+        var key = element.getAttribute('data-query-id') || 'id';
+        var querys = getQuery();
+
         // 加载熊掌号sdk
         var script = document.createElement('script');
         script.onload = function () {
@@ -41,7 +43,7 @@ define(function (require) {
                 }
             });
         };
-        script.src = 'https://xiongzhang.baidu.com/sdk/c.js?appid=' + appid + '&timestamp=' + (+new Date());
+        script.src = 'https://xiongzhang.baidu.com/sdk/c.js?appid=' + querys[key] + '&timestamp=' + (+new Date());
         document.body.appendChild(script);
 
         var button = element.querySelector('button');

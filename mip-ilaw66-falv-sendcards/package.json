@@ -1,6 +1,6 @@
 {
     "name": "mip-ilaw66-falv-sendcards",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "通过判断激活状态跳转页面，表单验证",
     "contributors": [
         {

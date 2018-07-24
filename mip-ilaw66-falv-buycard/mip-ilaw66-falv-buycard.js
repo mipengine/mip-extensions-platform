@@ -4,7 +4,8 @@
  */
 
 define(function (require) {
-    var $ = require('zepto');
+    var $ = require('jquery');
+    // zepto不支持一些方法，如is,所以使用jquery
     var customElement = require('customElement').create();
 
     /**
@@ -72,9 +73,9 @@ define(function (require) {
 
         // 获取卡的数量
         var cardnum = $el.find('#wantbuynumber').val();
+        console.log(cardnum);
         $el.find('#wantbuynumber').val(parseInt(cardnum, 10));
         showBuystyles(cardnum);
-        console.log(cardnum);
         // 获取卡的id
         var id;
         var id = getQueryString(id);
@@ -173,9 +174,9 @@ define(function (require) {
             else {
                 // 非微信环境
                 $.ajax({
-                    url: 'lawyerCard/buy?productJson=' + JSON.stringify(productJsonarr)
-                    + '&_csrf=' + $el.find('#_csrf').val(),
+                    url: 'lawyerCard/buy',
                     type: 'POST',
+                    data: 'productJson=' + JSON.stringify(productJsonarr) + '&_csrf=' + $('#_csrf').val(),
                     success: function (data) {
                         var orderId = data;
                         window.top.location.href = 'mip_cash_pay?orderId=' + orderId + '&id=' + id;
@@ -206,7 +207,6 @@ define(function (require) {
             if (r != null) {
                 return unescape(r[2]);
             }
-
             return null;
         }
 
@@ -253,7 +253,7 @@ define(function (require) {
         // 判断是否是微信环境
         function isWeiXin() {
             var ua = window.navigator.userAgent.toLowerCase();
-            if (ua.match(/MicroMessenger/i) === 'micromessenger') {
+            if (ua.match('/MicroMessenger/i') === 'micromessenger') {
                 return true;
             }
             else {
@@ -261,15 +261,6 @@ define(function (require) {
             }
         }
 
-        function getQueryString(name) {
-            var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
-            var r = window.location.search.substr(1).match(reg);
-            if (r != null) {
-                return unescape(r[2]);
-            }
-
-            return null;
-        }
         $el.find('#wantbuynumber').keypress(function () {
             return (/[\d.]/.test(String.fromCharCode(event.keyCode)));
         });

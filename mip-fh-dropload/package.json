@@ -1,0 +1,13 @@
+
+{
+    "name": "mip-fh-dropload",
+    "version": "1.0.0",
+	"description":"飞华健康网，下拉刷新组件",
+    "author": {
+        "name": "machenglong",
+        "email": "machenglong@fh21.com"
+    },
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

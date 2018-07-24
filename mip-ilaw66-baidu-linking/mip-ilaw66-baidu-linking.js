@@ -9,7 +9,7 @@ define(function (require) {
     var customElement = require('customElement').create();
 
     /**
-     * 第一次进入可视区回调，只会执行一次
+     * 备注：部分地方存在全局选择因为部分地方规则限定
      */
     customElement.prototype.firstInviewCallback = function () {
         var $el = $(this.element);
@@ -33,8 +33,9 @@ define(function (require) {
 
         if (tel) {
             // 加载的时候显示号码
-            $el.find('title').text('等待接通');
-            $el.find('div_header').text('等待接通');
+            // $el.find('title').text('等待接通');
+            $('title').text('等待接通');
+            $el.find('.div_header').text('等待接通');
             $el.find('.link_phone span').html(tel);
         }
         else {
@@ -117,7 +118,7 @@ define(function (require) {
                     var questionType = $el.find('#questionType').val();
                     var tp = getType(questionType);
                     if (tp && temp.lawyerField.indexOf(tp) >= 0) {
-                        $el.find('.linking_lawyerField').text(questionType);
+                        $el.find('.linking_lawyerField').text(tp);
                     }
                     else {
                         $el.find('.linkingconntentnotel tr:nth-child(1) td:nth-child(1)').hide();
@@ -304,16 +305,18 @@ define(function (require) {
         function backToUnusual() {
             $el.find('.link_middle').hide();
             $el.find('.link_bottom').hide();
-            $el.find('title').text('服务完成');
-            $el.find('div_header').text('服务完成');
+            // $el.find('title').text('服务完成');
+            $('title').text('服务完成');
+            $el.find('.div_header').text('服务完成');
             $el.find('#pop_consulationEnd').show();
             $el.find('.outOfUnusual').show();
             $el.find('.inOfUnusual').hide();
         }
         function settime() {
             $el.find('.linkingDom').hide();
-            $el.find('title').text('服务完成');
-            $el.find('div_header').text('服务完成');
+            // $el.find('title').text('服务完成');
+            $('title').text('服务完成');
+            $el.find('.div_header').text('服务完成');
             $el.find('#pop_consulationEnd').show();
         }
         function gobackHandle() {

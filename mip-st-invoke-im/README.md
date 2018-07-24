@@ -13,7 +13,16 @@ mip-st-invoke-im 组件说明
 
 ### 基本用法
 ```html
-<mip-st-invoke-im>
+<mip-st-invoke-im data-query-id="id">
     <button >联系客服</button>
 </mip-st-invoke-im>
 ```
+
+## 属性
+
+### data-query-id
+
+说明：从当前页面url中获取熊掌号id的查询字段名称
+必选项：否
+类型：string
+默认值：'id'
