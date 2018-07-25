@@ -150,9 +150,9 @@ define(function (require) {
                         + '</div>'
                         + '<div class="orderlist__status">'
                         + '<div class="order_info">'
-                        + '<p>联系方式：' + data.userPhone + '</p>'
+                        + '<p>联系方式：' + data.lawyerPhone + '</p>'
                         + '<p>咨询️时间: ' + timestampToTime(data.consultingTime) + '</p>'
-                        + '<p>订单金额：' + data.defaultPrice + ' 元</p>'
+                        + '<p>订单金额：' + data.totalAmount + ' 元</p>'
                         + '</div>'
                         + '</div>';
                     $el.find('#orderInfo').html(

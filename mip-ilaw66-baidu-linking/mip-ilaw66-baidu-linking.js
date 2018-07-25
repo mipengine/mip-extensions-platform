@@ -47,7 +47,7 @@ define(function (require) {
         getInfo(); // 加载头像等
 
         $el.find('.glyphicon').click(function () {
-            cancelRequestOr();
+            backLinkingOr();
         });
         $el.find('.js-gotoPay').click(function () { // 点击去支付按钮
             // 调用接口判断合并支付，传递requestId
@@ -121,11 +121,11 @@ define(function (require) {
                         $el.find('.linking_lawyerField').text(tp);
                     }
                     else {
-                        $el.find('.linkingconntentnotel tr:nth-child(1) td:nth-child(1)').hide();
+                        $el.find('.linking_lawyerFieldTxt').hide();
                         $el.find('.linking_lawyerField').hide();
                     }
                     if (!temp.serviceTimes || temp.serviceTimes === 0) {
-                        $el.find('.linkingconntentnotel tr:nth-child(1) td:nth-child(2)').hide();
+                        $el.find('.linking_serviceTimesTxt').hide();
                         $el.find('.linking_serviceTimes').hide();
                     }
                     else {
@@ -244,62 +244,72 @@ define(function (require) {
                 });
             }
         }
-        function cancelRequestOr() {
-            $.ajax({
-                url: 'cancelRequest?requestId=' + timerRequestId + '&_csrf=' + $el.find('#_csrf').val(),
-                type: 'POST',
-                success: function (data) {
-                    clearInterval(t1);
-                    var title = '';
-                    var main = '律师正在联系你，若不想咨询，可接通后礼貌告知律师，1分钟内结束咨询不计费。';
-                    var yes = '离开本页';
-                    var no = '礼貌等待';
-                    if (data === 'NG') {
-                        if (!isback) {
+        function backLinkingOr() {
+            var title = '';
+            var main = '';
+            var yes = '离开本页';
+            var no = '';
+            if ($el.find('#pop_consulationEnd').css('display') !== 'none') {
+                main = '请支付律师辛苦费，若不支付费用则无法再次咨询律师';
+                no = '我知道了';
+                popBackOrMsg(title, main, yes, no, 0);
+            }
+            else {
+                main = '律师正在联系你，若不想咨询，可接通后礼貌告知律师，1分钟内结束咨询不计费。';
+                no = '礼貌等待';
+                $.ajax({
+                    type: 'GET',
+                    url: 'timer?id=' + timerRequestId + '&lawyerId=' + lawyerId,
+                    dataType: 'json',
+                    success: function (data) {
+                        if (!data || data.status === 'ERROR') {
+                            alert(data.status);
+                            return;
                         }
-                        else {
-                            window.top.location.href = './';
-                            return false;
-                        }
-                        $el.find('.backOr_div .back__popLayer span:nth-of-type(1)').text(title);
-                        $el.find('.backOr_div .back__popLayer span:nth-of-type(2)').text(main);
-                        $el.find('.backOr_div .back__popLayer .back-leave').text(yes);
-                        $el.find('.backOr_div .back__popLayer .back-continue').text(no);
-                        $el.find('.backOr_div').show();
-                        $el.find('.backOr_div .back__popLayer .back-leave').click(function () {
-                            $el.find('.backOr_div').hide();
-                            gobackHandle();
-                        });
-                        $el.find('.backOr_div .back__popLayer .back-continue').click(function () {
-                            $el.find('.backOr_div').hide();
-                            t1 = setInterval(function () {
-                                fnDate();
-                            }, 1000);
-                        });
-                    }
-                    else if (data === 'OK') {
-                        $el.find('.toast_txt').text('取消成功');
-                        $el.find('.toast_div').show();
-                        setTimeout(function () {
-                            $el.find('.toast_div').hide();
-                            gobackHandle();
-                        }, 2000);
-                    }
-                    else {
-                    }
-                },
-                error: function (jqXHR) {
-                    if (jqXHR.status === 403) {
-                        window.location.reload();
-                    }
 
+                        var dataStatus = data.status;
+                        if (dataStatus === 5) { // 通话未结束
+                            popBackOrMsg(title, main, yes, no, dataStatus);
+                        }
+                        else if (dataStatus === 8) { // 无需付费
+                            gobackHandle();
+                        }
+                        else if (dataStatus === 6) { // >=60
+                            backToUnusual();
+                        }
+
+                    },
+                    error: function (jqXHR) {
+                        if (jqXHR.status === 403) {
+                            window.location.reload();
+                        }
+
+                    }
+                });
+            }
+        }
+        function popBackOrMsg(title, main, yes, no, status) {
+            $el.find('.backOr_div .back__popLayer span:nth-of-type(1)').text(title);
+            $el.find('.backOr_div .back__popLayer span:nth-of-type(2)').text(main);
+            $el.find('.backOr_div .back__popLayer .back-leave').text(yes);
+            $el.find('.backOr_div .back__popLayer .back-continue').text(no);
+            $el.find('.backOr_div').show();
+            $el.find('.backOr_div .back__popLayer .back-leave').click(function () {
+                $el.find('.backOr_div').hide();
+                if (status === 5) {
+                    gobackHandle();
                 }
+                else {
+                    window.top.location.href = './';
+                }
+            });
+            $el.find('.backOr_div .back__popLayer .back-continue').click(function () {
+                $el.find('.backOr_div').hide();
             });
         }
         function backToUnusual() {
             $el.find('.link_middle').hide();
             $el.find('.link_bottom').hide();
-            // $el.find('title').text('服务完成');
             $('title').text('服务完成');
             $el.find('.div_header').text('服务完成');
             $el.find('#pop_consulationEnd').show();
@@ -308,7 +318,6 @@ define(function (require) {
         }
         function settime() {
             $el.find('.linkingDom').hide();
-            // $el.find('title').text('服务完成');
             $('title').text('服务完成');
             $el.find('.div_header').text('服务完成');
             $el.find('#pop_consulationEnd').show();

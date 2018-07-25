@@ -1,0 +1,120 @@
+/**
+ * @file mip-pragnant-weight-height-calculator样式文件
+ */
+
+mip-dj-pragnant-weight-height-calculator {
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    .form {
+        border: 1px #efefef solid;
+        padding: 0 20px;
+
+        &__item {
+            border-bottom: 1px #efefef solid;
+            display: flex;
+
+            .item {
+                &__label {
+                    padding: 10px 0;
+                    color: #ababab;
+                    width: 40%;
+                }
+
+                &__value {
+                    flex: 1;
+
+                    .input-control {
+                        width: 100%;
+                        border: 0;
+                        padding: 10px 0;
+                        line-height: 20px;
+                        font-size: 14px;
+                        color: #ff6672;
+                    }
+              }
+            }
+
+            &:last-child {
+                border-bottom: 0;
+            }
+        }
+    }
+
+    .submit-wrapper {
+        padding: 30px 20px;
+
+        .calculate-btn {
+            text-align: center;
+            background: #ff6672;
+            color: #fff;
+            display: block;
+            border: 0;
+            padding: 10px;
+            width: 100%;
+            font-size: 14px;
+        }
+    }
+
+    .calculate-result-wrapper {
+        overflow: hidden;
+        height: 0;
+        margin-top: 10px;
+        transition: all .5s;
+
+        &--show {
+            height: 300px;
+        }
+    }
+
+    .calculate-result {
+        position: relative;
+
+        .result-bg {
+            border: 2px #ff6672 solid;
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            margin: 0 auto;
+        }
+
+        .result-data {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 100%;
+            text-align: center;
+            color: #ababab;
+            margin-top: -40px;
+            background: #ffffff;
+
+            p {
+                margin: 15px 0;
+
+                &.summary-wrapper {
+                    padding-bottom: 20px;
+                    margin-bottom: 20px;
+                    position: relative;
+                    margin-top: -40px;
+
+                    &::after {
+                        content: '';
+                        width: 170px;
+                        border-bottom: 1px #ababab dashed;
+                        position: absolute;
+                        left: 50%;
+                        bottom: 0;
+                        margin-left: -85px;
+                    }
+                }
+            }
+
+            .count {
+                color: #ff6672;
+            }
+        }
+    }
+}
