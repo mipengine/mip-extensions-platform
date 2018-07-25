@@ -15,7 +15,26 @@ define(function (require) {
         var $el = $(this.element);
         // 自动加载数据
         $el.find('#requestId').val(getQueryString('requestId'));
-        $el.find('#questionType').val(getQueryString('questionType'));
+        var paystart = getQueryString('payState');
+        if (paystart) {
+            $el.find('.payalert').show();
+        }
+
+        $el.find('#gohome').click(function () {
+            window.top.location.href = './';
+        });
+        $el.find('#cleardpayalert').click(function () {
+            $el.find('.payalert').hide();
+        });
+
+        $el.find('.headerlf5').click(function () {
+            if (paystart) {
+                window.top.location.href = './';
+            }
+            else {
+                window.history.go(-1);
+            }
+        });
         load();
 
         function getQueryString(name) {
@@ -93,7 +112,8 @@ define(function (require) {
                 url: 'selectOrderV1?id=' + requestId,
                 async: false,
                 success: function (data) {
-
+                    var qusetype = data.questionType;
+                    $el.find('#questionType').val(qusetype);
                     function orderStatusLabel(status, unpaidAmount) {
                         if (unpaidAmount === 0) {
                             return status;

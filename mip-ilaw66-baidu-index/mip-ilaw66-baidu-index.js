@@ -378,7 +378,7 @@ define(function (require) {
                             var tempMoreHtml = '';
                             tempMoreHtml += '<li><div class="total_user">'
                                 + '<mip-img src="tempbaidu/images/bab.png"></mip-img>'
-                                + '累积服务人数&nbsp;<i class="userTotalNum">'
+                                + '累计服务人数&nbsp;<i class="userTotalNum">'
                                 + numtransform(b.countAll) + ' </i> 人</div></li>';
                             tempMoreHtml += '<li><div class="total_user">'
                                 + '<mip-img src="tempbaidu/images/bab.png"></mip-img>'
@@ -389,7 +389,7 @@ define(function (require) {
                             //                              var tempMoreHtml = '';
                             //                              tempMoreHtml += '<li><div class="total_user">'
                             //                                  + '<mip-img src="tempbaidu/images/bab.png"></mip-img>'
-                            //                                  + '累积服务人数&nbsp;<i class="userTotalNum">'
+                            //                                  + '累计服务人数&nbsp;<i class="userTotalNum">'
                             //                                  + numtransform(b.countAll) + ' </i> 人</div></li>';
                             //                              tempMoreHtml += '<li><div class="total_user">'
                             //                                  + '<mip-img src="tempbaidu/images/bab.png"></mip-img>'
@@ -474,7 +474,7 @@ define(function (require) {
                             //                                  var tempMoreHtml = '';
                             //                                  tempMoreHtml += '<li><div class="total_user">'
                             //                                      + '<mip-img  src="tempbaidu/images/bab.png"></mip-img >'
-                            //                                      + '累积服务人数&nbsp;<i class="userTotalNum">'
+                            //                                      + '累计服务人数&nbsp;<i class="userTotalNum">'
                             //                                      + numtransform(b.countAll) + ' </i> 人 </div></li>';
                             //                                  tempMoreHtml += '<li><div class="total_user">'
                             //                                      + '<mip-img  src="tempbaidu/images/bab.png"></mip-img >'

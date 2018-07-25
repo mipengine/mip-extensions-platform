@@ -83,6 +83,15 @@ mip-ilaw66-baidu-order 组件说明
           </div>
         </div>
       </div>
+      	<div class=" payalert" >
+					<div class="talking_result text-center">
+						<p><mip-img  layout="responsive" width="20px" height="20px" src="tempbaidu/images/payok.png"></mip-img>支付成功</p>
+						<div class="link_btn">
+							<span id="gohome">再次提问</span>
+							<span id="cleardpayalert" >查看订单</span>
+						</div>
+					</div>
+				</div>
       <div class="popUp_unpaidErr">
         <div class="talking_result text-center">
           <h4>温馨提示</h4>

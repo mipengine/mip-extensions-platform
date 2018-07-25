@@ -3,6 +3,7 @@
  * @author cxtom(cxtom2008@gmail.com)
  */
 
+/* global MIP */
 /* eslint-disable no-var */
 
 define(function (require) {
@@ -124,6 +125,7 @@ define(function (require) {
         if (!Bdbox.isBox
             || (platform.isIos() && Bdbox.versionCompare(Bdbox.version, '9.2') < 0)
             || (platform.isAndroid() && Bdbox.versionCompare(Bdbox.version, '9.1') < 0)
+            || (MIP.hash && MIP.hash.get && MIP.hash.get('from') === '')
         ) {
             return;
         }

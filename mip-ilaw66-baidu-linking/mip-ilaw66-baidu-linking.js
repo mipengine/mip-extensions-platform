@@ -278,18 +278,12 @@ define(function (require) {
                         });
                     }
                     else if (data === 'OK') {
-                        $el.find('.backOr_div .back__popLayer span:nth-of-type(1)').text(title);
-                        $el.find('.backOr_div .back__popLayer span:nth-of-type(2)').text(main);
-                        $el.find('.backOr_div .back__popLayer .back-leave').text(yes);
-                        $el.find('.backOr_div .back__popLayer .back-continue').text(no);
-                        $el.find('.backOr_div').show();
-                        $el.find('.backOr_div .back__popLayer .back-leave').click(function () {
-                            $el.find('.backOr_div').hide();
-                            window.top.location.href = './';
-                        });
-                        $el.find('.backOr_div .back__popLayer .back-continue').click(function () {
-                            $el.find('.backOr_div').hide();
-                        });
+                        $el.find('.toast_txt').text('取消成功');
+                        $el.find('.toast_div').show();
+                        setTimeout(function () {
+                            $el.find('.toast_div').hide();
+                            gobackHandle();
+                        }, 2000);
                     }
                     else {
                     }

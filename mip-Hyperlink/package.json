@@ -1,0 +1,14 @@
+{
+    "name": "mip-Hyperlink",
+    "version": "1.0.0",
+    "description": "超链接",
+    "contributors": [
+        {
+            "name": "张世元",
+            "email": "1171326259@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

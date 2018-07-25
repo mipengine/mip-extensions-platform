@@ -35,22 +35,22 @@ define(function (require) {
             case 'T01':
                 // 畅聊卡
                 $el.find('.yearcard-price').removeClass().addClass('chatingcard-price');
-                $el.find('.topbg>img:nth-of-type(1)').attr('src', 'images/T01_bg.jpg');
+                $el.find('.topbg img:nth-of-type(1)').attr('src', 'images/T01_bg.jpg');
                 break;
             case 'T02':
                 // 年卡
-                $el.find('.topbg>img:nth-of-type(1)').attr('src', 'images/buybaonian.jpg');
+                $el.find('.topbg img:nth-of-type(1)').attr('src', 'images/buybaonian.jpg');
                 break;
 
             case 'T0201':
                 // 无忧
                 $el.find('.yearcard-price').removeClass().addClass('wuyou-price');
-                $el.find('.topbg>img:nth-of-type(1)').attr('src', 'images/cardInfo_wuyou.png');
-                $el.find('.topbg>img:nth-of-type(2)').attr('src', 'images/cardInfo_wuyou1.png');
-                $el.find('.topbg>img:nth-of-type(3)').attr('src', 'images/cardInfo_wuyou2.png');
-                $el.find('.topbg>img:nth-of-type(4)').attr('src', 'images/cardInfo_wuyou3.png');
-                $el.find('.topbg>img:nth-of-type(5)').attr('src', 'images/cardInfo_wuyou4.png');
-                $el.find('.topbg>img:nth-of-type(6)').attr('src', 'images/cardInfo_wuyou5.png');
+                $el.find('.topbg img:nth-of-type(1)').attr('src', 'images/cardInfo_wuyou.png');
+                $el.find('.topbg img:nth-of-type(2)').attr('src', 'images/cardInfo_wuyou1.png');
+                $el.find('.topbg img:nth-of-type(3)').attr('src', 'images/cardInfo_wuyou2.png');
+                $el.find('.topbg img:nth-of-type(4)').attr('src', 'images/cardInfo_wuyou3.png');
+                $el.find('.topbg img:nth-of-type(5)').attr('src', 'images/cardInfo_wuyou4.png');
+                $el.find('.topbg img:nth-of-type(6)').attr('src', 'images/cardInfo_wuyou5.png');
                 break;
             case 'T0208':
             case 'T0209':
@@ -66,7 +66,7 @@ define(function (require) {
             case 'T0401':
             case 'T0402':
             case 'T0403':
-                $el.find('.topbg>img:nth-of-type(1)').attr('src', 'images/icon' + typeOfCard + '.png');
+                $el.find('.topbg img:nth-of-type(1)').attr('src', 'images/icon' + typeOfCard + '.png');
                 break;
 
         }

@@ -4,8 +4,9 @@
  */
 
 define(function (require) {
-    var $ = require('zepto');
-
+    var $ = require('jquery');
+    // 因为有些方法zepto不支持，比如is，所以有些需要使用jquery
+    var viewport = require('viewport');
     var customElement = require('customElement').create();
     customElement.prototype.firstInviewCallback = function () {
         var $el = $(this.element);
@@ -29,7 +30,7 @@ define(function (require) {
                 var e = event || window.event;
                 var t = e.target || e.srcElement;
                 if (t.tagName.toLowerCase() === 'a') {
-                    return parseInt(t.innerHTML, 16);
+                    return parseInt(t.innerHTML, 10);
                 }
             }
 
@@ -120,7 +121,7 @@ define(function (require) {
 + '<div class="back__popLayer__toast">' + '<span>'
 + This.option.main + '</span>' + '</div>' + '</div>';
                 This.body.append(This.main);
-                This.ToastUp = $('.ToastUp');
+                This.ToastUp = This.body.find('.ToastUp');
                 This.ToastUp.show();
             },
             bindEvent: function () {
@@ -193,11 +194,12 @@ define(function (require) {
         //   $el.find('.star_block').raty({
         //       score : 0
         //   });
-        var wH = $(window).height();
+        var wW = viewport.getWidth();
+        var wH = viewport.getHeight();
         $('body').css('height', wH + 'px');
         //  订单管理
         $el.find('.backfirst-list-alt').click(function () {
-            window.top.location.href = 'orderlist';
+            window.top.location.href = 'mip_orderlist';
         });
 
         $el.find('.link_btn_sysErrConfirm').click(function () {
@@ -297,7 +299,7 @@ define(function (require) {
             if (statueVal < 1) {
                 toastOr('请您评价律师服务');
             } else {
-                var csrfToken = $el.find('#csrf').val();
+                var csrfToken = $el.find('#_csrf').val();
                 var requestId = $el.find('#requestId').val();
                 var questionType = $el.find('#questionType').val();
                 var starLevel = statueVal;
@@ -308,11 +310,11 @@ define(function (require) {
                 if (type) {
                     url = 'addReviewV3?requestId=' + requestId + '&applyLawyer=' + applyLawyer
 + '&comment=' + comment + '&starLevel=' + starLevel + '&lawyerLebel=' + lawyerLebel
-+ '&questionType=' + questionType + '&csrf=' + csrfToken + '&type=' + type;
++ '&questionType=' + questionType + '&_csrf=' + csrfToken + '&type=' + type;
                 } else {
                     url = 'addReviewV3?requestId=' + requestId + '&applyLawyer='
 + applyLawyer + '&comment=' + comment + '&starLevel=' + starLevel + '&lawyerLebel='
-+ lawyerLebel + '&questionType=' + questionType + '&csrf=' + csrfToken;
++ lawyerLebel + '&questionType=' + questionType + '&_csrf=' + csrfToken;
                 }
                 gotoCommitCommentMsg(url, requestId);
             }
