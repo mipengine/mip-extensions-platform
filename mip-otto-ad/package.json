@@ -1,0 +1,14 @@
+{
+    "name": "mip-otto-ad",
+    "version": "1.0.0",
+    "description": "网校首页轮播图",
+    "contributors": [
+        {
+            "name": "xinbao",
+            "email": "fa@ijust.cc"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

@@ -14,6 +14,7 @@ mip-linktion-city 级联城市组件
 <mip-linktion-city id="city" data-login=false>
 <!-- search的弹框 -->
 <a on="tap:select-city.toggle tap:city.open" id="btn-open" role="button" class="city-pop-btn" href="javascrpt:;" tabindex="0" data-domain="http://47.100.7.250:8080" data-submiturl="http://47.100.7.250:8080/city"><i class="fa fa-map-marker"></i><p class="tre-location-txt">北京/海淀</p></a>
+<button id="btn">btn</button>
 <a href="javascript:;" on="tap:select-city-phone.toggle tap:city.open" data-domain="http://47.100.7.250:8080" data-submitUrl="http://47.100.7.250:8080/city" id="phone-btn-open" role="button" class="city-pop-btn" href="javascrpt:;"tabindex="0" class="phone-clientele-head">北京/海淀 -phone</a>
 <!-- 选城市弹框 -->
   <mip-lightbox id="select-city" layout="nodisplay" class="mip-hidden">

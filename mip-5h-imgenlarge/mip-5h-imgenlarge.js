@@ -22,6 +22,8 @@ define(function (require) {
             var myimgurl = $(this).attr('src');
             var myihao = myimgurl.split('_')[0];
             var format = myimgurl.split('_')[2].split('.')[1];
+            myihao = myihao.replace('pic1.5h.com/5h/mb', 'm.5h.com');
+            console.log(myihao);
             $(this).attr({'data-index': i, 'data-original': myihao + '.' + format});
         });
         var ui = {

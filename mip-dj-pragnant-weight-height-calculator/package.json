@@ -1,6 +1,6 @@
 {
     "name": "mip-dj-pragnant-weight-height-calculator",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "基于孕妇的身高和体重，计算出孕前标准体重、孕前肥胖度、肥胖度BMI、安产理想体重。",
     "contributors": [
         {

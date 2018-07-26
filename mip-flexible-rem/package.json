@@ -1,0 +1,14 @@
+{
+    "name": "mip-flexible-rem",
+    "version": "1.0.0",
+    "description": "移动端自适应组件",
+    "contributors": [
+        {
+            "name": "mip-flexible-rem",
+            "email": "924796663@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

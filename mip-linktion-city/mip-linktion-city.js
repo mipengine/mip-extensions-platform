@@ -5,7 +5,8 @@
 
 define(function (require) {
     'use strict';
-    var $ = require('jquery');
+    var $ = require('zepto');
+
     var customElement = require('customElement').create();
     var viewer = require('viewer');
 
@@ -23,18 +24,20 @@ define(function (require) {
             if ($el.data('login') === false) {
                 $el.find('#btn-open')[0].click();
                 if ($(window).width() < 768) {
-                    $el.find('#phone-btn-open').trigger('tap');
+                    $el.find('#phone-btn-open')[0].addEventListener('click', function (event) {
+                        viewer.eventAction.execute('tap', event.target, event);
+                    });
+                    $el.find('#phone-btn-open')[0].click();
                 }
-            };
+            }
         }, 45000);
         this.addEventAction('open', function (event) {
             function initLocationData(locationClass, id) {
                 var domain = $el.find('.city-pop-btn').data('domain');
                 var url = domain + '/common/city/' + id + '/group';
-                $.ajax({
-                    type: 'get',
-                    url: url
-                }).done(function (datas) {
+                fetch(url).then(function (res) {
+                    return res.json();
+                }).then(function (datas) {
                     var data = '';
                     if (datas) {
                         // 移动端城市js
@@ -45,6 +48,20 @@ define(function (require) {
                         puloadData(data.AG, data.HK, data.LS, data.TZ, locationClass);
                     }
                 });
+                // $.ajax({
+                //     type: 'get',
+                //     url: url
+                // }).done(function (datas) {
+                //     var data = '';
+                //     if (datas) {
+                //         // 移动端城市js
+                //         data = datas.data.cities;
+                //         initPhone(data.AG, data.HK, data.LS, data.TZ, locationClass);
+                //         // pc端城市js
+                //         uploadPcData(data.AG, data.HK, data.LS, data.TZ, locationClass);
+                //         puloadData(data.AG, data.HK, data.LS, data.TZ, locationClass);
+                //     }
+                // });
             }
             initLocationData('province', 0);
             $el.find('#city-tab').on('click', function () {
@@ -224,13 +241,24 @@ define(function (require) {
                             var areasubmitUrl = $el.find('.city-pop-btn').data('submiturl');
                             var bodya =  {cityId: areaid};
                             window.location.reload();
-                            $.ajax({
-                                type: 'post',
-                                url: areasubmitUrl,
-                                data: bodya
-                            }).done(function (data) {
-                                if (data) {
-                                    $el.find('.load-mask').show();
+                            // $.ajax({
+                            //     type: 'post',
+                            //     url: areasubmitUrl,
+                            //     data: bodya
+                            // }).done(function (data) {
+                            //     if (data) {
+                            //         $el.find('.load-mask').show();
+                            //     }
+                            // });
+                            fetch(areasubmitUrl, {method: 'post',
+                            body: JSON.stringify(bodya)}).then(function (res) {
+                                return res.json();
+                            }).then(function (datas) {
+                                var data = '';
+                                if (datas) {
+                                    if (data) {
+                                        $el.find('.load-mask').show();
+                                    }
                                 }
                             });
                         }
@@ -251,13 +279,24 @@ define(function (require) {
                                 var citySubmitUrl = $el.find('.city-pop-btn').data('submiturl');
                                 var bodyc = {cityId: pcareacityid};
                                 window.location.reload();
-                                $.ajax({
-                                    type: 'post',
-                                    url: citySubmitUrl,
-                                    data: bodyc
-                                }).done(function (data) {
-                                    if (data) {
-                                        $el.find('.load-mask').show();
+                                // $.ajax({
+                                //     type: 'post',
+                                //     url: citySubmitUrl,
+                                //     data: bodyc
+                                // }).done(function (data) {
+                                //     if (data) {
+                                //         $el.find('.load-mask').show();
+                                //     }
+                                // });
+                                fetch(citySubmitUrl, {method: 'post',
+                                body: JSON.stringify(bodyc)}).then(function (res) {
+                                    return res.json();
+                                }).then(function (datas) {
+                                    var data = '';
+                                    if (datas) {
+                                        if (data) {
+                                            $el.find('.load-mask').show();
+                                        }
                                     }
                                 });
                             }
@@ -278,13 +317,24 @@ define(function (require) {
             }
             function ajaxUpload(submiturl, bodyData) {
                 $el.find('.load-mask').show();
-                $.ajax({
-                    type: 'post',
-                    url: submiturl,
-                    data: bodyData
-                }).done(function (data) {
-                    if (data) {
-                        window.location.reload();
+                // $.ajax({
+                //     type: 'post',
+                //     url: submiturl,
+                //     data: bodyData
+                // }).done(function (data) {
+                //     if (data) {
+                //         window.location.reload();
+                //     }
+                // });
+                fetch(submiturl, {method: 'post',
+                body: JSON.stringify(bodyData)}).then(function (res) {
+                    return res.json();
+                }).then(function (datas) {
+                    var data = '';
+                    if (datas) {
+                        if (data) {
+                            window.location.reload();
+                        }
                     }
                 });
             }
