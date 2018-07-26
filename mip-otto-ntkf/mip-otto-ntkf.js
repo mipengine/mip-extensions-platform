@@ -7,6 +7,7 @@ define(function (require) {
     var util = require('util');
     var Gesture = util.Gesture;
     var customElement = require('customElement').create();
+    var fetchJsonp = require('fetch-jsonp');
 
     customElement.prototype.build = function () {
 
@@ -23,16 +24,33 @@ define(function (require) {
                 myHead.appendChild(myScript);
             }
         }
-
         var siteid = element.getAttribute('siteid') || 'kf_9009';
         var settingid = element.getAttribute('kfid') || 'kf_9009_1497510869857';
+        var sign = element.getAttribute('sign');
+        if (sign) {
+            var url = 'http://wap.wangxiao.cn/Pub/GetNtalkerSettingIdBySign?sign=' + sign;
+            fetchJsonp(url, {
+                jsonpCallbackFunction: 'cb'
+            }).then(function (res) {
+                return res.json();
+            }).then(function (data) {
+                if (data.ResultCode === 0) {
+                    NTKF_PARAM.settingid = data.Data.NtalkerSettingId;
+                }
+
+            });
+        }
+        else {
+            NTKF_PARAM.settingid = settingid;
+        }
         var NTKF_PARAM = {
             siteid: siteid,
-            settingid: settingid,
             uid: '',
             uname: '',
             userlevel: '0'
         };
+        // 新增接口的逻辑
+
         var script4kf = document.createElement('script');
         script4kf.text = 'var NTKF_PARAM =' + JSON.stringify(NTKF_PARAM);
         script4kf.type = 'text/javascript';

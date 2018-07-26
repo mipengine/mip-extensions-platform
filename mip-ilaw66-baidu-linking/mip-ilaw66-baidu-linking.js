@@ -33,7 +33,6 @@ define(function (require) {
 
         if (tel) {
             // 加载的时候显示号码
-            // $el.find('title').text('等待接通');
             $('title').text('等待接通');
             $el.find('.div_header').text('等待接通');
             $el.find('.link_phone span').html(tel);
@@ -133,7 +132,7 @@ define(function (require) {
                     }
 
                     if (temp.authorizedNo) {
-                        $el.find('.linkingconntent_lawyerid').text(temp.authorizedNo);
+                        $el.find('.linkingconntent_lawyerid').text('律师执业证号：' + temp.authorizedNo);
                     }
                     else {
                         $el.find('.linkingconntent_lawyerid').hide();
@@ -268,14 +267,13 @@ define(function (require) {
                         }
 
                         var dataStatus = data.status;
-                        if (dataStatus === 5) { // 通话未结束
-                            popBackOrMsg(title, main, yes, no, dataStatus);
-                        }
-                        else if (dataStatus === 8) { // 无需付费
+                        if (dataStatus === 8) { // 无需付费
                             gobackHandle();
                         }
                         else if (dataStatus === 6) { // >=60
                             backToUnusual();
+                        } else {
+                            popBackOrMsg(title, main, yes, no, dataStatus);
                         }
 
                     },

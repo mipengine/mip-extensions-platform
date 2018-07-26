@@ -199,6 +199,9 @@ define(function (require) {
                     if (data === 'NG') {
                         $el.find('.toast_txt').text('取消晚了，律师正在联系您');
                         $el.find('.toast_div').show();
+                        setTimeout(function () {
+                            $el.find('.toast_div').hide();
+                        }, 2000);
                     }
                     else if (data === 'OK') {
                         pauseAnimation();

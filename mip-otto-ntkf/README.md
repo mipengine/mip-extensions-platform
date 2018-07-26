@@ -13,7 +13,10 @@ mip-otto-ntkf 用来支持网校小能客服咨询功能
 ### 基本用法
 
 ```html
-<mip-otto-ntkf siteid="kf_9009" kfid="kf_9009_1497510869857">咨询客服</mip-otto-ntkf>
+<script>
+
+</script>
+<mip-otto-ntkf sign="cfe">咨询客服</mip-otto-ntkf>
 ```
 
 ## 属性
@@ -34,6 +37,15 @@ mip-otto-ntkf 用来支持网校小能客服咨询功能
 默认值："kf_9009_1497510869857"
 使用限制: 如果其他网站调用，务必添加专属 `kfid`
 
+### sign
+
+说明: 课程sign值
+必选项：否
+类型：字符串
+默认值：""
+使用限制: 定制使用
+
 ## 注意事项
 
 1. 本插件定制使用，其他网站调用务必添加 `siteid`，`kfid` 属性
+2. sign 调用网站接口，`sign` 比 `kfid` 权重高
