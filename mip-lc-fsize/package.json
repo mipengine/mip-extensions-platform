@@ -1,0 +1,14 @@
+{
+    "name": "mip-lc-fsize",
+    "version": "1.0.0",
+    "description": "手机适配js",
+    "contributors": [
+        {
+            "name": "songxd",
+            "email": "songxd2012@126.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

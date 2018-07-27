@@ -1,0 +1,14 @@
+{
+    "name": "mip-3h3-all",
+    "version": "1.0.0",
+    "description": "3h3组件",
+    "contributors": [
+        {
+            "name": "wky",
+            "email": "493886562@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

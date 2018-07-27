@@ -1,0 +1,12 @@
+{
+    "name": "mip-ilaw66-xzh-index",
+    "version": "1.0.0",
+    "description": "法率网首页",
+    "contributors": [{
+        "name": "jessli",
+        "email": "306651535@qq.com"
+    }],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "name": "mip-ilaw66-xzh-couponPay",
+    "version": "1.0.3",
+    "description": "百度支付页",
+    "contributors": [
+        {
+            "name": "skylyth",
+            "email": "skylyth@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

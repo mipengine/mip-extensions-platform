@@ -1,0 +1,14 @@
+{
+    "name": "mip-ilaw66-xzh-noresponse",
+    "version": "1.0.0",
+    "description": "无人应答页面",
+    "contributors": [
+        {
+             "name": "skylyth",
+            "email": "skylyth@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
