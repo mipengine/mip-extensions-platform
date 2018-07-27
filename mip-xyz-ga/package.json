@@ -1,0 +1,14 @@
+{
+    "name": "mip-xyz-ga",
+    "version": "1.0.0",
+    "description": "新一站GA统计组件",
+    "contributors": [
+        {
+            "name": "guanweisong",
+            "email": "307761682@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "name": "mip-xyz-toggle-class",
+    "version": "1.0.0",
+    "description": "新一站Toggle Class组件",
+    "contributors": [
+        {
+            "name": "guanweisong",
+            "email": "307761682@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
