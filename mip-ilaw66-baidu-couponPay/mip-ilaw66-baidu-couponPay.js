@@ -1,5 +1,5 @@
 /**
- * @file mip-couponPay 组件
+ * @file mip-ilaw66-baidu-couponPay 组件
  * @author
  */
 
@@ -29,14 +29,14 @@ define(function (require) {
         // 如果是微信登入,获取微信验证code
         var code = getQueryString('code');
 
-        $el.find('.glyphicon-menu-left').on('click', function () {
+        $el.find('.glyphicon-menu-left').click(function () {
             $el.find('.back__pop').show();
             // “狠心离开”按钮回到首页
-            $el.find('#js-back-leave').on('click', function () {
+            $el.find('#js-back-leave').click(function () {
                 window.top.location.href = './';
             });
             // “继续支付”按钮事件
-            $el.find('#js-back-continue').on('click', function () {
+            $el.find('#js-back-continue').click(function () {
                 $el.find('#back__pop').hide();
             });
         });
@@ -60,7 +60,7 @@ define(function (require) {
         });
 
         // 支付订单详情页，点击刷新
-        $el.find('.freshOrder').on('click', function () {
+        $el.find('.freshOrder').click(function () {
             checkTalking(requestId);
         });
 
@@ -135,7 +135,7 @@ define(function (require) {
                             window.top.location.href = data.cashier_url;
                         }
                         else {
-                            //                              toastOr('报错了，请稍后尝试，或者联系客服');
+                            alert('报错了，请稍后尝试，或者联系客服');
                         }
 
                     },
@@ -331,17 +331,17 @@ define(function (require) {
                 });
             });
             // 点击遮罩层关闭弹窗及遮罩层
-            $el.find('#js-layer__wrapper').on('click', function () {
+            $el.find('#js-layer__wrapper').click(function () {
                 $el.find('#pay__pop').hide();
 
             });
 
             // 点击遮罩层关闭弹窗及遮罩层
-            $el.find('.layer__wrapper').on('click', function () {
+            $el.find('.layer__wrapper').click(function () {
                 $el.find('#back__pop').hide();
             });
 
-            $el.find('#js-pay-btn-success').on('click', function () {
+            $el.find('#js-pay-btn-success').click(function () {
                 if (channel === 'cmbc') {
                     $.ajax({
                         type: 'GET',
@@ -373,7 +373,7 @@ define(function (require) {
                 }
 
             });
-            $el.find('#js-pay-btn-fail').on('click', function () {
+            $el.find('#js-pay-btn-fail').click(function () {
                 $el.find('.pay__popUp_fail').hide();
                 window.top.location.href = 'orderlist';
             });

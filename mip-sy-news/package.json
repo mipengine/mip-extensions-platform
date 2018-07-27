@@ -1,0 +1,15 @@
+{
+    "name": "mip-sy-news",
+    "version": "1.0.0",
+    "description": "mip-sy-news 用来 MIP页面推送消息功能，并与用户互动 ",
+    "contributors": [
+        {
+            "name": "sy",
+            "email": "18076106705@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
+

@@ -1,0 +1,14 @@
+{
+    "name": "mip-sy-rem",
+    "version": "1.0.0",
+    "description": "mip-sy-rem 用来支持rem弹性布局的字体设置 ",
+    "contributors": [
+        {
+            "name": "sy",
+            "email": "18076106705@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

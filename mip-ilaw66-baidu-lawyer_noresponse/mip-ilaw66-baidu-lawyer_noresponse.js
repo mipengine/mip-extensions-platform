@@ -47,7 +47,7 @@ define(function (require) {
             var fromChannel = localStorage.getItem('fromChannel');
             var currentHours = new Date().getHours();
 
-            if (currentHours <= 8 && currentHours >= 23) {
+            if (currentHours <= 8 || currentHours >= 23 || currentHours === 0) {
                 // 非工作时间
                 // 应 修改
                 $el.find('#js-continueAsk').hide();

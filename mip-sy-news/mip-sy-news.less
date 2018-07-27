@@ -1,0 +1,44 @@
+/**
+ * @file mip-sy-news样式文件
+ */
+
+mip-sy-news {
+    // TODO
+    @color: #fff;
+    @color1: #000;
+    .weixinRootBz {
+        display:none;
+        transition:display 10s;
+        -moz-transition:display 10s; /* Firefox 4 */
+        -webkit-transition:display 10s; /* Safari and Chrome */
+        -o-transition:display 10s; /* Opera */
+        .lvsu_tuisong {
+            max-width: 640px;
+            margin: 0 auto;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            margin-left:auto;
+            margin-right:auto;
+            background: @color1;
+            opacity: .5;
+            -webkit-opacity: .5;
+            -moz-opacity: .5;
+            color:@color;
+            height:8vh;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1020000000;
+            .lvsu_tuisong_left {
+                background-size:100% 100% !important;
+                margin-right:4vw;
+            }
+            .lvsu_tuisong_right {
+                width:80%;
+            }
+        }
+    }	
+
+}
