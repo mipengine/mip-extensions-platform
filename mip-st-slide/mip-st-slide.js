@@ -507,5 +507,9 @@ define(function (require) {
         touchSlide(Data);
     };
 
+    customElement.prototype.prerenderAllowed = function () {
+        return true;
+    };
+
     return customElement;
 });

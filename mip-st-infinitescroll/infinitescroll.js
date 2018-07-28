@@ -58,7 +58,7 @@ define(function (require) {
             me._horizontalHack();
 
             // 处理loading区域内容
-            me.options.$loading.html(me.options.loadingHtml);
+            // me.options.$loading.html(me.options.loadingHtml);
             // 如果firstResult存在,同步加载第0页内容
             if (me.options.firstResult.length) {
                 me.scrollPageCache.content = me.scrollPageCache.content.concat(me._separatePage(me.options.firstResult));
@@ -242,6 +242,15 @@ define(function (require) {
                 var dataDeferred = me.options.pushResult.call(me, (dn + 1) * me.options.pageResultNum, dn - pn);
                 // 标记数据状态为请求中
                 me.dataStatus = 2;
+                // 首屏有动画，二屏加载无加载动画
+                // pn先是0，dn是-1，数据加载回来dn变为0，所以首屏用dn < 0 判断
+                // console.log(pn, dn);
+                if (dn < 0) {
+                    me.options.$loading.html(me.options.loadingHtml);
+                }
+                else {
+                    me.options.$loading.html('<div style="height: 40px;text-align:center;color:#aaa;border-top: solid 1px #eee;padding-top: 10px;">加载中…</div>');
+                }
                 $.when(dataDeferred).then(
                     // 成功
                     function (newResultArr) {

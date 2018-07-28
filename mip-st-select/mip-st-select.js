@@ -15,6 +15,7 @@ define(function (require) {
 
     function getQuery(url) {
         url = url || location.href;
+        url = url.split('#')[0];
         var query = url.split('?')[1] || '';
         if (!query) {
             return {};
@@ -41,7 +42,7 @@ define(function (require) {
                     html += '<div class="st-tag-wrapper' + (key === value ? ' selected' : '') + '" key="' + key + '">';
                     html += '   <div class="st-tag" key="' + key + '">';
                     html += '       <span class="st-tag-text">' + tag.text + '</span>';
-                    html += '       <span class="st-tag-count">(' + tag.count + ')</span>';
+                    html += '       <span class="st-tag-count">' + tag.count + '</span>';
                     html += '   </div>';
                     html += '</div>';
                 }
@@ -63,14 +64,20 @@ define(function (require) {
             }
 
             wrapper.classList.add('selected');
-            history.replaceState('', null,
-                location.origin
+            var url = location.origin
                 + location.pathname
-                + location.search.replace(/tag=\w+/, 'tag=' + currentKey)
-            );
+                + location.search.replace(/tag=\w+/, 'tag=' + currentKey);
+            if (!/tag=/.test(url)) {
+                url = url.replace('?', '?tag=' + currentKey + '&');
+            }
+            history.replaceState('', null, url);
             // location.hash = '#tag=' + currentKey;
             viewer.eventAction.execute('tagchange', element);
         });
+    };
+
+    customElement.prototype.prerenderAllowed = function () {
+        return true;
     };
 
     return customElement;

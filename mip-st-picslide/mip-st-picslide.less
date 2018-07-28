@@ -5,6 +5,11 @@
 mip-st-picslide {
     .inner {
         position: fixed;
+        z-index: 999999;
+        // 这里虽然有bottom:0，但是有些浏览器下是无法拉开的，需要再写height: 100%
+        // 如下浏览器有这个bug: 安卓机的百度、简单搜索
+        // 苹果7p(ios10)的浏览器，华为EVA-AL00(7.0)的自带和百度极速版
+        height: 100%;
         top: 0;
         bottom: 0;
         right: 0;
@@ -21,5 +26,10 @@ mip-st-picslide {
         .on {
             display: block;
         }
+    }
+
+    mip-st-slide {
+        max-height: 100%;
+        overflow: scroll;
     }
 }

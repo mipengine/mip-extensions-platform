@@ -144,5 +144,9 @@ define(function (require) {
         infiniteScroll = null;
     };
 
+    customElement.prototype.prerenderAllowed = function () {
+        return true;
+    };
+
     return customElement;
 });

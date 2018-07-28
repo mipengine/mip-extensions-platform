@@ -3,7 +3,7 @@
  * @author
  */
 
-/* global MIP */
+/* global MIP, m */
 define(function (require) {
     'use strict';
 
@@ -32,7 +32,17 @@ define(function (require) {
         var element = this.element;
         var url = element.getAttribute('url');
         var productid = getQuery().product_id;
-        fetch(url + '?product_id=' + productid, {
+        var xzhid = getQuery().xzh_id;
+        if (productid) {
+            url += '?product_id=' + productid;
+        }
+        else if (xzhid) {
+            url += '?xzh_id=' + xzhid;
+        }
+        if (m.currentTab) {
+            url += '&spu_cate=' + m.currentTab;
+        }
+        fetch(url, {
         }).then(function (res) {
             return res.json();
         }).then(function (res) {
@@ -40,8 +50,12 @@ define(function (require) {
             MIP.setData({
                 data: res.data
             });
-            viewer.eventAction.execute('dataloaded', element);
+            viewer.eventAction.execute('dataloaded', element, res.data);
         });
+    };
+
+    customElement.prototype.prerenderAllowed = function () {
+        return true;
     };
 
     return customElement;

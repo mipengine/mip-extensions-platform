@@ -1,0 +1,300 @@
+mip-st-lazy-tab {
+    &.mip-st-lazy-tab {
+        position: relative;
+    }
+
+    .mip-st-lazy-tab-nav {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: inline-block;
+        height: 44px;
+        font-size: 14px;
+        white-space: nowrap;
+        background-color: #fff;
+
+        -webkit-align-content: flex-start;
+        -webkit-align-items: stretch;
+        -webkit-box-align: stretch;
+        -webkit-box-direction: normal;
+        -webkit-box-lines: single;
+        -webkit-box-orient: horizontal;
+        -webkit-box-pack: justify;
+        -webkit-flex-direction: row;
+        -webkit-flex-wrap: nowrap;
+        -webkit-justify-content: space-between;
+        padding: 0 16px;
+    }
+
+    .mip-st-lazy-tab-nav * {
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    .mip-st-lazy-tab-nav-li {
+        // display: block;
+        display: inline-block;
+        overflow: hidden;
+        // width: 16.66667%;
+        width: auto;
+        height: 44px;
+        padding: 0;
+        line-height: 44px;
+        text-align: center;
+        white-space: nowrap;
+        text-decoration: none;
+        text-overflow: ellipsis;
+        list-style: none;
+        color: #666;
+        margin: 0 15px;
+
+        -webkit-box-flex: 1;
+        -webkit-flex: 1 1 auto;
+    }
+
+    .mip-st-lazy-tab-nav .mip-st-lazy-tab-nav-selected {
+        border-bottom: 2px solid #333;
+        color: #333;
+    }
+
+    .mip-st-lazy-tab-nav .mip-st-lazy-tab-nav-selected .mip-st-lazy-tab-item {
+        font-weight: bold;
+    }
+
+    .mip-st-lazy-tab-nav-bottom {
+        border-top: 1px solid #eee;
+        background: #f8f8f8;
+    }
+
+    .mip-st-lazy-tab-nav-bottom .mip-st-lazy-tab-nav-li {
+        color: #666;
+    }
+
+    .mip-st-lazy-tab-nav-bottom .mip-st-lazy-tab-nav-icon {
+        display: none;
+    }
+
+    .mip-st-lazy-tab-nav-bottom .mip-st-lazy-tab-nav-li.mip-st-lazy-tab-nav-selected {
+        position: relative;
+        top: -1px;
+        height: 38px;
+        border: 1px solid #f1f1f1;
+        border-color: #fff #f1f1f1 #333 #f1f1f1;
+        line-height: 38px;
+        color: #333;
+        background-color: #fff;
+    }
+
+    .mip-st-lazy-tab-nav-bottom .mip-st-lazy-tab-nav-selected:first-child {
+        margin-left: -1px;
+    }
+
+    .mip-st-lazy-tab-nav-bottom .mip-st-lazy-tab-nav-selected .mip-st-lazy-tab-nav-icon {
+        display: inline-block;
+    }
+
+    .mip-st-lazy-tab-nav-view {
+        position: relative;
+        overflow: hidden;
+        height: 44px;
+        text-align: left;
+        background-color: #fff;
+        border-bottom: solid 1px #eee;
+    }
+
+    .mip-st-lazy-tab-nav-view .mip-st-lazy-tab-nav {
+        display: inline-block;
+        position: relative;
+    }
+
+    .mip-st-lazy-tab-nav-view .mip-st-lazy-tab-nav .mip-st-lazy-tab-nav-li {
+        display: inline-block;
+        vertical-align: middle;
+        width: auto;
+        margin: 0 15px;
+    }
+
+    .mip-st-lazy-tab-nav-view .mip-st-lazy-tab-nav.mip-st-lazy-tab-nav-bottom {
+        background-color: #f8f8f8;
+        position: relative;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .mip-st-lazy-tab-nav-layer {
+        position: absolute;
+        z-index: 8;
+        top: 0;
+        width: 100%;
+        border-bottom: 1px solid #e7e7e7;
+        background-color: #fff;
+    }
+
+    .mip-st-lazy-tab-nav-layer p {
+        height: 40px;
+        padding: 0 16px;
+        // border-bottom: 1px solid #eee;
+        line-height: 40px;
+        text-align: left;
+        color: #999;
+    }
+
+    .mip-st-lazy-tab-nav-layer-ul {
+        padding: 0 17px 5px 17px;
+        margin-left: -4px;
+        margin-right: -4px;
+    }
+
+    .mip-st-lazy-tab-nav-layer-ul .mip-st-lazy-tab-nav-li {
+        display: inline-block;
+        line-height: auto;
+        height: auto;
+        width: 33.33%;
+        padding: 0;
+        margin: 0;
+    }
+
+    .mip-st-lazy-tab-nav-layer-ul .mip-st-lazy-tab-nav-li .mip-st-lazy-tab-item {
+        display: block;
+        line-height: 22px;
+        border: solid 1px #eee;
+        border-radius: 3px;
+        margin: 6px 4px;
+        padding: 3px 4px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: #666;
+    }
+
+    .mip-st-lazy-tab-nav-layer-ul .mip-st-lazy-tab-nav-selected .mip-st-lazy-tab-item {
+        border-color: #000;
+        color: #000;
+    }
+
+    .mip-st-lazy-tab-nav-toggle {
+        -webkit-tap-highlight-color: transparent;
+        position: absolute;
+        z-index: 9;
+        top: 0;
+        right: 0;
+        display: block;
+        width: 30px;
+        height: 26px;
+        padding: 9px 0;
+        // border-left: 1px solid #ccc;
+        text-align: center;
+        background-color: #fff;
+        // img {
+        //     position: absolute;
+        //     top: 50%;
+        //     left: 50%;
+        //     display: inline-block;
+        //     width: 10px;
+        //     height: 6px;
+        //     margin: -3px 0 0 -5px;
+        // }
+    }
+
+    .mip-st-lazy-tab-nav-toggle-gradient {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 100%;
+        width: 30px;
+        // background-color: blue;
+        background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255,  255, 1));
+    }
+
+    .mip-st-lazy-tab-nav-toggle-btn {
+        position: absolute;
+        top: 50%;
+        right: 23px;
+        display: inline-block;
+        margin-top: -2px;
+        margin-right: -4px;
+
+        width: 0;
+        height: 0;
+        border-top: 5px solid #999;
+        border-right: 5px solid transparent;
+        border-left: 5px solid transparent;
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+        -webkit-transform-origin: center center;
+        transform-origin: center center;
+        -webkit-transition: All .16s cubic-bezier(.46, 0, 1, 1);
+        transition: All .16s cubic-bezier(.46, 0, 1, 1);
+    }
+
+    .mip-st-lazy-tab-nav-toggle-holder {
+        display: inline-block;
+        width: 29px;
+        height: 1px;
+        visibility: hidden;
+    }
+
+    .mip-st-lazy-tab-scroll-touch {
+        position: relative;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 30px;
+        margin-top: -30px;
+        -webkit-transform: translateY(30px);
+        transform: translateY(30px);
+        width: 1px;
+        min-width: 100%;
+    }
+
+    .mip-st-lazy-tab-episode-content {
+        padding: 15px 16px;
+        text-align: left;
+    }
+
+    .mip-st-lazy-tab-episode-item {
+        display: inline-block;
+        width: 20%;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+    }
+
+    .mip-st-lazy-tab-episode-item-selected {
+        color: #333;
+    }
+
+    .mip-st-lazy-tab-episode-bottom-nav {
+        padding: 0;
+        height: 38px;
+    }
+
+    .mip-st-lazy-tab-episode-bottom-nav .mip-st-lazy-tab-nav-li {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .mip-st-lazy-tab-nav-view > .mip-st-lazy-tab-scroll-touch > .mip-st-lazy-tab-episode-bottom-nav.mip-st-lazy-tab-nav > .mip-st-lazy-tab-nav-li {
+        display: inline-block;
+    }
+
+    .mip-st-lazy-tab-episode-bottom-nav.mip-st-lazy-tab-nav .mip-st-lazy-tab-nav-li {
+        display: block;
+    }
+
+    .mip-st-lazy-tab-row-tile {
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .mip-st-lazy-tab-mask {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: rgba(0, 0, 0, .4);
+    }
+
+    &.mip-st-lazy-tab[toggle-more] {
+        z-index: 10;
+    }
+}

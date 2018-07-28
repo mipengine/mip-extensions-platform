@@ -3,11 +3,14 @@
  */
 
 mip-st-select {
+    -webkit-tap-highlight-color: transparent;
+
 
     .st-select {
         margin-right: -8px;
         margin-bottom: -8px;
         overflow: hidden;
+        -webkit-tap-highlight-color: transparent;
     }
 
     .st-tag-wrapper {
@@ -36,7 +39,10 @@ mip-st-select {
         border-radius: 3px;
         margin-right: 8px;
         margin-bottom: 10px;
-        padding: 4px;
+        padding: 4px 8px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .st-tag-text,
