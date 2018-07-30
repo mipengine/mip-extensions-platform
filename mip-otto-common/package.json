@@ -1,0 +1,14 @@
+{
+    "name": "mip-otto-common",
+    "version": "1.0.0",
+    "description": "网校主站逻辑整理",
+    "contributors": [
+        {
+            "name": "xinbao",
+            "email": "fa@ijust.cc"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

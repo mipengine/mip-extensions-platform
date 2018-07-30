@@ -187,11 +187,11 @@ define(function (require) {
             $el.find('.popUp_unFinishedBillErr').show();
         }
         else if (indexmessage === 'ERROR4') {
-            // toastOr("您今日取消咨询已达3次，请明天再来");
             $el.find('#' + tabHref).removeClass().addClass('tab-pane');
             flg = 0;
-            alert('您今日取消咨询已达3次，请明天再来');
-        }
+            $el.find('#messagecontem').text('您今日取消咨询已达3次，请明天再来');
+            $el.find('.popUp_unpaidErr').show();
+        };
 
         // 公共
         var flg = 0;

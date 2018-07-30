@@ -51,7 +51,10 @@ define(function (require) {
                 //    "toggle-more": true,
                 //    "toggle-label": "请选择分类"
                 //};
-                _this.tabConfig = JSON.parse(el.querySelector('script[type="application/json"]').innerHTML);
+                // mip不让template里套script，检测到了就无法用sf打开
+                // 所以只好用div放个json，然后display:none;
+                // 不要问我四不四撒，我也不想这样做
+                _this.tabConfig = JSON.parse(el.querySelector('div[type="application/json"]').innerHTML);
                 switch (type) {
                     case 'episode':
                         var $result = generateWrapper.call(this);
