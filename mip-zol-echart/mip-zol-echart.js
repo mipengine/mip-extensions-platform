@@ -58,6 +58,7 @@ define(function (require) {
 
             // 指定图表的配置项和数据
             var option = {
+                color: '#eee',
                 grid: {
                     left: '3%',
                     right: '9%',
@@ -224,25 +225,32 @@ define(function (require) {
                         textStyle: {
                             color: '#fff'
                         }
+                    },
+                    splitLine: {
+                        lineStyle: {
+                            color: '#eee'
+                        }
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            color: '#eee'
+                        }
                     }
                 }],
                 series: [{
                     name: '',
                     type: 'radar',
                     radius: 83,
-                    lineStyle: {
-                        width: 0
-                    },
                     areaStyle: {
                         normal: {
-                            opacity: 0.7,
-                            color: new echarts.graphic.RadialGradient(0, 0, 1, [
+                            opacity: 0.85,
+                            color: new echarts.graphic.RadialGradient(0, 0, 1.3, [
                                 {
-                                    color: '#71F6A1',
+                                    color: '#59DEB4',
                                     offset: 0
                                 },
                                 {
-                                    color: '#0791FB',
+                                    color: '#078FF7',
                                     offset: 1
                                 }
                             ])
