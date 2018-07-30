@@ -300,7 +300,7 @@ define(function (require) {
             //   startConsulting(questionType);
             // } else {
             // var coudeurl=encodeURIComponent('request?questionType='+questionType)
-            window.top.location.href = 'baidusearch/authorize?questionType='
+            window.top.location.href = 'baiduxzh/authorize?questionType='
                 + questionType
                 + '&urlstring=mipilaw66xzh_request';
             // window.top.location.href = 'blank?questionType=' + questionType + '&channel=' + channel;

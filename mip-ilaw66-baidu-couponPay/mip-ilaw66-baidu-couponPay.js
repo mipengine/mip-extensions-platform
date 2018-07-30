@@ -64,6 +64,10 @@ define(function (require) {
             checkTalking(requestId);
         });
 
+        $el.find('#err_confirm').click(function () {
+            $el.find('.popUp_sysErr').hide();
+        });
+
         // 立即支付
         $el.find('#js-pay-button').click(function () {
             var freeFlg = '0'; // 没有订单免单
@@ -135,7 +139,7 @@ define(function (require) {
                             window.top.location.href = data.cashier_url;
                         }
                         else {
-                            alert('报错了，请稍后尝试，或者联系客服');
+                            $el.find('.popUp_sysErr').fadeIn();
                         }
 
                     },

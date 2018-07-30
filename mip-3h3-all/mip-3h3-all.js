@@ -12,8 +12,7 @@ define(function (require) {
         if (gtype === '3h3_news') {
             // 点击量统计
             var module = t.getAttribute('module');
-            var hitsurl = siteurl + 'api.php?op=count&modelid=' + t.getAttribute('modelid')
-            + '&id=' + t.getAttribute('my_id');
+            var hitsurl = siteurl + 'ajax.asp?action=4&id=' + t.getAttribute('id');
             if (module !== '') {
                 hitsurl += '&module=' + module;
             }
@@ -27,7 +26,7 @@ define(function (require) {
             if (con.height() > 834) {
                 var muban = '<section class="click_more"><div class="slide-btn">';
                 muban += '<span>展开，查看全部</span><i></i></div></section>';
-                var newcon = con.find('.artbody');
+                var newcon = con.find('.m-con');
                 newcon.addClass('wraptext');
                 newcon.after(muban);
                 newcon.css({
@@ -77,6 +76,7 @@ define(function (require) {
                 con.find('.app_soft').show();
                 con.find('.ztshow').show();
                 con.find('.ztshow').next().show();
+                con.find('.app_article').show();
                 con.find('.con-box').show();
                 con.find('.app_guess').show();
                 con.find('.Qtag').show();
@@ -91,6 +91,7 @@ define(function (require) {
                 con.find('.app_soft').show();
                 con.find('.ztshow').show();
                 con.find('.ztshow').next().show();
+                con.find('.app_article').show();
                 con.find('.con-box').show();
                 con.find('.app_guess').show();
                 con.find('.Qtag').show();
@@ -105,6 +106,7 @@ define(function (require) {
                 con.find('.app_soft').hide();
                 con.find('.ztshow').hide();
                 con.find('.ztshow').next().hide();
+                con.find('.app_article').hide();
                 con.find('.con-box').hide();
                 con.find('.app_guess').show();
                 con.find('.Qtag').show();
@@ -119,10 +121,11 @@ define(function (require) {
                 con.find('.app_soft').hide();
                 con.find('.ztshow').hide();
                 con.find('.ztshow').next().hide();
+                con.find('.app_article').hide();
                 con.find('.con-box').hide();
                 con.find('.app_guess').hide();
                 con.find('.Qtag').hide();
-                con.find('.app_appmore').hide();
+                con.find('.app_appmore').show();
                 $(this).addClass('on');
                 anchor1.removeClass('on');
                 anchor2.removeClass('on');
@@ -149,7 +152,7 @@ define(function (require) {
                 hdarticle.css('width', '50%');
             } else if (cnxhNotNullSize === 0) {
                 hdarticle.parent().remove();
-                anchor3.remove();
+                anchor3.hide();
                 con.find('.m-anchor li').css('width', '33.3%');
             }
             if ($.trim(hdarticle.html()) === '') {

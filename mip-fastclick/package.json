@@ -1,0 +1,14 @@
+{
+    "name": "mip-fastclick",
+    "version": "1.0.0",
+    "description": "简单封装 fastclick 库，使子组件 attach fastclick",
+    "contributors": [
+        {
+            "name": "zhangpenghe",
+            "email": "zhangpenghe@baidu.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

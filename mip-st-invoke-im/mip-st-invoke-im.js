@@ -53,5 +53,9 @@ define(function (require) {
         }, false);
     };
 
+    customElement.prototype.prerenderAllowed = function () {
+        return true;
+    };
+
     return customElement;
 });

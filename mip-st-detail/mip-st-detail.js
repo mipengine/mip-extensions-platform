@@ -50,6 +50,11 @@ define(function (require) {
             MIP.setData({
                 data: res.data
             });
+            var url = location.href;
+            if (!/tag=/.test(url)) {
+                url = url.replace('?', '?tag=all&');
+            }
+            history.replaceState('', null, url);
             viewer.eventAction.execute('dataloaded', element, res.data);
         });
     };

@@ -392,13 +392,13 @@ define(function (require) {
                             colorStops: [
                                 {
                                     offset: 0,
-                                    color: '#0791FB'
+                                    color: '#48BBE5'
 
                                     // 0% 处的颜色
                                 },
                                 {
                                     offset: 1,
-                                    color: '#71F6A1'
+                                    color: '#48BBE5'
 
                                     // 100% 处的颜色
                                 }
@@ -409,7 +409,7 @@ define(function (require) {
                         }
                     },
                     lineStyle: {
-                        color: '#73D9ED',
+                        color: '#48BBE5',
                         width: 3
                     },
                     markLine: {

@@ -77,7 +77,7 @@ define(function (require) {
             $el.find('.common_number').css('height', '48px');
             $el.find('.common_number').text('');
         }
-        else if (channel === 'baidusearch') {
+        else if (channel === 'baidusearch' || channel === 'baidu_xzh') {
             $el.find('.header_block').html('准备咨询');
             $el.find('.header_block').css('color', '#000');
             $el.find('.header_block').css('background', '#fff');
@@ -126,7 +126,7 @@ define(function (require) {
                     $el.find('head').append('<link href="css/wenlvshi.base.css?v=20170928"'
                         + ' rel="stylesheet" type="text/css" />');
                 }
-                else if (channel === 'baidusearch') {
+                else if (channel === 'baidusearch' || channel === 'baidu_xzh') {
                     $el.find('head').append('<link href="css/wenlvshi.eleme.css?20180619"'
                         + ' rel="stylesheet" type="text/css" />');
                 }
@@ -501,9 +501,9 @@ define(function (require) {
         });
 
         // qyy add
-        if (channel === 'baidusearch') { // 返回《按钮
+        if (channel === 'baidusearch' || channel === 'baidu_xzh') { // 返回《按钮
             $el.find('#precautions-back').click(function () {
-                if (channel === 'baidusearch') {
+                if (channel === 'baidusearch' || channel === 'baidu_xzh') {
                     location.href = './';
                 }
                 else {
@@ -571,7 +571,7 @@ define(function (require) {
             }
             else {
                 // qyy add
-                if (channel === 'baidusearch') {
+                if (channel === 'baidusearch' || channel === 'baidu_xzh') {
                     if ($el.find('#login').hasClass('noChecked')
                         && !$el.find('#radio-rule-iconCT002').hasClass('isChecked')) {
                         alert('请阅读并同意《分秒律师用户服务协议》');

@@ -10,10 +10,6 @@ define(function (require) {
     var util = require('util');
     var viewport = require('viewport');
 
-    // 需要预渲染
-    var element = document.getElementById('scrollboundary');
-    window.MIP.prerenderElement(element);
-
     function stopProFun(e) {
         e.stopPropagation();
     }
@@ -29,13 +25,7 @@ define(function (require) {
 
         scrollaBoundaryTouch.setAttribute('mip-shell-scrollboundary', true);
         [].slice.call(body.children).forEach(function (child) {
-            if (/^(SCRIPT|IFRAME|MIP-SHELL|MIP-DATA|MIP-SCROLLBOUNDARY|MIP-FIXED)/.test(child.nodeName)) {
-                return;
-            }
-            scrollaBoundaryTouch.appendChild(child);
-        });
-        [].slice.call(body.children).forEach(function (child) {
-            if (/^(SCRIPT|IFRAME|MIP-SHELL|MIP-DATA|MIP-SCROLLBOUNDARY|MIP-FIXED)/.test(child.nodeName)) {
+            if (/^(SCRIPT|IFRAME|MIP-SHELL|MIP-DATA|MIP-ST-SCROLLBOUNDARY|MIP-FIXED)/.test(child.nodeName)) {
                 return;
             }
             scrollaBoundaryTouch.appendChild(child);
@@ -107,6 +97,10 @@ define(function (require) {
      */
     customElement.prototype.firstInviewCallback = function () {
         scrollBoundary();
+    };
+
+    customElement.prototype.prerenderAllowed = function () {
+        return true;
     };
 
     return customElement;
