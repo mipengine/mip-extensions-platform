@@ -83,7 +83,13 @@ define(function (require) {
             $el.find('.header_block').css('background', '#fff');
             $el.find('.glyphicon').css('color', '#000000');
             $el.find('#sms').css('color', '#4992FF');
-            $el.find('#login').text('去匹配律师');
+            if (sessionStorage.getItem('ishomeorder')) {
+                $el.find('#login').text('提交');
+            }
+            else {
+                $el.find('#login').text('去匹配律师');
+            }
+
             $el.find('#login').css('background', '#3388FF');
             $el.find('#login').css('height', '45px');
             $el.find('.radio-rule').show();
@@ -503,8 +509,9 @@ define(function (require) {
         // qyy add
         if (channel === 'baidusearch' || channel === 'baidu_xzh') { // 返回《按钮
             $el.find('#precautions-back').click(function () {
+                sessionStorage.clear('ishomeorder');
                 if (channel === 'baidusearch' || channel === 'baidu_xzh') {
-                    location.href = './';
+                    window.top.location.href = './';
                 }
                 else {
                     history.go(-1);
@@ -540,7 +547,7 @@ define(function (require) {
             }
             // 《分秒律师用户服务协议》
             $el.find('.rulePA').on('click', function () {
-                location.href = 'rule';
+                window.top.location.href = 'rule';
             });
         }
 
@@ -603,6 +610,7 @@ define(function (require) {
             $(frmLogin).attr('action', action);
             $(frmLogin).attr('method', 'post');
             $(frmLogin).attr('target', '_self');
+            sessionStorage.clear('ishomeorder');
             $(frmLogin).submit();
         }
 

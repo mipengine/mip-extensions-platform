@@ -18,20 +18,17 @@ mip-otto-common 网校通用模块集合
         {
             "rem": true,
             "fixedright": true,
-            "sign":"jz1"
+            "sign":"jsz",
+            "fixedbottom":true,
+            "downbanner":{
+                "enable":true,
+                "positon":"top"
+            }
         }
     </script>
+    
     <div style="height:1000px"></div>
     <!--右侧悬浮 -->
-    <div class="commonFixedRight cfr">
-        <div class="cfr__kf kf">
-            <div class="cfr__kf_img"></div>
-        </div>
-        <div class="cfr__back2top" id="js__back2top">
-            <div class="cfr__back2top_img"></div>
-        </div>
-    </div>
-
 </mip-otto-common>
 ```
 
@@ -39,7 +36,7 @@ mip-otto-common 网校通用模块集合
 
 ### rem
 
-说明：是否当前页面启用rem
+说明：是否当前页面启用 rem
 必选项：否
 类型：boolean
 默认值：false
@@ -53,11 +50,25 @@ mip-otto-common 网校通用模块集合
 
 ### sign
 
-说明：指定考试sign
+说明：指定考试 sign
 必选项：否
 类型：boolean
 默认值：false
 
+### fixedbottom
+
+说明：设置顶部tab
+必选项：否
+类型：boolean
+默认值：false
+
+### downbanner
+
+说明：设定下载banner
+必选项：否
+类型：boolean
+默认值：false
 
 ## 注意事项
-1. 网校业务定制。
+
+1.  网校业务定制。

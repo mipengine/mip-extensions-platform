@@ -1,0 +1,11 @@
+<style>
+  html {
+    padding-top: 1000px;
+  }
+  li {
+    margin: 10px;
+  }
+  .btn-disabled {
+    color: #AAA;
+  }
+</style>

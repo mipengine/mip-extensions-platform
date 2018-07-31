@@ -23,6 +23,9 @@ define(function (require) {
         var search = location.search.toLowerCase();
         var channel = $el.find('#channel').val();
         var userId = $el.find('#userId').val();
+        if (sessionStorage.getItem('ishomeorder')) {
+            sessionStorage.clear('ishomeorder');
+        }
 
         function getQueryString(name) {
             var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
@@ -187,12 +190,18 @@ define(function (require) {
             $el.find('.popUp_unFinishedBillErr').show();
         }
         else if (indexmessage === 'ERROR4') {
-            // toastOr("您今日取消咨询已达3次，请明天再来");
             $el.find('#' + tabHref).removeClass().addClass('tab-pane');
             flg = 0;
-            alert('您今日取消咨询已达3次，请明天再来');
+            $el.find('#messagecontem').text('您今日取消咨询已达3次，请明天再来');
+            $el.find('.popUp_unpaidErr').show();
         }
 
+        $el.find('.headerright').click(function () {
+            if (!userId) {
+                sessionStorage.setItem('ishomeorder', '1');
+            }
+
+        });
         // 公共
         var flg = 0;
         // 滚屏控制 有弹出层出现 不可滚动

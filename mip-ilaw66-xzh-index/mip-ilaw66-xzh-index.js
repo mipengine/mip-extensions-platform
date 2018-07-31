@@ -23,6 +23,9 @@ define(function (require) {
         var search = location.search.toLowerCase();
         var channel = $el.find('#channel').val();
         var userId = $el.find('#userId').val();
+        if (sessionStorage.getItem('ishomeorder')) {
+            sessionStorage.clear('ishomeorder');
+        }
 
         function getQueryString(name) {
             var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
@@ -191,7 +194,14 @@ define(function (require) {
             flg = 0;
             $el.find('#messagecontem').text('您今日取消咨询已达3次，请明天再来');
             $el.find('.popUp_unpaidErr').show();
-        };
+        }
+        $el.find('.headerright').click(function () {
+            if (!userId) {
+                sessionStorage.setItem('ishomeorder', '1');
+            }
+
+            window.top.location.href = 'mipilaw66xzh_orderlist';
+        });
 
         // 公共
         var flg = 0;

@@ -1,0 +1,67 @@
+/**
+* @file mip-otto-scrollnews样式文件
+*/
+
+mip-otto-scrollnews {
+    .scrollNews {
+        width: 100%;
+        background-color: #fff;
+        &__head {
+            display: flex;
+            box-sizing: border-box;
+            border-bottom: 1px solid #e5e5e5;
+            font-size: .8rem;
+            text-align: center;
+            white-space: nowrap;
+            color: #666;
+
+            align-items: center;
+            justify-content: space-between;
+        }
+        &__type {
+            padding: .675rem 0;
+
+            flex: 0 1 19%;
+            &--hover {
+                border-bottom: 1px solid #fd4541;
+                color: #fd4541;
+            }
+        }
+        &__box {
+            overflow-y: scroll;
+            width: 96%;
+            height: 23.375rem;
+            margin: 0 auto;
+            color: #333;
+        }
+
+        &__item {
+            padding: .7rem 0;
+            border-bottom: 1px solid #e5e5e5;
+            list-style: none;
+            a {
+                display: block;
+            }
+        }
+        &__title {
+            margin-bottom: .5rem;
+            font-size: .8rem;
+            color: #333;
+        }
+        &__class {
+            display: inline-block;
+            width: 3.2rem;
+            height: 1rem;
+            border: 1px solid #999;
+            font-size: .6rem;
+            line-height: 1rem;
+            text-align: center;
+            color: #999;
+            border-radius: 1rem;
+        }
+        &__date {
+            font-size: .6rem;
+            color: #fd4541;
+        }
+    }
+}

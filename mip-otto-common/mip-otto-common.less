@@ -11,54 +11,164 @@ mip-otto-common {
         display: block;
     }
     .hide {
-        display: none;
+        display: none !important;
     }
     .cfr {
         position: fixed;
         z-index: 3;
         right: 0;
         bottom: 10%;
-        display: none;
-        width: 2.25rem;
-        text-align: center;
+        height: 5rem;
     }
     .cfr__kf,
     .cfr__back2top {
+        display: flex;
         width: 2.2rem;
         height: 2.2rem;
         line-height: 2.2rem;
         opacity: .8;
         border-radius: 50%;
-        background: #f22f3f;
+
+        align-items: center;
+        justify-content: center;
     }
     .cfr__kf {
-        position: relative;
-        margin-bottom: .5rem;
+        margin-bottom: .3rem;
         background: #f22f3f;
     }
     .cfr__kf_img {
-        position: absolute;
-        top: 50%;
-        left: 50%;
         width: 1.6rem;
         height: 1.3rem;
-        background: url("http://wap2.wangxiao.cn/content/website2/img/rg.png")
+        background: url("http://static.wangxiao.cn/commonResoures/mip/rg.png")
         no-repeat -.05rem -.05rem;
         background-size: 3rem auto;
-        transform: translate(-50%, -50%);
     }
     .cfr__back2top {
-        position: relative;
         background: #7f7f7f;
     }
     .cfr__back2top_img {
-        position: absolute;
-        top: 50%;
-        left: 50%;
         width: 1.4rem;
         height: 1.3rem;
-        background: url("http://wap2.wangxiao.cn/content/website2/img/rg.png") no-repeat -1.6rem 0;
+        background: url("http://static.wangxiao.cn/commonResoures/mip/rg.png")
+        no-repeat -1.6rem 0;
         background-size: 3rem auto;
-        transform: translate(-50%, -50%);
+    }
+    // 底部通栏
+    .cFooter {
+        position: fixed;
+        z-index: 2;
+        bottom: 0;
+        display: flex;
+        width: 100%;
+        border-top: 1px solid #e5e5e5;
+        background-color: #fff;
+
+        align-items: center;
+        flex-flow: row nowrap;
+        justify-content: space-around;
+    }
+    .cFooter__item {
+        padding: .375rem 0 .125rem;
+        font-size: 0 1 20%;
+        text-align: center;
+        list-style: none;
+    }
+
+    .cFooter__itemImg--home {
+        background: url("http://static.wangxiao.cn/commonResoures/mip/css_sprites2.png") -.25rem -.25rem;
+        background-size: 6.6rem 4.95rem;
+    }
+    .cFooter__itemImg--course {
+        background: url("http://static.wangxiao.cn/commonResoures/mip/css_sprites2.png") -3.45rem -3.45rem;
+        background-size: 6.6rem 4.95rem;
+    }
+    .cFooter__itemImg--bank {
+        background: url("http://static.wangxiao.cn/commonResoures/mip/css_sprites2.png") -1.9rem -.25rem;
+        background-size: 6.6rem 4.95rem;
+    }
+    .cFooter__itemImg--book {
+        background: url("http://static.wangxiao.cn/commonResoures/mip/css_sprites2.png") -.25rem -3.55rem;
+        background-size: 6.6rem 4.95rem;
+    }
+    .cFooter__itemImg--my {
+        background: url("http://static.wangxiao.cn/commonResoures/mip/css_sprites2.png") -.25rem -1.9rem;
+        background-size: 6.6rem 4.95rem;
+    }
+    .hover .cFooter__itemImg--home {
+        background: url("http://static.wangxiao.cn/commonResoures/mip/css_sprites2.png") -1.9rem -1.9rem;
+        background-size: 6.6rem 4.95rem;
+    }
+    .hover .cFooter__itemImg--course {
+        background: url("http://static.wangxiao.cn/commonResoures/mip/css_sprites2.png") -5.2rem -.25rem;
+        background-size: 6.6rem 4.95rem;
+    }
+    .hover .cFooter__itemImg--bank {
+        background: url("http://static.wangxiao.cn/commonResoures/mip/css_sprites2.png") -3.45rem -.25rem;
+        background-size: 6.6rem 4.95rem;
+    }
+    .hover .cFooter__itemImg--book {
+        background: url("http://static.wangxiao.cn/commonResoures/mip/css_sprites2.png") -1.9rem -3.55rem;
+        background-size: 6.6rem 4.95rem;
+    }
+    .hover .cFooter__itemImg--my {
+        background: url("http://static.wangxiao.cn/commonResoures/mip/css_sprites2.png") -3.5rem -1.9rem;
+        background-size: 6.6rem 4.95rem;
+    }
+    .hover .cFooter__itemText {
+        color: #fd4541;
+    }
+    .cFooter__itemImg {
+        display: inline-block;
+        width: 1.15rem;
+        height: 1.15rem;
+    }
+    .cFooter__itemText {
+        margin-top: -.125rem;
+        font-size: .6rem;
+        color: #666;
+    }
+    // app导航
+    .pageApp {
+        position: fixed;
+        top: 0;
+        box-sizing: border-box;
+        width: 100%;
+        padding: .5rem .25rem;
+        background-color: #313131;
+    }
+    .getApp {
+        position: fixed;
+        top: 0;
+        display: flex;
+        box-sizing: border-box;
+        width: 100%;
+        padding: .5rem .25rem;
+        background-color: #313131;
+
+        align-items: center;
+        justify-content: space-between;
+    }
+    .pageApp_close {
+        padding: 0 .375rem .125rem;
+        font-size: .75rem;
+        color: #fafcfd;
+        border-radius: 50%;
+        background-color: #181818;
+    }
+    .pageApp_img {
+        width: 2rem;
+        height: 2rem;
+    }
+    .pageApp_title {
+        font-size: .75rem;
+        color: #fafcfd;
+    }
+    .pageApp_btn {
+        margin-left: .25rem;
+        padding: .5rem .45rem;
+        font-size: .7rem;
+        color: #fafcfd;
+        border-radius: .15rem;
+        background-color: #f22f3f;
     }
 }
