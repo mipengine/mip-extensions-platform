@@ -202,10 +202,7 @@ define(function (require) {
             }
 
             //          window.top.location.href = 'mipilaw66xzh_orderlist';
-
-            window.top.location.href = 'baiduxzh/authorize?questionType='
-                + questionType
-                + '&urlstring=mipilaw66xzh_orderlist';
+            window.top.location.href = 'baiduxzh/authorize?urlstring=mipilaw66xzh_orderlist';
         });
 
         // 公共
