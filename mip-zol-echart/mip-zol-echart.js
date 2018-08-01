@@ -228,12 +228,12 @@ define(function (require) {
                     },
                     splitLine: {
                         lineStyle: {
-                            color: '#eee'
+                            color: '#d8d8d8'
                         }
                     },
                     axisLine: {
                         lineStyle: {
-                            color: '#eee'
+                            color: '#d8d8d8'
                         }
                     }
                 }],
@@ -243,7 +243,7 @@ define(function (require) {
                     radius: 83,
                     areaStyle: {
                         normal: {
-                            opacity: 0.85,
+                            opacity: 0.8,
                             color: new echarts.graphic.RadialGradient(0, 0, 1.3, [
                                 {
                                     color: '#59DEB4',

@@ -1,36 +1,37 @@
 /**
- * @file mip-otto-common 组件
+ * @file mip-otto-common 网校通用组件
  * @author xinbao
+ * @date 2018年7月31日
  */
 
 define(function (require) {
     'use strict';
 
-    const customElement = require('customElement').create();
-    const viewport = require('viewport');
-    const util = require('util');
-    const Gesture = util.Gesture;
-    const fetchJsonp = require('fetch-jsonp');
+    var customElement = require('customElement').create();
+    var viewport = require('viewport');
+    var util = require('util');
+    var Gesture = util.Gesture;
+    var fetchJsonp = require('fetch-jsonp');
 
-    let utilJs = (function () {
-        let remFun = function (element) {
-            let resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+    var utilJs = (function () {
+        var remFun = function (element) {
+            var resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
             function recalc() {
-                let clientWidth = viewport.getWidth();
-                let UIWidth = element.params.basewidth;
-                let baseFontSize = element.params.basefont;
-                let result = ((clientWidth / UIWidth) * baseFontSize * 2).toFixed(2);
+                var clientWidth = viewport.getWidth();
+                var UIWidth = element.params.basewidth;
+                var baseFontSize = element.params.basefont;
+                var result = ((clientWidth / UIWidth) * baseFontSize * 2).toFixed(2);
                 document.querySelector('html').style.fontSize = result + 'px';
             }
             window.addEventListener(resizeEvt, recalc, false);
             document.addEventListener('DOMContentLoaded', recalc, false);
         };
-        let urlRules = ['/h/', '/Course/', '/Tiku/', '/Book/', '/TikUserData/'];
-        let isType = function () {
-            let length = urlRules.length;
-            let res;
-            for (let i = 0; i < length; i++) {
-                let p = new RegExp(urlRules[i].toLowerCase());
+        var urlRules = ['/h/', '/Course/', '/Tiku/', '/Book/', '/TikUserData/'];
+        var isType = function () {
+            var length = urlRules.length;
+            var res;
+            for (var i = 0; i < length; i++) {
+                var p = new RegExp(urlRules[i].toLowerCase());
                 if (p.test(window.location.href.toLowerCase())) {
                     res = i;
                     return res;
@@ -41,32 +42,32 @@ define(function (require) {
             }
             return res;
         };
-        let loadJs = function (url) {
+        var loadJs = function (url) {
             if (/^(https?:)?\/\//gi.test(url)) {
-                let myHead = document.querySelector('head');
-                let myScript = document.createElement('script');
+                var myHead = document.querySelector('head');
+                var myScript = document.createElement('script');
                 myScript.type = 'text/javascript';
                 myScript.src = url;
                 myHead.appendChild(myScript);
             }
 
         };
-        let addKF = function (element) {
-            let NTKF_PARAM = {
+        var addKF = function (element) {
+            var NTKF_PARAM = {
                 siteid: 'kf_9009',
                 uid: '',
                 uname: '',
                 userlevel: '0'
             };
-            let sign = element.params.sign;
+            var sign = element.params.sign;
 
             if (sign) {
-                let baseUrl = window.location.origin;
+                var baseUrl = window.location.origin;
                 if (window.location.origin.search(/wangxiao.cn/gi) < 0) {
                     baseUrl = 'http://wap2.wangxiao.cn';
                 }
 
-                let url = baseUrl + '/Pub/GetNtalkerSettingIdBySign?sign=' + sign;
+                var url = baseUrl + '/Pub/GetNtalkerSettingIdBySign?sign=' + sign;
                 fetchJsonp(url, {
                     jsonpCallbackFunction: 'cb'
                 })
@@ -80,7 +81,7 @@ define(function (require) {
 
                     })
                     .then(function () {
-                        let script4kf = document.createElement('script');
+                        var script4kf = document.createElement('script');
                         script4kf.text = 'var NTKF_PARAM =' + JSON.stringify(NTKF_PARAM);
                         script4kf.type = 'text/javascript';
                         document.querySelector('head').appendChild(script4kf);
@@ -90,13 +91,13 @@ define(function (require) {
                     });
             }
 
-            let gestureKf = new Gesture(element.querySelector('.kf'));
+            var gestureKf = new Gesture(element.querySelector('.kf'));
             gestureKf.on('tap', function () {
                 window.NTKF.im_openInPageChat(NTKF_PARAM.settingid);
             });
         };
-        let go2top = function (element) {
-            let threshold = 200;
+        var go2top = function (element) {
+            var threshold = 200;
             function toggle(element) {
                 if (viewport.getScrollTop() > threshold) {
                     element.querySelector('#js__back2top').classList.remove('hide');
@@ -125,7 +126,7 @@ define(function (require) {
         };
     })();
     customElement.prototype.build = function () {
-        let element = this.element;
+        var element = this.element;
         window.NTKF;
         // 配置默认参数
         element.params = {
@@ -140,8 +141,8 @@ define(function (require) {
             }
         };
         // 格式化自定义参数
-        let config = element.querySelector('script[type="application/json"]');
-        let data = config ? JSON.parse(config.textContent.toString()) : {};
+        var config = element.querySelector('script[type="application/json"]');
+        var data = config ? JSON.parse(config.textContent.toString()) : {};
         // 配置完成
         element.params = util.fn.extend(element.params, data);
 
@@ -152,7 +153,7 @@ define(function (require) {
 
         // 设置悬浮
         function addFixed(element) {
-            let temp = document.createElement('div');
+            var temp = document.createElement('div');
             temp.classList.add('cfr');
             element.appendChild(temp);
             element.querySelector('.cfr').innerHTML = '<div class="cfr__kf kf">'
@@ -173,7 +174,7 @@ define(function (require) {
 
         // 设定底部
         function addFooter(element) {
-            let temp = document.createElement('ul');
+            var temp = document.createElement('ul');
             temp.classList.add('cFooter');
             element.appendChild(temp);
             element.querySelector('.cFooter').innerHTML = '<li class="cFooter__item">'
@@ -196,8 +197,8 @@ define(function (require) {
         if (element.params.fixedbottom) {
             // footer
             addFooter(element);
-            let navIndex = utilJs.isType();
-            let li = element.querySelectorAll('.cFooter__item');
+            var navIndex = utilJs.isType();
+            var li = element.querySelectorAll('.cFooter__item');
             if (navIndex > -1) {
                 li[navIndex].classList.add('hover');
             }
@@ -209,7 +210,7 @@ define(function (require) {
 
         // 设定banner下载
         function addBanner(element) {
-            let temp = document.createElement('div');
+            var temp = document.createElement('div');
             temp.classList.add('getApp');
             element.appendChild(temp);
             element.querySelector('.getApp').innerHTML = '<span class="pageApp_close">×</span>'
