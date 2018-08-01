@@ -195,12 +195,17 @@ define(function (require) {
             $el.find('#messagecontem').text('您今日取消咨询已达3次，请明天再来');
             $el.find('.popUp_unpaidErr').show();
         }
+
         $el.find('.headerright').click(function () {
             if (!userId) {
                 sessionStorage.setItem('ishomeorder', '1');
             }
 
-            window.top.location.href = 'mipilaw66xzh_orderlist';
+            //          window.top.location.href = 'mipilaw66xzh_orderlist';
+
+            window.top.location.href = 'baiduxzh/authorize?questionType='
+                + questionType
+                + '&urlstring=mipilaw66xzh_orderlist';
         });
 
         // 公共
