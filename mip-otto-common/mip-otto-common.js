@@ -68,9 +68,7 @@ define(function (require) {
                 }
 
                 var url = baseUrl + '/Pub/GetNtalkerSettingIdBySign?sign=' + sign;
-                fetchJsonp(url, {
-                    jsonpCallbackFunction: 'cb'
-                })
+                fetchJsonp(url)
                     .then(function (res) {
                         return res.json();
                     })
@@ -117,12 +115,82 @@ define(function (require) {
                 false
             );
         };
+        var toggleBar = function (element) {
+            var threshold = 200;
+            function toggle(element) {
+                if (viewport.getScrollTop() > threshold) {
+                    element.querySelector('.getApp').classList.remove('hide');
+                }
+                else {
+                    element.querySelector('.getApp').classList.add('hide');
+                }
+            }
+            toggle(element);
+            viewport.on('scroll', function () {
+                toggle(element);
+            });
+            element.addEventListener(
+                'click', function () {
+                    viewport.setScrollTop(0);
+                },
+                false
+            );
+        };
+        function addFixed(element) {
+            var temp = document.createElement('div');
+            temp.classList.add('cfr');
+            element.appendChild(temp);
+            element.querySelector('.cfr').innerHTML = '<div class="cfr__kf kf">'
+                + '<i class="cfr__kf_img"></i>'
+                + '</div>'
+                + '<div class="cfr__back2top hide" id="js__back2top">'
+                + '<i class="cfr__back2top_img"></i>'
+                + '</div>';
+        }
+        function addFooter(element) {
+            var temp = document.createElement('div');
+            temp.classList.add('cFooter');
+            element.appendChild(temp);
+            element.querySelector('.cFooter').innerHTML = '<a href="mip/h/@(Sign).html" class="cFooter__item">'
+                + '<i class="cFooter__itemImg cFooter__itemImg--home"></i>'
+                + '<p class="cFooter__itemText">首页</p>'
+                + '</a>'
+                + '<a href="/Course/Index?sign=@(Sign)" class="cFooter__item">'
+                + '<i class="cFooter__itemImg cFooter__itemImg--course"></i><p class="cFooter__itemText">课程</p>'
+                + '</a>'
+                + '<a href="/Tiku/?sign=@(Sign)" href="/Tiku/?sign=@(Sign)" class="cFooter__item">'
+                + '<i class="cFooter__itemImg cFooter__itemImg--bank"></i><p class="cFooter__itemText">题库</p>'
+                + '</a>'
+                + '<a href="/Book/?sign=@(Sign)" class="cFooter__item">'
+                + ' <i class="cFooter__itemImg cFooter__itemImg--book"></i><p class="cFooter__itemText">图书</p>'
+                + '</a>'
+                + '<a href="/TikuUserData/Personal/?sign=@(Sign)" class="cFooter__item">'
+                + ' <i class="cFooter__itemImg cFooter__itemImg--my"></i><p class="cFooter__itemText">我的</p>'
+                + '</a>';
+        }
+        function addBanner(element) {
+            var temp = document.createElement('div');
+            temp.classList.add('getApp');
+            temp.classList.add('hide');
+            element.appendChild(temp);
+            element.querySelector('.getApp').innerHTML = '<span class="pageApp_close">×</span>'
+                + '<img class="pageApp_img" src="http://wap2.wangxiao.cn/content/website2/img/app_logo.png" alt="">'
+                + '<span class="pageApp_title">准题库-考试通关听课刷题神器</span>'
+                + '<a class="pageApp_btn" href="http://appconfig.wangxiao.cn/DownLoad/Index?sign=' + element.params.sign + '">免费下载</a>';
+            element.querySelector('.pageApp_close').addEventListener('click', function () {
+                this.parentElement.classList.add('hide');
+            });
+        }
         return {
             remFun: remFun,
             isType: isType,
             loadJs: loadJs,
             go2top: go2top,
-            addkf: addKF
+            addkf: addKF,
+            toggleBar: toggleBar,
+            addFixed: addFixed,
+            addFooter: addFooter,
+            addBanner: addBanner
         };
     })();
     customElement.prototype.build = function () {
@@ -152,19 +220,9 @@ define(function (require) {
         }
 
         // 设置悬浮
-        function addFixed(element) {
-            var temp = document.createElement('div');
-            temp.classList.add('cfr');
-            element.appendChild(temp);
-            element.querySelector('.cfr').innerHTML = '<div class="cfr__kf kf">'
-                + '<i class="cfr__kf_img"></i>'
-                + '</div>'
-                + '<div class="cfr__back2top hide" id="js__back2top">'
-                + '<i class="cfr__back2top_img"></i>'
-                + '</div>';
-        }
+
         if (element.params.fixedright && element.params.sign) {
-            addFixed(element);
+            utilJs.addFixed(element);
             utilJs.addkf(element);
             utilJs.go2top(element);
         }
@@ -173,30 +231,9 @@ define(function (require) {
         }
 
         // 设定底部
-        function addFooter(element) {
-            var temp = document.createElement('ul');
-            temp.classList.add('cFooter');
-            element.appendChild(temp);
-            element.querySelector('.cFooter').innerHTML = '<li class="cFooter__item">'
-                + '<i class="cFooter__itemImg cFooter__itemImg--home"></i>'
-                + '<p class="cFooter__itemText">首页</p>'
-                + '</li>'
-                + '<li class="cFooter__item">'
-                + '<i class="cFooter__itemImg cFooter__itemImg--course"></i><p class="cFooter__itemText">课程</p>'
-                + '</li>'
-                + '<li class="cFooter__item">'
-                + '<i class="cFooter__itemImg cFooter__itemImg--bank"></i><p class="cFooter__itemText">题库</p>'
-                + '</li>'
-                + '<li class="cFooter__item">'
-                + ' <i class="cFooter__itemImg cFooter__itemImg--book"></i><p class="cFooter__itemText">图书</p>'
-                + '</li>'
-                + '<li class="cFooter__item">'
-                + ' <i class="cFooter__itemImg cFooter__itemImg--my"></i><p class="cFooter__itemText">我的</p>'
-                + '</li>';
-        }
         if (element.params.fixedbottom) {
             // footer
-            addFooter(element);
+            utilJs.addFooter(element);
             var navIndex = utilJs.isType();
             var li = element.querySelectorAll('.cFooter__item');
             if (navIndex > -1) {
@@ -209,17 +246,10 @@ define(function (require) {
         }
 
         // 设定banner下载
-        function addBanner(element) {
-            var temp = document.createElement('div');
-            temp.classList.add('getApp');
-            element.appendChild(temp);
-            element.querySelector('.getApp').innerHTML = '<span class="pageApp_close">×</span>'
-                + ' <img class="pageApp_img" src="http://wap2.wangxiao.cn/content/website2/img/app_logo.png" alt="">'
-                + '<span class="pageApp_title">准题库-考试通关听课刷题神器</span>'
-                + '<a class="pageApp_btn" href="http://appconfig.wangxiao.cn/DownLoad/Index?sign=' + element.params.sign + '">免费下载</a>';
-        }
+
         if (element.params.downbanner.enable) {
-            addBanner(element);
+            utilJs.addBanner(element);
+            // utilJs.toggleBar(element);
         }
 
     };

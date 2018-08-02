@@ -21,14 +21,12 @@ mip-otto-common 网校通用模块集合
             "sign":"jsz",
             "fixedbottom":true,
             "downbanner":{
-                "enable":true,
+                "enable":false,
                 "positon":"top"
             }
         }
     </script>
-    
     <div style="height:1000px"></div>
-    <!--右侧悬浮 -->
 </mip-otto-common>
 ```
 
@@ -71,4 +69,5 @@ mip-otto-common 网校通用模块集合
 
 ## 注意事项
 
-1.  网校业务定制。
+1. 网校业务定制。
+2. 更新了导航链接

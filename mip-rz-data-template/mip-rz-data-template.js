@@ -13,9 +13,8 @@ define(function (require) {
 
     // 复制剪切
     var ClipboardJS = require('./clipboard.min');
-    function getQuery(url) {
-        url = url || location.href;
-        var query = url.split('?')[1] || '';
+    function getQuery() {
+        var query = location.search.slice(1) || '';
         if (!query) {
             return {};
         }
