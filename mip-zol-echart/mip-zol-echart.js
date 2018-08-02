@@ -128,25 +128,25 @@ define(function (require) {
                             if (maxNum === Number(npercent)) {
                                 if (maxNumIndex === (count - 1)) {
                                     if (maxNumIndex > 2 || maxNumIndex === 0) {
-                                        return ' {a|' + value + '} {c|最优} {g|\n' + npercent + '} ';
+                                        return ' {a| ' + value + ' } {c|最优} {g| \n' + npercent + '} ';
                                     } else {
-                                        return ' {c|最优} {a|' + value + '} {e|\n' + npercent + '} ';
+                                        return ' {c|最优} {a| ' + value + ' } {e| \n' + npercent + '} ';
                                     }
                                 } else {
-                                    return '{a|' + value + '} {b|\n' + npercent + '} ';
+                                    return '{a| ' + value + ' } {b|\n' + npercent + '} ';
                                 }
                             } else if (minNum === Number(npercent)) {
                                 if (minNumIndex === (count - 1)) {
                                     if (minNumIndex > 2 || minNumIndex === 0) {
-                                        return ' {a|' + value + '} {d|有点菜} {f|\n' + npercent + '} ';
+                                        return ' {a| ' + value + ' } {d|有点菜} {f|\n' + npercent + '} ';
                                     } else {
-                                        return ' {d|有点菜} {a|' + value + '} {h|\n' + npercent + '} ';
+                                        return ' {d|有点菜} {a|' + value + ' } {h|\n' + npercent + '} ';
                                     }
                                 } else {
-                                    return '{a|' + value + '} {b|\n' + npercent + '} ';
+                                    return '{a| ' + value + ' } {b| \n' + npercent + '} ';
                                 }
                             } else {
-                                return ' {a|' + value + '} {b|\n' + npercent + '} ';
+                                return ' {a| ' + value + ' } {b| \n' + npercent + '} ';
                             }
                         },
                         rich: {

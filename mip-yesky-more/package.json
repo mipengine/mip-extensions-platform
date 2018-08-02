@@ -1,0 +1,14 @@
+{
+    "name": "mip-yesky-more",
+    "version": "1.0.0",
+    "description": "点击加载更多",
+    "contributors": [
+        {
+            "name": "zhangpp",
+            "email": "1179585662@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
