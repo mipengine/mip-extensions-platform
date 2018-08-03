@@ -1,0 +1,14 @@
+{
+    "name": "mip-times-xz",
+    "version": "1.0.0",
+    "description": "订单提交",
+    "contributors": [
+        {
+            "name": "chm",
+            "email": "2668302237@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

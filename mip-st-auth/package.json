@@ -1,0 +1,14 @@
+{
+    "name": "mip-st-auth",
+    "version": "1.0.0",
+    "description": "获取熊掌号鉴权数据的组件",
+    "contributors": [
+        {
+            "name": "maomingyang",
+            "email": "maomingyang@baidu.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

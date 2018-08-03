@@ -1,0 +1,14 @@
+{
+    "name": "mip-st-xzh",
+    "version": "1.0.0",
+    "description": "引入熊掌号JS-SDK的组件",
+    "contributors": [
+        {
+            "name": "maomingyang",
+            "email": "maomingyang@baidu.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
