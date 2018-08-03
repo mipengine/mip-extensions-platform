@@ -21,7 +21,7 @@ mip-otto-common 网校通用模块集合
             "sign":"jsz",
             "fixedbottom":true,
             "downbanner":{
-                "enable":false,
+                "enable":true,
                 "positon":"top"
             }
         }

@@ -68,7 +68,7 @@ define(function (require) {
                 radar: [{
                     nameGap: 3,
                     center: ['50%', '57%'],
-                    radius: '70%',
+                    radius: '66%',
                     splitArea: {
                         areaStyle: {
                             color: ['#fff', '#fff', '#fff', '#fff']
@@ -96,8 +96,8 @@ define(function (require) {
                                 };
                             }
 
-                            // console.log(maxNum)
-                            // console.log(minNum)
+                            // console.log(maxNum);
+                            // console.log(minNum);
                             if (maxNum === Number(dataVal[2])) {
                                 maxNumIndex = 2;
                             } else if (maxNum === Number(dataVal[3])) {
@@ -111,6 +111,7 @@ define(function (require) {
                             }
 
                             if (minNum === dataVal[1]) {
+                                console.log(1);
                                 minNumIndex = 1;
                             } else if (minNum === Number(dataVal[0])) {
                                 minNumIndex = 0;
@@ -123,14 +124,20 @@ define(function (require) {
                             }
 
                             // console.log(minNum);
+                            // console.log(minNumIndex);
+                            // console.log(count);
                             // console.log(npercent);
                             // 判断最大值最小值放置位置
                             if (maxNum === Number(npercent)) {
                                 if (maxNumIndex === (count - 1)) {
                                     if (maxNumIndex > 2 || maxNumIndex === 0) {
-                                        return ' {a| ' + value + ' } {c|最优} {g| \n' + npercent + '} ';
+                                        if (maxNumIndex === 0) {
+                                            return ' {a| ' + value + ' } {c|最优} {i|\n' + npercent + '} ';
+                                        } else {
+                                            return ' {a| ' + value + ' } {c|最优} {g|\n' + npercent + '} ';
+                                        }
                                     } else {
-                                        return ' {c|最优} {a| ' + value + ' } {e| \n' + npercent + '} ';
+                                        return ' {c|最优} {a| ' + value + ' } {e|\n' + npercent + '} ';
                                     }
                                 } else {
                                     return '{a| ' + value + ' } {b|\n' + npercent + '} ';
@@ -138,12 +145,17 @@ define(function (require) {
                             } else if (minNum === Number(npercent)) {
                                 if (minNumIndex === (count - 1)) {
                                     if (minNumIndex > 2 || minNumIndex === 0) {
-                                        return ' {a| ' + value + ' } {d|有点菜} {f|\n' + npercent + '} ';
+                                        if (minNumIndex === 0) {
+                                            return ' {a| ' + value + '} {d|有点菜} {l|\n' + npercent + '} ';
+                                        } else {
+                                            return ' {a| ' + value + '} {d|有点菜} {f|\n' + npercent + '} ';
+                                        }
+
                                     } else {
-                                        return ' {d|有点菜} {a|' + value + ' } {h|\n' + npercent + '} ';
+                                        return ' {d|有点菜} {a| ' + value + ' } {h|\n' + npercent + '} ';
                                     }
                                 } else {
-                                    return '{a| ' + value + ' } {b| \n' + npercent + '} ';
+                                    return '{d|有点菜} {a| ' + value + ' } {h|\n' + npercent + '} ';
                                 }
                             } else {
                                 return ' {a| ' + value + ' } {b| \n' + npercent + '} ';
@@ -220,6 +232,22 @@ define(function (require) {
                                 fontFamily: 'PingFangSC-Regular',
                                 lineHeight: 19,
                                 padding: [0, 0, 0, 45]
+                            },
+                            i: {
+                                fontSize: 14,
+                                color: '#3388FF',
+                                align: 'center',
+                                fontFamily: 'PingFangSC-Regular',
+                                lineHeight: 19,
+                                padding: [0, 0, 0, 0]
+                            },
+                            l: {
+                                fontSize: 14,
+                                color: '#3388FF',
+                                align: 'center',
+                                fontFamily: 'PingFangSC-Regular',
+                                lineHeight: 19,
+                                padding: [0, 0, 0, 0]
                             }
                         },
                         textStyle: {

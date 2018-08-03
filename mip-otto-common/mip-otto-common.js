@@ -1,7 +1,7 @@
 /**
  * @file mip-otto-common 网校通用组件
  * @author xinbao
- * @date 2018年7月31日
+ * @date 2018年8月2日
  */
 
 define(function (require) {
@@ -11,7 +11,8 @@ define(function (require) {
     var viewport = require('viewport');
     var util = require('util');
     var Gesture = util.Gesture;
-    var fetchJsonp = require('fetch-jsonp');
+    // fetchJsonp 的用法不熟悉，还是使用zepto的ajax
+    var $ = require('zepto');
 
     var utilJs = (function () {
         var remFun = function (element) {
@@ -68,17 +69,14 @@ define(function (require) {
                 }
 
                 var url = baseUrl + '/Pub/GetNtalkerSettingIdBySign?sign=' + sign;
-                fetchJsonp(url)
-                    .then(function (res) {
-                        return res.json();
-                    })
-                    .then(function (data) {
+                $.ajax({
+                    url: url,
+                    dataType: 'jsonp',
+                    success: function (data) {
                         if (data.ResultCode === 0) {
                             NTKF_PARAM.settingid = data.Data.NtalkerSettingId;
                         }
 
-                    })
-                    .then(function () {
                         var script4kf = document.createElement('script');
                         script4kf.text = 'var NTKF_PARAM =' + JSON.stringify(NTKF_PARAM);
                         script4kf.type = 'text/javascript';
@@ -86,7 +84,8 @@ define(function (require) {
 
                         // 此处引用小能客服js，由第三方提供服务支持，暂时无法做进一步封装
                         loadJs('https://dl.ntalker.com/js/xn6/ntkfstat.js?siteid=' + NTKF_PARAM.siteid);
-                    });
+                    }
+                });
             }
 
             var gestureKf = new Gesture(element.querySelector('.kf'));
@@ -108,7 +107,7 @@ define(function (require) {
             viewport.on('scroll', function () {
                 toggle(element);
             });
-            element.addEventListener(
+            element.querySelector('#js__back2top').addEventListener(
                 'click', function () {
                     viewport.setScrollTop(0);
                 },
@@ -171,10 +170,9 @@ define(function (require) {
         function addBanner(element) {
             var temp = document.createElement('div');
             temp.classList.add('getApp');
-            temp.classList.add('hide');
             element.appendChild(temp);
             element.querySelector('.getApp').innerHTML = '<span class="pageApp_close">×</span>'
-                + '<img class="pageApp_img" src="http://wap2.wangxiao.cn/content/website2/img/app_logo.png" alt="">'
+                + '<mip-img class="pageApp_img" src="http://wap2.wangxiao.cn/content/website2/img/app_logo.png" alt=""></mip-img>'
                 + '<span class="pageApp_title">准题库-考试通关听课刷题神器</span>'
                 + '<a class="pageApp_btn" href="http://appconfig.wangxiao.cn/DownLoad/Index?sign=' + element.params.sign + '">免费下载</a>';
             element.querySelector('.pageApp_close').addEventListener('click', function () {
@@ -249,7 +247,6 @@ define(function (require) {
 
         if (element.params.downbanner.enable) {
             utilJs.addBanner(element);
-            // utilJs.toggleBar(element);
         }
 
     };
