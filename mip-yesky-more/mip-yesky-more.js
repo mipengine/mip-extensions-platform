@@ -12,10 +12,11 @@ define(function (require) {
         var common = link.slice(0, inx);
         var productId = $(element).attr('productId');
         // 图片加载更多点击效果
-        $(element).find('button').live('click', function () {
+        $(element).find('button').on('click', function () {
             var pageNo = 1;
             var lsitMore = '';
-            var productType = $(this).find('ul').attr('alt');
+            var productType = $(this).parent('ul').attr('alt');
+            console.log(productType);
             var This = $(this);
             pageNo++;
             var num = common + 'front/product/pic/interface.do?id=' + productId + '&type='
@@ -48,7 +49,7 @@ define(function (require) {
                 $.ajax({
                     type: 'get',
                     url: num,
-                    dataType: 'script',
+                    dataType: 'json',
                     success: function (data) {
                         for (var i = 0; i < data.productpic.length; i++) {
                             lsitMore += '<li><mip-img src="' + data.productpic[i].cmsimage + '" '

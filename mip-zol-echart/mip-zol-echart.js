@@ -67,7 +67,7 @@ define(function (require) {
                 },
                 radar: [{
                     nameGap: 3,
-                    center: ['50%', '57%'],
+                    center: ['50%', '55%'],
                     radius: '66%',
                     splitArea: {
                         areaStyle: {
