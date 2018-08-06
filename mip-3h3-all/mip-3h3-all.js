@@ -17,32 +17,6 @@ define(function (require) {
                 hitsurl += '&module=' + module;
             }
             $.getJSON(hitsurl);
-            // 内容缩进
-            var con = $(t);
-            var txt = con.text();
-            var pic = con.find('img');
-            var zs = txt.length;
-            var piclen = pic.length;
-            if (con.height() > 834) {
-                var muban = '<section class="click_more"><div class="slide-btn">';
-                muban += '<span>展开，查看全部</span><i></i></div></section>';
-                var newcon = con.find('.m-con');
-                newcon.addClass('wraptext');
-                newcon.after(muban);
-                newcon.css({
-                    'height': '834px',
-                    'overflow': 'hidden',
-                    'visibility': 'visible',
-                    'position': 'relative'
-                });
-                newcon.addClass('snbg');
-                var btn = con.find('.click_more');
-                btn.click(function () {
-                    con.removeClass('wraptext');
-                    newcon.removeClass('snbg').removeAttr('style');
-                    $(this).remove();
-                });
-            }
         } else if (gtype === '3h3_youxi_content_hideshow') {
             // 内容缩进
             var con = $(t);
@@ -157,11 +131,24 @@ define(function (require) {
             }
             if ($.trim(hdarticle.html()) === '') {
                 hdarticle.parent().remove();
+            } else {
+                var isClick = false;
+                setTimeout(function () {
+                    con.find('.app_guess .hd_article span').each(function (index) {
+                        if ($(this).css('display') !== 'none' && isClick === false) {
+                            $(this).click();
+                            isClick = true;
+                        }
+                    });
+                }, 600);
             }
             var appsoft = con.find('.app_soft');
-            if ($.trim(appsoft.find('#r_main .apptxt').html()) === '') {
-                appsoft.find('.hd_article span').eq(1).remove();
-                appsoft.find('.hd_article').css('width', '50%');
+            if ($.trim(appsoft.find('#m-rel .m-option').eq(1).html()) === '') {
+                appsoft.find('#m-rel .tab-1 li').eq(1).remove();
+            }
+            if ($.trim(appsoft.find('#m-rel .m-option').eq(0).html()) === ''
+                && $.trim(appsoft.find('#m-rel .m-option').eq(1).html()) === '') {
+                appsoft.remove();
             }
         } else if (gtype === '3h3_youxi_downhref') {
             var con = $(t);

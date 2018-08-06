@@ -1,0 +1,14 @@
+{
+    "name": "mip-auto-push",
+    "version": "1.0.0",
+    "description": "百度平台相关统计代码推送推送",
+    "contributors": [
+        {
+            "name": "fqq",
+            "email": "1113620929@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "name": "mip-yesky-slide",
+    "version": "1.0.0",
+    "description": "点击动态展示轮播效果",
+    "contributors": [
+        {
+            "name": "zhangpp",
+            "email": "1179585662@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

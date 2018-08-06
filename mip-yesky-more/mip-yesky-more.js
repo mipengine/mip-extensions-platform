@@ -12,11 +12,10 @@ define(function (require) {
         var common = link.slice(0, inx);
         var productId = $(element).attr('productId');
         // 图片加载更多点击效果
-        $(element).find('button').on('click', function () {
+        $(element).on('click', 'button', function () {
             var pageNo = 1;
             var lsitMore = '';
             var productType = $(this).parent('ul').attr('alt');
-            console.log(productType);
             var This = $(this);
             pageNo++;
             var num = common + 'front/product/pic/interface.do?id=' + productId + '&type='

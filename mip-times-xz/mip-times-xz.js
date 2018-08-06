@@ -17,10 +17,10 @@ define(function (require) {
         });
         $(element).find('.m_btn').click(function () {
             if ($.trim($(element).find('#dd_car').val()) === '0') {
-                window.top.location.href = '/wap/order.html?sid=' + $(element).find('#dd_series').val();
+                window.top.location.href = 'https://m.autotimes.com.cn/wap/order.html?sid=' + $(element).find('#dd_series').val();
             }
             else {
-                window.top.location.href = '/wap/order.html?cid=' + $(element).find('#dd_car').val();
+                window.top.location.href = 'https://m.autotimes.com.cn/wap/order.html?cid=' + $(element).find('#dd_car').val();
             }
         });
         function getbrand() {
@@ -32,7 +32,7 @@ define(function (require) {
             $(element).find('#dd_car').append('<option value=\'0\'>选择车型</option>');
             $.ajax({
                 type: 'post',
-                url: '/json/get-brand.js',
+                url: 'https://m.autotimes.com.cn/json/get-brand.js',
                 cache: true,
                 async: true,
                 dataType: 'json',
@@ -50,7 +50,7 @@ define(function (require) {
             $(element).find('#dd_car').append('<option value=\'0\'>选择车型</option>');
             $.ajax({
                 type: 'post',
-                url: '/json/get-brand-series.js',
+                url: 'https://m.autotimes.com.cn/json/get-brand-series.js',
                 data: {id: $.trim($('#dd_brand').val())},
                 cache: true,
                 async: true,
@@ -70,7 +70,7 @@ define(function (require) {
             $(element).find('#dd_car').append('<option value=\'0\'>选择车型</option>');
             $.ajax({
                 type: 'post',
-                url: '/json/get-car.js',
+                url: 'https://m.autotimes.com.cn/json/get-car.js',
                 data: {id: $.trim($('#dd_series').val())},
                 cache: true,
                 async: true,
@@ -86,6 +86,5 @@ define(function (require) {
             });
         }
     };
-
     return customElement;
 });

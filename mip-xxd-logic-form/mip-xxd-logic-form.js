@@ -293,6 +293,10 @@ define(function (require) {
             onSubmit(element);
         });
 
+        [].slice.call(element.querySelectorAll('.record-btn')).forEach(function () {
+            onSubmit(element);
+        });
+
         var tipElement = createTipElement();
         element.appendChild(tipElement);
     };

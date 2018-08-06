@@ -1,0 +1,14 @@
+{
+    "name": "mip-yesky-cha",
+    "version": "1.0.0",
+    "description": "关闭浮层",
+    "contributors": [
+        {
+            "name": "zhangpp",
+            "email": "1179585662@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
