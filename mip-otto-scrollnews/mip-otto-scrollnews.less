@@ -1,67 +1,74 @@
 /**
 * @file mip-otto-scrollnews样式文件
 */
-
 mip-otto-scrollnews {
     .scrollNews {
         width: 100%;
         background-color: #fff;
-        &__head {
-            display: flex;
-            box-sizing: border-box;
-            border-bottom: 1px solid #e5e5e5;
-            font-size: .8rem;
-            text-align: center;
-            white-space: nowrap;
-            color: #666;
+    }
+    .scrollNews__head {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        border-bottom: 1px solid #e5e5e5;
+        font-size: .8rem;
+        text-align: center;
+        white-space: nowrap;
+        color: #666;
 
-            align-items: center;
-            justify-content: space-between;
-        }
-        &__type {
-            padding: .675rem 0;
+        align-items: center;
+        -webkit-box-align: center;
+        -webkit-box-pack: justify;
+        -ms-flex-align: center;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+    }
+    .scrollNews__type {
+        padding: .675rem 0;
 
-            flex: 0 1 19%;
-            &--hover {
-                border-bottom: 1px solid #fd4541;
-                color: #fd4541;
-            }
-        }
-        &__box {
-            overflow-y: scroll;
-            width: 96%;
-            height: 23.375rem;
-            margin: 0 auto;
-            color: #333;
-        }
-
-        &__item {
-            padding: .7rem 0;
-            border-bottom: 1px solid #e5e5e5;
-            list-style: none;
-            a {
-                display: block;
-            }
-        }
-        &__title {
-            margin-bottom: .5rem;
-            font-size: .8rem;
-            color: #333;
-        }
-        &__class {
-            display: inline-block;
-            width: 3.2rem;
-            height: 1rem;
-            border: 1px solid #999;
-            font-size: .6rem;
-            line-height: 1rem;
-            text-align: center;
-            color: #999;
-            border-radius: 1rem;
-        }
-        &__date {
-            font-size: .6rem;
-            color: #fd4541;
-        }
+        -webkit-box-flex: 0;
+        -ms-flex: 0 1 19%;
+        flex: 0 1 19%;
+    }
+    .scrollNews__type--hover {
+        border-bottom: 1px solid #fd4541;
+        color: #fd4541;
+    }
+    .scrollNews__box {
+        overflow-y: scroll;
+        width: 96%;
+        height: 23.375rem;
+        margin: 0 auto;
+        color: #333;
+    }
+    .scrollNews__item {
+        padding: .7rem 0;
+        border-bottom: 1px solid #e5e5e5;
+        list-style: none;
+    }
+    .scrollNews__item a {
+        display: block;
+    }
+    .scrollNews__title {
+        margin-bottom: .5rem;
+        font-size: .8rem;
+        color: #333;
+    }
+    .scrollNews__class {
+        display: inline-block;
+        width: 3.2rem;
+        height: 1rem;
+        border: 1px solid #999;
+        font-size: .6rem;
+        line-height: 1rem;
+        text-align: center;
+        color: #999;
+        border-radius: 1rem;
+    }
+    .scrollNews__date {
+        font-size: .6rem;
+        color: #fd4541;
     }
 }

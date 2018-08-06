@@ -1,0 +1,14 @@
+{
+    "name": "mip-52dus-bdwmext",
+    "version": "1.0.0",
+    "description": "自适应MIP网站使用百度网盟反屏蔽广告自动匹配PC广告或WAP广告。",
+    "contributors": [
+        {
+            "name": "admin_52dus",
+            "email": "admin@52dus.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

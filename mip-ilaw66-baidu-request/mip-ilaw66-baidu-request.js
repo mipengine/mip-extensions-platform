@@ -22,46 +22,46 @@ define(function (require) {
         var lawyerId;
 
         /*
-                var temp = {};
-                temp.list = [];
-                temp.list.push({
-                    value: 0,
-                    name: '某律师0',
-                    identifyPhoto: 'http://images.ilaw66.com/images/authorize/banner_new_first.png'
-                });
-                temp.list.push({
-                    value: 1,
-                    name: '某律师1',
-                    identifyPhoto: 'http://images.ilaw66.com/images/authorize/banner_new_first.png'
-                });
-                var tempHtml = "";
-                tempHtml +='<mip-carousel '
-                    +'autoplay '
-                    +'layout="responsive" '
-                    +'width="60" '
-                    +'height="60">';
-                var tempHtmlN = "";
-                tempHtmlN +='<mip-carousel '
-                    +'autoplay '
-                    +'layout="responsive" '
-                    +'width="60" '
-                    +'height="33">';
-                temp.list.forEach(function (item) {
-                    tempHtml += '<mip-img class="mip_img" width="60" height="60"'
-                        +' src="'+item.identifyPhoto+'"></mip-img>';
-                    tempHtmlN += '<p>' + item.name + '</p>';
-                });
-                tempHtml +='</mip-carousel>';
-                tempHtmlN +='</mip-carousel>';
-                $el.find('#mip-template-lawyerImg').html(tempHtml);
-                $el.find('#mip-template-lawyerName').html(tempHtmlN);
-        */
+         var temp = {};
+         temp.list = [];
+         temp.list.push({
+         value: 0,
+         name: '某律师0',
+         identifyPhoto: 'http://images.ilaw66.com/images/authorize/banner_new_first.png'
+         });
+         temp.list.push({
+         value: 1,
+         name: '某律师1',
+         identifyPhoto: 'http://images.ilaw66.com/images/authorize/banner_new_first.png'
+         });
+         var tempHtml = "";
+         tempHtml +='<mip-carousel '
+         +'autoplay '
+         +'layout="responsive" '
+         +'width="60" '
+         +'height="60">';
+         var tempHtmlN = "";
+         tempHtmlN +='<mip-carousel '
+         +'autoplay '
+         +'layout="responsive" '
+         +'width="60" '
+         +'height="33">';
+         temp.list.forEach(function (item) {
+         tempHtml += '<mip-img class="mip_img" width="60" height="60"'
+         +' src="'+item.identifyPhoto+'"></mip-img>';
+         tempHtmlN += '<p>' + item.name + '</p>';
+         });
+         tempHtml +='</mip-carousel>';
+         tempHtmlN +='</mip-carousel>';
+         $el.find('#mip-template-lawyerImg').html(tempHtml);
+         $el.find('#mip-template-lawyerName').html(tempHtmlN);
+         */
 
         /*$el.find(".toast_txt").text('取消晚了,律师正在联系您');
-        $el.find(".toast_div").show();
-        setTimeout(function () {
-            $el.find(".toast_div").hide();
-        }, 2000);*/
+         $el.find(".toast_div").show();
+         setTimeout(function () {
+         $el.find(".toast_div").hide();
+         }, 2000);*/
 
         $el.find('.jingxuan_top').css('background-image', 'url("images/bg_jingxuanlvshi.png")');
         $el.find('.jingxuan_top>img').attr('src', 'images/bg_touxiangjx.png');

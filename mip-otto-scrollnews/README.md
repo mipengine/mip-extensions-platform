@@ -13,6 +13,7 @@ mip-otto-scrollnews 网校新闻滚动组件
 ### 基本用法
 
 ```html
+<p style="height:900px">dmeo</p>
 <mip-otto-scrollnews>
     <div class="scrollNews">
         <div class="scrollNews__head">

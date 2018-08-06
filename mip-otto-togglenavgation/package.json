@@ -1,7 +1,7 @@
 {
-    "name": "mip-otto-scrollnews",
-    "version": "1.1.0",
-    "description": "网校新闻滚动组件",
+    "name": "mip-otto-togglenavgation",
+    "version": "1.0.0",
+    "description": "首页切换组件",
     "contributors": [
         {
             "name": "xinbao",
