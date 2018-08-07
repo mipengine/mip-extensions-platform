@@ -6,6 +6,7 @@
 define(function (require) {
     'use strict';
     var $ = require('zepto');
+    var viewer = require('viewer');
     var customElement = require('customElement').create();
 
     /**
@@ -26,22 +27,26 @@ define(function (require) {
                 element.webkitRequestFullScreen();
             }
         }
+        $el.find('.video-close')[0].addEventListener('click', function (event) {
+            viewer.eventAction.execute('tap', event.target, event);
+        });
         if ($el.find('#modal-video video').length !== 0) {
             var modelCloseBtn = $el.find('#modal-video video');
-
+            var video = modelCloseBtn[0];
+            video.addEventListener('ended', function () {
+                $el.find('.video-close').click();
+            });
+            video.addEventListener('click', function () {
+                // if (videoPopBtn.hasClass('more') == false) {
+                //     videoPopBtn.addClass('more');
+                launchFullScreen(video);
+                this.play();
+                // }
+            });
             this.addEventAction('open', function (event) {
                 $el.css('z-index', 10001);
                 var stringOption = 'tap:modal-video.close tap:video.close';
                 $el.find('#MIP-LLIGTBOX-MASK').attr('on', stringOption);
-                var video = modelCloseBtn[0];
-                if (videoPopBtn.hasClass('more')) {
-                    video.play();
-                }
-                else {
-                    video.play();
-                    launchFullScreen(video);
-                    videoPopBtn.addClass('more');
-                }
             });
             this.addEventAction('close', function (event) {
                 $el.css('z-index', 1);

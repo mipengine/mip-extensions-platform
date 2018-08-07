@@ -293,9 +293,47 @@ define(function (require) {
             onSubmit(element);
         });
 
-        [].slice.call(element.querySelectorAll('.record-btn')).forEach(function () {
-            onSubmit(element);
-        });
+        var bindRecordBtnEvent = function (recordElement) {
+            recordElement.addEventListener('click', function () {
+                var inputs = element.querySelectorAll('mip-xxd-input-item');
+                var result = Array.prototype.every.call(inputs, function (input) {
+                    if (input.dataset.value && input.dataset.validate) {
+                        var data = JSON.parse(input.dataset.validate);
+                        return validateItem.call(element, data, input);
+                    }
+                    return true;
+                });
+
+                if (!result) {
+                    return;
+                }
+
+                var data = {};
+                var inputs = element.querySelectorAll('mip-xxd-input-item');
+                Array.prototype.forEach.call(inputs, function (child) {
+                    var key = child.dataset.key;
+                    var value = child.dataset.value;
+                    if (key && value) {
+                        data[key] = value;
+                    }
+                });
+
+                var redirect = recordElement.dataset.redirect;
+
+                // 直接转跳
+                var redirectUrl = redirect.replace(/#([^#]*)#/g, function ($0, $1) {
+                    return data[$1] || '';
+                });
+
+                redirectUrl = redirectUrl.replace(/{{(.+?)}}/g, function ($0, $1) {
+                    return encodeURIComponent($1);
+                });
+
+                window.location = redirectUrl;
+            });
+        };
+
+        [].slice.call(document.querySelectorAll('.record-btn')).forEach(bindRecordBtnEvent);
 
         var tipElement = createTipElement();
         element.appendChild(tipElement);

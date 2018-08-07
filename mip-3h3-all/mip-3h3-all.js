@@ -150,6 +150,24 @@ define(function (require) {
                 && $.trim(appsoft.find('#m-rel .m-option').eq(1).html()) === '') {
                 appsoft.remove();
             }
+            var apparticle = con.find('.app_article');
+            var apparticleNotNullSize = 0;
+            apparticle.find('#xg_main .xg_main_ul .xg_list ul').each(function (index) {
+                if ($.trim($(this).html()) !== '') {
+                    apparticleNotNullSize++;
+                } else {
+                    con.find('.hd_article span').eq(index).hide();
+                }
+            });
+            apparticle.find('.hd_article span').each(function (index) {
+                if ($(this).css('display') !== 'none') {
+                    $(this).click();
+                    return false;
+                }
+            });
+            if (apparticleNotNullSize === 0) {
+                apparticle.remove();
+            }
         } else if (gtype === '3h3_youxi_downhref') {
             var con = $(t);
             var downaddressa = con.find('#address');
@@ -195,6 +213,33 @@ define(function (require) {
             var submitbtn = con.attr('submit_btn');
             $(submitbtn).click(function () {
                 con.find('form').submit();
+            });
+        } else if (gtype === '3h3_zt_show_menu') {
+            var con = $(t);
+            var headsearch = con.find('.headsearch');
+            headsearch.click(function () {
+                if (con.find('.search-box').css('display') === 'block') {
+                    con.find('.search-box').hide();
+                } else {
+                    con.find('.search-box').show();
+                }
+            });
+            var navbtn = con.find('.nav-btn');
+            navbtn.click(function () {
+                if (con.find('.nav').css('display') === 'block') {
+                    con.find('.nav').hide();
+                } else {
+                    con.find('.nav').show();
+                }
+            });
+            con.find('.m-aside .menu').show();
+            var menubtn = con.find('.m-aside .menu');
+            menubtn.click(function () {
+                if (con.find('.body-masking').css('display') === 'block') {
+                    con.find('.body-masking').hide();
+                } else {
+                    con.find('.body-masking').show();
+                }
             });
         }
     };

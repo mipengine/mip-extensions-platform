@@ -251,7 +251,9 @@ define(function (require) {
                             //     }
                             // });
                             fetch(areasubmitUrl, {method: 'post',
-                            body: JSON.stringify(bodya)}).then(function (res) {
+                            body: JSON.stringify(bodya), headers: {
+                                'content-type': 'application/json'
+                            }}).then(function (res) {
                                 return res.json();
                             }).then(function (datas) {
                                 var data = '';
@@ -289,7 +291,9 @@ define(function (require) {
                                 //     }
                                 // });
                                 fetch(citySubmitUrl, {method: 'post',
-                                body: JSON.stringify(bodyc)}).then(function (res) {
+                                body: JSON.stringify(bodyc), headers: {
+                                    'content-type': 'application/json'
+                                }}).then(function (res) {
                                     return res.json();
                                 }).then(function (datas) {
                                     var data = '';
@@ -327,7 +331,9 @@ define(function (require) {
                 //     }
                 // });
                 fetch(submiturl, {method: 'post',
-                body: JSON.stringify(bodyData)}).then(function (res) {
+                body: JSON.stringify(bodyData), headers: {
+                    'content-type': 'application/json'
+                }}).then(function (res) {
                     return res.json();
                 }).then(function (datas) {
                     var data = '';

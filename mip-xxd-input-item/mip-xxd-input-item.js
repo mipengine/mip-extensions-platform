@@ -57,13 +57,14 @@ define(function (require) {
      * @return {string} 需要渲染的html
      */
     function renderSelect(data) {
-        var options = generateOptionsHtml(data);
+        var options = generateOptionsHtml(data, data.value);
 
         var html = '<label class="mip-xxd-input-item-box">'
                     + '<div class="mip-xxd-input-item-title">' + data.title + '</div>'
                     + '<select'
                         + ' class="mip-xxd-input-item-input item-select"'
                         + ' id=' + data.key
+                        + ' value=' + data.value
                     + '>'
                         + options
                     + '</select>'
@@ -79,7 +80,7 @@ define(function (require) {
      * @return {string} 需要渲染的html
      */
     function renderSelectInput(data) {
-        var options = generateOptionsHtml(data);
+        var options = generateOptionsHtml(data, data.selectValue);
 
         var html = '<label class="mip-xxd-input-item-box" for=' + data.selectKey + '>'
                     + '<div class="mip-xxd-input-item-title is-select">'
@@ -194,14 +195,15 @@ define(function (require) {
      * 生成select的options
      *
      * @param {Object} data 所需数据
+     * @param  {string} defaultValue 默认值
      * @return {string} options的html字符串
      */
-    function generateOptionsHtml(data) {
+    function generateOptionsHtml(data, defaultValue) {
         var options = (data.data || []).map(
             function (optionData) {
                 var optionHtml = '<option'
-                            + ' value=' + (optionData.value || '')
-                            + (optionData.value === data.value ? ' selected' : '')
+                            + ' value=' + '"' + (optionData.value || '') + '"'
+                            + (optionData.value === defaultValue ? ' selected' : '')
                         + '>'
                             + optionData.name
                         + '</option>';
@@ -499,7 +501,7 @@ define(function (require) {
         element.dataset.value = data.value || '';
 
         if (type === 'selectInput') {
-            element.dataset.key = '';
+            element.dataset.key = data.selectValue || '';
         }
 
         // 绑定改变事件
