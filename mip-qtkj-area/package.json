@@ -1,0 +1,14 @@
+{
+    "name": "mip-qtkj-area",
+    "version": "1.0.1",
+    "description": "城市三级联动，选择区域",
+    "contributors": [
+        {
+            "name": "yzxsl",
+            "email": "1311524642@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
