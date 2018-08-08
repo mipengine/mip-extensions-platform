@@ -1,0 +1,14 @@
+{
+    "name": "mip-btbcc-bdlxb",
+    "version": "1.0.0",
+    "description": "网站调用百度离线宝功能",
+    "contributors": [
+        {
+            "name": "microcust.com",
+            "email": "24294533@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

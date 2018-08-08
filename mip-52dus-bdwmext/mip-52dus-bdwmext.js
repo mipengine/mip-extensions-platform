@@ -8,21 +8,28 @@ define(function (require) {
 
     var customElement = require('customElement').create();
 
-    customElement.prototype.firstInviewCallback = function () {
+    customElement.prototype.build = function () {
 
         var ele = this.element;
         var domain = ele.getAttribute('domain');
         var pctoken = ele.getAttribute('pctoken');
         var waptoken = ele.getAttribute('waptoken');
         var script = document.createElement('script');
-        if (domain && waptoken && pctoken) {
+        if (domain && waptoken) {
             if (isMobile()) {
                 script.src = document.location.protocol + '//' + domain + '/' + waptoken + '.js';
-            } else {
-                script.src = document.location.protocol + '//' + domain + '/' + pctoken + '.js';
+            }
+            else {
+                if (pctoken) {
+                    script.src = document.location.protocol + '//' + domain + '/' + pctoken + '.js';
+                }
+                else {
+                    return;
+                }
             }
             ele.appendChild(script);
-        } else {
+        }
+        else {
             console.error('请输入正确的 domain 或者 token');
         }
     };
@@ -38,7 +45,8 @@ define(function (require) {
         var result = RegexMatch.exec(u);
         if (null == result) {
             return false;
-        } else {
+        }
+        else {
             return true;
         }
     }

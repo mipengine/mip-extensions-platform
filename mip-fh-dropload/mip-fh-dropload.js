@@ -9,6 +9,7 @@ define(function (require) {
     var util = require('util');
     var platform = util.platform;
     var customElem = require('customElement').create();
+    var templates = require('templates');
     var ajaxs = {
         Page1: 1,
         Page2: 1,
@@ -18,24 +19,28 @@ define(function (require) {
         totalPage: 0,
         isPlat: '',
         ajaxUrl: '',
-        nowEq: 0
+        nowEq: 0,
+        overFlag: 0,
+        loading: 0
     };
     function dropload(element, options) {
+        if (ajaxs.overFlag) {
+            return;
+        }
+        if (ajaxs.loading) {
+            return;
+        }
+        ajaxs.loading = 1;
         ++ajaxs.nowPage;
-        if (options.isPlat) {
-            ajaxs.ajaxUrl = options.url + '&page=' + ajaxs.nowPage + '&platform=' + ajaxs.isPlat;
-        }
-        else {
-            ajaxs.ajaxUrl = options.url + '&page=' + ajaxs.nowPage;
-        }
+        ajaxs.ajaxUrl = options.url + '&page=' + ajaxs.nowPage;
         $.ajax({
             type: 'GET',
             url: ajaxs.ajaxUrl,
             dataType: 'json',
             success: function (data) {
                 var html = '';
-                ajaxs.totalPage = data.totalPage; // 总记页数
-                ajaxs.nowPage = data.page;
+                ajaxs.totalPage = data.data.length > 0 ? 9999 : 0; // 总记页数
+                ajaxs.nowPage = data.page || ajaxs.nowPage;
                 if (ajaxs.isPlat === 'android') {
                     ajaxs.Page1 = ajaxs.nowPage;
                     ajaxs.allPage1 = ajaxs.totalPage;
@@ -46,25 +51,18 @@ define(function (require) {
                     ajaxs.allPage2 = ajaxs.totalPage;
                 }
 
-                if (ajaxs.nowPage >= data.totalPage) {
+                if (ajaxs.nowPage >= ajaxs.totalPage) {
                     $(element).find('.button-footer').remove();
                 }
 
                 if (parseInt(ajaxs.totalPage, 10) === 0) {
+                    ajaxs.overFlag = 1;
                     return;
                 }
-
-                for (var i in data.list) {
-                    html += '<li><a href="' + (data.list)[i].url + '" class="img" target="_blank">';
-                    html += '<mip-img src="' + (data.list)[i].thumb + '" width="60" height="60"></mip-img></a>';
-                    html += '<p><a href="' + (data.list)[i].url + '" target="_blank">' + (data.list)[i].title;
-                    html += '</a><em class="lstar' + (data.list)[i].stars + '"></em><span>';
-                    html += (data.list)[i].catname + '<u>' + (data.list)[i].filesize + '</u></span></p>';
-                    html += '<a href="' + (data.list)[i].url + '" class="btn" target="_blank">';
-                    html += '<em class="bg"></em>\u4e0b\u8f7d</a></li>';
-                }
-
-                $(element).find('ul').eq(ajaxs.nowEq).append(html);
+                templates.render(element, data).then(function (html) {
+                    $(element).find('ul').eq(ajaxs.nowEq).append(html);
+                    ajaxs.loading = 0;
+                });
             }
         });
     }
@@ -107,7 +105,7 @@ define(function (require) {
         });
         if (params.isclick) {
             viewport.on('scroll', function (e) {
-                if (viewport.getScrollTop() + viewport.getHeight() >= viewport.getScrollHeight()) {
+                if (viewport.getScrollTop() + viewport.getHeight() >= viewport.getScrollHeight() - 20) {
                     if (ajaxs.nowPage === ajaxs.totalPage) {
                         return;
                     }
