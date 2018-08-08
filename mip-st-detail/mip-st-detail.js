@@ -15,6 +15,7 @@ define(function (require) {
     function getQuery(url) {
         url = url || location.href;
         var query = url.split('?')[1] || '';
+        query = query.split('#')[0] || '';
         if (!query) {
             return {};
         }

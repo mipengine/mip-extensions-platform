@@ -6,11 +6,7 @@
 define(function (require) {
     var customElement = require('customElement').create();
     var util = require('util');
-    /**
-     * 第一次进入可视区回调，只会执行一次
-     */
-
-    customElement.prototype.firstInviewCallback = function () {
+    customElement.prototype.build = function () {
         var element = this.element;
 		// 单机按钮
         var clickBtn = element.querySelector('[showmorebtn]');

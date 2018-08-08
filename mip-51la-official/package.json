@@ -1,0 +1,14 @@
+{
+    "name": "mip-51la-official",
+    "version": "1.0.0",
+    "description": "组件介绍",
+    "contributors": [
+        {
+            "name": "janking",
+            "email": "online@concat.51.la"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

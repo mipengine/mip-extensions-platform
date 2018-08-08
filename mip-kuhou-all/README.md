@@ -12,7 +12,7 @@ mip-kuhou-all 用来显示更多内容，且显示后隐藏该按钮。
 
 ### 根据高度控制
 ```html
-<mip-kuhou-all maxheight='40' animatetime='.3'>
+ <mip-kuhou-all maxheight='40' animatetime='.3'>
      <div showmorebox>
         <div>todo<br><br><br><br>aasd<br><br>撒大声地</div>
       </div>
