@@ -1,0 +1,14 @@
+{
+    "name": "mip-carousel-figure",
+    "version": "1.1.0",
+    "description": "carousel component",
+    "contributors": [
+        {
+            "name": "Mickey",
+            "email": "787440432@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.2.0"
+    }
+}

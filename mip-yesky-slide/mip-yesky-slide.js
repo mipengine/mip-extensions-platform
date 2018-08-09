@@ -23,7 +23,6 @@ define(function (require) {
             var lsitDOM = '';
             var url = common + 'front/product/pic/interfaceAll.do?id='
                 + productId + '&type=' + productType + '&status=mip';
-            var url = 'pic.json';
             var num = $(this).index();
             var width = $('body').width();
             var imgnum = '<span class="swiper-pagination-current">'

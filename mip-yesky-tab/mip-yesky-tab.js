@@ -31,7 +31,7 @@ define(function (require) {
             }
         });
         // 点击其他分类执行结果
-        $(element).find('#line li').click(function () {
+        $(element).on('click', '#line li', function () {
             var lsitMore = '';
             var productType = $(this).attr('alt');
             var ThisIndex = $(this).index();

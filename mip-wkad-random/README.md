@@ -1,6 +1,6 @@
 # mip-wkad-random
 
-寻医问药新版广告组件
+寻医问药分流广告组件
 
 标题|内容
 ----|----
@@ -13,10 +13,17 @@
 只需要一个`<mip-wkad-random>`标签，无须其他填充dom
 
 ```
-<mip-wkad-random ads="[mobile_zhuanti_400_zixun, mobile_zhuanti_float_zixun]"></mip-wkad-random>
+<mip-wkad-random ratio="20%,80%" ads="[mobile_zhuanti_400_zixun, mobile_zhuanti_float_zixun]"></mip-wkad-random>
 
 ```
 ## 属性
+
+### ratio
+
+说明：广告比例配置参数
+必填：是
+格式：字符串格式
+取值：百分比值
 
 ### ads
 
