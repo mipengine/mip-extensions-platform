@@ -238,8 +238,9 @@ define(function (require) {
                         if ((AGArry.length === 0) && (HKArry.length === 0)
                          && (LSArry.length === 0) && (TZArry.length === 0)) {
                             var areaid = $el.find('#phone-area-tab').data('val');
-                            var areasubmitUrl = $el.find('.city-pop-btn').data('submiturl');
-                            var bodya =  {cityId: areaid};
+                            var areasubmitUrl = $el.find('.city-pop-btn').data('submiturl')
+                             + '?cityId=' + areaid;
+                            // var bodya =  {cityId: areaid};
                             window.location.reload();
                             // $.ajax({
                             //     type: 'post',
@@ -250,8 +251,21 @@ define(function (require) {
                             //         $el.find('.load-mask').show();
                             //     }
                             // });
-                            fetch(areasubmitUrl, {method: 'post',
-                            body: JSON.stringify(bodya), headers: {
+                            // fetch(areasubmitUrl, {method: 'post',
+                            // body: JSON.stringify(bodya), headers: {
+                            //     'content-type': 'application/json'
+                            // }}).then(function (res) {
+                            //     return res.json();
+                            // }).then(function (datas) {
+                            //     var data = '';
+                            //     if (datas) {
+                            //         if (data) {
+                            //             $el.find('.load-mask').show();
+                            //         }
+                            //     }
+                            // });
+                            fetch(areasubmitUrl, {method: 'get',
+                            headers: {
                                 'content-type': 'application/json'
                             }}).then(function (res) {
                                 return res.json();
@@ -267,7 +281,8 @@ define(function (require) {
                         else {
                             $el.find('.phone-city-but.but-street').on('click', function (event) {
                                 var phstreetid = $(this).attr('id');
-                                var phsubmitUrl = $el.find('.city-pop-btn').data('submiturl');
+                                var phsubmitUrl = $el.find('.city-pop-btn').data('submiturl')
+                                 + '?cityId=' + phstreetid;
                                 var bodyb =  {cityId: phstreetid};
                                 ajaxUpload(phsubmitUrl, bodyb);
                             });
@@ -278,8 +293,9 @@ define(function (require) {
                          && (LSArry.length === 0) && (TZArry.length === 0)) {
                             if ($el.find('#area-tag').data('value') !== '') {
                                 var pcareacityid = $el.find('#area-tag').data('value');
-                                var citySubmitUrl = $el.find('.city-pop-btn').data('submiturl');
-                                var bodyc = {cityId: pcareacityid};
+                                var citySubmitUrl = $el.find('.city-pop-btn').data('submiturl')
+                                + '?cityId=' + pcareacityid;
+                                // var bodyc = {cityId: pcareacityid};
                                 window.location.reload();
                                 // $.ajax({
                                 //     type: 'post',
@@ -290,8 +306,21 @@ define(function (require) {
                                 //         $el.find('.load-mask').show();
                                 //     }
                                 // });
-                                fetch(citySubmitUrl, {method: 'post',
-                                body: JSON.stringify(bodyc), headers: {
+                                // fetch(citySubmitUrl, {method: 'post',
+                                // body: JSON.stringify(bodyc), headers: {
+                                //     'content-type': 'application/json'
+                                // }}).then(function (res) {
+                                //     return res.json();
+                                // }).then(function (datas) {
+                                //     var data = '';
+                                //     if (datas) {
+                                //         if (data) {
+                                //             $el.find('.load-mask').show();
+                                //         }
+                                //     }
+                                // });
+                                fetch(citySubmitUrl, {method: 'get',
+                                headers: {
                                     'content-type': 'application/json'
                                 }}).then(function (res) {
                                     return res.json();
@@ -312,7 +341,8 @@ define(function (require) {
                         $el.find('#street-tag').css('display', 'inline-table');
                         if ($el.find('#street-tag').data('value')  !== '') {
                             var pccityid = $el.find('#street-tag').data('value');
-                            var pcsubmitUrl = $el.find('.city-pop-btn').data('submiturl');
+                            var pcsubmitUrl = $el.find('.city-pop-btn').data('submiturl')
+                             + '?cityId=' + pccityid;
                             var bodyd =  {cityId: pccityid};
                             ajaxUpload(pcsubmitUrl, bodyd);
                         }
@@ -330,8 +360,21 @@ define(function (require) {
                 //         window.location.reload();
                 //     }
                 // });
-                fetch(submiturl, {method: 'post',
-                body: JSON.stringify(bodyData), headers: {
+                // fetch(submiturl, {method: 'post',
+                // body: JSON.stringify(bodyData), headers: {
+                //     'content-type': 'application/json'
+                // }}).then(function (res) {
+                //     return res.json();
+                // }).then(function (datas) {
+                //     var data = '';
+                //     if (datas) {
+                //         if (data) {
+                //             window.location.reload();
+                //         }
+                //     }
+                // });
+                fetch(submiturl, {method: 'get',
+                headers: {
                     'content-type': 'application/json'
                 }}).then(function (res) {
                     return res.json();
@@ -339,7 +382,7 @@ define(function (require) {
                     var data = '';
                     if (datas) {
                         if (data) {
-                            window.location.reload();
+                            $el.find('.load-mask').show();
                         }
                     }
                 });
