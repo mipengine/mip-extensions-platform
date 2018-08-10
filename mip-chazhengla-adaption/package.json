@@ -1,0 +1,14 @@
+{
+    "name": "mip-chazhengla-adaption",
+    "version": "1.0.0",
+    "description": "用于页面的自适应",
+    "contributors": [
+        {
+            "name": "Aaron",
+            "email": "lclian1@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
