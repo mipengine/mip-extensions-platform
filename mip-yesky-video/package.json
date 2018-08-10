@@ -1,0 +1,14 @@
+{
+    "name": "mip-yesky-video",
+    "version": "1.0.0",
+    "description": "监听视频播放",
+    "contributors": [
+        {
+            "name": "srt",
+            "email": "821511107@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

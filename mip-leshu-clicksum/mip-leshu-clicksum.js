@@ -19,6 +19,7 @@ define(function (require) {
          */
         clicksum.on('click', 'a', function (params) {
             var self = $(this);
+            self.removeAttr('href');
             fetchJsonp('//m.9k9k.com/operation/iplocation.php?ac=getposcall', {
                 jsonpCallback: 'callback'
             }).then(function (res) {
@@ -34,12 +35,16 @@ define(function (require) {
                     if (self.attr('datahref') !== 'undefined' && self.attr('class') === 'android') {
                         window.top.location.href = data.locaUrl[1];
                     }
-                } else {
-                    if (self.attr('datahref') !== 'undefined') {
+                }
+                else
+                {
+                    if (self.attr('datahref') !== 'undefined' && self.attr('href') === '#') {
                         window.top.location.href = self.attr('datahref');
                     }
                 }
-            });
+                return false;
+            }
+           );
         });
     }
 

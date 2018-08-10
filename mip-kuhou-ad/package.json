@@ -1,0 +1,14 @@
+{
+    "name": "mip-kuhou-ad",
+    "version": "1.0.0",
+    "description": "调用动态数据",
+    "contributors": [
+        {
+            "name": "ruizai324",
+            "email": "435529564@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

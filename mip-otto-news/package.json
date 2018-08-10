@@ -1,0 +1,14 @@
+{
+    "name": "mip-otto-news",
+    "version": "1.0.0",
+    "description": "网校新闻页通用逻辑",
+    "contributors": [
+        {
+            "name": "xinbao",
+            "email": "fa@ijust.cc"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
