@@ -1,7 +1,7 @@
 {
     "name": "mip-kuhou-ad",
-    "version": "1.0.0",
-    "description": "调用动态数据",
+    "version": "1.0.1",
+    "description": "修改参数,解决http跟https下都能使用这个组件",
     "contributors": [
         {
             "name": "ruizai324",

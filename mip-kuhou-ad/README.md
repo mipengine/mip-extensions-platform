@@ -13,7 +13,7 @@ mip-kuhou-ad 在静态页面上通过fetch调用热门的动态数据
 ### 根据类型显示资源
 ```html
 <div id="thelist2">11111111</div>
-<mip-kuhou-ad adtype="1" class="adkuhou"></mip-kuhou-ad>
+<mip-kuhou-ad url="https://mip.cncrk.com/ajax.asp?action=31&type=1" class="adkuhou"></mip-kuhou-ad>
 <div>222222222</div>
 
 
@@ -21,9 +21,9 @@ mip-kuhou-ad 在静态页面上通过fetch调用热门的动态数据
 
 ## 属性
 
-### adtype
+### url
 
-说明：所调用资源的类型
+说明：所调用资源的地址
 必选项：是
-类型：数字
+类型：字符串
 

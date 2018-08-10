@@ -264,6 +264,7 @@ define(function (require) {
                             //         }
                             //     }
                             // });
+                            $el.find('.load-mask').show();
                             fetch(areasubmitUrl, {method: 'get',
                             headers: {
                                 'content-type': 'application/json'
@@ -271,10 +272,8 @@ define(function (require) {
                                 return res.json();
                             }).then(function (datas) {
                                 var data = '';
-                                if (datas) {
-                                    if (data) {
-                                        $el.find('.load-mask').show();
-                                    }
+                                if (datas.code === 0) {
+                                    window.location.reload();
                                 }
                             });
                         }
@@ -319,6 +318,7 @@ define(function (require) {
                                 //         }
                                 //     }
                                 // });
+                                $el.find('.load-mask').show();
                                 fetch(citySubmitUrl, {method: 'get',
                                 headers: {
                                     'content-type': 'application/json'
@@ -326,10 +326,8 @@ define(function (require) {
                                     return res.json();
                                 }).then(function (datas) {
                                     var data = '';
-                                    if (datas) {
-                                        if (data) {
-                                            $el.find('.load-mask').show();
-                                        }
+                                    if (datas.code === 0) {
+                                        window.location.reload();
                                     }
                                 });
                             }
@@ -373,6 +371,7 @@ define(function (require) {
                 //         }
                 //     }
                 // });
+
                 fetch(submiturl, {method: 'get',
                 headers: {
                     'content-type': 'application/json'
@@ -380,10 +379,8 @@ define(function (require) {
                     return res.json();
                 }).then(function (datas) {
                     var data = '';
-                    if (datas) {
-                        if (data) {
-                            $el.find('.load-mask').show();
-                        }
+                    if (datas.code === 0) {
+                        window.location.reload();
                     }
                 });
             }

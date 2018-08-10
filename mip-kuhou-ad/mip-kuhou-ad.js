@@ -9,10 +9,10 @@ define(function (require) {
     var $ = require('zepto');
     customElement.prototype.firstInviewCallback = function () {
         var element = this.element;
-        var type = element.getAttribute('adtype');
+        var url = element.getAttribute('url');
         kuhou();
         function kuhou() {
-            fetch('http://www.kuhou.com/index.php?m=api&c=table&a=mipad&type=' + type)
+            fetch(url)
             .then(function (response) {
                 var str = response.text();
                 str.then(function (result) {

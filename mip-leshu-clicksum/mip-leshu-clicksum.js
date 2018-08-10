@@ -38,7 +38,7 @@ define(function (require) {
                 }
                 else
                 {
-                    if (self.attr('datahref') !== 'undefined' && self.attr('href') === '#') {
+                    if (self.attr('datahref') !== 'undefined') {
                         window.top.location.href = self.attr('datahref');
                     }
                 }
