@@ -241,7 +241,7 @@ define(function (require) {
                             var areasubmitUrl = $el.find('.city-pop-btn').data('submiturl')
                              + '?cityId=' + areaid;
                             // var bodya =  {cityId: areaid};
-                            window.location.reload();
+                            // window.location.reload();
                             // $.ajax({
                             //     type: 'post',
                             //     url: areasubmitUrl,
@@ -266,6 +266,7 @@ define(function (require) {
                             // });
                             $el.find('.load-mask').show();
                             fetch(areasubmitUrl, {method: 'get',
+                            credentials: 'include',
                             headers: {
                                 'content-type': 'application/json'
                             }}).then(function (res) {
@@ -273,6 +274,7 @@ define(function (require) {
                             }).then(function (datas) {
                                 var data = '';
                                 if (datas.code === 0) {
+                                    document.cookie = document.cookie;
                                     window.location.reload();
                                 }
                             });
@@ -320,6 +322,7 @@ define(function (require) {
                                 // });
                                 $el.find('.load-mask').show();
                                 fetch(citySubmitUrl, {method: 'get',
+                                credentials: 'include',
                                 headers: {
                                     'content-type': 'application/json'
                                 }}).then(function (res) {
@@ -327,6 +330,7 @@ define(function (require) {
                                 }).then(function (datas) {
                                     var data = '';
                                     if (datas.code === 0) {
+                                        document.cookie = document.cookie;
                                         window.location.reload();
                                     }
                                 });
@@ -373,6 +377,7 @@ define(function (require) {
                 // });
 
                 fetch(submiturl, {method: 'get',
+                credentials: 'include',
                 headers: {
                     'content-type': 'application/json'
                 }}).then(function (res) {
@@ -380,6 +385,7 @@ define(function (require) {
                 }).then(function (datas) {
                     var data = '';
                     if (datas.code === 0) {
+                        document.cookie = document.cookie;
                         window.location.reload();
                     }
                 });

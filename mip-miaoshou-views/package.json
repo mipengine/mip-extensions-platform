@@ -1,0 +1,14 @@
+{
+    "name": "mip-miaoshou-views",
+    "version": "1.0.0",
+    "description": "妙手医生统计MIP页面浏览次数组件",
+    "contributors": [
+        {
+            "name": "niewei",
+            "email": "qf_niewei@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
