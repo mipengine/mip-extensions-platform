@@ -17,7 +17,7 @@ mip-xiandu-showmorebtn 点击加载更多内容
 <td>td1</td>
 </tr>
 </table>
-<mip-xiandu-showmorebtn class="showmorebtn" target="tbList"  jsurl="http://localhost:60822/" pagecount="1">
+<mip-xiandu-showmorebtn class="showmorebtn" target="tbList"  jsurl="http://localhost:60822/" pagecount="2" moreId="divMore">
    <div style="width:100px;height:50px" id="divMore">点击加载</div>
 </mip-xiandu-showmorebtn>
 ```
@@ -34,10 +34,10 @@ mip-xiandu-showmorebtn 点击加载更多内容
  
 
 ### jsurl
-说明：当前调用js所在目录或http地址
+说明：当前调用js所在目录或http地址,可以为相对路径地址，以/结尾
 必选项：是
 类型：字符串 
-默认值：tbList 
+默认值：http://localhost:60822/ 
 
  
 
@@ -45,4 +45,11 @@ mip-xiandu-showmorebtn 点击加载更多内容
 说明：总页数
 必选项：是
 类型：字符串 
-默认值：tbList 
+默认值：1 
+
+
+### moreId
+说明：点击更多按钮的组件id
+必选项：是
+类型：字符串 
+默认值：divMore 

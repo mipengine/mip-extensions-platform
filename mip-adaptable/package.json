@@ -1,6 +1,6 @@
 {
     "name": "mip-adaptable",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "页面自适应",
     "contributors": [
         {
@@ -9,6 +9,6 @@
         }
     ],
     "engines": {
-        "mip": ">=1.1.1"
+        "mip": ">=1.1.2"
     }
 }

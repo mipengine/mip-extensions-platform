@@ -7,17 +7,17 @@ define(function (require) {
     'use strict';
     var customElement = require('customElement').create();
     window.onload = function () {
-        document.documentElement.style.fontSize = window.innerWidth / 6.4 + 'px';
+        document.documentElement.style.fontSize = parseInt(window.innerWidth / 6.4, 10) + 'px';
     };
     window.onresize = function () {
-        document.documentElement.style.fontSize = window.innerWidth / 6.4 + 'px';
+        document.documentElement.style.fontSize = parseInt(window.innerWidth / 6.4, 10) + 'px';
     };
     customElement.prototype.firstInviewCallback = function () {
         window.onload = function () {
-            document.documentElement.style.fontSize = window.innerWidth / 6.4 + 'px';
+            document.documentElement.style.fontSize = parseInt(window.innerWidth / 6.4, 10) + 'px';
         };
         window.onresize = function () {
-            document.documentElement.style.fontSize = window.innerWidth / 6.4 + 'px';
+            document.documentElement.style.fontSize = parseInt(window.innerWidth / 6.4, 10) + 'px';
         };
     };
 
