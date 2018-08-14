@@ -12,7 +12,7 @@ mip-qtkj-roll 滚动效果，支持上下左右滚动
 
 ### 基本用法
 ```html
-<mip-qtkj-roll direction="2" step="1" delayStop="150" speed="50" delayTime="3000" wateTime="1000">
+<mip-qtkj-roll direction="2" step="1" delayWidth="150" speed="50" delayTime="3000" wateTime="1000">
     <ul>
         <li><a>1111111111111</a></li>
         <li><a>2222222222222</a></li>

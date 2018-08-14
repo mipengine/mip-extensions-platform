@@ -12,9 +12,7 @@ mip-jjyy-view 用来品牌文章浏览组件
 
 ### 基本用法
 ```html
-<mip-jjyy-view>
-    <mip-jjyy-view viewId="0" viewPage="brand"></mip-jjyy-view>
-</mip-jjyy-view>
+    <mip-jjyy-view viewId="0" viewPage="article"></mip-jjyy-view>
 ```
 
 ## 属性

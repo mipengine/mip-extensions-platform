@@ -36,7 +36,7 @@ define(function (require) {
                         lsitDOM += '<div class="swiper-slide"><img src="' + data.productpic[i].cmsimage + '"></div>';
                     }
                     $('#swiper-container' + productType).find('.addlist').html(lsitDOM);
-                    // $('.swiper-slide:lt(" + num + ")').css('margin-left', '-' + width + 'px');
+                    $('.swiper-slide:lt(" + num + ")').css('margin-left', '-' + width + 'px');
                     $('#swiper-container' + productType).show();
                     $('.swiper-pagination').html(imgnum);
                     $('.swiper-button-next').on('click', function (e) {

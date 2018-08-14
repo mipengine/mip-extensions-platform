@@ -32,32 +32,9 @@ define(function (require) {
         });
         // 点击其他分类执行结果
         $(element).on('click', '#line li', function () {
-            var lsitMore = '';
-            var productType = $(this).attr('alt');
             var ThisIndex = $(this).index();
-            var url = common + 'front/product/pic/interface.do?id='
-                + productId + '&type = ' + productType + '&pageNo = 1&status=mip';
-            // var url= "http://wap.yesky.com/front/product/pic/interface.do?id=1049907&type=3&pageNo=1";
-            $.ajax({
-                type: 'get',
-                url: url,
-                dataType: 'json',
-                success: function (data) {
-                    for (var i = 0; i < data.productpic.length; i++) {
-                        lsitMore += '<li><mip-img src="' + data.productpic[i].cmsimage + '" '
-                            + 'num="' + data.productpic[i].num + '">'
-                            + '</mip-img></li>';
-                    }
-                    $('.piclist ul').eq(ThisIndex).html('').show().addClass('active')
-                        .siblings('ul').removeClass('active').hide();
-                    if (data.productpic.length < 10) {
-                        $('.piclist ul').eq(ThisIndex).html(lsitMore);
-                    }
-                    else {
-                        $('.piclist ul').eq(ThisIndex).html(lsitMore + '<button>加载更多</button>');
-                    }
-                }
-            });
+            $('.piclist ul').eq(ThisIndex).show().addClass('active')
+                .siblings('ul').removeClass('active').hide();
         });
     };
     return customElement;

@@ -2,7 +2,7 @@
 * 寻医问药mip改造 分流广告组件
 * @file 脚本支持
 * @author jqthink@gmail.com
-* @time 2018.08.09
+* @time 2018.08.14
 * @version 1.0.2
 */
 define(function (require) {
@@ -57,8 +57,8 @@ define(function (require) {
         $(elem).append(el);
         $(el).append(script);
     };
-    // firstInviewCallback  方法，元素插入到文档时执行，仅会执行一次
-    customElem.prototype.firstInviewCallback = function () {
+    // build 方法，元素插入到文档时执行，仅会执行一次
+    customElem.prototype.build = function () {
      // this.element 可取到当前实例对应的 dom 元素
         var elem = this.element;
         var ratio = $(elem).attr('ratio').split(/%,?/);

@@ -1,6 +1,6 @@
 # mip-hereseo-view
 
-mip-hereseo-view 组件说明
+mip-hereseo-view 用来品牌文章浏览组件
 
 标题|内容
 ----|----

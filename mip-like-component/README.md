@@ -13,7 +13,7 @@ mip-like-component   网站逻辑代码
 ### 基本用法
 ```html
 <mip-like-component>
-
+   
 </mip-like-component>
 ```
 

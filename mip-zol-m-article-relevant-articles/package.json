@@ -1,0 +1,14 @@
+{
+    "name": "mip-zol-m-article-relevant-articles",
+    "version": "1.0.0",
+    "description": "ZOLM站私有业务组件，加载更多相关文章",
+    "contributors": [
+        {
+            "name": "mulianju",
+            "email": "mulianju@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

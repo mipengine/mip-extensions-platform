@@ -26,7 +26,6 @@ define(function (require) {
             });
         }
         if (viewPage === 'article') {
-            alert('https://mip.hereseo.net/article_view.jspx');
             $.getJSON('https://mip.hereseo.net/article_view.jspx',
             {
                 'articleId': viewId

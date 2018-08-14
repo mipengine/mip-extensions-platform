@@ -18,7 +18,7 @@ define(function (require) {
         }, options);
         options.obj.append('<span class=\'__num\'>' + options.str + '</span>');
         var box = $('.__num');
-        var left = options.obj.offset().left;
+        var left = 0;
         var top = 0;
         box.css({
             'position': 'absolute',
@@ -42,11 +42,11 @@ define(function (require) {
     customElement.prototype.firstInviewCallback = function () {
         var ele = $(this.element);
         ele.find('.fabulous').on('click', function () {
-            var num =  parseInt($(this).find('.like-num').text(), 0);
+            var num =  parseInt(ele.find('.fabulous .like-num').text(), 0);
+            ele.find('.fabulous .like-num').text(num + 1);
             tipsBox({
                 obj: $('.fabulous')
             });
-            $(this).find('.like-num').text(num + 1);
         });
     };
     return customElement;

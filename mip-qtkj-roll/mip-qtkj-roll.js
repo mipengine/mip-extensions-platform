@@ -71,9 +71,7 @@ define(function (require) {
                         if (element.scrollTop >= this.ClientScroll) {
                             element.scrollTop -= this.ClientScroll;
                         }
-                        else {
-                            element.scrollTop += this.step;
-                        }
+                        element.scrollTop += this.step;
                     }
                     break;
                 case 1:
@@ -87,9 +85,7 @@ define(function (require) {
                         if (element.scrollTop <= 0) {
                             element.scrollTop += this.ClientScroll;
                         }
-                        else {
-                            element.scrollTop -= this.step;
-                        }
+                        element.scrollTop -= this.step;
                     }
                     break;
                 case 2:
@@ -103,9 +99,7 @@ define(function (require) {
                         if (element.scrollLeft >= this.ClientScroll) {
                             element.scrollLeft -= this.ClientScroll;
                         }
-                        else {
-                            element.scrollLeft += this.step;
-                        }
+                        element.scrollLeft += this.step;
                     }
                     break;
                 case 3:
@@ -119,9 +113,7 @@ define(function (require) {
                         if (element.scrollLeft <= 0) {
                             element.scrollLeft += this.ClientScroll;
                         }
-                        else {
-                            element.scrollLeft -= this.step;
-                        }
+                        element.scrollLeft -= this.step;
                     }
                     break;
             }
