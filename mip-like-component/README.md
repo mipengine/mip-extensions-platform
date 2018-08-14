@@ -3,7 +3,7 @@
 mip-like-component   网站逻辑代码
 
 标题|内容
---- 网站逻辑代码| 网站逻辑代码，基于音频组件的交互----
+--- 网站逻辑代码| 网站逻辑代码，基于点赞组件的交互----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
 所需脚本|https://c.mipcdn.com/static/v1/mip-like-component/mip-like-component.js
@@ -13,7 +13,7 @@ mip-like-component   网站逻辑代码
 ### 基本用法
 ```html
 <mip-like-component>
-   
+
 </mip-like-component>
 ```
 

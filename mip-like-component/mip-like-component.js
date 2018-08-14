@@ -6,7 +6,7 @@
 define(function (require) {
     var $ = require('zepto');
     var customElement = require('customElement').create();
-    var tipsBox = function (ele, options) {
+    var tipsBox = function (options) {
         options = $.extend({
             obj: null,
             str: '+1',
@@ -16,10 +16,10 @@ define(function (require) {
             color: 'red',
             callback: function () {}
         }, options);
-        ele.append('<span class=\'__num\'>' + options.str + '</span>');
+        options.obj.append('<span class=\'__num\'>' + options.str + '</span>');
         var box = $('.__num');
         var left = options.obj.offset().left;
-        var top = options.obj.offset().top;
+        var top = 0;
         box.css({
             'position': 'absolute',
             'left': left + 'px',
@@ -40,12 +40,13 @@ define(function (require) {
     };
 
     customElement.prototype.firstInviewCallback = function () {
-        // var element = $(this.element);
         var ele = $(this.element);
-        ele.on('click', function () {
-            tipsBox(ele, {
+        ele.find('.fabulous').on('click', function () {
+            var num =  parseInt($(this).find('.like-num').text(), 0);
+            tipsBox({
                 obj: $('.fabulous')
             });
+            $(this).find('.like-num').text(num + 1);
         });
     };
     return customElement;
