@@ -44,7 +44,7 @@ define(function (require) {
     }
 
     // 发送请求
-    customElement.prototype.sendAjax = function () {
+    customElement.prototype.sendAjax = function (pa) {
         var that = this;
         var $self = $(that.element);
         if (!that.data.request.url) {
@@ -55,7 +55,7 @@ define(function (require) {
         $.ajax({
             url: that.data.request.url,
             type: 'post',
-            data: that.data.params,
+            data: pa,
             beforeSend: function () {
                 if ($self.find('.loading-common').length === 0) {
                     $self.append('<div class="loading-common"></div>');
@@ -85,6 +85,11 @@ define(function (require) {
                         }
                     }
                 }
+                $self.find('input').each(function () {
+                    if (/^1[3|4|5|7|8]\d{9}$/.test($(this).val())) {
+                        $(this).val('');
+                    }
+                });
             }
         });
     };
@@ -110,8 +115,10 @@ define(function (require) {
     // 参数处理
     customElement.prototype.paramsFn = function () {
         var that = this;
-        var request = that.data.request;
-        var params = that.data.params;
+        var params = {};
+        for (var pkey in that.data.params) {
+            params[pkey] = that.data.params[pkey];
+        }
         var $self = $(that.element);
         for (var key in params) {
 
@@ -144,8 +151,7 @@ define(function (require) {
                 params[key] = mobileEncrypt(params[key], that.data.encrypt || 'zx');
             }
         }
-        console.log(that.data.params);
-        that.sendAjax();
+        that.sendAjax(params);
     };
 
     // 验证参数

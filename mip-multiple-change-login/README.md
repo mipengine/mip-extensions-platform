@@ -13,14 +13,14 @@ mip-multiple-change-login 组件说明
 ## 示例
 ```html
 <mip-multiple-change-login>
-    <div id="open-mip-login">登录</div>
+    <div class="open-mip-login">登录</div>
 </mip-multiple-change-login>
 ```
 
 ### 基本用法
 ```html
 <mip-multiple-change-login>
-    <div id="open-mip-login">登录</div>
+    <div class="open-mip-login">登录</div>
 </mip-multiple-change-login>
 ```
 

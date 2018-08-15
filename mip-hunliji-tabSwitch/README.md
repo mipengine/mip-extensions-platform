@@ -14,12 +14,12 @@ mip-hunliji-tabSwitch tab切换组件可嵌套mip-fixed
 ```html
 <mip-hunliji-tabSwitch>
     <div class="tab_box">
-        <div data-type="top-nav-list1">xxx</div>
+        <div class="active" data-type="top-nav-list1">xxx</div>
         <div data-type="top-nav-list2">sss</div>
     </div>
     <div class="text_box">
-        <div class="top-nav-list1">list1</div>
-        <div class="top-nav-list2">list2</div>
+        <div class="displaybox top-nav-list1">list1</div>
+        <div class="displaybox top-nav-list2">list2</div>
     </div>
 </mip-hunliji-tabSwitch>
 
@@ -34,8 +34,8 @@ mip-hunliji-tabSwitch tab切换组件可嵌套mip-fixed
         </div>
     </mip-semi-fixed>
     <div class="text_box">
-        <div class="top-nav-list1">list1</div>
-        <div class="top-nav-list2">list2</div>
+        <div class="displaybox top-nav-list1">list1</div>
+        <div class="displaybox top-nav-list2">list2</div>
     </div>
 </mip-hunliji-tabSwitch>
 ```
@@ -50,3 +50,4 @@ mip-hunliji-tabSwitch tab切换组件可嵌套mip-fixed
 
 ## 注意事项
 使用mip-semi-fixed时记得引用mip-semi-fixed.js
+text_box类名下div标签必须有“displaybox”类名，以便于切换内容

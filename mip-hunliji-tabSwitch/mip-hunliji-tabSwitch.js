@@ -16,8 +16,10 @@ define(function (require) {
         var $ele = $(this.element);
 
         $($ele).on('click', '.tab_box div', function () {
+            $ele.find('.tab_box div').removeClass('active');
+            $(this).addClass('active');
             var tag = $(this).attr('data-type');
-            $ele.find('.text_box div').hide();
+            $ele.find('.text_box .displaybox').hide();
             $ele.find('.text_box div.' + tag).show();
         });
     };

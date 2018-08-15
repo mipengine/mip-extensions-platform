@@ -1,0 +1,14 @@
+{
+    "name": "mip-ilaw66-baidutwo-order",
+    "version": "1.0.0",
+    "description": "法率网订单详情2期",
+    "contributors": [
+         {
+           "name": "jessli",
+           "email": "306651535@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

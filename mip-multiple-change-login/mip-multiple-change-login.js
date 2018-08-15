@@ -24,7 +24,7 @@ define(function (require) {
             + '            <p class="mobileNumber">请填写正确的手机号</p>'
             + '            <div class="change-login-code">\n'
             + '                <input name="code" type="text" placeholder="请输入短信码">\n'
-            + '                <p class="phone-code">获取验证</p>\n'
+            + '                <span class="phone-code">获取验证</span>\n'
             + '            </div>\n'
             + '            <input name="password" type="password" placeholder="请设置6-12位密码">\n'
             + '            <p class="passwordPrompt">请设置6-12位密码</p>'
@@ -63,7 +63,7 @@ define(function (require) {
             + '            <p class="mobileNumber">请填写正确的手机号</p>'
             + '            <div class="change-login-code">\n'
             + '                <input name="code" type="text" placeholder="请输入短信码">\n'
-            + '                <p class="phone-code">获取验证</p>\n'
+            + '                <span class="phone-code">获取验证</span>\n'
             + '            </div>\n'
             + '            <input name="password" type="password" placeholder="请设置6-12位密码">\n'
             + '            <p class="passwordPrompt">请设置6-12位密码</p>'
@@ -85,7 +85,7 @@ define(function (require) {
                 $('.mip-multiple-change-login').find('.multiple-change-view').css({'display': 'none'});
                 $('.mip-multiple-change-login').find('#' + showWhich).css({'display': 'block'});
             });
-            $('#open-mip-login').on('click', function () {
+            $('.open-mip-login').on('click', function () {
                 $('.mip-multiple-change-login').css({'display': 'block'});
             });
             $('.mip-multiple-change-login').find('.icon-close-x').on('click', function () {
