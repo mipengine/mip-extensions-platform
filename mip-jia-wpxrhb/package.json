@@ -1,0 +1,14 @@
+{
+    "name": "mip-jia-wpxrhb",
+    "version": "1.0.0",
+    "description": "旺铺新人红包",
+    "contributors": [
+        {
+            "name": "tao",
+            "email": "165526381@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

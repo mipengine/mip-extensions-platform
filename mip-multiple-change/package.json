@@ -1,0 +1,14 @@
+{
+    "name": "mip-multiple-change",
+    "version": "1.1.0",
+    "description": "一款切换显示页面元素隐藏的组件",
+    "contributors": [
+        {
+            "name": "mickey",
+            "email": "787440432@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.2.0"
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "name": "mip-hunliji-tabSwitch",
+    "version": "1.0.0",
+    "description": "tab切换组件可嵌套mip-fixed",
+    "contributors": [
+        {
+            "name": "niu_niu",
+            "email": "niu_niu@hunliji.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

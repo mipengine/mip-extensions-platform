@@ -12,7 +12,7 @@ mip-qtkj-roll 滚动效果，支持上下左右滚动
 
 ### 基本用法
 ```html
-<mip-qtkj-roll direction="2" step="1" delayWidth="150" speed="50" delayTime="3000" wateTime="1000">
+<mip-qtkj-roll direction="2" step="1" delayWidth="150" speed="50" delayTime="3000" waitTime="1000">
     <ul>
         <li><a>1111111111111</a></li>
         <li><a>2222222222222</a></li>
@@ -31,7 +31,7 @@ mip-qtkj-roll 滚动效果，支持上下左右滚动
 必选项：是
 类型：字符串
 取值范围：0:向上,1:向下,2:向左,3:向右
-## 注意事项:左右滚动的子元素需要转换为行内活行内块儿元素
+## 注意事项:左右滚动的子元素需要转换为行内或行内块儿元素
 
 
 ### step
