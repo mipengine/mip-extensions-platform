@@ -1,0 +1,14 @@
+{
+    "name": "mip-51la-lianyun",
+    "version": "1.0.0",
+    "description": "lianyun.51.la广告平台JS组件。",
+    "contributors": [
+        {
+            "name": "点点",
+            "email": "sy3tem@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
