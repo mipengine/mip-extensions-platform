@@ -53,6 +53,7 @@ define(function (require) {
                 $(ele).find('#fhuadong2').after(tips);
             }
 
+            downtips();
             downAddress();
             if (nodownOK === true) {
                 if ($(ele).find('.f-nodown').length <= 0) {
@@ -169,6 +170,50 @@ define(function (require) {
                         alert('预约成功！');
                     }
                 });
+            }
+        }
+        function downtips() {
+            var dunm = $(ele).find('.m-downdiv p').length;
+            var title = $(ele).find('.m-mkutop h1').html();
+            var nodownAzTips = '<p class="m-tips">《' + title + '》安卓版暂未公布上架日期，敬请期待。</p>';
+            var nodownIosTips = '<p class="m-tips">《' + title + '》苹果版暂未公布上架日期，敬请期待。</p>';
+            var kongTips = '<p class="m-tips">《' + title + '》暂未公布上架日期，敬请期待。</p>';
+            var mwords = ['安卓下载', '百度版', '九游版', '果盘版', '变态版', '在线玩', '立即下载', '360版'];
+            var downarr = [];
+            var resultarr = [];
+            for (var s = 0; s < dunm; s++) {
+                var text = $(ele).find('.m-downdiv p').eq(s).find('a').html();
+                downarr.push(text);
+            }
+            if (dunm !== 0) {
+                var size = $(ele).find('#downAddress a').html();
+                if (size === '暂无下载' || size === '资源已下架') {
+                    $(ele).find('.zw_0804_click').after(kongTips);
+                }
+                else {
+                    if (downarr.indexOf('苹果商店') !== -1 || downarr.indexOf('苹果下载') !== -1) {
+                        for (var n = 0, m = downarr.length; n < m; n++) {
+                            if (mwords.indexOf(downarr[n]) !== -1) {
+                                resultarr.push(downarr[n]);
+                            }
+
+                        }
+                        if (resultarr.length === 0) {
+                            $(ele).find('.zw_0804_click').after(nodownAzTips);
+                        }
+                    }
+                    else {
+                        for (var n = 0, m = downarr.length; n < m; n++) {
+                            if (mwords.indexOf(downarr[n]) !== -1) {
+                                resultarr.push(downarr[n]);
+                            }
+
+                        }
+                        if (resultarr.length !== 0) {
+                            $(ele).find('.zw_0804_click').after(nodownIosTips);
+                        }
+                    }
+                }
             }
         }
     };

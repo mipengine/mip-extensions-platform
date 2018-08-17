@@ -1,0 +1,14 @@
+{
+    "name": "mip-typecho-comment",
+    "version": "1.0.0",
+    "description": "Typecho评论回复的MIP组件",
+    "contributors": [
+        {
+            "name": "Zhao Zhiping",
+            "email": "izzhip@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

@@ -1,6 +1,6 @@
 {
     "name": "mip-to8to-report",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "可以支持页面进行个性化的数据上报统计，包括简单的自定义埋点",
     "contributors": [{
         "name": "svenMcLee",

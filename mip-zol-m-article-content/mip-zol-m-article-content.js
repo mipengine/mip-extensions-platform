@@ -23,7 +23,7 @@ define(function (require) {
                 }).then(function (res) {
                     return res.json();
                 }).then(function (res) {
-                    if (res.state === 1) {
+                    if (parseInt(res.state, 10) === 1) {
                         var fragment = document.createDocumentFragment();
                         var oDiv = document.createElement('div');
                         oDiv.innerHTML = res.docContent;

@@ -108,7 +108,7 @@ define(function (require) {
             var t = t + i;
             8 !== e && 12 !== e && 16 !== e && 20 !== e || (t += '');
         }
-        return this.guid = t += Math.ceil(1e6 * Math.random());
+        return t += Math.ceil(1e6 * Math.random());
     }
     /*
      * 获取当前时间戳

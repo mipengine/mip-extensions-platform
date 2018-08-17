@@ -1,0 +1,14 @@
+{
+    "name": "mip-xiandu-nav",
+    "version": "1.0.0",
+    "description": "mip网站导航",
+    "contributors": [
+        {
+            "name": "yanpo",
+            "email": "yanpo100@sina.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

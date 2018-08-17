@@ -1,0 +1,14 @@
+{
+    "name": "mip-hunliji-packageScreen",
+    "version": "1.0.0",
+    "description": "套餐列表筛选介绍",
+    "contributors": [
+        {
+            "name": "niu_niu",
+            "email": "niu_niu@hunliji.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
