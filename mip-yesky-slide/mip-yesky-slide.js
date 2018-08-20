@@ -2,7 +2,6 @@
  * @file mip-yesky-slide 组件
  * @author
  */
-
 define(function (require) {
     var customElement = require('customElement').create();
     var $ = require('zepto');
@@ -36,9 +35,7 @@ define(function (require) {
                         lsitDOM += '<div class="swiper-slide"><img src="' + data.productpic[i].cmsimage + '"></div>';
                     }
                     $(element).find('#swiper-container' + productType).find('.addlist').html(lsitDOM);
-                    for (var j = 0; j < num; j++) {
-                        $(element).find('.swiper-slide:eq(' + j + ')').css('margin-left', '-' + width + 'px');
-                    }
+                    $(element).find('.addlist .swiper-slide').slice(0, num).css('margin-left', '-' + width + 'px');
                     $(element).find('#swiper-container' + productType).show();
                     $(element).find('.swiper-pagination').html(imgnum);
                     $(element).find('.swiper-button-next').on('click', function (e) {

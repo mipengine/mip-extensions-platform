@@ -1,0 +1,14 @@
+{
+    "name": "mip-codeHMback-tgb",
+    "version": "1.0.0",
+    "description": "港股美股回调函数",
+    "contributors": [
+        {
+            "name": "xhj",
+            "email": "3233268172@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

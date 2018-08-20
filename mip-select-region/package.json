@@ -1,0 +1,14 @@
+{
+    "name": "mip-select-region",
+    "version": "1.0.0",
+    "description": "一款选择省市地区的组件",
+    "contributors": [
+        {
+            "name": "mickey",
+            "email": "787440432@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

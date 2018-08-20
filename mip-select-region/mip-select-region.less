@@ -1,0 +1,187 @@
+/**
+ * @file mip-select-region样式文件
+ */
+
+mip-select-region {
+    // TODO
+    width: 100%;
+    position: relative;
+}
+
+mip-select-region .mip-sel-region-box {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    background: #ffffff;
+    z-index: 1000;
+    padding: 0 0% 2% 0%;
+    width: 100%;
+    border: 1px solid #d8d6d6;
+    text-align: center;
+    display: none;
+}
+
+mip-select-region .top {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 1px solid #d8d6d6;
+}
+
+mip-select-region .mip-sel-region-box span {
+    width: 19%;
+    height: 40px;
+    line-height: 40px;
+    display: block;
+    float: left;
+    color: #666666;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+mip-select-region .mip-sel-region-box .province span:hover, 
+mip-select-region .mip-sel-region-box .city span:hover {
+    color: #2A72C6;
+}
+
+mip-select-region .mip-sel-region-box .activeBlue {
+    color: #2A72C6;
+}
+
+mip-select-region .pcClose {
+    display: block;
+    width: 40px;
+    height: 40px;
+    float: right;
+    font-style: normal;
+    color: #666666;
+    font-size: 30px;
+    margin-right: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+
+mip-select-region .mobileClose {
+    display: none;
+    width: 40px;
+    height: 40px;
+    font-size: 30px;
+    font-style: normal;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #666666;
+}
+
+mip-select-region .mip-sel-region-box .city {
+    display: none;
+}
+
+.mip-select-region-maskLayer {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 999;
+}
+
+.clear-float:after {
+    content: ".";
+    clear: both;
+    display: block;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+}
+
+@media screen and (max-width: 767px) {
+    mip-select-region .mip-sel-region-box {
+        width: 100%;
+        height: 70%;
+        background-color: #FFF;
+        position: fixed;
+        top: 30%;
+        overflow: hidden;
+        text-align: left;
+        animation: myfirst .4s;
+        -moz-animation: myfirst .4s; /* Firefox */
+        -webkit-animation: myfirst .4s; /* Safari and Chrome */
+        -o-animation: myfirst .4s; /* Opera */
+    }
+
+    @keyframes myfirst {
+        from {
+            top: 100%;
+        }
+        to {
+            top: 30%;
+        }
+    }
+
+    @-moz-keyframes myfirst /* Firefox */ {
+        from {
+            top: 100%;
+        }
+        to {
+            top: 30%;
+        }
+    }
+
+    @-webkit-keyframes myfirst /* Safari and Chrome */ {
+        from {
+            top: 100%;
+        }
+        to {
+            top: 30%;
+        }
+    }
+
+    @-o-keyframes myfirst /* Opera */ {
+        from {
+            top: 100%;
+        }
+        to {
+            top: 30%;
+        }
+    }
+    mip-select-region .top {
+        display: none;
+    }
+
+    mip-select-region .mip-sel-region-box .province {
+        display: block !important;
+        width: 50%;
+        height: 100%;
+        float: left;
+        background-color: #f2f2f2;
+        overflow-y: scroll;
+    }
+
+    mip-select-region .mip-sel-region-box .city {
+        width: 50%;
+        height: 100%;
+        float: right;
+        overflow-y: scroll;
+    }
+
+    mip-select-region .mip-sel-region-box span {
+        width: 91%;
+        height: 40px;
+        line-height: 40px;
+        padding-left: 10%;
+        display: block;
+        font-size: 14px;
+        color: #acabab;
+    }
+
+    mip-select-region .pcClose {
+        display: none;
+    }
+
+    mip-select-region .mobileClose {
+        display: block;
+    }
+}

@@ -646,7 +646,7 @@ define(function (require) {
         function onchangeEvent(arrArea) {
             var str = '';
             for (var i = 0; i < arrArea.length; i++) {
-                str = str + '<option value="' + i + '">' + arrArea[i] + '</option>';
+                str = str + '<option value="' + arrArea[i] + '">' + arrArea[i] + '</option>';
             }
             return str;
         }
