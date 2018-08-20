@@ -1,0 +1,14 @@
+{
+    "name": "mip-loadJS-tgb",
+    "version": "1.0.1",
+    "description": "获取股票的当前价，涨跌幅，涨跌额信息",
+    "contributors": [
+        {
+            "name": "xhj",
+            "email": "3233268172@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

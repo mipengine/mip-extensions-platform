@@ -1,13 +1,11 @@
 {
     "name": "mip-ilaw66-baidu-login",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "法率网登录页",
-    "contributors": [
-        {
-            "name": "skylyth",
-            "email": "skylyth@163.com"
-        }
-    ],
+       "contributors": [{
+        "name": "jessli",
+        "email": "306651535@qq.com"
+    }],
     "engines": {
         "mip": ">=1.1.0"
     }

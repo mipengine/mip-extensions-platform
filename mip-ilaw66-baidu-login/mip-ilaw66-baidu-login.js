@@ -78,7 +78,7 @@ define(function (require) {
             $el.find('.common_number').text('');
         }
         else if (channel === 'baidusearch' || channel === 'baidu_xzh') {
-            $el.find('.header_block').html('准备咨询');
+            $el.find('.header_block .headertitle').html('准备咨询');
             $el.find('.header_block').css('color', '#000');
             $el.find('.header_block').css('background', '#fff');
             $el.find('.glyphicon').css('color', '#000000');

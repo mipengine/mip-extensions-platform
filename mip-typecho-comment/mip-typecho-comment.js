@@ -16,13 +16,13 @@ define(function (require) {
         var ele = this.element;
 
         $(ele).ready(function () {
-            $('mip-typecho-comment span').on('click', function () {
-                var target = this.getAttribute('target');
+            $('mip-typecho-comment a').on('click', function () {
+                var objective = this.getAttribute('objective');
                 var cid = this.getAttribute('cid');
                 var coid = this.getAttribute('coid');
                 var rid = this.getAttribute('rid');
 
-                if (target === 'reply') {
+                if (objective === 'reply') {
                     var comment = ele.querySelector('#' + cid);
                     var response = ele.querySelector('#' + rid);
                     var input = ele.querySelector('#comment-parent');
@@ -75,7 +75,7 @@ define(function (require) {
                     return false;
                 }
 
-                if (target === 'cancelreply') {
+                if (objective === 'cancelreply') {
                     response = ele.querySelector('#' + rid);
                     holder = ele.querySelector('#comment-form-place-holder');
                     input = ele.querySelector('#comment-parent');

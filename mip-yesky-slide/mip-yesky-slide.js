@@ -35,32 +35,34 @@ define(function (require) {
                     for (var i = 0; i < data.productpic.length; i++) {
                         lsitDOM += '<div class="swiper-slide"><img src="' + data.productpic[i].cmsimage + '"></div>';
                     }
-                    $('#swiper-container' + productType).find('.addlist').html(lsitDOM);
-                    $('.swiper-slide:lt(" + num + ")').css('margin-left', '-' + width + 'px');
-                    $('#swiper-container' + productType).show();
-                    $('.swiper-pagination').html(imgnum);
-                    $('.swiper-button-next').on('click', function (e) {
+                    $(element).find('#swiper-container' + productType).find('.addlist').html(lsitDOM);
+                    for (var j = 0; j < num; j++) {
+                        $(element).find('.swiper-slide:eq(' + j + ')').css('margin-left', '-' + width + 'px');
+                    }
+                    $(element).find('#swiper-container' + productType).show();
+                    $(element).find('.swiper-pagination').html(imgnum);
+                    $(element).find('.swiper-button-next').on('click', function (e) {
                         if (num === 0) {
                             num = 0;
                         }
                         else if (num === thisTotal - 1) {
                             num = thisTotal - 2;
                         }
-                        $('.swiper-slide').eq(num).animate({'margin-left': '-' + width + 'px'});
+                        $(element).find('.swiper-slide').eq(num).animate({'margin-left': '-' + width + 'px'});
                         num = num + 1;
                         var imgnum = '<span class="swiper-pagination-current">'
                             + (num + 1) + '</span> /' + thisTotal + '（' + thisName + '）';
-                        $('.swiper-pagination').html(imgnum);
+                        $(element).find('.swiper-pagination').html(imgnum);
                     });
-                    $('.swiper-button-prev').click(function (e) {
+                    $(element).find('.swiper-button-prev').click(function (e) {
                         if (num === 0) {
                             num = 1;
                         }
-                        $('.swiper-slide').eq(num - 1).animate({'margin-left': 0});
+                        $(element).find('.swiper-slide').eq(num - 1).animate({'margin-left': 0});
                         num = num - 1;
                         var imgnum = '<span class="swiper-pagination-current">'
                             + (num + 1) + '</span> /' + thisTotal + '（' + thisName + '）';
-                        $('.swiper-pagination').html(imgnum);
+                        $(element).find('.swiper-pagination').html(imgnum);
                     });
                 }
             });

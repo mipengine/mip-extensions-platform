@@ -1,7 +1,7 @@
 {
     "name": "mip-5hshield-data",
-    "version": "1.0.2",
-    "description": "添加了新功能",
+    "version": "1.1.2",
+    "description": "添加了无下载地址提示功能",
     "contributors": [
         {
             "name": "yx",

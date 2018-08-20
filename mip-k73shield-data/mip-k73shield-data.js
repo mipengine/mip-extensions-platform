@@ -138,6 +138,7 @@ define(function (require) {
                 var yAlert = dom1 + '<div class="yAlert">' + dom2 + dom3 + dom4 + '</div>';
                 var title = $(ele).find('.f-game-h1').html();
                 var newtitle = title.replace('下载', '');
+                $(ele).find('.m-mkutop dl dd').eq(2).html('<span>大小：</span>暂未发布');
                 $(ele).find('.f-game-h1').html(newtitle);
                 $(ele).find('.f-downbtn-url').find('a').addClass('reser').html('立即预约');
                 $('body').on('click', '.reser', function (e) {

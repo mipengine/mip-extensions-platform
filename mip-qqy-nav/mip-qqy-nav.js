@@ -15,6 +15,7 @@ define(function (require) {
             var bodyheight = $(document).height();
             e.find('.quick_bg').css('height', bodyheight);
             e.find('.quick-nav,.quick_bg').toggle();
+            e.find('.quick_bg').css('opacity', '.4');
         });
     };
 

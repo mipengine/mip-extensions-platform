@@ -1,0 +1,14 @@
+{
+    "name": "mip-lc-alert",
+    "version": "1.0.0",
+    "description": "弹框组件",
+    "contributors": [
+        {
+            "name": "songxd",
+            "email": "songxd126@123.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

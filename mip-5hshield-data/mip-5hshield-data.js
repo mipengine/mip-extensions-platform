@@ -44,6 +44,7 @@ define(function (require) {
             var nodownsize = data.nodownsize;
             var notagsurl = data.swnotagurl;
             var incity = data.ipInfo.city;
+            downAdd();
             mgcFilter(data.ffTitle, data.mgcArrayHtml, data['eject-city'], incity);
             if (nodownOK === true) {
                 if ($(ele).find('.f-nodown').length <= 0) {
@@ -119,7 +120,53 @@ define(function (require) {
                 }
             }
         }
-
+        function downAdd() {
+            if ($(ele).find('#downAddress').find('li').length === 0) {
+                var nodown = '<li class="m-down-last nodown">立即预约</li>';
+                $(ele).find('#downAddress').append(nodown);
+                $(ele).find('.g-info .info1 .f-game-size').html('暂未发布');
+            }
+            var id = pageInfo.id;
+            var dom1 = '<div class="yAlert_bg"></div>';
+            var dom2 = '<div class="yAlert_t cfix"><span class="yAlert_c">×</span>请输入预约的手机号码</div>';
+            var dom3 = '<input type="text" id="yPhone" placeholder="输入手机号码">';
+            var dom4 = '<div class="yAlert_b"><div class="yAlert_bs">确定</div><div class="yAlert_br">取消</div></div>';
+            var yAlert = dom1 + '<div class="yAlert">' + dom2 + dom3 + dom4 + '</div>';
+            $(ele).find('.m-down-ul .nodown').click(function () {
+                $(ele).find('footer').after(yAlert);
+                $(ele).find('.yAlert_bg,.yAlert').show();
+            });
+            $(ele).on('click', '.yAlert_c', function () {
+                $(ele).find('.yAlert_bg,.yAlert').remove();
+            });
+            $(ele).on('click', '.yAlert_br', function () {
+                $(ele).find('.yAlert_bg,.yAlert').remove();
+            });
+            $(ele).on('click', '.yAlert_bs', function () {
+                var tel = $('#yPhone').val();
+                var pattern = /^1[34578]\d{9}$/;
+                if (tel === '') {
+                    alert('请输入手机号码！');
+                }
+                else if (!pattern.test(tel)) {
+                    alert('请输入正确手机号码！');
+                }
+                else {
+                    $.ajax({
+                        url: 'http://m.5h.com/e/extend/addly.php',
+                        type: 'post',
+                        data: {
+                            kid: id,
+                            tbname: 'down',
+                            reason: tel
+                        },
+                        success: function (returnValue) {
+                            $(ele).find('.yAlert_bg,.yAlert').remove();
+                        }
+                    });
+                }
+            });
+        }
     };
     return customElement;
 });
