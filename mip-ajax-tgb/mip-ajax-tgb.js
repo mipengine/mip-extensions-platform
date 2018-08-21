@@ -5,7 +5,7 @@
 
 define(function (require) {
     'use strict';
-
+    var $ = require('zepto');
     var customElement = require('customElement').create();
 
     /**
@@ -17,16 +17,15 @@ define(function (require) {
         var funId = element.getAttribute('funId') || '';
         var asyncType = element.getAttribute('asyncType') || true;
         var codeDataDiv = document.getElementById(funId);
-        asyncfun(url, funId, asyncType);
+        asyncfun(url, codeDataDiv, asyncType);
     };
     function asyncfun(url, codeDataDiv, asyncType) {
         $.ajax({
             type: 'GET',
             url: url,
             dataType: 'json',
-            async: true,
             success: function (json) {
-                codeDataDiv.value = json;
+                codeDataDiv.value = JSON.stringify(json);
             },
             timeout: 30000,
             async: asyncType,

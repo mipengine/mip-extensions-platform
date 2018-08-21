@@ -37,7 +37,7 @@ define(function (require) {
         },
         options.interval,
         function () {
-            box.remove();
+            $(box).remove();
             options.callback();
         });
     };
@@ -75,6 +75,7 @@ define(function (require) {
                         tipsBox({
                             obj: self,
                             str: '+1',
+                            color: 'red',
                             callback: function () {
                                 var num = parseInt(ele.find('.fabulous .like-num').text().replace(/,/g, ''), 0);
                                 var newNum = num + 1;
@@ -85,6 +86,7 @@ define(function (require) {
                         tipsBox({
                             obj: self,
                             str: '您已点赞，谢谢！',
+                            color: 'red',
                             callback: function () {}
                         });
                     }

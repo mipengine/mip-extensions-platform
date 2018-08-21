@@ -6,25 +6,23 @@
 define(function (require) {
     'use strict';
 
-    (function (doc, win) {
-        var docEl = doc.documentElement;
-        var resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
-        var reCalc = function () {
-            var clientWidth = docEl.clientWidth;
-            if (!clientWidth) {
-                return;
-            }
-            win.baseFontSize = 100 * (clientWidth / 750);
-            docEl.style.fontSize = win.baseFontSize + 'px';
-        };
-        if (!doc.addEventListener) {
+    var docEl = document.documentElement;
+    var resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+    if (!document.addEventListener) {
+        return;
+    }
+    reCalc();
+    window.addEventListener(resizeEvt, reCalc, false);
+    document.addEventListener('DOMContentLoaded', reCalc, false);
+
+    function reCalc() {
+        var clientWidth = docEl.clientWidth;
+        if (!clientWidth) {
             return;
         }
-        reCalc();
-        win.addEventListener(resizeEvt, reCalc, false);
-        doc.addEventListener('DOMContentLoaded', reCalc, false);
-    })(document, window);
-
+        window.baseFontSize = 100 * (clientWidth / 750);
+        docEl.style.fontSize = window.baseFontSize + 'px';
+    }
 
 
     var customElement = require('customElement').create();

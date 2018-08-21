@@ -12,7 +12,7 @@ mip-ajax-tgb 自定义异步请求封装
 
 ### 基本用法
 ```html
-<div  id='aaaa'></div>
+<input  id='aaaa' />
 <mip-ajax-tgb  url='*******'  funId='aaaa'></mip-ajax-tgb>
 </mip-ajax-tgb>
 ```

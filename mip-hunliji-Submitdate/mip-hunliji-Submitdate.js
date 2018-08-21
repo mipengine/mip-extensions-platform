@@ -34,6 +34,11 @@ define(function (require) {
                     }
                 } else {
                     $(element).find('#open_tips p').html(result.status.msg);
+                    $(element).find('#open_tips').show();
+                    setTimeout(function () {
+                        $(element).find('#open_tips').hide();
+                        window.top.location.href = location.href;
+                    }, 2000);
                 }
             }
         });

@@ -1,7 +1,7 @@
 {
-    "name": "mip-ajax-tgb",
-    "version": "1.0.1",
-    "description": "自定义异步请求封装",
+    "name": "mip-code-msg",
+    "version": "1.0.0",
+    "description": "获取当前价，涨跌幅，涨跌额，昨收，今开，最高，最低价格",
     "contributors": [
         {
             "name": "xhj",

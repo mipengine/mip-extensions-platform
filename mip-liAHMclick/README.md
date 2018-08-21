@@ -1,0 +1,53 @@
+# mip-liAHMclick
+
+mip-liAHMclick 组件说明
+自定义切换条
+标题|内容
+----|----
+类型|通用
+支持布局|responsive,fixed-height,fill,container,fixed
+所需脚本|https://c.mipcdn.com/static/v1/mip-liAHMclick/mip-liAHMclick.js
+
+## 示例
+
+### 基本用法
+```html
+ <ul class="tabClick">
+			<li class="active " id="lia"><a 
+				href="#" id="titA" class='liastyle'>沪深</a></li>
+			<li id="lib"><a  href="#"
+				id="titH" class='liastyle'>港股</a></li>
+			<li id="lic"><a  href="#"
+				id="titM" class='liastyle'>美股</a></li>
+</ul>
+	<div class="tabList" id="aHM">aa</div>
+	<div class="tabList" id="AhM">bb</div>
+	<div class="tabList" id="AHm">cc</div>
+	<mip-liAHMclick   type='A'  aId='titA' ></mip-liAHMclick>
+	<mip-liAHMclick   aId='titH' type='H'></mip-liAHMclick>
+	<mip-liAHMclick   aId='titM' type='M'>
+</mip-liAHMclick>```
+
+
+#### 属性
+
+### aId
+说明：a标签的id
+必选项：是
+类型：字符串
+取值范围：无
+单位：无
+默认值：无
+
+### type
+说明：类型
+必选项：是
+类型：字符串
+取值范围：A H  M
+单位：无
+默认值：无
+
+## 注意事项
+无
+
+
