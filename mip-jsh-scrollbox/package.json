@@ -1,0 +1,14 @@
+{
+    "name": "mip-jsh-scrollbox",
+    "version": "1.0.0",
+    "description": "文字内容滚动组件",
+    "contributors": [
+        {
+            "name": "yang",
+            "email": "3094316744@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

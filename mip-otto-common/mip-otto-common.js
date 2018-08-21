@@ -1,7 +1,9 @@
 /**
  * @file mip-otto-common 网校通用组件
  * @author xinbao
- * @date 2018年8月2日
+ * @date 2018年8月14日
+ * @desc 更新内部链接，更灵活健壮
+ * @desc 修改部分url，但因部分网址不支持https，只能先修改一部分了。
  */
 
 define(function (require) {
@@ -65,7 +67,7 @@ define(function (require) {
             if (sign) {
                 var baseUrl = window.location.origin;
                 if (window.location.origin.search(/wangxiao.cn/gi) < 0) {
-                    baseUrl = 'http://wap2.wangxiao.cn';
+                    baseUrl = '//wap2.wangxiao.cn';
                 }
 
                 var url = baseUrl + '/Pub/GetNtalkerSettingIdBySign?sign=' + sign;
@@ -83,7 +85,9 @@ define(function (require) {
                         document.querySelector('head').appendChild(script4kf);
 
                         // 此处引用小能客服js，由第三方提供服务支持，暂时无法做进一步封装
-                        loadJs('https://dl.ntalker.com/js/xn6/ntkfstat.js?siteid=' + NTKF_PARAM.siteid);
+                        loadJs(
+                            'https://dl.ntalker.com/js/xn6/ntkfstat.js?siteid=' + NTKF_PARAM.siteid
+                        );
                     }
                 });
             }
@@ -97,10 +101,14 @@ define(function (require) {
             var threshold = 200;
             function toggle(element) {
                 if (viewport.getScrollTop() > threshold) {
-                    element.querySelector('#js__back2top').classList.remove('hide');
+                    element
+                        .querySelector('#js__back2top')
+                        .classList.remove('hide');
                 }
                 else {
-                    element.querySelector('#js__back2top').classList.add('hide');
+                    element
+                        .querySelector('#js__back2top')
+                        .classList.add('hide');
                 }
             }
             toggle(element);
@@ -150,20 +158,31 @@ define(function (require) {
             var temp = document.createElement('div');
             temp.classList.add('cFooter');
             element.appendChild(temp);
-            element.querySelector('.cFooter').innerHTML = '<a href="mip/h/@(Sign).html" class="cFooter__item">'
+            var sign = element.params.sign;
+            element.querySelector('.cFooter').innerHTML = '<a href="mip/h/'
+                + sign
+                + '.html" class="cFooter__item">'
                 + '<i class="cFooter__itemImg cFooter__itemImg--home"></i>'
                 + '<p class="cFooter__itemText">首页</p>'
                 + '</a>'
-                + '<a href="/Course/Index?sign=@(Sign)" class="cFooter__item">'
+                + '<a href="/Course/Index?sign='
+                + sign
+                + '" class="cFooter__item">'
                 + '<i class="cFooter__itemImg cFooter__itemImg--course"></i><p class="cFooter__itemText">课程</p>'
                 + '</a>'
-                + '<a href="/Tiku/?sign=@(Sign)" href="/Tiku/?sign=@(Sign)" class="cFooter__item">'
+                + '<a href="/Tiku/?sign='
+                + sign
+                + '" class="cFooter__item">'
                 + '<i class="cFooter__itemImg cFooter__itemImg--bank"></i><p class="cFooter__itemText">题库</p>'
                 + '</a>'
-                + '<a href="/Book/?sign=@(Sign)" class="cFooter__item">'
+                + '<a href="/Book/?sign='
+                + sign
+                + '" class="cFooter__item">'
                 + ' <i class="cFooter__itemImg cFooter__itemImg--book"></i><p class="cFooter__itemText">图书</p>'
                 + '</a>'
-                + '<a href="/TikuUserData/Personal/?sign=@(Sign)" class="cFooter__item">'
+                + '<a href="/TikuUserData/Personal/?sign='
+                + sign
+                + '" class="cFooter__item">'
                 + ' <i class="cFooter__itemImg cFooter__itemImg--my"></i><p class="cFooter__itemText">我的</p>'
                 + '</a>';
         }
@@ -174,10 +193,14 @@ define(function (require) {
             element.querySelector('.getApp').innerHTML = '<span class="pageApp_close">×</span>'
                 + '<mip-img class="pageApp_img" src="http://wap2.wangxiao.cn/content/website2/img/app_logo.png" alt=""></mip-img>'
                 + '<span class="pageApp_title">准题库-考试通关听课刷题神器</span>'
-                + '<a class="pageApp_btn" href="http://appconfig.wangxiao.cn/DownLoad/Index?sign=' + element.params.sign + '">免费下载</a>';
-            element.querySelector('.pageApp_close').addEventListener('click', function () {
-                this.parentElement.classList.add('hide');
-            });
+                + '<a class="pageApp_btn" href="http://appconfig.wangxiao.cn/DownLoad/Index?sign='
+                + element.params.sign
+                + '">免费下载</a>';
+            element
+                .querySelector('.pageApp_close')
+                .addEventListener('click', function () {
+                    this.parentElement.classList.add('hide');
+                });
         }
         return {
             remFun: remFun,

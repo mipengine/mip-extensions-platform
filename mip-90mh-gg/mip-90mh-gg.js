@@ -15,7 +15,7 @@ define(function (require) {
         var node = document.createElement('script');
         node.type = 'text/javascript';
         // 引入90漫画广告管理组件，实现广告素材轮播功能
-        node.src = 'https://www.90mh.com/mip/a-90mh.js';
+        node.src = 'http://www.90mh.com/mip/a-90mh.js';
         node.async = 'async';
         $(element).append(node);
     }

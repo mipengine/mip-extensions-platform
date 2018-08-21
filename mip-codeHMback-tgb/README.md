@@ -7,6 +7,7 @@ mip-codeHMback-tgb 组件说明
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
 所需脚本|https://c.mipcdn.com/static/v1/mip-codeHMback-tgb/mip-codeHMback-tgb.js
+https://c.mipcdn.com/static/v1/mip-codeHMback-tgb/mip-codeHMback-tgb.js
 
 ## 示例
 

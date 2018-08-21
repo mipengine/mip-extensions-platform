@@ -1,0 +1,14 @@
+{
+    "name": "mip-hunliji-Submitdate",
+    "version": "1.0.0",
+    "description": "用户提交预约信息",
+    "contributors": [
+        {
+            "name": "niu_niu",
+            "email": "niu_niu@hunliji.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "name": "mip-hunliji-CollectPackage",
+    "version": "1.0.0",
+    "description": "收藏、取消收藏商家套餐",
+    "contributors": [
+        {
+            "name": "niu_niu",
+            "email": "niu_niu@hunliji.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

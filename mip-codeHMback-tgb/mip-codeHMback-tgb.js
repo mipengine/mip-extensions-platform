@@ -30,31 +30,45 @@ define(function (require) {
                     } else {
                         codelist += list[i].keywordName + ',';
                     }
+                    var id = 'l_' + list[i].keywordName;
+                    var html2 = '<mip-loadJS-tgb code="' + list[i].keywordName + '"code-id="';
+                    html2 += id + '"+ code-type="H" code-count="two"></mip-loadJS-tgb>';
+                    $('#H_stocke').append(html2);
                 }
-                $('#' + funId).attr('name', codelist);
-                if (type === 'M') {
-                    document.getElementById('M_stocke').innerHTML = html;
-                    // 美股数据添加
-                    var codelist = '';
-                    // 需要判断股票代码是否以gb_开头
-                    for (var i = 0; i < list.length; i++) {
-                        var head = list[i].keywordName.toLowerCase().substring(0, 3);
-                        if (i === (list.length - 1)) {
-                            if ('gb_' === head) {
-                                codelist += list[i].keywordName.toLowerCase();
-                            } else {
-                                codelist += 'gb_' + list[i].keywordName.toLowerCase();
-                            }
+            } else if (type === 'M') {
+                document.getElementById('M_stocke').innerHTML = html;
+                // 美股数据添加
+                var codelist = '';
+                // 需要判断股票代码是否以gb_开头
+                for (var i = 0; i < list.length; i++) {
+                    var head = list[i].keywordName.toLowerCase().substring(0, 3);
+                    if (i === (list.length - 1)) {
+                        if ('gb_' === head) {
+                            codelist += list[i].keywordName.toLowerCase();
                         } else {
-                            if ('gb_' === head) {
-                                codelist += list[i].keywordName.toLowerCase() + ',';
-                            } else {
-                                codelist += 'gb_' + list[i].keywordName.toLowerCase() + ',';
-                            }
+                            codelist += 'gb_' + list[i].keywordName.toLowerCase();
+                        }
+                    } else {
+                        if ('gb_' === head) {
+                            codelist += list[i].keywordName.toLowerCase() + ',';
+                        } else {
+                            codelist += 'gb_' + list[i].keywordName.toLowerCase() + ',';
                         }
                     }
-                    $('#' + funId).attr('name', codelist);
+                    if ('gb_' === head) {
+                        var id = 'l_' + list[i].keywordName.toLowerCase();
+                        var html2 = '<mip-loadJS-tgb code="' + list[i].keywordName.toLowerCase() + '"code-id="';
+                        html2 += id + '"+ code-type="M" code-count="two"></mip-loadJS-tgb>';
+                        $('#M_stocke').append(html2);
+                    } else {
+                        var id = 'l_gb_' + list[i].keywordName.toLowerCase();
+                        var code = 'gb_' + list[i].keywordName.toLowerCase();
+                        var html2 = '<mip-loadJS-tgb code="' + code + '"code-id="';
+                        html2 += id + '"+ code-type="M" code-count="two"></mip-loadJS-tgb>';
+                        $('#M_stocke').append(html2);
+                    }
                 }
+
             }
         }
     };

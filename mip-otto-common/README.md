@@ -18,7 +18,7 @@ mip-otto-common 网校通用模块集合
         {
             "rem": true,
             "fixedright": true,
-            "sign":"jsz",
+            "sign":"cfe",
             "fixedbottom":true,
             "downbanner":{
                 "enable":true,

@@ -20,6 +20,11 @@ mip-linktion-fortune-consults ajax移动端弹框提交表单，pc端下滑卡�
         }
     </script>
   </mip-data>
+  <div class="details-iframe">
+    <mip-video src="https://gss0.bdstatic.com/-b1Caiqa0d9Bmcmop9aC2jh9h2w8e4_h7sED0YQ_t9iCPK/mda-gjkt21pkrsd8ae5y/mda-gjkt21pkrsd8ae5y.mp4"></mip-video>
+  </div>
+
+    </div>
   <div class="col-lg-4 col-xs-12 col-sm-4 consult-box">
     <div class="person-card consult-box" data-plannerid="1" data-productid="6"  data-consulturl="http://www.caifu.org/product/consult">
       <div class="click-lightbox slide-up">
@@ -54,11 +59,11 @@ mip-linktion-fortune-consults ajax移动端弹框提交表单，pc端下滑卡�
         </form>
       </div>
       <div class="recommend-icon">
-        <mip-img src=""></mip-img>
+        <mip-img src="img.png"></mip-img>
       </div>
       <div class="card-box">
         <div class="person-icon">
-          <mip-img src=""></mip-img>
+          <mip-img src="img.png"></mip-img>
         </div>
         <div class="info-text">
           <div class="text-name">
@@ -126,11 +131,11 @@ mip-linktion-fortune-consults ajax移动端弹框提交表单，pc端下滑卡�
         </mip-form>
       </div>
       <div class="recommend-icon">
-        <mip-img src=""></mip-img>
+        <mip-img src="img.png"></mip-img>
       </div>
       <div class="card-box">
         <div class="person-icon">
-          <mip-img src=""></mip-img>
+          <mip-img src="img.png"></mip-img>
         </div>
         <div class="info-text">
           <div class="text-name">

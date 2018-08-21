@@ -15,6 +15,16 @@ define(function (require) {
      */
     customElement.prototype.firstInviewCallback = function () {
         var $el = $(this.element);
+        $el.find('.card-phone-but a').on('touchstart', function () {
+            $el.find('.details-iframe').hide();
+            $el.find('.details-iframe video')[0].pause();
+            $el.find('#MIP-LLIGTBOX-MASK').on('touchstart', function () {
+                $el.find('.details-iframe').show();
+            });
+        });
+        $el.find('.close').on('touchstart', function () {
+            $el.find('.details-iframe').show();
+        });
         $el.find('.card-but .but-advisory').on('click', function () {
             $(this).parent().siblings('.click-lightbox').removeClass('slide-up').addClass('slide');
         });
