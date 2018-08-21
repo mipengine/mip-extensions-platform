@@ -11,14 +11,14 @@ define(function (require) {
             obj: null,
             str: '+1',
             startSize: '12px',
-            endSize: '30px',
+            endSize: '20px',
             interval: 600,
             color: 'red',
             callback: function () {}
         },
         options);
         options.obj.append('<span class=\'__num\'>' + options.str + '</span>');
-        var box = $(options.obj + '.__num');
+        var box = $(options.obj).find('.__num');
         var left = 0;
         var top = 0;
         box.css({
@@ -37,7 +37,7 @@ define(function (require) {
         },
         options.interval,
         function () {
-            $(box).remove();
+            box.remove();
             options.callback();
         });
     };
