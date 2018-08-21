@@ -1,7 +1,7 @@
 {
     "name": "mip-typecho-comment",
-    "version": "1.0.1",
-    "description": "修正评论回复提交之后，新的评论显示位置不正确的问题",
+    "version": "1.0.2",
+    "description": "修正评论回复提交目标不正确的问题",
     "contributors": [
         {
             "name": "Zhao Zhiping",

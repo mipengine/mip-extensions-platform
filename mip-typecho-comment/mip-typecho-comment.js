@@ -1,5 +1,5 @@
 /**
- * @file mip-typecho-comment Typecho评论回复的MIP组件
+ * @file mip-typecho-comment Typecho 移动加速版 评论回复的MIP组件
  * @author Zhao Zhiping<izzhip@qq.com>
  */
 
@@ -16,35 +16,30 @@ define(function (require) {
         var ele = this.element;
 
         $(ele).ready(function () {
-            $('mip-typecho-comment a').on('click', function () {
-                var objective = this.getAttribute('objective');
-                var cid = this.getAttribute('cid');
-                var coid = this.getAttribute('coid');
-                var rid = this.getAttribute('rid');
+            $('mip-typecho-comment a').click(function () {
+                var target = $(ele).attr('target');
+                var cid = $(this).attr('cid');
+                var coid = $(this).attr('coid');
+                var objective = this.innerHTML;
 
-                if (objective === 'reply') {
+                var btn = ele.querySelector('#btn');
+                $(btn).attr('coid', coid);
+
+                $('mip-typecho-comment button').attr('coid', coid);
+
+                if (objective === '回复') {
                     var comment = ele.querySelector('#' + cid);
-                    var response = ele.querySelector('#' + rid);
+                    var response = ele.querySelector('#' + target);
                     var input = ele.querySelector('#comment-parent');
-
-                    if ('mip-form' === response.tagName) {
-                        var form = response;
-                    }
-
-                    else {
-                        var form = response.getElementsByTagName('mip-form')[0];
-                    }
-
-                    var textarea = response.getElementsByTagName('textarea')[0];
+                    var form = response.querySelector('#comment-form');
+                    var textarea = form.querySelector('#textarea');
 
                     if (null == input) {
-
                         $('<input id="comment-parent"></input>').appendTo(form);
-
-                        input = ele.querySelector('#comment-parent');
-                        input.setAttribute('type', 'hidden');
-                        input.setAttribute('name', 'parent');
-                        input.setAttribute('value', coid);
+                        input = form.querySelector('#comment-parent');
+                        $(input).attr('type', 'hidden');
+                        $(input).attr('name', 'parent');
+                        $(input).attr('value', coid);
                     }
 
                     if (null == ele.querySelector('#comment-form-place-holder')) {
@@ -52,6 +47,7 @@ define(function (require) {
                         $('<div id="comment-form-place-holder"></div>').appendTo(ele);
 
                         var holder = ele.querySelector('#comment-form-place-holder');
+
                         response.parentNode.insertBefore(holder, response);
                     }
 
@@ -75,8 +71,8 @@ define(function (require) {
                     return false;
                 }
 
-                if (objective === 'cancelreply') {
-                    response = ele.querySelector('#' + rid);
+                if (objective === '取消回复') {
+                    response = ele.querySelector('#' + target);
                     holder = ele.querySelector('#comment-form-place-holder');
                     input = ele.querySelector('#comment-parent');
 
@@ -93,6 +89,16 @@ define(function (require) {
 
                     return false;
                 }
+
+            });
+
+            $('mip-typecho-comment button').click(function () {
+                var btn = ele.querySelector('#btn');
+                var form = ele.querySelector('#comment-form');
+
+                $(form).attr('url', $(form).attr('url') + '?parent=' + $(btn).attr('coid'));
+
+                $(form).submit();
             });
 
         });
