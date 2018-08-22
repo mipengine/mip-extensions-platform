@@ -12,6 +12,7 @@ mip-code-msg 组件说明
 
 ### 基本用法
 ```html
+<mip-code-msg   code='sh600330' >
 <div class="mhq_top" >
 			<div class="mhq_top_num">
 			<div class="left" id="current_price">--</div>
@@ -40,7 +41,6 @@ mip-code-msg 组件说明
 			</ul>
         </div>
 </div>
-<mip-code-msg   code='sh600330' >
 </mip-code-msg>
 ```
 

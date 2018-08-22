@@ -13,6 +13,7 @@ mip-slide-model 模态框的下拉与隐藏
 ### 基本用法
 ```html
 <mip-slide-model>
+    <span class="hed-rgt shortcut-ico iconfont icon-ellipsis"></span>
     <div class="mask-tm"></div>
     <div class="shortcut">
         <div class="pointer"></div>

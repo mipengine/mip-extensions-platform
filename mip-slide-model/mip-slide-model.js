@@ -8,7 +8,7 @@ define(function (require) {
     var customElement = require('customElement').create();
     customElement.prototype.build = function () {
         var element = this.element;
-        $(element).find('.shortcut').click(function () {
+        $(element).find('.shortcut-ico').click(function () {
             $(element).find('.mask-tm').show().click(function () {
                 $(element).find('.mask-tm').hide();
                 $(element).find('.shortcut').slideUp(200);

@@ -7,11 +7,11 @@ mip-liAHMclick 组件说明
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
 所需脚本|https://c.mipcdn.com/static/v1/mip-liAHMclick/mip-liAHMclick.js
-
 ## 示例
 
 ### 基本用法
 ```html
+<mip-liAHMclick >
  <ul class="tabClick">
 			<li class="active " id="lia"><a 
 				href="#" id="titA" class='liastyle'>沪深</a></li>
@@ -23,10 +23,8 @@ mip-liAHMclick 组件说明
 	<div class="tabList" id="aHM">aa</div>
 	<div class="tabList" id="AhM">bb</div>
 	<div class="tabList" id="AHm">cc</div>
-	<mip-liAHMclick   type='A'  aId='titA' ></mip-liAHMclick>
-	<mip-liAHMclick   aId='titH' type='H'></mip-liAHMclick>
-	<mip-liAHMclick   aId='titM' type='M'>
-</mip-liAHMclick>```
+</mip-liAHMclick>
+```
 
 
 #### 属性

@@ -55,11 +55,11 @@ define(function (require) {
             dataType: 'json',
             success: function (ret) {
                 if (ret.state === 1) {
-                    if (ele.find('.eye')) {
-                        ele.find('.eye').html(ret.data.readNum + '次浏览');
-                    }
                     if (ele.find('.like-num')) {
                         ele.find('.like-num').html(ret.data.praiseNum);
+                    }
+                    if (ele.find('.eye')) {
+                        ele.find('.eye').html(ret.data.readNum + '次浏览');
                     }
                 }
             }

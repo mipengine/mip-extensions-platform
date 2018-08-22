@@ -1,0 +1,150 @@
+/**
+ * @file mip-apple-nav样式文件
+ */
+
+mip-apple-nav {
+    // TODO
+    width: 100%;
+}
+
+.mip-apple-nav-maskLayer {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    z-index: 698;
+    display: none;
+}
+
+mip-apple-nav ul {
+    width: 100%;
+    margin: 0 auto;
+    height: 50px;
+}
+
+mip-apple-nav ul li {
+    height: 50px;
+    line-height: 50px;
+    list-style: none;
+    list-style-type: none;
+}
+
+mip-apple-nav .pcNav li {
+    float: left;
+    margin-right: 50px;
+}
+
+mip-apple-nav .pcNav .regist,
+mip-apple-nav .pcNav .login {
+    float: right;
+    margin-left: 10px;
+    margin-right: 0;
+}
+
+mip-apple-nav ul li .logo {
+    width: 60%;
+    vertical-align: middle;
+    margin-top: 13px;
+}
+
+mip-apple-nav ul li a {
+    font-size: 14px;
+    color: #FFF;
+}
+
+mip-apple-nav ul .regist a {
+    font-size: 12px;
+}
+
+mip-apple-nav ul .login a {
+    font-size: 12px;
+    color: #ccc;
+}
+
+@media screen and (max-width: 1199px) {
+    mip-apple-nav ul .fl {
+        margin-right: 30px;
+    }
+
+    mip-apple-nav ul .fr {
+        margin-left: 10px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    mip-apple-nav .pcNav {
+        display: block;
+        clear: both;
+    }
+
+    mip-apple-nav .mobileNav {
+        display: none;
+        clear: both;
+    }
+
+    mip-apple-nav #mobileNavList {
+        display: none !important;
+    }
+
+    .mip-apple-nav-maskLayer {
+    	display: none !important;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    mip-apple-nav .pcNav {
+        display: none;
+    }
+
+    mip-apple-nav .mobileNav {
+        width: 100%;
+        display: block;
+        text-align: center;
+        position: relative;
+    }
+
+    mip-apple-nav .mobileNav li {
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 0;
+    }
+
+    mip-apple-nav #mobileNavList {
+        width: 100%;
+        height: 0;
+        background: #333;
+        position: absolute;
+        top: 50px;
+        left: 0;
+        z-index: 699;
+        clear: both;
+        overflow: hidden;
+        border-top: 1px solid #111;
+    }
+
+    mip-apple-nav .navbar-toggle {
+        display: block;
+        padding: 5px;
+        border: 0;
+        background: transparent;
+        padding: 8px 20px;
+        position: absolute;
+        left: 0;
+        top: 8px;
+    }
+
+    mip-apple-nav .navbar-toggle .icon-bar {
+        background-color: #FFF;
+        height: 2px;
+        width: 23px;
+        display: block;
+        margin-top: 6px;
+    }
+
+    mip-apple-nav .navbar-toggle .icon-bar:nth-child(1) {
+        margin-top: 0;
+    }
+
+}

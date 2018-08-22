@@ -86,14 +86,14 @@ mip-linktion-fortune-consults ajax移动端弹框提交表单，pc端下滑卡�
         <a href="javascript:;" class="but-about">了解TA</a>
         <!-- <a class="but-advisory " href="javascript:return false;" onclick="return false;">咨询中</a> -->
         <!-- 这部分是咨询TA按钮，分不同的状态。把ID改成modal-consult是登录后的弹框，现在是未登录的咨询TA弹框-->
-        <a class="but-advisory">咨询TA</a>
+        <a class="but-advisory hide-video">咨询TA</a>
       </div>
       <div class="card-phone-but">
         <a href="javascript:;" class="but-about" on="tap:modal-consult.toggle tap:MIP.setData({plannerid:1,productid:6})" id="" role="button" tabindex="0">咨询TAp</a>
 
         <!-- 未登录用户的咨询TA弹框 -->
         <!-- <a href=javascript:;"" class="but-about" on="tap:modal-consult-visitor.toggle" id="" role="button" tabindex="0">咨询TA</a> -->
-        <a href="javascript:;" on="tap:planner-more.toggle" id="" role="button" tabindex="0"  class="but-advisory">换一位理财师</a>
+        <a href="javascript:;" on="tap:planner-more.toggle" id="" role="button" tabindex="0"  class="but-advisory hide-video">换一位理财师</a>
       </div>
     </div>
   </div>

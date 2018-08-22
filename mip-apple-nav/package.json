@@ -1,7 +1,7 @@
 {
-    "name": "mip-select-region",
+    "name": "mip-apple-nav",
     "version": "1.1.0",
-    "description": "一款选择省市地区的组件",
+    "description": "苹果导航栏",
     "contributors": [
         {
             "name": "mickey",

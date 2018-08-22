@@ -15,7 +15,7 @@ define(function (require) {
      */
     customElement.prototype.firstInviewCallback = function () {
         var $el = $(this.element);
-        $el.find('.card-phone-but a').on('touchstart', function () {
+        $el.find('.hide-video').on('touchstart', function () {
             $el.find('.details-iframe').hide();
             $el.find('.details-iframe video')[0].pause();
             $el.find('#MIP-LLIGTBOX-MASK').on('touchstart', function () {

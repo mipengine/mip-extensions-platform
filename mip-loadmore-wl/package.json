@@ -1,0 +1,14 @@
+{
+    "name": "mip-loadmore-wl",
+    "version": "1.0.0",
+    "description": "网站逻辑",
+    "contributors": [
+        {
+            "name": "yxl",
+            "email": "qwe@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

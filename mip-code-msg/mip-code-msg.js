@@ -19,7 +19,7 @@ define(function (require) {
             script.parentNode.removeChild(script);
             script = null;
             if (params.listCode) {
-                params.callback(params.listCode);
+                params.callback(params.listCode, params.element);
             } else {
                 params.callback();
             }
@@ -37,14 +37,23 @@ define(function (require) {
     customElement.prototype.firstInviewCallback = function () {
         var element = this.element;
         var codelist = element.getAttribute('code') || '';
+        if (codelist.substring(0, 2) === 'sh'
+        || codelist.substring(0, 2) === 'sz'
+        || codelist.substring(0, 2) === 'hk'
+        || codelist.substring(0, 2) === 'gb') {
+
+        } else {
+            codelist = 'gb_' + codelist.toLowerCase();
+        };
         loadJS({
             src: 'https://hq.sinajs.cn/list=' + codelist,
             charset: 'gb2312',
             callback: xjChangeA,
-            listCode: codelist
+            listCode: codelist,
+            element: element
         });
     };
-    function xjChangeA(listCode) {
+    function xjChangeA(listCode, element) {
         // 三元数组 利用数组进行排序
         var arr = listCode.split(',');
         var codeNum = 0;
@@ -108,7 +117,7 @@ define(function (require) {
                     yestodEndPri = parseFloat(hqObj[2]).toFixed(2);
                     todayMax = parseFloat(hqObj[4]).toFixed(2);
                     todayMin = parseFloat(hqObj[5]).toFixed(2);
-                    datetime = hqObj[30] + '' + hqObj[31] + ' (北京时间)';
+                    datetime = hqObj[30] + '  ' + hqObj[31] + ' (北京时间)';
                 } else if (code.substring(0, 2) === 'hk') {
                     currentPrice = 'HK$' + parseFloat(hqObj[6]).toFixed(2);
                     if (hqObj[8] > 0) {
@@ -126,7 +135,7 @@ define(function (require) {
                     todayMax = parseFloat(hqObj[4]).toFixed(2);
                     // 最低
                     todayMin = parseFloat(hqObj[5]).toFixed(2);
-                    datetime = hqObj[17] + ' ' + hqObj[18] + ' (北京时间)';
+                    datetime = hqObj[17] + '  ' + hqObj[18] + ' (北京时间)';
                 } else {
                     // 美股
                     currentPrice = '$' + parseFloat(hqObj[1]).toFixed(2);
@@ -148,49 +157,50 @@ define(function (require) {
                     datetime = hqObj[25] + ' (美东时间)';
                 }
                 commonHtml(code, currentPrice, zdRateStr, riseFallAmount,
-                 todayStartPri, yestodEndPri, todayMax, todayMin, datetime);
+                todayStartPri, yestodEndPri, todayMax, todayMin, datetime, element);
             }
         }
     }
 
     function commonHtml(code, currentPrice, zdRateStr, riseFallAmount,
-     todayStartPri, yestodEndPri, todayMax, todayMin, datetime) {
-        $('#todayStartPri').text(todayStartPri);
-        $('#yestodEndPri').text(yestodEndPri);
+     todayStartPri, yestodEndPri, todayMax, todayMin, datetime, element) {
+        element.querySelector('#todayStartPri').innerHTML = todayStartPri;
+        element.querySelector('#yestodEndPri').innerHTML = yestodEndPri;
+        var util = require('util');
         if (todayStartPri >= yestodEndPri) {
-            $('#todayStartPri').css('color', '#ed3713');
+            util.css(element.querySelector('#todayStartPri'), 'color', '#ed3713');
         } else {
-            $('#todayStartPri').css('color', '#0bb60b');
+            util.css(element.querySelector('#todayStartPri'), 'color', '#0bb60b');
         }
         if (todayMin >= yestodEndPri) {
-            $('#todayMin').css('color', '#ed3713');
+            util.css(element.querySelector('#todayMin'), 'color', '#ed3713');
         } else {
-            $('#todayMin').css('color', '#0bb60b');
+            util.css(element.querySelector('#todayMin'), 'color', '#0bb60b');
         }
         if (todayMax >= yestodEndPri) {
-            $('#todayMax').css('color', '#ed3713');
+            util.css(element.querySelector('#todayMax'), 'color', '#ed3713');
         } else {
-            $('#todayMax').css('color', '#0bb60b');
+            util.css(element.querySelector('#todayMax'), 'color', '#0bb60b');
         }
         // 最高
-        $('#todayMax').text(todayMax);
+        element.querySelector('#todayMax').innerHTML = todayMax;
         // 最低
-        $('#todayMin').text(todayMin);
+        element.querySelector('#todayMin').innerHTML = todayMin;
         // 时间
-        $('#datetime').text(datetime);
+        element.querySelector('#datetime').innerHTML = datetime;
         // 当前价
-        $('#currentPrice').text(currentPrice);
+        element.querySelector('#currentPrice').innerHTML = currentPrice;
         // 涨跌额
         $('#riseFallAmount').text(riseFallAmount);
         if (riseFallAmount > 0) {
-            $('.mhq_top').css('background-color', '#ed3713');
+            util.css(element.querySelectorAll('.mhq_top'), 'background', '#ed3713');
         } else if (riseFallAmount < 0) {
-            $('.mhq_top').css('background-color', '#0bb60b');
+            util.css(element.querySelectorAll('.mhq_top'), 'background', '#0bb60b');
         } else {
-            $('.mhq_top').css('background-color', '#ccc');
+            util.css(element.querySelectorAll('.mhq_top'), 'background', '#ccc');
         }
         // 涨跌幅
-        $('#zdRateStr').text(zdRateStr);
+        element.querySelector('#zdRateStr').innerHTML = zdRateStr;
     }
     return customElement;
 });

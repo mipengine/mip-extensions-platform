@@ -1,0 +1,12 @@
+{
+    "name": "mip-ilaw66-baidutwo-linking",
+    "version": "1.0.1",
+    "description": "成功匹配律师，进行通话2期",
+      "contributors": [{
+        "name": "jessli",
+        "email": "306651535@qq.com"
+    }],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

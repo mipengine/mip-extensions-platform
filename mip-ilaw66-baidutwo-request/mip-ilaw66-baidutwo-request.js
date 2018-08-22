@@ -21,48 +21,74 @@ define(function (require) {
         var timer;
         var lawyerId;
         var dataStatus = 0;
+        $el.find('#questionType').val(getQueryString('questionType'));
+        var canvas = document.getElementById('canvas'); // 获取canvas元素
+        var context = canvas.getContext('2d'); // 获取画图环境，指明为2d
+        var centerX = canvas.width / 2; // Canvas中心点x轴坐标
+        var centerY = canvas.height / 2; // Canvas中心点y轴坐标
+        var rad = Math.PI * 2 / 60; // 将360度分成100份，那么每一份就是rad度
+        var speed = 0; // 圈
+        var textstring = 60;
+        var times;
+        // 绘制5像素宽的运动外圈
+        function blueCircle(n) {
+            context.save();
+            context.strokeStyle = '#fff'; // 设置描边样式
+            context.lineWidth = 4; // 设置线宽
+            context.beginPath(); // 路径开始
+            context.arc(centerX, centerY, 25, -Math.PI / 2, -Math.PI / 2 + n * rad, false); // 用于绘制圆弧context.arc(x坐标，y坐标，半径，起始角度，终止角度，顺时针/逆时针)
+            context.stroke(); // 绘制
+            context.closePath(); // 路径结束
+            context.restore();
+        }
+        // 绘制白色外圈
+        function whiteCircle() {
+            context.save();
+            context.beginPath();
+            context.lineWidth = 2; // 设置线宽
+            context.strokeStyle = '999';
+            context.arc(centerX, centerY, 25, 0, Math.PI * 2, false);
+            context.stroke();
+            context.closePath();
+            context.restore();
+        }
+        // 百分比文字绘制
+        function text(n) {
+            context.save(); // save和restore可以保证样式属性只运用于该段canvas元素
+            context.strokeStyle = '#333'; // 设置描边样式
+            context.font = '14px Arial'; // 设置字体大小和字体
+            // 绘制字体，并且指定位置
+            if (n > 10) {
+                context.strokeText(n.toFixed(0), centerX - 8, centerY + 5);
+            }
+            else {
+                context.strokeText(n.toFixed(0), centerX - 10, centerY + 5);
+            }
+            context.stroke(); // 执行绘制
+            context.restore();
+        }
+        // 动画
+        function drawFrame() {
+            times = setInterval(function () {
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                whiteCircle();
+                text(textstring);
+                blueCircle(speed);
+                if (speed > 60) {
+                    speed = 0;
+                }
 
-        /*
-         var temp = {};
-         temp.list = [];
-         temp.list.push({
-         value: 0,
-         name: '某律师0',
-         identifyPhoto: 'http://images.ilaw66.com/images/authorize/banner_new_first.png'
-         });
-         temp.list.push({
-         value: 1,
-         name: '某律师1',
-         identifyPhoto: 'http://images.ilaw66.com/images/authorize/banner_new_first.png'
-         });
-         var tempHtml = "";
-         tempHtml +='<mip-carousel '
-         +'autoplay '
-         +'layout="responsive" '
-         +'width="60" '
-         +'height="60">';
-         var tempHtmlN = "";
-         tempHtmlN +='<mip-carousel '
-         +'autoplay '
-         +'layout="responsive" '
-         +'width="60" '
-         +'height="33">';
-         temp.list.forEach(function (item) {
-         tempHtml += '<mip-img class="mip_img" width="60" height="60"'
-         +' src="'+item.identifyPhoto+'"></mip-img>';
-         tempHtmlN += '<p>' + item.name + '</p>';
-         });
-         tempHtml +='</mip-carousel>';
-         tempHtmlN +='</mip-carousel>';
-         $el.find('#mip-template-lawyerImg').html(tempHtml);
-         $el.find('#mip-template-lawyerName').html(tempHtmlN);
-         */
-
-        /*$el.find(".toast_txt").text('取消晚了,律师正在联系您');
-         $el.find(".toast_div").show();
-         setTimeout(function () {
-         $el.find(".toast_div").hide();
-         }, 2000);*/
+                speed += 1;
+                if (textstring <= 0) {
+                    clearInterval(times);
+                    textstring = 0;
+                }
+                else {
+                    textstring -= 1;
+                }
+            }, 1000);
+        }
+        drawFrame();
 
         $el.find('.jingxuan_top').css('background-image', 'url("images/bg_jingxuanlvshi.png")');
         $el.find('.jingxuan_top>img').attr('src', 'images/bg_touxiangjx.png');
@@ -108,7 +134,7 @@ define(function (require) {
         });
 
         $el.find('#requestId').val(getQueryString('data'));
-        $el.find('#questionType').val(getQueryString('questionType'));
+
         $el.find('#askingType').val(getQueryString('askingType'));
 
         // 根据咨询类型：是否继续问显示不同内容
@@ -155,12 +181,7 @@ define(function (require) {
             var id = getQueryString('data');
             var questionType = $el.find('#questionType').val();
             var askingType = $el.find('#askingType').val();
-            //          if (countdown > 60) {
-            //              clearInterval(timer);
-            //              window.top.location.href = 'mipilaw66baidu_lawyer_noresponse?questionType=' + questionType;
-            //          }
-            //          else {
-            //              if (countdown % 5 === 0) {
+
             if (countdown <= 60) {
                 var socket;
                 var t;
@@ -169,8 +190,6 @@ define(function (require) {
 
                 var reconnection = function () {
                     count = count + 1;
-                    //              		console.log("reconnection...【" + count + "】");
-                    //              		console.log(socket)
                     // 1与服务器已经建立连接
                     if (count >= MAX || socket.readyState === 1) {
                         clearTimeout(t);
@@ -227,7 +246,7 @@ define(function (require) {
                     reconnection();
                 };
                 var connection = function () {
-                    var fromUserId = document.getElementById('fromUserId');
+                    //                  var fromUserId = document.getElementById('fromUserId');
                     var url = 'ws://test.ilaw66.com/peony/orderpush.ws?deviceId=' + id;
                     socket = new WebSocket(url);
                     socket.onopen = onopen;
@@ -237,43 +256,6 @@ define(function (require) {
                 };
                 connection();
             }
-
-            //                  $.ajax({
-            //                      type: 'GET',
-            //                      url: 'timer?id=' + id,
-            //                      dataType: 'json',
-            //                      success: function (data) {
-            //                          //                      	debugger
-            //                          var dataStatus = data.status;
-            //                          if (dataStatus === 2 || dataStatus === 5 || dataStatus === 6
-            //                              || dataStatus === 7 || dataStatus === 8
-            //                              || dataStatus === 11 || dataStatus === 12) {
-            //                              clearInterval(timer);
-            //                              var url = encodeURI(
-            //                                  'mipilaw66baidu_linking?questionType=' + questionType + '&lawyerName='
-            //                                  + data.lawyerName + '&requestId=' + id + '&askingType='
-            //                                  + askingType + '&lawyerId=' + data.lawyerId + '&tel='
-            //                                  + data.tel + '&goodCommentRate=' + data.goodCommentRate);
-            //                              window.top.location.href = url;
-            //                          }
-            //                          else if (dataStatus === 4 || dataStatus === 1 || dataStatus === 3
-            //                              || dataStatus === 9 || dataStatus === 10
-            //                              || dataStatus === 'ERROR' || dataStatus === 'ERROR1') {
-            //                              clearInterval(timer);
-            //                              window.top.location.href = 'mipilaw66baidu_lawyer_noresponse?questionType='
-            //                                  + questionType;
-            //                          }
-            //
-            //                      },
-            //                      error: function (jqXHR) {
-            //                          if (jqXHR.status === 403) {
-            //                              window.location.reload();
-            //                          }
-            //
-            //                      }
-            //                  });
-            //              }
-            //          }
         }
         function cancelRequestOr() {
             $.ajax({
@@ -381,22 +363,14 @@ define(function (require) {
                             + 'autoplay '
                             + 'layout="responsive" '
                             + 'width="60" '
-                            + 'height="60">';
-                        var tempHtmlN = '';
-                        tempHtmlN += '<mip-carousel '
-                            + 'autoplay '
-                            + 'layout="responsive" '
-                            + 'width="60" '
-                            + 'height="60">';
+                            + 'height="90">';
                         temp.list.forEach(function (item) {
-                            tempHtml += '<mip-img class="mip_img" width="60" height="60"'
-                                + ' src="' + item.identifyPhoto + '"></mip-img>';
-                            tempHtmlN += '<p>' + item.name + '</p>';
+                            tempHtml += '<a  href="javascript:;"><mip-img class="mip_img" width="60" height="60"'
+                                + ' src="' + item.identifyPhoto + '"></mip-img>'
+                                + ' <div class="mip-carousle-subtitle">' + item.name + '</div></a>';
                         });
                         tempHtml += '</mip-carousel>';
-                        tempHtmlN += '</mip-carousel>';
                         $el.find('#mip-template-lawyerImg').html(tempHtml);
-                        $el.find('#mip-template-lawyerName').html(tempHtmlN);
                     }
                 },
                 error: function (jqXHR) {
