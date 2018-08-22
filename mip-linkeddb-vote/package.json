@@ -1,0 +1,14 @@
+{
+    "name": "mip-linkeddb-vote",
+    "version": "1.0.0",
+    "description": "投票功能",
+    "contributors": [
+        {
+            "name": "linkeddb",
+            "email": "340236524@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

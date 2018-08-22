@@ -1,0 +1,14 @@
+{
+    "name": "mip-foot-app",
+    "version": "1.0.1",
+    "description": "监听下载app事件和打开app",
+    "contributors": [
+        {
+            "name": "xhj",
+            "email": "3233268172@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
