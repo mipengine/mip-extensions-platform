@@ -1,0 +1,14 @@
+{
+    "name": "mip-cyb-top",
+    "version": "1.0.1",
+    "description": "华彩控制导航返回|搜索",
+    "contributors": [
+        {
+            "name": "cyb",
+            "email": "415204@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

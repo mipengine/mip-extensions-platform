@@ -1,0 +1,14 @@
+{
+    "name": "mip-cyb-hcdown",
+    "version": "1.0.0",
+    "description": "华彩下载内容页组件",
+    "contributors": [
+        {
+            "name": "cyb",
+            "email": "415204@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
