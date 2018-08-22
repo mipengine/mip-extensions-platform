@@ -1,0 +1,14 @@
+{
+    "contributors": [
+        {
+            "name": "regboy",
+            "email": "regboy@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    },
+    "name": "mip-ys137-audio",
+    "description": "音频播放器",
+    "version": "1.0.0"
+}

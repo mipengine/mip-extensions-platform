@@ -1,0 +1,14 @@
+{
+    "name": "mip-slide-model",
+    "version": "1.0.1",
+    "description": "模态框下拉与隐藏",
+    "contributors": [
+        {
+            "name": "chenwenkai",
+            "email": "1084072318@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

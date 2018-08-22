@@ -55,8 +55,12 @@ define(function (require) {
             dataType: 'json',
             success: function (ret) {
                 if (ret.state === 1) {
-                    ele.find('.eye').html(ret.data.readNum + '次浏览');
-                    ele.find('.fabulous .like-num').html(ret.data.praiseNum);
+                    if (ele.find('.eye')) {
+                        ele.find('.eye').html(ret.data.readNum + '次浏览');
+                    }
+                    if (ele.find('.like-num')) {
+                        ele.find('.like-num').html(ret.data.praiseNum);
+                    }
                 }
             }
         });
@@ -77,9 +81,9 @@ define(function (require) {
                             str: '+1',
                             color: 'red',
                             callback: function () {
-                                var num = parseInt(ele.find('.fabulous .like-num').text().replace(/,/g, ''), 0);
+                                var num = parseInt(ele.find('.like-num').text().replace(/,/g, ''), 0);
                                 var newNum = num + 1;
-                                ele.find('.fabulous .like-num').text(newNum);
+                                ele.find('.like-num').text(newNum);
                             }
                         });
                     } else if (ret.state === 2) {

@@ -91,7 +91,7 @@ define(function (require) {
                 h1 += '<div class="gupiao_price  zhang_color" >' + currentPrice;
                 h1 += '</div><div class="gupiao_zde  zhang_color" >' + riseFallAmount;
                 h1 += '</div><div class="gupiao_zdf  zhang_color">' + zdRateStr + '</div>';
-            } else if ('AHZ' === type) {
+            } else if ('AHZ' === type || 'MZ' === type) {
                 h1 += '<div class="top_data_price  zhang_color" >';
                 h1 += currentPrice;
                 h1 += '</div><div class="top_data_zhangfu"><span class="zhangfu_s  zhang_color" >';
@@ -109,7 +109,7 @@ define(function (require) {
                 h2 += '<div class="gupiao_price   die_color" >' + currentPrice;
                 h2 += '</div><div class="gupiao_zde  die_color" >' + riseFallAmount;
                 h2 += '</div><div class="gupiao_zdf  die_color" >' + zdRateStr + '</div>';
-            } else if ('AHZ' === type) {
+            } else if ('AHZ' === type || 'MZ' === type) {
                 h2 += '<div class="top_data_price  die_color" >';
                 h2 += currentPrice;
                 h2 += '</div><div class="top_data_zhangfu"><span class="zhangfu_s  die_color" >';
@@ -126,7 +126,7 @@ define(function (require) {
                 h3 += '<div class="gupiao_price  other_color" >' + currentPrice;
                 h3 += '</div><div class="gupiao_zde  other_color">';
                 h3 += riseFallAmount + '</div><div class="gupiao_zdf  other_color" >' + zdRateStr + '</div>';
-            } else if ('AHZ' === type) {
+            } else if ('AHZ' === type || 'MZ' === type) {
                 h3 += '<div class="top_data_price  other_color" >';
                 h3 += currentPrice;
                 h3 += '</div><div class="top_data_zhangfu"><span class="zhangfu_s  other_color" >';

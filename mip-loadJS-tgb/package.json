@@ -1,6 +1,6 @@
 {
     "name": "mip-loadJS-tgb",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "获取股票的当前价，涨跌幅，涨跌额信息",
     "contributors": [
         {
