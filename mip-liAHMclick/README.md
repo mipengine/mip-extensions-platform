@@ -21,8 +21,12 @@ mip-liAHMclick 组件说明
 				id="titM" class='liastyle'>美股</a></li>
 </ul>
 	<div class="tabList" id="aHM">aa</div>
-	<div class="tabList" id="AhM">bb</div>
-	<div class="tabList" id="AHm">cc</div>
+	<div class="tabList" id="AhM">
+<div id="H_stocke" class="HMstock"></div>
+       </div>
+	<div class="tabList" id="AHm">
+        <div id="M_stocke" class="HMstock"></div>
+       </div>
 </mip-liAHMclick>
 ```
 

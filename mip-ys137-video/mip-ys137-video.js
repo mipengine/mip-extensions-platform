@@ -21,7 +21,7 @@ define(function (require) {
             'webkit-playsinline': 'true',
             'controls': '',
             'poster': poster,
-            'preload': 'no',
+            'preload': 'none',
             'x-webkit-airplay': 'allow',
             'class': 'contentVideo'
         });

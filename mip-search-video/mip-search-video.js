@@ -42,12 +42,11 @@ define(function (require) {
         if (!this.sourceDoms.length) {
             sourceIsHttps = false;
         }
-        for (var i = 0, l = this.sourceDoms.length; i < l; i++) {
-            var node = this.sourceDoms[i];
+        Array.prototype.slice.apply(this.sourceDoms).forEach(function (node) {
             if (!node.src.match(/^https:|^\/\//)) {
                 sourceIsHttps = false;
             }
-        }
+        });
         var videoProHttps = (this.src && this.src.match(/^https:|^\/\//))
                             || (this.sourceDoms && sourceIsHttps);
 
@@ -82,13 +81,14 @@ define(function (require) {
 
         videoEl.setAttribute('playsinline', 'playsinline');
         videoEl.setAttribute('webkit-playsinline', 'webkit-playsinline');
-        for (var i = 0, l = this.element.childNodes.length; i < l; i++) {
-            var node = this.element.childNodes[i];
+
+        Array.prototype.slice.apply(this.element.childNodes).forEach(function (node) {
+            // FIXME: mip layout related, remove this!
             if (node.nodeName.toLowerCase() === 'mip-i-space') {
-                continue;
+                return;
             }
             videoEl.appendChild(node);
-        }
+        });
         // add log
         log.bind(videoEl);
         this.element.appendChild(videoEl);
@@ -114,12 +114,11 @@ define(function (require) {
 
         // make sourceList, send to outer iframe
         var sourceList = [];
-        for (var i = 0, l = this.sourceDoms.length; i < l; i++) {
-            var node = this.sourceDoms[i];
+        Array.prototype.slice.apply(this.sourceDoms).forEach(function (node) {
             var obj = {};
             obj[node.type] = node.src;
             sourceList.push(obj);
-        }
+        });
 
         if (!sourceList.length) {
             urlSrc = videoEl.dataset.videoSrc;
@@ -155,10 +154,9 @@ define(function (require) {
      */
     function getAttributeSet(attributes) {
         var attrs = {};
-        for (var i = 0, l = attributes.length; i < l; i++) {
-            var attr = attributes[i];
+        Array.prototype.slice.apply(attributes).forEach(function (attr) {
             attrs[attr.name] = attr.value;
-        }
+        });
         return attrs;
     }
 
