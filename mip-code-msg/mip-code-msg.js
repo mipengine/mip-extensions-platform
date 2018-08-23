@@ -164,30 +164,32 @@ define(function (require) {
 
     function commonHtml(code, currentPrice, zdRateStr, riseFallAmount,
      todayStartPri, yestodEndPri, todayMax, todayMin, datetime, element) {
-        element.querySelector('#todayStartPri').innerHTML = todayStartPri;
-        element.querySelector('#yestodEndPri').innerHTML = yestodEndPri;
         var util = require('util');
-        if (todayStartPri >= yestodEndPri) {
-            util.css(element.querySelector('#todayStartPri'), 'color', '#ed3713');
-        } else {
-            util.css(element.querySelector('#todayStartPri'), 'color', '#0bb60b');
+        if (code.substring(0, 2) === 'sh' || code.substring(0, 2) === 'sz') {
+            element.querySelector('#todayStartPri').innerHTML = todayStartPri;
+            element.querySelector('#yestodEndPri').innerHTML = yestodEndPri;
+            if (todayStartPri >= yestodEndPri) {
+                util.css(element.querySelector('#todayStartPri'), 'color', '#ed3713');
+            } else {
+                util.css(element.querySelector('#todayStartPri'), 'color', '#0bb60b');
+            }
+            if (todayMin >= yestodEndPri) {
+                util.css(element.querySelector('#todayMin'), 'color', '#ed3713');
+            } else {
+                util.css(element.querySelector('#todayMin'), 'color', '#0bb60b');
+            }
+            if (todayMax >= yestodEndPri) {
+                util.css(element.querySelector('#todayMax'), 'color', '#ed3713');
+            } else {
+                util.css(element.querySelector('#todayMax'), 'color', '#0bb60b');
+            }
+            // 最高
+            element.querySelector('#todayMax').innerHTML = todayMax;
+            // 最低
+            element.querySelector('#todayMin').innerHTML = todayMin;
+            // 时间
+            element.querySelector('#datetime').innerHTML = datetime;
         }
-        if (todayMin >= yestodEndPri) {
-            util.css(element.querySelector('#todayMin'), 'color', '#ed3713');
-        } else {
-            util.css(element.querySelector('#todayMin'), 'color', '#0bb60b');
-        }
-        if (todayMax >= yestodEndPri) {
-            util.css(element.querySelector('#todayMax'), 'color', '#ed3713');
-        } else {
-            util.css(element.querySelector('#todayMax'), 'color', '#0bb60b');
-        }
-        // 最高
-        element.querySelector('#todayMax').innerHTML = todayMax;
-        // 最低
-        element.querySelector('#todayMin').innerHTML = todayMin;
-        // 时间
-        element.querySelector('#datetime').innerHTML = datetime;
         // 当前价
         element.querySelector('#currentPrice').innerHTML = currentPrice;
         // 涨跌额
