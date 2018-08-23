@@ -4,8 +4,10 @@
  */
 
 define(function (require) {
+
     'use strict';
 
+    var util = require('util');
     var customElement = require('customElement').create();
 
     /**
@@ -15,95 +17,127 @@ define(function (require) {
 
         var ele = this.element;
 
-        $(ele).ready(function () {
-            $('mip-typecho-comment a').click(function () {
-                var target = $(ele).attr('target');
-                var cid = $(this).attr('cid');
-                var coid = $(this).attr('coid');
-                var objective = this.innerHTML;
+        $(ele).on('click', 'a', function () {
 
-                var btn = ele.querySelector('#btn');
-                $(btn).attr('coid', coid);
+            var target = ele.getAttribute('target');
 
-                $('mip-typecho-comment button').attr('coid', coid);
+            var cid = this.getAttribute('cid');
+            var coid = this.getAttribute('coid');
+            var objective = this.innerHTML;
 
-                if (objective === '回复') {
-                    var comment = ele.querySelector('#' + cid);
-                    var response = ele.querySelector('#' + target);
-                    var input = ele.querySelector('#comment-parent');
-                    var form = response.querySelector('#comment-form');
-                    var textarea = form.querySelector('#textarea');
+            if (objective === '回复') {
 
-                    if (null == input) {
-                        $('<input id="comment-parent"></input>').appendTo(form);
-                        input = form.querySelector('#comment-parent');
-                        $(input).attr('type', 'hidden');
-                        $(input).attr('name', 'parent');
-                        $(input).attr('value', coid);
-                    }
+                this.setAttribute('id', 'reply' + coid);
 
-                    if (null == ele.querySelector('#comment-form-place-holder')) {
+                var comment = ele.querySelector('#' + cid);
+                var response = ele.querySelector('#' + target);
+                var input = ele.querySelector('#comment-parent');
+                var form = 'form' === response.tagName ? response : response.querySelector('form');
+                var textarea = form.querySelector('textarea');
 
-                        $('<div id="comment-form-place-holder"></div>').appendTo(ele);
+                if (null == input) {
 
-                        var holder = ele.querySelector('#comment-form-place-holder');
+                    input = util.dom.create('<input></input>');
 
-                        response.parentNode.insertBefore(holder, response);
-                    }
+                    input.setAttribute('id', 'comment-parent');
+                    input.setAttribute('type', 'hidden');
+                    input.setAttribute('name', 'parent');
 
-                    var list = comment.getElementsByTagName('div');
+                    form.appendChild(input);
 
-                    for (var i = 0; i < list.length; i++) {
-                        if (list.item(i).className === 'comment-content') {
-                            var content = list.item(i);
-                            break;
-                        }
-                    }
-
-                    $(response).insertAfter(content);
-
-                    ele.querySelector('#cancel-comment-reply-link').setAttribute('class', '');
-
-                    if (null != textarea && 'text' === textarea.name) {
-                        textarea.focus();
-                    }
-
-                    return false;
                 }
 
-                if (objective === '取消回复') {
-                    response = ele.querySelector('#' + target);
-                    holder = ele.querySelector('#comment-form-place-holder');
-                    input = ele.querySelector('#comment-parent');
+                if (null == ele.querySelector('#comment-form-place-holder')) {
 
-                    if (null != input) {
-                        input.parentNode.removeChild(input);
-                    }
+                    var holder = util.dom.create('<div></div>');
 
-                    if (null == holder) {
-                        return true;
-                    }
+                    holder.setAttribute('id', 'comment-form-place-holder');
 
-                    ele.querySelector('#cancel-comment-reply-link').setAttribute('class', 'cancelreply');
-                    holder.parentNode.insertBefore(response, holder);
+                    response.parentNode.insertBefore(holder, response);
 
-                    return false;
                 }
 
-            });
+                var content = comment.querySelector('.comment-content');
 
-            $('mip-typecho-comment button').click(function () {
-                var btn = ele.querySelector('#btn');
-                var form = ele.querySelector('#comment-form');
+                if (content.parentNode.lastChild === content) {
 
-                $(form).attr('url', $(form).attr('url') + '?parent=' + $(btn).attr('coid'));
+                    content.parentNode.appendChild(response);
 
-                $(form).submit();
-            });
+                }
+
+                else {
+
+                    content.parentNode.insertBefore(response, content.nextSibling);
+
+                }
+
+                input.setAttribute('value', coid);
+
+                var author = ele.querySelector('#author');
+
+                if (!author.getAttribute('value')) {
+
+                    author.focus();
+
+                }
+
+                else {
+
+                    textarea.focus();
+
+                }
+
+                var cancel = ele.querySelector('#cancel-comment-reply-link');
+
+                if (cancel.getAttribute('from')) {
+
+                    var from = ele.querySelector('#' + cancel.getAttribute('from'));
+                    from.setAttribute('class', '');
+
+                }
+
+                cancel.setAttribute('from', this.getAttribute('id'));
+                cancel.setAttribute('class', '');
+
+                this.setAttribute('class', 'hidden');
+
+                return false;
+
+            }
+
+            if (objective === '取消回复') {
+
+                response = ele.querySelector('#' + target);
+                holder = ele.querySelector('#comment-form-place-holder');
+                input = ele.querySelector('#comment-parent');
+
+                if (null != input) {
+
+                    input.parentNode.removeChild(input);
+
+                }
+
+                if (null == holder) {
+
+                    return true;
+
+                }
+
+                holder.parentNode.insertBefore(response, holder);
+                holder.parentNode.removeChild(holder);
+
+                this.setAttribute('class', 'hidden');
+
+                var from = ele.querySelector('#' + this.getAttribute('from'));
+                from.setAttribute('class', '');
+
+                return false;
+            }
 
         });
 
     };
 
     return customElement;
+
 });

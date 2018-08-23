@@ -1,0 +1,141 @@
+mip-hlj-address {
+    position: fixed!important;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    -webkit-user-select: none;
+    user-select: none;
+    overflow: hidden;
+    z-index: 9999999;
+    > * {
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+    .picker-mask {
+        position: absolute;
+        z-index: 1;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        opacity: 0;
+        -webkit-transition: opacity .3s ease-in-out;
+        transition: opacity .3s ease-in-out;
+    }
+    .picker {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        -webkit-transform: translateY(100%);
+        transform: translateY(100%);
+        z-index: 2;
+        width: 100%;
+        color: #333;
+        background: #FFF;
+        z-index: 9999;
+        -webkit-transition: transform .3s ease-in-out;
+        transition: transform .3s ease-in-out;
+        * {
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        > header {
+            overflow: hidden;
+            width: 100%;
+            height: 48px;
+            line-height: 48px;
+            text-align: center;
+            background: #FFF;
+            border-bottom: 1px solid #DDD;
+            > button {
+                font-size: 14px;
+                height: 100%;
+                padding: 0 .48rem;
+                border: 0 none;
+                outline: 0 none;
+                background: #FFF;
+                color: #333;
+            }
+            .picker-cancel {
+                float: left;
+            }
+            .picker-ok {
+                float: right;
+                color: #f83244;
+            }
+        }
+        > div {
+            overflow: hidden;
+            height: 220px;
+            text-align: center;
+        }
+        .picker-body {
+            position: relative;
+            display: -webkit-box;
+            display: -moz-box;
+            display: box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: -moz-flex;
+            display: flex;
+            > * {
+                display: block;
+                -webkit-box-flex: 1;
+                -moz-box-flex: 1;
+                -ms-flex: 1;
+                -webkit-flex: 1;
+                -moz-flex: 1;
+                flex: 1
+            }
+        }
+        .picker-col {
+            position: relative;
+        }
+        ul {
+            line-height: 44px;
+            font-size: 14px;
+            > li {
+                height: 44px;
+                color: #333;
+                padding: 0 .3rem !important;
+                margin: 0 !important;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+        .picker-mask-middle {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 44px;
+            pointer-events: none;
+            -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+        }
+        .picker-mask-middle::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 1000%;
+            height: 1000%;
+            border-top: .1rem solid #aaa;
+            border-bottom: .1rem solid #aaa;
+            -webkit-transform: scale(.1);
+            transform: scale(.1);
+            -webkit-transform-origin: left top;
+            transform-origin: left top;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+    }
+    .picker.open {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+    .picker.open + .picker-mask {
+        opacity: .4;
+    }
+}

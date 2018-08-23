@@ -1,7 +1,7 @@
 {
     "name": "mip-typecho-comment",
-    "version": "1.0.2",
-    "description": "修正评论回复提交目标不正确的问题",
+    "version": "1.0.3",
+    "description": "修正无法对评论进行回复的问题",
     "contributors": [
         {
             "name": "Zhao Zhiping",

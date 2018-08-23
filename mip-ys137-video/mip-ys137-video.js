@@ -15,7 +15,7 @@ define(function (require) {
         var endAd = element.getAttribute('end-ad');
         var poster = element.getAttribute('poster');
         var src = element.getAttribute('src');
-        var video = document.createElement('mip-video');
+        var video = document.createElement('video');
         $(video).attr({
             'playsinline': 'playsinline',
             'webkit-playsinline': 'true',

@@ -13,7 +13,22 @@ mip-loadmore-wl 组件说明
 ### 基本用法
 ```html
 <mip-loadmore-wl>
-   里面放置自定义代码
+   <ul class="max-height">
+       <li>我是li</li>
+   </ul>
+   <div class="more-box">加载更多</div>
+</mip-loadmore-wl>
+<mip-loadmore-wl>
+   <ul class="max-height">
+       <li>我是li</li>
+   </ul>
+   <div class="more-box">加载更多</div>
+</mip-loadmore-wl>
+<mip-loadmore-wl>
+   <ul class="max-height">
+       <li>我是li</li>
+   </ul>
+   <div class="more-box">加载更多</div>
 </mip-loadmore-wl>
 ```
 

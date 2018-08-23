@@ -247,7 +247,7 @@ define(function (require) {
                 };
                 var connection = function () {
                     //                  var fromUserId = document.getElementById('fromUserId');
-                    var url = 'ws://test.ilaw66.com/peony/orderpush.ws?deviceId=' + id;
+                    var url = 'wss://test.ilaw66.com/peony/orderpush.ws?deviceId=' + id;
                     socket = new WebSocket(url);
                     socket.onopen = onopen;
                     socket.onmessage = onmessage;

@@ -5,7 +5,7 @@
 
 define(function (require) {
     'use strict';
-
+    var $ = require('zepto');
     var customElement = require('customElement').create();
 
     /**
@@ -14,7 +14,7 @@ define(function (require) {
     customElement.prototype.firstInviewCallback = function () {
         var element = this.element;
         var funId = element.getAttribute('funId') || '';
-        var obj = document.getElementById(funId).value;
+        var obj = element.getAttribute('data') || '';
         var type = element.getAttribute('type') || '';
         var data = JSON.parse(obj);
         if (data.status === true) {

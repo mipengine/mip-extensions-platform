@@ -15,7 +15,7 @@ define(function (require) {
         var parent = ele.find('.max-height');
         ele.find('.more-box').on('click', function () {
             var $this = $(this);
-            $this.remove();
+            ele.find('.more-box').hide();
             parent.removeClass('max-height');
         });
     };

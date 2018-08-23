@@ -44,11 +44,12 @@ define(function (require) {
 
     customElement.prototype.firstInviewCallback = function () {
         var ele = $(this.element);
-        var src = ele.attr('data-src');
+        var clicksrc = ele.attr('click-src');
+        var updatesrc = ele.attr('update-src');
         var id = ele.attr('data-id');
         $.ajax({
             type: 'post',
-            url: src,
+            url: updatesrc,
             data: {
                 'id': id
             },
@@ -68,7 +69,7 @@ define(function (require) {
         function () {
             var self = $(this);
             $.ajax({
-                url: src,
+                url: clicksrc,
                 type: 'post',
                 dataType: 'json',
                 data: {

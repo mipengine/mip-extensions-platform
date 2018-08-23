@@ -7,14 +7,14 @@ mip-codeHMback-tgb 组件说明
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
 所需脚本|https://c.mipcdn.com/static/v1/mip-codeHMback-tgb/mip-codeHMback-tgb.js
-https://c.mipcdn.com/static/v1/mip-codeHMback-tgb/mip-codeHMback-tgb.js
+https://c.mipcdn.com/static/v1/mip-loadJS-tgb/mip-loadJS-tgb.js
 
 ## 示例
 
 ### 基本用法
 ```html
 <input type="button"  value='{"status":true,"dto":{"listStock":[{"keywordID":471148,"keywordName":"hk00762","stockName":"中国联通"}]},"_t":1534747346346}'   id='aaaaa'   />
-<mip-codeHMback-tgb   funId='aaaaa'  type='H'></mip-codeHMback-tgb>
+<mip-codeHMback-tgb   data='aaaaa'  type='H'></mip-codeHMback-tgb>
 <div id="H_stocke" class="HMstock"></div>
 ```
 

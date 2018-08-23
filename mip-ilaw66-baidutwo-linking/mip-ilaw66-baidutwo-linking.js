@@ -586,7 +586,7 @@ define(function (require) {
             reconnection();
         };
         var connection = function () {
-            var url = 'ws://test.ilaw66.com/peony/orderpush.ws?deviceId=' + timerRequestId;
+            var url = 'wss://test.ilaw66.com/peony/orderpush.ws?deviceId=' + timerRequestId;
             socket = new WebSocket(url);
             socket.onopen = onopen;
             socket.onmessage = onmessage;

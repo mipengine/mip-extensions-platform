@@ -25,7 +25,7 @@ define(function (require) {
             if (domain) {
                 cookie += ';domain=' + domain;
             }
-            else {
+            if (maxAge > 0) {
                 cookie += ';max-age=' + maxAge;
             }
             document.cookie = cookie;
