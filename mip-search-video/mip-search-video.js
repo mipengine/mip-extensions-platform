@@ -85,7 +85,7 @@ define(function (require) {
         for (var i = 0, l = this.element.childNodes.length; i < l; i++) {
             var node = this.element.childNodes[i];
             if (node.nodeName.toLowerCase() === 'mip-i-space') {
-                return;
+                continue;
             }
             videoEl.appendChild(node);
         }

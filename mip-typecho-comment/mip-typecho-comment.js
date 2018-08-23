@@ -75,7 +75,7 @@ define(function (require) {
 
                 var author = ele.querySelector('#author');
 
-                if (!author.getAttribute('value')) {
+                if (null !== author && !author.getAttribute('value')) {
 
                     author.focus();
 

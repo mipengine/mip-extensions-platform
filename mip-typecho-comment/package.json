@@ -1,7 +1,7 @@
 {
     "name": "mip-typecho-comment",
-    "version": "1.0.3",
-    "description": "修正无法对评论进行回复的问题",
+    "version": "1.0.4",
+    "description": "修正登陆状态下出现意外跳转的异常。",
     "contributors": [
         {
             "name": "Zhao Zhiping",
