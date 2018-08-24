@@ -8,8 +8,8 @@ define(function (require) {
     var customElement = require('customElement').create();
     customElement.prototype.build = function () {
         var element = this.element;
-        var model = element.getElementById('mask-tm');
-        element.getElementById('shortcut-ico').addEventListener('click', function () {
+        var model = document.getElementById('mask-tm');
+        document.getElementById('shortcut-ico').addEventListener('click', function () {
             model.style.display = 'block';
             toggleSlide('shortcut', '200');
         });
@@ -20,8 +20,7 @@ define(function (require) {
         });
     };
     function toggleSlide(id, s) {
-        var element = this.element;
-        var div = element.getElementById(id);
+        var div = document.getElementById(id);
         var divheight = div.offsetHeight;
         div.style.transition = 'height ' + s + 'ms';
         div.style.overflow = 'hidden';

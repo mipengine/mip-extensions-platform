@@ -249,81 +249,81 @@ define(function (require) {
 
             return null;
         }
-        function fnDate() {
-            var date = new Date();
-            countTimeInSec = (date.getHours() - begin) * 3600
-                + (date.getMinutes() - min) * 60 + (date.getSeconds() - sec);
-            getPhoneStatus();
-        }
-        function getPhoneStatus() {
-            var questionType = $el.find('#questionType').val();
-            var askingType = $el.find('#askingType').val();
-
-            if (countTimeInSec % 5 === 0) {
-                $.ajax({
-                    type: 'GET',
-                    url: 'timer?id=' + timerRequestId + '&lawyerId=' + lawyerId,
-                    dataType: 'json',
-                    success: function (data) {
-                        console.log(data);
-                        localStorage.setItem('reAskAvatar', data.avatar);
-                        localStorage.setItem('reAskSex', data.sex);
-                        localStorage.setItem('reAskName', data.lawyerName);
-                        localStorage.setItem('lawyerField', data.lawyerField);
-                        localStorage.setItem('goodCommentRate', data.goodCommentRate);
-                        var dataStatus = data.status;
-                        timerRequestId = data.requestId;
-                        // 重新显示后台返回的呼叫中心号码，防止是因律师未接电话又下了一个单，然后调用的不同的呼叫中心
-                        $el.find('.link_phone span').html(data.tel);
-                        if (dataStatus === 3 || dataStatus === 4 || dataStatus === 7) {
-                            // 弹出律师未接提示
-                            //                          clearInterval(t1);
-                            var title = '';
-                            var main = '抱歉，' + data.lawyerName + '临时有事，无法为您服务系统可以为您推荐其他律师';
-                            var yes = '退出本页';
-                            var no = '推荐其他律师';
-                            $el.find('.backOr_div .back__popLayer span:nth-of-type(1)').text(title);
-                            $el.find('.backOr_div .back__popLayer span:nth-of-type(2)').text(main);
-                            $el.find('.backOr_div .back__popLayer .back-leave').text(yes);
-                            $el.find('.backOr_div .back__popLayer .back-continue').text(no);
-                            $el.find('.backOr_div').show();
-                            $el.find('.backOr_div .back__popLayer .back-leave').click(function () {
-                                $el.find('.backOr_div').hide();
-                                gobackHandle();
-                            });
-                            $el.find('.backOr_div .back__popLayer .back-continue').click(function () {
-                                $el.find('.backOr_div').hide();
-                                window.top.location.href = 'baidusearch/authorize?questionType='
-                                    + questionType + '&urlstring=mipilaw66baidu_request';
-                            });
-                        }
-                        else {
-                            if (dataStatus === 8 || dataStatus === 6 || dataStatus === 10 || dataStatus === 13) {
-                                //                              clearInterval(t1);
-                                settime();
-                            }
-                            else if (dataStatus === 5) {
-                                if (flag === 0) {
-                                    flag = 1;
-                                    //                                  clearInterval(t1);
-                                    setTimeout(function () {
-                                        settime();
-                                    }, 20000);
-                                    isback = false;
-                                }
-                            }
-                        }
-                    },
-                    error: function (jqXHR) {
-                        if (jqXHR.status === 403) {
-                            window.location.reload();
-                        }
-
-                    }
-
-                });
-            }
-        }
+        //      function fnDate() {
+        //          var date = new Date();
+        //          countTimeInSec = (date.getHours() - begin) * 3600
+        //              + (date.getMinutes() - min) * 60 + (date.getSeconds() - sec);
+        //          getPhoneStatus();
+        //      }
+        //      function getPhoneStatus() {
+        //          var questionType = $el.find('#questionType').val();
+        //          var askingType = $el.find('#askingType').val();
+        //
+        //          if (countTimeInSec % 5 === 0) {
+        //              $.ajax({
+        //                  type: 'GET',
+        //                  url: 'timer?id=' + timerRequestId + '&lawyerId=' + lawyerId,
+        //                  dataType: 'json',
+        //                  success: function (data) {
+        //                      console.log(data);
+        //                      localStorage.setItem('reAskAvatar', data.avatar);
+        //                      localStorage.setItem('reAskSex', data.sex);
+        //                      localStorage.setItem('reAskName', data.lawyerName);
+        //                      localStorage.setItem('lawyerField', data.lawyerField);
+        //                      localStorage.setItem('goodCommentRate', data.goodCommentRate);
+        //                      var dataStatus = data.status;
+        //                      timerRequestId = data.requestId;
+        //                      // 重新显示后台返回的呼叫中心号码，防止是因律师未接电话又下了一个单，然后调用的不同的呼叫中心
+        //                      $el.find('.link_phone span').html(data.tel);
+        //                      if (dataStatus === 3 || dataStatus === 4 || dataStatus === 7) {
+        //                          // 弹出律师未接提示
+        //                          //                          clearInterval(t1);
+        //                          var title = '';
+        //                          var main = '抱歉，' + data.lawyerName + '临时有事，无法为您服务系统可以为您推荐其他律师';
+        //                          var yes = '退出本页';
+        //                          var no = '推荐其他律师';
+        //                          $el.find('.backOr_div .back__popLayer span:nth-of-type(1)').text(title);
+        //                          $el.find('.backOr_div .back__popLayer span:nth-of-type(2)').text(main);
+        //                          $el.find('.backOr_div .back__popLayer .back-leave').text(yes);
+        //                          $el.find('.backOr_div .back__popLayer .back-continue').text(no);
+        //                          $el.find('.backOr_div').show();
+        //                          $el.find('.backOr_div .back__popLayer .back-leave').click(function () {
+        //                              $el.find('.backOr_div').hide();
+        //                              gobackHandle();
+        //                          });
+        //                          $el.find('.backOr_div .back__popLayer .back-continue').click(function () {
+        //                              $el.find('.backOr_div').hide();
+        //                              window.top.location.href = 'baidusearch/authorize?questionType='
+        //                                  + questionType + '&urlstring=mipilaw66baidu_request';
+        //                          });
+        //                      }
+        //                      else {
+        //                          if (dataStatus === 8 || dataStatus === 6 || dataStatus === 10 || dataStatus === 13) {
+        //                              //                              clearInterval(t1);
+        //                              settime();
+        //                          }
+        //                          else if (dataStatus === 5) {
+        //                              if (flag === 0) {
+        //                                  flag = 1;
+        //                                  //                                  clearInterval(t1);
+        //                                  setTimeout(function () {
+        //                                      settime();
+        //                                  }, 20000);
+        //                                  isback = false;
+        //                              }
+        //                          }
+        //                      }
+        //                  },
+        //                  error: function (jqXHR) {
+        //                      if (jqXHR.status === 403) {
+        //                          window.location.reload();
+        //                      }
+        //
+        //                  }
+        //
+        //              });
+        //          }
+        //      }
 
         function websocketgetPhoneStatus(data) {
             var questionType = $el.find('#questionType').val();
@@ -367,8 +367,7 @@ define(function (require) {
                 });
             }
             else {
-                if (dataStatus === 8 || dataStatus === 6 || dataStatus === 10 || dataStatus === 13) {
-                    //   clearInterval(t1);
+                if (dataStatus === 8 || dataStatus === 6 || dataStatus === 10 || dataStatus === 13) { // 服务完成
                     settime();
                 }
                 else if (dataStatus === 5) {
@@ -564,23 +563,34 @@ define(function (require) {
                 t = setTimeout(function () {
                     console.log('重新连接');
                     reconnection();
-                }, 100);
+                }, 500);
             }
         };
         var onopen = function () {
             console.log('open...');
+
+            setInterval(function () {
+                if (orderstart !== 6 || orderstart !== 8) {
+                    socket.send('HBT');
+                }
+
+            }, 2000);
+
         };
         var onclose = function () {
-            //              		console.log("close...");
+            //  console.log("close...");
             reconnection();
         };
         var onmessage = function (event) {
-            var data = JSON.parse(event.data);
-            orderstart = data.status;
-            //          socketgetInfo(data);
-            websocketgetPhoneStatus(data);
+            var datatype = typeof (event.data);
+            if (datatype !== 'string') {
+                var data = JSON.parse(event.data);
+                orderstart = data.status;
+                websocketgetPhoneStatus(data);
+            }
 
         };
+
         var onerror = function () {
             console.log('error...');
             reconnection();
