@@ -34,7 +34,7 @@ define(function (require) {
 
     var slide = {
         down: function (div) {
-            div.style.height = '150px';
+            div.style.height = '166px';
             div.style.display = 'block';
         },
         up: function (div) {

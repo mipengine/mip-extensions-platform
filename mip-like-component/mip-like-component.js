@@ -55,8 +55,11 @@ define(function (require) {
             },
             dataType: 'json',
             success: function (ret) {
+                console.log(ret.data);
                 if (ret.state === 1) {
-                    ele.find('.like-num').text(ret.data.praiseNum);
+                    console.log('come');
+                    console.log(ret.data['praiseNum']);
+                    ele.find('.like-num').text(ret.data['praiseNum']);
                 }
             }
         });
