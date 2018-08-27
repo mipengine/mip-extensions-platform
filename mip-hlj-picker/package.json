@@ -1,6 +1,6 @@
 {
     "name": "mip-hlj-picker",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "弹窗选择组件，支持1-3级的弹窗",
     "contributors": [
         {

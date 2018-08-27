@@ -1,0 +1,14 @@
+{
+    "name": "mip-qtkj-tab",
+    "version": "1.0.0",
+    "description": "tab切换组件，选项卡切换功能",
+    "contributors": [
+        {
+            "name": "yzxsl",
+            "email": "1311524642@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

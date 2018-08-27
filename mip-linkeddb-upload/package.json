@@ -1,0 +1,14 @@
+{
+    "name": "mip-linkeddb-upload",
+    "version": "1.0.0",
+    "description": "上传图片 点击可以查看上传的图片",
+    "contributors": [
+        {
+            "name": "linkeddb",
+            "email": "340236524@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

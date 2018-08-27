@@ -210,7 +210,7 @@ define(function (require) {
         }
     }
     var zhankaiStatus = 'false';
-    function openArticle() {
+    function openArticletie() {
         zhankaiStatus = 'true';
         $('.zhankai', element).hide();
         $('.tzitem_text', element).removeClass('hideText');
@@ -237,7 +237,7 @@ define(function (require) {
             },
             500);
         } else {
-            openArticle();
+            openArticletie();
         }
 
     });
@@ -429,5 +429,17 @@ define(function (require) {
         }
         document.getElementById('voteIn', element).innerHTML = str;
     }
+    $('#addGoodFriend', element).click(function () {
+        addGoodFriend();
+    });
+    $('#offYZ', element).click(function () {
+        offYZ();
+    });
+    $('#addFriendInfo', element).click(function () {
+        addFriendInfo();
+    });
+    $('#openArticletie', element).click(function () {
+        openArticletie();
+    });
     return customElement;
 });

@@ -45,6 +45,49 @@ define(function (require) {
         sessionScope = element.getAttribute('sessionScope') || '';
         blogerName = element.getAttribute('blogerName') || '';
         addtopicID = element.getAttribute('addtopicID') || '';
+        $('#mbokeTitleBlog', element).click(function () {
+            $('.Mboke_content', element).hide();
+            $('.Mboke_title', element).removeClass('Mboke_title_active');
+            $(this).addClass('Mboke_title_active');
+            $('.indexContent', element).show();
+        });
+        $('#mbokeTitleStock', element).click(function () {
+            $('.Mboke_content', element).hide();
+            $('.Mboke_title', element).removeClass('Mboke_title_active');
+            $(this).addClass('Mboke_title_active');
+            $('.geguContent', element).show();
+            jQajax();
+        });
+        $('#mbokeTitleRe', element).click(function () {
+            $('.Mboke_content', element).hide();
+            $('.Mboke_title', element).removeClass('Mboke_title_active');
+            $(this).addClass('Mboke_title_active');
+            $('.hotContent', element).show();
+            hotAjax();
+        });
+        // 关注
+        $('#addGoodFriendDiv', element).click(function () {
+            addGoodFriend();
+        });
+        // 取消关注
+        $('#delFriendDiv', element).click(function () {
+            delFriend();
+        });
+        $('.yzBox_Off', element).click(function () {
+            offYZ();
+        });
+        $('#yzInfo_R', element).click(function () {
+            addFriendInfo();
+        });
+        $('.isLoginClick', element).click(function () {
+            isLogin();
+        });
+        $('#focusYes', element).click(function () {
+            focusYes();
+        });
+        $('#focusNo', element).click(function () {
+            focusNo();
+        });
     };
     function hotAjax() {
         $.ajax({
@@ -285,8 +328,8 @@ define(function (require) {
                     var ridID = '"' + arr[i].topicID + '"';
                     var Zannum = '"' + '0' + '"';
                     var topic = '"' + 'T' + '"';
-                    str += '   <div class="contentBtn left zanBtn" onclick="addUseful(';
-                    str += ridID + ',' + Zannum + ',' + topic + ',' + flag + ')">';
+                    var lridID = 'l' + ridID;
+                    str += '   <div class="contentBtn left zanBtn" id="' + lridID + '">';
                     str += '    <mip-img src="https://css.taoguba.com.cn/images/mNew/zan.png" class="img1" alt=""></mip-img>';
                     str += '    <span class="contentBtns_span">赞(' + arr[i].usefulNum + ')</span>';
                     str += '    </div>';
@@ -294,7 +337,7 @@ define(function (require) {
                     str += '    <mip-img src="https://css.taoguba.com.cn/images/mNew/liulan.png" class="img2" alt=""></mip-img>';
                     str += '    <span  class="viewBtn_span">浏览(' + arr[i].totalViewNum + ')</span>';
                     str += '  </div>';
-                    str += '  <div class="contentBtn left plBtn" onclick="isLogin()">';
+                    str += '  <div class="contentBtn left plBtn isLoginClick"  >';
                     str += '  <mip-img src="https://css.taoguba.com.cn/images/mNew/pinglun.png" class="img3" alt=""></mip-img>';
                     str += '  <span  class="plBtn_span" >评论(' + arr[i].totalReplyNum + ')</span>';
                     str += '  </div>';
@@ -303,6 +346,23 @@ define(function (require) {
                 }
                 if (arr.length > 0) {
                     $('.indexContentItems2', element).append(str);
+                }
+                for (var i = 0; i < arr.length; i++) {
+                    var flag = '"' + 'S' + '"';
+                    if (sessionScope.userID === null) {
+                        flag = '"' + 'F' + '"';
+                    } else if (sessionScope.role !== null && sessionScope.role === 'noActive') {
+                        flag = '"' + 'T' + '"';
+                    } else {
+                        flag = '"' + 'S' + '"';
+                    }
+                    var ridID = '"' + arr[i].topicID + '"';
+                    var Zannum = '"' + '0' + '"';
+                    var topic = '"' + 'T' + '"';
+                    var lridID = 'l' + ridID;
+                    $('#' + lridID, element).click(function () {
+                        addUseful(ridID, Zannum, topic, flag);
+                    });
                 }
             }
         });
@@ -455,21 +515,6 @@ define(function (require) {
         hotAjax();
         $('.Mboke_title', element).eq(2).addClass('Mboke_title_active');
     }
-    $('.Mboke_title', element).click(function () {
-        var type = $(this).index();
-        $('.Mboke_content', element).hide();
-        $('.Mboke_title', element).removeClass('Mboke_title_active');
-        $(this).addClass('Mboke_title_active');
-        if (type === 0) {
-            $('.indexContent', element).show();
-        } else if (type === 1) {
-            $('.geguContent', element).show();
-            jQajax();
-        } else if (type === 2) {
-            $('.hotContent', element).show();
-            hotAjax();
-        }
-    });
     var page = 0;
     var scroll2Num = 1;
     $(window).scroll(function () {
@@ -498,9 +543,9 @@ define(function (require) {
             var userId = $('.Mboke', element).attr('data-id');
             if (bkuserID !== userId) {
                 if (dto.focusType === 'Y') {
-                    $('.BKgz_btn', element).html('<div class="Mboke_userGZ mhasGZ" onclick="delFriend()">已关注 </div>');
+                    $('.BKgz_btn', element).html('<div class="Mboke_userGZ mhasGZ"    id="delFriendDiv">已关注 </div>');
                 } else {
-                    $('.BKgz_btn', element).html('<div class="Mboke_userGZ munGZ" onclick="addGoodFriend()">关注</div>');
+                    $('.BKgz_btn', element).html('<div class="Mboke_userGZ munGZ"  id="addGoodFriendDiv"  >关注</div>');
                 }
             }
         }
@@ -551,34 +596,5 @@ define(function (require) {
             }
         });
     }
-    $('.yzBox_Off', element).click(function () {
-        offYZ();
-    });
-    $('#yzInfo_R', element).click(function () {
-        addFriendInfo();
-    });
-    $('#Mfoot_app', element).click(function () {
-        window.top.location.href = 'https://m.taoguba.com.cn/downloadApp';
-    });
-    $('#isLogin', element).click(function () {
-        isLogin();
-    });
-    $('#focusYes', element).click(function () {
-        focusYes();
-    });
-    $('#focusNo', element).click(function () {
-        focusNo();
-    });
-    $('#AddUseful', element).click(function () {
-        var flag = '';
-        if (sessionScope.userID === null) {
-            flag = 'F';
-        } else if (sessionScope.role !== null && sessionScope.role === 'noActive') {
-            flag = 'T';
-        } else {
-            flag = 'S';
-        }
-        addUseful(addtopicID, '0', 'T', flag);
-    });
     return customElement;
 });

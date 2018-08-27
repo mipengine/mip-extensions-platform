@@ -1,7 +1,7 @@
 /**
  * @file mip-wygx-views 组件.
  * @author east_qiu@gmail.com.
- * @version 1.2.2
+ * @version 1.2.3
  */
 
 define(function (require) {
@@ -26,7 +26,7 @@ define(function (require) {
     var ui = {
         defaultSetting: {
             app: 'false',
-            appurl: 'http://m.woyaogexing.com/app/wygxw.apk',
+            appurl: 'http://m.woyaogexing.com/about/appad.html',
             nexturl: '',
             download: '保存图片'
         },

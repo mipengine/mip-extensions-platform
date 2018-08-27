@@ -1,0 +1,12 @@
+{
+    "name": "mip-ilaw66baiduthree-index",
+    "version": "1.0.2",
+    "description": "法率网首页3期",
+    "contributors": [{
+        "name": "jessli",
+        "email": "306651535@qq.com"
+    }],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

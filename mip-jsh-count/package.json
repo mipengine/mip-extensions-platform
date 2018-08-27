@@ -1,0 +1,14 @@
+{
+    "name": "mip-jsh-count",
+    "version": "1.0.0",
+    "description": "实现倒计时功能",
+    "contributors": [
+        {
+            "name": "wangziyi",
+            "email": "471019897@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

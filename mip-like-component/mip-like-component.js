@@ -82,7 +82,7 @@ define(function (require) {
                             callback: function () {
                                 var num = parseInt(ele.find('.like-num').text().replace(/,/g, ''), 0);
                                 var newNum = num + 1;
-                                ele.find('.like-num').text(newNum);
+                                // ele.find('.like-num').text(newNum);
                             }
                         });
                     } else if (ret.state === 2) {

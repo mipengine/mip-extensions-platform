@@ -69,11 +69,7 @@ define(function (require) {
                 pickerMaskClose(element);
             },
             createCallback: function () {
-                var mask = element.querySelector('.picker-mask');
-                mask.addEventListener('click', function (e) {
-                    pickerMaskClose(element);
-                    element.myPicker.hidePicker();
-                });
+
             }
         });
 
