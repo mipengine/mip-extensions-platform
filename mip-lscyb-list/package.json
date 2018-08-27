@@ -1,0 +1,14 @@
+{
+    "name": "mip-lscyb-list",
+    "version": "1.0.0",
+    "description": "绿色下载列表数据组件",
+    "contributors": [
+        {
+            "name": "cyb",
+            "email": "415204@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

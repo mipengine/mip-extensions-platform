@@ -1,0 +1,14 @@
+{
+    "name": "mip-hlj-appointment",
+    "version": "1.0.0",
+    "description": "预约组件 公司内部使用",
+    "contributors": [
+        {
+            "name": "kong_kong",
+            "email": "kong_kong@hunliji.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

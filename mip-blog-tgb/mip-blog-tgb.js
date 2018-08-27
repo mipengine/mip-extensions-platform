@@ -12,6 +12,7 @@ define(function (require) {
     var sessionScope = '';
     var blogerName = '';
     var element = '';
+    var addtopicID = '';
     // String.prototype.trim = function() {
     //     return this.replace(/(^\s*)|(\s*$)/g, "");
     // };
@@ -43,6 +44,7 @@ define(function (require) {
         ssoPath = element.getAttribute('ssoPath') || '';
         sessionScope = element.getAttribute('sessionScope') || '';
         blogerName = element.getAttribute('blogerName') || '';
+        addtopicID = element.getAttribute('addtopicID') || '';
     };
     function hotAjax() {
         $.ajax({
@@ -86,7 +88,7 @@ define(function (require) {
                     str += '    <mip-img src="https://css.taoguba.com.cn/images/mNew/liulan.png" class="img2" alt=""></mip-img>';
                     str += '    <span>浏览(' + arr[i].totalViewNum + ')</span>';
                     str += '  </div>';
-                    str += '  <div class="contentBtn left plBtn" onclick="MopenAPP(' + arr[i].topicID + ',0)">';
+                    str += '  <div class="contentBtn left plBtn" onclick="mopenAPP(' + arr[i].topicID + ',0)">';
                     str += '  <mip-img src="https://css.taoguba.com.cn/images/mNew/pinglun.png" class="img3" alt=""></mip-img>';
                     str += '  <span>评论(' + arr[i].totalReplyNum + ')</span>';
                     str += '  </div>';
@@ -117,7 +119,7 @@ define(function (require) {
     function isLogin() {
         var isLogin = userID;
         if (isLogin === 0) {
-            window.location.href = ssoPath + '/m/login/index';
+            window.top.location.href = ssoPath + '/m/login/index';
         } else {
             return;
         }
@@ -283,7 +285,7 @@ define(function (require) {
                     var ridID = '"' + arr[i].topicID + '"';
                     var Zannum = '"' + '0' + '"';
                     var topic = '"' + 'T' + '"';
-                    str += '   <div class="contentBtn left zanBtn" onclick="AddUseful(';
+                    str += '   <div class="contentBtn left zanBtn" onclick="addUseful(';
                     str += ridID + ',' + Zannum + ',' + topic + ',' + flag + ')">';
                     str += '    <mip-img src="https://css.taoguba.com.cn/images/mNew/zan.png" class="img1" alt=""></mip-img>';
                     str += '    <span class="contentBtns_span">赞(' + arr[i].usefulNum + ')</span>';
@@ -402,7 +404,7 @@ define(function (require) {
             }
         });
     }
-    function AddUseful(rid, num, topic, flag) {
+    function addUseful(rid, num, topic, flag) {
         var pageNum = 0;
         if (flag === 'F') {
             // alert("您还没有登陆，请登录后再点赞");
@@ -549,5 +551,34 @@ define(function (require) {
             }
         });
     }
+    $('.yzBox_Off', element).click(function () {
+        offYZ();
+    });
+    $('#yzInfo_R', element).click(function () {
+        addFriendInfo();
+    });
+    $('#Mfoot_app', element).click(function () {
+        window.top.location.href = 'https://m.taoguba.com.cn/downloadApp';
+    });
+    $('#isLogin', element).click(function () {
+        isLogin();
+    });
+    $('#focusYes', element).click(function () {
+        focusYes();
+    });
+    $('#focusNo', element).click(function () {
+        focusNo();
+    });
+    $('#AddUseful', element).click(function () {
+        var flag = '';
+        if (sessionScope.userID === null) {
+            flag = 'F';
+        } else if (sessionScope.role !== null && sessionScope.role === 'noActive') {
+            flag = 'T';
+        } else {
+            flag = 'S';
+        }
+        addUseful(addtopicID, '0', 'T', flag);
+    });
     return customElement;
 });

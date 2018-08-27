@@ -1,0 +1,14 @@
+{
+    "name": "mip-cdel-im",
+    "version": "1.0.0",
+    "description": "在线客服",
+    "contributors": [
+        {
+            "name": "yxq",
+            "email": "1002796635@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
