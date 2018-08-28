@@ -76,7 +76,7 @@ define(function (require) {
         + city.cid + '>' + city.short_name + '城区</a></li>';
         for (var i = 0; i < groups.length; i++) {
             html += '<li><a data-id=' + groups[i].cid + ' href=' + '/baidu/package/city_'
-            + groups[i].cid + '>' + groups[i].short_name + '</a></li>';
+            + groups[i].cid + '>' + groups[i].area_name + '</a></li>';
         }
 
         $(element).find('#groups').html(html);

@@ -44,7 +44,8 @@ define(function (require) {
         ssoPath = element.getAttribute('ssoPath') || '';
         sessionScope = element.getAttribute('sessionScope') || '';
         blogerName = element.getAttribute('blogerName') || '';
-        addtopicID = element.getAttribute('addtopicID') || '';
+        var listTopic = element.getAttribute('listTopic') || '';
+        listTopic = JSON.parse(listTopic);
         $('#mbokeTitleBlog', element).click(function () {
             $('.Mboke_content', element).hide();
             $('.Mboke_title', element).removeClass('Mboke_title_active');
@@ -65,6 +66,24 @@ define(function (require) {
             $('.hotContent', element).show();
             hotAjax();
         });
+        // listTopic=listTopic.dto.listTopic;
+        for (var i = 0; i < listTopic.length; i++) {
+            var ridID = listTopic[i].topicID;
+            var ridID2 = '#l' + ridID;
+            $(ridID2, element).click(function () {
+                var flag = 'S';
+                if (sessionScope.userID === null) {
+                    flag = 'F';
+                } else if (sessionScope.role !== null && sessionScope.role === 'noActive') {
+                    flag = 'T';
+                } else {
+                    flag = 'S';
+                }
+                var Zannum = '0';
+                var topic = 'T';
+                addUseful(ridID, Zannum, topic, flag);
+            });
+        }
         // 关注
         $('#addGoodFriendDiv', element).click(function () {
             addGoodFriend();
@@ -79,15 +98,19 @@ define(function (require) {
         $('#yzInfo_R', element).click(function () {
             addFriendInfo();
         });
+        // 评论
         $('.isLoginClick', element).click(function () {
             isLogin();
         });
+        // 确定
         $('#focusYes', element).click(function () {
             focusYes();
         });
+        // 取消
         $('#focusNo', element).click(function () {
             focusNo();
         });
+        // 登录头像更换
     };
     function hotAjax() {
         $.ajax({
@@ -104,7 +127,7 @@ define(function (require) {
                     str += '  <a class="HeadInfo left" href="/blog/' + arr[i].userID + '">';
                     str += '  <mip-img    layout="responsive" width="100" height="100" src="https://image.taoguba.com.cn/img/';
                     str += arr[i].portrait + '" alt="" class="HeadInfo_img"></mip-img>';
-                    if (arr[i].auth === 55) {
+                    if (Number(arr[i].auth) === 55) {
                         str += '  <mip-img src="https://css.taoguba.com.cn/images/mNew/daV.png" alt="" class="HeadIndo_dav"></mip-img>';
                     }
                     str += '  </a>';
@@ -161,7 +184,7 @@ define(function (require) {
     // 判断是否登录
     function isLogin() {
         var isLogin = userID;
-        if (isLogin === 0) {
+        if (Number(isLogin) === 0) {
             window.top.location.href = ssoPath + '/m/login/index';
         } else {
             return;
@@ -298,8 +321,9 @@ define(function (require) {
                     str += '  <div>';
                     str += '  <div class="Head left">';
                     str += '  <div class="HeadInfo left">';
-                    str += '  <mip-img src="' + portrait + '" alt="" class="HeadInfo_img"></mip-img>';
-                    if (Auth === 55) {
+                    str += '  <mip-img src="' + portrait;
+                    str += '" alt="" class="HeadInfo_img"  layout="responsive" width="100" height="100"></mip-img>';
+                    if (Number(Auth) === 55) {
                         str += '  <mip-img src="https://css.taoguba.com.cn/images/mNew/daV.png" alt="" class="HeadIndo_dav"></mip-img>';
                     }
                     str += '  </div>';
@@ -317,17 +341,17 @@ define(function (require) {
                     str += '      【摘要】' + arr[i].content;
                     str += '   </a>';
                     str += '  <div class="contentBtns">';
-                    var flag = '"' + 'S' + '"';
+                    var flag = 'S';
                     if (sessionScope.userID === null) {
-                        flag = '"' + 'F' + '"';
+                        flag = 'F';
                     } else if (sessionScope.role !== null && sessionScope.role === 'noActive') {
-                        flag = '"' + 'T' + '"';
+                        flag = 'T';
                     } else {
-                        flag = '"' + 'S' + '"';
+                        flag = 'S';
                     }
-                    var ridID = '"' + arr[i].topicID + '"';
-                    var Zannum = '"' + '0' + '"';
-                    var topic = '"' + 'T' + '"';
+                    var ridID = arr[i].topicID;
+                    var Zannum = '0';
+                    var topic = 'T';
                     var lridID = 'l' + ridID;
                     str += '   <div class="contentBtn left zanBtn" id="' + lridID + '">';
                     str += '    <mip-img src="https://css.taoguba.com.cn/images/mNew/zan.png" class="img1" alt=""></mip-img>';
@@ -348,17 +372,17 @@ define(function (require) {
                     $('.indexContentItems2', element).append(str);
                 }
                 for (var i = 0; i < arr.length; i++) {
-                    var flag = '"' + 'S' + '"';
+                    var flag = 'S';
                     if (sessionScope.userID === null) {
-                        flag = '"' + 'F' + '"';
+                        flag = 'F';
                     } else if (sessionScope.role !== null && sessionScope.role === 'noActive') {
-                        flag = '"' + 'T' + '"';
+                        flag = 'T';
                     } else {
-                        flag = '"' + 'S' + '"';
+                        flag = 'S';
                     }
-                    var ridID = '"' + arr[i].topicID + '"';
-                    var Zannum = '"' + '0' + '"';
-                    var topic = '"' + 'T' + '"';
+                    var ridID = arr[i].topicID;
+                    var Zannum = '0';
+                    var topic = 'T';
                     var lridID = 'l' + ridID;
                     $('#' + lridID, element).click(function () {
                         addUseful(ridID, Zannum, topic, flag);
@@ -401,7 +425,7 @@ define(function (require) {
                     if (window[winStr] !== '') {
                         var winInfo = window[winStr].split(',');
                         var zd = (winInfo[3] - winInfo[2]).toFixed(2);
-                        if (winInfo[2] === 0) {
+                        if (Number(winInfo[2]) === 0) {
                             continue;
                         }
                         var zdRate = (winInfo[3] - winInfo[2]) / winInfo[2] * 100;
@@ -423,8 +447,8 @@ define(function (require) {
         });
     }
     function jQajax() {
-        var url2 = window.location.href;
-        var userID = url2.split('/blog/')[1];
+        var url2 = window.top.location.href;
+        var userID2 = url2.split('/blog/')[1];
         var domainPath = '';
         if (url2.indexOf('taoguba.xsq') > -1) {
             domainPath = 'https://www.taoguba.xsq';
@@ -437,7 +461,7 @@ define(function (require) {
         }
         $.ajax({
             type: 'GET',
-            url: '/mGetBlogStock?blogID=' + userID,
+            url: '/mGetBlogStock?blogID=' + userID2,
             dataType: 'json',
             success: function (data) {
                 var dto = data.dto;
@@ -468,7 +492,7 @@ define(function (require) {
         var pageNum = 0;
         if (flag === 'F') {
             // alert("您还没有登陆，请登录后再点赞");
-            window.top.location.href = '<%=ssoPath%>/m/login/index?url=https://m.<%=documentDomain%>/Article/<c:out value="${topicID}"/>/1';
+            window.top.location.href = ssoPath + '/m/login/index?url=https://m.<%=documentDomain%>/Article/<c:out value="${topicID}"/>/1';
             return;
         }
         if (flag === 'T') {
@@ -508,7 +532,7 @@ define(function (require) {
         }
     }
     var BKsize = $('.indexContentItems', element).attr('data-size');
-    if (BKsize === 0) {
+    if (Number(BKsize) === 0) {
         $('.Mboke_content', element).hide();
         $('.Mboke_title', element).removeClass('Mboke_title_active');
         $('.hotContent', element).show();
@@ -530,7 +554,8 @@ define(function (require) {
             }
         }
     });
-    var bkUrl = window.location.href;
+    var bkUrl = window.top.location.href;
+    // bkUrl='http://m.taoguba.yl/mip/blog/4132';
     var bkuserID = bkUrl.split('blog/')[1];
     $.ajax({
         url: '/blogUseMsg?userID=' + bkuserID,
@@ -550,13 +575,22 @@ define(function (require) {
             }
         }
     });
-    // 添加订阅
-    function addOrder() {
-        var getName = blogerName;
-        var baseurl = $('.div_head_data', element).attr('id');
-        var url = baseurl + 'mAddSubscriptionUser?userName=' + getName;
-        sendReq('get', url, '', getReturnOrder);
-    }
+    // var url='http://m.taoguba.yl/blogUseMsg?userID=' + bkuserID;
+    // var fetchJsonp = require('fetch-jsonp');
+    // fetchJsonp(url, {
+    //     jsonpCallback: 'cb'
+    // }).then(function (res) {
+    //     return res.json();
+    // }).then(function (data) {
+    //     console.log(data);
+    // });
+    // // 添加订阅
+    // function addOrder() {
+    //     var getName = blogerName;
+    //     var baseurl = $('.div_head_data', element).attr('id');
+    //     var url = baseurl + 'mAddSubscriptionUser?userName=' + getName;
+    //     sendReq('get', url, '', getReturnOrder);
+    // }
     // function toActivity(type, userID, blogName) {
     //     var param = '{"to":"Friends","params":[{"name":"userID","value":"';
     //     param += userID + '"},{"name":"type","value":"' + type + '"}';
@@ -568,7 +602,7 @@ define(function (require) {
     //     AndroidAPI.callJava('toActivity', param);
     // }
     function focusYes() {
-        var url2 = window.location.href;
+        var url2 = window.top.location.href;
         var relationID = url2.split('/blog/')[1];
         var url = '/delGoodFriend?relationID=' + relationID;
         $('.focusBox', element).hide();
@@ -586,12 +620,12 @@ define(function (require) {
         function (obj) {
             var str = obj.dto;
             $('.yzBox').hide();
-            if (str === 1) {
+            if (Number(str) === 1) {
                 showMessage('发送成功!');
                 $('.yzBox').hide();
-            } else if (str === 0) {
+            } else if (Number(str) === 0) {
                 showMessage('失败，请重试!');
-            } else if (str === 2) {
+            } else if (Number(str) === 2) {
                 showMessage('您的关注已经超过2000个，无法再加。');
             }
         });

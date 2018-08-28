@@ -12,6 +12,7 @@ define(function (require) {
     var ssoPath = '';
     var xLstatus1 = 0;
     var xLstatus2 = 0;
+    var topicIDA = 0;
 
     /**
      * 第一次进入可视区回调，只会执行一次
@@ -21,6 +22,7 @@ define(function (require) {
         element = element2;
         userID = $('.div_head_data', element).attr('data-type');
         ssoPath = $('.div_head_data', element).attr('name');
+        topicIDA = element.getAttribute('topicIDA') || '0';
         $(document).click(function () {
             $('.content_sortXL', element).hide();
         });
@@ -236,7 +238,7 @@ define(function (require) {
         }
     }
     $('#openApp', element).click(function () {
-        mopenAPP(0, 0);
+        mopenAPP(topicIDA, 0);
     });
     return customElement;
 });

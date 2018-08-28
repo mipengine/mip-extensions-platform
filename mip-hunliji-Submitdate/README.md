@@ -12,7 +12,7 @@ mip-hunliji-Submitdate 用户提交预约信息
 
 ### 基本用法
 ```html
-<mip-hunliji-Submitdate data-url="//api.hunliji.com/p/wedding/web/baidu/MakeAppointment" data-type='hotel' data-id='147853' data-islogin='1'>
+<mip-hunliji-Submitdate data-url="//api.hunliji.com/p/wedding/web/baidu/MakeAppointment" data-type='hotel' data-id='147853'>
     <div class="mipfrom">
         <div class="open_box_div"><span>姓名：</span><input type="text" name="fullname" placeholder="请输入真实姓名"></div>
         <div class="tishi_box name_box">姓名不能为空</div>
@@ -48,11 +48,5 @@ mip-hunliji-Submitdate 用户提交预约信息
 必选项：{否}
 类型：{number}
 
-### {data-islogin}
-
-说明：{是否登录,如果data-type=‘package’,此属性必须有}
-必选项：{否}
-类型：{number}
-取值范围：{0是未登录,1是登录}
 
 ## 注意事项
