@@ -1,0 +1,14 @@
+{
+    "name": "mip-liAHM-click",
+    "version": "1.0.0",
+    "description": "切换按钮组件",
+    "contributors": [
+        {
+            "name": "xhj",
+            "email": "3233268172@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

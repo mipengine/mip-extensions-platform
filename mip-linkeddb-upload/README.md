@@ -72,5 +72,5 @@ mip-linkeddb-upload 上传图片 点击查看图片可以预览上传的图片
 类型：字符串
 
 ## 注意事项
-<div id="content">必须是<mip-linkeddb-upload>的父元素
+class content 必须是 mip-linkeddb-upload 的父元素
 

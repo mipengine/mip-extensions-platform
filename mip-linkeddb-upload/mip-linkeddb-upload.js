@@ -8,6 +8,14 @@ define(function (require) {
 
     var customElement = require('customElement').create();
     var $ = require('zepto');
+    require('./jquery-weui');
+    // jquery-weui-min 此为定制化精简模块,内部只包含本组件中使用的功能
+    // 一下列举定制化模块包含模块详情
+    // jquery-extend  jquery 依赖模块
+    // template7  模板模块
+    // $.confirm  使用 modal   提示用户操作的弹出层模块
+    // $.toptip   使用 toptip  顶部提示模块
+    // $.toast    使用 toast   信息提示框模块
 
     /**
      * 第一次进入可视区回调，只会执行一次
@@ -16,7 +24,7 @@ define(function (require) {
         var ele = this.element;
         var content = $(ele).parent();
         var cpId = $(ele).attr('data-cp-id');
-        var photoAlbumWrap = $('.photo-album-wrap');
+        var photoAlbumWrap = $(ele).find('.photo-album-wrap');
         var setImgModal = function () {
             var allPhotos = photoAlbumWrap.find('.upload-num').find('.file-limit').text();
             var overPhotos = photoAlbumWrap.find('.upload-num').find('.now-cnt').text();

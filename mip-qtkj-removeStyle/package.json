@@ -1,0 +1,14 @@
+{
+    "name": "mip-qtkj-removeStyle",
+    "version": "1.0.0",
+    "description": "去除行内style属性",
+    "contributors": [
+        {
+            "name": "yzxsl",
+            "email": "1311524642@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

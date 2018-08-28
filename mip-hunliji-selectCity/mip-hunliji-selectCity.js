@@ -30,6 +30,7 @@ define(function (require) {
         var element = this.element;
         gitCity(element.getAttribute('urlApi'), element);
         $(element).find('dt').on('click', function () {
+            $(this).find('input').blur();
             $(element).find('dd').show();
         });
         $(element).on('click', '#select_cityname span', function () {

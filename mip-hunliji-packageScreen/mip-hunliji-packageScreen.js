@@ -27,8 +27,15 @@ define(function (require) {
         $(element).on('click', '#typeclick li', function () {
             index = $(this).index();
             typeclass = $(this).attr('data-type');
-            $(element).find('#package_screen_content dl').hide();
-            $(element).find('#package_screen_content .' + typeclass).show();
+            if ($(this).hasClass('on')) {
+                $(element).find('#typeclick li').removeClass('on');
+                $(element).find('#package_screen_content dl').hide();
+            } else {
+                $(element).find('#typeclick li').removeClass('on');
+                $(this).addClass('on');
+                $(element).find('#package_screen_content dl').hide();
+                $(element).find('#package_screen_content .' + typeclass).show();
+            }
         });
         /**
          * 价格筛选清除价格
