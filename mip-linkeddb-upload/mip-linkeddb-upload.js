@@ -71,7 +71,7 @@ define(function (require) {
                     if (['image/jpg', 'image/jpeg', 'image/png'].indexOf(thisFile.type) >= 0) {
                         var formData = new FormData();
                         formData.append('img', thisFile);
-                        sendAjax(url + cpId, 'post', formData, fun, fun2, fun3);
+                        sendAjax(url + cpId, formData, fun, fun2, fun3);
                     } else {
                         $.toptip('点击图片查看保存拼图', 'warning');
                     }
@@ -168,21 +168,13 @@ define(function (require) {
                         var swiperSlideHtml = '';
                         var photoArr = res.data;
                         $.each(photoArr, function (index, item) {
-                            swiperSlideHtml += '<div class="swiper-slide"><mip-img src="${item}" alt="" class="img">'
-                                + '</mip-img></div>';
+                            swiperSlideHtml += '<mip-img src="' + item + '" alt="" class="img"></mip-img>';
                         });
-                        var swiperWrapperHtml = '<div class="swiper-wrapper">${swiperSlideHtml}</div>';
-                        var swiperContainerHtml = '<div class="swiper-container photo-swiper">'
-                            + '${swiperWrapperHtml}<div class="swiper-pagination"></div></div>';
+
+                        var swiperContainerHtml = '<mip-carousel layout="responsive" width="600" height="400"'
+                            + 'indicator><div>' + swiperSlideHtml + '</div></mip-carousel>';
 
                         content.append(swiperContainerHtml);
-
-                        // var photoSwiper = new Swiper('.photo-swiper', {
-                        //     pagination: {
-                        //         el: '.swiper-pagination',
-                        //         type: 'fraction',
-                        //     },
-                        // });
                         content.find('.photo-swiper').addClass('show');
                         content.addClass('z-index-cover');
                         $(document.body).addClass('overflow');
