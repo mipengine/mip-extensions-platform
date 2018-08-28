@@ -8,6 +8,10 @@ define(function (require) {
     var $ = require('zepto');
     var customElement = require('customElement').create();
     var element = '';
+    var userID = '';
+    var ssoPath = '';
+    var xLstatus1 = 0;
+    var xLstatus2 = 0;
 
     /**
      * 第一次进入可视区回调，只会执行一次
@@ -15,6 +19,25 @@ define(function (require) {
     customElement.prototype.firstInviewCallback = function () {
         var element2 = this.element;
         element = element2;
+        userID = $('.div_head_data', element).attr('data-type');
+        ssoPath = $('.div_head_data', element).attr('name');
+        $(document).click(function () {
+            $('.content_sortXL', element).hide();
+        });
+        $('.Mhead_userbtn', element).click(function (event) {
+            if (xLstatus2 % 2 === 0) {
+                $('.MheadXL2', element).show();
+                $('.Mhead_userbtn', element).find('.Mhimg3').attr('src', 'https://css.taoguba.com.cn/images/mNew/guanbi.png');
+            } else {
+                $('.MheadXL2', element).hide();
+                var img2 = $('.Mhead_userbtn', element).find('.Mhimg3').attr('data-img');
+                $('.Mhead_userbtn', element).find('.Mhimg3').attr('src', img2);
+            }
+            xLstatus2++;
+            event = event || window.event;
+            event.stopPropagation();
+        });
+        appInfo();
     };
     if (window.top.location.protocol !== 'https:') {
         window.top.location.href = window.top.location.href.replace('http:', 'https:');
@@ -22,10 +45,8 @@ define(function (require) {
     function openbuy() {
         var u = navigator.userAgent;
         if (!! u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)
-            || u.indexOf('Android') > -1
-            || u.indexOf('Linux') > -1
-            || u.indexOf('iPhone') > -1
-            || u.indexOf('iPad') > -1) {
+            || u.indexOf('Android') > -1 || u.indexOf('Linux') > -1
+            || u.indexOf('iPhone') > -1 || u.indexOf('iPad') > -1) {
             window.top.location.href = 'https://m.taoguba.com.cn/checkFromMstgb';
         } else {
             alert('请使用app或掌上淘股吧购买产品');
@@ -34,12 +55,9 @@ define(function (require) {
     function alterAtarget() {
 
     }
-
     /**
- 		 *头部js
- 		 **/
-    var userID = $('.div_head_data', element).attr('data-type');
-    var ssoPath = $('.div_head_data', element).attr('name');
+         *头部js
+         **/
     // 活跃度统计
     var domainUrl = document.domain;
     var rootDomain = domainUrl.substring(domainUrl.indexOf('taoguba'));
@@ -49,7 +67,6 @@ define(function (require) {
     $('#Msearch', element).focus(function () {
         searchStatus = 'false';
     });
-
     $.ajax({
         type: 'GET',
         url: summaryUrl,
@@ -62,24 +79,6 @@ define(function (require) {
         error: function () {}
     });
     // 消息中心区域外隐藏
-    var xLstatus1 = 0;
-    var xLstatus2 = 0;
-    $(document).click(function () {
-        $('.content_sortXL', element).hide();
-    });
-    $('.Mhead_userbtn', element).click(function (event) {
-        if (xLstatus2 % 2 === 0) {
-            $('.MheadXL2', element).show();
-            $('.Mhead_userbtn', element).find('.Mhimg3').attr('src', 'https://css.taoguba.com.cn/images/mNew/guanbi.png');
-        } else {
-            $('.MheadXL2', element).hide();
-            var img2 = $('.Mhead_userbtn', element).find('.Mhimg3').attr('data-img');
-            $('.Mhead_userbtn', element).find('.Mhimg3').attr('src', img2);
-        }
-        xLstatus2++;
-        event = event || window.event;
-        event.stopPropagation();
-    });
     // 上拉与下拉切换头部
     var HstartY;
     var HendY;
@@ -100,7 +99,6 @@ define(function (require) {
         }
     },
     false);
-    appInfo();
     function appInfo() {
         var url = 'appUserInfo?userID=' + userID;
         var localImg = localStorage.getItem('local_img' + userID);
@@ -163,7 +161,6 @@ define(function (require) {
                 }
             },
             25);
-
             if (topicID === 0) {
                 window.location.href = 'taoguba://taoguba.com.cn';
             } else {
@@ -220,8 +217,7 @@ define(function (require) {
             try {
                 state = window.open('taoguba://app.topic/openAddTopic');
             } catch (e) {}
-            if (state) {
-            } else {
+            if (state) {} else {
                 window.top.location.href = 'https://m.taoguba.com.cn/downloadApp';
             }
         }
