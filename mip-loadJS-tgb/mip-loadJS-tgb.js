@@ -46,7 +46,7 @@ define(function (require) {
             riseFallAmount = '--';
             if (hqObj.length > 1) {
                 if ('A' === type) {
-                    if (hqObj[3] !== 0) {
+                    if (Number(hqObj[3]) !== 0) {
                         riseFallAmount = parseFloat(hqObj[3] - hqObj[2]).toFixed(2);
                         zdRate = (hqObj[3] - hqObj[2]) / hqObj[2] * 100;
                         zdRateStr = zdRate.toFixed(2) + '%';

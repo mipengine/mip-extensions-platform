@@ -27,9 +27,15 @@ define(function (require) {
         var isback = true;
         $el.find('#requestId').val(timerRequestId);
         $el.find('#questionType').val(timerQuestionType);
-        var thishostname = location.hostname;
-        var name = 'mip-login-xzh:sessionId:https://' + thishostname + '/jasmine/baidusearch/authorize2';
-        var sessionId = localStorage.getItem(name);
+        //      var thishostname = location.hostname;
+        //      var name = 'mip-login-xzh:sessionId:https://' + thishostname + '/jasmine/baidusearch/authorize2';
+        //      var sessionId = localStorage.getItem(name);
+        var sessionId = getQueryString('sessionId');
+        setTimeout(function () {
+            sessionId = $el.find('#sesiid').html();
+            console.log(sessionId);
+        }, 1000);
+
         var t1 = setInterval(function () {
             fnDate();
         }, 1000);

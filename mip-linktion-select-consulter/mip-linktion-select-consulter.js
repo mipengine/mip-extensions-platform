@@ -129,7 +129,7 @@ define(function (require) {
                                         + '</div>'
                                         + '<div class="card-but">'
                                             + '<a href="/planner/' + items.id + '" class="but-about">了解TA</a>'
-                                            + changeReturnHtml
+                                            // + changeReturnHtml
                                         + '</div>'
                                     + '</div>'
                                 + '</div>';
@@ -211,10 +211,13 @@ define(function (require) {
                                             + '<a href="/planner/' + items.id + '"><button class="but-about"'
                                                 + '>了解TA'
                                             + '</button></a>'
-                                            + returnHtml
+                                            // + returnHtml
                                         + '</div>'
                                         + '<div class="card-phone-but">'
-                                        + returnPhoneHtml
+                                        // + returnPhoneHtml
+                                            + '<a href="/planner/' + items.id + '"><button class="but-about"'
+                                                + '>了解TA'
+                                            + '</button></a>'
                                         + '</div>'
                                     + '</div>'
                                 + '</div>';

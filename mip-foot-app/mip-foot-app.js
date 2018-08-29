@@ -40,11 +40,11 @@ define(function (require) {
                 }
             },
             25);
-            if (topicID === 0) {
+            if (Number(topicID) === 0) {
                 window.top.location.href = 'taoguba://taoguba.com.cn';
             } else {
             // isLogin();
-                if (replyID === 0) {
+                if (Number(replyID) === 0) {
                     window.top.location.href = 'taoguba://app.topic/openTopic?topicId=' + topicID;
                 } else {
                     window.top.location.href = 'taoguba://app.topic/openTopic?topicId=' + topicID + '&replyId=' + replyID;
@@ -62,7 +62,7 @@ define(function (require) {
                 }
             },
             25);
-            if (topicID === 0) {
+            if (Number(topicID) === 0) {
                 window.top.location.href = 'tgbiosapp://';
             } else {
             // isLogin();

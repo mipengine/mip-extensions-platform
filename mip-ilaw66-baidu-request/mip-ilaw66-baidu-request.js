@@ -20,9 +20,14 @@ define(function (require) {
         var sec = dateTime.getSeconds();
         var timer;
         var lawyerId;
-        var thishostname = location.hostname;
-        var name = 'mip-login-xzh:sessionId:https://' + thishostname + '/jasmine/baidusearch/authorize2';
-        var sessionId = localStorage.getItem(name);
+        //      var thishostname = location.hostname;
+        //      var name = 'mip-login-xzh:sessionId:https://' + thishostname + '/jasmine/baidusearch/authorize2';
+        //      var sessionId = localStorage.getItem(name);
+        var sessionId = getQueryString('sessionId');
+        setTimeout(function () {
+            sessionId = $el.find('#sesiid').html();
+            console.log(sessionId);
+        }, 1000);
 
         $el.find('.jingxuan_top').css('background-image', 'url("images/bg_jingxuanlvshi.png")');
         $el.find('.jingxuan_top>img').attr('src', 'images/bg_touxiangjx.png');
@@ -112,7 +117,7 @@ define(function (require) {
             if (countdown > 60) {
                 clearInterval(timer);
                 window.top.location.href = 'mipilaw66baidu_lawyer_noresponse?questionType='
-                + questionType + '&sessionId=' + sessionId;
+                    + questionType + '&sessionId=' + sessionId;
             }
             else {
                 if (countdown % 5 === 0) {
@@ -157,7 +162,7 @@ define(function (require) {
         function cancelRequestOr() {
             $.ajax({
                 url: 'cancelRequest?requestId=' + $el.find('#requestId').val() + '&_csrf='
-                + $el.find('#_csrf').val() + '&sessionId=' + sessionId,
+                    + $el.find('#_csrf').val() + '&sessionId=' + sessionId,
                 type: 'POST',
                 success: function (data) {
                     if (data === 'NG') {

@@ -24,148 +24,14 @@ define(function (require) {
         var search = location.search.toLowerCase();
         var channel = $el.find('#channel').val();
         var userId = $el.find('#userId').val();
-        var thishostname = location.hostname;
-        var name = 'mip-login-xzh:sessionId:https://' + thishostname + '/jasmine/baidusearch/authorize2';
-        var sessionId = localStorage.getItem(name);
+        var sessionId = $el.find('#sesiid').html();
+        setTimeout(function () {
+            sessionId = $el.find('#sesiid').html();
+            console.log(sessionId);
+        }, 1000);
         bannerusernum();
-        //   	console.log(sessionId)
-
         if (sessionStorage.getItem('ishomeorder')) {
             sessionStorage.clear('ishomeorder');
-        }
-
-        function getQueryString(name) {
-            var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
-            var r = window.location.search.substr(1).match(reg);
-            if (r !== null) {
-                return unescape(r[2]);
-            }
-
-            return null;
-        }
-
-        function PopUp(option) {
-            this.init(option);
-            return this;
-        }
-
-        PopUp.prototype = {
-            constructor: PopUp,
-            init: function (option) {
-                var This = this;
-                This.option = {
-                    title: '弹窗标题',
-                    main: '弹窗内容',
-                    yes: '确定',
-                    no: '取消',
-                    popYes: function () {},
-                    popNo: function () {}
-                };
-                $.extend(true, this.option, option || {});
-                This.dom();
-                This.bindEvent();
-            },
-            dom: function () {
-                var This = this;
-                This.body = $('body');
-                var btnN = '<div class="back-leave" id="js-back-leave">'
-                    + This.option.yes + '</div>' + '<div class="back-continue" id="js-back-continue">'
-                    + This.option.no + '</div>';
-                if (!This.option.yes) {
-                    btnN = '<div class="back-continue back-continue__one" id="js-back-continue">'
-                        + This.option.no + '</div>';
-                }
-
-                This.main = '<div class="back__pop popUP" style="display:none;" id="back__pop">'
-                    + '<div class="layer__wrapper"></div>' + '<div class="back__popLayer">' + '<span>'
-                    + This.option.title + '</span>' + '<span>' + This.option.main
-                    + '</span>' + btnN + '</div>' + '</div>';
-                This.body.append(This.main);
-                This.PopUp = $el.find('.popUP');
-                This.PopUp.show();
-            },
-            bindEvent: function () {
-                var This = this;
-                //  点击离开事件
-                This.PopUp.on('click', '#js-back-leave', function () {
-                    This.PopUp.remove();
-                    This.option.popYes();
-                });
-                //  点击确认事件
-                This.PopUp.on('click', '#js-back-continue', function () {
-                    This.PopUp.remove();
-                    This.option.popNo();
-
-                });
-                //  点击遮罩层事件 --- 点击不关闭，必须点按钮
-
-                /*This.PopUp.on('click', '.layer__wrapper', function () {
-                    This.PopUp.remove();
-                })*/
-
-            }
-        };
-
-        window.PopUp = PopUp;
-
-        // 取消内容显示样式
-        function ToastUp(option) {
-            this.init(option);
-            return this;
-        }
-        ToastUp.prototype = {
-            constructor: ToastUp,
-            init: function (option) {
-                var This = this;
-                This.option = {
-                    main: '显示内容'
-                };
-                $.extend(true, this.option, option || {});
-                This.dom();
-                This.bindEvent();
-            },
-            dom: function () {
-                var This = this;
-                This.body = $('body');
-                This.main = '<div class="back__pop ToastUp" style="display:none;" id="back__pop">'
-                    + '<div class="layer__wrapper layer__wrapper__toast"></div>'
-                    + '<div class="back__popLayer__toast">' + '<span>'
-                    + This.option.main + '</span>' + '</div>' + '</div>';
-                This.body.append(This.main);
-                This.ToastUp = $el.find('.ToastUp');
-                This.ToastUp.show();
-            },
-            bindEvent: function () {
-                var This = this;
-                //  显示内容2秒
-                setTimeout(function () {
-                    This.ToastUp.remove();
-                },
-                    2000);
-            }
-        };
-
-        window.ToastUp = ToastUp;
-
-        function backOr(f, a, e, d, c, b) {
-            new PopUp({
-                title: f,
-                main: a,
-                yes: e,
-                no: d,
-                popYes: function (g) {
-                    c.call(this, g);
-                },
-                popNo: function (g) {
-                    b.call(this, g);
-                }
-            });
-        }
-
-        function toastOr(a) {
-            new ToastUp({
-                main: a
-            });
         }
 
         function getQueryString(name) {
@@ -264,7 +130,7 @@ define(function (require) {
                     }
                 });
                 if (a) {
-                    toastOr(d);
+                    //                  toastOr(d);
                     setTimeout(function () {
                         window.location.reload();
                     },
@@ -299,6 +165,7 @@ define(function (require) {
         $el.find('.consulting').click(function () {
             var questionType = $(this).data('type');
             startConsulting(questionType);
+            //          alert("W")
             //          if (islog) {
             //              startConsulting(questionType);
             //          }
@@ -486,8 +353,8 @@ define(function (require) {
         function startConsulting(questionType) {
             $.ajax({
                 url: 'greeting?questionType='
-                + questionType + '&_csrf='
-                + $el.find('#_csrf').val() + '&sessionId=' + sessionId,
+                    + questionType + '&_csrf='
+                    + $el.find('#_csrf').val() + '&sessionId=' + sessionId,
                 type: 'POST',
                 success: function (indexmessage) {
 
@@ -522,7 +389,7 @@ define(function (require) {
 
                 },
                 error: function () {
-                    window.location.reload();
+                    //                  window.location.reload();
                 }
             });
         }
@@ -537,7 +404,7 @@ define(function (require) {
                         window.top.location.href = 'mipilaw66baidu_myreservation?sessionId=' + sessionId;
                     }
                     else {
-                        toastOr(data.message);
+                        //                      toastOr(data.message);
                     }
                 },
                 error: function (a) {
@@ -721,35 +588,6 @@ define(function (require) {
                             var main = data.error + '，您可以稍后继续问，或由系统推荐其他律师';
                             var yes = '立刻推荐其他律师';
                             var no = '稍后继续问';
-                            backOr(title, main, yes, no, function () {
-                                startConsulting(questionType);
-                            }, function () {
-                                $.ajax({
-                                    url: 'createContinueAskLater?lawyerId='
-                                        + lawyerId + '&questionType=' + questionType
-                                        + '&_csrf=' + csrfToken + '&sessionId=' + sessionId,
-                                    type: 'POST',
-                                    //                                  data: {
-                                    //                                      lawyerId: lawyerId,
-                                    //                                      questionType: questionType,
-                                    //                                      _csrf: csrfToken
-                                    //                                  },
-                                    success: function (data) {
-                                        if (data === 'ERROR') {
-                                            alert('系统异常');
-                                        }
-                                        else {
-                                            console.log(data);
-                                        }
-                                    },
-                                    error: function (jqXHR) {
-                                        if (jqXHR.status === 403) {
-                                            window.location.reload();
-                                        }
-
-                                    }
-                                });
-                            });
                         }
                         else {
                             var msg = data.error;

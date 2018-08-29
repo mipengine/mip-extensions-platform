@@ -10,6 +10,8 @@ define(function (require) {
     var $ = require('zepto');
     var element = '';
     var catalogID = '';
+    var sessionUserID = '';
+    var zhankaiStatus = 'false';
     function sendReq(method, siteUrl, data, callback) {
         $.ajax({
             type: method,
@@ -29,13 +31,116 @@ define(function (require) {
     }
 
     /**
-     * 第一次进入可视区回调，只会执行一次
-     */
+	 * 第一次进入可视区回调，只会执行一次
+	 */
     customElement.prototype.firstInviewCallback = function () {
         var element2 = this.element;
         element = element2;
+        // 帖子id，与路径上的那个id一致
         topicID = element.getAttribute('topicID') || '';
         catalogID = element.getAttribute('catalogID') || '';
+        sessionUserID = element.getAttribute('userID') || '';
+        var sessionRole = element.getAttribute('role') || '';
+        // 关注
+        $('#addGoodFriend', element).click(function () {
+            addGoodFriend();
+        });
+        // 博主请求身份验证
+        $('#offYZ', element).click(function () {
+            offYZ();
+        });
+        $('#addFriendInfo', element).click(function () {
+            addFriendInfo();
+        });
+        // 展开全文，收起
+        $('.tzitem_hide', element).click(function () {
+            if (zhankaiStatus === 'true') {
+                $('.zhankai', element).show();
+                $('.tzitem_text', element).addClass('hideText');
+                $('.tzitem_bot', element).removeClass('fixBot');
+                $('.tzitem_bot', element).attr('data-open', 'false');
+                $('.tzitem_hide', element).find('img').attr('src', 'https://css.taoguba.com.cn/images/mNew/zhankai.png');
+                $('.tzitem_hide', element).find('span').text('展开');
+                zhankaiStatus = 'false';
+                $('html, body').animate({
+                    scrollTop: $('.Pagetitle').offset().top
+                },
+                500);
+            } else {
+                openArticletie();
+            }
+        });
+        // 帖子点赞
+        $('.tzitem_zan', element).click(function () {
+            var flag = 'S';
+            if (sessionUserID == null) {
+                flag = 'F';
+            } else if (sessionRole !== null && sessionRole === 'noActive') {
+                flag = 'T';
+            } else {
+                flag = 'S';
+            }
+            addUseful(topicID, '0', 'R', flag);
+        });
+        $('#openArticletie', element).click(function () {
+            openArticletie();
+        });
+        // 评论
+        $('.tzitem_pl', element).click(function () {
+            articleMopenAPP(topicID, 0);
+        });
+        // 收藏
+        $('.collectBtn', element).click(function () {
+            var flag = 'S';
+            if (sessionUserID === null) {
+                flag = 'F';
+            } else if (sessionRole !== null && sessionRole === 'noActive') {
+                flag = 'T';
+            } else {
+                flag = 'S';
+            }
+            addMyCol(topicID, flag);
+        });
+        // 精彩评论点赞
+        $('.plzan', element).click(function () {
+            var replyID = $(this).attr('name');
+            var flag = 'S';
+            if (sessionUserID == null) {
+                flag = 'F';
+            } else if (sessionRole !== null && sessionRole === 'noActive') {
+                flag = 'T';
+            } else {
+                flag = 'S';
+            }
+            addUseful(replyID, '0', 'R', flag);
+        });
+        // 热文推荐点赞
+        $('.hotArticle_zan', element).click(function () {
+            var replyID = $(this).attr('name');
+            var flag = 'S';
+            if (sessionUserID == null) {
+                flag = 'F';
+            } else if (sessionRole !== null && sessionRole === 'noActive') {
+                flag = 'T';
+            } else {
+                flag = 'S';
+            }
+            addUseful(replyID, '0', 'R', flag);
+        });
+        // 热文推荐评论
+        $('.hotArticle_pl', element).click(function () {
+            var replyID = $(this).attr('name');
+            articleMopenAPP(replyID, 0);
+        });
+        // 热文推荐评论
+        $('.hotArticle_pl', element).click(function () {
+            var replyID = $(this).attr('name');
+            articleMopenAPP(replyID, 0);
+        });
+        // 打开app，查看更多
+        $('#articleApp', element).click(function () {
+            articleMopenAPP(topicID, 0);
+        });
     };
     $(function () {
         init();
@@ -56,7 +161,8 @@ define(function (require) {
         function elementInViewport(el) {
             var rect = el.getBoundingClientRect();
             return (rect.top >= 0 && rect.left >= 0
-            && rect.top <= (window.innerHeight || document.documentElement.clientHeight));
+            && rect.top <= (window.innerHeight
+            || document.documentElement.clientHeight));
         }
         // 初始化一个图片数组
         var images = [];
@@ -92,13 +198,13 @@ define(function (require) {
     // }
     var blockID = catalogID;
     function init() {
-        if (blockID === 20009) {
+        if (Number(blockID) === 20009) {
             var documentDomain = $('.data_none', element).attr('name');
             var url = documentDomain + '/voteState?topicID=' + topicID;
             sendReq('get', url, '', getReVoteRecord);
         }
     }
-    function AddUseful(rid, num, topic, flag) {
+    function addUseful(rid, num, topic, flag) {
         var pageNum = 0;
         if (flag === 'F') {
             var ssoPath = $('.data_none', element).attr('value');
@@ -166,7 +272,7 @@ define(function (require) {
             return;
         }
         var basePath = $('.data_none').attr('id');
-        var url = basePath + '/mAddFavorite?rid=' + favID;
+        var url = basePath + 'mAddFavorite?rid=' + favID;
         sendReq('get', url, '', getReturnAddfav);
     }
     function getReturnAddfav(obj) {
@@ -209,7 +315,6 @@ define(function (require) {
             return false;
         }
     }
-    var zhankaiStatus = 'false';
     function openArticletie() {
         zhankaiStatus = 'true';
         $('.zhankai', element).hide();
@@ -223,24 +328,7 @@ define(function (require) {
         $('.tzitem_hide', element).find('img').attr('src', 'https://css.taoguba.com.cn/images/mNew/shouqi.png');
         $('.tzitem_hide', element).find('span').text('收起');
     }
-    $('.tzitem_hide', element).click(function () {
-        if (zhankaiStatus === 'true') {
-            $('.zhankai', element).show();
-            $('.tzitem_text', element).addClass('hideText');
-            $('.tzitem_bot', element).removeClass('fixBot');
-            $('.tzitem_bot', element).attr('data-open', 'false');
-            $('.tzitem_hide', element).find('img').attr('src', 'https://css.taoguba.com.cn/images/mNew/zhankai.png');
-            $('.tzitem_hide', element).find('span').text('展开');
-            zhankaiStatus = 'false';
-            $('html, body').animate({
-                scrollTop: $('.Pagetitle').offset().top
-            },
-            500);
-        } else {
-            openArticletie();
-        }
 
-    });
     var bodyH = $(window).height();
     $(window).scroll(function () {
         var isopen = $('.tzitem_bot', element).attr('data-open');
@@ -260,10 +348,21 @@ define(function (require) {
     });
     // 添加好友名单
     function addGoodFriend() {
+        isLogin();
         var getName = $('.HeadInfo_name', element).text();
         var basePath = $('.data_none', element).attr('id');
         var url = basePath + 'mAddFriend?userName=' + getName;
         sendReq('get', url, '', getReturnGood);
+    }
+    // 判断是否登录
+    function isLogin() {
+        var isLogin = sessionUserID;
+        var ssoPath = $('.data_none', element).attr('value');
+        if (Number(isLogin) === 0) {
+            window.top.location.href = ssoPath + '/m/login/index';
+        } else {
+            return;
+        }
     }
     function getReturnGood(obj) {
         var str = obj.dto;
@@ -342,12 +441,12 @@ define(function (require) {
         function (obj) {
             var str = obj.dto;
             $('.yzBox').hide();
-            if (str === 1) {
+            if (Number(str) === 1) {
                 showMessage('发送成功!');
                 $('.yzBox').hide();
-            } else if (str === 0) {
+            } else if (Number(str) === 0) {
                 showMessage('失败，请重试!');
-            } else if (str === 2) {
+            } else if (Number(str) === 2) {
                 showMessage('您的关注已经超过2000个，无法再加.');
             }
         });
@@ -429,17 +528,57 @@ define(function (require) {
         }
         document.getElementById('voteIn', element).innerHTML = str;
     }
-    $('#addGoodFriend', element).click(function () {
-        addGoodFriend();
-    });
-    $('#offYZ', element).click(function () {
-        offYZ();
-    });
-    $('#addFriendInfo', element).click(function () {
-        addFriendInfo();
-    });
-    $('#openArticletie', element).click(function () {
-        openArticletie();
-    });
+    // 帖子评论
+    function articleMopenAPP(topicID, replyID) {
+        // 判断当前位Android 还是iOS
+        var u = navigator.userAgent;
+        var app = navigator.appVersion;
+        // g
+        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1;
+        // ios终端
+        var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+        if (isAndroid) {
+            var loadDateTime = new Date();
+            window.setTimeout(function () {
+                var timeOutDateTime = new Date();
+                if (timeOutDateTime - loadDateTime < 5000) {
+                    window.top.location.href = 'https://m.taoguba.com.cn/downloadApp';
+                } else {
+                    window.close();
+                }
+            },
+            25);
+            if (Number(topicID) === 0) {
+                window.location.href = 'taoguba://taoguba.com.cn';
+            } else {
+                isLogin();
+                if (Number(replyID) === 0) {
+                    window.top.location.href = 'taoguba://app.topic/openTopic?topicId=' + topicID;
+                } else {
+                    window.top.location.href = 'taoguba://app.topic/openTopic?topicId=' + topicID + '&replyId=' + replyID;
+                }
+            }
+
+        }
+        if (isIOS) {
+            var loadDateTime = new Date();
+            window.setTimeout(function () {
+                var timeOutDateTime = new Date();
+                if (timeOutDateTime - loadDateTime < 5000) {
+                    window.top.location.href = 'https://m.taoguba.com.cn/downloadApp';
+                } else {
+                    window.close();
+                }
+            },
+            25);
+            if (Number(topicID) === 0) {
+                window.top.location.href = 'tgbiosapp://';
+            } else {
+                isLogin();
+                window.top.location.href = 'tgbiosapp://?type=openTopic&topicId=' + topicID + '&replyId=' + replyID;
+            }
+        }
+
+    }
     return customElement;
 });

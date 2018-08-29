@@ -12,6 +12,41 @@ mip-linktion-select-consulter 传参数拉去筛选数据
 ## 示例
 
 ```html
+
+<div style="float:left;width: 0%">
+    <div>skdfhalksdf</div>
+    <div>skdfhalksdf</div>
+    <div>skdfhalksdf</div>
+    <div>skdfhalksdf</div>
+    <div>skdfhalksdf</div>
+    <div>skdfhalksdf</div>
+    <div>skdfhalksdf</div>
+    <div>skdfhalksdf</div>
+    <div>skdfhalksdf</div>
+    <div>skdfhalksdf</div>
+    <div>skdfhalksdf</div>
+    <div>skdfhalksdf</div>
+    <div>skdfhalksdf</div>
+    <div>skdfhalksdf</div>
+    <div>skdfhalksdf</div>
+    <div>skdfhalksdf</div>
+    <div>skdfhalksdf</div>
+    <div>skdfhalksdf</div>
+    <div>skdfhalksdf</div>
+    <div>skdfhalksdf</div>
+    <div>skdfhalksdf</div>
+    <div>skdfhalksdf</div>
+    <div>skdfhalksdf</div>
+    <div>skdfhalksdf</div>
+    <div>skdfhalksdf</div>
+    <div>skdfhalksdf</div>
+    <div>skdfhalksdf</div>
+    <div>skdfhalksdf</div>
+    <div>skdfhalksdf</div>
+    <div>skdfhalksdf</div>
+    <div>skdfhalksdf</div>
+</div>
+
 <mip-linktion-select-consulter>
     <div class="person-head">
     <h3>更多推荐</h3>

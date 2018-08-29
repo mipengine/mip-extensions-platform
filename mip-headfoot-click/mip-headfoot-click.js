@@ -27,7 +27,7 @@ define(function (require) {
             $('.content_sortXL', element).hide();
         });
         $('.Mhead_userbtn', element).click(function (event) {
-            if (xLstatus2 % 2 === 0) {
+            if (Number(xLstatus2 % 2) === 0) {
                 $('.MheadXL2', element).show();
                 $('.Mhead_userbtn', element).find('.Mhimg3').attr('src', 'https://css.taoguba.com.cn/images/mNew/guanbi.png');
             } else {
@@ -163,11 +163,11 @@ define(function (require) {
                 }
             },
             25);
-            if (topicID === 0) {
+            if (Number(topicID) === 0) {
                 window.location.href = 'taoguba://taoguba.com.cn';
             } else {
                 isLogin();
-                if (replyID === 0) {
+                if (Number(replyID) === 0) {
                     window.top.location.href = 'taoguba://app.topic/openTopic?topicId=' + topicID;
                 } else {
                     window.top.location.href = 'taoguba://app.topic/openTopic?topicId=' + topicID + '&replyId=' + replyID;
@@ -187,7 +187,7 @@ define(function (require) {
             },
             25);
 
-            if (topicID === 0) {
+            if (Number(topicID) === 0) {
                 window.top.location.href = 'tgbiosapp://';
             } else {
                 isLogin();
@@ -199,7 +199,7 @@ define(function (require) {
     // 判断是否登录
     function isLogin() {
         var isLogin = userID;
-        if (isLogin === 0) {
+        if (Number(isLogin) === 0) {
             window.top.location.href = ssoPath + '/m/login/index';
         } else {
             return;

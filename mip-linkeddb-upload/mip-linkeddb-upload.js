@@ -63,6 +63,7 @@ define(function (require) {
                 }
             });
         };
+
         // 上传图片 @param $ele input 元素   @param url 上传地址  @param method 上传方式   @param fun 回调函数 @param fun2 回调函数 (显示 loading)  @param fun3 回调函数 (提示查看拼图)
         var upLoadPic = function ($ele, url, fun, fun2, fun3) {
             $($ele).on('change', function () {
@@ -104,7 +105,7 @@ define(function (require) {
                 promptLogin('#imgInput1');
             } else {
                 // 上传拼图图片
-                upLoadPic('#imgInput0', upload, 'POST', function (res) {
+                upLoadPic('#imgInput0', upload, function (res) {
                     console.log(res);
                     photoAlbumWrap.find('.upload-num')
                         .find('.now-cnt')
@@ -129,7 +130,7 @@ define(function (require) {
                 });
 
                 // 上传底图图片
-                upLoadPic('#imgInput1', film, 'POST', function (res) {
+                upLoadPic('#imgInput1', film, function (res) {
                     console.log(res.data);
                     content.find('.mosic-loading-toast').remove();
                     content.find('.weui-mask_transparent').remove();
@@ -171,11 +172,12 @@ define(function (require) {
                             swiperSlideHtml += '<mip-img src="' + item + '" alt="" class="img"></mip-img>';
                         });
 
-                        var swiperContainerHtml = '<mip-carousel layout="responsive" width="600" height="400"'
-                            + 'indicator><div>' + swiperSlideHtml + '</div></mip-carousel>';
+                        var swiperContainerHtml = '<div class="photo-warp">'
+                            + '<mip-carousel class="middle-responsive" layout="responsive" width="600" height="400"'
+                            + 'indicator>' + swiperSlideHtml + '</mip-carousel></div>';
 
                         content.append(swiperContainerHtml);
-                        content.find('.photo-swiper').addClass('show');
+                        content.find('.photo-warp').addClass('show');
                         content.addClass('z-index-cover');
                         $(document.body).addClass('overflow');
                         hiddenPhotoSwiper();
@@ -184,14 +186,14 @@ define(function (require) {
                     }
                 });
             } else {
-                content.find('.photo-swiper').addClass('show');
+                content.find('.photo-warp').addClass('show');
                 content.addClass('z-index-cover');
                 $(document.body).addClass('overflow');
                 hiddenPhotoSwiper();
             }
         });
         function hiddenPhotoSwiper() {
-            $(document.body).find('.photo-swiper').on('click', function () {
+            $(document.body).find('.photo-warp').on('click', function () {
                 $(this).removeClass('show');
                 content.removeClass('z-index-cover');
                 $(document.body).removeClass('overflow');

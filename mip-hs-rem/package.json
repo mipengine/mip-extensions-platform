@@ -1,0 +1,14 @@
+{
+    "name": "mip-hs-rem",
+    "version": "1.0.0",
+    "description": "问答平台rem适配",
+    "contributors": [
+        {
+            "name": "lin",
+            "email": "840399305@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

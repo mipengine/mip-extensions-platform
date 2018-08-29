@@ -46,14 +46,13 @@ define(function (require) {
         sessionUserID = element.getAttribute('sessionUserID') || '';
         sessionRole = element.getAttribute('sessionRole') || '';
         blogerName = element.getAttribute('blogerName') || '';
-        var listTopic = element.getAttribute('listTopic') || '';
-        listTopic = JSON.parse(listTopic);
         $('#mbokeTitleBlog', element).click(function () {
             $('.Mboke_content', element).hide();
             $('.Mboke_title', element).removeClass('Mboke_title_active');
             $(this).addClass('Mboke_title_active');
             $('.indexContent', element).show();
         });
+        // 近期讨论个股
         $('#mbokeTitleStock', element).click(function () {
             $('.Mboke_content', element).hide();
             $('.Mboke_title', element).removeClass('Mboke_title_active');
@@ -61,6 +60,7 @@ define(function (require) {
             $('.geguContent', element).show();
             jQajax();
         });
+        // 热文推荐栏目点击事件
         $('#mbokeTitleRe', element).click(function () {
             $('.Mboke_content', element).hide();
             $('.Mboke_title', element).removeClass('Mboke_title_active');
@@ -68,24 +68,28 @@ define(function (require) {
             $('.hotContent', element).show();
             hotAjax();
         });
-        // listTopic=listTopic.dto.listTopic;
-        for (var i = 0; i < listTopic.length; i++) {
-            var ridID = listTopic[i].topicID;
-            var ridID2 = '#l' + ridID;
-            $(ridID2, element).click(function () {
-                var flag = 'S';
-                if (sessionUserID === null) {
-                    flag = 'F';
-                } else if (sessionRole !== null && sessionRole === 'noActive') {
-                    flag = 'T';
-                } else {
-                    flag = 'S';
-                }
-                var Zannum = '0';
-                var topic = 'T';
-                addUseful(ridID, Zannum, topic, flag);
-            });
-        }
+        // 博客首页和热文推荐点赞
+        $('.addUsefulClick', element).click(function () {
+            var flag = 'S';
+            if (sessionUserID === null) {
+                flag = 'F';
+            } else if (sessionRole !== null && sessionRole === 'noActive') {
+                flag = 'T';
+            } else {
+                flag = 'S';
+            }
+            var Zannum = '0';
+            var topic = 'T';
+            var ridID = $(this).attr('name');
+            addUseful(ridID, Zannum, topic, flag);
+        });
+        // 博客首页和热文推荐评论
+        $('.contentBtnClick', element).click(function () {
+            // 判断是否登陆
+            isLogin();
+            var rID = $(this).attr('name');
+            articleMopenAPP(rID, 0);
+        });
         // 关注
         $('#addGoodFriendDiv', element).click(function () {
             addGoodFriend();
@@ -100,10 +104,6 @@ define(function (require) {
         $('#yzInfo_R', element).click(function () {
             addFriendInfo();
         });
-        // 评论
-        $('.isLoginClick', element).click(function () {
-            isLogin();
-        });
         // 确定
         $('#focusYes', element).click(function () {
             focusYes();
@@ -114,6 +114,7 @@ define(function (require) {
         });
         // 登录头像更换
     };
+    // 热文推荐
     function hotAjax() {
         $.ajax({
             type: 'GET',
@@ -148,7 +149,7 @@ define(function (require) {
                     str += '      【摘要】' + arr[i].content;
                     str += '   </a>';
                     str += '  <div class="contentBtns">';
-                    str += '   <div class="contentBtn left zanBtn">';
+                    str += '   <div class="contentBtn left zanBtn  addUsefulClick"   name="' + arr[i].topicID + '">';
                     str += '    <mip-img src="https://css.taoguba.com.cn/images/mNew/zan.png" class="img1" alt=""></mip-img>';
                     str += '    <span>赞(' + arr[i].usefulNum + ')</span>';
                     str += '    </div>';
@@ -156,7 +157,7 @@ define(function (require) {
                     str += '    <mip-img src="https://css.taoguba.com.cn/images/mNew/liulan.png" class="img2" alt=""></mip-img>';
                     str += '    <span>浏览(' + arr[i].totalViewNum + ')</span>';
                     str += '  </div>';
-                    str += '  <div class="contentBtn left plBtn" onclick="mopenAPP(' + arr[i].topicID + ',0)">';
+                    str += '  <div class="contentBtn left plBtn  contentBtnClick"   name="' + arr[i].topicID + '">';
                     str += '  <mip-img src="https://css.taoguba.com.cn/images/mNew/pinglun.png" class="img3" alt=""></mip-img>';
                     str += '  <span>评论(' + arr[i].totalReplyNum + ')</span>';
                     str += '  </div>';
@@ -306,6 +307,7 @@ define(function (require) {
     function offYZ() {
         $('.yzBox', element).hide();
     }
+    // 博客首页下拉加载更多
     function bkAjax(page) {
         var url = window.top.location.href;
         var userID = url.split('/blog/')[1];
@@ -354,8 +356,7 @@ define(function (require) {
                     var ridID = arr[i].topicID;
                     var Zannum = '0';
                     var topic = 'T';
-                    var lridID = 'l' + ridID;
-                    str += '   <div class="contentBtn left zanBtn" id="' + lridID + '">';
+                    str += '   <div class="contentBtn left zanBtn  addUsefulClick"  name="' + ridID + '">';
                     str += '    <mip-img src="https://css.taoguba.com.cn/images/mNew/zan.png" class="img1" alt=""></mip-img>';
                     str += '    <span class="contentBtns_span">赞(' + arr[i].usefulNum + ')</span>';
                     str += '    </div>';
@@ -363,7 +364,7 @@ define(function (require) {
                     str += '    <mip-img src="https://css.taoguba.com.cn/images/mNew/liulan.png" class="img2" alt=""></mip-img>';
                     str += '    <span  class="viewBtn_span">浏览(' + arr[i].totalViewNum + ')</span>';
                     str += '  </div>';
-                    str += '  <div class="contentBtn left plBtn isLoginClick"  >';
+                    str += '  <div class="contentBtn left plBtn contentBtnClick"  name="' + ridID + '" >';
                     str += '  <mip-img src="https://css.taoguba.com.cn/images/mNew/pinglun.png" class="img3" alt=""></mip-img>';
                     str += '  <span  class="plBtn_span" >评论(' + arr[i].totalReplyNum + ')</span>';
                     str += '  </div>';
@@ -372,23 +373,6 @@ define(function (require) {
                 }
                 if (arr.length > 0) {
                     $('.indexContentItems2', element).append(str);
-                }
-                for (var i = 0; i < arr.length; i++) {
-                    var flag = 'S';
-                    if (sessionUserID === null) {
-                        flag = 'F';
-                    } else if (sessionRole !== null && sessionRole === 'noActive') {
-                        flag = 'T';
-                    } else {
-                        flag = 'S';
-                    }
-                    var ridID = arr[i].topicID;
-                    var Zannum = '0';
-                    var topic = 'T';
-                    var lridID = 'l' + ridID;
-                    $('#' + lridID, element).click(function () {
-                        addUseful(ridID, Zannum, topic, flag);
-                    });
                 }
             }
         });
@@ -448,6 +432,7 @@ define(function (require) {
             }
         });
     }
+    // 近期讨论个股
     function jQajax() {
         var url2 = window.top.location.href;
         var userID2 = url2.split('/blog/')[1];
@@ -471,8 +456,8 @@ define(function (require) {
                 var str = '';
                 for (var i = 0; i < arr.length; i++) {
                     str += '   <div class="geguContentItem">';
-                    str += '    <a href="mStockBar?keywordID=' + arr[i].keywordID;
-                    str += '&pageNo=1&barType=S" class="geguitem width3 left">';
+                    str += '    <a href="mip/quotes/' + arr[i].stockCode;
+                    str += '" class="geguitem width3 left">';
                     str += '  <p class="gegu_name" >' + arr[i].keywordName + '</p>';
                     str += ' <span class="gegu_num" >' + arr[i].stockCode + '</span>';
                     str += '  </a>';
@@ -631,6 +616,58 @@ define(function (require) {
                 showMessage('您的关注已经超过2000个，无法再加。');
             }
         });
+    }
+    // 帖子评论
+    function articleMopenAPP(topicID, replyID) {
+        // 判断当前位Android 还是iOS
+        var u = navigator.userAgent;
+        var app = navigator.appVersion;
+        // g
+        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1;
+        // ios终端
+        var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+        if (isAndroid) {
+            var loadDateTime = new Date();
+            window.setTimeout(function () {
+                var timeOutDateTime = new Date();
+                if (timeOutDateTime - loadDateTime < 5000) {
+                    window.top.location.href = 'https://m.taoguba.com.cn/downloadApp';
+                } else {
+                    window.close();
+                }
+            },
+            25);
+            if (Number(topicID) === 0) {
+                window.location.href = 'taoguba://taoguba.com.cn';
+            } else {
+                isLogin();
+                if (Number(replyID) === 0) {
+                    window.top.location.href = 'taoguba://app.topic/openTopic?topicId=' + topicID;
+                } else {
+                    window.top.location.href = 'taoguba://app.topic/openTopic?topicId=' + topicID + '&replyId=' + replyID;
+                }
+            }
+
+        }
+        if (isIOS) {
+            var loadDateTime = new Date();
+            window.setTimeout(function () {
+                var timeOutDateTime = new Date();
+                if (timeOutDateTime - loadDateTime < 5000) {
+                    window.top.location.href = 'https://m.taoguba.com.cn/downloadApp';
+                } else {
+                    window.close();
+                }
+            },
+            25);
+            if (Number(topicID) === 0) {
+                window.top.location.href = 'tgbiosapp://';
+            } else {
+                isLogin();
+                window.top.location.href = 'tgbiosapp://?type=openTopic&topicId=' + topicID + '&replyId=' + replyID;
+            }
+        }
+
     }
     return customElement;
 });
