@@ -15,22 +15,23 @@ define(function (require) {
     customElement.prototype.firstInviewCallback = function () {
         // TODO
         var element = this.element;
+
         $('body').append('<div class="mip-apple-nav-maskLayer"></div>');
         $(element).find('.navbar-toggle').on('click', function () {
             if (!navShowing) {
-                $(element).find('#mobileNavList').css({'display': 'block'});
+                $(element).find('#mobileNavList').css({'display': 'block', 'height': window.screen.height + 'px'});
                 $('.mip-apple-nav-maskLayer').css({'display': 'block'});
                 $(element).find('#mobileNavList').animate({
-                        'height': '160px'
+                        'width': '100%'
                     },
-                    200, function () {
+                    100, function () {
                         navShowing = true;
                     });
             } else {
                 $(element).find('#mobileNavList').animate({
-                        'height': '0'
+                        'width': '0'
                     },
-                    200, function () {
+                    100, function () {
                         $(element).find('#mobileNavList').css({'display': 'none'});
                         $('.mip-apple-nav-maskLayer').css({'display': 'none'});
                         navShowing = false;
@@ -39,9 +40,9 @@ define(function (require) {
         });
         $('body').find('.mip-apple-nav-maskLayer').on('click', function () {
             $(element).find('#mobileNavList').animate({
-                    'height': '0'
+                    'width': '0'
                 },
-                200, function () {
+                100, function () {
                     $(element).find('#mobileNavList').css({'display': 'none'});
                     $('.mip-apple-nav-maskLayer').css({'display': 'none'});
                     navShowing = false;

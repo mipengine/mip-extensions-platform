@@ -27,6 +27,9 @@ define(function (require) {
         var isback = true;
         $el.find('#requestId').val(timerRequestId);
         $el.find('#questionType').val(timerQuestionType);
+        var thishostname = location.hostname;
+        var name = 'mip-login-xzh:sessionId:https://' + thishostname + '/jasmine/baidusearch/authorize2';
+        var sessionId = localStorage.getItem(name);
         var t1 = setInterval(function () {
             fnDate();
         }, 1000);
@@ -76,7 +79,7 @@ define(function (require) {
         function getInfo() {
             $.ajax({
                 type: 'GET',
-                url: 'timer?id=' + timerRequestId + '&lawyerId=' + lawyerId,
+                url: 'timer?id=' + timerRequestId + '&lawyerId=' + lawyerId + '&sessionId=' + sessionId,
                 dataType: 'json',
                 success: function (data) {
                     if (!data || data.status === 'ERROR') {
@@ -181,10 +184,10 @@ define(function (require) {
             if (countTimeInSec % 5 === 0) {
                 $.ajax({
                     type: 'GET',
-                    url: 'timer?id=' + timerRequestId + '&lawyerId=' + lawyerId,
+                    url: 'timer?id=' + timerRequestId + '&lawyerId=' + lawyerId + '&sessionId=' + sessionId,
                     dataType: 'json',
                     success: function (data) {
-                        console.log(data);
+                        //                      console.log(data);
                         localStorage.setItem('reAskAvatar', data.avatar);
                         localStorage.setItem('reAskSex', data.sex);
                         localStorage.setItem('reAskName', data.lawyerName);
@@ -213,7 +216,7 @@ define(function (require) {
                             $el.find('.backOr_div .back__popLayer .back-continue').click(function () {
                                 $el.find('.backOr_div').hide();
                                 window.top.location.href = 'baidusearch/authorize?questionType='
-                                    + questionType + '&urlstring=mipilaw66baidu_request';
+                                    + questionType + '&urlstring=mipilaw66baidu_request&sessionId=' + sessionId;
                             });
                         }
                         else {
@@ -258,7 +261,7 @@ define(function (require) {
                 no = '礼貌等待';
                 $.ajax({
                     type: 'GET',
-                    url: 'timer?id=' + timerRequestId + '&lawyerId=' + lawyerId,
+                    url: 'timer?id=' + timerRequestId + '&lawyerId=' + lawyerId + '&sessionId=' + sessionId,
                     dataType: 'json',
                     success: function (data) {
                         if (!data || data.status === 'ERROR') {
@@ -272,7 +275,8 @@ define(function (require) {
                         }
                         else if (dataStatus === 6) { // >=60
                             backToUnusual();
-                        } else {
+                        }
+                        else {
                             popBackOrMsg(title, main, yes, no, dataStatus);
                         }
 
@@ -331,7 +335,7 @@ define(function (require) {
         function checkTalking(checkRequestId, questionType) {
             $.ajax({
                 type: 'GET',
-                url: 'checkTalkingOrder?requestId=' + checkRequestId,
+                url: 'checkTalkingOrder?requestId=' + checkRequestId + '&sessionId=' + sessionId,
                 success: function (data) {
                     var state = data.result.state;
                     if (state === 6) {
@@ -354,12 +358,12 @@ define(function (require) {
                     else {
                         $.ajax({
                             type: 'get',
-                            url: 'getRequestId?requestId=' + checkRequestId,
+                            url: 'getRequestId?requestId=' + checkRequestId + '&sessionId=' + sessionId,
                             async: false,
                             success: function (data) {
                                 console.log('是否合并支付单号：' + data);
                                 window.top.location.href = 'mipilaw66baidu_couponPay?requestId='
-                                    + data + '&questionType=' + questionType;
+                                    + data + '&questionType=' + questionType + '&sessionId=' + sessionId;
                                 localStorage.setItem('linkingOrding', 'linkingOrdingGone');
                             },
                             error: function () {

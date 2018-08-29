@@ -9,7 +9,7 @@ define(function (require) {
 
     var customElement = require('customElement').create();
 
-    function setuser(element, url, name, phone, id) {
+    function setuser(element, url, name, phone, id, packid, chatid) {
         $.ajax({
             url: url,
             type: 'post',
@@ -23,7 +23,7 @@ define(function (require) {
                 if (result.status.RetCode === 0) {
                     if (result.data.is_login === 1) {
                         location.href = location.origin
-                        + '/p/wedding/Public/wap/m/mip_baidu/chat/dist/index.html?id=' + id;
+                        + '/p/wedding/Public/wap/m/mip_baidu/chat/dist/index.html?id=' + chatid + '&entityId=' + packid;
                     } else {
                         $(element).find('#open_tips p').html('预约成功');
                         $(element).find('#open_tips').show();
@@ -81,6 +81,8 @@ define(function (require) {
         var type = $(element).attr('data-type');
         var apiurl = $(element).attr('data-url');
         var merchantid = $(element).attr('data-id');
+        var chatid = $(element).attr('data-chat');
+        var packageid = $(element).attr('data-packid');
         var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
         $(element).on('click', '.open_box_submit', function () {
             if (type === 'package') {
@@ -108,7 +110,7 @@ define(function (require) {
             }
             if (name && phone) {
                 if (type === 'package') {
-                    setuser(element, apiurl, name, phone, merchantid);
+                    setuser(element, apiurl, name, phone, merchantid, packageid, chatid);
                 } else {
                     sethotel(element, apiurl, city, time, phone);
                 }

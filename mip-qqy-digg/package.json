@@ -1,0 +1,14 @@
+{
+    "name": "mip-qqy-digg",
+    "version": "1.0.0",
+    "description": "去去游戏DIGG组件",
+    "contributors": [
+        {
+            "name": "cyb",
+            "email": "415204@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

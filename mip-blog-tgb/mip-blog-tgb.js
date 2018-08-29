@@ -9,7 +9,8 @@ define(function (require) {
     var $ = require('zepto');
     var customElement = require('customElement').create();
     var ssoPath = '';
-    var sessionScope = '';
+    var sessionUserID = '';
+    var sessionRole = '';
     var blogerName = '';
     var element = '';
     var addtopicID = '';
@@ -42,7 +43,8 @@ define(function (require) {
         element = element2;
         userID = element.getAttribute('userID') || '';
         ssoPath = element.getAttribute('ssoPath') || '';
-        sessionScope = element.getAttribute('sessionScope') || '';
+        sessionUserID = element.getAttribute('sessionUserID') || '';
+        sessionRole = element.getAttribute('sessionRole') || '';
         blogerName = element.getAttribute('blogerName') || '';
         var listTopic = element.getAttribute('listTopic') || '';
         listTopic = JSON.parse(listTopic);
@@ -72,9 +74,9 @@ define(function (require) {
             var ridID2 = '#l' + ridID;
             $(ridID2, element).click(function () {
                 var flag = 'S';
-                if (sessionScope.userID === null) {
+                if (sessionUserID === null) {
                     flag = 'F';
-                } else if (sessionScope.role !== null && sessionScope.role === 'noActive') {
+                } else if (sessionRole !== null && sessionRole === 'noActive') {
                     flag = 'T';
                 } else {
                     flag = 'S';
@@ -342,9 +344,9 @@ define(function (require) {
                     str += '   </a>';
                     str += '  <div class="contentBtns">';
                     var flag = 'S';
-                    if (sessionScope.userID === null) {
+                    if (sessionUserID === null) {
                         flag = 'F';
-                    } else if (sessionScope.role !== null && sessionScope.role === 'noActive') {
+                    } else if (sessionRole !== null && sessionRole === 'noActive') {
                         flag = 'T';
                     } else {
                         flag = 'S';
@@ -373,9 +375,9 @@ define(function (require) {
                 }
                 for (var i = 0; i < arr.length; i++) {
                     var flag = 'S';
-                    if (sessionScope.userID === null) {
+                    if (sessionUserID === null) {
                         flag = 'F';
-                    } else if (sessionScope.role !== null && sessionScope.role === 'noActive') {
+                    } else if (sessionRole !== null && sessionRole === 'noActive') {
                         flag = 'T';
                     } else {
                         flag = 'S';

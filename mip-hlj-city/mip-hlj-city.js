@@ -37,11 +37,13 @@ define(function (require) {
                     }
                 }
                 $('.hots').hide();
-                $('.citys').show();
+                $('#citys').show();
+                $(element).find('#groups').hide();
             }
             else {
-                $('.hots').show();
-                $('.citys').hide();
+                $(element).find('.hots').show();
+                $(element).find('#citys').hide();
+                $(element).find('#groups').hide();
                 initHots(element, hots);
             }
         });
@@ -51,7 +53,7 @@ define(function (require) {
         var html = '';
 
         for (var i = 0; i < citys.length; i++) {
-            html += '<li><a data-id=' + citys[i].cid + '>' + citys[i].short_name + '</a></li>';
+            html += '<li><a data-id=' + citys[i].cid + '>' + citys[i].area_name + '</a></li>';
         }
 
         $(element).find('#citys').html(html);
@@ -61,6 +63,7 @@ define(function (require) {
             var id = e.currentTarget.dataset.id;
             $(element).find('#citys a').removeClass('active');
             $(this).addClass('active');
+            $(element).find('#groups').show();
 
             for (var i = 0; i < citys.length; i++) {
                 if (citys[i].cid === id) {

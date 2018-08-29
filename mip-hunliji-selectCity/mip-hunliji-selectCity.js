@@ -18,7 +18,7 @@ define(function (require) {
                 for (var i = 0; i < result.data.length; i++) {
                     addhtml += '<span data-id="' + result.data[i].cid + '">' + result.data[i].name + '</span>';
                 }
-                $(element).find('#selectCity dd').html(addhtml);
+                $(element).find('#selectCity dd').append(addhtml);
             }
         });
     }
@@ -38,6 +38,9 @@ define(function (require) {
             $(element).find('#select_cid').val(addcid);
             $(element).find('dd').hide();
             $(element).find('#select_city').val($(this).html());
+        });
+        $(element).on('click', '#close_select', function () {
+            $(element).find('#select_cityname').hide();
         });
     };
 

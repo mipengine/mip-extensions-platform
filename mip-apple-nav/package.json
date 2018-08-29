@@ -1,7 +1,7 @@
 {
     "name": "mip-apple-nav",
-    "version": "1.1.0",
-    "description": "苹果导航栏",
+    "version": "1.2.0",
+    "description": "苹果导航栏,更新了手机端导航展开样式",
     "contributors": [
         {
             "name": "mickey",
@@ -9,6 +9,6 @@
         }
     ],
     "engines": {
-        "mip": ">=1.2.0"
+        "mip": ">=1.3.0"
     }
 }

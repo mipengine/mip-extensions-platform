@@ -15,7 +15,7 @@ define(function (require) {
     customElement.prototype.firstInviewCallback = function () {
         // TODO
         var $el = $(this.element);
-        bannerusernum();
+
         var questionType;
         var tabHref;
         var lawyerId = '';
@@ -24,7 +24,12 @@ define(function (require) {
         var search = location.search.toLowerCase();
         var channel = $el.find('#channel').val();
         var userId = $el.find('#userId').val();
-        var islog = sessionStorage.getItem('islogins') ? 1 : 0;
+        var thishostname = location.hostname;
+        var name = 'mip-login-xzh:sessionId:https://' + thishostname + '/jasmine/baidusearch/authorize2';
+        var sessionId = localStorage.getItem(name);
+        bannerusernum();
+        //   	console.log(sessionId)
+
         if (sessionStorage.getItem('ishomeorder')) {
             sessionStorage.clear('ishomeorder');
         }
@@ -240,7 +245,8 @@ define(function (require) {
                     async: false,
                     type: 'GET',
                     data: {
-                        requestIdList: b.requestId
+                        requestIdList: b.requestId,
+                        sessionId: sessionId
                     },
                     url: 'checkFreeBill',
                     success: function (c) {
@@ -269,13 +275,14 @@ define(function (require) {
                         type: 'get',
                         url: 'getRequestId',
                         data: {
-                            requestId: b.requestId
+                            requestId: b.requestId,
+                            sessionId: sessionId
                         },
                         async: false,
                         success: function (data) {
                             console.log('是否合并支付单号：' + data);
                             window.top.location.href = 'mipilaw66baidu_couponPay?requestId='
-                            + data + '&questionType=' + b.questionType;
+                                + data + '&questionType=' + b.questionType + '&sessionId=' + sessionId;
                         },
                         error: function () {
                             window.location.reload();
@@ -291,21 +298,21 @@ define(function (require) {
 
         $el.find('.consulting').click(function () {
             var questionType = $(this).data('type');
-            //          alert(islog)
-            if (islog) {
-                startConsulting(questionType);
-            }
-            else {
-                var isnew = getQueryString('code');
-                if (isnew) {
-                    window.top.location.href = 'toLogin?channel=baidusearch';
-                }
-                else {
-                    setTimeout(function () {
-                        window.top.location.href = 'toLogin?channel=baidusearch';
-                    }, 1500);
-                }
-            }
+            startConsulting(questionType);
+            //          if (islog) {
+            //              startConsulting(questionType);
+            //          }
+            //          else {
+            //              var isnew = getQueryString('code');
+            //              if (isnew) {
+            //                  window.top.location.href = 'toLogin?channel=baidusearch';
+            //              }
+            //              else {
+            //                  setTimeout(function () {
+            //                      window.top.location.href = 'toLogin?channel=baidusearch';
+            //                  }, 1500);
+            //              }
+            //          }
         });
 
         $el.find('.link_confirm').click(function (event) {
@@ -313,15 +320,9 @@ define(function (require) {
         });
 
         function directOrOrder(questionType) {
-            // if ($el.find('#userId').val()) {
-            //   startConsulting(questionType);
-            // } else {
-            // var coudeurl=encodeURIComponent('request?questionType='+questionType)
             window.top.location.href = 'baidusearch/authorize?questionType='
                 + questionType
                 + '&urlstring=mipilaw66baidu_request';
-            // window.top.location.href = 'blank?questionType=' + questionType + '&channel=' + channel;
-            // }
         }
         var tabHref;
 
@@ -330,7 +331,7 @@ define(function (require) {
 
             $.ajax({
                 type: 'GET',
-                url: 'getOrderCount',
+                url: 'getOrderCount?sessionId=' + sessionId,
                 dataType: 'json',
                 success: function (a) {
                     //                  console.log(a);
@@ -394,9 +395,8 @@ define(function (require) {
         }
         //  初始化首页价格
         $.ajax({
-            url: 'getPrice?channel=' + $el.find('#channel').val(),
+            url: 'getPrice?channel=' + $el.find('#channel').val() + '&sessionId=' + sessionId,
             type: 'GET',
-
             success: function (data) {
                 console.log(data);
                 if (data.code === 200) {
@@ -448,7 +448,8 @@ define(function (require) {
         }
         // 上下轮播
         function startmarquee(speed, delay) {
-            var lineH = $el.find('#slogonMsgId li').eq(0).height(); // 获取行高
+            //          var lineH = ($el.find('#slogonMsgId li').eq(0).height()) *2; // 获取行高
+            var lineH = 40; // 获取行高
             var p = false;
             var t;
             var o = document.getElementById('slogonMsgId');
@@ -484,7 +485,9 @@ define(function (require) {
         // 开始咨询调用接口
         function startConsulting(questionType) {
             $.ajax({
-                url: 'greeting?questionType=' + questionType + '&_csrf=' + $el.find('#_csrf').val(),
+                url: 'greeting?questionType='
+                + questionType + '&_csrf='
+                + $el.find('#_csrf').val() + '&sessionId=' + sessionId,
                 type: 'POST',
                 success: function (indexmessage) {
 
@@ -513,7 +516,8 @@ define(function (require) {
                         $el.find('#' + tabHref).removeClass().addClass('tab-pane');
                         flg = 0;
                         window.top.location.href = 'mipilaw66baidu'
-                            + '_request?data=' + indexmessage + '&questionType=' + questionType;
+                            + '_request?data=' + indexmessage + '&questionType=' + questionType
+                            + '&sessionId=' + sessionId;
                     }
 
                 },
@@ -526,11 +530,11 @@ define(function (require) {
         function checkReservationExpired() {
             $.ajax({
                 type: 'GET',
-                url: 'reservation/findRequestReservationByUserId',
+                url: 'reservation/findRequestReservationByUserId?sessionId=' + sessionId,
                 success: function (data) {
                     console.log(data);
                     if (data.info) {
-                        window.top.location.href = 'mipilaw66baidu_myreservation';
+                        window.top.location.href = 'mipilaw66baidu_myreservation?sessionId=' + sessionId;
                     }
                     else {
                         toastOr(data.message);
@@ -603,7 +607,7 @@ define(function (require) {
                 async: true,
                 type: 'POST',
                 url: 'continueAsk?lawyerId=' + lawyerId + '&questionType='
-                    + questionType + '&_csrf=' + csrfToken,
+                    + questionType + '&_csrf=' + csrfToken + '&sessionId=' + sessionId,
                 dataType: 'json',
                 success: function (data) {
                     $el.find('.loadingArea').hide();
@@ -612,7 +616,7 @@ define(function (require) {
                     if (id !== '') {
                         window.top.location.href = 'mipilaw66baidu_request?data='
                             + id + '&questionType=' + questionType + '&askingType='
-                            + askingType + '&lawyerId=' + lawyerId;
+                            + askingType + '&lawyerId=' + lawyerId + '&sessionId=' + sessionId;
                     }
                     else {
                         if (state === 1) {
@@ -644,7 +648,7 @@ define(function (require) {
                 async: true,
                 type: 'POST',
                 url: 'continueAsk?lawyerId=' + lawyerId + '&questionType='
-                    + questionType + '&_csrf=' + csrfToken,
+                    + questionType + '&_csrf=' + csrfToken + '&sessionId=' + sessionId,
                 dataType: 'json',
                 success: function (data) {
                     $el.find('.loadingArea').hide();
@@ -657,7 +661,7 @@ define(function (require) {
                         // 传入lawyerId
                         window.top.location.href = 'mipilaw66baidu_informLawyer?data='
                             + id + '&questionType=' + questionType + '&askingType='
-                            + askingType + '&lawyerId=' + lawyerId;
+                            + askingType + '&lawyerId=' + lawyerId + '&sessionId=' + sessionId;
                     }
                     else {
                         $el.find('.loadingArea').hide();
@@ -691,7 +695,8 @@ define(function (require) {
                 async: true,
                 type: 'POST',
                 url: 'continueAskV3?lawyerId=' + lawyerId + '&questionType='
-                    + questionType + '&_csrf=' + csrfToken + '&continueAskPage=' + continueAskPage,
+                    + questionType + '&_csrf=' + csrfToken + '&continueAskPage='
+                    + continueAskPage + '&sessionId=' + sessionId,
                 dataType: 'json',
                 success: function (data) {
                     console.log('继续问2', data);
@@ -707,7 +712,7 @@ define(function (require) {
                         // 传入lawyerId
                         window.top.location.href = 'mipilaw66baidu_informLawyer?data='
                             + id + '&questionType=' + questionType + '&askingType='
-                            + askingType + '&lawyerId=' + lawyerId + '&PABackJumpFlg=index';
+                            + askingType + '&lawyerId=' + lawyerId + '&PABackJumpFlg=index&sessionId=' + sessionId;
                     }
                     else {
                         if (state === 1 || state === 2) { // 1.律师正在服务中 2.律师已下线
@@ -722,7 +727,7 @@ define(function (require) {
                                 $.ajax({
                                     url: 'createContinueAskLater?lawyerId='
                                         + lawyerId + '&questionType=' + questionType
-                                        + '&_csrf=' + csrfToken,
+                                        + '&_csrf=' + csrfToken + '&sessionId=' + sessionId,
                                     type: 'POST',
                                     //                                  data: {
                                     //                                      lawyerId: lawyerId,
