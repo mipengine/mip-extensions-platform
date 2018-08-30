@@ -1,7 +1,7 @@
 {
-    "name": "mip-lscyb-list",
-    "version": "1.0.1",
-    "description": "绿色下载列表数据组件",
+    "name": "mip-lscyb-down",
+    "version": "1.0.0",
+    "description": "绿色下载内容页组件",
     "contributors": [
         {
             "name": "cyb",

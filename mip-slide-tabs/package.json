@@ -1,0 +1,14 @@
+{
+    "name": "mip-slide-tabs",
+    "version": "1.0.0",
+    "description": "双层tabs切换",
+    "contributors": [
+        {
+            "name": "chenwenkai",
+            "email": "1084072318@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
