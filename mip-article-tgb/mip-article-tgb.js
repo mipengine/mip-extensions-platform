@@ -73,14 +73,14 @@ define(function (require) {
         // 帖子点赞
         $('.tzitem_zan', element).click(function () {
             var flag = 'S';
-            if (sessionUserID == null) {
+            if (sessionUserID === null || sessionUserID === '') {
                 flag = 'F';
             } else if (sessionRole !== null && sessionRole === 'noActive') {
                 flag = 'T';
             } else {
                 flag = 'S';
             }
-            addUseful(topicID, '0', 'R', flag);
+            addUseful(topicID, '0', 'T', flag);
         });
         $('#openArticletie', element).click(function () {
             openArticletie();
@@ -92,7 +92,7 @@ define(function (require) {
         // 收藏
         $('.collectBtn', element).click(function () {
             var flag = 'S';
-            if (sessionUserID === null) {
+            if (sessionUserID === null || sessionUserID === '') {
                 flag = 'F';
             } else if (sessionRole !== null && sessionRole === 'noActive') {
                 flag = 'T';
@@ -105,7 +105,7 @@ define(function (require) {
         $('.plzan', element).click(function () {
             var replyID = $(this).attr('name');
             var flag = 'S';
-            if (sessionUserID == null) {
+            if (sessionUserID == null || sessionUserID === '') {
                 flag = 'F';
             } else if (sessionRole !== null && sessionRole === 'noActive') {
                 flag = 'T';
@@ -118,14 +118,14 @@ define(function (require) {
         $('.hotArticle_zan', element).click(function () {
             var replyID = $(this).attr('name');
             var flag = 'S';
-            if (sessionUserID == null) {
+            if (sessionUserID == null || sessionUserID === '') {
                 flag = 'F';
             } else if (sessionRole !== null && sessionRole === 'noActive') {
                 flag = 'T';
             } else {
                 flag = 'S';
             }
-            addUseful(replyID, '0', 'R', flag);
+            addUseful(replyID, '0', 'T', flag);
         });
         // 热文推荐评论
         $('.hotArticle_pl', element).click(function () {
@@ -278,7 +278,7 @@ define(function (require) {
     function getReturnAddfav(obj) {
         var insertFlag = obj.dto.root;
         var existValue = insertFlag.value;
-        if (existValue === 0) {
+        if (Number(existValue) === 0) {
             showMessage('您已经收藏过了!');
         } else if (existValue === 'error') {
             showMessage('发生错误，请您联系股天乐!');
