@@ -12,21 +12,16 @@ define(function (require) {
      */
     customElement.prototype.firstInviewCallback = function () {
         var ele = $(this.element);
-        var aDiv;
         var jDiv = ele.find('.re-ul-list .help-num');
         var jLength = jDiv.length;
         var jQids = [];
         var url = ele.attr('data-src');
-        var qid = ele.attr('data-id');
+        var qid = ele.attr('data-qid');
         var isExit = false;
-        if (ele.find('.common-tips-time .fr').length > 0) {
-            isExit = true;
-            aDiv = ele.find('.common-tips-time .fr');
-        }
         // 精品咨询
         if (jLength > 0) {
             for (var i = 0; i < jLength; i++) {
-                jQids.push(jDiv.eq(i).attr('data-qid'));
+                jQids.push(jDiv.eq(i).attr('data-id'));
             }
         }
         $.ajax({
@@ -39,15 +34,9 @@ define(function (require) {
             },
             dataType: 'json',
             success: function (ret) {
-                if (isExit) {
-                    if (ret.askClick > 0) {
-                        var tipNum = '已帮助：' + ret.askClick + ' 人';
-                        aDiv.html(tipNum);
-                    }
-                } else {
                     if (ret.jingAsk) {
                         for (var i = 0; i < jLength; i++) {
-                            var qid = jDiv.eq(i).attr('data-qid');
+                            var qid = jDiv.eq(i).attr('data-id');
                             var num = ret.jingAsk[qid];
                             if ('undefined' !== num && num !== '' && num !== null) {
                                 jDiv.eq(i).text('已帮助' + num + '人');
@@ -57,7 +46,6 @@ define(function (require) {
                         }
                     }
                 }
-            }
         });
     };
     return customElement;

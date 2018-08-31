@@ -6,6 +6,7 @@ mip-slide-tabs 双层tabs切换
 ----|----
 类型|通用
 支持布局|container
+所需脚本|https://mipcache.bdstatic.com/static/v1/mip-slide-tabs/mip-slide-tabs.js
 
 ## 示例
 

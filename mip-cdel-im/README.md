@@ -12,7 +12,7 @@ mip-cdel-im 在线客服
 
 ### 基本用法
 ```html
-<mip-cdel-im></mip-cdel-im>
+<mip-cdel-im>##调用标签##</mip-cdel-im>
 ```
 
 ## 属性

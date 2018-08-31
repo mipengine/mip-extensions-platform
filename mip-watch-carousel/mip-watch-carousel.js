@@ -23,14 +23,14 @@ define(function (require) {
                 return;
             }
             n++;
-            $(ele).css({left: (parseInt($(ele).css('left'), 10) - width) + 'px'});
+            $(ele).css({left: (parseInt($(ele).css('left'), 10) - width - 4) + 'px'});
         });
         $(ele).parent().parent().children('.icon-left').click(function () {
             if (n === 0) {
                 return;
             }
             n--;
-            $(ele).css({left: (parseInt($(ele).css('left'), 10) + width) + 'px'});
+            $(ele).css({left: (parseInt($(ele).css('left'), 10) + width + 4) + 'px'});
         });
     };
 

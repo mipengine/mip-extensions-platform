@@ -67,29 +67,9 @@ define(function (require) {
             $(this).addClass('Mboke_title_active');
             $('.hotContent', element).show();
             hotAjax();
+            zanPlClickb();
         });
-        // 博客首页和热文推荐点赞
-        $('.addUsefulClick', element).click(function () {
-            var flag = 'S';
-            if (sessionUserID === null) {
-                flag = 'F';
-            } else if (sessionRole !== null && sessionRole === 'noActive') {
-                flag = 'T';
-            } else {
-                flag = 'S';
-            }
-            var Zannum = '0';
-            var topic = 'T';
-            var ridID = $(this).attr('name');
-            addUseful(ridID, Zannum, topic, flag);
-        });
-        // 博客首页和热文推荐评论
-        $('.contentBtnClick', element).click(function () {
-            // 判断是否登陆
-            isLogin();
-            var rID = $(this).attr('name');
-            articleMopenAPP(rID, 0);
-        });
+        zanPlClick();
         // 关注
         $('#addGoodFriendDiv', element).click(function () {
             addGoodFriend();
@@ -114,6 +94,75 @@ define(function (require) {
         });
         // 登录头像更换
     };
+    function zanPlClick() {
+        // 博客首页和热文推荐点赞
+        $('.addUsefulClick', element).click(function () {
+            var flag = 'S';
+            if (sessionUserID === null || sessionUserID === '') {
+                flag = 'F';
+            } else if (sessionRole !== null && sessionRole === 'noActive') {
+                flag = 'T';
+            } else {
+                flag = 'S';
+            }
+            var Zannum = '0';
+            var topic = 'T';
+            var ridID = $(this).attr('name');
+            addUseful(ridID, Zannum, topic, flag);
+        });
+        $('.contentBtnClick', element).click(function () {
+            // 判断是否登陆
+            isLogin();
+            var rID = $(this).attr('name');
+            articleMopenAPP(rID, 0);
+        });
+    }
+    function zanPlClickb() {
+        // 博客首页和热文推荐点赞
+        $('.addUsefulClickb', element).click(function () {
+            var flag = 'S';
+            if (sessionUserID === null || sessionUserID === '') {
+                flag = 'F';
+            } else if (sessionRole !== null && sessionRole === 'noActive') {
+                flag = 'T';
+            } else {
+                flag = 'S';
+            }
+            var Zannum = '0';
+            var topic = 'T';
+            var ridID = $(this).attr('name');
+            addUseful(ridID, Zannum, topic, flag);
+        });
+        $('.contentBtnClickb', element).click(function () {
+            // 判断是否登陆
+            isLogin();
+            var rID = $(this).attr('name');
+            articleMopenAPP(rID, 0);
+        });
+    }
+    function zanPlClickc() {
+        // 博客首页和热文推荐点赞
+        $('.addUsefulClickc', element).click(function () {
+            var flag = 'S';
+            if (sessionUserID === null || sessionUserID === '') {
+                flag = 'F';
+            } else if (sessionRole !== null && sessionRole === 'noActive') {
+                flag = 'T';
+            } else {
+                flag = 'S';
+            }
+            var Zannum = '0';
+            var topic = 'T';
+            var ridID = $(this).attr('name');
+            addUseful(ridID, Zannum, topic, flag);
+        });
+        $('.contentBtnClickc', element).click(function () {
+            // 判断是否登陆
+            isLogin();
+            var rID = $(this).attr('name');
+            articleMopenAPP(rID, 0);
+        });
+    }
     // 热文推荐
     function hotAjax() {
         $.ajax({
@@ -149,17 +198,17 @@ define(function (require) {
                     str += '      【摘要】' + arr[i].content;
                     str += '   </a>';
                     str += '  <div class="contentBtns">';
-                    str += '   <div class="contentBtn left zanBtn  addUsefulClick"   name="' + arr[i].topicID + '">';
+                    str += '   <div class="contentBtn left zanBtn  addUsefulClickb"   name="' + arr[i].topicID + '">';
                     str += '    <mip-img src="https://css.taoguba.com.cn/images/mNew/zan.png" class="img1" alt=""></mip-img>';
-                    str += '    <span>赞(' + arr[i].usefulNum + ')</span>';
+                    str += '    <span  class="contentBtns_span">赞(' + arr[i].usefulNum + ')</span>';
                     str += '    </div>';
                     str += '   <div class="contentBtn left viewBtn">';
                     str += '    <mip-img src="https://css.taoguba.com.cn/images/mNew/liulan.png" class="img2" alt=""></mip-img>';
-                    str += '    <span>浏览(' + arr[i].totalViewNum + ')</span>';
+                    str += '    <span  class="viewBtn_span">浏览(' + arr[i].totalViewNum + ')</span>';
                     str += '  </div>';
-                    str += '  <div class="contentBtn left plBtn  contentBtnClick"   name="' + arr[i].topicID + '">';
+                    str += '  <div class="contentBtn left plBtn  contentBtnClickb"   name="' + arr[i].topicID + '">';
                     str += '  <mip-img src="https://css.taoguba.com.cn/images/mNew/pinglun.png" class="img3" alt=""></mip-img>';
-                    str += '  <span>评论(' + arr[i].totalReplyNum + ')</span>';
+                    str += '  <span  class="plBtn_span">评论(' + arr[i].totalReplyNum + ')</span>';
                     str += '  </div>';
                     str += '  <div class="clear"></div>';
                     str += '  </div> </div>';
@@ -346,7 +395,7 @@ define(function (require) {
                     str += '   </a>';
                     str += '  <div class="contentBtns">';
                     var flag = 'S';
-                    if (sessionUserID === null) {
+                    if (sessionUserID === null || sessionUserID === '') {
                         flag = 'F';
                     } else if (sessionRole !== null && sessionRole === 'noActive') {
                         flag = 'T';
@@ -356,7 +405,7 @@ define(function (require) {
                     var ridID = arr[i].topicID;
                     var Zannum = '0';
                     var topic = 'T';
-                    str += '   <div class="contentBtn left zanBtn  addUsefulClick"  name="' + ridID + '">';
+                    str += '   <div class="contentBtn left zanBtn  addUsefulClickc"  name="' + ridID + '">';
                     str += '    <mip-img src="https://css.taoguba.com.cn/images/mNew/zan.png" class="img1" alt=""></mip-img>';
                     str += '    <span class="contentBtns_span">赞(' + arr[i].usefulNum + ')</span>';
                     str += '    </div>';
@@ -364,7 +413,7 @@ define(function (require) {
                     str += '    <mip-img src="https://css.taoguba.com.cn/images/mNew/liulan.png" class="img2" alt=""></mip-img>';
                     str += '    <span  class="viewBtn_span">浏览(' + arr[i].totalViewNum + ')</span>';
                     str += '  </div>';
-                    str += '  <div class="contentBtn left plBtn contentBtnClick"  name="' + ridID + '" >';
+                    str += '  <div class="contentBtn left plBtn contentBtnClickc"  name="' + ridID + '" >';
                     str += '  <mip-img src="https://css.taoguba.com.cn/images/mNew/pinglun.png" class="img3" alt=""></mip-img>';
                     str += '  <span  class="plBtn_span" >评论(' + arr[i].totalReplyNum + ')</span>';
                     str += '  </div>';
@@ -454,9 +503,10 @@ define(function (require) {
                 var dto = data.dto;
                 var arr = dto.stockList;
                 var str = '';
+                var baseurl = $('.div_head_data', element).attr('id');
                 for (var i = 0; i < arr.length; i++) {
                     str += '   <div class="geguContentItem">';
-                    str += '    <a href="mip/quotes/' + arr[i].stockCode;
+                    str += '    <a href="' + baseurl + 'mip/quotes/' + arr[i].stockCode;
                     str += '" class="geguitem width3 left">';
                     str += '  <p class="gegu_name" >' + arr[i].keywordName + '</p>';
                     str += ' <span class="gegu_num" >' + arr[i].stockCode + '</span>';
@@ -538,6 +588,7 @@ define(function (require) {
             if (page > scroll2Num) {
                 bkAjax(page);
                 scroll2Num++;
+                zanPlClickc();
             }
         }
     });
@@ -552,7 +603,8 @@ define(function (require) {
             $('.BKjy', element).text(dto.allNum);
             $('.BKgz', element).text(dto.totalFollowNum);
             $('.BKfs', element).text(dto.totalFansNum);
-            var userId = $('.Mboke', element).attr('data-id');
+            var userId = $('.Mboke').attr('data-id');
+            // alert( $('.BKjy', element).text());
             if (bkuserID !== userId) {
                 if (dto.focusType === 'Y') {
                     $('.BKgz_btn', element).html('<div class="Mboke_userGZ mhasGZ"    id="delFriendDiv">已关注 </div>');
@@ -638,7 +690,7 @@ define(function (require) {
             },
             25);
             if (Number(topicID) === 0) {
-                window.location.href = 'taoguba://taoguba.com.cn';
+                window.top.location.href = 'taoguba://taoguba.com.cn';
             } else {
                 isLogin();
                 if (Number(replyID) === 0) {

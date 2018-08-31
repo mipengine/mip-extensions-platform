@@ -1,0 +1,44 @@
+/**
+ * @file mip-xxd-slider样式文件
+ */
+
+mip-xxd-slider {
+    position: relative;
+
+    .mip-xxd-slider-scroll-box-outer {
+        overflow: hidden;
+    }
+
+    .mip-xxd-slider-scroll-box {
+        white-space: nowrap;
+        overflow: auto;
+        padding-bottom: 34px;
+    }
+
+    .mip-xxd-slider-dot-list {
+        position: absolute;
+        white-space: nowrap;
+        text-align: center;
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        .mip-xxd-slider-dot {
+            display: inline-block;
+            margin-right: .6rem;
+            width: .8rem;
+            height: .8rem;
+            background-color: #FEAE4E;
+            border-radius: 50%;
+            vertical-align: middle;
+
+            &:last-child {
+                margin-right: 0;
+            }
+
+            &.mip-xxd-slider-dot-active {
+                background-color: #546BD4;
+            }
+        }
+    }
+}

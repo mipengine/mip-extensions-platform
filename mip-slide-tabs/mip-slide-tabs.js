@@ -5,7 +5,7 @@
 
 define(function (require) {
     var customElement = require('customElement').create();
-    customElement.prototype.build = function () {
+    customElement.prototype.firstInviewCallback = function () {
         var aTabL = document.getElementById('tabl');
         var aTit = aTabL.getElementsByTagName('a');
         var aCon = document.getElementsByClassName('tabr_li');
@@ -35,7 +35,8 @@ define(function (require) {
         }
         function fn(index) {
             var aTitSign = aCon[index];
-            var aTitSignAs = aTitSign.getElementsByTagName('a');
+            var secTitle = aTitSign.getElementsByClassName('tab1-tit');
+            var aTitSignAs = secTitle[0].getElementsByTagName('a');
             var aConSignLis = aTitSign.getElementsByTagName('li');
             for (var i = 0; i < aTitSignAs.length; i++) {
                 if (i === 0) {

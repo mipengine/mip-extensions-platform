@@ -38,6 +38,20 @@ define(function (require) {
                     });
             }
         });
+
+        $(element).find('.head-img').on('click', function (e) {
+            e.stopPropagation();
+            $(element).find('.personal-box').css({'display': 'block'});
+        });
+
+        $(element).find('.personal-box').on('click', function (e) {
+            e.stopPropagation();
+        });
+
+        $(document).on('click', function () {
+            $(element).find('.personal-box').css({'display': 'none'});
+        });
+
         $('body').find('.mip-apple-nav-maskLayer').on('click', function () {
             $(element).find('#mobileNavList').animate({
                     'width': '0'

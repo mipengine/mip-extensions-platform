@@ -1,0 +1,15 @@
+{
+  "name": "mip-pc-redirect",
+  "version": "1.0.0",
+  "description": "实现当使用非移动设备访问时自动跳转到PC页面",
+
+  "author": {
+    "name": "cncms",
+    "email": "safeie@163.com",
+    "url":"https://www.vodjk.com"
+  },
+
+  "engines": {
+    "mip": ">=1.1.2"
+  }
+}

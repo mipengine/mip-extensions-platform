@@ -1,0 +1,14 @@
+{
+    "name": "mip-xxd-slider",
+    "version": "1.0.0",
+    "description": "选校帝滑动组件",
+    "contributors": [
+        {
+            "name": "xwchris",
+            "email": "zhangxiaowei@innobuddy.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

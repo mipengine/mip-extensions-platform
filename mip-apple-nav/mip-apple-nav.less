@@ -36,6 +36,12 @@ mip-apple-nav .pcNav li {
     margin-right: 50px;
 }
 
+mip-apple-nav .pcNav .iconfont,
+mip-apple-nav .mobileNav .iconfont {
+    font-size: 20px;
+    color:#FFF;
+}
+
 mip-apple-nav .pcNav .regist,
 mip-apple-nav .pcNav .login {
     float: right;
@@ -61,6 +67,48 @@ mip-apple-nav ul .regist a {
 mip-apple-nav ul .login a {
     font-size: 12px;
     color: #ccc;
+}
+
+mip-apple-nav ul .head-img-box {
+    float: right;
+    position: relative;
+}
+
+mip-apple-nav ul .head-img {
+    width: 40px;
+    height: 40px;
+    margin-top: 5px;
+}
+
+mip-apple-nav ul .head-img-box .personal-box {
+    width: 130px;
+    padding: 5px 0;
+    background: #FFF;
+    border-radius: 4px;
+    position: absolute;
+    top: 65px;
+    left: -40px;
+    display: none;
+}
+
+mip-apple-nav ul .head-img-box .personal-box:before {
+    content: "";
+    width:0;
+    height:0;
+    border: 10px solid transparent;
+    border-bottom-color: #FFF;
+    position: absolute;
+    top: -20px;
+    left: 50px;
+}
+
+mip-apple-nav ul .head-img-box .personal-box a {
+    display: block;
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+    color: #0070c9;
+    text-align: center;
 }
 
 @media screen and (max-width: 1199px) {
