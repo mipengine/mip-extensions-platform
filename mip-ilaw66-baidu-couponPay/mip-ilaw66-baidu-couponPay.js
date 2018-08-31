@@ -23,7 +23,27 @@ define(function (require) {
         var RUN_ON_BOCOMM_APP = localStorage.getItem('RUN_ON_BOCOMM_APP');
         // 加载获取requestId
         var requestId = getQueryString('requestId');
-
+        var sessionId = getQueryString('sessionId');
+        setTimeout(function () {
+            sessionId = $el.find('#sesiid').html();
+            console.log(sessionId);
+        }, 1000);
+        var hosturl = 'https://www.ilaw66.com/jasmine/';
+        function returhostname() {
+            var hostweb = location.protocol;
+            var hostname = location.hostname;
+            if (hostname === 'm.baidu.com' || hostname === 'www.ilaw66.com') {
+                hosturl = 'https://www.ilaw66.com/jasmine/';
+            }
+            else if (hostname === 'localhost') {
+                var hostport = location.port;
+                hosturl = 'http://' + hostname + ':' + hostport + '/jasmine/';
+            }
+            else {
+                hosturl = 'https://' + hostname + '/jasmine/';
+            }
+        }
+        returhostname();
         $el.find('#requestId').val(requestId);
 
         // 如果是微信登入,获取微信验证code
@@ -76,9 +96,10 @@ define(function (require) {
                 async: false,
                 type: 'GET',
                 data: {
-                    requestIdList: getQueryString('requestId')
+                    requestIdList: getQueryString('requestId'),
+                    sessionId: sessionId
                 },
-                url: 'checkFreeBill',
+                url: hosturl + 'checkFreeBill',
                 success: function (data) {
                     if (data.result === '2') {
                         freeFlg = '2';
@@ -132,7 +153,7 @@ define(function (require) {
 
                 $.ajax({
                     type: 'POST',
-                    url: 'pay/baidupay',
+                    url: hosturl + 'pay/baidupay?sessionId=' + sessionId,
                     data: data,
                     success: function (data) {
                         if (data && data.cashier_url) {
@@ -155,7 +176,6 @@ define(function (require) {
         });
 
         function load() {
-
             // 用户手动操作 cardId:卡券Id cardType:卡券类型 ifUseCard:是否使用卡
             var cardId = $el.find('#cardId').val();
 
@@ -205,7 +225,7 @@ define(function (require) {
 
             $.ajax({
                 type: 'GET',
-                url: url,
+                url: hosturl + url + '&sessionId=' + sessionId,
                 success: function (data) {
                     var totalAmount = data.totalAmount;
                     var duration = data.duration;
@@ -299,11 +319,12 @@ define(function (require) {
 
                 // 获取订单orderId
                 data.orderId = requestId;
+                data.sessionId = sessionId;
 
                 /*$el.find("#pay__pop").hide();*/
                 $.ajax({
+                    url: hosturl + 'card/updateOrderWithCard',
                     type: 'POST',
-                    url: 'card/updateOrderWithCard',
                     data: data,
                     success: function (data) {
                         // -1:连接异常，
@@ -349,9 +370,10 @@ define(function (require) {
                 if (channel === 'cmbc') {
                     $.ajax({
                         type: 'GET',
-                        url: 'activity/getLotteryTimes',
+                        url: hosturl + 'activity/getLotteryTimes',
                         data: {
-                            activityId: 'msfp'
+                            activityId: 'msfp',
+                            sessionId: sessionId
                         },
                         success: function (data) {
                             var chanceNum = data.data.times;
@@ -430,10 +452,11 @@ define(function (require) {
         function getCheckPay(id, questionType) {
             $.ajax({
                 type: 'get',
-                url: 'check/' + id,
+                url: hosturl + 'check/' + id + '&sessionId=' + sessionId,
                 success: function (msg) {
                     if (msg === 'OK') {
-                        window.top.location.href = 'comment?requestId=' + id + '&questionType=' + questionType;
+                        window.top.location.href = 'comment?requestId=' + id
+                        + '&questionType=' + questionType + '&sessionId=' + sessionId;
                     }
                     else {
                         //                      toastOr('支付失败，请重新支付');
@@ -453,9 +476,10 @@ define(function (require) {
         function checkTalking(requestId) {
             $.ajax({
                 type: 'GET',
-                url: 'checkTalkingOrder',
+                url: hosturl + 'checkTalkingOrder',
                 data: {
-                    requestId: requestId
+                    requestId: requestId,
+                    sessionId: sessionId
                 },
                 success: function (data) {
                     console.log(data);

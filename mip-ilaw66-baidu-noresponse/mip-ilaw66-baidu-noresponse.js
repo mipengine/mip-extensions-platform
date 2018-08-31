@@ -19,19 +19,28 @@ define(function (require) {
         var lawyerId;
         var $el = $(this.element);
         $(function () {
-            var channel = localStorage.getItem('channel');
-            if (channel === 'winbaoxian') {
-                $el.find('.header_block').hide();
-            }
 
-            //          $el.find('.glyphicon-menu-left').on('click', function () {
-            //              if (!parseInt(sessionStorage.getItem('loginFlg'), 10) && sessionStorage.getItem('loginFlg') === '0') {
-            //                  window.top.location.href = 'login';
-            //              }
-            //              else {
-            //                  window.top.location.href = './';
-            //              }
-            //          });
+            var sessionId = getQueryString('sessionId');
+            setTimeout(function () {
+                sessionId = $el.find('#sesiid').html();
+                console.log(sessionId);
+            }, 1000);
+            var hosturl = 'https://www.ilaw66.com/jasmine/';
+            function returhostname() {
+                var hostweb = location.protocol;
+                var hostname = location.hostname;
+                if (hostname === 'm.baidu.com' || hostname === 'www.ilaw66.com') {
+                    hosturl = 'https://www.ilaw66.com/jasmine/';
+                }
+                else if (hostname === 'localhost') {
+                    var hostport = location.port;
+                    hosturl = 'http://' + hostname + ':' + hostport + '/jasmine/';
+                }
+                else {
+                    hosturl = 'https://' + hostname + '/jasmine/';
+                }
+            }
+            returhostname();
             $el.find('.glyphicon-menu-left').click(function () {
                 if (!parseInt(sessionStorage.getItem('loginFlg'), 10) && sessionStorage.getItem('loginFlg') === '0') {
                     window.top.location.href = 'login';
@@ -43,7 +52,6 @@ define(function (require) {
 
             lawyerId = getQueryString('lawyerId');
 
-            var channel = localStorage.getItem('channel');
             var fromChannel = localStorage.getItem('fromChannel');
             var currentHours = new Date().getHours();
 
@@ -101,7 +109,8 @@ define(function (require) {
             $el.find('#js-continueAsk').click(function () {
                 $.ajax({
                     type: 'post',
-                    url: 'greeting?questionType=' + questionType + '&_csrf=' + csrfToken,
+                    url: hosturl + 'greeting?questionType=' + questionType + '&_csrf='
+                    + csrfToken + '&sessionId=' + sessionId,
                     success: function (data) {
                         if (data === 'ERROR' || data === 'ERROR1') {
                             $el.find('#err_msg').html('系统异常，请返回重新咨询');

@@ -15,7 +15,6 @@ define(function (require) {
     customElement.prototype.firstInviewCallback = function () {
         // TODO
         var $el = $(this.element);
-
         var questionType;
         var tabHref;
         var lawyerId = '';
@@ -29,11 +28,29 @@ define(function (require) {
             sessionId = $el.find('#sesiid').html();
             console.log(sessionId);
         }, 1000);
-        bannerusernum();
+
         if (sessionStorage.getItem('ishomeorder')) {
             sessionStorage.clear('ishomeorder');
         }
 
+        var hosturl = 'https://www.ilaw66.com/jasmine/';
+        function returhostname() {
+            var hostweb = location.protocol;
+            var hostname = location.hostname;
+            if (hostname === 'm.baidu.com' || hostname === 'www.ilaw66.com') {
+                hosturl = 'https://www.ilaw66.com/jasmine/';
+            }
+            else if (hostname === 'localhost') {
+                var hostport = location.port;
+                hosturl = 'http://' + hostname + ':' + hostport + '/jasmine/';
+            }
+            else {
+                hosturl = 'https://' + hostname + '/jasmine/';
+            }
+        }
+        returhostname();
+        console.log(hosturl);
+        bannerusernum();
         function getQueryString(name) {
             var reg = new RegExp('(^|&)'
                 + name + '=([^&]*)(&|$)', 'i');
@@ -114,7 +131,7 @@ define(function (require) {
                         requestIdList: b.requestId,
                         sessionId: sessionId
                     },
-                    url: 'checkFreeBill',
+                    url: hosturl + 'checkFreeBill',
                     success: function (c) {
                         if (c.result === 2) {
                             a = true;
@@ -139,7 +156,7 @@ define(function (require) {
                 else {
                     $.ajax({
                         type: 'get',
-                        url: 'getRequestId',
+                        url: hosturl + 'getRequestId',
                         data: {
                             requestId: b.requestId,
                             sessionId: sessionId
@@ -197,8 +214,8 @@ define(function (require) {
         function bannerusernum() {
 
             $.ajax({
+                url: hosturl + 'getOrderCount?sessionId=' + sessionId,
                 type: 'GET',
-                url: 'getOrderCount?sessionId=' + sessionId,
                 dataType: 'json',
                 success: function (a) {
                     //                  console.log(a);
@@ -261,8 +278,9 @@ define(function (require) {
             });
         }
         //  初始化首页价格
+
         $.ajax({
-            url: 'getPrice?channel=' + $el.find('#channel').val() + '&sessionId=' + sessionId,
+            url: hosturl + 'getPrice?channel=' + $el.find('#channel').val() + '&sessionId=' + sessionId,
             type: 'GET',
             success: function (data) {
                 console.log(data);
@@ -352,7 +370,7 @@ define(function (require) {
         // 开始咨询调用接口
         function startConsulting(questionType) {
             $.ajax({
-                url: 'greeting?questionType='
+                url: hosturl + 'greeting?questionType='
                     + questionType + '&_csrf='
                     + $el.find('#_csrf').val() + '&sessionId=' + sessionId,
                 type: 'POST',
@@ -386,10 +404,9 @@ define(function (require) {
                             + '_request?data=' + indexmessage + '&questionType=' + questionType
                             + '&sessionId=' + sessionId;
                     }
-
                 },
                 error: function () {
-                    //                  window.location.reload();
+                    window.location.reload();
                 }
             });
         }
@@ -397,7 +414,7 @@ define(function (require) {
         function checkReservationExpired() {
             $.ajax({
                 type: 'GET',
-                url: 'reservation/findRequestReservationByUserId?sessionId=' + sessionId,
+                url: hosturl + 'reservation/findRequestReservationByUserId?sessionId=' + sessionId,
                 success: function (data) {
                     console.log(data);
                     if (data.info) {
@@ -473,7 +490,7 @@ define(function (require) {
             $.ajax({
                 async: true,
                 type: 'POST',
-                url: 'continueAsk?lawyerId=' + lawyerId + '&questionType='
+                url: hosturl + 'continueAsk?lawyerId=' + lawyerId + '&questionType='
                     + questionType + '&_csrf=' + csrfToken + '&sessionId=' + sessionId,
                 dataType: 'json',
                 success: function (data) {
@@ -514,7 +531,7 @@ define(function (require) {
             $.ajax({
                 async: true,
                 type: 'POST',
-                url: 'continueAsk?lawyerId=' + lawyerId + '&questionType='
+                url: hosturl + 'continueAsk?lawyerId=' + lawyerId + '&questionType='
                     + questionType + '&_csrf=' + csrfToken + '&sessionId=' + sessionId,
                 dataType: 'json',
                 success: function (data) {
@@ -561,7 +578,7 @@ define(function (require) {
             $.ajax({
                 async: true,
                 type: 'POST',
-                url: 'continueAskV3?lawyerId=' + lawyerId + '&questionType='
+                url: hosturl + 'continueAskV3?lawyerId=' + lawyerId + '&questionType='
                     + questionType + '&_csrf=' + csrfToken + '&continueAskPage='
                     + continueAskPage + '&sessionId=' + sessionId,
                 dataType: 'json',

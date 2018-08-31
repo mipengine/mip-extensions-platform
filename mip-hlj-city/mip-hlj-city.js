@@ -37,13 +37,13 @@ define(function (require) {
                     }
                 }
                 $('.hots').hide();
-                $('#citys').show();
-                $(element).find('#groups').hide();
+                $('#citys').css('display', 'inline-block');
+                $(element).find('#groups').css('display', 'none');
             }
             else {
-                $(element).find('.hots').show();
-                $(element).find('#citys').hide();
-                $(element).find('#groups').hide();
+                $(element).find('.hots').css('display', 'block');
+                $(element).find('#citys').css('display', 'none');
+                $(element).find('#groups').css('display', 'none');
                 initHots(element, hots);
             }
         });
@@ -63,7 +63,7 @@ define(function (require) {
             var id = e.currentTarget.dataset.id;
             $(element).find('#citys a').removeClass('active');
             $(this).addClass('active');
-            $(element).find('#groups').show();
+            $(element).find('#groups').css('display', 'inline-block');
 
             for (var i = 0; i < citys.length; i++) {
                 if (citys[i].cid === id) {
@@ -91,12 +91,12 @@ define(function (require) {
 
         for (var i = 0; i < hots.length; i++) {
             if (hots[i].is_near === 1 || hots[i].is_near === '1') {
-                html += '<li><a data-id=' + hots[i].cid + ' href=' + '/baidu/package/city_'
-                + hots[i].cid + ' class="closter">' + hots[i].name + '</a></li>';
+                html += '<li class="closter"><a data-id=' + hots[i].cid + ' href=' + '/baidu/package/city_'
+                + hots[i].cid + '>' + hots[i].name + '</a></li>';
             }
             else if (hots[i].is_lvpai === 1 || hots[i].is_lvpai === '1') {
-                html += '<li><a data-id=' + hots[i].cid + ' href=' + '/baidu/package/city_'
-                + hots[i].cid + ' class="trip">' + hots[i].name + '</a></li>';
+                html += '<li class="trip"><a data-id=' + hots[i].cid + ' href=' + '/baidu/package/city_'
+                + hots[i].cid + '>' + hots[i].name + '</a></li>';
             }
             else {
                 html += '<li><a data-id=' + hots[i].cid + ' href=' + '/baidu/package/city_'
@@ -122,7 +122,7 @@ define(function (require) {
 
         $(element).find('#last-city').html(html);
         $(element).find('#last-city-title').show();
-        $(element).find('#last-city').css('display', 'flex');
+        $(element).find('#last-city').css('display', 'block');
         $(element).find('#last-city a').on('click', stopDefaultEvent);
     }
 

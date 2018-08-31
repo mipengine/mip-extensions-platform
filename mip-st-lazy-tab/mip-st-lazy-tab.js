@@ -96,6 +96,10 @@ define(function (require) {
             $header = $(el.children.item(0));
         }
 
+        if ($header.children().size() <= 4) {
+            $header.addClass('mip-st-lazy-tab-less');
+        }
+
         $header.detach();
         $header.children().each(function (index, element) {
             var $element = $(element);

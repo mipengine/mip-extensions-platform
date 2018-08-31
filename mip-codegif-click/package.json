@@ -1,0 +1,14 @@
+{
+    "name": "mip-codegif-click",
+    "version": "1.0.0",
+    "description": "股票分时，日线，周线，月线信息",
+    "contributors": [
+        {
+            "name": "xhj",
+            "email": "3233268172@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

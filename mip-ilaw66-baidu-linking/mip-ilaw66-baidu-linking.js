@@ -35,7 +35,23 @@ define(function (require) {
             sessionId = $el.find('#sesiid').html();
             console.log(sessionId);
         }, 1000);
-
+        var hosturl = 'https://www.ilaw66.com/jasmine/';
+        function returhostname() {
+            var hostweb = location.protocol;
+            var hostname = location.hostname;
+            if (hostname === 'm.baidu.com' || hostname === 'www.ilaw66.com') {
+                hosturl = 'https://www.ilaw66.com/jasmine/';
+            }
+            else if (hostname === 'localhost') {
+                var hostport = location.port;
+                hosturl = 'http://' + hostname + ':' + hostport + '/jasmine/';
+            }
+            else {
+                hosturl = 'https://' + hostname + '/jasmine/';
+            }
+        }
+        returhostname();
+        console.log(hosturl);
         var t1 = setInterval(function () {
             fnDate();
         }, 1000);
@@ -85,7 +101,7 @@ define(function (require) {
         function getInfo() {
             $.ajax({
                 type: 'GET',
-                url: 'timer?id=' + timerRequestId + '&lawyerId=' + lawyerId + '&sessionId=' + sessionId,
+                url: hosturl + 'timer?id=' + timerRequestId + '&lawyerId=' + lawyerId + '&sessionId=' + sessionId,
                 dataType: 'json',
                 success: function (data) {
                     if (!data || data.status === 'ERROR') {
@@ -190,7 +206,7 @@ define(function (require) {
             if (countTimeInSec % 5 === 0) {
                 $.ajax({
                     type: 'GET',
-                    url: 'timer?id=' + timerRequestId + '&lawyerId=' + lawyerId + '&sessionId=' + sessionId,
+                    url: hosturl + 'timer?id=' + timerRequestId + '&lawyerId=' + lawyerId + '&sessionId=' + sessionId,
                     dataType: 'json',
                     success: function (data) {
                         //                      console.log(data);
@@ -267,7 +283,7 @@ define(function (require) {
                 no = '礼貌等待';
                 $.ajax({
                     type: 'GET',
-                    url: 'timer?id=' + timerRequestId + '&lawyerId=' + lawyerId + '&sessionId=' + sessionId,
+                    url: hosturl + 'timer?id=' + timerRequestId + '&lawyerId=' + lawyerId + '&sessionId=' + sessionId,
                     dataType: 'json',
                     success: function (data) {
                         if (!data || data.status === 'ERROR') {
@@ -341,7 +357,7 @@ define(function (require) {
         function checkTalking(checkRequestId, questionType) {
             $.ajax({
                 type: 'GET',
-                url: 'checkTalkingOrder?requestId=' + checkRequestId + '&sessionId=' + sessionId,
+                url: hosturl + 'checkTalkingOrder?requestId=' + checkRequestId + '&sessionId=' + sessionId,
                 success: function (data) {
                     var state = data.result.state;
                     if (state === 6) {
@@ -364,7 +380,7 @@ define(function (require) {
                     else {
                         $.ajax({
                             type: 'get',
-                            url: 'getRequestId?requestId=' + checkRequestId + '&sessionId=' + sessionId,
+                            url: hosturl + 'getRequestId?requestId=' + checkRequestId + '&sessionId=' + sessionId,
                             async: false,
                             success: function (data) {
                                 console.log('是否合并支付单号：' + data);

@@ -16,6 +16,25 @@ define(function (require) {
         // 自动加载数据
         $el.find('#requestId').val(getQueryString('requestId'));
         var paystart = getQueryString('payState');
+        var sessionId = getQueryString('sessionId');
+        setTimeout(function () {
+            sessionId = $el.find('#sesiid').html();
+            //          console.log(sessionId);
+        }, 1000);
+        var hosturl = 'https://www.ilaw66.com/jasmine/';
+        var hostweb = location.protocol;
+        var hostname = location.hostname;
+        if (hostname === 'm.baidu.com' || hostname === 'www.ilaw66.com') {
+            hosturl = 'https://www.ilaw66.com/jasmine/';
+        }
+        else if (hostname === 'localhost') {
+            var hostport = location.port;
+            hosturl = 'http://' + hostname + ':' + hostport + '/jasmine/';
+        }
+        else {
+            hosturl = 'https://' + hostname + '/jasmine/';
+        }
+        console.log(hosturl);
         if (paystart) {
             $el.find('.payalert').show();
         }
@@ -109,7 +128,7 @@ define(function (require) {
             $.ajax({
                 type: 'GET',
                 // url: 'data.json'
-                url: 'selectOrderV1?id=' + requestId,
+                url: hosturl + 'selectOrderV1?id=' + requestId + '&sessionId=' + sessionId,
                 async: false,
                 success: function (data) {
                     var qusetype = data.questionType;
@@ -196,9 +215,10 @@ define(function (require) {
                                 async: false,
                                 type: 'GET',
                                 data: {
-                                    requestIdList: requestId
+                                    requestIdList: requestId,
+                                    sessionId: sessionId
                                 },
-                                url: 'checkFreeBill',
+                                url: hosturl + 'checkFreeBill',
                                 success: function (data) {
                                     if (data.result !== 2) {
                                         window.top.location.href = 'mipilaw66baidu_couponPay?requestId='
@@ -362,7 +382,8 @@ define(function (require) {
             $.ajax({
                 async: true,
                 type: 'POST',
-                url: 'continueAsk?lawyerId=' + lawyerId + '&questionType=' + questionType + '&_csrf=' + csrfToken,
+                url: hosturl + 'continueAsk?lawyerId=' + lawyerId + '&questionType=' + questionType + '&_csrf='
+                    + csrfToken + '&sessionId=' + sessionId,
                 dataType: 'json',
                 success: function (data) {
                     $el.find('.loadingArea').hide();
@@ -402,7 +423,8 @@ define(function (require) {
             $.ajax({
                 async: true,
                 type: 'POST',
-                url: 'continueAsk?lawyerId=' + lawyerId + '&questionType=' + questionType + '&_csrf=' + csrfToken,
+                url: hosturl + 'continueAsk?lawyerId=' + lawyerId + '&questionType=' + questionType
+                    + '&_csrf=' + csrfToken + '&sessionId=' + sessionId,
                 dataType: 'json',
                 success: function (data) {
                     $el.find('.loadingArea').hide();
@@ -447,9 +469,9 @@ define(function (require) {
             $.ajax({
                 async: true,
                 type: 'POST',
-                url: 'continueAskV3?lawyerId=' + lawyerId + '&questionType='
+                url: hosturl + 'continueAskV3?lawyerId=' + lawyerId + '&questionType='
                     + questionType + '&_csrf=' + csrfToken + '&continueAskPage='
-                    + continueAskPage,
+                    + continueAskPage + '&sessionId=' + sessionId,
                 dataType: 'json',
                 success: function (data) {
                     console.log('继续问2', data);

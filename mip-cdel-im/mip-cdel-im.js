@@ -18,7 +18,7 @@ define(function (require) {
         var self = this;
         var element = this.element;
         var defineUrl = getDomainUrl();
-        fetchJsonp('http://m.chinaacc.com/m_member/baidu/getXZJs.shtm?redirectUrl=' + defineUrl.replace('lan.', ''),
+        fetchJsonp('//m.chinaacc.com/m_member/baidu/getXZJs.shtm?redirectUrl=' + defineUrl.replace('lan.', ''),
         {
             jsonpCallback: 'jsonpCallback'
         }).then(function (res) {

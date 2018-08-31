@@ -20,15 +20,28 @@ define(function (require) {
         var sec = dateTime.getSeconds();
         var timer;
         var lawyerId;
-        //      var thishostname = location.hostname;
-        //      var name = 'mip-login-xzh:sessionId:https://' + thishostname + '/jasmine/baidusearch/authorize2';
-        //      var sessionId = localStorage.getItem(name);
         var sessionId = getQueryString('sessionId');
         setTimeout(function () {
             sessionId = $el.find('#sesiid').html();
             console.log(sessionId);
         }, 1000);
-
+        var hosturl = 'https://www.ilaw66.com/jasmine/';
+        function returhostname() {
+            var hostweb = location.protocol;
+            var hostname = location.hostname;
+            if (hostname === 'm.baidu.com' || hostname === 'www.ilaw66.com') {
+                hosturl = 'https://www.ilaw66.com/jasmine/';
+            }
+            else if (hostname === 'localhost') {
+                var hostport = location.port;
+                hosturl = 'http://' + hostname + ':' + hostport + '/jasmine/';
+            }
+            else {
+                hosturl = 'https://' + hostname + '/jasmine/';
+            }
+        }
+        returhostname();
+        console.log(hosturl);
         $el.find('.jingxuan_top').css('background-image', 'url("images/bg_jingxuanlvshi.png")');
         $el.find('.jingxuan_top>img').attr('src', 'images/bg_touxiangjx.png');
 
@@ -123,7 +136,7 @@ define(function (require) {
                 if (countdown % 5 === 0) {
                     $.ajax({
                         type: 'GET',
-                        url: 'timer?id=' + id + '&sessionId=' + sessionId,
+                        url: hosturl + 'timer?id=' + id + '&sessionId=' + sessionId,
                         dataType: 'json',
                         success: function (data) {
                             //                      	debugger
@@ -161,7 +174,7 @@ define(function (require) {
         }
         function cancelRequestOr() {
             $.ajax({
-                url: 'cancelRequest?requestId=' + $el.find('#requestId').val() + '&_csrf='
+                url: hosturl + 'cancelRequest?requestId=' + $el.find('#requestId').val() + '&_csrf='
                     + $el.find('#_csrf').val() + '&sessionId=' + sessionId,
                 type: 'POST',
                 success: function (data) {
@@ -245,7 +258,7 @@ define(function (require) {
             temp.list = [];
             $.ajax({
                 type: 'post',
-                url: 'lawyerOnlines?_csrf=' + $el.find('#_csrf').val()
+                url: hosturl + 'lawyerOnlines?_csrf=' + $el.find('#_csrf').val()
                     + '&questionType=' + getQueryString('questionType') + '&sessionId=' + sessionId,
                 async: false,
                 success: function (data) {

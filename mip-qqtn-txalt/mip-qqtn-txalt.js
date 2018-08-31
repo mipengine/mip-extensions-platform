@@ -92,8 +92,8 @@ define(function (require) {
 
                 // 判断设备,安卓才下APK
                 if (/android/i.test(navigator.userAgent)) {
-                    overlay.appendChild(downapk);
-                    picdownload.setAttribute('style', 'right:auto;left:15%');
+                    // overlay.appendChild(downapk);
+                    // picdownload.setAttribute('style', 'right:auto;left:15%');
                 }
 
                 document.body.appendChild(overlay);
