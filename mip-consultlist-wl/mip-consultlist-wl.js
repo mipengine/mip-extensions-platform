@@ -24,6 +24,7 @@ define(function (require) {
                 jQids.push(jDiv.eq(i).attr('data-id'));
             }
         }
+        console.log(jQids);
         $.ajax({
             type: 'post',
             url: url,

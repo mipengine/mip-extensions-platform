@@ -27,7 +27,23 @@ define(function (require) {
         var head = $el.find('.header_block');
         var t1;
         var phoneChangedFlagAndHasOrderUnpaid = false;
-
+        var hosturl = 'https://www.ilaw66.com/jasmine/';
+        function returhostname() {
+            var hostweb = location.protocol;
+            var hostname = location.hostname;
+            if (hostname === 'www-ilaw66-com.mipcdn.com' || hostname === 'www.ilaw66.com') {
+                hosturl = 'https://www.ilaw66.com/jasmine/';
+            }
+            else if (hostname === 'localhost') {
+                var hostport = location.port;
+                hosturl = 'http://' + hostname + ':' + hostport + '/jasmine/';
+            }
+            else {
+                hosturl = 'https://' + hostname + '/jasmine/';
+            }
+        }
+        returhostname();
+        console.log(hosturl);
         var channelInUrl = getQueryString('channel');
         if (!channel && channelInUrl) {
             channel = channelInUrl;
@@ -633,7 +649,7 @@ define(function (require) {
                 /** 发送短信*/
                 $.ajax({
                     type: 'GET',
-                    url: 'sendSms?phone=' + phone + '&channel=' + channel + '&_csrf=' + csrfToken,
+                    url: hosturl + 'sendSms?phone=' + phone + '&channel=' + channel + '&_csrf=' + csrfToken,
                     success: function (data) {
                         if (data === 'ERROR') {
                             $el.find('#sendSMSError_msg').text('发送短信失败');
@@ -693,7 +709,8 @@ define(function (require) {
             $.ajax({
                 async: true,
                 type: 'POST',
-                url: 'updateUserPhoneNumber?phoneNumber=' + phone + '&smsCode=' + smsCode + '&_csrf=' + csrfToken,
+                url: hosturl + 'updateUserPhoneNumber?phoneNumber=' + phone
+                + '&smsCode=' + smsCode + '&_csrf=' + csrfToken,
                 dataType: 'json',
                 success: function (data) {
                     if (data.code === 1) {

@@ -1,0 +1,14 @@
+{
+    "name": "mip-miaotu-countdown",
+    "version": "1.0.0",
+    "description": "倒计时组件",
+    "contributors": [
+        {
+            "name": "blm",
+            "email": "1129908393@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

@@ -29,7 +29,7 @@ define(function (require) {
         function returhostname() {
             var hostweb = location.protocol;
             var hostname = location.hostname;
-            if (hostname === 'm.baidu.com' || hostname === 'www.ilaw66.com') {
+            if (hostname === 'www-ilaw66-com.mipcdn.com' || hostname === 'www.ilaw66.com') {
                 hosturl = 'https://www.ilaw66.com/jasmine/';
             }
             else if (hostname === 'localhost') {

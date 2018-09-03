@@ -18,7 +18,9 @@ define(function (require) {
         yuyue.off('click').on('click', function () {
             var bodyheight = $(document).height();
             bg.css('height', bodyheight);
+            bg.css('position', 'fixed');
             tbox.show();
+            bg.show();
             bg.css('opacity', '.4');
         });
         e.find('.msg_box .msg_close').off('click').on('click', function () {

@@ -1,0 +1,14 @@
+{
+    "name": "mip-miaotu-domshowhide",
+    "version": "1.0.0",
+    "description": "点击按钮隐藏和显示DOM",
+    "contributors": [
+        {
+            "name": "blm",
+            "email": "1129908393@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
