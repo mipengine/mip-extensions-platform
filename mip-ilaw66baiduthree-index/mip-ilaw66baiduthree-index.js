@@ -375,7 +375,8 @@ define(function (require) {
                     + $el.find('#_csrf').val() + '&sessionId=' + sessionId,
                 type: 'POST',
                 success: function (indexmessage) {
-
+                    console.log(indexmessage);
+                    console.log(typeof indexmessage);
                     if (indexmessage === 'ERROR' || indexmessage === 'ERROR1') {
                         $el.find('#' + tabHref).removeClass().addClass('tab-pane');
                         flg = 0;

@@ -1,0 +1,10 @@
+<style>
+  a {
+    border: 1px solid #369FFF;
+    display: inline-block;
+  }
+  .btn-disabled {
+    border-color: #D8D8D8;
+    color: #D8D8D8;
+  }
+</style>

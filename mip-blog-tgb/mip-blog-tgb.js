@@ -70,6 +70,31 @@ define(function (require) {
             zanPlClickb();
         });
         zanPlClick();
+        var bkUrl = window.top.location.href;
+        // bkUrl='http://m.taoguba.yl/mip/blog/4132';
+        var bkuserID = bkUrl.split('blog/')[1];
+        $.ajax({
+            url: '/blogUseMsg?userID=' + bkuserID,
+            dataType: 'json',
+            async: false,
+            success: function (data) {
+                var dto = data.dto;
+                $('.BKjy', element).text(dto.allNum);
+                $('.BKgz', element).text(dto.totalFollowNum);
+                $('.BKfs', element).text(dto.totalFansNum);
+                var userId = $('.Mboke').attr('data-id');
+                // alert( $('.BKjy', element).text());
+                if (bkuserID !== userId) {
+                    if (dto.focusType === 'Y') {
+                        $('.BKgz_btn', element).html(
+                        '<div class="Mboke_userGZ mhasGZ"    id="delFriendDiv">已关注 </div>');
+                    } else {
+                        $('.BKgz_btn', element).html(
+                        '<div class="Mboke_userGZ munGZ"  id="addGoodFriendDiv"  >关注</div>');
+                    }
+                }
+            }
+        });
         // 关注
         $('#addGoodFriendDiv', element).click(function () {
             addGoodFriend();
@@ -169,6 +194,7 @@ define(function (require) {
             type: 'GET',
             url: '/mGetUseFulList',
             dataType: 'json',
+            async: false,
             success: function (data) {
                 var arr = data.dto;
                 var str = '';
@@ -364,6 +390,7 @@ define(function (require) {
             type: 'GET',
             url: '/mBlogTopicAjax?userID=' + userID + '&sortFlag=W&pageNo=' + page,
             dataType: 'json',
+            async: false,
             success: function (data) {
                 var portrait = $('.Mboke_userimg', element).attr('src');
                 var arr = data.dto.listTopic;
@@ -589,28 +616,6 @@ define(function (require) {
                 bkAjax(page);
                 scroll2Num++;
                 zanPlClickc();
-            }
-        }
-    });
-    var bkUrl = window.top.location.href;
-    // bkUrl='http://m.taoguba.yl/mip/blog/4132';
-    var bkuserID = bkUrl.split('blog/')[1];
-    $.ajax({
-        url: '/blogUseMsg?userID=' + bkuserID,
-        dataType: 'json',
-        success: function (data) {
-            var dto = data.dto;
-            $('.BKjy', element).text(dto.allNum);
-            $('.BKgz', element).text(dto.totalFollowNum);
-            $('.BKfs', element).text(dto.totalFansNum);
-            var userId = $('.Mboke').attr('data-id');
-            // alert( $('.BKjy', element).text());
-            if (bkuserID !== userId) {
-                if (dto.focusType === 'Y') {
-                    $('.BKgz_btn', element).html('<div class="Mboke_userGZ mhasGZ"    id="delFriendDiv">已关注 </div>');
-                } else {
-                    $('.BKgz_btn', element).html('<div class="Mboke_userGZ munGZ"  id="addGoodFriendDiv"  >关注</div>');
-                }
             }
         }
     });

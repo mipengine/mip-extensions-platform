@@ -1,0 +1,18 @@
+{
+    "name": "mip-qf-download",
+    "version": "1.0.0",
+    "description": "七风-下载逻辑组件",
+    "contributors": [
+        {
+            "name": "MIP authors",
+            "email": "mip-support@baidu.com",
+            "url": "https://www.mipengine.org"
+        }, {
+            "name": "@9-lives",
+            "email": "911120823@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=2.0.0"
+    }
+}
