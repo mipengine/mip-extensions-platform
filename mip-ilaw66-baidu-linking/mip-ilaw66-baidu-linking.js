@@ -31,6 +31,7 @@ define(function (require) {
         //      var name = 'mip-login-xzh:sessionId:https://' + thishostname + '/jasmine/baidusearch/authorize2';
         //      var sessionId = localStorage.getItem(name);
         var sessionId = getQueryString('sessionId');
+        var MIP = window.MIP;
         setTimeout(function () {
             sessionId = $el.find('#sesiid').html();
             console.log(sessionId);
@@ -52,6 +53,23 @@ define(function (require) {
         }
         returhostname();
         console.log(hosturl);
+        function locahost(topsurl, toptitle) {
+            if (topsurl === './') {
+                topsurl = 'baidusearch';
+            }
+
+            var topurl = hosturl + topsurl;
+            if (MIP.viewer.isIframed) {
+                MIP.viewer.sendMessage('loadiframe', {
+                    title: toptitle,
+                    click: '',
+                    url: topurl
+                });
+            }
+            else {
+                location.assign(topurl);
+            }
+        }
         var t1 = setInterval(function () {
             fnDate();
         }, 1000);
@@ -91,7 +109,8 @@ define(function (require) {
             $el.find('.toast_div').show();
             setTimeout(function () {
                 $el.find('.toast_div').hide();
-                window.top.location.href = './';
+                //              window.top.location.href = './';
+                locahost('./', '电话咨询');
             }, 2000);
         });
         $el.find('.type_cancell').click(function () { // 取消
@@ -199,6 +218,23 @@ define(function (require) {
                 + (date.getMinutes() - min) * 60 + (date.getSeconds() - sec);
             getPhoneStatus();
         }
+        function startConsulting(questionType) {
+            $.ajax({
+                url: hosturl + 'greeting?questionType='
+                    + questionType + '&_csrf='
+                    + $el.find('#_csrf').val() + '&sessionId=' + sessionId,
+                type: 'POST',
+                success: function (indexmessage) {
+                    var requesturl = 'mipilaw66baidu'
+                        + '_request?data=' + indexmessage + '&questionType=' + questionType
+                        + '&sessionId=' + sessionId;
+                    locahost(requesturl, '匹配律师');
+                },
+                error: function () {
+                    //                  window.location.reload();
+                }
+            });
+        }
         function getPhoneStatus() {
             var questionType = $el.find('#questionType').val();
             var askingType = $el.find('#askingType').val();
@@ -237,8 +273,11 @@ define(function (require) {
                             });
                             $el.find('.backOr_div .back__popLayer .back-continue').click(function () {
                                 $el.find('.backOr_div').hide();
-                                window.top.location.href = 'baidusearch/authorize?questionType='
-                                    + questionType + '&urlstring=mipilaw66baidu_request&sessionId=' + sessionId;
+                                //                              var  = 'baidusearch/authorize?questionType='
+                                //                                  + questionType + '&urlstring=mipilaw66baidu_request&sessionId=' + sessionId;
+                                //                                  locahost('./', '电话咨询');
+                                startConsulting(questionType);
+
                             });
                         }
                         else {
@@ -324,7 +363,8 @@ define(function (require) {
                     gobackHandle();
                 }
                 else {
-                    window.top.location.href = './';
+                    //                  window.top.location.href = './';
+                    locahost('./', '咨询律师');
                 }
             });
             $el.find('.backOr_div .back__popLayer .back-continue').click(function () {
@@ -348,10 +388,12 @@ define(function (require) {
         }
         function gobackHandle() {
             if (!parseInt(sessionStorage.getItem('loginFlg'), 10) && sessionStorage.getItem('loginFlg') === '0') {
-                window.top.location.href = 'login';
+                //              window.top.location.href = 'login';
+                locahost('login', '开始咨询');
             }
             else {
-                window.top.location.href = './';
+                //              window.top.location.href = './';
+                locahost('./', '开始咨询');
             }
         }
         function checkTalking(checkRequestId, questionType) {
@@ -365,7 +407,8 @@ define(function (require) {
                         $el.find('.toast_div').show();
                         setTimeout(function () {
                             $el.find('.toast_div').hide();
-                            window.top.location.href = './';
+                            //                          window.top.location.href = './';
+                            locahost('./', '开始咨询');
                         }, 2000);
                     }
                     else if (state === 4) {
@@ -384,8 +427,9 @@ define(function (require) {
                             async: false,
                             success: function (data) {
                                 console.log('是否合并支付单号：' + data);
-                                window.top.location.href = 'mipilaw66baidu_couponPay?requestId='
+                                var payulr = 'mipilaw66baidu_couponPay?requestId='
                                     + data + '&questionType=' + questionType + '&sessionId=' + sessionId;
+                                locahost(payulr, '开始咨询');
                                 localStorage.setItem('linkingOrding', 'linkingOrdingGone');
                             },
                             error: function () {

@@ -21,6 +21,7 @@ define(function (require) {
         var timer;
         var lawyerId;
         var sessionId = getQueryString('sessionId');
+        var MIP = window.MIP;
         setTimeout(function () {
             sessionId = $el.find('#sesiid').html();
             console.log(sessionId);
@@ -42,6 +43,23 @@ define(function (require) {
         }
         returhostname();
         console.log(hosturl);
+        function locahost(topsurl, toptitle) {
+            if (topsurl === './') {
+                topsurl = 'baidusearch';
+            }
+
+            var topurl = hosturl + topsurl;
+            if (MIP.viewer.isIframed) {
+                MIP.viewer.sendMessage('loadiframe', {
+                    title: toptitle,
+                    click: '',
+                    url: topurl
+                });
+            }
+            else {
+                location.assign(topurl);
+            }
+        }
         $el.find('.jingxuan_top').css('background-image', 'url("images/bg_jingxuanlvshi.png")');
         $el.find('.jingxuan_top>img').attr('src', 'images/bg_touxiangjx.png');
 
@@ -62,7 +80,8 @@ define(function (require) {
         }, 1000);
         // 取消按钮事件
         $el.find('.cancelBtn').click(function () {
-            window.top.location.href = './'; // 取消跳转至首页
+            //          window.top.location.href = './'; // 取消跳转至首页
+            locahost('./', '电话咨询');
         });
         // 取消咨询, 头部返回按钮
         $el.find('.tocancle').click(function () {
@@ -129,8 +148,9 @@ define(function (require) {
             var askingType = $el.find('#askingType').val();
             if (countdown > 60) {
                 clearInterval(timer);
-                window.top.location.href = 'mipilaw66baidu_lawyer_noresponse?questionType='
+                var norurl = 'mipilaw66baidu_lawyer_noresponse?questionType='
                     + questionType + '&sessionId=' + sessionId;
+                locahost(norurl, '无人应答');
             }
             else {
                 if (countdown % 5 === 0) {
@@ -151,14 +171,15 @@ define(function (require) {
                                     + askingType + '&lawyerId=' + data.lawyerId + '&tel='
                                     + data.tel + '&goodCommentRate=' + data.goodCommentRate
                                     + '&sessionId=' + sessionId);
-                                window.top.location.href = url;
+                                locahost(url, '匹配律师');
                             }
                             else if (dataStatus === 4 || dataStatus === 1 || dataStatus === 3
                                 || dataStatus === 9 || dataStatus === 10
                                 || dataStatus === 'ERROR' || dataStatus === 'ERROR1') {
                                 clearInterval(timer);
-                                window.top.location.href = 'mipilaw66baidu_lawyer_noresponse?questionType='
+                                var lawnoresurl = 'mipilaw66baidu_lawyer_noresponse?questionType='
                                     + questionType + '&sessionId=' + sessionId;
+                                locahost(lawnoresurl, '无人应答');
                             }
 
                         },
@@ -247,10 +268,12 @@ define(function (require) {
         }
         function gobackHandle() {
             if (!parseInt(sessionStorage.getItem('loginFlg'), 10) && sessionStorage.getItem('loginFlg') === '0') {
-                window.top.location.href = 'login';
+                var tologinurl = 'login';
+                locahost(tologinurl, '登录');
             }
             else {
-                window.top.location.href = './';
+                //              window.top.location.href = './';
+                locahost('./', '电话咨询');
             }
         }
         function getLawyerImgs() {

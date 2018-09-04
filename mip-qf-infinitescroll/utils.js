@@ -4,8 +4,8 @@
  */
 
 define(function (require) {
-    const fetchJsonp = require('fetch-jsonp');
-    const util = require('util');
+    var fetchJsonp = require('fetch-jsonp');
+    var util = require('util');
 
     /**
      * 获取自定义参数
@@ -14,8 +14,8 @@ define(function (require) {
      */
 
     function getCustomParams(el) {
-        let params = {
-            clientType: util.platform.isAdr() ? 'apk' : 'ipa', // 客户端类型。apk 安卓；ipa 苹果；
+        var params = {
+            clientType: util.platform.isIos() ? 'ipa' : 'apk', // 客户端类型。默认 apk 安卓；ipa 苹果
             columns: '', // 返回的列
             cpFlag: 'Y', // 价值
             pageIndex: 0, // 开始页数
@@ -25,19 +25,10 @@ define(function (require) {
             siteId: undefined, // 站点 ID
             type: undefined // 排行榜类型。1 热门; 7 自定义
         }; // 默认参数
+        var script = el.querySelector('script[type="application/json"]');
 
-        try {
-            let script = el.querySelector('script[type="application/json"]');
-            if (script) {
-                params = util.fn.extend(params, JSON.parse(script.textContent));
-            }
-        }
-        catch (e) {
-            if (e && e.message) {
-                console.error(e.message);
-            }
-
-            return false;
+        if (script) {
+            params = util.fn.extend(params, JSON.parse(script.textContent));
         }
 
         return params;
@@ -45,24 +36,14 @@ define(function (require) {
 
     /**
      * 获取数据
-     * @param {Function} failure 失败回调
-     * @param {Function} success 成功回调
-     * @param {number} timeout 超时时长
-     * @param {string} url 请求地址
+     * @param {Object} 参数对象
      */
 
-    function getDataByJsonp(failure, success, timeout, url) {
-        if (typeof failure !== 'function') {
-            failure = function () {};
-        }
-        if (typeof success !== 'function') {
-            success = function () {};
-        }
-
-        fetchJsonp(url, {
-            jsonpCallback: 'callback',
-            timeout: timeout
-        })
+    function getDataByJsonp(options) {
+        fetchJsonp(options.url, {
+                jsonpCallback: 'callback',
+                timeout: options.timeout
+            })
             .then(function (rs) {
                 return rs.json();
             })
@@ -71,14 +52,14 @@ define(function (require) {
                     throw new Error('status code:', rs.status);
                 }
 
-                success(rs.data.items);
+                options.success(rs.data.items);
             })
             .catch(function (e) {
                 if (e && e.message) {
-                    console.error(e.message);
+                    console.error(e.message); // eslint-disable-line
                 }
 
-                failure();
+                options.failure();
             });
     }
 
@@ -89,82 +70,61 @@ define(function (require) {
      */
 
     function getHtmlProperties(el) {
-        let properties = {
-            completedTxt: '加载完毕', // 完成文本
-            failedTxt: '加载失败', // 失败文本
-            gap: 0, // 触发间距
-            loadingTxt: '正在加载...', // 加载文本
-            mbPrefix: undefined, // IOS 越狱包手机百度链接前缀
-            nonMBPrefix: undefined, // IOS 越狱包非手机百度链接前缀
-            timeout: 7000, // jsonp 超时时间
-            url: undefined // jsonp 地址
+        if (!el.getAttribute('data-url')) {
+            throw new Error('invalid argument data-url');
+        }
+
+        return {
+            completedTxt: el.getAttribute('txt-completed') ? el.getAttribute('txt-completed') : '加载完毕',
+            failedTxt: el.getAttribute('txt-failed') ? el.getAttribute('txt-failed') : '加载失败',
+            gap: el.getAttribute('gap') ? Number.parseInt(el.getAttribute('gap'), 10) : 0,
+            loadingTxt: el.getAttribute('txt-loading') ? el.getAttribute('txt-loading') : '正在加载...',
+            timeout: el.getAttribute('timeout') ? Number.parseInt(el.getAttribute('timeout'), 10) * 1000 : 7000,
+            url: el.getAttribute('data-url')
         };
-
-        let completedTxt = el.getAttribute('txt-completed');
-        if (completedTxt) {
-            properties.completedTxt = completedTxt;
-        }
-
-        let failedTxt = el.getAttribute('txt-failed');
-        if (failedTxt) {
-            properties.failedTxt = failedTxt;
-        }
-
-        let gap = el.getAttribute('gap');
-        if (gap) {
-            properties.gap = Number.parseInt(gap, 10);
-        }
-
-        let loadingTxt = el.getAttribute('txt-loading');
-        if (loadingTxt) {
-            properties.loadingTxt = loadingTxt;
-        }
-
-        let mbPrefix = el.getAttribute('ipa-prefix-mb');
-        if (mbPrefix) {
-            properties.mbPrefix = mbPrefix;
-        }
-
-        let nonMBPrefix = el.getAttribute('ipa-prefix-nonmb');
-        if (nonMBPrefix) {
-            properties.nonMBPrefix = nonMBPrefix;
-        }
-
-        let url = el.getAttribute('data-url');
-        if (url) {
-            properties.url = url;
-        }
-        else {
-            throw new Error('invalid argument: data-url');
-        }
-
-        let timeout = el.getAttribute('timeout');
-        if (timeout) {
-            properties.timeout = Number.parseInt(timeout, 10) * 1000;
-        }
-
-        return properties;
     }
 
     /**
      * 检测被动事件兼容性
      * @return {boolean} 是否支持被动事件
      */
-
     function isPassiveEvtSupport() {
-        let passiveSupported = false;
-        let obj;
+        var passiveSupported = false;
 
-        obj = Object.defineProperty({}, 'passive', {
-            get() {
+        window.addEventListener('_testpassive', null, Object.defineProperty({}, 'passive', {
+            get: function () {
                 passiveSupported = true;
                 return false;
             }
-        });
-
-        window.addEventListener('_testpassive', null, obj);
+        }));
 
         return passiveSupported;
+    }
+
+    /**
+     * 解析 API 返回的 downloadLink 对象数组
+     * @param {Array} arr 下载对象数组
+     * @return {Object} 下载链接对象（apk、ipa）
+     */
+    function parsePackInfo(arr) {
+        if (util.platform.isWechatApp()) {
+            // 微信浏览器
+            return null;
+        }
+
+        if (!(arr instanceof Array)) {
+            throw new Error('invalid argument arr');
+        }
+
+        var link = {}; // 无 IOS 下载包
+
+        for (var i = 0; i < arr.length; i++) {
+            if (arr[i].link && arr[i].defaultpackage === 'Y') {
+                link[arr[i].type] = arr[i].link;
+            }
+        }
+
+        return link;
     }
 
     /**
@@ -172,7 +132,7 @@ define(function (require) {
      * @param {Function} callback 待执行的方法
      */
 
-    const rqFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame;
+    var rqFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame;
 
     /**
      * 设置 url 参数
@@ -182,12 +142,10 @@ define(function (require) {
      */
 
     function setUrlParams(url, params) {
-        /* eslint-disable */
         url += '?';
-        /* eslint-disable */
 
-        let flag = true;
-        for (let key of Object.keys(params)) {
+        var flag = true;
+        for (var key in params) {
             url += (flag ? '' : '&') + key.toLowerCase() + '=' + params[key];
             flag = false;
         }
@@ -196,11 +154,12 @@ define(function (require) {
     }
 
     return {
-        getCustomParams,
-        getDataByJsonp,
-        getHtmlProperties,
-        isPassiveEvtSupport,
-        rqFrame,
-        setUrlParams
+        getCustomParams: getCustomParams,
+        getDataByJsonp: getDataByJsonp,
+        getHtmlProperties: getHtmlProperties,
+        isPassiveEvtSupport: isPassiveEvtSupport,
+        parsePackInfo: parsePackInfo,
+        rqFrame: rqFrame,
+        setUrlParams: setUrlParams
     };
 });

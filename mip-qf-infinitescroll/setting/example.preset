@@ -5,7 +5,7 @@
   li {
     margin: 10px;
   }
-  .btn-disabled {
-    color: #AAA;
+  span {
+    word-break: break-all;
   }
 </style>

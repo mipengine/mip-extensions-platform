@@ -1,12 +1,12 @@
 # mip-qf-infinitescroll mip-七风-无限滚动组件。
 
-当用户滚动到页面底部时，异步加载更多数据，包含湖南七风的下载逻辑。
+当用户滚动到页面底部时，异步加载更多数据，可配合湖南七风的下载逻辑组件一起使用。
 
 标题|内容
 ----|----
 类型|通用
 支持布局|responsive, fixed-height, fill, container, fixed
-所需脚本|https://c.mipcdn.com/static/v1/mip-infinitescroll/mip-qf-infinitescroll.js<br/> https://c.mipcdn.com/static/v1/mip-mustache/mip-mustache.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-qf-infinitescroll/mip-qf-infinitescroll.js<br/> https://c.mipcdn.com/static/v1/mip-mustache/mip-mustache.js 
 
 ## 示例
 
@@ -22,7 +22,7 @@
 - `txt-loading` (可选) 正在加载按钮文本。
 
 ```html
-<mip-qf-infinitescroll data-url="https://mtest.119you.com/fgame/game/ranking" gap="200" ipa-prefix-mb="guide/mbInstruction.shtml?link=/" ipa-prefix-nonmb="guide/usInstruction.shtml?link=/" timeout="5" txt-completed="完毕orz" txt-failed="失败(￣(工)￣)" txt-loading="努力加载...">
+<mip-qf-infinitescroll data-url="https://mtest.119you.com/fgame/game/ranking" gap="200" ipa-prefix-mb="guide/mbInstruction.shtml?link=/" ipa-prefix-nonmb="guide/usInstruction.shtml?link=/" timeout="5" txt-completed="完毕" txt-failed="失败" txt-loading="努力加载...">
     <script type="application/json">
         {
             "columns": "downloadlink,name",
@@ -33,9 +33,9 @@
     </script>
     <template type="mip-mustache">
         <li>
-            <span>{{itemnum}}: {{name}}</span>
-            {{#downloadlink}}<a class="btn-download" href="https://mtest.119you.com/{{downloadlink}}">下载按钮</a>{{/downloadlink}}
-            {{^downloadlink}}<a class="btn-download btn-disabled" href="javascript:void(0)">下载按钮</a>{{/downloadlink}}
+            <span>{{itemnum}} {{name}}</span><br>
+            <span>apk：{{apkHref}}</span><br>
+            <span>ipa: {{ipaHref}}</span>
         </li>
     </template>
     <ul></ul>

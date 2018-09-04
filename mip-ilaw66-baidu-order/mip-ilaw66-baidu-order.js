@@ -17,6 +17,7 @@ define(function (require) {
         $el.find('#requestId').val(getQueryString('requestId'));
         var paystart = getQueryString('payState');
         var sessionId = getQueryString('sessionId');
+        var MIP = window.MIP;
         setTimeout(function () {
             sessionId = $el.find('#sesiid').html();
             //          console.log(sessionId);
@@ -34,13 +35,31 @@ define(function (require) {
         else {
             hosturl = 'https://' + hostname + '/jasmine/';
         }
-        console.log(hosturl);
+        function locahost(topsurl, toptitle) {
+            if (topsurl === './') {
+                topsurl = 'baidusearch';
+            }
+
+            var topurl = hosturl + topsurl;
+            if (MIP.viewer.isIframed) {
+                MIP.viewer.sendMessage('loadiframe', {
+                    title: toptitle,
+                    click: '',
+                    url: topurl
+                });
+            }
+            else {
+                location.assign(topurl);
+            }
+        }
+        //      console.log(hosturl);
         if (paystart) {
             $el.find('.payalert').show();
         }
 
         $el.find('#gohome').click(function () {
-            window.top.location.href = './';
+            //          window.top.location.href = './';
+            locahost('./', '电话咨询');
         });
         $el.find('#cleardpayalert').click(function () {
             $el.find('.payalert').hide();
@@ -48,7 +67,8 @@ define(function (require) {
 
         $el.find('.headerlf5').click(function () {
             if (paystart) {
-                window.top.location.href = './';
+                //              window.top.location.href = './';
+                locahost('./', '电话咨询');
             }
             else {
                 window.history.go(-1);
@@ -221,8 +241,9 @@ define(function (require) {
                                 url: hosturl + 'checkFreeBill',
                                 success: function (data) {
                                     if (data.result !== 2) {
-                                        window.top.location.href = 'mipilaw66baidu_couponPay?requestId='
+                                        var payurl = 'mipilaw66baidu_couponPay?requestId='
                                             + requestId + '&questionType=' + questionType;
+                                        locahost(payurl, '支付详情');
                                     }
 
                                 },
@@ -287,7 +308,8 @@ define(function (require) {
                     });
 
                     $el.find('.link_btn_unpaidErrConfirm').click(function () {
-                        window.top.location.href = 'orderlist';
+                        var orderlisturl = 'orderlist';
+                        locahost(orderlisturl, '订单列表');
                     });
                 }
             });
@@ -390,9 +412,10 @@ define(function (require) {
                     var id = data.data;
                     var state = data.state;
                     if (id !== '') {
-                        window.top.location.href = 'mipilaw66baidu_request?data='
+                        var requesturl = 'mipilaw66baidu_request?data='
                             + id + '&questionType=' + questionType + '&askingType='
                             + askingType + '&lawyerId=' + lawyerId;
+                        locahost(requesturl, '匹配律师');
                     }
                     else {
                         if (state === 1) {
@@ -435,9 +458,10 @@ define(function (require) {
                     localStorage.setItem('reAskSex', data.sex);
                     if (id !== '') {
                         // 传入lawyerId
-                        window.top.location.href = 'mipilaw66baidu_informLawyer?data='
+                        var informulr = 'mipilaw66baidu_informLawyer?data='
                             + id + '&questionType=' + questionType + '&askingType='
                             + askingType + '&lawyerId=' + lawyerId;
+                        locahost(informulr, '匹配律师');
                     }
                     else {
                         $el.find('.loadingArea').hide();
@@ -485,10 +509,11 @@ define(function (require) {
                     localStorage.setItem('goodCommentRate', data.goodCommentRate);
                     if (id !== '') {
                         // 传入lawyerId
-                        window.top.location.href = 'mipilaw66baidu_informLawyer?data='
+                        var infourl = 'mipilaw66baidu_informLawyer?data='
                             + id + '&questionType='
                             + questionType + '&askingType=' + askingType + '&lawyerId='
                             + lawyerId + '&PABackJumpFlg=index';
+                        locahost(infourl, '无人应答');
                     }
                     else {
                         if (state === 1 || state === 2) {

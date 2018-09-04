@@ -4,27 +4,26 @@
  */
 
 define(function (require) {
-    const parsePackInfo = require('./parsePackInfo');
-    const mustache = require('templates');
-    const utils = require('./utils');
+    var mustache = require('templates');
+    var utils = require('./utils');
 
-    let customElement = require('customElement').create();
-    let component; // 组件元素
-    let btn; // 加载按钮
-    let params; // jsonp 参数
-    let properties; // HTML 属性
-    let itemNum = 0; // 当前数据序号
+    var customElement = require('customElement').create();
+    var component; // 组件元素
+    var btn; // 加载按钮
+    var params; // jsonp 参数
+    var properties; // HTML 属性
+    var itemNum = 0; // 当前数据序号
 
-    let scroll = {};
+    var scroll = {};
 
     // 按钮相关
-    let btnLoading = {
+    var btnLoading = {
         // 增加点击事件监听
-        addHandler() {
+        addHandler: function () {
             btn.addEventListener('click', btnLoading.handler, false);
         },
         // 点击事件监听
-        handler() {
+        handler: function () {
             // 增加滚动监听
             scroll.addHandler();
             // 移除按钮点击事件监听
@@ -32,15 +31,15 @@ define(function (require) {
             scroll.trigger();
         },
         // 移除点击事件监听
-        rmHandler() {
+        rmHandler: function () {
             btn.removeEventListener('click', btnLoading.handler, false);
         }
     };
 
     // 加载相关
-    let loading = {
+    var loading = {
         // 加载失败回调
-        failure() {
+        failure: function () {
             if (btn) {
                 btn.innerText = properties.failedTxt;
                 // 移除滚动监听
@@ -52,48 +51,53 @@ define(function (require) {
             loading.finally();
         },
         // 最终加载回调，无论成功或失败均会执行
-        finally() {
+        finally: function () {
             loading.isLoading = false;
         },
         // 加载状态
         isLoading: false,
         // 加载
-        load() {
+        load: function () {
             loading.isLoading = true;
             if (btn) {
                 btn.innerText = properties.loadingTxt;
             }
 
-            /* eslint-disable */
-            utils.getDataByJsonp(loading.failure, loading.success, properties.timeout, utils.setUrlParams(properties.url, params));
-            /* eslint-disable */
+            utils.getDataByJsonp({
+                failure: loading.failure,
+                success: loading.success,
+                timeout: properties.timeout,
+                url: utils.setUrlParams(properties.url, params)
+            });
         },
         // 加载成功回调
-        success(data) {
+        success: function (data) {
             params.pageIndex++;
 
             if (!data || (data instanceof Array && data.length === 0)) {
                 // 无数据返回，加载完毕
-                window.removeEventListener('scroll', scroll.handler);
-                return;
+                return window.removeEventListener('scroll', scroll.handler);
             }
 
             // 处理数据
-            for (let d of data) {
+            for (var i = 0; i < data.length; i++) {
                 // 下载链接
-                if (d.downloadlink) {
-                    d.downloadlink = parsePackInfo(d.downloadlink, properties.mbPrefix, properties.nonMBPrefix);
+                if (data[i].downloadlink) {
+                    var dHref = utils.parsePackInfo(data[i].downloadlink);
+
+                    data[i].apkHref = dHref.apk;
+                    data[i].ipaHref = dHref.ipa;
                 }
 
                 // 序号
-                if (!d.itemnum) {
-                    d.itemnum = ++itemNum;
+                if (!data[i].itemnum) {
+                    data[i].itemnum = ++itemNum;
                 }
             }
 
             mustache.render(component.element, data)
                 .then(function (rs) {
-                    let ul = component.element.querySelector('ul');
+                    var ul = component.element.querySelector('ul');
 
                     if (rs instanceof Array) {
                         rs = rs.join('');
@@ -109,30 +113,29 @@ define(function (require) {
     // 滚动相关
     scroll = {
         // 增加滚动事件监听
-        addHandler() {
+        addHandler: function () {
             window.addEventListener('scroll', scroll.handler, utils.isPassiveEvtSupport() ? {
                 passive: true
             } : false);
         },
         // 滚动事件监听
-        handler() {
+        handler: function () {
             utils.rqFrame.call(window, scroll.trigger);
         },
         // 移除滚动事件监听
-        rmHandler() {
+        rmHandler: function () {
             window.removeEventListener('scroll', scroll.handler);
         },
         // 触发器
-        trigger() {
+        trigger: function () {
             if (loading.isLoading) {
                 // 正在加载，不重复触发
                 return;
             }
 
-            /* eslint-disable */
-            let btmPos = window.innerHeight + (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop); // 视口底部到文档顶部高度
-            /* eslint-disable */
-            let limitHt = component.element.offsetTop - properties.gap;
+            var y = (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop);
+            var btmPos = window.innerHeight + y; // 视口底部到文档顶部高度
+            var limitHt = component.element.offsetTop - properties.gap;
 
             if (btmPos > limitHt) {
                 loading.load();
@@ -140,35 +143,23 @@ define(function (require) {
         }
     };
 
-    customElement.prototype.createdCallback = function () {
+    customElement.prototype.firstInviewCallback = function () {
         component = this;
         btn = component.element.querySelector('.mip-qf-infinitescroll-btn');
-
         params = utils.getCustomParams(this.element);
         properties = utils.getHtmlProperties(this.element);
 
         if (!params || !properties) {
-            return error();
+            return;
         }
-    };
 
-    customElement.prototype.attachedCallback = function () {
         scroll.handler();
         scroll.addHandler();
     };
 
     customElement.prototype.detachedCallback = function () {
-        if (btn) {
-            scroll.rmHandler();
-        }
-
         scroll.rmHandler();
     };
 
     return customElement;
-
-    // 错误处理
-    function error() {
-        return this.element.remove();
-    }
 });

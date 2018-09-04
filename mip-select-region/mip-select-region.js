@@ -57,13 +57,17 @@ define(function (require) {
             + '            <div class="cont clear-float city" id="taiwan"><a href="https://www.pgwxd.com/locate/taiwan"><span>全台湾</span></a><a href="https://www.pgwxd.com/locate/taibei"><span>台北</span></a><a href="https://www.pgwxd.com/locate/gaoxiong"><span>高雄</span></a><a href="https://www.pgwxd.com/locate/tainan"><span>台南</span></a><a href="https://www.pgwxd.com/locate/taizhong"><span>台中</span></a><a href="https://www.pgwxd.com/locate/nantou"><span>南投</span></a><a href="https://www.pgwxd.com/locate/twjilong"><span>基隆</span></a><a href="https://www.pgwxd.com/locate/xinzhu"><span>新竹</span></a><a href="https://www.pgwxd.com/locate/jiayi"><span>嘉义</span></a><a href="https://www.pgwxd.com/locate/twxinbei"><span>新北</span></a><a href="https://www.pgwxd.com/locate/twyilan"><span>宜兰</span></a><a href="https://www.pgwxd.com/locate/twxinzhu"><span>新竹</span></a><a href="https://www.pgwxd.com/locate/twtaoyuan"><span>桃园</span></a><a href="https://www.pgwxd.com/locate/twmiaoli"><span>苗栗</span></a><a href="https://www.pgwxd.com/locate/zhzhanghua"><span>彰化</span></a><a href="https://www.pgwxd.com/locate/twjiayi"><span>嘉义</span></a><a href="https://www.pgwxd.com/locate/yunlin"><span>云林</span></a><a href="https://www.pgwxd.com/locate/pingdong"><span>屏东</span></a><a href="https://www.pgwxd.com/locate/taidong"><span>台东</span></a><a href="https://www.pgwxd.com/locate/hualian"><span>花莲</span></a><a href="https://www.pgwxd.com/locate/penghu"><span>澎湖</span></a></div>\n'
             + '            <div class="cont clear-float city" id="xianggang"><a href="https://www.pgwxd.com/locate/xianggang"><span>全香港</span></a><a href="https://www.pgwxd.com/locate/zhongxiqu"><span>中西区</span></a><a href="https://www.pgwxd.com/locate/hkdongqu"><span>东区</span></a><a href="https://www.pgwxd.com/locate/jiulong"><span>九龙</span></a><a href="https://www.pgwxd.com/locate/guantangqu"><span>观塘区</span></a><a href="https://www.pgwxd.com/locate/xgnanqu"><span>南区</span></a><a href="https://www.pgwxd.com/locate/shenshuibuqu"><span>深水埗区</span></a><a href="https://www.pgwxd.com/locate/wanziqu"><span>湾仔区</span></a><a href="https://www.pgwxd.com/locate/huangdaxianqu"><span>黄大仙区</span></a><a href="https://www.pgwxd.com/locate/youjianwangqu"><span>油尖旺区</span></a><a href="https://www.pgwxd.com/locate/lidaoqu"><span>离岛区</span></a><a href="https://www.pgwxd.com/locate/kuiqingqu"><span>葵青区</span></a><a href="https://www.pgwxd.com/locate/beiqu"><span>北区</span></a><a href="https://www.pgwxd.com/locate/xigongqu"><span>西贡区</span></a><a href="https://www.pgwxd.com/locate/shatianqu"><span>沙田区</span></a><a href="https://www.pgwxd.com/locate/tunmenqu"><span>屯门区</span></a><a href="https://www.pgwxd.com/locate/dapuqu"><span>大埔区</span></a><a href="https://www.pgwxd.com/locate/quanwanqu"><span>荃湾区</span></a><a href="https://www.pgwxd.com/locate/yuanlangqu"><span>元朗区</span></a></div>\n'
             + '            <div class="cont clear-float city" id="aomen"><a href="https://www.pgwxd.com/locate/aomen"><span>全澳门</span></a><a href="https://www.pgwxd.com/locate/aomenbandao"><span>澳门半岛</span></a><a href="https://www.pgwxd.com/locate/dangzi"><span>凼仔</span></a><a href="https://www.pgwxd.com/locate/ludangcheng"><span>路凼城</span></a><a href="https://www.pgwxd.com/locate/luhuan"><span>路环</span></a></div>');
-        /*var transition = $(element).data('transition');
+        var transition = $(element).data('transition');
         if (typeof(transition) === 'undefined' || !transition) {
             $(element).find('a').each(function () {
                 var xx = $(this).html();
-                $(this).replaceWith(xx);
+                var pinyin = $(this).attr('href');
+                var newLink = pinyin.substr(pinyin.indexOf('locate'));
+                $(this).attr('href', '#');
+                $(this).attr('data-link', newLink);
+                // $(this).replaceWith(xx);
             });
-        }*/
+        }
         $('body').append('<div class="mip-select-region-maskLayer"></div>');
         $('body').find('.mip-select-region-maskLayer').css({'display': 'none'});
         $(element).find('.mip-selected-region').on('click', function () {
@@ -79,6 +83,8 @@ define(function (require) {
         $(element).find('.province').find('span').on('click', function () {
             var pinyin = $(this).data('pinyin');
             if (typeof(pinyin) === 'undefined' || !pinyin) {
+                var newLink = $(this).parent().data('link');
+                window.location.href = $(element).data('url') + '/' + newLink;
             } else {
                 $(element).find('.province').find('span').css({'background': 'none'});
                 $(this).css({'background': '#FFF'});
@@ -91,12 +97,8 @@ define(function (require) {
             }
         });
         $(element).find('.city').find('span').on('click', function () {
-            /*var pinyin = $(this).data('pinyin');
-            if (typeof(pinyin) === 'undefined' || !pinyin) {
-                var html = $(this).html();
-                $(element).find('.mip-selected-region').html(html);
-                mipSelectrRegionClose();
-            }*/
+            var newLink = $(this).parent().data('link');
+            window.location.href = $(element).data('url') + '/' + newLink;
         });
         $(element).find('.close-region').on('click', function () {
             mipSelectrRegionClose();

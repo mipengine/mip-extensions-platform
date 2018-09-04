@@ -19,7 +19,7 @@ define(function (require) {
         var lawyerId;
         var $el = $(this.element);
         $(function () {
-
+            var MIP = window.MIP;
             var sessionId = getQueryString('sessionId');
             setTimeout(function () {
                 sessionId = $el.find('#sesiid').html();
@@ -42,12 +42,31 @@ define(function (require) {
             }
             returhostname();
             console.log(hosturl);
-            $el.find('.glyphicon-menu-left').click(function () {
-                if (!parseInt(sessionStorage.getItem('loginFlg'), 10) && sessionStorage.getItem('loginFlg') === '0') {
-                    window.top.location.href = 'login';
+            function locahost(topsurl, toptitle) {
+                if (topsurl === './') {
+                    topsurl = 'baidusearch';
+                }
+
+                var topurl = hosturl + topsurl;
+                if (MIP.viewer.isIframed) {
+                    MIP.viewer.sendMessage('loadiframe', {
+                        title: toptitle,
+                        click: '',
+                        url: topurl
+                    });
                 }
                 else {
-                    window.top.location.href = './';
+                    location.assign(topurl);
+                }
+            }
+            $el.find('.glyphicon-menu-left').click(function () {
+                if (!parseInt(sessionStorage.getItem('loginFlg'), 10) && sessionStorage.getItem('loginFlg') === '0') {
+                    //                  window.top.location.href = 'login';
+                    locahost('login', '登录');
+                }
+                else {
+                    //                  window.top.location.href = './';
+                    locahost('./', '匹配律师');
                 }
             });
 
@@ -111,7 +130,7 @@ define(function (require) {
                 $.ajax({
                     type: 'post',
                     url: hosturl + 'greeting?questionType=' + questionType + '&_csrf='
-                    + csrfToken + '&sessionId=' + sessionId,
+                        + csrfToken + '&sessionId=' + sessionId,
                     success: function (data) {
                         if (data === 'ERROR' || data === 'ERROR1') {
                             $el.find('#err_msg').html('系统异常，请返回重新咨询');
@@ -127,13 +146,14 @@ define(function (require) {
                         }
                         else {
                             if (lawyerId) {
-                                window.top.location.href = 'mipilaw66baidu_request?data=' + data + '&questionType='
+                                var requset = 'mipilaw66baidu_request?data=' + data + '&questionType='
                                     + questionType + '&lawyerId=' + lawyerId;
                             }
                             else {
-                                window.top.location.href = 'mipilaw66baidu_request?data='
+                                var requset = 'mipilaw66baidu_request?data='
                                     + data + '&questionType=' + questionType;
                             }
+                            locahost(requset, '匹配律师');
                         }
                     },
                     error: function (jqXHR) {
@@ -147,7 +167,8 @@ define(function (require) {
 
             // 文字咨询按钮
             $el.find('#js-textConsulting').click(function () {
-                window.top.location.href = 'https://m.baidu.com/zhuanjia/question#/submit?vn=law&ref=alaqiang&ssid=0&from=0&uid=0&pu=csrc%40app_secr_txt,sz%401320_2001,ta%40iphone_1_11.2_22_2.8,usm%406&bd_page_type=1&baiduid=F90644066BC91C4E0285A23EFBBC5CC9&tj=2gs_2_0_10_l1&htrackid=6ec1913b5246ead3b67a15bc5d256a75';
+                var textbutturl = 'https://m.baidu.com/zhuanjia/question#/submit?vn=law&ref=alaqiang&ssid=0&from=0&uid=0&pu=csrc%40app_secr_txt,sz%401320_2001,ta%40iphone_1_11.2_22_2.8,usm%406&bd_page_type=1&baiduid=F90644066BC91C4E0285A23EFBBC5CC9&tj=2gs_2_0_10_l1&htrackid=6ec1913b5246ead3b67a15bc5d256a75';
+                locahost(textbutturl, '文字咨询');
             });
 
             // 点击弹窗错误按钮

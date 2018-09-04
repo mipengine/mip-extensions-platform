@@ -22,6 +22,7 @@ define(function (require) {
         var questionType = getQueryString('questionType');
         var RUN_ON_BOCOMM_APP = localStorage.getItem('RUN_ON_BOCOMM_APP');
         // 加载获取requestId
+        var MIP = window.MIP;
         var requestId = getQueryString('requestId');
         var sessionId = getQueryString('sessionId');
         setTimeout(function () {
@@ -45,6 +46,23 @@ define(function (require) {
         }
         returhostname();
         console.log(hosturl);
+        function locahost(topsurl, toptitle) {
+            if (topsurl === './') {
+                topsurl = 'baidusearch';
+            }
+
+            var topurl = hosturl + topsurl;
+            if (MIP.viewer.isIframed) {
+                MIP.viewer.sendMessage('loadiframe', {
+                    title: toptitle,
+                    click: '',
+                    url: topurl
+                });
+            }
+            else {
+                location.assign(topurl);
+            }
+        }
         $el.find('#requestId').val(requestId);
 
         // 如果是微信登入,获取微信验证code
@@ -54,7 +72,8 @@ define(function (require) {
             $el.find('.back__pop').show();
             // “狠心离开”按钮回到首页
             $el.find('#js-back-leave').click(function () {
-                window.top.location.href = './';
+                //              window.top.location.href = './';
+                locahost('./', '电话咨询');
             });
             // “继续支付”按钮事件
             $el.find('#js-back-continue').click(function () {
@@ -121,7 +140,8 @@ define(function (require) {
             if (freeFlg === '2') {
                 //              toastOr(freeMessage);
                 setTimeout(function () {
-                    window.top.location.href = 'orderlist';
+                    //                  window.top.location.href = 'orderlist';
+                    locahost('./', '电话咨询');
                 }, 2000);
                 return;
             }
@@ -158,7 +178,8 @@ define(function (require) {
                     data: data,
                     success: function (data) {
                         if (data && data.cashier_url) {
-                            window.top.location.href = data.cashier_url;
+                            //                          window.top.location.href = data.cashier_url;
+                            locahost(data.cashier_url, '电话咨询');
                         }
                         else {
                             $el.find('.popUp_sysErr').fadeIn();
@@ -457,7 +478,7 @@ define(function (require) {
                 success: function (msg) {
                     if (msg === 'OK') {
                         window.top.location.href = 'comment?requestId=' + id
-                        + '&questionType=' + questionType + '&sessionId=' + sessionId;
+                            + '&questionType=' + questionType + '&sessionId=' + sessionId;
                     }
                     else {
                         //                      toastOr('支付失败，请重新支付');
