@@ -1,0 +1,31 @@
+/**
+ * @file mip-scroll-top样式文件
+ */
+
+.Animation(@x) {
+    -webkit-transition: all @x ease-in-out 0s;
+    -moz-transition: all @x ease-in-out 0s;
+    -ms-transition: all @x ease-in-out 0s;
+    transition: all @x ease-in-out 0s;
+}
+
+.Animation {
+    .Animation(.3s)
+}
+
+mip-scroll-top {
+    z-index: 1000;
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0);
+    width: 100%;
+    overflow: hidden;
+    .Animation();
+    &.active {
+        background-color: #f4740f;
+        color: #fff;
+        .Animation();
+    }
+}

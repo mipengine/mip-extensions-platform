@@ -1,0 +1,14 @@
+{
+    "name": "mip-micro1168",
+    "version": "1.0.0",
+    "description": "组件介绍",
+    "contributors": [
+        {
+            "name": "天道酬勤",
+            "email": "1017365725@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

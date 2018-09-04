@@ -200,7 +200,8 @@ define(function (require) {
         });
 
         $el.find('.link_confirm').click(function (event) {
-            $el.find('.popUp_sysErr').hide();
+            //          $el.find('.popUp_sysErr').hide();
+            $el.find('.alertbox').removeClass('alertactive');
         });
 
         function directOrOrder(questionType) {
@@ -380,23 +381,24 @@ define(function (require) {
                     if (indexmessage === 'ERROR' || indexmessage === 'ERROR1') {
                         $el.find('#' + tabHref).removeClass().addClass('tab-pane');
                         flg = 0;
-                        $el.find('.popUp_sysErr').show();
+                        $el.find('.popUp_sysErr').addClass('alertactive');
                     }
                     else if (indexmessage === 'ERROR2') {
                         $el.find('#' + tabHref).removeClass().addClass('tab-pane');
                         flg = 0;
-                        $el.find('.popUp_unpaidErr').show();
+                        //                      $el.find('.popUp_unpaidErr').show();alertactive
+                        $el.find('.popUp_unpaidErr').addClass('alertactive');
                     }
                     else if (indexmessage === 'ERROR3') {
                         $el.find('#' + tabHref).removeClass().addClass('tab-pane');
                         flg = 0;
-                        $el.find('.popUp_unFinishedBillErr').show();
+                        $el.find('.popUp_unFinishedBillErr').addClass('alertactive');
                     }
                     else if (indexmessage === 'ERROR4') {
                         $el.find('#' + tabHref).removeClass().addClass('tab-pane');
                         flg = 0;
                         $el.find('#messagecontem').text('您今日取消咨询已达3次，请明天再来');
-                        $el.find('.popUp_unpaidErr').show();
+                        $el.find('.popUp_unpaidErr').addClass('alertactive');
                     }
                     else {
                         $el.find('#' + tabHref).removeClass().addClass('tab-pane');

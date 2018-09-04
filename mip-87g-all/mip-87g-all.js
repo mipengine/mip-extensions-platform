@@ -223,6 +223,12 @@ define(function (require) {
                     con.find('.fancybox-overlay').addClass('hide');
                 });
             }
+            // 下载量统计
+            downaddressa.click(function () {
+                var hitsurl = siteurl + 'api.php?op=down_count&modelid=' + t.getAttribute('modelid')
+                + '&id=' + t.getAttribute('my_id') + '&catid=' + t.getAttribute('catid');
+                $.getJSON(hitsurl);
+            });
         } else if (gtype === 'g87_youxi_imgs') {
             var con = $(t);
             setTimeout(function () {

@@ -1,0 +1,14 @@
+{
+    "name": "mip-scroll-top",
+    "version": "1.0.0",
+    "description": "顶部菜单下拉超过一定距离增加颜色",
+    "contributors": [
+        {
+            "name": "老林",
+            "email": "51153877@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

@@ -1,0 +1,12 @@
+﻿.com_top { background-repeat: no-repeat; background-position: center; background-size: cover; text-align: center; width: 97%; }
+.com_top .comTitle { font-size: 1.6em; color: #ffffff; height: 30px; line-height: 30px; width: 100%; margin-top: 130px; background: rgba(0, 0, 0, 0.4) !important; /* IE无效，FF有效 */ filter: alpha(opacity=40); -moz-opacity: .4; background: #000; }
+.com_top .comTitle span { position: relative; }
+
+.top .m_banner { padding: 5px; }
+.top .m_nav { margin-top: 10px; float: left; width: 100%; }
+.top .m_nav img { height: 44px; }
+.top .m_nav a { width: 25%; text-decoration: none; height: 100px; text-align: center; float: left; margin-top: 10px; }
+.top .m_nav a span { width: 100%; float: left; line-height: 40px; font-size: 14px; color: #666666; font-family: "Microsoft YaHei", Arial, Helvetica, sans-serif; }
+.top .sce a { width:20%;}
+
+.but_more { width:96%;background:#ff0000;height:35px;line-height:35px;margin:10px auto;cursor: pointer; border-radius: 2px;-moz-border-radius:2px;-webkit-border-radius:2px; text-align:center;font-size:1.4em;color:#ffffff;}
