@@ -23,28 +23,16 @@ define(function (require) {
         var search = location.search.toLowerCase();
         var channel = $el.find('#channel').val();
         var userId = $el.find('#userId').val();
-        var sessionId = $el.find('#sesiid').html();
+        var sessionId = 0;
         var MIP = window.MIP;
-        setTimeout(function () {
-            sessionId = $el.find('#sesiid').html();
-            console.log(sessionId);
-        }, 1000);
+
+        //      setTimeout(function () {
+        //          sessionId = $el.find('#sesiid').html();
+        //          console.log(sessionId);
+        //      }, 1000);
 
         //      var els= $el.find('my-lightbox');
         //       viewer.eventAction.execute('toggle', els , {});
-
-        function locahost(topurl, toptitle) {
-            if (MIP.viewer.isIframed) {
-                MIP.viewer.sendMessage('loadiframe', {
-                    title: toptitle,
-                    click: '',
-                    url: topurl
-                });
-            }
-            else {
-                location.assign(topurl);
-            }
-        }
 
         if (sessionStorage.getItem('ishomeorder')) {
             sessionStorage.clear('ishomeorder');
@@ -67,7 +55,60 @@ define(function (require) {
         }
         returhostname();
         console.log(hosturl);
-        bannerusernum();
+        var isloginf = false;
+        this.addEventAction('login', function (event) {
+            console.log('授权成功');
+            var sessid = event.sessionId;
+            var islogin = parseInt(event.userInfo.isLogin, 10);
+            if (!islogin) { // 未注册
+                //  window.top.location.href = 'toLogin?channel=baidusearch';
+                if (MIP.viewer.isIframed) {
+                    MIP.viewer.sendMessage('loadiframe', {
+                        title: '登录',
+                        click: '',
+                        url: 'https://www.ilaw66.com/jasmine/toLogin?channel=baidusearch'
+                    });
+                }
+                else {
+                    location.assign('https://www.ilaw66.com/jasmine/toLogin?channel=baidusearch');
+                }
+            }
+            else {
+                console.log('登录成功');
+                sessionId = sessid;
+                isloginf = true;
+                bannerusernum();
+                //              $el.find('#sesiid').html(sessid);
+                //              var thishostname = location.hostname;
+                //              var name = 'mip-login-xzh:sessionId:https://' + thishostname + '/jasmine/baidusearch/authorize2';
+                //              localStorage.setItem(name, sessid);
+            }
+        });
+        setTimeout(function () {
+            if (!isloginf) {
+                bannerusernum();
+            }
+
+        }, 1000);
+
+        function locahost(topsurl, toptitle) {
+            if (topsurl === './') {
+                topsurl = 'baidusearch';
+            }
+
+            var topurl = hosturl + topsurl;
+            if (MIP.viewer.isIframed) {
+                MIP.viewer.sendMessage('loadiframe', {
+                    title: toptitle,
+                    click: '',
+                    url: topurl
+                });
+            }
+            else {
+                location.assign(topurl);
+            }
+        }
+
         function getQueryString(name) {
             var reg = new RegExp('(^|&)'
                 + name + '=([^&]*)(&|$)', 'i');
