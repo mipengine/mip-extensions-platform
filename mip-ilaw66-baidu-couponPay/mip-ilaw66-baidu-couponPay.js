@@ -178,8 +178,8 @@ define(function (require) {
                     data: data,
                     success: function (data) {
                         if (data && data.cashier_url) {
-                            //                          window.top.location.href = data.cashier_url;
-                            locahost(data.cashier_url, '电话咨询');
+                            window.top.location.href = data.cashier_url;
+//                          locahost(data.cashier_url, '电话咨询');
                         }
                         else {
                             $el.find('.popUp_sysErr').fadeIn();

@@ -8,6 +8,7 @@ define(function (require) {
 
     var customElement = require('customElement').create();
     var fetchJsonp = require('fetch-jsonp');
+    var viewer = require('viewer');
 
     /**
      * 创建tip元素
@@ -88,6 +89,7 @@ define(function (require) {
         }).then(function (data) {
             if (data.status === 0) {
                 submitData.response = data.data;
+                submitData = Object.assign({}, submitData, element.extraData);
                 var token = data.token;
                 var redirectUrl = redirect.replace(/#([^#]*)#/g, function ($0, $1) {
                     return submitData[$1] || defaultValue;
@@ -146,6 +148,7 @@ define(function (require) {
         }
         else {
 
+            submitData = Object.assign({}, submitData, element.extraData);
             // 直接转跳
             var redirectUrl = redirect.replace(/#([^#]*)#/g, function ($0, $1) {
                 return submitData[$1] || '';
@@ -162,8 +165,9 @@ define(function (require) {
      * 提交表单
      *
      * @param {dom} element dom元素
+     * @param {Event} event 事件对象
      */
-    function onSubmit(element) {
+    function onSubmit(element, event) {
         if (element.submitting) {
             return;
         }
@@ -181,7 +185,17 @@ define(function (require) {
         if (!validateForm.call(element)) {
             return;
         }
-        onRedirect.call(element, data);
+
+        // 判断是否需要百度授权登录
+        var loginEleId = element.dataset.loginId || '';
+
+        if (!loginEleId || element.extraData.sessionId) {
+            onRedirect.call(element, data);
+        }
+        else {
+            var loginEle = document.getElementById(loginEleId);
+            viewer.eventAction.execute('login', loginEle, event);
+        }
     }
 
     /**
@@ -262,6 +276,20 @@ define(function (require) {
     }
 
     /**
+     * 读取localStorage
+     *
+     * @param {string} key 要读取的key
+     * @return {string} 存储的值
+     */
+    function readStorage(key) {
+        var result = '';
+        if (localStorage) {
+            result = localStorage.getItem(key);
+        }
+        return result;
+    }
+
+    /**
      * 展示tips
      *
      * @param {string} text 要展示的文本
@@ -289,8 +317,8 @@ define(function (require) {
 
         element.id = 'mip-xxd-logic-form';
         var submitElement = element.querySelector('#submit');
-        submitElement.addEventListener('click', function () {
-            onSubmit(element);
+        submitElement.addEventListener('click', function (event) {
+            onSubmit(element, event);
         });
 
         var bindRecordBtnEvent = function (recordElement) {
@@ -309,7 +337,6 @@ define(function (require) {
                 }
 
                 var data = {};
-                var inputs = element.querySelectorAll('mip-xxd-input-item');
                 Array.prototype.forEach.call(inputs, function (child) {
                     var key = child.dataset.key;
                     var value = child.dataset.value;
@@ -347,6 +374,16 @@ define(function (require) {
         self.addEventAction('showTip', function (event, text) {
             showTip.call(element, text);
             return;
+        });
+
+        // 记录登录后的额外信息
+        element.extraData = {};
+        self.addEventAction('saveData', function () {
+            var info = JSON.parse(element.dataset.info || '{}');
+            var sessionStorageId = element.dataset.sessionStorageId;
+            var extraData = Object.assign({}, info, {sessionId: readStorage(sessionStorageId)});
+            element.extraData = extraData;
+            onSubmit(element, event);
         });
     };
 
