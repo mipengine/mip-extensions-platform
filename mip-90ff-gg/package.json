@@ -1,0 +1,13 @@
+{
+    "name": "mip-90ff-gg",
+    "version": "1.0.0",
+    "description":"非凡漫画广告轮播组件",
+    "author": {
+        "name": "Shen.L",
+        "email": "shen@shenl.com",
+        "url": "https://www.shenl.com"
+    },
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

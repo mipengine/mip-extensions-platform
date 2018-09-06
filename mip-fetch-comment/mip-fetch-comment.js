@@ -36,6 +36,9 @@ define(function (require) {
                     awardsContent.style = 'display:block';
                     var awardsHtml = element.querySelector('#pjawards');
                     awardsHtml.innerHTML = '';
+                    var pjhjLightboxhtml = element.querySelector('#pjhjLightbox');
+                    pjhjLightboxhtml.innerHTML = '';
+                    var pjhjHtml = '';
                     var hjhtml = '';
                     for (var i = 0; i < json.hj.length; i++) {
                         hjhtml += '<div class="scores bdb-t-1px"><div class="scoreVal"><div class="score-r"> 获奖时间：'
@@ -43,9 +46,17 @@ define(function (require) {
                         + json.hj[i].grade
                         + '</span></div></div></div><div class="scoreVal"><div class="wine-nf">葡萄酒年份：'
                         + json.hj[i].year + '</div><div class="wineOrg"><div class="org-t">颁奖组织：'
-                        + json.hj[i].agency + '</div><i class="rater" >?</i></div></div></div>';
+                        + json.hj[i].agency + '</div><i class="rater" on="tap:pjhj-'
+                        + i + '-lightbox.toggle">?</i></div></div></div>';
+                        pjhjHtml += '<mip-lightbox id="pjhj-' + i + '-lightbox" layout="nodisplay" '
+                        + 'class="mip-hidden"> <div class="lightbox"> <div class="downPop popvt">'
+                        + ' <span class="close-pop iconfont icon-toclosed" on="tap:pjhj-'
+                        + i + '-lightbox.toggle"></span><div class="rater-nm" id="raterName">'
+                        + json.hj[i].agency + '</div><div class="rater-info" id="raterSummary">'
+                        + json.hj[i].agencySummary + '</div></div></div></mip-lightbox>';
                     }
                     awardsHtml.innerHTML += hjhtml;
+                    pjhjLightboxhtml.innerHTML += pjhjHtml;
                 }
                 else {
                     var awardsContent = element.querySelector('#awardsContent');
@@ -57,6 +68,9 @@ define(function (require) {
                     var gradeHtml = element.querySelector('#pjgrade');
                     gradeHtml.innerHTML = '';
                     var pfhtml = '';
+                    var pjpfLightboxhtml = element.querySelector('#pjpfLightbox');
+                    pjpfLightboxhtml.innerHTML = '';
+                    var pjpfHtml = '';
                     for (var i = 0; i < json.pf.length; i++) {
                         var showStr = '';
                         if (json.pf[i].score.indexOf('/100') > -1) {
@@ -72,13 +86,21 @@ define(function (require) {
                             showStr = '<span class=\"scoreV\">' + json.pf[i].score + '</span><br />';
                         }
                         pfhtml += '<div class="scores bdb-t-1px"><div class="scoreVal"><div class="score-r"> 适饮时间：'
-                        + json.pf[i].date == null ? '' : json.pf[i].date
+                        + json.pf[i].date
                         + '</div><div class="score-l"><div class="score-i">'
                         + showStr + '</div></div></div><div class="scoreVal"><div class="wine-nf">葡萄酒年份：'
                         + json.pf[i].year + '</div><div class="wineOrg"><div class="org-t">评分者：'
-                        + json.pf[i].critic + '</div> <i class="rater" >?</i></div></div></div>';
+                        + json.pf[i].critic + '</div> <i class="rater" on="tap:pjpf-'
+						+ i + '-lightbox.toggle" >?</i></div></div></div>';
+                        pjpfHtml += '<mip-lightbox id="pjpf-' + i + '-lightbox" layout="nodisplay" '
+                        + 'class="mip-hidden"> <div class="lightbox"> <div class="downPop popvt">'
+                        + ' <span class="close-pop iconfont icon-toclosed" on="tap:pjpf-'
+                        + i + '-lightbox.toggle"></span><div class="rater-nm" id="raterName">'
+                        + json.pf[i].critic + '</div><div class="rater-info" id="raterSummary">'
+                        + json.pf[i].criticSummary + '</div></div></div></mip-lightbox>';
                     }
                     gradeHtml.innerHTML += pfhtml;
+                    pjpfLightboxhtml.innerHTML += pjpfHtml;
                 } else {
                     var gradeContent = element.querySelector('#gradeContent');
                     gradeContent.style = 'display:none';

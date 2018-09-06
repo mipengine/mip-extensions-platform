@@ -58,7 +58,15 @@ mip-fetch-comment 根据点击的年份异步加载酒款的评价信息
 		<ul class="jiuping wineComment" id="pjjiuping"></ul>
 	</div>
 </div>
+<div id='pjpfLightbox'> 
+
+</div>
+<div id='pjhjLightbox'> 
+
+</div>
+
 </mip-fetch-comment>
+<script src="https://c.mipcdn.com/static/v1/mip-lightbox/mip-lightbox.js"></script>
 ```
 
 
