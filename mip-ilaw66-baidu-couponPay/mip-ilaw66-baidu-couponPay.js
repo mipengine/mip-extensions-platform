@@ -166,8 +166,18 @@ define(function (require) {
                 }
                 data._csrf = $el.find('#_csrf').val();
                 data.questionType = $el.find('#questionType').val();
-                data.questionType = 'CT001';
+                //              data.questionType = 'CT001';
                 data.userCouponId = $el.find('#couponId').val();
+                var hostnames = location.hostname;
+                var payhosturl;
+                if (hostnames === 'www-ilaw66-com.mipcdn.com') {
+                    payhosturl = 'https://m.baidu.com/mip/c/s/www.ilaw66.com/jasmine/';
+                }
+                else {
+                    payhosturl = hosturl;
+                }
+                data.returnUrl = payhosturl + 'mipilaw66baidu_couponPay?requestId=' + $el.find('#requestId').val()
+                    + '&questionType=' + $el.find('#questionType').val() + '&sessionId=' + sessionId + '&paystart=1';
                 if ($el.find('#cardId').val()) {
                     data.cardId = $el.find('#cardId').val();
                 }
@@ -179,7 +189,7 @@ define(function (require) {
                     success: function (data) {
                         if (data && data.cashier_url) {
                             window.top.location.href = data.cashier_url;
-//                          locahost(data.cashier_url, '电话咨询');
+                        //                          locahost(data.cashier_url, '电话咨询');
                         }
                         else {
                             $el.find('.popUp_sysErr').fadeIn();

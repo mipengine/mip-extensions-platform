@@ -1,0 +1,14 @@
+{
+    "name": "mip-otto-subclass",
+    "version": "1.0.0",
+    "description": "网校地区页功能",
+    "contributors": [
+        {
+            "name": "xinbao",
+            "email": "fa@ijust.cc"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "name": "mip-qtkj-addrem",
+    "version": "1.0.0",
+    "description": "点击有类名则删除，没有则添加",
+    "contributors": [
+        {
+            "name": "yzxsl",
+            "email": "1311524642@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

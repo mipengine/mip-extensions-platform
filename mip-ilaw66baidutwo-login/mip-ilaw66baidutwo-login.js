@@ -75,6 +75,7 @@ define(function (require) {
                 userId = false;
             }
             else {
+                console.log('登录成功');
                 sessionId = sessid;
                 userId = true;
             }
@@ -126,7 +127,7 @@ define(function (require) {
                 channel = channelInUrl;
             }
 
-            //          choose(channel);
+            //    choose(channel);
         }
         var settings = {
             e: 'idcode',
@@ -477,7 +478,8 @@ define(function (require) {
             $el.find('#precautions-back').click(function () {
                 sessionStorage.clear('ishomeorder');
                 if (channel === 'baidusearch' || channel === 'baidu_xzh') {
-                    window.top.location.href = './';
+                    //                  window.top.location.href = './';
+                    locahost('./', '开始咨询');
                 }
                 else {
                     history.go(-1);
@@ -513,7 +515,8 @@ define(function (require) {
             }
             // 《分秒律师用户服务协议》
             $el.find('.rulePA').on('click', function () {
-                window.top.location.href = 'rule';
+                //              window.top.location.href = 'rule';
+                locahost('rule', '分秒律师用户服务协议');
             });
         }
 
@@ -624,10 +627,8 @@ define(function (require) {
                 $.ajax({
                     type: 'POST',
                     url: hosturl + 'baidusearch/login?username=' + phone + '&channel='
-                        + channel + '&password=' + smsCode,
+                        + channel + '&password=' + smsCode + '&sessionId=' + sessionId,
                     success: function (data) {
-                        //                      	console.log(data)
-                        //                      	console.log(data.status + data.data.isLogin)
                         if (data.status === 0 && data.data.isLogin === '1') {
                             var sesidtype = sessionStorage.getItem('baiduquestionType');
                             if (sesidtype) {
@@ -671,10 +672,12 @@ define(function (require) {
 
                 /** 发送短信*/
                 var flag = sessionStorage.getItem('loginFlg');
-                if (userId && flag === 0) { // 修改手机号
+
+                if (userId) { // 修改手机号
                     $.ajax({
                         type: 'GET',
-                        url: hosturl + 'sms?phone=' + phone + '&channel=' + channel,
+                        url: hosturl + 'sms?phone=' + phone + '&channel=' + channel
+                        + '&sessionId=' + sessionId,
                         success: function (data) {
                             if (data === 'ERROR') {
                                 $el.find('#sendSMSError_msg').text('发送短信失败');
@@ -695,7 +698,8 @@ define(function (require) {
                 else {
                     $.ajax({
                         type: 'GET',
-                        url: hosturl + 'sendSms?phone=' + phone + '&channel=' + channel + '&_csrf=' + csrfToken,
+                        url: hosturl + 'sendSms?phone=' + phone + '&channel=' + channel
+                        + '&_csrf=' + csrfToken + '&sessionId=' + sessionId,
                         success: function (data) {
                             if (data === 'ERROR') {
                                 $el.find('#sendSMSError_msg').text('发送短信失败');
@@ -757,7 +761,7 @@ define(function (require) {
                 async: true,
                 type: 'POST',
                 url: hosturl + 'baidusearch/updatePhone?phone=' + phone
-                    + '&code=' + smsCode,
+                    + '&code=' + smsCode + '&sessionId=' + sessionId,
                 dataType: 'json',
                 success: function (data) {
                     if (data.code === 1) {

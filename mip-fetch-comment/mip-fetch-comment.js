@@ -19,8 +19,18 @@ define(function (require) {
                         arr[j].className = 'nianfen currVintage';
                     }
                 };
+                var lightbox = element.querySelector('#MIP-LLIGTBOX-MASK');
+                lightbox.style.display = 'none';
+                var miplightbox = element.querySelector('#pjyear-lightbox');
+                miplightbox.style.display = 'none';
             };
         };
+        element.querySelector('#allyears').addEventListener('click', function () {
+            var lightbox = element.querySelector('#MIP-LLIGTBOX-MASK');
+            lightbox.style.display = 'block';
+            var miplightbox = element.querySelector('#pjyear-lightbox');
+            miplightbox.style.display = 'block';
+        });
         function loadData(wineid, year) {
             var url = 'https://mip-test.wine-world.com/wine/GetWineInfo?wineid=' + wineid + '&vintageid=' + year;
             fetch(url, {
