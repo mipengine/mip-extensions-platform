@@ -1,5 +1,5 @@
 /**
- * @file mip-ilaw66-baidu-login 组件
+ * @file mip-ilaw66baidutwo-login 组件
  * @author
  */
 
@@ -22,13 +22,14 @@ define(function (require) {
         var timeout = 60;
         var loginTimes = parseInt($el.find('#error').val().slice(5, 6), 10);
         var csrfToken = $el.find('#_csrf').val();
-        var channel = $el.find('#channel').val();
-        var userId = $el.find('#userId').val();
+        var channel = 'baidusearch';
+        var userId = false;
         var head = $el.find('.header_block');
         var t1;
         var phoneChangedFlagAndHasOrderUnpaid = false;
         var channelInUrl = getQueryString('channel');
         var MIP = window.MIP;
+        var sessionId = 0;
         if (!channel && channelInUrl) {
             channel = channelInUrl;
         }
@@ -39,9 +40,6 @@ define(function (require) {
             var hostname = location.hostname;
             if (hostname === 'www-ilaw66-com.mipcdn.com' || hostname === 'www.ilaw66.com') {
                 hosturl = 'https://www.ilaw66.com/jasmine/';
-                if (hostname === 'www-ilaw66-com.mipcdn.com') {
-                    channel = 'baidusearch';
-                }
             }
             else if (hostname === 'localhost') {
                 var hostport = location.port;
@@ -69,75 +67,40 @@ define(function (require) {
                 location.assign(topurl);
             }
         }
-
+        this.addEventAction('login', function (event) {
+            console.log('授权成功');
+            var sessid = event.sessionId;
+            var islogin = parseInt(event.userInfo.isLogin, 10);
+            if (!islogin) { // 未注册
+                userId = false;
+            }
+            else {
+                sessionId = sessid;
+                userId = true;
+            }
+        });
         console.log(hosturl);
-
         setTimeout(function () {
             $el.find('.loading_pop').hide();
         }, 2000);
 
-        choose(channel);
-        if (channel === 'eleme') {
-            $el.find('.header_block').css('background', '#089EFF');
-        }
-        else if (channel === 'weiche') {
-            $el.find('.header_block').addClass('header_weiche');
-            $el.find('.btn_into').addClass('btn_into_weiche');
-        }
-        else if (channel === 'mmbang' || channel === 'hers') {
-            if (channel === 'mmbang') {
-                $el.find('.header_block').css('margin-top', '48px');
-            }
-
-            $el.find('.header_block').css('background', '#ff6191');
-        }
-        else if (channel === 'weixin' || channel === 'onstar'
-            || channel === 'falv' || channel === 'jbh' || channel === 'linjia') {
-            $el.find('.header_block').css('background', '#ff6100');
-        }
-        else if (channel === 'WxiaoApp' || channel === 'fengniao' || channel === 'fengniaozb') {
-            if (channel === 'WxiaoApp') {
-                $el.find('.header_block').hide();
-            }
-            else {
-                $el.find('.header_block').css('background', '#5C7DC0');
-            }
-        }
-        else if (channel === 'dayima') {
-            $el.find('.top_header,.header_block').css('background', '#fff');
-            $el.find('.div_header,.glyphicon-menu-left:before,.glyphicon,.header_block').css('color', '#000');
-        }
-        else if (channel === 'winbaoxian') {
-            $el.find('.glyphicon').hide();
-            $el.find('.header_block').hide();
-            $el.find('.btn').css('background', '#8698C6');
-            $el.find('.content_inputCodeText').css('color', '#8698C6');
-            $el.find('.tile_ele').css('text-algin', 'center');
-            $el.find('.common_number').css('height', '48px');
-            $el.find('.common_number').text('');
-        }
-        else if (channel === 'baidusearch' || channel === 'baidu_xzh') {
-            $el.find('.header_block .headertitle').html('准备咨询');
-            $el.find('.header_block').css('color', '#000');
-            $el.find('.header_block').css('background', '#fff');
-            $el.find('.glyphicon').css('color', '#000000');
-            $el.find('#sms').css('color', '#4992FF');
-            if (sessionStorage.getItem('ishomeorder')) {
-                $el.find('#login').text('提交');
-            }
-            else {
-                $el.find('#login').text('去匹配律师');
-            }
-
-            $el.find('#login').css('background', '#3388FF');
-            $el.find('#login').css('height', '45px');
-            $el.find('.radio-rule').show();
-            $el.find('.botText01').show();
-            $el.find('#botText_div').hide();
+        $el.find('.header_block .headertitle').html('准备咨询');
+        $el.find('.header_block').css('color', '#000');
+        $el.find('.header_block').css('background', '#fff');
+        $el.find('.glyphicon').css('color', '#000000');
+        $el.find('#sms').css('color', '#4992FF');
+        if (sessionStorage.getItem('ishomeorder')) {
+            $el.find('#login').text('提交');
         }
         else {
-            $el.find('.header_block').css('background', '#ff6100');
+            $el.find('#login').text('去匹配律师');
         }
+
+        $el.find('#login').css('background', '#3388FF');
+        $el.find('#login').css('height', '45px');
+        $el.find('.radio-rule').show();
+        $el.find('.botText01').show();
+        $el.find('#botText_div').hide();
 
         if (head && head.is(':hidden')) {
             $el.find('.content_inputCodeText').css({
@@ -145,46 +108,10 @@ define(function (require) {
             });
         }
 
-        function choose(channel) {
-            if (channel) {
-                if (channel === 'eleme') {
-                    $el.find('head').append(
-                        '<link href="tempeleme/css/wenlvshi.eleme.css?v=20170807"'
-                        + ' rel="stylesheet" type="text/css" />');
-                }
-                else if (channel === 'hlx') {
-                    $el.find('head').append('<link href="temphualongxiang/css/wenlvshi.hualongxiang.css"'
-                        + ' rel="stylesheet" type="text/css" />');
-                    $el.find('#unitprice').html('5');
-                }
-                else if (channel === 'dsc') {
-                    $el.find('head').append('<link href="tempdasouche/css/wenlvshi.dasouche.css"'
-                        + ' rel="stylesheet" type="text/css" />');
-                }
-                else if (channel === 'mmbang' || channel === 'hers') {
-                    $el.find('head').append('<link href="tempmmbang/css/wenlvshi.mmbang.css"'
-                        + ' rel="stylesheet" type="text/css" />');
-                }
-                else if (channel === 'fengniao' || channel === 'fengniaozb') {
-                    $el.find('.header_block').removeClass().addClass('header_block_fengniao');
-                    $el.find('.btn').removeClass().addClass('btn_fengniao');
-                    $el.find('head').append('<link href="css/wenlvshi.base.css?v=20170928"'
-                        + ' rel="stylesheet" type="text/css" />');
-                }
-                else if (channel === 'baidusearch' || channel === 'baidu_xzh') {
-                    $el.find('head').append('<link href="css/wenlvshi.eleme.css?20180619"'
-                        + ' rel="stylesheet" type="text/css" />');
-                }
-                else {
-                    $el.find('head').append('<link href="css/wenlvshi.base.css?v=20170928"'
-                        + ' rel="stylesheet" type="text/css" />');
-                }
-            }
-            else {
-                $el.find('head').append('<link href="css/wenlvshi.base.css?v=20170928"'
-                    + ' rel="stylesheet" type="text/css" />');
-            }
-        }
+        //      function choose(channel) {
+        //         $el.find('head').append('<link href="css/wenlvshi.eleme.css?20180619"'
+        //                      + ' rel="stylesheet" type="text/css" />');
+        //      }
         function getQueryString(name) {
             var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
             var r = window.location.search.substr(1).match(reg);
@@ -199,7 +126,7 @@ define(function (require) {
                 channel = channelInUrl;
             }
 
-            choose(channel);
+            //          choose(channel);
         }
         var settings = {
             e: 'idcode',
@@ -642,42 +569,85 @@ define(function (require) {
                 }
             }
         });
-
+        function startConsulting(questionType) {
+            $.ajax({
+                url: hosturl + 'greeting?questionType='
+                    + questionType + '&sessionId=' + sessionId,
+                type: 'POST',
+                success: function (indexmessage) {
+                    //                  console.log(indexmessage);
+                    //                  console.log(typeof indexmessage);
+                    if (indexmessage === 'ERROR' || indexmessage === 'ERROR1') {
+                        $el.find('#sendSMSError_msg').text('系统异常，请返回重新咨询');
+                        $el.find('.popUp_sysErr').fadeIn();
+                        setTimeout(function () {
+                            locahost('./', '电话咨询');
+                        }, 1000);
+                    }
+                    else if (indexmessage === 'ERROR2') {
+                        $el.find('#sendSMSError_msg').text('您有订单未支付，请支付后再咨询');
+                        $el.find('.popUp_sysErr').fadeIn();
+                        setTimeout(function () {
+                            locahost('./', '电话咨询');
+                        }, 1000);
+                    }
+                    else if (indexmessage === 'ERROR3') {
+                        $el.find('#sendSMSError_msg').text('您有订单未结束，请等待1分钟后再试');
+                        $el.find('.popUp_sysErr').fadeIn();
+                        setTimeout(function () {
+                            locahost('./', '电话咨询');
+                        }, 1000);
+                    }
+                    else if (indexmessage === 'ERROR4') {
+                        $el.find('#sendSMSError_msg').text('您今日取消咨询已达3次，请明天再来');
+                        $el.find('.popUp_sysErr').fadeIn();
+                        setTimeout(function () {
+                            locahost('./', '电话咨询');
+                        }, 1000);
+                    }
+                    else {
+                        var requesturl = 'mipilaw66baidu'
+                            + '_request?data=' + indexmessage + '&questionType=' + questionType
+                            + '&sessionId=' + sessionId;
+                        locahost(requesturl, '匹配律师');
+                    }
+                },
+                error: function () {
+                    //                  window.location.reload();
+                }
+            });
+        }
         function login() {
-
-            if (channel === 'baidusearch') {
-                var phone = $el.find('#username').val();
-                if (check(phone)) {
-                    var smsCode = $el.find('#password').val();
-                    $.ajax({
-                        type: 'POST',
-                        url: hosturl + 'baidusearch/login?username=' + phone + '&channel='
+            var phone = $el.find('#username').val();
+            if (check(phone)) {
+                var smsCode = $el.find('#password').val();
+                $.ajax({
+                    type: 'POST',
+                    url: hosturl + 'baidusearch/login?username=' + phone + '&channel='
                         + channel + '&password=' + smsCode,
-                        success: function (data) {
-                            if (data.status === 0 && data.data.isLogin === 1) {
+                    success: function (data) {
+                        //                      	console.log(data)
+                        //                      	console.log(data.status + data.data.isLogin)
+                        if (data.status === 0 && data.data.isLogin === '1') {
+                            var sesidtype = sessionStorage.getItem('baiduquestionType');
+                            if (sesidtype) {
+                                startConsulting(sesidtype);
+                            }
+                            else {
                                 locahost('./', '电话咨询');
                             }
-
-                        },
-                        error: function (jqXHR) {
-                            if (jqXHR.status === 500) {
-                                $el.find('#sendSMSError_msg').text(jqXHR.responseJSON.data);
-                                $el.find('.popUp_sysErr').fadeIn();
-                                //                 		 	console.log(jqXHR.responseJSON.data)
-                            }
-
                         }
 
-                    });
-                }
-            }
-            else {
-                var action = window.location.origin + '/jasmine/login';
-                var frmLogin = $el.find('#frmLogin form');
-                $(frmLogin).attr('action', action);
-                $(frmLogin).attr('method', 'post');
-                $(frmLogin).attr('target', '_self');
-                $(frmLogin).submit();
+                    },
+                    error: function (jqXHR) {
+                        if (jqXHR.status === 500) {
+                            $el.find('#sendSMSError_msg').text(jqXHR.responseJSON.data);
+                            $el.find('.popUp_sysErr').fadeIn();
+                            //    	console.log(jqXHR.responseJSON.data)
+                        }
+
+                    }
+                });
             }
 
             sessionStorage.clear('ishomeorder');
@@ -700,25 +670,49 @@ define(function (require) {
                 }, 1000);
 
                 /** 发送短信*/
-                $.ajax({
-                    type: 'GET',
-                    url: hosturl + 'sendSms?phone=' + phone + '&channel=' + channel + '&_csrf=' + csrfToken,
-                    success: function (data) {
-                        if (data === 'ERROR') {
-                            $el.find('#sendSMSError_msg').text('发送短信失败');
-                            $el.find('.popUp_sysErr').fadeIn();
-                        }
-                        else if (data === 'ERROR1') {
-                            $el.find('#sendSMSError_msg').text('链接异常');
-                            $el.find('.popUp_sysErr').fadeIn();
-                        }
-                        else if (data === 'ERROR2') {
-                            $el.find('#sendSMSError_msg').text('您已申请过，请稍后申请');
-                            $el.find('.popUp_sysErr').fadeIn();
-                        }
+                var flag = sessionStorage.getItem('loginFlg');
+                if (userId && flag === 0) { // 修改手机号
+                    $.ajax({
+                        type: 'GET',
+                        url: hosturl + 'sms?phone=' + phone + '&channel=' + channel,
+                        success: function (data) {
+                            if (data === 'ERROR') {
+                                $el.find('#sendSMSError_msg').text('发送短信失败');
+                                $el.find('.popUp_sysErr').fadeIn();
+                            }
+                            else if (data === 'ERROR1') {
+                                $el.find('#sendSMSError_msg').text('链接异常');
+                                $el.find('.popUp_sysErr').fadeIn();
+                            }
+                            else if (data === 'ERROR2') {
+                                $el.find('#sendSMSError_msg').text('您已申请过，请稍后申请');
+                                $el.find('.popUp_sysErr').fadeIn();
+                            }
 
-                    }
-                });
+                        }
+                    });
+                }
+                else {
+                    $.ajax({
+                        type: 'GET',
+                        url: hosturl + 'sendSms?phone=' + phone + '&channel=' + channel + '&_csrf=' + csrfToken,
+                        success: function (data) {
+                            if (data === 'ERROR') {
+                                $el.find('#sendSMSError_msg').text('发送短信失败');
+                                $el.find('.popUp_sysErr').fadeIn();
+                            }
+                            else if (data === 'ERROR1') {
+                                $el.find('#sendSMSError_msg').text('链接异常');
+                                $el.find('.popUp_sysErr').fadeIn();
+                            }
+                            else if (data === 'ERROR2') {
+                                $el.find('#sendSMSError_msg').text('您已申请过，请稍后申请');
+                                $el.find('.popUp_sysErr').fadeIn();
+                            }
+
+                        }
+                    });
+                }
             }
         }
 
@@ -762,8 +756,8 @@ define(function (require) {
             $.ajax({
                 async: true,
                 type: 'POST',
-                url: hosturl + 'updateUserPhoneNumber?phoneNumber=' + phone
-                    + '&smsCode=' + smsCode + '&_csrf=' + csrfToken,
+                url: hosturl + 'baidusearch/updatePhone?phone=' + phone
+                    + '&code=' + smsCode,
                 dataType: 'json',
                 success: function (data) {
                     if (data.code === 1) {

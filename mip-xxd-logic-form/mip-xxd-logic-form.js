@@ -187,14 +187,13 @@ define(function (require) {
         }
 
         // 判断是否需要百度授权登录
-        var loginEleId = element.dataset.loginId || '';
+        var xzhAuth = !!element.dataset.xzhAuth || false;
 
-        if (!loginEleId || element.extraData.sessionId) {
+        if (!xzhAuth || element.extraData.isLogin) {
             onRedirect.call(element, data);
         }
         else {
-            var loginEle = document.getElementById(loginEleId);
-            viewer.eventAction.execute('login', loginEle, event);
+            viewer.eventAction.execute('login', element, event);
         }
     }
 
@@ -379,11 +378,18 @@ define(function (require) {
         // 记录登录后的额外信息
         element.extraData = {};
         self.addEventAction('saveData', function () {
-            var info = JSON.parse(element.dataset.info || '{}');
-            var sessionStorageId = element.dataset.sessionStorageId;
-            var extraData = Object.assign({}, info, {sessionId: readStorage(sessionStorageId)});
-            element.extraData = extraData;
-            onSubmit(element, event);
+            setTimeout(function () {
+                var info = JSON.parse(element.dataset.info || '{}');
+                var sessionStorageId = element.dataset.sessionStorageId;
+                var extraData = Object.assign(
+                    {},
+                    {isLogin: !!info.isLogin},
+                    info.userInfo || {},
+                    {sessionId: readStorage(sessionStorageId)}
+                );
+                element.extraData = extraData;
+                onSubmit(element, event);
+            });
         });
     };
 

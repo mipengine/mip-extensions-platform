@@ -268,7 +268,7 @@ define(function (require) {
         }
         function gobackHandle() {
             if (!parseInt(sessionStorage.getItem('loginFlg'), 10) && sessionStorage.getItem('loginFlg') === '0') {
-                var tologinurl = 'login';
+                var tologinurl = 'mipilaw66baidu_login?channel=baidusearch';
                 locahost(tologinurl, '登录');
             }
             else {

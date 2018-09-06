@@ -1,0 +1,14 @@
+{
+    "name": "mip-yesky-showmore",
+    "version": "1.0.0",
+    "description": "点击展开已隐藏的部分",
+    "contributors": [
+        {
+            "name": "zhangpp",
+            "email": "1179585662@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

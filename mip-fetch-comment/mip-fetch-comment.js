@@ -25,7 +25,7 @@ define(function (require) {
             var url = 'https://mip-test.wine-world.com/wine/GetWineInfo?wineid=' + wineid + '&vintageid=' + year;
             fetch(url, {
                 method: 'POST',
-                headers: {
+                header: {
                     'Content-type': 'application/json'
                 }
             }).then(function (res) {

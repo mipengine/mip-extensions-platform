@@ -1,0 +1,14 @@
+{
+    "name": "mip-jsh-center",
+    "version": "1.0.0",
+    "description": "选中居中功能",
+    "contributors": [
+        {
+            "name": "wangziyi",
+            "email": "471019897@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

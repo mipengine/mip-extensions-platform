@@ -5,7 +5,7 @@
 
 define(function (require) {
     var $ = require('zepto');
-    var templates = require('templates');
+//  var templates = require('templates');
     var customElement = require('customElement').create();
 
     /**
@@ -389,7 +389,7 @@ define(function (require) {
         function gobackHandle() {
             if (!parseInt(sessionStorage.getItem('loginFlg'), 10) && sessionStorage.getItem('loginFlg') === '0') {
                 //              window.top.location.href = 'login';
-                locahost('login', '开始咨询');
+                locahost('mipilaw66baidu_login?channel=baidusearch', '开始咨询');
             }
             else {
                 //              window.top.location.href = './';

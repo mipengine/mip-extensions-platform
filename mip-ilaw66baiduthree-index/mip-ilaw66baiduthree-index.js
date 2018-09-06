@@ -66,11 +66,11 @@ define(function (require) {
                     MIP.viewer.sendMessage('loadiframe', {
                         title: '登录',
                         click: '',
-                        url: 'https://www.ilaw66.com/jasmine/toLogin?channel=baidusearch'
+                        url: 'https://www.ilaw66.com/jasmine/mipilaw66baidu_login?channel=baidusearch'
                     });
                 }
                 else {
-                    location.assign('https://www.ilaw66.com/jasmine/toLogin?channel=baidusearch');
+                    location.assign('https://www.ilaw66.com/jasmine/mipilaw66baidu_login?channel=baidusearch');
                 }
             }
             else {
@@ -88,7 +88,6 @@ define(function (require) {
             if (!isloginf) {
                 bannerusernum();
             }
-
         }, 1000);
 
         function locahost(topsurl, toptitle) {
@@ -240,6 +239,7 @@ define(function (require) {
 
         $el.find('.consulting').click(function () {
             var questionType = $(this).data('type');
+            sessionStorage.setItem('baiduquestionType', questionType);
             startConsulting(questionType);
             //          alert("W")
             //          if (islog) {
