@@ -1,0 +1,14 @@
+{
+    "name": "mip-big-image",
+    "version": "1.0.0",
+    "description": "全局点击图片显示大图功能",
+    "contributors": [
+        {
+            "name": "mickey",
+            "email": "787440432@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

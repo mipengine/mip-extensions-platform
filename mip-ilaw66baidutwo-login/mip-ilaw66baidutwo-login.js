@@ -609,6 +609,10 @@ define(function (require) {
                         }, 1000);
                     }
                     else {
+                        if (sessionStorage.getItem('baiduquestionType')) {
+                            sessionStorage.clear('baiduquestionType');
+                        }
+
                         var requesturl = 'mipilaw66baidu'
                             + '_request?data=' + indexmessage + '&questionType=' + questionType
                             + '&sessionId=' + sessionId;
@@ -677,7 +681,7 @@ define(function (require) {
                     $.ajax({
                         type: 'GET',
                         url: hosturl + 'sms?phone=' + phone + '&channel=' + channel
-                        + '&sessionId=' + sessionId,
+                            + '&sessionId=' + sessionId,
                         success: function (data) {
                             if (data === 'ERROR') {
                                 $el.find('#sendSMSError_msg').text('发送短信失败');
@@ -699,7 +703,7 @@ define(function (require) {
                     $.ajax({
                         type: 'GET',
                         url: hosturl + 'sendSms?phone=' + phone + '&channel=' + channel
-                        + '&_csrf=' + csrfToken + '&sessionId=' + sessionId,
+                            + '&_csrf=' + csrfToken + '&sessionId=' + sessionId,
                         success: function (data) {
                             if (data === 'ERROR') {
                                 $el.find('#sendSMSError_msg').text('发送短信失败');

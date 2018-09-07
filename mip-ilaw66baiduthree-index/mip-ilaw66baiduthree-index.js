@@ -55,41 +55,6 @@ define(function (require) {
         }
         returhostname();
         console.log(hosturl);
-        var isloginf = false;
-        this.addEventAction('login', function (event) {
-            console.log('授权成功');
-            var sessid = event.sessionId;
-            var islogin = parseInt(event.userInfo.isLogin, 10);
-            if (!islogin) { // 未注册
-                //  window.top.location.href = 'toLogin?channel=baidusearch';
-                if (MIP.viewer.isIframed) {
-                    MIP.viewer.sendMessage('loadiframe', {
-                        title: '登录',
-                        click: '',
-                        url: 'https://www.ilaw66.com/jasmine/mipilaw66baidu_login?channel=baidusearch'
-                    });
-                }
-                else {
-                    location.assign('https://www.ilaw66.com/jasmine/mipilaw66baidu_login?channel=baidusearch');
-                }
-            }
-            else {
-                console.log('登录成功');
-                sessionId = sessid;
-                isloginf = true;
-                bannerusernum();
-                //              $el.find('#sesiid').html(sessid);
-                //              var thishostname = location.hostname;
-                //              var name = 'mip-login-xzh:sessionId:https://' + thishostname + '/jasmine/baidusearch/authorize2';
-                //              localStorage.setItem(name, sessid);
-            }
-        });
-        setTimeout(function () {
-            if (!isloginf) {
-                bannerusernum();
-            }
-        }, 1000);
-
         function locahost(topsurl, toptitle) {
             if (topsurl === './') {
                 topsurl = 'baidusearch';
@@ -107,6 +72,42 @@ define(function (require) {
                 location.assign(topurl);
             }
         }
+        var isloginf = false;
+        this.addEventAction('login', function (event) {
+            console.log('授权成功');
+            var sessid = event.sessionId;
+            var islogin = parseInt(event.userInfo.isLogin, 10);
+            if (!islogin) { // 未注册
+                //  window.top.location.href = 'toLogin?channel=baidusearch';
+                //              if (MIP.viewer.isIframed) {
+                //                  MIP.viewer.sendMessage('loadiframe', {
+                //                      title: '登录',
+                //                      click: '',
+                //                      url: 'https://www.ilaw66.com/jasmine/mipilaw66baidu_login?channel=baidusearch'
+                //                  });
+                //              }
+                //              else {
+                //                  location.assign('https://www.ilaw66.com/jasmine/mipilaw66baidu_login?channel=baidusearch');
+                //              }
+                locahost('mipilaw66baidu_login?channel=baidusearch', '准备咨询');
+            }
+            else {
+                console.log('登录成功');
+                sessionId = sessid;
+                isloginf = true;
+                bannerusernum();
+                //              $el.find('#sesiid').html(sessid);
+                //              var thishostname = location.hostname;
+                //              var name = 'mip-login-xzh:sessionId:https://' + thishostname + '/jasmine/baidusearch/authorize2';
+                //              localStorage.setItem(name, sessid);
+            }
+        });
+        setTimeout(function () {
+            if (!isloginf) {
+                bannerusernum();
+            }
+
+        }, 1000);
 
         function getQueryString(name) {
             var reg = new RegExp('(^|&)'
@@ -142,7 +143,6 @@ define(function (require) {
         //          $el.find('#messagecontem').text('您今日取消咨询已达3次，请明天再来');
         //          $el.find('.popUp_unpaidErr').show();
         //      }
-
         $el.find('.headerright').click(function () {
             if (!userId) {
                 sessionStorage.setItem('ishomeorder', '1');
@@ -616,7 +616,7 @@ define(function (require) {
                         var informlawyer = 'mipilaw66baidu_informLawyer?data='
                             + id + '&questionType=' + questionType + '&askingType='
                             + askingType + '&lawyerId=' + lawyerId + '&sessionId=' + sessionId;
-                        locahost(informlawyer, '无人应答');
+                        locahost(informlawyer, '律师未回应');
                     }
                     else {
                         $el.find('.loadingArea').hide();
@@ -668,7 +668,7 @@ define(function (require) {
                         var infourl = 'mipilaw66baidu_informLawyer?data='
                             + id + '&questionType=' + questionType + '&askingType='
                             + askingType + '&lawyerId=' + lawyerId + '&PABackJumpFlg=index&sessionId=' + sessionId;
-                        locahost(infourl, '无人应答');
+                        locahost(infourl, '律师未回应');
                     }
                     else {
                         if (state === 1 || state === 2) { // 1.律师正在服务中 2.律师已下线

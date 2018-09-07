@@ -364,7 +364,7 @@ define(function (require) {
                 }
                 else {
                     //                  window.top.location.href = './';
-                    locahost('./', '咨询律师');
+                    locahost('./', '电话咨询');
                 }
             });
             $el.find('.backOr_div .back__popLayer .back-continue').click(function () {
@@ -389,11 +389,11 @@ define(function (require) {
         function gobackHandle() {
             if (!parseInt(sessionStorage.getItem('loginFlg'), 10) && sessionStorage.getItem('loginFlg') === '0') {
                 //              window.top.location.href = 'login';
-                locahost('mipilaw66baidu_login?channel=baidusearch', '开始咨询');
+                locahost('mipilaw66baidu_login?channel=baidusearch', '准备咨询');
             }
             else {
                 //              window.top.location.href = './';
-                locahost('./', '开始咨询');
+                locahost('./', '电话咨询');
             }
         }
         function checkTalking(checkRequestId, questionType) {
@@ -408,7 +408,7 @@ define(function (require) {
                         setTimeout(function () {
                             $el.find('.toast_div').hide();
                             //                          window.top.location.href = './';
-                            locahost('./', '开始咨询');
+                            locahost('./', '电话咨询');
                         }, 2000);
                     }
                     else if (state === 4) {
@@ -429,7 +429,7 @@ define(function (require) {
                                 console.log('是否合并支付单号：' + data);
                                 var payulr = 'mipilaw66baidu_couponPay?requestId='
                                     + data + '&questionType=' + questionType + '&sessionId=' + sessionId;
-                                locahost(payulr, '开始咨询');
+                                locahost(payulr, '支付详情');
                                 localStorage.setItem('linkingOrding', 'linkingOrdingGone');
                             },
                             error: function () {

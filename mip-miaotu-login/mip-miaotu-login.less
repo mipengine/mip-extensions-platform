@@ -1,0 +1,72 @@
+/**
+ * @file mip-miaotu-login样式文件
+ */
+
+mip-miaotu-login {
+    .inp-user,
+    .inp-val,
+    .inp-pwd,
+    .inp-repwd,
+    .btn-login {
+        width: 88%;
+        height: 2.28125em;
+        margin: 0 auto;
+        margin-bottom: 1em;
+    }
+    #form-login input {
+        width: 100%;
+        height: 2.75em;
+        outline: none;
+        background-color: #ffffff;
+        border: solid .0625em #eeeeee;
+        border-radius: .5em;
+        padding-left: .75em;
+        box-sizing: border-box;
+    }
+    #form-login input:focus {
+        border: solid .0625em #ff9a9a;
+    }
+    .inp-val {
+        position: relative;
+    }
+    #form-login .inp-val .get-val {
+        width: auto;
+        padding-left: 0;
+        position: absolute;
+        right: .875em;
+        bottom: .125em;
+        color: #ff9a9a;
+        font-size: .75em;
+        border: none;
+        outline: none;
+        background: none;
+    }
+    .login-bypwd {
+        text-align: center;
+    }
+    .login-bypwd span {
+        display: block;
+        color: #ff9a9a;
+        font-size: .75em;
+    }
+    .btn-login {
+        margin-top: 1.2em;
+    }
+    #form-login .btn-login input {
+        background-color: #ff5757;
+        border: solid .0625em #ff5757;
+        color: #ffffff;
+    }
+    .reg-second,
+    .log-pwd,
+    #loginByVal {
+        display: none;
+    }
+    .error {
+        display: block;
+        color: #ff5757;
+        height: 1.25em;
+        font-size: .75em;
+        line-height: 1.4em;
+    }
+}
