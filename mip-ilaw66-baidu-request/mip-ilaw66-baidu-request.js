@@ -270,7 +270,7 @@ define(function (require) {
         }
         function gobackHandle() {
             if (!parseInt(sessionStorage.getItem('loginFlg'), 10) && sessionStorage.getItem('loginFlg') === '0') {
-                var tologinurl = 'mipilaw66baidu_login?channel=baidusearch';
+                var tologinurl = 'mipilaw66baidu_login?channel=baidusearch&sessionId=' + sessionId;
                 locahost(tologinurl, '准备咨询');
             }
             else {

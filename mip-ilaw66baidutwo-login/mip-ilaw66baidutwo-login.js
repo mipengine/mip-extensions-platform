@@ -29,7 +29,7 @@ define(function (require) {
         var phoneChangedFlagAndHasOrderUnpaid = false;
         var channelInUrl = getQueryString('channel');
         var MIP = window.MIP;
-        var sessionId = 0;
+        var sessionId = getQueryString('sessionId');
         if (!channel && channelInUrl) {
             channel = channelInUrl;
         }
@@ -50,6 +50,7 @@ define(function (require) {
             }
         }
         returhostname();
+
         function locahost(topsurl, toptitle) {
             if (topsurl === './') {
                 topsurl = 'baidusearch';
@@ -70,6 +71,7 @@ define(function (require) {
         this.addEventAction('login', function (event) {
             console.log('授权成功');
             var sessid = event.sessionId;
+            sessionId = sessid;
             var islogin = parseInt(event.userInfo.isLogin, 10);
             if (!islogin) { // 未注册
                 userId = false;

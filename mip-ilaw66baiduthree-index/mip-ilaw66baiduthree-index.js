@@ -89,7 +89,9 @@ define(function (require) {
                 //              else {
                 //                  location.assign('https://www.ilaw66.com/jasmine/mipilaw66baidu_login?channel=baidusearch');
                 //              }
-                locahost('mipilaw66baidu_login?channel=baidusearch', '准备咨询');
+                setTimeout(function () {
+                    locahost('mipilaw66baidu_login?channel=baidusearch&sessionId=' + sessid, '准备咨询');
+                }, 500);
             }
             else {
                 console.log('登录成功');

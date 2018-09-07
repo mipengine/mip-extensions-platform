@@ -22,7 +22,7 @@ define(function (require) {
                 var that = this;
                 var page = 1;
                 var ul = element.querySelector('.curseList_list');
-                var baseurl = (/wangxiao\.cn/g.test(location.host)) ? 'http://wap2.wangxiao.cn' : 'http://dev.com:8004/wap2';
+                var baseurl = (/wangxiao\.cn/g.test(location.host)) ? '' : 'http://dev.com:8004/wap2';
                 var args = 'classid=' + data.cid
                     + '&subjectid=' + data.subjectid
                     + '&areaid=' + data.areaid
@@ -77,7 +77,7 @@ define(function (require) {
                 var index = patt.exec(location.pathname);
                 var currentCity = '全国';
                 if (index) {
-                    var currentCity = cities[Number(index[1]) - 1] || '全国';
+                    currentCity = cities[Number(index[1]) - 1] || '全国';
                 }
 
                 return currentCity;

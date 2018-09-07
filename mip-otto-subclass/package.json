@@ -1,7 +1,7 @@
 {
     "name": "mip-otto-subclass",
-    "version": "1.0.0",
-    "description": "网校地区页功能",
+    "version": "1.0.1",
+    "description": "网校地区页功能，问题排查",
     "contributors": [
         {
             "name": "xinbao",

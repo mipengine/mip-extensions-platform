@@ -389,7 +389,7 @@ define(function (require) {
         function gobackHandle() {
             if (!parseInt(sessionStorage.getItem('loginFlg'), 10) && sessionStorage.getItem('loginFlg') === '0') {
                 //              window.top.location.href = 'login';
-                locahost('mipilaw66baidu_login?channel=baidusearch', '准备咨询');
+                locahost('mipilaw66baidu_login?channel=baidusearch&sessionId=' + sessionId, '准备咨询');
             }
             else {
                 //              window.top.location.href = './';
