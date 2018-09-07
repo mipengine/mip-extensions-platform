@@ -187,9 +187,20 @@ define(function (require) {
          *
          * @param  {string} type 验证类型
          * @param  {string} value 需要验证的文案
+         * @param  {HTMLElement} target dom元素
          * @return {boolean} 是否符合自定义校验
          */
-        verification: function (type, value) {
+        verification: function (type, value, target) {
+            if (target.type === 'radio') {
+                var sameRadio = this.ele.querySelectorAll('input[type="radio"][name="' + target.name + '"]');
+                var checked = false;
+                for (var i in sameRadio) {
+                    if (sameRadio[i].checked) {
+                        checked = true;
+                    }
+                }
+                return checked;
+            }
             return (type === 'must') ? !(value === '') : REGS[type.toUpperCase()].test(value);
         },
 
@@ -237,7 +248,7 @@ define(function (require) {
                         reg = value === '' ? false : (new RegExp(regval)).test(value);
                     }
                     else {
-                        reg = me.verification(type, value);
+                        reg = me.verification(type, value, item);
                     }
 
                     // 显示表单错误信息

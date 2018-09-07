@@ -18,10 +18,17 @@ define(function (require) {
                     rewardlist.showRewardDiv();
                 }
             }
+            if ($(element.find('.yc_z')).length !== 0) {
+                $(element.find('.yc_user')).on('click', function (event) {
+                    event.preventDefault();
+                    var jsondata = 'url=' + encodeURIComponent(window.location.href) + '&aid='
+                        + $(element.find('.hiddenartid')).val();
+                    window.top.location.href = 'http://www.360doc.cn/weixinreward/mipreward.aspx?' + jsondata;
+                });
+            }
         }
         catch (e) { }
     };
-    var element = $(this.element);
     var rewardlist = {
         type: 'mip',
         queryStartID: 0,
@@ -49,9 +56,8 @@ define(function (require) {
                     success: function (result) {
                         rewardlist.showRewardLoading = false;
                         // decodeURIComponent
-                        if (result.status === 1) {
-                            $(element.find('.yc_user')).show();
-
+                        if (result.status === '1') {
+                            $('.yc_user').show();
                             var user1html = '<div class=\'d1\'>';
                             user1html += '<p class=\'fl\'><a href=\'http://www.360doc.cn/userhome.aspx?userid=' + rewardlist.userid + '\' target=\'_blank\'><img src=\'' + decodeURIComponent(result.userphoto) + '\' /></a></p>';
                             user1html += '<div class=\'fl yc_user_data\'>';
@@ -62,11 +68,7 @@ define(function (require) {
                             user1html += '<a href=\'javascript:void(0);\' class=\'fr yc_btn cur\'></a>';
                             user1html += '</div>';
                             user1html += '<div class=\'text\'>' + decodeURIComponent(result.description) + '</div>';
-                            $(element.find('.yc_user_1')).html(user1html).show();
-                            $(element.find('.yc_user_2')).html('<p class=\'p1\'>你的赞赏是我坚持原创的动力！'
-                                + '</p><a id=\'btnreward\' href=\'javascript:void(0);\' '
-                            + 'class=\'yc_z\' onclick=\'rewardlist.showRewardAlert();\'>'
-                            + '赞赏</a><div class=\'yc_ulist\' class=\'rewarduserslist\'></div>').show();
+                            $('.yc_user_1').html(user1html).show();
                             rewardlist.getRewardUserList();
                         }
                     }
@@ -88,14 +90,14 @@ define(function (require) {
                 data: {aid: rewardlist.artid, dn: 10, id: 0, type: rewardlist.type, sign: sign},
                 success: function (result) {
                     // $('#rewarduserslist').remove();     //先清空
-                    if (result.status === 1 && result.count > 0 && result.userlist.length > 0) {
-                        $(element.find('.rewarduserslist')).html('<span class=\'spantotalrewardcount\'>共'
+                    if (result.status === '1' && result.count > 0 && result.userlist.length > 0) {
+                        $('.rewarduserslist').html('<span class=\'spantotalrewardcount\'>共'
                             + ' <i id=\'totalrewardcount\'>' + result.count + '</i> 人赞赏</span>');
                         var rewarduserhref = '';
                         var rewardusername = '';
                         var rewarduserphoto = '';
                         for (var i = 0; i < result.userlist.length; i++) {
-                            if (result.userlist[i].userid === -1) {
+                            if (result.userlist[i].userid === '-1') {
                                 rewarduserhref = 'javascript:void(0);';
                                 rewardusername = '游客';
                                 rewarduserphoto = '<img src=\'http://pubimage.360doc.com/payment/\' + (result.userlist[i].paytype == 1 ? \'wx\' : \'zfb\') + \'.jpg\' title=\'游客\'/>';
@@ -106,9 +108,9 @@ define(function (require) {
                                 rewarduserphoto = '<img src=\'' + result.userlist[i].photo
                                     + '\' title=\'' + result.userlist[i].nickname + '\'/>';
                             }
-                            $(element.find('.spantotalrewardcount')).before('<a href=\'' + rewarduserhref
+                            $('.spantotalrewardcount').before('<a href=\'' + rewarduserhref
                                 + '\' class=\'ara1\' '
-                                + (result.userlist[i].userid === -1 ? '' : ' target=\'_blank\'')
+                                + (result.userlist[i].userid === '-1' ? '' : ' target=\'_blank\'')
                                 + '>' + rewarduserphoto + '</a>');
                         }
                     }
@@ -141,7 +143,6 @@ define(function (require) {
         },
         // 展示赞赏弹出层
         showRewardAlert: function () {
-
             var jsondata = 'url=' + encodeURIComponent(window.location.href) + '&aid=' + rewardlist.artid;
             window.top.location.href = 'http://www.360doc.cn/weixinreward/mipreward.aspx?' + jsondata;
             return;
