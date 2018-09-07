@@ -14,15 +14,13 @@
 
 - `data-url` jsonp 请求 url。
 - `gap` (可选)触发滚动回调的距离，单位px。
-- `ipa-prefix-mb` ios 越狱包手机百度下载地址前缀。
-- `ipa-prefix-nonmb` ios 越狱包非手机百度下载地址前缀。
 - `timeout` (可选) jsonp 超时时间。
 - `txt-completed` (可选) 加载完毕按钮文本。
 - `txt-failed` (可选) 加载失败按钮文本。
 - `txt-loading` (可选) 正在加载按钮文本。
 
 ```html
-<mip-qf-infinitescroll data-url="https://mtest.119you.com/fgame/game/ranking" gap="200" ipa-prefix-mb="guide/mbInstruction.shtml?link=/" ipa-prefix-nonmb="guide/usInstruction.shtml?link=/" timeout="5" txt-completed="完毕" txt-failed="失败" txt-loading="努力加载...">
+<mip-qf-infinitescroll data-url="https://mtest.119you.com/fgame/game/ranking" gap="200" timeout="5" txt-completed="完毕" txt-failed="失败" txt-loading="努力加载...">
     <script type="application/json">
         {
             "columns": "downloadlink,name",

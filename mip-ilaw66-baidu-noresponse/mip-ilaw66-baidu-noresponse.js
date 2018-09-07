@@ -62,11 +62,12 @@ define(function (require) {
             $el.find('.glyphicon-menu-left').click(function () {
                 if (!parseInt(sessionStorage.getItem('loginFlg'), 10) && sessionStorage.getItem('loginFlg') === '0') {
                     //                  window.top.location.href = 'login';
-                    locahost('login', '登录');
+                    //                  locahost('login', '登录');
+                    locahost('mipilaw66baidu_login?channel=baidusearch', '准备咨询');
                 }
                 else {
                     //                  window.top.location.href = './';
-                    locahost('./', '匹配律师');
+                    locahost('./', '电话咨询');
                 }
             });
 
@@ -147,11 +148,11 @@ define(function (require) {
                         else {
                             if (lawyerId) {
                                 var requset = 'mipilaw66baidu_request?data=' + data + '&questionType='
-                                    + questionType + '&lawyerId=' + lawyerId;
+                                    + questionType + '&lawyerId=' + lawyerId + '&sessionId=' + sessionId;
                             }
                             else {
                                 var requset = 'mipilaw66baidu_request?data='
-                                    + data + '&questionType=' + questionType;
+                                    + data + '&questionType=' + questionType + '&sessionId=' + sessionId;
                             }
                             locahost(requset, '匹配律师');
                         }
@@ -168,7 +169,7 @@ define(function (require) {
             // 文字咨询按钮
             $el.find('#js-textConsulting').click(function () {
                 var textbutturl = 'https://m.baidu.com/zhuanjia/question#/submit?vn=law&ref=alaqiang&ssid=0&from=0&uid=0&pu=csrc%40app_secr_txt,sz%401320_2001,ta%40iphone_1_11.2_22_2.8,usm%406&bd_page_type=1&baiduid=F90644066BC91C4E0285A23EFBBC5CC9&tj=2gs_2_0_10_l1&htrackid=6ec1913b5246ead3b67a15bc5d256a75';
-                locahost(textbutturl, '文字咨询');
+                location.assign(textbutturl);
             });
 
             // 点击弹窗错误按钮

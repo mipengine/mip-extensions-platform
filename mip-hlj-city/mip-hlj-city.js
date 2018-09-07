@@ -109,7 +109,11 @@ define(function (require) {
     }
 
     function initLastCitys(element) {
-        var lastCity = JSON.parse(storage.get(cityStorageKey));
+        const storageStr = storage.get(cityStorageKey);
+        if (!storageStr) {
+            return;
+        }
+        var lastCity = JSON.parse(storageStr);
         if (!lastCity) {
             return;
         }
@@ -238,9 +242,10 @@ define(function (require) {
     function stopDefaultEvent(e) {
         e.preventDefault();
         var id = e.currentTarget.dataset.id;
-        var lastCity = JSON.parse(storage.get(cityStorageKey));
+        var lastCityStr = storage.get(cityStorageKey);
         var resultCity = findCityById(data.list, id);
         var currentCity;
+        var lastCity;
 
         if (!resultCity) {
             location.href = '/baidu/package/city_' + id;
@@ -254,10 +259,11 @@ define(function (require) {
             'short_name': resultCity['short_name']
         };
 
-        if (!lastCity) {
+        if (!lastCityStr) {
             storage.set(cityStorageKey, JSON.stringify([currentCity]));
         }
         else {
+            lastCity = JSON.parse(lastCityStr);
             var newCitys = [currentCity];
             for (var i = 0; i < lastCity.length; i++) {
                 if (lastCity[i].cid === currentCity.cid) {
