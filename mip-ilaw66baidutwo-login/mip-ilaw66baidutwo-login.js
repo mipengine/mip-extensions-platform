@@ -68,6 +68,8 @@ define(function (require) {
                 location.assign(topurl);
             }
         }
+        var mipsesid = 'mip-login-xzh:sessionId:' + returhostname + 'baidusearch/authorize2';
+        sessionId = localStorage.getItem(mipsesid);
         this.addEventAction('login', function (event) {
             console.log('授权成功');
             var sessid = event.sessionId;
@@ -82,6 +84,7 @@ define(function (require) {
                 userId = true;
             }
         });
+
         console.log(hosturl);
         setTimeout(function () {
             $el.find('.loading_pop').hide();
@@ -225,7 +228,6 @@ define(function (require) {
             col.push('#6B486E');
             col.push('#243F5F');
             col.push('#16BDB5');
-
             var charIndex;
             for (var i = 0; i < codeObj.length; i++) {
                 charIndex = Math.floor(Math.random() * col.length);
@@ -636,11 +638,16 @@ define(function (require) {
                         + channel + '&password=' + smsCode + '&sessionId=' + sessionId,
                     success: function (data) {
                         if (data.status === 0 && data.data.isLogin === '1') {
+                            sessionId = data.sessionId;
+                            localStorage.setItem(mipsesid, data.sessionId);
                             var sesidtype = sessionStorage.getItem('baiduquestionType');
+                            console.log(sesidtype);
                             if (sesidtype) {
+                                console.log('下单了');
                                 startConsulting(sesidtype);
                             }
                             else {
+                                console.log('跳转了');
                                 locahost('./', '电话咨询');
                             }
                         }

@@ -402,7 +402,7 @@ define(function (require) {
                 url: hosturl + 'checkTalkingOrder?requestId=' + checkRequestId + '&sessionId=' + sessionId,
                 success: function (data) {
                     var state = data.result.state;
-                    if (state === 6) {
+                    if (state === 6 || state === 7) {
                         $el.find('.toast_txt').text('通话不足60秒，无需支付');
                         $el.find('.toast_div').show();
                         setTimeout(function () {

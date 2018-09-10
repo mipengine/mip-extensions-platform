@@ -28,14 +28,17 @@ mip-slide-tabs 双层tabs切换
 				   <a>扩展信息</a>
                </div>
                <ul class="tab1-con">
-                   <li>位于法国波尔多梅多克产区（Medoc）的</li>
+                   <li><div class='w-article'>位于法国波尔多梅多克产区（Medoc）的
+				   
+				   <a href="www.baidu.com">sdfhisdfiasdjlkasjdgka</a></div>
+				   </li>
                    <li>赤霞珠（Cabernet Sauvignon）81%，梅洛（Merlot ）15%，品丽珠（Cabernet Franc）3%，味而多（Petit Verdot）1%</li>
                    <li>木桐酒庄红葡萄酒</li>
 				   <li>地址：Chateau Mouton Rothschild 33250 Pauillac, France</li>
                </ul>
            </li>
            <li class="tabr_li" >
-			   <p>以出产优质的红葡萄酒而著称。在1855年梅多克的分级制度中，共评出四个一级酒庄，分别为：拉菲古堡、拉图酒庄、玛歌酒庄、侯伯王酒庄，再加上1973年由二级酒庄升为一级酒庄的木桐酒庄，总共有五个一级酒庄。而波雅克村就占有其中三个，这也许就是这个名不见经传的小村庄名扬天下的原因。</P>
+			  <div class="w-article">上岛咖啡<a href='www.baidu.com'>百度链接<span style="color:#0000ff">BAIDU</span><span style="color:red">阿里巴巴</span></a></div>
            </li>
            <li class="tabr_li" >
                <div class="tab1-tit">
@@ -50,7 +53,7 @@ mip-slide-tabs 双层tabs切换
                </ul>
            </li>
        </ul>
-   </div>
+</div>
 </mip-slide-tabs>
 ```
 
