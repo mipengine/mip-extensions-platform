@@ -1,6 +1,6 @@
 {
     "name": "mip-hlj-city",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "选择城市组件，选择省市区，以及模糊查询",
     "contributors": [
         {

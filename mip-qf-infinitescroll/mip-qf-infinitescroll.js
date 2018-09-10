@@ -5,6 +5,7 @@
 
 define(function (require) {
     var mustache = require('templates');
+    var util = require('util');
     var utils = require('./utils');
 
     var customElement = require('customElement').create();
@@ -82,7 +83,7 @@ define(function (require) {
             // 处理数据
             for (var i = 0; i < data.length; i++) {
                 // 下载链接
-                if (data[i].downloadlink) {
+                if (!util.platform.isWechatApp() && data[i].downloadlink) {
                     var dHref = utils.parsePackInfo(data[i].downloadlink);
 
                     data[i].apkHref = dHref.apk;

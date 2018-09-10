@@ -75,10 +75,10 @@ define(function (require) {
     }
 
     function initGroups(element, groups, city) {
-        var html = '<li><a data-id=' + city.cid + ' href=' + '/baidu/package/city_'
+        var html = '<li><a data-id=' + city.cid + ' href=https://m.hunliji.com' + '/baidu/package/city_'
         + city.cid + '>' + city.short_name + '城区</a></li>';
         for (var i = 0; i < groups.length; i++) {
-            html += '<li><a data-id=' + groups[i].cid + ' href=' + '/baidu/package/city_'
+            html += '<li><a data-id=' + groups[i].cid + ' href=https://m.hunliji.com' + '/baidu/package/city_'
             + groups[i].cid + '>' + groups[i].area_name + '</a></li>';
         }
 
@@ -91,15 +91,15 @@ define(function (require) {
 
         for (var i = 0; i < hots.length; i++) {
             if (hots[i].is_near === 1 || hots[i].is_near === '1') {
-                html += '<li class="closter"><a data-id=' + hots[i].cid + ' href=' + '/baidu/package/city_'
+                html += '<li class="closter"><a data-id=' + hots[i].cid + ' href=' + 'https://m.hunliji.com/baidu/package/city_'
                 + hots[i].cid + '>' + hots[i].name + '</a></li>';
             }
             else if (hots[i].is_lvpai === 1 || hots[i].is_lvpai === '1') {
-                html += '<li class="trip"><a data-id=' + hots[i].cid + ' href=' + '/baidu/package/city_'
+                html += '<li class="trip"><a data-id=' + hots[i].cid + ' href=' + 'https://m.hunliji.com/baidu/package/city_'
                 + hots[i].cid + '>' + hots[i].name + '</a></li>';
             }
             else {
-                html += '<li><a data-id=' + hots[i].cid + ' href=' + '/baidu/package/city_'
+                html += '<li><a data-id=' + hots[i].cid + ' href=' + 'https://m.hunliji.com/baidu/package/city_'
                 + hots[i].cid + '>' + hots[i].name + '</a></li>';
             }
         }
@@ -120,7 +120,7 @@ define(function (require) {
 
         var html = '';
         for (var i = 0; i < lastCity.length; i++) {
-            html += '<li><a data-id=' + lastCity[i].cid + ' href=' + '/baidu/package/city_'
+            html += '<li><a data-id=' + lastCity[i].cid + ' href=https://m.hunliji.com' + '/baidu/package/city_'
             + lastCity[i].cid + '>' + lastCity[i].short_name + '</a></li>';
         }
 
@@ -183,7 +183,7 @@ define(function (require) {
                 var flag = false;
                 if (citys[j][type].indexOf(value) > -1) {
                     flag = true;
-                    html += '<li><a data-id=' + citys[j].cid + ' href=' + '/baidu/package/city_'
+                    html += '<li><a data-id=' + citys[j].cid + ' href=https://m.hunliji.com' + '/baidu/package/city_'
                     + citys[j].cid + '>' + citys[j].short_name + '</a></li>';
                 }
 
@@ -194,7 +194,7 @@ define(function (require) {
                 var groups = citys[j].children;
                 for (var k = 0; k < groups.length; k++) {
                     if (groups[k][type].indexOf(value) > -1 || flag) {
-                        html += '<li><a data-id=' + groups[k].cid + ' href='
+                        html += '<li><a data-id=' + groups[k].cid + ' href=https://m.hunliji.com'
                         + '/baidu/package/city_' + groups[k].cid + '>'
                         + citys[j].short_name + ',' + groups[k].short_name + '</a></li>';
                     }
@@ -248,7 +248,7 @@ define(function (require) {
         var lastCity;
 
         if (!resultCity) {
-            location.href = '/baidu/package/city_' + id;
+            location.href = 'https://m.hunliji.com/baidu/package/city_' + id;
             return;
         }
 
@@ -278,7 +278,7 @@ define(function (require) {
             storage.set(cityStorageKey, JSON.stringify(newCitys));
         }
 
-        location.href = '/baidu/package/city_' + id;
+        location.href = 'https://m.hunliji.com/baidu/package/city_' + id;
     }
 
     /**

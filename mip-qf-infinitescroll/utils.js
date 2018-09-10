@@ -70,15 +70,21 @@ define(function (require) {
      */
 
     function getHtmlProperties(el) {
+        var btn = el.querySelector('.mip-qf-infinitescroll-btn');
+
+        if (!btn) {
+            throw new Error('DOM element not found');
+        }
+
         if (!el.getAttribute('data-url')) {
             throw new Error('invalid argument data-url');
         }
 
         return {
-            completedTxt: el.getAttribute('txt-completed') ? el.getAttribute('txt-completed') : '加载完毕',
-            failedTxt: el.getAttribute('txt-failed') ? el.getAttribute('txt-failed') : '加载失败',
+            completedTxt: btn.getAttribute('txt-completed') ? btn.getAttribute('txt-completed') : '加载完毕',
+            failedTxt: btn.getAttribute('txt-failed') ? btn.getAttribute('txt-failed') : '加载失败',
             gap: el.getAttribute('gap') ? Number.parseInt(el.getAttribute('gap'), 10) : 0,
-            loadingTxt: el.getAttribute('txt-loading') ? el.getAttribute('txt-loading') : '正在加载...',
+            loadingTxt: btn.getAttribute('txt-loading') ? btn.getAttribute('txt-loading') : '正在加载...',
             timeout: el.getAttribute('timeout') ? Number.parseInt(el.getAttribute('timeout'), 10) * 1000 : 7000,
             url: el.getAttribute('data-url')
         };

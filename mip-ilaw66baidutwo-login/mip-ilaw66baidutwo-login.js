@@ -16,6 +16,7 @@ define(function (require) {
      */
     customElement.prototype.firstInviewCallback = function () {
         var $el = $(this.element);
+        //   	alert("W")
         var interval;
         var min;
         var sec;
@@ -29,7 +30,9 @@ define(function (require) {
         var phoneChangedFlagAndHasOrderUnpaid = false;
         var channelInUrl = getQueryString('channel');
         var MIP = window.MIP;
+        var sesidtype = getQueryString('questionType');
         var sessionId = getQueryString('sessionId');
+
         if (!channel && channelInUrl) {
             channel = channelInUrl;
         }
@@ -38,12 +41,16 @@ define(function (require) {
         function returhostname() {
             var hostweb = location.protocol;
             var hostname = location.hostname;
+            console.log(hostname);
             if (hostname === 'www-ilaw66-com.mipcdn.com' || hostname === 'www.ilaw66.com') {
                 hosturl = 'https://www.ilaw66.com/jasmine/';
             }
             else if (hostname === 'localhost') {
                 var hostport = location.port;
                 hosturl = 'http://' + hostname + ':' + hostport + '/jasmine/';
+            }
+            else if (hostname === 'test-ilaw66-com.mipcdn.com') {
+                hosturl = 'https://test.ilaw66.com/jasmine/';
             }
             else {
                 hosturl = 'https://' + hostname + '/jasmine/';
@@ -68,8 +75,10 @@ define(function (require) {
                 location.assign(topurl);
             }
         }
-        var mipsesid = 'mip-login-xzh:sessionId:' + returhostname + 'baidusearch/authorize2';
+
+        var mipsesid = 'mip-login-xzh:sessionId:' + hosturl + 'baidusearch/authorize2';
         sessionId = localStorage.getItem(mipsesid);
+        console.log(sessionId);
         this.addEventAction('login', function (event) {
             console.log('授权成功');
             var sessid = event.sessionId;
@@ -84,8 +93,10 @@ define(function (require) {
                 userId = true;
             }
         });
+        //      alert(sessionId)
+        //      localStorage.setItem(mipsesid, data.sessionId);
 
-        console.log(hosturl);
+        //      console.log(hosturl);
         setTimeout(function () {
             $el.find('.loading_pop').hide();
         }, 2000);
@@ -131,8 +142,6 @@ define(function (require) {
             if (!channel && channelInUrl) {
                 channel = channelInUrl;
             }
-
-            //    choose(channel);
         }
         var settings = {
             e: 'idcode',
@@ -559,15 +568,15 @@ define(function (require) {
                     }
                     else {
                         var flag = sessionStorage.getItem('loginFlg');
-                        if (userId && flag === 0) {
+                        if (userId) {
                             // 修改手机号
                             updateTel();
                         }
                         else {
                             // 用户首次登陆
                             sessionStorage.setItem('loginFlg', 0);
+                            login();
                         }
-                        login();
                     }
                 }
                 else {
@@ -579,7 +588,8 @@ define(function (require) {
         function startConsulting(questionType) {
             $.ajax({
                 url: hosturl + 'greeting?questionType='
-                    + questionType + '&sessionId=' + sessionId,
+                    + questionType + '&sessionId=' + sessionId + '&_csrf='
+                    + $el.find('#_csrf').val(),
                 type: 'POST',
                 success: function (indexmessage) {
                     //                  console.log(indexmessage);
@@ -589,32 +599,32 @@ define(function (require) {
                         $el.find('.popUp_sysErr').fadeIn();
                         setTimeout(function () {
                             locahost('./', '电话咨询');
-                        }, 1000);
+                        }, 1500);
                     }
                     else if (indexmessage === 'ERROR2') {
                         $el.find('#sendSMSError_msg').text('您有订单未支付，请支付后再咨询');
                         $el.find('.popUp_sysErr').fadeIn();
                         setTimeout(function () {
                             locahost('./', '电话咨询');
-                        }, 1000);
+                        }, 1500);
                     }
                     else if (indexmessage === 'ERROR3') {
                         $el.find('#sendSMSError_msg').text('您有订单未结束，请等待1分钟后再试');
                         $el.find('.popUp_sysErr').fadeIn();
                         setTimeout(function () {
                             locahost('./', '电话咨询');
-                        }, 1000);
+                        }, 1500);
                     }
                     else if (indexmessage === 'ERROR4') {
                         $el.find('#sendSMSError_msg').text('您今日取消咨询已达3次，请明天再来');
                         $el.find('.popUp_sysErr').fadeIn();
                         setTimeout(function () {
                             locahost('./', '电话咨询');
-                        }, 1000);
+                        }, 1500);
                     }
                     else {
-                        if (sessionStorage.getItem('baiduquestionType')) {
-                            sessionStorage.clear('baiduquestionType');
+                        if (localStorage.getItem('baiduquestionType')) {
+                            localStorage.removeItem('baiduquestionType');
                         }
 
                         var requesturl = 'mipilaw66baidu'
@@ -637,11 +647,17 @@ define(function (require) {
                     url: hosturl + 'baidusearch/login?username=' + phone + '&channel='
                         + channel + '&password=' + smsCode + '&sessionId=' + sessionId,
                     success: function (data) {
+                        //                  	debugger
                         if (data.status === 0 && data.data.isLogin === '1') {
-                            sessionId = data.sessionId;
-                            localStorage.setItem(mipsesid, data.sessionId);
-                            var sesidtype = sessionStorage.getItem('baiduquestionType');
-                            console.log(sesidtype);
+                            //                      	debugger
+                            //                          sessionId = data.sessionId;
+                            //                          localStorage.setItem(mipsesid, data.sessionId);
+                            //                          var sesidtypes = localStorage.getItem('baiduquestionType');
+                            //                          console.log(sesidtypes);
+                            //                          debugger
+                            //							if(!sesidtype){
+                            //								sesidtype=sesidtypes;
+                            //							}
                             if (sesidtype) {
                                 console.log('下单了');
                                 startConsulting(sesidtype);
@@ -671,8 +687,6 @@ define(function (require) {
             var phone = $el.find('#username').val();
             if (check(phone)) {
                 $el.find('#sms').prop('disabled', true).off('click');
-                var csrfToken = $el.find('#_csrf').val();
-                var channel = $el.find('#channel').val();
 
                 /** 倒计时*/
                 $el.find('#sms').text(timeout + 's');

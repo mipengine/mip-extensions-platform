@@ -6,7 +6,9 @@
 ----|----
 类型|通用
 支持布局|responsive, fixed-height, fill, container, fixed
-所需脚本|https://c.mipcdn.com/static/v1/mip-qf-infinitescroll/mip-qf-infinitescroll.js<br/> https://c.mipcdn.com/static/v1/mip-mustache/mip-mustache.js 
+所需脚本|
+https://c.mipcdn.com/static/v1/mip-mustache/mip-mustache.js<br/>
+https://c.mipcdn.com/static/v1/mip-qf-infinitescroll/mip-qf-infinitescroll.js<br/>
 
 ## 示例
 
@@ -20,7 +22,7 @@
 - `txt-loading` (可选) 正在加载按钮文本。
 
 ```html
-<mip-qf-infinitescroll data-url="https://mtest.119you.com/fgame/game/ranking" gap="200" timeout="5" txt-completed="完毕" txt-failed="失败" txt-loading="努力加载...">
+<mip-qf-infinitescroll data-url="https://mtest.119you.com/fgame/game/ranking" gap="200" timeout="5">
     <script type="application/json">
         {
             "columns": "downloadlink,name",
@@ -37,7 +39,7 @@
         </li>
     </template>
     <ul></ul>
-    <button class="mip-qf-infinitescroll-btn">加载更多</button>
+    <button class="mip-qf-infinitescroll-btn" txt-completed="完毕" txt-failed="失败" txt-loading="努力加载...">加载更多</button>
 </mip-qf-infinitescroll>
 ```
 

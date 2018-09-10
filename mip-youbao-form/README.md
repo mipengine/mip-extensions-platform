@@ -13,6 +13,10 @@ mip-youbao-form 表单组件
 
 ```html
 <mip-youbao-form method="get" fetch-url="http://laravel51.com/postData" from="comment" id="test" >
+    <input type="number" name="mobile" validatetarget="mobile" validatetype="phone" placeholder="电话号码"  value="1395018682">
+    <div class="error" target="mobile">请输入正确的电话</div>
+    <input type="number" validatetarget="age" validatetype="must" name="age" placeholder="年龄" value="123">
+    <div class="error" target="age">年龄不能为空</div>
     <label>
         <input type="radio" validatetarget="sex" validatetype="must" name="sex" value="1" on="tap:scheme-form.validTag(sex)"> 男
     </label>
@@ -34,7 +38,7 @@ mip-youbao-form 表单组件
             服务器错误
         </template>
     </div>
-    <button type="submit" class="submit">确定</button>
+    <input type="submit" class="submit" value="提交">
 </mip-youbao-form>
 ```
 ## 属性

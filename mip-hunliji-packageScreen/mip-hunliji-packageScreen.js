@@ -55,7 +55,7 @@ define(function (require) {
             category = $(element).find('#typeclick li').eq(0).attr('data-list');
             region = $(element).find('#typeclick li').eq(1).attr('data-list');
             sort = $(element).find('#typeclick li').eq(2).attr('data-list');
-            location.href = location.origin + '/baidu/package/list_' + category
+            window.top.location.href = 'https://m.hunliji.com/baidu/package/list_' + category
             + '?page=1&shop_area_id=' + region + '&sort=' + sort + '&actual_price=' + price;
         });
         /**
@@ -67,7 +67,7 @@ define(function (require) {
             price = minActualPrice + ',' + maxActualPrice;
             $(element).find('#typeclick li').eq(index).attr('data-list', price);
             $(element).find('#package_screen_content dl').eq(index).hide();
-            location.href = location.origin + '/baidu/package/list_' + category
+            window.top.location.href = 'https://m.hunliji.com/baidu/package/list_' + category
             + '?page=1&shop_area_id=' + region + '&sort=' + sort + '&actual_price=' + price;
         });
     };

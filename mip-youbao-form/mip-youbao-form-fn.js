@@ -26,9 +26,21 @@ define(function (require) {
         fetchUrl: function (url) {
             var me = this;
             util.css([me.successEle, me.failEle, me.errorEle], {display: 'none'});
+
+            // 获取CSRF-TOKEN
+            var tokenDom = document.querySelector('meta[name="csrf-token"]');
+            if (tokenDom) {
+                var token = tokenDom.getAttribute('content');
+            }
+
             var fetchData = {
                 method: me.method,
-                credentials: 'include'
+                credentials: 'include',
+                headers: new Headers({
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Accept': 'application/json',
+                    'X-CSRF-TOKEN': token ? token : ''
+                })
             };
             if (me.method === 'POST') {
                 var formD = me.ele.querySelector('form');
@@ -191,11 +203,12 @@ define(function (require) {
          * @return {boolean} 是否符合自定义校验
          */
         verification: function (type, value, target) {
-            if (target.type === 'radio') {
-                var sameRadio = this.ele.querySelectorAll('input[type="radio"][name="' + target.name + '"]');
+            if (target.type === 'radio' || target.type === 'checkbox') {
+                var selector = 'input[type="' + target.type + '"][name="' + target.name + '"]';
+                var sameEle = this.ele.querySelectorAll(selector);
                 var checked = false;
-                for (var i in sameRadio) {
-                    if (sameRadio[i].checked) {
+                for (var i in sameEle) {
+                    if (sameEle[i].checked) {
                         checked = true;
                     }
                 }

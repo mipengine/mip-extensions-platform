@@ -9,11 +9,11 @@ define(function (require) {
     var viewer = require('viewer');
 
     /**
-     *   * 因有些方法zepto不支持故使用jquery
    * 备注：部分地方存在全局选择因为部分地方规则限定
    */
     customElement.prototype.firstInviewCallback = function () {
         // TODO
+        //       alert("W")
         var $el = $(this.element);
         var questionType;
         var tabHref;
@@ -42,12 +42,16 @@ define(function (require) {
         function returhostname() {
             var hostweb = location.protocol;
             var hostname = location.hostname;
+            console.log(hostname);
             if (hostname === 'www-ilaw66-com.mipcdn.com' || hostname === 'www.ilaw66.com') {
                 hosturl = 'https://www.ilaw66.com/jasmine/';
             }
             else if (hostname === 'localhost') {
                 var hostport = location.port;
                 hosturl = 'http://' + hostname + ':' + hostport + '/jasmine/';
+            }
+            else if (hostname === 'test-ilaw66-com.mipcdn.com') {
+                hosturl = 'https://test.ilaw66.com/jasmine/';
             }
             else {
                 hosturl = 'https://' + hostname + '/jasmine/';
@@ -89,9 +93,12 @@ define(function (require) {
                 //              else {
                 //                  location.assign('https://www.ilaw66.com/jasmine/mipilaw66baidu_login?channel=baidusearch');
                 //              }
-                setTimeout(function () {
-                    locahost('mipilaw66baidu_login?channel=baidusearch&sessionId=' + sessid, '准备咨询');
-                }, 500);
+                //              setTimeout(function () {
+                var qusttype = localStorage.getItem('baiduquestionType');
+                var tzurl = 'mipilaw66baidu_login?channel=baidusearch&sessionId='
+                + sessid + '&questionType=' + qusttype;
+                locahost(tzurl, '准备咨询');
+            //              }, 500);
             }
             else {
                 console.log('登录成功');
@@ -104,6 +111,11 @@ define(function (require) {
                 //              localStorage.setItem(name, sessid);
             }
         });
+
+        this.addEventAction('error', function (event) {
+            console.log('登录错误');
+        });
+
         setTimeout(function () {
             if (!isloginf) {
                 bannerusernum();
@@ -241,8 +253,11 @@ define(function (require) {
 
         $el.find('.consulting').click(function () {
             var questionType = $(this).data('type');
-            sessionStorage.setItem('baiduquestionType', questionType);
-            startConsulting(questionType);
+            localStorage.setItem('baiduquestionType', questionType);
+            if (sessionId !== 0) {
+                startConsulting(questionType);
+            }
+
             //          alert("W")
             //          if (islog) {
             //              startConsulting(questionType);
@@ -280,7 +295,7 @@ define(function (require) {
                 type: 'GET',
                 dataType: 'json',
                 success: function (a) {
-                    //                  console.log(a);
+                    //                     console.log(a);
                     var rvFlg = false;
                     if (!a) {
                         return;
