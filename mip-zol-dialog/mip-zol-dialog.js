@@ -181,11 +181,17 @@ define(function (require) {
 
         // 自定义事件给DOM来触发
         self.addEventAction('toast', function (e, str) {
-            toast.call(self, str);
+            var msg = str && str !== '' ? str : (e.msg && e.msg !== '' ? e.msg : '');
+            toast.call(self, msg);
         });
 
         self.addEventAction('confirm', function (e, str) {
-            confirm.call(self, str);
+            if (str) {
+                confirm.call(self, str);
+            }
+            else {
+                confirm.call(self, e.msg, e.options);
+            }
         });
 
     };

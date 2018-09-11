@@ -48,9 +48,6 @@ define(function (require) {
         var self = this;
         var element = self.element;
         var src = element.getAttribute('data-src') || '';
-        var appkey = element.getAttribute('appkey') || '';
-        var token = element.getAttribute('token');
-        var isNeedToken = (token && token === 'true');
 
         // 如果没有写data-api, 则报错提示
         if (!src) {
@@ -91,25 +88,6 @@ define(function (require) {
         // 是否从第一页开始
         self.params.isFirstPage = (self.params.query.page === 1);
 
-        // 如果需要token
-        if (isNeedToken) {
-            // token 获取
-            var tokenApi = '//wap.zol.com.cn/mip/api/MakeToken/GetToken?appkey=' + appkey;
-
-            fetchJsonp(tokenApi, {
-                jsonpCallback: 'callback'
-            }).then(function (res) {
-                return res.json();
-            }).then(function (res) {
-                if (!res.status) {
-                    self.token = res.token;
-                    self.params.query.appkey = appkey;
-                    self.params.query.token = res.token;
-                    // 重新设置获取数据的 url
-                    self.url = getQueryUrl(src, self.params.query);
-                }
-            });
-        }
     }
 
     /**
@@ -168,13 +146,16 @@ define(function (require) {
                     element.isLoading = false;
                     var src = self.element.getAttribute('data-src');
                     self.params.query.page++;
+                    if (element.isNeedLogin && element.sessionId && element.sessionId !== '') {
+                        self.params.query.sessionId = element.sessionId;
+                    }
                     self.url = getQueryUrl(src, self.params.query);
                     element.isRefresh = false;
                 }
                 else {
                     element.isLoading = false;
                     scrollLoadStatus.classList.remove('loading');
-                    toast.call(self, self.params.failed);
+                    toast.call(self.element, self.params.failed);
                     callback();
                 }
             });
@@ -254,7 +235,21 @@ define(function (require) {
         loadingText.innerHTML = self.params.loading;
         self.scrollLock = false;
 
-        initScrollLoad.call(self);
+        var needLoginAttr = element.getAttribute('isNeedLogin');
+        var isNeedLogin = needLoginAttr !== null && needLoginAttr !== '0' && needLoginAttr !== 'false';
+        element.isNeedLogin = isNeedLogin;
+        if (!isNeedLogin) {
+            // 加载数据
+            initScrollLoad.call(self);
+        }
+        else {
+            // 登录后 加载数据
+            self.addEventAction('load', function (event) {
+                element.sessionId = event.sessionId;
+                self.url += '&sessionId=' + event.sessionId;
+                initScrollLoad.call(self);
+            });
+        }
 
         // 滚动加载的适合向外提供方法
         self.addEventAction('refresh', function (e, extra) {
@@ -286,6 +281,9 @@ define(function (require) {
                         query[item.name] = item.value;
                     }
                 });
+            }
+            if (isNeedLogin) {
+                query.sessionId = element.sessionId;
             }
             self.url = getQueryUrl(src, query);
             initScrollLoad.call(self, true);

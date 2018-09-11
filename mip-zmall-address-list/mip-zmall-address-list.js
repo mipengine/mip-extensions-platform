@@ -9,6 +9,7 @@ define(function (require) {
     var util = require('util');
     var fetchJsonp = require('fetch-jsonp');
     var templates = require('templates');
+    var viewer = require('viewer');
 
     /**
      * 加载数据
@@ -23,7 +24,12 @@ define(function (require) {
         var templateElement = element.querySelector('#' + templateId);
         var confirmUrl = element.getAttribute('url');
 
-        fetchJsonp(element.api.list, {
+        var url = element.api.list;
+        if (element.isNeedLogin && element.sessionId && element.sessionId !== '') {
+            url = element.api.list + '&sessionId=' + element.sessionId;
+        }
+
+        fetchJsonp(url, {
             jsonpCallback: 'callback'
         }).then(function (res) {
             return res.json();
@@ -52,7 +58,11 @@ define(function (require) {
             }
             else {
                 element.innerHTML = '<p class="empty-address">没有收货地址</p>';
-                element.mipDialogComponent.customElement.toast(address.msg);
+                if (address.msg) {
+                    viewer.eventAction.execute('fail', element, {
+                        msg: address.msg
+                    });
+                }
             }
         });
     }
@@ -64,9 +74,11 @@ define(function (require) {
         if (userInfo && userInfo.sid && userInfo.sid !== '') {
             userId = userInfo.sid;
         }
-
-        if (!userId) {
-            element.mipDialogComponent.customElement.toast('请先登录才能操作');
+        var sessionId = element.sessionId && element.sessionId !== '' ? element.sessionId : 0;
+        if (!userId && !sessionId) {
+            viewer.eventAction.execute('loginTip', element, {
+                msg: '请先登录才能操作'
+            });
             return;
         }
 
@@ -75,13 +87,19 @@ define(function (require) {
         var parent = radio.parentNode;
         var textElement = parent.querySelector('span');
         var defaultApi = element.api.default + '&addressId=' + value + '&userId=' + userId;
+        if (element.isNeedLogin) {
+            defaultApi = element.api.default + '&addressId=' + value + '&sessionId=' + sessionId;
+        }
         fetchJsonp(defaultApi, {
             jsonpCallback: 'callback'
         }).then(function (res) {
             return res.json();
         }).then(function (res) {
-            if (res.flag) {
-                element.mipDialogComponent.customElement.toast('设置成功');
+            var success = element.isNeedLogin ? !res.status : res.flag;
+            if (success) {
+                viewer.eventAction.execute('success', element, {
+                    msg: '设置成功'
+                });
                 if (element.checkedRadio) {
                     checkedRadioParent.classList.remove('label-radio--checked');
                     checkedRadioParent.querySelector('span').textContent = '设置默认';
@@ -94,7 +112,9 @@ define(function (require) {
             else {
                 element.checkedRadio && (element.checkedRadio.checked = true);
                 radio.checked = false;
-                element.mipDialogComponent.customElement.toast(res.msg);
+                viewer.eventAction.execute('fail', element, {
+                    msg: res.msg
+                });
             }
         });
     }
@@ -106,32 +126,47 @@ define(function (require) {
         if (userInfo && userInfo.sid && userInfo.sid !== '') {
             userId = userInfo.sid;
         }
-        if (!userId) {
-            element.mipDialogComponent.customElement.toast('请先登录才能操作');
+        var sessionId = element.sessionId && element.sessionId !== '' ? element.sessionId : 0;
+        if (!userId && !sessionId) {
+            viewer.eventAction.execute('loginTip', element, {
+                msg: '请先登录才能操作'
+            });
             return;
         }
         var addressId = delElement.dataset.id;
         var addressItemNode = delElement.parentNode.parentNode;
         var deleteApi = element.api.delete + '&addressId=' + addressId + '&userId=' + userId;
-        element.mipDialogComponent.customElement.confirm('确定删除该地址？', {
-            okCallback: function () {
-                fetchJsonp(deleteApi, {
-                    jsonpCallback: 'callback'
-                }).then(function (res) {
-                    return res.json();
-                }).then(function (res) {
-                    if (res.flag) {
-                        addressItemNode.classList.add('removing');
-                        setTimeout(function () {
-                            element.removeChild(addressItemNode);
-                            setEmpty(element);
-                            element.mipDialogComponent.customElement.toast('删除成功');
-                        }, 201);
-                    }
-                    else {
-                        element.mipDialogComponent.customElement.toast(res.msg);
-                    }
-                });
+        if (element.isNeedLogin) {
+            deleteApi = element.api.delete + '&addressId=' + addressId + '&sessionId=' + sessionId;
+        }
+
+        viewer.eventAction.execute('confirm', element, {
+            msg: '确定删除该地址？',
+            options: {
+                okCallback: function () {
+                    fetchJsonp(deleteApi, {
+                        jsonpCallback: 'callback'
+                    }).then(function (res) {
+                        return res.json();
+                    }).then(function (res) {
+                        var success = element.isNeedLogin ? !res.status : res.flag;
+                        if (success) {
+                            addressItemNode.classList.add('removing');
+                            setTimeout(function () {
+                                element.removeChild(addressItemNode);
+                                setEmpty(element);
+                                viewer.eventAction.execute('success', element, {
+                                    msg: '删除成功'
+                                });
+                            }, 201);
+                        }
+                        else {
+                            viewer.eventAction.execute('fail', element, {
+                                msg: res.msg
+                            });
+                        }
+                    });
+                }
             }
         });
     }
@@ -193,10 +228,7 @@ define(function (require) {
             return;
         }
 
-        var mipDialogComponent = document.querySelector('mip-zol-dialog');
-
         element.api = userSettings;
-        element.mipDialogComponent = mipDialogComponent;
 
         // 缓存模板信息
         var templateId = element.getAttribute('template');
@@ -210,14 +242,33 @@ define(function (require) {
             return;
         }
 
-        // 加载数据
-        loadAddressList.call(this, function () {
-            bindEvents(element);
-            // 添加或者修改完成返回该页面的时候，刷新数据
-            window.addEventListener('pageshow', function () {
-                self.refresh();
-            }, false);
-        });
+        var needLoginAttr = element.getAttribute('isNeedLogin');
+        var isNeedLogin = needLoginAttr !== null && needLoginAttr !== '0' && needLoginAttr !== 'false';
+        element.isNeedLogin = isNeedLogin;
+        if (!isNeedLogin) {
+            // 加载数据
+            loadAddressList.call(this, function () {
+                bindEvents(element);
+                // 添加或者修改完成返回该页面的时候，刷新数据
+                window.addEventListener('pageshow', function () {
+                    self.refresh();
+                }, false);
+            });
+        }
+        else {
+            // 绑定评论登录
+            this.addEventAction('load', function (event) {
+                element.sessionId = event.sessionId;
+                // 加载数据
+                loadAddressList.call(this, function () {
+                    bindEvents(element);
+                    // 添加或者修改完成返回该页面的时候，刷新数据
+                    window.addEventListener('pageshow', function () {
+                        self.refresh();
+                    }, false);
+                });
+            });
+        }
     };
 
     customElement.prototype.refresh = function () {

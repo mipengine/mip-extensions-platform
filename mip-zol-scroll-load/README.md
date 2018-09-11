@@ -10,6 +10,8 @@
 
 ## 更新
 
+- 1.0.1 增加登录判断，以及登录后请求数据sessionId的传入
+
 ## 示例
 
 ### 基本用法
@@ -17,7 +19,7 @@
 页面已经输出了结果，但只显示了部分，其余部分需要点击来显示
 
 ```html
-<mip-zol-scroll-load appkey="wap" token="true" data-src="//path/to/api" template="tpl-xxx">
+<mip-zol-scroll-load isNeedLogin data-src="//path/to/api" template="tpl-xxx">
     <script type="application/json">
         {
             "query": {
@@ -46,9 +48,13 @@
 
 ## 属性
 
-基本用法二的时候需要属性，基本用法一则不需要
+### isNeedLogin
+
+是否需要登录根据用户ID再获取数据
 
 ### data-src
+
+基本用法二的时候需要属性，基本用法一则不需要
 
 说明：异步请求数据接口   
 必选项：是
@@ -57,19 +63,6 @@
 单位：无   
 默认值：无   
 
-### appkey
-
-说明：应用组件的业务，具体请咨询作者。当 `token="true"` 时起作用                  
-必选项：否    
-类型：字符串   
-默认值：无   
-
-### token
-
-说明：获取内容是否需要token来限制。                               
-必选项：否    
-类型：字符串   
-默认值：`false`    
 
 ### template
 

@@ -8,6 +8,7 @@ define(function (require) {
     var customElement = require('customElement').create();
     var $ = require('zepto');
     var fetchJsonp = require('fetch-jsonp');
+    var viewer = require('viewer');
 
     /**
      * 创建地址编辑层
@@ -179,14 +180,13 @@ define(function (require) {
         //  on="tap:myMapPicker.open"
         var mapPickerTrigger = element.querySelector('#js_map_picker');
         var mapPicker = document.getElementById('myMapPicker');
-        var mipDialogComponent = document.querySelector('mip-zol-dialog');
         mapPickerTrigger.addEventListener('click', function () {
             // 用户选择的省
             var provinceId = element.querySelector('input[name="provinceId"]').value;
             // 用户选择的市
             var cityId = element.querySelector('input[name="cityId"]').value;
             if (provinceId === '' || cityId === '') {
-                mipDialogComponent.customElement.toast('请先选择省份/城市');
+                execute('toast', element, '请先选择省份/城市');
                 return;
             }
             // 打开地图
@@ -216,6 +216,12 @@ define(function (require) {
         }, 300);
     }
 
+    function execute(type, element, msg) {
+        viewer.eventAction.execute(type, element, {
+            msg: msg
+        });
+    }
+
     // 保存地址
     function saveAddress(element, callback) {
 
@@ -227,35 +233,36 @@ define(function (require) {
 
         // 地址ID
         var addressId = element.dataset.addressid;
+        // 用户sessionId
+        var sessionId = element.sessionId;
 
         // 用户输入的值
         var values = getValues(element);
 
         // 验证
-        var mipDialogComponent = document.querySelector('mip-zol-dialog');
         var mobileReg = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
         if (values.truename.trim() === '') {
-            mipDialogComponent.customElement.toast('请填写收货人姓名');
+            execute('toast', element, '请填写收货人姓名');
             return;
         }
         else if (values.mobile.trim() === '') {
-            mipDialogComponent.customElement.toast('请填写收货人手机号码');
+            execute('toast', element, '请填写收货人手机号码');
             return;
         }
         else if (values.mobile.trim().length < 11 || !mobileReg.test(values.mobile.trim())) {
-            mipDialogComponent.customElement.toast('手机号码有误');
+            execute('toast', element, '手机号码有误');
             return;
         }
         else if (values.provinceId === '' || values.cityId === '') {
-            mipDialogComponent.customElement.toast('请选择省份/城市');
+            execute('toast', element, '请选择省份/城市');
             return;
         }
         else if (values.poi === '') {
-            mipDialogComponent.customElement.toast('请选择街道/建筑物');
+            execute('toast', element, '请选择街道/建筑物');
             return;
         }
         else if (values.address.trim() === '') {
-            mipDialogComponent.customElement.toast('请填写详细地址');
+            execute('toast', element, '请填写详细地址');
             return;
         }
 
@@ -264,6 +271,7 @@ define(function (require) {
             type: 'POST',
             data: {
                 addressId: addressId,
+                sessionId: sessionId,
                 userId: userId,
                 truename: values.truename,
                 mobile: values.mobile,
@@ -277,8 +285,9 @@ define(function (require) {
             },
             dataType: 'json',
             success: function (res) {
-                if (res.flag) {
-                    mipDialogComponent.customElement.toast('地址保存成功');
+                var success = element.isNeedLogin ? !res.status : res.flag;
+                if (success) {
+                    execute('toast', element, '地址保存成功');
                     // 保存成功回显
                     window.MIP.setData({
                         address: {
@@ -294,26 +303,24 @@ define(function (require) {
                     }
                 }
                 else {
-                    mipDialogComponent.customElement.toast(res.msg);
+                    execute('toast', element, res.msg);
                 }
             },
             error: function (e) {
-                mipDialogComponent.customElement.toast('保存地址错误，请稍后再试');
+                execute('toast', element, '保存地址错误，请稍后再试');
             }
         });
     }
 
-    customElement.prototype.firstInviewCallback = function () {
-
-        var element = this.element;
+    function getAddressInfo(element) {
         var data = element.dataset;
-
-        create(element);
-
-        initEvent(element);
-
         if (data.type !== 'component' && parseInt(data.addressid, 10) && data.list && data.list !== '') {
-            fetchJsonp(data.list, {
+            var sessionId = element.sessionId && element.sessionId !== '' ? element.sessionId : 0;
+            var listApi = data.list;
+            if (element.isNeedLogin) {
+                listApi += '&sessionId=' + sessionId;
+            }
+            fetchJsonp(listApi, {
                 jsonpCallback: 'callback'
             }).then(function (res) {
                 return res.json();
@@ -323,14 +330,20 @@ define(function (require) {
                     var userAddress = addressData.info.address;
                     var index = userAddress.lastIndexOf('/');
                     var poi = userAddress.substr(0, index);
+                    if (poi === '') {
+                        poi = addressData.info.poi;
+                    }
                     var address = userAddress.substr(index + 1);
+                    var lat = addressData.info.lat ? addressData.info.lat : addressData.info.coordinate_lat;
+                    var lng = addressData.info.lng ? addressData.info.lng : addressData.info.coordinate_lng;
                     window.MIP.setData({
                         userSelectedCityName: addressData.info.provinceName + ' ' + addressData.info.cityName,
                         userSelectedCityId: addressData.info.cityId,
                         userSelectedProvinceId: addressData.info.provinceId,
                         userSelectedPOI: poi,
-                        userSelectedLat: addressData.info.lat,
-                        userSelectedLng: addressData.info.lng
+                        userSelectedLat: lat,
+                        userSelectedLng: lng,
+                        userDefault: addressData.info.isDefault
                     });
                     // 姓名
                     var truenameInput = element.querySelector('input[name="truename"]');
@@ -342,11 +355,38 @@ define(function (require) {
                     var addressArea = element.querySelector('textarea[name="address"]');
                     addressArea.value = address;
                     // 是否默认
+                    var defaultElement = element.querySelector('#js_address_default');
                     if (addressData.info.isDefault) {
-                        element.querySelector('#js_address_default').checked = true;
+                        defaultElement.checked = true;
+                    }
+                    else {
+                        defaultElement.checked = false;
                     }
                     setFixedButtonEnabled(element);
                 }
+            });
+        }
+    }
+
+    customElement.prototype.firstInviewCallback = function () {
+
+        var element = this.element;
+
+        create(element);
+
+        initEvent(element);
+
+        var needLoginAttr = element.getAttribute('isNeedLogin');
+        var isNeedLogin = needLoginAttr !== null && needLoginAttr !== '0' && needLoginAttr !== 'false';
+        element.isNeedLogin = isNeedLogin;
+        if (!isNeedLogin) {
+            getAddressInfo(element);
+        }
+        else {
+            // 登录
+            this.addEventAction('load', function (event) {
+                element.sessionId = event.sessionId;
+                getAddressInfo(element);
             });
         }
     };
