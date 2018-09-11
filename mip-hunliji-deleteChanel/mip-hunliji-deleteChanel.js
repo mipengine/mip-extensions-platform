@@ -9,9 +9,9 @@ define(function (require) {
 
     var customElement = require('customElement').create();
 
-    function delChanel(id, element) {
+    function delChanel(url, id, element) {
         $.ajax({
-            url: '/baidu/delMsg',
+            url: url,
             type: 'POST',
             xhrFields: {
                 withCredentials: true
@@ -29,8 +29,9 @@ define(function (require) {
     customElement.prototype.firstInviewCallback = function () {
         var element = this.element;
         var id = $(element).attr('data-id');
+        var url = $(element).attr('data-url');
         $(element).on('click', '.chat-message-del', function () {
-            delChanel(id, element);
+            delChanel(url, id, element);
         });
     };
 

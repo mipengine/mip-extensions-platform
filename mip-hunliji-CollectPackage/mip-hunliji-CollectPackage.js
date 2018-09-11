@@ -18,7 +18,7 @@ define(function (require) {
             success: function (result) {
                 if (type === 'collect') {
                     if (+result.status.RetCode === 1000) {
-                        window.top.location.href = location.origin + '/baidu/authorize?url=' + location.href;
+                        window.top.location.href = 'https://m.hunliji.com/baidu/authorize?url=' + location.href;
                     } else if (+result.status.RetCode === 0) {
                         $(divid).find('p').html('收藏成功');
                         $(divid).show();
@@ -29,7 +29,7 @@ define(function (require) {
                     }
                 } else {
                     if (+result.status.RetCode === 1000) {
-                        window.top.location.href = location.origin + '/baidu/authorize?url=' + location.href;
+                        window.top.location.href = 'https://m.hunliji.com/baidu/authorize?url=' + location.href;
                     } else if (+result.status.RetCode === 0) {
                         $(divid).find('p').html('取消收藏成功');
                         $(divid).show();

@@ -1,0 +1,14 @@
+{
+    "name": "mip-glasscn-addcaigou",
+    "version": "1.0.0",
+    "description": "全球玻璃网添加采购信息",
+    "contributors": [
+        {
+            "name": "marvinliang",
+            "email": "350618774@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

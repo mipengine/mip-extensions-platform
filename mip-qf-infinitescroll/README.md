@@ -36,9 +36,16 @@ https://c.mipcdn.com/static/v1/mip-qf-infinitescroll/mip-qf-infinitescroll.js<br
             <span>{{itemnum}} {{name}}</span><br>
             <span>apk：{{apkHref}}</span><br>
             <span>ipa: {{ipaHref}}</span>
+            <mip-img src="https://mip.119you.com/upload/resources/image/2018/09/10/369221_120x120.jpg?1536573125000"></mip-img>
         </li>
     </template>
-    <ul></ul>
+    <ul>
+        <li>
+            <span>第一个元素节点为 li，itemNum 计数'li'标签</span><br>
+        </li>
+        <p>p 标签:itemnum 不计数</p>
+    </ul>
+    <div class="mip-qf-infinitescroll-buffer"></div>
     <button class="mip-qf-infinitescroll-btn" txt-completed="完毕" txt-failed="失败" txt-loading="努力加载...">加载更多</button>
 </mip-qf-infinitescroll>
 ```

@@ -22,8 +22,7 @@ define(function (require) {
             success: function (result) {
                 if (result.status.RetCode === 0) {
                     if (result.data.is_login === 1) {
-                        location.href = location.origin
-                        + '/p/wedding/Public/wap/m/mip_baidu/chat/dist/index.html?id=' + chatid + '&entityId=' + packid;
+                        window.top.location.href = 'https://m.hunliji.com/p/wedding/Public/wap/m/mip_baidu/chat/dist/index.html?id=' + chatid + '&entityId=' + packid;
                     } else {
                         $(element).find('#open_tips p').html('预约成功');
                         $(element).find('#open_tips').show();

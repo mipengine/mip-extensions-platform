@@ -176,17 +176,19 @@ define(function (require) {
                 else {
                     payhosturl = hosturl;
                 }
-                data.returnUrl = payhosturl + 'mipilaw66baidu_couponPay?requestId=' + $el.find('#requestId').val()
+                data.returnUrl = payhosturl + 'mipilaw66baidu_order?requestId=' + $el.find('#requestId').val()
                     + '&questionType=' + $el.find('#questionType').val() + '&sessionId=' + sessionId + '&paystart=1';
                 if ($el.find('#cardId').val()) {
                     data.cardId = $el.find('#cardId').val();
                 }
+//              debugger
 
                 $.ajax({
                     type: 'POST',
                     url: hosturl + 'pay/baidupay?sessionId=' + sessionId,
                     data: data,
                     success: function (data) {
+//                  	                debugger
                         if (data && data.cashier_url) {
                             window.top.location.href = data.cashier_url;
                         //                          locahost(data.cashier_url, '电话咨询');

@@ -5,6 +5,7 @@
 
 define(function (require) {
     var fetchJsonp = require('fetch-jsonp');
+    var mustache = require('templates');
     var util = require('util');
 
     /**
@@ -66,16 +67,11 @@ define(function (require) {
     /**
      * 获取 HTML 属性
      * @param {Object} el 组件元素
+     * @param {Object} btn 加载按钮
      * @return {Object} HTML 标签属性对象
      */
 
-    function getHtmlProperties(el) {
-        var btn = el.querySelector('.mip-qf-infinitescroll-btn');
-
-        if (!btn) {
-            throw new Error('DOM element not found');
-        }
-
+    function getHtmlProperties(el, btn) {
         if (!el.getAttribute('data-url')) {
             throw new Error('invalid argument data-url');
         }
@@ -152,8 +148,10 @@ define(function (require) {
 
         var flag = true;
         for (var key in params) {
-            url += (flag ? '' : '&') + key.toLowerCase() + '=' + params[key];
-            flag = false;
+            if (params.hasOwnProperty(key)) {
+                url += (flag ? '' : '&') + key.toLowerCase() + '=' + params[key];
+                flag = false;
+            }
         }
 
         return url;

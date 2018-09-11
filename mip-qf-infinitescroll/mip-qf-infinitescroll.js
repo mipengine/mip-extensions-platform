@@ -10,12 +10,14 @@ define(function (require) {
 
     var customElement = require('customElement').create();
     var component; // 组件元素
-    var btn; // 加载按钮
     var params; // jsonp 参数
     var properties; // HTML 属性
     var itemNum = 0; // 当前数据序号
 
     var scroll = {};
+
+    var btn; // 加载按钮
+    var ul; // 挂载对象
 
     // 按钮相关
     var btnLoading = {
@@ -98,13 +100,20 @@ define(function (require) {
 
             mustache.render(component.element, data)
                 .then(function (rs) {
-                    var ul = component.element.querySelector('ul');
-
                     if (rs instanceof Array) {
                         rs = rs.join('');
                     }
 
-                    ul.innerHTML += rs;
+                    var el = document.createElement('ul');
+                    var frag = document.createDocumentFragment();
+
+                    el.innerHTML = rs;
+
+                    while (el.children.length !== 0) {
+                        frag.appendChild(el.children[0]);
+                    }
+
+                    ul.appendChild(frag);
                 });
 
             loading.finally();
@@ -147,15 +156,43 @@ define(function (require) {
     customElement.prototype.firstInviewCallback = function () {
         component = this;
         btn = component.element.querySelector('.mip-qf-infinitescroll-btn');
+        ul = component.element.querySelector('ul');
+
+        if (!ul || !btn) {
+            throw new Error('DOM element not found');
+        }
+
         params = utils.getCustomParams(this.element);
-        properties = utils.getHtmlProperties(this.element);
+        properties = utils.getHtmlProperties(this.element, btn);
 
         if (!params || !properties) {
             return;
         }
 
-        scroll.handler();
-        scroll.addHandler();
+        mustache.render(component.element, {})
+        .then(function (rs) {
+            var el = document.createElement('ul');
+
+            el.innerHTML = rs;
+
+            // 以首个元素节点标签名为参照
+            var nName = el.children[0].nodeName.toLowerCase();
+
+            // 初始化 itemnum
+            if (el.children.length > 0) {
+                var i = 0;
+                while (i <= el.children.length - 1) {
+                    if (el.children[i].nodeName.toLowerCase() === nName) {
+                        itemNum++;
+                    }
+
+                    i++;
+                }
+            }
+
+            scroll.handler();
+            scroll.addHandler();
+        });
     };
 
     customElement.prototype.detachedCallback = function () {
