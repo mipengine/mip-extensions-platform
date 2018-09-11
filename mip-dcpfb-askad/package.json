@@ -1,0 +1,14 @@
+{
+    "name": "mip-dcpfb-askad",
+    "version": "1.0.0",
+    "description": "页面问答显示图片",
+    "contributors": [
+        {
+            "name": "ljh",
+            "email": "1125263756@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

@@ -38,6 +38,7 @@ define(function (require) {
                 $(element).find('.btnCode').show();
                 return true;
             }
+
             if (second >= 60) {
                 $.ajax({
                     type: 'POST',
@@ -46,6 +47,9 @@ define(function (require) {
                     async: true,
                     success: function (data) {
                         alert(data.info);
+                    },
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 });
                 $(element).find('.getInquiryCode').hide();

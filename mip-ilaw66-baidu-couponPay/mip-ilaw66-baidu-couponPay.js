@@ -25,10 +25,10 @@ define(function (require) {
         var MIP = window.MIP;
         var requestId = getQueryString('requestId');
         var sessionId = getQueryString('sessionId');
-        setTimeout(function () {
-            sessionId = $el.find('#sesiid').html();
-            console.log(sessionId);
-        }, 1000);
+//      setTimeout(function () {
+//          sessionId = $el.find('#sesiid').html();
+//          console.log(sessionId);
+//      }, 1000);
         var hosturl = 'https://www.ilaw66.com/jasmine/';
         function returhostname() {
             var hostweb = location.protocol;
@@ -165,7 +165,7 @@ define(function (require) {
                     data.requestId = $el.find('#requestId').val();
                 }
                 data._csrf = $el.find('#_csrf').val();
-                data.questionType = $el.find('#questionType').val();
+                data.questionType = questionType;
                 //              data.questionType = 'CT001';
                 data.userCouponId = $el.find('#couponId').val();
                 var hostnames = location.hostname;
@@ -177,18 +177,16 @@ define(function (require) {
                     payhosturl = hosturl;
                 }
                 data.returnUrl = payhosturl + 'mipilaw66baidu_order?requestId=' + $el.find('#requestId').val()
-                    + '&questionType=' + $el.find('#questionType').val() + '&sessionId=' + sessionId + '&paystart=1';
+                    + '&questionType=' + questionType + '&sessionId=' + sessionId + '&paystart=1';
                 if ($el.find('#cardId').val()) {
                     data.cardId = $el.find('#cardId').val();
                 }
-//              debugger
-
                 $.ajax({
                     type: 'POST',
                     url: hosturl + 'pay/baidupay?sessionId=' + sessionId,
                     data: data,
                     success: function (data) {
-//                  	                debugger
+
                         if (data && data.cashier_url) {
                             window.top.location.href = data.cashier_url;
                         //                          locahost(data.cashier_url, '电话咨询');

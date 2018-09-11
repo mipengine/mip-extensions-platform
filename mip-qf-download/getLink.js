@@ -43,9 +43,11 @@ define(function (require) {
      * @return {boolean} true 是；false 否
      */
     function isEmpty(options) {
-        if (util.platform.isIos() && !options.ipaHref) {
+        if (util.platform.isIos()) {
             // IOS
-            return true;
+            if (!options.ipaHref) {
+                return true;
+            }
         } else if (!options.apkHref) {
             // 默认安卓
             return true;
