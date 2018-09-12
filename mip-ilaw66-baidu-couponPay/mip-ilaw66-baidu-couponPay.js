@@ -171,16 +171,18 @@ define(function (require) {
                 var hostnames = location.hostname;
                 var payhosturl;
                 if (hostnames === 'www-ilaw66-com.mipcdn.com') {
-                    payhosturl = 'https://m.baidu.com/mip/c/s/www.ilaw66.com/jasmine/';
+                    payhosturl = 'https://m.baidu.com/mip/c/s/';
                 }
                 else {
                     payhosturl = hosturl;
                 }
-                data.returnUrl = payhosturl + 'mipilaw66baidu_order?requestId=' + $el.find('#requestId').val()
-                    + '&questionType=' + questionType + '&sessionId=' + sessionId + '&paystart=1';
+                var encodeurl = encodeURIComponent('www.ilaw66.com/jasmine/mipilaw66baidu_order?requestId='
+                + $el.find('#requestId').val() + '&questionType=' + questionType
+                + '&sessionId=' + sessionId + '&paystart=1');
+                data.returnUrl = payhosturl + encodeurl;
                 if ($el.find('#cardId').val()) {
                     data.cardId = $el.find('#cardId').val();
-                }
+                };
                 $.ajax({
                     type: 'POST',
                     url: hosturl + 'pay/baidupay?sessionId=' + sessionId,

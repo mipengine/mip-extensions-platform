@@ -1,0 +1,11 @@
+<style>
+  #mask {
+    background: rgba(0, 0, 0, 0.3);
+    display: none;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+</style>

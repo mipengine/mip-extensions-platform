@@ -6,6 +6,27 @@
 define(function (require) {
     var customElement = require('customElement').create();
     customElement.prototype.firstInviewCallback = function () {
+
+        var tabTitles = document.getElementsByClassName('tabTitle');
+        var tabContents = document.getElementsByClassName('tabContent');
+        for (var i = 0; i < tabTitles.length; i++) {
+            tabTitles[i].index = i;
+            if (i === 0) {
+                tabContents[i].style = 'display:block';
+            }
+            else {
+                tabContents[i].style = 'display:none';
+            }
+            tabTitles[i].onclick = function () {
+                for (var j = 0; j < tabTitles.length; j++) {
+                    tabTitles[j].className = 'tabTitle';
+                    tabContents[j].style = 'display:none';
+                };
+                this.className = 'tabTitle CurrTab';
+                tabContents[this.index].style = 'display:block';
+            };
+        };
+
         var aTabL = document.getElementById('tabl');
         var aTit = aTabL.getElementsByTagName('a');
         var aCon = document.getElementsByClassName('tabr_li');

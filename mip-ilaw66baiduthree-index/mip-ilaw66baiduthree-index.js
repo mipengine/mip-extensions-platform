@@ -13,7 +13,7 @@ define(function (require) {
    */
     customElement.prototype.firstInviewCallback = function () {
         // TODO
-        //       alert("W")
+        //               alert("W")
         var $el = $(this.element);
         var questionType;
         var tabHref;
@@ -96,7 +96,7 @@ define(function (require) {
                 //              setTimeout(function () {
                 var qusttype = localStorage.getItem('baiduquestionType');
                 var tzurl = 'mipilaw66baidu_login?channel=baidusearch&sessionId='
-                + sessid + '&questionType=' + qusttype;
+                    + sessid + '&questionType=' + qusttype;
                 locahost(tzurl, '准备咨询');
             //              }, 500);
             }
@@ -449,7 +449,7 @@ define(function (require) {
             $.ajax({
                 url: hosturl + 'greeting?questionType='
                     + questionType + '&_csrf='
-                    + $el.find('#_csrf').val() + '&sessionId=' + sessionId,
+                    + $el.find('#_csrf').val() + '&sessionId=' + sessionId + '&channel=baidusearch',
                 type: 'POST',
                 success: function (indexmessage) {
                     console.log(indexmessage);

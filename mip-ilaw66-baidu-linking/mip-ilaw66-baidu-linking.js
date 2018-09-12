@@ -5,7 +5,7 @@
 
 define(function (require) {
     var $ = require('zepto');
-//  var templates = require('templates');
+    //  var templates = require('templates');
     var customElement = require('customElement').create();
 
     /**
@@ -40,12 +40,16 @@ define(function (require) {
         function returhostname() {
             var hostweb = location.protocol;
             var hostname = location.hostname;
+            console.log(hostname);
             if (hostname === 'www-ilaw66-com.mipcdn.com' || hostname === 'www.ilaw66.com') {
                 hosturl = 'https://www.ilaw66.com/jasmine/';
             }
             else if (hostname === 'localhost') {
                 var hostport = location.port;
                 hosturl = 'http://' + hostname + ':' + hostport + '/jasmine/';
+            }
+            else if (hostname === 'test-ilaw66-com.mipcdn.com') {
+                hosturl = 'https://test.ilaw66.com/jasmine/';
             }
             else {
                 hosturl = 'https://' + hostname + '/jasmine/';
@@ -222,7 +226,7 @@ define(function (require) {
             $.ajax({
                 url: hosturl + 'greeting?questionType='
                     + questionType + '&_csrf='
-                    + $el.find('#_csrf').val() + '&sessionId=' + sessionId,
+                    + $el.find('#_csrf').val() + '&sessionId=' + sessionId + '&channel=baidusearch',
                 type: 'POST',
                 success: function (indexmessage) {
                     var requesturl = 'mipilaw66baidu'

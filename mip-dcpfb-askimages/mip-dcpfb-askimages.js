@@ -25,7 +25,6 @@ define(function (require) {
     customElem.prototype.firstInviewCallback = function () {
         var elem = this.element;
         var alSpan = $('#dcask-body');
-        var wdSpan = $('#adDisplayNone');
         $.ajax({
             url: 'https://shop.qdanyy.cn/mipextends/',
             dataType: 'json',
@@ -35,9 +34,8 @@ define(function (require) {
  + '<div class="mobile_bottom_float_class">'
  + '<a href="http://knq.zoossoft.net/lr/chatpre.aspx?id=knq75134940&amp;p=m5.dcpfb.com&amp;rf1=m5.dcpfb.com" class="bot-layer" target="_blank" rel="nofollow">'
  + '<mip-img src="http://m5.dcpfb.com/swt/img/header.jpg" class="bot-img mip-element mip-layout-container mip-img-loaded" title="皮肤病 在线问医生"><img class="mip-fill-content mip-replaced-content" src="http://m5.dcpfb.com/swt/img/header.jpg" title="皮肤病 在线问医生"></mip-img><div class="bot-txt"><div class="bot-name-line"><span class="bot-name">皮肤病</span><span class="bot-zhic">在线问医生</span></div><p class="bot-info">日回复<span id="click-times-box">435</span>人次</p></div><div class="bot-btn">免费咨询</div></a>' + '</div></div></div>');
-                    wdSpan.addClass('ad_display');
                 } else {
-                    wdSpan.css('display', 'block');
+                    $('.addcpfb').removeClass('addDisplayNone');
                 }
             }
         });

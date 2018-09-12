@@ -18,13 +18,8 @@ define(function (require) {
         var paystart = getQueryString('payState');
         var sessionId = getQueryString('sessionId');
         var requestId = getQueryString('requestId');
-        //     	alert(getQueryString('requestId'))
-
         var MIP = window.MIP;
-        setTimeout(function () {
-            sessionId = $el.find('#sesiid').html();
-            //          console.log(sessionId);
-        }, 1000);
+
         var hosturl = 'https://www.ilaw66.com/jasmine/';
         var hostweb = location.protocol;
         var hostname = location.hostname;
@@ -61,6 +56,21 @@ define(function (require) {
         if (paystart) {
             $el.find('.payalert').show();
         }
+
+        this.addEventAction('login', function (event) {
+            console.log('授权成功');
+            var sessid = event.sessionId;
+            var islogin = parseInt(event.userInfo.isLogin, 10);
+            if (!islogin) { // 未注册
+                var tzurl = 'mipilaw66baidu_login?channel=baidusearch&sessionId='
+                    + sessid;
+                locahost(tzurl, '准备咨询');
+            }
+            else {
+                console.log('登录成功');
+                sessionId = sessid;
+            }
+        });
 
         $el.find('#gohome').click(function () {
             //          window.top.location.href = './';
@@ -231,6 +241,7 @@ define(function (require) {
                     );
                     // 支付
                     $el.find('#pay').click(function () {
+                        //                  	alert("W")
                         if (data.orderStatusLabel === '已免单') {
                             var $toast = $el.find('#toast');
                             $toast.fadeIn(100);
@@ -240,13 +251,13 @@ define(function (require) {
                         }
                         else {
                             $.ajax({
-                                async: false,
+                                //                              async: false,
                                 type: 'GET',
-                                data: {
-                                    requestIdList: requestId,
-                                    sessionId: sessionId
-                                },
-                                url: hosturl + 'checkFreeBill',
+                                //                              data: {
+                                //                                  requestIdList: requestId,
+                                //                                  sessionId: sessionId
+                                //                              },
+                                url: hosturl + 'checkFreeBill?sessionId=' + sessionId + '&requestIdList=' + requestId,
                                 success: function (data) {
                                     if (data.result !== 2) {
                                         var payurl = 'mipilaw66baidu_couponPay?requestId='

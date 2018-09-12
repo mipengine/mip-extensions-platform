@@ -13,6 +13,19 @@ mip-slide-tabs 双层tabs切换
 ### 基本用法
 ```html
 <mip-slide-tabs>
+<div class="goods-col" id="topTab">
+   <div class="tabTitle">酒款</div>
+   <div class="tabTitle">资料</div>
+   <div class="tabTitle">评价</div>
+</div>
+
+<div class="tabContent" id="jiukuan">
+酒款xinxi
+</div>
+
+
+<div class="tabContent" id="ziliao">
+
 <div id="box">
        <div id="tabl" class="tabL">
            <a class="active">酒庄</a>
@@ -53,6 +66,13 @@ mip-slide-tabs 双层tabs切换
                </ul>
            </li>
        </ul>
+</div>
+
+</div>
+
+
+<div class="tabContent" id="pingjia">
+酒款评价
 </div>
 </mip-slide-tabs>
 ```

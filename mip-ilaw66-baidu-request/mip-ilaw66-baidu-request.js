@@ -287,6 +287,41 @@ define(function (require) {
                     + '&questionType=' + getQueryString('questionType') + '&sessionId=' + sessionId,
                 async: false,
                 success: function (data) {
+//                  var data = data.data;
+//                  if (!data || data.length === 0) {
+//                  // no lawyer msg
+//                  }
+//                  else {
+//                      for (var h = 0; h < data.length; h++) {
+//                          var a = data[h];
+//                          temp.list.push({
+//                              name: a.name,
+//                              identifyPhoto: a.identifyPhoto
+//                          });
+//                      }
+//                      var tempHtml = '';
+//                      tempHtml += '<mip-carousel '
+//                          + 'autoplay '
+//                          + 'layout="responsive" '
+//                          + 'width="60" '
+//                          + 'height="60">';
+//                      var tempHtmlN = '';
+//                      tempHtmlN += '<mip-carousel '
+//                          + 'autoplay '
+//                          + 'layout="responsive" '
+//                          + 'width="60" '
+//                          + 'height="60">';
+//                      temp.list.forEach(function (item) {
+//                          tempHtml += '<mip-img class="mip_img" width="60" height="60"'
+//                              + ' src="' + item.identifyPhoto + '"></mip-img>';
+//                          tempHtmlN += '<p>' + item.name + '</p>';
+//                      });
+//                      tempHtml += '</mip-carousel>';
+//                      tempHtmlN += '</mip-carousel>';
+//                      $el.find('#mip-template-lawyerImg').html(tempHtml);
+//                      $el.find('#mip-template-lawyerName').html(tempHtmlN);
+//                  }
+
                     var data = data.data;
                     if (!data || data.length === 0) {
                     // no lawyer msg
@@ -304,22 +339,14 @@ define(function (require) {
                             + 'autoplay '
                             + 'layout="responsive" '
                             + 'width="60" '
-                            + 'height="60">';
-                        var tempHtmlN = '';
-                        tempHtmlN += '<mip-carousel '
-                            + 'autoplay '
-                            + 'layout="responsive" '
-                            + 'width="60" '
-                            + 'height="60">';
+                            + 'height="90">';
                         temp.list.forEach(function (item) {
-                            tempHtml += '<mip-img class="mip_img" width="60" height="60"'
-                                + ' src="' + item.identifyPhoto + '"></mip-img>';
-                            tempHtmlN += '<p>' + item.name + '</p>';
+                            tempHtml += '<a  href="javascript:;"><mip-img class="mip_img" width="60" height="60"'
+                                + ' src="' + item.identifyPhoto + '"></mip-img>'
+                                + ' <div class="mip-carousle-subtitle">' + item.name + '</div></a>';
                         });
                         tempHtml += '</mip-carousel>';
-                        tempHtmlN += '</mip-carousel>';
                         $el.find('#mip-template-lawyerImg').html(tempHtml);
-                        $el.find('#mip-template-lawyerName').html(tempHtmlN);
                     }
                 },
                 error: function (jqXHR) {

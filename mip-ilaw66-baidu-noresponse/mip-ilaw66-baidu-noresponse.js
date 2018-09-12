@@ -131,7 +131,7 @@ define(function (require) {
                 $.ajax({
                     type: 'post',
                     url: hosturl + 'greeting?questionType=' + questionType + '&_csrf='
-                        + csrfToken + '&sessionId=' + sessionId,
+                        + csrfToken + '&sessionId=' + sessionId + '&channel=baidusearch',
                     success: function (data) {
                         if (data === 'ERROR' || data === 'ERROR1') {
                             $el.find('#err_msg').html('系统异常，请返回重新咨询');
@@ -169,10 +169,9 @@ define(function (require) {
             // 文字咨询按钮
             $el.find('#js-textConsulting').click(function () {
                 var textbutturl = 'https://m.baidu.com/zhuanjia/question#/submit?vn=law&ref=alaqiang&ssid=0&from=0&uid=0&pu=csrc%40app_secr_txt,sz%401320_2001,ta%40iphone_1_11.2_22_2.8,usm%406&bd_page_type=1&baiduid=F90644066BC91C4E0285A23EFBBC5CC9&tj=2gs_2_0_10_l1&htrackid=6ec1913b5246ead3b67a15bc5d256a75';
-                location.assign(textbutturl);
+                //              location.assign(textbutturl);
+                window.top.location.href = textbutturl;
             });
-
-            // 点击弹窗错误按钮
             $el.find('#err_confirm').click(function () {
                 $el.find('.popUp_sysErr').hide();
             });
