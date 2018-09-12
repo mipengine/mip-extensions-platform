@@ -9,6 +9,7 @@ define(function (require) {
     var $ = require('zepto');
     var CustomStorage = util.customStorage;
     var storage = new CustomStorage(0);
+    var hrefUrl = '';
     // 存储城市信息
     var data;
     // 最近访问城市key
@@ -78,10 +79,10 @@ define(function (require) {
         var href = element.dataset.href;
 
         var html = '<li><a data-id=' + city.cid + ' href=' + href
-        + city.cid + ' mip-link>' + city.short_name + '城区</a></li>';
+        + city.cid + '>' + city.short_name + '城区</a></li>';
         for (var i = 0; i < groups.length; i++) {
             html += '<li><a data-id=' + groups[i].cid + ' href=' + href
-            + groups[i].cid + ' mip-link>' + groups[i].area_name + '</a></li>';
+            + groups[i].cid + '>' + groups[i].area_name + '</a></li>';
         }
 
         $(element).find('#groups').html(html);
@@ -95,15 +96,15 @@ define(function (require) {
         for (var i = 0; i < hots.length; i++) {
             if (hots[i].is_near === 1 || hots[i].is_near === '1') {
                 html += '<li class="closter"><a data-id=' + hots[i].cid + ' href=' + href
-                + hots[i].cid + ' mip-link>' + hots[i].name + '</a></li>';
+                + hots[i].cid + '>' + hots[i].name + '</a></li>';
             }
             else if (hots[i].is_lvpai === 1 || hots[i].is_lvpai === '1') {
                 html += '<li class="trip"><a data-id=' + hots[i].cid + ' href=' + href
-                + hots[i].cid + ' mip-link>' + hots[i].name + '</a></li>';
+                + hots[i].cid + '>' + hots[i].name + '</a></li>';
             }
             else {
                 html += '<li><a data-id=' + hots[i].cid + ' href=' + href
-                + hots[i].cid + ' mip-link>' + hots[i].name + '</a></li>';
+                + hots[i].cid + '>' + hots[i].name + '</a></li>';
             }
         }
 
@@ -125,7 +126,7 @@ define(function (require) {
         var html = '';
         for (var i = 0; i < lastCity.length; i++) {
             html += '<li><a data-id=' + lastCity[i].cid + ' href=' + href
-            + lastCity[i].cid + ' mip-link>' + lastCity[i].short_name + '</a></li>';
+            + lastCity[i].cid + '>' + lastCity[i].short_name + '</a></li>';
         }
 
         $(element).find('#last-city').html(html);
@@ -189,7 +190,7 @@ define(function (require) {
                 if (citys[j][type].indexOf(value) > -1) {
                     flag = true;
                     html += '<li><a data-id=' + citys[j].cid + ' href=' + href
-                    + citys[j].cid + ' mip-link>' + citys[j].short_name + '</a></li>';
+                    + citys[j].cid + '>' + citys[j].short_name + '</a></li>';
                 }
 
                 if (!citys[j].children || citys[j].children.length === 0) {
@@ -199,7 +200,7 @@ define(function (require) {
                 var groups = citys[j].children;
                 for (var k = 0; k < groups.length; k++) {
                     if (groups[k][type].indexOf(value) > -1 || flag) {
-                        html += '<li><a data-id=' + groups[k].cid + ' href=' + href + groups[k].cid + ' mip-link>'
+                        html += '<li><a data-id=' + groups[k].cid + ' href=' + href + groups[k].cid + '>'
                         + citys[j].short_name + ',' + groups[k].short_name + '</a></li>';
                     }
                 }
@@ -252,6 +253,8 @@ define(function (require) {
 
         if (!resultCity) {
             // location.href = 'https://m.hunliji.com/baidu/package/city_' + id;
+
+            window.MIP.viewer.open(hrefUrl + id, {isMipLink: true});
             return;
         }
 
@@ -282,6 +285,7 @@ define(function (require) {
         }
 
         // location.href = 'https://m.hunliji.com/baidu/package/city_' + id;
+        window.MIP.viewer.open(hrefUrl + id, {isMipLink: true});
     }
 
     /**
@@ -290,6 +294,7 @@ define(function (require) {
     customElement.prototype.firstInviewCallback = function () {
         var element = this.element;
         var url = element.dataset.api;
+        hrefUrl = element.dataset.href;
         cityStorageKey = element.dataset.cityStorageKey;
 
         inputEvent(element);

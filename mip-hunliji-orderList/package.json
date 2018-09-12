@@ -1,0 +1,14 @@
+{
+    "name": "mip-hunliji-orderList",
+    "version": "1.0.0",
+    "description": "预约列表",
+    "contributors": [
+        {
+            "name": "li_shu",
+            "email": "li_shu@hunliji.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

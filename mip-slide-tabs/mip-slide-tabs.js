@@ -5,7 +5,8 @@
 
 define(function (require) {
     var customElement = require('customElement').create();
-    customElement.prototype.firstInviewCallback = function () {
+    // build说明：tabs组件，在首屏展示，需要尽快加载
+    customElement.prototype.build = function () {
 
         var tabTitles = document.getElementsByClassName('tabTitle');
         var tabContents = document.getElementsByClassName('tabContent');

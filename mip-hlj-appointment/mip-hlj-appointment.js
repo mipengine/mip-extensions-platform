@@ -7,6 +7,9 @@ define(function (require) {
     var customElement = require('customElement').create();
     var util = require('util');
     var $ = require('zepto');
+    var CustomStorage = util.customStorage;
+    var storage = new CustomStorage(0);
+    var sessionId = '';
 
     function showTip(element, text) {
         $(element).find('.tip').text(text);
@@ -22,7 +25,12 @@ define(function (require) {
      */
     customElement.prototype.firstInviewCallback = function () {
         var element = this.element;
-        var url = element.dataset.api;
+        var api = element.dataset.api;
+        var url = element.dataset.url;
+
+        this.addEventAction('customLogin', function (e) {
+            sessionId = e.sessionId;
+        });
 
         $(element).find('#submit').on('click', function (e) {
             e.preventDefault();
@@ -54,24 +62,37 @@ define(function (require) {
                 showTip(element, '请输入正确格式的手机号');
                 return;
             }
-
-            var link = url;
+            var body = {};
 
             var cityList = cityes.split(',');
             if (cityList.length === 1) {
-                link += ('/city_' + cityList[0]);
+                body['city_code'] = cityList[0];
             } else {
-                link += ('/city_' + cityList[1]);
+                body['city_code'] = cityList[1];
             }
 
-            link += ('/property_' + propertyId);
-
             var priceList = priceRange.split('-');
-            link += ('/min_price_' + priceList[0]);
-            link += ('/max_price_' + priceList[1]);
-            link += ('/phone_' + phone);
 
-            window.top.location.href = link;
+            body['property_id'] = propertyId;
+            body['min_price'] = priceList[0];
+            body['max_price'] = priceList[1];
+            body['phone'] = phone;
+            body['sessionId'] = sessionId;
+
+            $.ajax({
+                url: api,
+                type: 'POST',
+                xhrFields: {
+                    withCredentials: true
+                },
+                data: body,
+                success: function (result) {
+                    if (result.status.RetCode === 0) {
+                        storage.set('recommend_id', result.data.id);
+                        window.top.location.href = url;
+                    }
+                }
+            });
         });
     };
 

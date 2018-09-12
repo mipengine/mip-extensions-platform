@@ -17,6 +17,7 @@ define(function (require) {
         var index = '';
         var typeclass;
         var moren = '';
+        var url = element.dataset.url;
         var category = $(element).find('#typeclick li').eq(0).attr('data-list');
         var region = $(element).find('#typeclick li').eq(1).attr('data-list');
         var sort = $(element).find('#typeclick li').eq(2).attr('data-list');
@@ -55,20 +56,26 @@ define(function (require) {
             category = $(element).find('#typeclick li').eq(0).attr('data-list');
             region = $(element).find('#typeclick li').eq(1).attr('data-list');
             sort = $(element).find('#typeclick li').eq(2).attr('data-list');
-            window.top.location.href = 'https://m.hunliji.com/baidu/package/list_' + category
+            var linkHref = url + category
             + '?page=1&shop_area_id=' + region + '&sort=' + sort + '&actual_price=' + price;
+
+            window.MIP.viewer.open(linkHref, {isMipLink: true});
         });
         /**
          * 价格筛选确定事件
          */
         $(element).on('click', '#btn_submit', function () {
+
+
             var minActualPrice = $(element).find('#ip1').val();
             var maxActualPrice = $(element).find('#ip2').val();
             price = minActualPrice + ',' + maxActualPrice;
             $(element).find('#typeclick li').eq(index).attr('data-list', price);
             $(element).find('#package_screen_content dl').eq(index).hide();
-            window.top.location.href = 'https://m.hunliji.com/baidu/package/list_' + category
+            var linkHref = url + category
             + '?page=1&shop_area_id=' + region + '&sort=' + sort + '&actual_price=' + price;
+
+            window.MIP.viewer.open(linkHref, {isMipLink: true});
         });
     };
 

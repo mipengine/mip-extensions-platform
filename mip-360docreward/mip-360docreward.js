@@ -19,7 +19,7 @@ define(function (require) {
                 }
             }
             if ($(element.find('.yc_z')).length !== 0) {
-                $(element.find('.yc_user')).on('click', function (event) {
+                $(element.find('.yc_z')).on('click', function (event) {
                     event.preventDefault();
                     var jsondata = 'url=' + encodeURIComponent(window.location.href) + '&aid='
                         + $(element.find('.hiddenartid')).val();
@@ -65,7 +65,10 @@ define(function (require) {
                             user1html += '<div class=\'yc_star\'>' + rewardlist.getStarrank(result.degree)
                                 + '</div>';
                             user1html += '</div>';
-                            user1html += '<a href=\'javascript:void(0);\' class=\'fr yc_btn cur\'></a>';
+                            user1html += '<a href=\'http://www.360doc.cn/login.aspx?url='
+                            + encodeURIComponent('http://www.360doc.cn/article/' + rewardlist.userid + '_'
+                                + rewardlist.artid + '.html?addfollow=2&url2=http://www.360doc.cn/index.html')
+                            + '\' class=\'fr yc_btn\'></a>';
                             user1html += '</div>';
                             user1html += '<div class=\'text\'>' + decodeURIComponent(result.description) + '</div>';
                             $('.yc_user_1').html(user1html).show();

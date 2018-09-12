@@ -339,9 +339,9 @@ define(function (require) {
                             + 'autoplay '
                             + 'layout="responsive" '
                             + 'width="60" '
-                            + 'height="90">';
+                            + 'height="110">';
                         temp.list.forEach(function (item) {
-                            tempHtml += '<a  href="javascript:;"><mip-img class="mip_img" width="60" height="60"'
+                            tempHtml += '<a  href="javascript:;"><mip-img class="mip_img" width="59" height="60"'
                                 + ' src="' + item.identifyPhoto + '"></mip-img>'
                                 + ' <div class="mip-carousle-subtitle">' + item.name + '</div></a>';
                         });

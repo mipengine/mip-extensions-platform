@@ -1,7 +1,7 @@
 {
-    "name": "mip-hlj-appointment",
-    "version": "1.0.1",
-    "description": "预约组件 公司内部使用",
+    "name": "mip-hlj-recommend",
+    "version": "1.0.0",
+    "description": "推荐列表组件，公司内部使用",
     "contributors": [
         {
             "name": "kong_kong",

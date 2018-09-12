@@ -32,7 +32,7 @@ define(function (require) {
             if (window.top.history.length === 0) {
                 window.top.location.href = str;
             }
-            window.top.history.back();
+            window.top.history.go(-1);
         });
 
         // 添加重定向事件
