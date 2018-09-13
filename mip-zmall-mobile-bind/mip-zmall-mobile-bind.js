@@ -63,9 +63,6 @@ define(function (require) {
             settings = util.fn.extend(settings, customSettings);
         }
 
-        var mipDialogComponent = document.querySelector('mip-zol-dialog');
-        element.mipDialogComponent = mipDialogComponent;
-
         return settings;
     }
 
@@ -103,13 +100,14 @@ define(function (require) {
             setTimer();
         },
 
-        showBindLayer: function (element, config, data) {
+        showBindLayer: function (element, config) {
             setCover(element);
             var layer = element.querySelector('#js_bind_layer');
             if (layer) {
                 layer.classList.add('visible');
             }
             else {
+                var data = {};
                 data.input = config.input;
                 templates.render(element, data).then(function (html) {
                     element.innerHTML = html;
@@ -132,24 +130,28 @@ define(function (require) {
             var submitButton = element.querySelector('#js_bind_button');
 
             var mobileReg = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
-            var mipDialog = element.mipDialogComponent;
 
             codeSendBtn.addEventListener('click', function () {
                 var timerElement = this;
                 var mobileNumber = numberInputElement.value + '';
                 // 验证
                 if (mobileNumber.trim().length < 11 || !mobileReg.test(mobileNumber.trim())) {
-                    mipDialog && mipDialog.customElement.toast('手机号码有误');
+                    viewer.eventAction.execute('toast', element, {
+                        msg: '手机号码有误'
+                    });
                     return;
                 }
                 var codeUrl = config.code + '&mobile=' + mobileNumber;
 
                 userMobile.ajax(codeUrl, function (data) {
-                    if (data.flag) {
+                    var success = config.isNotCookie ? !data.status : data.flag;
+                    if (success) {
                         userMobile.codeTimerCountdown(timerElement);
                     }
                     else {
-                        mipDialog && mipDialog.customElement.toast(data.msg);
+                        viewer.eventAction.execute('toast', element, {
+                            msg: data.msg
+                        });
                     }
                 });
             });
@@ -178,16 +180,25 @@ define(function (require) {
                 var codeValue = codeInputElement.value;
                 self.innerHTML = '绑定中...';
                 var url = config.bind + '&mobile=' + numberValue + '&bindCode=' + codeValue;
+                if (config.isNotCookie) {
+                    url += '&sessionId=' + element.sessionId;
+                }
                 userMobile.ajax(url, function (data) {
-                    if (data.flag) {
+                    var success = config.isNotCookie ? !data.status : data.flag;
+                    if (success) {
                         self.innerHTML = '绑定成功';
-                        viewer.eventAction.execute('bindSuccess', element, data);
+                        viewer.eventAction.execute('bindSuccess', element, {
+                            target: config.clickElement,
+                            sessionId: element.sessionId
+                        });
                         setTimeout(function () {
                             closeWindow(element);
                         }, 100);
                     }
                     else {
-                        mipDialog && mipDialog.customElement.toast(data.msg);
+                        viewer.eventAction.execute('toast', element, {
+                            msg: data.msg
+                        });
                     }
                 });
             });
@@ -204,14 +215,27 @@ define(function (require) {
 
         var config = getCustomConfig(element);
 
+        self.addEventAction('setsessionid', function (e) {
+            element.sessionId = e.sessionId ? e.sessionId : 0;
+        });
+
         // 绑定手机号事件
-        self.addEventAction('check', function () {
-            userMobile.ajax(config.check, function (data) {
-                if (!data.flag) {
-                    userMobile.showBindLayer(element, config, data);
+        self.addEventAction('check', function (e) {
+            var url = config.check;
+            if (config.isNotCookie) {
+                url += '&sessionId=' + element.sessionId;
+            }
+            userMobile.ajax(url, function (data) {
+                var isNotBind = config.isNotCookie ? (!data.status && !data.isBindPhone) : !data.flag;
+                if (isNotBind) {
+                    config.clickElement = e.target;
+                    userMobile.showBindLayer(element, config);
                 }
                 else {
-                    viewer.eventAction.execute('binded', element, data);
+                    viewer.eventAction.execute('binded', element, {
+                        target: e.target,
+                        sessionId: element.sessionId
+                    });
                 }
             });
         });

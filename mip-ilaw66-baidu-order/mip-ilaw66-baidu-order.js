@@ -15,11 +15,11 @@ define(function (require) {
         var $el = $(this.element);
         // 自动加载数据
         $el.find('#requestId').val(getQueryString('requestId'));
-        var paystart = getQueryString('payState');
+        var paystart = getQueryString('paystart');
         var sessionId = getQueryString('sessionId');
         var requestId = getQueryString('requestId');
         var MIP = window.MIP;
-
+        //		alert(paystart)
         var hosturl = 'https://www.ilaw66.com/jasmine/';
         var hostweb = location.protocol;
         var hostname = location.hostname;
@@ -53,9 +53,6 @@ define(function (require) {
             }
         }
         //      console.log(hosturl);
-        if (paystart) {
-            $el.find('.payalert').show();
-        }
 
         this.addEventAction('login', function (event) {
             console.log('授权成功');
@@ -92,7 +89,12 @@ define(function (require) {
         load();
         setTimeout(function () {
             $el.find('.loading_pop').hide();
-        }, 2000);
+            if (paystart) {
+                //              $el.find('.payalert .talking_result p').css('margin-top', '0px');
+                $el.find('.payalert').show();
+            }
+
+        }, 1000);
 
         function getQueryString(name) {
             var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
@@ -194,7 +196,7 @@ define(function (require) {
                                 + data.id + '">去支付</button>';
                         }
                     }
-                    var orderInfoHtml = '<div class="orderlist__status border_bottom">'
+                    var orderInfoHtml = '<div class="orderlist__status border_bottom payheader">'
                         + '<div class="con_left">'
                         + '<div class="order__title">'
                         + '<span class="pay_status_icon">付费</span> '

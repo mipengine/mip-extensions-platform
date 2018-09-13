@@ -7,6 +7,10 @@
 类型|业务组件
 所需脚本|https://c.mipcdn.com/static/v1/mip-zmall-mobile-bind/mip-zmall-mobile-bind.js
 
+## 更新
+
+- 1.0.1 增加登录用户的判断，以及用户ID的传入
+
 ## 示例
 
 ### 基本用法

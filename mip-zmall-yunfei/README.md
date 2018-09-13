@@ -5,7 +5,11 @@
 标题|内容
 ----|----
 类型|公司业务组件
-所需脚本|https://c.mipcdn.com/static/v1/mip-zmall-yunfei/mip-zmall-yunfei.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-zmall-yunfei/mip-zmall-yunfei.js
+
+## 更新
+
+- 1.0.1 新版和旧版的兼容，对外提供的方法增加dataset的获取
 
 ## 示例
 

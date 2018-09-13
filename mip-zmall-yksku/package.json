@@ -1,0 +1,14 @@
+{
+    "name": "mip-zmall-yksku",
+    "version": "1.0.0",
+    "description": "友客MIP sku 选择组件",
+    "contributors": [
+        {
+            "name": "liuxianggui",
+            "email": "liu.xianggui@zol.com.cn"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

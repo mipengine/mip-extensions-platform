@@ -406,12 +406,20 @@ define(function (require) {
                 url: hosturl + 'checkTalkingOrder?requestId=' + checkRequestId + '&sessionId=' + sessionId,
                 success: function (data) {
                     var state = data.result.state;
-                    if (state === 6 || state === 7) {
+                    if (state === 6) {
                         $el.find('.toast_txt').text('通话不足60秒，无需支付');
                         $el.find('.toast_div').show();
                         setTimeout(function () {
                             $el.find('.toast_div').hide();
                             //                          window.top.location.href = './';
+                            locahost('./', '电话咨询');
+                        }, 2000);
+                    }
+                    else if (state === 7) {
+                        $el.find('.toast_txt').text('通话异常，未接通电话');
+                        $el.find('.toast_div').show();
+                        setTimeout(function () {
+                            $el.find('.toast_div').hide();
                             locahost('./', '电话咨询');
                         }, 2000);
                     }

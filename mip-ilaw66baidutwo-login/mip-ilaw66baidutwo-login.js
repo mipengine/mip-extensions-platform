@@ -16,7 +16,7 @@ define(function (require) {
      */
     customElement.prototype.firstInviewCallback = function () {
         var $el = $(this.element);
-        //   	alert("W")
+        //           	alert("W")
         var interval;
         var min;
         var sec;
@@ -112,7 +112,7 @@ define(function (require) {
         else {
             $el.find('#login').text('去匹配律师');
         }
-
+        $el.find('.popUp_sysErr').css('position', 'fixed');
         $el.find('#login').css('background', '#3388FF');
         $el.find('#login').css('height', '45px');
         $el.find('.radio-rule').show();
@@ -569,14 +569,14 @@ define(function (require) {
                     else {
                         var flag = sessionStorage.getItem('loginFlg');
                         if (userId) {
-                            // 修改手机号
-                            updateTel();
+                        // 修改手机号
+                        //                          updateTel();
                         }
                         else {
                             // 用户首次登陆
                             sessionStorage.setItem('loginFlg', 0);
-                            login();
                         }
+                        login();
                     }
                 }
                 else {
@@ -592,6 +592,10 @@ define(function (require) {
                     + $el.find('#_csrf').val(),
                 type: 'POST',
                 success: function (indexmessage) {
+                    if (localStorage.getItem('baiduquestionType')) {
+                        localStorage.removeItem('baiduquestionType');
+                    }
+
                     //                  console.log(indexmessage);
                     //                  console.log(typeof indexmessage);
                     if (indexmessage === 'ERROR' || indexmessage === 'ERROR1') {
@@ -623,17 +627,16 @@ define(function (require) {
                         }, 1500);
                     }
                     else {
-                        if (localStorage.getItem('baiduquestionType')) {
-                            localStorage.removeItem('baiduquestionType');
-                        }
-
                         var requesturl = 'mipilaw66baidu'
                             + '_request?data=' + indexmessage + '&questionType=' + questionType
                             + '&sessionId=' + sessionId;
                         locahost(requesturl, '匹配律师');
                     }
+
                 },
                 error: function () {
+                    $el.find('#sendSMSError_msg').text('匹配律师发生错误，请返回首页重新下单！');
+                    $el.find('.popUp_sysErr').fadeIn();
                     //                  window.location.reload();
                 }
             });
@@ -642,6 +645,12 @@ define(function (require) {
             var phone = $el.find('#username').val();
             if (check(phone)) {
                 var smsCode = $el.find('#password').val();
+                if (smsCode === '' || (smsCode.length) <= 6) {
+                    $el.find('#sendSMSError_msg').text('请输入正确验证码');
+                    $el.find('.popUp_sysErr').fadeIn();
+                    return;
+                }
+
                 $.ajax({
                     type: 'POST',
                     url: hosturl + 'baidusearch/login?username=' + phone + '&channel='
@@ -652,18 +661,19 @@ define(function (require) {
                             //                      	debugger
                             //                          sessionId = data.sessionId;
                             //                          localStorage.setItem(mipsesid, data.sessionId);
-                            //                          var sesidtypes = localStorage.getItem('baiduquestionType');
+                            var sesidtypes = localStorage.getItem('baiduquestionType');
                             //                          console.log(sesidtypes);
-                            //                          debugger
-                            //							if(!sesidtype){
-                            //								sesidtype=sesidtypes;
-                            //							}
+                            if (!sesidtype && sesidtypes) {
+                                sesidtype = sesidtypes;
+                            }
+
+                            //                           var sesidtype = localStorage.getItem('baiduquestionType');
                             if (sesidtype) {
-                                console.log('下单了');
+                                //                              console.log('下单了');
                                 startConsulting(sesidtype);
                             }
                             else {
-                                console.log('跳转了');
+                                //                              console.log('跳转了');
                                 locahost('./', '电话咨询');
                             }
                         }
@@ -698,52 +708,60 @@ define(function (require) {
                 }, 1000);
 
                 /** 发送短信*/
-                var flag = sessionStorage.getItem('loginFlg');
+                //              var flag = sessionStorage.getItem('loginFlg');
 
-                if (userId) { // 修改手机号
-                    $.ajax({
-                        type: 'GET',
-                        url: hosturl + 'sms?phone=' + phone + '&channel=' + channel
-                            + '&sessionId=' + sessionId,
-                        success: function (data) {
-                            if (data === 'ERROR') {
-                                $el.find('#sendSMSError_msg').text('发送短信失败');
-                                $el.find('.popUp_sysErr').fadeIn();
-                            }
-                            else if (data === 'ERROR1') {
-                                $el.find('#sendSMSError_msg').text('链接异常');
-                                $el.find('.popUp_sysErr').fadeIn();
-                            }
-                            else if (data === 'ERROR2') {
-                                $el.find('#sendSMSError_msg').text('您已申请过，请稍后申请');
-                                $el.find('.popUp_sysErr').fadeIn();
-                            }
-
+                //                              if (userId) { // 修改手机号
+                $.ajax({
+                    type: 'GET',
+                    url: hosturl + 'sms?phone=' + phone + '&channel=' + channel
+                        + '&sessionId=' + sessionId,
+                    success: function (data) {
+                        if (data === 'ERROR') {
+                            $el.find('#sendSMSError_msg').text('发送短信失败');
+                            $el.find('.popUp_sysErr').fadeIn();
                         }
-                    });
-                }
-                else {
-                    $.ajax({
-                        type: 'GET',
-                        url: hosturl + 'sendSms?phone=' + phone + '&channel=' + channel
-                            + '&_csrf=' + csrfToken + '&sessionId=' + sessionId,
-                        success: function (data) {
-                            if (data === 'ERROR') {
-                                $el.find('#sendSMSError_msg').text('发送短信失败');
-                                $el.find('.popUp_sysErr').fadeIn();
-                            }
-                            else if (data === 'ERROR1') {
-                                $el.find('#sendSMSError_msg').text('链接异常');
-                                $el.find('.popUp_sysErr').fadeIn();
-                            }
-                            else if (data === 'ERROR2') {
-                                $el.find('#sendSMSError_msg').text('您已申请过，请稍后申请');
-                                $el.find('.popUp_sysErr').fadeIn();
-                            }
-
+                        else if (data === 'ERROR1') {
+                            $el.find('#sendSMSError_msg').text('链接异常');
+                            $el.find('.popUp_sysErr').fadeIn();
                         }
-                    });
-                }
+                        else if (data === 'ERROR2') {
+                            $el.find('#sendSMSError_msg').text('10分钟内不能重复发送');
+                            $el.find('.popUp_sysErr').fadeIn();
+                        }
+
+                    },
+                    error: function (jqXHR) {
+                        if (jqXHR.status === 500) {
+                            $el.find('#sendSMSError_msg').text(jqXHR.responseJSON.data);
+                            $el.find('.popUp_sysErr').fadeIn();
+                            //    	console.log(jqXHR.responseJSON.data)
+                        }
+
+                    }
+                });
+                //                              }
+                //              else {
+                //              $.ajax({
+                //                  type: 'GET',
+                //                  url: hosturl + 'sendSms?phone=' + phone + '&channel=' + channel
+                //                      + '&_csrf=' + csrfToken + '&sessionId=' + sessionId,
+                //                  success: function (data) {
+                //                      if (data === 'ERROR') {
+                //                          $el.find('#sendSMSError_msg').text('发送短信失败');
+                //                          $el.find('.popUp_sysErr').fadeIn();
+                //                      }
+                //                      else if (data === 'ERROR1') {
+                //                          $el.find('#sendSMSError_msg').text('链接异常');
+                //                          $el.find('.popUp_sysErr').fadeIn();
+                //                      }
+                //                      else if (data === 'ERROR2') {
+                //                          $el.find('#sendSMSError_msg').text('您已申请过，请稍后申请');
+                //                          $el.find('.popUp_sysErr').fadeIn();
+                //                      }
+                //
+                //                  }
+                //              });
+                //              }
             }
         }
 
@@ -788,7 +806,8 @@ define(function (require) {
                 async: true,
                 type: 'POST',
                 url: hosturl + 'baidusearch/updatePhone?phone=' + phone
-                    + '&code=' + smsCode + '&sessionId=' + sessionId,
+                    + '&code=' + smsCode + '&sessionId=' + sessionId + '&_csrf='
+                    + csrfToken + '&channel=' + channel,
                 dataType: 'json',
                 success: function (data) {
                     if (data.code === 1) {
@@ -814,8 +833,10 @@ define(function (require) {
                     }
                 },
                 error: function (jqXHR) {
-                    if (jqXHR.status === 403) {
-                        // window.location.reload();
+                    if (jqXHR.status === 500) {
+                        $el.find('#sendSMSError_msg').text(jqXHR.responseJSON.data);
+                        $el.find('.popUp_sysErr').fadeIn();
+                        //    	console.log(jqXHR.responseJSON.data)
                     }
 
                 }

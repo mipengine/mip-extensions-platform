@@ -1,0 +1,14 @@
+{
+    "name": "mip-zmall-login-data",
+    "version": "1.0.0",
+    "description": "根据用户ID请求数据，并放入mip-data中",
+    "contributors": [
+        {
+            "name": "liuxianggui",
+            "email": "liu.xianggui@zol.com.cn"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

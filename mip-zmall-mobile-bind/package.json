@@ -1,7 +1,7 @@
 {
     "name": "mip-zmall-mobile-bind",
-    "version": "1.0.0",
-    "description": "组件介绍",
+    "version": "1.0.1",
+    "description": "绑定手机号",
     "contributors": [
         {
             "name": "liuxg",

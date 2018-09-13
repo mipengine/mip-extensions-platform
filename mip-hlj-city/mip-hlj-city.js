@@ -245,6 +245,7 @@ define(function (require) {
 
     // 阻止默认的跳转事件 存储最近城市
     function stopDefaultEvent(e) {
+        e.preventDefault();
         var id = e.currentTarget.dataset.id;
         var lastCityStr = storage.get(cityStorageKey);
         var resultCity = findCityById(data.list, id);

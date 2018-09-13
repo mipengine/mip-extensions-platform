@@ -84,7 +84,9 @@ define(function (require) {
                     }
                 }
                 else {
-                    element.mipDialogComponent.customElement.toast(res.msg);
+                    viewer.eventAction.execute('toast', element, {
+                        msg: res.msg
+                    });
                 }
             });
         }
@@ -100,7 +102,9 @@ define(function (require) {
             }
         }
         else {
-            element.mipDialogComponent.customElement.toast('参数错误');
+            viewer.eventAction.execute('toast', element, {
+                msg: '参数错误'
+            });
         }
     }
 
@@ -166,9 +170,6 @@ define(function (require) {
             var customSettings = JSON.parse(script.textContent.toString());
             settings = util.fn.extend(settings, customSettings);
         }
-
-        var mipDialogComponent = document.querySelector('mip-zol-dialog');
-        element.mipDialogComponent = mipDialogComponent;
 
         self.addEventAction('open', function (e, title) {
             if (title) {

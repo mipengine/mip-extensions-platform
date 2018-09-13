@@ -99,7 +99,7 @@ define(function (require) {
                     return encodeURIComponent($1);
                 });
 
-                window.location = handleUrl(redirectUrl, {token: token});
+                window.top.location.href = handleUrl(redirectUrl, {token: token});
             }
             else {
 
@@ -157,7 +157,7 @@ define(function (require) {
             redirectUrl = redirectUrl.replace(/{{(.+?)}}/g, function ($0, $1) {
                 return encodeURIComponent($1);
             });
-            window.location = redirectUrl;
+            window.top.location.href = redirectUrl;
         }
     }
 
@@ -355,7 +355,7 @@ define(function (require) {
                     return encodeURIComponent($1);
                 });
 
-                window.location = redirectUrl;
+                window.top.location.href = redirectUrl;
             });
         };
 
