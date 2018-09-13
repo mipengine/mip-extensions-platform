@@ -43,7 +43,6 @@ define(function (require) {
             /* eslint-enable fecs-camelcase */
         },
         network: 'unknown',
-        getNetworkType: 'baiduboxapp://v19/utils/getNetworkType?callback=videoPageGetNetworkType',
         ua: platform,
         sectionNum: 10
     };
@@ -74,12 +73,6 @@ define(function (require) {
             var self = this;
             self.init();
             self.getNetwork();
-            window.videoPageGetNetworkType = function (data) {
-                var res = JSON.parse(data);
-                if (res && !parseInt(res.status, 10) && res.data) {
-                    videoLog.network = res.data.networkType;
-                }
-            };
 
             var autoplay = videoEl.getAttribute('autoplay');
             if (autoplay) {
@@ -155,9 +148,6 @@ define(function (require) {
             if (self.isSearchCraft()) {
                 self.getNetworkSearchCraft();
             }
-            else if (ua.isBaiduApp()) {
-                self.getNetworkBaidubox();
-            }
         },
         // 简单搜索版本号
         secrVersion: function () {
@@ -196,10 +186,6 @@ define(function (require) {
         isSearchCraft: function () {
             var isSearchCraft = /SearchCraft/i.test(navigator.userAgent);
             return isSearchCraft;
-        },
-        // 获取手百的网络状态
-        getNetworkBaidubox: function () {
-            location.assign(videoLog.getNetworkType);
         },
         // 获取简单的网络状态
         getNetworkSearchCraft: function () {
