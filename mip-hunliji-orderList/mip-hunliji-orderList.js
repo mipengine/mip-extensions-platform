@@ -8,7 +8,7 @@ define(function (require) {
     const $ = require('zepto');
     const customElement = require('customElement').create();
 
-    function getOrderList(url, sessionId, element) {
+    function getOrderList(url, sessionId, element, href) {
         $.ajax({
             url: url,
             type: 'get',
@@ -21,7 +21,7 @@ define(function (require) {
                 if (result.data.list) {
                     for (let i = 0; i < result.data.list.length; i++) {
                         html += '<li>'
-                            + '<a href="/merchant/detail_' + result.data.list[i].merchant.id + '">'
+                            + '<a href="' + href + '/merchant/detail_' + result.data.list[i].merchant.id + '" mip-link>'
                             + '<div class="order-item-hd">'
                             + '<mip-img layout="container" src="' + result.data.list[i].merchant.logo_path
                             + '?imageView2/2/w/100" alt=""></mip-img>'
@@ -37,8 +37,8 @@ define(function (require) {
                             + '<p>私信</p>'
                             + '</div>'
                             + '</a>'
-                            + '<a href="/p/wedding/Public/wap/m/mip_baidu/chat/dist/index.html?id='
-                            + result.data.list[i].merchant.user_id + '" class="order-chat"></a>'
+                            + '<a href="' + href + '/p/wedding/Public/wap/m/mip_baidu/chat/dist/index.html?id='
+                            + result.data.list[i].merchant.user_id + '" class="order-chat" mip-link></a>'
                             + '</li>';
                     }
 
@@ -57,9 +57,10 @@ define(function (require) {
         const element = this.element;
         let sessionId = '';
         const url = $(element).attr('data-url');
+        const href = $(element).attr('data-href');
         this.addEventAction('customLogin', function (e) {
             sessionId = e.sessionId;
-            getOrderList(url, sessionId, element);
+            getOrderList(url, sessionId, element, href);
         });
     };
 

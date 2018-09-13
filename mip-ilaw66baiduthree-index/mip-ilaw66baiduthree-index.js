@@ -104,6 +104,11 @@ define(function (require) {
                 console.log('登录成功');
                 sessionId = sessid;
                 isloginf = true;
+                var sesidtypes = localStorage.getItem('baiduquestionType');
+                if (sesidtypes) {
+                    startConsulting(sesidtypes);
+                }
+
                 bannerusernum();
                 //              $el.find('#sesiid').html(sessid);
                 //              var thishostname = location.hostname;
@@ -452,8 +457,12 @@ define(function (require) {
                     + $el.find('#_csrf').val() + '&sessionId=' + sessionId + '&channel=baidusearch',
                 type: 'POST',
                 success: function (indexmessage) {
-                    console.log(indexmessage);
-                    console.log(typeof indexmessage);
+                    //                  console.log(indexmessage);
+                    //                  console.log(typeof indexmessage);
+                    if (localStorage.getItem('baiduquestionType')) {
+                        localStorage.removeItem('baiduquestionType');
+                    }
+
                     if (indexmessage === 'ERROR' || indexmessage === 'ERROR1') {
                         $el.find('#' + tabHref).removeClass().addClass('tab-pane');
                         flg = 0;

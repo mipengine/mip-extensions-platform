@@ -9,7 +9,7 @@ define(function (require) {
 
     const customElement = require('customElement').create();
 
-    function getOrderList(url, sessionId, element) {
+    function getOrderList(url, sessionId, element, href) {
         $.ajax({
             url: url,
             type: 'get',
@@ -29,7 +29,8 @@ define(function (require) {
                         data = result.data.list;
                         for (let j = 0; j < data[i].content.length; j++) {
                             if (data[i].property_id !== '13') {
-                                content = '<a href="/baidu/package/detail_' + data[i].content[j].id + '">'
+                                content = '<a href="' + href + '/baidu/package/detail_' + data[i].content[j].id + '"'
+                                    + ' mip-link>'
                                     + '<li>'
                                     + '<div class="message_pack_hd">'
                                     + '<mip-img layout="container" src="' + data[i].content[j].cover_path
@@ -42,7 +43,8 @@ define(function (require) {
                                     + '</li>'
                                     + '</a>';
                             } else {
-                                content = '<a href="/baidu/hotel/detail_' + data[i].content[j].id + '">'
+                                content = '<a href="' + href + '/baidu/hotel/detail_' + data[i].content[j].id + '"'
+                                    + ' mip-link>'
                                     + '<li>'
                                     + '<div class="message_pack_hd hotel">'
                                     + '<mip-img layout="container"  src="' + data[i].content[j].logo_path
@@ -99,9 +101,10 @@ define(function (require) {
         const element = this.element;
         let sessionId = '';
         const url = $(element).attr('data-url');
+        const href = $(element).attr('data-href');
         this.addEventAction('customLogin', function (e) {
             sessionId = e.sessionId;
-            getOrderList(url, sessionId, element);
+            getOrderList(url, sessionId, element, href);
         });
     };
 

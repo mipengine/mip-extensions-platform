@@ -645,7 +645,7 @@ define(function (require) {
             var phone = $el.find('#username').val();
             if (check(phone)) {
                 var smsCode = $el.find('#password').val();
-                if (smsCode === '' || (smsCode.length) <= 6) {
+                if (smsCode === '') {
                     $el.find('#sendSMSError_msg').text('请输入正确验证码');
                     $el.find('.popUp_sysErr').fadeIn();
                     return;

@@ -1,0 +1,14 @@
+{
+    "name": "mip-apple-func",
+    "version": "1.0.0",
+    "description": "个人项目接口",
+    "contributors": [
+        {
+            "name": "mickey",
+            "email": "787440432@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

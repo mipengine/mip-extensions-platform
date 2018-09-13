@@ -9,7 +9,7 @@ define(function (require) {
 
     const customElement = require('customElement').create();
 
-    function getOrderList(url, sessionId, element) {
+    function getOrderList(url, sessionId, element, href) {
         $.ajax({
             url: url,
             type: 'get',
@@ -49,8 +49,8 @@ define(function (require) {
                         }
 
                         msgList += '<li data-attr="' + data.msg_list[i].id + '">\
-                            <a href="/p/wedding/Public/wap/m/mip_baidu/chat/dist/index.html?id='
-                            + data.msg_list[i].merchant.user_id + '">\
+                            <a href="' + href + '/p/wedding/Public/wap/m/mip_baidu/chat/dist/index.html?id='
+                            + data.msg_list[i].merchant.user_id + '" mip-link>\
                             <div class="chat_avatar">\
                             ' + unreadCount + '\
                             <mip-img layout="container"\
@@ -59,16 +59,16 @@ define(function (require) {
                             </div>\
                             </a>\
                             <div class="chat_right">\
-                            <a href="/p/wedding/Public/wap/m/mip_baidu/chat/dist/index.html?id='
-                             + data.msg_list[i].merchant.user_id + '">\
+                            <a href="' + href + '/p/wedding/Public/wap/m/mip_baidu/chat/dist/index.html?id='
+                             + data.msg_list[i].merchant.user_id + '" mip-link>\
                                 <div class="chat-top">\
                                     <h3>' + data.msg_list[i].merchant.name + '</h3>\
                                     <span>' + data.msg_list[i].created_at.substring(0, 10) + '</span>\
                                 </div>\
                             </a>\
                                 <div class="chat-message clearfix">\
-                                    <a href="/p/wedding/Public/wap/m/mip_baidu/chat/dist/index.html?id='
-                                     + data.msg_list[i].merchant.user_id + '">' + msgContent + '</a>\
+                                    <a href="' + href + '/p/wedding/Public/wap/m/mip_baidu/chat/dist/index.html?id='
+                                     + data.msg_list[i].merchant.user_id + '" mip-link>' + msgContent + '</a>\
                                     <mip-hunliji-deleteChanel data-id="' + data.msg_list[i].id + '" data-url="https://m.hunliji.com/baidu/delMsg">\
                                         <span class="chat-message-del">删除</span>\
                                     </mip-hunliji-deleteChanel>\
@@ -81,9 +81,11 @@ define(function (require) {
                     html += '<div class="personal_info">\
                                 <div class="header_info">\
                                     <h3>' + data.user.nick + '</h3>\
-                                    <a data-type="mip" data-title="收藏" href="/baidu/mySetMealCollector">\
+                                    <a data-type="mip" data-title="收藏" \
+                                    href="' + href + '/baidu/mySetMealCollector" mip-link>\
                                     <p><span>' + data.user.collector_count + '</span><i>收藏</i></p></a>\
-                                    <a data-type="mip" data-title="预约" href="/baidu/myAppointment">\
+                                    <a data-type="mip" data-title="预约" \
+                                    href="' + href + '/baidu/myAppointment" mip-link>\
                                     <p><span>' + data.user.appointment_count + '</span><i>预约</i></p></a>\
                                 </div>\
                                 <div class="header_avatar">\
@@ -92,7 +94,8 @@ define(function (require) {
                                 </div>\
                             </div>\
                             <div class="system_message">\
-                                <a  data-type="mip" data-title="系统消息"  href="/baidu/systemMessage">\
+                                <a  data-type="mip" data-title="系统消息"  \
+                                href="' + href + '/baidu/systemMessage" mip-link>\
                                     <div class="system_message_top clearfix">\
                                         <p>系统消息</p>\
                                         <span>' + data.created_at.substring(0, 10) + '</span>\
@@ -119,9 +122,10 @@ define(function (require) {
         const element = this.element;
         let sessionId = '';
         const url = $(element).attr('data-url');
+        const href = $(element).attr('data-href');
         this.addEventAction('customLogin', function (e) {
             sessionId = e.sessionId;
-            getOrderList(url, sessionId, element);
+            getOrderList(url, sessionId, element, href);
         });
     };
 

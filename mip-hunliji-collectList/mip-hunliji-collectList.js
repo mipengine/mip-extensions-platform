@@ -9,7 +9,7 @@ define(function (require) {
 
     const customElement = require('customElement').create();
 
-    function getOrderList(url, sessionId, element) {
+    function getOrderList(url, sessionId, element, href) {
         $.ajax({
             url: url,
             type: 'get',
@@ -21,7 +21,8 @@ define(function (require) {
                 let html = '';
                 if (result.data.list) {
                     for (let i = 0; i < result.data.list.length; i++) {
-                        html += '<a href="/baidu/package/detail_' + result.data.list[i].set_meal.id + '">'
+                        html += '<a href="' + href + '/baidu/package/detail_' + result.data.list[i].set_meal.id + '"'
+                            + ' mip-link>'
                             + '<li  data-attr="' + result.data.list[i].id + '">'
                             +  '<div class="pkg-item-hd">'
                             + '<p><i>' + result.data.list[i].set_meal.property_name + '</i></p>'
@@ -52,9 +53,10 @@ define(function (require) {
         const element = this.element;
         let sessionId = '';
         const url = $(element).attr('data-url');
+        const href = $(element).attr('data-href');
         this.addEventAction('customLogin', function (e) {
             sessionId = e.sessionId;
-            getOrderList(url, sessionId, element);
+            getOrderList(url, sessionId, element, href);
         });
     };
 
