@@ -25,6 +25,7 @@ define(function (require) {
         var userId = $el.find('#userId').val();
         var sessionId = 0;
         var MIP = window.MIP;
+        var clicksstart = true;
 
         //      setTimeout(function () {
         //          sessionId = $el.find('#sesiid').html();
@@ -42,7 +43,6 @@ define(function (require) {
         function returhostname() {
             var hostweb = location.protocol;
             var hostname = location.hostname;
-            console.log(hostname);
             if (hostname === 'www-ilaw66-com.mipcdn.com' || hostname === 'www.ilaw66.com') {
                 hosturl = 'https://www.ilaw66.com/jasmine/';
             }
@@ -66,11 +66,16 @@ define(function (require) {
 
             var topurl = hosturl + topsurl;
             if (MIP.viewer.isIframed) {
-                MIP.viewer.sendMessage('loadiframe', {
-                    title: toptitle,
-                    click: '',
-                    url: topurl
-                });
+                if (topsurl === './') {
+                    location.assign('https://m.baidu.com/mip/c/s/www.ilaw66.com/jasmine/baidusearch');
+                }
+                else {
+                    MIP.viewer.sendMessage('loadiframe', {
+                        title: toptitle,
+                        click: '',
+                        url: topurl
+                    });
+                }
             }
             else {
                 location.assign(topurl);
@@ -451,14 +456,18 @@ define(function (require) {
         // $el.find('#alertconten').addClass('alertactive');
         // 开始咨询调用接口
         function startConsulting(questionType) {
+            if (!clicksstart) {
+                return;
+            }
+
+            clicksstart = false;
             $.ajax({
                 url: hosturl + 'greeting?questionType='
                     + questionType + '&_csrf='
                     + $el.find('#_csrf').val() + '&sessionId=' + sessionId + '&channel=baidusearch',
                 type: 'POST',
                 success: function (indexmessage) {
-                    //                  console.log(indexmessage);
-                    //                  console.log(typeof indexmessage);
+                    clicksstart = true;
                     if (localStorage.getItem('baiduquestionType')) {
                         localStorage.removeItem('baiduquestionType');
                     }
@@ -497,6 +506,7 @@ define(function (require) {
                     }
                 },
                 error: function () {
+                    clicksstart = true;
                     //                  window.location.reload();
                 }
             });

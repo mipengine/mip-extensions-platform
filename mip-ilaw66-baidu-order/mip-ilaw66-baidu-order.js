@@ -42,11 +42,16 @@ define(function (require) {
 
             var topurl = hosturl + topsurl;
             if (MIP.viewer.isIframed) {
-                MIP.viewer.sendMessage('loadiframe', {
-                    title: toptitle,
-                    click: '',
-                    url: topurl
-                });
+                if (topsurl === './') {
+                    location.assign('https://m.baidu.com/mip/c/s/www.ilaw66.com/jasmine/baidusearch');
+                }
+                else {
+                    MIP.viewer.sendMessage('loadiframe', {
+                        title: toptitle,
+                        click: '',
+                        url: topurl
+                    });
+                }
             }
             else {
                 location.assign(topurl);
@@ -70,7 +75,7 @@ define(function (require) {
         });
 
         $el.find('#gohome').click(function () {
-            //          window.top.location.href = './';
+            //  window.top.location.href = './';
             locahost('./', '电话咨询');
         });
         $el.find('#cleardpayalert').click(function () {
@@ -149,8 +154,19 @@ define(function (require) {
             var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '/';
             var D = date.getDate() + ' ';
             var h = date.getHours() + ':';
-            var m = date.getMinutes() + ':';
-            var s = date.getSeconds();
+            var mzdata = date.getMinutes();
+            if (mzdata < 10) {
+                var m = '0' + date.getMinutes() + ':';
+            }
+            else {
+                var m = date.getMinutes() + ':';
+            }
+            if (mzdata < 10) {
+                var s = '0' + date.getSeconds();
+            }
+            else {
+                var s = date.getSeconds();
+            }
             return Y + M + D + h + m + s;
         }
         function load() {
@@ -500,12 +516,12 @@ define(function (require) {
                 }
             });
         }
-        $el.find('.loading_pop').hide();
-        $el.find('#loading_pop').hide();
+        $el.find('#loading_pop').css('display', 'none');
+        //      $el.find('#loading_pop').hide();
         if (paystart) {
-            //              $el.find('.payalert .talking_result p').css('margin-top', '0px');
-            $el.find('.payalert').show();
-            $el.find('#payalert').show();
+            $el.find('#payalert').css('display', 'block');
+            //          $el.find(".payalert").show();
+            //          $el.find('#payalert').show();
         }
 
         // continueAsk2 更改为 continueAskNew

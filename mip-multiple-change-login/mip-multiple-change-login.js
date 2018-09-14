@@ -75,6 +75,7 @@ define(function (require) {
         var dataType = $('meta[name="_token"]').attr('content');
         var mobileReg = /^[1][3,4,5,6,7,8,9][0-9]{9}$/;
         var passwordReg = /^[\w]{6,12}$/;
+
         $(function () {
             $('body').append(html);
             $('.mip-multiple-change-login').css({'display': 'none'});
@@ -114,6 +115,17 @@ define(function (require) {
             var findpwdurl = $('.open-mip-login').data('findpwdurl');
             var findpwdcodeurl = $('.open-mip-login').data('findpwdcodeurl');
             var registercodeurl = $('.open-mip-login').data('registercodeurl');
+            var promptDom = '<div class="mip-login-promptInfo"><span></span></div>';
+
+            $('body').append(promptDom);
+
+            function showMipLoginPromptInfo(info) {
+                $('.mip-login-promptInfo').find('span').html(info);
+                $('.mip-login-promptInfo').show();
+                setTimeout(function () {
+                    $('.mip-login-promptInfo').hide();
+                }, 2000);
+            }
 
             $('.mip-login-button').click(function () {
                 var mobileNumber = $(this).parent().find('input[name="mobile"]').val();
@@ -161,7 +173,7 @@ define(function (require) {
                 } else {
                     $.ajax({
                         type: 'POST',
-                        url: $('.register-win').data('url'),
+                        url: registerurl,
                         data: {
                             'mobile': mobileNumber,
                             'code': codeNumber,
@@ -198,7 +210,7 @@ define(function (require) {
                 } else {
                     $.ajax({
                         type: 'POST',
-                        url: $('.forgot-win').data('url'),
+                        url: findpwdurl,
                         data: {
                             'mobile': mobileNumber,
                             'code': codeNumber,
@@ -259,7 +271,7 @@ define(function (require) {
                 var self = this;
                 var seconds = 30;
                 var mobileNumber = $(this).parent().parent().find('input[name="mobile"]').val();
-                var url = findpwdcodeurl;
+                var url = registercodeurl;
                 if (!isGetRegisterCode) {
                     if (!mobileReg.test(mobileNumber)) {
                         showMipLoginPromptInfo('请输入正确的手机号');
@@ -288,18 +300,6 @@ define(function (require) {
                     }, 1000);
                 }
             });
-
-            var promptDom = '<div class="mip-login-promptInfo"><span></span></div>';
-
-            $('body').append(promptDom);
-
-            function showMipLoginPromptInfo(info) {
-                $('.mip-login-promptInfo').find('span').html(info);
-                $('.mip-login-promptInfo').show();
-                setTimeout(function () {
-                    $('.mip-login-promptInfo').hide();
-                }, 2000);
-            }
         });
     };
 

@@ -55,20 +55,38 @@ define(function (require) {
                     return res.json();
                 }
             }).then(function (response) {
-
-                if (response.status === 1) {
+                var status = parseInt(response.status, 10);
+                if (status === 1) {
 
                     me.successHandle();
-                }
-                if (response.status === -1) {
-
+                } else {
+                    // 处理错误提示
+                    me.showFailInfo(response.info);
                     me.failHandle();
                 }
+
             }).catch(function (err) {
 
                 me.errorHandle();
                 // me.fetchReject(err);
             });
+        },
+        hideFailInfo: function () {
+            if (this.failInfoId) {
+                var failInfoEl = document.getElementById(this.failInfoId);
+                if (failInfoEl) {
+                    util.css(failInfoEl, {display: 'none'});
+                }
+            }
+        },
+        showFailInfo: function (info) {
+            if (this.failInfoId) {
+                var failInfoEl = document.getElementById(this.failInfoId);
+                if (failInfoEl) {
+                    failInfoEl.innerHTML = info;
+                    util.css(failInfoEl, {display: 'block'});
+                }
+            }
         },
         setFetchData: function (key, val) {
             if (!this.fetchData) {
@@ -131,6 +149,8 @@ define(function (require) {
 
             me.method = (element.getAttribute('method') || 'GET').toUpperCase();
 
+            me.failInfoId = element.getAttribute('fail-info-id');
+            me.hideFailInfo();
             var submitBtn = element.querySelector('[fetch-button]');
             // 添加点击事件监听
             submitBtn.addEventListener('click', function (event) {
@@ -147,6 +167,7 @@ define(function (require) {
          */
         onSubmit: function (element) {
             var me = this;
+            me.hideFailInfo();
             // 定时器已存在不允许再次触发点击
             if (me.timer) {
                 return;
@@ -182,8 +203,6 @@ define(function (require) {
                 me.timeEle.firstElementChild.innerHTML = timeout--;
                 if (timeout <= 0) {
                     me.clearTimer();
-                    util.css(me.submitBtn, {display: 'block'});
-                    util.css(me.timeEle, {display: 'none'});
                 }
             }, 1000);
 
@@ -199,8 +218,11 @@ define(function (require) {
          * @param  {HTMLElement} element form节点
          */
         clearTimer: function () {
+
             if (this.timer) {
                 clearInterval(this.timer);
+                util.css(this.submitBtn, {display: 'block'});
+                util.css(this.timeEle, {display: 'none'});
                 this.timer = null;
             }
         },
@@ -251,9 +273,11 @@ define(function (require) {
          * @param  {HTMLElement} element form节点
          */
         failHandle: function () {
+
             if (!evt) {
                 return;
             }
+            this.clearTimer();
             viewer.eventAction.execute('fail', evt.target, evt);
         },
 

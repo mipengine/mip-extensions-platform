@@ -65,11 +65,16 @@ define(function (require) {
 
             var topurl = hosturl + topsurl;
             if (MIP.viewer.isIframed) {
-                MIP.viewer.sendMessage('loadiframe', {
-                    title: toptitle,
-                    click: '',
-                    url: topurl
-                });
+                if (topsurl === './') {
+                    location.assign('https://m.baidu.com/mip/c/s/www.ilaw66.com/jasmine/baidusearch');
+                }
+                else {
+                    MIP.viewer.sendMessage('loadiframe', {
+                        title: toptitle,
+                        click: '',
+                        url: topurl
+                    });
+                }
             }
             else {
                 location.assign(topurl);
@@ -595,32 +600,33 @@ define(function (require) {
                     if (localStorage.getItem('baiduquestionType')) {
                         localStorage.removeItem('baiduquestionType');
                     }
+
                     //                  console.log(indexmessage);
                     //                  console.log(typeof indexmessage);
                     if (indexmessage === 'ERROR' || indexmessage === 'ERROR1') {
-//                      $el.find('#sendSMSError_msg').text('系统异常，请返回重新咨询');
-//                      $el.find('.popUp_sysErr').fadeIn();
+                        //                      $el.find('#sendSMSError_msg').text('系统异常，请返回重新咨询');
+                        //                      $el.find('.popUp_sysErr').fadeIn();
                         setTimeout(function () {
                             locahost('./', '电话咨询');
                         }, 1500);
                     }
                     else if (indexmessage === 'ERROR2') {
-//                      $el.find('#sendSMSError_msg').text('您有订单未支付，请支付后再咨询');
-//                      $el.find('.popUp_sysErr').fadeIn();
+                        //                      $el.find('#sendSMSError_msg').text('您有订单未支付，请支付后再咨询');
+                        //                      $el.find('.popUp_sysErr').fadeIn();
                         setTimeout(function () {
                             locahost('./', '电话咨询');
                         }, 1500);
                     }
                     else if (indexmessage === 'ERROR3') {
-//                      $el.find('#sendSMSError_msg').text('您有订单未结束，请等待1分钟后再试');
-//                      $el.find('.popUp_sysErr').fadeIn();
+                        //                      $el.find('#sendSMSError_msg').text('您有订单未结束，请等待1分钟后再试');
+                        //                      $el.find('.popUp_sysErr').fadeIn();
                         setTimeout(function () {
                             locahost('./', '电话咨询');
                         }, 1500);
                     }
                     else if (indexmessage === 'ERROR4') {
-//                      $el.find('#sendSMSError_msg').text('您今日取消咨询已达3次，请明天再来');
-//                      $el.find('.popUp_sysErr').fadeIn();
+                        //                      $el.find('#sendSMSError_msg').text('您今日取消咨询已达3次，请明天再来');
+                        //                      $el.find('.popUp_sysErr').fadeIn();
                         setTimeout(function () {
                             locahost('./', '电话咨询');
                         }, 1500);

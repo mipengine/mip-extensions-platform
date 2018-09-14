@@ -68,11 +68,16 @@ define(function (require) {
 
             var topurl = hosturl + topsurl;
             if (MIP.viewer.isIframed) {
-                MIP.viewer.sendMessage('loadiframe', {
-                    title: toptitle,
-                    click: '',
-                    url: topurl
-                });
+                if (topsurl === './') {
+                    location.assign('https://m.baidu.com/mip/c/s/www.ilaw66.com/jasmine/baidusearch');
+                }
+                else {
+                    MIP.viewer.sendMessage('loadiframe', {
+                        title: toptitle,
+                        click: '',
+                        url: topurl
+                    });
+                }
             }
             else {
                 location.assign(topurl);
