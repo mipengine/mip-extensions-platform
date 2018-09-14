@@ -194,6 +194,15 @@ define(function (require) {
             }
         });
 
+        self.addEventAction('selector', function (e, options) {
+            if (options) {
+                selector.call(self, options);
+            }
+            else {
+                selector.call(self, e.options);
+            }
+        });
+
     };
 
     // 自定义方法给别的组件来调用

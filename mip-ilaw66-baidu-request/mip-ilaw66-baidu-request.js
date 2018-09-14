@@ -23,9 +23,13 @@ define(function (require) {
         var sessionId = getQueryString('sessionId');
         var MIP = window.MIP;
         setTimeout(function () {
-            sessionId = $el.find('#sesiid').html();
+            var htsesi = $el.find('#sesiid').html();
+            if (htsesi) {
+                sessionId = htsesi;
+            }
+
             console.log(sessionId);
-        }, 1000);
+        }, 2000);
         var hosturl = 'https://www.ilaw66.com/jasmine/';
         function returhostname() {
             var hostweb = location.protocol;
@@ -47,6 +51,7 @@ define(function (require) {
             if (topsurl === './') {
                 topsurl = 'baidusearch';
             }
+
             var topurl = hosturl + topsurl;
             if (MIP.viewer.isIframed) {
                 MIP.viewer.sendMessage('loadiframe', {
@@ -59,9 +64,33 @@ define(function (require) {
                 location.assign(topurl);
             }
         }
+        //        this.addEventAction('login', function (event) { //不提交
+        //          console.log('授权成功');
+        //          var sessid = event.sessionId;
+        //          var islogin = parseInt(event.userInfo.isLogin, 10);
+        //
+        //          if (!islogin) { // 未注册
+        //              if (MIP.viewer.isIframed) {
+        //                  MIP.viewer.sendMessage('loadiframe', {
+        //                      title: '登录',
+        //                      click: '',
+        //                      url: 'https://www.ilaw66.com/jasmine/toLogin?channel=baidusearch'
+        //                  });
+        //              }
+        //              else {
+        //                  location.assign('https://www.ilaw66.com/jasmine/toLogin?channel=baidusearch');
+        //              }
+        //          }
+        //          else {
+        //              console.log('登录成功');
+        //                sessionId = sessid;
+        //          }
+        //
+        //      });
         if (sessionStorage.getItem('baiduquestionType')) {
             sessionStorage.clear('baiduquestionType');
         }
+
         $el.find('.jingxuan_top').css('background-image', 'url("images/bg_jingxuanlvshi.png")');
         $el.find('.jingxuan_top>img').attr('src', 'images/bg_touxiangjx.png');
 
@@ -287,40 +316,40 @@ define(function (require) {
                     + '&questionType=' + getQueryString('questionType') + '&sessionId=' + sessionId,
                 async: false,
                 success: function (data) {
-//                  var data = data.data;
-//                  if (!data || data.length === 0) {
-//                  // no lawyer msg
-//                  }
-//                  else {
-//                      for (var h = 0; h < data.length; h++) {
-//                          var a = data[h];
-//                          temp.list.push({
-//                              name: a.name,
-//                              identifyPhoto: a.identifyPhoto
-//                          });
-//                      }
-//                      var tempHtml = '';
-//                      tempHtml += '<mip-carousel '
-//                          + 'autoplay '
-//                          + 'layout="responsive" '
-//                          + 'width="60" '
-//                          + 'height="60">';
-//                      var tempHtmlN = '';
-//                      tempHtmlN += '<mip-carousel '
-//                          + 'autoplay '
-//                          + 'layout="responsive" '
-//                          + 'width="60" '
-//                          + 'height="60">';
-//                      temp.list.forEach(function (item) {
-//                          tempHtml += '<mip-img class="mip_img" width="60" height="60"'
-//                              + ' src="' + item.identifyPhoto + '"></mip-img>';
-//                          tempHtmlN += '<p>' + item.name + '</p>';
-//                      });
-//                      tempHtml += '</mip-carousel>';
-//                      tempHtmlN += '</mip-carousel>';
-//                      $el.find('#mip-template-lawyerImg').html(tempHtml);
-//                      $el.find('#mip-template-lawyerName').html(tempHtmlN);
-//                  }
+                    //                  var data = data.data;
+                    //                  if (!data || data.length === 0) {
+                    //                  // no lawyer msg
+                    //                  }
+                    //                  else {
+                    //                      for (var h = 0; h < data.length; h++) {
+                    //                          var a = data[h];
+                    //                          temp.list.push({
+                    //                              name: a.name,
+                    //                              identifyPhoto: a.identifyPhoto
+                    //                          });
+                    //                      }
+                    //                      var tempHtml = '';
+                    //                      tempHtml += '<mip-carousel '
+                    //                          + 'autoplay '
+                    //                          + 'layout="responsive" '
+                    //                          + 'width="60" '
+                    //                          + 'height="60">';
+                    //                      var tempHtmlN = '';
+                    //                      tempHtmlN += '<mip-carousel '
+                    //                          + 'autoplay '
+                    //                          + 'layout="responsive" '
+                    //                          + 'width="60" '
+                    //                          + 'height="60">';
+                    //                      temp.list.forEach(function (item) {
+                    //                          tempHtml += '<mip-img class="mip_img" width="60" height="60"'
+                    //                              + ' src="' + item.identifyPhoto + '"></mip-img>';
+                    //                          tempHtmlN += '<p>' + item.name + '</p>';
+                    //                      });
+                    //                      tempHtml += '</mip-carousel>';
+                    //                      tempHtmlN += '</mip-carousel>';
+                    //                      $el.find('#mip-template-lawyerImg').html(tempHtml);
+                    //                      $el.find('#mip-template-lawyerName').html(tempHtmlN);
+                    //                  }
 
                     var data = data.data;
                     if (!data || data.length === 0) {

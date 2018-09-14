@@ -5,9 +5,9 @@
 
 define(function (require) {
     'use strict';
-    const $ = require('zepto');
+    var $ = require('zepto');
 
-    const customElement = require('customElement').create();
+    var customElement = require('customElement').create();
 
     function getOrderList(url, sessionId, element, href) {
         $.ajax({
@@ -18,9 +18,9 @@ define(function (require) {
             },
             data: {sessionid: sessionId},
             success: function (result) {
-                let html = '';
+                var html = '';
                 if (result.data.list) {
-                    for (let i = 0; i < result.data.list.length; i++) {
+                    for (var i = 0; i < result.data.list.length; i++) {
                         html += '<a href="' + href + '/baidu/package/detail_' + result.data.list[i].set_meal.id + '"'
                             + ' mip-link>'
                             + '<li  data-attr="' + result.data.list[i].id + '">'
@@ -50,10 +50,10 @@ define(function (require) {
      */
     customElement.prototype.firstInviewCallback = function () {
         // TODO
-        const element = this.element;
-        let sessionId = '';
-        const url = $(element).attr('data-url');
-        const href = $(element).attr('data-href');
+        var element = this.element;
+        var sessionId = '';
+        var url = $(element).attr('data-url');
+        var href = $(element).attr('data-href');
         this.addEventAction('customLogin', function (e) {
             sessionId = e.sessionId;
             getOrderList(url, sessionId, element, href);

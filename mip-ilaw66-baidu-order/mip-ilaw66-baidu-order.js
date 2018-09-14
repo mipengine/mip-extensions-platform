@@ -87,15 +87,6 @@ define(function (require) {
             }
         });
         load();
-        setTimeout(function () {
-            $el.find('.loading_pop').hide();
-            if (paystart) {
-                //              $el.find('.payalert .talking_result p').css('margin-top', '0px');
-                $el.find('.payalert').show();
-            }
-
-        }, 1000);
-
         function getQueryString(name) {
             var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
             var r = window.location.search.substr(1).match(reg);
@@ -509,6 +500,14 @@ define(function (require) {
                 }
             });
         }
+        $el.find('.loading_pop').hide();
+        $el.find('#loading_pop').hide();
+        if (paystart) {
+            //              $el.find('.payalert .talking_result p').css('margin-top', '0px');
+            $el.find('.payalert').show();
+            $el.find('#payalert').show();
+        }
+
         // continueAsk2 更改为 continueAskNew
         function continueAskNew(lawyerId, questionType, askingType, csrfToken, continueAskPage) {
             $.ajax({

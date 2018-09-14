@@ -1,0 +1,14 @@
+{
+    "name": "mip-uniqueway-form",
+    "version": "1.0.0",
+    "description": "表单组件",
+    "contributors": [
+        {
+            "name": "likai",
+            "email": "likai@uniqueway.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

@@ -5,9 +5,9 @@
 
 define(function (require) {
     'use strict';
-    const $ = require('zepto');
+    var $ = require('zepto');
 
-    const customElement = require('customElement').create();
+    var customElement = require('customElement').create();
 
     function getOrderList(url, sessionId, element, href) {
         $.ajax({
@@ -21,14 +21,14 @@ define(function (require) {
                 'per_page': 99999999
             },
             success: function (result) {
-                let html = '';
-                let msgList = '';
-                let msgContent = '';
-                let unreadCount = '';
-                let data = '';
+                var html = '';
+                var msgList = '';
+                var msgContent = '';
+                var unreadCount = '';
+                var data = '';
                 if (result.data) {
                     data = result.data;
-                    for (let i = 0; i < result.data.msg_list.length; i++) {
+                    for (var i = 0; i < result.data.msg_list.length; i++) {
                         if (result.data.msg_list[i].lastMsg) {
                             switch (result.data.msg_list[i].lastMsg.kind) {
                                 case 'text':
@@ -119,10 +119,10 @@ define(function (require) {
      */
     customElement.prototype.firstInviewCallback = function () {
         // TODO
-        const element = this.element;
-        let sessionId = '';
-        const url = $(element).attr('data-url');
-        const href = $(element).attr('data-href');
+        var element = this.element;
+        var sessionId = '';
+        var url = $(element).attr('data-url');
+        var href = $(element).attr('data-href');
         this.addEventAction('customLogin', function (e) {
             sessionId = e.sessionId;
             getOrderList(url, sessionId, element, href);

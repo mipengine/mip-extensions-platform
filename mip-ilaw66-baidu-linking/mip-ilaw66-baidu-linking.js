@@ -33,9 +33,13 @@ define(function (require) {
         var sessionId = getQueryString('sessionId');
         var MIP = window.MIP;
         setTimeout(function () {
-            sessionId = $el.find('#sesiid').html();
+            var htsesi = $el.find('#sesiid').html();
+            if (htsesi) {
+                sessionId = htsesi;
+            }
+
             console.log(sessionId);
-        }, 1000);
+        }, 2000);
         var hosturl = 'https://www.ilaw66.com/jasmine/';
         function returhostname() {
             var hostweb = location.protocol;
@@ -127,6 +131,8 @@ define(function (require) {
                 url: hosturl + 'timer?id=' + timerRequestId + '&lawyerId=' + lawyerId + '&sessionId=' + sessionId,
                 dataType: 'json',
                 success: function (data) {
+                    //             	var data={"requestId":"28114","status":6,"lawyerName":"张律师","lawyerId":"3795ef17-f6b0-4374-8d34-dfcd8f87f214","sex":"female","avatar":"//images.ilaw66.com/images/formal/3795ef17-f6b0-4374-8d34-dfcd8f87f214_formal_thumbnails.jpg","lawyerField":"","goodCommentRate":"100%","reCallNoAnswerTimes":"0","serviceTimes":"55","lightStar":[0,0,0,0,0],"grayStar":[],"tel":"021-31354391"}
+
                     if (!data || data.status === 'ERROR') {
                         alert(data.status);
                         return;
@@ -249,6 +255,8 @@ define(function (require) {
                     url: hosturl + 'timer?id=' + timerRequestId + '&lawyerId=' + lawyerId + '&sessionId=' + sessionId,
                     dataType: 'json',
                     success: function (data) {
+                        //                  	     	var data={"requestId":"28114","status":6,"lawyerName":"张律师","lawyerId":"3795ef17-f6b0-4374-8d34-dfcd8f87f214","sex":"female","avatar":"//images.ilaw66.com/images/formal/3795ef17-f6b0-4374-8d34-dfcd8f87f214_formal_thumbnails.jpg","lawyerField":"","goodCommentRate":"100%","reCallNoAnswerTimes":"0","serviceTimes":"55","lightStar":[0,0,0,0,0],"grayStar":[],"tel":"021-31354391"}
+
                         //                      console.log(data);
                         localStorage.setItem('reAskAvatar', data.avatar);
                         localStorage.setItem('reAskSex', data.sex);

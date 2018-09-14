@@ -25,10 +25,14 @@ define(function (require) {
         var MIP = window.MIP;
         var requestId = getQueryString('requestId');
         var sessionId = getQueryString('sessionId');
-//      setTimeout(function () {
-//          sessionId = $el.find('#sesiid').html();
-//          console.log(sessionId);
-//      }, 1000);
+        setTimeout(function () {
+            var htsesi = $el.find('#sesiid').html();
+            if (htsesi) {
+                sessionId = htsesi;
+            }
+
+            console.log(sessionId);
+        }, 2000);
         var hosturl = 'https://www.ilaw66.com/jasmine/';
         function returhostname() {
             var hostweb = location.protocol;
@@ -177,22 +181,31 @@ define(function (require) {
                     payhosturl = hosturl;
                 }
                 var encodeurl = encodeURIComponent('mipilaw66baidu_order?requestId='
-                + $el.find('#requestId').val() + '&questionType=' + questionType
-                + '&sessionId=' + sessionId + '&paystart=1');
+                    + $el.find('#requestId').val() + '&questionType=' + questionType
+                    + '&sessionId=' + sessionId + '&paystart=1');
                 data.returnUrl = payhosturl + encodeurl;
                 if ($el.find('#cardId').val()) {
                     data.cardId = $el.find('#cardId').val();
-                };
+                }
 
+                data.sessionId = sessionId;
+                //				debugger
                 $.ajax({
                     type: 'POST',
-                    url: hosturl + 'pay/baidupay?sessionId=' + sessionId,
+                    url: hosturl + 'pay/baidupay',
                     data: data,
                     success: function (data) {
-
+                        // {"cashier_url":"https"}
                         if (data && data.cashier_url) {
                             window.top.location.href = data.cashier_url;
                         //                          locahost(data.cashier_url, '电话咨询');
+                        }
+                        else if (data.ERROR1 === 'ERROR1') {
+                            $el.find('.popUp_sysErr').fadeIn();
+                            $el.find('#err_msg').html('您无需支付该笔订单');
+                            $el.find('#err_confirm').click(function () {
+                                locahost('./', '电话咨询');
+                            });
                         }
                         else {
                             $el.find('.popUp_sysErr').fadeIn();

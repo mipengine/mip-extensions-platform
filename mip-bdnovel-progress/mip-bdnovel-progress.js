@@ -6,9 +6,12 @@
 define(function (require) {
     'use strict';
 
-    const customElement = require('customElement').create();
-    const util = require('util');
-    function leftPad2(str = '') {
+    var customElement = require('customElement').create();
+    var util = require('util');
+    function leftPad2(str) {
+        if (!str) {
+            str = '';
+        }
         str += '';
         switch (str.length) {
             case 0:
@@ -21,21 +24,21 @@ define(function (require) {
     }
 
     customElement.prototype.build = function () {
-        const element = this.element;
-        const title = element.getAttribute('chapter-title');
-        const url = element.getAttribute('chapter-url');
+        var element = this.element;
+        var title = element.getAttribute('chapter-title');
+        var url = element.getAttribute('chapter-url');
         if (title) {
             util.css(element, 'display', 'none');
-            const date = new Date();
-            const dateStr = (date.getYear() + 1900) + '' + leftPad2(date.getMonth() + 1) + leftPad2(date.getDate());
+            var date = new Date();
+            var dateStr = (date.getYear() + 1900) + '' + leftPad2(date.getMonth() + 1) + leftPad2(date.getDate());
 
-            const node = document.createElement('script');
+            var node = document.createElement('script');
             node.type = 'text/javascript';
             node.src = 'https://gss0.bdstatic.com/5foIcy0a2gI2n2jgoY3K/n/nvn/jslib/BDTR_NOVEL.js?v=' + dateStr;
             element.appendChild(node);
 
             node.onload = function () {
-                const options = url && url.length > 0 ? {url} : {};
+                var options = url && url.length > 0 ? {url: url} : {};
                 window.BDTR.saveLastChapter(title || '', options);
             };
         }

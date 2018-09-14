@@ -29,10 +29,11 @@ define(function (require) {
 
         // 添加后退事件
         this.addEventAction('goback', function (event, str) {
-            if (window.top.history.length === 0) {
+            if (window.top.history.length === 0 && str) {
                 window.top.location.href = str;
+            } else {
+                window.top.history.go(-1);
             }
-            window.top.history.go(-1);
         });
 
         // 添加重定向事件

@@ -4,10 +4,13 @@
  */
 
 define(function (require) {
+    var util = require('util');
+    var Gesture = util.Gesture;
     var customElement = require('customElement').create();
     // build说明：tabs组件，在首屏展示，需要尽快加载
     customElement.prototype.build = function () {
-
+        var gesture = new Gesture(this.element);
+        var currTabIndex;
         var tabTitles = document.getElementsByClassName('tabTitle');
         var tabContents = document.getElementsByClassName('tabContent');
         for (var i = 0; i < tabTitles.length; i++) {
@@ -27,6 +30,45 @@ define(function (require) {
                 tabContents[this.index].style = 'display:block';
             };
         };
+        // 控制tabs的左右滑动
+        gesture.on('swipe', function (event, data) {
+            var tabCount = tabTitles.length;
+            for (var i = 0; i < tabTitles.length; i++) {
+                if (tabTitles[i].className === 'tabTitle CurrTab') {
+                    currTabIndex = i;
+                }
+            };
+            if (currTabIndex === 0 && tabCount > 0) {
+                if (data.type === 'swipe' && data.swipeDirection === 'left') {
+                    tabTitles[currTabIndex].className = 'tabTitle';
+                    tabContents[currTabIndex].style = 'display:none';
+                    tabTitles[currTabIndex + 1].className = 'tabTitle CurrTab';
+                    tabContents[currTabIndex + 1].style = 'display:block';
+                }
+            }
+            else if (currTabIndex > 0 && currTabIndex === tabCount - 1) {
+                if (data.type === 'swipe' && data.swipeDirection === 'right') {
+                    tabTitles[currTabIndex].className = 'tabTitle';
+                    tabContents[currTabIndex].style = 'display:none';
+                    tabTitles[currTabIndex - 1].className = 'tabTitle CurrTab';
+                    tabContents[currTabIndex - 1].style = 'display:block';
+                }
+            }
+            else {
+                if (data.type === 'swipe' && data.swipeDirection === 'left') {
+                    tabTitles[currTabIndex].className = 'tabTitle';
+                    tabContents[currTabIndex].style = 'display:none';
+                    tabTitles[currTabIndex + 1].className = 'tabTitle CurrTab';
+                    tabContents[currTabIndex + 1].style = 'display:block';
+                }
+                else if (data.type === 'swipe' && data.swipeDirection === 'right') {
+                    tabTitles[currTabIndex].className = 'tabTitle';
+                    tabContents[currTabIndex].style = 'display:none';
+                    tabTitles[currTabIndex - 1].className = 'tabTitle CurrTab';
+                    tabContents[currTabIndex - 1].style = 'display:block';
+                }
+            }
+        });
 
         var aTabL = document.getElementById('tabl');
         var aTit = aTabL.getElementsByTagName('a');

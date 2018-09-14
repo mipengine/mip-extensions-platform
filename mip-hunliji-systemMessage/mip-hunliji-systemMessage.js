@@ -5,9 +5,9 @@
 
 define(function (require) {
     'use strict';
-    const $ = require('zepto');
+    var $ = require('zepto');
 
-    const customElement = require('customElement').create();
+    var customElement = require('customElement').create();
 
     function getOrderList(url, sessionId, element, href) {
         $.ajax({
@@ -21,13 +21,13 @@ define(function (require) {
                 'per_page': 99999999
             },
             success: function (result) {
-                let html = '';
-                let data;
-                let content = '';
+                var html = '';
+                var data;
+                var content = '';
                 if (result.data.list) {
-                    for (let i = 0; i < result.data.list.length; i++) {
+                    for (var i = 0; i < result.data.list.length; i++) {
                         data = result.data.list;
-                        for (let j = 0; j < data[i].content.length; j++) {
+                        for (var j = 0; j < data[i].content.length; j++) {
                             if (data[i].property_id !== '13') {
                                 content = '<a href="' + href + '/baidu/package/detail_' + data[i].content[j].id + '"'
                                     + ' mip-link>'
@@ -98,10 +98,10 @@ define(function (require) {
      */
     customElement.prototype.firstInviewCallback = function () {
         // TODO
-        const element = this.element;
-        let sessionId = '';
-        const url = $(element).attr('data-url');
-        const href = $(element).attr('data-href');
+        var element = this.element;
+        var sessionId = '';
+        var url = $(element).attr('data-url');
+        var href = $(element).attr('data-href');
         this.addEventAction('customLogin', function (e) {
             sessionId = e.sessionId;
             getOrderList(url, sessionId, element, href);
