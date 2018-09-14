@@ -191,16 +191,19 @@ mip-zmall-store-filter {
         background: #fff;
     }
     .store-box__list {
-        .item a {
+        .item a,
+        .item label {
             position: relative;
             padding: .46rem 1rem .46rem .54rem;
             color: #000;
             display: block;
         }
-        .item a::before {
+        .item a::before,
+        .item label::before {
             .onePxLineTop(#f3f3f3);
         }
-        .item:first-child a::before {
+        .item:first-child a::before,
+        .item:first-child label::before {
             content: none;
         }
         .item a::after {
@@ -252,6 +255,38 @@ mip-zmall-store-filter {
             -webkit-background-size: contain;
             background-size: contain;
         }
+        input[type="radio"] {
+            display: none;
+        }
+        .radio {
+            position: absolute;
+            right: .56rem;
+            top: 50%;
+            width: 4.4rem;
+            height: 4.4rem;
+            border: .4rem solid #f60;
+            border-radius: 4rem;
+            -webkit-transform: scale(.1) translateY(-50%);
+            transform: scale(.1) translateY(-50%);
+            -webkit-transform-origin: right top;
+            transform-origin: right top;
+        }
+        .radio::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            width: 0;
+            height: 0;
+            margin: 0 auto;
+            border: 1rem solid transparent;
+            border-radius: 2rem;
+        }
+        input[type="radio"]:checked + .radio::after {
+            border-color: #f60;
+        }
     }
     .store-box__more {
         height: 1.56rem;
@@ -259,7 +294,7 @@ mip-zmall-store-filter {
         line-height: 1.56rem;
         text-align: center;
         color: #999;
-        font-size: .48rem;
+        font-size: .42rem;
     }
     .store-box__more.disabled {
         display: none;

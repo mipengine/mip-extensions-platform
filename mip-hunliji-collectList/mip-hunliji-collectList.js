@@ -9,14 +9,18 @@ define(function (require) {
 
     var customElement = require('customElement').create();
 
-    function getOrderList(url, sessionId, element, href) {
+    function getOrderList(url, sessionId, element, href, page) {
         $.ajax({
             url: url,
             type: 'get',
             xhrFields: {
                 withCredentials: true
             },
-            data: {sessionid: sessionId},
+            data: {
+                sessionid: sessionId,
+                page: page,
+                'per_page': 20
+            },
             success: function (result) {
                 var html = '';
                 if (result.data.list) {
@@ -38,7 +42,7 @@ define(function (require) {
 
                     }
 
-                    $(element).html(html);
+                    $(element).append(html);
 
                 }
             }
@@ -54,9 +58,22 @@ define(function (require) {
         var sessionId = '';
         var url = $(element).attr('data-url');
         var href = $(element).attr('data-href');
+        var page = 1;
+        getOrderList(url, sessionId, element, href, page);
+        var timer = null;
         this.addEventAction('customLogin', function (e) {
             sessionId = e.sessionId;
-            getOrderList(url, sessionId, element, href);
+            getOrderList(url, sessionId, element, href, page);
+            var timer = null;
+            $(window).scroll(function () {
+                if ($(window).scrollTop() + $(window).height() + 0 >= $(document).height()) {
+                    clearTimeout(timer);
+                    timer = setTimeout(function () {
+                        page++;
+                        getOrderList(url, sessionId, element, href, page);
+                    }, 300);
+                }
+            });
         });
     };
 

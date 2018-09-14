@@ -1,74 +1,53 @@
 # mip-zmall-coupon
 
-领取优惠劵 预约到店
+领取优惠劵组件，主要提供领取线上或者线下优惠券的操作
 
 标题|内容
 ----|----
 类型|业务组件
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/static/v1/mip-zmall-coupon/mip-zmall-coupon.js
+所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-zmall-coupon/mip-zmall-coupon.js
 
-## 最新版本
+## 更新
 
-### 1.1.3
+### 2.0.0
 
-- 增加防止点击过快的限制
-
-### 1.1.0
-
-- 改为独立层弹出，主要解决因 不能自己写fixed元素，而用mip-fixed导致的问题，实现逻辑变了
-
-### 1.0.4
-
-- 修改样式
-
-### 1.0.3
-
-- 修改提示语
-- 修改样式
-
-### 1.0.2
-
-- 修改查看路线的链接
-
-### 1.0.1
-
-- 增加部分注释
-- 更改获取 `userId` 为 获取 `sid`
-- 把 `alert` 改成 `toast`
+- 重写全部代码，功能定义为领取优惠券的操作
 
 ## 示例
 
 ### 基本用法
 ```html
-<mip-zmall-coupon data-url="//path/to/api" data-merchant-id="" data-store-id="" data-trigger="click:coupon.show" data-target="coupon">
-    <mip-fixed type="top" zmall-fixed-id="coupon" class="mip-zmall-coupon-fixed"></mip-fixed>
-</mip-zmall-coupon>
-<div on="click:coupon.show">优惠到店</div>
+<mip-zmall-coupon id="couponReceiver" template="tpl-receive-success" on="toast:myDialog.toast">
+        <script type="application/json">
+        {
+            "merchantId": "",
+            "online": "path/to/api",
+            "offline": "path/to/api"
+        }
+        </script>
+        <template type="mip-mustache" id="tpl-receive-success">
+            <div id="js_coupon_success_layer" class="receive-coupon-success">
+                <div class="receive-coupon-header">恭喜成功领取到店优惠券</div>
+                <div class="receive-coupon-text">内容包含：</div>
+                <div id="js_coupon_scroller" class="receive-coupon-scroller">
+                    {{#successList}}
+                    <div class="receive-coupon-item">{{.}}</div>
+                    {{/successList}}
+                </div>
+                <p class="receive-coupon-tip">提示：到店出示领取成功的短信提示即可享受优惠，优惠详细规则请到店咨询商家。</p>
+                <div id="js_coupon_success_close" class="receive-coupon-btn">确定</div>
+            </div>
+            <div id="js_receive_mask" class="receive-coupon-mask"></div>
+        </template>
+    </mip-zmall-coupon>
 ```
 
 ## 属性
 
-### data-url
+### on
 
-说明：一键领取接口地址    
-必选项：是     
-类型：String       
-默认值：""     
-
-### data-trigger
-
-说明：触发优惠券层的按钮         
-必选项：是         
-类型：String          
-默认值：""      
-
-### data-target
-
-说明：被挪到下面的fixed的对应值             
-必选项：是         
-类型：String          
-默认值：""
+执行自生事件方法
 
 ## 注意事项
-- 组件内部Dom结构及属性名称不能自定义
+

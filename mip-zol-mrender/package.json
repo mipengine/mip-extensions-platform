@@ -1,6 +1,6 @@
 {
     "name": "mip-zol-mrender",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "渲染mip-data请求回来的数据",
     "contributors": [
         {

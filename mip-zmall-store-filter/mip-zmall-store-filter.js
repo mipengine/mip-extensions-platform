@@ -136,20 +136,40 @@ define(function (require) {
     function renderStore(element, stores, page) {
         var storesHtml = '';
         var total = parseInt(element.storeTotal, 10);
-        var start = 10 * (page - 1);
-        var storeList = stores.slice(start, start + 10);
+        var storeList = stores;
+        if (!element.isPage) {
+            var pn = element.getAttribute('pn') ? parseInt(element.getAttribute('pn'), 10) : 10;
+            var start = pn * (page - 1);
+            storeList = stores.slice(start, start + 10);
+        }
         var length = storeList.length;
         var listScrollerElement = element.querySelector('#js_store_scroller');
         var loadMoreElement = element.querySelector('.store-box__more');
+        var isSelectType = element.dataset.type && element.dataset.type === 'select';
         storeList.forEach(function (item) {
-            storesHtml += [
-                '<li class="item"><a data-type="mip" href="' + item.url + '">',
-                '<h4 class="store-list__name">' + item.name + '</h4>',
-                '<p class="store-list_service-hours">' + item.serviceHours + '</p>',
-                '<p class="store-list__address">' + item.address + '</p>',
-                '<div class="store-list__distance">距您' + item.distanceStr + '</div>',
-                '</a></li>'
-            ].join('');
+            if (isSelectType) {
+                storesHtml += [
+                    '<li class="item"><label for="s_' + item.storeId + '">',
+                    '<p class="store-list__name">' + item.name + '</p>',
+                    '<p class="store-list__address">' + item.address + '</p>',
+                    '<p class="store-list__distance">距您收货地址' + item.distanceStr + '</p>',
+                    '<input name="store" type="radio" id="s_' + item.storeId + '" data-name="' + item.name + '"',
+                    ' data-address="' + item.address + '" data-distance="' + item.distanceStr + '"',
+                    ' data-lat="' + item.lat + '" data-lng="' + item.lng + '" value="' + item.storeId + '">',
+                    '<span class="radio"></span>',
+                    '</label></li>'
+                ].join('');
+            }
+            else {
+                storesHtml += [
+                    '<li class="item"><a data-type="mip" href="' + item.url + '">',
+                    '<h4 class="store-list__name">' + item.name + '</h4>',
+                    '<p class="store-list_service-hours">' + item.serviceHours + '</p>',
+                    '<p class="store-list__address">' + item.address + '</p>',
+                    '<div class="store-list__distance">距您' + item.distanceStr + '</div>',
+                    '</a></li>'
+                ].join('');
+            }
         });
         var storeListElement = element.querySelector('#js_store_list');
         if (page > 1) {
@@ -182,20 +202,18 @@ define(function (require) {
         var lng = element.getAttribute('lng') || 0;
         var pid = (options && options.provinceId) || 0;
         var cid = (options && options.cityId) || 0;
+        var pn = element.getAttribute('pn') || 10;
+
+        var page = element.page || 1;
 
         var listScrollerElement = element.querySelector('#js_store_scroller');
         var loadMoreElement = element.querySelector('.store-box__more');
 
         var ajaxUrl = url + '&merchantId=' + merchantId + '&lat=' + lat + '&lng=' + lng
-                    + '&pid=' + pid + '&cid=' + cid;
+                    + '&pid=' + pid + '&cid=' + cid + '&page=' + page + '&number=' + pn;
         if (options && options.isFilter) {
             ajaxUrl += '&isFilter=1';
         }
-
-        var page = 1;
-        element.page = page;
-        element.provinceid = pid;
-        element.provinceid = cid;
 
         // 加载中
         listScrollerElement.scrollLoading = true;
@@ -220,7 +238,7 @@ define(function (require) {
                     return;
                 }
                 // 滚动加载状态
-                if (res.total <= 10) {
+                if ((!element.isPage && res.total <= pn) || (element.isPage && res.isEnd)) {
                     loadMoreElement.classList.add('disabled');
                     listScrollerElement.scrollLoadEnd = true;
                 }
@@ -241,9 +259,19 @@ define(function (require) {
             if (!this.scrollLoadEnd && !this.scrollLoading) {
                 var scrollY = scroller.scrollTop;
                 if (scroller.scrollHeight - scroller.clientHeight === scrollY) {
-                    var stores = element.storeList;
-                    var page = element.page;
-                    renderStore(element, stores, page);
+                    if (!element.isPage) {
+                        var stores = element.storeList;
+                        var page = element.page;
+                        renderStore(element, stores, page);
+                    }
+                    else {
+                        var pid = element.pid || 0;
+                        var cid = element.cid || 0;
+                        getStoreData(element, {
+                            provinceId: pid,
+                            cityId: cid
+                        });
+                    }
                 }
             }
         });
@@ -294,6 +322,9 @@ define(function (require) {
 
                 // 渲染当前选择省份下的城市
                 renderCityByProvince(id, element);
+                element.pid = id;
+                element.cid = 0;
+                element.page = 1;
 
                 selected.classList.remove('selected');
                 targetElement.classList.add('selected');
@@ -327,6 +358,9 @@ define(function (require) {
                 filterMask.click();
                 var cityPanelTrigger = element.querySelector('li[panel="js_store_filter_city"] span');
                 cityPanelTrigger.innerText = cityName;
+                element.pid = provinceId;
+                element.cid = cityId;
+                element.page = 1;
                 getStoreData(element, {
                     provinceId: provinceId,
                     cityId: cityId,
@@ -348,7 +382,9 @@ define(function (require) {
                 if (panel === 'js_store_filter_city') {
                     var pid = item.getAttribute('pid');
                     if (pid === '0') {
-                        element.mipDialogComponent.customElement.toast('请先选择省份/直辖市');
+                        viewer.eventAction.execute('toast', element, {
+                            msg: '请先选择省份/直辖市'
+                        });
                         return;
                     }
                 }
@@ -390,6 +426,24 @@ define(function (require) {
         });
     }
 
+    // 选择事件
+    function bindListSelectEvent(element) {
+        var listBox = element.querySelector('#js_store_list');
+        listBox.addEventListener('change', function (e) {
+            var targetElement = e.target;
+            var data = targetElement.dataset;
+            window.MIP.setData({
+                userPickStoreId: targetElement.value,
+                userPickStoreName: data.name,
+                userPickStoreAddress: data.address,
+                userPickStoreLat: data.lat,
+                userPickStoreLng: data.lng,
+                userPickDistance: data.distance
+            });
+            close(element);
+        }, false);
+    }
+
     // 关闭
     function close(element) {
         element.querySelector('#js_store_box').classList.remove('show');
@@ -413,6 +467,7 @@ define(function (require) {
             bindProvinceEvent(element);
             bindCityEvent(element);
             bindListScrollEvent(element);
+            bindListSelectEvent(element);
             getStoreData(element);
         }
     }
@@ -427,13 +482,10 @@ define(function (require) {
             viewer.eventAction.execute('point', element, {element: element});
         }
 
-        // 因为该组件内部有一个DOM绑定了点击事件
-        // 在需要某条件下触发 mip-zol-dialog 对外暴露的方法
-        // 所以暂时不能用 on="组件ID.方法" 的方式来做
-        // 故而在这里用 document.querySelector 来获取 mip-zol-dialog 这个组件
-        // 通过它的 .customElement 来获取方法
-        var mipDialogComponent = document.querySelector('mip-zol-dialog');
-        element.mipDialogComponent = mipDialogComponent;
+        // 是否需要分页请求
+        var pagination = element.getAttribute('pagination');
+        var isPage = pagination !== null && pagination !== '0' && pagination !== 'false';
+        element.isPage = isPage;
 
         self.addEventAction('open', function () {
             open.call(self);

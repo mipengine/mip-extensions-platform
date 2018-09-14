@@ -9,14 +9,14 @@ define(function (require) {
 
     var customElement = require('customElement').create();
 
-    function delChanel(url, id, element) {
+    function delChanel(url, id, element, sessionId) {
         $.ajax({
             url: url,
             type: 'POST',
             xhrFields: {
                 withCredentials: true
             },
-            data: {'id': +id},
+            data: {'id': +id, sessionid: sessionId},
             success: function (result) {
                 $(element).parents('li').remove();
             }
@@ -30,6 +30,7 @@ define(function (require) {
         var element = this.element;
         var id = $(element).attr('data-id');
         var url = $(element).attr('data-url');
+        var sessionId = $(element).attr('data-sessionId');
         $(element).on('click', '.chat-message-del', function () {
             delChanel(url, id, element);
         });

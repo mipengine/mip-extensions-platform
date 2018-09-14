@@ -9,6 +9,7 @@
 
 ## 更新日志
 
+- 1.0.3 增加登录判断，渲染登录后请求的数据, 登录数据由组件 `mip-zmall-login-data` 获取
 - 1.0.2 绑定找到组件下面元素的方法，并返回给其他组件使用
 - 1.0.1 修改因执行时机不同导致的报错，当已经执行过了之后，就不再渲染了。
 
@@ -26,8 +27,8 @@
 
 ### data
 
-`mip-data` 获取回来的数据，一般从 `window.m` 里边获取
+`mip-data` 或者 `mip-zmall-login-data` 获取回来的数据，一般从 `window.m` 里边获取
 
 ## 注意事项
 
-此组件只为配合 `mip-data` 使用，使用之前需要确认页面 使用 `mip-data` 来获取过数据
+此组件只为配合 `mip-data` 或者 `mip-zmall-login-data` 使用，使用之前需要确认页面 使用 `mip-data` 或者 `mip-zmall-login-data` 来获取过数据

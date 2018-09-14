@@ -20,6 +20,10 @@ define(function (require) {
         var text = '';
         var toastTip = '';
         var url = self.ajaxUrl + '&orderId=' + orderId + '&orderStatus=' + orderStatus + '&merchantId=' + merchantId;
+        var sessionId = self.element.sessionId;
+        if (sessionId && sessionId !== '') {
+            url += '&sessionId=' + sessionId;
+        }
         if (options.type === 'cansel') {
             text = '确定取消订单？';
             toastTip = '订单取消成功';
@@ -32,28 +36,31 @@ define(function (require) {
             text = '卖家将收到您的货款，是否确认收货？';
             toastTip = '您已确认收货';
         }
-        self.mipDialogComponent.customElement.confirm(text, {
-            okCallback: function () {
-                if (options.type === 'cansel') {
-                    var reasons = self.params.canselOrderReason || [];
-                    createCanselOrderReasonLayer(self.mipDialogComponent, reasons, function (result) {
-                        if (result[0] && result[0].value) {
-                            url += '&reasonId=' + result[0].value;
-                        }
-                        if (result[0] && result[0].content && result[0].content.trim() !== '') {
-                            url += '&content=' + decodeURIComponent(result[0].content);
-                        }
-                        fetch(url, orderId, self.mipDialogComponent, self.element, targetElement, toastTip);
-                    });
-                }
-                else {
-                    fetch(url, orderId, self.mipDialogComponent, self.element, targetElement, toastTip);
+        viewer.eventAction.execute('confirm', self.element, {
+            msg: text,
+            options: {
+                okCallback: function () {
+                    if (options.type === 'cansel') {
+                        var reasons = self.params.canselOrderReason || [];
+                        createCanselOrderReasonLayer(reasons, self.element, function (result) {
+                            if (result[0] && result[0].value) {
+                                url += '&reasonId=' + result[0].value;
+                            }
+                            if (result[0] && result[0].content && result[0].content.trim() !== '') {
+                                url += '&content=' + decodeURIComponent(result[0].content);
+                            }
+                            fetchApi(url, orderId, self.element, targetElement, toastTip);
+                        });
+                    }
+                    else {
+                        fetchApi(url, orderId, self.element, targetElement, toastTip);
+                    }
                 }
             }
         });
     }
 
-    function fetch(url, orderId, dialogElement, element, targetElement, toastTip) {
+    function fetchApi(url, orderId, element, targetElement, toastTip) {
         fetchJsonp(url, {
             jsonpCallback: 'callback'
         }).then(function (res) {
@@ -69,22 +76,34 @@ define(function (require) {
                 toastTip = res.msg;
             }
             setTimeout(function () {
-                dialogElement.customElement.toast(toastTip);
+                viewer.eventAction.execute('toast', element, {
+                    msg: toastTip
+                });
             }, 301);
-        });
-    }
-
-    function refundOrder(options) {
-        var self = this;
-        var text = '退换货请拨打客服电话<br>' + options.tel;
-        self.mipDialogComponent.customElement.confirm(text, {
-            okCallback: function () {
-                window.top.location.href = 'tel:' + options.tel;
+            // 如果是删除 回到列表页
+            var type = targetElement.dataset.type;
+            var pageType = targetElement.dataset.page;
+            if (type && type === '-1' && pageType === 'detail') {
+                setTimeout(function () {
+                    window.history.go(-1);
+                }, 1500);
             }
         });
     }
 
-    function createCanselOrderReasonLayer(dialogElement, reasons, callback) {
+    function refundOrder(options) {
+        var text = '退换货请拨打客服电话<br>' + options.tel;
+        viewer.eventAction.execute('confirm', this.element, {
+            msg: text,
+            options: {
+                okCallback: function () {
+                    window.top.location.href = 'tel:' + options.tel;
+                }
+            }
+        });
+    }
+
+    function createCanselOrderReasonLayer(reasons, element, callback) {
         var reasonsArr = reasons;
         var length = reasonsArr.length;
         reasonsArr.forEach(function (item, index) {
@@ -94,13 +113,15 @@ define(function (require) {
         });
         reasonsArr[length - 1] = {value: 0, name: '其他原因', custom: 1};
         setTimeout(function () {
-            dialogElement.customElement.selector({
-                title: '取消订单原因',
-                buttonText: '确定',
-                type: 'radio',
-                list: reasonsArr,
-                callback: function (res) {
-                    callback(res);
+            viewer.eventAction.execute('selector', element, {
+                options: {
+                    title: '取消订单原因',
+                    buttonText: '确定',
+                    type: 'radio',
+                    list: reasonsArr,
+                    callback: function (res) {
+                        callback(res);
+                    }
                 }
             });
         }, 301);
@@ -113,13 +134,6 @@ define(function (require) {
 
         var self = this;
         var element = this.element;
-        // 因为该组件内部有一个DOM绑定了点击事件，而且需要传个回调函数
-        // 在需要某条件下触发 mip-zol-dialog 对外暴露的方法
-        // 所以暂时不能用 on="组件ID.方法" 的方式来做
-        // 故而在这里用 document.querySelector 来获取 mip-zol-dialog 这个组件
-        // 通过它的 .customElement 来获取方法
-        var mipDialogComponent = document.querySelector('mip-zol-dialog');
-        self.mipDialogComponent = mipDialogComponent;
 
         var ajaxUrl = element.dataset.ajaxUrl;
         self.ajaxUrl = ajaxUrl;
@@ -139,6 +153,25 @@ define(function (require) {
             console.warn(e); // eslint-disable-line
         }
 
+        var needLoginAttr = element.getAttribute('isNeedLogin');
+        var isNeedLogin = needLoginAttr !== null && needLoginAttr !== '0' && needLoginAttr !== 'false';
+        element.isNeedLogin = isNeedLogin;
+
+        // 登录
+        if (isNeedLogin) {
+            self.addEventAction('setsessionid', function (event) {
+                element.sessionId = event.sessionId ? event.sessionId : 0;
+            });
+        }
+        // 订单支付
+        self.addEventAction('pay', function (e) {
+            e.preventDefault();
+            var payUrl = e.target.getAttribute('href');
+            if (payUrl && payUrl !== '') {
+                payUrl = payUrl + '&sessionId=' + element.sessionId;
+            }
+            window.location.href = payUrl;
+        });
         // 取消订单
         self.addEventAction('cansel', function (e) {
             orderHandle.call(self, {

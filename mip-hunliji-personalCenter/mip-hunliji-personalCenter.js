@@ -50,7 +50,7 @@ define(function (require) {
 
                         msgList += '<li data-attr="' + data.msg_list[i].id + '">\
                             <a href="' + href + '/p/wedding/Public/wap/m/mip_baidu/chat/dist/index.html?id='
-                            + data.msg_list[i].merchant.user_id + '" mip-link>\
+                            + data.msg_list[i].merchant.user_id + '">\
                             <div class="chat_avatar">\
                             ' + unreadCount + '\
                             <mip-img layout="container"\
@@ -60,7 +60,7 @@ define(function (require) {
                             </a>\
                             <div class="chat_right">\
                             <a href="' + href + '/p/wedding/Public/wap/m/mip_baidu/chat/dist/index.html?id='
-                             + data.msg_list[i].merchant.user_id + '" mip-link>\
+                             + data.msg_list[i].merchant.user_id + '">\
                                 <div class="chat-top">\
                                     <h3>' + data.msg_list[i].merchant.name + '</h3>\
                                     <span>' + data.msg_list[i].created_at.substring(0, 10) + '</span>\
@@ -68,8 +68,9 @@ define(function (require) {
                             </a>\
                                 <div class="chat-message clearfix">\
                                     <a href="' + href + '/p/wedding/Public/wap/m/mip_baidu/chat/dist/index.html?id='
-                                     + data.msg_list[i].merchant.user_id + '" mip-link>' + msgContent + '</a>\
-                                    <mip-hunliji-deleteChanel data-id="' + data.msg_list[i].id + '" data-url="https://m.hunliji.com/baidu/delMsg">\
+                                     + data.msg_list[i].merchant.user_id + '">' + msgContent + '</a>\
+                                    <mip-hunliji-deleteChanel data-id="' + data.msg_list[i].id + '"\
+                                    data-sessionId = "' + sessionId + '" data-url="https://m.hunliji.com/baidu/delMsg">\
                                         <span class="chat-message-del">删除</span>\
                                     </mip-hunliji-deleteChanel>\
                                 </div>\

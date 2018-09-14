@@ -70,7 +70,8 @@ define(function (require) {
                                 + rewardlist.artid + '.html?addfollow=2&url2=http://www.360doc.cn/index.html')
                             + '\' class=\'fr yc_btn\'></a>';
                             user1html += '</div>';
-                            user1html += '<div class=\'text\'>' + decodeURIComponent(result.description) + '</div>';
+                            user1html += '<a href=\'http://www.360doc.cn/userhome.aspx?userid=' + rewardlist.userid + '\' target=\'_blank\'>' + '<div class=\'text\'>'
+                            + decodeURIComponent(result.description) + '</div>' + '</a>';
                             $('.yc_user_1').html(user1html).show();
                             rewardlist.getRewardUserList();
                         }
@@ -99,11 +100,17 @@ define(function (require) {
                         var rewarduserhref = '';
                         var rewardusername = '';
                         var rewarduserphoto = '';
+                        var platform = '';
                         for (var i = 0; i < result.userlist.length; i++) {
                             if (result.userlist[i].userid === '-1') {
                                 rewarduserhref = 'javascript:void(0);';
                                 rewardusername = '游客';
-                                rewarduserphoto = '<img src=\'http://pubimage.360doc.com/payment/\' + (result.userlist[i].paytype == 1 ? \'wx\' : \'zfb\') + \'.jpg\' title=\'游客\'/>';
+                                if (result.userlist[i].paytype === '1') {
+                                    platform = 'http://pubimage.360doc.com/payment/wx.jpg';
+                                } else {
+                                    platform = 'http://pubimage.360doc.com/payment/zfb.jpg';
+                                }
+                                rewarduserphoto = '<img src=\'' + platform + '\' title=\'游客\'/>';
                             }
                             else {
                                 rewarduserhref = 'http://www.360doc.cn/userhome.aspx?userid=' + result.userlist[i].userid;

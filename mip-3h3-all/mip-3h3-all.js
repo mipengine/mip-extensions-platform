@@ -241,6 +241,10 @@ define(function (require) {
                     con.find('.body-masking').show();
                 }
             });
+            var bodymasking = con.find('.body-masking');
+            bodymasking.click(function () {
+                bodymasking.hide();
+            });
         }
     };
     return customElement;

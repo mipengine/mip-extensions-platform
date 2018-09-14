@@ -8,34 +8,41 @@ define(function (require) {
 
     var customElement = require('customElement').create();
     var $ = require('zepto');
+    var sessionId = '';
+
     function postPackage(element, divid, api, packageid, type) {
+        var addApi = $(element).attr('data-api-add');
+        var deleteApi = $(element).attr('data-api-del');
+
+        var api = addApi;
+        if ($(element).find('#btn_collect').text() === '已收藏') {
+            api = deleteApi;
+        }
+
         $.ajax({
             url: api,
             type: 'post',
             data: {
-                'set_meal_id': packageid
+                'set_meal_id': packageid,
+                sessionId: sessionId
             },
             success: function (result) {
-                if (type === 'collect') {
-                    if (+result.status.RetCode === 1000) {
-                        window.top.location.href = 'https://m.hunliji.com/baidu/authorize?url=' + location.href;
-                    } else if (+result.status.RetCode === 0) {
+                if (api === addApi) {
+                    if (+result.status.RetCode === 0) {
                         $(divid).find('p').html('收藏成功');
                         $(divid).show();
+                        $(element).find('#btn_collect').text('已收藏');
                         setTimeout(function () {
                             $(divid).hide();
-                            window.top.location.href = location.href;
                         }, 2000);
                     }
                 } else {
-                    if (+result.status.RetCode === 1000) {
-                        window.top.location.href = 'https://m.hunliji.com/baidu/authorize?url=' + location.href;
-                    } else if (+result.status.RetCode === 0) {
+                    if (+result.status.RetCode === 0) {
                         $(divid).find('p').html('取消收藏成功');
                         $(divid).show();
+                        $(element).find('#btn_collect').text('收藏');
                         setTimeout(function () {
                             $(divid).hide();
-                            window.top.location.href = location.href;
                         }, 2000);
                     }
                 }
@@ -47,6 +54,11 @@ define(function (require) {
      * 第一次进入可视区回调，只会执行一次
      */
     customElement.prototype.firstInviewCallback = function () {
+        // 客户登陆成功
+        this.addEventAction('customLogin', function (e) {
+            sessionId = e.sessionId;
+        });
+
         var element = this.element;
         var api = $(element).attr('data-api');
         var packageid = $(element).attr('package-id');

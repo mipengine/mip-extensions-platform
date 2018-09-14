@@ -25,14 +25,26 @@ define(function (require) {
         var MIP = window.MIP;
         var requestId = getQueryString('requestId');
         var sessionId = getQueryString('sessionId');
+        var seidtime;
         setTimeout(function () {
             var htsesi = $el.find('#sesiid').html();
             if (htsesi) {
                 sessionId = htsesi;
             }
+            else {
+                seidtime = setInterval(function () {
+                    var htsesis = $el.find('#sesiid').html();
+                    if (htsesis) {
+                        sessionId = htsesis;
+                        clearInterval(seidtime);
+                    }
+
+                }, 800);
+            }
 
             console.log(sessionId);
         }, 2000);
+
         var hosturl = 'https://www.ilaw66.com/jasmine/';
         function returhostname() {
             var hostweb = location.protocol;

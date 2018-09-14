@@ -1,8 +1,8 @@
 /**
 * @file 脚本支持
 * @author hejieye
-* @time  2018-06-20
-* @version 2.1.8
+* @time  2018-09-14
+* @version 2.1.9
 */
 define(function (require) {
     var $ = require('zepto');
@@ -237,7 +237,7 @@ define(function (require) {
         if (pos === undefined || pos === 'undefined') {
             pos = '';
         }
-        uid = '';
+        // uid = '';
         ipLoad(function (data) {
             ip = data.ip || '';
             province = data.province || '';
