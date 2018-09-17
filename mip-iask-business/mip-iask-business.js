@@ -2,7 +2,7 @@
 * @file 脚本支持
 * @author hejieye
 * @time  2018-09-14
-* @version 2.1.9
+* @version 2.1.10
 */
 define(function (require) {
     var $ = require('zepto');
@@ -1572,8 +1572,8 @@ define(function (require) {
         var $thatDiv = ele.querySelector('.baidu_label_div');
         var list = materiel.materialList;
         var version = materiel.version;
-        var channelCode = version.channelCode;
-        $that.setAttribute('uid', version.userId);
+        var channelCode = materiel.channelCode;
+        $that.setAttribute('uid', materiel.userId);
         if ('2' !== version) {
             // 如果不是标准版，则删除百度广告
             removeBaiduAd(ele);

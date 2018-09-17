@@ -54,8 +54,8 @@ define(function (require) {
 
             var topurl = hosturl + topsurl;
             if (MIP.viewer.isIframed) {
-                if (topsurl === './') {
-                    location.assign('https://m.baidu.com/mip/c/s/www.ilaw66.com/jasmine/baidusearch');
+                if (topsurl === 'baidusearch') {
+                    window.top.location.href = 'https://m.baidu.com/mip/c/s/www.ilaw66.com/jasmine/baidusearch';
                 }
                 else {
                     MIP.viewer.sendMessage('loadiframe', {

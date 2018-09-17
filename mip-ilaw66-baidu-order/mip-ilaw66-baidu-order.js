@@ -14,6 +14,7 @@ define(function (require) {
     customElement.prototype.firstInviewCallback = function () {
         var $el = $(this.element);
         // 自动加载数据
+        //      alert("W")
         $el.find('#requestId').val(getQueryString('requestId'));
         var paystart = getQueryString('paystart');
         var sessionId = getQueryString('sessionId');
@@ -42,8 +43,8 @@ define(function (require) {
 
             var topurl = hosturl + topsurl;
             if (MIP.viewer.isIframed) {
-                if (topsurl === './') {
-                    location.assign('https://m.baidu.com/mip/c/s/www.ilaw66.com/jasmine/baidusearch');
+                if (topsurl === 'baidusearch') {
+                    window.top.location.href = 'https://m.baidu.com/mip/c/s/www.ilaw66.com/jasmine/baidusearch';
                 }
                 else {
                     MIP.viewer.sendMessage('loadiframe', {
@@ -161,11 +162,12 @@ define(function (require) {
             else {
                 var m = date.getMinutes() + ':';
             }
-            if (mzdata < 10) {
-                var s = '0' + date.getSeconds();
+            var s = date.getSeconds();
+            if (s < 10) {
+                s = '0' + date.getSeconds();
             }
             else {
-                var s = date.getSeconds();
+                s = date.getSeconds();
             }
             return Y + M + D + h + m + s;
         }

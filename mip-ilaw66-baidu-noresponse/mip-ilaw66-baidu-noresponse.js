@@ -49,11 +49,16 @@ define(function (require) {
 
                 var topurl = hosturl + topsurl;
                 if (MIP.viewer.isIframed) {
-                    MIP.viewer.sendMessage('loadiframe', {
-                        title: toptitle,
-                        click: '',
-                        url: topurl
-                    });
+                    if (topsurl === 'baidusearch') {
+                        window.top.location.href = 'https://m.baidu.com/mip/c/s/www.ilaw66.com/jasmine/baidusearch';
+                    }
+                    else {
+                        MIP.viewer.sendMessage('loadiframe', {
+                            title: toptitle,
+                            click: '',
+                            url: topurl
+                        });
+                    }
                 }
                 else {
                     location.assign(topurl);
@@ -128,11 +133,19 @@ define(function (require) {
             //              });
             //          });
             $el.find('#js-continueAsk').click(function () {
+                var ajaxdatas = {};
+                ajaxdatas.questionType = questionType;
+                ajaxdatas._csrf = csrfToken;
+                ajaxdatas.channel = 'baidusearch';
+                ajaxdatas.sessionId = sessionId;
                 $.ajax({
                     type: 'post',
-                    url: hosturl + 'greeting?questionType=' + questionType + '&_csrf='
+                    url: hosturl + 'greeting2?questionType=' + questionType + '&_csrf='
                         + csrfToken + '&sessionId=' + sessionId + '&channel=baidusearch',
-                    success: function (data) {
+                    data: ajaxdatas,
+                    timeout: 10000, // 超时时间设置，单位毫秒
+                    success: function (datas) {
+                        var data = datas.data;
                         if (data === 'ERROR' || data === 'ERROR1') {
                             $el.find('#err_msg').html('系统异常，请返回重新咨询');
                             $el.find('.popUp_sysErr').fadeIn();
@@ -173,7 +186,8 @@ define(function (require) {
                 window.top.location.href = textbutturl;
             });
             $el.find('#err_confirm').click(function () {
-                $el.find('.popUp_sysErr').hide();
+                //              $el.find('.popUp_sysErr').hide();
+                locahost('./', '电话咨询');
             });
         });
         // 获取url参数

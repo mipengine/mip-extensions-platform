@@ -65,8 +65,8 @@ define(function (require) {
 
             var topurl = hosturl + topsurl;
             if (MIP.viewer.isIframed) {
-                if (topsurl === './') {
-                    location.assign('https://m.baidu.com/mip/c/s/www.ilaw66.com/jasmine/baidusearch');
+                if (topsurl === 'baidusearch') {
+                    window.top.location.href = 'https://m.baidu.com/mip/c/s/www.ilaw66.com/jasmine/baidusearch';
                 }
                 else {
                     MIP.viewer.sendMessage('loadiframe', {
@@ -591,18 +591,23 @@ define(function (require) {
             }
         });
         function startConsulting(questionType) {
+            var ajaxdatas = {};
+            ajaxdatas.questionType = questionType;
+            ajaxdatas._csrf = $el.find('#_csrf').val();
+            ajaxdatas.channel = 'baidusearch';
+            ajaxdatas.sessionId = sessionId;
             $.ajax({
-                url: hosturl + 'greeting?questionType='
+                url: hosturl + 'greeting2?questionType='
                     + questionType + '&sessionId=' + sessionId + '&_csrf='
                     + $el.find('#_csrf').val(),
                 type: 'POST',
-                success: function (indexmessage) {
+                data: ajaxdatas,
+                success: function (datas) {
+                    var indexmessage = datas.data;
                     if (localStorage.getItem('baiduquestionType')) {
                         localStorage.removeItem('baiduquestionType');
                     }
 
-                    //                  console.log(indexmessage);
-                    //                  console.log(typeof indexmessage);
                     if (indexmessage === 'ERROR' || indexmessage === 'ERROR1') {
                         //                      $el.find('#sendSMSError_msg').text('系统异常，请返回重新咨询');
                         //                      $el.find('.popUp_sysErr').fadeIn();
@@ -661,24 +666,17 @@ define(function (require) {
                     url: hosturl + 'baidusearch/login?username=' + phone + '&channel='
                         + channel + '&password=' + smsCode + '&sessionId=' + sessionId,
                     success: function (data) {
-                        //                  	debugger
                         if (data.status === 0 && data.data.isLogin === '1') {
-                            //                      	debugger
-                            //                          sessionId = data.sessionId;
-                            //                          localStorage.setItem(mipsesid, data.sessionId);
                             var sesidtypes = localStorage.getItem('baiduquestionType');
                             //                          console.log(sesidtypes);
                             if (!sesidtype && sesidtypes) {
                                 sesidtype = sesidtypes;
                             }
 
-                            //                           var sesidtype = localStorage.getItem('baiduquestionType');
                             if (sesidtype) {
-                                //                              console.log('下单了');
                                 startConsulting(sesidtype);
                             }
                             else {
-                                //                              console.log('跳转了');
                                 locahost('./', '电话咨询');
                             }
                         }

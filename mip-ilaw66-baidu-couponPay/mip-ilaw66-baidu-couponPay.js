@@ -32,7 +32,6 @@ define(function (require) {
                 sessionId = htsesi;
             }
             else {
-                console.log('定时获取');
                 seidtime = setInterval(function () {
                     var htsesis = $el.find('#sesiid').html();
                     if (htsesis) {
@@ -40,11 +39,9 @@ define(function (require) {
                         clearInterval(seidtime);
                     }
 
-                    console.log('一直');
                 }, 800);
             }
-            console.log(sessionId);
-        }, 2000);
+        }, 1000);
 
         var hosturl = 'https://www.ilaw66.com/jasmine/';
         function returhostname() {
@@ -70,8 +67,8 @@ define(function (require) {
 
             var topurl = hosturl + topsurl;
             if (MIP.viewer.isIframed) {
-                if (topsurl === './') {
-                    location.assign('https://m.baidu.com/mip/c/s/www.ilaw66.com/jasmine/baidusearch');
+                if (topsurl === 'baidusearch') {
+                    window.top.location.href = 'https://m.baidu.com/mip/c/s/www.ilaw66.com/jasmine/baidusearch';
                 }
                 else {
                     MIP.viewer.sendMessage('loadiframe', {
@@ -134,6 +131,13 @@ define(function (require) {
         $el.find('#js-pay-button').click(function () {
             var freeFlg = '0'; // 没有订单免单
             var freeMessage = '';
+            //          var htsesisf = $el.find('#sesiid').html();
+            //          if (htsesisf) {
+            //              sessionId = htsesi;
+            //          }else{
+            //          	  $el.find('.pay__popUp_success .pay__popLayer span').text('请稍等');
+            //          	  return;
+            //          }
             $.ajax({
                 async: false,
                 type: 'GET',
@@ -207,6 +211,10 @@ define(function (require) {
                 }
 
                 data.sessionId = sessionId;
+                if (!sessionId) {
+                    return;
+                }
+
                 //				debugger
                 $.ajax({
                     type: 'POST',

@@ -1,0 +1,14 @@
+{
+    "name": "mip-collectionStatistics",
+    "version": "1.0.0",
+    "description": "url自适应",
+    "contributors": [
+        {
+            "name": "张世元",
+            "email": "1171326259@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

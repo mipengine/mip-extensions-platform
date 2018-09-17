@@ -5,6 +5,7 @@
 
 define(function (require) {
     var $ = require('zepto');
+    //  var $ = require('jquery');
     var customElement = require('customElement').create();
     var viewer = require('viewer');
 
@@ -13,7 +14,6 @@ define(function (require) {
    */
     customElement.prototype.firstInviewCallback = function () {
         // TODO
-        //               alert("W")
         var $el = $(this.element);
         var questionType;
         var tabHref;
@@ -60,13 +60,14 @@ define(function (require) {
         returhostname();
         console.log(hosturl);
         function locahost(topsurl, toptitle) {
+
             if (topsurl === './') {
                 topsurl = 'baidusearch';
             }
 
             var topurl = hosturl + topsurl;
             if (MIP.viewer.isIframed) {
-                if (topsurl === './') {
+                if (topsurl === 'baidusearch') {
                     location.assign('https://m.baidu.com/mip/c/s/www.ilaw66.com/jasmine/baidusearch');
                 }
                 else {
@@ -87,23 +88,10 @@ define(function (require) {
             var sessid = event.sessionId;
             var islogin = parseInt(event.userInfo.isLogin, 10);
             if (!islogin) { // 未注册
-                //  window.top.location.href = 'toLogin?channel=baidusearch';
-                //              if (MIP.viewer.isIframed) {
-                //                  MIP.viewer.sendMessage('loadiframe', {
-                //                      title: '登录',
-                //                      click: '',
-                //                      url: 'https://www.ilaw66.com/jasmine/mipilaw66baidu_login?channel=baidusearch'
-                //                  });
-                //              }
-                //              else {
-                //                  location.assign('https://www.ilaw66.com/jasmine/mipilaw66baidu_login?channel=baidusearch');
-                //              }
-                //              setTimeout(function () {
                 var qusttype = localStorage.getItem('baiduquestionType');
                 var tzurl = 'mipilaw66baidu_login?channel=baidusearch&sessionId='
                     + sessid + '&questionType=' + qusttype;
                 locahost(tzurl, '准备咨询');
-            //              }, 500);
             }
             else {
                 console.log('登录成功');
@@ -111,14 +99,11 @@ define(function (require) {
                 isloginf = true;
                 var sesidtypes = localStorage.getItem('baiduquestionType');
                 if (sesidtypes) {
+                    localStorage.removeItem('baiduquestionType');
                     startConsulting(sesidtypes);
                 }
 
                 bannerusernum();
-                //              $el.find('#sesiid').html(sessid);
-                //              var thishostname = location.hostname;
-                //              var name = 'mip-login-xzh:sessionId:https://' + thishostname + '/jasmine/baidusearch/authorize2';
-                //              localStorage.setItem(name, sessid);
             }
         });
 
@@ -144,29 +129,6 @@ define(function (require) {
             return null;
         }
 
-        var indexmessage = getQueryString('data');
-
-        //      if (indexmessage === 'ERROR' || indexmessage === 'ERROR1') {
-        //          $el.find('#' + tabHref).removeClass().addClass('tab-pane');
-        //          flg = 0;
-        //          $el.find('.popUp_sysErr').show();
-        //      }
-        //      else if (indexmessage === 'ERROR2') {
-        //          $el.find('#' + tabHref).removeClass().addClass('tab-pane');
-        //          flg = 0;
-        //          $el.find('.popUp_unpaidErr').show();
-        //      }
-        //      else if (indexmessage === 'ERROR3') {
-        //          $el.find('#' + tabHref).removeClass().addClass('tab-pane');
-        //          flg = 0;
-        //          $el.find('.popUp_unFinishedBillErr').show();
-        //      }
-        //      else if (indexmessage === 'ERROR4') {
-        //          $el.find('#' + tabHref).removeClass().addClass('tab-pane');
-        //          flg = 0;
-        //          $el.find('#messagecontem').text('您今日取消咨询已达3次，请明天再来');
-        //          $el.find('.popUp_unpaidErr').show();
-        //      }
         $el.find('.headerright').click(function () {
             if (!userId) {
                 sessionStorage.setItem('ishomeorder', '1');
@@ -264,25 +226,14 @@ define(function (require) {
         $el.find('.consulting').click(function () {
             var questionType = $(this).data('type');
             localStorage.setItem('baiduquestionType', questionType);
+
             if (sessionId !== 0) {
                 startConsulting(questionType);
             }
+            else {
+                window.location.reload();
+            }
 
-            //          alert("W")
-            //          if (islog) {
-            //              startConsulting(questionType);
-            //          }
-            //          else {
-            //              var isnew = getQueryString('code');
-            //              if (isnew) {
-            //                  window.top.location.href = 'toLogin?channel=baidusearch';
-            //              }
-            //              else {
-            //                  setTimeout(function () {
-            //                      window.top.location.href = 'toLogin?channel=baidusearch';
-            //                  }, 1500);
-            //              }
-            //          }
         });
 
         $el.find('.link_confirm').click(function (event) {
@@ -303,6 +254,7 @@ define(function (require) {
             $.ajax({
                 url: hosturl + 'getOrderCount?sessionId=' + sessionId,
                 type: 'GET',
+                timeout: 10000, // 超时时间设置，单位毫秒
                 dataType: 'json',
                 success: function (a) {
                     //                     console.log(a);
@@ -453,44 +405,54 @@ define(function (require) {
             }
             setTimeout(start, delay);
         }
+
         // $el.find('#alertconten').addClass('alertactive');
         // 开始咨询调用接口
         function startConsulting(questionType) {
-            if (!clicksstart) {
-                return;
-            }
-
-            clicksstart = false;
+            var ajaxdatas = {};
+            ajaxdatas.questionType = questionType;
+            ajaxdatas._csrf = $el.find('#_csrf').val();
+            ajaxdatas.channel = 'baidusearch';
+            ajaxdatas.sessionId = sessionId;
             $.ajax({
-                url: hosturl + 'greeting?questionType='
+                url: hosturl + 'greeting2?questionType='
                     + questionType + '&_csrf='
                     + $el.find('#_csrf').val() + '&sessionId=' + sessionId + '&channel=baidusearch',
-                type: 'POST',
-                success: function (indexmessage) {
+                type: 'post',
+                async: true,
+                data: ajaxdatas,
+                //              cache:false,
+                //              dataType: 'txt',
+                //              global:false,
+                //              crossDomain: true,
+                //    		    contentType: "application/json", // POST时必须
+                timeout: 5000, // 超时时间设置，单位毫秒
+                success: function (datas) {
+                    var datas = datas.data;
                     clicksstart = true;
                     if (localStorage.getItem('baiduquestionType')) {
                         localStorage.removeItem('baiduquestionType');
                     }
 
-                    if (indexmessage === 'ERROR' || indexmessage === 'ERROR1') {
+                    if (datas === 'ERROR' || datas === 'ERROR1') {
                         $el.find('#' + tabHref).removeClass().addClass('tab-pane');
                         flg = 0;
                         //                      $el.find('.popUp_sysErr').addClass('alertactive');
                         $el.find('#alertconten').addClass('alertactive');
                     }
-                    else if (indexmessage === 'ERROR2') {
+                    else if (datas === 'ERROR2') {
                         $el.find('#' + tabHref).removeClass().addClass('tab-pane');
                         flg = 0;
                         //   $el.find('.popUp_unpaidErr').show();alertactive
                         $el.find('#payalert').addClass('alertactive');
                     }
-                    else if (indexmessage === 'ERROR3') {
+                    else if (datas === 'ERROR3') {
                         $el.find('#' + tabHref).removeClass().addClass('tab-pane');
                         flg = 0;
                         //                      $el.find('.popUp_unFinishedBillErr').addClass('alertactive');
                         $el.find('#alertBillErr').addClass('alertactive');
                     }
-                    else if (indexmessage === 'ERROR4') {
+                    else if (datas === 'ERROR4') {
                         $el.find('#' + tabHref).removeClass().addClass('tab-pane');
                         flg = 0;
                         $el.find('#messagecontem').text('您今日取消咨询已达3次，请明天再来');
@@ -500,13 +462,19 @@ define(function (require) {
                         $el.find('#' + tabHref).removeClass().addClass('tab-pane');
                         flg = 0;
                         var requesturl = 'mipilaw66baidu'
-                            + '_request?data=' + indexmessage + '&questionType=' + questionType
+                            + '_request?data=' + datas + '&questionType=' + questionType
                             + '&sessionId=' + sessionId;
                         locahost(requesturl, '匹配律师');
                     }
                 },
-                error: function () {
+                complete: function (xhr, status) {
+                    //              	alert(JSON.stringify(xhr))
+                },
+                error: function (data) {
                     clicksstart = true;
+                    //                   $el.find('#messagecontem').text(JSON.stringify(xhr));
+                    //                      $el.find('#payalert').addClass('alertactive');
+                    $el.find('#sesiid').html(data);
                     //                  window.location.reload();
                 }
             });
@@ -585,7 +553,7 @@ define(function (require) {
         // 咨询其他律师时
         $el.find('.link_others').click(function (event) {
             $el.find('.popUp_confirm').hide();
-            startConsulting(questionType);
+            //          startConsulting(questionType);
 
             //          viewer.eventAction.execute('tap','my-lightbox.toggle',{});
         });
