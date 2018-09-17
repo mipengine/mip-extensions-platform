@@ -18,7 +18,7 @@
 
 ## 属性
 
-### chapter-name
+### chapter-title
 
 说明：当前章节的名称
 必填：是

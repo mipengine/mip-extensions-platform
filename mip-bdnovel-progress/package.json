@@ -1,6 +1,6 @@
 {
     "name": "mip-bdnovel-progress",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "提供给百度小说业务流量合作方的进度回传组件",
     "contributors": [
         {

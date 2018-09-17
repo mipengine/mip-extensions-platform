@@ -58,6 +58,27 @@ define(function (require) {
     }
 
     /**
+     * 替换并编码URL
+     *
+     * @param {Object} data 要应用的数据对象
+     * @param {string} url 要处理的链接
+     * @param {any} defaultValue 默认值
+     *
+     * @return {string} 处理后的链接
+     */
+    function replaceAndEncodeUrl(data, url, defaultValue) {
+        defaultValue = defaultValue || '';
+        var redirectUrl = url.replace(/#([^#]*)#/g, function ($0, $1) {
+            return data[$1] || defaultValue;
+        });
+
+        redirectUrl = redirectUrl.replace(/{{(.+?)}}/g, function ($0, $1) {
+            return encodeURIComponent($1);
+        });
+        return redirectUrl;
+    }
+
+    /**
      * 使用JSONP发送请求
      *
      * @param {dom} element 当前元素
@@ -91,13 +112,7 @@ define(function (require) {
                 submitData.response = data.data;
                 submitData = Object.assign({}, submitData, element.extraData);
                 var token = data.token;
-                var redirectUrl = redirect.replace(/#([^#]*)#/g, function ($0, $1) {
-                    return submitData[$1] || defaultValue;
-                });
-
-                redirectUrl = redirectUrl.replace(/{{(.+?)}}/g, function ($0, $1) {
-                    return encodeURIComponent($1);
-                });
+                var redirectUrl = replaceAndEncodeUrl(submitData, redirect, defaultValue);
 
                 window.top.location.href = handleUrl(redirectUrl, {token: token});
             }
@@ -147,16 +162,8 @@ define(function (require) {
             request(element, loginUrl, redirect, submitData, loginData, 0);
         }
         else {
-
             submitData = Object.assign({}, submitData, element.extraData);
-            // 直接转跳
-            var redirectUrl = redirect.replace(/#([^#]*)#/g, function ($0, $1) {
-                return submitData[$1] || '';
-            });
-
-            redirectUrl = redirectUrl.replace(/{{(.+?)}}/g, function ($0, $1) {
-                return encodeURIComponent($1);
-            });
+            var redirectUrl = replaceAndEncodeUrl(submitData, redirect, '');
             window.top.location.href = redirectUrl;
         }
     }
@@ -347,14 +354,7 @@ define(function (require) {
                 var redirect = recordElement.dataset.redirect;
 
                 // 直接转跳
-                var redirectUrl = redirect.replace(/#([^#]*)#/g, function ($0, $1) {
-                    return data[$1] || '';
-                });
-
-                redirectUrl = redirectUrl.replace(/{{(.+?)}}/g, function ($0, $1) {
-                    return encodeURIComponent($1);
-                });
-
+                var redirectUrl = replaceAndEncodeUrl(data, redirect, '');
                 window.top.location.href = redirectUrl;
             });
         };
@@ -380,6 +380,8 @@ define(function (require) {
         self.addEventAction('saveData', function () {
             setTimeout(function () {
                 var info = JSON.parse(element.dataset.info || '{}');
+                var isSideLogin = JSON.parse(element.dataset.isSideLogin);
+                var phonePage = element.dataset.phonePage;
                 var sessionStorageId = element.dataset.sessionStorageId;
                 var extraData = Object.assign(
                     {},
@@ -388,7 +390,15 @@ define(function (require) {
                     {sessionId: readStorage(sessionStorageId)}
                 );
                 element.extraData = extraData;
-                onSubmit(element, event);
+
+                if (isSideLogin) {
+                    if (info.userInfo && !info.userInfo.id) {
+                        window.top.location.href = replaceAndEncodeUrl(extraData, phonePage, '');
+                    }
+                }
+                else {
+                    onSubmit(element, event);
+                }
             });
         });
     };

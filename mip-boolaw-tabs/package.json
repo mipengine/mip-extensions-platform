@@ -1,0 +1,14 @@
+{
+    "name": "mip-boolaw-tabs",
+    "version": "1.0.0",
+    "description": "mip-fixed和mip-vd-tabs融合定制",
+    "contributors": [
+        {
+            "name": "boolaw",
+            "email": "8927747@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

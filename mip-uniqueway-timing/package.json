@@ -1,7 +1,7 @@
 {
     "name": "mip-uniqueway-timing",
     "version": "1.0.0",
-    "description": "定时触发事件",
+    "description": "Uniqueway定时组件",
     "contributors": [
         {
             "name": "likai",

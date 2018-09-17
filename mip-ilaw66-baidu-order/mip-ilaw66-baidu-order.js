@@ -518,10 +518,10 @@ define(function (require) {
                 }
             });
         }
-        $el.find('#loading_pop').css('display', 'none');
-        //      $el.find('#loading_pop').hide();
+        $el.find('#loading_pop').addClass('alertactivefalse');
+
         if (paystart) {
-            $el.find('#payalert').css('display', 'block');
+            $el.find('#payalert').addClass('alertactivetrue');
             //          $el.find(".payalert").show();
             //          $el.find('#payalert').show();
         }

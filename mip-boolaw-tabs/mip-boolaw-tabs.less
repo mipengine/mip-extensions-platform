@@ -1,0 +1,28 @@
+ul,
+ol,
+li {
+    list-style: none;
+}
+mip-boolaw-tabs {
+    section {
+        background: #fff;
+        z-index: 99;
+        width: 100%;
+        position: static;
+        .tab-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+    section.fixed {
+        position: fixed;
+        left: 50%;
+        right: 0;
+        top: 0;
+        transform: translateX(-50%);
+    }
+    .tab-content {
+        display: none;
+    }
+}

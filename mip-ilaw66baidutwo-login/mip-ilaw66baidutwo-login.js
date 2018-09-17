@@ -597,9 +597,7 @@ define(function (require) {
             ajaxdatas.channel = 'baidusearch';
             ajaxdatas.sessionId = sessionId;
             $.ajax({
-                url: hosturl + 'greeting2?questionType='
-                    + questionType + '&sessionId=' + sessionId + '&_csrf='
-                    + $el.find('#_csrf').val(),
+                url: hosturl + 'greeting2',
                 type: 'POST',
                 data: ajaxdatas,
                 success: function (datas) {

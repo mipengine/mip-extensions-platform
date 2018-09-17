@@ -8,6 +8,9 @@ define(function (require) {
 
     var customElement = require('customElement').create();
     var $ = require('zepto');
+    var util = require('util');
+    var CustomStorage = util.customStorage;
+    var storage = new CustomStorage(0);
 
     /**
      * 第一次进入可视区回调，只会执行一次
@@ -61,7 +64,7 @@ define(function (require) {
             $button.attr('disable', true);
 
             var url = $form.attr('action');
-            var success = $form.attr('success');
+            var lightboxId = $form.attr('close-lightbox-id');
 
             var data = validateForm($form);
             if (data === false) {
@@ -77,10 +80,13 @@ define(function (require) {
                     if (response.err === 0) {
                         resetForm($form);
                         $button.removeAttr('disable');
-                        if (success) {
-                            location.href = success;
+                        if (lightboxId) {
+                            $('#' + lightboxId).hide();
+                            $('#MIP-LLIGTBOX-MASK').hide();
+                            $('html').removeClass('mip-no-scroll');
+                            storage.set('mip-uniqueway-timing-' + lightboxId, true);
                         } else {
-                            alert('提交成功');
+                            alert('提交成功，顾问会尽快与你联系');
                         }
                         return true;
                     } else {
