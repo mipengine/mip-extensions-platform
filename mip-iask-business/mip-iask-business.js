@@ -131,7 +131,7 @@ define(function (require) {
         $tokenDiv.innerHTML = '<mip-stats-baidu token="' + token + '"></mip-stats-baidu>';
     };
     var ipLoad = function (callback) {
-        var url = 'http://ipip.iask.cn/iplookup/search?format=json&callback=?';
+        var url = 'https://ipip.iask.cn/iplookup/search?format=json&callback=?';
         // var url = 'https://mipp.iask.cn/iplookup/search?format=json&ip=43.226.37.75&callback=?';
         try {
             $.getJSON(url, function (data) {

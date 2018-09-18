@@ -1,6 +1,6 @@
 {
     "name": "mip-zmall-login-data",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "根据用户ID请求数据，并放入mip-data中",
     "contributors": [
         {

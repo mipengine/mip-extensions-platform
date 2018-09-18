@@ -30,7 +30,7 @@ define(function (require) {
                         if (data[i].content) {
                             for (var j = 0; j < data[i].content.length; j++) {
                                 if (data[i].property_id !== '13') {
-                                    content = '<a href="' + href + '/baidu/package/detail_' + data[i].content[j].id
+                                    content += '<a href="' + href + '/baidu/package/detail_' + data[i].content[j].id
                                         + '" mip-link>'
                                         + '<li>'
                                         + '<div class="message_pack_hd">'
@@ -44,7 +44,7 @@ define(function (require) {
                                         + '</li>'
                                         + '</a>';
                                 } else {
-                                    content = '<a href="' + href + '/baidu/hotel/detail_' + data[i].content[j].id + '"'
+                                    content += '<a href="' + href + '/baidu/hotel/detail_' + data[i].content[j].id + '"'
                                         + ' mip-link>'
                                         + '<li>'
                                         + '<div class="message_pack_hd hotel">'
@@ -85,6 +85,7 @@ define(function (require) {
                                 + '</div>'
                                 + '</div>';
                         }
+                        content = '';
                     }
 
                     $(element).html(html);

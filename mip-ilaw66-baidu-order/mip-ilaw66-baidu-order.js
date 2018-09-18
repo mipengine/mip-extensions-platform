@@ -14,10 +14,10 @@ define(function (require) {
     customElement.prototype.firstInviewCallback = function () {
         var $el = $(this.element);
         // 自动加载数据
-        //              alert("W")
+        //                                      alert("W")
         $el.find('#requestId').val(getQueryString('requestId'));
         var paystart = getQueryString('paystart');
-        var sessionId = getQueryString('sessionId');
+        var sessionId = getQueryString('sessionId') ? getQueryString('sessionId') : 0;
         var requestId = getQueryString('requestId');
         var MIP = window.MIP;
         //		alert(paystart)
@@ -34,13 +34,9 @@ define(function (require) {
         else {
             hosturl = 'https://' + hostname + '/jasmine/';
         }
-        $el.find('#loading_pop').addClass('alertactivefalse');
-        if (paystart) {
-            $el.find('#payalert').addClass('alertactivetrue');
-        }
 
-        var mipsesid = 'mip-login-xzh:sessionId:' + hosturl + 'baidusearch/authorize2';
-        sessionId = localStorage.getItem(mipsesid);
+        //      var mipsesid = 'mip-login-xzh:sessionId:' + hosturl + 'baidusearch/authorize2';
+        //      sessionId = localStorage.getItem(mipsesid);
         function locahost(topsurl, toptitle) {
             if (topsurl === './') {
                 topsurl = 'baidusearch';
@@ -75,9 +71,21 @@ define(function (require) {
                 locahost(tzurl, '准备咨询');
             }
             else {
+                $el.find('#loading_pop').addClass('alertactivefalse');
+                $el.find('#loading_pop').css('display', 'none');
+                if (paystart) {
+                    $el.find('#payalert').addClass('alertactivetrue');
+                    $el.find('#payalert').css('display', 'block');
+                }
+
                 console.log('登录成功');
                 sessionId = sessid;
+                load();
             }
+        });
+
+        this.addEventAction('error', function (event) {
+            locahost('./', '电话咨询');
         });
 
         $el.find('#gohome').click(function () {
@@ -96,7 +104,7 @@ define(function (require) {
                 window.history.go(-1);
             }
         });
-        load();
+
         function getQueryString(name) {
             var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
             var r = window.location.search.substr(1).match(reg);
@@ -297,26 +305,26 @@ define(function (require) {
                         }
                     });
                     // 继续问
-                    $el.find('.reAsk').click(function () {
-                        $('.loadingArea').show();
-                        var askingType = $(this).data('type');
-                        var lawyerId = this.attributes.lawyerId.nodeValue;
-                        // var questionType = getQuestionTypeNum(this.attributes['questionType'].nodeValue);
-                        var questionType = this.attributes.questiontype.nodeValue;
-                        var csrfToken = $el.find('#_csrf').val();
-                        // console.log(csrfToken);
-                        continueAskNew(lawyerId, questionType, askingType, csrfToken, 'order');
-                    });
-
-                    // 希望重试
-                    $el.find('#still_reAsk').click(function () {
-                        $el.find('.popUp_confirm').hide();
-                        $el.find('.loadingArea').show();
-                        var askingType = $(this).data('type');
-                        var lawyerId = this.attributes.lawyerId.nodeValue;
-                        var csrfToken = $el.find('#_csrf').val();
-                        continueAsk(lawyerId, questionType, askingType, csrfToken);
-                    });
+                    //                  $el.find('.reAsk').click(function () {
+                    //                      $('.loadingArea').show();
+                    //                      var askingType = $(this).data('type');
+                    //                      var lawyerId = this.attributes.lawyerId.nodeValue;
+                    //                      // var questionType = getQuestionTypeNum(this.attributes['questionType'].nodeValue);
+                    //                      var questionType = this.attributes.questiontype.nodeValue;
+                    //                      var csrfToken = $el.find('#_csrf').val();
+                    //                      // console.log(csrfToken);
+                    //                      continueAskNew(lawyerId, questionType, askingType, csrfToken, 'order');
+                    //                  });
+                    //
+                    //                  // 希望重试
+                    //                  $el.find('#still_reAsk').click(function () {
+                    //                      $el.find('.popUp_confirm').hide();
+                    //                      $el.find('.loadingArea').show();
+                    //                      var askingType = $(this).data('type');
+                    //                      var lawyerId = this.attributes.lawyerId.nodeValue;
+                    //                      var csrfToken = $el.find('#_csrf').val();
+                    //                      continueAsk(lawyerId, questionType, askingType, csrfToken);
+                    //                  });
                     // 点击继续问，a有未处理订单时,设为false
                     var flg = false;
                     $el.find('.link_btn_uncheckErrConfirm').click(function () {
@@ -347,29 +355,31 @@ define(function (require) {
                         $el.find('.popUp_unFinishedBillErr').hide();
                     });
 
-                    $el.find('.link_btn_unpaidErrConfirm').click(function () {
-                        var orderlisturl = 'orderlist';
-                        locahost(orderlisturl, '订单列表');
-                    });
+                    //                  $el.find('.link_btn_unpaidErrConfirm').click(function () {
+                    //                      var orderlisturl = 'orderlist';
+                    //                      locahost(orderlisturl, '订单列表');
+                    //                  });
 
                     $el.find('#loading_pop').addClass('alertactivefalse');
+                    $el.find('#loading_pop').css('display', 'none');
                     if (paystart) {
                         $el.find('#payalert').addClass('alertactivetrue');
+                        $el.find('#payalert').css('display', 'block');
                     }
 
+                },
+                error: function (c) {
+                    alert('W');
+                    if (c.status === 500) {
+                        window.location.reload();
+                    }
+                    else {
+                        locahost('./', '电话咨询');
+                    }
                 }
             });
         }
 
-        /*新版操作end*/
-        document.addEventListener('touchmove', function (event) {
-            // 监听滚动事件
-            if (flg === 1) {
-                // 判断是遮罩显示时执行，禁止滚屏
-                event.preventDefault(); // 最关键的一句，禁止浏览器默认行为
-            }
-
-        });
         $el.find('.link_btn_uncheckErrConfirm').click(function () {
             $el.find('.popUp_err').hide();
         });
@@ -446,47 +456,47 @@ define(function (require) {
         //   });
         // }
         // 继续问---通知律师跳转到request页面（开始咨询；confirmTel页）
-        function continueAsk(lawyerId, questionType, askingType, csrfToken) {
-            $.ajax({
-                async: true,
-                type: 'POST',
-                url: hosturl + 'continueAsk?lawyerId=' + lawyerId + '&questionType=' + questionType + '&_csrf='
-                    + csrfToken + '&sessionId=' + sessionId,
-                dataType: 'json',
-                success: function (data) {
-                    $el.find('.loadingArea').hide();
-                    var id = data.data;
-                    var state = data.state;
-                    if (id !== '') {
-                        var requesturl = 'mipilaw66baidu_request?data='
-                            + id + '&questionType=' + questionType + '&askingType='
-                            + askingType + '&lawyerId=' + lawyerId;
-                        locahost(requesturl, '匹配律师');
-                    }
-                    else {
-                        if (state === 1) {
-                            // 点击继续问，b律师正在服务中,设为true
-                            flg = true;
-                            $el.find('.popUp_confirm').fadeIn();
-                            $el.find('#still_reAsk').attr('lawyerId', lawyerId);
-                        }
-                        else {
-                            var msg = data.error;
-                            $el.find('#tips').html(msg);
-                            $el.find('.popUp_confirm').hide();
-                            $el.find('.popUp_uncheckErr').fadeIn();
-                        }
-                    }
-                },
-                error: function (jqXHR) {
-                    $el.find('.loadingArea').hide();
-                    if (jqXHR.status === 403) {
-                        window.location.reload();
-                    }
-
-                }
-            });
-        }
+        //      function continueAsk(lawyerId, questionType, askingType, csrfToken) {
+        //          $.ajax({
+        //              async: true,
+        //              type: 'POST',
+        //              url: hosturl + 'continueAsk?lawyerId=' + lawyerId + '&questionType=' + questionType + '&_csrf='
+        //                  + csrfToken + '&sessionId=' + sessionId,
+        //              dataType: 'json',
+        //              success: function (data) {
+        //                  $el.find('.loadingArea').hide();
+        //                  var id = data.data;
+        //                  var state = data.state;
+        //                  if (id !== '') {
+        //                      var requesturl = 'mipilaw66baidu_request?data='
+        //                          + id + '&questionType=' + questionType + '&askingType='
+        //                          + askingType + '&lawyerId=' + lawyerId;
+        //                      locahost(requesturl, '匹配律师');
+        //                  }
+        //                  else {
+        //                      if (state === 1) {
+        //                          // 点击继续问，b律师正在服务中,设为true
+        //                          flg = true;
+        //                          $el.find('.popUp_confirm').fadeIn();
+        //                          $el.find('#still_reAsk').attr('lawyerId', lawyerId);
+        //                      }
+        //                      else {
+        //                          var msg = data.error;
+        //                          $el.find('#tips').html(msg);
+        //                          $el.find('.popUp_confirm').hide();
+        //                          $el.find('.popUp_uncheckErr').fadeIn();
+        //                      }
+        //                  }
+        //              },
+        //              error: function (jqXHR) {
+        //                  $el.find('.loadingArea').hide();
+        //                  if (jqXHR.status === 403) {
+        //                      window.location.reload();
+        //                  }
+        //
+        //              }
+        //          });
+        //      }
         // 继续问---通知律师跳转到informLawyer页面（orderlist页，首页slogon）
         function continueAsk2(lawyerId, questionType, askingType, csrfToken) {
             $.ajax({
@@ -536,84 +546,84 @@ define(function (require) {
         }
 
         // continueAsk2 更改为 continueAskNew
-        function continueAskNew(lawyerId, questionType, askingType, csrfToken, continueAskPage) {
-            $.ajax({
-                async: true,
-                type: 'POST',
-                url: hosturl + 'continueAskV3?lawyerId=' + lawyerId + '&questionType='
-                    + questionType + '&_csrf=' + csrfToken + '&continueAskPage='
-                    + continueAskPage + '&sessionId=' + sessionId,
-                dataType: 'json',
-                success: function (data) {
-                    console.log('继续问2', data);
-                    $el.find('.loadingArea').hide();
-                    var id = data.data;
-                    var state = data.state;
-                    localStorage.setItem('reAskAvatar', data.avatar);
-                    localStorage.setItem('reAskName', data.lawyerName);
-                    localStorage.setItem('reAskSex', data.sex);
-                    localStorage.setItem('lawyerField', data.lawyerField);
-                    localStorage.setItem('goodCommentRate', data.goodCommentRate);
-                    if (id !== '') {
-                        // 传入lawyerId
-                        var infourl = 'mipilaw66baidu_informLawyer?data='
-                            + id + '&questionType='
-                            + questionType + '&askingType=' + askingType + '&lawyerId='
-                            + lawyerId + '&PABackJumpFlg=index';
-                        locahost(infourl, '无人应答');
-                    }
-                    else {
-                        if (state === 1 || state === 2) {
-                            // 1.律师正在服务中 2.律师已下线
-                            document.body.scrollTop = document.documentElement.scrollTop = 0;
-                            var title = '温馨提示';
-                            var main = data.error + '\uFF0C您可以稍后继续问\uFF0C或由系统推荐其他律师';
-                            var yes = '立刻推荐其他律师';
-                            var no = '稍后继续问';
-                        //							backOr(title, main, yes, no, function() {
-                        //								// startConsulting(questionType);
-                        //							}, function() {
-                        //								$.ajax({
-                        //									url: 'createContinueAskLater?lawyerId=' + lawyerId + '&questionType=' + questionType + '&_csrf=' + csrfToken,
-                        //									type: 'POST',
-                        //									//                                  data: {
-                        //									//                                      lawyerId: lawyerId,
-                        //									//                                      questionType: questionType,
-                        //									//                                      _csrf: csrfToken
-                        //									//                                  },
-                        //									success: function(data) {
-                        //										if(data === 'ERROR') {
-                        //											alert('系统异常');
-                        //										} else {
-                        //											console.log(data);
-                        //										}
-                        //									},
-                        //									error: function(jqXHR) {
-                        //										if(jqXHR.status === 403) {
-                        //											window.location.reload();
-                        //										}
-                        //
-                        //									}
-                        //								});
-                        //							});
-                        }
-                        else {
-                            var msg = data.error;
-                            $el.find('#tips').html(msg);
-                            $el.find('.popUp_confirm').hide();
-                            $el.find('.popUp_uncheckErr').fadeIn();
-                        }
-                    }
-                },
-                error: function (jqXHR) {
-                    $el.find('.loadingArea').hide();
-                    if (jqXHR.status === 403) {
-                        window.location.reload();
-                    }
-
-                }
-            });
-        }
+        //      function continueAskNew(lawyerId, questionType, askingType, csrfToken, continueAskPage) {
+        //          $.ajax({
+        //              async: true,
+        //              type: 'POST',
+        //              url: hosturl + 'continueAskV3?lawyerId=' + lawyerId + '&questionType='
+        //                  + questionType + '&_csrf=' + csrfToken + '&continueAskPage='
+        //                  + continueAskPage + '&sessionId=' + sessionId,
+        //              dataType: 'json',
+        //              success: function (data) {
+        //                  console.log('继续问2', data);
+        //                  $el.find('.loadingArea').hide();
+        //                  var id = data.data;
+        //                  var state = data.state;
+        //                  localStorage.setItem('reAskAvatar', data.avatar);
+        //                  localStorage.setItem('reAskName', data.lawyerName);
+        //                  localStorage.setItem('reAskSex', data.sex);
+        //                  localStorage.setItem('lawyerField', data.lawyerField);
+        //                  localStorage.setItem('goodCommentRate', data.goodCommentRate);
+        //                  if (id !== '') {
+        //                      // 传入lawyerId
+        //                      var infourl = 'mipilaw66baidu_informLawyer?data='
+        //                          + id + '&questionType='
+        //                          + questionType + '&askingType=' + askingType + '&lawyerId='
+        //                          + lawyerId + '&PABackJumpFlg=index';
+        //                      locahost(infourl, '无人应答');
+        //                  }
+        //                  else {
+        //                      if (state === 1 || state === 2) {
+        //                          // 1.律师正在服务中 2.律师已下线
+        //                          document.body.scrollTop = document.documentElement.scrollTop = 0;
+        //                          var title = '温馨提示';
+        //                          var main = data.error + '\uFF0C您可以稍后继续问\uFF0C或由系统推荐其他律师';
+        //                          var yes = '立刻推荐其他律师';
+        //                          var no = '稍后继续问';
+        //                      //							backOr(title, main, yes, no, function() {
+        //                      //								// startConsulting(questionType);
+        //                      //							}, function() {
+        //                      //								$.ajax({
+        //                      //									url: 'createContinueAskLater?lawyerId=' + lawyerId + '&questionType=' + questionType + '&_csrf=' + csrfToken,
+        //                      //									type: 'POST',
+        //                      //									//                                  data: {
+        //                      //									//                                      lawyerId: lawyerId,
+        //                      //									//                                      questionType: questionType,
+        //                      //									//                                      _csrf: csrfToken
+        //                      //									//                                  },
+        //                      //									success: function(data) {
+        //                      //										if(data === 'ERROR') {
+        //                      //											alert('系统异常');
+        //                      //										} else {
+        //                      //											console.log(data);
+        //                      //										}
+        //                      //									},
+        //                      //									error: function(jqXHR) {
+        //                      //										if(jqXHR.status === 403) {
+        //                      //											window.location.reload();
+        //                      //										}
+        //                      //
+        //                      //									}
+        //                      //								});
+        //                      //							});
+        //                      }
+        //                      else {
+        //                          var msg = data.error;
+        //                          $el.find('#tips').html(msg);
+        //                          $el.find('.popUp_confirm').hide();
+        //                          $el.find('.popUp_uncheckErr').fadeIn();
+        //                      }
+        //                  }
+        //              },
+        //              error: function (jqXHR) {
+        //                  $el.find('.loadingArea').hide();
+        //                  if (jqXHR.status === 403) {
+        //                      window.location.reload();
+        //                  }
+        //
+        //              }
+        //          });
+        //      }
 
     };
 

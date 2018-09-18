@@ -16,7 +16,7 @@ define(function (require) {
      */
     customElement.prototype.build = function () {
         this.win = window;
-        var src = this.element.getAttribute('src');
+        var src = this.element.getAttribute('data-src');
         var typeArr = this.element.getAttribute('type');
         var isNormalData = typeArr === 'normal';
         if (isNormalData && src) {

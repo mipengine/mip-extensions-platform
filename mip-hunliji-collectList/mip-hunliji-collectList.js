@@ -8,7 +8,7 @@ define(function (require) {
     var $ = require('zepto');
 
     var customElement = require('customElement').create();
-
+    var loading = false;
     function getOrderList(url, sessionId, element, href, page) {
         $.ajax({
             url: url,
@@ -23,7 +23,7 @@ define(function (require) {
             },
             success: function (result) {
                 var html = '';
-                if (result.data.list) {
+                if (result.data.list && result.data.list.length) {
                     for (var i = 0; i < result.data.list.length; i++) {
                         html += '<a href="' + href + '/baidu/package/detail_' + result.data.list[i].set_meal.id + '"'
                             + ' mip-link>'
@@ -43,7 +43,7 @@ define(function (require) {
                     }
 
                     $(element).append(html);
-
+                    loading = false;
                 }
             }
         });
@@ -65,10 +65,13 @@ define(function (require) {
             getOrderList(url, sessionId, element, href, page);
         });
         $wrapper.scroll(function () {
-            setTimeout(function () {
-                page++;
-                getOrderList(url, sessionId, element, href, page);
-            }, 300);
+            if ($(window).scrollTop() + $(window).height() + 5 > $(document).height() && !loading) {
+                loading = true;
+                setTimeout(function () {
+                    page++;
+                    getOrderList(url, sessionId, element, href, page);
+                }, 3000);
+            }
         });
     };
 

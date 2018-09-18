@@ -8,6 +8,10 @@ mip-zmall-login-data 登录后请求数据
 支持布局|responsive,fixed-height,fill,container,fixed
 所需脚本|https://c.mipcdn.com/static/v1/mip-zmall-login-data/mip-zmall-login-data.js
 
+## 更新
+
+- 1.0.1 因为使用src来作为接口地址的属性会被mip变成相对地址，所以改成data-src
+
 ## 示例
 
 ### 基本用法

@@ -7,7 +7,7 @@ define(function (require) {
     'use strict';
     var $ = require('zepto');
     var customElement = require('customElement').create();
-
+    var loading = false;
     function getOrderList(url, sessionId, element, href, page) {
         $.ajax({
             url: url,
@@ -22,7 +22,7 @@ define(function (require) {
             },
             success: function (result) {
                 var html = '';
-                if (result.data.list) {
+                if (result.data.list && result.data.list.length) {
                     for (var i = 0; i < result.data.list.length; i++) {
                         html += '<li>'
                             + '<a href="' + href + '/merchant/detail_' + result.data.list[i].merchant.id + '" mip-link>'
@@ -47,7 +47,7 @@ define(function (require) {
                     }
 
                     $(element).append(html);
-
+                    loading = false;
                 }
             }
         });
@@ -69,10 +69,13 @@ define(function (require) {
             getOrderList(url, sessionId, element, href, page);
         });
         $wrapper.scroll(function () {
-            setTimeout(function () {
-                page++;
-                getOrderList(url, sessionId, element, href, page);
-            }, 300);
+            if ($(window).scrollTop() + $(window).height() + 5 > $(document).height() && !loading) {
+                loading = true;
+                setTimeout(function () {
+                    page++;
+                    getOrderList(url, sessionId, element, href, page);
+                }, 300);
+            }
         });
     };
 
