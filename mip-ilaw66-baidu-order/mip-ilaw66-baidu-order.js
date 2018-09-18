@@ -14,7 +14,7 @@ define(function (require) {
     customElement.prototype.firstInviewCallback = function () {
         var $el = $(this.element);
         // 自动加载数据
-        //      alert("W")
+        //              alert("W")
         $el.find('#requestId').val(getQueryString('requestId'));
         var paystart = getQueryString('paystart');
         var sessionId = getQueryString('sessionId');
@@ -34,6 +34,11 @@ define(function (require) {
         else {
             hosturl = 'https://' + hostname + '/jasmine/';
         }
+        $el.find('#loading_pop').addClass('alertactivefalse');
+        if (paystart) {
+            $el.find('#payalert').addClass('alertactivetrue');
+        }
+
         var mipsesid = 'mip-login-xzh:sessionId:' + hosturl + 'baidusearch/authorize2';
         sessionId = localStorage.getItem(mipsesid);
         function locahost(topsurl, toptitle) {
@@ -80,12 +85,11 @@ define(function (require) {
             locahost('./', '电话咨询');
         });
         $el.find('#cleardpayalert').click(function () {
-            $el.find('.payalert').hide();
+            $el.find('#payalert').removeClass('alertactivetrue');
         });
 
         $el.find('.headerlf5').click(function () {
             if (paystart) {
-                //              window.top.location.href = './';
                 locahost('./', '电话咨询');
             }
             else {
@@ -174,12 +178,18 @@ define(function (require) {
         function load() {
             var requestId = $el.find('#requestId').val();
             var questionType = $el.find('#questionType').val();
+            //          $el.find('#loading_pop').addClass('alertactivefalse');
+            //          if (paystart) {
+            //              $el.find('#payalert').addClass('alertactivetrue');
+            //          }
+
             $.ajax({
                 type: 'GET',
                 // url: 'data.json'
                 url: hosturl + 'selectOrderV1?id=' + requestId + '&sessionId=' + sessionId,
                 async: false,
                 success: function (data) {
+
                     var qusetype = data.questionType;
                     $el.find('#questionType').val(qusetype);
                     function orderStatusLabel(status, unpaidAmount) {
@@ -341,6 +351,12 @@ define(function (require) {
                         var orderlisturl = 'orderlist';
                         locahost(orderlisturl, '订单列表');
                     });
+
+                    $el.find('#loading_pop').addClass('alertactivefalse');
+                    if (paystart) {
+                        $el.find('#payalert').addClass('alertactivetrue');
+                    }
+
                 }
             });
         }
@@ -517,13 +533,6 @@ define(function (require) {
 
                 }
             });
-        }
-        $el.find('#loading_pop').addClass('alertactivefalse');
-
-        if (paystart) {
-            $el.find('#payalert').addClass('alertactivetrue');
-            //          $el.find(".payalert").show();
-            //          $el.find('#payalert').show();
         }
 
         // continueAsk2 更改为 continueAskNew

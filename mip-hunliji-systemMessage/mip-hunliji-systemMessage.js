@@ -27,36 +27,37 @@ define(function (require) {
                 if (result.data.list) {
                     for (var i = 0; i < result.data.list.length; i++) {
                         data = result.data.list;
-                        for (var j = 0; j < data[i].content.length; j++) {
-                            if (data[i].property_id !== '13') {
-                                content = '<a href="' + href + '/baidu/package/detail_' + data[i].content[j].id + '"'
-                                    + ' mip-link>'
-                                    + '<li>'
-                                    + '<div class="message_pack_hd">'
-                                    + '<mip-img layout="container" src="' + data[i].content[j].cover_path
-                                    + '?imageView2/1/w/196/h/122" alt=""></mip-img>'
-                                    + '</div>'
-                                    + '<div class="message_pack_bd">'
-                                    + '<h3>' + data[i].content[j].title + '</h3>'
-                                    + '<p>￥<span>' + data[i].content[j].show_price + '</span></p>'
-                                    + '</div>'
-                                    + '</li>'
-                                    + '</a>';
-                            } else {
-                                content = '<a href="' + href + '/baidu/hotel/detail_' + data[i].content[j].id + '"'
-                                    + ' mip-link>'
-                                    + '<li>'
-                                    + '<div class="message_pack_hd hotel">'
-                                    + '<mip-img layout="container"  src="' + data[i].content[j].logo_path
-                                    + '?imageView2/1/w/196/h/196" alt=""></mip-img>'
-                                    + '</div>'
-                                    + '<div class="message_pack_bd">'
-                                    + '<h3>' + data[i].content[j].name + '</h3>'
-                                    + '<p>￥<span>' + data[i].content[j].hotel.price_start + '起</span></p>'
-                                    + '</div>'
-                                    + '</li>'
-                                    + '</a>';
-
+                        if (data[i].content) {
+                            for (var j = 0; j < data[i].content.length; j++) {
+                                if (data[i].property_id !== '13') {
+                                    content = '<a href="' + href + '/baidu/package/detail_' + data[i].content[j].id
+                                        + '" mip-link>'
+                                        + '<li>'
+                                        + '<div class="message_pack_hd">'
+                                        + '<mip-img layout="container" src="' + data[i].content[j].cover_path
+                                        + '?imageView2/1/w/196/h/122" alt=""></mip-img>'
+                                        + '</div>'
+                                        + '<div class="message_pack_bd">'
+                                        + '<h3>' + data[i].content[j].title + '</h3>'
+                                        + '<p>￥<span>' + data[i].content[j].show_price + '</span></p>'
+                                        + '</div>'
+                                        + '</li>'
+                                        + '</a>';
+                                } else {
+                                    content = '<a href="' + href + '/baidu/hotel/detail_' + data[i].content[j].id + '"'
+                                        + ' mip-link>'
+                                        + '<li>'
+                                        + '<div class="message_pack_hd hotel">'
+                                        + '<mip-img layout="container"  src="' + data[i].content[j].logo_path
+                                        + '?imageView2/1/w/196/h/196" alt=""></mip-img>'
+                                        + '</div>'
+                                        + '<div class="message_pack_bd">'
+                                        + '<h3>' + data[i].content[j].name + '</h3>'
+                                        + '<p>￥<span>' + data[i].content[j].hotel.price_start + '起</span></p>'
+                                        + '</div>'
+                                        + '</li>'
+                                        + '</a>';
+                                }
                             }
                         }
 

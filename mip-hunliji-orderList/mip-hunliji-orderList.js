@@ -1,6 +1,6 @@
 /**
  * @file mip-hunliji-orderList 组件
- * @author
+ * @author li_shu
  */
 
 define(function (require) {
@@ -63,19 +63,16 @@ define(function (require) {
         var url = $(element).attr('data-url');
         var href = $(element).attr('data-href');
         var page = 1;
+        var $wrapper = $(element).parents('.order_wrapper');
         this.addEventAction('customLogin', function (e) {
             sessionId = e.sessionId;
             getOrderList(url, sessionId, element, href, page);
-            var timer = null;
-            $(window).scroll(function () {
-                if ($(window).scrollTop() + $(window).height() + 0 >= $(document).height()) {
-                    clearTimeout(timer);
-                    timer = setTimeout(function () {
-                        page++;
-                        getOrderList(url, sessionId, element, href, page);
-                    }, 300);
-                }
-            });
+        });
+        $wrapper.scroll(function () {
+            setTimeout(function () {
+                page++;
+                getOrderList(url, sessionId, element, href, page);
+            }, 300);
         });
     };
 

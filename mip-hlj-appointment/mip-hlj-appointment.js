@@ -89,7 +89,7 @@ define(function (require) {
                 success: function (result) {
                     if (result.status.RetCode === 0) {
                         storage.set('recommend_id', result.data.id);
-                        window.top.location.href = url;
+                        window.MIP.viewer.open(url, {isMipLink: true});
                     }
                 }
             });

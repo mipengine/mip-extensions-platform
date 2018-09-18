@@ -1,7 +1,7 @@
 {
-    "name": "mip-fetch-wine",
-    "version": "1.0.1",
-    "description": "根据酒庄的Id异步加载酒庄的相关酒款",
+    "name": "mip-fetch-comment-test",
+    "version": "1.0.0",
+    "description": "根据点击的年份异步加载酒款的相关评价信息",
     "contributors": [
         {
             "name": "chenwenkai",

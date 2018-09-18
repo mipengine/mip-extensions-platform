@@ -1,5 +1,5 @@
 /**
- * @file mip-fetch-wine 组件
+ * @file mip-fetch-wine-test 组件
  * @author
  */
 
@@ -8,7 +8,7 @@ define(function (require) {
     customElement.prototype.firstInviewCallback = function () {
         var element = this.element;
         var chateauId = element.querySelector('#chateauId').value;
-        var url = 'https://mip.wine-world.com/winery/ajax/wine?id=' + chateauId;
+        var url = 'https://mip-test.wine-world.com/winery/ajax/wine?id=' + chateauId;
         fetch(url, {
             method: 'POST',
             header: {

@@ -1,6 +1,6 @@
 {
-    "name": "mip-fetch-wine",
-    "version": "1.0.1",
+    "name": "mip-fetch-wine-test",
+    "version": "1.0.0",
     "description": "根据酒庄的Id异步加载酒庄的相关酒款",
     "contributors": [
         {

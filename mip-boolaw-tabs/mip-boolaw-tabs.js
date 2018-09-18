@@ -41,10 +41,17 @@ define(function (require) {
         Tabswitch.prototype.addListener = function () {
             var self = this;
             this.navItems.on('click', function () {
-                $('.tab-nav-li').removeClass('activy');
-                $(this).addClass('activy');
+                var item = $element.find('section .tab-nav-li');
+                var index = this.getAttribute('data-id');
+                for (var i = 0; i < item.length; i++) {
+                    if (index * 1 === i) {
+                        $(item[i]).addClass('activy');
+                    }
+                    else {
+                        $(item[i]).removeClass('activy');
+                    }
+                }
                 if (!this.isScroll) {
-                    var index = this.getAttribute('data-id');
                     self.changeContentVisibility(index);
                 }
             });

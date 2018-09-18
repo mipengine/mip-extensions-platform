@@ -1,6 +1,6 @@
 # mip-hunliji-orderList
 
-mip-hunliji-orderList 组件说明
+mip-hunliji-orderList 预约列表
 
 标题|内容
 ----|----
@@ -12,21 +12,24 @@ mip-hunliji-orderList 组件说明
 
 ### 基本用法
 ```html
-<mip-hunliji-orderList>
+<mip-hunliji-orderList"  data-url="//m.hunliji.com/baidu/getMyAppointment" data-href="//m.hunliji.com">
     自定义内容，可以嵌套其他组件
 </mip-hunliji-orderList>
 ```
 
 ## 属性
 
-### {属性名}
+### data-url
 
-说明：{说明}
-必选项：{是|否}
-类型：{类型}
-取值范围：{取值范围}
-单位：{单位}
-默认值：{默认值}
+说明：请求接口
+必选项：是
+类型：string
+
+### data-href
+
+说明：跳转链接
+必选项：是
+类型：string
 
 ## 注意事项
 

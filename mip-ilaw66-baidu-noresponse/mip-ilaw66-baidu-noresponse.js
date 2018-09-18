@@ -140,8 +140,7 @@ define(function (require) {
                 ajaxdatas.sessionId = sessionId;
                 $.ajax({
                     type: 'post',
-                    url: hosturl + 'greeting2?questionType=' + questionType + '&_csrf='
-                        + csrfToken + '&sessionId=' + sessionId + '&channel=baidusearch',
+                    url: hosturl + 'greeting2',
                     data: ajaxdatas,
                     timeout: 10000, // 超时时间设置，单位毫秒
                     success: function (datas) {

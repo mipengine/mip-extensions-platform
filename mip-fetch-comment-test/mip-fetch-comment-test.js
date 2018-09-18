@@ -1,5 +1,5 @@
 /**
- * @file mip-fetch-comment 组件
+ * @file mip-fetch-comment-test 组件
  * @author
  */
 
@@ -32,7 +32,7 @@ define(function (require) {
             miplightbox.style.display = 'block';
         });
         function loadData(wineid, year) {
-            var url = 'https://mip.wine-world.com/wine/GetWineInfo?wineid=' + wineid + '&vintageid=' + year;
+            var url = 'https://mip-test.wine-world.com/wine/GetWineInfo?wineid=' + wineid + '&vintageid=' + year;
             fetch(url, {
                 method: 'POST',
                 header: {
