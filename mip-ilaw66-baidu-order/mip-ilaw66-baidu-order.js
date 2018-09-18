@@ -71,6 +71,7 @@ define(function (require) {
                 locahost(tzurl, '准备咨询');
             }
             else {
+
                 $el.find('#loading_pop').addClass('alertactivefalse');
                 $el.find('#loading_pop').css('display', 'none');
                 if (paystart) {
@@ -93,6 +94,7 @@ define(function (require) {
             locahost('./', '电话咨询');
         });
         $el.find('#cleardpayalert').click(function () {
+            $el.find('#payalert').css('display', 'none');
             $el.find('#payalert').removeClass('alertactivetrue');
         });
 
