@@ -25,10 +25,14 @@ define(function (require) {
                 var msgList = '';
                 var msgContent = '';
                 var unreadCount = '';
+                var toUserAvatar = '';
                 var data = '';
                 if (result.data) {
                     data = result.data;
                     for (var i = 0; i < result.data.msg_list.length; i++) {
+                        data.msg_list[i].toUser.avatar && data.msg_list[i].toUser.avatar !== ''
+                        ? toUserAvatar = data.msg_list[i].toUser.avatar
+                        : toUserAvatar = 'http://qnm.hunliji.com/2FE91E901F8564F2C1F19136625557A9';
                         if (result.data.msg_list[i].lastMsg) {
                             switch (result.data.msg_list[i].lastMsg.kind) {
                                 case 'text':
@@ -54,7 +58,7 @@ define(function (require) {
                             <div class="chat_avatar">\
                             ' + unreadCount + '\
                             <mip-img layout="container"\
-                            src="' + data.msg_list[i].toUser.avatar + '?imageView2/1/w/100/h100">\
+                            src="' + toUserAvatar + '?imageView2/1/w/100/h100">\
                             </mip-img>\
                             </div>\
                             </a>\

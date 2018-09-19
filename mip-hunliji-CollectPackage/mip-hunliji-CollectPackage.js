@@ -8,6 +8,7 @@ define(function (require) {
 
     var customElement = require('customElement').create();
     var $ = require('zepto');
+    var viewer = require('viewer');
     var sessionId = '';
 
     function postPackage(element, divid, api, packageid, type) {
@@ -54,18 +55,22 @@ define(function (require) {
      * 第一次进入可视区回调，只会执行一次
      */
     customElement.prototype.firstInviewCallback = function () {
-        // 客户登陆成功
-        this.addEventAction('customLogin', function (e) {
-            sessionId = e.sessionId;
-        });
-
         var element = this.element;
         var api = $(element).attr('data-api');
         var packageid = $(element).attr('package-id');
         var type = $(element).attr('data-type');
         var divid = $('#collect_openbox');
-        $(element).on('click', function () {
-            postPackage(element, divid, api, packageid, type);
+        $(element).find('#btn_collect').on('click', function (e) {
+            var info = JSON.parse($(element).attr('info'));
+
+            if (info.sessionId) {
+                e.stopPropagation();
+                e.preventDefault();
+                sessionId = info.sessionId;
+                postPackage(element, divid, api, packageid, type);
+            } else {
+                viewer.eventAction.execute('tap', e.target, e);
+            }
         });
     };
 

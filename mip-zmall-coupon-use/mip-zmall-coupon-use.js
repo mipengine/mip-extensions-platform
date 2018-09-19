@@ -14,7 +14,7 @@ define(function (require) {
     var couponTemplate = '';
 
     function render(element, e) {
-        var api = element.getAttribute('src');
+        var api = element.getAttribute('data-src');
         var data = element.dataset;
         if (e.target) {
             data = util.fn.extend(data, e.target.dataset, {});

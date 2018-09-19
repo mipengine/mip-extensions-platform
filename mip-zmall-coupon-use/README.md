@@ -8,11 +8,15 @@ mip-zmall-coupon-use 主要是在确认订单页选择使用优惠券的组件
 支持布局|responsive,fixed-height,fill,container,fixed
 所需脚本|https://c.mipcdn.com/static/v1/mip-zmall-coupon-use/mip-zmall-coupon-use.js
 
+## 更新
+
+- 1.0.1 替换src属性，因为src属性会被mip处理
+
 ## 示例
 
 ### 基本用法
 ```html
-<mip-zmall-coupon-use id="onlineCouponRender" src="接口地址" data-goods-id-str="商品id">
+<mip-zmall-coupon-use id="onlineCouponRender" data-src="接口地址" data-goods-id-str="商品id">
     <template type="mip-mustache">
         <div class="discounts">
             {{#data}}

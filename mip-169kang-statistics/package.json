@@ -1,0 +1,14 @@
+{
+    "name": "mip-169kang-statistics",
+    "version": "1.0.0",
+    "description": "网站相关数据统计  v1.0.0  carl@169kang.com",
+    "contributors": [
+        {
+            "name": "carl",
+            "email": "carl@169kang.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

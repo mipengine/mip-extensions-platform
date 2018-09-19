@@ -1,0 +1,14 @@
+{
+    "name": "mip-boolaw-click",
+    "version": "1.0.0",
+    "description": "熊掌号登录并获取订单详情",
+    "contributors": [
+        {
+            "name": "yuzongde",
+            "email": "8927747@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

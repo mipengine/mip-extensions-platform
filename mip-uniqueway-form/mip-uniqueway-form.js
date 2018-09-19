@@ -29,7 +29,9 @@ define(function (require) {
                 var required = $element.attr('required');
                 if (required) {
                     if ($.trim(value) === '') {
-                        alert('请填写' + label);
+                        var message = '请填写' + label;
+                        window._hmt && window._hmt.push(['_trackEvent', 'input_error', message]);
+                        alert(message);
                         return false;
                     }
                 }
@@ -38,7 +40,9 @@ define(function (require) {
                 if (pattern) {
                     var regexp = new RegExp(pattern);
                     if (!regexp.test(value)) {
-                        alert(label + '格式不正确');
+                        var message = label + '格式不正确';
+                        window._hmt && window._hmt.push(['_trackEvent', 'input_error', message]);
+                        alert(message);
                         return false;
                     }
                 }
@@ -59,12 +63,18 @@ define(function (require) {
             }
         };
 
-        var $button = $form.find('input[type=submit]');
+        var $button = $form.find('[data-submit=true]');
         $button.click(function () {
             $button.attr('disable', true);
 
             var url = $form.attr('action');
             var lightboxId = $form.attr('close-lightbox-id');
+
+            var trackEvent = false;
+            if ($form.data('track-event')) {
+                trackEvent = $form.data('track-event').split(',');
+                trackEvent.unshift('_trackEvent');
+            }
 
             var data = validateForm($form);
             if (data === false) {
@@ -88,14 +98,20 @@ define(function (require) {
                         } else {
                             alert('提交成功，顾问会尽快与你联系');
                         }
+
+                        if (trackEvent) {
+                            window._hmt && window._hmt.push(trackEvent);
+                        }
                         return true;
                     } else {
+                        window._hmt && window._hmt.push(['_trackEvent', 'submit_error', response.msg]);
                         alert(response.msg);
                         $button.attr('disable', false);
                         return false;
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
+                    window._hmt && window._hmt.push(['_trackEvent', 'submit_error', errorThrown]);
                     alert('提交失败，请重试。');
                     $button.attr('disable', false);
                     return false;

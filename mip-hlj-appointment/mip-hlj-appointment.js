@@ -7,6 +7,7 @@ define(function (require) {
     var customElement = require('customElement').create();
     var util = require('util');
     var $ = require('zepto');
+    var viewer = require('viewer');
     var CustomStorage = util.customStorage;
     var storage = new CustomStorage(0);
     var sessionId = '';
@@ -34,6 +35,12 @@ define(function (require) {
 
         $(element).find('#submit').on('click', function (e) {
             e.preventDefault();
+            var info = JSON.parse($(element).attr('info'));
+
+            if (!info.sessionId) {
+                viewer.eventAction.execute('tap', e.target, e);
+                return;
+            }
 
             var cityes = $(element).find('#city_code').val();
 
@@ -77,7 +84,7 @@ define(function (require) {
             body['min_price'] = priceList[0];
             body['max_price'] = priceList[1];
             body['phone'] = phone;
-            body['sessionId'] = sessionId;
+            body['sessionId'] = info.sessionId;
 
             $.ajax({
                 url: api,
