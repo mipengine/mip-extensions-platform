@@ -13,11 +13,11 @@ define(function (require) {
     var sessionId = '';
 
     function showTip(element, text) {
-        $(element).find('.tip').text(text);
-        $(element).find('.tip').show();
+        $(element).find('.tip-msg-info').text(text);
+        $(element).find('.tip-msg-info').show();
 
         setTimeout(function () {
-            $(element).find('.tip').hide();
+            $(element).find('.tip-msg-info').hide();
         }, 2000);
     }
 

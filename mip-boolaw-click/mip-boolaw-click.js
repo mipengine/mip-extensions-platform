@@ -70,9 +70,9 @@ define(function (require) {
         });
         // 获取url中的qid
         function getUrlQid() {
-            let url = location.href;
-            let reg = new RegExp('/order/([0-9]*)', 'i');
-            let matched = url.match(reg);
+            var url = location.href;
+            var reg = new RegExp('/order/([0-9]*)', 'i');
+            var matched = url.match(reg);
             return matched ? decodeURIComponent(matched[1]) : '';
         }
     };
