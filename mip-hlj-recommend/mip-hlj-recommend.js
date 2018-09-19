@@ -47,7 +47,7 @@ define(function (require) {
                                     initPackage(element, data.list);
                                 }
                             } else {
-                                var html = '你所在的城市无符合您需求的“<span class="red">' + data['property_name'] + '推荐';
+                                var html = '你所在的城市无符合您需求的“<span class="red">' + data['property_name'] + '</span>”推荐';
                                 $(element).find('.header').html(html);
                             }
 

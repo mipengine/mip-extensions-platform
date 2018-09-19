@@ -1,6 +1,6 @@
 # mip-hlj-recommend
 
-mip-hlj-recommend 组件说明
+mip-hlj-recommend 推荐列表组件，公司内部使用
 
 标题|内容
 ----|----
