@@ -1,15 +1,15 @@
 /**
 * @file 脚本支持
 * @author hejieye
-* @time  2018-09-14
-* @version 2.1.10
+* @time  2018-09-20
+* @version 2.1.11
 */
 define(function (require) {
     var $ = require('zepto');
     var customElem = require('customElement').create();
     var busUid = '';
-    var httpPath = 'https://mipp.iask.cn';
-    // var httpPath = 'https://m.iask.sina.com.cn';
+    // var httpPath = 'https://mipp.iask.cn';
+    var httpPath = 'https://m.iask.sina.com.cn';
     var fetchJsonp = require('fetch-jsonp');
     var utf8Encode = function (string) {
         string = string.replace(/\r\n/g, '\n');

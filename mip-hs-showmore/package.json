@@ -1,0 +1,14 @@
+{
+    "name": "mip-hs-showmore",
+    "version": "1.0.0",
+    "description": "展示更多内容",
+    "contributors": [
+        {
+            "name": "lin",
+            "email": "840399305@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

@@ -1,0 +1,81 @@
+/**
+ * @file mip-hs-showmore样式文件
+ */
+
+mip-hs-showmore {
+    .text_warp {
+        .text {
+            overflow: hidden;
+            margin: 0;
+            font-size: .85rem;
+            line-height: 1.5rem;
+            text-indent: 2em;
+            &.limit-height {
+                height: 4.5rem;
+            }
+            &.show {
+                height: auto;
+            }
+        }
+        .btnmore {
+            position: relative;
+            display: block;
+            height: 2rem;
+            padding-right: 20px;
+            font-size: .8rem;
+            line-height: 2rem;
+            text-align: right;
+            background: #fff;
+        }
+        .btnmore .icon.icon-down {
+            position: absolute;
+            z-index: 999;
+            font-size: 14px;
+            color: #000;
+        }
+        .btnmore .icon.icon-down:after {
+            content: "";
+            display: inline-block;
+            width: 1rem;
+            height: 1rem;
+            height: .55rem;
+            margin-left: 10px;
+            font-size: 1rem;
+            vertical-align: middle;
+            background: url("https://static.linkeddb.com/m/images/icon-down.png") no-repeat center left;
+            -webkit-background-size: 100%;
+            background-size: 100%;
+        }
+        .gradient:after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            display: block;
+            width: 100%;
+            height: 130px;
+            background:    -moz-linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);
+            background: -webkit-linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);
+            background:         linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);
+        }
+        .btnmore .icon.icon-up {
+            font-size: 14px;
+            color: #000;
+        }
+        .btnmore .icon.icon-up:after {
+            content: "";
+            display: inline-block;
+            width: 1rem;
+            height: 1rem;
+            height: .55rem;
+            margin-left: 10px;
+            font-size: 1rem;
+            vertical-align: middle;
+            background: url("https://static.linkeddb.com/m/images/icon-up.png") no-repeat center left;
+            -webkit-background-size: 100%;
+            background-size: 100%;
+        }
+        .btnmore.hide {
+            display: none;
+        }
+    }
+}

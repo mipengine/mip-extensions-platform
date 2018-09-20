@@ -387,6 +387,7 @@ define(function (require) {
                     {},
                     {isLogin: !!info.isLogin},
                     info.userInfo || {},
+                    info.data || {},
                     {sessionId: readStorage(sessionStorageId)}
                 );
                 element.extraData = extraData;
