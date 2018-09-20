@@ -392,7 +392,7 @@ define(function (require) {
                 element.extraData = extraData;
 
                 if (isSideLogin) {
-                    if (info.userInfo && !info.userInfo.id) {
+                    if (!info.userInfo) {
                         window.top.location.href = replaceAndEncodeUrl(extraData, phonePage, '');
                     }
                 }

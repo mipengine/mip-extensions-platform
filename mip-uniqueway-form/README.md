@@ -17,8 +17,9 @@ mip-uniqueway-form Uniqueway表单组件
   <input type="hidden" name="destination" value="无">
   <input type="tel" name="phone" placeholder="请填写您的手机号" required="true" label="手机号">
   <textarea name="comment" placeholder="留下您想告知顾问的话（非必填）" pattern="\d+" label="备注"></textarea>
-  <input type="button" class="submit button" value="请顾问联系我">
+  <input type="button" data-submit="true" class="button" value="提交需求" data-track-event="consult,success,alert_form" data-stats-baidu-obj='{"type":"click", "data":["_trackEvent", "consult", "click", "alert_form"]}'>
 </mip-uniqueway-form>
+
 ```
 
 ## 属性

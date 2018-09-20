@@ -1,3 +1,4 @@
+
 /**
  * @file mip-uniqueway-form 组件
  * @author
@@ -95,13 +96,11 @@ define(function (require) {
                             $('#MIP-LLIGTBOX-MASK').hide();
                             $('html').removeClass('mip-no-scroll');
                             storage.set('mip-uniqueway-timing-' + lightboxId, true);
-                        } else {
-                            alert('提交成功，顾问会尽快与你联系');
                         }
-
                         if (trackEvent) {
                             window._hmt && window._hmt.push(trackEvent);
                         }
+                        alert('提交成功，顾问会尽快与你联系');
                         return true;
                     } else {
                         window._hmt && window._hmt.push(['_trackEvent', 'submit_error', response.msg]);
