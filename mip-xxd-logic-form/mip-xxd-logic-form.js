@@ -393,7 +393,7 @@ define(function (require) {
                 element.extraData = extraData;
 
                 if (isSideLogin) {
-                    if (!info.userInfo) {
+                    if (!extraData.id) {
                         window.top.location.href = replaceAndEncodeUrl(extraData, phonePage, '');
                     }
                 }

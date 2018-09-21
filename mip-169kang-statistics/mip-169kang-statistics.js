@@ -28,7 +28,7 @@ define(function (require) {
         // 2、页面位置的点击pv
         // 3、统计uv
         window.addEventListener('load', function () {
-            if (!pbs[0].complete) {
+            if (pbs[0] && !pbs[0].complete) {
                 isNoImg = true;
                 for (var i = 0; i < pbs.length; i++) {
                     getAjaxData(pbs[i].src);
@@ -53,6 +53,7 @@ define(function (require) {
             xhr.open('GET', url, true);
             xhr.send(null);
         }
+
         (function () {
             var pburl = 'https://pb.169kang.com/pgv.gif';
             var pbwzurl = 'https://pb.169kang.com/wz_pv.gif';
@@ -268,10 +269,10 @@ define(function (require) {
                         wzPB(wzCount);
                     }
                     else if (yyParams) {
-                        switchMethod(pbstaurl, yyParams); // 医院点击pingback
+                        clickPingback(pbstaurl, yyParams); // 医院点击pingback
                     }
                     else if (tbParams) {
-                        switchMethod(pbstaurl, tbParams); // 淘宝点击pingback
+                        clickPingback(pbstaurl, tbParams); // 淘宝点击pingback
                     }
                 }
             };
@@ -294,7 +295,7 @@ define(function (require) {
                     + '&k_time='
                     + Math.floor(new Date().getTime() / 1000)
                     + Math.floor(Math.random() * 1000000);
-                switchMethod(pbwzurl, pingbackwz);
+                clickPingback(pbwzurl, pingbackwz);
             }
 
             // 初始化pingback图片方法
@@ -418,6 +419,16 @@ define(function (require) {
                 }
                 else {
                     pingaction(surl, params, success, error);
+                }
+            }
+
+            // 点击跳转pingback单独处理
+            function clickPingback(surl, params, success, error) {
+                if (typeof navigator.sendBeacon === 'function') {
+                    navigator.sendBeacon(surl + params);
+                }
+                else {
+                    switchMethod(surl, params, success, error);
                 }
             }
 
