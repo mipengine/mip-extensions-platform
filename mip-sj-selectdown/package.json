@@ -1,0 +1,14 @@
+{
+    "name": "mip-sj-selectdown",
+    "version": "1.0.0",
+    "description": "显示隐藏",
+    "contributors": [
+        {
+            "name": "amarlboro",
+            "email": "2524336380@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
