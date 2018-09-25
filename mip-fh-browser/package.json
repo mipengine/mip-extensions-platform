@@ -1,0 +1,14 @@
+{
+    "name": "mip-fh-browser",
+    "version": "1.0.0",
+    "description": "飞华健康网，浏览器识别组件，浏览器页面跳转到指定href地址",
+    "contributors": [
+        {
+            "name": "sunxiaopeng",
+            "email": "sunxiaopeng@fh21.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
