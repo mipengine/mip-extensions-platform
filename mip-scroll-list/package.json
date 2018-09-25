@@ -1,0 +1,14 @@
+{
+    "name": "mip-scroll-list",
+    "version": "1.0.0",
+    "description": "一个滚动的ul列表",
+    "contributors": [
+        {
+            "name": "老林",
+            "email": "51153877@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

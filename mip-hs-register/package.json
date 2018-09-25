@@ -1,0 +1,14 @@
+{
+    "name": "mip-hs-register",
+    "version": "1.0.0",
+    "description": "用户注册组件",
+    "contributors": [
+        {
+            "name": "lin",
+            "email": "840399305@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

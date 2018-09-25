@@ -6,8 +6,14 @@
 define(function (require) {
     'use strict';
     var $ = require('zepto');
-
+    var viewport = require('viewport');
     var customElement = require('customElement').create();
+
+    function scrollPage() {
+        if (window.top.location.search) {
+            viewport.setScrollTop(182);
+        }
+    }
 
     /**
      * 第一次进入可视区回调，只会执行一次

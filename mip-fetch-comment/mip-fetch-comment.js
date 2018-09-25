@@ -20,7 +20,9 @@ define(function (require) {
                     }
                 };
                 var lightbox = element.querySelector('#MIP-LLIGTBOX-MASK');
-                lightbox.style.display = 'none';
+                if (lightbox != null) {
+                    lightbox.style.display = 'none';
+                }
                 var miplightbox = element.querySelector('#pjyear-lightbox');
                 miplightbox.style.display = 'none';
             };
