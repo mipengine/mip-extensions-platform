@@ -1,0 +1,14 @@
+{
+    "name": "mip-52dus-adsennse",
+    "version": "1.0.0",
+    "description": "谷歌广告插件，支持新式广告，支持自适应广告",
+    "contributors": [
+        {
+            "name": "admin_52dus",
+            "email": "admin@52dus.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

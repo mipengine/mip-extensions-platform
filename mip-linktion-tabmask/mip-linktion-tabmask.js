@@ -25,6 +25,14 @@ define(function (require) {
                 $el.find('.tab-mask').hide();
             }
         });
+        var leftText = $el.find('.left-section .list-span.active').text();
+        var rightText = $el.find('.right-section .list-span.active').text();
+        if (leftText !== '全部') {
+            $el.find('.left-section h4 strong').text(leftText);
+        };
+        if (rightText !== '全部') {
+            $el.find('.right-section  h4 strong').text(rightText);
+        };
     };
     return customElement;
 });
