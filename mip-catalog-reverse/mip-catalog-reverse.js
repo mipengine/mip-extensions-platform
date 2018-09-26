@@ -10,11 +10,19 @@ define(function (require) {
      * 第一次进入可视区回调，只会执行一次
      */
     customElement.prototype.firstInviewCallback = function () {
+        var hasName = false;
         // 给小说目录页（在组件外）逆序，需要操作组件外的dom结构，故必须要用全局选择
         var catalog = document.querySelectorAll('.catalog-li li');
+        if (this.element.querySelector('.reverse-name')) {
+            var reverseName = this.element.querySelector('.reverse-name');
+            hasName = true;
+        }
         var arra = [];
         arra = Array.prototype.slice.call(catalog);
         this.element.addEventListener('click', function () {
+            if (hasName) {
+                reverseName.innerHTML = reverseName.innerHTML === '正序' ? '倒序' : '正序';
+            }
             var ss = [];
             for (var i = 0; i < arra.length; i++) {
                 ss[i] = arra[i].innerHTML;
