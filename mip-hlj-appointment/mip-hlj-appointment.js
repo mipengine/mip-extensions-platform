@@ -10,7 +10,6 @@ define(function (require) {
     var viewer = require('viewer');
     var CustomStorage = util.customStorage;
     var storage = new CustomStorage(0);
-    var sessionId = '';
 
     function showTip(element, text) {
         $(element).find('.tip-msg-info').text(text);
@@ -29,12 +28,10 @@ define(function (require) {
         var api = element.dataset.api;
         var url = element.dataset.url;
 
-        this.addEventAction('customLogin', function (e) {
-            sessionId = e.sessionId;
-        });
-
         $(element).find('#submit').on('click', function (e) {
+            e.stopPropagation();
             e.preventDefault();
+
             var info = JSON.parse($(element).attr('info'));
 
             if (!info.sessionId) {

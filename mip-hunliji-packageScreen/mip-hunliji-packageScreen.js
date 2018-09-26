@@ -10,7 +10,7 @@ define(function (require) {
     var customElement = require('customElement').create();
 
     function scrollPage() {
-        if (window.top.location.search) {
+        if (location.search) {
             viewport.setScrollTop(182);
         }
     }
