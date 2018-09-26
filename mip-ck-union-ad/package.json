@@ -1,0 +1,14 @@
+{
+    "name": "mip-ck-union-ad",
+    "version": "1.0.0",
+    "description": "主要用于投放搜狗广告及其它第三方广告",
+    "contributors": [
+        {
+            "name": "laoono",
+            "email": "laoono@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

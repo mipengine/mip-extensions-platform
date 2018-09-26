@@ -147,7 +147,10 @@ define(function (require) {
             if (data.is_identical === 1) {
                 return;
             }
-            if (Object.prototype.toString.call(data.lists) === '[object Array]' && data.lists.length) {
+            if ((Object.prototype.toString.call(data.lists) === '[object Array]'
+                && data.lists.length)
+                || (Object.prototype.toString.call(data.lists) === '[object Object]'
+                && data.lists[tarId])) {
                 pbyy(pbSta, 'yy_minus');
                 thatEl.innerHTML = data.lists[tarId].adstr;
                 pbyy(pbSta);
