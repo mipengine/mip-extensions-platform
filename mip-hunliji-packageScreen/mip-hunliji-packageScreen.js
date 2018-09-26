@@ -15,9 +15,6 @@ define(function (require) {
         }
     }
 
-    /**
-     * 第一次进入可视区回调，只会执行一次
-     */
     customElement.prototype.firstInviewCallback = function () {
         var element = this.element;
         var index = '';
@@ -90,6 +87,8 @@ define(function (require) {
             linkHref += '?page=1&shop_area_id=' + region + '&sort=' + sort + '&actual_price=' + price;
             window.MIP.viewer.open(linkHref, {isMipLink: true});
         });
+
+        scrollPage();
     };
 
     return customElement;
