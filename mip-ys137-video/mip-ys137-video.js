@@ -14,7 +14,7 @@ define(function (require) {
         var startAd = element.getAttribute('start-ad');
         var endAd = element.getAttribute('end-ad');
         var poster = element.getAttribute('poster');
-        var src = element.getAttribute('src');
+        var src = element.getAttribute('target-src');
         var video = document.createElement('video');
         $(video).attr({
             'playsinline': 'playsinline',

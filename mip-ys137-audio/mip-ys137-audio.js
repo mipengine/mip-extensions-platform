@@ -12,7 +12,7 @@ define(function (require) {
     // 初始化插件
     var init = function (element) {
         var duration = element.getAttribute('duration');
-        var src = element.getAttribute('src');
+        var src = element.getAttribute('target-src');
         var html = $('<div class="doctor_audio_player"></div>');
         html.append('<div class="d_a_p_wrapper"></div>');
         var audio = document.createElement('audio');

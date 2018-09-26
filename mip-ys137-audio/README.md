@@ -13,7 +13,7 @@ mip-ys137-audio 音频播放器
 
 ### 使用
 ```html
-<mip-ys137-audio duration="83" src='https://file.ys137.com/upload/audio/20180821/5694717f2ef13fcfc0b8d50c753dc63f.mp3'>
+<mip-ys137-audio duration="83" target-src='https://file.ys137.com/upload/audio/20180821/5694717f2ef13fcfc0b8d50c753dc63f.mp3'>
 </mip-ys137-audio>
 ```
 
@@ -27,7 +27,7 @@ mip-ys137-audio 音频播放器
 取值范围：无
 默认值：'0'
 
-### src
+### target-src
 
 说明：音频链接
 必选项：是

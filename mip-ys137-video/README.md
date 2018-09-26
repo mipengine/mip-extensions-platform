@@ -16,7 +16,7 @@ mip-ys137-video 自适应视频播放器
 ```html
 <mip-ys137-video
  poster='https://img.ys137.com/uploads/allimg/180820/20180820151413-5b7a6a45ec87a.png'
- src='https://v.ys137.com/fc79669f5cc94fa3802f8834ae3e34dd/01740d70459e44d689453104c3c53b90-1ba85f3f926d5992cd672fcf4dfc533f-hd.mp4'>
+ target-src='https://v.ys137.com/fc79669f5cc94fa3802f8834ae3e34dd/01740d70459e44d689453104c3c53b90-1ba85f3f926d5992cd672fcf4dfc533f-hd.mp4'>
 </mip-ys137-video>
 ```
 
@@ -46,7 +46,7 @@ mip-ys137-video 自适应视频播放器
 取值范围：无
 默认值：''
 
-### src
+### target-src
 
 说明：视频链接
 必选项：否
