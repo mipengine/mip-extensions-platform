@@ -1,6 +1,6 @@
 # mip-linktion-fixtab
 
-mip-linktion-fixtab 实现tab导航在页面一定高度时固定
+mip-linktion-fixtab 实现tab导航滚动到页面一定高度时固定，回滚到某一个高度时，取消固定
 
 标题|内容
 ----|----
