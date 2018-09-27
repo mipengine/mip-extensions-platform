@@ -41,15 +41,15 @@ define(function (require) {
         // var FixHeight =  -(fixedHeight  - screenHeight + footerHeight);
         // var beforeScroll = document.documentElement.scrollTop || document.body.scrollTop;
         // $el.find('.details-fix-top>.scroll-wrap').css({'width': $el.find('.details-fix-top').width()});
-        var top = $('.details-fix-top>.scroll-wrap').offset().top;
+        var topSpace = $('.details-fix-top>.scroll-wrap').offset().top;
         var bodyScroll = document.documentElement.scrollTop || document.body.scrollTop;
-        var fixtop = top - 120 - 58;
+        var fixtop = topSpace - 120 - 58;
         $(window).on('scroll', function () {
-            if (bodyScroll > top) {
+            if (bodyScroll > topSpace) {
                 $('.details-fix-top>.scroll-wrap').css({'position': 'fixed', 'top': fixtop,
                 'width': $('.details-fix-top').width()});
             }
-            if (bodyScroll < top) {
+            if (bodyScroll < topSpace) {
                 $('.details-fix-top>.scroll-wrap').css({'position': 'unset',
                 'width': $('.details-fix-top').width()});
             }

@@ -126,6 +126,10 @@ define(function (require) {
                 data.questionType = $el.find('#questionType').val();
                 data.questionType = 'CT001';
                 data.userCouponId = $el.find('#couponId').val();
+                var hostprotocol = location.protocol;
+                var hostnames = location.hostname;
+                var payhosturl = hostprotocol + '//' + hostnames + '/jasmine/mipilaw66xzh_orderlist';
+                data.returnUrl = payhosturl;
                 if ($el.find('#cardId').val()) {
                     data.cardId = $el.find('#cardId').val();
                 }

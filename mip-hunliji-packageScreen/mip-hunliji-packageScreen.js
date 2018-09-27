@@ -9,8 +9,8 @@ define(function (require) {
     var viewport = require('viewport');
     var customElement = require('customElement').create();
 
-    function scrollPage() {
-        if (location.search) {
+    function scrollPage(regx) {
+        if (location.search || location.href.match(new RegExp(regx))) {
             viewport.setScrollTop(182);
         }
     }
@@ -22,6 +22,7 @@ define(function (require) {
         var moren = '';
         var url = element.dataset.url;
         var cid = element.dataset.cid;
+        var regx = element.dataset.regx;
         var category = $(element).find('#typeclick li').eq(0).attr('data-list');
         var region = $(element).find('#typeclick li').eq(1).attr('data-list');
         var sort = $(element).find('#typeclick li').eq(2).attr('data-list');
@@ -88,7 +89,7 @@ define(function (require) {
             window.MIP.viewer.open(linkHref, {isMipLink: true});
         });
 
-        scrollPage();
+        scrollPage(regx);
     };
 
     return customElement;
