@@ -50,6 +50,10 @@ define(function (require) {
         return res;
     }
 
+    var isSogousearch = (function (ua) {
+        return ua.indexOf('sogousearch') > -1;
+    })(window.navigator.userAgent.toLowerCase() || '');
+
     // 主功能方法
     function setHtmlDomain(elem, data) {
 
@@ -59,15 +63,16 @@ define(function (require) {
         var i = 0;
         var domainType = '';
         var converse = elem.getAttribute('converse');
-        var domainClass = domainsType.join('__').replace(/\./g, '-');
+        var domainClass = domainsType.join('__').replace(/\./g, '-').replace(/\s?/g, '');
         var converseClass = '';
+        var isSogouReferrer;
 
         if (converse !== null) {
             converseClass = '-' + 'converse';
         }
 
         for (i; i < len; i++) {
-            domainType = domainsType[i];
+            domainType = domainsType[i].trim();
 
             var flag = false;
 
@@ -89,10 +94,20 @@ define(function (require) {
             }
         }
 
+        if ((elemDomainType.indexOf('sogou.com') > -1 && data.indexOf('sogou.com') > -1) || isSogousearch) {
+            flag = true;
+            isSogouReferrer = true;
+        }
+
+
         if (flag) {
             // 真 显示元素
             elem.classList.add('mip-ck-referrer--show');
             $body.classList.add('view-mip-ck-referrer-' + domainClass + converseClass); // 向body添加特定的class,目的是为了以后可以方便地的通过选择器来控制页面元素的相关展示
+
+            if (isSogouReferrer) {
+                $body.classList.add('view-mip-ck-referrer--sogou');
+            }
         }
         else {
             // 假 移除元素

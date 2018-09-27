@@ -1,0 +1,14 @@
+{
+    "name": "mip-goup-page",
+    "version": "1.0.0",
+    "description": "返回顶部，点击按钮返回网页顶部",
+    "contributors": [
+        {
+            "name": "xsr",
+            "email": "1617330234@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

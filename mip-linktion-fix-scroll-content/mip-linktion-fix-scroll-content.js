@@ -42,17 +42,32 @@ define(function (require) {
         // var beforeScroll = document.documentElement.scrollTop || document.body.scrollTop;
         // $el.find('.details-fix-top>.scroll-wrap').css({'width': $el.find('.details-fix-top').width()});
         var topSpace = $('.details-fix-top>.scroll-wrap').offset().top;
-        var bodyScroll = document.documentElement.scrollTop || document.body.scrollTop;
         var fixtop = topSpace - 120 - 58;
+        var bigWidth = $('.details-fix-top').width();
+        var smallWidth = $('.details-fix-top').width();
         $(window).on('scroll', function () {
-            if (bodyScroll > topSpace) {
-                $('.details-fix-top>.scroll-wrap').css({'position': 'fixed', 'top': fixtop,
-                'width': $('.details-fix-top').width()});
+            var bodyScroll = document.documentElement.scrollTop || document.body.scrollTop;
+            if ($(window).width() < 1200) {
+                if (bodyScroll > topSpace) {
+                    $('.details-fix-top>.scroll-wrap').css({'position': 'fixed', 'top': fixtop,
+                    'width': smallWidth});
+                }
+                if (bodyScroll < topSpace) {
+                    $('.details-fix-top>.scroll-wrap').css({'position': 'unset',
+                    'width': smallWidth});
+                }
             }
-            if (bodyScroll < topSpace) {
-                $('.details-fix-top>.scroll-wrap').css({'position': 'unset',
-                'width': $('.details-fix-top').width()});
+            if ($(window).width() > 1200) {
+                if (bodyScroll > topSpace) {
+                    $('.details-fix-top>.scroll-wrap').css({'position': 'fixed', 'top': fixtop,
+                    'width': bigWidth});
+                }
+                if (bodyScroll < topSpace) {
+                    $('.details-fix-top>.scroll-wrap').css({'position': 'unset',
+                    'width': bigWidth});
+                }
             }
+
         //     var bodyScroll = document.documentElement.scrollTop || document.body.scrollTop;
         //     // 判断页面滚动的方向
         //     var scrollDeration = beforeScroll - bodyScroll;

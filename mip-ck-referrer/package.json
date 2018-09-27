@@ -1,7 +1,7 @@
 {
     "name": "mip-ck-referrer",
-    "version": "1.0.0",
-    "description": "根据康网访问来源显示内容",
+    "version": "1.0.1",
+    "description": "class去除空格、增加搜狗搜索app强制判断",
     "contributors": [
         {
             "name": "laoono",

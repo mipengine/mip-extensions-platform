@@ -1,0 +1,14 @@
+{
+    "name": "mip-original",
+    "version": "1.0.0",
+    "description": "360doc原创统计组件",
+    "contributors": [
+        {
+            "name": "360doc",
+            "email": "caizhi@360doc.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.1"
+    }
+}

@@ -12,7 +12,7 @@ mip-ck-referrer 根据康网访问来源显示内容
 
 ### 基本用法
 ```html
-<mip-ck-referrer referrer="192.168.1.21">
+<mip-ck-referrer referrer="192.168.1.21,localhost">
 	来源是192.168.1.21才会显示内容
 </mip-ck-referrer>
 ```
