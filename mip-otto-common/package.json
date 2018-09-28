@@ -1,7 +1,7 @@
 {
     "name": "mip-otto-common",
-    "version": "1.3.0",
-    "description": "网校主站逻辑整理，优化逻辑，整理修改url，新增百度im切换",
+    "version": "1.3.1",
+    "description": "修复fetch body 写法存在的兼容性问题",
     "contributors": [
         {
             "name": "xinbao",

@@ -4,6 +4,7 @@
  * @date 2018年9月27日
  * @desc 更新内部链接，更灵活健壮
  * @desc 新增百度im切换
+ * @desc fetch的body写法有兼容性问题，回退普通模式
  */
 
 define(function (require) {
@@ -14,7 +15,6 @@ define(function (require) {
     var util = require('util');
     var Gesture = util.Gesture;
     var fetchJsonp = require('fetch-jsonp');
-
     var utilJs = (function () {
         var remFun = function (element) {
             var resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
@@ -70,12 +70,9 @@ define(function (require) {
                         headers: new Headers({
                             'Content-Type': 'application/x-www-form-urlencoded'
                         }),
-                        body: new URLSearchParams([['url', targetUrl]]).toString()
+                        body: 'url=' + targetUrl
                     }).then(function (res) {
-                        if (/application\/json/.test(res.headers.get('Content-Type'))) {
-                            return res.json();
-                        }
-
+                        return res.json();
                     }).then(function (res) {
                         if (res.code === '000000') {
                             return res.data;
@@ -89,6 +86,8 @@ define(function (require) {
                             + data.nonce_str + '&signature=' + data.signature + '&url=' + targetUrl;
                         script.src = imsearch;
                         document.body.appendChild(script);
+                    }).catch(function (err) {
+                        alert(err);
                     });
                 }
                 catch (err) {

@@ -6,10 +6,11 @@
 define(function (require) {
     'use strict';
     var $ = require('zepto');
+    var viewer = require('viewer');
 
     var customElement = require('customElement').create();
 
-    function setuser(element, url, name, phone, id, packid, chatid, href) {
+    function setuser(element, url, name, phone, id, packid, chatid, event) {
         $.ajax({
             url: url,
             type: 'post',
@@ -28,7 +29,7 @@ define(function (require) {
                         $(element).find('#open_tips').show();
                         setTimeout(function () {
                             $(element).find('#open_tips').hide();
-                            window.MIP.viewer.open(href, {isMipLink: true});
+                            viewer.eventAction.execute('hide', event.target, event);
                         }, 2000);
                     }
                 } else {
@@ -36,14 +37,14 @@ define(function (require) {
                     $(element).find('#open_tips').show();
                     setTimeout(function () {
                         $(element).find('#open_tips').hide();
-                        window.MIP.viewer.open(href, {isMipLink: true});
+                        viewer.eventAction.execute('hide', event.target, event);
                     }, 2000);
                 }
             }
         });
     }
 
-    function sethotel(element, url, city, time, phone, href) {
+    function sethotel(element, url, city, time, phone, event) {
         $.ajax({
             url: url,
             type: 'post',
@@ -59,13 +60,14 @@ define(function (require) {
                     $(element).find('#open_tips').show();
                     setTimeout(function () {
                         $(element).find('#open_tips').hide();
-                        window.MIP.viewer.open(href, {isMipLink: true});
+                        viewer.eventAction.execute('hide', event.target, event);
                     }, 2000);
                 } else {
                     $(element).find('#open_tips p').html(result.status.msg);
                     $(element).find('#open_tips').show();
                     setTimeout(function () {
                         $(element).find('#open_tips').hide();
+                        viewer.eventAction.execute('hide', event.target, event);
                     }, 2000);
                 }
             }
@@ -79,12 +81,11 @@ define(function (require) {
         var element = this.element;
         var type = $(element).attr('data-type');
         var apiurl = $(element).attr('data-url');
-        var href = $(element).attr('data-href');
         var merchantid = $(element).attr('data-id');
         var chatid = $(element).attr('data-chat');
         var packageid = $(element).attr('data-packid');
         var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
-        $(element).on('click', '.open_box_submit', function () {
+        $(element).on('click', '.open_box_submit', function (event) {
             if (type === 'package') {
                 var name = $(element).find('.mipfrom input').eq(0).val();
                 var phone = $(element).find('.mipfrom input').eq(1).val();
@@ -110,9 +111,9 @@ define(function (require) {
             }
             if (name && phone) {
                 if (type === 'package') {
-                    setuser(element, apiurl, name, phone, merchantid, packageid, chatid, href);
+                    setuser(element, apiurl, name, phone, merchantid, packageid, chatid, event);
                 } else {
-                    sethotel(element, apiurl, city, time, phone, href);
+                    sethotel(element, apiurl, city, time, phone, event);
                 }
             }
         });

@@ -6,7 +6,7 @@ mip-otto-common 网校通用模块集合
 | -------- | ----------------------------------------------------------------- |
 | 类型     | 通用                                                              |
 | 支持布局 | responsive,fixed-height,fill,container,fixed                      |
-| 所需脚本 | https://c.mipcdn.com/static/v1/mip-otto-common/mip-otto-common.js http://wap2.wangxiao.cn/local-extension-loader/mip-otto-sdk.js |
+| 所需脚本 | https://c.mipcdn.com/static/v1/mip-otto-common/mip-otto-common.js |
 
 
 
