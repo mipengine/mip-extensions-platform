@@ -85,7 +85,7 @@ define(function (require) {
             var exp = new Date(nd);
             exp.setTime(exp.getTime() + Hours * 60 * 60 * 1000);
             var content = name + '=' + escape(value) + ';expires=' + exp.toGMTString()
-            + ';domain=192.168.1.196;';
+            + ';domain=www-360doc-cn.mipcdn.com;';
             window.top.document.cookie = content;
         }
         function getCookie(name) {

@@ -1,0 +1,14 @@
+{
+    "name": "mip-change",
+    "version": "1.0.1",
+    "description": "换一批",
+    "contributors": [
+        {
+            "name": "liuqiang",
+            "email": "18366971514@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

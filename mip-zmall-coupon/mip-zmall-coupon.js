@@ -190,7 +190,7 @@ define(function (require) {
                 }
                 else {
                     viewer.eventAction.execute('toast', element, {
-                        msg: '优惠券已经领完了，下次早点哦~'
+                        msg: res.msg
                     });
                 }
             });

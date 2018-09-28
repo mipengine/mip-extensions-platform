@@ -6,7 +6,9 @@ mip-otto-common 网校通用模块集合
 | -------- | ----------------------------------------------------------------- |
 | 类型     | 通用                                                              |
 | 支持布局 | responsive,fixed-height,fill,container,fixed                      |
-| 所需脚本 | https://c.mipcdn.com/static/v1/mip-otto-common/mip-otto-common.js |
+| 所需脚本 | https://c.mipcdn.com/static/v1/mip-otto-common/mip-otto-common.js http://wap2.wangxiao.cn/local-extension-loader/mip-otto-sdk.js |
+
+
 
 ## 示例
 
@@ -20,6 +22,7 @@ mip-otto-common 网校通用模块集合
             "fixedright": true,
             "sign":"cfe",
             "fixedbottom":true,
+            "kf": ["baidu","xiaoneng"],
             "downbanner":{
                 "enable":true,
                 "positon":"top"
@@ -66,6 +69,13 @@ mip-otto-common 网校通用模块集合
 必选项：否
 类型：boolean
 默认值：false
+
+### kf
+
+说明： 设定当前客服接待软件，可选 百度 和 小能
+必选项：否
+类型： Array
+默认值： ['baidu','xiaoneng']
 
 ## 注意事项
 

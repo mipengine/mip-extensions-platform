@@ -1,6 +1,6 @@
 {
     "name": "mip-zmall-coupon",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "description": "领取优惠劵组件，主要提供领取线上或者线下优惠券的操作",
     "contributors": [
         {

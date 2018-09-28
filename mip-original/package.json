@@ -1,7 +1,7 @@
 {
     "name": "mip-original",
-    "version": "1.0.0",
-    "description": "360doc原创统计组件",
+    "version": "1.0.1",
+    "description": "360doc原创组件",
     "contributors": [
         {
             "name": "360doc",

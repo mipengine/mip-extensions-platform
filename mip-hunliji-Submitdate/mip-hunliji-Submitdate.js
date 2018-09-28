@@ -9,7 +9,7 @@ define(function (require) {
 
     var customElement = require('customElement').create();
 
-    function setuser(element, url, name, phone, id, packid, chatid) {
+    function setuser(element, url, name, phone, id, packid, chatid, href) {
         $.ajax({
             url: url,
             type: 'post',
@@ -28,7 +28,7 @@ define(function (require) {
                         $(element).find('#open_tips').show();
                         setTimeout(function () {
                             $(element).find('#open_tips').hide();
-                            window.top.location.href = location.href;
+                            window.MIP.viewer.open(href, {isMipLink: true});
                         }, 2000);
                     }
                 } else {
@@ -36,14 +36,14 @@ define(function (require) {
                     $(element).find('#open_tips').show();
                     setTimeout(function () {
                         $(element).find('#open_tips').hide();
-                        window.top.location.href = location.href;
+                        window.MIP.viewer.open(href, {isMipLink: true});
                     }, 2000);
                 }
             }
         });
     }
 
-    function sethotel(element, url, city, time, phone) {
+    function sethotel(element, url, city, time, phone, href) {
         $.ajax({
             url: url,
             type: 'post',
@@ -59,7 +59,7 @@ define(function (require) {
                     $(element).find('#open_tips').show();
                     setTimeout(function () {
                         $(element).find('#open_tips').hide();
-                        window.top.location.href = location.href;
+                        window.MIP.viewer.open(href, {isMipLink: true});
                     }, 2000);
                 } else {
                     $(element).find('#open_tips p').html(result.status.msg);
@@ -79,6 +79,7 @@ define(function (require) {
         var element = this.element;
         var type = $(element).attr('data-type');
         var apiurl = $(element).attr('data-url');
+        var href = $(element).attr('data-href');
         var merchantid = $(element).attr('data-id');
         var chatid = $(element).attr('data-chat');
         var packageid = $(element).attr('data-packid');
@@ -109,9 +110,9 @@ define(function (require) {
             }
             if (name && phone) {
                 if (type === 'package') {
-                    setuser(element, apiurl, name, phone, merchantid, packageid, chatid);
+                    setuser(element, apiurl, name, phone, merchantid, packageid, chatid, href);
                 } else {
-                    sethotel(element, apiurl, city, time, phone);
+                    sethotel(element, apiurl, city, time, phone, href);
                 }
             }
         });
