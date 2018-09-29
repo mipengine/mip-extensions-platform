@@ -19,7 +19,8 @@ define(function (require) {
         }
         var arra = [];
         arra = Array.prototype.slice.call(catalog);
-        this.element.addEventListener('click', function () {
+        this.element.addEventListener('click', function (e) {
+            e.stopPropagation();
             if (hasName) {
                 reverseName.innerHTML = reverseName.innerHTML === '正序' ? '倒序' : '正序';
             }
