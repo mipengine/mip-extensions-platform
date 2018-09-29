@@ -7,9 +7,9 @@ define(function (require) {
     var customElement = require('customElement').create();
 
     /**
-     * 第一次进入可视区回调，只会执行一次
+     * 绑定排序方法，为了页面效果更好，需要提前加载
      */
-    customElement.prototype.firstInviewCallback = function () {
+    customElement.prototype.build = function () {
         var hasName = false;
         // 给小说目录页（在组件外）逆序，需要操作组件外的dom结构，故必须要用全局选择
         var catalog = document.querySelectorAll('.catalog-li li');

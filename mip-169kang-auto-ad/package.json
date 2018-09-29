@@ -1,7 +1,7 @@
 {
-    "name": "mip-169kang-ad",
-    "version": "1.0.1",
-    "description": "网站异步数据加载  v1.0.1  carl@169kang.com",
+    "name": "mip-169kang-auto-ad",
+    "version": "1.0.0",
+    "description": "自动切换广告  v1.0.0  carl@169kang.com",
     "contributors": [
         {
             "name": "carl",

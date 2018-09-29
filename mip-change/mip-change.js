@@ -28,7 +28,7 @@ define(function (require) {
                 }
             });
         }
-
+        extend(2, 4, '.exClick');
     };
 
     return customElement;

@@ -29,6 +29,8 @@ define(function (require) {
         // 发送 POST 请求
         Loadorder.prototype.post = function (data) {
             var that = this;
+            var timestamp = new Date().getTime();
+            hosturl = hosturl + '?t=' + timestamp;
             $.ajax({
                 type: 'POST',
                 data: data,

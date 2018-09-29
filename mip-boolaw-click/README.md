@@ -12,19 +12,9 @@ mip-boolaw-click 组件说明
 
 ### 基本用法
 ```html
-<mip-boolaw-click id="orderHtml" data-autolaw="true" data-htmlurl="https://m.boolaw.com/zhuanjia/orderData">
+<mip-boolaw-click id="orderHtml" data-autolaw="true" data-htmlurl="https://m.boolaw.com/xxxx">
     
 </mip-boolaw-click>
-<mip-login-xzh
-	id="userlogin"
-	data-autologin="true"
-	on="login:orderHtml.login"
-	data-client-id="N9U56uMzeA8nv5xrpdnK2cpybjxwSke1"
-	data-endpoint="https://m.boolaw.com/zhuanjia/baiduLogin"
-	>
-</mip-login-xzh>
-<script src="https://c.mipcdn.com/static/v1/mip-mustache/mip-mustache.js"></script>
-<script src="https://c.mipcdn.com/static/v1/mip-login-xzh/mip-login-xzh.js"></script>
 ```
 
 ## 属性

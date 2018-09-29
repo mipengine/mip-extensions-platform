@@ -216,7 +216,8 @@ define(function (require) {
             temp.classList.add('cFooter');
             element.appendChild(temp);
             var sign = element.params.sign;
-            element.querySelector('.cFooter').innerHTML = '<a href="/mip/h/'
+            var base = (location.pathname.indexOf('mip') > -1) ? '/mip/' : '/';
+            element.querySelector('.cFooter').innerHTML = '<a href="' + base + 'h/'
                 + sign
                 + '.html" class="cFooter__item">'
                 + '<i class="cFooter__itemImg cFooter__itemImg--home"></i>'

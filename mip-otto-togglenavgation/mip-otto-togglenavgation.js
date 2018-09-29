@@ -20,7 +20,7 @@ define(function (require) {
         btn.addEventListener('click', function () {
             toggleDiv.classList.toggle('active');
             var target = this.querySelector('span');
-            var str = target.innerText === '更多' ? '收回' : '更多';
+            var str = target.innerText === '更多' ? '收起' : '更多';
             target.innerText = str;
         }, false);
     };

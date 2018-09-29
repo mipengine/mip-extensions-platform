@@ -1,7 +1,7 @@
 {
     "name": "mip-otto-togglenavgation",
-    "version": "1.0.0",
-    "description": "首页切换组件",
+    "version": "1.0.1",
+    "description": "修复 文字描述错误",
     "contributors": [
         {
             "name": "xinbao",

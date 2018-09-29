@@ -11,25 +11,29 @@ define(function (require) {
     /**
      * 构造元素，只会运行一次
      */
-    customElement.prototype.firstInviewCallback = function () {
-        var e = this.element;
-        var baseUrl = e.getAttribute('data-base-url');
-        var elId = 'wap_' + e.getAttribute('data-el-id');
-        var id = e.getAttribute('data-id');
+    // build说明: 异步广告备用组件，百度广告被屏蔽时超时检测后展现，需要尽快加载
+    customElement.prototype.build = function () {
+        var el = this.element;
+        var baseUrl = el.getAttribute('base-url');
+        var id = el.getAttribute('sg-id');
+        var sgWidth = el.getAttribute('sg-width');
+        var sgHeight = el.getAttribute('sg-height');
+        var elId = 'sogou_wap_' + id + el.getAttribute('el-index');
         var d = document.createDocumentFragment();
         var div = document.createElement('div');
-        div.dataset.elId = elId;
-        var sc1 = document.createElement('script');
-        var scStr = 'var tar_div = document.querySelector("[data-el-id=\'' + elId + '\']");';
-        scStr += 'window.sogou_un = window.sogou_un || [];';
-        scStr += 'window.sogou_un.push({id: "' + id + '",ele:tar_div});';
-        sc1.innerHTML = scStr;
-        var sc2 = document.createElement('script');
-        sc2.src = baseUrl + id + '.js';
+        div.setAttribute('id', elId);
+        var scriptTxt = 'var sogou_div = document.getElementById("' + elId + '");';
+        scriptTxt += 'window.sogou_un = window.sogou_un || [];';
+        scriptTxt += 'window.sogou_un.push({id: "' + id + '",ele:sogou_div,w:' + sgWidth + ',h:' + sgHeight + '});';
+        var innerSc = document.createElement('script');
+        innerSc.innerHTML = scriptTxt;
+        var sc = document.createElement('script');
+        sc.src = baseUrl;
+        sc.setAttribute('async', true);
         d.appendChild(div);
-        d.appendChild(sc1);
-        d.appendChild(sc2);
-        e.appendChild(d);
+        d.appendChild(innerSc);
+        d.appendChild(sc);
+        el.appendChild(d);
     };
     return customElement;
 });
