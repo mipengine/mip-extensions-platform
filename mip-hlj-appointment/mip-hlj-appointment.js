@@ -27,6 +27,7 @@ define(function (require) {
         var element = this.element;
         var api = element.dataset.api;
         var url = element.dataset.url;
+        var clickToken = $(element).attr('mip-click-token');
 
         $(element).find('#submit').on('click', function (e) {
             e.stopPropagation();
@@ -82,6 +83,7 @@ define(function (require) {
             body['max_price'] = priceList[1];
             body['phone'] = phone;
             body['sessionId'] = info.sessionId;
+            body['clickToken'] = clickToken;
 
             $.ajax({
                 url: api,
