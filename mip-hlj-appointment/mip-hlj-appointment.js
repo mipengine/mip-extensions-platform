@@ -34,8 +34,8 @@ define(function (require) {
 
             var info = JSON.parse($(element).attr('info'));
 
-            if (!info.sessionId) {
-                viewer.eventAction.execute('tap', e.target, e);
+            if (!info.isLogin) {
+                viewer.eventAction.execute('login', e.target, e);
                 return;
             }
 
