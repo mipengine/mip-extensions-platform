@@ -43,16 +43,6 @@ mip-change 点击换一批
 		<li>a</li>
 		<li>a</li>
 	</ul>
-	<ul class="list1 listchange4">
-		<li>b</li>
-		<li>b</li>
-		<li>b</li>
-		<li>b</li>
-		<li>b</li>
-		<li>b</li>
-		<li>b</li>
-		<li>b</li>
-	</ul>
 	<div style="text-align: center;"><span class="exClick">换一批</span></div>
 </mip-change>
 ```

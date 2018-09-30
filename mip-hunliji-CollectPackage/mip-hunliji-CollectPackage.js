@@ -63,13 +63,13 @@ define(function (require) {
         $(element).find('#btn_collect').on('click', function (e) {
             var info = JSON.parse($(element).attr('info'));
 
-            if (info.sessionId) {
+            if (info.isLogin) {
                 e.stopPropagation();
                 e.preventDefault();
                 sessionId = info.sessionId;
                 postPackage(element, divid, api, packageid, type);
             } else {
-                viewer.eventAction.execute('tap', e.target, e);
+                viewer.eventAction.execute('login', e.target, e);
             }
         });
     };

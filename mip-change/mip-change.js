@@ -19,7 +19,7 @@ define(function (require) {
             var listitemmax = changeNum;
             $(changeObj).click(function () {
                 $('.listchange' + listitem).siblings('ul').css('display', 'none');
-                $('.listchange' + listitem).css('display', 'flex');
+                $('.listchange' + listitem).css('display', 'block');
                 if (listitem < listitemmax) {
                     listitem++;
                 }
@@ -28,7 +28,7 @@ define(function (require) {
                 }
             });
         }
-        extend(2, 4, '.exClick');
+        extend(2, 3, '.exClick');
     };
 
     return customElement;
