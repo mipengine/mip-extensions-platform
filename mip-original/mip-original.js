@@ -60,7 +60,6 @@ define(function (require) {
             }
             var pid = getCookie('360doc_pid3');
             var refer = encodeURIComponent(document.referrer);
-            alert(pid);
             img.src = url + '?artid=' + artid + '&pid=' + pid + '&ts=' + uid
             + '&refer=' + refer + '&sign=' + generateMixed(8);
         }

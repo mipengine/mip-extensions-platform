@@ -1,0 +1,15 @@
+{
+    "name": "mip-anchor",
+    "version": "1.0.0",
+    "description": "寻找锚点，模拟a标签",
+    "contributors": [
+        {
+            "name": "MIP anchor",
+            "email": "mip-support@baidu.com",
+            "url": "https://www.mipengine.org"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
