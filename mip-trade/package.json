@@ -1,7 +1,7 @@
 {
-    "name": "mip-unit",
-    "version": "1.0.2",
-    "description": "文字向上滚动",
+    "name": "mip-trade",
+    "version": "1.0.0",
+    "description": "换组",
     "contributors": [
         {
             "name": "liuqiang",

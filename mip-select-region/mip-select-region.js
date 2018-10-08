@@ -108,7 +108,10 @@ define(function (require) {
         });
 
         $(element).find('button').on('click', function () {
-            window.location.href = $(this).data('url') + $(this).siblings('input').val();
+            console.log($(this).data('url'));
+            console.log($(this).siblings('input').val());
+            console.log($(this).data('url') + $(this).siblings('input').val());
+            // window.location.href = $(this).data('url') + $(this).siblings('input').val();
         });
     };
 

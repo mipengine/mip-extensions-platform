@@ -13,7 +13,7 @@ mip-unit 文字向上滚动
 ### 基本用法
 ```html
 <mip-unit>
-	<div class="scrollDiv maquee">
+	<div class="scrollDiv">
 		<ul>
 			<li class="sm-l"><a href="" class="sm-a">第一行，在此处添加文字。</a></li>
 			<li class="sm-l"><a href="" class="sm-a">第二行，在此处添加文字。</a></li>

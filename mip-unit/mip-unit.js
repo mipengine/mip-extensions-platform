@@ -12,13 +12,13 @@ define(function (require) {
      */
     customElement.prototype.firstInviewCallback = function () {
         function vartical(obj, time, smtime) {
-            var Object = obj;
+            var Othis = obj;
             var FunTime = time; // 调用这个函数的时间
             var ActTime = smtime; // 执行动画过程
             setInterval(function () {
-                $(Object).animate(
+                $(Othis).animate(
                     {
-                        marginTop: -parseInt($(Object).find('li').css('line-height'), 10)
+                        marginTop: -parseInt($(Othis).find('li').css('line-height'), 10)
                     }, ActTime, function () {
                         $(this).css({
                             marginTop: 0
@@ -26,6 +26,7 @@ define(function (require) {
                     });
             }, FunTime);
         }
+        vartical('.scrollDiv ul', 4000, 1500);
     };
     return customElement;
 });
