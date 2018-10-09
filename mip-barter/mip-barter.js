@@ -1,5 +1,5 @@
 /**
- * @file mip-trade 组件
+ * @file mip-barter 组件
  * @author
  */
 
@@ -18,8 +18,8 @@ define(function (require) {
             // 这是要换的批数
             var listitemmax = changeNum;
             $(changeObj).click(function () {
-                $('.menuchange' + listitem).siblings('ul').css('display', 'none');
-                $('.menuchange' + listitem).css('display', 'block');
+                $('.barchange' + listitem).siblings('ul').css('display', 'none');
+                $('.barchange' + listitem).css('display', 'block');
                 if (listitem < listitemmax) {
                     listitem++;
                 }
@@ -28,7 +28,7 @@ define(function (require) {
                 }
             });
         }
-        extend(2, 3, '.oexClick');
+        extend(2, 3, '.bexClick');
     };
 
     return customElement;

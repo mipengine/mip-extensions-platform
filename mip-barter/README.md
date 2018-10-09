@@ -1,19 +1,19 @@
-# mip-trade
+# mip-barter
 
-mip-trade 组件说明
+mip-barter 组件说明
 
 标题|内容
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/static/v1/mip-trade/mip-trade.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-barter/mip-barter.js
 
 ## 示例
 
 ### 基本用法
 ```html
-<mip-trade>
-    <ul class="menu1 menuchange1">
+<mip-barter>
+    <ul class="bar1 barchange1">
 		<li>A</li>
 		<li>A</li>
 		<li>A</li>
@@ -23,7 +23,7 @@ mip-trade 组件说明
 		<li>A</li>
 		<li>A</li>
 	</ul>
-	<ul class="menu1 menuchange2">
+	<ul class="bar1 barchange2">
 		<li>B</li>
 		<li>B</li>
 		<li>B</li>
@@ -33,7 +33,7 @@ mip-trade 组件说明
 		<li>B</li>
 		<li>B</li>
 	</ul>
-	<ul class="menu1 menuchange3">
+	<ul class="bar1 barchange3">
 		<li>a</li>
 		<li>a</li>
 		<li>a</li>
@@ -43,8 +43,8 @@ mip-trade 组件说明
 		<li>a</li>
 		<li>a</li>
 	</ul>
-	<div style="text-align: center;"><span class="oexClick">换一批</span></div>
-</mip-trade>
+	<div style="text-align: center;"><span class="bexClick">换一批</span></div>
+</mip-barter>
 ```
 
 ## 属性

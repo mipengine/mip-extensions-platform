@@ -62,6 +62,11 @@ define(function (require) {
                     navShowing = false;
                 });
         });
+
+        $('.myItemButton').on('click', function () {
+            var url = $(this).data('url');
+            window.top.location.href = url;
+        });
     };
 
     return customElement;

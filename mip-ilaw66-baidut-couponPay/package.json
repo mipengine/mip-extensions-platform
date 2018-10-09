@@ -1,0 +1,14 @@
+{
+    "name": "mip-ilaw66-baidut-couponPay",
+    "version": "1.0.1",
+    "description": "百度支付页2",
+    "contributors": [
+        {
+            "name": "skylyth",
+            "email": "skylyth@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "name": "mip-a5-list",
+    "version": "1.0.0",
+    "description": "A5创业网mip站列表加载更多功能",
+    "contributors": [
+        {
+            "name": "cuikangyi",
+            "email": "3098591767@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
