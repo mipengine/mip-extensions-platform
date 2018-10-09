@@ -28,7 +28,7 @@ define(function (require) {
                 }
             });
         }
-        extend(2, 3, '.oexClick');
+        extend(2, 3, '.mexClick');
     };
 
     return customElement;

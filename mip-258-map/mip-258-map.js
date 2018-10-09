@@ -71,7 +71,10 @@ define(function (require) {
         var point = new BMap.Point(cfg.location.lng, cfg.location.lat);
         this.map = new BMap.Map(this.ele);
         this.map.centerAndZoom(point, cfg.location.zoom);
-
+        this.map.enableScrollWheelZoom();
+        this.map.enableContinuousZoom();
+        this.map.addControl(new BMap.NavigationControl());
+        this.map.addControl(new BMap.OverviewMapControl());
         var marker = new BMap.Marker(point);
         this.map.addOverlay(marker);
         var infoWindow = new BMap.InfoWindow('<div>' + cfg.marker.address + '</div>');

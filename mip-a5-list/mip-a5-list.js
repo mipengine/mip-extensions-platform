@@ -11,9 +11,9 @@ define(function (require) {
     /**
      * [pushResult push结果函数]
      *
-     * @param  {string} src ajax请求的url
+     * @param  {string} dataSrc ajax请求的url
      */
-    function pushResult(src) {
+    function pushResult(dataSrc) {
         var self = this;
 
         if (self.isEnd || self.isLoading) {
@@ -24,7 +24,7 @@ define(function (require) {
         self.button = document.querySelector(self.btn);
         self.button.innerHTML = '加载中...';
 
-        var url = getUrl(src, self.pageName, self.page++);
+        var url = getUrl(dataSrc, self.pageName, self.page++);
 
         fetchJsonp(url, {
             jsonpCallback: 'jsonpcallback',
@@ -69,22 +69,22 @@ define(function (require) {
     /**
      * [getUrl 获取最后拼接好的数据请求 url]
      *
-     * @param  {string}  src    原始 url
+     * @param  {string}  dataSrc    原始 url
      * @param  {string}  pageName 翻页字段名
      * @param  {integer} page     页码
      * @return {string}         拼接好的 url
      */
-    function getUrl(src, pageName, page) {
-        if (!src) {
-            console.error('src 属性不能为空');
+    function getUrl(dataSrc, pageName, page) {
+        if (!dataSrc) {
+            console.error('dataSrc 属性不能为空');
             return;
         }
         if (!pageName || !page) {
             return;
         }
-        var url = src;
-        if (src.indexOf('?') > 0) {
-            url += src[src.length - 1] === '?' ? '' : '&';
+        var url = dataSrc;
+        if (dataSrc.indexOf('?') > 0) {
+            url += dataSrc[dataSrc.length - 1] === '?' ? '' : '&';
             url += pageName + '=' + page;
         }
         else {
@@ -98,7 +98,7 @@ define(function (require) {
         var self = this;
         var element = this.element;
 
-        var src = element.getAttribute('src') || '';
+        var dataSrc = element.getAttribute('dataSrc') || '';
         self.page = element.getAttribute('page') || 1;
         self.btn = element.getAttribute('btn') || '#more-btn';
         self.list = element.getAttribute('list') || '#more-list';
@@ -110,9 +110,9 @@ define(function (require) {
 
         self.container = element.querySelector(self.list);
 
-        if (element.hasAttribute('has-more')) {
+        if (element.hasAttribute('hasMore')) {
             self.addEventAction('more', function () {
-                pushResult.call(self, src);
+                pushResult.call(self, dataSrc);
             });
         }
 
@@ -124,7 +124,7 @@ define(function (require) {
                 var scrollTop = viewport.getScrollTop();
                 var diff = viewport.getScrollHeight() - winHeight - scrollTop - bufferHeightPx;
                 if (diff <= 0 && (scrollPage === 0 || self.page <= scrollPage)) {
-                    pushResult.call(self, src);
+                    pushResult.call(self, dataSrc);
                 }
             });
         }

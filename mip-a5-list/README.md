@@ -14,12 +14,12 @@ mip-a5-list 是A5创业网mip站列表加载更多功能的组件。
 
 ```html
 <mip-a5-list
-    src="https://xxx?a=a&b=b"
+    dataSrc="https://xxx?a=a&b=b"
     page="2"
     btn="#more-btn"
     list="#more-list"
     id="mip-a5-list"
-    has-more
+    hasMore
     scrollPage="-1"
     bufferHeightPx="50"
     pageName="page"
@@ -37,7 +37,7 @@ mip-a5-list 是A5创业网mip站列表加载更多功能的组件。
 
 ## 属性
 
-### src
+### dataSrc
 
 说明：异步请求的数据接口，如果没有其他参数结尾请不要带 ? ,必须是 HTTPS 的   
 必选项：是   
@@ -71,7 +71,7 @@ mip-a5-list 是A5创业网mip站列表加载更多功能的组件。
 类型：字符串
 默认值：'mip-a5-list'
 
-### has-more
+### hasMore
 
 说明：是否有点击展开更多功能   
 必选项：否   

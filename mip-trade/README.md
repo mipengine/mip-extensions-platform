@@ -43,7 +43,7 @@ mip-trade 组件说明
 		<li>a</li>
 		<li>a</li>
 	</ul>
-	<div style="text-align: center;"><span class="oexClick">换一批</span></div>
+	<div style="text-align: center;"><span class="mexClick">换一批</span></div>
 </mip-trade>
 ```
 
