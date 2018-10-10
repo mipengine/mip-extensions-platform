@@ -27,6 +27,7 @@ define(function (require) {
         var requestId = getQueryString('requestId');
         var sessionId = getQueryString('sessionId');
         var seidtime;
+        var paystarts = 0;
         setTimeout(function () {
             var htsesi = $el.find('#sesiid').html();
             if (htsesi) {
@@ -129,7 +130,10 @@ define(function (require) {
 
         // 立即支付
         $el.find('#js-pay-button').click(function () {
-            payload();
+            if (!paystarts) {
+                payload();
+            }
+
         });
 
         function payload() {
@@ -226,13 +230,14 @@ define(function (require) {
                     url: hosturl + 'pay/baidupay',
                     data: data,
                     success: function (data) {
+                        paystarts = 1;
                         //                  	debugger
                         // {"cashier_url":"https"}
                         if (data && data.cashier_url) {
                             //                          window.top.location.href = data.cashier_url;
                             //							$el.find('.callList').show()
                             $el.find('#js-pay-button').html('<a data-type="mip" href="' + data.cashier_url
-                            + '">立即支付 ¥ <i id="unpaidAmount">' + ordermount + '</i></a>');
+                                + '">立即支付 ¥ <i id="unpaidAmount">' + ordermount + '</i></a>');
                         }
                         else if (data.ERROR1 === 'ERROR1') {
                             $el.find('.popUp_sysErr').fadeIn();

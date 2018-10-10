@@ -22,8 +22,7 @@ define(function (require) {
                 $(this).removeClass('text-hidden-3');
             });
             element.find(obj).attr('isOpen', 'open');
-            //  $(obj).attr({ isOpen: 'open' });
-            element.find(obj).text('收起');
+            element.find(obj).removeClass('user-list-content-more').addClass('user-list-content-up');
         }
         else if (element.find(obj).attr('isOpen') === 'open') {
             //  展开
@@ -31,14 +30,13 @@ define(function (require) {
                 $(this).addClass('text-hidden-3');
             });
             element.find(obj).attr('isOpen', 'close');
-            //  $(obj).attr({ isOpen: 'close' });
-            element.find(obj).text('展开');
+            element.find(obj).addClass('user-list-content-more').removeClass('user-list-content-up');
         }
     }
     function init() {
         var jsonText = JSON.parse(element.find('#jsonText').attr('name'));
         // 展开收起
-        element.find('.user-list-text-hide').each(function (i, j) {
+        element.find('.user-list-content-more').each(function (i, j) {
             var idText = $(j).attr('id');
             var ids = idText.split('_');
             var page = ids[1];
@@ -118,7 +116,6 @@ define(function (require) {
     function initScrollPage(countNumber, apiurl, container, flaghide) {
         // 存在第二页
         if (countNumber > 1) {
-
             var length = element.find('#loading .loadingSpan').find('span').length;
             if (length === 0) {
                 element.find('#loading span').text('努力加载中');
@@ -141,7 +138,7 @@ define(function (require) {
         }
         else {
             if (flaghide) {
-                element.find('#loading span').text('好厉害，你已翻完全内容啦~ ');
+                element.find('#loading span').text('好厉害\uFF0C你已翻完全内容啦~ ');
                 // setTimeout(function() { $('#loading').css('opacity','0');}, 2000);
             }
         }
@@ -160,7 +157,7 @@ define(function (require) {
                 container.append(htmlPack);
                 /* eslint-disable max-nested-callbacks */
                 // 展开收起
-                element.find('.user-list-text-hide').each(function (i, j) {
+                element.find('.user-list-content-more').each(function (i, j) {
                     var idText = $(j).attr('id');
                     var ids = idText.split('_');
                     var page = ids[1];
@@ -182,7 +179,8 @@ define(function (require) {
                 });
             }
             else {
-                $('#loading span').text('好厉害，你已翻完全内容啦~ ');
+                $('#loading span').text('好厉害\uFF0C你已翻完全内容啦~ ');
+                // setTimeout(function() { $('#loading').css('opacity','0');}, 2000);
             }
         });
     }

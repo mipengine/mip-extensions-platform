@@ -140,7 +140,10 @@ define(function (require) {
                     if (tempdata.brandBackground) {
                         var pageTitle = element.querySelectorAll('.top-title')[0];
                         util.css(pageTitle, 'backgroundImage', 'url(' + tempdata.brandBackground + ')');
-                    };
+                    } else if (tempdata.idType === '5' && tempdata.brandLogo) {
+                        var pageTitle = element.querySelectorAll('.top-bg')[0];
+                        util.css(pageTitle, 'backgroundImage', 'url(' + tempdata.brandLogo + ')');
+                    }
                     copyfun(element);
                     realfull(element, tempdata);
                 });
