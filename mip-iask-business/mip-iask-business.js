@@ -1325,7 +1325,7 @@ define(function (require) {
         var $tokenDiv = ele.querySelector('.mip-stats-token-div');
         var token = ele.querySelector('.mip-token-value').innerHTML;
         var type = 'SOUTH';
-        var version = ele.querySelector('#paramDiv').attr('version');
+        var version = ele.querySelector('.paramDiv').getAttribute('version');
         var channel = version === '4' ? '104' : '100';
         var sourceType =  version === '4' ? 'COOPERATE_SOUTHNETWORK_4' : 'COOPERATE_SOUTHNETWORK';
         var dataEvent = 'MIP_SY_' + channel;

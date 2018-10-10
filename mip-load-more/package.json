@@ -1,0 +1,15 @@
+{
+    "name": "mip-load-more",
+    "version": "1.0.0",
+    "description": "ajax加载更多",
+    "contributors": [
+        {
+            "name": "MIP load-more",
+            "email": "mip-support@baidu.com",
+            "url": "https://www.mipengine.org"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
