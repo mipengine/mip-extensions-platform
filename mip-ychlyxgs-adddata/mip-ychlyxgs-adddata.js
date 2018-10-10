@@ -14,20 +14,6 @@ define(function (require) {
         var pageInfo = {
             phpUrl: $(ele).find('.f-information').attr('data-phpurl')
         };
-        var province = '';
-        var city = '';
-        var remotIpInfo = {
-            ret: 1,
-            start: -1,
-            end: -1,
-            country: '\u4e2d\u56fd',
-            province: '\u6e56\u5317',
-            city: '\u6b66\u6c49',
-            district: '',
-            isp: '',
-            type: '',
-            desc: ''
-        };
         fetchJsonp('https://ca.6071.com/mip/index/c/' + pageInfo.phpUrl, {
             jsonpCallback: 'callback'
         }).then(function (res) {
@@ -39,6 +25,7 @@ define(function (require) {
             var openAndroidEject = data.openAndroidEject;
             var openIosEject = data.openIosEject;
             var allData;
+            var city = data.curr_city;
             if (data.platformOpend === true) {
                 if (platform.isIos()) { // ios
                     equipment = 'ios';
@@ -50,8 +37,6 @@ define(function (require) {
             else {
                 equipment = 'default';
             }
-            province = remotIpInfo.province;
-            city = remotIpInfo.city;
             var recomdCity = data.recomdCity;
             if (data.recomdCityOpen === true) {
                 if ($.inArray(city, recomdCity) !== -1) { // 在指定城市

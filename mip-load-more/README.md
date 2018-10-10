@@ -12,8 +12,11 @@ mip-load-more 组件说明
 
 ### 基本用法
 ```html
-<mip-load-more>
-    自定义内容，可以嵌套其他组件
+<ul id='more'>内容会遍历到ul中</ul>
+<mip-load-more src='请求的地址'>
+    <div id='wenda_more'>
+    	加载更多
+    </div>
 </mip-load-more>
 ```
 

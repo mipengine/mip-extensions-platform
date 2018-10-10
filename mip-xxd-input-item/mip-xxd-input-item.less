@@ -45,8 +45,14 @@ mip-xxd-input-item {
     }
 
     .mip-xxd-input-item-box {
+        display: -webkit-flex;
+        display: -ms-flexbox;
         display: flex;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
         align-items: center;
+        -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
         justify-content: space-between;
         height: 6.5rem;
         padding-right: 2rem;
@@ -54,11 +60,17 @@ mip-xxd-input-item {
         font-size: 1.6rem;
 
         .input-area {
+            display: -webkit-flex;
+            display: -ms-flexbox;
             display: flex;
+            -webkit-align-items: center;
+            -ms-flex-align: center;
             align-items: center;
         }
 
         .mip-xxd-input-item-title {
+            -webkit-flex: 0 0 7rem;
+            -ms-flex: 0 0 7rem;
             flex: 0 0 7rem;
             width: 7rem;
             margin-right: 5.9rem;
@@ -67,6 +79,8 @@ mip-xxd-input-item {
 
             &.is-select {
                 position: relative;
+                -webkit-flex: 0 0 11.3rem;
+                -ms-flex: 0 0 11.3rem;
                 flex: 0 0 11.3rem;
                 width: 11.3rem;
                 height: 3.1rem;
@@ -105,6 +119,8 @@ mip-xxd-input-item {
         }
 
         .mip-xxd-input-item-input {
+            -webkit-flex: 1;
+            -ms-flex: 1;
             flex: 1;
             height: 100%;
             padding-right: 2.4rem;
@@ -125,6 +141,8 @@ mip-xxd-input-item {
         }
 
         .is-after {
+            -webkit-flex: 0 0 8rem;
+            -ms-flex: 0 0 8rem;
             flex: 0 0 8rem;
             width: 8rem;
 
@@ -153,7 +171,9 @@ mip-xxd-input-item {
             margin: 0 1rem 0 .3rem;
             border-bottom: .2rem solid #ddd;
             border-right: .2rem solid #ddd;
+            -webkit-transform: rotate(-45deg);
             transform: rotate(-45deg);
+            -webkit-transform-origin: 50% 50%;
             transform-origin: 50% 50%;
         }
 

@@ -6,7 +6,7 @@ mip-ychlyxgs-adddata 需要进入页面就执行，只执行一次，本公司�
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/static/v1/mip-ychlyxgs-adddata/mip-ychlyxgs-adddata.js
+所需脚本|https://mipcache.bdstatic.com/extensions/platform/v1/mip-ychlyxgs-adddata/mip-ychlyxgs-adddata.js
 
 ## 示例
 

@@ -8,30 +8,24 @@ define(function (require) {
     var $ = require('zepto');
     var customElement = require('customElement').create();
 
-    function getData(src, offset, size) {
+    function getData(src, moreNum) {
         $.ajax({
             type: 'GET',
-            url: src + '&now=' + Math.random(),
+            url: src + '&flag=' + moreNum + '&now=' + Math.random(),
             dataType: 'json',
             success: function (reponse) {
                 var data = reponse;
                 var sum = reponse.length;
                 var result = '';
-                if (sum - offset < size) {
-                    size = sum - offset;
-                }
-                // 使用for循环模拟SQL里的limit(offset,size)
-                for (var i = offset; i < (offset + size); i++) {
-                    var num = Number(data[i].play_num) + Number(data[i].add_time.substr(7));
-                    result += '<div class="video_img">' + '<a href="/video/v' + data[i].id + '.html">' + '<mip-img src="http://shenzhen.66zhuang.com' + data[i].picname + '"></mip-img>' + '<i class="icon-video mark-video"></i>' + '</a>' + '</div>' + '<div class="video_cont">' + '<a href="/video/v' + data[i].id + '.html"><span class="title">' + data[i].title + '</span></a>' + '<span class="view"><i class="icon-video page-view"></i>' + num + '</span>' + '</div>';
-                }
-                $('.js-blog-list').append(result);
-                // 隐藏more
-                if ((Number(offset) + Number(size)) >= sum) {
-                    $('.js-load-more').hide();
+                if (data === 0) {
+                    $('#wenda_more').css({border: 'none', background: 'none'});
+                    $('#wenda_more').html('到底啦，已经没有更多了哦!');
                 }
                 else {
-                    $('.js-load-more').show();
+                    for (var i = 0; i < sum; i++) {
+                        result += '<li><div class="video_img"><a href="/video/v' + data[i].id + '.html"><mip-img src="http://shenzhen.66zhuang.com' + data[i].picname + '"></mip-img><i class="icon-video mark-video"></i></a></div><div class="video_cont"><a href="/video/v' + data[i].id + '.html"><span class="title">' + data[i].title + '</span></a><span class="view"><i class="icon-video page-view"></i>' + (Number(data[i].play_num) + Number(data[i].add_time.substr(7))) + '</span></div></li>';
+                    }
+                    $('#more').html(result);
                 }
             },
             error: function (xhr, type) {
@@ -41,13 +35,10 @@ define(function (require) {
     }
 
     customElement.prototype.firstInviewCallback = function () {
-
         var self = this;
         var element = self.element;
         var src = element.getAttribute('data-src') || '';
         var counter = 0;
-        var pageStart = 0;
-        var pageSize = element.getAttribute('load-number') || 5;
 
         // 如果没有写data-src, 则报错提示
         if (!src) {
@@ -55,12 +46,14 @@ define(function (require) {
             element.remove();
             return;
         }
-        $('.js-load-more').show();
+        $('#wenda_more').show();
         // 监听加载更多
-        $(element).on('click', '.js-load-more', function () {
+        $(element).on('click', '#wenda_more', function () {
+            var moreNum = document.getElementById('more_num').innerHTML;
             counter++;
-            pageStart = counter * pageSize;
-            getData(src, pageStart, pageSize);
+            getData(src, moreNum);
+            var num = moreNum - 1 + 2;
+            $('#more_num').html(num);
         });
     };
 
