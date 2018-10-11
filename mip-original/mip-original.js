@@ -85,10 +85,10 @@ define(function (require) {
             exp.setTime(exp.getTime() + Hours * 60 * 60 * 1000);
             var content = name + '=' + escape(value) + ';expires=' + exp.toGMTString()
             + ';';
-            window.top.document.cookie = content;
+            document.cookie = content;
         }
         function getCookie(name) {
-            var arr = window.top.document.cookie.match(new RegExp('(^| )' + name + '=([^;]*)(;|$)'));
+            var arr = document.cookie.match(new RegExp('(^| )' + name + '=([^;]*)(;|$)'));
             if (arr != null) {
                 return unescape(arr[2]);
             }
