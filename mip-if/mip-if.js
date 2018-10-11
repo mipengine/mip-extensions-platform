@@ -29,7 +29,21 @@ define(function (require) {
                 case row === 'referrer':
                     var r = document.referrer;
                     r = r.toLowerCase();
-                    if (wrong && r.indexOf(val) === -1 || !wrong && r.indexOf(val) > -1) {
+                    if (r === '') {
+                        if (val === '' && wrong) {
+                            result.push(false);
+                        }
+                        else if (val === '' && !wrong) {
+                            result.push(true);
+                        }
+                        else if (val !== '' && wrong) {
+                            result.push(true);
+                        }
+                        else if (val !== '' && !wrong) {
+                            result.push(false);
+                        }
+                    }
+                    else if (wrong && r.indexOf(val) === -1 || !wrong && r.indexOf(val) > -1) {
                         result.push(true);
                     }
                     else {

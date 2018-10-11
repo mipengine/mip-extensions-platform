@@ -23,7 +23,7 @@ define(function (require) {
                 }
                 else {
                     for (var i = 0; i < sum; i++) {
-                        result += '<li><div class="video_img"><a href="/video/v' + data[i].id + '.html"><mip-img src="http://shenzhen.66zhuang.com' + data[i].picname + '"></mip-img><i class="icon-video mark-video"></i></a></div><div class="video_cont"><a href="/video/v' + data[i].id + '.html"><span class="title">' + data[i].title + '</span></a><span class="view"><i class="icon-video page-view"></i>' + (Number(data[i].play_num) + Number(data[i].add_time.substr(7))) + '</span></div></li>';
+                        result += '<li><div class="video_img"><a href="/mip/video/v' + data[i].id + '.html"><mip-img src="http://shenzhen.66zhuang.com' + data[i].picname + '"></mip-img><i class="icon-video mark-video"></i></a></div><div class="video_cont"><a href="/mip/video/v' + data[i].id + '.html"><span class="title">' + data[i].title + '</span></a><span class="view"><i class="icon-video page-view"></i>' + (Number(data[i].play_num) + Number(data[i].add_time.substr(7))) + '</span></div></li>';
                     }
                     $('#more').html(result);
                 }
