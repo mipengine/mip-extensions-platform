@@ -239,14 +239,14 @@ define(function (require) {
                         if (eleTop <= scrollTop + viewHei / 2) {
                             storage.set('usFlag', 'true', 21600000);
                             zxbjPage.usFlag = true;
-                            $this.find('.footer_xrhb').trigger('click');
+                            // $this.find('.footer_xrhb').trigger('click');
                         }
                     }
                     else {
                         if (eleTop <= viewHei / 2) {
                             storage.set('usFlag', 'true', 21600000);
                             zxbjPage.usFlag = true;
-                            $this.find('.footer_xrhb').trigger('click');
+                            // $this.find('.footer_xrhb').trigger('click');
                         }
                     }
                 }

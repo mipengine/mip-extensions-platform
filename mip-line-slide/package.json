@@ -1,0 +1,14 @@
+{
+    "name": "mip-line-slide",
+    "version": "1.0.0",
+    "description": "垂直滚动-用于新闻垂直滚动，留言信息滚动",
+    "contributors": [
+        {
+            "name": "guomengyuan",
+            "email": "1401105669@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
