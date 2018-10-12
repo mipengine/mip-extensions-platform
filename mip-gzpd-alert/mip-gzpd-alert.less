@@ -1,5 +1,8 @@
 mip-gzpd-alert {
-
+    div.mip-gzpd-alert-marks .alert-box,
+    div.mip-gzpd-alert-cservice-marks .mip-gzpd-alert-cservice {
+        overflow: unset;
+    }
     div.mip-gzpd-alert-marks .claos,
     div.mip-gzpd-alert-cservice-marks .claos {
         position: absolute;
@@ -24,6 +27,7 @@ mip-gzpd-alert {
         display: none;
         position: fixed;
         top: 0;
+        left: 0;
         background: rgba(19, 19, 19, 0.6);
     }
     div.mip-gzpd-alert-marks .alert-box {
@@ -304,9 +308,6 @@ mip-gzpd-alert {
         margin: auto;
     }
 
-    div.mip-gzpd-alert-success {
-        display: none;
-    }
     div.mip-gzpd-alert-success .icon {
         width: 1.8em;
         height: 2.5em;
@@ -316,14 +317,18 @@ mip-gzpd-alert {
         margin-right: 6px;
     }
     div.mip-gzpd-alert-success {
+        display: none;
         border: 1px solid #d3d4d3;
         padding: 4px;
-        margin: auto;
-        width: 33%;
+        width: 32%;
         text-align: center;
         color: #333;
         font-size: 16px;
         background: #fff;
+        position: fixed;
+        top: 45%;
+        left: 34%;
+        z-index: 100;
     }
     div.mip-gzpd-alert-bounceIn {
         animation-name: mip-gzpd-alert-bounceIn;
@@ -404,7 +409,6 @@ mip-gzpd-alert {
         color: rgba(255, 255, 255, 0);
         background-color: rgba(255, 255, 255, 0);
     }
-
     @-webkit-keyframes mip-gzpd-alert-bounceIn {
         0% {
             opacity: 0;

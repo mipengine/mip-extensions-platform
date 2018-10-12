@@ -1,6 +1,6 @@
 {
   "name": "mip-gzpd-alert",
-  "version": "1.0.0",
+  "version": "1.1.2",
   "description": "用户服务登陆并支付后使用提示功能",
   "author": {
     "name": "jfdsies",

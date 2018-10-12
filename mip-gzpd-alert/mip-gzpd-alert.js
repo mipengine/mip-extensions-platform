@@ -13,8 +13,19 @@ define(function (require) {
     var buyInterval;
     var copyTimeout;
 
+    var hashCode = function (str) {
+        var hash = 0;
+        var len = str.length;
+        var i = 0;
+        if (len > 0) {
+            while (i < len) {
+                hash = (hash << 5) - hash + str.charCodeAt(i++) | 0;
+            }
+        }
+        return hash;
+    };
     var marksHtml = function (config) {
-        var payUrl = 'https://my.yjbys.com/company/wxpay/native_middle.php?mip&id=' + config.id + '&rd=' + encodeURI(window.location.href.split('?')[0]);
+        var payUrl = config.payUrl + '?mip&id=' + config.id + '&rd=' + encodeURI(window.location.href.split('?')[0]);
         var freeboxDetail = config.alertFree.detail.map(function (item) {
             return '<p>' + item + '</p>';
         }).join('');
@@ -104,99 +115,109 @@ define(function (require) {
             + '</div>';
     };
 
-    // build 方法，元素插入到文档时执行，仅会执行一次
     customElem.prototype.firstInviewCallback = function () {
         var ele = this.element;
 
-        var configEle = ele.querySelectorAll('#mip-gzpd-alert-data')[0];
-        var config = JSON.parse($(configEle).html());
-
-        var marks = marksHtml(config);
-        var payAlert = payAlertHtml(config);
-        var copySuccess = copySuccessHtml(config);
-        var customerService = customerServiceHtml(config);
-
-        var content = ele.querySelectorAll('.content')[0];
-        $(content).append(marks + payAlert + copySuccess + customerService);
-
-        var cserviceMarks = ele.querySelectorAll('.mip-gzpd-alert-cservice-marks')[0];
-        var cserviceMarksCloseBtn = cserviceMarks.querySelectorAll('.claos')[0];
-
-        var alertMarks = ele.querySelectorAll('.mip-gzpd-alert-marks')[0];
-        var alertMarksCloseBtn = alertMarks.querySelectorAll('.claos')[0];
-        var alertMarksPayBox = alertMarks.querySelectorAll('.paybox-cservice')[0];
-
-        var alertWxpay = ele.querySelectorAll('.mip-gzpd-alert-marks-wxpay')[0];
-        var alertWxpaySuccessBtn = alertWxpay.querySelectorAll('.payqr_success_text .btn')[0];
-
-        var freeboxBtn = ele.querySelectorAll('.freebox-btn')[0];
-        var freeboxInput = ele.querySelectorAll('.freebox-input')[0];
-
-        document.addEventListener('copy', function (e) {
-            if (!storage.get(config.cookieKey)) {
-                if ($(alertMarks).css('display') !== 'block') {
-                    e.clipboardData.setData('text/plain', '');
-                    e.preventDefault();
-                }
-                $(alertMarks).css('display', 'block');
+        $.getJSON('//my.pincai.com/wx_app/miniapp/config/mip.copy.json', function (config) {
+            if (config.code !== 200) {
+                return;
             }
-            else {
-                window.clearTimeout(copyTimeout);
-                var alertSuccess = ele.querySelectorAll('.mip-gzpd-alert-success')[0];
-                $(alertSuccess).css('display', 'block');
-                copyTimeout = window.setTimeout(function () {
-                    $(alertSuccess).css('display', 'none');
-                }, 1000);
-            }
-        });
-        if (window.location.href.indexOf('order=') > -1) {
-            var payBox = ele.querySelectorAll('.payqr_box')[0];
-            var payBoxSuccess = ele.querySelectorAll('.payqr_success_box')[0];
-            var wxTopSpan = ele.querySelectorAll('.wx_top span')[0];
 
-            $(alertWxpay).css('display', 'block');
-            $(payBox).css('display', 'block');
-            $(payBoxSuccess).css('display', 'none');
-            buyInterval = window.setInterval(function () {
-                $.getJSON('//my.yjbys.com/company/wxpay/trade_copy.php' + window.location.search, function (data) {
-                    if (data.state === 'OK') {
-                        $(alertMarksCloseBtn).css('display', 'none');
-                        $(payBox).css('display', 'none');
-                        $(payBoxSuccess).css('display', 'block');
-                        $(wxTopSpan).text('支付成功');
-                        storage.set(config.cookieKey, 1, config.cookieTtl * 1000);
-                        window.clearInterval(buyInterval);
+            if (!config.cookieKey) {
+                var pathname = window.location.pathname;
+                config.cookieKey = hashCode(pathname.substr(pathname.lastIndexOf('/') + 1)).toString();
+            }
+
+            var marks = marksHtml(config);
+            var payAlert = payAlertHtml(config);
+            var copySuccess = copySuccessHtml(config);
+            var customerService = customerServiceHtml(config);
+
+            var content = ele.querySelectorAll('.content')[0];
+            $(content).append(marks + payAlert + copySuccess + customerService);
+
+            var cserviceMarks = ele.querySelectorAll('.mip-gzpd-alert-cservice-marks')[0];
+            var cserviceMarksCloseBtn = cserviceMarks.querySelectorAll('.claos')[0];
+
+            var alertMarks = ele.querySelectorAll('.mip-gzpd-alert-marks')[0];
+            var alertMarksCloseBtn = alertMarks.querySelectorAll('.claos')[0];
+            var alertMarksPayBox = alertMarks.querySelectorAll('.paybox-cservice')[0];
+
+            var alertWxpay = ele.querySelectorAll('.mip-gzpd-alert-marks-wxpay')[0];
+            var alertWxpaySuccessBtn = alertWxpay.querySelectorAll('.payqr_success_text .btn')[0];
+
+            var freeboxBtn = ele.querySelectorAll('.freebox-btn')[0];
+            var freeboxInput = ele.querySelectorAll('.freebox-input')[0];
+
+            document.addEventListener('copy', function (e) {
+                if (!storage.get(config.cookieKey)) {
+                    if ($(alertMarks).css('display') !== 'block') {
+                        e.clipboardData.setData('text/plain', '');
+                        e.preventDefault();
                     }
-                });
-            }, 1500);
-        }
+                    $(alertMarks).css('display', 'block');
+                }
+                else {
+                    window.clearTimeout(copyTimeout);
+                    var alertSuccess = ele.querySelectorAll('.mip-gzpd-alert-success')[0];
+                    $(alertSuccess).css('display', 'block');
+                    copyTimeout = window.setTimeout(function () {
+                        $(alertSuccess).css('display', 'none');
+                    }, 1000);
+                }
+            });
+            if (window.location.href.indexOf('order=') > -1) {
+                var payBox = ele.querySelectorAll('.payqr_box')[0];
+                var payBoxSuccess = ele.querySelectorAll('.payqr_success_box')[0];
+                var wxTopSpan = ele.querySelectorAll('.wx_top span')[0];
 
-        $(cserviceMarksCloseBtn).click(function () {
-            $(cserviceMarks).css('display', 'none');
-        });
-
-        $(alertMarksCloseBtn).click(function () {
-            $(alertMarks).css('display', 'none');
-        });
-
-        $(alertMarksPayBox).click(function () {
-            $(cserviceMarks).css('display', 'block');
-        });
-
-        $(freeboxBtn).click(function () {
-            var userInput = parseInt($(freeboxInput).val(), 10);
-            if (userInput < 1000) {
-                alert('输入不正确!');
+                $(alertWxpay).css('display', 'block');
+                $(payBox).css('display', 'block');
+                $(payBoxSuccess).css('display', 'none');
+                buyInterval = window.setInterval(function () {
+                    $.getJSON('//my.pincai.com/wx_app/wxpay/trade_copy.php' + window.location.search, function (data) {
+                        if (data.state === 'OK') {
+                            $(alertMarksCloseBtn).css('display', 'none');
+                            $(payBox).css('display', 'none');
+                            $(payBoxSuccess).css('display', 'block');
+                            $(wxTopSpan).text('支付成功');
+                            storage.set(config.cookieKey, 1, config.cookieTtl * 1000);
+                            window.clearInterval(buyInterval);
+                        }
+                    });
+                }, 1500);
             }
 
-            if (userInput > 8000 && userInput < 9999) {
-                storage.set(config.cookieKey, 1, config.cookieTtl * 1000);
+            $(cserviceMarksCloseBtn).click(function () {
+                $(cserviceMarks).css('display', 'none');
+            });
+
+            $(alertMarksCloseBtn).click(function () {
                 $(alertMarks).css('display', 'none');
-            }
-        });
+            });
 
-        $(alertWxpaySuccessBtn).click(function () {
-            window.top.location.href = window.location.href.split('?')[0];
+            $(alertMarksPayBox).click(function () {
+                $(cserviceMarks).css('display', 'block');
+            });
+
+            $(freeboxBtn).click(function () {
+                var userInput = parseInt($(freeboxInput).val(), 10);
+                if (userInput < 1000) {
+                    return;
+                }
+
+                if (userInput > 8000 && userInput < 9999) {
+                    storage.set(config.cookieKey, 1, config.cookieTtl * 1000);
+                    $(alertMarks).css('display', 'none');
+                }
+                else {
+                    alert('输入不正确!');
+                }
+            });
+
+            $(alertWxpaySuccessBtn).click(function () {
+                window.top.location.href = window.location.href.split('?')[0];
+            });
         });
     };
 
