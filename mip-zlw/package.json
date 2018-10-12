@@ -1,0 +1,14 @@
+{
+    "name": "mip-zlw",
+    "version": "1.0.0",
+    "description": "组件介绍",
+    "contributors": [
+        {
+            "name": "zlw",
+            "email": "1432558639@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

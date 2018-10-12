@@ -1,0 +1,14 @@
+{
+    "name": "mip-hsl-timeout",
+    "version": "1.0.0",
+    "description": "韩森林制作-定时显示某个DIV组件，可自定义显示时间",
+    "contributors": [
+        {
+            "name": "hsl",
+            "email": "han52036@126.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

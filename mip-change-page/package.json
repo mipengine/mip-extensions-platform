@@ -1,0 +1,14 @@
+{
+    "name": "mip-change-page",
+    "version": "1.0.0",
+    "description": "左右翻页，实现自动分页功能",
+    "contributors": [
+        {
+            "name": "guomengyuan",
+            "email": "1401105669@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

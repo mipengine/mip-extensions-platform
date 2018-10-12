@@ -1,0 +1,104 @@
+/**
+ * @file mip-change-page样式文件
+ */
+
+mip-change-page {
+    &.change-page {
+        width: 100%;
+    }
+    #box {
+        width: 100%;
+        height: 460px;
+        padding: 0 2px 10px 10px;
+    }
+    .mip-change-boxs {
+        float: left;
+        width: 31%;
+        height: 141px;
+        margin-top: 9px;
+        margin-right: 2.33%;
+        padding: 5px;
+        border: 1px solid #f6f4f5;
+        border-radius: 4px;
+        -webkit-box-shadow: 2px 2px 5px #e8e8e8;
+        -moz-box-shadow: 2px 2px 5px #e8e8e8;
+        box-shadow: 2px 2px 5px #e8e8e8;
+    }
+    .mip-change-boxs mip-img {
+        width: 100px;
+        height: 90px;
+        margin: 0 auto;
+        border-radius: 4px;
+    }
+    .mip-change-boxs .mip-change-page-title {
+        width: 100%;
+        height: 21px;
+        font-size: 11px;
+        line-height: 21px;
+        text-align: center;
+        color: #666;
+    }
+    .mip-change-boxs .mip-change-page-info {
+        width: 100%;
+        height: 18px;
+    }
+    .mip-change-boxs .mip-change-page-info p:first-child,
+    .mip-change-boxs .mip-change-page-info p:last-child {
+        float: left;
+        height: 18px;
+    }
+    .mip-change-boxs .mip-change-page-info p:first-child {
+        width: 40%;
+        font-size: 10px;
+        line-height: 18px;
+        color: #f33;
+    }
+    .mip-change-boxs .mip-change-page-info p:last-child {
+        width: 54%;
+        font-size: 10px;
+        line-height: 18px;
+        text-align: center;
+        color: #fff;
+        border-radius: 4px;
+        background: #ff7c40;
+    }
+    #page {
+        position: absolute;
+        top: -15px;
+        right: 2.33%;
+        width: 64px;
+        height: 15px;
+    }
+    #page > #pre,
+    #page > #next {
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        font-size: 10px;
+        line-height: 15px;
+        text-align: center;
+        text-decoration: none;
+        color: #fff;
+        border-radius: 50%;
+        background-color: #8a8a8a;
+    }
+    #page > #pre {
+        float: left;
+    }
+    #page > #next {
+        float: right;
+    }
+    .list {
+        display: none;
+    }
+    .list a {
+        padding: 0 5px;
+        text-decoration: none;
+    }
+    .list a.current {
+        color: #f00;
+    }
+    .boxboxs {
+        display: none;
+    }
+}

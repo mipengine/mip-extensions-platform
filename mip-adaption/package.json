@@ -1,0 +1,15 @@
+{
+    "name": "mip-adaption",
+    "version": "1.0.0",
+    "description": "针对iframe做响应式布局使用",
+    "contributors": [
+        {
+            "name": "MIP adaption",
+            "email": "mip-support@baidu.com",
+            "url": "https://www.mipengine.org"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
