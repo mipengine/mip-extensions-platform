@@ -87,7 +87,7 @@ define(function (require) {
                         script.src = imsearch;
                         document.body.appendChild(script);
                     }).catch(function (err) {
-                        alert(err);
+                        throw err;
                     });
                 }
                 catch (err) {

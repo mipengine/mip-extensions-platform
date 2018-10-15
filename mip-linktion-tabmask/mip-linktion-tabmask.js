@@ -29,11 +29,11 @@ define(function (require) {
         var rightText = $el.find('.right-section .list-span.active').text();
         if (leftText !== '全部') {
             $el.find('.left-section h4 strong').text(leftText);
-            $el.find('.phone-section .left-section').addClass('active');
+            $el.find('.phone-section.left-section').addClass('active');
         };
         if (rightText !== '全部') {
             $el.find('.right-section  h4 strong').text(rightText);
-            $el.find('.phone-section .right-section').addClass('active');
+            $el.find('.phone-section.right-section').addClass('active');
         };
     };
     return customElement;

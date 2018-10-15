@@ -1,6 +1,6 @@
 {
     "name": "mip-adaption",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "针对iframe做响应式布局使用",
     "contributors": [
         {

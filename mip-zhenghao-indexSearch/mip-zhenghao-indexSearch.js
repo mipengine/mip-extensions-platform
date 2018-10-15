@@ -1,7 +1,7 @@
 /**
  * @file 整好 首页搜索 插件
  * @author chenrong <812069449@qq.com>
- * @version 1.0
+ * @version 1.0.1
  */
 define(function (require) {
     var $ = require('zepto');
@@ -12,10 +12,6 @@ define(function (require) {
 
     // 第一次进入可视区回调,只会执行一次，做懒加载，利于网页速度
     customElem.prototype.firstInviewCallback = function () {
-
-        // 服务器地址
-        var ServerHref = $('#server_href').val();
-        ServerHref = !empty(ServerHref) ? ServerHref : location.protocol + '://' + location.host + '/mip_search.html?keyWord=';
 
         /**
          * 是否为空
@@ -30,6 +26,13 @@ define(function (require) {
             }
 
         }
+
+        // 服务器地址
+        var ServerHref = $('#server_href').val();
+        if (empty(ServerHref)) {
+            ServerHref = location.protocol + '//' + location.host + '/mip_search.html?keyWord=';
+        }
+
 
         /**
          * 刷新历史数据 包括数据 和 界面
@@ -95,10 +98,10 @@ define(function (require) {
             return result;
         }
 
-
         // 显示搜索页面
         $('#index_search_box').click(function () {
             $('#index_search_page').show();
+            $('#index_search_input').focus();
             refreshHistorical();
         });
 
