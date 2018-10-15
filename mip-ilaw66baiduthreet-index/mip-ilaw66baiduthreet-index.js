@@ -234,9 +234,6 @@ define(function (require) {
             if (sessionId !== 0) {
                 startConsulting(questionType);
             }
-            else {
-                window.location.reload();
-            }
 
         });
 
