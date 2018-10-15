@@ -55,12 +55,14 @@ define(function (require) {
             type: 'POST',
             data: {width: W, height: record(recode)},
             url: src,
-            dataType: 'test',
+            dataType: 'json',
             success: function (reponse) {
-                console.log(true);
+                $('.videoiframe').attr('width', reponse.width);
+                $('.videoiframe').attr('height', reponse.height);
             },
             error: function (xhr, type) {
-                console.log(type);
+                alert('请求出错，请检测src问题');
+                return;
             }
         });
     };

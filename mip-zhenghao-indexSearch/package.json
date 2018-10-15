@@ -1,0 +1,14 @@
+{
+    "name": "mip-zhenghao-indexSearch",
+    "version": "1.0.0",
+    "description": "整好mip站 首页搜索 自用组件",
+    "contributors": [
+        {
+            "name": "chenrong",
+            "email": "812069449@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

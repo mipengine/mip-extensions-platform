@@ -12,6 +12,8 @@ mip-adaption 组件说明
 
 ### 基本用法
 ```html
+<!-- videoiframe是必须添加的，因为写死了，所以只能用这个，没有做动态的 -->
+<div class="videoiframe" width="x" height="y"></div>
 <mip-adaption data-src="post方式请求到需要调用的页面" data-res="需要获取的class对象是谁"></mip-adaption>
 ```
 
