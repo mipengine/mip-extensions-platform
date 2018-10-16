@@ -13,50 +13,50 @@ define(function (require) {
      */
     customElement.prototype.firstInviewCallback = function () {
         // 获取元素
-        let myThis = this.element;
+        var myThis = this.element;
         // 获取元素
-        let domBox = myThis.querySelector('#box');
-        let domPage = myThis.querySelector('#page');
-        let domList = myThis.querySelector('.list');
-        let domBoxboxs = myThis.querySelectorAll('.boxboxs');
+        var domBox = myThis.querySelector('#box');
+        var domPage = myThis.querySelector('#page');
+        var domList = myThis.querySelector('.list');
+        var domBoxboxs = myThis.querySelectorAll('.boxboxs');
 
-        let preNum = 0;
+        var preNum = 0;
 
-        let jsonLen = domBoxboxs.length;
+        var jsonLen = domBoxboxs.length;
         // 设置规则
-        let each = parseInt(myThis.getAttribute('data-number'), 10);
-        let page = Math.ceil(jsonLen / each);
+        var each = parseInt(myThis.getAttribute('data-number'), 0);
+        var page = Math.ceil(jsonLen / each);
 
         // 设置内容
-        for (let i = 0; i < each; i++) {
-            let domP = '<div class="mip-change-boxs">';
+        for (var i = 0; i < each; i++) {
+            var domP = '<div class="mip-change-boxs">';
             domP += domBoxboxs[i].innerHTML;
             domP += '</div>';
             domBox.innerHTML += domP;
         }
 
         // 设置列表页数
-        for (let i = 0; i < page; i++) {
-            let domA = document.createElement('a');
+        for (var i = 0; i < page; i++) {
+            var domA = document.createElement('a');
             domA.href = 'javascript:;';
             domA.innerHTML = i + 1;
             domList.insertBefore(domA, null);
         }
         // 获取元素
-        let domListChild = domList.children;
+        var domListChild = domList.children;
         // 获取页数
-        let domListLen = domListChild.length;
+        var domListLen = domListChild.length;
 
         // 记录上一次单击的元素
-        let preDom = domList.children[0];
+        var preDom = domList.children[0];
         preDom.className = 'current';
 
         // 切换页
         domList.addEventListener('click', function (e) {
             // 获取目标元素
-            let target = e.target;
+            var target = e.target;
             // 获取目标元素的标签名，并统一转换成小写
-            let targetName = target.nodeName.toLocaleLowerCase();
+            var targetName = target.nodeName.toLocaleLowerCase();
             if (targetName === 'a') {
                 // 添加class
                 preDom.className = '';
@@ -71,41 +71,41 @@ define(function (require) {
                 if (target.innerHTML !== '1') {
                     if (target.innerHTML === '2') {
                         // 遍历每页的条数，并将内容添加到domBox中。
-                        for (let i = 0; i < each; i++) {
-                            let arrJsonCurrent = domBoxboxs[i - 1 + (target.innerHTML * (each - 1))];
+                        for (var i = 0; i < each; i++) {
+                            var arrJsonCurrent = domBoxboxs[i - 1 + (target.innerHTML * (each - 1))];
                             if (arrJsonCurrent == null) {
                                 break;
                             }
 
-                            let domP = '<div class="mip-change-boxs">';
+                            var domP = '<div class="mip-change-boxs">';
                             domP += arrJsonCurrent.innerHTML;
                             domP += '</div>';
                             domBox.innerHTML += domP;
                         }
                     }
                     else if (target.innerHTML === '3') {
-                        for (let i = 0; i < each; i++) {
-                            let arrJsonCurrent = domBoxboxs[i + (target.innerHTML * (each - 1))];
+                        for (var i = 0; i < each; i++) {
+                            var arrJsonCurrent = domBoxboxs[i + (target.innerHTML * (each - 1))];
                             if (arrJsonCurrent == null) {
                                 break;
                             }
 
-                            let domP = '<div class="mip-change-boxs">';
+                            var domP = '<div class="mip-change-boxs">';
                             domP += arrJsonCurrent.innerHTML;
                             domP += '</div>';
                             domBox.innerHTML += domP;
                         }
                     }
                     else {
-                        for (let i = 0; i < each; i++) {
+                        for (var i = 0; i < each; i++) {
                             var numa = target.innerHTML - each;
                             var numb = target.innerHTML * (each - 1);
-                            let arrJsonCurrent = domBoxboxs[i + numa + numb];
+                            var arrJsonCurrent = domBoxboxs[i + numa + numb];
                             if (arrJsonCurrent == null) {
                                 break;
                             }
 
-                            let domP = '<div class="mip-change-boxs">';
+                            var domP = '<div class="mip-change-boxs">';
                             domP += arrJsonCurrent.innerHTML;
                             domP += '</div>';
                             domBox.innerHTML += domP;
@@ -113,13 +113,13 @@ define(function (require) {
                     }
                 }
                 else {
-                    for (let i = 0; i < each; i++) {
-                        let arrJsonCurrent = domBoxboxs[i];
+                    for (var i = 0; i < each; i++) {
+                        var arrJsonCurrent = domBoxboxs[i];
                         if (arrJsonCurrent == null) {
                             break;
                         }
 
-                        let domP = '<div class="mip-change-boxs">';
+                        var domP = '<div class="mip-change-boxs">';
                         domP += arrJsonCurrent.innerHTML;
                         domP += '</div>';
                         domBox.innerHTML += domP;
@@ -129,8 +129,8 @@ define(function (require) {
 
         });
         // 获取上一页和下一页元素
-        let pagePreDom = document.getElementById('pre');
-        let pageNextDom = document.getElementById('next');
+        var pagePreDom = document.getElementById('pre');
+        var pageNextDom = document.getElementById('next');
         // 上一页
         pagePreDom.addEventListener('click', function () {
             // 判断当前元素索引
@@ -158,13 +158,13 @@ define(function (require) {
             switch (currentNum) {
                 case 0:
                     // 遍历元素
-                    for (let i = 0; i < each; i++) {
-                        let arrJsonCurrent = domBoxboxs[currentNum + i];
+                    for (var i = 0; i < each; i++) {
+                        var arrJsonCurrent = domBoxboxs[currentNum + i];
                         if (arrJsonCurrent == null) {
                             break;
                         }
 
-                        let domP = '<div class="mip-change-boxs">';
+                        var domP = '<div class="mip-change-boxs">';
                         domP += arrJsonCurrent.innerHTML;
                         domP += '</div>';
                         domBox.innerHTML += domP;
@@ -172,13 +172,13 @@ define(function (require) {
                     break;
                 case 1:
                     // 遍历元素
-                    for (let i = 0; i < each; i++) {
-                        let arrJsonCurrent = domBoxboxs[each + i];
+                    for (var i = 0; i < each; i++) {
+                        var arrJsonCurrent = domBoxboxs[each + i];
                         if (arrJsonCurrent == null) {
                             break;
                         }
 
-                        let domP = '<div class="mip-change-boxs">';
+                        var domP = '<div class="mip-change-boxs">';
                         domP += arrJsonCurrent.innerHTML;
                         domP += '</div>';
                         domBox.innerHTML += domP;
@@ -186,13 +186,13 @@ define(function (require) {
                     break;
                 default:
                     // 遍历元素
-                    for (let i = 0; i < each; i++) {
-                        let arrJsonCurrent = domBoxboxs[currentNum * each + i];
+                    for (var i = 0; i < each; i++) {
+                        var arrJsonCurrent = domBoxboxs[currentNum * each + i];
                         if (arrJsonCurrent == null) {
                             break;
                         }
 
-                        let domP = '<div class="mip-change-boxs">';
+                        var domP = '<div class="mip-change-boxs">';
                         domP += arrJsonCurrent.innerHTML;
                         domP += '</div>';
                         domBox.innerHTML += domP;
