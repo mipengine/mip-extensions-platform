@@ -1,0 +1,14 @@
+{
+    "name": "mip-yp-rem",
+    "version": "1.0.0",
+    "description": "rem换算",
+    "contributors": [
+        {
+            "name": "xiaoping",
+            "email": "1194073221@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

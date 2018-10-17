@@ -11,6 +11,7 @@
  * 1.0.5 根据主管需求，修改提示文字
  * 1.1.0 新增：苹果设备访问安卓资源，安卓设备访问苹果资源给出的提示。
  * 1.1.1 升级less文件背景图片为https。
+ * 1.1.2 修改提示描述
  * @author gom3250@qq.com.
  *  */
 
@@ -106,9 +107,8 @@ define(function (require) {
                             var colsys = 'pc';
                             var tiyes = 'yes';
                         }
-                        var titshi = '<p class="m-tisp1"><i></i>该软件为' + colsys + '资源，没有';
-                        titshi += '<strong>' + sys + '</strong>版。';
-                        titshi += '该地址下载的是：<span>' + firname + '</span></p>';
+                        var titshi = '<p class="m-tisp1"><i></i>该软件为' + colsys + '资源，';
+                        titshi += '推荐下载的是：<span>' + firname + '</span></p>';
                         // 有地址的情况切换
                         if (tiyes === 'yes') {
                             $(ele).find('#downAddress ul').after(titshi);

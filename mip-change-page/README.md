@@ -22,7 +22,7 @@ mip-change-page 左右翻页，实现自动分页功能
 </style>
 <mip-change-page class="change-page" data-number="9">
     <section id="box">
-    	<div class="mip-change-boxs">
+    	<div class="boxboxs">
     		<a href="">
 	    		<mip-img layout="responsive" src="https://www.mipengine.org/static/img/sample_01.jpg" alt=""></mip-img>
 	    		<p class="mip-change-page-title">蘭公子卤肉饭</p>
@@ -32,7 +32,7 @@ mip-change-page 左右翻页，实现自动分页功能
 	    		</div>
     		</a>
     	</div>
-    	<div class="mip-change-boxs">
+    	<div class="boxboxs">
     		<a href="">
 	    		<mip-img layout="responsive" src="https://www.mipengine.org/static/img/sample_01.jpg" alt=""></mip-img>
 	    		<p class="mip-change-page-title">蘭公子卤肉饭</p>
@@ -42,7 +42,7 @@ mip-change-page 左右翻页，实现自动分页功能
 	    		</div>
     		</a>
     	</div>
-    	<div class="mip-change-boxs">
+    	<div class="boxboxs">
     		<a href="">
 	    		<mip-img layout="responsive" src="https://www.mipengine.org/static/img/sample_01.jpg" alt=""></mip-img>
 	    		<p class="mip-change-page-title">蘭公子卤肉饭</p>
@@ -52,7 +52,7 @@ mip-change-page 左右翻页，实现自动分页功能
 	    		</div>
     		</a>
     	</div>
-    	<div class="mip-change-boxs">
+    	<div class="boxboxs">
     		<a href="">
 	    		<mip-img layout="responsive" src="https://www.mipengine.org/static/img/sample_01.jpg" alt=""></mip-img>
 	    		<p class="mip-change-page-title">蘭公子卤肉饭</p>
@@ -62,7 +62,7 @@ mip-change-page 左右翻页，实现自动分页功能
 	    		</div>
     		</a>
     	</div>
-    	<div class="mip-change-boxs">
+    	<div class="boxboxs">
     		<a href="">
 	    		<mip-img layout="responsive" src="https://www.mipengine.org/static/img/sample_01.jpg" alt=""></mip-img>
 	    		<p class="mip-change-page-title">蘭公子卤肉饭</p>
@@ -72,7 +72,7 @@ mip-change-page 左右翻页，实现自动分页功能
 	    		</div>
     		</a>
     	</div>
-    	<div class="mip-change-boxs">
+    	<div class="boxboxs">
     		<a href="">
 	    		<mip-img layout="responsive" src="https://www.mipengine.org/static/img/sample_01.jpg" alt=""></mip-img>
 	    		<p class="mip-change-page-title">蘭公子卤肉饭</p>
@@ -82,7 +82,7 @@ mip-change-page 左右翻页，实现自动分页功能
 	    		</div>
     		</a>
     	</div>
-    	<div class="mip-change-boxs">
+    	<div class="boxboxs">
     		<a href="">
 	    		<mip-img layout="responsive" src="https://www.mipengine.org/static/img/sample_01.jpg" alt=""></mip-img>
 	    		<p class="mip-change-page-title">蘭公子卤肉饭</p>
@@ -92,7 +92,7 @@ mip-change-page 左右翻页，实现自动分页功能
 	    		</div>
     		</a>
     	</div>
-    	<div class="mip-change-boxs">
+    	<div class="boxboxs">
     		<a href="">
 	    		<mip-img layout="responsive" src="https://www.mipengine.org/static/img/sample_01.jpg" alt=""></mip-img>
 	    		<p class="mip-change-page-title">蘭公子卤肉饭</p>
@@ -102,7 +102,7 @@ mip-change-page 左右翻页，实现自动分页功能
 	    		</div>
     		</a>
     	</div>
-    	<div class="mip-change-boxs">
+    	<div class="boxboxs">
     		<a href="">
 	    		<mip-img layout="responsive" src="https://www.mipengine.org/static/img/sample_01.jpg" alt=""></mip-img>
 	    		<p class="mip-change-page-title">蘭公子卤肉饭</p>
@@ -112,7 +112,7 @@ mip-change-page 左右翻页，实现自动分页功能
 	    		</div>
     		</a>
     	</div>
-    	<div class="mip-change-boxs">
+    	<div class="boxboxs">
     		<a href="">
 	    		<mip-img layout="responsive" src="https://www.mipengine.org/static/img/sample_01.jpg" alt=""></mip-img>
 	    		<p class="mip-change-page-title">蘭公子卤肉饭</p>
@@ -122,7 +122,7 @@ mip-change-page 左右翻页，实现自动分页功能
 	    		</div>
     		</a>
     	</div>
-    	<div class="mip-change-boxs">
+    	<div class="boxboxs">
     		<a href="">
 	    		<mip-img layout="responsive" src="https://www.mipengine.org/static/img/sample_01.jpg" alt=""></mip-img>
 	    		<p class="mip-change-page-title">蘭公子卤肉饭</p>
@@ -132,7 +132,7 @@ mip-change-page 左右翻页，实现自动分页功能
 	    		</div>
     		</a>
     	</div>
-    	<div class="mip-change-boxs">
+    	<div class="boxboxs">
     		<a href="">
 	    		<mip-img layout="responsive" src="https://www.mipengine.org/static/img/sample_01.jpg" alt=""></mip-img>
 	    		<p class="mip-change-page-title">蘭公子卤肉饭</p>
