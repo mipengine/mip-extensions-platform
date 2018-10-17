@@ -8,7 +8,11 @@ define(function (require) {
     var util = require('util');
     var platform = util.platform;
     var customElem = require('customElement').create();
+    var fetchJsonp = require('fetch-jsonp');
 
+    /**
+     * 播放器需要在首屏显示，需要尽快加载
+     */
     customElem.prototype.build = function () {
         // this.element 可取到当前实例对应的 dom 元素
         var $element = $(this.element);
@@ -16,25 +20,57 @@ define(function (require) {
         var adSrcEnd = $element.attr('ad-src-end');
         var targetSrc = $element.attr('target-src');
         var poster = $element.attr('poster');
+        var aliSrc = $element.attr('ali-src');
         // 广告提示的dom
         var domAdTip = document.createElement('div');
         // domAdTip.innerHTML = '广告';
         // domAdTip.className = 'ad-tip';
         // 初始化播放器
         var video = document.createElement('video');
-        var src = (adSrc && !(platform.isIos() && platform.isQQ())) ? adSrc : targetSrc;
-        // 初始化video的属性
-        $(video).attr({
-            id: 'vide',
-            controls: '',
-            src: src,
-            poster: poster,
-            preload: 'no'
-        });
+        var src = adSrc && !(platform.isIos() && platform.isQQ()) ? adSrc : targetSrc;
+        // 根据时长替换视频地址
+        var replaceVideoSrc = function (src) {
+            $(video).attr({
+                id: 'vide',
+                controls: '',
+                src: src,
+                poster: poster,
+                preload: 'no'
+            });
+        };
+
+        video.poster = poster;
+        video.controls = true;
+
+        if (aliSrc) {
+
+            // 根据视频地址获取是否可以正常播放的接口地
+            var videoInterfaceUrl = '//s.cnkang.com/mip/video/check?video_url=' + encodeURIComponent(targetSrc);
+            fetchJsonp(videoInterfaceUrl, {
+                jsonpCallback: 'callback',
+                timeout: 1000
+            }).then(function (res) {
+                return res.json();
+            }).then(function (data) {
+                data = data || {};
+                var code = data.code;
+                var tmpSrc = src;
+                if (code !== 200) {
+                    tmpSrc = aliSrc;
+                }
+                replaceVideoSrc(tmpSrc);
+            }).catch(function () {
+                replaceVideoSrc(aliSrc);
+            });
+        }
+        else {
+            replaceVideoSrc(src);
+        }
+
         //  初始化video的尺寸大小
-        $(video).css('height', window.innerWidth / 16 * 9 + 'px');
+        var height = window.innerWidth / 16 * 9 + 'px';
+        $(video).css('height', height);
         $element[0].appendChild(video);
-        var height = $('#vide').height();
         $('.shipin,.box2,.box3').height(height);
         $('#video').css('height', 'height');
         //  当播放开始的时候设置为自动播放

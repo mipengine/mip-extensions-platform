@@ -16,7 +16,6 @@ define(function (require) {
         var myThis = this.element;
         // 获取元素
         var domBox = myThis.querySelector('#box');
-        var domPage = myThis.querySelector('#page');
         var domList = myThis.querySelector('.list');
         var domBoxboxs = myThis.querySelectorAll('.boxboxs');
 
@@ -129,8 +128,8 @@ define(function (require) {
 
         });
         // 获取上一页和下一页元素
-        var pagePreDom = document.getElementById('pre');
-        var pageNextDom = document.getElementById('next');
+        var pagePreDom = myThis.querySelector('#pre');
+        var pageNextDom = myThis.querySelector('#next');
         // 上一页
         pagePreDom.addEventListener('click', function () {
             // 判断当前元素索引

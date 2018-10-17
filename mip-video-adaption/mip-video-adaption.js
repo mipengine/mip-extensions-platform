@@ -54,8 +54,8 @@ define(function (require) {
             url: src,
             dataType: 'json',
             success: function (reponse) {
-                $('.videoiframe')[0].style.height = reponse.height + 'px';
-                $('.videoiframe')[0].style.width = reponse.width + 'px';
+                $('.videoiframe').css('width', reponse.width + 'px');
+                $('.videoiframe').css('height', reponse.height + 'px');
             },
             error: function (xhr, type) {
                 alert('请求出错，请检测src问题');

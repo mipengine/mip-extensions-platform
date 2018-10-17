@@ -1,7 +1,7 @@
 {
     "name": "mip-append-video",
-    "version": "1.0.1",
-    "description": "实现了一个简单的广告（非必填）+视频的播放",
+    "version": "1.0.2",
+    "description": "增加判断视频是否可以播放的接口",
     "contributors": [
         {
             "name": "shaoshilei",

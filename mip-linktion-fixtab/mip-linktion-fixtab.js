@@ -16,7 +16,7 @@ define(function (require) {
         var $el = $(this.element);
         var tabTop = $el.find('mip-vd-tabs').offset().top - 138;
         var consultTop = $el.find('.phone-console-box').offset().top;
-        var tabWidth = $el.find('.tab-content').width();
+        var tabWidth = $('body').width();
         window.onscroll = function () {
             var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
             if (scrollTop > tabTop) {

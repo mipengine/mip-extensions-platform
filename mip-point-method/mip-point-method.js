@@ -13,10 +13,10 @@ define(function (require) {
     // 展开回复
     function replyclick(obj, num) {
         if (gt(obj + num).style.display === 'none') {
-            gt(obj + num).style.display = 'block';
+            gt(obj + num).style.display = 'none';
         }
         else {
-            gt(obj + num).style.display = 'none';
+            gt(obj + num).style.display = 'block';
         }
     }
     // 顶

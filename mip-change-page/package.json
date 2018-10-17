@@ -1,6 +1,6 @@
 {
     "name": "mip-change-page",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "左右翻页，实现自动分页功能",
     "contributors": [
         {

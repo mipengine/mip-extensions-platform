@@ -12,6 +12,25 @@ mip-append-video 实现了一个简单的广告（非必填）+视频的播放�
 
 ### 带广告的播放
 ```html
+<mip-append-video ad-src=""
+    ad-src-end=""
+    ali-src="https://yl.vodjk.com/58a04ffb12164a08b6484d6a7b54ad6f/c0234831b0204c0ab7edabe8e4e3467a-7c7fe6b2471397cf830fba13f4002e77-sd.mp4?"
+    poster="http://file.youlai.cn/cnkfile1/M00/00/0E/ooYBAFdfLiGAKRKPAAFPJnnRsBs14.jpeg"
+    target-src="https://gslb.miaopai.com/stream/VWrquhaYXmFpOjOQ~AvWjs170Rx-h8Qa5y8zNQ__.mp4"></mip-append-video>
+
+<mip-append-video target-src="https://yl.vodjk.com/58a04ffb12164a08b6484d6a7b54ad6f/c0234831b0204c0ab7edabe8e4e3467a
+-7c7fe6b2471397cf830fba13f4002e77-sd.mp4"  poster="http://file.youlai.cn/cnkfile1/M00/00/0E/ooYBAFdfLiGAKRKPAAFPJnnRsBs14.jpeg"></mip-append-video>
+
+<mip-append-video ali-src="https://gslb.miaopai.com/stream/2RQ36IIawq1cuDiHcNrufz~JJDySbiZFa791Tg__.mp4" target-src="https://gslb.miaopai.com/stream/NEgz0wuPIu-XfDhGx6uySBIhfS6pGWO9P7XIKw__.mp4"  
+poster="http://file.youlai.cn/cnkfile1/M00/00/0E/ooYBAFdfLiGAKRKPAAFPJnnRsBs14.jpeg">
+
+</mip-append-video>
+<mip-append-video ad-src=""
+    ad-src-end=""
+    ali-src="https://yl.vodjk.com/58a04ffb12164a08b6484d6a7b54ad6f/c0234831b0204c0ab7edabe8e4e3467a-7c7fe6b2471397cf830fba13f4002e77-sd.mp4?"
+    poster="http://file.youlai.cn/cnkfile1/M00/00/0E/ooYBAFdfLiGAKRKPAAFPJnnRsBs14.jpeg"
+    target-src="https://gslb.miaopai.com/stream/VWrquhaYXmFpOjOQ~AvWjs170Rx-h8Qa5y8zNQ__.mp4"></mip-append-video>
+
 <div class="shipin">
 <mip-append-video id="video" ad-src=""
     ad-src-end=""
