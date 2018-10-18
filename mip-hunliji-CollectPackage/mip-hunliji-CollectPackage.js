@@ -60,6 +60,12 @@ define(function (require) {
         var packageid = $(element).attr('package-id');
         var type = $(element).attr('data-type');
         var divid = $('#collect_openbox');
+
+        this.addEventAction('customLogin', function (e) {
+            if (e.origin === 'asynLog') {
+                postPackage(element, divid, api, packageid, type);
+            }
+        });
         $(element).find('#btn_collect').on('click', function (e) {
             var info = JSON.parse($(element).attr('info'));
 
@@ -69,7 +75,7 @@ define(function (require) {
                 sessionId = info.sessionId;
                 postPackage(element, divid, api, packageid, type);
             } else {
-                viewer.eventAction.execute('login', e.target, e);
+                viewer.eventAction.execute('actionCollect', e.target, e);
             }
         });
     };

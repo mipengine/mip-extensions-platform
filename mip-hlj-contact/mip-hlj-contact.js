@@ -13,12 +13,17 @@ define(function (require) {
         var element = this.element;
         var url = element.dataset.href;
 
+        this.addEventAction('contactCustomLogin', function (e) {
+            if (e.origin === 'asynLogContact') {
+                window.top.location.href = url;
+            }
+        });
         $(element).find('a').on('click', function (e) {
             e.preventDefault();
             e.stopPropagation();
             var info = JSON.parse($(element).attr('info'));
             if (!info.isLogin) {
-                viewer.eventAction.execute('login', e.target, e);
+                viewer.eventAction.execute('actionContact', e.target, e);
                 return;
             }
             window.top.location.href = url;

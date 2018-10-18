@@ -13,10 +13,10 @@ define(function (require) {
     // 展开回复
     function replyclick(obj, num) {
         if (gt(obj + num).style.display === 'none') {
-            gt(obj + num).style.display = 'none';
+            gt(obj + num).style.display = 'block';
         }
         else {
-            gt(obj + num).style.display = 'block';
+            gt(obj + num).style.display = 'none';
         }
     }
     // 顶
@@ -49,6 +49,7 @@ define(function (require) {
             return;
         }
         var par = parameter.split(',');
+        replyclick(par[0], par[1] ? par[1] : '');
         element.addEventListener('click', function () {
             if (code === 'replyclick') {
                 replyclick(par[0], par[1] ? par[1] : '');

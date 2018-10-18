@@ -22,22 +22,22 @@ define(function (require) {
             if (scrollTop > tabTop) {
                 if ($(window).width() < 769) {
                     $el.find('.mip-vd-tabs-nav').css({'position': 'fixed', 'top': '138px', 'width':
-                        + tabWidth, 'z-index': '1', 'left': '0'});
+                        + tabWidth, 'z-index': '2', 'left': '0'});
                 } else {
                     $el.find('.mip-vd-tabs-nav').css({'position': 'fixed', 'top': '96px', 'width':
-                        + tabWidth, 'z-index': '1'});
+                        + tabWidth, 'z-index': '2'});
                 }
             } else if (scrollTop < tabTop) {
                 $el.find('.mip-vd-tabs-nav').css({'position': 'relative', 'top': 'auto', 'width':
-                    + tabWidth, 'z-index': '1'});
+                    + tabWidth, 'z-index': '2'});
             }
             if ($(window).width() < 769) {
                 if (scrollTop > tabTop) {
                     $el.find('.phone-console-box').css({'position': 'fixed', 'top': '0', 'width':
-                        + tabWidth, 'z-index': '1', 'left': '0'});
+                        + tabWidth, 'z-index': '2', 'left': '0'});
                 } else if (scrollTop < tabTop) {
                     $el.find('.phone-console-box').css({'position': 'relative', 'top': 'auto', 'width':
-                        + tabWidth, 'z-index': '1'});
+                        + tabWidth, 'z-index': '2'});
                 }
             }
 

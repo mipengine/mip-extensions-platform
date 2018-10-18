@@ -87,6 +87,8 @@ define(function (require) {
         var type = $(element).attr('data-type');
         var apiurl = $(element).attr('data-url');
         var merchantid = $(element).attr('data-id');
+        var info = JSON.parse($(element).attr('info'));
+        var clickToken = $(element).attr('mip-click-token');
         var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
 
         var script = element.querySelector('script[type="application/json"]');
@@ -95,16 +97,19 @@ define(function (require) {
             var customParams = JSON.parse(script.textContent.toString());
             params = util.fn.extend(params, customParams);
         }
-
-        $(element).on('click', '.open_box_submit', function (event) {
-            var info = JSON.parse($(element).attr('info'));
-            var clickToken = $(element).attr('mip-click-token');
-
-            if (!info.isLogin) {
-                viewer.eventAction.execute('login', event.target, event);
-                return;
+        this.addEventAction('submitdateCustomLogin', function (e) {
+            if (e.origin === 'actionSubmitdate') {
+                validateSub(info, clickToken);
             }
+        });
+        $(element).on('click', '.open_box_submit', function (event) {
+            if (!info.isLogin) {
+                viewer.eventAction.execute('actionSubmitdate', event.target, event);
+            }
+            validateSub(info, clickToken);
+        });
 
+        function validateSub(info, clickToken) {
             if (type === 'package') {
                 var name = $(element).find('.mipfrom input').eq(0).val();
                 var phone = $(element).find('.mipfrom input').eq(1).val();
@@ -135,7 +140,7 @@ define(function (require) {
                     sethotel(element, apiurl, city, time, phone, event, params, info.sessionId, clickToken);
                 }
             }
-        });
+        }
     };
 
     return customElement;

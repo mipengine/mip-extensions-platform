@@ -1,0 +1,14 @@
+{
+    "name": "mip-mfk-if",
+    "version": "1.0.0",
+    "description": "江苏民福康,模块判断组件",
+    "contributors": [
+        {
+            "name": "张小龙",
+            "email": "864855920@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
