@@ -1,0 +1,15 @@
+{
+    "name": "mip-hao315-rem",
+    "version": "1.0.0",
+    "description": "用来支持 MIP 页面使用rem单位布局",
+    "author":"hYanDou",
+    "contributors": [
+        {
+            "name": "mip-hao315-rem",
+            "email": "591160982@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

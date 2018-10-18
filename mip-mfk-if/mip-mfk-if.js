@@ -1,6 +1,6 @@
 /**
  * @file mip-mfk-if 组件
- * @author 小龙
+ * @author
  */
 
 define(function (require) {

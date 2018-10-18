@@ -22,6 +22,9 @@ mip-point-method 组件说明
 <mip-point-method data-code="reloadImgCode" data-parameter="img,/xxx.php?xx=,IMGid">回复</mip-point-method>
 验证码刷新，参数1 输入验证码的input框，参数2 验证码更新的src地址，参数3 区分验证码避免冲突，参数4 验证码的id
 <mip-point-method data-code="reloadImgCodes" data-parameter="img,/xxx.php?xx=,4,IMGid">回复</mip-point-method>
+图片垂直居中，参数1 图片地址，参数2 元素id，参数3 元素可见高度[通过id获取]
+<mip-point-method data-code="changeTops" data-parameter="http://xxx.xxx.xx.x.jpg,img,ui-info"></mip-point-method>
+<div id="ui-info"></div>
 <input id="img" value="">
 <img id="IMGid" />
 ### 基本用法
@@ -36,7 +39,7 @@ mip-point-method 组件说明
 ### replyclick
 
 说明：点击展开或者隐藏
-必选项：parameter不能为空
+必选项：data-code,parameter不能为空
 类型：text
 取值范围：a-zA-Z0-9
 单位：无
@@ -45,7 +48,7 @@ mip-point-method 组件说明
 ### dingcomment
 
 说明：点赞功能
-必选项：parameter不能为空
+必选项：data-code,parameter不能为空
 类型：text
 取值范围：a-zA-Z0-9
 单位：无
@@ -54,7 +57,7 @@ mip-point-method 组件说明
 ### reloadImgCode
 
 说明：验证码刷新
-必选项：parameter不能为空
+必选项：data-code,parameter不能为空
 类型：text
 取值范围：a-zA-Z0-9
 单位：无
@@ -63,11 +66,20 @@ mip-point-method 组件说明
 ### reloadImgCodes
 
 说明：验证码区分刷新
-必选项：parameter不能为空
+必选项：data-code,parameter不能为空
 类型：text
 取值范围：a-zA-Z0-9
 单位：无
 默认值：无
+
+### changeTops
+
+说明：图片垂直居中
+必选项：data-code,parameter不能为空
+类型：text
+取值范围：a-zA-Z0-9
+单位：无
+默认值：300*200
 
 ## 注意事项
 

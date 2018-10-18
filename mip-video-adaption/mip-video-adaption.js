@@ -5,11 +5,10 @@
 
 define(function (require) {
     var customElement = require('customElement').create();
-    var W = document.documentElement.clientWidth;
-
+    var W = document.documentElement.clientWidth || document.body.clientWidth || window.innerWidth;
     function record(adaption) {
         var height = $(document.getElementsByClassName(adaption))[0][0].style.height;
-        if (W >= '320' && W <= '374') {
+        if (W >= '320' && W <= '374' || W <= '320') {
             height = '245';
         }
         else if (W >= '375' && W <= '424') {

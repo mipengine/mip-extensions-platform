@@ -1,0 +1,14 @@
+{
+    "name": "mip-jbaobao-count",
+    "version": "1.0.0",
+    "description": "用作精确统计文章阅读的组件",
+    "contributors": [
+        {
+            "name": "Jbbauthor",
+            "email": "constus@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

@@ -39,17 +39,53 @@ define(function (require) {
             img.setAttribute('src', src + Math.random());
         }
     }
+    // 图片自适应屏高距离垂直居中
+    function changeTops(href, imgName, offinfo) {
+        var img = new Image();
+        img.src = href;
+        var iw = img.width;
+        var ih = img.height;
+        var wh = document.documentElement.clientHeight || document.body.clientHeight || window.innerHeight;
+        var ww = document.documentElement.clientWidth || document.body.clientWidth || window.innerWidth;
+        var fw = ww / iw;
+        var fh = wh / ih;
+        var W;
+        var H;
+        var th =  document.getElementById(offinfo).offsetHeight;
+        if (iw === 0) {
+            W = 0.3333333333333333 * 960;
+            H = 0.3333333333333333 * 600;
+        }
+        else {
+            if (fw < fh) {
+                W = fw * iw;
+                H = fw * ih;
+            }
+            else {
+                W = fh * iw;
+                H = fh * ih;
+            }
+        }
+        $('#' + imgName).css({width: W, height: H});
+        var L = wh - H;
+        $('#' + imgName).css('margin-top', ((L - th) / 2) + 'px');
+    }
     customElement.prototype.firstInviewCallback = function () {
         var self = this;
         var element = self.element;
         var code = element.getAttribute('data-code') || '';
         var parameter = element.getAttribute('data-parameter') || '';
-        if (!parameter) {
+        if (!parameter && !code) {
             alert('请仔细阅读文档说明再使用，避免参数填写错误，导致效果不佳');
             return;
         }
         var par = parameter.split(',');
-        replyclick(par[0], par[1] ? par[1] : '');
+        if (code === 'replyclick') {
+            replyclick(par[0], par[1] ? par[1] : '');
+        }
+        if (code === 'changeTops') {
+            changeTops(par[0], par[1], par[2]);
+        }
         element.addEventListener('click', function () {
             if (code === 'replyclick') {
                 replyclick(par[0], par[1] ? par[1] : '');

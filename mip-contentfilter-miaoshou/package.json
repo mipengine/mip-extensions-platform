@@ -1,0 +1,14 @@
+{
+    "name": "mip-contentfilter-miaoshou",
+    "version": "1.0.0",
+    "description": "妙手医生MIP详情页过滤正文空p标签",
+    "contributors": [
+        {
+            "name": "niewei",
+            "email": "qf_niewei@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
