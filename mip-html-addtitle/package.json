@@ -1,0 +1,14 @@
+{
+    "name": "mip-html-addtitle",
+    "version": "1.0.0",
+    "description": "判断div下面有无内容",
+    "contributors": [
+        {
+            "name": "dgm",
+            "email": "1028212667@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

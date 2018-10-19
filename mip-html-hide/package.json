@@ -1,0 +1,14 @@
+{
+    "name": "mip-html-hide",
+    "version": "1.0.0",
+    "description": "判断无内容隐藏",
+    "contributors": [
+        {
+            "name": "dgm",
+            "email": "1028212667@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

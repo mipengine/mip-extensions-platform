@@ -78,7 +78,7 @@ define(function (require) {
             else if (pass === 'remove') {
                 setTimeout(function () {
                     element.parentNode.removeChild(element);
-                }, 100);
+                }, 1000);
             }
         }
 
