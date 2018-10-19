@@ -1,0 +1,14 @@
+{
+    "name": "mip-666-addclass",
+    "version": "1.0.0",
+    "description": "list 插件，给选中项加个样式 class（为了一个click事件，我居然要写一个组件）。",
+    "contributors": [
+        {
+            "name": "pzq",
+            "email": "1802110227@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

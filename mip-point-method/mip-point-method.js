@@ -99,6 +99,9 @@ define(function (require) {
             else if (code === 'reloadImgCodes') {
                 reloadImgCodes(par[0], par[1], par[2], par[3]);
             }
+            else if (code === 'changeTops') {
+                changeTops(par[0], par[1], par[2]);
+            }
             else {
                 return alert('暂无组件函数，需新增……');
             }
