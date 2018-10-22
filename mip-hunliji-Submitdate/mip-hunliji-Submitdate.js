@@ -87,22 +87,23 @@ define(function (require) {
         var type = $(element).attr('data-type');
         var apiurl = $(element).attr('data-url');
         var merchantid = $(element).attr('data-id');
-        var info = JSON.parse($(element).attr('info'));
         var clickToken = $(element).attr('mip-click-token');
         var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
-
+        var info;
         var script = element.querySelector('script[type="application/json"]');
         var params = {};
         if (script) {
             var customParams = JSON.parse(script.textContent.toString());
             params = util.fn.extend(params, customParams);
         }
+
         this.addEventAction('submitdateCustomLogin', function (e) {
             if (e.origin === 'actionSubmitdate') {
                 validateSub(info, clickToken);
             }
         });
         $(element).on('click', '.open_box_submit', function (event) {
+            info = JSON.parse($(element).attr('info'));
             if (!info.isLogin) {
                 viewer.eventAction.execute('actionSubmitdate', event.target, event);
             }
