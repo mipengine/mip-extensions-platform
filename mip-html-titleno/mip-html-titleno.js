@@ -5,13 +5,16 @@
  */
 define(function (require) {
     var $ = require('zepto');
+    var util = require('util');
+    var platform = util.platform;
     var customElement = require('customElement').create();
     customElement.prototype.firstInviewCallback = function () {
-        var util = require('util');
-        var platform = util.platform;
+        titleno();
+    };
+    function titleno() {
         var ele = this.element;
-        var azid = $(ele).find('.f-tags-box .f-tags-android li').length;
-        var iosid = $(ele).find('.f-tags-box .f-tags-ios li').length;
+        var azid = $('.f-tags-box .f-tags-android li').length;
+        var iosid = $('.f-tags-box .f-tags-ios li').length;
         if (platform.isIos()) {
             if (iosid <= 0) {
                 $('.f-xgbb').hide();
@@ -21,6 +24,6 @@ define(function (require) {
                 $('.f-xgbb').hide();
             }
         }
-    };
+    }
     return customElement;
 });

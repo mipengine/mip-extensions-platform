@@ -16,6 +16,8 @@ define(function (require) {
         var toast = require('./toast');
         var auto = $ele.attr('auto') || 0;
         var doctorId = $ele.attr('doctor-id') || '';
+        var $dialogTxt = $('.j-follow-dialog-txt');
+        var $dialogWxcode = $('.j-follow-dialog-wxcode');
 
         // 关注或取消关注医生
         if (auto !== '0') {
@@ -69,6 +71,19 @@ define(function (require) {
                     $ele.removeClass('mip-cy-follow-doctor');
                     $ele.addClass('mip-cy-followed-doctor');
                     xzSubscribe();
+
+                    var doctorName = $dialogTxt.data('doctor-name');
+                    if (json.coupon_rate > 0) {
+                        //  有折扣
+                        $dialogTxt.text('您已成功关注' + doctorName + '医生，医生赠送了一张问诊优惠券给您，咨询可享' + json.coupon_rate * 10
+                            + '折优惠，为防止失效，请尽快使用微信扫描下方二维码领取（截图或长按图片保存二维码）。');
+                    } else {
+                        // 无折扣
+                        $dialogTxt.text('您已成功关注' + doctorName + '医生，请微信扫描下方二维码添加医生至微信，方便之后随时咨询（截图或长按图片保存二维码）。');
+                    }
+
+                    // 医生二维码or折扣二维码
+                    $dialogWxcode.attr('src', json.qr_img || 'https://static.chunyuyisheng.com/@/media/images/2018/01/17/_inedx');
                 },
                 error: function () {
                     $ele.removeClass('disabled');
