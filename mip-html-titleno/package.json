@@ -1,0 +1,14 @@
+{
+    "name": "mip-html-titleno",
+    "version": "1.0.2",
+    "description": "根据设备判断指定ul li下面有无内容隐藏title",
+    "contributors": [
+        {
+            "name": "dgm",
+            "email": "1028212667@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

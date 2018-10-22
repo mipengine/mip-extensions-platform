@@ -17,6 +17,8 @@ mip-point-method 组件说明
 点赞功能，parameter参数1是入口文件，参数2是id值，参数3是控制器，参数4是方法，参数5是id名称
 示例：/index.php?m=ask&a=comment&id=2
 <mip-point-method data-code="dingcomment" data-parameter="index,2,ask,comment,div">点赞</mip-point-method>
+根据分类type类型1或者2点赞，参数1 入口文件，参数2 id值，参数3 type类型[ 只能是1或者2 ]，参数4 控制器，参数5 方法，参数6 id名称（显示的地方） 
+<mip-point-method data-code="supportComment" data-parameter="index,2,1,ask,testcode,id_key,div"></mip-point-method>
 <div id="div2"></div>
 验证码刷新，参数1 输入验证码的input框，参数2 验证码更新的src地址，参数3 验证码的id
 <mip-point-method data-code="reloadImgCode" data-parameter="img,/xxx.php?xx=,IMGid">回复</mip-point-method>
@@ -48,6 +50,15 @@ mip-point-method 组件说明
 ### dingcomment
 
 说明：点赞功能
+必选项：data-code,parameter不能为空
+类型：text
+取值范围：a-zA-Z0-9
+单位：无
+默认值：无
+
+### supportComment
+
+说明：类型点赞功能
 必选项：data-code,parameter不能为空
 类型：text
 取值范围：a-zA-Z0-9

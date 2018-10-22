@@ -1,7 +1,7 @@
 {
     "name": "mip-point-method",
-    "version": "1.0.5",
-    "description": "点赞功能，显示隐藏功能，刷新验证码功能，图片垂直居中",
+    "version": "1.0.6",
+    "description": "点赞功能（类型点赞功能），显示隐藏功能，刷新验证码功能，图片垂直居中",
     "contributors": [
         {
             "name": "MIP point-method",

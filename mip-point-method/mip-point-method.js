@@ -25,6 +25,17 @@ define(function (require) {
         var htmlobj = $.ajax({url: p, async: false});
         $('#' + idname + str).html($.trim(htmlobj.responseText));
     }
+    // 评论顶
+    function supportComment(i, s, t, c, f, n) {
+        var p = '/' + i + '.php?m=' + c + '&a=' + f + '&pinglun_id=' + s + '&type=' + t + '&now=' + Math.random();
+        var htmlobj = $.ajax({url: p, async: false});
+        if (t === 1) {
+            $('#' + n + s).html($.trim(htmlobj.responseText));
+        }
+        else {
+            $('#' + n + s).html($.trim(htmlobj.responseText));
+        }
+    }
     // 验证码刷新
     function reloadImgCode(name, src, imgcode) {
         if ($('#' + name).length) {
@@ -101,6 +112,9 @@ define(function (require) {
             }
             else if (code === 'changeTops') {
                 changeTops(par[0], par[1], par[2]);
+            }
+            else if (code === 'supportComment') {
+                supportComment(par[0], par[1], par[2], par[3], par[4], par[5]);
             }
             else {
                 return alert('暂无组件函数，需新增……');
