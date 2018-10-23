@@ -26,7 +26,7 @@ define(function (require) {
         var sessionId = 0;
         var MIP = window.MIP;
         var clicksstart = true;
-
+        var thisurls = window.location.href;
         //      setTimeout(function () {
         //          sessionId = $el.find('#sesiid').html();
         //          console.log(sessionId);
@@ -58,7 +58,7 @@ define(function (require) {
             }
         }
         returhostname();
-        console.log(hosturl);
+        //      console.log(hosturl);
         function locahost(topsurl, toptitle) {
 
             if (topsurl === './') {
@@ -84,7 +84,7 @@ define(function (require) {
         }
         var isloginf = false;
         this.addEventAction('login', function (event) {
-            console.log('授权成功');
+            //          console.log('授权成功');
             var sessid = event.sessionId;
             var islogin = parseInt(event.userInfo.isLogin, 10);
             if (!islogin) { // 未注册
@@ -94,7 +94,7 @@ define(function (require) {
                 locahost(tzurl, '准备咨询');
             }
             else {
-                console.log('登录成功');
+                //              console.log('登录成功');
                 sessionId = sessid;
                 isloginf = true;
                 var sesidtypes = localStorage.getItem('baiduquestionType');
@@ -108,7 +108,7 @@ define(function (require) {
         });
 
         this.addEventAction('error', function (event) {
-            console.log('登录错误');
+            //          console.log('登录错误');
         });
 
         setTimeout(function () {
@@ -206,7 +206,7 @@ define(function (require) {
                         },
                         async: false,
                         success: function (data) {
-                            console.log('是否合并支付单号：' + data);
+                            //                          console.log('是否合并支付单号：' + data);
                             var urls = 'mipilaw66baidu_couponPay?requestId='
                                 + data + '&questionType=' + b.questionType + '&sessionId=' + sessionId;
                             locahost(urls, '支付详情');
@@ -221,20 +221,21 @@ define(function (require) {
 
         $el.find('.tab-content__close').click(function () {
             $(this).parent().parent().removeClass().addClass('tab-pane');
-        });
-
-        $el.find('.consulting').click(function () {
-            var questionType = $(this).data('type');
-            localStorage.setItem('baiduquestionType', questionType);
-
-            if (sessionId !== 0) {
-                startConsulting(questionType);
-            }
-            else {
-                window.location.reload();
+            if (localStorage.getItem('baiduquestionType')) {
+                localStorage.removeItem('baiduquestionType');
             }
 
         });
+
+        //      $el.find('.consulting').click(function () {
+        //          var questionType = $(this).data('type');
+        //          localStorage.setItem('baiduquestionType', questionType);
+        //          statistics(8, thisurls, questionType);
+        //          if (sessionId !== 0) {
+        //              startConsulting(questionType);
+        //          }
+        //
+        //      });
 
         $el.find('.link_confirm').click(function (event) {
             //          $el.find('.popUp_sysErr').hide();
@@ -312,7 +313,7 @@ define(function (require) {
                     /*slogon部位内容end*/
                 },
                 error: function (a) {
-                    console.log('获取访问人数：' + a.countAll);
+                    //                  console.log('获取访问人数：' + a.countAll);
                 }
             });
         }
@@ -322,7 +323,7 @@ define(function (require) {
             url: hosturl + 'getPrice?channel=' + $el.find('#channel').val() + '&sessionId=' + sessionId,
             type: 'GET',
             success: function (data) {
-                console.log(data);
+                //              console.log(data);
                 if (data.code === 200) {
                     $el.find('.indexPrice').text(data.result);
                     sessionStorage.setItem('productPrice', data.result);
@@ -338,16 +339,26 @@ define(function (require) {
         });
         //
         var agreeImgSrc = $el.find('.radio-rule').find('img').attr('src');
-
+        // alert("F")
         $el.find('.tab-content__close').on('click', function () {
             $(this).parent().parent().removeClass().addClass('tab-pane');
             flg = 0;
         });
         $el.find('.media').on('click', function (event) {
-            console.log($(this).data('href'));
+            //          console.log($(this).data('href'));
             tabHref = $(this).data('href');
-            $el.find('#' + $(this).data('href')).removeClass().addClass('tab-pane active');
+            var questionTypes = $(this).data('type');
+
+            //          statistics(2, thisurls, questionTypes);
+            localStorage.setItem('baiduquestionType', questionTypes);
+            //          $el.find('#' + $(this).data('href')).removeClass().addClass('tab-pane active');
+            statistics(8, thisurls, questionTypes);
+            if (sessionId !== 0) {
+                startConsulting(questionTypes);
+            }
+
             flg = 1;
+
             event.preventDefault();
         });
 
@@ -483,7 +494,7 @@ define(function (require) {
                 type: 'GET',
                 url: hosturl + 'reservation/findRequestReservationByUserId?sessionId=' + sessionId,
                 success: function (data) {
-                    console.log(data);
+                    //                  console.log(data);
                     if (data.info) {
                         var myreservationurl = 'mipilaw66baidu_myreservation?sessionId=' + sessionId;
                         locahost(myreservationurl, '我的预约');
@@ -495,6 +506,26 @@ define(function (require) {
                 error: function (a) {
                     alert('系统异常，请稍后再试');
                     window.location.reload();
+                }
+            });
+        }
+
+        function statistics(userTrack, entrance, description) {
+            var datas = {};
+            datas.userTrack = userTrack;
+            datas.entrance = entrance;
+            datas.description = description;
+            datas.channel = 'baidusearch';
+            datas._csrf = $el.find('#_csrf').val();
+            $.ajax({
+                type: 'post',
+                url: hosturl + 'addUserTrack',
+                data: datas,
+                success: function (data) {
+                    //                  console.log(data);
+                },
+                error: function (a) {
+                    //                  window.location.reload();
                 }
             });
         }
@@ -656,7 +687,7 @@ define(function (require) {
                     + continueAskPage + '&sessionId=' + sessionId,
                 dataType: 'json',
                 success: function (data) {
-                    console.log('继续问2', data);
+                    //                  console.log('继续问2', data);
                     $el.find('.loadingArea').hide();
                     var id = data.data;
                     var state = data.state;

@@ -1,0 +1,14 @@
+{
+    "name": "mip-connect",
+    "version": "1.0.0",
+    "description": "锚链接",
+    "contributors": [
+        {
+            "name": "liuqiang",
+            "email": "18366971514@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
