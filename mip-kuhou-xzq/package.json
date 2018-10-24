@@ -1,0 +1,14 @@
+{
+    "name": "mip-kuhou-xzq",
+    "version": "1.0.0",
+    "description": "切换不同的下载按钮",
+    "contributors": [
+        {
+            "name": "ruizai324",
+            "email": "435529564@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "name": "mip-zxz-rem",
+    "version": "1.0.0",
+    "description": "移动端rem计算，完成页面的适配",
+    "contributors": [
+        {
+            "name": "rem",
+            "email": "981952053@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
