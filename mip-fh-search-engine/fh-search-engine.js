@@ -6,7 +6,7 @@
  */
 
 define(function () {
-    var urlReferrer = window.top.document.referrer;
+    var urlReferrer = window.top.document.referrer || window.location.href;
     var module = {};
     module.google = ((function () {
         return /\.google\./i.test(urlReferrer);
