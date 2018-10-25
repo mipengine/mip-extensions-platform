@@ -39,6 +39,8 @@ define(function (require) {
             sessionStorage.clear('ishomeorder');
         }
 
+        var isloginpage = sessionStorage.getItem('taplogin') ? sessionStorage.getItem('taplogin') : 0;
+
         var hosturl = 'https://www.ilaw66.com/jasmine/';
         function returhostname() {
             var hostweb = location.protocol;
@@ -84,19 +86,26 @@ define(function (require) {
         }
         var isloginf = false;
         this.addEventAction('login', function (event) {
-            //          console.log('授权成功');
             var sessid = event.sessionId;
             var islogin = parseInt(event.userInfo.isLogin, 10);
             if (!islogin) { // 未注册
-                var qusttype = localStorage.getItem('baiduquestionType');
-                var tzurl = 'mipilaw66baidu_login?channel=baidusearch&sessionId='
-                    + sessid + '&questionType=' + qusttype;
-                locahost(tzurl, '准备咨询');
+
+                if (isloginpage === 0) {
+                    var qusttype = localStorage.getItem('baiduquestionType');
+                    var tzurl = 'mipilaw66baidu_login?channel=baidusearch&sessionId='
+                        + sessid + '&questionType=' + qusttype;
+                    locahost(tzurl, '准备咨询');
+                }
             }
             else {
                 //              console.log('登录成功');
                 sessionId = sessid;
                 isloginf = true;
+                isloginpage = 0;
+                if (sessionStorage.getItem('taplogin')) {
+                    sessionStorage.removeItem('taplogin');
+                }
+
                 var sesidtypes = localStorage.getItem('baiduquestionType');
                 if (sesidtypes) {
                     localStorage.removeItem('baiduquestionType');
@@ -339,20 +348,24 @@ define(function (require) {
         });
         //
         var agreeImgSrc = $el.find('.radio-rule').find('img').attr('src');
-        // alert("F")
         $el.find('.tab-content__close').on('click', function () {
             $(this).parent().parent().removeClass().addClass('tab-pane');
             flg = 0;
         });
+
         $el.find('.media').on('click', function (event) {
-            //          console.log($(this).data('href'));
             tabHref = $(this).data('href');
             var questionTypes = $(this).data('type');
 
-            //          statistics(2, thisurls, questionTypes);
             localStorage.setItem('baiduquestionType', questionTypes);
             //          $el.find('#' + $(this).data('href')).removeClass().addClass('tab-pane active');
             statistics(8, thisurls, questionTypes);
+            if (isloginpage) {
+                var tzurl = 'mipilaw66baidu_login?channel=baidusearch&sessionId='
+                    + sessionId + '&questionType=' + questionTypes;
+                locahost(tzurl, '准备咨询');
+            }
+
             if (sessionId !== 0) {
                 startConsulting(questionTypes);
             }

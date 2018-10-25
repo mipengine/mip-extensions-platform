@@ -1,0 +1,14 @@
+{
+    "name": "mip-haitweet-template-list",
+    "version": "1.0.0",
+    "description": "Haitweet 模板加载列表",
+    "contributors": [
+        {
+            "name": "haitweet-template-list",
+            "email": "guocailee@gmail.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

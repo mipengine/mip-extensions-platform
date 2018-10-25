@@ -80,6 +80,7 @@ define(function (require) {
                 location.assign(topurl);
             }
         }
+        sessionStorage.setItem('taplogin', 1);
 
         var mipsesid = 'mip-login-xzh:sessionId:' + hosturl + 'baidusearch/authorize2';
         sessionId = localStorage.getItem(mipsesid);
@@ -98,10 +99,10 @@ define(function (require) {
                 userId = true;
             }
         });
-        //      alert(sessionId)
-        //      localStorage.setItem(mipsesid, data.sessionId);
+        this.addEventAction('error', function (event) {
+            console.log('登录错误');
+        });
 
-        //      console.log(hosturl);
         setTimeout(function () {
             $el.find('.loading_pop').hide();
         }, 2000);
@@ -664,6 +665,10 @@ define(function (require) {
                     url: hosturl + 'baidusearch/login?username=' + phone + '&channel='
                         + channel + '&password=' + smsCode + '&sessionId=' + sessionId,
                     success: function (data) {
+                        if (sessionStorage.getItem('taplogin')) {
+                            sessionStorage.removeItem('taplogin');
+                        }
+
                         if (data.status === 0 && data.data.isLogin === '1') {
                             var sesidtypes = localStorage.getItem('baiduquestionType');
                             //                          console.log(sesidtypes);

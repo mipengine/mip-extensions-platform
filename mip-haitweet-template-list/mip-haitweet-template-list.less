@@ -1,0 +1,26 @@
+/**
+ * @file mip-haitweet-template-list样式文件
+ */
+@primary: #f6693a;
+mip-haitweet-template-list {
+    // TODO
+    mip-fill-content {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        .item {
+            background: #fff;
+            text-align: center;
+            vertical-align: middle;
+            color: @primary;
+            width: 25%;
+            min-height: 90px;
+            border-radius: 3px;
+            &.active,
+            &:hover {
+                color: #fff;
+                background: @primary;
+            }
+        }
+    }
+}
