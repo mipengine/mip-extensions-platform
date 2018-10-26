@@ -38,6 +38,8 @@ define(function (require) {
                 preload: 'no'
             });
         };
+        // 是否已经获取推荐视频开关
+        var isHasGetVideoOnEnd = false;
 
         video.poster = poster;
         video.controls = true;
@@ -66,6 +68,58 @@ define(function (require) {
         else {
             replaceVideoSrc(src);
         }
+        // 视频播放中获取推荐列表
+        var getVideoOnEnd = function () {
+            var constant = $('.changliang').html();
+            var constant1 = $('.changliang1').html();
+            $.ajax({
+                url: 'https://m.youlai.cn/mapi/gInfo?did=' + constant + '&aid=' + constant1 + '&callback=adsf',
+                dataType: 'jsonp',
+                data: '',
+                jsonp: 'callback',
+                success: function (data) {
+                    isHasGetVideoOnEnd = true;
+                    if (!data) {
+                        $('.box2, .box3').css('display', 'none');
+                        $('.play').css('display', 'none');
+                    }
+                    if (data.length === 2) {
+                        $('.neirong a').eq(0).text(data[0].title);
+                        $('.gaodu').eq(0).attr('src', data[0].litpic);
+                        $('.pic img').eq(0).attr('src', data[0].litpic);
+                        $('.neirong a').eq(1).text(data[1].title);
+                        $('.gaodu').eq(1).attr('src', data[1].litpic);
+                        $('.pic img').eq(1).attr('src', data[1].litpic);
+                        $('.pic').eq(0).attr('href', 'https://m.youlai.cn/video/mip/' + data[0].id + '.html');
+                        $('.pic').eq(1).attr('href', 'https://m.youlai.cn/video/mip/' + data[1].id + '.html');
+                        $('.neirong a').eq(0).attr('href', 'https://m.youlai.cn/video/mip/' + data[0].id + '.html');
+                        $('.neirong a').eq(1).attr('href', 'https://m.youlai.cn/video/mip/' + data[1].id + '.html');
+                    }
+                    if (data.length === 1) {
+                        $('.juli').addClass('hide');
+                        $('.pic,.neirong a').css('margin-left', '26%');
+                        $('.neirong a').eq(0).text(data[0].title);
+                        $('.gaodu').eq(0).attr('src', data[0].litpic);
+                        $('.pic img').eq(0).attr('src', data[0].litpic);
+                        $('.pic').eq(0).attr('href', 'https://m.youlai.cn/video/mip/' + data[0].id + '.html');
+                        $('.neirong a').eq(0).attr('href', 'https://m.youlai.cn/video/mip/' + data[0].id + '.html');
+                    }
+                },
+                error: function () {
+                    isHasGetVideoOnEnd = false;
+                }
+            });
+        };
+
+        // 事件句柄
+        var getVideoOnEndHander = function () {
+            if ((video.currentTime + 10) >= video.duration && !isHasGetVideoOnEnd) {
+                isHasGetVideoOnEnd = true;
+                getVideoOnEnd();
+                // 剩余时长已经小于10s，移除注册的事件
+                video.removeEventListener('timeupdate', getVideoOnEndHander);
+            }
+        };
 
         //  初始化video的尺寸大小
         var height = window.innerWidth / 16 * 9 + 'px';
@@ -80,6 +134,8 @@ define(function (require) {
             $('.box2, .box3').addClass('hide');
             $('.play').addClass('hide');
         };
+        // 注册播放时间更新事件
+        video.addEventListener('timeupdate', getVideoOnEndHander, false);
         // 如果有广告并且非IOS上的QQ浏览器 则播放广告
         if (adSrc && !(platform.isIos() && platform.isQQ())) {
             $element[0].appendChild(domAdTip);
@@ -123,41 +179,6 @@ define(function (require) {
     $('.close').click(function () {
         $('.box2, .box3').addClass('hide');
         $('.play').addClass('hide');
-    });
-    var constant = $('.changliang').html();
-    var constant1 = $('.changliang1').html();
-    $.ajax({
-        url: 'https://m.youlai.cn/mapi/gInfo?did=' + constant + '&aid=' + constant1 + '&callback=adsf',
-        dataType: 'jsonp',
-        data: '',
-        jsonp: 'callback',
-        success: function (data) {
-            if (!data) {
-                $('.box2, .box3').css('display', 'none');
-                $('.play').css('display', 'none');
-            }
-            if (data.length === 2) {
-                $('.neirong a').eq(0).text(data[0].title);
-                $('.gaodu').eq(0).attr('src', data[0].litpic);
-                $('.pic img').eq(0).attr('src', data[0].litpic);
-                $('.neirong a').eq(1).text(data[1].title);
-                $('.gaodu').eq(1).attr('src', data[1].litpic);
-                $('.pic img').eq(1).attr('src', data[1].litpic);
-                $('.pic').eq(0).attr('href', 'https://m.youlai.cn/video/mip/' + data[0].id + '.html');
-                $('.pic').eq(1).attr('href', 'https://m.youlai.cn/video/mip/' + data[1].id + '.html');
-                $('.neirong a').eq(0).attr('href', 'https://m.youlai.cn/video/mip/' + data[0].id + '.html');
-                $('.neirong a').eq(1).attr('href', 'https://m.youlai.cn/video/mip/' + data[1].id + '.html');
-            }
-            if (data.length === 1) {
-                $('.juli').addClass('hide');
-                $('.pic,.neirong a').css('margin-left', '26%');
-                $('.neirong a').eq(0).text(data[0].title);
-                $('.gaodu').eq(0).attr('src', data[0].litpic);
-                $('.pic img').eq(0).attr('src', data[0].litpic);
-                $('.pic').eq(0).attr('href', 'https://m.youlai.cn/video/mip/' + data[0].id + '.html');
-                $('.neirong a').eq(0).attr('href', 'https://m.youlai.cn/video/mip/' + data[0].id + '.html');
-            }
-        }
     });
     return customElem;
 });

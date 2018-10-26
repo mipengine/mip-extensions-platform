@@ -1,0 +1,12 @@
+{
+    "name": "mip-wkstatistic-final",
+    "version": "1.0.0",
+    "description": "寻医问药点击和展示量统计组件",
+    "author": {
+        "name": "tinkbell",
+		"email": "jqthink@gmail.com"
+    },
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

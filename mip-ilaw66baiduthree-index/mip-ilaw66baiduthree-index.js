@@ -96,6 +96,9 @@ define(function (require) {
                         + sessid + '&questionType=' + qusttype;
                     locahost(tzurl, '准备咨询');
                 }
+                else {
+                    sessionId = sessid;
+                }
             }
             else {
                 //              console.log('登录成功');

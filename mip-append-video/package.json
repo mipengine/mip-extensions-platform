@@ -1,7 +1,7 @@
 {
     "name": "mip-append-video",
-    "version": "1.0.2",
-    "description": "增加判断视频是否可以播放的接口",
+    "version": "1.0.3",
+    "description": "视频播放时长小于10s, 再请求接口",
     "contributors": [
         {
             "name": "shaoshilei",
