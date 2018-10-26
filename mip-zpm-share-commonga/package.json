@@ -1,0 +1,13 @@
+{
+    "name": "mip-zpm-share-commonga",
+    "version": "0.0.1",
+	"description": "统计",
+    "author": {
+        "name": "wangjx",
+        "email": "651183320@qq.com",
+        "url": "http://m.zhaopin.com"
+    },
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "name": "mip-jiahezigui-search",
+    "version": "1.0.0",
+    "description": "全屏搜索",
+    "contributors": [
+        {
+            "name": "chenkby",
+            "email": "99912250@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

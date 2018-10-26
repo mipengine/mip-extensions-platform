@@ -66,19 +66,32 @@ define(function (require) {
                         result.push(false);
                     }
                     break;
+                case row === 'domain':
+                    var domain = document.domain;
+                    if (wrong && domain.indexOf(val) === -1 || !wrong && domain.indexOf(val) > -1) {
+                        result.push(true);
+                    }
+                    else {
+                        result.push(false);
+                    }
+                    break;
             }
         }
         if (result.indexOf(false) === -1) {
+            var inner = element.innerHTML;
+            inner = inner.replace(/mip-script/g, 'script', inner);
             if (pass === 'hide') {
                 element.style.display = 'none';
             }
             else if (pass === 'show') {
+                element.innerHTML = inner;
                 element.style.display = 'block';
             }
             else if (pass === 'remove') {
-                setTimeout(function () {
-                    element.parentNode.removeChild(element);
-                }, 1000);
+                element.parentNode.removeChild(element);
+            }
+            else {
+                element.innerHTML = inner;
             }
         }
 

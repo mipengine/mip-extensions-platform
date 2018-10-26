@@ -1,0 +1,14 @@
+{
+    "name": "mip-toggle-menu",
+    "version": "1.0.0",
+    "description": "点击顶部按钮控制导航菜单的显示和隐藏",
+    "contributors": [
+        {
+            "name": "xiangshurong",
+            "email": "1617330234@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

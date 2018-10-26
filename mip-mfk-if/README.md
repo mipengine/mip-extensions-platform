@@ -12,7 +12,7 @@ mip-mfk-if 判断模块显示
 
 ### 基本用法
 ```html
-<mip-mfk-if get-a="123" get-b_d="222" referrer="baidu.com" pass="hide">
+<mip-mfk-if domain="0.13" pass="show">
     <ul>
     	<li>自定义内容</li>
     	<li>自定义内容</li>
@@ -20,10 +20,16 @@ mip-mfk-if 判断模块显示
     	<li>自定义内容自定义内容</li>
     	<li>自定义内容</li>
     </ul>
+    <mip-script src="https://c.mipcdn.com/static/v1/mip-mfk-if/mip-mfk-if.js"></mip-script>
 </mip-mfk-if>
 ```
 
 ## 属性
+
+### domain
+说明：页面域名  
+必选项：否
+类型：string
 
 ### referrer
 说明：页面来源  
@@ -42,4 +48,4 @@ mip-mfk-if 判断模块显示
 类型：string
 
 ## 注意事项
-
+组件中的<script>...</script>标签需改为<mip-script>...</mip-script>

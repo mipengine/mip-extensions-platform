@@ -27,6 +27,7 @@ define(function (require) {
         var MIP = window.MIP;
         var clicksstart = true;
         var thisurls = window.location.href;
+        var loginsessionId = 0;
         //      setTimeout(function () {
         //          sessionId = $el.find('#sesiid').html();
         //          console.log(sessionId);
@@ -97,7 +98,7 @@ define(function (require) {
                     locahost(tzurl, '准备咨询');
                 }
                 else {
-                    sessionId = sessid;
+                    loginsessionId = sessid;
                 }
             }
             else {
@@ -362,11 +363,15 @@ define(function (require) {
 
             localStorage.setItem('baiduquestionType', questionTypes);
             //          $el.find('#' + $(this).data('href')).removeClass().addClass('tab-pane active');
-            statistics(8, thisurls, questionTypes);
+
             if (isloginpage) {
+                statistics(8, 'tologin', questionTypes);
                 var tzurl = 'mipilaw66baidu_login?channel=baidusearch&sessionId='
-                    + sessionId + '&questionType=' + questionTypes;
+                    + loginsessionId + '&questionType=' + questionTypes;
                 locahost(tzurl, '准备咨询');
+            }
+            else {
+                statistics(8, 'order', questionTypes);
             }
 
             if (sessionId !== 0) {

@@ -16,19 +16,17 @@ define(function (require) {
         // TODO
         var onOff = true;
         var focus = document.getElementsByClassName('.focus');
-        focus.click(function () {
+        focus.onclick = function () {
             if (focus.onOff) {
-                focus.val('关注'),
                 util.css(focus, 'background', '#ff9900'),
                 util.css(focus, 'color', '#ffffff'),
                 focus.onOff = false;
             } else {
                 util.css(focus, 'background', '#ebebeb'),
                 util.css(focus, 'color', '#56585d'),
-                focus.val('已关注'),
                 focus.onOff = true;
             }
-        });
+        };
     };
 
     return customElement;
