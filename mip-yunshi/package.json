@@ -1,0 +1,14 @@
+{
+    "name": "mip-yunshi",
+    "version": "1.0.0",
+    "description": "时间与星座的选择",
+    "contributors": [
+        {
+            "name": "mip-yunshi",
+            "email": "981952053@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

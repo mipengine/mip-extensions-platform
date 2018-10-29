@@ -12,7 +12,7 @@ mip-mfk-if 判断模块显示
 
 ### 基本用法
 ```html
-<mip-mfk-if domain="0.13" pass="show">
+<mip-mfk-if domain="0.13" pass="remove" mip-tags="ad">
     <ul>
     	<li>自定义内容</li>
     	<li>自定义内容</li>
@@ -20,7 +20,7 @@ mip-mfk-if 判断模块显示
     	<li>自定义内容自定义内容</li>
     	<li>自定义内容</li>
     </ul>
-    <mip-script src="https://c.mipcdn.com/static/v1/mip-mfk-if/mip-mfk-if.js"></mip-script>
+    <ad type="baidu-wm-ext" domain="fccs.mfk.com" token="cxpuuggzg"><div id="cxpuuggzg"></div></ad>
 </mip-mfk-if>
 ```
 
@@ -47,5 +47,9 @@ mip-mfk-if 判断模块显示
 默认：show  
 类型：string
 
+### mip-tags
+说明：整理标签,会在指定标签名前加"mip-",多个标签用","连接
+必选项：否 
+类型：string
+
 ## 注意事项
-组件中的<script>...</script>标签需改为<mip-script>...</mip-script>

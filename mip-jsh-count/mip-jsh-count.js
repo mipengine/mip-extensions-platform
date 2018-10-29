@@ -8,8 +8,8 @@ define(function (require) {
 
     var customElement = require('customElement').create();
     customElement.prototype.firstInviewCallback = function () {
-        console.log(this.element);
-        var s = this.element.getAttribute('data-time');
+        var $this = this.element;
+        var s = $this.getAttribute('data-time');
         function countDown(times) {
             var timer = null;
             timer = setInterval(function () {
@@ -36,15 +36,15 @@ define(function (require) {
                     second = '0' + second;
                 }
                 if (day === '00') {
-                    document.getElementById('timer').innerHTML = '截止时间：' + hour + '小时' + minute + '分' + second + '秒';
+                    $this.innerHTML = '截止时间：' + hour + '小时' + minute + '分' + second + '秒';
                 } else if (hour === '00') {
-                    document.getElementById('timer').innerHTML = '截止时间：' + minute + '分' + second + '秒';
+                    $this.innerHTML = '截止时间：' + minute + '分' + second + '秒';
                 } else {
                     var s = '截止时间：' + day + '天' + hour + '小时' + minute + '分' + second + '秒';
-                    document.getElementById('timer').innerHTML = s;
+                    $this.innerHTML = s;
                 }
                 if (hour === '00' && day === '00' && minute === '00' && second === '00') {
-                    document.getElementById('timer').innerHTML = '截止时间：正在开奖...';
+                    $this.innerHTML = '截止时间：正在开奖...';
                 }
                 times --;
             }, 1000);

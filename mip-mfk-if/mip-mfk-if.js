@@ -16,6 +16,7 @@ define(function (require) {
         var attr = this.element.attributes;
         var pass = 'show';
         var result = [];
+        var miptag = [];
         for (var i = 0; i < attr.length; i++) {
             var item = attr[i].nodeName;
             var row = item.toLowerCase();
@@ -75,11 +76,24 @@ define(function (require) {
                         result.push(false);
                     }
                     break;
+                case row === 'mip-tags':
+                    pass = val;
+                    miptag = val.split(',');
+                    break;
             }
         }
+        var inner = element.innerHTML;
+        var Reg;
+        for (var i = 0; i < miptag.length; i++) {
+            if (miptag[i] === '') {
+                continue;
+            }
+            Reg = new RegExp('<' + miptag[i], 'gim');
+            inner = inner.replace(Reg, '<mip-' + miptag[i], inner);
+            Reg = new RegExp('</\\s*' + miptag[i] + '>', 'gim');
+            inner = inner.replace(Reg, '</mip-' + miptag[i] + '>', inner);
+        }
         if (result.indexOf(false) === -1) {
-            var inner = element.innerHTML;
-            inner = inner.replace(/mip-script/g, 'script', inner);
             if (pass === 'hide') {
                 element.style.display = 'none';
             }
@@ -93,6 +107,9 @@ define(function (require) {
             else {
                 element.innerHTML = inner;
             }
+        }
+        else {
+            element.innerHTML = inner;
         }
 
         /**

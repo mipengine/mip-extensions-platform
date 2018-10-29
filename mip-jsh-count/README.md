@@ -12,7 +12,7 @@ mip-jsh-count 组件说明
 
 ### 基本用法
 ```html
-<mip-jsh-count data-time='100'>
+<mip-jsh-count id='timer' data-time='100'>
     自定义内容，可以嵌套其他组件
 </mip-jsh-count>
 ```

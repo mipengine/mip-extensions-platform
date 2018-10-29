@@ -1,0 +1,14 @@
+{
+    "name": "mip-signmatch",
+    "version": "1.0.0",
+    "description": "星座选择，选择星座时使用",
+    "contributors": [
+        {
+            "name": "sanguogege",
+            "email": "981952053@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

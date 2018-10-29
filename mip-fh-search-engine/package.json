@@ -1,6 +1,6 @@
 {
     "name": "mip-fh-search-engine",
-    "version": "1.2.1",
+    "version": "1.2.2",
     "description": "根据页面的搜索引擎来源，跳转到指定的页面地址，针对性优化用户体验",
     "contributors": [
         {
