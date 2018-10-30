@@ -206,12 +206,19 @@ define(function (require) {
                 }
             });
         },
-        init: function () {
-            this.xfNav(), this.rank(), this.downHref(), this.hotRec(), this.show(), this.jc();
+        ntj: function (o) {
+            $(o).find('#info #btns a').on('click', function () {
+                var img = new Image();
+                img.src = 'https://stat-api.20hn.cn/jf.gif?web_id=5&id=' + this.webInfoId + '&cate_id=' + this.webInfoCid + '&cate=' + $('#info .cata').text() + '&title=' + $('#info h1').text() + '&device=1';
+            });
+        },
+        init: function (o) {
+            this.xfNav(), this.rank(), this.downHref(), this.hotRec(), this.show(), this.jc(), this.ntj(o);
         }
     };
-    customElem.prototype.build = function () {
-        down.init();
+    customElem.prototype.firstInviewCallback = function () {
+        var element = this.element;
+        down.init(element);
     };
     return customElem;
 });

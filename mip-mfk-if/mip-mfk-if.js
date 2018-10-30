@@ -77,7 +77,6 @@ define(function (require) {
                     }
                     break;
                 case row === 'mip-tags':
-                    pass = val;
                     miptag = val.split(',');
                     break;
             }

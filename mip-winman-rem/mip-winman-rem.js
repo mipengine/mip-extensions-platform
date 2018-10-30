@@ -5,7 +5,7 @@
  */
 define(function (require) {
     var customElement = require('customElement').create();
-    customElement.prototype.firstInviewCallback = function (N, M) {
+    customElement.prototype.build = function (N, M) {
         var K;
         var J = N.document;
         var I = J.documentElement;

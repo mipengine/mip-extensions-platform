@@ -15,10 +15,10 @@ define(function (require) {
      */
     customElement.prototype.firstInviewCallback = function () {
         var $el = $(this.element);
-
         document.addEventListener('touchmove', function (e) {
             e.returnValue = true;
         }, false);
+
         // 游客进入45秒后弹出弹框
         setTimeout(function () {
             if ($el.data('login') === false) {
@@ -63,7 +63,27 @@ define(function (require) {
                 //     }
                 // });
             }
+            // 选择热门城市直接跳过选城市到选区县
+            $el.find('.city-link').on('click', function () {
+                var cityid = $(this).data('city');
+                var provinceid = $(this).data('province');
+                var proname = $(this).data('proname');
+                var cityname = $(this).text();
+                $el.find('#province-tab').data('tid', '0');
+                $el.find('#province-tag p').text(proname);
+                $el.find('#city-tag p').text(cityname);
+                $el.find('#area-tag p').text('');
+                $el.find('#street-tag p').text('');
+                $el.find('#province-tag').data('value', provinceid).css('display', 'inline-table');
+                $el.find('#city-tag').data('value', cityid).css('display', 'inline-table');
+                $el.find('#area-tag').data('value', '').css('display', 'none');
+                $el.find('#street-tag').data('value', 'cityid').css('display', 'none');
+                $el.find('#area-tab').click();
+            });
             initLocationData('province', 0);
+            $el.find('#province-tab').on('click', function () {
+                initLocationData('province', 0);
+            });
             $el.find('#city-tab').on('click', function () {
                 if ($el.find('#province-tag').data('value') !== '') {
                     var provinceId = $el.find('#province-tag').data('value');
@@ -90,7 +110,7 @@ define(function (require) {
                     initLocationData('street', areaId);
                 }
                 else {
-                    $el.find('#province-tab').click();
+                    $el.find('#area-tab').click();
                     showTips('请先选择区县级', 'err');
                 }
             });
@@ -124,22 +144,42 @@ define(function (require) {
                 var HKSeletor = '#' + locationClass + ' .HK';
                 var LSSeletor = '#' + locationClass + ' .LS';
                 var TZSeletor = '#' + locationClass + ' .TZ';
-                AGArry.forEach(function (items) {
-                    AGHtml += '<li><button id="' + items.id + '" type="button" '
-                     + 'class="location-but but-' + locationClass + '">' + items.name + '</button></li>';
-                });
-                HKArry.forEach(function (items) {
-                    HKHtml += '<li><button id="' + items.id + '" type="button" '
-                     + 'class="location-but but-' + locationClass + '">' + items.name + '</button></li>';
-                });
-                LSArry.forEach(function (items) {
-                    LSHtml += '<li><button id="' + items.id + '" type="button" '
-                     + 'class="location-but but-' + locationClass + '">' + items.name + '</button></li>';
-                });
-                TZArry.forEach(function (items) {
-                    TZHtml += '<li><button id="' + items.id + '" type="button" '
-                     + 'class="location-but but-' + locationClass + '">' + items.name + '</button></li>';
-                });
+                if (AGArry.length === 0) {
+                    AGHtml = '<li><button class="none-city"> - </button></li>';
+                } else {
+                    AGArry.forEach(function (items) {
+                        AGHtml += '<li><button id="' + items.id + '" type="button" '
+                         + 'class="location-but but-' + locationClass + '">'
+                         + items.name + '</button></li>';
+                    });
+                };
+                if (HKArry.length === 0) {
+                    HKHtml = '<li><button class="none-city"> - </button></li>';
+                } else {
+                    HKArry.forEach(function (items) {
+                        HKHtml += '<li><button id="' + items.id + '" type="button" '
+                         + 'class="location-but but-' + locationClass + '">'
+                         + items.name + '</button></li>';
+                    });
+                };
+                if (LSArry.length === 0) {
+                    LSHtml = '<li><button class="none-city"> - </button></li>';
+                } else {
+                    LSArry.forEach(function (items) {
+                        LSHtml += '<li><button id="' + items.id + '" type="button" '
+                         + 'class="location-but but-' + locationClass + '">'
+                         + items.name + '</button></li>';
+                    });
+                };
+                if (TZArry.length === 0) {
+                    TZHtml = '<li><button class="none-city"> - </button></li>';
+                } else {
+                    TZArry.forEach(function (items) {
+                        TZHtml += '<li><button id="' + items.id + '" type="button" '
+                         + 'class="location-but but-' + locationClass + '">'
+                         + items.name + '</button></li>';
+                    });
+                };
                 $el.find(AGSeletor).html(AGHtml);
                 $el.find(HKSeletor).html(HKHtml);
                 $el.find(LSSeletor).html(LSHtml);
@@ -195,7 +235,7 @@ define(function (require) {
                             $el.find('#province-tag p').text($(this).text());
                             $el.find('#province-tag').data('value', $(this).attr('id')).css('display', 'inline-table');
                             $el.find('#city-tab').click();
-                            initPeovince();
+                            initProvince();
                         });
                     }
                 }
@@ -391,7 +431,7 @@ define(function (require) {
                 });
             }
             // 重新选择
-            function initPeovince() {
+            function initProvince() {
                 $el.find('.city-label.second-tag').data('value', '');
                 $el.find('.city-label.second-tag').css('display', 'none');
             }
@@ -427,7 +467,7 @@ define(function (require) {
                 var location = $(this).data('location');
                 if (location === 'province') {
                     $el.find('#province-tab').click();
-                    initPeovince();
+                    initProvince();
                 }
                 else if (location === 'city') {
                     $el.find('#province-tab').click();

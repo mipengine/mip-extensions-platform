@@ -1,0 +1,13 @@
+{
+  "name": "mip-xz6-comment",
+  "version": "1.0.0",
+  "description": "小说页面评论功能",
+  "author": {
+      "name": "lj",
+      "email": "lj@952.com",
+      "url": "https://www.xz6.com"
+  },
+  "engines": {
+      "mip": ">=1.1.0"
+  }
+}

@@ -33,9 +33,21 @@ mip-linktion-city 级联城市组件
         </div>
         <div class="modal-body">
           <div class="select-city-info">
-            <h3 class="info-head">亲爱的用户您好：</h3>
+            <!-- <h3 class="info-head">亲爱的用户您好：</h3>
             <p class="info-txt">切换城市，让我们为您提供更准确地理财信息</p>
-            <p class="info-location">点击进入<button type="button">海淀</button>or 手动切换到其他城市</p>
+            <p class="info-location">点击进入<button type="button">海淀</button>or 手动切换到其他城市</p> -->
+            <p class="info-txt">为了方便您找到适合自己的理财师，请选择当前所在城市</p>
+            <p class="hot-city">
+              <span>热门城市</span>
+              <span class="city-link" id="beijing" data-proname="北京" data-province="1" data-city="2">北京</span>
+              <span class="city-link" id="shanghai" data-proname="上海" data-province="360" data-city="361">上海</span>
+              <span class="city-link" id="guangzhou" data-proname="广东" data-province="33673" data-city="33674">广州</span>
+              <span class="city-link" id="shenzhen" data-proname="广东" data-province="33673" data-city="33855">深圳</span>
+              <span class="city-link" id="tianjin" data-proname="天津" data-province="609" data-city="610">天津</span>
+              <span class="city-link" id="chongqing" data-proname="重庆" data-province="883" data-city="884">重庆</span>
+              <span class="city-link" id="hangzhou" data-proname="浙江" data-province="25771" data-city="25772">杭州</span>
+              <span class="city-link" id="nanjing" data-proname="江苏" data-province="16735" data-city="16736">南京</span>
+            </p>
           </div>
           <div class="city-card">
             <h2>手动切换城市</h2>

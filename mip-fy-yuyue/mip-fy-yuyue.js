@@ -12,6 +12,7 @@
  * 1.1.0 新增：苹果设备访问安卓资源，安卓设备访问苹果资源给出的提示。
  * 1.1.1 升级less文件背景图片为https。
  * 1.1.2 修改提示描述
+ * 1.1.3 根据百度手机助手 百度-黄奥 的需求，修改文本提示。
  * @author gom3250@qq.com.
  *  */
 
@@ -107,8 +108,8 @@ define(function (require) {
                             var colsys = 'pc';
                             var tiyes = 'yes';
                         }
-                        var titshi = '<p class="m-tisp1"><i></i>该软件为' + colsys + '资源，';
-                        titshi += '推荐下载的是：<span>' + firname + '</span></p>';
+                        var titshi = '<p class="m-tisp1"><i></i>检测到您是' + sys + '设备，';
+                        titshi += '点击下载的是：<span>' + firname + '</span></p>';
                         // 有地址的情况切换
                         if (tiyes === 'yes') {
                             $(ele).find('#downAddress ul').after(titshi);

@@ -1,0 +1,14 @@
+{
+    "name": "mip-mylike-referrerurl",
+    "version": "1.0.0",
+    "description": "获取网站访问来源",
+    "contributors": [
+        {
+            "name": "55555",
+            "email": "112906867@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

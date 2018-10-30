@@ -30,4 +30,5 @@ mip-winman-rem 本组件用于移动端css3 rem单位适配 比例为 100:1，�
   </div>
 ```
 ## 注意事项
+customElement.prototype.build:此插件必须在页面开始加载时触发 
 必须在head引用|https://c.mipcdn.com/static/v1/mip-winman-rem/mip-winman-rem.js
