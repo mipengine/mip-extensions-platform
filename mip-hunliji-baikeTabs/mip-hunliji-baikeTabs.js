@@ -31,44 +31,46 @@ define(function (require) {
                                     + item.related_mark[j].id + '">' + item.related_mark[j].title + '</a>';
                         }
                     }
-                    if (i === 9) {
-                        var num = page * 2 - 2;
-                        var text = '';
-                        if (item1[num].content) {
-                            text = item1[num].content;
-                        }
-                        htmlJing = '<div class="baike_180716">\
+                    if (item1) {
+                        if (i === 9) {
+                            var num = page * 2 - 2;
+                            var text = '';
+                            if (item1[num].content) {
+                                text = item1[num].content;
+                            }
+                            htmlJing = '<div class="baike_180716">\
                             <div class="baike_180716_title">\
                                 <a href="//www.hunliji.com/p/wedding/Public/wap/activity/20170306download.html?id=347"\
-                                 class="a1">' + item1[num].title + '</a>\
+                                    class="a1">' + item1[num].title + '</a>\
                                 <a href="//www.hunliji.com/p/wedding/Public/wap/activity/20170306download.html?id=347"\
-                                 class="a2">APP内打开</a></div>\
+                                    class="a2">APP内打开</a></div>\
                             <div class="baike_180716_tag">\
                             <a href="//www.hunliji.com/p/wedding/Public/wap/activity/20170306download.html?id=347"\
                             >新娘日记精选</a></div>\
                             <div class="baike_180716_text">\
                             <a href="//www.hunliji.com/p/wedding/Public/wap/activity/20170306download.html?id=347"\
                             >' + text + '</a></div>\
-                        </div>';
-                    } else if (i === 19) {
-                        var num = page * 2 - 1;
-                        var text = '';
-                        if (item1[num].content) {
-                            text = item1[num].content;
-                        }
-                        htmlJing = '<div class="baike_180716">\
+                            </div>';
+                        } else if (i === 19) {
+                            var num = page * 2 - 1;
+                            var text = '';
+                            if (item1[num].content) {
+                                text = item1[num].content;
+                            }
+                            htmlJing = '<div class="baike_180716">\
                             <div class="baike_180716_title">\
                                 <a href="//www.hunliji.com/p/wedding/Public/wap/activity/20170306download.html?id=347"\
-                                 class="a1">' + item1[num].title + '</a>\
+                                    class="a1">' + item1[num].title + '</a>\
                                 <a href="//www.hunliji.com/p/wedding/Public/wap/activity/20170306download.html?id=347"\
-                                 class="a2">APP内打开</a></div>\
+                                    class="a2">APP内打开</a></div>\
                             <div class="baike_180716_tag">\
                             <a href="//www.hunliji.com/p/wedding/Public/wap/activity/20170306download.html?id=347"\
                             >新娘日记精选</a></div>\
                             <div class="baike_180716_text">\
                             <a href="//www.hunliji.com/p/wedding/Public/wap/activity/20170306download.html?id=347"\
                             >' + text + '</a></div>\
-                        </div>';
+                            </div>';
+                        }
                     }
                     html += '<div class="content__item" data-id="' + item.id + '">\
                                     <div class="content__item__left">\
