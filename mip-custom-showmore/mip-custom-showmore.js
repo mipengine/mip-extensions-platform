@@ -4,6 +4,7 @@
  */
 
 define(function (require) {
+    console.log('this is custom');
     var showmoreEle = require('customElement').create();
     var util = require('util');
     var viewport = require('viewport');
@@ -12,6 +13,47 @@ define(function (require) {
         bottomShadowClass: 'mip-custom-showmore-gradient',
         btnClassWhenUnfold: 'mip-custom-showmore-btn-unfold'
     };
+
+    // 获取实验组id
+    if (MIP.hash.hashTree.sids) {
+        var sidsArr = MIP.hash.hashTree.sids.value.split('_')
+        var sidsA = '126449'
+        var sidsB = '126450'
+        var sidsC = '126490'
+
+        if (matchIsSids(sidsA)) { // 命中实验组
+            var sidsBtn = document.querySelector('.mip-custom-showmore-btn')
+            sidsBtn.innerHTML = '展开全部'
+            sidsBtn.classList.add('mip-showmore-btn-sidsA')
+            var iconChildElement = document.createElement('span')
+            iconChildElement.classList.add('down-icon')
+            sidsBtn.appendChild(iconChildElement)
+        }
+        if (matchIsSids(sidsB)) { // 命中实验组
+            var sidsBtn = document.querySelector('.mip-custom-showmore-btn')
+            sidsBtn.innerHTML = '展开全部'
+            sidsBtn.classList.add('mip-showmore-btn-sidsB')
+            var iconChildElement = document.createElement('span')
+            iconChildElement.classList.add('down-icon')
+            sidsBtn.appendChild(iconChildElement)
+            staticOpt.bottomShadowClass = 'mip-custom-showmore-gradient-sidsC'
+        }
+    }
+
+    /**
+     * 匹配实验组sids是否命中
+     * 
+     * @param {string} sids 
+     * @returns {boolean} 是否匹配到实验组id
+     */
+    function matchIsSids(sids) {
+        for (var sidNum = 0, sidsLen = sidsArr.length; sidNum < sidsLen; sidNum++) {
+            if (sidsArr[sidNum] === sids) {
+                return true
+            }
+        }
+        return false
+    }
 
     /**
      * 构造元素，只会运行一次
@@ -28,6 +70,9 @@ define(function (require) {
         this.addEventAction('toggle', function (event) {
             me.toggle(event);
         });
+        if (MIP.hash.hashTree.sids && matchIsSids(sidsC)) { // 命中实验组
+            me.toggle(event);
+        }
 
         // 兼容手机横竖屏切换时，字数重新排列高度变化情况
         window.addEventListener('orientationchange', function () {
