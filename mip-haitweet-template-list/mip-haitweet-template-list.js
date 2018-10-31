@@ -16,18 +16,25 @@ define(function (require) {
     function render(data) {
         var self = this;
         var nodeList = [];
-        if (data && data instanceof Array) {
-            var fragment = document.createDocumentFragment();
+        var fragment = document.createDocumentFragment();
+        if (data && data instanceof Array && data.length > 0) {
+            // 移除默认节点
+            self.container.removeChild(self.container.childNodes[0]);
             data.map(function (item) {
                 var node = document.createElement('div');
                 node.innerHTML = item.name;
                 node.setAttribute('role', 'listitem');
-                node.setAttribute('role-id', item.id);
-                node.setAttribute('role-name', item.name);
+                node.setAttribute('template-id', item.id);
+                node.setAttribute('template-name', item.name);
                 node.classList = ['item'];
                 nodeList.push(node);
                 fragment.appendChild(node);
             });
+        } else {
+            var node = document.createElement('div');
+            node.innerHTML = '暂无模板数据';
+            node.classList = 'no-data';
+            fragment.appendChild(node);
         }
         // 绑定click事件
         nodeList.forEach(function (n) {
@@ -37,6 +44,8 @@ define(function (require) {
                     activeItem.classList.remove('active');
                 }
                 event.target.classList.add('active');
+                document.getElementById('templateId').value = event.target.getAttribute('template-id');
+                document.getElementById('templateName').value = event.target.getAttribute('template-name');
             });
         });
         self.container.appendChild(fragment);
@@ -55,6 +64,10 @@ define(function (require) {
         if (!self.container.hasAttribute('role')) {
             self.container.setAttribute('role', 'list');
         }
+        var node = document.createElement('div');
+        node.innerHTML = '暂无模板数据';
+        node.classList = 'no-data';
+        self.container.appendChild(node);
 
         var url = '//www.haitweet.com/?s=/api/template';
         fetch(url)
