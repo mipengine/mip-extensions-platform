@@ -7,13 +7,6 @@ define(function (require) {
     'use strict';
     var $ = require('zepto');
     var customElement = require('customElement').create();
-    customElement.prototype.firstInviewCallback = function () {
-        init();
-        sexSelect();
-        shadowSlick();
-        signSelect();
-    };
-
     function init() {
         if (localStorage.MatchSignIDNv) {
             matchSignShange(0, parseInt(localStorage.MatchSignIDNv, 0));
@@ -193,6 +186,10 @@ define(function (require) {
         };
         return sign;
     }
+    init();
+    sexSelect();
+    shadowSlick();
+    signSelect();
     return customElement;
 });
 

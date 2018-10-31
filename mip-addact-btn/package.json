@@ -1,0 +1,14 @@
+{
+    "name": "mip-addact-btn",
+    "version": "1.0.0",
+    "description": "点击按钮添加高亮，其余兄弟按钮删除高亮",
+    "contributors": [
+        {
+            "name": "guomengyuan",
+            "email": "1401105669@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

@@ -11,10 +11,6 @@ define(function (require) {
     var dataYS = require('./data');
     var YUNSHISIGNID = 1;
     var YUNSHITIME = 0;
-    customElement.prototype.firstInviewCallback = function () {
-        toolYunshi();
-        mxzYunshi();
-    };
     function toolYunshi() {
         var obj = $('#YUNSHIBOX');
         if (obj.length === 0) {
@@ -287,6 +283,8 @@ define(function (require) {
                 break;
         }
     }
+    toolYunshi();
+    mxzYunshi();
     return customElement;
 });
 
