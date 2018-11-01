@@ -11,8 +11,10 @@ define(function (require) {
         $(window).scrollTop(0);
         return false;
     });
+
     $(window).scroll(function () {
-        var scrollTop = $(document).scrollTop();
+        var scrollTop = $(this).scrollTop();
+        console.log(scrollTop);
         if (scrollTop > 300) {
             $('#FLOAT_BTN').show();
             setTimeout(floatHide, 3000);
@@ -21,7 +23,7 @@ define(function (require) {
         }
         // 停止3秒后隐藏侧边栏
         function floatHide() {
-            var nowTop = $(document).scrollTop();
+            var nowTop = $(this).scrollTop();
             if (scrollTop === nowTop) {
                 $('#FLOAT_BTN').hide();
             }
