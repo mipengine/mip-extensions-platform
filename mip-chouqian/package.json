@@ -1,0 +1,14 @@
+{
+    "name": "mip-chouqian",
+    "version": "1.0.0",
+    "description": "组件介绍",
+    "contributors": [
+        {
+            "name": "抽签组件",
+            "email": "sanguogege@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

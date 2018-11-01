@@ -42,7 +42,7 @@ define(function (require) {
         // var beforeScroll = document.documentElement.scrollTop || document.body.scrollTop;
         // $el.find('.details-fix-top>.scroll-wrap').css({'width': $el.find('.details-fix-top').width()});
         var topSpace = $('.details-fix-top>.scroll-wrap').offset().top;
-        var fixtop = topSpace - 120 - 58;
+        var fixtop = 97;
         var bigWidth = $('.details-fix-top').width() - 20;
         var smallWidth = $('.details-fix-top').width() - 15;
         $(window).on('scroll', function () {

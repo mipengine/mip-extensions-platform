@@ -140,15 +140,11 @@ define(function (require) {
             var tpl = '<div class="weui-toast ' + className + '">' + html + '</div>';
             var dialog = $(tpl).appendTo(document.body);
             dialog.addClass('weui-toast--visible');
-            dialog.show();
+            // dialog.show();
         };
         var hide = function (callback) {
             $('.weui-mask_transparent').remove();
-            $('.weui-toast--visible').removeClass('weui-toast--visible').transitionEnd(function () {
-                var $this = $(this);
-                $this.remove();
-                callback && callback($this);
-            });
+            $('.weui-toast--visible').removeClass('weui-toast--visible');
         };
         $.toast = function (text, style, callback) {
             if (typeof style === 'function') {
