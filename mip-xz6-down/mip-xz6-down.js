@@ -15,15 +15,12 @@ define(function (require) {
             if ($(o).find('.tzz .scroll li').length === 0) {
                 $(o).find('.tzz').remove();
             }
-            if ($(o).find('#chapter-list li').length > 0) {
-                $(o).find('.btns .goRead').attr('href', $(o).find('#chapter-list li:first a').attr('href'));
+            if ($(o).find('#chapter-list li').length < 1) {
+                $(o).find('.btns .goRead').remove();
+                $(o).find('#bookCata').remove();
             }
             else if ($(o).find('#chapter-list li').length === 1) {
                 $(o).find('#moer-chapter').hide();
-            }
-            else {
-                $(o).find('.btns .goRead').remove();
-                $(o).find('#bookCata').remove();
             }
             if (platform.isIos()) {
                 $('.book-tips a,.free-book a,#open-app').attr('href', 'https://disp.rr6.com/spread/v1/1009');

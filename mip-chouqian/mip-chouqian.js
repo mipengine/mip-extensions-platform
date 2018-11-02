@@ -19,7 +19,7 @@ define(function (require) {
                 var qianwen = 'show.html?id=' + QianHao;
                 $('#CQ_JG').text('您抽到了第' + QianHao + '签');
                 $('#CQ_BTN').removeClass('start').addClass('show').attr('href', qianwen);
-            }, 5000);
+            }, 1000);
             return false;
         };
     });

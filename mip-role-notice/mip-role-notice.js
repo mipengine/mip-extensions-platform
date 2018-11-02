@@ -13,6 +13,7 @@ define(function (require) {
      */
     customElement.prototype.firstInviewCallback = function () {
         var ele = this.element;
+        var speed = ele.getAttribute('speed') ? ele.getAttribute('speed') : 50;
         var scroll = ele.children[0];
         var scrollCopy = scroll.cloneNode('true');
         ele.appendChild(scrollCopy);
@@ -25,7 +26,7 @@ define(function (require) {
              else {
                 ele.scrollLeft++;
             }
-        }, 50);
+        }, speed);
     };
     return customElement;
 });

@@ -58,6 +58,7 @@ mip-xz6-down 小说落地页逻辑
         </ul>
     </div>
   </section>
+  <section class="btns-widget"><a id="open-app" class="btn-primary full" btn-size="large" href="https://d.safeurl.cn/qirexiaoshuo.com/Apk/qrxs_25429202.apk">免费送书，立即打开移动客户端</a></section>
   <mip-down-comment>
     <section  class="wrap" id="comment">
         <div class="hd">

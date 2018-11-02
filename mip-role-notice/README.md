@@ -13,33 +13,29 @@ mip-role-notice 滚动组件，加载后滚动这个dom
 ### 基本用法
 ```html
 <style>
-	.scroll-bar * {
-	    display: inline-block;
-	    vertical-align: middle;
-	}
-	.scroll-bar img {
-	    width: 16px;
-	    margin-right: 5px;
-	    margin-left: 8px;
-	}
+	mip-role-notice{ margin-bottom: 10px; margin-top: 10px;}
+	.scroll-bar {margin-bottom: 10px;line-height: 25px;padding-right: 15vw;    font-size: 15px;}
+	.scroll-bar * {display: inline-block;vertical-align: middle;}
+	.scroll-bar .icon{width: 4vw;height: 4vw;margin-right: 1vw;margin-left: 1.2vw;background:url(http://qxmobi.test.q-dazzle.com/mobile_common/img/new-home/scroll-bar.png) center no-repeat;background-size: cover;}
+
 </style>
-<mip-role-notice>
+<mip-role-notice speed="50">
     <span class="scroll-bar">
-    	<i class="icon"><mip-img src="http://qxmobi.test.q-dazzle.com/mobile_common/img/new-home/scroll-bar.png" alt=""></mip-img></i>这是一行可以滚动的文字;这是一行可以滚动的文字;这是一行可以滚动的文字;这是一行可以滚动的文字;
+    	<i class="icon"></i>这是一行可以滚动的文字;这是一行可以滚动的文字;这是一行可以滚动的文字;这是一行可以滚动的文字;
     </span>
 </mip-role-notice>
 ```
 
 ## 属性
 
-### {属性名}
+### speed
 
-说明：{说明}
-必选项：{是|否}
-类型：{类型}
-取值范围：{取值范围}
-单位：{单位}
-默认值：{默认值}
+说明：设置滚动速度
+必选项：是
+类型：字符串
+取值范围：>0
+单位：无
+默认值：50
 
 ## 注意事项
 

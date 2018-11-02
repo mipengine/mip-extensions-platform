@@ -14,7 +14,6 @@ define(function (require) {
 
     $(window).scroll(function () {
         var scrollTop = $(this).scrollTop();
-        console.log(scrollTop);
         if (scrollTop > 300) {
             $('#FLOAT_BTN').show();
             setTimeout(floatHide, 3000);
