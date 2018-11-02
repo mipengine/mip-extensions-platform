@@ -22,15 +22,18 @@ define(function (require) {
             var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
             if (scrollTop > tabTop) {
                 if ($(window).width() < 769) {
-                    $el.find('.mip-vd-tabs-nav').css({'position': 'fixed', 'top': '138px', 'width':
+                    $el.find('.fixed-nav .mip-vd-tabs-nav').css({'position': 'fixed', 'top': '138px', 'width':
                         + phoneWidth, 'z-index': '2', 'left': '0'});
+                    $el.find('.fixed-nav.section').css('height', '203px');
                 } else {
-                    $el.find('.mip-vd-tabs-nav').css({'position': 'fixed', 'top': '96px', 'width':
+                    $el.find('.fixed-nav .mip-vd-tabs-nav').css({'position': 'fixed', 'top': '96px', 'width':
                         + tabWidth, 'z-index': '2'});
+                    $el.find('.fixed-nav.section').css('height', '60px');
                 }
             } else if (scrollTop < tabTop) {
-                $el.find('.mip-vd-tabs-nav').css({'position': 'relative', 'top': 'auto', 'width':
+                $el.find('.fixed-nav .mip-vd-tabs-nav').css({'position': 'relative', 'top': 'auto', 'width':
                     + tabWidth, 'z-index': '2'});
+                $el.find('.fixed-nav.section').css('height', 'auto');
             }
             if ($(window).width() < 769) {
                 if (scrollTop > tabTop) {

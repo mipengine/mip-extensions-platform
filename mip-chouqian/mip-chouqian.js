@@ -23,6 +23,12 @@ define(function (require) {
             return false;
         };
     });
+
+    $('#seeMore').click(function () {
+        $('.chouqian_list').css('max-height', 'none');
+        $('.chouqian_more').hide();
+    });
+
     // 根据页面去返回随机数
     function getRadom() {
         var url = location.pathname;

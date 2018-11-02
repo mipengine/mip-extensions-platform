@@ -18,7 +18,7 @@ define(function (require) {
         $(ele).find('#m-game-tutorail').click(function () {
             $(this).addClass('m-hover').siblings().removeClass('m-hover');
             $('.g-previmg-box,.g-down-information,.g-down-recomd,.m-comment,.showad,#g-keyword').hide();
-            $('.g-key-ohter,#g-recomd-game,.f-tags-box,.f-admorediv,.f-cont-bd').hide();
+            $('.g-key-ohter,#g-recomd-game,.f-tags-box,.f-admorediv,.f-cont-bd,#comment').hide();
             $('.g-cms-relatedcms').show();
             $('.g-down-introd').addClass('no');
             $('.g-down-introd').removeClass('no-two');
@@ -27,7 +27,7 @@ define(function (require) {
             $(this).addClass('m-hover').siblings().removeClass('m-hover');
             $('.g-previmg-box,.g-down-information,.g-down-recomd,.g-cms-relatedcms,.showad').hide();
             $('#g-keyword,.g-key-ohter,#g-recomd-game,.f-tags-box,.f-admorediv,.f-cont-bd').hide();
-            $('.m-comment').show();
+            $('.m-comment,#comment').show();
             $('.g-down-introd').removeClass('no');
             $('.g-down-introd').addClass('no-two');
         });
