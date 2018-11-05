@@ -35,6 +35,11 @@ define(function (require) {
             });
         },
         rank: function (o) {
+            $(o).find('.rank .cbox').each(function () {
+                if ($(this).find('.rank .list-ul li').length === 0) {
+                    $(this).find('.getMore').remove();
+                }
+            });
             if ($(o).find('.rank .list-ul').length > 0) {
                 $(o).find('.rank .list-ul').each(function () {
                     $(this).find('li').hide().slice(0, 3).show();

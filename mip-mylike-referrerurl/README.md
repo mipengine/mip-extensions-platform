@@ -12,14 +12,26 @@ mip-mylike-referrerurl 组件说明
 
 ### 基本用法
 ```html
-<mip-mylike-referrerurl></mip-mylike-referrerurl>
+<mip-mylike-referrerurl time='86400000'></mip-mylike-referrerurl>
 ```
+
+## 属性
+
+### time
+
+说明：存储的过期时间 
+必选项：否  
+类型：数字  
+取值范围：>0  
+单位：毫秒(ms)  
+默认值：86400000
+
 
 ## 注意事项
 
 ### 储存变量列表
 
-- `sKeyWord` 搜索引擎来源关键词。
+- `expiry` 过期时间。
 
 - `referrerUrl` 来源URL。
 

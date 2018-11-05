@@ -21,7 +21,7 @@ define(function (require) {
             }
         },
         ml: function (o) {
-            fetchJsonp('https://m.xz6.com/ajax.php?action=getChapterList' + '&bookid=' + this.bookid, {
+            fetchJsonp('https://www.xz6.com/ajax.php?action=getChapterList' + '&bookid=' + this.bookid, {
                 method: 'get'
             }).then(function (response) {
                 response.json().then(function (data) {

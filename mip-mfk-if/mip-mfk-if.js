@@ -21,35 +21,11 @@ define(function (require) {
             var item = attr[i].nodeName;
             var row = item.toLowerCase();
             var val = attr[i].nodeValue;
-            var wrong = false;
-            if (val.indexOf('!') === 0) {
-                wrong = true;
-                val = val.substr(1);
-            }
             switch (true) {
                 case row === 'referrer':
                     var r = document.referrer;
                     r = r.toLowerCase();
-                    if (r === '') {
-                        if (val === '' && wrong) {
-                            result.push(false);
-                        }
-                        else if (val === '' && !wrong) {
-                            result.push(true);
-                        }
-                        else if (val !== '' && wrong) {
-                            result.push(true);
-                        }
-                        else if (val !== '' && !wrong) {
-                            result.push(false);
-                        }
-                    }
-                    else if (wrong && r.indexOf(val) === -1 || !wrong && r.indexOf(val) > -1) {
-                        result.push(true);
-                    }
-                    else {
-                        result.push(false);
-                    }
+                    result.push(handleLogic(val, r));
                     break;
                 case row === 'pass':
                     pass = val;
@@ -57,24 +33,11 @@ define(function (require) {
                 case row.indexOf('get-') === 0:
                     var para = item.substr(4);
                     var urlpara = getRequest();
-                    if (urlpara[para] === undefined) {
-                        result.push(false);
-                    }
-                    else if (wrong && urlpara[para] !== val || !wrong && urlpara[para] === val) {
-                        result.push(true);
-                    }
-                    else {
-                        result.push(false);
-                    }
+                    result.push(handleLogic(urlpara[para], val));
                     break;
                 case row === 'domain':
                     var domain = document.domain;
-                    if (wrong && domain.indexOf(val) === -1 || !wrong && domain.indexOf(val) > -1) {
-                        result.push(true);
-                    }
-                    else {
-                        result.push(false);
-                    }
+                    result.push(handleLogic(domain, val));
                     break;
                 case row === 'mip-tags':
                     miptag = val.split(',');
@@ -83,14 +46,14 @@ define(function (require) {
         }
         var inner = element.innerHTML;
         var Reg;
-        for (var i = 0; i < miptag.length; i++) {
-            if (miptag[i] === '') {
+        for (var j = 0; j < miptag.length; j++) {
+            if (miptag[j] === '') {
                 continue;
             }
-            Reg = new RegExp('<' + miptag[i], 'gim');
-            inner = inner.replace(Reg, '<mip-' + miptag[i], inner);
-            Reg = new RegExp('</\\s*' + miptag[i] + '>', 'gim');
-            inner = inner.replace(Reg, '</mip-' + miptag[i] + '>', inner);
+            Reg = new RegExp('<' + miptag[j], 'gim');
+            inner = inner.replace(Reg, '<mip-' + miptag[j], inner);
+            Reg = new RegExp('</\\s*' + miptag[j] + '>', 'gim');
+            inner = inner.replace(Reg, '</mip-' + miptag[j] + '>', inner);
         }
         if (result.indexOf(false) === -1) {
             if (pass === 'hide') {
@@ -127,6 +90,74 @@ define(function (require) {
                 }
             }
             return theRequest;
+        }
+
+        function handleLogic(val, logic) {
+            val = val ? val : '';
+            var res = [];
+            var sym = [];
+            logic = logic.replace(/\|+/g, '|');
+            logic = logic.replace(/\&+/g, '&');
+            for (var o = 0; o < logic.length; o++) {
+                if (logic.substr(o, 1) === '|' || logic.substr(o, 1) === '&') {
+                    sym.push(logic.substr(o, 1));
+                }
+            }
+            logic = logic.replace(/\&+/g, '|');
+            logic = logic.split('|');
+            if (logic.length > 0) {
+                var pro;
+                var rowres;
+                for (var k = 0; k < logic.length; k++) {
+                    var wrong = false;
+                    if (logic[k].indexOf('!') === 0) {
+                        wrong = true;
+                        logic[k] = logic[k].substr(1);
+                    }
+                    if (val === '') {
+                        if (logic[k] === '' && wrong) {
+                            rowres = false;
+                        }
+                        else if (logic[k] === '' && !wrong) {
+                            rowres = true;
+                        }
+                        else if (logic[k] !== '' && wrong) {
+                            rowres = true;
+                        }
+                        else if (logic[k] !== '' && !wrong) {
+                            rowres = false;
+                        }
+                    }
+                    else if (logic[k] === '') {
+                        if (wrong) {
+                            rowres = false;
+                        }
+                        else if (!wrong) {
+                            rowres = false;
+                        }
+                    }
+                    else if (wrong && val.indexOf(logic[k]) === -1 || !wrong && val.indexOf(logic[k]) > -1) {
+                        rowres = true;
+                    }
+                    else {
+                        rowres = false;
+                    }
+                    if (k < 1) {
+                        pro = rowres;
+                    }
+                    else if (sym[k - 1] === '&') {
+                        pro = pro || rowres;
+                    }
+                    else if (sym[k - 1] === '|') {
+                        pro = pro && rowres;
+                    }
+                }
+                res.push(pro);
+            }
+            else {
+                res.push(val === '');
+            }
+            return !(res.indexOf(false) > -1);
         }
     };
 

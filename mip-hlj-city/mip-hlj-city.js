@@ -113,7 +113,7 @@ define(function (require) {
     }
 
     function initLastCitys(element) {
-        const storageStr = storage.get(cityStorageKey);
+        var storageStr = storage.get(cityStorageKey);
         if (!storageStr) {
             return;
         }

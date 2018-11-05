@@ -19,7 +19,7 @@ mip-role-notice 滚动组件，加载后滚动这个dom
 	.scroll-bar .icon{width: 4vw;height: 4vw;margin-right: 1vw;margin-left: 1.2vw;background:url(http://qxmobi.test.q-dazzle.com/mobile_common/img/new-home/scroll-bar.png) center no-repeat;background-size: cover;}
 
 </style>
-<mip-role-notice speed="50">
+<mip-role-notice speed="10">
     <span class="scroll-bar">
     	<i class="icon"></i>这是一行可以滚动的文字;这是一行可以滚动的文字;这是一行可以滚动的文字;这是一行可以滚动的文字;
     </span>
