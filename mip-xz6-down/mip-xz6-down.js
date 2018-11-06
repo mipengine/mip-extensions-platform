@@ -27,6 +27,9 @@ define(function (require) {
             }
         },
         yd: function (o) {
+            $(o).find('#tab span').eq(0).click(function () {
+                $(o).find('#bookCata,.tbsm,.tzz,.tltj,.cnxh,.rank').show();
+            });
             $(o).find('#tab span').eq(1).click(function () {
                 $(o).find('#bookCata,.tbsm,.tzz,.tltj,.cnxh,.rank').show();
             });

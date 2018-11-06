@@ -43,7 +43,7 @@ define(function (require) {
                         var r = data.relevant;
                         var html1 = '';
                         for (var x = 0; x < r.length; x++) {
-                            html1 += '<li><i>【' + r[x].classname + '】</i><a href="' + r[x].murl + '">'
+                            html1 += '<li><i>【' + r[x].classname + '】</i><a href="https://m.xz6.com' + r[x].murl + '">'
                             + r[x].title + '</a></li>';
                         }
                         $(o).find('.morebook > ul').append(html1);

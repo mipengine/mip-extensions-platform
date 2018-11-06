@@ -146,10 +146,10 @@ define(function (require) {
                         pro = rowres;
                     }
                     else if (sym[k - 1] === '&') {
-                        pro = pro || rowres;
+                        pro = pro && rowres;
                     }
                     else if (sym[k - 1] === '|') {
-                        pro = pro && rowres;
+                        pro = pro || rowres;
                     }
                 }
                 res.push(pro);
