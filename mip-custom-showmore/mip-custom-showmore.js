@@ -4,7 +4,6 @@
  */
 
 define(function (require) {
-    console.log('this is custom');
     var showmoreEle = require('customElement').create();
     var util = require('util');
     var viewport = require('viewport');
