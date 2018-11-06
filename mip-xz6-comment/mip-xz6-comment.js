@@ -97,7 +97,7 @@ define(function (require) {
             p = Math.floor(oli.length / 5 + 1);
             $.ajax({
                 type: 'get',
-                url: ajaxUrl + 'sajax.php',
+                url: ajaxUrl + 'ajax.php',
                 data: 'action=readComment&classid=' + $(o).find('#classid').val() + '&id=' + oid + '&page=' + p,
                 dataType: 'json',
                 success: function (data) {

@@ -8,6 +8,7 @@ define(function (require) {
     var $ = require('zepto');
     var viewer = require('viewer');
     var util = require('util');
+    // require('./utils');
 
     var customElement = require('customElement').create();
 
@@ -27,19 +28,13 @@ define(function (require) {
             data: body,
             success: function (result) {
                 if (result.status.RetCode === 0) {
-                    $(element).find('#open_tips p').html('预约成功');
-                    $(element).find('#open_tips').show();
-                    setTimeout(function () {
-                        $(element).find('#open_tips').hide();
-                        viewer.eventAction.execute('hide', event.target, event);
-                    }, 2000);
+                    $.toast('预约成功', 'text');
+                    viewer.eventAction.execute('hide', event.target, event);
                 } else {
-                    $(element).find('#open_tips p').html(result.status.msg);
-                    $(element).find('#open_tips').show();
-                    setTimeout(function () {
-                        $(element).find('#open_tips').hide();
-                        viewer.eventAction.execute('hide', event.target, event);
-                    }, 2000);
+                    $.toast(result.status.msg, 'text');
+                    viewer.eventAction.execute('hide', event.target, event);
+                    //     viewer.eventAction.execute('hide', event.target, event);
+                    // }, 2000);
                 }
             }
         });
@@ -61,19 +56,11 @@ define(function (require) {
             data: body,
             success: function (result) {
                 if (+result.status.RetCode === 0) {
-                    $(element).find('#open_tips p').html('预约成功');
-                    $(element).find('#open_tips').show();
-                    setTimeout(function () {
-                        $(element).find('#open_tips').hide();
-                        viewer.eventAction.execute('hide', event.target, event);
-                    }, 2000);
+                    $.toast('预约成功', 'text');
+                    viewer.eventAction.execute('hide', event.target, event);
                 } else {
-                    $(element).find('#open_tips p').html(result.status.msg);
-                    $(element).find('#open_tips').show();
-                    setTimeout(function () {
-                        $(element).find('#open_tips').hide();
-                        viewer.eventAction.execute('hide', event.target, event);
-                    }, 2000);
+                    $.toast(result.status.msg, 'text');
+                    viewer.eventAction.execute('hide', event.target, event);
                 }
             }
         });
@@ -143,6 +130,60 @@ define(function (require) {
             }
         }
     };
+
+    (function ($) {
+        'use strict';
+        var defaults;
+        var show = function (html, className) {
+            className = className || '';
+            var mask = $('<div class="weui-mask_transparent"></div>').appendTo(document.body);
+            var tpl = '<div class="weui-toast ' + className + '">' + html + '</div>';
+            var dialog = $(tpl).appendTo(document.body);
+            dialog.addClass('weui-toast--visible');
+            // dialog.show();
+        };
+        var hide = function (callback) {
+            $('.weui-mask_transparent').remove();
+            $('.weui-toast--visible').removeClass('weui-toast--visible');
+        };
+        $.toast = function (text, style, callback) {
+            if (typeof style === 'function') {
+                callback = style;
+            }
+            var className;
+            var iconClassName = 'weui-icon-success-no-circle';
+            var duration = 2500;
+            if (style === 'cancel') {
+                className = 'weui-toast_cancel';
+                iconClassName = 'weui-icon-cancel';
+            }
+            else if (style === 'forbidden') {
+                className = 'weui-toast--forbidden';
+                iconClassName = 'weui-icon-warn';
+            }
+            else if (style === '') {
+                className = 'weui-toast--text';
+            }
+            else if (typeof style === typeof 1) {
+                duration = style;
+            };
+            show('<i class="' + iconClassName + ' weui-icon_toast"></i>'
+                + '<p class="weui-toast_content">' + (text || '已经完成') + '</p>', className);
+            setTimeout(function () {
+                hide(callback);
+            }, duration);
+        };
+        $.showLoading = function (text) {
+            var html = '<div class="weui_loading">';
+            html += '<i class="weui-loading weui-icon_toast"></i>';
+            html += '</div>';
+            html += '<p class="weui-toast_content">' + (text || '数据加载中') + '</p>';
+            show(html, 'weui_loading_toast');
+        };
+        $.hideLoading = function () {
+            hide();
+        };
+    }($));
 
     return customElement;
 });

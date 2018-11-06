@@ -1,0 +1,14 @@
+{
+    "name": "mip-pbph-mobile",
+    "version": "1.0.0",
+    "description": "移动端一键一屏，屏幕竖直翻页",
+    "contributors": [
+        {
+            "name": "yhf",
+            "email": "11453207@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

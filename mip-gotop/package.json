@@ -1,0 +1,14 @@
+{
+    "name": "mip-gotop",
+    "version": "1.0.1",
+    "description": "组件介绍",
+    "contributors": [
+        {
+            "name": "回到顶部和回到首页功能合计",
+            "email": "sanguogege@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

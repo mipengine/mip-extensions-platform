@@ -15,21 +15,21 @@ define(function (require) {
             if ($(o).find('.tzz .scroll li').length === 0) {
                 $(o).find('.tzz').remove();
             }
-            if ($(o).find('#chapter-list li').length > 0) {
-                $(o).find('.btns .goRead').attr('href', $(o).find('#chapter-list li:first a').attr('href'));
+            if ($(o).find('#chapter-list li').length < 1) {
+                $(o).find('.btns .goRead').remove();
+                $(o).find('#bookCata').remove();
             }
             else if ($(o).find('#chapter-list li').length === 1) {
                 $(o).find('#moer-chapter').hide();
-            }
-            else {
-                $(o).find('.btns .goRead').remove();
-                $(o).find('#bookCata').remove();
             }
             if (platform.isIos()) {
                 $('.book-tips a,.free-book a,#open-app').attr('href', 'https://disp.rr6.com/spread/v1/1009');
             }
         },
         yd: function (o) {
+            $(o).find('#tab span').eq(0).click(function () {
+                $(o).find('#bookCata,.tbsm,.tzz,.tltj,.cnxh,.rank').show();
+            });
             $(o).find('#tab span').eq(1).click(function () {
                 $(o).find('#bookCata,.tbsm,.tzz,.tltj,.cnxh,.rank').show();
             });
@@ -38,6 +38,11 @@ define(function (require) {
             });
         },
         rank: function (o) {
+            $(o).find('.rank .cbox').each(function () {
+                if ($(this).find('.rank .list-ul li').length === 0) {
+                    $(this).find('.getMore').remove();
+                }
+            });
             if ($(o).find('.rank .list-ul').length > 0) {
                 $(o).find('.rank .list-ul').each(function () {
                     $(this).find('li').hide().slice(0, 3).show();

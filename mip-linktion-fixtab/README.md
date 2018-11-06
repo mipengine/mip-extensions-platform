@@ -126,7 +126,7 @@ mip-linktion-fixtab 实现tab导航在页面一定高度时固定
           </div>
     </div>
     <mip-vd-tabs>
-      <section class="nav nav-justified" role="tablist">
+      <section class="nav nav-justified fixed-nav" role="tablist">
         <li>案例介绍</li>
         <li>常见问题</li>
         <li>特邀点评</li>
