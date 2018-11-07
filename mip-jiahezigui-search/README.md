@@ -19,7 +19,7 @@ mip-jiahezigui-search 组件说明
 <div on="tap:testId.open">点我打开</div>
 <div on="tap:testId.close">点我关闭</div>
 </div>
-<div style="height:1200px">sfdf</div>
+<div style="height:1200px"><a href="#error">透传链接测试</a></div>
 ```
 
 ## 属性

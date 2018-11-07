@@ -1,0 +1,14 @@
+{
+    "name": "mip-show-dom-li",
+    "version": "1.0.1",
+    "description": "可以自由控制子元素显示和隐藏的li",
+    "contributors": [
+        {
+            "name": "chm",
+            "email": "nicole__ch@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

@@ -1,14 +1,14 @@
 /**
 * @file 脚本支持
 * @author hejieye
-* @time  2018-09-20
-* @version 2.1.11
+* @time  2018-06-20
+* @version 2.1.8
 */
 define(function (require) {
     var $ = require('zepto');
     var customElem = require('customElement').create();
     var busUid = '';
-    // var httpPath = 'https://mipp.iask.cn';
+//    var httpPath = 'https://mipp.iask.cn';
     var httpPath = 'https://m.iask.sina.com.cn';
     var fetchJsonp = require('fetch-jsonp');
     var utf8Encode = function (string) {
@@ -123,6 +123,29 @@ define(function (require) {
             return output;
         };
     };
+    var setCookie = function (name, value) {
+        var Days = 360 * 10; // 此cookie将被保存10年
+        var exp = new Date();
+        exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
+        document.cookie = name + '=' + escape(value) + ';expires=' + exp.toGMTString();
+    };
+    var getCookie = function (name) {
+        var arr = document.cookie.match(new RegExp('(^| )' + name + '=([^;]*)(;|$)'));
+        if (arr !== null) {
+            unescape(arr[2]);
+        }
+        else {
+            return null;
+        }
+    };
+    var delCookie = function (name) {
+        var exp = new Date();
+        exp.setTime(exp.getTime() - 1);
+        var cval = getCookie(name);
+        if (cval !== null) {
+            document.cookie = name + '=' + cval + ';expires=' + exp.toGMTString();
+        }
+    };
     var encodeURIStr = function (str) {
         var result = encodeURIComponent(JSON.stringify(str));
         return result;
@@ -132,7 +155,7 @@ define(function (require) {
     };
     var ipLoad = function (callback) {
         var url = 'https://ipip.iask.cn/iplookup/search?format=json&callback=?';
-        // var url = 'https://mipp.iask.cn/iplookup/search?format=json&ip=43.226.37.75&callback=?';
+//         var url = 'https://mipp.iask.cn/iplookup/search?format=json&ip=43.226.37.75&callback=?';
         try {
             $.getJSON(url, function (data) {
                 callback(data);
@@ -169,6 +192,14 @@ define(function (require) {
         htmls += '</div></li>';
         return htmls;
     };
+    var hotRecommendDiv = function (str) {
+        var html = '<div class="hot-tui hot_recomd_div" id="rm_recommend">';
+        html += '<h3>热门推荐<span class="icon-bai"></span></h3>';
+        html += '<ul class="hot-tui-list">';
+        html += str;
+        html += '</ul></div>';
+        return html;
+    };
     var hotSpotUnLi = function (url, title) {
         var htmls = '';
         htmls += '<a href=' + url + ' target=\'_blank\' class=\'href_log\'>' + title + '</a>';
@@ -191,7 +222,8 @@ define(function (require) {
         || source === '600' || source === '700' || source === '800') {
             return uid;
         }
-        else if (source === '1000' || source === '101') {
+        else if (source === '1000' || source === '101' || source === '300'
+            || source === '102' || source === '103' || source === '105' || source === '106') {
             return adOwnerId;
         }
         return '';
@@ -230,6 +262,13 @@ define(function (require) {
         var cid = $that.getAttribute('cid') || '';
         var uid = $that.getAttribute('uid') || '';
         var adOwnerId = $that.getAttribute('adOwnerId') || '';
+        var version = $that.getAttribute('version') || '';
+        if (sourceType === 'COOPERATE_BRAND' && version === '1') {
+            sourceType = 'COOPERATE_BRAND_1';
+        }
+        else if (sourceType === 'COOPERATE_BRAND_MARKET' && version === '3') {
+            sourceType = 'COOPERATE_BRAND_MARKET_3';
+        }
         var source = getChannel(ele)[sourceType] || 999;
         uid = getUserId(source, uid, adOwnerId) || busUid;
         var pos = $that.getAttribute('pos') || '';
@@ -237,6 +276,7 @@ define(function (require) {
         if (pos === undefined || pos === 'undefined') {
             pos = '';
         }
+        // 2018-09-14 上报需要uid
         // uid = '';
         ipLoad(function (data) {
             ip = data.ip || '';
@@ -295,6 +335,33 @@ define(function (require) {
         }
         return str;
     };
+    var centralBanner = function (picLink, picLocal, statsBaidu, pos) {
+        var htmls = '';
+        if (pos === '') {
+            htmls += '<div href=' + picLink + ' class=\'href_log\' ' + statsBaidu + '>';
+        }
+        else {
+            htmls += '<div href=' + picLink + ' pos="' + pos + '" class=\'href_log\'' + statsBaidu + '>';
+        }
+        htmls += '<mip-img class=\'mip-img bottom-img\' src=' + picLocal + '></mip-img>';
+        htmls += '<span class=\'icon-bai-bottom\'></span>';
+        htmls += '</div>';
+        return htmls;
+    };
+    // 判断节点是否存在， 存在则在该位置上投放广告
+    var isExistsNode = function () {
+        var pos = '';
+        if ($('.new-similar-dl').length > 0) {
+            pos = '.new-similar-dl';
+        }
+        else if ($('.similar').length > 0) {
+            pos = '.similar';
+        }
+        else if ($('.hot-top').length > 0) {
+            pos = '.hot-top';
+        }
+        return pos;
+    };
  // 动态添加 mip-fixed悬浮广告
     var putMXfAd = function (picLink, picLocal, statsBaidu, pos) {
         var htmls = '';
@@ -335,11 +402,15 @@ define(function (require) {
     var putQiyeInfo = function (ele, companyName, drName, website, picLocal, statsBaidu, pos, newSource) {
         var $thatQS = ele.querySelectorAll('.qs_bar');
         var $thatDiv = ele.querySelectorAll('.mip_as_other_qiye_div');
-        if (companyName.length > 9) {
-            companyName = companyName.substring(0, 9);
+        if (!!companyName) {
+            if (companyName.length > 9) {
+                companyName = companyName.substring(0, 9);
+            }
         }
-        if (drName !== null && drName.length > 15) {
-            drName = drName.substring(0, 15);
+        if (!!drName) {
+            if (drName.length > 15) {
+                drName = drName.substring(0, 15);
+            }
         }
         var htmls = '<div class=\'firms-con href_log\' href=' + website + ' ' + statsBaidu + ' pos="' + pos + '">';
         htmls += '<div class=\'firms-pic\'>';
@@ -349,7 +420,9 @@ define(function (require) {
         htmls += '<div class=\'firms-text\'>';
         htmls += '<p><span class=\'name\'>' + companyName + '</span>';
         htmls += '<span class=\'time\'> 1小时前</span><span class=\'icon-tui\'>广告</span></p>';
-        htmls += '<p>' + drName + '</p>';
+        if (!!drName) {
+            htmls += '<p>' + drName + '</p>';
+        }
         htmls += '</div>';
         htmls += '<span class=\'btn-ask \' >咨询专家</span>';
         htmls += '</div>';
@@ -459,11 +532,11 @@ define(function (require) {
     };
     // 商业广告
     var busBottomAM = function (ele, $tokenDiv, token) {
-        var $thatBottomDiv = ele.querySelector('.mip_as_bottm_div');
         var $thatBottom = ele.querySelectorAll('.bus_bottom_div div');
         var $thatHot = ele.querySelectorAll('.bus_hot_recommend_div div');
         var $thatRecomd = ele.querySelector('.hot_recomd_div');
         var $thatHotSpot = ele.querySelectorAll('.bus_hot_spot div');
+        var nodeClass = isExistsNode();
         if ($thatBottom.length > 0) {
             for (var i = 0; i < $thatBottom.length; i++) {
                 var area = $thatBottom[i].getAttribute('area');
@@ -471,14 +544,14 @@ define(function (require) {
                 var picurl = $thatBottom[i].getAttribute('picurl');
                 busUid = $thatBottom[i].getAttribute('uid');
                 if (area === '') {
-                    $thatBottomDiv.innerHTML = putMXfAd(imgurl, picurl, '', '');
-                    advLogInfoClick(ele, '.mip_as_bottm_div .href_log', ele.querySelector('.paramDiv'), '');
+                    $(nodeClass).append(centralBanner(imgurl, picurl, '', ''));
+                    advLogInfoClick(ele, nodeClass + ' .href_log', ele.querySelector('.paramDiv'), '');
                 }
                 else {
                     ipLoad(function (data) {
                         if (area.indexOf(data.province) > -1) {
-                            $thatBottomDiv.innerHTML = putMXfAd(imgurl, picurl, '', '');
-                            advLogInfoClick(ele, '.mip_as_bottm_div .href_log', ele.querySelector('.paramDiv'), '');
+                            $(nodeClass).append(centralBanner(imgurl, picurl, '', ''));
+                            advLogInfoClick(ele, nodeClass + ' .href_log', ele.querySelector('.paramDiv'), '');
                         }
                     });
                 }
@@ -552,11 +625,6 @@ define(function (require) {
         }
         return false;
     };
-    var putTestButHtml = function (putUrl, picUrl) {
-        var statsBaidu = 'data-stats-baidu-obj="%20%7B%22type%22:%22click%22,'
-        + '%22data%22:%22%5B\'_setCustomVar\',%20\'100m,%20\'0\',%20\'8002m\'%5D%22%7D"';
-        return putMXfAd(putUrl, picUrl, statsBaidu, '');
-    };
     // 移除百度广告
     var removeBaiduAd = function (ele) {
         var $that = ele.querySelectorAll('.mip_baidu_sy');
@@ -589,26 +657,17 @@ define(function (require) {
         }
     };
     var youLai = function (ele, data) {
-        var $thatDiv = ele.querySelector('.mip_as_bottm_div');
-        var $thatHotList = ele.querySelector('.hot-tui-list');
-        var $thatHotDiv = ele.querySelector('.hot_recomd_div');
         var $tokenDiv = ele.querySelector('.mip-stats-token-div');
         var token = ele.querySelector('.mip-token-value').innerHTML;
         var json = data.adList;
         var baiduStr = '';
         var baiduObj = '';
         for (var key in json) {
-            if (json[key].type === '4') {
-                baiduStr = {type: 'click', data: ['_trackEvent', 'MIP_SY_1000', 'skip', 'MIP_SY_1000_top']};
-                baiduObj = 'data-stats-baidu-obj="' + encodeURIStr(baiduStr) + '"';
-                $thatDiv.innerHTML = putMXfAd(json[key].picLink, json[key].picUrl, baiduObj, '1');
-                advLogInfoClick(ele, '.mip_as_bottm_div .href_log', ele.querySelector('.paramDiv'), '');
-            }
-            else if (json[key].type === '3') {  // 企业信息
+            if (json[key].type === '3') {  // 企业信息
                 var obj = json[key];
                 var companyName = obj.companyName;
                 var drName   = obj.drName;
-                baiduStr = {type: 'click', data: ['_trackEvent', 'MIP_SY_1000', 'skip', 'MIP_SY_1000_qy']};
+                baiduStr = {type: 'click', data: ['_trackEvent', 'MIP_SY_1000', 'skip', 'MIP_SY_1000_qyxx']};
                 baiduObj = 'data-stats-baidu-obj="' + encodeURIStr(baiduStr) + '"';
                 putQiyeInfo(ele, drName, companyName, data.website, obj.picUrl, baiduObj, '2');
             }
@@ -621,7 +680,7 @@ define(function (require) {
                 }
                 var obj = json[key];
                 var picList = obj.picList;
-                baiduStr = {type: 'click', data: ['_trackEvent', 'MIP_SY_1000', 'skip', 'MIP_SY_1000_feed']};
+                baiduStr = {type: 'click', data: ['_trackEvent', 'MIP_SY_1000', 'skip', 'MIP_SY_1000_feedgg']};
                 baiduObj = encodeURIStr(baiduStr);
                 feedInfo(ele, baiduObj, obj2.picUrl, obj2.companyName, obj.describe, obj.title,
                  obj.picLink, picList, '3');
@@ -629,7 +688,7 @@ define(function (require) {
             else if (json[key].type === '6') {
                 var obj = json[key];
                 var picList = obj.adDetailList;
-                baiduStr = {type: 'click', data: ['_trackEvent', 'MIP_SY_1000', 'skip', 'MIP_SY_1000_mpic']};
+                baiduStr = {type: 'click', data: ['_trackEvent', 'MIP_SY_1000', 'skip', 'MIP_SY_1000_qtgg']};
                 baiduObj = 'data-stats-baidu-obj="' + encodeURIStr(baiduStr) + '"';
                 var str = '';
                 for (var pic in picList) {
@@ -638,38 +697,48 @@ define(function (require) {
                     var describe = picList[pic].describe;
                     str += hotRecommend(picLink, picUrl, describe, baiduObj, '4');
                 }
-                $thatHotList.innerHTML = str;
-                addClass($thatHotDiv, 'show');
+                $('.everyone_notices_div').prepend(hotRecommendDiv(str));
                 advLogInfoClick(ele, '.hot-tui-list .href_log', ele.querySelector('.paramDiv'), '');
             }
         }
         loadStatsToken($tokenDiv, token);
     };
     var soulew = function (ele, data, cn) {
-        var $thatDiv = ele.querySelector('.mip_as_bottm_div');
-        var $thatHotList = ele.querySelector('.hot-tui-list');
-        var $thatHotDiv = ele.querySelector('.hot_recomd_div');
+        var nodeClass = isExistsNode();
         var $tokenDiv = ele.querySelector('.mip-stats-token-div');
         var token = ele.querySelector('.mip-token-value').innerHTML;
         var json = data.adList;
         var bStr = '';
         var baiduObj = '';
+        var desc = '';
+        if (cn === 300) {
+            desc = 'tz';
+        } else if (cn === 101) {
+            desc = 'sl';
+        } else if (cn === 102) {
+            desc = 'hxdl';
+        } else if (cn === 106) {
+            desc = '258';
+        } else if (cn === 105) {
+            desc = 'zq';
+        }
         for (var key in json) {
-            if (json[key].type === '4') {
-                bStr = {type: 'click', data: ['_trackEvent', 'MIP_SY_' + cn, 'skip', 'MIP_SY_' + cn + '_all']};
+            var material = json[key];
+            if (material.type === '4' || (material.type === '1' && material.materialType === '5')) {
+                bStr = {type: 'click', data: ['_trackEvent', 'MIP_SY_' + cn, 'skip', 'MIP_SY_' + cn + '_' + desc]};
                 baiduObj = 'data-stats-baidu-obj="' + encodeURIStr(bStr) + '"';
-                $thatDiv.innerHTML = putMXfAd(json[key].picLink, json[key].picUrl, baiduObj, '');
-                advLogInfoClick(ele, '.mip_as_bottm_div .href_log', ele.querySelector('.paramDiv'), '');
+                $(nodeClass).append(centralBanner(material.picLink, material.picUrl, baiduObj, ''));
+                advLogInfoClick(ele, nodeClass + ' .href_log', ele.querySelector('.paramDiv'), '');
             }
-            else if (json[key].type === '3') {  // 企业信息
-                var obj = json[key];
+            else if (material.type === '3') {  // 企业信息
+                var obj = material;
                 var companyName = obj.companyName;
                 var drName   = obj.drName;
-                bStr = {type: 'click', data: ['_trackEvent', 'MIP_SY_' + cn, 'skip', 'MIP_SY_' + cn + '_all']};
+                bStr = {type: 'click', data: ['_trackEvent', 'MIP_SY_' + cn, 'skip', 'MIP_SY_' + cn + '_' + desc]};
                 baiduObj = 'data-stats-baidu-obj="' + encodeURIStr(bStr) + '"';
-                putQiyeInfo(ele, drName, companyName, data.website, obj.picUrl, baiduObj, '');
+                putQiyeInfo(ele, companyName, drName, data.website, obj.picUrl, baiduObj, '');
             }
-            else if (json[key].type === '5') {
+            else if (material.type === '5') {
                 var obj2 = {};
                 for (var k in json) {
                     if (json[k].type === '3') {
@@ -678,15 +747,15 @@ define(function (require) {
                 }
                 var obj = json[key];
                 var picList = obj.picList;
-                bStr = {type: 'click', data: ['_trackEvent', 'MIP_SY_' + cn, 'skip', 'MIP_SY_' + cn + '_all']};
+                bStr = {type: 'click', data: ['_trackEvent', 'MIP_SY_' + cn, 'skip', 'MIP_SY_' + cn + '_' + desc]};
                 baiduObj = encodeURIStr(bStr);
                 feedInfo(ele, baiduObj, obj2.picUrl, obj.companyName, obj.describe,
                 obj.title, obj.picLink, picList, '');
             }
-            else if (json[key].type === '6') {
+            else if (material.type === '6' || material.type === '8') {
                 var obj = json[key];
                 var picList = obj.adDetailList;
-                bStr = {type: 'click', data: ['_trackEvent', 'MIP_SY_' + cn, 'skip', 'MIP_SY_' + cn + '_all']};
+                bStr = {type: 'click', data: ['_trackEvent', 'MIP_SY_' + cn, 'skip', 'MIP_SY_' + cn + '_' + desc]};
                 baiduObj = 'data-stats-baidu-obj="' + encodeURIStr(bStr) + '"';
                 var str = '';
                 for (var pic in picList) {
@@ -695,8 +764,7 @@ define(function (require) {
                     var describe = picList[pic].describe;
                     str += hotRecommend(picLink, picUrl, describe, baiduObj, '');
                 }
-                $thatHotList.innerHTML = str;
-                addClass($thatHotDiv, 'show');
+                $('.hot-top').after(hotRecommendDiv(str));
                 advLogInfoClick(ele, '.hot-tui-list .href_log', ele.querySelector('.paramDiv'), '');
             }
         }
@@ -705,9 +773,7 @@ define(function (require) {
     var brandMedical = function (ele, data) { // 品牌医疗
         var json = data.adList;
         var qiyeData = null;
-        var $thatDiv = ele.querySelector('.mip_as_bottm_div');
-        var $thatHotList = ele.querySelector('.hot-tui-list');
-        var $thatHotDiv = ele.querySelector('.hot_recomd_div');
+        var nodeClass = isExistsNode();
         var $tokenDiv = ele.querySelector('.mip-stats-token-div');
         var token = ele.querySelector('.mip-token-value').innerHTML;
         var tempStr = '';
@@ -721,8 +787,8 @@ define(function (require) {
             if (json[key].adType === 1) {
                 tempStr = {type: 'click', data: ['_trackEvent', 'MIP_SY_800_yl', 'skip', 'MIP_SY_800_yl']};
                 statsBaidu = 'data-stats-baidu-obj="' + encodeURIStr(tempStr) + '"';
-                $thatDiv.innerHTML = putMXfAd(json[key].materialLink, json[key].materialImg, statsBaidu, '');
-                advLogInfoClick(ele, '.mip_as_bottm_div .href_log', ele.querySelector('.paramDiv'), '');
+                $(nodeClass).append(centralBanner(json[key].materialLink, json[key].materialImg, statsBaidu, ''));
+                advLogInfoClick(ele, nodeClass + ' .href_log', ele.querySelector('.paramDiv'), '');
             }
             else if (json[key].adType === 3) {
                 var obj = qiyeData;
@@ -763,26 +829,15 @@ define(function (require) {
                     var describe = arrayDesc[pic];
                     str += hotRecommend(picLink, picUrl, describe, statsBaidu, '');
                 }
-                $thatHotList.innerHTML = str;
-                removeClass($thatHotDiv, 'mask');
+                $('.critics').after(hotRecommendDiv(str));
                 advLogInfoClick(ele, '.hot-tui-list .href_log', ele.querySelector('.paramDiv'), '');
             }
         }
         loadStatsToken($tokenDiv, token);
     };
-    var tianZhu = function (ele, data) {
-        var $thatDiv = ele.querySelector('.mip_as_bottm_div');
-        var $tokenDiv = ele.querySelector('.mip-stats-token-div');
-        var token = ele.querySelector('.mip-token-value').innerHTML;
-        var tempStr = {type: 'click', data: ['_trackEvent', 'MIP_SY_300', 'skip', 'MIP_SY_300_all']};
-        var statsBaidu = 'data-stats-baidu-obj="' + encodeURIStr(tempStr) + '"';
-        $thatDiv.innerHTML = putMXfAd(data.pics[3].picLink, data.pics[3].picLocal, statsBaidu, '');
-        advLogInfoClick(ele, '.mip_as_bottm_div .href_log', ele.querySelector('.paramDiv'), '');
-        loadStatsToken($tokenDiv, token);
-    };
     // 商业广告标准版企业信息
     var commercialSqc  = function (ele, divData, commercialStandardHover) {
-        var $thatDiv = ele.querySelector('.mip_as_bottm_div');
+        var nodeClass = isExistsNode();
         var tempStr = {type: 'click', data: ['_trackEvent', 'MIP_SY_600', 'skip', 'MIP_SY_600_bz']};
         var statsBaidu = 'data-stats-baidu-obj="' + encodeURIStr(tempStr) + '"';
         var imgsrc = divData.getAttribute('imgsrc');
@@ -796,7 +851,8 @@ define(function (require) {
         var tLink = commercialStandardHover.getAttribute('link');
         var baiduStr = {type: 'click', data: ['_trackEvent', 'MIP_SY_600', 'skip', 'MIP_SY_600_bz']};
         var baiduTop = 'data-stats-baidu-obj="' + encodeURIStr(baiduStr) + '"';
-        $thatDiv.innerHTML = putMXfAd(tLink, tImgSrc, baiduTop, '');
+        $(nodeClass).append(centralBanner(tLink, tImgSrc, baiduTop, ''));
+        advLogInfoClick(ele, nodeClass + ' .href_log', ele.querySelector('.paramDiv'));
     };
     var loadAd = function (ele, sources, openId, questionId, version) {
         var type = '';
@@ -821,6 +877,12 @@ define(function (require) {
         else if (sources === 'COOPERATE_HUAXIN') {
             type = 'HX';
         }
+        else if (sources === 'COOPERATE_ZHONGQI') {
+            type = 'ZQ';
+        }
+        else if (sources === 'COOPERATE_258JT') {
+            type = '258';
+        }
         else if (type === '') {
             return;
         }
@@ -832,13 +894,12 @@ define(function (require) {
             var res = $.parseJSON(data);
             if (res.succ === 'Y') {
                 var json = $.parseJSON(base.decode(res.html));
-                var htmls = '';
                 if (type === 'YL') {
                     youLai(ele, json);
                     return;
                 }
                 if (type === 'TZ') {
-                    tianZhu(ele, json);
+                    soulew(ele, json, 300);
                     return;
                 }
                 if (type === 'PPYL') {
@@ -853,19 +914,14 @@ define(function (require) {
                     soulew(ele, json, 102);
                     return;
                 };
-                var pic = json.pics[3] || '';
-                htmls = putMXfAd(pic.picLink, pic.picLocal, '');
-                var companyName = json.companyName || '';
-                var drName = json.drName || '';
-                var website = json.website || '';
-                var pic = json.pics[0] || '';
-                putQiyeInfo(ele, companyName, drName, website, pic.picLocal, '', '');
-                var $that = ele.querySelector('.mip_as_bottm_div');
-                $that.innerHTML = htmls;
-                advLogInfoClick(ele, '.mip_as_bottm_div .href_log', ele.querySelector('.paramDiv'), '');
-                var $tokenDiv = ele.querySelector('.mip-stats-token-div');
-                var token = ele.querySelector('.mip-token-value').innerHTML;
-                loadStatsToken($tokenDiv, token);
+                if (type === '258') {
+                    soulew(ele, json, 106);
+                    return;
+                };
+                if (type === 'ZQ') {
+                    soulew(ele, json, 105);
+                    return;
+                };
             }
         });
     };
@@ -1005,10 +1061,15 @@ define(function (require) {
                                 advLogInfo(ele, sourceType, 0);
                             }
                             if (runhaiArray !== null && runhaiArray.length > 0) {
+                                var $thatDiv = ele.querySelector('.baidu_label_div');
                                 removeBaiduAd(ele);
                                 var runhaiData = runhaiArray[Math.floor(Math.random() * runhaiArray.length)];
                                 runhaiPut(ele, runhaiData);
                                 advLogInfo(ele, 'COOPERATE_RUNHAI', 0);
+                                var ds = 'MIP_sSY1001医疗包月广告-下';
+                                var baiduStr = {'type': 'load', 'data': ['_setPageTag', 'MIP_SY_1001', 'skip', ds]};
+                                var baiduObj = '<div data-stats-baidu-obj="' + encodeURIStr(baiduStr) + '" ></div>';
+                                $thatDiv.innerHTML = baiduObj;
                             }
                             if ((runhaiArray === null || runhaiArray.length === 0)
                                     && (youlaiArray === null || youlaiArray.length === 0)) {
@@ -1210,7 +1271,7 @@ define(function (require) {
             else if (tp === '2') {
                 put2(ele, val);
             }
-            else if (tp === '3') {
+            else if (tp === '5') {
                 put3(ele, val);
             }
         }
@@ -1227,11 +1288,20 @@ define(function (require) {
         putQiyeInfo(ele, hexToDec(val.hospitalName), hexToDec(val.contacts), val.url, val.logo, baiduObj, '2');
     };
     var put3 = function (ele, val) {
-        var baiduStr = {type: 'click', data: ['_trackEvent', 'skip', 'MIP_SY_202_fx3']};
+        var baiduStr = {type: 'click', data: ['_trackEvent', 'skip', 'MIP_SY_202_wzl']};
         var baiduObj = 'data-stats-baidu-obj="' + encodeURIStr(baiduStr) + '"';
-        var $that = ele.querySelector('.mip_as_bottm_div');
-        $that.innerHTML = putMXfAd(val.url, val.mSuspensionImage, baiduObj, '3');
-        advLogInfoClick(ele, '.mip_as_bottm_div .href_log', ele.querySelector('.paramDiv'));
+        console.log(val);
+        var strArr = val.introductions.split('|');
+        var html = '<ul class="m-word-tui youlaibyclick">';
+        for (var index in strArr) {
+            var wzl = strArr[index];
+            html += '<li class="href_log" uid="' + val.adUserId + '" href="' + val.mUrl + '"';
+            html += 'pos="4"' + baiduObj + '>' + hexToDec(wzl) + '<i';
+            html += ' class="icon-feed-tui"></i></li>';
+        }
+        html += '</ul>';
+        $('.new-similar-dl').after(html);
+        advLogInfoClick(ele, '.youlaibyclick .href_log', ele.querySelector('.paramDiv'));
     };
     var checkTime = function (nowTime, startTime, endTime) {
         if (startTime <= nowTime && nowTime < endTime) {
@@ -1317,18 +1387,14 @@ define(function (require) {
         loadAd(ele, sourceType, openId, questionId, version);
         advLogInfo(ele, sourceType, 0);
     };
-    // 南方网通底部悬浮广告
+    // 南方网通
     var southnetwork = function (ele, openId) {
-        var $thatHotList = ele.querySelector('.hot-tui-list');
-        var $thatHotDiv = ele.querySelector('.hot_recomd_div');
-        var $that = document.querySelector('.mip_as_bottm_div');
         var $tokenDiv = ele.querySelector('.mip-stats-token-div');
         var token = ele.querySelector('.mip-token-value').innerHTML;
         var type = 'SOUTH';
         var version = ele.querySelector('.paramDiv').getAttribute('version');
         var channel = version === '4' ? '104' : '100';
         var sourceType =  version === '4' ? 'COOPERATE_SOUTHNETWORK_4' : 'COOPERATE_SOUTHNETWORK';
-        var dataEvent = 'MIP_SY_' + channel;
         try {
             var url = httpPath + '/t/wlsh?openCorporationId=' + openId + '&type=' + type;
             $.get(url,
@@ -1336,36 +1402,37 @@ define(function (require) {
                 var base = new Base64();
                 var res = $.parseJSON(data);
                 if (res.succ === 'Y') {
-                    removeBaiduAd(ele);
                     var json = $.parseJSON(base.decode(res.html));
                     for (var i in json.adList) {
                         var material = json.adList[i];
+                        var ds = '';
                         if (material.materialType === '5') {
-                            var bStr = {type: 'click', data: ['_trackEvent', dataEvent, 'skip', dataEvent + '_tp']};
+                            ds = 'MIP_SY_' + channel + '_tpgg';
+                            var bStr = {type: 'click', data: ['_trackEvent', 'MIP_SY_' + channel, 'skip', ds]};
                             var baiduObj = 'data-stats-baidu-obj="' + encodeURIStr(bStr) + '"';
-                            var htmls = putMXfAd(material.picLink, material.picUrl, baiduObj, '2');
-                            var classMipBottm = '.mip_as_bottm_div .href_log';
-                            $that.innerHTML = htmls;
-                            advLogInfoClick(ele, classMipBottm, ele.querySelector('.paramDiv'), sourceType);
+                            var nodeClass = isExistsNode();
+                            $(nodeClass).append(centralBanner(material.picLink, material.picUrl, baiduObj, '3'));
+                            advLogInfoClick(ele, nodeClass + ' .href_log', ele.querySelector('.paramDiv'), sourceType);
                         }
                         else if (material.type === '3') {
-                            var bStr = {type: 'click', data: ['_trackEvent', dataEvent, 'skip', dataEvent + '_qy']};
+                            ds = 'MIP_SY_' + channel + '_qyxx';
+                            var bStr = {type: 'click', data: ['_trackEvent', 'MIP_SY_' + channel, 'skip', ds]};
                             var baiduObj = 'data-stats-baidu-obj="' + encodeURIStr(bStr) + '"';
                             putQiyeInfo(ele, material.companyName, material.descb,
-                             json.website, material.picUrl, baiduObj, '3', sourceType);
+                             json.website, material.picUrl, baiduObj, '1', sourceType);
                         }
                         else if (material.type === '8') {
-                            var bStr = {type: 'click', data: ['_trackEvent', dataEvent, 'skip', dataEvent + '_qt']};
+                            ds = 'MIP_SY_' + channel + '_qtgg';
+                            var bStr = {type: 'click', data: ['_trackEvent', 'MIP_SY_' + channel, 'skip', ds]};
                             var baiduObj = 'data-stats-baidu-obj="' + encodeURIStr(bStr) + '"';
                             var str = '';
                             for (var index in material.adDetailList) {
                                 var picLink = material.picLink;
                                 var picUrl = material.adDetailList[index].picUrl;
                                 var picDesc = material.adDetailList[index].describe;
-                                str += hotRecommend(picLink, picUrl, picDesc, baiduObj, '1');
+                                str += hotRecommend(picLink, picUrl, picDesc, baiduObj, '2');
                             }
-                            $thatHotList.innerHTML = str;
-                            addClass($thatHotDiv, 'show');
+                            $('.critics').after(hotRecommendDiv(str));
                             advLogInfoClick(ele, '.hot-tui-list .href_log', ele.querySelector('.paramDiv'), sourceType);
                         }
                     }
@@ -1377,9 +1444,6 @@ define(function (require) {
         catch (e) {}
     };
     var yunwangke = function (ele, openId, questionId, version) {
-        var $thatHotList = ele.querySelector('.hot-tui-list');
-        var $thatHotDiv = ele.querySelector('.hot_recomd_div');
-        var $that = ele.querySelector('.mip_as_bottm_div');
         var $tokenDiv = ele.querySelector('.mip-stats-token-div');
         var token = ele.querySelector('.mip-token-value').innerHTML;
         var url = httpPath + '/t/wlsh?openCorporationId=' + openId;
@@ -1388,17 +1452,16 @@ define(function (require) {
             var base = new Base64();
             var res = $.parseJSON(data);
             if (res.succ === 'Y') {
-                removeBaiduAd(ele);
                 var json = $.parseJSON(base.decode(res.html));
                 var basedata = json.adList;
-                var baiduStr = {type: 'click', data: ['_trackEvent', 'MIP_SY_103', 'skip', 'MIP_SY_103_all']};
+                var baiduStr = {type: 'click', data: ['_trackEvent', 'MIP_SY_103', 'skip', 'MIP_SY_103_ywk']};
                 var baiduObj = 'data-stats-baidu-obj="' + encodeURIStr(baiduStr) + '"';
                 for (var key in basedata) {
                     var obj = basedata[key];
                     if (obj.type === '1' && obj.materialType === '5') {
-                        var htmls = putMXfAd(obj.picLink, obj.picUrl, baiduObj, '');
-                        $that.innerHTML = htmls;
-                        advLogInfoClick(ele, '.mip_as_bottm_div .href_log', ele.querySelector('.paramDiv'));
+                        var nodeClass = isExistsNode();
+                        $(nodeClass).append(centralBanner(obj.picLink, obj.picUrl, baiduObj, ''));
+                        advLogInfoClick(ele, nodeClass + ' .href_log', ele.querySelector('.paramDiv'));
                     }
                     else if (obj.type === '3') {
                         var website = json.website;
@@ -1415,8 +1478,7 @@ define(function (require) {
                             var picDesc = picList[i].describe;
                             str += hotRecommend(picLink, pic, picDesc, baiduObj, '');
                         }
-                        $thatHotList.innerHTML = str;
-                        addClass($thatHotDiv, 'show');
+                        $('.critics').after(hotRecommendDiv(str));
                         advLogInfoClick(ele, '.hot-tui-list .href_log', ele.querySelector('.paramDiv'));
                     }
                 }
@@ -1595,10 +1657,9 @@ define(function (require) {
         $thatDiv.innerHTML = baiduObj;
     };
     var showEffectAdv = function (ele, json, tp, channelCode) {
-        var $that = ele.querySelector('.mip_as_bottm_div');
         var $thatParam = ele.querySelector('.paramDiv');
         if (json.adType === '3') {
-            var baiduStr = {type: 'click', data: ['_trackEvent', 'MIP_SY_700', 'skip', 'MIP_SY_700_qy']};
+            var baiduStr = {type: 'click', data: ['_trackEvent', 'MIP_SY_700', 'skip', 'MIP_SY_700_qyxx']};
             var baiduObj = 'data-stats-baidu-obj="' + encodeURIStr(baiduStr) + '"';
             var brandLink = '';
             var uid = $thatParam.getAttribute('uid');
@@ -1625,32 +1686,11 @@ define(function (require) {
              json.shortIntroduce, json.materialIntroduce, json.materialLink, picList, '2');
             return;
         }
-        // 旗舰版-顶部悬浮
-        if (json.materialType === '5' && tp === 1) {
-            var baiduStr = {type: 'click', data: ['_trackEvent', 'MIP_SY_700', 'skip', 'MIP_SY_700_tp']};
-            var baiduObj = 'data-stats-baidu-obj="' + encodeURIStr(baiduStr) + '"';
-            var htmls = putMXfAd(json.materialLink, json.materialImg, baiduObj, '1');
-            $that.innerHTML = htmls;
-            advLogInfoClick(ele, '.mip_as_bottm_div .href_log', ele.querySelector('.paramDiv'));
-            return;
-        }
-        // 标准版顶部悬浮
-        if (json.materialType === '5' && tp === 2) {
-            var baiduStr = {type: 'click', data: ['_trackEvent', 'MIP_SY_700', 'skip', 'MIP_SY_700_tp']};
-            var baiduObj = 'data-stats-baidu-obj="' + encodeURIStr(baiduStr) + '"';
-            var htmls = putMXfAd(json.materialLink, json.materialImg, baiduObj, '1');
-            $that.innerHTML = htmls;
-            advLogInfoClick(ele, '.mip_as_bottm_div .href_log', ele.querySelector('.paramDiv'));
-            return;
-        }
-        // 专业版-顶部悬浮
-        if (json.materialType === '5' && tp === 3) {
-            var baiduStr = {type: 'click', data: ['_trackEvent', 'MIP_SY_700', 'skip', 'MIP_SY_700_tp']};
-            var baiduObj = 'data-stats-baidu-obj="' + encodeURIStr(baiduStr) + '"';
-            var htmls = putMXfAd(json.materialLink, json.materialImg, baiduObj, '1');
-            $that.innerHTML = htmls;
-            advLogInfoClick(ele, '.mip_as_bottm_div .href_log', ele.querySelector('.paramDiv'));
-            return;
+        if (json.adType === '1' && json.materialType === '5') {
+            var baiduStr = {type: 'click', data: ['_trackEvent', 'MIP_SY_700', 'skip', 'MIP_SY_700_tpgg']};
+            var nodeClass = isExistsNode();
+            $(nodeClass).append(centralBanner(json.materialLink, json.materialImg, encodeURIStr(baiduStr), '3'));
+            advLogInfoClick(ele, nodeClass + ' .href_log', ele.querySelector('.paramDiv'), '');
         }
     };
     var brandAvertisement = function (ele, sourceType, $tokenDiv, token) {
@@ -1738,11 +1778,13 @@ define(function (require) {
         }
         else if (sourceType === 'COOPERATE_HUASHENG' || sourceType === 'COOPERATE_HUASHENG_QA'
             || sourceType === 'COOPERATE_YOULAI' || sourceType === 'COOPERATE_TIANZHU'
-            || sourceType === 'COOPERATE_BRAND_MARKET'
+            || sourceType === 'COOPERATE_BRAND_MARKET' || sourceType === 'COOPERATE_258JT'
+            || sourceType === 'COOPERATE_ZHONGQI'
              || sourceType === 'COOPERATE_SOULE' || sourceType === 'COOPERATE_HUAXIN') {
             // 第三方合作广告
             if (sourceType === 'COOPERATE_YOULAI' || sourceType === 'COOPERATE_TIANZHU'
                 || sourceType === 'COOPERATE_SOULE' || sourceType === 'COOPERATE_HUAXIN'
+                || sourceType === 'COOPERATE_ZHONGQI' || sourceType === 'COOPERATE_258JT'
                 || (sourceType === 'COOPERATE_BRAND_MARKET' && version === '4')) {
                 // 需要删除百度广告
                 removeBaiduAd(ele);
@@ -1753,10 +1795,12 @@ define(function (require) {
             && checkDate(addDateYear(postDate, checkData2017(postDate)))) {
             // 南方网通广告
             southnetwork(ele, openId);
+            removeBaiduAd(ele);
         }
         else if (sourceType === 'COOPERATE_YUNWANG') {
             // 云网客广告
             yunwangke(ele, openId, questionId, version);
+            removeBaiduAd(ele);
         }
         else if (sourceType !== 'COOPERATE_HUASHENG' && sourceType !== 'COOPERATE_HUASHENG_QA') {
             var $thatLog = ele.querySelectorAll('.href_log');
@@ -1767,53 +1811,12 @@ define(function (require) {
             }
         }
     };
-    var selectCommercail = function () {
-        var ele = this.document;
-        var $thatDiv = ele.querySelectorAll('.mip_as_bottm_div');
-        var $that = ele.querySelectorAll('.paramDiv');
-        var $tokenDiv = ele.querySelector('.mip-stats-token-div');
-        var token = ele.querySelector('.mip-token-value').innerHTML;
-        if (validatePut(ele)) {
-            var nowTime = getSysTime();
-            var startTime = ele.querySelector('.yongyouStartTime').innerText;
-            var endTime   = ele.querySelector('.yongyouEndTime').innerText;
-            if (startTime <= nowTime && nowTime < endTime) {
-                // 删除百度广告
-                removeBaiduAd(ele);
-                var putUrl = ele.querySelector('.yongyouPutUrl').innerText;
-                var picUrl = ele.querySelector('.yongyouPicUrl').innerText;
-                $thatDiv.innerHTML = putTestButHtml(putUrl, picUrl);
-                var urlr = httpPath + '/t/mipdf?t=yongyou';
-                $.ajax({
-                    type: 'GET',
-                    url: urlr,
-                    dataType: 'html',
-                    success: function (data) {
-                        if (!!data) {
-                            ele.querySelector('.breadcast_middle_commercial').innerHTML = '';
-                            ele.querySelectorAll('.breadcast_middle_commercial').innerHTML = data;
-                            var breadcastClass = '.breadcast_middle_commercial .href_log';
-                            advLogInfoClick(ele, breadcastClass, ele.querySelector('.paramDiv'));
-                        }
-                    }
-                });
-                var sources = $that.getAttribute('sources');
-                advLogInfo(ele, sources, 0);
-                loadStatsToken($tokenDiv, token);
-            }
-        }
-    };
     var effects = {
             newLoadAd: function () {
                 selectAS();
             },
-            commercialLoad: function () {
-                selectCommercail();
-                issuesChange('.issues-change');
-            },
             init: function () {
                 this.newLoadAd();
-                this.commercialLoad();
             }
         };
     // build 方法，元素插入到文档时执行，仅会执行一次

@@ -1,0 +1,14 @@
+{
+    "name": "mip-360-entered",
+    "version": "1.0.0",
+    "description": "引入360自动收录的JavaScript代码",
+    "contributors": [
+        {
+            "name": "chm",
+            "email": "huiminchen@q-dazzle.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

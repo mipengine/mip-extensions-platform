@@ -1,0 +1,14 @@
+{
+    "name": "mip-select-beautify",
+    "version": "1.0.0",
+    "description": "美化select组件",
+    "contributors": [
+        {
+            "name": "guomengyuan",
+            "email": "1401105669@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

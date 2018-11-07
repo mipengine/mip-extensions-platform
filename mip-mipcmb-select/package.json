@@ -1,0 +1,14 @@
+{
+    "name": "mip-mipcmb-select",
+    "version": "1.0.0",
+    "description": "下拉列表",
+    "contributors": [
+        {
+            "name": "liuqiang",
+            "email": "18366971514@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
