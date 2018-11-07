@@ -5,20 +5,6 @@
 define(function (require) {
     var $ = require('zepto');
     var customElem = require('customElement').create();
-    // 按钮效果
-    function validate(o) {
-        var text = $(o).find('.w-text textarea').val();
-        var len = text.length;
-        var zh = text.replace(/[\x00-\xff]/g, '').length;
-        var tlen = Math.ceil((len + zh) / 2);
-        if (tlen < 5) {
-            $(o).find('#verify').addClass('disable');
-        }
-        else {
-            $(o).find('#verify').removeClass('disable');
-        }
-    }
-
 
     function comment(o) {
         var ajaxUrl = $(o).find('mip-form').attr('url');
@@ -51,7 +37,8 @@ define(function (require) {
             oli = oul.find('li');
             $.ajax({
                 url: ajaxUrl + 'ajax.php',
-                dataType: 'json',
+                dataType: 'jsonp',
+                jsonp: 'callback',
                 data: {
                     type: 'get',
                     saytext: $('.w-text textarea').val(),
@@ -99,13 +86,13 @@ define(function (require) {
                 type: 'get',
                 url: ajaxUrl + 'ajax.php',
                 data: 'action=readComment&classid=' + $(o).find('#classid').val() + '&id=' + oid + '&page=' + p,
-                dataType: 'json',
+                dataType: 'jsonp',
+                jsonp: 'callback',
                 success: function (data) {
                     if (data.RecordCount > 0) {
                         var html = '';
                         var d = (new Function('', 'return' + data))();
                         var userName = d.sUserName;
-                        var userForm = d.sUserForm;
                         var userData = d.sDateAndTime;
                         var userText = d.sContent;
                         for (var i = 0; i < userName.length; i++) {
@@ -140,7 +127,18 @@ define(function (require) {
             $(o).find('#view-comment').css('display', 'block');
             $(o).find('#submit').css('display', 'none');
         });
-        $(o).find('.w-text textarea').keyup(validate);
+        $(o).find('.w-text textarea').on('keyup', function () {
+            var text = $(this).val();
+            var len = text.length;
+            var zh = text.replace(/[\x00-\xff]/g, '').length;
+            var tlen = Math.ceil((len + zh) / 2);
+            if (tlen < 5) {
+                $(o).find('#verify').addClass('disable');
+            }
+            else {
+                $(o).find('#verify').removeClass('disable');
+            }
+        });
     }
 
     customElem.prototype.firstInviewCallback = function () {

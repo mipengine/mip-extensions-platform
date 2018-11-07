@@ -1,5 +1,5 @@
 /**
- * @file mip-hs-like 组件
+ * @file mip-hs-dianzan 组件
  * @author
  */
 
@@ -13,10 +13,13 @@ define(function (require) {
      */
     customElement.prototype.firstInviewCallback = function () {
         // TODO
-        var add = document.querySelector('.add');
-        add.onclick = function () {
-            var num = document.querySelector('.num');
-            num.innerText++;
+        var add = document.querySelectorAll('.add');
+        var num = document.querySelectorAll('.num');
+        for (var i = 0; i < add.length; i++) {
+            add[i].index = i;
+            add[i].onclick = function () {
+                num[this.index].innerText++;
+            };
         };
     };
 

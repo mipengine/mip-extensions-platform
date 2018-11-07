@@ -1,0 +1,14 @@
+{
+    "name": "mip-hs-dianzan",
+    "version": "1.0.0",
+    "description": "组件介绍",
+    "contributors": [
+        {
+            "name": "yl.zhang",
+            "email": "1837078639@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

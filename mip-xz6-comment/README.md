@@ -36,7 +36,11 @@ mip-xz6-comment 用来支持小说详情页的评论
                 <input id="verify" class="button disable" type="submit" value="提交跟贴"  hidefocus="true" />
                 <span id="cancel" class="button">取消</span>
             </fieldset>
-            <input type="hidden" id="app-id" value="[!--id--]" />
+            <input name="username" type="hidden" class="inputText" id="username" value="网友" size="16" />
+            <input name="password" type="hidden" class="inputText" id="password" value="" size="16" />
+            <input name="classid" type="hidden" id="classid" value="111" />
+            <input name="repid" type="hidden" id="repid" value="0" />
+            <input type="hidden" id="app-id" value="135022" />
         </mip-form >
     </section>
 </mip-xz6-comment>

@@ -17,6 +17,7 @@ define(function (require) {
         var myThis = this.element;
         var domList = myThis.querySelector('.placeholder');
         var domListulli = myThis.querySelectorAll('li');
+        var domBody = document.getElementsByTagName('body');
 
         domList.addEventListener('click', function (e) {
             var parent = $(this).closest('.select');
@@ -36,6 +37,10 @@ define(function (require) {
                 parent.removeClass('is-open').find('.placeholder').text($(this).text());
             });
         }
+
+        domBody[0].addEventListener('click', function (e) {
+            myThis.classList.remove('is-open');
+        });
 
     };
 
