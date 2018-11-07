@@ -8,6 +8,8 @@
 define(function (require) {
     var customElement = require('customElement').create();
     customElement.prototype.build = function () {
+        var remCount = 12.42;
+        var remV = this.element.getAttribute('remV') || remCount;
         var doc = window.document;
         var docEl = doc.documentElement;
         var metaEl = doc.querySelector('meta[name="divport"]');
@@ -18,7 +20,7 @@ define(function (require) {
             var match = metaEl.getAttribute('content').match(/initial\-scale=([\d\.]+)/);
             if (match) {
                 scale = parseFloat(match[1]);
-                dpr = parseInt(10, 1 / scale);
+                dpr = parseInt(1 / scale, 10);
             }
         } else if (flexibleEl) {
             var content = flexibleEl.getAttribute('content');
@@ -75,7 +77,7 @@ define(function (require) {
             /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|Windows Phone)/i
         ))) {
             var width = document.documentElement.clientWidth;
-            var rem = width / 12.42;
+            var rem = width / remV;
             docEl.style.fontSize = rem + 'px';
         } else {
             document.getElementsByTagName('html')[0].style.fontSize = 100 + 'px';

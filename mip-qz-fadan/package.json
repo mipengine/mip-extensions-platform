@@ -1,0 +1,14 @@
+{
+    "name": "mip-qz-fadan",
+    "version": "1.0.0",
+    "description": "齐装网mip项目发单入口组件",
+    "contributors": [
+        {
+            "name": "qz_xsc",
+            "email": "1040867197@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

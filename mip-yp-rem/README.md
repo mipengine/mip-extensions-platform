@@ -14,4 +14,12 @@ mip-yp-rem rem换算
 <mip-yp-rem></mip-yp-rem>
 ```
 
+### 自定义参数
+
+```html
+<mip-alert remV="6.4">
+    自定义内容，可以嵌套其他组件
+</mip-alert>
+```
+
 

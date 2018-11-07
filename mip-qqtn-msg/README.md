@@ -567,6 +567,31 @@ margin: 9px 0 0;}
 
 .block-txt{ display:none;}
 #comment-list li {}
+/*评论*/
+#comment {margin-top: 12px;margin-bottom: 12px}
+#view-comment header{background:#fff;}
+#comment .fb {display: block; font-size:16px; -webkit-border-radius: 2px;border: 1px solid #ccc;color: #333;-webkit-box-sizing: border-box;line-height: 28px;padding: 10px 5px 10px 46px;position: relative;margin: 8px 10px 0 10px;background: url(/skin/new2016/images/pl.png) 6px 3px no-repeat;box-shadow: 0px 2px 1px #fff,inset 0px 1px 1px rgba(138, 138, 138, 0.2);}
+#comment-list {margin: 10px;font-size: 12px;}
+#comment-list li {padding: 10px 2px;border-bottom: 1px solid #e6e6e6;line-height: 24px;}
+#comment-list li:first-child {border-top: 1px solid #e6e6e6;}
+#comment-list li:last-child {border-bottom: 0;}
+#comment #submit {display: none;margin-bottom: 10px;}
+.w-text textarea {color: #666;background: #fff;border: 1px solid #ccc;border-radius: 4px;width: 100%;font-size: 16px;-webkit-box-shadow: 0 1px 4px rgba(0,0,0,.1) inset;height: 80px;padding: 5px 10px;line-height: 32px;}
+.w-text {margin:0 10px 8px;padding: 15px 0px 0 0;}
+.w-button {}
+#submit .button {width: 47%;margin-left: 2%;color: #555;height: 32px;border: 1px solid #ccc;-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .06);-moz-box-shadow: 0 1px 1px rgba(0, 0, 0, .06);box-shadow: 0 1px 1px rgba(0, 0, 0, .06);float:left;}
+#comment .button {background: #19b5fe;width: 95%;height: 34px;line-height: 34px;text-align: center;font-size: 15px;color: #fff;border-radius: 5px;display: block;margin-right: 1%;margin:12px auto;
+font-weight: normal;}
+#view-comment .button-status-complete {border-top: 1px solid #e6e6e6;overflow: hidden;text-align: center;position: relative;display: none;padding: 10px 0; background-color: #fff;padding: 0; height: auto;line-height: auto}
+#view-comment .button {padding: 0 20px;}
+#submit #verify {width: 67%;margin: 0px;background: #ff4d4e; border:0px; height: 30px; line-height: 30px;}
+#submit #verify.disable {width: 67%;height: 30px;line-height: 30px;background: #ff4d4e;font-size: 15px;font-weight: normal;font-family: "microsoft yahei";text-align: center;color: #fff;padding: 0;margin: 0;border: 0;float: left;display: inline;overflow: hidden;border-radius: 4px;-webkit-box-flex: 1;}
+#comment #cancel {width: 30%;height: 30px;line-height: 30px;background: #ccc;font-size: 14px;font-weight: normal;font-family: "microsoft yahei";text-align: center;color: #fff;padding: 0;margin: 0 0 0 3%;border: 0;float: left;display: inline-block;overflow: hidden;border-radius: 4px;}
+#comment-list .user {color: #326eb4;padding-right: 100px;position: relative;margin-bottom: 2px;height: 24px;overflow: hidden; font-size: 15px;}
+#comment-list .user time {position: absolute;right: 0;top: 0;color: #a6a6a6;width: 90px;height: 24px;overflow: hidden;text-align:right;font-size: 15px;}
+#view-comment footer span { font-size: 15px; }
+#comment-list li blockquote{ font-size: 15px; color: #666; }
+#comment-list li p{font-size: 15px;color: #666; }
 
 
 </style>
@@ -851,13 +876,6 @@ margin: 9px 0 0;}
         <dt>用户评论</dt>
         <dd></dd>
     </dl>
-<div id="view-comment" class="reviews">
-<div class="post"><header>
-<span class="fb">跟帖评论</span></header>
-<ul id="comment-list"></ul>
-<footer class="button-status-complete"><span class="button">更多评论</span></footer>
-</div>
-</div>
 <mip-form method="post" url="https://m.qqtn.com/" id="submit" class="post block-txt">
 <fieldset class="w-text"><textarea></textarea></fieldset>
 <fieldset class="w-button">
@@ -866,6 +884,13 @@ margin: 9px 0 0;}
 </fieldset>
 <input type="hidden" id="app-id" value="32370" />
 </mip-form>
+<div id="view-comment" class="reviews">
+<div class="post"><header>
+<span class="fb">跟帖评论</span></header>
+<ul id="comment-list"></ul>
+<footer class="button-status-complete"><span class="button">更多评论</span></footer>
+</div>
+</div>
 </section>
 </mip-qqtn-msg>
 <section id="tonglei">

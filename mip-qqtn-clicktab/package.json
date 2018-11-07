@@ -1,0 +1,14 @@
+{
+    "name": "mip-qqtn-clicktab",
+    "version": "1.0.0",
+    "description": "点击对应标签隐藏显示div",
+    "contributors": [
+        {
+            "name": "dgm",
+            "email": "1028212667@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.0.1"
+    }
+}

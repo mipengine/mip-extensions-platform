@@ -1,0 +1,14 @@
+{
+    "name": "mip-role-notice",
+    "version": "1.0.1",
+    "description": "元素滚动",
+    "contributors": [
+        {
+            "name": "chm",
+            "email": "huiminchen@q-dazzle.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.1"
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "name": "mip-scrollboxauto",
+    "version": "1.0.0",
+    "description": "横向滑动组件，支持自动适合屏幕宽度,添加指定默认选中元素。",
+    "contributors": [
+        {
+            "name": "sanguogege",
+            "email": "sanguogege@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

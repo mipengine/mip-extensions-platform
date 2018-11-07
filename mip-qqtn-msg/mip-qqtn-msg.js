@@ -96,7 +96,7 @@ define(function (require) {
                     var userData = data.sDateAndTime;
                     var userText = data.sContent;
                     for (var i = 0; i < userName.length; i++) {
-                        html += '<li><p class="user">腾牛网游<time>' + userData[i] + '</time></p><p>'
+                        html += '<li><p class="user">腾牛网友<time>' + userData[i] + '</time></p><p>'
                         + decodeURIComponent(userText[i]) + '</p></li>';
 
                     }

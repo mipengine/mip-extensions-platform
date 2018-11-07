@@ -1,0 +1,13 @@
+{
+  "name": "mip-xz6-read",
+  "version": "1.0.0",
+  "description": "小说阅读页逻辑",
+  "author": {
+      "name": "lj",
+      "email": "lj@952.com",
+      "url": "https://www.xz6.com"
+  },
+  "engines": {
+      "mip": ">=1.1.0"
+  }
+}
