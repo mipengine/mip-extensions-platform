@@ -16,10 +16,10 @@ define(function (require) {
     function render(data) {
         var self = this;
         var nodeList = [];
+        self.container.removeChild(self.container.childNodes[0]);
         var fragment = document.createDocumentFragment();
         if (data && data instanceof Array && data.length > 0) {
             // 移除默认节点
-            self.container.removeChild(self.container.childNodes[0]);
             data.map(function (item) {
                 var node = document.createElement('div');
                 node.innerHTML = item.name;

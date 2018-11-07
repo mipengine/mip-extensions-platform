@@ -18,20 +18,20 @@ mip-show-dom-li 组件说明
     	<div>不可控制一直显示啦啦啦</div>
     </div>
     <div ifShow='true'>我是显示的</div>
-    <div ifShow='false'>我是隐藏的</div>
+    <div ifShow='false' class="welfare_detail_text hide">我是隐藏的</div>
 </mip-show-dom-li>
 ```
 
 ## 属性
 
-### {属性名}
+### ifShow
 
-说明：{说明}
-必选项：{是|否}
-类型：{类型}
-取值范围：{取值范围}
-单位：{单位}
-默认值：{默认值}
+说明：控制其是否显示
+必选项：{是}
+类型：{bool}
+取值范围：{true|false}
+单位：无
+默认值：无
 
 ## 注意事项
 

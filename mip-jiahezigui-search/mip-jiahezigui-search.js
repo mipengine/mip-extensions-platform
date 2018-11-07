@@ -26,6 +26,7 @@ define(function (require) {
         this.addEventAction('open', function (event, str) {
             html.classList.add(showClassName);
             scrollTop = document.documentElement.scrollTop;
+            return false;
         });
 
         /**
@@ -37,6 +38,7 @@ define(function (require) {
         this.addEventAction('close', function (event, str) {
             html.classList.remove(showClassName);
             document.documentElement.scrollTop = scrollTop;
+            return false;
         });
     };
     return customElement;

@@ -1,0 +1,14 @@
+{
+    "name": "mip-hs-like",
+    "version": "1.0.0",
+    "description": "组件介绍",
+    "contributors": [
+        {
+            "name": "mip-hs-like",
+            "email": "1837078639@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

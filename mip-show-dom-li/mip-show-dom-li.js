@@ -16,7 +16,9 @@ define(function (require) {
         var elelist = ele.querySelectorAll('[ifShow]');
         var eleHideList = ele.querySelectorAll('[ifShow="false"]');
         for (var i = 0; i < eleHideList.length; i++) {
-            eleHideList[i].className += 'hide';
+            if (!hasClass(eleHideList[i], 'hide')) {
+                eleHideList[i].className += 'hide';
+            }
         }
         ele.addEventListener('click', function () {
             for (var i = 0; i < elelist.length; i++) {
