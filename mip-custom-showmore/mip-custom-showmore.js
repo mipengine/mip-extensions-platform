@@ -72,6 +72,7 @@ define(function (require) {
         if (MIP.hash.hashTree.sids && matchIsSids(sidsC)) { // 命中实验组
             me.toggle(event);
             document.querySelector('.mip-custom-showmore-btn').style.display = 'none'
+            this.element.style.paddingBottom = '0'
         }
 
         // 兼容手机横竖屏切换时，字数重新排列高度变化情况
