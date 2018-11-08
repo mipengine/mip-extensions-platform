@@ -281,7 +281,7 @@ define(function (require) {
                             var areasubmitUrl = $el.find('.city-pop-btn').data('submiturl')
                              + '?cityId=' + areaid;
                             // var bodya =  {cityId: areaid};
-                            // window.location.reload();
+                            // window.history.go(0);
                             // $.ajax({
                             //     type: 'post',
                             //     url: areasubmitUrl,
@@ -315,7 +315,7 @@ define(function (require) {
                                 var data = '';
                                 if (datas.code === 0) {
                                     document.cookie = document.cookie;
-                                    window.location.reload();
+                                    window.history.go(0);
                                 }
                             });
                         }
@@ -337,7 +337,7 @@ define(function (require) {
                                 var citySubmitUrl = $el.find('.city-pop-btn').data('submiturl')
                                 + '?cityId=' + pcareacityid;
                                 // var bodyc = {cityId: pcareacityid};
-                                window.location.reload();
+                                window.history.go(0);
                                 // $.ajax({
                                 //     type: 'post',
                                 //     url: citySubmitUrl,
@@ -371,7 +371,7 @@ define(function (require) {
                                     var data = '';
                                     if (datas.code === 0) {
                                         document.cookie = document.cookie;
-                                        window.location.reload();
+                                        window.history.go(0);
                                     }
                                 });
                             }
@@ -399,7 +399,7 @@ define(function (require) {
                 //     data: bodyData
                 // }).done(function (data) {
                 //     if (data) {
-                //         window.location.reload();
+                //         window.history.go(0);
                 //     }
                 // });
                 // fetch(submiturl, {method: 'post',
@@ -411,7 +411,7 @@ define(function (require) {
                 //     var data = '';
                 //     if (datas) {
                 //         if (data) {
-                //             window.location.reload();
+                //             window.history.go(0);
                 //         }
                 //     }
                 // });
@@ -426,7 +426,7 @@ define(function (require) {
                     var data = '';
                     if (datas.code === 0) {
                         document.cookie = document.cookie;
-                        window.location.reload();
+                        window.history.go(0);
                     }
                 });
             }

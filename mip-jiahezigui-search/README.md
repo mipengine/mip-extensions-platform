@@ -12,6 +12,11 @@ mip-jiahezigui-search 组件说明
 
 ### 基本用法
 ```html
+<style>
+.showMe{
+    background-color:red;
+}
+</style>
 <mip-jiahezigui-search show-class="showMe" id="testId">
     自定义内容，可以嵌套其他组件
 </mip-jiahezigui-search>

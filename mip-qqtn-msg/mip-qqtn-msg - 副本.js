@@ -9,6 +9,7 @@ define(function (require) {
     var ajaxUrl = $('#comment').find('mip-form').attr('url');
    // 按钮效果
     function validate() {
+
         var text = $('.w-text textarea').val();
         var len = text.length;
         var zh = text.replace(/[\x00-\xff]/g, '').length;
@@ -20,6 +21,7 @@ define(function (require) {
             $('#verify').removeClass('disable');
         }
     }
+
 
     function comment(o) {
         var oul = $('#comment-list');
@@ -72,113 +74,31 @@ define(function (require) {
                 $('#view-comment').show();
                 $('.w-text textarea').val('').focus();
                 setCookie('oldTime' + oid, '1');
-                alert('\u63d0\u4ea4\u6210\u529f\uff01');
-                return false;
             }).catch(function (err) {
             });
-        }
-        function uclick() {
-            $('#comment-list li .u-huifu').click(function () {
-                $('#submit').css('display', 'block');
-                var pid = $(this).attr('pid');
-                $('.w-text textarea').text('[quote]' + pid + '[/quote]').focus();
-                $('#cancel').click(function () {
-                    $('.w-text textarea').text('');
-                });
-            });
-        }
-        var oid = $('#app-id').val();
-        function bindDing(objtext, id, CommentTpye) {
-            var obj = $('#comment-list li span');
-            if (obj.length === 0) {
-                return false;
-            }
-            for (var i = 0; i < obj.length; i++) {
-                var sobj = obj.eq(i).find('a').first();
-                var spanobj = obj.eq(i).find('em');
-                sobj.click(function () {
-                    sendDing($(this).parent().attr('id'));
-                    var spanobj = $(this).parent().find('em');
-                    spanobj.html(parseInt(spanobj.html(), 0) + 1);
-                    $(this).unbind();
-                    $(this).attr('title', '您已经顶过了');
-                });
-            }
-            readDing(objtext, id, CommentTpye);
-        }
-        function sendDing(id)
-        {
-            var url = 'action=19&id=' + id;
-            $.ajax({
-                type: 'POST',
-                url: 'https://m.qqtn.com/ajax.asp',
-                data: url,
-                success: function (msg) {
-                }
-            });
-        }
-        function readDing(objtext, id, CommentTpye)
-        {
-            var obj = $('#comment-list li span');
-            var sendid = '';
-            for (var i = 0; i < obj.length; i++) {
-                sendid += obj.eq(i).attr('id');
-                if (i < (obj.length - 1)) {
-                    sendid += ',';
-                }
-            }
-            if (sendid !== '') {
-                var url = 'action=18&id=' + oid + '&CommentTpye=' + CommentTpye + '&sendid=' + escape(sendid) + '';
-                $.ajax({
-                    type: 'POST',
-                    url: 'https://m.qqtn.com/ajax.asp',
-                    data: url,
-                    success: function (msg) {
-                        listDing(objtext, msg);
-                    }
-                });
-            }
-        }
-        function listDing(objtext, msg)
-        {
-            var obj = $('#comment-list li span');
-            var dataObj = (new Function('return' + '' + msg + ''))();
-            for (var i = 0; i < obj.length; i++) {
-                var spanobj = obj.eq(i).find('em');
-                var sid = obj.eq(i).attr('id');
-                for (var y = 0; y < dataObj.ID.length; y++) {
-                    if (sid === dataObj.ID[y].toString()) {
-                        spanobj.html(dataObj.Ding[y]);
-                        break;
-                    }
-                }
-            }
         }
         $('#submit #verify').click(function () {
             writeComment();
             return false;
         });
+        // 读取评论
         function readComment() {
             oli = oul.find('li');
             p = Math.floor(oli.length / 5 + 1);
-            fetch(ajaxUrl + 'sajax.asp?action=6&t=' + oid + '&p=' + p)
+            fetch(ajaxUrl + 'sajax.asp?action=0&id=' + oid + '&page=' + p + '&CommentTpye=' + comid)
             .then(function (res) {
                 return res.text();
             }).then(function (data) {
                     var html = '';
                     var data = (new Function('', 'return' + data))();
-                    var userName = data.user;
-                    var userForm = data.sUserFrom;
-                    var userData = data.DateAndTime;
-                    var userText = data.Excerpt;
-                    var usGraded = data.Graded;
+                    var userName = data.sUserName;
+                    var userForm = data.sUserForm;
+                    var userData = data.sDateAndTime;
+                    var userText = data.sContent;
                     for (var i = 0; i < userName.length; i++) {
-                        html += '<li><p class="user">腾牛网友<time>'
-                        + userData[i] + '</time><i>第' + usGraded[i] + '楼</i></p><p>'
-                        + decodeURIComponent(userText[i]) + '</p><span class="u-click" id="'
-                        + data.Id[i] + '"><a href="javascript:">支持(<em>0</em>)</a>'
-                        + '<a class="u-huifu" href="javascript:" pid="'
-                        + data.Id[i] + '">盖楼(回复)</a></span></li>';
+                        html += '<li><p class="user">腾牛网友<time>' + userData[i] + '</time></p><p>'
+                        + decodeURIComponent(userText[i]) + '</p></li>';
+
                     }
                     if (data.RecordCount > 5) {
                         $('#view-comment .button-status-complete').css('display', 'block');
@@ -189,8 +109,6 @@ define(function (require) {
                     }
                     oli.length === 0 ? oul.html(html) : oli.last().after(html);
                     $('#comment-list li h4').hide();
-                    uclick();
-                    bindDing(oid);
                 }).catch(function (err) {
                 });
         }
@@ -215,4 +133,3 @@ define(function (require) {
     };
     return customElem;
 });
-

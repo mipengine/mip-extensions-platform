@@ -11,6 +11,7 @@ define(function (require) {
     var down = {
         bookid: $('mip-down-address').attr('bookid'),
         id: $('mip-down-address').attr('id'),
+        site: $('mip-down-address').attr('site'),
         qf: function (o) {
             if (platform.isIos()) {
                 $('.downApp,.install a,.free-book a,.rs-app-btn a').attr('href', 'https://disp.rr6.com/spread/v1/1009');
@@ -21,7 +22,8 @@ define(function (require) {
             }
         },
         ml: function (o) {
-            fetchJsonp('https://www.xz6.com/ajax.php?action=getChapterList' + '&bookid=' + this.bookid, {
+            var fetchurl = 'https:' + this.site + '/ajax.php?action=getChapterList';
+            fetchJsonp(fetchurl + '&bookid=' + this.bookid, {
                 method: 'get'
             }).then(function (response) {
                 response.json().then(function (data) {
@@ -43,7 +45,8 @@ define(function (require) {
                         var r = data.relevant;
                         var html1 = '';
                         for (var x = 0; x < r.length; x++) {
-                            html1 += '<li><i>【' + r[x].classname + '】</i><a href="https://m.xz6.com' + r[x].murl + '">'
+                            html1 += '<li><i>【' + r[x].classname + '】</i><a href="'
+                            + $('.morebook').attr('urlh') + r[x].murl + '">'
                             + r[x].title + '</a></li>';
                         }
                         $(o).find('.morebook > ul').append(html1);

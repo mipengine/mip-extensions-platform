@@ -18,9 +18,11 @@ define(function (require) {
             if (test.style.background = 'lightgray') {
                 test.style.background = '#ff9900';
                 test.style.color = 'white';
+                this.innerText = '关注';
             } else {
                 test.style.background = 'lightgray';
                 test.style.color = 'black';
+                this.innerText = '已关注';
             }
         };
     };
