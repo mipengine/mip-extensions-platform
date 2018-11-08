@@ -27,6 +27,7 @@ define(function (require) {
         var MIP = window.MIP;
         var clicksstart = true;
         var thisurls = window.location.href;
+        var loginsessionId = 0;
         //      setTimeout(function () {
         //          sessionId = $el.find('#sesiid').html();
         //          console.log(sessionId);
@@ -38,6 +39,8 @@ define(function (require) {
         if (sessionStorage.getItem('ishomeorder')) {
             sessionStorage.clear('ishomeorder');
         }
+
+        var isloginpage = sessionStorage.getItem('taplogin') ? sessionStorage.getItem('taplogin') : 0;
 
         var hosturl = 'https://www.ilaw66.com/jasmine/';
         function returhostname() {
@@ -84,19 +87,29 @@ define(function (require) {
         }
         var isloginf = false;
         this.addEventAction('login', function (event) {
-            //          console.log('授权成功');
             var sessid = event.sessionId;
             var islogin = parseInt(event.userInfo.isLogin, 10);
             if (!islogin) { // 未注册
-                var qusttype = localStorage.getItem('baiduquestionType');
-                var tzurl = 'mipilaw66baidu_login?channel=baidusearch&sessionId='
-                    + sessid + '&questionType=' + qusttype;
-                locahost(tzurl, '准备咨询');
+
+                if (isloginpage === 0) {
+                    var qusttype = localStorage.getItem('baiduquestionType');
+                    var tzurl = 'mipilaw66baidu_login?channel=baidusearch&sessionId='
+                        + sessid + '&questionType=' + qusttype;
+                    locahost(tzurl, '准备咨询');
+                }
+                else {
+                    loginsessionId = sessid;
+                }
             }
             else {
                 //              console.log('登录成功');
                 sessionId = sessid;
                 isloginf = true;
+                isloginpage = 0;
+                if (sessionStorage.getItem('taplogin')) {
+                    sessionStorage.removeItem('taplogin');
+                }
+
                 var sesidtypes = localStorage.getItem('baiduquestionType');
                 if (sesidtypes) {
                     localStorage.removeItem('baiduquestionType');
@@ -116,7 +129,7 @@ define(function (require) {
                 bannerusernum();
             }
 
-        }, 1000);
+        }, 2000);
 
         function getQueryString(name) {
             var reg = new RegExp('(^|&)'
@@ -227,15 +240,15 @@ define(function (require) {
 
         });
 
-        $el.find('.consulting').click(function () {
-            var questionType = $(this).data('type');
-            localStorage.setItem('baiduquestionType', questionType);
-            statistics(8, thisurls, questionType);
-            if (sessionId !== 0) {
-                startConsulting(questionType);
-            }
-
-        });
+        //      $el.find('.consulting').click(function () {
+        //          var questionType = $(this).data('type');
+        //          localStorage.setItem('baiduquestionType', questionType);
+        //          statistics(8, thisurls, questionType);
+        //          if (sessionId !== 0) {
+        //              startConsulting(questionType);
+        //          }
+        //
+        //      });
 
         $el.find('.link_confirm').click(function (event) {
             //          $el.find('.popUp_sysErr').hide();
@@ -290,12 +303,20 @@ define(function (require) {
                                 + '今日咨询人数&nbsp;<i class="userTodayNum">'
                                 + numtransform(b.countToday) + ' </i> 人 </div></li>';
                             showSlogonMsg(tempMoreHtml, 2000);
-
+                            var tempHtml = '<ul>';
                             if (b.payState === 6) { // 咨询过，欠费的用户
-                                var tempHtml = '<ul>';
                                 tempHtml += '<li><div class="topay">'
                                     + '<mip-img src="tempbaidu/images/paytipicon.png"></mip-img>'
                                     + '您有一个订单未支付<p id="topay">去支付</p></div></li>';
+                            }
+
+                            if (rvFlg) {
+                                tempHtml += '<li><div class="tocheckreservation">'
+                                    + '<mip-img src="tempbaidu/images/paytipicon.png"></mip-img>您预约了'
+                                    + timestamp3 + '的咨询<p id="tocheckreservation">查看预约</p></div></li>';
+                            }
+
+                            if (b.payState === 6 || rvFlg) {
                                 tempHtml += '</ul>';
                                 $el.find('.slogonMsg').addClass('slogonMsg_new');
                                 $el.find('.userinteractive, .headerbf').show();
@@ -339,19 +360,32 @@ define(function (require) {
         });
         //
         var agreeImgSrc = $el.find('.radio-rule').find('img').attr('src');
-
         $el.find('.tab-content__close').on('click', function () {
             $(this).parent().parent().removeClass().addClass('tab-pane');
             flg = 0;
         });
+
         $el.find('.media').on('click', function (event) {
-            //          console.log($(this).data('href'));
             tabHref = $(this).data('href');
             var questionTypes = $(this).data('type');
 
-            statistics(2, thisurls, questionTypes);
             localStorage.setItem('baiduquestionType', questionTypes);
-            $el.find('#' + $(this).data('href')).removeClass().addClass('tab-pane active');
+            //          $el.find('#' + $(this).data('href')).removeClass().addClass('tab-pane active');
+
+            if (isloginpage) {
+                statistics(8, 'tologin', questionTypes);
+                var tzurl = 'mipilaw66baidu_login?channel=baidusearch&sessionId='
+                    + loginsessionId + '&questionType=' + questionTypes;
+                locahost(tzurl, '准备咨询');
+            }
+            else {
+                statistics(8, 'order', questionTypes);
+            }
+
+            if (sessionId !== 0) {
+                startConsulting(questionTypes);
+            }
+
             flg = 1;
 
             event.preventDefault();

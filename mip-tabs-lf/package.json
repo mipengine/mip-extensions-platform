@@ -1,0 +1,14 @@
+{
+    "name": "mip-tabs-lf",
+    "version": "1.0.0",
+    "description": " 左右切换和分页结合",
+    "contributors": [
+        {
+            "name": "guomengyuan",
+            "email": "1401105669@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

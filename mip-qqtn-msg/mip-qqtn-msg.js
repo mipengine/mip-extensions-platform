@@ -80,10 +80,12 @@ define(function (require) {
         function uclick() {
             $('#comment-list li .u-huifu').click(function () {
                 $('#submit').css('display', 'block');
+                $('.post .fb').css('display', 'none');
                 var pid = $(this).attr('pid');
                 $('.w-text textarea').text('[quote]' + pid + '[/quote]').focus();
                 $('#cancel').click(function () {
                     $('.w-text textarea').text('');
+                    $('.post .fb').css('display', 'block');
                 });
             });
         }

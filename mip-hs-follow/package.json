@@ -1,0 +1,14 @@
+{
+    "name": "mip-hs-follow",
+    "version": "1.0.0",
+    "description": "点击关注，再次点击取消",
+    "contributors": [
+        {
+            "name": "yl.zhang",
+            "email": "1837078639@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
