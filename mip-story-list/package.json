@@ -1,0 +1,14 @@
+{
+    "name": "mip-story-list",
+    "version": "1.0.0",
+    "description": "组件介绍",
+    "contributors": [
+        {
+            "name": "wangqizheng",
+            "email": "wangqizheng01@baidu.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

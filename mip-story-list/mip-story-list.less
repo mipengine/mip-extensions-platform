@@ -1,0 +1,110 @@
+/**
+ * @file mip-story-list样式文件
+ */
+
+mip-story-list {
+    ul {
+        position: absolute;
+        left: 11px;
+        right: 11px;
+        bottom: 0;
+        top: 59px;
+        &::after {
+            display: block;
+            clear: both;
+            content: "";
+        }
+    }
+    li {
+        list-style: none;
+        width:50%;
+        display: inline-block;
+        float: left;
+        padding: 0 4px;
+        margin: 0;
+        margin-bottom: 16px;
+        overflow: hidden;
+        box-sizing: border-box;
+        a {
+            -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+        }
+        mip-img {
+            margin-bottom: 4px;
+        }
+        p {
+            width: 100%;
+            overflow: hidden;
+            text-overflow:ellipsis;
+            white-space: nowrap;
+            text-align: left;
+            line-height: 1.6;
+            &.title {
+                font-size: 14px;
+                line-height: 2;
+            }
+            &.desc {
+                font-size: 12px;
+                color: #999;
+            }
+        }
+    }
+}
+
+
+// @media only screen and (min-width: 320px) {
+//     mip-story-list {
+//         li {
+//             p {
+//                 &.title {
+//                     font-size: 15px;
+//                 }
+//                 &.desc {
+//                     font-size: 13px;
+//                 }
+//             }
+//         }
+//     }
+// }
+
+// @media only screen and (min-width: 375px) {
+//     mip-story-list {
+//         li {
+//             p {
+//                 &.title {
+//                     font-size: 16px;
+//                 }
+//                 &.desc {
+//                     font-size: 14px;
+//                 }
+//             }
+//         }
+//     }
+// }
+
+// @media only screen and (min-width: 414px) {
+//     mip-story-list {
+//         li {
+//             p {
+//                 &.title {
+//                     font-size: 18px;
+//                 }
+//                 &.desc {
+//                     font-size: 14px;
+//                 }
+//             }
+//         }
+//     }
+// }
+
+.story-title {
+    height: 44px;
+    line-height: 44px;
+    background: #fff;
+    font-size: 18px;
+    font-family: Arial,Helvetica,sans-serif;
+    font-weight: 700;
+    text-align: center;
+    border-bottom: 1px solid #f1f1f1;
+    -webkit-user-select: none;
+    user-select: none;
+}
