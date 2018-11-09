@@ -371,7 +371,7 @@ define(function (require) {
 
                 },
                 error: function (c) {
-                    alert('W');
+
                     if (c.status === 500) {
                         window.location.reload();
                     }

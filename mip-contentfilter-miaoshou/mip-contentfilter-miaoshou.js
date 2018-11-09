@@ -17,7 +17,7 @@ define(function (require) {
         var length = p.length;
 
         for (var i = 0; i < length; i++) {
-            if (p[i].firstChild.tagName === 'BR') {
+            if (p[i].firstElementChild != null && p[i].firstElementChild.nodeName === 'BR') {
                 p[i].parentNode.removeChild(p[i]);
             }
         }
