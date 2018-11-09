@@ -147,7 +147,7 @@ define(function (require) {
         function commitReservationMsg(reservationquestionType, reservationTime) {
             $.ajax({
                 type: 'post',
-                url: 'reservation/addRequestReservation?questionType='
+                url: hosturl + 'reservation/addRequestReservation?questionType='
                     + reservationquestionType + '&reservationTimeString='
                     + reservationTime + '&_csrf=' + $el.find('#_csrf').val() + '&sessionId=' + sessionId,
                 success: function (g) {
@@ -282,7 +282,7 @@ define(function (require) {
         function getReservationMsg() {
             $.ajax({
                 type: 'GET',
-                url: 'getOrderCount',
+                url: hosturl + 'getOrderCount' + '&sessionId=' + sessionId,
                 success: function (g) {
                     if (g.RQ && g.RQ.payState === '6') { // 6:欠费时
                         $el.find('#popUp').show();
@@ -293,7 +293,7 @@ define(function (require) {
                         });
                         $el.find('#link_done').click(function () {
                             var tmpUrl = 'mipilaw66baidu_couponPay?requestId='
-                            + g.RQ.requestId + '&questionType=' + g.RQ.questionType;
+                            + g.RQ.requestId + '&questionType=' + g.RQ.questionType + '&sessionId=' + sessionId;
                             locahost(tmpUrl, '支付订单');
                         });
                     }
@@ -304,7 +304,8 @@ define(function (require) {
                             $el.find('.reservationbtn_change').click(function () { // 修改预约
                                 var tmpUrl = 'mipilaw66baidu_reservation'
                                 + '?questionType=' + g.RV.questionType
-                                + '&reservationTime=' + g.RV.reservationTime + '&id=' + g.RV.id;
+                                + '&reservationTime=' + g.RV.reservationTime
+                                    + '&id=' + g.RV.id + '&sessionId=' + sessionId;
                                 locahost(tmpUrl, '修改预约');
                             });
                             $el.find('.reservationbtn_cancel').click(function () { // 取消预约
@@ -328,7 +329,7 @@ define(function (require) {
         function checkIfExistsReservationMsg() {
             $.ajax({
                 type: 'GET',
-                url: 'reservation/findRequestReservationByUserId',
+                url: hosturl + 'reservation/findRequestReservationByUserId' + '&sessionId=' + sessionId,
                 async: false,
                 success: function (data) {
                     console.log(data);
@@ -339,7 +340,7 @@ define(function (require) {
                             $el.find('#popUp').hide();
                         });
                         $el.find('#link_done').click(function () {
-                            var tmpUrl = 'mipilaw66baidu_myreservation';
+                            var tmpUrl = 'mipilaw66baidu_myreservation' + '?sessionId=' + sessionId;
                             locahost(tmpUrl, '查看预约');
                         });
                     }
@@ -364,7 +365,7 @@ define(function (require) {
                 $el.find('#popUp').hide();
                 $.ajax({
                     type: 'POST',
-                    url: 'reservation/cancelRequestReservation?id=' + cancelid + '&_csrf='
+                    url: hosturl + 'reservation/cancelRequestReservation?id=' + cancelid + '&_csrf='
                     + $el.find('#_csrf').val() + '&sessionId=' + sessionId,
                     success: function (g) {
                         console.log(g);

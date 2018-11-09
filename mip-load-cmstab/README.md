@@ -11,7 +11,7 @@ mip-load-cmstab 用于给选项卡里边的内容增加点击加载内容，每�
 ## 示例
 
 ```html
-<mip-load-cmstab data-topdateurl="https://aj.qqtn.com/" data-page="2" data-tid="47">
+<mip-load-cmstab data-topdateurl="https://m.qqtn.com/" data-page="2" data-tid="47">
 
 <section class="m-content m-dimain" id="infocon">
 	<mip-html-tabs tabs-type="Qi_4" tabs-nav="#tab-nav ul li" tabs-key="#tab-div ul" nav-cur="hover">

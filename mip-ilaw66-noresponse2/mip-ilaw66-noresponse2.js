@@ -68,7 +68,7 @@ define(function (require) {
                 if (!parseInt(sessionStorage.getItem('loginFlg'), 10) && sessionStorage.getItem('loginFlg') === '0') {
                     //                  window.top.location.href = 'login';
                     //                  locahost('login', '登录');
-                    locahost('mipilaw66baidu_login?channel=baidusearch', '准备咨询');
+                    locahost('mipilaw66baidu_login?channel=baidusearch&sessionId=' + sessionId, '准备咨询');
                 }
                 else {
                     //                  window.top.location.href = './';
@@ -182,8 +182,8 @@ define(function (require) {
             $el.find('#js-textConsulting').click(function () {
                 // var textbutturl = 'https://m.baidu.com/zhuanjia/question#/submit?vn=law&ref=alaqiang&ssid=0&from=0&uid=0&pu=csrc%40app_secr_txt,sz%401320_2001,ta%40iphone_1_11.2_22_2.8,usm%406&bd_page_type=1&baiduid=F90644066BC91C4E0285A23EFBBC5CC9&tj=2gs_2_0_10_l1&htrackid=6ec1913b5246ead3b67a15bc5d256a75';
                 //              location.assign(textbutturl);
-                var textbutturl = 'mipilaw66baidu_reservation';
-                window.top.location.href = textbutturl;
+                var textbutturl = 'mipilaw66baidu_reservation?sessionId=' + sessionId;
+                locahost(textbutturl, '预约咨询');
             });
             $el.find('#err_confirm').click(function () {
                 //              $el.find('.popUp_sysErr').hide();

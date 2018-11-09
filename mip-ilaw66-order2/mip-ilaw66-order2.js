@@ -250,7 +250,7 @@ define(function (require) {
                                 success: function (data) {
                                     if (data.result !== 2) {
                                         var payurl = 'mipilaw66baidu_couponPay?requestId='
-                                            + requestId + '&questionType=' + questionType;
+                                            + requestId + '&questionType=' + questionType + '&sessionId=' + sessionId;
                                         locahost(payurl, '支付详情');
                                     }
 
@@ -363,7 +363,8 @@ define(function (require) {
         function startConsulting(questionType, csrfToken) {
             $.ajax({
                 type: 'POST',
-                url: 'greeting?questionType=' + questionType + '&_csrf=' + csrfToken,
+                url: hosturl + 'greeting?questionType=' + questionType + '&_csrf=' + csrfToken
+                + '&sessionId=' + sessionId,
                 success: function (data) {
                     if (data === 'ERROR' || data === 'ERROR1') {
                         $el.find('#err_msg').html('系统异常，请返回重新咨询');

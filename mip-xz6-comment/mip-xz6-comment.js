@@ -60,7 +60,7 @@ define(function (require) {
                     }
                 },
                 success: function (data) {
-                    if (data.code === 1) {
+                    if (Number(data.code) === 1) {
                         alert(data.msg);
                         return false;
                     }
@@ -89,12 +89,11 @@ define(function (require) {
                 dataType: 'jsonp',
                 jsonp: 'callback',
                 success: function (data) {
-                    if (data.RecordCount > 0) {
+                    if (Number(data.RecordCount) > 0) {
                         var html = '';
-                        var d = (new Function('', 'return' + data))();
-                        var userName = d.sUserName;
-                        var userData = d.sDateAndTime;
-                        var userText = d.sContent;
+                        var userName = data.sUserName;
+                        var userData = data.sDateAndTime;
+                        var userText = data.sContent;
                         for (var i = 0; i < userName.length; i++) {
                             html += '<li><p class="user">' + userName[i] + '<time>'
                             + userData[i] + '</time></p><p>' + decodeURIComponent(userText[i]) + '</p></li>';
