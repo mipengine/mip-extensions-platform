@@ -37,8 +37,7 @@ define(function (require) {
             oli = oul.find('li');
             $.ajax({
                 url: ajaxUrl + 'ajax.php',
-                dataType: 'jsonp',
-                jsonp: 'callback',
+                dataType: 'json',
                 data: {
                     type: 'get',
                     saytext: $('.w-text textarea').val(),
@@ -86,8 +85,7 @@ define(function (require) {
                 type: 'get',
                 url: ajaxUrl + 'ajax.php',
                 data: 'action=readComment&classid=' + $(o).find('#classid').val() + '&id=' + oid + '&page=' + p,
-                dataType: 'jsonp',
-                jsonp: 'callback',
+                dataType: 'json',
                 success: function (data) {
                     if (Number(data.RecordCount) > 0) {
                         var html = '';

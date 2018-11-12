@@ -1,0 +1,14 @@
+{
+    "name": "mip-ilaw66-informLawyerFailed2",
+    "version": "1.0.2",
+    "description": "通知律师失败页",
+    "contributors": [
+        {
+            "name": "xiaying.gong",
+            "email": "xiaying.gong@ilaw66.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

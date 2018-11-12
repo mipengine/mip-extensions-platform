@@ -1,0 +1,14 @@
+{
+    "name": "mip-zl-newsroll",
+    "version": "1.0.0",
+    "description": "新闻列表无缝滚动",
+    "contributors": [
+        {
+            "name": "zhaoliang",
+            "email": "54360128@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

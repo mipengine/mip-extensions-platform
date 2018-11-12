@@ -1,0 +1,14 @@
+{
+    "name": "mip-ilaw66-informLawyer2",
+    "version": "1.0.2",
+    "description": "法率网二期通知律师",
+    "contributors": [
+      {
+        "name": "xiaying.gong",
+        "email": "xiaying.gong@ilaw66.com"
+      }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

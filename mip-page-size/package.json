@@ -1,0 +1,14 @@
+{
+    "name": "mip-page-size",
+    "version": "1.0.0",
+    "description": "页面字体大小设置",
+    "contributors": [
+        {
+            "name": "xiangshurong",
+            "email": "1617330234@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

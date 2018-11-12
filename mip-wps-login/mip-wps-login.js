@@ -152,7 +152,7 @@ define(function (require) {
                 );
             }
             else {
-                location.replace(changeLoginUrl + window.top.location.search);
+                location.replace(changeLoginUrl + window.top.location.hash);
             }
         }, false);
 
@@ -225,6 +225,10 @@ define(function (require) {
             }
         );
         bindEvents(element);
+    };
+
+    customElement.prototype.prerenderAllowed = function () {
+        return true;
     };
 
     return customElement;

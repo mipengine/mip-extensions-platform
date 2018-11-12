@@ -10,19 +10,19 @@ define(function (require) {
         var ele = this.element;
         var dataname = $(ele).find('.f-information').attr('data-categroyid');
         if (dataname === '9') {
-            $(ele).find('.f-page-title').append('个性表情');
+            $(ele).find('.f-page-title').append('腾牛·个性表情');
         } else if (dataname === '18') {
-            $(ele).find('.f-page-title').append('QQ说说');
+            $(ele).find('.f-page-title').append('腾牛·个性说说');
         } else if (dataname === '23') {
-            $(ele).find('.f-page-title').append('QQ签名');
+            $(ele).find('.f-page-title').append('腾牛·个性签名');
         } else if (dataname === '28') {
-            $(ele).find('.f-page-title').append('QQ网名');
+            $(ele).find('.f-page-title').append('腾牛·个性网名');
         } else if (dataname === '20') {
-            $(ele).find('.f-page-title').append('QQ头像');
+            $(ele).find('.f-page-title').append('腾牛·个性头像');
         } else if (dataname === '72') {
-            $(ele).find('.f-page-title').append('个性图片');
+            $(ele).find('.f-page-title').append('腾牛·个性图片');
         } else if (dataname === '74') {
-            $(ele).find('.f-page-title').append('个性皮肤');
+            $(ele).find('.f-page-title').append('腾牛·个性皮肤');
         }
     };
     return customElement;
