@@ -282,7 +282,7 @@ define(function (require) {
         function getReservationMsg() {
             $.ajax({
                 type: 'GET',
-                url: hosturl + 'getOrderCount' + '&sessionId=' + sessionId,
+                url: hosturl + 'getOrderCount' + '?sessionId=' + sessionId,
                 success: function (g) {
                     if (g.RQ && g.RQ.payState === '6') { // 6:欠费时
                         $el.find('#popUp').show();
@@ -329,7 +329,7 @@ define(function (require) {
         function checkIfExistsReservationMsg() {
             $.ajax({
                 type: 'GET',
-                url: hosturl + 'reservation/findRequestReservationByUserId' + '&sessionId=' + sessionId,
+                url: hosturl + 'reservation/findRequestReservationByUserId' + '?sessionId=' + sessionId,
                 async: false,
                 success: function (data) {
                     console.log(data);

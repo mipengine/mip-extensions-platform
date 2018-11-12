@@ -16,6 +16,8 @@ define(function (require) {
         var element = this.element;
         var showClassName = element.getAttribute('show-class') || 'show-class';
         var html = document.querySelector('html');
+        var clearUrl = element.getAttribute('clear-url') || false;
+        var historySelector = element.getAttribute('history-selector') || '.search-history';
 
         /**
          * 显示
@@ -41,6 +43,31 @@ define(function (require) {
             html.classList.remove(showClassName);
             document.documentElement.scrollTop = scrollTop;
             document.body.scrollTop = scrollTop;
+            event.stopPropagation();
+            event.preventDefault();
+            return false;
+        });
+
+        /**
+         * 清空搜索记录
+         *
+         * @param  {Object} event 触发时透传的 event 对象
+         * @param  {string} str   在 HTML `on` 属性中透传的参数，如：on="tap:id.click(test)"
+         */
+        this.addEventAction('clear', function (event, str) {
+            if (clearUrl) {
+                var fetchJsonp = require('fetch-jsonp');
+                fetchJsonp(clearUrl, {
+                    jsonpCallback: 'callback'
+                }).then(function (res) {
+                    return res.json();
+                }).then(function (res) {
+                    if (parseInt(res.err_code, 10) === 0) {
+                        var util = require('util');
+                        util.css(document.querySelector(historySelector), 'display', 'none');
+                    }
+                });
+            }
             event.stopPropagation();
             event.preventDefault();
             return false;

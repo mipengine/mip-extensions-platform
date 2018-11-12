@@ -53,7 +53,10 @@ define(function (require) {
                     if (json.status) {
                         $ele.removeClass('disabled');
                         if (json.login_url) {
-                            location.href = json.login_url;
+                            // location.href = json.login_url;
+                            $dialogWxcode.attr('src', json.qr_img || 'https://static.chunyuyisheng.com/@/media/images/2018/01/17/_inedx');
+                            $dialogTxt.text('扫码关注医生：截图或保存下方二维码图片至手机相册 > 打开微信扫一扫 > 点击右上角“相册” > 选择本图片。');
+                            $wrap.find('.attention-tip').removeClass('hide');
                         }
                         else {
                             toast(json.msg);
