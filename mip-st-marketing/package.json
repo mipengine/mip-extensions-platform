@@ -1,0 +1,14 @@
+{
+    "name": "mip-st-marketing",
+    "version": "0.0.1",
+    "description": "服务营销组件",
+    "contributors": [
+        {
+            "name": "maomingyang",
+            "email": "maomingyang@baidu.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

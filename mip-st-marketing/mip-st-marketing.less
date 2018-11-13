@@ -1,0 +1,153 @@
+/**
+ * @file mip-st-marketing样式文件
+ */
+
+mip-st-marketing {
+    position: fixed !important;
+    clip: rect(0, 0, 0, 0);
+    top: 0;
+    left: 0;
+    right: 0;
+    font-family: "PingFang SC", sans-serif;
+    background: #EEE;
+    overflow: auto;
+
+    .ticket-container {
+        display: flex;
+        display: -webkit-flex;
+        height: 70px;
+        margin: 0 17px 12px 17px;
+        background: url('data:image/svg+xml;utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1140.5 207.5"><path d="M1130.2 207h-299c-.3-8.1-6.9-14.5-15-14.5s-14.7 6.4-15 14.5h-791c-5.5 0-10-4.5-10-10V10.5C.2 5 4.7.5 10.2.5h791c0 8.3 6.7 15 15 15s15-6.7 15-15h299c5.5 0 10 4.5 10 10V197c0 5.5-4.4 10-10 10z" fill="#fff"/><path d="M816.7 30.2v147-147z" fill="none" stroke="#f64c51" stroke-dasharray="8,9"/></svg>') center/100% 100% no-repeat;
+
+        &:first-child {
+            border-top: 12px solid #EEE;
+        }
+
+        &:last-child {
+            border-bottom: 12px solid #EEE;
+            margin-bottom: 0;
+        }
+
+        .ticket-desc-wrapper {
+            display: flex;
+            display: -webkit-flex;
+            align-items: center;
+            -webkit-align-items: center;
+            flex: 0 1 71.5%;
+            -webkit-flex: 0 1 71.5%;
+            height: 100%;
+            color: #F64C51;
+            overflow: hidden;
+
+            .ticket-price-wrapper {
+                box-sizing: border-box;
+                -webkit-box-sizing: border-box;
+                flex: 1 0 auto;
+                -webkit-flex: 1 0 auto;
+                padding-left: 18.5px;
+                text-align: center;
+
+                .ticket-currency {
+                    padding-right: 3px;
+                    font-size: 24px;
+                }
+
+                .ticket-price {
+                    font-size: 40px;
+                    font-weight: 700;
+                }
+            }
+
+            .ticket-desc {
+                display: flex;
+                display: -webkit-flex;
+                flex-direction: column;
+                -webkit-flex-direction: column;
+                box-sizing: border-box;
+                -webkit-box-sizing: border-box;
+                padding: 0 25px 0 6.5px;
+                overflow: hidden;
+
+                span {
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .ticket-text {
+                    width: 100%;
+                    transform: translateY(7px);
+                    -webkit-transform: translateY(7px);
+                    font-size: 12px;
+                    font-weight: 700;
+                }
+
+                .ticket-mark {
+                    width: 200%;
+                    transform-origin-x: 0;
+                    -webkit-transform-origin-x: 0;
+                    transform-origin-y: 0;
+                    -webkit-transform-origin-y: 0;
+                    transform: translateY(7px) scale(.5);
+                    -webkit-transform: translateY(7px) scale(.5);
+                    font-size: 20px;
+                }
+            }
+        }
+
+        .ticket-btn-wrapper {
+            display: flex;
+            display: -webkit-flex;
+            justify-content: center;
+            -webkit-justify-content: center;
+            align-items: center;
+            -webkit-align-items: center;
+            flex: 0 1 28.5%;
+            -webkit-flex: 0 1 28.5%;
+
+            .ticket-btn {
+                width: 79.4%;
+                height: 28px;
+                line-height: 28px;
+                border-radius: 14px;
+                text-align: center;
+            }
+
+            .can-receive {
+                background: #F64C51;
+                color: #FFF;
+            }
+
+            .can-check {
+                border: 1px solid #F64C51;
+                color: #F64C51;
+            }
+
+            .can-not-receive {
+                background: #EAEAEA;
+                color: #A3A3A3;
+            }
+        }
+    }
+}
+
+.marketing-toast {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    height: 44px;
+    line-height: 44px;
+    padding: 0 17px;
+    border: 1px solid rgba(255, 255, 255, .5);
+    border-radius: 4px;
+    background: rgba(0, 0, 0, .8);
+    font-family: PingFangSC-Regular, sans-serif;
+    font-size: 16px;
+    color: #FFF;
+
+    &.marketing-toast-hide {
+        display: none;
+    }
+}

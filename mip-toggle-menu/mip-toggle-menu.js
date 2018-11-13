@@ -20,6 +20,13 @@ define(function (require) {
                 $(this).addClass('active').siblings().removeClass('active');
             }
         });
+
+// 右侧abox宽度
+        var h = $(window).height();
+        var w = $(window).width();
+        var w1 = w - 100;
+        var h1 = h - 50;
+        $('.menubox .dbox .abox').css({width: w1 + 'px', height: h1 + 'px'});
     });
 
 /**
@@ -38,17 +45,6 @@ define(function (require) {
         myclose.addEventListener('click', function () {
             menubox.className = menubox.className.replace('active', '');
         }, false);
-
-// 右侧abox宽度
-        var h = $(window).height();
-        var w = $(window).width();
-        var w1 = w - 100;
-        var h1 = h - 50;
-        var abox = document.getElementsByClassName('abox');
-        for (var j = 0; j < abox.length; j++) {
-            abox[j].style.width = w1 + 'px';
-            abox[j].style.height = h1 + 'px';
-        }
 
 // TODO
     };

@@ -76,6 +76,9 @@ define(function (require) {
             $el.find('.header_block').hide();
         }
 
+        $el.find('.link_confirm ,.link_btn_unpaidErrConfirm ').click(function (event) {
+            $el.find('.popUp_unpaidErr').hide();
+        });
         if (location.href.indexOf('myreservation') > 0) { // 进入‘我的咨询’页面
             getReservationMsg();
             return;
@@ -102,9 +105,6 @@ define(function (require) {
         }
 
         var now = new Date();
-        $el.find('.link_confirm ,.link_btn_unpaidErrConfirm ').click(function (event) {
-            $el.find('.popUp_unpaidErr').hide();
-        });
 
         $el.find('.reservationbtn').click(function () {
             // 获取分类和预约时间
@@ -383,7 +383,6 @@ define(function (require) {
                             $el.find('#message').text('预约取消失败，请重试');
                             $el.find('.popUp_unpaidErr').show();
                         }
-
                     },
                     error: function (a) {
                         if (a.status === 403) {

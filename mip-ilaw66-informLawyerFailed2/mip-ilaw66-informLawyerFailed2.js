@@ -13,10 +13,9 @@ define(function (require) {
      */
     customElement.prototype.firstInviewCallback = function () {
         var $el = $(this.element);
-        var timerRequestId = getQueryString('data');
+        var timerRequestId = getQueryString('requestId');
         var lawyerId = getQueryString('lawyerId');
         var secondAskFlg = getQueryString('secondAskFlg');
-        var requestId = getQueryString('requestId');
         var questionType = getQueryString('questionType');
         var askingType = getQueryString('askingType');
         var lawyerName = getQueryString('lawyerName');
@@ -81,32 +80,6 @@ define(function (require) {
         }
 
         getInfo();
-
-        var currentHour = new Date().getHours();
-        var currentMinutes = new Date().getMinutes();
-        $el.find('.inform_failed_tip').html(lawyerName + '不方便接听电话，<br/>'
-            + '请稍后继续问或由系统推荐其他律师').show();
-        if (currentHour < 8 || (currentHour === 23 && currentMinutes > 0) || currentHour > 23) {
-            $el.find('.continueAsk').html('继续问（建议8:00~23:00之间咨询）');
-        }
-
-        if (secondAskFlg >= '2') {
-            $el.find('.inform_failed_tip').html('律师可能在忙，请您稍后再试').show();
-            if (currentHour < 8 || (currentHour === 23 && currentMinutes > 0) || currentHour > 23) {
-                $el.find('.inform_failed_tip').html('当前是非工作时间，建议您在8:00~23:00之间咨询').show();
-            }
-
-            $el.find('.askOthers').removeClass().addClass('alreadyKnow');
-            $el.find('.alreadyKnow').text('我知道了');
-            $el.find('.continueAsk').hide();
-
-            $el.find('.alreadyKnow').click(function () {
-                var tmpUrl = encodeURI('mipilaw66baidu_linking?questionType=' + questionType + '&sessionId=' + sessionId
-                    + '&lawyerName=' + lawyerName + '&requestId=' + requestId + '&askingType=' + askingType
-                    + '&lawyerId=' + lawyerId);
-                locahost(tmpUrl, '服务完成');
-            });
-        }
 
         $el.find('.reAskAgain, .reAsk').click(function () {
             $.ajax({
@@ -175,6 +148,34 @@ define(function (require) {
                     };
                     $el.find('.end_name').text(temp.lawyerName);
 
+                    var currentHour = new Date().getHours();
+                    var currentMinutes = new Date().getMinutes();
+                    $el.find('.inform_failed_tip').html(temp.lawyerName + '不方便接听电话，<br/>'
+                        + '请稍后继续问或由系统推荐其他律师').show();
+                    if (currentHour < 8 || (currentHour === 23 && currentMinutes > 0) || currentHour > 23) {
+                        $el.find('.continueAsk').html('继续问（建议8:00~23:00之间咨询）');
+                    }
+
+                    if (secondAskFlg >= '2') {
+                        $el.find('.inform_failed_tip').html('律师可能在忙，请您稍后再试').show();
+                        if (currentHour < 8 || (currentHour === 23 && currentMinutes > 0) || currentHour > 23) {
+                            $el.find('.inform_failed_tip').html('当前是非工作时间，建议您在8:00~23:00之间咨询').show();
+                        }
+
+                        $el.find('.askOthers').removeClass().addClass('alreadyKnow');
+                        $el.find('.alreadyKnow').text('我知道了');
+                        $el.find('.continueAsk').hide();
+
+                        $el.find('.alreadyKnow').click(function () {
+                            /*var tmpUrl = encodeURI('mipilaw66baidu_linking?questionType='
+                                + questionType + '&sessionId=' + sessionId
+                                + '&lawyerName=' + temp.lawyerName + '&requestId='
+                                + timerRequestId + '&askingType=' + askingType
+                                + '&lawyerId=' + lawyerId);
+                            locahost(tmpUrl, '服务完成');*/
+                            locahost('./');
+                        });
+                    }
                 },
                 error: function (jqXHR) {
                     if (jqXHR.status === 403) {
@@ -226,7 +227,7 @@ define(function (require) {
                         $el.find('.popUp_sysErr').fadeIn();
                     }
                     else {
-                        var requesturl = 'mipilaw66baidu_request?data=' + data + '&questionType=' + questionType
+                        var requesturl = 'mipilaw66baidu_request?data=' + data.data + '&questionType=' + questionType
                             + '&sessionId=' + sessionId;
                         locahost(requesturl, '匹配律师');
                     }

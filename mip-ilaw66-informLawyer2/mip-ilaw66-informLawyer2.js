@@ -96,13 +96,13 @@ define(function (require) {
             $el.find('.inform_time').text(countdown + '秒');
             settime();
             if (countdown >= 60) {
-                clearInterval(timer);
+                // clearInterval(timer);
                 $el.find('.countdownTime').html('60秒');
             }
             else {
                 $el.find('.countdownTime').html(countdown + '秒');
             }
-        });
+        }, 1000);
         function getQueryString(name) {
             var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
             var r = window.location.search.substr(1).match(reg);
@@ -140,13 +140,12 @@ define(function (require) {
         }
 
         function settime() {
-            var id = $el.find('#requestId').val();
             var questionType = $el.find('#questionType').val();
             var askingType = $el.find('#askingType').val();
             if (countdown % 5 === 0) {
                 $.ajax({
                     type: 'GET',
-                    url: hosturl + 'timer?id=' + id + '&lawyerId=' + lawyerId + '&sessionId=' + sessionId,
+                    url: hosturl + 'timer?id=' + timerRequestId + '&lawyerId=' + lawyerId + '&sessionId=' + sessionId,
                     dataType: 'json',
                     success: function (data) {
                         var dataStatus = data.status;
@@ -158,20 +157,20 @@ define(function (require) {
                             localStorage.setItem('reAskName', data.lawyerName);
                             localStorage.setItem('lawyerField', data.lawyerField);
                         }
-
+                        timerRequestId = data.requestId;
                         if (dataStatus === 5 || dataStatus === 6
                             || dataStatus === 7 || dataStatus === 8 || dataStatus === 11 || dataStatus === 12) {
                             clearInterval(timer);
                             if (fromRoute) {
                                 url = encodeURI('mipilaw66baidu_linking?questionType=' + questionType
-                                    + '&lawyerName=' + data.lawyerName + '&requestId=' + id + '&askingType='
+                                    + '&lawyerName=' + data.lawyerName + '&requestId=' + timerRequestId + '&askingType='
                                     + askingType + '&lawyerId=' + lawyerId + '&tel=' + data.tel
                                     + '&fromRoute=clerical&sessionId=' + sessionId);
                             }
                             else {
                                 url = encodeURI('mipilaw66baidu_linking?questionType=' + questionType
                                     + '&sessionId=' + sessionId + '&lawyerName='
-                                    + data.lawyerName + '&requestId=' + id + '&askingType=' + askingType
+                                    + data.lawyerName + '&requestId=' + timerRequestId + '&askingType=' + askingType
                                     + '&lawyerId=' + lawyerId + '&tel=' + data.tel);
                             }
                             locahost(url, '服务完成');
@@ -183,14 +182,17 @@ define(function (require) {
                             if (fromRoute) {
                                 url = 'mipilaw66baidu_informLawyer_failed' + '?lawyerId=' + lawyerId
                                     + '&sessionId=' + sessionId + '&requestId='
-                                    + id + '&questionType=' + questionType + '&askingType='
-                                    + askingType + '&fromRoute=clerical';
+                                    + timerRequestId + '&questionType=' + questionType + '&askingType='
+                                    + askingType + '&fromRoute=clerical' + '&lawyerName='
+                                    + data.lawyerName;
                             }
                             else {
-                                location.href = 'mipilaw66baidu_informLawyer_failed'
+                                url = 'mipilaw66baidu_informLawyer_failed'
                                     + '?lawyerId=' + lawyerId + '&sessionId=' + sessionId
-                                + '&requestId=' + id + '&questionType=' + questionType + '&askingType=' + askingType
-                                + '&secondAskFlg=' + data.reCallNoAnswerTimes;
+                                + '&requestId=' + timerRequestId + '&questionType='
+                                    + questionType + '&askingType=' + askingType
+                                + '&secondAskFlg=' + data.reCallNoAnswerTimes + '&lawyerName='
+                                    + data.lawyerName;
                             }
                             locahost(url, '通知律师');
                         }

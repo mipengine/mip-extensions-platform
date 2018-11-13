@@ -1,0 +1,14 @@
+{
+    "name": "mip-close-btn",
+    "version": "1.0.0",
+    "description": "可自定义关闭目标元素的关闭按钮",
+    "contributors": [
+        {
+           "name": "chm",
+            "email": "huiminchen@q-dazzle.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
