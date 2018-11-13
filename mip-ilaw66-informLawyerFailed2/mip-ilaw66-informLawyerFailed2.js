@@ -21,6 +21,7 @@ define(function (require) {
         var askingType = getQueryString('askingType');
         var lawyerName = getQueryString('lawyerName');
         var csrfToken = $el.find('#_csrf').val();
+        // var nameOfLawyer = localStorage.getItem('reAskName');
 
         var sessionId = getQueryString('sessionId');
         var MIP = window.MIP;
@@ -83,35 +84,31 @@ define(function (require) {
 
         var currentHour = new Date().getHours();
         var currentMinutes = new Date().getMinutes();
-        $el.find('.inform_failed_tip').html('律师可能在忙，请您稍后再试').show();
+        $el.find('.inform_failed_tip').html(lawyerName + '不方便接听电话，<br/>'
+            + '请稍后继续问或由系统推荐其他律师').show();
         if (currentHour < 8 || (currentHour === 23 && currentMinutes > 0) || currentHour > 23) {
-            $el.find('.inform_failed_tip').html('当前是非工作时间，建议您在8:00~23:00之间咨询');
+            $el.find('.continueAsk').html('继续问（建议8:00~23:00之间咨询）');
         }
 
         if (secondAskFlg >= '2') {
+            $el.find('.inform_failed_tip').html('律师可能在忙，请您稍后再试').show();
+            if (currentHour < 8 || (currentHour === 23 && currentMinutes > 0) || currentHour > 23) {
+                $el.find('.inform_failed_tip').html('当前是非工作时间，建议您在8:00~23:00之间咨询').show();
+            }
+
             $el.find('.askOthers').removeClass().addClass('alreadyKnow');
             $el.find('.alreadyKnow').text('我知道了');
-            // $el.find('.continueAsk').hide();
+            $el.find('.continueAsk').hide();
+
             $el.find('.alreadyKnow').click(function () {
-                // location.href = "linking?questionType=" + questionType + "&lawyerName=" + nameOfLawyer
-                // + "&requestId=" + requestId + "&askingType=" + askingType + "&lawyerId=" + lawyerId;
                 var tmpUrl = encodeURI('mipilaw66baidu_linking?questionType=' + questionType + '&sessionId=' + sessionId
                     + '&lawyerName=' + lawyerName + '&requestId=' + requestId + '&askingType=' + askingType
                     + '&lawyerId=' + lawyerId);
                 locahost(tmpUrl, '服务完成');
             });
         }
-        else if (secondAskFlg === '1') {
-            $el.find('.askOthers').removeClass().addClass('reAskAgain');
-            $el.find('.reAskAgain').text('再通知一次');
-            // $el.find('.continueAsk').hide();
-            /*$el.find('.reAskAgain').click(function () {
-                continueAskNew();
-            });*/
-        }
 
-        // 继续问/再通知一次(informlawyer_failed)
-        $el.find('.reAskAgain').click(function () {
+        $el.find('.reAskAgain, .reAsk').click(function () {
             $.ajax({
                 type: 'POST',
                 url: hosturl + 'continueAskV3?lawyerId=' + lawyerId + '&questionType='
@@ -134,6 +131,12 @@ define(function (require) {
                     window.location.reload();
                 }
             });
+        });
+        $el.find('.askOthers').on('click', function () {
+            startConsulting(questionType, csrfToken);
+        });
+        $el.find('#err_confirm').click(function () {
+            $el.find('.popUp_sysErr').hide();
         });
 
         function getInfo() {
@@ -191,6 +194,50 @@ define(function (require) {
 
             return null;
         }
+
+        function startConsulting(questionType, csrfToken) {
+            var ajaxdatas = {};
+            ajaxdatas.questionType = questionType;
+            ajaxdatas._csrf = csrfToken;
+            ajaxdatas.channel = 'baidusearch';
+            ajaxdatas.sessionId = sessionId;
+            $.ajax({
+                url: hosturl + 'greeting2',
+                type: 'post',
+                async: true,
+                data: ajaxdatas,
+                timeout: 5000,
+                success: function (data) {
+
+                    if (data === 'ERROR' || data === 'ERROR1') {
+                        $el.find('#err_msg').html('系统异常，请返回重新咨询');
+                        $el.find('.popUp_sysErr').fadeIn();
+                    }
+                    else if (data === 'ERROR2') {
+                        $el.find('#err_msg').html('您有订单未支付，请支付后再咨询');
+                        $el.find('.popUp_sysErr').fadeIn();
+                    }
+                    else if (data === 'ERROR3') {
+                        $el.find('#err_msg').html('您有订单未结束，请等待1分钟后再试');
+                        $el.find('.popUp_sysErr').fadeIn();
+                    }
+                    else if (data === 'ERROR4') {
+                        $el.find('#err_msg').html('您今日取消咨询已达3次，请明天再来');
+                        $el.find('.popUp_sysErr').fadeIn();
+                    }
+                    else {
+                        var requesturl = 'mipilaw66baidu_request?data=' + data + '&questionType=' + questionType
+                            + '&sessionId=' + sessionId;
+                        locahost(requesturl, '匹配律师');
+                    }
+                },
+                error: function (data) {
+                    $el.find('#sesiid').html(data);
+                    // window.location.reload();
+                }
+            });
+        }
+
     };
 
     return customElement;

@@ -12,9 +12,7 @@ mip-page-size 页面字体大小设置
 
 ### 基本用法
 ```html
-<mip-page-size>
-    页面字体大小设置
-</mip-page-size>
+<mip-page-size class="pagesize"></mip-page-size>
 ```
 
 ## 属性

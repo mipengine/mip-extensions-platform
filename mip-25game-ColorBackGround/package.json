@@ -1,0 +1,15 @@
+{
+    "name": "mip-25game-ColorBackGround",
+    "version": "1.0.0",
+    "description": "动态渐变背景色",
+    "contributors": [
+      {
+        "name": "爱吾游戏",
+        "email": "service@25game.com",
+        "url": "https://www.25game.com"
+      }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
