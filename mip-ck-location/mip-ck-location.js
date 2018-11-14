@@ -1,7 +1,7 @@
 /**
  * @author: yoyoyoo
  * @date: 2016-12-12
- * @file: mip-ck-browser.js
+ * @file: mip-ck-location.js
  */
 
 define(function (require) {
@@ -12,7 +12,7 @@ define(function (require) {
 
     function setHtmlLocation(elem, locationsType) {
         getLocation(function (data) {
-
+            data = +data;
             var len = locationsType.length;
             var i = 0;
             var locationType = '';
@@ -29,9 +29,9 @@ define(function (require) {
 
                 var flag = false;
 
-                // 判断元素是否有浏览器取反
+                // 判断元素是否有地区取反
                 if (converse === null) {
-                    if (locationType === data) { // 判断浏览器类型
+                    if (locationType === data) { // 判断地区类型
                         flag = true;
                         break;
                     }

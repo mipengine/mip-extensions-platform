@@ -1,12 +1,12 @@
 # mip-ck-location
 
-mip-ck-location 根据不同地区展示不同的内容
+mip-ck-location 按地区显示组件 
 
-|描述|脚本mip改造|
-|---|---|
-|类型|脚本|
-|支持布局|N/S|
-|所需脚本|https://c.mipcdn.com/static/v1/mip-ck-location/mip-ck-location.js|
+标题|内容
+----|----
+类型|通用
+支持布局|responsive,fixed-height,fill,container,fixed
+所需脚本|https://c.mipcdn.com/static/v1/mip-ck-location/mip-ck-location.js
 
 ## 示例
 
@@ -20,6 +20,9 @@ mip-ck-location 根据不同地区展示不同的内容
 <mip-ck-location location="1" class="mip-ck-location">
     <p>this is content at beijing area</p>
 </mip-ck-location>
+
+ <mip-ck-location location="1" converse></mip-ck-location>
+
 
 <mip-ck-location location="1" class="mip-ck-location">
     <mip-ck-browser browser="UC">
@@ -40,11 +43,12 @@ mip-ck-location 根据不同地区展示不同的内容
 说明：选择地区 
 必选项：是  
 类型：字符串  
-取值范围：地区编码:1, 2, 3, 4.... (1 => 北京)，匹配多个浏览器使用,分开
+取值范围：地区编码:1, 2, 3, 4.... (1 => 北京)，匹配多个地区使用,分开
 
 ### converse 
 
-说明：排除area属性提供的浏览器环境 
+说明：排除area属性提供的地区环境 
 必选项：否 
 类型：字符串  
 取值范围：converse, true
+

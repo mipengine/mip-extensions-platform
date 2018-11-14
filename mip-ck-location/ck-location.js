@@ -1,7 +1,7 @@
 /**
  * @author: yoyoyoo
  * @date: 2016-12-12
- * @file: mip-ck-browser.js
+ * @file: mip-ck-location.js
  */
 
 define(function (require) {
@@ -11,12 +11,26 @@ define(function (require) {
 
     module.get = function (cb) {
         cb = cb || function () { };
+        // 默认使用0
+        var defaultLocation = 0;
 
-        $.post(url, function (res) {
-            var errno = +res.errno;
+        $.ajax({
+            url: url,
+            method: 'get',
+            dataType: 'json',
+            timeout: 3000,
+            success: function (res) {
+                var errno = +res.errno;
 
-            if (errno === 0) {
-                cb(res.default);
+                if (errno === 0) {
+                    cb(res.default);
+                }
+                else {
+                    cb(defaultLocation);
+                }
+            },
+            error: function () {
+                cb(defaultLocation);
             }
         });
     };
