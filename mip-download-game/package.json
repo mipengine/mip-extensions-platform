@@ -1,10 +1,10 @@
 {
-    "name": "mip-close-btn",
-    "version": "1.0.1",
-    "description": "可自定义关闭目标元素的关闭按钮",
+    "name": "mip-download-game",
+    "version": "1.0.0",
+    "description": "点击下载游戏",
     "contributors": [
         {
-           "name": "chm",
+            "name": "chm",
             "email": "huiminchen@q-dazzle.com"
         }
     ],

@@ -139,8 +139,8 @@ define(function (require) {
                 // 可提交预约,调用接口
                 var reservationquestionType = $el.find('#reservationquestionType').val();
                 // var reservationTime = formatvalidTime(new Date(oTimer.value.replace('T', ' ')), 'yyyy-MM-dd HH:mm');
-                var reservationTime = oTimer.value.replace('T', ' ').replace('-', '/').replace('-', '/');
-                // console.log(reservationquestionType + ' .. ' + reservationTime);
+                var reservationTime = oTimer.value.replace('T', ' ');
+                console.log(reservationquestionType + ' .. ' + reservationTime);
                 // alert(reservationquestionType + ' .. ' + reservationTime);
                 commitReservationMsg(reservationquestionType, reservationTime);
             }

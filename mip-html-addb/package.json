@@ -1,0 +1,14 @@
+{
+    "name": "mip-html-addb",
+    "version": "1.0.0",
+    "description": "在页面li标签指定位置加入标签",
+    "contributors": [
+        {
+            "name": "dgm",
+            "email": "1028212667@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

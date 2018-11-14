@@ -1,0 +1,14 @@
+{
+    "name": "mip-djcars-new-home",
+    "version": "1.0.0",
+    "description": "大家车言论，业务组件",
+    "contributors": [
+        {
+            "name": "songshaokang",
+            "email": "1209585189@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
