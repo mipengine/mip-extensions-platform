@@ -97,7 +97,9 @@ define(function (require) {
                         locahost(tmpUrl, '通知律师');
                     }
                     else {
-                        alert(data.error);
+                        // alert(data.error);
+                        $el.find('#err_msg').html(data.error);
+                        $el.find('.popUp_sysErr').fadeIn();
                     }
                 },
                 error: function (jqXHR) {
@@ -152,6 +154,7 @@ define(function (require) {
                     var currentMinutes = new Date().getMinutes();
                     $el.find('.inform_failed_tip').html(temp.lawyerName + '不方便接听电话，<br/>'
                         + '请稍后继续问或由系统推荐其他律师').show();
+
                     if (currentHour < 8 || (currentHour === 23 && currentMinutes > 0) || currentHour > 23) {
                         $el.find('.continueAsk').html('继续问（建议8:00~23:00之间咨询）');
                     }

@@ -73,21 +73,23 @@ define(function (require) {
                     }
                 }
             });
-            $(o).find('#read-footer .rgChapter').click(function () {
+            $(o).find('#read-footer .rgChapter').click(function (e) {
                 $(o).find('#blockOverlay').show();
                 $(o).find('#rs-chapter').animate({right: '0'}, 50);
+                e.preventDefault();
             });
             $(o).find('#blockOverlay').click(function () {
                 $(o).find('#blockOverlay').hide();
                 $(o).find('#rs-chapter').animate({right: '-100%'}, 10);
             });
-            $(o).find('#read-footer .rgAPP').click(function () {
+            $(o).find('#read-footer .rgAPP').click(function (e) {
                 if ($(o).find('#rs-app').hasClass('active')) {
                     $(o).find('#rs-app').removeClass('active');
                 }
                 else {
                     $(o).find('#rs-app').addClass('active');
                 }
+                e.preventDefault();
             });
         },
         init: function (o) {

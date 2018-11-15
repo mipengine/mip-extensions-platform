@@ -19,7 +19,7 @@ define(function (require) {
             }
             $.getJSON(hitsurl);
             // 内容缩进
-            var con = $(t);
+            var con = $(t).find('.artbody');
             var txt = con.text();
             var pic = con.find('img');
             var zs = txt.length;
