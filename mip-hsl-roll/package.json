@@ -1,0 +1,14 @@
+{
+    "name": "mip-hsl-roll",
+    "version": "1.0.0",
+    "description": "韩森林制作-逐行向上滚动",
+    "contributors": [
+        {
+            "name": "hsl",
+            "email": "han52036@126.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.0.0"
+    }
+}

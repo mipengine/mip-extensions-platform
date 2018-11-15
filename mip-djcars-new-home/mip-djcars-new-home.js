@@ -174,7 +174,7 @@ define(function (require) {
                         });
                     });
                     var playButtons = template.find('[play-button]');
-                    playButtons && playButtons.map && playButtons.map((index, item) => {
+                    playButtons && playButtons.map && playButtons.map(function (index, item) {
                         item.addEventListener('click', palyAudio);
                     });
                 }
