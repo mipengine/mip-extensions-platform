@@ -18,6 +18,9 @@ define(function (require) {
             className = className.replace(/^\s|\s$/g, '');
             return (' ' + ((dom || {}).className || '').replace(/\s/g, ' ') + ' ').indexOf(' ' + className + ' ') >= 0;
         }
+        function getStyle(ele, cssProp) {
+            return ele.currentStyle ? ele.currentStyle[cssProp] : getComputedStyle(ele, false)[cssProp];
+        }
         ShowHide.prototype.change = function () {
             var con = this.content;
             this.switch.onclick = function () {
@@ -33,9 +36,9 @@ define(function (require) {
             };
         };
         new ShowHide(
-            document.getElementsByClassName('show')[parseInt(element.getAttribute('sindex'), 10)],
-            document.getElementsByClassName('hide')[parseInt(element.getAttribute('cindex'), 10)],
-            document.getElementsByClassName('close')[parseInt(element.getAttribute('cindex'), 10)]
+            document.getElementsByClassName('layer-show')[parseInt(element.getAttribute('sindex'), 10)],
+            document.getElementsByClassName('layer-hide')[parseInt(element.getAttribute('hindex'), 10)],
+            document.getElementsByClassName('layer-close')[parseInt(element.getAttribute('cindex'), 10)]
         );
     };
     return customElement;

@@ -1,0 +1,14 @@
+{
+    "name": "mip-get-gift",
+    "version": "1.0.0",
+    "description": "点击获取礼包的按钮",
+    "contributors": [
+        {
+            "name": "chm",
+            "email": "huiminchen@q-dazzle.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

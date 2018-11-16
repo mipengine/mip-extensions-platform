@@ -1,0 +1,15 @@
+{
+    "name": "mip-tuliu-news-audio",
+    "version": "1.0.1",
+    "description": "土流资讯文字语音播报",
+    "contributors": [
+        {
+            "name": "zhengyongbo",
+            "email": "zhengyongbo0128@gmail.com",
+            "url": "https://github.com/zhengyongbo"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
