@@ -1,0 +1,14 @@
+{
+    "name": "mip-hs-alert",
+    "version": "1.0.0",
+    "description": "点击弹框显示隐藏",
+    "contributors": [
+        {
+            "name": "lin",
+            "email": "840399305@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
