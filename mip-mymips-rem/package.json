@@ -1,0 +1,14 @@
+{
+    "name": "mip-mymips-rem",
+    "version": "1.0.0",
+    "description": "使用rem布局网页元素",
+    "contributors": [
+        {
+            "name": "wangk",
+            "email": "2939743951@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

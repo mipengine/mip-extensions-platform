@@ -103,15 +103,15 @@ define(function (require) {
 
                         timerRequestId = data.requestId;
 
-                        url = 'mipilaw66xzh_informLawyer_failed'
+                        /*url = 'mipilaw66xzh_informLawyer_failed'
                         + '?lawyerId=' + lawyerId
                         + '&requestId=' + timerRequestId + '&questionType='
                         + questionType + '&askingType=' + askingType
                         + '&secondAskFlg=' + data.reCallNoAnswerTimes + '&lawyerName='
                         + data.lawyerName;
-                        window.top.location.href = url;
+                        window.top.location.href = url;*/
 
-                        /*if (dataStatus === 5 || dataStatus === 6
+                        if (dataStatus === 5 || dataStatus === 6
                             || dataStatus === 7 || dataStatus === 8 || dataStatus === 11 || dataStatus === 12) {
                             clearInterval(timer);
                             if (fromRoute) {
@@ -148,7 +148,7 @@ define(function (require) {
                                     + data.lawyerName;
                             }
                             window.top.location.href = url;
-                        }*/
+                        }
 
                     },
                     error: function (jqXHR) {
