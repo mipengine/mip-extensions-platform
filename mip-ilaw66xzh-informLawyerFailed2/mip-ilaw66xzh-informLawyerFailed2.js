@@ -33,7 +33,7 @@ define(function (require) {
                     console.log(data);
                     var id = data.data;
                     if (id !== '') {
-                        var tmpUrl = encodeURI('mipilaw66baidu_informLawyer?questionType=' + questionType
+                        var tmpUrl = encodeURI('mipilaw66xzh_informLawyer?questionType=' + questionType
                             + '&data=' + id + '&lawyerId=' + lawyerId + '&PABackJumpFlg=informLawyerfailed');
                         window.top.location.href = tmpUrl;
                     }
@@ -139,7 +139,7 @@ define(function (require) {
             var ajaxdatas = {};
             ajaxdatas.questionType = questionType;
             ajaxdatas._csrf = csrfToken;
-            ajaxdatas.channel = 'baidusearch';
+            ajaxdatas.channel = 'xzh';
             $.ajax({
                 url: 'greeting2',
                 type: 'post',
@@ -165,7 +165,7 @@ define(function (require) {
                         $el.find('.popUp_sysErr').fadeIn();
                     }
                     else {
-                        var requesturl = 'mipilaw66baidu_request?data=' + data.data + '&questionType=' + questionType;
+                        var requesturl = 'mipilaw66xzh_request?data=' + data.data + '&questionType=' + questionType;
                         window.top.location.href = requesturl;
                     }
                 },
