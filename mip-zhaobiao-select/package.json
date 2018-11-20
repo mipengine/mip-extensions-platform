@@ -1,0 +1,9 @@
+{
+    "name": "mip-zhaobiao-select",
+    "version": "1.0.0",
+    "description":"下拉更改表单提交插件",
+    "author": {
+        "name": "zhaobiao.cn",
+        "email": "150386322@qq.com"
+    }
+}
