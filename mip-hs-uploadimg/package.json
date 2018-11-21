@@ -1,0 +1,14 @@
+{
+    "name": "mip-hs-uploadimg",
+    "version": "1.0.0",
+    "description": "图片上传并预览",
+    "contributors": [
+        {
+            "name": "lin",
+            "email": "840399305@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

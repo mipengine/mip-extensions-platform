@@ -208,6 +208,8 @@ define(function (require) {
             else {
                 item.showStatus = cusConst.CAN_NOT_RECEIVE;
             }
+            // 券门槛
+            item.threshold /= 100;
         });
 
         // 记录券列表数据，用于自动领券时获取券状态
