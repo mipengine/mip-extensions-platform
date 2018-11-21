@@ -63,14 +63,14 @@ define(function (require) {
                 } else if (num === 2) {
                     tempobj.src = arr[index].orgPic;
                     tempobj.title = arr[index].honorName;
-                };
+                }
                 temparr.push(tempobj);
             }
             viewer.eventAction.execute('usefull', element, {
                 order: order,
                 items: temparr
             });
-        };
+        }
     }
     function levelfull(element, data, item) {
         item.querySelector('mip-img').addEventListener('click', function () {
@@ -119,17 +119,17 @@ define(function (require) {
                 // 渲染模板
                 if (res.data.regCapital) {
                     res.data.regCapital = res.data.regCapital.split('.')[0];
-                };
+                }
                 if (res.data.authTime) {
                     res.data.authTime = handTime(res.data.authTime);
-                };
+                }
                 if (res.data.regTime) {
                     res.data.regTime = handTime(res.data.regTime);
-                };
+                }
                 if (res.data.effTime) {
                     res.data.effTime = handTime(res.data.effTime);
-                };
-                var replacedata = JSON.stringify(res.data).replace(/http\:\/\/trustcdn.baidu.com/g, 'https://ss0.bdstatic.com/6KYTfyqn1Ah3otqbppnN2DJv')
+                }
+                var replacedata = JSON.stringify(res.data).replace(/http:\/\/trustcdn.baidu.com/g, 'https://ss0.bdstatic.com/6KYTfyqn1Ah3otqbppnN2DJv')
                 .replace(/http:\/\/himg.bdimg.com/g, '//himg.bdimg.com')
                 .replace(/http:\/\/kbbos.baidu.com/g, '//kbbos.baidu.com')
                 .replace(/http:\/\/trustrcv.baidu.com/g, 'https://sp1.baidu.com/6KYTfyq72xB3otqbppnN2DJv')
@@ -140,7 +140,7 @@ define(function (require) {
                     if (tempdata.brandBackground) {
                         var pageTitle = element.querySelectorAll('.top-title')[0];
                         util.css(pageTitle, 'backgroundImage', 'url(' + tempdata.brandBackground + ')');
-                    } else if (tempdata.idType === '5' && tempdata.brandLogo) {
+                    } else if (Number(tempdata.idType) === 5 && tempdata.brandLogo) {
                         var pageTitle = element.querySelectorAll('.top-bg')[0];
                         util.css(pageTitle, 'backgroundImage', 'url(' + tempdata.brandLogo + ')');
                     }

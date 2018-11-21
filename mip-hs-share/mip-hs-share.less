@@ -1,0 +1,49 @@
+/**
+ * @file mip-hs-share样式文件
+ */
+
+mip-hs-share {
+    &.mip-layout-container {
+        mip-share {
+            display: none;
+            -webkit-animation: comeon .5s;
+            animation: comeon .5s;
+            .c-share-btn {
+                padding: 0 4%;
+            }
+        }
+    }
+    @-webkit-keyframes comeon {
+        from {
+            -webkit-transform: translateY(100%);
+                    transform: translateY(100%);
+        }
+        to {
+            -webkit-transform: translateY(0);
+                    transform: translateY(0);
+        }
+    }
+    @keyframes comeon {
+        from {
+            -webkit-transform: translateY(100%);
+                    transform: translateY(100%);
+        }
+        to {
+            -webkit-transform: translateY(0);
+                    transform: translateY(0);
+        }
+    }
+}
+.pop-mask {
+    position: fixed;
+    z-index: 10000;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: none;
+    background-color: rgba(0,0,0,.5);
+}
+.hs-bottom-share {
+    z-index: 10001 !important;
+}
