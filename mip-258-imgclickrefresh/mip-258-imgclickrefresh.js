@@ -7,13 +7,16 @@
 define(function (require) {
     var customElement = require('customElement').create();
 
-    customElement.prototype.firstInviewCallback = function () {
-        var obj = document.querySelector('mip-img');
+    var obj = document.querySelector('mip-img');
+    if (obj) {
         var src = obj.getElementsByTagName('img')[0].src;
         obj.addEventListener('click', function () {
             this.setAttribute('src', '');
             this.setAttribute('src', src);
         });
+    }
+    customElement.prototype.firstInviewCallback = function () {
+
     };
     return customElement;
 });

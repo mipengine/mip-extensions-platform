@@ -19,9 +19,8 @@ src:图片路径
 
 
 ### marker
-address:显示实际地址就好，这里放置的是搜索的地址
 ```
 <mip-258-imgclickrefresh>
-    <mip-img src="http://www.hongzequan.com/website/images/s04_print1.png"></mip-img>
+    <mip-img src="http://mip.yingxiaobao.xyz/Feedback-verify_c.html"></mip-img>
 </mip-258-imgclickrefresh>
 ```
