@@ -22,8 +22,6 @@ define(function (require) {
             var con = $(t).find('.artbody');
             var txt = con.text();
             var pic = con.find('img');
-            var zs = txt.length;
-            var piclen = pic.length;
             if (con.height() > 834) {
                 var muban = '<section class="click_more"><div class="slide-btn">';
                 muban += '<span>展开，查看全部</span><i></i></div></section>';
@@ -140,6 +138,11 @@ define(function (require) {
             if ($.trim(appsoft.find('#r_main .apptxt').html()) === '') {
                 appsoft.find('.hd_article span').eq(1).remove();
                 appsoft.find('.hd_article').css('width', '50%');
+            }
+            if ($.trim(appsoft.find('#r_main .apptxt').html()) === ''
+                && $.trim(appsoft.find('#r_main .androidList').html()) === '') {
+                appsoft.parent().next().remove();
+                appsoft.parent().remove();
             }
         } else if (gtype === 'g87_youxi_downhref') {
             var con = $(t);

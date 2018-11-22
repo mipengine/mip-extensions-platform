@@ -18,12 +18,12 @@ define(function (require) {
     var url;
     // 是否处于获取数据阶段
     var loading;
-    var ddhost;
-    var ddq;
+    // var ddhost;
+    // var ddq;
 
-    var insertAfter = function (newNode, referenceNode) {
-        referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-    };
+    // var insertAfter = function (newNode, referenceNode) {
+    //     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+    // };
     var setData = function (ele, template, data) {
         var output = '';
         for (let i = 0; i < data.length; i++) {
@@ -56,21 +56,27 @@ define(function (require) {
             }
             rowHtml = rowHtml.replace(new RegExp('{{page}}', 'g'), page);
             rowHtml = rowHtml.replace(new RegExp('{{index}}', 'g'), i);
+
+            // switch (i) {
+            //     case 1: rowHtml += '<li class="pic"><mip-ad type="baidu-wm-ext" domain="'+ddhost+'" token="'+ddq[0]+'"><div id="'+ddq[0]+'"></div></mip-ad></li>';break;
+            //     case 4: rowHtml += '<li class="pic"><mip-ad type="baidu-wm-ext" domain="'+ddhost+'" token="'+ddq[1]+'"><div id="'+ddq[1]+'"></div></mip-ad></li>';break;
+            // }
+
             output += rowHtml;
         }
         $(ele).append(output);
 
-        var script1 = document.createElement('script');
-        script1.type = 'text/javascript';
-        script1.src = 'https://' + ddhost + '/' + ddq[Math.floor(Math.random() * ddq.length)] + '.js';
-        var b = ele.querySelectorAll('#lipic-' + page + '-2')[0];
-        insertAfter(script1, b);
+        // var script1 = document.createElement('script');
+        // script1.type = 'text/javascript';
+        // script1.src = 'https://' + ddhost + '/' + ddq[Math.floor(Math.random() * ddq.length)] + '.js';
+        // var b = ele.querySelectorAll('#lipic-' + page + '-2')[0];
+        // insertAfter(script1, b);
 
-        var script2 = document.createElement('script');
-        script2.type = 'text/javascript';
-        script2.src = 'https://' + ddhost + '/' + ddq[Math.floor(Math.random() * ddq.length)] + '.js';
-        var bb = ele.querySelectorAll('#lipic-' + page + '-5')[0];
-        insertAfter(script2, bb);
+        // var script2 = document.createElement('script');
+        // script2.type = 'text/javascript';
+        // script2.src = 'https://' + ddhost + '/' + ddq[Math.floor(Math.random() * ddq.length)] + '.js';
+        // var bb = ele.querySelectorAll('#lipic-' + page + '-5')[0];
+        // insertAfter(script2, bb);
     };
     var getData = function (ele, template, url) {
         if (loading) {
@@ -115,8 +121,8 @@ define(function (require) {
                 return;
             }
             url = config.url;
-            ddhost = config.ddhost;
-            ddq = config.ddq;
+            // ddhost = config.ddhost;
+            // ddq = config.ddq;
 
             if ($(document).height() <= $(window).height()) {
                 getData(ele, template, url);
