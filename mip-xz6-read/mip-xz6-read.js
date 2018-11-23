@@ -17,8 +17,8 @@ define(function (require) {
                 $('.downApp,.install a,.free-book a,.rs-app-btn a').attr('href', 'https://disp.rr6.com/spread/v1/1009');
             }
             if ($(o).find('.updown > a').last().text() === '返回列表'
-            && $(o).find('.install a').attr('data-read').indexOf('http') === 0) {
-                $(o).find('.updown > a').last().attr('href', $(o).find('.install a').attr('data-read')).html('下一章');
+            && $(o).find('.rs-app-btn a').attr('data-read').indexOf('http') === 0) {
+                $(o).find('.updown > a').last().attr('href', $(o).find('.rs-app-btn a').attr('data-read')).html('下一章');
             }
         },
         ml: function (o) {
