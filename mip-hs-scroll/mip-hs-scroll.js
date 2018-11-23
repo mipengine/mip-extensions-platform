@@ -63,7 +63,7 @@ define(function (require) {
             return;
         }
         else {
-            getQueryString('show') ? src = src + '/' + getQueryString('show') : src = src + '/ranking';
+            getQueryString('show') ? src = src + '/' + getQueryString('show') : src = src;
             //			src = src + '/' + GetQueryString('show') || src + '/ranking';
         }
 
@@ -112,6 +112,7 @@ define(function (require) {
                 }).then(function (res) {
                     return res.json();
                 }).then(function (data) {
+                    console.log(data);
                     // 数据加载成功，请求返回
                     if (data && parseInt(data.status, 10) === 0 && data.data) {
                         if (rn > self.params.rn || !data.data.items) {

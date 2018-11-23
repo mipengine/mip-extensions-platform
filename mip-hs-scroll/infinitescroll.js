@@ -59,8 +59,7 @@ define(function (require) {
             me.options.$loading.html(me.options.loadingHtml);
             // 如果firstResult存在,同步加载第0页内容
             if (me.options.firstResult.length) {
-                me.scrollPageCache.content
-                = me.scrollPageCache.content.concat(me.separatePage(me.options.firstResult));
+                me.scrollPageCache.content = me.scrollPageCache.content.concat(me.separatePage(me.options.firstResult));
                 me.options.$result.html(me.wrapPageParentDom(me.scrollPageCache.content[0], 0));
                 me.scrollPageCache.topPosition.push(me.options.$result.position().top);
             }
@@ -260,8 +259,8 @@ define(function (require) {
                             // 标记数据状态为默认
                             me.dataStatus = 1;
                             // 将新数据合并入数据缓存中
-                            me.scrollPageCache.content
-                            = me.scrollPageCache.content.concat(me.separatePage(newResultArr));
+                            me.scrollPageCache.content = me.scrollPageCache.content.concat(
+                                me.separatePage(newResultArr));
                             // trigger scroll事件,确保继续触发数据加载
                             me.options.$wrapper.trigger('scroll');
                         }
