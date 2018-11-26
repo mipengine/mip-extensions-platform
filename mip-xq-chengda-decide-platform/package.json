@@ -1,0 +1,15 @@
+{
+    "name": "mip-xq-chengda-decide-platform",
+    "version": "1.0.0",
+    "description": "用于进行判断PC端与移动端输出相应端的百度推荐的异步代码",
+    "contributors": [
+        {
+            "name": "XunselF",
+            "email": "609152706@qq.com",
+            "url": "https://www.gz-chengda.com/"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
