@@ -1,0 +1,14 @@
+{
+    "name": "mip-free-trial",
+    "version": "1.0.0",
+    "description": "提交申请免费体验",
+    "contributors": [
+        {
+            "name": "唐伟伟",
+            "email": "844475003@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

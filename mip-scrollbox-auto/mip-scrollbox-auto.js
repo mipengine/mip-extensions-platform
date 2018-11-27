@@ -45,7 +45,7 @@ define(function (require) {
      */
     customElement.prototype.warn = function () {
         var args = [].slice.call(arguments);
-        args.unshift('<mip-scrollbox-auto>:');
+        args.unshift('<mip-scrollbox>:');
         console.warn.apply(console, args);
     };
 
@@ -65,31 +65,35 @@ define(function (require) {
         element.addEventListener('touchmove', function (e) {
             e.stopPropagation();
         });
+        var scorll = element.querySelectorAll('[data-scroller]');
+        if (scorll.length) {
+            [].slice.call(scorll[0].children).forEach(function (node, index) {
+                if (node.getAttribute('class') === 'cur') {
+                    console.log(node.offsetWidth);
+                    console.log(index);
+                    var FatherNode = element.querySelector('[data-inner]');
+                    FatherNode.scrollLeft = node.offsetWidth * (index - 1);
+
+                }
+            });
+        }
         if (config.type !== 'row') {
             return;
         }
         var nodes = element.querySelectorAll('[data-item]');
         var width = 0;
         var cols = 0;
+
         [].slice.call(nodes).forEach(function (node) {
             var col = node.dataset.col || 3;
             width += col * config.rate;
             cols += col - 0;
         });
         [].slice.call(nodes).forEach(function (node) {
-            node.style.width = (((node.dataset.col || 3) * config.rate) / width) * 100 + '%';
+            node.style.width = (node.dataset.col || 3) * config.rate / width * 100 + '%';
             node.style.paddingRight = config.right / cols + '%';
         });
         element.querySelector('[data-scroller]').style.width = width + '%';
-        var scorll = element.querySelectorAll('[data-scroller]');
-        if (scorll.length) {
-            [].slice.call(scorll[0].children).forEach(function (node, index) {
-                if (node.getAttribute('class') === 'cur') {
-                    var FatherNode = element.querySelector('[data-inner]');
-                    FatherNode.scrollLeft = node.offsetWidth * (index - 1);
-                }
-            });
-        }
     };
 
     return customElement;

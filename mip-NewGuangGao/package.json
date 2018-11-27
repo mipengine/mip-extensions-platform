@@ -1,0 +1,14 @@
+{
+    "name": "mip-NewGuangGao",
+    "version": "1.0.0",
+    "description": "组件介绍",
+    "contributors": [
+        {
+            "name": "jiangfeng",
+            "email": "jiangfeng@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

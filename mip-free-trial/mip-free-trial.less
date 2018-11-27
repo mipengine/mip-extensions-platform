@@ -1,0 +1,134 @@
+/**
+ * @file mip-free-trial样式文件
+ */
+
+mip-free-trial {
+    .fm-box {
+        width: 100%;
+    }
+    .fm-c {
+        padding: 2.5rem 1rem 1rem 1rem;
+        dl {
+            margin: 0 0 1rem 0;
+            line-height: 2.4rem;
+            border: 1px solid #626262;
+            border-radius: 5px;
+            display: flex;
+            display: -webkit-flex;
+            .t1 {
+                color: #656565;
+                width: 100px;
+                padding: 0 10px;
+                font-size: 1rem;
+                display: block;
+            }
+            .ipt-txt {
+                flex: 1;
+                line-height: 2.4rem;
+                line-height: 2.4rem;
+                padding: 0 10px 0 0;
+                background: none;
+                border: none;
+            }
+        }
+        .ipt-submit {
+            font-size: 1.1rem;
+            line-height: 3rem;
+            height: 3rem;
+            border-radius: 5px;
+            text-align: center;
+            color: #fff;
+            background: #ff862c;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+    }
+    .reveal-modal-bg {
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        background: #000;
+        -moz-opacity: .7;
+        -khtml-opacity: .7;
+        opacity: .7;
+        z-index: 1000000;
+        display: none;
+        top: 0;
+        left: 0;
+    }
+    .reveal-modal {
+        display: none;
+        top: 0;
+        left: 5%;
+        position: absolute;
+        z-index: 10000001;
+        width: 90%;
+        height: auto;
+        top: 20px;
+        .reveal-msgbox {
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+        }
+        .msgbox-b {
+            border-radius: 5px;
+            background: #fff;
+            padding: 2rem 1rem;
+            border: 1px solid #e5e5e5;
+            .t1 {
+                text-align: center;
+                font-size: 1.4rem;
+                padding: 0 0 1.5rem 0;
+                span {
+                    display: inline-block;
+                    padding: 0 48px;
+                    color: #00a8ff;
+                    border-bottom: 2px solid #00a8ff;
+                    line-height: 44px;
+                }
+            }
+            .des {
+                padding: 0 0 1.5rem 0;
+                line-height: 26px;
+                color: #00a8ff;
+                text-align: center;
+                display: none;
+            }
+            .ipt-b {
+                display: flex;
+                display: -webkit-flex;
+                .ipt-txt {
+                    flex: 1;
+                    width: 100%;
+                    border: 1px solid #e8e8e8;
+                    border-radius: 3px;
+                    padding: 0 10px;
+                    line-height: 2.4rem;
+                }
+                .ipt-code {
+                    display: inline-block;
+                    padding: 5px 10px;
+                    line-height: 2.4rem;
+                    div {
+                        display: block;
+                        text-align: center;
+                        background: #eee;
+                        padding: 0 10px;
+                    }
+                }
+            }
+            .ipt-btn {
+                margin-top: 1.5rem;
+                .ipt-submit {
+                    line-height: 3rem;
+                    background: #00a8ff;
+                    color: #fff;
+                    text-align: center;
+                    width: 100%;
+                    border: none;
+                }
+            }
+        }
+    }
+}
