@@ -1,0 +1,14 @@
+{
+    "name": "mip-zxz-public",
+    "version": "1.0.0",
+    "description": "页面功能合集，rem,查看更多",
+    "contributors": [
+        {
+            "name": "功能合集",
+            "email": "sanguogege@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

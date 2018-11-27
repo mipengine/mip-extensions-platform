@@ -1,0 +1,14 @@
+{
+    "name": "mip-baihui12-LoadFile",
+    "version": "1.0.0",
+    "description": "载入文件",
+    "contributors": [
+        {
+            "name": "jiangfeng",
+            "email": "jiangfeng@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

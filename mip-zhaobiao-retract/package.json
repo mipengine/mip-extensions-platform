@@ -1,0 +1,9 @@
+{
+    "name": "mip-zhaobiao-retract",
+    "version": "1.0.0",
+    "description":"软键盘弹出页面底部广告隐藏插件",
+    "author": {
+        "name": "zhaobiao.cn",
+        "email": "750223584@qq.com"
+    }
+}
