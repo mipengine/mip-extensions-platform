@@ -1,7 +1,7 @@
 {
     "name": "mip-ck-location",
-    "version": "1.0.1",
-    "description": "接口返回失败时，增加默认值",
+    "version": "1.0.2",
+    "description": "调整ajax请求形式为jsonp",
     "contributors": [
         {
             "name": "yoyoyoo",

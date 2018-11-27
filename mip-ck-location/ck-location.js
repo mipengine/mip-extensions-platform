@@ -17,7 +17,7 @@ define(function (require) {
         $.ajax({
             url: url,
             method: 'get',
-            dataType: 'json',
+            dataType: 'jsonp',
             timeout: 3000,
             success: function (res) {
                 var errno = +res.errno;
