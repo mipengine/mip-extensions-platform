@@ -1,0 +1,14 @@
+{
+    "name": "mip-hs-discuss",
+    "version": "1.0.0",
+    "description": "详情页评论组件以及相对应的点赞",
+    "contributors": [
+        {
+            "name": "lin",
+            "email": "840399305@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
