@@ -14,18 +14,27 @@ define(function (require) {
     customElement.prototype.firstInviewCallback = function () {
         var self = this;
         var element = self.element;
-        var myMenu = element.querySelector('span');
         var myContent = document.querySelector('.tab-product');
-        myMenu.addEventListener('click', function () {
-            if (myMenu.className === 'menu-list') {
-                myMenu.className = 'menu-big';
-                myContent.classList.remove('product-bigImg');
-            } else {
-                myMenu.className = 'menu-list';
-                myContent.classList.add('product-bigImg');
-            };
+        var queryAll = document.querySelectorAll.bind(document);
+        var $ = queryAll;
+        var myMenu = $('.tab-menu');
+        var unboundForEach = Array.prototype.forEach;
+        var forEach = Function.prototype.call.bind(unboundForEach);
+
+        forEach(myMenu, function (el) {
+            el.addEventListener('click', function () {
+                for (var i = 0; i < myMenu.length; i++) {
+                    var menu = myMenu[i];
+                    if (menu.className === 'menu-list') {
+                        menu.className = 'menu-big';
+                        myContent.classList.remove('product-bigImg');
+                    } else {
+                        menu.className = 'menu-list';
+                        myContent.classList.add('product-bigImg');
+                    }
+                }
+            });
         });
     };
     return customElement;
-
 });

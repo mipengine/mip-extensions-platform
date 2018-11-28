@@ -28,6 +28,7 @@ define(function (require) {
                 dataUpload(key, segmentation);
                 if (href) {
                     window.location.href = href;
+                    window.parent.location.href = href;
                 }
             });
         } else if (type === 'load') {

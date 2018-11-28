@@ -1,0 +1,14 @@
+{
+    "name": "mip-hs-questioncai",
+    "version": "1.0.0",
+    "description": "详情页回答的踩",
+    "contributors": [
+        {
+            "name": "lin",
+            "email": "840399305@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

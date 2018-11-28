@@ -1,0 +1,14 @@
+{
+    "name": "mip-hs-delectanswer",
+    "version": "1.0.0",
+    "description": "个人主页问题数据列表删除操作",
+    "contributors": [
+        {
+            "name": "lin",
+            "email": "840399305@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

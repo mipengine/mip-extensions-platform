@@ -1,0 +1,14 @@
+{
+    "name": "mip-hs-quesattention",
+    "version": "1.0.0",
+    "description": "详情页关注",
+    "contributors": [
+        {
+            "name": "lin",
+            "email": "840399305@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

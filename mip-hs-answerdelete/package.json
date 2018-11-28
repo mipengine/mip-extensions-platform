@@ -1,0 +1,14 @@
+{
+    "name": "mip-hs-answerdelete",
+    "version": "1.0.0",
+    "description": "个人中心提问数据删除",
+    "contributors": [
+        {
+            "name": "lin",
+            "email": "840399305@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

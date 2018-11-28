@@ -14,7 +14,7 @@ define(function (require) {
             return;
         }
         button.on('click', function () {
-            $('#IHaveMore').css({'max-heigh': 'none'});
+            $('#IHaveMore').css({'max-height': 'none'});
             button.hide();
         });
     }

@@ -3,6 +3,7 @@
  * @author
  */
 define(function (require) {
+
     var util = require('util');
     var templates = require('templates');
     var fetchJsonp = require('fetch-jsonp');
@@ -11,11 +12,11 @@ define(function (require) {
     var infiniteScroll = null;
 
     /**
-	 * [getUrl url 拼接函数]
-	 *
-	 * @param  {string} src 获取的最初url
-	 * @return {string}     拼接后的url
-	 */
+     * [getUrl url 拼接函数]
+     *
+     * @param  {string} src 获取的最初url
+     * @return {string}     拼接后的url
+     */
     function getUrl(src) {
         var self = this;
         var url = src;
@@ -29,42 +30,19 @@ define(function (require) {
         return url;
     }
 
-    customElement.prototype.build = function () {
-        var me = this;
-        me.addEventAction('refreshlist', function (e) {
-            refreshContent.call(me, Array.prototype.slice.call(arguments, 1));
-        });
-    };
-
     /**
-	 * 构造元素，只会运行一次
-	 */
-    customElement.prototype.firstInviewCallback = function () {
+     * 创业家内有多个无限滚动组件，需要在进入页面时初始化，不然在切换到这个组建时，可能会无法加载数据
+     */
+    customElement.prototype.build = function () {
         var self = this;
         var element = self.element;
         var src = element.getAttribute('data-src') || '';
 
-        function getQueryString(name) {
-            var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
-            var r = window.location.search.substr(1).match(reg);
-            var context = '';
-            if (r != null) {
-                context = r[2];
-            }
-
-            reg = null;
-            r = null;
-            return context === null || context === '' || context === 'undefined' ? '' : context;
-        }
         // 如果没有写data-src, 则报错提示
         if (!src) {
             console.error('未填写src字段，不能获取数据');
             element.remove();
             return;
-        }
-        else {
-            getQueryString('show') ? src = src + '/' + getQueryString('show') : src = src;
-            //			src = src + '/' + GetQueryString('show') || src + '/ranking';
         }
 
         // 默认参数设置
@@ -98,10 +76,12 @@ define(function (require) {
 
         self.url = getUrl.call(self, src);
 
+        // 异步请求返回后，解析数据，使用mustache 渲染插入页面
         self.pushResult = function (rn, status) {
             // 异步获取数据示例
-            var deferShow = $.Deferred;
-            var defer = deferShow();
+            var deferr = $.Deferred;
+            var defer = deferr();
+
             if (rn > self.rn) {
                 defer.resolve('NULL');
             }
@@ -112,7 +92,6 @@ define(function (require) {
                 }).then(function (res) {
                     return res.json();
                 }).then(function (data) {
-                    console.log(data);
                     // 数据加载成功，请求返回
                     if (data && parseInt(data.status, 10) === 0 && data.data) {
                         if (rn > self.params.rn || !data.data.items) {
@@ -147,38 +126,17 @@ define(function (require) {
             limitShowPn: 0,
             preLoadPn: 2,
             firstResult: [],
-            pushResult: self.pushResult
+            pushResult: self.pushResult,
+            ele: element
         });
     };
 
+    /**
+     * 移除组件时，销毁实例，减少开销
+     */
     customElement.prototype.detachedCallback = function () {
-        insDestrory();
-    };
-
-    // 属性改变后重新渲染构建下拉
-    customElement.prototype.attributeChangedCallback = function (attributeName, oldValue, newValue, namespace) {
-        console.log(attributeName, oldValue, newValue, namespace);
-        if (attributeName === 'data-src' && oldValue !== newValue) {
-            refreshContent.call(this);
-        }
-
-    };
-
-    // 刷新列表
-    function refreshContent() {
-        if (infiniteScroll) {
-            var options = infiniteScroll.options;
-            options.$result.empty();
-        }
-
-        insDestrory();
-        this.firstInviewCallback();
-    }
-
-    function insDestrory() {
-        // infiniteScroll && infiniteScroll.destroy();
         infiniteScroll = null;
-    }
+    };
 
     return customElement;
 });

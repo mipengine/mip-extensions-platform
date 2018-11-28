@@ -6,7 +6,9 @@
 
 define(function (require) {
     // 使用了jquery $.Deferred
+    var util = require('util');
     var $ = require('jquery');
+    var viewport = require('viewport');
     var InfiniteScroll = function (opt) {
         if (!opt.$result || !opt.$loading || !opt.pushResult) {
             return;
@@ -16,6 +18,7 @@ define(function (require) {
 
         opt.$result = $(opt.$result);
         opt.$loading = $(opt.$loading);
+        opt.$ele = opt.ele;
 
         // 设置默认值
         me.options = $.extend({
@@ -92,7 +95,7 @@ define(function (require) {
             }
 
             me.wrapperHeight = me.options.$wrapper.height(); // 可视区高度
-            me.scrollerHeight = me.options.$scroller.height(); // 滚动容器高度
+            me.scrollerHeight = this.getScrollerHeight(); // 滚动容器高度
             me.currentScrollTop = me.options.$wrapper.scrollTop(); // 当前滚动条位置
         },
 
@@ -103,8 +106,8 @@ define(function (require) {
             var me = this;
 
             $(window).off('resize' + me.eventSpace); // 注销resize事件
-            me.options.$wrapper.off('scroll' + me.eventSpace); // 注销scroll事件
             me.options.$loading.off('click' + me.eventSpace); // 注销loading上的点击事件
+            viewport.off('scroll', me.scrollHandler);
             me.scrollPageCache = null; // 删除cache数据
         },
 
@@ -159,8 +162,8 @@ define(function (require) {
                 else if (window.orientation === 90 || window.orientation === -90) {
                     // 横屏
                     verticalScreenWidth = Math.min(window.screen.width, window.screen.height);
-                    verticalScreenWidth = verticalScreenWidth
-                    * $(window).width() / Math.max(window.screen.width, window.screen.height);
+                    var winScreen = Math.max(window.screen.width, window.screen.height);
+                    verticalScreenWidth = verticalScreenWidth * $(window).width() / winScreen;
                 }
             }
             else {
@@ -175,17 +178,19 @@ define(function (require) {
 
         bindScroll: function () {
             var me = this;
-
-            me.options.$wrapper.on('scroll' + me.eventSpace, function () {
+            var scrollHandler;
+            viewport.on('scroll', function scrollHandler() {
                 // 若为暂停状态,什么也不做
-                if (me.state === 'pause') {
+                if (me.state === 'pause' || !me.isElementInViewport()) {
                     return;
                 }
 
                 // 获取当前滚动条位置
-                me.currentScrollTop = $(this).scrollTop();
+                me.currentScrollTop = viewport.getScrollTop();
                 // 某些浏览器(安卓QQ)滚动时会隐藏头部但不触发resize,需要反复获取 wtf...
-                me.wrapperHeight = me.options.$wrapper.height();
+                me.wrapperHeight = viewport.getHeight();
+                // 获取容器高度
+                me.scrollerHeight = viewport.getScrollHeight();
 
                 // 到顶了
                 if (me.currentScrollTop <= 0) {
@@ -203,10 +208,10 @@ define(function (require) {
                 // 获取当前可视区页码
                 var currentShowPage = me.getShowPage();
                 // 若页码变化
+                var onChanPn = me.options.onChangeShowPN;
                 if (me.currentShowPage !== currentShowPage) {
                     // 执行回调
-                    me.options.onChangeShowPN
-                    && me.options.onChangeShowPN.call(me, currentShowPage, me.currentShowPage);
+                    onChanPn && onChanPn.call(me, currentShowPage, me.currentShowPage);
                     me.currentShowPage = currentShowPage;
                     // 清理or回填dom
                     if (me.options.limitShowPn) {
@@ -218,9 +223,10 @@ define(function (require) {
 
             // 若初始即不满一屏,trigger scroll事件触发加载
             if (me.currentScrollTop >= me.scrollerHeight - me.wrapperHeight - me.options.bufferHeightPx) {
-                me.options.$wrapper.trigger('scroll');
+                viewport.trigger('scroll');
             }
 
+            this.scrollHandler = scrollHandler;
         },
 
         /**
@@ -250,7 +256,7 @@ define(function (require) {
                     // 成功
                     function (newResultArr) {
                         // 处理新增数据
-                        if (!newResultArr.length || newResultArr === 'NULL') {
+                        if (newResultArr === '' || newResultArr === 'NULL') {
                             // 标记数据状态为无数据
                             me.dataStatus = 0;
                             me.options.$loading.html(me.options.loadOverHtml);
@@ -259,10 +265,10 @@ define(function (require) {
                             // 标记数据状态为默认
                             me.dataStatus = 1;
                             // 将新数据合并入数据缓存中
-                            me.scrollPageCache.content = me.scrollPageCache.content.concat(
-                                me.separatePage(newResultArr));
+                            var meScrollContent = me.scrollPageCache.content;
+                            me.scrollPageCache.content = meScrollContent.concat(me.separatePage(newResultArr));
                             // trigger scroll事件,确保继续触发数据加载
-                            me.options.$wrapper.trigger('scroll');
+                            viewport.trigger('scroll');
                         }
 
                         // 失败
@@ -274,7 +280,7 @@ define(function (require) {
                             me.dataStatus = 1;
                             me.options.$loading.html(me.options.loadingHtml);
                             // trigger scroll事件,重新触发数据加载
-                            me.options.$wrapper.trigger('scroll');
+                            viewport.trigger('scroll');
                         });
                     }
                 );
@@ -290,13 +296,16 @@ define(function (require) {
         updateScrollElement: function (pn) {
             var me = this;
 
-            var $domnewPage = $(me.wrapPageParentDom(me.scrollPageCache.content[pn], pn));
-            me.options.$result.append($domnewPage);
+            var $domNewPage = $(me.wrapPageParentDom(me.scrollPageCache.content[pn], pn));
+            me.options.$result.append($domNewPage);
 
             // 更新变量
             me.currentLoadPage = pn;
-            me.scrollerHeight = me.options.$scroller.height();
-            me.scrollPageCache.topPosition.push($domnewPage.position().top);
+            me.scrollerHeight = this.getScrollerHeight();
+            me.scrollPageCache.topPosition.push($domNewPage.position().top);
+        },
+        getScrollerHeight: function () {
+            return viewport.getScrollHeight();
         },
 
         /**
@@ -312,14 +321,14 @@ define(function (require) {
             var recycleClass = 'infinite-recycle';
             var startPage = Math.max(pn - Math.floor((me.options.limitShowPn - 1) / 2), 0);
             // 获取所有结果列表dom
-            var $domresultElement = me.options.$result.find('.' + me.options.scrollPageClass);
+            var $domResultElement = me.options.$result.find('.' + me.options.scrollPageClass);
             // 选出当前需要被显示的dom页
-            var $domshouldShowElement = $domresultElement.slice(startPage, startPage + me.options.limitShowPn);
+            var $domShouldShowElement = $domResultElement.slice(startPage, startPage + me.options.limitShowPn);
 
             // todo:这里应该还有优化空间
-            if ($domshouldShowElement.length) {
+            if ($domShouldShowElement.length) {
                 // 恢复:在应该被显示的dom中选出所有带回收标记标签的元素执行恢复操作
-                $domshouldShowElement.each(function () {
+                $domShouldShowElement.each(function () {
                     if ($(this).hasClass(recycleClass)) {
                         $(this).html(me.scrollPageCache.content[$(this).attr('data-page')]);
                         $(this).removeClass(recycleClass);
@@ -327,12 +336,12 @@ define(function (require) {
 
                 });
                 // 清理:选出所有不应该被显示的dom,并排除已有回收标记标签的元素,执行清理操作
-                $domresultElement.not($domshouldShowElement).not('.' + recycleClass).each(function () {
+                $domResultElement.not($domShouldShowElement).not('.' + recycleClass).each(function () {
                     $(this).height($(this).height()).empty();
                     $(this).addClass(recycleClass);
                 });
                 // 这里有可能导致整体高度变化,需要重新更新高度
-                me.scrollerHeight = me.options.$scroller.height();
+                me.scrollerHeight = this.getScrollerHeight();
             }
 
         },
@@ -380,6 +389,26 @@ define(function (require) {
                 '</ul>'
             ].join('')
             );
+        },
+
+        /**
+         * 判断组件是否在可视区域内
+         *
+         * @return {boolean} true 或 false
+         */
+        isElementInViewport: function () {
+            var ele = this.options.$ele;
+            var rect = util.rect.getElementRect(ele);
+
+            var winWidth = viewport.getWidth();
+            var winHeight = viewport.getHeight();
+            var offRect = util.rect.getElementOffset(ele);
+            var offLeft = offRect.left;
+            var offTop = offRect.top;
+            var offWidth = offRect.width;
+            var offHeight = offRect.height;
+
+            return (offLeft > -offWidth && offLeft < winWidth && offTop > -offHeight && offTop < winHeight);
         },
 
         /**
