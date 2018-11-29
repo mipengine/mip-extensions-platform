@@ -256,7 +256,7 @@ define(function (require) {
                     // 成功
                     function (newResultArr) {
                         // 处理新增数据
-                        if (newResultArr === '' || newResultArr === 'NULL') {
+                        if (newResultArr.length === 0 || newResultArr === 'NULL') {
                             // 标记数据状态为无数据
                             me.dataStatus = 0;
                             me.options.$loading.html(me.options.loadOverHtml);

@@ -28,19 +28,24 @@ define(function (require) {
                 url: ajaxurl,
                 cache: false,
                 data: 'account=' + phone + '&password=' + pass + '&code=' + code
-                + '&remember=' + remember + '&t=' + Math.random(),
+                    + '&remember=' + remember + '&t=' + Math.random(),
                 dataType: 'json',
                 async: false,
                 success: function (data) {
                     if (data.status === 1) {
                         $el.find('.error').html(data.msg);
-                        var $url = '/captcha';
-                        $url = $url + '/' + Math.random();
-                        $el.find('#change').src = $url;
+                        var Url = 'http://hsanswer.altke.cn/captcha';
+                        Url = Url + '/' + Math.random();
+                        $el.find('.idf_img_show').attr('src', Url);
                     }
 
                     if (data.status === 0) {
-                        window.location.href = data.data.url;
+                        if (data.data.close === true) {
+                            window.close();
+                        }
+                        else {
+                            window.location.href = data.data.url;
+                        }
                     }
 
                 },
@@ -49,6 +54,11 @@ define(function (require) {
                     return;
                 }
             });
+        });
+        $el.find('.idf_img_show').on('click', function () {
+            var Url = 'http://hsanswer.altke.cn/captcha';
+            Url = Url + '/' + Math.random();
+            $(this).attr('src', Url);
         });
     };
 

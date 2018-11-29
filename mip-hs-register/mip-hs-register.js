@@ -56,7 +56,7 @@ define(function (require) {
                     url: ajaxurl,
                     cache: false,
                     data: 'account=' + phone + '&code=' + vcode + '&password=' + pass
-                    + '&verification_key=' + verificationKey + '&t=' + Math.random(),
+                        + '&verification_key=' + verificationKey + '&t=' + Math.random(),
                     dataType: 'json',
                     async: false,
                     success: function (data) {
@@ -65,8 +65,7 @@ define(function (require) {
                             $el.find('.error').html(data.msg);
                         }
                         else {
-                            alert('注册成功，请登录');
-                            location.href = data.url;
+                            window.top.location.href = data.data.url;
                         }
                     },
                     error: function (e) {
@@ -99,8 +98,12 @@ define(function (require) {
             var phone = $.trim($el.find('.reg_mobile').val());
             var regphone = /^1[34578][0-9]{9}$/;
             var regemail = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/;
+            var code = $.trim($('.idf').val());
             if (!regphone.test(phone) && !regemail.test(phone)) {
                 $el.find('.error').html('请输入正确的手机号或邮箱');
+            }
+            else if (!code) {
+                $('.error').html('请输入图片验证码');
             }
             else {
                 $el.find('.error').html('');
@@ -109,12 +112,15 @@ define(function (require) {
                     type: 'POST',
                     url: smsurl,
                     cache: false,
-                    data: 'account=' + phone + '&t=' + Math.random(),
+                    data: 'account=' + phone + '&code=' + code + '&t=' + Math.random(),
                     dataType: 'json',
                     async: false,
                     success: function (data) {
                         if (data.status !== 0) {
                             $el.find('.error').html(data.msg);
+                            var Url = 'http://hsanswer.altke.cn/captcha';
+                            Url = Url + '/' + Math.random();
+                            $el.find('.idf_img_show').attr('src', Url);
                         }
                         else {
                             $el.find('input[name=verification_key]').val(data.verification_key);
@@ -129,6 +135,11 @@ define(function (require) {
                     }
                 });
             }
+        });
+        $el.find('.idf_img_show').on('click', function () {
+            var Url = 'http://hsanswer.altke.cn/captcha';
+            Url = Url + '/' + Math.random();
+            $(this).attr('src', Url);
         });
     };
 

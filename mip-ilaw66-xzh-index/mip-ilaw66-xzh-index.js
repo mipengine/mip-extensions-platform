@@ -397,15 +397,15 @@ define(function (require) {
                                 + '今日咨询人数&nbsp;<i class="userTodayNum">'
                                 + numtransform(b.countToday) + ' </i> 人 </div></li>';
                             showSlogonMsg(tempMoreHtml, 2000);
-                            var tempHtml = '<ul>';
+                            var tempHtml = '<ul id="hearderbox">';
                             if (b.payState === 6) { // 咨询过，欠费的用户
-                                tempHtml += '<li><div class="topay">'
+                                tempHtml += '<li style="margin-bottom:0"><div class="topay">'
                                     + '<mip-img src="tempbaidu/images/paytipicon.png"></mip-img>'
                                     + '您有一个订单未支付<p id="topay">去支付</p></div></li>';
                             }
 
                             if (rvFlg) {
-                                tempHtml += '<li><div class="tocheckreservation">'
+                                tempHtml += '<li style="margin-bottom:0"><div class="tocheckreservation">'
                                     + '<mip-img src="tempbaidu/images/paytipicon.png"></mip-img>您预约了'
                                     + timestamp3 + '的咨询<p id="tocheckreservation">查看预约</p></div></li>';
                             }
@@ -416,6 +416,10 @@ define(function (require) {
                                 $el.find('.userinteractive, .headerbf').show();
                                 $el.find('.userinteractive').html(tempHtml);
                                 //                                  }
+                                if (b.payState === 6 && rvFlg) {
+                                    startmarquee(20, 2000, 'hearderbox');
+                                }
+
                                 haveNoPaidOrder(b);
                             }
 
@@ -486,14 +490,15 @@ define(function (require) {
             tempHtml += tempMoreHtml;
             tempHtml += '</ul>';
             $el.find('.slogonMsg').html(tempHtml);
-            startmarquee(20, 2000);
+            startmarquee(20, 2000, 'slogonMsgId');
         }
         // 上下轮播
-        function startmarquee(speed, delay) {
-            var lineH = $el.find('#slogonMsgId li').eq(0).height(); // 获取行高
+        function startmarquee(speed, delay, ids) {
+            //          var lineH = $el.find('#slogonMsgId li').eq(0).height(); // 获取行高
+            var lineH = 40; // 获取
             var p = false;
             var t;
-            var o = document.getElementById('slogonMsgId');
+            var o = document.getElementById(ids);
             if (!o) {
                 return;
             }

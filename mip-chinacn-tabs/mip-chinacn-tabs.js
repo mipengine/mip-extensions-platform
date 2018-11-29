@@ -17,7 +17,7 @@ define(function (require) {
         var myContent = document.querySelector('.tab-product');
         var queryAll = document.querySelectorAll.bind(document);
         var $ = queryAll;
-        var myMenu = $('.tab-menu');
+        var myMenu = $('.tab-li span');
         var unboundForEach = Array.prototype.forEach;
         var forEach = Function.prototype.call.bind(unboundForEach);
 

@@ -1,7 +1,7 @@
 # mip-hs-register
 
 mip-hs-register 组件说明
-此组件用于用户注册的组件，通过获取组件的属性data-url进行异步请求处理
+此组件用于用户注册的组件，通过获取组件的属性data-url进行异步请求处理,sms-url短信接口
 标题|内容
 ----|----
 类型|通用
@@ -12,7 +12,7 @@ mip-hs-register 组件说明
 
 ### 基本用法
 ```html
-<mip-hs-register data-url='https://www.xxx.com/regster'>
+<mip-hs-register data-url='https://www.xxx.com/regster' sms-url='https://www.xxx.com/sms'>
     <div class="main">
 		<mip-img class="main_logo" src="statics/images/thems/logo.png"></mip-img>
 		<div class="main_tit">

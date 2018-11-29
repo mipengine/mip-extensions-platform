@@ -8,7 +8,7 @@ define(function (require) {
 
     var $ = require('zepto');
     var customElement = require('customElement').create();
-    var dataYS = require('./data');
+    var dataYS = require('https://static.shenpo.com/mip/js/tool/yunshi');
     var YUNSHISIGNID = 1;
     var YUNSHITIME = 0;
     function toolYunshi() {
