@@ -2,15 +2,14 @@
  * @file mip-retract 组件
  */
 define(function (require) {
+    var customElement = require('customElement').create();
     var w = window.innerWidth;
     var h = window.innerHeight;
-    var changehide = document.getElementById('changehide');
     window.onresize = function () {
         if (w > window.innerWidth || h > window.innerHeight) {
-            changehide.style.display = 'none';
-        } else {
-            changehide.style.display = 'block';
+            console.log('缩小');
+            alert(123);
         };
     };
+    return customElement;
 });
-

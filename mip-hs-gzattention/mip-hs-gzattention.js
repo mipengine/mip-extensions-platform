@@ -16,7 +16,7 @@ define(function (require) {
         if (That.hasClass('gzactive')) {
             $.ajax({
                 type: 'post',
-                url: unattention,
+                url: attention,
                 data: {
                     'user_id': userid
                 },
@@ -42,7 +42,7 @@ define(function (require) {
         else {
             $.ajax({
                 type: 'post',
-                url: attention,
+                url: unattention,
                 data: {
                     'user_id': userid
                 },
