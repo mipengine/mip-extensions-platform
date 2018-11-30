@@ -8,7 +8,7 @@ define(function (require) {
     customElement.prototype.firstInviewCallback = function () {
         var t = this.element;
         var gtype = t.getAttribute('g_type');
-        var siteurl = '//m.87g.com/';
+        var siteurl = '//m.87g.cn/';
         if (gtype === 'g87_news') {
             // 点击量统计
             var module = t.getAttribute('module');
@@ -232,6 +232,14 @@ define(function (require) {
                 + '&id=' + t.getAttribute('my_id') + '&catid=' + t.getAttribute('catid');
                 $.getJSON(hitsurl);
             });
+            if (con.find('.down_flag').length > 0) {
+                $.get(siteurl + 'index.php?m=content&c=content_ajax&a=get_down_flag', function (date) {
+                    if (date === 1) {
+                        var addresshtml = '<a style="background: rgb(204, 204, 204);" href="javascript:;">已经下架</a>';
+                        con.find('.down_flag').html(addresshtml);
+                    }
+                });
+            }
         } else if (gtype === 'g87_youxi_imgs') {
             var con = $(t);
             setTimeout(function () {
