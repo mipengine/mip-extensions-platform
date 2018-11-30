@@ -12,13 +12,13 @@ define(function (require) {
         var That = $(this);
         var uncollect = That.attr('url-uncollect');
         var collect = That.attr('url-collect');
-        var num = That.siblings('.collectnum').html();
+        var num = That.attr('url-id');
         if (That.hasClass('collected')) {
             $.ajax({
                 type: 'post',
                 url: uncollect,
                 data: {
-                    'answer_id': num
+                    'question_id': num
                 },
                 dataType: 'json',
                 success: function (data) {
@@ -43,7 +43,7 @@ define(function (require) {
                 type: 'post',
                 url: collect,
                 data: {
-                    'answer_id': num
+                    'question_id': num
                 },
                 dataType: 'json',
                 success: function (data) {

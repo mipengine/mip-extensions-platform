@@ -1,6 +1,6 @@
 # mip-258-imgclickrefresh
 
-`<mip-258-imgclickrefresh>` 点击验证码图片刷新
+ 点击验证码图片刷新
 
 标题|内容
 ----|----
@@ -21,6 +21,6 @@ src:图片路径
 ### marker
 ```
 <mip-258-imgclickrefresh>
-    <mip-img src="http://mip.yingxiaobao.xyz/Feedback-verify_c.html"></mip-img>
+    <mip-img id="mip-imgrefresh" src="http://mip.yingxiaobao.xyz/Feedback-verify_c.html"></mip-img>
 </mip-258-imgclickrefresh>
 ```

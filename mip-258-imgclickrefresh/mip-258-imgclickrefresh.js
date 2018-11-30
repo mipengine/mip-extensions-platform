@@ -6,15 +6,16 @@
 
 define(function (require) {
     var customElement = require('customElement').create();
-
-    var obj = document.querySelector('mip-img');
-    if (obj) {
-        var src = obj.getElementsByTagName('img')[0].src;
-        obj.addEventListener('click', function () {
-            this.setAttribute('src', '');
-            this.setAttribute('src', src);
-        });
-    }
+    var util = require('util');
+    var $ = require('zepto');
+    var obj = $('#mip-imgrefresh');
+    obj.click(function () {
+        if (obj) {
+            var src = obj.attr('src');
+            obj.attr('src', '');
+            obj.attr('src', src);
+        }
+    });
     customElement.prototype.firstInviewCallback = function () {
 
     };
