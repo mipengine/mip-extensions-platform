@@ -25,7 +25,7 @@ define(function (require) {
         self.open = false;
         self.id = this.element.id;
         self.scroll = this.element.hasAttribute('content-scroll');
-        let showBox = this.element.hasAttribute('show');
+        var showBox = this.element.hasAttribute('show');
         if (showBox) {
             util.css(self.element, {
                 'position': 'fixed',
