@@ -5,10 +5,12 @@ define(function (require) {
     var customElement = require('customElement').create();
     var w = window.innerWidth;
     var h = window.innerHeight;
+    var changehide = document.getElementById('changehide');
     window.onresize = function () {
         if (w > window.innerWidth || h > window.innerHeight) {
-            console.log('缩小');
-            alert(123);
+            changehide.style.display = 'none';
+        } else {
+            changehide.style.display = 'block';
         };
     };
     return customElement;

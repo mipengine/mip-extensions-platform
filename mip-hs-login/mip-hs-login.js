@@ -60,6 +60,14 @@ define(function (require) {
             Url = Url + '/' + Math.random();
             $(this).attr('src', Url);
         });
+        $el.find('.check').on('click', function () {
+            if ($(this).hasClass('checked')) {
+                $(this).removeClass('checked');
+            }
+            else {
+                $(this).addClass('checked');
+            }
+        });
     };
 
     return customElement;

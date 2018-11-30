@@ -370,6 +370,9 @@ define(function (require) {
         var self = this;
         var element = self.element;
 
+        // 第一次进入的时候不进行表单校验
+        var count = 0;
+
         self.addEventAction('showTip', function (event, text) {
             showTip.call(element, text);
             return;
@@ -377,7 +380,7 @@ define(function (require) {
 
         // 记录登录后的额外信息
         element.extraData = {};
-        self.addEventAction('saveData', function () {
+        self.addEventAction('saveData', function (event) {
             setTimeout(function () {
                 var info = JSON.parse(element.dataset.info || '{}');
                 var isSideLogin = JSON.parse(element.dataset.isSideLogin);
@@ -392,13 +395,18 @@ define(function (require) {
                 );
                 element.extraData = extraData;
 
+                count++;
                 if (isSideLogin) {
                     if (!extraData.id) {
                         window.top.location.href = replaceAndEncodeUrl(extraData, phonePage, '');
                     }
                 }
                 else {
-                    onSubmit(element, event);
+                    if (count === 1) {
+                        return;
+                    } else {
+                        onSubmit(element, event);
+                    }
                 }
             });
         });
