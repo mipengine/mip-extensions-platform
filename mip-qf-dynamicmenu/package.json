@@ -1,0 +1,14 @@
+{
+    "name": "mip-qf-dynamicmenu",
+    "version": "1.0.0",
+    "description": "119手游网排行榜子榜动态菜单",
+    "contributors": [
+        {
+            "name": "W_peach",
+            "email": "www.wtiroo@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

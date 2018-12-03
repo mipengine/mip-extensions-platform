@@ -45,12 +45,12 @@ define(function (require) {
                     }
                     var count = data.notice + data.zan + data.comment + data.focus;
                     if (count > 0) {
-                        $el.find('#msg_num').text(count);
                         $el.find('#msg_num').addClass('msg_num');
+                        $el.find('#person').addClass('status');
                     }
                     else {
-                        $el.find('#msg_num').text('');
                         $el.find('#msg_num').removeClass('msg_num');
+                        $el.find('#person').removeClass('status');
                     }
                 }
             });

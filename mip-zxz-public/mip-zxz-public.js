@@ -18,6 +18,18 @@ define(function (require) {
             button.hide();
         });
     }
+    // 文章内容分页跳转
+    function showPage() {
+        var obj = $('#SHOW_PAGE_SELECT');
+        if (obj[0] === undefined) {
+            return;
+        }
+
+        obj.change(function () {
+            top.location.href = obj.val();
+        });
+    }
     seeMore();
+    showPage();
     return customElement;
 });

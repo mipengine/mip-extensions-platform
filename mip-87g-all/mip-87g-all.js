@@ -234,7 +234,7 @@ define(function (require) {
             });
             if (con.find('.down_flag').length > 0) {
                 $.get(siteurl + 'index.php?m=content&c=content_ajax&a=get_down_flag', function (date) {
-                    if (date === 1) {
+                    if (date === '1') {
                         var addresshtml = '<a style="background: rgb(204, 204, 204);" href="javascript:;">已经下架</a>';
                         con.find('.down_flag').html(addresshtml);
                     }

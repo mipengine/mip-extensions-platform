@@ -22,9 +22,12 @@ define(function (require) {
             dataType: 'json',
             beforeSend: function () {
                 $('.loading').show();
+                That.parents('.answer_other').siblings('.discuss_show').find('.look_more').css('display', 'none');
+                That.parents('.answer_other').siblings('.discuss_show').find('.discuss_go').css('display', 'none');
             },
             success: function (data) {
                 $('.loading').hide();
+
                 if (data.status === 0) {
                     var comments = data.data.comments;
                     var str = '';
@@ -82,6 +85,8 @@ define(function (require) {
                     }
 
                     That.parents('.answer_other').siblings('.discuss_show').find('.discuss_list').append(str);
+                    That.parents('.answer_other').siblings('.discuss_show').find('.look_more').css('display', 'block');
+                    That.parents('.answer_other').siblings('.discuss_show').find('.discuss_go').css('display', 'flex');
                 }
                 else {
                     alert('暂时没有人评论');

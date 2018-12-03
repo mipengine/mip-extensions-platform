@@ -177,7 +177,7 @@ define(function (require) {
             if (con.find('.down_flag').length > 0) {
                 var downpageid = con.find('.down_flag').attr('down_page_id');
                 $.get(siteurl + 'ajax_nodown.asp?id=' + downpageid, function (date) {
-                    if (date === 1) {
+                    if (date === '1') {
                         con.find('.down_flag').css('background', 'rgb(204, 204, 204)');
                         con.find('.down_flag').attr('href', 'javascript:;').attr('data-href', 'javascript:;');
                         con.find('.down_flag').text('下载已关闭');

@@ -20,7 +20,7 @@ define(function (require) {
                 That.find('.slidup').removeClass('show');
                 That.find('.slidup').hide();
                 That.find('.disnum').show();
-                That.parents('.answer_other').siblings('.discuss_show').slideUp();
+                That.parents('.answer_other').siblings('.discuss_show').hide();
             }
             else {
                 That.find('.slidup').addClass('show');
