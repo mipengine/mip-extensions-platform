@@ -8,7 +8,7 @@ define(function (require) {
     customElement.prototype.firstInviewCallback = function () {
         var t = this.element;
         var gtype = t.getAttribute('g_type');
-        var siteurl = '//m.87g.cn/';
+        var siteurl = '//m.87g.com/';
         if (gtype === 'g87_news') {
             // 点击量统计
             var module = t.getAttribute('module');

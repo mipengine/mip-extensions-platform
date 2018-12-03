@@ -1,0 +1,14 @@
+{
+    "name": "mip-imgUrl",
+    "version": "1.0.0",
+    "description": "设暂无图片的默认图片",
+    "contributors": [
+        {
+            "name": "liuqiang",
+            "email": "18366971514@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

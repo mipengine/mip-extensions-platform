@@ -174,6 +174,16 @@ define(function (require) {
             if (downaddressa.attr('murl') !== '') {
                 downaddressa.attr('href', downaddressa.attr('murl'));
             }
+            if (con.find('.down_flag').length > 0) {
+                var downpageid = con.find('.down_flag').attr('down_page_id');
+                $.get(siteurl + 'ajax_nodown.asp?id=' + downpageid, function (date) {
+                    if (date === 1) {
+                        con.find('.down_flag').css('background', 'rgb(204, 204, 204)');
+                        con.find('.down_flag').attr('href', 'javascript:;').attr('data-href', 'javascript:;');
+                        con.find('.down_flag').text('下载已关闭');
+                    }
+                });
+            }
         } else if (gtype === '3h3_youxi_imgs') {
             var con = $(t);
             setTimeout(function () {
