@@ -14,15 +14,26 @@ define(function (require) {
      */
     customElement.prototype.build = function () {
         var element = this.element;
-        var viewNum = +element.getAttribute('num') || 5;
-        var between = +element.getAttribute('between') || 5;
+        var viewNum = element.getAttribute('num');
+        var between = parseInt(element.getAttribute('between'), 10) || 0;
         var current = element.querySelector('.current');
-        var index = $(current).parent().index();
-        var mySwiper = new Swiper('.swiper-container', {
-            slidesPerView: viewNum,
-            spaceBetween: between,
-            initialSlide: index
-        });
+        var freeMode = element.getAttribute('free');
+        var options = {};
+        if ('auto' !== viewNum) {
+            viewNum = parseInt(viewNum, 10) || 1;
+        }
+
+        options.slidesPerView = viewNum;
+        options.spaceBetween = between;
+        if (current !== null) {
+            options.initialSlide = $(current).parent().index();
+        }
+
+        if (freeMode !== null) {
+            options.freeMode = true;
+        }
+
+        new Swiper('.swiper-container', options);
     };
 
     return customElement;
