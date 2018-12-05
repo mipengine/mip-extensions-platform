@@ -1,0 +1,14 @@
+{
+    "name": "mip-ifrontend-alert",
+    "version": "1.0.0",
+    "description": "Alert弹出框",
+    "contributors": [
+        {
+            "name": "唐伟伟",
+            "email": "844475003@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

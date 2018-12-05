@@ -233,10 +233,17 @@ define(function (require) {
                 $.getJSON(hitsurl);
             });
             if (con.find('.down_flag').length > 0) {
-                $.get(siteurl + 'index.php?m=content&c=content_ajax&a=get_down_flag', function (date) {
-                    if (date === '1') {
-                        var addresshtml = '<a style="background: rgb(204, 204, 204);" href="javascript:;">已经下架</a>';
-                        con.find('.down_flag').html(addresshtml);
+                $.ajax({
+                    url: siteurl + 'index.php?m=content&c=content_ajax&a=get_down_flag',
+                    type: 'GET',
+                    dataType: 'jsonp',
+                    jsonp: 'callback',
+                    success: function (date, datastatus) {
+                        console.log(date, datastatus);
+                        if (date === 1) {
+                            var addresshtml = '<a style="background: rgb(204, 204, 204);" href="javascript:;">已经下架</a>';
+                            con.find('.down_flag').html(addresshtml);
+                        }
                     }
                 });
             }

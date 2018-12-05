@@ -1,0 +1,14 @@
+{
+    "name": "mip-menu",
+    "version": "1.0.0",
+    "description": "用于menu的显示和隐藏",
+    "contributors": [
+        {
+            "name": "wangzhen",
+            "email": "826918565@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
