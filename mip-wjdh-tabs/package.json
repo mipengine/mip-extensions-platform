@@ -1,0 +1,14 @@
+{
+    "name": "mip-wjdh-tabs",
+    "version": "1.0.0",
+    "description": "在普通的tab切换基础上加入触屏滑动",
+    "contributors": [
+        {
+            "name": "Twinkleee",
+            "email": "365189883@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
