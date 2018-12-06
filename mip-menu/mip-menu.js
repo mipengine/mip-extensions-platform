@@ -15,7 +15,9 @@ define(function (require) {
         var ele = this.element;
         var candan = document.querySelector('#candan');
         var pos = document.querySelector('#pos');
-
+        console.log(ele);
+        console.log(candan);
+        console.log(pos);
         ele.addEventListener('click', function () {
             if (candan.src === './imgs/caidan.png') {
                 pos.style.display = 'block';

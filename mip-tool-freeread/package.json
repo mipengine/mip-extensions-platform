@@ -1,0 +1,14 @@
+{
+    "name": "mip-tool-freeread",
+    "version": "1.0.0",
+    "description": "小说阅读器",
+    "contributors": [
+        {
+            "name": "i'm here",
+            "email": "85642319@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
