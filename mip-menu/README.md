@@ -13,7 +13,14 @@ mip-menu 切换菜单
 ### 基本用法
 ```html
 <mip-menu class="pos">
-    
+    <div><a href="">中考语文</a></div>
+    <div><a href="">中考语文</a></div>
+    <div><a href="">中考语文</a></div>
+    <div><a href="">中考语文</a></div>
+    <div><a href="">中考语文</a></div>
+    <div><a href="">中考语文</a></div>
+    <div><a href="">中考语文</a></div>
+    <div><a href="">中考语文</a></div>
 </mip-menu>
 ```
 
