@@ -1,7 +1,7 @@
 {
-    "name": "mip-wjdh-tabs",
-    "version": "1.0.1",
-    "description": "在普通的tab切换基础上加入触屏滑动",
+    "name": "mip-masonry",
+    "version": "1.0.0",
+    "description": "MIP瀑布里组件",
     "contributors": [
         {
             "name": "Twinkleee",

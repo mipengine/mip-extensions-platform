@@ -1,0 +1,14 @@
+{
+    "name": "mip-close",
+    "version": "1.0.0",
+    "description": "点击关闭弹窗",
+    "contributors": [
+        {
+            "name": "wxj",
+            "email": "1455802711@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

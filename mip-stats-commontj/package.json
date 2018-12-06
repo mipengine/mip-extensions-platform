@@ -1,0 +1,14 @@
+{
+    "name": "mip-stats-commontj",
+    "version": "1.0.0",
+    "description": "通用的统计脚本，通过模拟图片访问的方式，往对应地址发送相应的数据",
+    "contributors": [
+        {
+            "name": "liukaida",
+            "email": "liukaida@houxue.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

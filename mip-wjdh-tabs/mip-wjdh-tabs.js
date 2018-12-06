@@ -21,10 +21,10 @@ define(function (require) {
             interTime: e.getAttribute('interTime') || 2500, //  自动运行间隔
             defaultIndex: e.getAttribute('defaultIndex') || 0, //  默认的当前位置索引。0是第一个； defaultIndex:1 时，相当于从第2个开始执行
             titOnClassName: e.getAttribute('titOnClassName') || 'on', //  当前导航对象添加的className
-            autoPage: a.autoPage || false, //  自动分页，当为true时titCell为“导航对象包裹层”
-            prevCell: a.prevCell || '.prev', //  前一页按钮
-            nextCell: a.nextCell || '.next', //  后一页按钮
-            pageStateCell: a.pageStateCell || '.pageState', //  分页状态对象，用于显示分页状态，例如：2/3
+            autoPage: e.getAttribute('autoPage') || false, //  自动分页，当为true时titCell为“导航对象包裹层”
+            prevCell: e.getAttribute('prevCell') || '.prev', //  前一页按钮
+            nextCell: e.getAttribute('nextCell') || '.next', //  后一页按钮
+            pageStateCell: e.getAttribute('pageStateCell') || '.pageState', //  分页状态对象，用于显示分页状态，例如：2/3
             pnLoop: e.getAttribute('pnLoop') === undefined ? true : e.getAttribute('pnLoop'), //  前后按钮点击是否继续执行效果，当为最前/后页是会自动添加“prevStop”/“nextStop”控制样色
             startFun: a.startFun || null, //  每次切换效果开始时执行函数，用于处理特殊情况或创建更多效果。用法 satrtFun:function(i,c){ }； 其中i为当前分页，c为总页数
             endFun: a.endFun || null, //  每次切换效果结束时执行函数，用于处理特殊情况或创建更多效果。用法 endFun:function(i,c){ }； 其中i为当前分页，c为总页数

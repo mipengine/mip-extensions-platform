@@ -10,9 +10,21 @@ mip-menu 切换菜单
 
 ## 示例
 
-### 基本用法
+
 ```html
-<mip-menu class="pos">
+<div class="head clearfix">
+    <div class="logo">
+        <a href="">
+            <mip-img src="/imgs/logo.jpg">
+            </mip-img>
+        </a>
+    </div>
+    <div class="candan">
+        <mip-img src="/imgs/caidan.png" id="candan">
+        </mip-img>
+    </div>
+</div>
+<mip-menu class="pos" id="pos">
     <div><a href="">中考语文</a></div>
     <div><a href="">中考语文</a></div>
     <div><a href="">中考语文</a></div>

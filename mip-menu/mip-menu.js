@@ -15,16 +15,13 @@ define(function (require) {
         var ele = this.element;
         var candan = document.querySelector('#candan');
         var pos = document.querySelector('#pos');
-        console.log(ele);
-        console.log(candan);
         console.log(pos);
-        ele.addEventListener('click', function () {
-            if (candan.src === './imgs/caidan.png') {
+        candan.addEventListener('click', function () {
+            console.log(this);
+            if (pos.style.display === 'none') {
                 pos.style.display = 'block';
-                candan.src = './imgs/x.png';
             } else {
                 pos.style.display = 'none';
-                candan.src = './imgs/caidan.png';
             }
         });
     };

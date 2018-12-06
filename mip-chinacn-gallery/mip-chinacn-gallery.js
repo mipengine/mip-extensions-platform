@@ -6,8 +6,7 @@
 define(function (require) {
 
     var customElement = require('customElement').create();
-    var $ = require('zepto');
-    var Swiper = require('./swiper/swiper.jquery.min');
+    var Swiper = require('./swiper/swiper.min');
 
     /**
      * 构造元素，只会运行一次
