@@ -1,0 +1,14 @@
+{
+    "name": "mip-show-side",
+    "version": "1.0.0",
+    "description": "切换推出左侧侧边栏，点击蒙版层，恢复",
+    "contributors": [
+        {
+            "name": "xushuxing",
+            "email": "905336308@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

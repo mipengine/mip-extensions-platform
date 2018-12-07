@@ -1,7 +1,7 @@
 {
     "name": "mip-close",
-    "version": "1.0.0",
-    "description": "点击关闭弹窗",
+    "version": "1.0.1",
+    "description": "点击关闭弹窗和自适应代码",
     "contributors": [
         {
             "name": "wxj",

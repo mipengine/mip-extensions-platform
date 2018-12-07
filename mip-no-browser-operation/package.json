@@ -1,0 +1,15 @@
+{
+    "name": "mip-no-browser-operation",
+    "version": "1.0.0",
+    "description": "禁止用户在浏览器中进行右键菜单、全选、复制的方案",
+    "contributors": [
+        {
+            "name": "XunselF",
+            "email": "609152706@qq.com",
+            "url": "https://www.xieqiserver.com/"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
