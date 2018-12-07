@@ -1,0 +1,14 @@
+{
+    "name": "mip-otto-newsvideo",
+    "version": "1.0.0",
+    "description": "网校新闻页播放视频",
+    "contributors": [
+        {
+            "name": "xinbao",
+            "email": "fa@ijust.cc"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
