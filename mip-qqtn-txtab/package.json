@@ -1,15 +1,15 @@
 {
     "name": "mip-qqtn-txtab",
-    "version": "1.0.2",
-    "description": "点击按钮进行样式切换1.0.1更新，当内容有空格时会把图片隐藏，新版修复此问题。1.0.2 处理文字展现方式",
+    "version": "1.0.3",
+    "description": "点击按钮进行样式切换1.0.1更新，当内容有空格时会把图片隐藏，新版修复此问题。1.0.2 处理文字展现方式。1.0.3 修复由于MIP v2 的图片会增加<mip-i-space style='display: block;'>space</mip-i-space>引起的文本变多的问题",
     "contributors": [
         {
             "name": "gom",
             "email": "gom3250@qq.com",
-            "url": "https://www.mipengine.org"
+            "url": "https://m.qqtn.com"
         }
     ],
     "engines": {
-        "mip": ">=1.0.1"
+        "mip": ">=1.0.2"
     }
 }

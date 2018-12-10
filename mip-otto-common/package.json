@@ -1,7 +1,7 @@
 {
     "name": "mip-otto-common",
-    "version": "1.3.3",
-    "description": "改善错误提示",
+    "version": "1.3.5",
+    "description": "修正url路径",
     "contributors": [
         {
             "name": "xinbao",

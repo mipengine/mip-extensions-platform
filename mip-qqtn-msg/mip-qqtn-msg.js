@@ -163,7 +163,7 @@ define(function (require) {
         function readComment() {
             oli = oul.find('li');
             p = Math.floor(oli.length / 5 + 1);
-            fetch(ajaxUrl + 'sajax.asp?action=6&t=' + oid + '&p=' + p)
+            fetch(ajaxUrl + 'sajax.asp?action=6&t=' + oid + '&s=1&num=5&p=' + p)
             .then(function (res) {
                 return res.text();
             }).then(function (data) {

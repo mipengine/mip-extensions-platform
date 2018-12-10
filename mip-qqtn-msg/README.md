@@ -882,7 +882,7 @@ font-weight: normal;}
 <input id="verify" class="button disable" type="submit" value="提交跟贴" hidefocus="true" />
 <span id="cancel" class="button">取消</span>
 </fieldset>
-<input type="hidden" id="app-id" value="32370" />
+<input type="hidden" id="app-id" value="274720" />
 </mip-form>
 <div id="view-comment" class="reviews">
 <div class="post"><header>
@@ -952,7 +952,7 @@ font-weight: normal;}
     </ul>
 </div>
 
-<div class="f-information f-hide" data-id="32370" data-path="down" data-categroyId="194" data-rootid="15" data-commendid="2" data-system="Android" data-ppaddress="https://server-m.pp.cn/download/apk/new?channel=PM_5641&ch_src=pm_qqtn&ch=default&appId=566489" data-ismoney="0" data-CommentTpye="0" data-Username="zab" data-Type="0" data-DateTime="2010/6/5" data-phpurl="2"></div>
+<div class="f-information f-hide" data-id="32370" data-path="down" data-categroyId="194" data-rootid="15" data-commendid="2" data-system="Android" data-ppaddress="https://server-m.pp.cn/download/apk/new?channel=PM_5641&ch_src=pm_qqtn&ch=default&appId=566489" data-ismoney="0" data-CommentTpye="1" data-Username="zab" data-Type="0" data-DateTime="2010/6/5" data-phpurl="2"></div>
 </mip-html-titleno>
 </mip-fy-yuyue>
 

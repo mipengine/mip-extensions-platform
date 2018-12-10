@@ -1,0 +1,14 @@
+{
+    "name": "mip-another-change",
+    "version": "1.0.0",
+    "description": "get更新数据请求",
+    "contributors": [
+        {
+            "name": "xushuxing",
+            "email": "905336308@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

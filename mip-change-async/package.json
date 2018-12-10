@@ -1,0 +1,14 @@
+{
+    "name": "mip-change-async",
+    "version": "1.0.0",
+    "description": "异步刷新页面数据",
+    "contributors": [
+        {
+            "name": "xushuxing",
+            "email": "905336308@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

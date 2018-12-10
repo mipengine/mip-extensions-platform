@@ -2,7 +2,7 @@
  * @file mip-qqtn-txtab 组件.对页面中图片排版进行修改，
  * 针对头像进行大小图、圆形图切换，增加头像的用户体验,
  * @author gom3250@qq.com.
- * @version 1.0.0
+ * @version 1.0.3 修复由于MIP v2 的图片会增加<mip-i-space style='display: block;'>space</mip-i-space>引起的文本变多的问题
  */
 
 define(function (require) {
@@ -18,6 +18,7 @@ define(function (require) {
         var ele = this.element;
         var contenp = $(ele).find('#content');
         var toutext = contenp.find('p').text();
+        var toutext = toutext.replace(/space/g, '');
         contenp.wrapAll(addcount);
         $(ele).find('.m-touxiang').prepend(imgtt);
         contenp.find('.m-imgul p').each(function (i) {

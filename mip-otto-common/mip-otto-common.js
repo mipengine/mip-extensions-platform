@@ -217,28 +217,29 @@ define(function (require) {
             element.appendChild(temp);
             var sign = element.params.sign;
             var base = (location.pathname.indexOf('mip') > -1) ? '/mip/' : '/';
-            element.querySelector('.cFooter').innerHTML = '<a href="' + base + 'h/'
+            // 此处出现了http，是普通的页面跳转，非前后台通信。网站不是全站https，只有接口部分是https
+            element.querySelector('.cFooter').innerHTML = '<a href="http://wap.wangxiao.cn' + base + 'h/'
                 + sign
                 + '.html" class="cFooter__item">'
                 + '<i class="cFooter__itemImg cFooter__itemImg--home"></i>'
                 + '<p class="cFooter__itemText">首页</p>'
                 + '</a>'
-                + '<a href="/Course/Index?sign='
+                + '<a href="http://wap.wangxiao.cn/Course/Index?sign='
                 + sign
                 + '" class="cFooter__item">'
                 + '<i class="cFooter__itemImg cFooter__itemImg--course"></i><p class="cFooter__itemText">课程</p>'
                 + '</a>'
-                + '<a href="/Tiku/?sign='
+                + '<a href="http://wap.wangxiao.cn/Tiku/?sign='
                 + sign
                 + '" class="cFooter__item">'
                 + '<i class="cFooter__itemImg cFooter__itemImg--bank"></i><p class="cFooter__itemText">题库</p>'
                 + '</a>'
-                + '<a href="/Book/?sign='
+                + '<a href="http://wap.wangxiao.cn/Book/?sign='
                 + sign
                 + '" class="cFooter__item">'
                 + ' <i class="cFooter__itemImg cFooter__itemImg--book"></i><p class="cFooter__itemText">图书</p>'
                 + '</a>'
-                + '<a href="/TikuUserData/Personal/?sign='
+                + '<a href="http://wap.wangxiao.cn/TikuUserData/Personal/?sign='
                 + sign
                 + '" class="cFooter__item">'
                 + ' <i class="cFooter__itemImg cFooter__itemImg--my"></i><p class="cFooter__itemText">我的</p>'
