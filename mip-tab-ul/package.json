@@ -1,0 +1,14 @@
+{
+    "name": "mip-tab-ul",
+    "version": "1.0.0",
+    "description": "tab组件切换",
+    "contributors": [
+        {
+            "name": "小段",
+            "email": "864665573@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

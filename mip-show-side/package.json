@@ -1,7 +1,7 @@
 {
     "name": "mip-show-side",
-    "version": "1.0.0",
-    "description": "切换推出左侧侧边栏，点击蒙版层，恢复",
+    "version": "1.0.1",
+    "description": "切换推出左侧侧边栏，点击蒙版层，恢复，view非必填项",
     "contributors": [
         {
             "name": "xushuxing",

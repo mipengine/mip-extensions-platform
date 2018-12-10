@@ -1,0 +1,14 @@
+{
+    "name": "mip-stat-wulinbang",
+    "version": "1.0.0",
+    "description": "用于武林榜（50bang）统计投放",
+    "contributors": [
+        {
+            "name": "DING",
+            "email": "dingjy@2345.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

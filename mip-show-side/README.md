@@ -59,7 +59,7 @@
 <section id="view" class="transtons">
 	<div class="mark none" id="mark"></div>
 	<div class="transtons" id="side"></div>
-	<mip-show-side>
+	<mip-show-side side-id="#side" mark-id="#mark" view-id="#view">
 		<button>close</button>
 	</mip-show-side>
 </section>
@@ -71,22 +71,19 @@
 
 说明：指向需要打开的dom，支持queryselector
 必选项：否
-默认值：view
 
 
 
 ### side-id
 
 说明：指向需要打开的dom，支持queryselector
-必选项：否
-默认值：side
+必选项：是
 
 
 ### mark-id
 
 说明：指向需要打开的dom，支持queryselector
-必选项：否
-默认值：mark
+必选项：是
 
 ## 注意事项
 
