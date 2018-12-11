@@ -1,0 +1,14 @@
+{
+    "name": "mip-zhmsask",
+    "version": "1.0.1",
+    "description": "中华美食网mip咨询提交组件",
+    "contributors": [
+        {
+            "name": "wangwei",
+            "email": "wangwei@66law.cn"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
