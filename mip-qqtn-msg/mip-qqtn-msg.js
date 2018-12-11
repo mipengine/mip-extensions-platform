@@ -130,7 +130,7 @@ define(function (require) {
                 }
             }
             if (sendid !== '') {
-                var url = 'action=18&id=' + oid + '&CommentTpye=' + CommentTpye + '&sendid=' + escape(sendid) + '';
+                var url = 'action=18&id=' + oid + '&CommentTpye=' + comid + '&sendid=' + escape(sendid) + '';
                 $.ajax({
                     type: 'POST',
                     url: 'https://m.qqtn.com/ajax.asp',
@@ -163,7 +163,7 @@ define(function (require) {
         function readComment() {
             oli = oul.find('li');
             p = Math.floor(oli.length / 5 + 1);
-            fetch(ajaxUrl + 'sajax.asp?action=6&t=' + oid + '&s=1&num=5&p=' + p)
+            fetch(ajaxUrl + 'sajax.asp?action=6&t=' + oid + '&s=' + comid + '&num=5&p=' + p)
             .then(function (res) {
                 return res.text();
             }).then(function (data) {

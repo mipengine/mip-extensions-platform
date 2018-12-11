@@ -6,7 +6,7 @@ mip-tab-ul 组件说明
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|http://m.tuiguangjia.com/static/v1/mip-tab-ul/mip-tab-ul.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-tab-ul/mip-tab-ul.js
 
 ## 示例
 
