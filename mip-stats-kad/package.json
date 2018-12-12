@@ -1,0 +1,14 @@
+{
+    "name": "mip-stats-kad",
+    "version": "1.0.1",
+    "description": "康爱多MIP统计组件",
+    "contributors": [
+        {
+            "name": "罗君",
+            "email": "luojun@360kad.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
