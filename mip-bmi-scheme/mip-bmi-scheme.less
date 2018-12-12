@@ -4,78 +4,179 @@
 
 mip-bmi-scheme {
 
-    .scheme-info-div {
-        border: 1px #888888 dashed;
-        border-radius: 5px;
+    .height-weight-div {
+        height: .35rem;
+    }
+
+    .height-label {
+        float:left;
+        width:20%;
+        color:#575759;
+        line-height: .35rem;
+        font-size: .15rem;
+    }
+
+    .height-weight-input {
+        float:left;
+        width:35%;
+    }
+
+    .height-weight-input input {
+        margin-top: .05rem;
+        line-height: .25rem;
+        font-size:.18rem;
+        border:0 solid #000;
+        width:100%;
+    }
+
+    .age-select input {
+        margin-top: .05rem;
+        line-height: .25rem;
+        font-size:.18rem;
+        border:0 solid #000;
+        width:100%;
+    }
+
+    .age-select {
+        float:left;
+        width:75%;
+        line-height: .30rem;
+        color: #575759;
+        text-align:left;
+        padding-right:5%;
+    }
+
+    .type-select {
+        width: 100%;
         text-align: center;
-        padding: 15px 0 15px 10px
+        color: #000;
+        border:1px solid #ccc;
+        height: .3rem;
+        line-height: .3rem;
+        border-radius:4px;
+    }
+
+    .current-sport-div {
+        border: 0 #008000 dashed;
+        text-align: center;
+        display: inline-block;
+        border-radius: 5px;
+        padding: 10px 0 10px 0;
+        width: 100%
+    }
+
+    .current-sport-select {
+        width: 200px;
+        text-align: center;
+        color: #008000
+    }
+
+    .current-sport-label {
+        color: #008000
+    }
+
+    .scheme-info-div {
+        display: block;
+        padding:0;
+        background:#FFF;
     }
 
     .scheme-info-label {
-        font-size: 15px;
-        font-weight: bold;
-        letter-spacing: 5px
+        font-size:.16rem;
+        line-height:.3rem;
+        margin:auto auto 10px auto;
+        width:100px;
+        text-align:center;
+        background:#4975de;
+        color:#FFF;
+        display:none;
     }
+
+    .label {
+        color:#222222;
+	}
+
+    .diet-info-div {
+        padding:0 10px 0 10px;
+        border-bottom:1px solid #e1e1e1;	
+	}
+
+    .sport-info-div {
+        padding:0 10px 0 10px;
+        border-bottom:1px solid #e1e1e1;	
+	}
+
+    .water-info-div {
+        padding:0 10px 0 10px;
+        border-bottom:1px solid #e1e1e1;	
+	}
 
     .diet-div {
         text-align: left;
         font-weight: normal;
-        color: #0000FF;
-        padding: 15px 5px 5px 5px
+        color: #282828;
+        padding: 15px 5px 5px 5px;
+        line-height:.3rem;
     }
 
     .breakfast-div {
         text-align: left;
         font-weight: normal;
         font-size: 13px;
-        color: #808080;
-        padding: 5px 5px 5px 35px
+        color: #7c7c7c;
+        padding: 5px 5px 5px 5px;
+        line-height:.3rem;
     }
 
     .lunch-div {
         text-align: left;
         font-weight: normal;
         font-size: 13px;
-        color: #808080;
-        padding: 5px 5px 5px 35px
+        color: #7c7c7c;
+        padding: 5px 5px 5px 5px;
+        line-height:.3rem;
     }
 
     .dinner-div {
         text-align: left;
         font-weight: normal;
         font-size: 13px;
-        color: #808080;
-        padding: 5px 5px 5px 35px
+        color: #7c7c7c;
+        padding: 5px 5px 5px 5px;
+        line-height:.3rem;
     }
 
     .more-diet-div {
         text-align: left;
         font-weight: normal;
         font-size: 13px;
-        color: #808080;
-        padding: 5px 5px 5px 35px
+        color: #7c7c7c;
+        padding: 5px 5px 5px 5px;
+        line-height:.3rem;
     }
 
     .sport-summary-div {
         text-align: left;
         font-weight: normal;
-        color: #008000;
-        padding: 15px 5px 5px 5px
+        color: #282828;
+        padding: 15px 5px 5px 5px;
+        line-height:.3rem;
     }
 
     .sport-detail-div {
         text-align: left;
         font-weight: normal;
         font-size: 13px;
-        color: #808080;
-        padding: 5px 5px 5px 35px
+        color: #7c7c7c;
+        padding: 5px 5px 15px 35px;
     }
 
     .water-summary-div {
         text-align: left;
         font-weight: normal;
-        color: #0000FF;
-        padding: 15px 5px 5px 5px
+        color: #282828;
+        padding: 15px 5px 5px 5px;
+        line-height:.3rem;
     }
 
     .water-detail-div {
@@ -83,7 +184,40 @@ mip-bmi-scheme {
         font-weight: normal;
         font-size: 13px;
         color: #808080;
-        padding: 5px 5px 5px 35px
+        padding: 5px 5px 15px 35px;
     }
 
+    .sport-detail-item {
+
+    }
+
+    .sport-detail-item-num {
+        width: 10%;
+        float:left;
+        margin-top:.05rem;
+	}
+
+    .numquan {
+        width: 20px;
+        height:20px;
+        background:#7dc1ce;
+        border-radius:10px;
+        text-align:center;
+        color:#FFF;
+	}
+
+    .sport-detail-item-left {
+        width: 30%;
+        float:left;
+        height:.3rem;
+        color:#7fbcb5;
+        line-height:.3rem;
+    }
+
+    .sport-detail-item-right {
+        width: 50%;
+        float:left;
+        height:.3rem;
+        line-height:.3rem;
+    }
 }

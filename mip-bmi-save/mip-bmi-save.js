@@ -7,7 +7,7 @@ define(function (require) {
     'use strict';
 
     var customElement = require('customElement').create();
-    var $ = require('jquery');
+    var $ = require('zepto');
     var viewer = require('viewer');
 
     customElement.prototype.firstInviewCallback = function () {
@@ -16,11 +16,11 @@ define(function (require) {
         var weight = localStorage.getItem('CURRENT_WEIGHT');
         var bmi = localStorage.getItem('CURRENT_BMI');
         var mobile = $('#mobile').val();
-
         $('#resultData').text(localStorage.getItem('CURRENT_RESULT'));
-        $('#heightWeight').html('（身高' + height + '厘米，体重：' + weight + '公斤。）');
+        $('#resultPN').text('(' + localStorage.getItem('CURRENT_PN') + ')');
+        $('#heightWeight').html('（身高:' + height + ' cm，体重：' + weight + ' kg）');
         $('#info').text(localStorage.getItem('CURRENT_INFO'));
-
+        $('#info-div-box').text('注：BMI=体重(kg)/身高(m)2。通常来评估一个人的肥胖情况');
         this.addEventAction('saveBMI', function (event) {
 
             var url = 'https://www.bmi.com.cn/BMI/saveBMI';

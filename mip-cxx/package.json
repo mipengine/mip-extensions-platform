@@ -1,0 +1,14 @@
+{
+    "name": "mip-cxx",
+    "version": "1.0.0",
+    "description": "非通用组件，适用于ddooo.com、3322.cc、zdfans.com、xue51.com等站",
+    "contributors": [
+        {
+            "name": "星辰",
+            "email": "410097923@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

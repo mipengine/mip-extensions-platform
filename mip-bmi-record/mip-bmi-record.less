@@ -4,104 +4,100 @@
 
 mip-bmi-record {
 
+    .bmi-record-title-div {
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        color:#333;
+	}
+
     .bmi-record-info-head-div {
         display: block;
-        text-align: center
+        text-align: center;
+        background:#cecece;
+        margin-top:10px;
+        width:100%;
+        font-size:.08rem;
+    }
+
+    .bmi-record-info-head-div .gx {
+        height: 20px;
+        float:left;
+        padding-top:2px;
+        border-right: 1px #cecece solid;
     }
 
     .bmi-record-info-head-n {
-        display: inline-block;
-        width: 10%;
-        height: 20px;
-        border: 1px #808080 solid;
-        background-color: #33FFCC
+        width: 11%;         
     }
 
     .bmi-record-info-head-height {
-        display: inline-block;
-        width: 10%;
-        height: 20px;
-        border: 1px #808080 solid;
-        background-color: #33FFCC
+        width: 11%;
     }
 
     .bmi-record-info-head-weight {
-        display: inline-block;
-        width: 10%;
-        height: 20px;
-        border: 1px #808080 solid;
-        background-color: #33FFCC
+        width: 11%;
     }
 
     .bmi-record-info-head-bmi {
-        display: inline-block;
         width: 15%;
-        height: 20px;
-        border: 1px #808080 solid;
-        background-color: #33FFCC
     }
 
     .bmi-record-info-head-dateTime {
-        display: inline-block;
         width: 35%;
-        height: 20px;
-        border: 1px #808080 solid;
-        background-color: #33FFCC
     }
 
     .bmi-record-info-head-operation {
-        display: inline-block;
-        width: 10%;
+        float:left;
+        width: 15%;
         height: 20px;
-        border: 1px #808080 solid;
-        background-color: #33FFCC
     }
 
     .bmi-record-info-body-div {
         display: block;
-        text-align: center
+        text-align: center;
+        width:100%;
+        background:#FFF;
+        font-size:12px;
+        line-height:20px;
+    }
+
+    .bmi-record-info-body-div .gx {
+        float:left;
+        height: 20px;
+        border-right: 1px #808080 solid;
+        border-bottom: 1px #808080 solid;
     }
 
     .bmi-record-info-body-n {
-        display: inline-block;
-        width: 10%;
-        height: 20px;
-        border: 1px #808080 solid
+        width: 11%;
     }
 
     .bmi-record-info-body-height {
-        display: inline-block;
-        width: 10%;
-        height: 20px;
-        border: 1px #808080 solid
+        width: 11%;
     }
 
     .bmi-record-info-body-weight {
-        display: inline-block;
-        width: 10%;
-        height: 20px;
-        border: 1px #808080 solid
+        width: 11%;
     }
 
     .bmi-record-info-body-bmi {
-        display: inline-block;
         width: 15%;
-        height: 20px;
-        border: 1px #808080 solid
     }
 
     .bmi-record-info-body-dateTime {
-        display: inline-block;
         width: 35%;
-        height: 20px;
-        border: 1px #808080 solid
     }
 
     .bmi-record-info-body-operation {
-        display: inline-block;
-        width: 10%;
+        width: 15%;
+        float:left;
         height: 20px;
-        border: 1px #808080 solid
+        border-bottom: 1px #808080 solid;
     }
 
+    .bmi-record-info-body-foot {
+        background:#fff;
+        height:3px;
+    }
 }

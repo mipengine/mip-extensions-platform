@@ -5,7 +5,7 @@
 
 define(function (require) {
     'use strict';
-    var $ = require('jquery');
+    var $ = require('zepto');
     var customElement = require('customElement').create();
 
     customElement.prototype.firstInviewCallback = function () {
@@ -27,15 +27,15 @@ define(function (require) {
             for (var i = 0; i < bmiRecord.length; i++) {
                 tempRecord = bmiRecord[i];
                 tempRow += '<div>';
-                tempRow += '<div class=\'bmi-record-info-body-n\'>' + (i + 1) + '</div>';
-                tempRow += '<div class=\'bmi-record-info-body-height\'>' + tempRecord.height + '</div>';
-                tempRow += '<div class=\'bmi-record-info-body-weight\'>' + tempRecord.weight + '</div>';
-                tempRow += '<div class=\'bmi-record-info-body-bmi\'>' + tempRecord.bmi + '</div>';
-                tempRow += '<div class=\'bmi-record-info-body-dateTime\'>' + tempRecord.dateTime + '</div>';
+                tempRow += '<div class=\'bmi-record-info-body-n gx\'>' + (i + 1) + '</div>';
+                tempRow += '<div class=\'bmi-record-info-body-height gx\'>' + tempRecord.height + '</div>';
+                tempRow += '<div class=\'bmi-record-info-body-weight gx\'>' + tempRecord.weight + '</div>';
+                tempRow += '<div class=\'bmi-record-info-body-bmi gx\'>' + tempRecord.bmi + '</div>';
+                tempRow += '<div class=\'bmi-record-info-body-dateTime gx\'>' + tempRecord.dateTime + '</div>';
                 tempRow += '<div class=\'bmi-record-info-body-operation\'';
                 tempRow += ' on=\'tap:mipBmiRecord.deleteBMIRecord(' + i + ')\'>' + tempRecord.operation;
                 tempRow += '</div>';
-                tempRow += '</div>';
+                tempRow += '<div class="clear"></div></div>';
                 $('#bmiRecordInfoContent').append(tempRow);
                 tempRow = '';
             }

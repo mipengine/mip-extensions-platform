@@ -8,7 +8,7 @@ define(function (require) {
 
     var customElement = require('customElement').create();
     var viewer = require('viewer');
-    var $ = require('jquery');
+    var $ = require('zepto');
 
     /**
      * 第一次进入可视区回调，只执行一次。
@@ -108,22 +108,23 @@ define(function (require) {
             var standardWeightMin = (18.5 * ((height / 100) * (height / 100))).toFixed(2);
             var standardWeightMax = (23.9 * ((height / 100) * (height / 100))).toFixed(2);
             var info = '';
+            var piannali = '';
 
             if (bmi < 18.5) {
-                resultData += '（偏瘦）';
+                piannali = '偏瘦';
                 info = '你偏瘦。';
                 weightAdjustmentData = (standardWeightMin - weight).toFixed(2);
 
             } else if (bmi >= 18.5 && bmi < 24.0) {
-                resultData += '（正常）';
+                piannali = '正常';
                 info = '你的BMI正常。';
                 weightAdjustmentData = 0;
             } else if (bmi >= 24.0 && bmi < 28.0) {
-                resultData += '（偏重）';
+                piannali = '偏重';
                 info = '你偏重，请填写手机号码，免费获取塑身方案。';
                 weightAdjustmentData = (weight - standardWeightMax).toFixed(2);
             } else {
-                resultData += '（肥胖）';
+                piannali = '肥胖';
                 info = '你肥胖。';
                 weightAdjustmentData = (weight - standardWeightMax).toFixed(2);
             }
@@ -131,13 +132,10 @@ define(function (require) {
             localStorage.setItem('CURRENT_HEIGHT', height);
             localStorage.setItem('CURRENT_WEIGHT', weight);
             localStorage.setItem('CURRENT_BMI', bmi);
+            localStorage.setItem('CURRENT_PN', piannali);
             localStorage.setItem('CURRENT_RESULT', resultData);
             localStorage.setItem('CURRENT_INFO', info);
             localStorage.setItem('CURRENT_GENDER', $('input[name=\'gender\']:checked').val());
-            localStorage.setItem('CURRENT_AGE', $('#age').val());
-            localStorage.setItem('CURRENT_TYPE', $('#type option:selected').val());
-            localStorage.setItem('CURRENT_WAY', $('#way option:selected').val());
-            localStorage.setItem('CURRENT_CURRENT_SPORT', $('#currentSport option:selected').val());
 
             var recordSwitch = $('#recordSwitch').prop('checked');
             // console.log('保存BMI计算结果到本地 - '+recordSwitch);
