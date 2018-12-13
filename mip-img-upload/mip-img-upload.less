@@ -1,0 +1,76 @@
+/**
+ * @file mip-img-upload样式文件
+ */
+
+mip-img-upload {
+    // TODO
+    .upload {
+        display: flex;
+        margin-top: 20px;
+        border-radius: 2px;
+        padding-right: 20px;
+    }
+
+    .upload-cell.default {
+        background-color: #fff;
+        border:1px solid #eee;
+        position: relative;
+    }
+    .upload-cell {
+        position: relative;
+    }
+    .upload-cell .upload-cell-close {
+        z-index: 9999;
+        width: 16px;
+        height: 16px;
+        position: absolute;
+        right: -8px;
+        top: -8px;
+        background-image: url("../img/icon_close.png");
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+    }
+    .upload-cell.default:after {
+        content: "";
+        height: 1px;
+        width: 25px;
+        background-color: #ccc;
+        position: absolute;
+        left:50%;
+        top:50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .upload-cell.default:before {
+        content: "";
+        width: 1px;
+        height: 25px;
+        background-color: #ccc;
+        position: absolute;
+        left:50%;
+        top:50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .upload-cell.default .num-wrapper {
+        position: absolute;
+        right: -38px;
+        font-size: 12px;
+        color: #aaa;
+        bottom: 0;
+    }
+
+
+    .upload-cell {
+        width: calc((100% - 40px) / 5);
+        padding-top: calc((100% - 40px) / 5);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+
+    .upload-cell:not(:last-child) {
+        margin-right: 10px;
+    }
+}

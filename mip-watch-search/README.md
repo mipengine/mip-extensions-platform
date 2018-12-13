@@ -14,37 +14,6 @@ mip-watch-search 组件说明
 ```html
 <mip-watch-search>
         <script src="https://res.wx.qq.com/open/libs/weuijs/1.1.4/weui.min.js"></script>
-        <div class="search">
-            <div class="search-left">
-                <div class="search-left-select">
-                    <mip-img
-                            class="img1"
-                            layout="responsive"
-                            width="1"
-                            height="1"
-                            src="../assets/img/icon_positioning.png">
-                    </mip-img>
-                    <!--<img src="../assets/img/icon_positioning.png" alt="" class="img1">-->
-                    <span>上海</span>
-                    <mip-img
-                            class="img2"
-                            layout="responsive"
-                            width="1"
-                            height="1"
-                            src="../assets/img/icon_selected_triangle.png">
-                    </mip-img>
-                    <!--<img src="../assets/img/icon_selected_triangle.png" alt="" class="img2">-->
-                </div>
-                <span class="line"></span>
-                <mip-form class="txt-wrapper" url="https://baidu.com">
-                    <input type="text" class="txt" placeholder="输入店铺或区域"/>
-                </mip-form>
-                <!--<input type="text" class="txt" placeholder="输入店铺或区域"/>-->
-            </div>
-            <div class="search-right">
-                <button>查询</button>
-            </div>
-        </div>
 </mip-watch-search>
 ```
 

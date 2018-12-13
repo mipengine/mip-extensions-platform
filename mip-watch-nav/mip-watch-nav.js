@@ -6,7 +6,7 @@
 define(function (require) {
     'use strict';
 
-    var $ = require('jquery');
+    var $ = require('zepto');
     var customElement = require('customElement').create();
 
     /**
