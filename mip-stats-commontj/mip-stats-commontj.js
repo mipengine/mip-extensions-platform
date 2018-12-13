@@ -6,7 +6,7 @@
 define(function (require) {
     var customElement = require('customElement').create();
 
-    customElement.prototype.build = function () {
+    customElement.prototype.firstInviewCallback = function () {
         // 获取config
         try {
             var script = this.element.querySelector('script[type="application/json"]');
@@ -28,14 +28,10 @@ define(function (require) {
             }
         }
         if (str) {
-            if (document.referrer) {
-                str += 'r=' + encodeURIComponent(document.referrer) + '&';
-            }
-            if (document.cookie) {
-                str += 'ck=' + encodeURIComponent(document.cookie) + '&';
-            }
+            str += 'r=' + encodeURIComponent(document.referrer) + '&';
+            str += 'ck=' + encodeURIComponent(document.cookie) + '&';
+            str += 'ca=' + window.screen.width + 'x' + window.screen.height + '&';
             str = str.substring(0, str.length - 1); // 去掉末尾的&
-
             // 全局代理事件
 
             if (str) {
