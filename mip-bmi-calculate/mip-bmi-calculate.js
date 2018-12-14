@@ -112,20 +112,20 @@ define(function (require) {
 
             if (bmi < 18.5) {
                 piannali = '偏瘦';
-                info = '你偏瘦。';
+                info = '你目前的体重属于瘦弱，请加强营养，健康增重。';
                 weightAdjustmentData = (standardWeightMin - weight).toFixed(2);
 
             } else if (bmi >= 18.5 && bmi < 24.0) {
                 piannali = '正常';
-                info = '你的BMI正常。';
+                info = '你目前的体重属于正常范围，请勿盲目减肥，规律的有氧运动能帮助你完美身体线条。';
                 weightAdjustmentData = 0;
             } else if (bmi >= 24.0 && bmi < 28.0) {
                 piannali = '偏重';
-                info = '你偏重，请填写手机号码，免费获取塑身方案。';
+                info = '你的体重属于超重范围，请积极减肥，合理的饮食和运动能帮你健康减重。';
                 weightAdjustmentData = (weight - standardWeightMax).toFixed(2);
             } else {
                 piannali = '肥胖';
-                info = '你肥胖。';
+                info = '您的体重肥胖，请咨询医生等专业人士建议，积极减肥，合理的饮食和运动能帮助你健康享瘦。';
                 weightAdjustmentData = (weight - standardWeightMax).toFixed(2);
             }
 

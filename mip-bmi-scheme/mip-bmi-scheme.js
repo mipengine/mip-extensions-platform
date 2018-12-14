@@ -66,7 +66,7 @@ define(function (require) {
                         $('#dinner').text(result.dinner);
                         $('#moreDiet').text('加餐：' + result.moreDiet);
                         $('#sportSummary').text('运动：' + result.sportSummary);
-
+                        $('.scheme-info-label').css({display: 'none'});
                         // 清空
                         $('#sportDetail').empty();
                         var sd = result.sportDetail;

@@ -20,7 +20,6 @@ define(function (require) {
         $('#resultPN').text('(' + localStorage.getItem('CURRENT_PN') + ')');
         $('#heightWeight').html('（身高:' + height + ' cm，体重：' + weight + ' kg）');
         $('#info').text(localStorage.getItem('CURRENT_INFO'));
-        $('#info-div-box').text('注：BMI=体重(kg)/身高(m)2。通常来评估一个人的肥胖情况');
         this.addEventAction('saveBMI', function (event) {
 
             var url = 'https://www.bmi.com.cn/BMI/saveBMI';

@@ -5,14 +5,51 @@
 define(function (require) {
     var $ = require('zepto');
     $('.middle,.bottom').hide();
-    $('.comment mip-img').attr('src', '/getcode.asp?time=' + Math.random());
     $('.comment .text').click(function () {
         $('.middle,.bottom').show();
     });
     $('.cancel').click(function () {
         $('.middle,.bottom').hide();
     });
-
+    $.fn.nextAll = function (selector) {
+        var nextEls = [];
+        var el = this[0];
+        if (!el) {
+            return $([]);
+        };
+        while (el.nextElementSibling) {
+            var next = el.nextElementSibling;
+            if (selector) {
+                if ($(next).is(selector)) {
+                    nextEls.push(next);
+                }
+            } else {
+                nextEls.push(next);
+            }
+            el = next;
+        }
+        return $(nextEls);
+    };
+    function downTab() {
+        $('.tab li').click(function () {
+            $(this).addClass('m-hover').siblings('li').removeClass('m-hover');
+            var n = $(this).index();
+            if (n === 0) {
+                $('.tab').show();
+                $('.tab').nextAll().show();
+            }
+            if (n === 1) {
+                $('.tab').nextAll().hide();
+                $('#interfix').show();
+                $('#interfix').nextAll().show();
+            }
+            if (n === 2) {
+                $('.tab').nextAll().hide();
+                $('#interfix').nextAll().show();
+            }
+        });
+    }
+    downTab();
     $('.tjbutton').click(function () {
         var msg = $.trim($('.comment .text').val());
         var csoftid = $('#SOHUCS').attr('sid');
