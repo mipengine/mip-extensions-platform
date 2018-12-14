@@ -1,0 +1,14 @@
+{
+    "name": "mip-xiaoshuo-clipboard",
+    "version": "1.0.0",
+    "description": "复制剪贴板组件",
+    "contributors": [
+        {
+            "name": "caoru",
+            "email": "1461719319@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
