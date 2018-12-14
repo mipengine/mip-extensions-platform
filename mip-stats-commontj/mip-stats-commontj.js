@@ -6,7 +6,7 @@
 define(function (require) {
     var customElement = require('customElement').create();
 
-    customElement.prototype.firstInviewCallback = function () {
+    customElement.prototype.build = function () {
         // 获取config
         try {
             var script = this.element.querySelector('script[type="application/json"]');

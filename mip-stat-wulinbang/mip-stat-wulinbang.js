@@ -15,6 +15,7 @@ define(function (require) {
         var el = null;
         var code = null;
         var uid = null;
+        var lO = null;
         var agt = navigator.userAgent;
         var r = encodeURIComponent(n);
         var lg = navigator.systemLanguage || window.navigator.language;
@@ -26,13 +27,29 @@ define(function (require) {
             el = statTarBox[i];
             code = el.getAttribute('stat-code') || '';
             uid = el.getAttribute('stat-uid') || '';
+            lO = el.getAttribute('stat-lo') || '';
             url = '//union2.50bang.org/web/' + code
             + '?uId2=SPTNPQRLSX&uId=' + uid + '&agt=' + agt
             + '&r=' + r + '&aN=' + aN + '&lg=' + lg
-            + '&OS=' + OS + '&aV=' + aV + '&fBL=' + fBL;
+            + '&OS=' + OS + '&aV=' + aV + '&fBL=' + fBL + '&lO=' + lO;
             el.addEventListener('click', function () {
                 createScript(url);
             });
+        }
+    }
+    function visitStat() {
+        var srcVisit = 'http://union2.50bang.org/js/';
+        var statTarBox = document.getElementsByTagName('mip-visit-wulinbang');
+        var visitLen = statTarBox.length;
+        var i = 0;
+        var el = null;
+        var kwd = null;
+        var url = null;
+        for (; i < visitLen; i++) {
+            el = statTarBox[i];
+            kwd = el.getAttribute('visit-kwd') || '';
+            url = srcVisit + kwd;
+            createScript(url);
         }
     }
     // 此处引入的js代码为第三方统计JS。
@@ -49,8 +66,7 @@ define(function (require) {
     }
 
     customElement.prototype.build = function () {
-        var srcVisit = 'http://union2.50bang.org/js/tongji';
-        createScript(srcVisit);
+        visitStat();
         bindEle();
     };
 
