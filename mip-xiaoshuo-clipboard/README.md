@@ -12,7 +12,7 @@ mip-xiaoshuo-clipboard 复制剪贴板组件
 
 ### 基本用法
 ```html
-<mip-xiaoshuo-clipboard data-clipboard-text="111111111">
+<mip-xiaoshuo-clipboard data-clipboard-text="要复制的内容">
 </mip-xiaoshuo-clipboard>
 ```
 
