@@ -1,6 +1,6 @@
 # mip-bmi-calculate
 
-mip-bmi-calculate 组件说明
+mip-bmi-calculate 体脂率计算组件
 
 标题|内容
 ----|----
@@ -13,7 +13,7 @@ mip-bmi-calculate 组件说明
 ### 基本用法
 ```html
 <mip-bmi-calculate>
-    Fanshiming示例，自定义内容，可以嵌套组件、HTML。
+    组件内可签到组件、元素
 </mip-bmi-calculate>
 ```
 

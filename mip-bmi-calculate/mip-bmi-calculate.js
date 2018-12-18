@@ -145,7 +145,7 @@ define(function (require) {
                 saveBMIRecord(height, weight, bmi, resultData);
             }
 
-            window.location.href = './Interaction.html';
+            window.top.location.href = './OS/Interaction.html';
 
         });
 

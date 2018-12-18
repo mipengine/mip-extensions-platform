@@ -1,6 +1,6 @@
 # mip-bmi-save
 
-mip-bmi-save 组件说明
+mip-bmi-save 保存体脂率组件
 
 标题|内容
 ----|----
