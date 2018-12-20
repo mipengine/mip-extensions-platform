@@ -1,0 +1,14 @@
+{
+    "name": "mip-component-filter",
+    "version": "1.0.0",
+    "description": "公司业务类型过滤器",
+    "contributors": [
+        {
+            "name": "ldf",
+            "email": "759952225@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

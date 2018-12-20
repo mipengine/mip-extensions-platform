@@ -8,13 +8,14 @@ define(function (require) {
     customElement.prototype.createdCallback = function () {
         var e = this.element;
         var s = e.getAttribute('hslspeed');
+        $('#hslshow').hide();
         var hslshowfun = function () {
             $('#hslshow').show();
         };
         $('#hslclose').click(function () {
             $('#hslshow').hide();
         });
-        setTimeout('hslshowfun()', s);
+        setTimeout('hslshowfun()', 4000);
     };
     return customElement;
 });

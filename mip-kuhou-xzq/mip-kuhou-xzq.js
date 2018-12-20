@@ -10,18 +10,20 @@ define(function (require) {
     customElement.prototype.firstInviewCallback = function () {
         var element = this.element;
         var xzqid = element.getAttribute('xzqid');
-        var gsxzq = element.querySelector('[gsxzid]');
-        var puxzq = element.querySelector('[ptid]');
-        document.getElementById(xzqid).addEventListener('click', function () {
-            if (this.checked === true) {
-                util.css(gsxzq, 'display', 'block');
-                util.css(puxzq, 'display', 'none');
-            }
-			else {
-                util.css(gsxzq, 'display', 'none');
-                util.css(puxzq, 'display', 'block');
-            }
-        });
+        if (document.getElementById(xzqid)) {
+            var gsxzq = element.querySelector('[gsxzid]');
+            var puxzq = element.querySelector('[ptid]');
+            document.getElementById(xzqid).addEventListener('click', function () {
+                if (this.checked === true) {
+                    util.css(gsxzq, 'display', 'block');
+                    util.css(puxzq, 'display', 'none');
+                }
+                else {
+                    util.css(gsxzq, 'display', 'none');
+                    util.css(puxzq, 'display', 'block');
+                }
+            });
+        }
     };
     return customElement;
 });

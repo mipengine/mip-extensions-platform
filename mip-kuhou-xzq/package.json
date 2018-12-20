@@ -1,7 +1,7 @@
 {
     "name": "mip-kuhou-xzq",
-    "version": "1.0.0",
-    "description": "切换不同的下载按钮",
+    "version": "1.0.1",
+    "description": "修改元素不存时报错问题",
     "contributors": [
         {
             "name": "ruizai324",

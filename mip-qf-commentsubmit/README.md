@@ -13,9 +13,9 @@ https://c.mipcdn.com/static/v1/mip-form/mip-form.js
 
 ### 基本用法
 ```html
-<mip-qf-commentsubmit prefix="/https:/m.119you.com/" data-url="api/member/logindata" columns="realname,username,logofile,signature,score,level,levelid">
+<mip-qf-commentsubmit prefix="https://www.easy-mock.com/mock/5c0f88505324d050e6ab19fa/m.119you.com/" data-url="api/member/logindata" columns="realname,username,logofile,signature,score,level,levelid">
     <div class="div-img">
-        <mip-img src="../images/v2/ic-user-default.png" class="img" width="30" height="30"></mip-img>
+        <mip-img src="https://m.119you.com/images/v2/ic-user-default.png" class="img" width="30" height="30"></mip-img>
     </div>
     <div class="td td2">
          <textarea class="textarea" placeholder="请输入评论内容" rows="10" cols="20" disabled></textarea>

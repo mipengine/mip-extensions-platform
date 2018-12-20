@@ -1,0 +1,14 @@
+{
+    "name": "mip-component-head",
+    "version": "1.0.0",
+    "description": "公司多个head切换动画效果",
+    "contributors": [
+        {
+            "name": "ldf",
+            "email": "759952225@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

@@ -41,7 +41,7 @@ define(function (require) {
                 textarea.disabled = false;
                 login.style.display = 'none';
                 input.style.display = 'block';
-                img.setAttribute('src', data.logofile);
+                img.setAttribute('src', data.data.logofile);
             } else {
                 textarea.disabled = true;
                 login.style.display = 'block';
@@ -49,7 +49,7 @@ define(function (require) {
                 img.setAttribute('src', 'https://m.119you.com/images/v2/ic-user-default.png');
             }
         }).catch(function (error) {
-            console.log(error);
+            alert('服务器错误，请联系管理员！');
         });
 
     };

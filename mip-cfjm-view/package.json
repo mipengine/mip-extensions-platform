@@ -1,0 +1,14 @@
+{
+    "name": "mip-cfjm-view",
+    "version": "1.0.0",
+    "description": "用来品牌文章浏览组件",
+    "contributors": [
+        {
+            "name": "Wuxin",
+            "email": "wuxin168@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

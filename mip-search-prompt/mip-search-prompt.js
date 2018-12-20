@@ -85,7 +85,7 @@ define(function (require) {
                 var validData;
                 var date = new Date().getTime();
                 var worde = encodeURIComponent(word);
-                var URL = 'http://unionsug.baidu.com/su?p=3&t=' + date + '&wd=' + worde;
+                var URL = 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?t=' + date + '&wd=' + worde;
                 var fetchJsonp = require('fetch-jsonp');
                 fetchJsonp(URL, {
                     jsonpCallback: 'cb'

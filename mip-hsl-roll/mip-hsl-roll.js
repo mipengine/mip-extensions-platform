@@ -6,9 +6,9 @@ define(function (require) {
     var customElement = require('customElement').create();
     customElement.prototype.build = function () {
         var element = this.element;
-        var hslmt = element.getAttribute('hslmt') || '28';
         var speed = element.getAttribute('speed') || '20';
         var delay = element.getAttribute('delay') || '1500';
+        var hslmt = element.getAttribute('hslmt') || '36';
         var id = element.getAttribute('ulid');
         window.onload = startmarquee(hslmt, speed, delay, id);
     };

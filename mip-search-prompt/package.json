@@ -1,6 +1,6 @@
 {
     "name": "mip-search-prompt",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "搜索组件，有百度提示的搜索提示框组件",
     "contributors": [
         {
