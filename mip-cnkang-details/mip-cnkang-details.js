@@ -4,6 +4,8 @@
  */
 
 define(function (require) {
+
+    var $ = require('zepto');
     var util = require('util');
     var platform = util.platform;
     var customElement = require('customElement').create();

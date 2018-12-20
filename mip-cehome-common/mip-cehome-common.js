@@ -5,6 +5,8 @@
 
 define(function (require) {
 
+    var $ = require('zepto');
+
     (function () {
         var docEl = document.documentElement;
         var resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';

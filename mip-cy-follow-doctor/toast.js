@@ -5,6 +5,8 @@
 define(function () {
     'use strict';
 
+    var $ = require('zepto');
+
     var utilFun = function () {
         var util = {};
 

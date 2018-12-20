@@ -6,6 +6,8 @@
  */
 
 define(function (require) {
+
+    var $ = require('zepto');
         var appendtxt = $('<a style="display:none!important" id="tanx-a-mm_34618856_4222645_14288433"></a>');
         $(document.body).append(appendtxt);
         var node = document.createElement('script');

@@ -5,6 +5,8 @@
  */
 define(function (require) {
 
+    var $ = require('zepto');
+
     var TouchMove = function (parms) {
         this.parm = parms;
         this.init();

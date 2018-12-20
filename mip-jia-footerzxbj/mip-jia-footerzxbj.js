@@ -135,7 +135,7 @@ define(function (require) {
                 var $this = $(ele);
                 var str = '';
                 str += '<div class="popmask"></div>';
-                str += '<mip-fixed type="bottom" class="bottom-base toutiao-ask-zxbj box-conversion">';
+                str += '<mip-fixed still type="bottom" class="bottom-base toutiao-ask-zxbj box-conversion">';
                 str += '<div class="ask-zxbj-loading"></div>';
                 str += '<div class="ask-zxbj-up">';
                 str += '<div class="ask-zxbj-banner">';

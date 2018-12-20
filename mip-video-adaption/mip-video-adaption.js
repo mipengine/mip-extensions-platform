@@ -4,6 +4,8 @@
  */
 
 define(function (require) {
+
+    var $ = require('zepto');
     var customElement = require('customElement').create();
     var W = document.documentElement.clientWidth || document.body.clientWidth || window.innerWidth;
     function record(adaption) {

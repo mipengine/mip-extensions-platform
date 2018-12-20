@@ -7,6 +7,8 @@
 define(function (require) {
     'use strict';
 
+    var $ = require('zepto');
+
     /**
      * 封装了localStorage的存储类
      *

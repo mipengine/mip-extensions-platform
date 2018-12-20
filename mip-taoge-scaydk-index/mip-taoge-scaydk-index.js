@@ -5,6 +5,8 @@
 
 define(function (require) {
 
+    var $ = require('zepto');
+
     var customElem = require('customElement').create();
     var options;
 

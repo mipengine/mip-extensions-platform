@@ -3,6 +3,8 @@
  * @author 点点
  */
 define(function (require) {
+
+    var $ = require('zepto');
     var i = require('customElement').create();
     var fetch = require('fetch');
     return i.prototype.firstInviewCallback = function () {

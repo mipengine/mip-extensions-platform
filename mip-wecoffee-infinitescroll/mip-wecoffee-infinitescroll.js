@@ -4,6 +4,8 @@
  */
 
 define(function (require) {
+
+    var $ = require('zepto');
     var util = require('util');
     var templates = require('templates');
     var fetchJsonp = require('fetch-jsonp');

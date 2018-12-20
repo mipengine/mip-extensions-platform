@@ -4,6 +4,8 @@
  * @time 16-12-08
  */
 define(function (require) {
+
+    var $ = require('zepto');
     var NTKF;
     function loadJs(url) {
         var myHead = document.getElementsByTagName('head').item(0);

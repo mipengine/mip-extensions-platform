@@ -4,6 +4,8 @@
  */
 
 define(function () {
+
+    var $ = require('zepto');
     /* eslint-disable */
     var templates = require('templates');
     var fn = function() {};

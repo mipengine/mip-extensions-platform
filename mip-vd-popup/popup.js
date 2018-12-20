@@ -4,6 +4,8 @@
  * @update zhangjignfeng
  */
 define(function () {
+
+    var $ = require('zepto');
     var PopupFrame = function (opt) {
         var me = this;
         // 设置默认值

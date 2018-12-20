@@ -5,6 +5,8 @@
 
 define(function (require) {
     'use strict';
+
+    var $ = require('zepto');
     var customElement = require('customElement').create();
     customElement.prototype.firstInviewCallback = function () {
         function center() {

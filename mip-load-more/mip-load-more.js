@@ -5,6 +5,8 @@
 
 define(function (require) {
 
+    var $ = require('zepto');
+
     var customElement = require('customElement').create();
 
     function getData(src, moreNum, clickName, dataName) {

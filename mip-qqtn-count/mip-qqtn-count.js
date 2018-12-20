@@ -5,6 +5,8 @@
 
 define(function (require) {
 
+    var $ = require('zepto');
+
     var customElement = require('customElement').create();
     function getCnzzInfo(tjinfo, bjname) {
         var cnzzArr = tjinfo.split('|');

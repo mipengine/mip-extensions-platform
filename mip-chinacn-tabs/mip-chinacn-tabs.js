@@ -6,6 +6,8 @@
  * @file mip-chinacn-tabs 组件
  */
 define(function (require) {
+
+    var $ = require('zepto');
     var customElement = require('customElement').create();
 
     /**

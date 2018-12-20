@@ -116,7 +116,7 @@ define(function (require) {
         // 加载不同的弹层
         if (!!type) {
             var str = [
-                '<mip-fixed type="bottom" class="bottom-base wp-order-pop pay-in-advance">',
+                '<mip-fixed still type="bottom" class="bottom-base wp-order-pop pay-in-advance">',
                 '    <span class="close-btn"></span>',
                 '    <p>需支付订金：<span>' + params['order-money'] + '</span></p>',
                 '    <span class="btn">去支付</span>',
@@ -124,7 +124,7 @@ define(function (require) {
             ].join('');
         } else {
             var str = [
-                '<mip-fixed type="bottom" class="bottom-base wp-order-pop make-an-appointment">',
+                '<mip-fixed still type="bottom" class="bottom-base wp-order-pop make-an-appointment">',
                 '    <span class="close-btn"></span>',
                 '    <h3>免费预约，锁定爆款特价</h3>',
                 '    <div class="input-box">',

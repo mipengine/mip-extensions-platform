@@ -6,6 +6,8 @@
 define(function (require) {
     'use strict';
 
+    var $ = require('zepto');
+
     var customElement = require('customElement').create();
     var viewer = require('viewer');
     var fetchJsonp = require('fetch-jsonp');

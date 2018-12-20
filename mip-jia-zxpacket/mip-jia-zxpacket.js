@@ -218,7 +218,7 @@ define(function (require) {
 
     // 添加红包html
     RedPacket.prototype.appendEle = function () {
-        /*var str = '<mip-fixed type="right" class="fixed-hb">';
+        /*var str = '<mip-fixed still type="right" class="fixed-hb">';
         str += '<div class="hb-box">' + this.cfg.text + '</div>';
         str += '</mip-fixed>';*/
         var str = '';

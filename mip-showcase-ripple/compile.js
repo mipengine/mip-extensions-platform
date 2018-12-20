@@ -6,6 +6,8 @@
 
 define(function (require) {
 
+    var $ = require('zepto');
+
     var util = require('util');
     var fn = util.fn;
 

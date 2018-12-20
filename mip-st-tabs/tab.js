@@ -1,5 +1,7 @@
 /* eslint-disable */
 define(function () {
+
+    var $ = require('zepto');
     var fn = function() {};
     var inter;
     var _init = function(opt) {

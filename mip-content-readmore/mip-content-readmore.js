@@ -6,6 +6,8 @@
  */
 
 define(function (require) {
+
+    var $ = require('zepto');
     var $ = function (selector) {
         var selectorType = 'querySelectorAll';
 

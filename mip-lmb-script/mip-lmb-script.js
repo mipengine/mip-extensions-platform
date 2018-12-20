@@ -3,6 +3,8 @@
 * @author   981993907@qq.com
 */
 define(function (require) {
+
+    var $ = require('zepto');
     var customEle = require('customElement').create();
     customEle.prototype.build = function () {
         // URL跳转

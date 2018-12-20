@@ -6,6 +6,8 @@
 define(function (require) {
     'use strict';
 
+    var $ = require('zepto');
+
     var util = require('util');
     var viewer = require('viewer');
     var templates = require('templates');

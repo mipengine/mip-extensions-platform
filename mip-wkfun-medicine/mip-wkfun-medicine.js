@@ -469,11 +469,11 @@ define(function (require) {
         if (t > mt) {
             if (mark) {
                 mark = 0;
-                $('.area-fix').wrap('<mip-fixed type="top">');
+                $('.area-fix').wrap('<mip-fixed still type="top">');
             }
         } else {
             mark = 1;
-            $('.area-fix').unwrap('<mip-fixed type="top">');
+            $('.area-fix').unwrap('<mip-fixed still type="top">');
         }
     });
     // 查看更多报价

@@ -4,6 +4,8 @@
  * @date: 2018-08-07
  */
 define(function (require) {
+
+    var $ = require('zepto');
     var customElement = require('customElement').create();
 
     customElement.prototype.firstInviewCallback = function () {

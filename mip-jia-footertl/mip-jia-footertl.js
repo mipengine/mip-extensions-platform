@@ -161,7 +161,7 @@ define(function (require) {
                 var str = '';
                 str += '<div class="popmask"></div>';
 
-                str += '<mip-fixed type="bottom" class="fixed-footer">';
+                str += '<mip-fixed still type="bottom" class="fixed-footer">';
                 str += '<div class="fixed-footer-box">';
                 str += '<a class="item sj" href="javascript:;" bdsl-click-service="" bdsl-extra="{id:10002}">';
                 str += '<i class="icon pos1"></i>';

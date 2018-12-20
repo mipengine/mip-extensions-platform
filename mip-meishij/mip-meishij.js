@@ -4,6 +4,8 @@
  */
 
 define(function (require) {
+
+    var $ = require('zepto');
     var URL = 'http://m.meishij.net';
     var id = $('.addfav_box').data('id');
 

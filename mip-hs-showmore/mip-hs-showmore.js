@@ -5,6 +5,8 @@
 
 define(function (require) {
     'use strict';
+
+    var $ = require('zepto');
     var viewport = require('viewport');
     var customElement = require('customElement').create();
 

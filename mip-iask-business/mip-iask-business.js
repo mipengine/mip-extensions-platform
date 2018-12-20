@@ -365,7 +365,7 @@ define(function (require) {
  // 动态添加 mip-fixed悬浮广告
     var putMXfAd = function (picLink, picLocal, statsBaidu, pos) {
         var htmls = '';
-        htmls += '<mip-fixed type=\'top\' id=\'customid\' >';
+        htmls += '<mip-fixed still type=\'top\' id=\'customid\' >';
         htmls += '<div class=\'mip-adbd\'>';
         htmls += '<div on=\'tap:customid.close\' class=\'mip-adbd-close\'><span>关闭</span></div>';
         if (pos === '') {
@@ -383,7 +383,7 @@ define(function (require) {
     // 顶部悬浮广告-拨打电话
     var putMXfAdTel = function (picLink, picLocal, statsBaidu, pos) {
         var htmls = '';
-        htmls += '<mip-fixed type=\'top\' id=\'customid\' >';
+        htmls += '<mip-fixed still type=\'top\' id=\'customid\' >';
         htmls += '<div class=\'mip-adbd\'>';
         htmls += '<div on=\'tap:customid.close\' class=\'mip-adbd-close\'><span>关闭</span></div>';
         if (pos === '') {

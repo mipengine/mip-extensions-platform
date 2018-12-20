@@ -4,7 +4,7 @@
  */
 
 define(function (require) {
-    return '<mip-fixed class="inner hide" type="top">                     '
+    return '<mip-fixed still class="inner hide" type="top">                     '
         + '</mip-fixed>                                                   '
         + '<template type="mip-etpl">                                     '
         + '    <mip-st-slide>                                             '

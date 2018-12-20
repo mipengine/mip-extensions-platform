@@ -5,6 +5,8 @@
 
 define(function (require) {
 
+    var $ = require('zepto');
+
     var customElement = require('customElement').create();
     // 获取id
     function gt(objID) {
