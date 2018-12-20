@@ -12,7 +12,12 @@ mip-w750 移动适配以750为准
 
 
 ```html
-<mip-w750></mip-w750>
+<style mip-custom>
+.close-section{width:10rem; height:4rem; margin:1rem auto; border:1px solid #000; position: relative; font-size:.6rem;}
+</style>
+<section class="close-section">
+<mip-w750 class="close-btn">X</mip-w750>
+</section>
 ```
 
 ## 属性

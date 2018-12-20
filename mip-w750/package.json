@@ -1,10 +1,10 @@
 {
     "name": "mip-w750",
-    "version": "1.0.1",
-    "description": "移动适配以750为准",
+    "version": "1.0.2",
+    "description": "移动适配以750为准提交",
     "contributors": [
         {
-            "name": "wang",
+            "name": "w",
             "email": "1455802711@qq.com"
         }
     ],

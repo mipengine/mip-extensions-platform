@@ -168,7 +168,7 @@ define(function (require) {
                 }
                 str += '<div class="item dk" bdsl-click-service="" bdsl-extra="{id:10007}">';
                 str += '<i class="icon pos3"></i>';
-                str += '<p class="txt">专享贷</p>';
+                str += '<p class="txt">装修贷</p>';
                 str += '</div>';
                 str += '<div class="item qj" bdsl-click-service="" bdsl-extra="{id:10008}">';
                 str += '<i class="icon pos4"></i>';

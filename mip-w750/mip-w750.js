@@ -28,6 +28,11 @@ define(function (require) {
             win.addEventListener(resizeEvt, recalc, false);
             doc.addEventListener('DOMContentLoaded', recalc, false);
         })(document, window);
+        var ele = this.element;
+        ele.addEventListener('click', function () {
+            var target = ele.parentElement;
+            target.parentElement.removeChild(target);
+        }, false);
     };
 
     return customElement;

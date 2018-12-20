@@ -3,19 +3,20 @@
  * @author 韩森林
  */
 define(function (require) {
-    var $ = require('zepto');
     var customElement = require('customElement').create();
     customElement.prototype.createdCallback = function () {
         var e = this.element;
-        var s = e.getAttribute('hslspeed');
-        $('#hslshow').hide();
-        var hslshowfun = function () {
-            $('#hslshow').show();
+        var hslshow = document.getElementById('hslshow');
+        var hslclose = document.getElementById('hslclose');
+        var hslopen = document.getElementById('hslopen');
+        hslshow.style.display = 'none';
+        hslclose.onclick = function () {
+            hslshow.style.display = 'none';
         };
-        $('#hslclose').click(function () {
-            $('#hslshow').hide();
-        });
-        setTimeout('hslshowfun()', 4000);
+        hslopen.onclick = function () {
+            hslshow.style.display = 'block';
+        };
+        setTimeout('hslshow.style.display = "block"', 4000);
     };
     return customElement;
 });

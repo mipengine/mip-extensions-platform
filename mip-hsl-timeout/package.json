@@ -1,6 +1,6 @@
 {
     "name": "mip-hsl-timeout",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "description": "韩森林制作-定时显示某个DIV组件，4秒后显示",
     "contributors": [
         {
