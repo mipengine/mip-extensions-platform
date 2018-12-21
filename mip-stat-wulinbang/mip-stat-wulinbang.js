@@ -37,23 +37,25 @@ define(function (require) {
             });
         }
     }
+
     function visitStat() {
-        var srcVisit = 'http://union2.50bang.org/js/';
+        var srcVisit = 'http://union2.50bang.org/web/';
         var statTarBox = document.getElementsByTagName('mip-visit-wulinbang');
         var visitLen = statTarBox.length;
         var i = 0;
         var el = null;
         var kwd = null;
         var url = null;
+        var fBL = screen.width + '*' + screen.height;
         for (; i < visitLen; i++) {
             el = statTarBox[i];
             kwd = el.getAttribute('visit-kwd') || '';
-            url = srcVisit + kwd;
-            createScript(url);
+            url = srcVisit + kwd + '?uId2=SPTNPQRLSX&r=&fBL=' + fBL;
+            createImg(url);
         }
     }
     // 此处引入的js代码为第三方统计JS。
-    // 用途：实现点击统计和访问统计
+    // 用途：实现点击统计和访问统计·
     // 服务提供商：50bang
     function createScript(t) {
         if (t && void 0 !== t) {
@@ -65,6 +67,19 @@ define(function (require) {
         }
     }
 
+    function createImg(url) {
+        if (url && void 0 !== url) {
+            var i = document.createElement('img');
+            return i.setAttribute('border', '0'),
+            i.setAttribute('hspace', '0'),
+            i.setAttribute('vspace', '0'),
+            i.setAttribute('height', '0'),
+            i.setAttribute('width', '0'),
+            i.setAttribute('src', url),
+            document.getElementsByTagName('body')[0].appendChild(i),
+            !0;
+        }
+    }
     customElement.prototype.build = function () {
         visitStat();
         bindEle();

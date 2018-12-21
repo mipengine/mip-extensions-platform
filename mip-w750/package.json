@@ -1,7 +1,7 @@
 {
     "name": "mip-w750",
-    "version": "1.0.2",
-    "description": "移动适配以750为准提交",
+    "version": "1.0.3",
+    "description": "移动适配750提交",
     "contributors": [
         {
             "name": "w",

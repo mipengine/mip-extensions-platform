@@ -118,7 +118,7 @@ define(function (require) {
                     success: function (data) {
                         if (data.status !== 0) {
                             $el.find('.error').html(data.msg);
-                            var Url = 'http://hsanswer.altke.cn/captcha';
+                            var Url = '/captcha';
                             Url = Url + '/' + Math.random();
                             $el.find('.idf_img_show').attr('src', Url);
                         }
@@ -137,7 +137,7 @@ define(function (require) {
             }
         });
         $el.find('.idf_img_show').on('click', function () {
-            var Url = 'http://hsanswer.altke.cn/captcha';
+            var Url = '/captcha';
             Url = Url + '/' + Math.random();
             $(this).attr('src', Url);
         });

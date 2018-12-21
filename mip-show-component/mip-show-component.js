@@ -77,7 +77,7 @@ define(function (require) {
         function (index2, law) {
             if (law === '' || law == null) {
                 url = 'http://m.findlaw.cn/?c=index&a=lawyerjoin';
-                photo = '/img/touch_front/v3/global/default.gif';
+                photo = '//img1.findlawimg.com/img/touch_front/v3/global/default.gif';
                 username = '诚邀加盟';
                 mobile = '400-678-6088';
                 href = '<a href="' + url + '" class="const-me scale-1px-4">咨询我</a>';

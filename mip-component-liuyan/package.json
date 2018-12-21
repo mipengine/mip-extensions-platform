@@ -1,7 +1,7 @@
 {
-    "name": "mip-component-filter",
-    "version": "1.0.1",
-    "description": "公司业务类型过滤器",
+    "name": "mip-component-liuyan",
+    "version": "1.0.0",
+    "description": "用于公司留言组件弹出和数据提交",
     "contributors": [
         {
             "name": "ldf",

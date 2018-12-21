@@ -41,8 +41,8 @@ define(function (require) {
                                 + '<a class="discuss_tit" href="/user/' + comments[i].user.id
                                 + '"><span class="discuss_title avatar_text">'
                                 + comments[i].user.name + '</span></a>'
-                                + '<span class="discuss_zannum zanshow borderRadius" url-unzan ="http://hsanswer.altke.cn/comment/unzan"'
-                                + 'url-zan ="http://hsanswer.altke.cn/comment/zan" url-id ="'
+                                + '<span class="discuss_zannum zanshow borderRadius" url-unzan ="/comment/unzan"'
+                                + 'url-zan ="/comment/zan" url-id ="'
                                 + comments[i].id + '">' + comments[i].zan_count
                                 + '</span>'
                                 + '</div>'
@@ -57,8 +57,8 @@ define(function (require) {
                                 + comments[i].user.avatar + '"></mip-img></a>'
                                 + '<a class="discuss_tit" href="/user/' + comments[i].user.id
                                 + '"><span class="discuss_title">' + comments[i].user.name + '</span></a>'
-                                + '<span class="discuss_zannum borderRadius" url-unzan ="http://hsanswer.altke.cn/comment/unzan"'
-                                + 'url-zan ="http://hsanswer.altke.cn/comment/zan" url-id ="'
+                                + '<span class="discuss_zannum borderRadius" url-unzan ="/comment/unzan"'
+                                + 'url-zan ="/comment/zan" url-id ="'
                                 + comments[i].id + '">' + comments[i].zan_count
                                 + '</span>'
                                 + '</div>'
@@ -75,7 +75,7 @@ define(function (require) {
                         }
 
                         str += '<mip-hs-replayshow user-id='
-                            + comments[i].answer_id + ' data-url="http://hsanswer.altke.cn/comment" user-pid='
+                            + comments[i].answer_id + ' data-url="/comment" user-pid='
                             + comments[i].id + '><span class="btn_back">回复</span>'
                             + '<div class="replay_show"><div class="replay_show_text subgo" contenteditable="true" >回复 '
                             + comments[i].user.name + '</div><div class="replay_show_btn">'
