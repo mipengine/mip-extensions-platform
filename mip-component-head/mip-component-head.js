@@ -1,51 +1,51 @@
-/**
+﻿/**
  * @file mip-component-head 组件
- * @author
+ * @author ldf
  */
 
 define(function (require) {
     'use strict';
-    const customElement = require('customElement').create();
+    var customElement = require('customElement').create();
 
     /**
      * 第一次进入可视区回调，只会执行一次
      */
     customElement.prototype.firstInviewCallback = function () {
-        const element = this.element;
-        const btnSearch = element.querySelector('.search-text');
-        const btnToggle = element.querySelector('.collapse');
-        const toggle = function () {
-            const dom = event.target;
+        var element = this.element;
+        var btnSearch = element.querySelector('.search-text');
+        var btnToggle = element.querySelector('.collapse');
+        var toggle = function () {
+            var dom = event.target;
+            var nav2 = document.querySelector('.head-nav-2');
             if (dom.classList.contains('up')) {
-                const nav2 = document.querySelector('.head-nav-2');
                 nav2.classList.remove('show');
-                setTimeout(() => {
+                dom.classList.remove('up');
+                setTimeout(function () {
                     nav2.style.display = 'none';
                 }, 300);
-                dom.classList.remove('up');
             } else {
-                const nav2 = document.querySelector('.head-nav-2');
                 nav2.style.display = 'block';
-                setTimeout(() => {
+                setTimeout(function () {
                     nav2.classList.add('show');
                     dom.classList.add('up');
                 }, 0);
             }
-
         };
-        const search = function () {
+
+        var search = function () {
             if (event.target.nodeName !== 'DIV') {
                 return;
             }
-            const dom = event.target.firstElementChild;
-            const value = dom.value.trim();
+            var dom = event.target.firstElementChild;
+            var value = dom.value.trim();
             if (!value) {
                 alert('关键字不能为空');
                 return;
             }
-            const url = dom.dataset.url;
+            var url = dom.dataset.url;
             window.top.location.href = url + value;
         };
+
         btnSearch.addEventListener('click', search);
         btnToggle.addEventListener('click', toggle);
     };

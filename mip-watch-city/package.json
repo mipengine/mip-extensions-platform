@@ -1,0 +1,14 @@
+{
+    "name": "mip-watch-city",
+    "version": "1.0.0",
+    "description": "手表热门城市切换选项卡",
+    "contributors": [
+        {
+            "name": "zengwei",
+            "email": "18514075699@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

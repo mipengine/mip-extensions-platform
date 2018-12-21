@@ -1,0 +1,14 @@
+{
+    "name": "mip-watch-back",
+    "version": "1.0.0",
+    "description": "带标题的返回功能的组件",
+    "contributors": [
+        {
+            "name": "zengwei",
+            "email": "18514075699@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

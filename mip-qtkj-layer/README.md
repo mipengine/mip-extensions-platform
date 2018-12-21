@@ -12,7 +12,7 @@ mip-qtkj-layer 点击显示隐藏
 
 ### 基本用法
 ```html
-<mip-qtkj-layer sindex="0" hindex="0" cindex="0"></mip-qtkj-layer>
+<mip-qtkj-layer sindex="0" hindex="0" delay="2000" cindex="0"></mip-qtkj-layer>
 <div class="layer-show"></div>
 <div class="layer-hide"></div>
 <div class="layer-close"></div>
@@ -43,5 +43,9 @@ mip-qtkj-layer 点击显示隐藏
 ### class属性名layer-close
 说明：关闭按钮的类名
 必选项：是
+
+### delay
+说明：定时器，延迟一定时间自定隐藏内容
+必选项：否
 
 ## 注意事项:mip-qtkj-layer标签或其父级需定位为position:fixed;top:0;不然如果页面有其他元素，只有滑动到当前标签一次之后，点击隐藏效果才会生效。

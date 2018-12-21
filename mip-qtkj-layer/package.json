@@ -1,7 +1,7 @@
 {
     "name": "mip-qtkj-layer",
-    "version": "1.0.0",
-    "description": "点击显示隐藏",
+    "version": "1.0.1",
+    "description": "点击显示隐藏,包含延迟一定时间自动隐藏内容",
     "contributors": [
         {
             "name": "yzxsl",

@@ -28,6 +28,7 @@ define(function (require) {
         var clicksstart = true;
         var thisurls = window.location.href;
         var loginsessionId = 0;
+
         //      setTimeout(function () {
         //          sessionId = $el.find('#sesiid').html();
         //          console.log(sessionId);
@@ -540,11 +541,13 @@ define(function (require) {
         }
 
         function statistics(userTrack, entrance, description) {
+            var isloginid = localStorage.getItem('mip-login-xzh:sessionId:https://www.ilaw66.com/jasmine/baidusearch/authorize2');
             var datas = {};
             datas.userTrack = userTrack;
             datas.entrance = entrance;
             datas.description = description;
             datas.channel = 'baidusearch';
+            datas.sessionId = isloginid;
             datas._csrf = $el.find('#_csrf').val();
             $.ajax({
                 type: 'post',

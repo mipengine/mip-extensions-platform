@@ -12,6 +12,7 @@ define(function (require) {
             this.switch = arguments[0];
             this.content = arguments[1];
             this.close = arguments[2];
+            this.delay = arguments[3];
             this.change();
         }
         function hasClass(dom, className) {
@@ -34,11 +35,17 @@ define(function (require) {
             this.close.onclick = function () {
                 con.style.display = 'none';
             };
+            if (element.getAttribute('delay')) {
+                setTimeout(function () {
+                    con.style.display = 'none';
+                }, this.delay);
+            }
         };
         new ShowHide(
             document.getElementsByClassName('layer-show')[parseInt(element.getAttribute('sindex'), 10)],
             document.getElementsByClassName('layer-hide')[parseInt(element.getAttribute('hindex'), 10)],
-            document.getElementsByClassName('layer-close')[parseInt(element.getAttribute('cindex'), 10)]
+            document.getElementsByClassName('layer-close')[parseInt(element.getAttribute('cindex'), 10)],
+            parseInt(element.getAttribute('delay'), 10)
         );
     };
     return customElement;
