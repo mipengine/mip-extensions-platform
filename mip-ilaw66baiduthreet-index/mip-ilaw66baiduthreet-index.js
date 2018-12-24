@@ -20,6 +20,7 @@ define(function (require) {
         var lawyerId = '';
         var flg = 0;
         var qSt = getQueryString('questionType');
+        var bdcard = getQueryString('bdcard') ? getQueryString('bdcard') : null;
         var search = location.search.toLowerCase();
         var channel = $el.find('#channel').val();
         var userId = $el.find('#userId').val();
@@ -28,7 +29,6 @@ define(function (require) {
         var clicksstart = true;
         var thisurls = window.location.href;
         var loginsessionId = 0;
-
         //      setTimeout(function () {
         //          sessionId = $el.find('#sesiid').html();
         //          console.log(sessionId);
@@ -95,7 +95,7 @@ define(function (require) {
                 if (isloginpage === 0) {
                     var qusttype = localStorage.getItem('baiduquestionType');
                     var tzurl = 'mipilaw66baidu_login?channel=baidusearch&sessionId='
-                        + sessid + '&questionType=' + qusttype;
+                        + sessid + '&questionType=' + qusttype + '&bdcard=' + bdcard;
                     locahost(tzurl, '准备咨询');
                 }
                 else {
@@ -376,7 +376,7 @@ define(function (require) {
             if (isloginpage) {
                 statistics(8, 'tologin', questionTypes);
                 var tzurl = 'mipilaw66baidu_login?channel=baidusearch&sessionId='
-                    + loginsessionId + '&questionType=' + questionTypes;
+                    + loginsessionId + '&questionType=' + questionTypes + '&bdcard=' + bdcard;
                 locahost(tzurl, '准备咨询');
             }
             else {
@@ -544,7 +544,7 @@ define(function (require) {
             var isloginid = localStorage.getItem('mip-login-xzh:sessionId:https://www.ilaw66.com/jasmine/baidusearch/authorize2');
             var datas = {};
             datas.userTrack = userTrack;
-            datas.entrance = entrance;
+            datas.entrance = entrance + '&bdcard=' + bdcard;
             datas.description = description;
             datas.channel = 'baidusearch';
             datas.sessionId = isloginid;

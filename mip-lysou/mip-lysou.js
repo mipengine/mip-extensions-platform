@@ -78,33 +78,6 @@ define(function (require) {
                 };
             };
         };
-
-
-
-
-
-// 新闻中心的切换
-        function show() {
-            var btnfather = document.getElementsByClassName('news_nav')[0];
-            var artfather = document.getElementsByClassName('about_news')[0];
-            var article =  artfather.getElementsByClassName('article_body');
-            var btn = btnfather.getElementsByTagName('li');
-            var btnlength = btn.length;
-
-            for (var i = 0; i < btnlength; i ++) {
-
-                (function (arg) {
-                    btn[arg].onclick = function () {
-                        for (var j = 0; j < btnlength; j ++) {
-                            article[j].classList.remove('show');
-                        };
-                        article[arg].classList.add('show');
-                    };
-                })(i);
-            };
-        }
-        show();
-
     };
 
     return customElement;
