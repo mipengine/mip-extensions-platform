@@ -27,7 +27,7 @@ define(function (require) {
         };
 
         // 点赞函数
-        function like(el) {
+        function like() {
             fetch(likeUrl, options)
                 .then(function (res) {
                     return res.json();
@@ -38,7 +38,7 @@ define(function (require) {
                         count.innerText++;
                         return false;
                     }
-                    tip(el, '请求接口错误，请联系管理员！', 'error');
+                    tip('请求接口错误，请联系管理员！', 'error');
                 })
                 .catch(function (error) {
                     tip(error);
@@ -46,7 +46,7 @@ define(function (require) {
         }
 
         // 取消赞函数
-        function removeLike(el) {
+        function removeLike() {
             fetch(removelikeUrl, options)
                 .then(function (res) {
                     return res.json();
@@ -57,7 +57,7 @@ define(function (require) {
                         count.innerText--;
                         return false;
                     }
-                    tip(el, '请求接口错误，请联系管理员！', 'error');
+                    tip('请求接口错误，请联系管理员！', 'error');
                 })
                 .catch(function (error) {
                     tip(error);
@@ -65,7 +65,7 @@ define(function (require) {
         }
 
         component.addEventListener('click', function () {
-            this.classList.contains('div-praise-active') ? removeLike(component) : like(component);
+            this.classList.contains('div-praise-active') ? removeLike() : like();
         });
 
     };
@@ -75,19 +75,18 @@ define(function (require) {
 
 /**
  * 错误消息提示框
- * @param {string} el      提示框绑定元素
  * @param {string} message 提示框文案
  * @param {string} state   提示框类型
  */
-function tip(el, message, state) {
+function tip(message, state) {
     var html = '<div class="message-tip"></div>';
     var self;
 
-    $(el).append(html);
+    $('body').append(html);
     self = $('.message-tip');
     self.text(message);
 
-    state === 'error' ? self.css('background-color', '#FD5050') : self.css('background-color', '#333');
+    state === 'error' ? self.css('background-color', '#F96565C9') : self.css('background-color', '#333');
 
     $('.message-tip').fadeIn('fast');
     setTimeout(function () {

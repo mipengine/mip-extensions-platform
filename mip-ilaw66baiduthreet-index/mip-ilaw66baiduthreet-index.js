@@ -91,7 +91,6 @@ define(function (require) {
             var sessid = event.sessionId;
             var islogin = parseInt(event.userInfo.isLogin, 10);
             if (!islogin) { // 未注册
-
                 if (isloginpage === 0) {
                     var qusttype = localStorage.getItem('baiduquestionType');
                     var tzurl = 'mipilaw66baidu_login?channel=baidusearch&sessionId='
@@ -122,12 +121,16 @@ define(function (require) {
         });
 
         this.addEventAction('error', function (event) {
-            //          console.log('登录错误');
+            console.log('登录错误');
         });
 
         setTimeout(function () {
             if (!isloginf) {
                 bannerusernum();
+            }
+
+            if (bdcard) {
+                editsession();
             }
 
         }, 2000);
@@ -536,6 +539,26 @@ define(function (require) {
                 error: function (a) {
                     alert('系统异常，请稍后再试');
                     window.location.reload();
+                }
+            });
+        }
+
+        function editsession() {
+            var isloginid = localStorage.getItem('mip-login-xzh:sessionId:https://www.ilaw66.com/jasmine/baidusearch/authorize2');
+            var datas = {};
+            datas.bdcard = bdcard;
+            datas.channel = 'baidusearch';
+            datas.sessionId = isloginid;
+            datas._csrf = $el.find('#_csrf').val();
+            $.ajax({
+                type: 'post',
+                url: hosturl + 'baidusearch/editSession',
+                data: datas,
+                success: function (data) {
+                    //                  console.log(data);
+                },
+                error: function (a) {
+                    //                  window.location.reload();
                 }
             });
         }
