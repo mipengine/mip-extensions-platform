@@ -50,6 +50,33 @@ define(function (require) {
         });
     }
     downTab();
+    function getCookie(objName) {
+        var arrStr = document.cookie.split('; ');
+        for (var i = 0; i < arrStr.length; i++) {
+            var temp = arrStr[i].split('=');
+            if (temp[0] === objName) {
+                return unescape(temp[1]);
+            }
+        }
+        return '';
+    }
+    function setCookie(cname, cvalue, exdays) {
+        var d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        var expires = 'expires=' + d.toGMTString();
+        document.cookie = cname + '=' + escape(cvalue) + '; ' + expires;
+    }
+    function tongji() {
+        var softid = $('#SOHUCS').attr('sid');
+        var flag = getCookie(softid);
+        if (flag) {} else {
+            $.post('/ajax_tongji.asp', {
+                id: softid,
+                type: 'tj'
+            });
+            setCookie(softid, 1, 1);
+        }
+    }
     $('.tjbutton').click(function () {
         var msg = $.trim($('.comment .text').val());
         var csoftid = $('#SOHUCS').attr('sid');

@@ -1,0 +1,14 @@
+{
+    "name": "mip-pbpix",
+    "version": "1.0.0",
+    "description": "平步科技自定义mip pix组件，用于网页访问情况统计",
+    "contributors": [
+        {
+            "name": "cuipengyu",
+            "email": "cuipy2004@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
