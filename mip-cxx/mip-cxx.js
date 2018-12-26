@@ -77,6 +77,9 @@ define(function (require) {
             setCookie(softid, 1, 1);
         }
     }
+    if ($('.tongji').index() !== -1) {
+        tongji();
+    }
     $('.tjbutton').click(function () {
         var msg = $.trim($('.comment .text').val());
         var csoftid = $('#SOHUCS').attr('sid');

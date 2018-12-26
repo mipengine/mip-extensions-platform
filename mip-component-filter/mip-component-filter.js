@@ -35,21 +35,30 @@ define(function (require) {
             window.top.location.href = url + value;
         };
         var getWare = function () {
-            var loadid = event.target.dataset.loadid;
-            var loadname = event.target.dataset.loadname;
-            var template = event.target.parentElement.dataset.template;
-            var templateall = event.target.parentElement.dataset.templateall;
-            var getUrl = event.target.parentElement.dataset.url;
+            var target = event.target;
+            var parent = target.parentElement;
+            var loadid = target.dataset.loadid;
+            var loadname = target.dataset.loadname;
+            var name = target.textContent;
+            var template = parent.dataset.template;
+            var templateall = parent.dataset.templateall;
+            var getUrl = parent.dataset.url;
+            var title = parent.dataset.title;
             fetch(getUrl + loadid).then(function (response) {
                 return response.text();
             }).then(function (text) {
                 var data = JSON.parse(text);
-                var linkTemplate = '<a data-type="mip" href="{0}">{1}</a>';
-                var html = linkTemplate.replace('{0}', (loadname ? template.replace('{0}', loadname) : templateall))
-                    .replace('{1}', '全部');
+                var linkTemplate = '<a data-type="mip"  title="{title}" href="{href}">{text}</a>';
+                var allTitle = title.replace('{0}', (!title.startsWith('{0}') && name === '全部') ? '' : name);
+                var html = linkTemplate
+                    .replace('{title}', allTitle)
+                    .replace('{href}', (loadname ? template.replace('{0}', loadname) : templateall))
+                    .replace('{text}', '全部');
                 for (var item in data) {
-                    html += linkTemplate.replace('{0}', template.replace('{0}', data[item].LoadName))
-                        .replace('{1}', data[item].Name);
+                    html += linkTemplate
+                        .replace('{title}', title.replace('{0}', data[item].Name))
+                        .replace('{href}', template.replace('{0}', data[item].LoadName))
+                        .replace('{text}', data[item].Name);
                 }
                 element.querySelector('.filter-box').innerHTML = html;
             });
