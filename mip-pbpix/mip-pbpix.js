@@ -11,10 +11,11 @@ define(function (require) {
 
     customElement.pixInfo = {
         event: '',
+        cookieId: getCookiePbpixId(),
         loadId: uuid(),
         openTime: new Date().getTime(),
         closeTime: null,
-        referer: '',
+        referrer: '',
         documentSize: {
             width: 0,
             height: 0
@@ -38,7 +39,7 @@ define(function (require) {
         var element = this.element;
 
         var postUrl = element.getAttribute('postUrl');
-        if (postUrl == null) {
+        if (postUrl == null || postUrl === '') {
             postUrl = '/index/ApiAnonyMipPix/index.html';
         }
         customElement.postUrl = postUrl;
@@ -52,7 +53,7 @@ define(function (require) {
             customElement.pixInfo.event = 'window.load';
             customElement.pixInfo.title = title;
             customElement.pixInfo.openTime = new Date().getTime();
-            customElement.pixInfo.referer = document.referrer;
+            customElement.pixInfo.referrer = document.referrer;
             customElement.pixInfo.os = getOSInfo();
             customElement.pixInfo.browser = getBrowserInfo();
             customElement.pixInfo.screenSize = getScreenSize();
@@ -179,15 +180,15 @@ define(function (require) {
         }
         // firefox
         if (agent.indexOf('firefox') > 0) {
-            return agent.match(regStrFf);
+            return agent.match(regStrFf)[0];
         }
         // Safari
         if (agent.indexOf('safari') > 0 && agent.indexOf('chrome') < 0) {
-            return agent.match(regStrSaf);
+            return agent.match(regStrSaf)[0];
         }
         // Chrome
         if (agent.indexOf('chrome') > 0) {
-            return agent.match(regStrChrome);
+            return agent.match(regStrChrome)[0];
         }
     }
 
@@ -196,7 +197,7 @@ define(function (require) {
 
         var isWin = (navigator.platform === 'Win32') || (navigator.platform === 'Windows');
         var isMac = (navigator.platform === 'Mac68K') || (navigator.platform === 'MacPPC')
-        || (navigator.platform === 'Macintosh') || (navigator.platform === 'MacIntel');
+            || (navigator.platform === 'Macintosh') || (navigator.platform === 'MacIntel');
         if (isMac) {
             return 'Mac';
         }
@@ -268,5 +269,50 @@ define(function (require) {
             body: 'tt=' + json
         });
     }
+
+    function getCookiePbpixId() {
+        var pbpixId = getCookieByKey('pbpix_id');
+        if (pbpixId === null || pbpixId === '') {
+            pbpixId = uuid();
+            setCookie('pbpix_id', pbpixId, '/');
+        }
+        return pbpixId;
+    }
+
+    function setCookie(key, val, path, time) {
+        if (typeof key !== 'string' || typeof val !== 'string') {
+            return false;
+        }
+        time = time || 7 * 24 * 3600;
+        if (path == null || path === '') {
+            path = '/';
+        }
+
+        var exp = new Date();
+        exp.setTime(exp.getTime() + time * 1000);
+        document.cookie = key + '=' + val + ';path=' + path + ';expires=' + exp.toGMTString();
+    }
+
+    // 获取所有的cookies
+    function getAllCookies() {
+        var cookies = document.cookie.split(/;\s/g);
+        var cookieObj = {};
+        cookies.forEach(function (item) {
+            var key = item.split('=')[0];
+            cookieObj[key] = item.split('=')[1];
+        });
+        return cookieObj;
+    }
+
+    // 通过key来获取cookie，本方法依赖于getAllCookies()
+    function getCookieByKey(key) {
+        return getAllCookies()[key];
+    }
+
+    // 通过key来删除cookie
+    function clearCookieByKey(key) {
+        setCookie(key, '', '/', -1);
+    }
+
 
 });

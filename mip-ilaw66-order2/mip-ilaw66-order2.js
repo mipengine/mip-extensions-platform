@@ -324,11 +324,17 @@ define(function (require) {
                 },
                 error: function (c) {
                     if (c.status === 500) {
-                        window.location.reload();
+                        if (!requestId) {
+                            locahost('./', '电话咨询');
+                        }
+                        else {
+                            window.location.reload();
+                        }
                     }
                     else {
                         locahost('./', '电话咨询');
                     }
+
                 }
             });
         }
@@ -364,7 +370,7 @@ define(function (require) {
             $.ajax({
                 type: 'POST',
                 url: hosturl + 'greeting?questionType=' + questionType + '&_csrf=' + csrfToken
-                + '&sessionId=' + sessionId,
+                    + '&sessionId=' + sessionId,
                 success: function (data) {
                     if (data === 'ERROR' || data === 'ERROR1') {
                         $el.find('#err_msg').html('系统异常，请返回重新咨询');
