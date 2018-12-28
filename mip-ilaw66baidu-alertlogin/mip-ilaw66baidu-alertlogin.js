@@ -14,6 +14,16 @@ define(function (require) {
     customElement.prototype.firstInviewCallback = function () {
         var $el = $(this.element);
         var MIP = window.MIP;
+        var isnewpages = getQueryString('isnewpage') ? getQueryString('isnewpage') : null;
+        function getQueryString(name) {
+            var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+
+            return null;
+        }
 
         this.addEventAction('login', function (event) {
             console.log('授权成功');
@@ -21,16 +31,17 @@ define(function (require) {
             var islogin = parseInt(event.userInfo.isLogin, 10);
 
             if (!islogin) { // 未注册
-                //                  window.top.location.href = 'toLogin?channel=baidusearch';
-                if (MIP.viewer.isIframed) {
-                    MIP.viewer.sendMessage('loadiframe', {
-                        title: '登录',
-                        click: '',
-                        url: 'https://www.ilaw66.com/jasmine/mipilaw66baidu_login?channel=baidusearch'
-                    });
-                }
-                else {
-                    location.assign('https://www.ilaw66.com/jasmine/mipilaw66baidu_login?channel=baidusearch');
+                if (isnewpages !== 1) {
+                    if (MIP.viewer.isIframed) {
+                        MIP.viewer.sendMessage('loadiframe', {
+                            title: '登录',
+                            click: '',
+                            url: 'https://www.ilaw66.com/jasmine/mipilaw66baidu_login?channel=baidusearch'
+                        });
+                    }
+                    else {
+                        location.assign('https://www.ilaw66.com/jasmine/mipilaw66baidu_login?channel=baidusearch');
+                    }
                 }
             }
             else {

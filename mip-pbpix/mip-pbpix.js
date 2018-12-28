@@ -40,7 +40,7 @@ define(function (require) {
 
         var postUrl = element.getAttribute('postUrl');
         if (postUrl == null || postUrl === '') {
-            postUrl = '/index/ApiAnonyMipPix/index.html';
+            postUrl = '/index/ApiAnonyMipPix/do_pix';
         }
         customElement.postUrl = postUrl;
 
@@ -262,7 +262,7 @@ define(function (require) {
         var json = JSON.stringify(info);
         fetch(customElement.postUrl, {
             method: 'POST',
-            mode: 'cors',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },

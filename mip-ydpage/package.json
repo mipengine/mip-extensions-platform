@@ -1,0 +1,14 @@
+{
+    "name": "mip-ydpage",
+    "version": "1.0.0",
+    "description": "缘盾分页组件，分页信息数据的异步加载",
+    "contributors": [
+        {
+            "name": "yuandun-java",
+            "email": "gzbenai@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

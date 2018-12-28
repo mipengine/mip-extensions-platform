@@ -1,0 +1,14 @@
+{
+    "name": "mip-ydcategory",
+    "version": "1.0.0",
+    "description": "缘盾数据分类插件，按分类筛选需求数据",
+    "contributors": [
+        {
+            "name": "yuandun-java",
+            "email": "gzbenai@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

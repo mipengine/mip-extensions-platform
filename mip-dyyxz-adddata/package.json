@@ -1,0 +1,14 @@
+{
+    "name": "mip-dyyxz-adddata",
+    "version": "1.0.0",
+    "description": "加载下载数据",
+    "contributors": [
+        {
+            "name": "leshuadmin",
+            "email": "wanghao@leshu.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
