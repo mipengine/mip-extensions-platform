@@ -9,9 +9,9 @@ define(function (require) {
     var customElement = require('customElement').create();
 
     /**
-     * 第一次进入可视区回调，只会执行一次
+     * build 说明: 统计组件，需要尽快加载，以统计访问数据 https://mip-project.github.io/v2/api/global/base-custom-element.html#build
      */
-    customElement.prototype.firstInviewCallback = function () {
+    customElement.prototype.build = function () {
         var that = this;
         var element = that.element;
         var account = element.getAttribute('account') || 'UA-3051632-5';
@@ -36,18 +36,21 @@ define(function (require) {
         });
 
         // 统计组件的依赖，谷歌统计js，必须引入的
-        var ga = document.createElement('script');
-        ga.type = 'text/javascript';
-        ga.async = true;
-        ga.src = ('https:' === document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(ga, s);
-        ga.onload = function () {
-            bindEle();
-        };
+        var gaSrc = ('https:' === document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        createScript(gaSrc, function () {
+            bindGaEle();
+        });
+
+        // 统计组件的依赖，康爱多统计js，必须引入的
+        var kadStatsSrc = document.location.protocol + '//ctr.360kad.com/ctrjs/ctr_v2.js';
+        createScript(kadStatsSrc, function () {
+            // onload
+        });
+
+
     };
 
-    function bindEle() {
+    function bindGaEle() {
         // var mipStatsConf = {
         //     event: "click",
         //     data: ['_trackEvent', '百度mip页', '点击事件', '0', 0]
@@ -87,6 +90,16 @@ define(function (require) {
                 });
             }
         });
+    }
+
+    function createScript(src, onload) {
+        var js = document.createElement('script');
+        js.type = 'text/javascript';
+        js.async = true;
+        js.src = src;
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(js, s);
+        js.onload = onload;
     }
     return customElement;
 });

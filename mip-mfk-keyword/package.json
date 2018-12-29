@@ -1,0 +1,14 @@
+{
+    "name": "mip-mfk-keyword",
+    "version": "1.0.0",
+    "description": "民福康内容关键字说明",
+    "contributors": [
+        {
+            "name": "小龙",
+            "email": "864855920@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

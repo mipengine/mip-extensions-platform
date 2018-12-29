@@ -29,9 +29,9 @@ define(function (require) {
             console.log('授权成功');
             var sessid = event.sessionId;
             var islogin = parseInt(event.userInfo.isLogin, 10);
-
+            $el.find('#sesiid').html(sessid);
             if (!islogin) { // 未注册
-                if (isnewpages !== 1) {
+                if (isnewpages !== '1') {
                     if (MIP.viewer.isIframed) {
                         MIP.viewer.sendMessage('loadiframe', {
                             title: '登录',

@@ -239,7 +239,7 @@ define(function (require) {
                             $el.find('#js-pay-button').html('<a data-type="mip" href="' + data.cashier_url
                                 + '">立即支付 ¥ <i id="unpaidAmount">' + ordermount + '</i></a>');
                         }
-                        else if (data.ERROR1 === 'ERROR1') {
+                        else if (data.message === 'ERROR1') {
                             $el.find('.popUp_sysErr').fadeIn();
                             $el.find('#err_msg').html('您无需支付该笔订单');
                             $el.find('#err_confirm').click(function () {

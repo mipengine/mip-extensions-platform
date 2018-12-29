@@ -1,6 +1,6 @@
 {
     "name": "mip-pbpix",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "平步科技自定义mip pix组件，用于网页访问情况统计",
     "contributors": [
         {

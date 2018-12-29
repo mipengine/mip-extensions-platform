@@ -30,8 +30,9 @@ define(function (require) {
             }
         };
         var search = function () {
-            var value = event.target.previousElementSibling.value;
-            var url = event.target.dataset.url;
+            var dom = event.target.closest('.search-line');
+            var value = dom.children[1].value;
+            var url = dom.children[2].dataset.url;
             window.top.location.href = url + value;
         };
         var getWare = function () {
@@ -63,10 +64,16 @@ define(function (require) {
                 element.querySelector('.filter-box').innerHTML = html;
             });
         };
+        var listenEnter = function () {
+            if (event.keyCode === 13) {
+                search();
+            }
+        };
         dom.btnDropdown.addEventListener('click', open);
         dom.mask.addEventListener('click', close);
         dom.btnBack.addEventListener('click', close);
         dom.btnSearch.addEventListener('click', search);
+        element.querySelector('.search-line').addEventListener('keyup', listenEnter);
         util.event.delegate(element.querySelector('.scroll-filter'), 'button', 'click', getWare);
     };
 

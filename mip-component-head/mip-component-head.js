@@ -33,10 +33,11 @@ define(function (require) {
         };
 
         var search = function () {
-            if (event.target.nodeName !== 'DIV') {
+            if (!(event instanceof MouseEvent && event.target.nodeName === 'DIV')
+                && !(event instanceof KeyboardEvent && event.keyCode === 13)) {
                 return;
             }
-            var dom = event.target.firstElementChild;
+            var dom = event.target.firstElementChild || event.target;
             var value = dom.value.trim();
             if (!value) {
                 alert('关键字不能为空');
@@ -48,6 +49,7 @@ define(function (require) {
 
         btnSearch.addEventListener('click', search);
         btnToggle.addEventListener('click', toggle);
+        btnSearch.addEventListener('keyup', search);
     };
     return customElement;
 });
