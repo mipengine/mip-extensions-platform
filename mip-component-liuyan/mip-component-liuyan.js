@@ -17,7 +17,7 @@ define(function (require) {
         var btnClose = element.querySelector('.close');
         var formSelector = '.' + element.dataset.type;
         var isFreetalk = element.dataset.type === 'freetalk';
-
+        var fetchUrl = element.dataset.fetchurl;
         // 弹出时禁止底层的滚动
         var scroll = (function () {
             var cacheTop = undefined;
@@ -123,7 +123,7 @@ define(function (require) {
             if (!formData.Content) {
                 formData.Content = '对此项目很感兴趣，想加盟，请速与我联系';
             }
-            fetch('/ajax/saveLiuyan.ashx', {
+            fetch(fetchUrl, {
                 method: 'POST',
                 body: toFormData(formData)
             }).then(function (response) {

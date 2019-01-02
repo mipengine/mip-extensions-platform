@@ -28,13 +28,13 @@ define(function (require) {
                     var data = (new Function('', 'return' + data))();
                     for (var o = 0; o < data.Title.length; ++o) {
                         html += '<li>';
-                        html += '<a class="tab-con-li" data-type="mip" href="/mipc/' + data.Id[o] + '.html">';
+                        html += '<a class="tab-con-li" href="/c/' + data.Id[o] + '">';
                         html += '' + data.Title[o] + '</a>';
                         var date0 = data.DateAndTime[o].replace(/\//ig, '-');
                         var date = date0.substring(0, data.DateAndTime[o].lastIndexOf(' '));
                         html += '<span class="u-deta">发布时间：'
-                        + date + '</span><span class="u-read"><a data-type="mip" href="/mipc/'
-                        + data.Id[o] + '.html">查看全部</a></span></li>';
+                        + date + '</span><span class="u-read"><a href="/c/'
+                        + data.Id[o] + '">查看全部</a></span></li>';
                     }
                     $(ele).find('#tab-div ul').eq(tabnum).append(html);
                     $(ele).find('#more').html('\u70b9\u51fb\u67e5\u770b\u66f4\u591a\u002e\u002e\u002e');

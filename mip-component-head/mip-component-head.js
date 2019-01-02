@@ -31,7 +31,6 @@ define(function (require) {
                 }, 0);
             }
         };
-
         var search = function () {
             if (!(event instanceof MouseEvent && event.target.nodeName === 'DIV')
                 && !(event instanceof KeyboardEvent && event.keyCode === 13)) {
