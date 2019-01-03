@@ -65,11 +65,11 @@ define(function (require) {
                 return;
             }
 
-            if ($(tagBox[index]).hasClass('mip-stats-eventload')) {
+            if ($(tagBox[index]).hasClass('mip-stats-google-eventload')) {
                 return;
             }
 
-            $(tagBox[index]).addClass('mip-stats-eventload');
+            $(tagBox[index]).addClass('mip-stats-google-eventload');
 
             if (eventtype === 'load') {
                 window._gaq.push(data);
