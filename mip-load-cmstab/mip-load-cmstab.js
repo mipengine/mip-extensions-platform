@@ -15,6 +15,12 @@ define(function (require) {
         var p = ele.getAttribute('data-page');
         var ajaxUrl = ele.getAttribute('data-topdateurl');
         var gxId = ele.getAttribute('data-tid');
+        $(ele).find('.tab-con li img').each(function () {
+            var noimg = $(ele).find(this).attr('src');
+            if (noimg === 'https://www.qqtn.com/skin/NoPic.jpg' || noimg === '') {
+                $(ele).find(this).hide();
+            }
+        });
         $(ele).find('#more').click(function () {
             $(this).html('\u5185\u5bb9\u6b63\u5728\u52a0\u8f7d\u4e2d\u002e\u002e\u002e');
             var tabid = $(ele).find('#tab-nav li.hover').attr('data-tabid');
@@ -29,12 +35,15 @@ define(function (require) {
                     for (var o = 0; o < data.Title.length; ++o) {
                         html += '<li>';
                         html += '<a class="tab-con-li" href="/c/' + data.Id[o] + '">';
-                        html += '' + data.Title[o] + '</a>';
+                        if (data.SmallImg[o] === '') {
+                            html += '<img style="display:none" src="' + data.SmallImg[o] + '">';
+                        } else {
+                            html += '<img src="' + data.SmallImg[o] + '" alt="' + data.Title[o] + '">';
+                        }
                         var date0 = data.DateAndTime[o].replace(/\//ig, '-');
                         var date = date0.substring(0, data.DateAndTime[o].lastIndexOf(' '));
-                        html += '<span class="u-deta">发布时间：'
-                        + date + '</span><span class="u-read"><a href="/c/'
-                        + data.Id[o] + '">查看全部</a></span></li>';
+                        html += '<p><strong>' + data.Title[o] + '</strong>';
+                        html += '<span class="u-deta">' + date + '</span></p></a></li>';
                     }
                     $(ele).find('#tab-div ul').eq(tabnum).append(html);
                     $(ele).find('#more').html('\u70b9\u51fb\u67e5\u770b\u66f4\u591a\u002e\u002e\u002e');

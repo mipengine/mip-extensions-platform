@@ -5,7 +5,7 @@
 
 define(function (require) {
     'use strict';
-    // var $ = require('zepto');
+    var $ = require('jquery');
     var customElement = require('customElement').create();
 
     /**
@@ -13,6 +13,7 @@ define(function (require) {
      */
     customElement.prototype.firstInviewCallback = function () {
         var that = this.element;
+        that.showtip = false;
         that.style.display = 'inline';
         that.className = 'art_entry_btn';
         if (!document.getElementById('bg')) {
@@ -28,12 +29,12 @@ define(function (require) {
             if (k === '') {
                 return false;
             }
+            that.showtip = true;
             tip({type: 1});
-            ajaxJSON({
-                url: 'https://mip.mfk.com/app/api/mip_mfk_keyword.php',
-                data: {k: k},
-                cache: false,
-                success: function (res) {
+            $.get(
+                'https://mip.mfk.com/app/api/mip_mfk_keyword.php',
+                {k: k},
+                function (res) {
                     if (res.code === 200) {
                         tip({type: 2, data: res.data});
                     }
@@ -41,78 +42,32 @@ define(function (require) {
                         tip({type: 3, data: res.msg});
                     }
                 },
-                error: function () {
-                    tip({type: 3, data: '词条内容加载失败！'});
-                }
+                'json'
+            ).error(function () {
+                tip({type: 3, data: '词条内容加载失败！'});
             });
         }, false);
 
         document.getElementById('bg').onclick = null;
         document.getElementById('bg').onclick = function () {
+            that.showtip = false;
             var artEntryBox = document.getElementById('art_entry_box');
             artEntryBox.parentNode.removeChild(artEntryBox);
             document.getElementById('bg').style.display = 'none';
             that.className = 'art_entry_btn';
         };
 
-        function ajaxJSON(params) {
-            params.type = (params.type || 'GET').toUpperCase();
-            params.data = params.data || {};
-            var formatedParams = formateParams(params.data, params.cache);
-            var xhr;
-            if (window.XMLHttpRequest) {
-                xhr = new XMLHttpRequest();
-            }
-            else {
-                xhr = new ActiveXObject('Microsoft.XMLHTTP');
-            }
-
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    if (!!params.success) {
-                        if (typeof xhr.responseText === 'string') {
-                            params.success(JSON.parse(xhr.responseText));
-                        }
-                        else {
-                            params.success(xhr.responseText);
-                        }
-                    }
-                }
-                else {
-                    params.error && params.error(status);
-                }
-            };
-            if (params.type === 'GET') {
-                xhr.open('GET', (!!formatedParams ? params.url + '?' + formatedParams : params.url), true);
-                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                xhr.send();
-            }
-            else {
-                xhr.open('POST', params.url, true);
-                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                xhr.send(formatedParams);
-            }
-        }
-
-        function formateParams(data, isCache) {
-            var arr = [];
-            for (var name in data) {
-                arr.push(encodeURIComponent(name) + '=' + encodeURIComponent(data[name]));
-            }
-            if (isCache) {
-                arr.push('t=' + (new Date()).getTime());
-            }
-            return arr.join('&');
-        }
-
         function tip(para) {
+            if (!that.showtip) {
+                return false;
+            }
             document.getElementById('bg').style.display = 'block';
             that.className = 'art_entry_btn art_entry_btn_cur';
-            var objW = that.scrollWidth;
-            var sTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
-            var winW = document.body.offsetWidth;
-            var top = that.offsetTop;
-            var left = that.offsetLeft;
+            var objW = $(that).width();
+            var sTop = $(window).scrollTop();
+            var winW = $(window).width();
+            var top = $(that).offset().top;
+            var left = $(that).offset().left;
 
             var artEntryBox = document.createElement('div');
             artEntryBox.className = 'art_entry_box';
@@ -139,8 +94,8 @@ define(function (require) {
             }
 
             document.getElementsByTagName('body')[0].appendChild(artEntryBox);
-            var boxH = document.getElementById('art_entry_box').offsetHeight;
-            var boxW = document.getElementById('art_entry_box').offsetWidth;
+            var boxH = $('#art_entry_box').height();
+            var boxW = $('#art_entry_box').width();
             if ((left + (objW / 2)) < (boxW / 2)) {
                 var boxL = 10;
             }

@@ -1,0 +1,14 @@
+{
+    "name": "mip-tubatu-tender",
+    "version": "1.0.0",
+    "description": "底部发标广告弹框",
+    "contributors": [
+        {
+            "name": "lewis.liu",
+            "email": "lewis.liu@corp.to8to.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

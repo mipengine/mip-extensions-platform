@@ -18,29 +18,6 @@ define(function (require) {
         var formSelector = '.' + element.dataset.type;
         var isFreetalk = element.dataset.type === 'freetalk';
         var fetchUrl = element.dataset.fetchurl;
-        // 弹出时禁止底层的滚动
-        var scroll = (function () {
-            var cacheTop = undefined;
-            var allow = function () {
-                document.documentElement.style.overflowY = 'auto';
-                document.body.style.overflowY = 'auto';
-                window.scrollTo(0, cacheTop);
-            };
-            var ban = function () {
-                cacheTop = scroll.top();
-                document.documentElement.style.overflowY = 'hidden';
-                document.body.style.overflowY = 'hidden';
-                document.body.style.top = (-1 * cacheTop) + 'px';
-            };
-            var top = function () {
-                return viewport.getScrollTop();
-            };
-            return {
-                allow: allow,
-                ban: ban,
-                top: top
-            };
-        })();
 
         var open = function (userid) {
             var form = mask.querySelector(formSelector);
@@ -56,7 +33,6 @@ define(function (require) {
                 form.querySelector('.UserID').value = userid;
             }
             mask.style.display = 'block';
-            scroll.ban();
             setTimeout(function () {
                 mask.classList.add('show');
             }, 0);
@@ -64,7 +40,6 @@ define(function (require) {
         var close = function () {
             if (event.target === mask || event.target.classList.contains('close')) {
                 mask.classList.remove('show');
-                scroll.allow();
                 setTimeout(function () {
                     mask.style.display = 'none';
                 }, 300);
