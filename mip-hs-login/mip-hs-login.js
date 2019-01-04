@@ -34,7 +34,7 @@ define(function (require) {
                 success: function (data) {
                     if (data.status === 1) {
                         $el.find('.error').html(data.msg);
-                        var Url = 'http://hsanswer.altke.cn/captcha';
+                        var Url = '/captcha';
                         Url = Url + '/' + Math.random();
                         $el.find('.idf_img_show').attr('src', Url);
                     }

@@ -6,7 +6,7 @@ mip-tubatu-tender 组件说明
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/static/v1/mip-footerlayer/mip-tubatu-tender.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-tubatu-tender/mip-tubatu-tender.js
 
 ## 示例
 

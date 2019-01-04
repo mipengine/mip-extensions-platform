@@ -31,10 +31,12 @@ define(function (require) {
             }
             that.showtip = true;
             tip({type: 1});
-            $.get(
-                'https://mip.mfk.com/app/api/mip_mfk_keyword.php',
-                {k: k},
-                function (res) {
+            $.ajax({
+                url: 'https://mip.mfk.com/app/api/mip_mfk_keyword.php',
+                data: {k: k},
+                dataType: 'jsonp',
+                success: function (res) {
+                    console.log(res);
                     if (res.code === 200) {
                         tip({type: 2, data: res.data});
                     }
@@ -42,38 +44,33 @@ define(function (require) {
                         tip({type: 3, data: res.msg});
                     }
                 },
-                'json'
-            ).error(function () {
-                tip({type: 3, data: '词条内容加载失败！'});
+                error: function () {
+                    tip({type: 3, data: '词条内容加载失败！'});
+                }
             });
         }, false);
 
-        document.getElementById('bg').onclick = null;
-        document.getElementById('bg').onclick = function () {
+        $('#bg').unbind('click').bind('click', function () {
             that.showtip = false;
-            var artEntryBox = document.getElementById('art_entry_box');
-            artEntryBox.parentNode.removeChild(artEntryBox);
-            document.getElementById('bg').style.display = 'none';
-            that.className = 'art_entry_btn';
-        };
+            $('#art_entry_box').remove();
+            $('#bg').hide();
+            $('.art_entry_btn').removeClass('art_entry_btn_cur');
+        });
 
         function tip(para) {
             if (!that.showtip) {
                 return false;
             }
-            document.getElementById('bg').style.display = 'block';
-            that.className = 'art_entry_btn art_entry_btn_cur';
+            $(that).addClass('art_entry_btn_cur');
             var objW = $(that).width();
             var sTop = $(window).scrollTop();
             var winW = $(window).width();
             var top = $(that).offset().top;
             var left = $(that).offset().left;
 
-            var artEntryBox = document.createElement('div');
-            artEntryBox.className = 'art_entry_box';
-            artEntryBox.id = 'art_entry_box';
+            var innerHTML;
             if (para.type === 1) {
-                artEntryBox.innerHTML = '<div class="art_entry_title"></div>\
+                innerHTML = '<div class="art_entry_title"></div>\
 <div id="arrow_top" class="arrow_top" style="border-top: .1rem solid #fff;bottom:-.09rem;"></div>\
 <p style="text-align:center;">\
 <img src="https://mip.mfk.com/statics/images/loading.gif" class="img_load"/>词条内容加载中...\
@@ -81,19 +78,24 @@ define(function (require) {
 <div id="arrow_down" class="arrow_down" style="border-bottom: .1rem solid #fff;top:-.07rem;"></div>';
             }
             else if (para.type === 2) {
-                artEntryBox.innerHTML = '<div class="art_entry_title">' + para.data.title + '</div>\
+                innerHTML = '<div class="art_entry_title">' + para.data.title + '</div>\
 <div id="arrow_top" class="arrow_top" style="border-top: .1rem solid #fff;bottom:-.09rem;"></div>\
 <p>' + para.data.content + '</p>\
 <div id="arrow_down" class="arrow_down" style="border-bottom: .1rem solid #fff;top:-.07rem;"></div>';
             }
             else if (para.type === 3) {
-                artEntryBox.innerHTML = '<div class="art_entry_title"></div>\
+                innerHTML = '<div class="art_entry_title"></div>\
 <div id="arrow_top" class="arrow_top" style="border-top: .1rem solid #fff;bottom:-.09rem;"></div>\
 <p>' + para.msg + '</p>\
 <div id="arrow_down" class="arrow_down" style="border-bottom: .1rem solid #fff;top:-.07rem;"></div>';
             }
+            if ($('#art_entry_box').length > 0) {
+                $('#art_entry_box').html(innerHTML);
+            }
+            else {
+                $('body').append('<div class="art_entry_box" id="art_entry_box">' + innerHTML + '</div>');
+            }
 
-            document.getElementsByTagName('body')[0].appendChild(artEntryBox);
             var boxH = $('#art_entry_box').height();
             var boxW = $('#art_entry_box').width();
             if ((left + (objW / 2)) < (boxW / 2)) {
@@ -108,21 +110,21 @@ define(function (require) {
             var jiaoL = (left + (objW / 2)) - boxL;
 
             if ((top - sTop) > boxH) {
-                document.getElementById('arrow_top').style.display = 'block';
-                document.getElementById('arrow_down').style.display = 'none';
-                var jiao = document.getElementById('arrow_top');
-                document.getElementById('art_entry_box').style.top = (top - boxH - 9) + 'px';
-                document.getElementById('art_entry_box').style.left = boxL + 'px';
+                $('#arrow_top').show();
+                $('#arrow_down').hide();
+                var jiao = $('#arrow_top');
+                $('#art_entry_box').css('top', (top - boxH - 9) + 'px');
+                $('#art_entry_box').css('left', boxL + 'px');
             }
             else {
-                document.getElementById('arrow_top').style.display = 'none';
-                document.getElementById('arrow_down').style.display = 'block';
-                var jiao = document.getElementById('arrow_down');
-                document.getElementById('art_entry_box').style.top = (top + 30) + 'px';
-                document.getElementById('art_entry_box').style.left = boxL + 'px';
+                $('#arrow_top').hide();
+                $('#arrow_down').show();
+                var jiao = $('#arrow_down');
+                $('#art_entry_box').css('top', (top + 30) + 'px');
+                $('#art_entry_box').css('left', boxL + 'px');
             }
-            document.getElementById('bg').style.display = 'block';
-            jiao.style.left = jiaoL + 'px';
+            $('#bg').show();
+            jiao.css('left', jiaoL + 'px');
         }
     };
 

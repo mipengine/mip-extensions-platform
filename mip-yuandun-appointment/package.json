@@ -1,0 +1,14 @@
+{
+    "name": "mip-yuandun-appointment",
+    "version": "1.0.0",
+    "description": "缘盾预约组件,完成用户缘盾信息校验，预约",
+    "contributors": [
+        {
+            "name": "yuandun-java",
+            "email": "gzbenai@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

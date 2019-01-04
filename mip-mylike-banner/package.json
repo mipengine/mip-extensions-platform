@@ -1,0 +1,14 @@
+{
+    "name": "mip-mylike-banner",
+    "version": "1.0.0",
+    "description": "获取banner图片",
+    "contributors": [
+        {
+            "name": "chihou",
+            "email": "504780859@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

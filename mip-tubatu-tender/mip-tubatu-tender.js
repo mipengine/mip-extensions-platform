@@ -580,11 +580,11 @@ define(function (require) {
             });
 
             // 获取ptag
-            $('.btn-mfsj').attr('data-pg', $('#mfsj_btn_ptag').val());
-            $('#mfsj_pg').val($('#msfj_crm_ptag').val());
+            $('.btn-mfsj').attr('data-pg', $('#mfsj_btn_ptag').attr('data-ptagg'));
+            $('#mfsj_pg').val($('#msfj_crm_ptag').attr('data-ptagg'));
 
-            $('.btn-zxbj').attr('data-pg', $('#zxbj_btn_ptag').val());
-            $('#zxbj_pg').val($('#zxbj_crm_ptag').val());
+            $('.btn-zxbj').attr('data-pg', $('#zxbj_btn_ptag').attr('data-ptagg'));
+            $('#zxbj_pg').val($('#zxbj_crm_ptag').attr('data-ptagg'));
 
             $('.bottom-form-btn-box li').on('touchstart', function () {
                 var Tthis = $(this);
@@ -796,8 +796,6 @@ define(function (require) {
                             + '</div>';
                         $('.layerout').addClass('layerout-z');
                         $('body').append(html);
-                        $('.mfsj-close-box').attr('data-pg', $('#mfsj_close_box_ptag').val());
-                        $('.mfsj-close-box em').attr('data-pg', $('#mfsj_close_box_ptag').val());
                     }
                     if (res.status === 5) {
                         // errorLayer('非常抱歉，您当前的城市' + addArr[1] + '尚未开通免费设计服务，敬请期待！');
