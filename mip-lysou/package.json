@@ -1,7 +1,7 @@
 {
     "name": "mip-lysou",
-    "version": "1.1.0",
-    "description": "组件功能主要是对页面的导航一级栏目的显示和隐藏和二级栏目的显示和隐藏。主要是因为mip自带的组件没有我想要的这些比较仔细一点的功能。所以想自己写点js代码使用。和之前相比减少了新闻板块的切换。",
+    "version": "1.1.1",
+    "description": "有点class样式的改变",
     "contributors": [
         {
             "name": "lysou_xiaobao",

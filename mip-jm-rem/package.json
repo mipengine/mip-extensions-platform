@@ -1,0 +1,14 @@
+{
+    "name": "mip-jm-rem",
+    "version": "1.0.0",
+    "description": "创牛网rem适配",
+    "contributors": [
+        {
+            "name": "lin",
+            "email": "840399305@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

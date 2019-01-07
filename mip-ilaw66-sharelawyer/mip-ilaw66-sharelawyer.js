@@ -75,7 +75,7 @@ define(function (require) {
             if (!islogin) { // 未注册
                 var qusttype = localStorage.getItem('baiduquestionType');
                 var tzurl = 'mipilaw66baidu_login?channel=baidusearch&sessionId='
-                    + sessid + '&questionType=' + qusttype + '&bdcard=' + bdcard;
+                + sessid + '&questionType=' + qusttype + '&bdcard=' + bdcard;
                 locahost(tzurl, '准备咨询');
             }
             else {
@@ -90,7 +90,7 @@ define(function (require) {
 
         function getQueryString(name) {
             var reg = new RegExp('(^|&)'
-                + name + '=([^&]*)(&|$)', 'i');
+            + name + '=([^&]*)(&|$)', 'i');
             var r = window.location.search.substr(1).match(reg);
             if (r !== null) {
                 return unescape(r[2]);
@@ -103,12 +103,6 @@ define(function (require) {
             if (sessionId !== 0) {
                 startConsulting('CT007');
             }
-            else {
-                var tzurl = 'mipilaw66baidu_login?channel=baidusearch&sessionId='
-                    + sessionId + '&questionType=CT007&bdcard=' + bdcard;
-                locahost(tzurl, '准备咨询');
-            }
-
         });
 
         function getLawyerMsg(lawyerId) {
@@ -122,13 +116,6 @@ define(function (require) {
                 data: ajaxdatas,
                 async: false,
                 success: function (data) {
-                    //					var data = {
-                    //						"code": "200",
-                    //						"status": "success",
-                    //						"msg": null,
-                    //						"result": "{\"authorizePhoto\":\"https://lawer.ilaw66.com/FrMULMWh23tA-A6MC9blSzXdQhWq\",\"lawyerFields\":\"01,05,09,99\",\"personalIntro\":\"\",\"city\":\"3\",\"minutes\":6,\"sex\":\"male\",\"workExperience\":\"1992年\",\"lawyerFieldStr\":\"婚姻家庭,房产物业,公司创业,其他\",\"percent\":\"83%\",\"workTime\":\"8年\",\"lawyerOffice\":\"框道\",\"identifyPhoto\":\"\",\"authorizedTime\":\"2011\",\"goodCommentRate\":\"90%\",\"formalPhoto\":\"https://lawer.ilaw66.com/FrMULMWh23tA-A6MC9blSzXdQhWq\",\"phoneNumber\":\"13818945436\",\"cityName\":\"上海市\",\"field\":[{\"lawyerField\":\"00\",\"fieldName\":\"劳动人事\"},{\"lawyerField\":\"01\",\"fieldName\":\"婚姻家庭\"},{\"lawyerField\":\"03\",\"fieldName\":\"交通意外\"},{\"lawyerField\":\"04\",\"fieldName\":\"医疗纠纷\"},{\"lawyerField\":\"05\",\"fieldName\":\"房产物业\"},{\"lawyerField\":\"06\",\"fieldName\":\"民间借贷\"},{\"lawyerField\":\"07\",\"fieldName\":\"人身伤害\"},{\"lawyerField\":\"09\",\"fieldName\":\"公司创业\"},{\"lawyerField\":\"10\",\"fieldName\":\"合同纠纷\"},{\"lawyerField\":\"16\",\"fieldName\":\"刑事\"},{\"lawyerField\":\"99\",\"fieldName\":\"其它\"}],\"province\":\"9\",\"name\":\"贺律师\",\"lawyerId\":\"\",\"provinceName\":\"上海市\",\"mark\":4,\"shareChain\":\"https://www.ilaw66.com/jasmine/shareLawyer?lawyerId=biwen.he&from=shareLawyer_lawyerShare&channel=WxiaoApp\"}",
-                    //						"data": null
-                    //					};
                     if (!data.result) {
                     // no lawyer msg
                     }
@@ -149,9 +136,9 @@ define(function (require) {
                         console.log(data.result);
                         var lawylengt = b.lawyerFieldStr.length ? b.lawyerFieldStr.length : 0;
 
-                        var htmlstring = '<mip-img src=' + b.authorizePhoto + '  class="userimg"></mip-img>'
-                            + '<h1>' + b.name + '</h1>'
-                            + '<p class="shareLawyer_p">好评率:' + b.goodCommentRate
+                        var htmlstring = '<mip-img src=' + b.authorizePhoto + 'class="userimg"></mip-img>'
+                        + '<h1>' + b.name + '</h1>'
+                        + '<p class="shareLawyer_p">好评率:' + b.goodCommentRate
                             + '</p><p class="shareLawyer_h2">执业信息</p>'
                             + '<p class="shareLawyer_p">执业地区:' + b.provinceName + '</p>'
                             + '<p class="shareLawyer_p">执业年限:' + b.workTime + '</p>';
@@ -159,10 +146,11 @@ define(function (require) {
                             var lawyer = ' ';
                             for (var i = 0; i < b.lawyerFieldStr.length; i++) {
                                 lawyer += '<p class="shareLawyer_p shareLawyer_p__field">'
-                                    + b.lawyerFieldStr[i] + '</p>';
+                                + b.lawyerFieldStr[i] + '</p>';
                             }
                             htmlstring += '<div class="shareLawyer_h2 shareLawyer_h2__takearea">'
-                                + ' <span class="shareLawyer_h2__takeareaTxt">擅长领域</span><br/>' + lawyer + '</div>';
+                            + '<span class="shareLawyer_h2__takeareaTxt">擅长领域</span><br/>'
+                            + lawyer + '</div>';
                         }
 
                         $el.find('#authorbox').html(htmlstring);
@@ -181,6 +169,55 @@ define(function (require) {
             $el.find('.alertbox').removeClass('alertactive');
         });
 
+        function constorder() {
+            var ajaxdatas = {};
+            ajaxdatas.questionType = 'CT007';
+            ajaxdatas.lawyerId = lawyerId;
+            ajaxdatas.desc = lawyerId;
+            ajaxdatas.origin = 'shareLawyer';
+            ajaxdatas.continueAskPage = 'shareLawyer_lawyerShare';
+            ajaxdatas._csrf = $el.find('#_csrf').val();
+            ajaxdatas.channel = 'baidusearch';
+            ajaxdatas.sessionId = sessionId;
+            $.ajax({
+                url: hosturl + 'continueAskV3',
+                type: 'POST',
+                async: true,
+                data: ajaxdatas,
+                timeout: 5000, // 超时时间设置，单位毫秒
+                success: function (data) {
+                    var id = data.data;
+                    if (id !== '') {
+                        localStorage.setItem('reAskAvatar', data.avatar);
+                        localStorage.setItem('reAskName', data.lawyerName);
+                        localStorage.setItem('reAskSex', data.sex);
+                        localStorage.setItem('lawyerField', data.lawyerField);
+                        localStorage.setItem('goodCommentRate', data.goodCommentRate);
+                        //		location.href = "informLawyer_wx?data=" + id + "&questionType=" + questionType + "&lawyerId=" + getQueryString("lawyerId") + "&PABackJumpFlg=shareLawyer";
+                        var infourl = 'mipilaw66baidu_informLawyer?data='
+                        + id + '&questionType=CT007&lawyerId='
+                        + lawyerId + '&PABackJumpFlg=shareLawyer'
+                        + '&sessionId=' + sessionId;
+                        locahost(infourl, '通知律师');
+                    }
+                    else {
+                        $el.find('#messagecontem').text(data.error);
+                        $el.find('#payalert').addClass('alertactive');
+                    }
+                },
+                complete: function (xhr, status) {
+                    //              	alert(JSON.stringify(xhr))
+                },
+                error: function (data) {
+                    clicksstart = true;
+                    //                   $el.find('#messagecontem').text(JSON.stringify(xhr));
+                    //                      $el.find('#payalert').addClass('alertactive');
+                    $el.find('#sesiid').html(data);
+                    //                  window.location.reload();
+                }
+            });
+        }
+
         function startConsulting(questionType) {
             var ajaxdatas = {};
             ajaxdatas.questionType = questionType;
@@ -188,35 +225,20 @@ define(function (require) {
             ajaxdatas.channel = 'baidusearch';
             ajaxdatas.sessionId = sessionId;
             $.ajax({
-                url: hosturl + 'greeting2',
-                type: 'POST',
-                async: true,
-                data: ajaxdatas,
+                url: hosturl + 'getUserIdFromServer',
+                type: 'GET',
+
                 timeout: 5000, // 超时时间设置，单位毫秒
                 success: function (datas) {
-                    var datas = datas.data;
-                    if (datas === 'ERROR' || datas === 'ERROR1') {
-                        $el.find('#messagecontem').text('系统异常，请返回重新咨询');
-                        $el.find('#alertconten').addClass('alertactive');
-                    }
-                    else if (datas === 'ERROR2') {
-                        $el.find('#messagecontem').text('您有订单未支付，请支付后再咨询');
-                        $el.find('#payalert').addClass('alertactive');
-                    }
-                    else if (datas === 'ERROR3') {
-                        $el.find('#messagecontem').text('您有订单未结束，请等待1分钟后再试');
-                        $el.find('#alertBillErr').addClass('alertactive');
-                    }
-                    else if (datas === 'ERROR4') {
-                        $el.find('#messagecontem').text('您今日取消咨询已达3次，请明天再来');
-                        $el.find('#payalert').addClass('alertactive');
+                    if (datas) {
+
+                        constorder();
                     }
                     else {
-                        var requesturl = 'mipilaw66baidu'
-                            + '_request?data=' + datas + '&questionType=' + questionType
-                            + '&sessionId=' + sessionId;
-                        locahost(requesturl, '匹配律师');
+                        $el.find('#messagecontem').text('系统异常，请返回重新咨询');
+                        $el.find('#payalert').addClass('alertactive');
                     }
+
                 },
                 complete: function (xhr, status) {
                     //              	alert(JSON.stringify(xhr))

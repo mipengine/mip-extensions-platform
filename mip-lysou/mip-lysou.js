@@ -60,8 +60,8 @@ define(function (require) {
 
                 if (bloon1 === true) {
                     ul.style.display = 'block';
-                    navspan.classList.remove('faangle_right');
-                    navspan.classList.add('faangle_down');
+                    navspan.classList.remove('faangle-right');
+                    navspan.classList.add('faangle-down');
                     setTimeout(function () {
                         ul.style.opacity = '1';
                     }, 1);
@@ -69,8 +69,8 @@ define(function (require) {
                 }
                 else {
                     if ((typeof ul.style) !== undefined && (typeof ul.style) != null) {
-                        navspan.classList.remove('faangle_down');
-                        navspan.classList.add('faangle_right');
+                        navspan.classList.remove('faangle-down');
+                        navspan.classList.add('faangle-right');
                         ul.style.display = 'none';
                         bloon1 = true;
                     };

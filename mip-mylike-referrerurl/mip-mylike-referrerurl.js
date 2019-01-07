@@ -15,6 +15,8 @@ define(function (require) {
         var expiryTime = element.getAttribute('time') || 86400000;
         var expiry = storage.get('expiry');
         var date = new Date().getTime();
+        var project = element.getAttribute('project') || '项目';
+        var hname = element.getAttribute('hname') || '地区';
         if (!expiry || date > expiry) {
             var refurl = document.referrer;
             storage.set('expiry', date + parseInt(expiryTime, 10));
@@ -22,6 +24,8 @@ define(function (require) {
             storage.set('referrerUrl', refurl);
         }
         storage.set('enterUrl', document.URL);
+        storage.set('project', project);
+        storage.set('hname', hname);
     };
     return customElement;
 });
