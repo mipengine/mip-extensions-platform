@@ -215,6 +215,7 @@ define(function (require) {
                     + $el.find('#requestId').val() + '&questionType=' + questionType
                     + '&sessionId=' + sessionId + '&paystart=1');
                 data.returnUrl = payhosturl + encodeurl;
+                data.thisUrl = window.location.href;
                 if ($el.find('#cardId').val()) {
                     data.cardId = $el.find('#cardId').val();
                 }

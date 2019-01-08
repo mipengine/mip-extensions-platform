@@ -1,0 +1,14 @@
+{
+    "name": "mip-jm-newscroll",
+    "version": "1.0.0",
+    "description": "新闻列表上下无缝滚动",
+    "contributors": [
+        {
+            "name": "lin",
+            "email": "840399305@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

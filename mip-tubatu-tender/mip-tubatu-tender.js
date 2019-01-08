@@ -1014,7 +1014,7 @@ define(function (require) {
                 a += '';
             }
         }
-        return this.guid = a += Math.ceil(1E6 * Math.random());
+        return a += Math.ceil(1E6 * Math.random());
     }
 
     customElement.prototype.build = build;
