@@ -136,7 +136,7 @@ define(function (require) {
                         console.log(data.result);
                         var lawylengt = b.lawyerFieldStr.length ? b.lawyerFieldStr.length : 0;
 
-                        var htmlstring = '<mip-img src=' + b.authorizePhoto + 'class="userimg"></mip-img>'
+                        var htmlstring = '<mip-img src=' + b.authorizePhoto + ' class="userimg"></mip-img>'
                         + '<h1>' + b.name + '</h1>'
                         + '<p class="shareLawyer_p">好评率:' + b.goodCommentRate
                             + '</p><p class="shareLawyer_h2">执业信息</p>'

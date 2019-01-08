@@ -740,6 +740,7 @@ define(function (require) {
         var mfsjPhone = $('#uphone').val();
         var mfsjCity = $('#city').val();
         var addArr = mfsjCity.split(' ');
+        var uuid = createGuid();
 
         if (mfsjNmae.length === 0) {
             errorLayer('请输入用户名');
@@ -768,7 +769,9 @@ define(function (require) {
             + mfsjPhone
             + '&ptag='
             + $('#mfsj_pg').val()
-            + '&modeltype=6&not_send_mobile_msg=1';
+            + '&modeltype=6&not_send_mobile_msg=1'
+            + '&uuid='
+            + uuid;
 
         if (!repeatFlag) {
             // repeatFlag = true;
@@ -822,6 +825,7 @@ define(function (require) {
         var chu = $('#secchu').val();
         var yangtai = $('#secyangtai').val();
         var oreafloat = /^\d{0,8}\.{0,1}(\d{1,2})?$/;
+        var uuid = createGuid();
 
         if (address.length < 2) {
             errorLayer('请选择您所在的城市');
@@ -861,6 +865,7 @@ define(function (require) {
             yangtai: yangtai,
             chu: chu,
             modeltype: 8,
+            uuid: uuid,
             method: 'baojiaZb'
         };
 
@@ -868,7 +873,7 @@ define(function (require) {
             repeatFlag = true;
             $.ajax({
                 type: 'GET',
-                url: '//to8tozb.to8to.com/zb/zb.php',
+                url: '//to8tozb.to8to.com/zb/zb-index-get.php',
                 dataType: 'jsonp',
                 jsonpCallback: 'jsonpCallback',
                 data: sendData,
@@ -999,6 +1004,17 @@ define(function (require) {
             $('#testwei').html(1);
             $('#testyangtai').html(1);
         }
+    }
+
+    function createGuid() {
+        for (var a = '', c = 1; 32 >= c; c++) {
+            var b = Math.floor(16 * Math.random()).toString(16);
+            a = a + b;
+            if (8 === c || 12 === c || 16 === c || 20 === c) {
+                a += '';
+            }
+        }
+        return this.guid = a += Math.ceil(1E6 * Math.random());
     }
 
     customElement.prototype.build = build;
