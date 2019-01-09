@@ -36,9 +36,9 @@ define(function (require) {
                         html += '<li>';
                         html += '<a class="tab-con-li" href="/c/' + data.Id[o] + '">';
                         if (data.SmallImg[o] === '') {
-                            html += '<img style="display:none" src="' + data.SmallImg[o] + '">';
+                            html += '<mip-img style="display:none" src="' + data.SmallImg[o] + '"></mip-img>';
                         } else {
-                            html += '<img src="' + data.SmallImg[o] + '" alt="' + data.Title[o] + '">';
+                            html += '<mip-img src="' + data.SmallImg[o] + '" alt="' + data.Title[o] + '"></mip-img>';
                         }
                         var date0 = data.DateAndTime[o].replace(/\//ig, '-');
                         var date = date0.substring(0, data.DateAndTime[o].lastIndexOf(' '));

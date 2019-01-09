@@ -437,7 +437,8 @@ define(function (require) {
                                 str = '<span>' + arr[k].substring(2, -1) + '</span>' + arr[k].substring(2);
                             }
                             li += '<li data-handle="' + arr[k]
-                                + '" class=\"' + ('city' === key ? '' : (k === 0 ? this.config.markClass : '')) + '\">'
+                                + '" class=\"' + ('city' === key ? '' : (parseInt(k, 10)
+                                === 0 ? this.config.markClass : '')) + '\">'
                                 + '<div class="area-select-option">' + str + '</div>'
                                 + '</li>';
                         }
