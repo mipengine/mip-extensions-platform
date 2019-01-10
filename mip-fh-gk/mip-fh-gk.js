@@ -8,9 +8,9 @@ define(function (require) {
     var customElement = require('customElement').create();
     customElement.prototype.firstInviewCallback = function () {
         var ele = this.element;
-        var threeId = ele.getAttribute('three-id');
-        var twoId = ele.getAttribute('two-id');
-        var oneId = ele.getAttribute('one-id');
+        var threeId = ele.getAttribute('hundredId');
+        var twoId = ele.getAttribute('tenId');
+        var oneId = ele.getAttribute('bitId');
         var three = document.querySelector(threeId);
         var two = document.querySelector(twoId);
         var one = document.querySelector(oneId);

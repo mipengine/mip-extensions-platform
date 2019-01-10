@@ -28,26 +28,26 @@ time{
 
 <!-- <section id="view" class="transtons"> -->
 <time id="three"></time><time id="two"></time><time id="one"></time>
-<mip-fh-gk three-id="#three" two-id="#two" one-id="#one"></mip-fh-gk>
+<mip-fh-gk hundredId="#three" tenId="#two" bitId="#one"></mip-fh-gk>
 <!-- </section> -->
 ```
 
 ## 属性
 
-### three-id
+### hundredId
 
 说明：百位
 必选项：是
 
 
 
-### two-id
+### tenId
 
 说明：十位
 必选项：是
 
 
-### one-id
+### bitId
 
 说明：个位
 必选项：是

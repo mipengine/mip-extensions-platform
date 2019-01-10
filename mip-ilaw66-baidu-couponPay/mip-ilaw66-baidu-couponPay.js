@@ -4,7 +4,6 @@
  */
 
 define(function (require) {
-
     var customElement = require('customElement').create();
     var $ = require('jquery');
 
@@ -20,29 +19,20 @@ define(function (require) {
         var readyToPayAmountflg = true; // 默认true，指有支付金额的时候
         var channel = localStorage.getItem('channel');
         var questionType = getQueryString('questionType');
+        var ordermount = 0;
         var RUN_ON_BOCOMM_APP = localStorage.getItem('RUN_ON_BOCOMM_APP');
         // 加载获取requestId
         var MIP = window.MIP;
         var requestId = getQueryString('requestId');
-        var sessionId = getQueryString('sessionId');
+        var sessionId = getQueryString('sessionId') ? getQueryString('sessionId') : 0;
         var seidtime;
-        setTimeout(function () {
-            var htsesi = $el.find('#sesiid').html();
-            if (htsesi) {
-                sessionId = htsesi;
-            }
-            else {
-                seidtime = setInterval(function () {
-                    var htsesis = $el.find('#sesiid').html();
-                    if (htsesis) {
-                        sessionId = htsesis;
-                        clearInterval(seidtime);
-                    }
+        var paystarts = 0;
+        this.addEventAction('login', function (event) {
+            var islogin = parseInt(event.userInfo.isLogin, 10);
+            sessionId = event.sessionId;
+            payload();
 
-                }, 800);
-            }
-        }, 1000);
-
+        });
         var hosturl = 'https://www.ilaw66.com/jasmine/';
         function returhostname() {
             var hostweb = location.protocol;
@@ -59,7 +49,6 @@ define(function (require) {
             }
         }
         returhostname();
-        console.log(hosturl);
         function locahost(topsurl, toptitle) {
             if (topsurl === './') {
                 topsurl = 'baidusearch';
@@ -99,7 +88,6 @@ define(function (require) {
                 $el.find('#back__pop').hide();
             });
         });
-
         load();
         // 现金支付的按钮选中效果
         $el.find('.sel_pay').click(function () {
@@ -115,7 +103,6 @@ define(function (require) {
             $(this).children('.allow_icon1').css('display', '-webkit-box');
             // 将所选的支付方式放入隐藏表单
             $el.find('input[name=\'paytype\']').val(no);
-            console.log($el.find('input[name=\'paytype\']').val());
         });
 
         // 支付订单详情页，点击刷新
@@ -129,6 +116,14 @@ define(function (require) {
 
         // 立即支付
         $el.find('#js-pay-button').click(function () {
+            if (!paystarts) {
+                payload();
+            }
+
+        });
+
+        function payload() {
+
             var freeFlg = '0'; // 没有订单免单
             var freeMessage = '';
             //          var htsesisf = $el.find('#sesiid').html();
@@ -138,6 +133,7 @@ define(function (require) {
             //          	  $el.find('.pay__popUp_success .pay__popLayer span').text('请稍等');
             //          	  return;
             //          }
+
             $.ajax({
                 async: false,
                 type: 'GET',
@@ -180,7 +176,6 @@ define(function (require) {
             }
 
             if ($el.find('#unpaidAmount').text() && $el.find('#unpaidAmount').text() > 0) {
-                console.log('现金支付');
                 // 调用接口
                 var CouponPaytype = document.getElementById('coupon_paytype').value;
                 var data = {};
@@ -191,9 +186,9 @@ define(function (require) {
                     data.requestId = $el.find('#requestId').val();
                 }
                 data._csrf = $el.find('#_csrf').val();
-                data.questionType = questionType;
+                //              data.questionType = questionType;
                 //              data.questionType = 'CT001';
-                data.userCouponId = $el.find('#couponId').val();
+                //              data.userCouponId = $el.find('#couponId').val();
                 var hostnames = location.hostname;
                 var payhosturl;
                 if (hostnames === 'www-ilaw66-com.mipcdn.com') {
@@ -206,6 +201,7 @@ define(function (require) {
                     + $el.find('#requestId').val() + '&questionType=' + questionType
                     + '&sessionId=' + sessionId + '&paystart=1');
                 data.returnUrl = payhosturl + encodeurl;
+                data.thisUrl = window.location.href;
                 if ($el.find('#cardId').val()) {
                     data.cardId = $el.find('#cardId').val();
                 }
@@ -215,18 +211,21 @@ define(function (require) {
                     return;
                 }
 
-                //				debugger
+                // debugger
                 $.ajax({
                     type: 'POST',
                     url: hosturl + 'pay/baidupay',
                     data: data,
                     success: function (data) {
+                        paystarts = 1;
                         // {"cashier_url":"https"}
                         if (data && data.cashier_url) {
-                            window.top.location.href = data.cashier_url;
-                        //                          locahost(data.cashier_url, '电话咨询');
+                            //                          window.top.location.href = data.cashier_url;
+                            //							$el.find('.callList').show()
+                            $el.find('#js-pay-button').html('<a  href="' + data.cashier_url
+                                + '">立即支付 ¥ <i id="unpaidAmount">' + ordermount + '</i></a>');
                         }
-                        else if (data.ERROR1 === 'ERROR1') {
+                        else if (data.message === 'ERROR1') {
                             $el.find('.popUp_sysErr').fadeIn();
                             $el.find('#err_msg').html('您无需支付该笔订单');
                             $el.find('#err_confirm').click(function () {
@@ -246,8 +245,7 @@ define(function (require) {
                     }
                 });
             }
-
-        });
+        }
 
         function load() {
             // 用户手动操作 cardId:卡券Id cardType:卡券类型 ifUseCard:是否使用卡
@@ -307,6 +305,7 @@ define(function (require) {
                     var questionType = data.questionType;
                     var price = data.price;
                     var unpaidAmount = data.unpaidAmount;
+                    ordermount = data.unpaidAmount;
                     var cardInfo = data.cardInfo;
 
                     var unpaidOrderList = data.unpaidOrderList; // 获取多个订单详情数组
@@ -369,6 +368,9 @@ define(function (require) {
                             $el.find('.payType_cash').hide();
                             $el.find('.payType_cash').off('click');
                         }
+                    }
+                    if (sessionId !== 0) {
+                        payload();
                     }
 
                 },
@@ -539,7 +541,6 @@ define(function (require) {
                 },
                 error: function (jqXHR) {
                     if (jqXHR.status === 403) {
-                        console.log(jqXHR);
                     }
 
                 }
@@ -556,7 +557,6 @@ define(function (require) {
                     sessionId: sessionId
                 },
                 success: function (data) {
-                    console.log(data);
                     // 如果订单未生成，显示[未获取订单状态]模块，点击[点击刷新]按钮，重新加载调用load()方法/reload()
                     // 否则显示[支付订单详情]
                     // data.status = 2;//for test need delete
@@ -572,7 +572,7 @@ define(function (require) {
                         var biu1 = '<span><i id="totalAmount"></i>元</span>';
                         $el.find('.layerAsk__callMinutes span:nth-child(2)').html(biu);
                         $el.find('.layerAsk__callPrice span:nth-child(2)').html(biu1);
-                        load();
+                        //                      load();
                         $el.find('.getOrderSuccess').show();
                         $el.find('.getOrderFail').hide();
                         localStorage.setItem('linkingOrding', 'linkingOrdingGone');
