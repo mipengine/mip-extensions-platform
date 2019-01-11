@@ -1,0 +1,14 @@
+{
+    "name": "mip-jm-anchor",
+    "version": "1.0.0",
+    "description": "品牌详情页锚点定位",
+    "contributors": [
+        {
+            "name": "lin",
+            "email": "840399305@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

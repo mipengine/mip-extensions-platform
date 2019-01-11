@@ -7,7 +7,7 @@ define(function (require) {
 
     var customElement = require('customElement').create();
     var $ = require('jquery');
-    customElement.prototype.firstInviewCallback = function () {
+    customElement.prototype.build = function () {
 
         var anchor = window.location.hash;
         if (anchor !== '') {
@@ -15,7 +15,7 @@ define(function (require) {
             var id = $(strs[0]).parent().prev().attr('id');
             $('#' + id).click();
             setTimeout(function () {
-                location.href = strs[0];
+                window.MIP.viewer.page.scrollToHash(strs[0]);
             }, 300);
         }
     };

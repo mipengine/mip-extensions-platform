@@ -1,0 +1,208 @@
+/**
+ * @file mip-jm样式文件
+ */
+
+mip-jm {
+    &.mip-project {
+        font-family: '微软雅黑';
+        display: none;
+    }
+    &.d-show {
+        display: block;
+    }
+    .zhez {
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, .6);
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 10000;
+    }
+    .tc-bg {
+        width: 14rem;
+        height: 16.3rem;
+        background: #fff;
+        position: fixed;
+        top: 50%;
+        margin-top: -8.15rem;
+        left: 1rem;
+        z-index: 10001;
+        padding: .8rem 0;
+    }
+    .opact {
+        opacity: 0;
+    }
+    .tishi {
+        width: 12rem;
+        height: 4rem;
+        background: #fff;
+        position: fixed;
+        top: 50%;
+        margin-top: -2rem;
+        left: 2rem;
+        z-index: 10001;
+        padding: .8rem 0;
+        text-align: center;
+        line-height: 2rem;
+        display: none;
+    }
+    .qued {
+        display: block;
+        width: 3rem;
+        height: 1.2rem;
+        line-height: 1.2rem;
+        border: 1px solid #333;
+        border-radius: .2rem;
+        margin: .5rem auto;
+    }
+    .tc-close {
+        font-size: .8rem;
+        color: #efefef;
+        position: absolute;
+        top: -1.3rem;
+        right: -.2rem
+    }
+    .zx-tit {
+        font-size: .7rem;
+        line-height: 1rem;
+        color: #333;
+        text-align: center;
+    }
+    .zx-txt {
+        color: #2977c4;
+        font-size: .55rem;
+        text-align: center;
+        line-height: .9rem;
+    }
+    .zx-xinx {
+        border: 1px solid #c0c5cb;
+        margin: .5rem auto 0;
+        line-height: 1.3rem;
+        border-radius: .2rem;
+        width: 12rem;
+        height: 1.3rem;
+    }
+    .zx-liuyan {
+        height: 3rem;
+    }
+    .name-img {
+        width: .8rem;
+        height: .6rem;
+        margin: .3rem .3rem 0;
+    }
+    .fl {
+        float: left;
+    }
+    input,
+    textarea,
+    button {
+        border: none;
+        outline: none;
+        -webkit-appearance: none;
+    }
+    input[type='text'] {
+        line-height: 1.3rem;
+        height: 1.3rem;
+        background: none;
+    }
+    .input-name,
+    .input-yanzm {
+        width: 6rem;
+    }
+    .input-tell {
+        width: 10rem;
+    }
+    .input-liuyan {
+        margin: .3rem 0;
+        height: 2.4rem;
+        width: 10rem;
+        line-height: .8rem;
+        color: #666;
+    }
+    .sex,
+    .yanzm {
+        position: relative;
+    }
+    .sex:before,
+    .yanzm:before {
+        content: '';
+        width: 1px;
+        height: .8rem;
+        background: #ccc;
+        position: absolute;
+        top: .3rem;
+        left: 0;
+    }
+    .sex input[type='radio'] {
+        display: inline-block;
+        position: relative;
+        outline: none;
+        border: none;
+        -webkit-appearance: none;
+        padding-right: .3rem;
+        padding-left: .1rem;
+        margin-top: .4rem;
+        margin-left: .5rem;
+    }
+    .sex input[type='radio']:before {
+        content: '';
+        width: .28rem;
+        height: .28rem;
+        background: #dedede;
+        border: .04rem solid #fff;
+        border-radius: 50%;
+        overflow: hidden;
+        position: absolute;
+        top: .04rem;
+        left: .04rem;
+        z-index: 2;
+    }
+    .sex input[type='radio']:after {
+        content: '';
+        width: .44rem;
+        height: .44rem;
+        background: #dedede;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 50%;
+    }
+    .sex input[type='radio']:checked:before,
+    .sex input[type='radio']:checked:after {
+        background: #dd2727;
+    }
+    .sex label,
+    .sex input[type='radio'] {
+        float: left;
+    }
+    .sex label {
+        padding: 0 .4rem 0 .1rem;
+        font-size: .5rem;
+    }
+    .err {
+        width: 12rem;
+        margin: .1rem auto 0;
+        color: #f00;
+        font-size: .5rem;
+        display: none;
+    }
+    .err-show {
+        display: block;
+    }
+    .yanzm button {
+        background: none;
+        width: 4.6rem;
+        text-align: center;
+    }
+    .tijao {
+        width: 12rem;
+        height: 1.5rem;
+        background: #f44336;
+        border-radius: .2rem;
+        color: #fff;
+        font-size: .6rem;
+        margin: .5rem auto 0;
+        display: block;
+    }
+}

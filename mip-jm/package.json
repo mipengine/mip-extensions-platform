@@ -1,0 +1,14 @@
+{
+    "name": "mip-jm",
+    "version": "1.0.1",
+    "description": "验证码加密",
+    "contributors": [
+        {
+            "name": "w",
+            "email": "1710854102@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

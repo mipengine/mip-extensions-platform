@@ -14,4 +14,3 @@ mip-bkmy-anchor 组件说明
 ```html
 <mip-bkmy-anchor></mip-bkmy-anchor>
 ```
-
