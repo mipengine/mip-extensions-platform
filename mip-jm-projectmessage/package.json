@@ -1,0 +1,14 @@
+{
+    "name": "mip-jm-projectmessage",
+    "version": "1.0.0",
+    "description": "品牌详情页组件",
+    "contributors": [
+        {
+            "name": "lin",
+            "email": "840399305@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

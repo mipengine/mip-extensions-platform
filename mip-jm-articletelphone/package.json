@@ -1,0 +1,14 @@
+{
+    "name": "mip-jm-articletelphone",
+    "version": "1.0.0",
+    "description": "资讯详情页免费电话",
+    "contributors": [
+        {
+            "name": "lin",
+            "email": "840399305@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

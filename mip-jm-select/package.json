@@ -1,0 +1,14 @@
+{
+    "name": "mip-jm-select",
+    "version": "1.0.1",
+    "description": "页面三部加盟数据交互处理",
+    "contributors": [
+        {
+            "name": "lin",
+            "email": "840399305@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

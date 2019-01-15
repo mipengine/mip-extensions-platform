@@ -1,0 +1,14 @@
+{
+    "name": "mip-yuandun-article",
+    "version": "1.0.0",
+    "description": "缘盾文章内容组件，获取文章内容填充到容器中",
+    "contributors": [
+        {
+            "name": "yuandun-java",
+            "email": "gzbenai@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

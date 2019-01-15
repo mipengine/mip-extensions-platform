@@ -1,0 +1,12 @@
+{
+    "name": "mip-169kang-content",
+    "version": "1.0.1",
+    "description": "网站异步数据加载  v1.0.1  carl@169kang.com",
+    "contributors": [{
+        "name": "carl",
+        "email": "carl@169kang.com"
+    }],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
