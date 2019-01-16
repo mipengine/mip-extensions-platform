@@ -13,8 +13,8 @@ define(function (require) {
      */
     customElement.prototype.firstInviewCallback = function () {
         var btnZx = document.querySelectorAll('.btn-zx');
-        var mipProject = this.element;
-        // var mipProject = document.querySelector('.mip-project');
+        // var mipProject = this.element;
+        var mipProject = document.querySelector('.mip-project');
         var tcClose = mipProject.querySelector('.tc-close');
         var yanzm = mipProject.querySelector('.getYzm');
         var tijao = mipProject.querySelector('.tijao');

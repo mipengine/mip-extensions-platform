@@ -12,7 +12,7 @@ mip-mfk-if 判断模块显示
 
 ### 基本用法
 ```html
-<mip-mfk-if get-t="!sm-tc.cn&!transcode.cn" pass="remove" mip-tags="ad">
+<mip-mfk-if domain="!10.0.0.13" pass="remove" mip-tags="ad">
     <ul>
     	<li>自定义内容</li>
     	<li>自定义内容</li>

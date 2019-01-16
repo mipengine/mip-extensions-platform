@@ -24,6 +24,7 @@ define(function (require) {
             switch (true) {
                 case row === 'referrer':
                     var r = document.referrer;
+                    console.log('referrer', r);
                     r = r.toLowerCase();
                     result.push(handleLogic(val, r));
                     break;
@@ -33,10 +34,12 @@ define(function (require) {
                 case row.indexOf('get-') === 0:
                     var para = item.substr(4);
                     var urlpara = getRequest();
+                    console.log('get-' + para, urlpara[para]);
                     result.push(handleLogic(urlpara[para], val));
                     break;
                 case row === 'domain':
                     var domain = document.domain;
+                    console.log('domain', domain);
                     result.push(handleLogic(domain, val));
                     break;
                 case row === 'mip-tags':
