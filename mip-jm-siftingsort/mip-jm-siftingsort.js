@@ -8,6 +8,7 @@ define(function (require) {
     var customElement = require('customElement').create();
 
     $('.side_left li').click(function () {
+        $(this).addClass('side_left_active').siblings().removeClass('side_left_active');
         bianhuan($(this), $(this).attr('data-pinyin'));
     });
 
