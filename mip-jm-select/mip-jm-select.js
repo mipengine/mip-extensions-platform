@@ -17,7 +17,7 @@ define(function (require) {
             $(this).parents('.relaxed_step_option').find('.for-option').fadeOut();
         });
 
-        $('body').on('click', '.for-option li', function () {
+        $('.relaxed_step_option').on('click', '.for-option li', function () {
             var index = $(this).index();
             $(this).addClass('select-li');
             $(this).siblings('li').removeClass('select-li');

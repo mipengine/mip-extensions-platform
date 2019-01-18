@@ -53,7 +53,6 @@ define(function (require) {
         function forSearch($this) {
             var zkey = $this.val();
             if (zkey === '') {
-                $this.focus();
                 openarticle($element.find('.model_bg'), $element.find('.article_model'), '请输入搜索关键字');
                 return false;
             }
@@ -79,7 +78,7 @@ define(function (require) {
                 }
 
             }).catch(function (e) {
-                openarticle($element.find('.model_bg'), $element.find('.article_model'), '当前访问用户较多，请稍后重试。');
+                openarticle($element.find('.model_bg'), $element.find('.article_model'), '网络错误，请稍后重试。');
 
             });
         }
