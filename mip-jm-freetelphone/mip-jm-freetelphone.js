@@ -25,6 +25,16 @@ define(function (require) {
             forSearch($input);
             return false;
         });
+        $form.on('keydown', function (e) {
+            var keycode = e.keyCode;
+            if (keycode === 13 || keycode === 9) {
+                e.preventDefault();
+                forSearch($input);
+                $input.blur();
+                return false;
+            }
+
+        });
 
         function closearticle($modelbg, $model) {
             $modelbg.fadeOut(300);

@@ -30,9 +30,10 @@ mip-jmw {
         z-index: 10001;
         padding: .8rem 0;
     }
-    .opact {
-        opacity: 0;
-    }
+    // .opact {
+    //     opacity: 0;
+    // }
+
     .tishi {
         width: 12rem;
         height: 4rem;
@@ -40,7 +41,8 @@ mip-jmw {
         position: fixed;
         top: 50%;
         margin-top: -2rem;
-        left: 2rem;
+        left: 50%;
+        margin-left: -6rem;
         z-index: 10001;
         padding: .8rem 0;
         text-align: center;
@@ -84,7 +86,7 @@ mip-jmw {
         height: 1.3rem;
     }
     .zx-liuyan {
-        height: 3rem;
+        height: 4rem;
     }
     .name-img {
         width: .8rem;
@@ -101,10 +103,23 @@ mip-jmw {
         outline: none;
         -webkit-appearance: none;
     }
-    input[type='text'] {
-        line-height: 1.3rem;
-        height: 1.3rem;
-        background: none;
+    // input[type='text'] {
+    //     line-height: 1.3rem;
+    //     height: 1.3rem;
+    //     background: none;
+    // }
+    .input-name:empty:before,
+    .input-yanzm:empty:before,
+    .input-tell:empty:before {
+        color: #D3D3D3;
+        content: attr(placeholder);
+    }
+    .input-name,
+    .input-yanzm,
+    .input-tell {
+        border: none;
+        outline: none;
+        -webkit-appearance: none;
     }
     .input-name,
     .input-yanzm {
@@ -115,11 +130,41 @@ mip-jmw {
     }
     .input-liuyan {
         margin: .3rem 0;
-        height: 2.4rem;
-        width: 10rem;
-        line-height: .8rem;
+        height: 3rem;
+        width: 10.3rem;
+        line-height: 1rem;
         color: #666;
+        overflow-y: auto;
     }
+    .someP {
+        margin-left: .4rem;
+        width: 1.475rem;
+        height: .625rem;
+        float: right;
+        line-height: .625rem;
+        font-size: .6rem;
+        margin-top: .3rem;
+    }
+    .someP u {
+        display: block;
+        width: .625rem;
+        height: .625rem;
+        border-radius: 50%;
+        float: left;
+        text-decoration: none;
+    }
+    .sex1 {
+        margin-left: .2rem;
+    }
+    .bgChange {
+        background: url(http://image1.jmw.com.cn/public/img/queding.png) no-repeat center center;
+        background-size: .62rem .62rem;
+    }
+    .bgChange1 {
+        background: url(http://image1.jmw.com.cn/public/img/quxiao.png) no-repeat center center;
+        background-size: .62rem .62rem;
+    }
+
     .sex,
     .yanzm {
         position: relative;
@@ -134,52 +179,52 @@ mip-jmw {
         top: .3rem;
         left: 0;
     }
-    .sex input[type='radio'] {
-        display: inline-block;
-        position: relative;
-        outline: none;
-        border: none;
-        -webkit-appearance: none;
-        padding-right: .3rem;
-        padding-left: .1rem;
-        margin-top: .4rem;
-        margin-left: .5rem;
-    }
-    .sex input[type='radio']:before {
-        content: '';
-        width: .28rem;
-        height: .28rem;
-        background: #dedede;
-        border: .04rem solid #fff;
-        border-radius: 50%;
-        overflow: hidden;
-        position: absolute;
-        top: .04rem;
-        left: .04rem;
-        z-index: 2;
-    }
-    .sex input[type='radio']:after {
-        content: '';
-        width: .44rem;
-        height: .44rem;
-        background: #dedede;
-        position: absolute;
-        top: 0;
-        left: 0;
-        border-radius: 50%;
-    }
-    .sex input[type='radio']:checked:before,
-    .sex input[type='radio']:checked:after {
-        background: #dd2727;
-    }
-    .sex label,
-    .sex input[type='radio'] {
-        float: left;
-    }
-    .sex label {
-        padding: 0 .4rem 0 .1rem;
-        font-size: .5rem;
-    }
+    // .sex input[type='radio'] {
+    //     display: inline-block;
+    //     position: relative;
+    //     outline: none;
+    //     border: none;
+    //     -webkit-appearance: none;
+    //     padding-right: .3rem;
+    //     padding-left: .1rem;
+    //     margin-top: .4rem;
+    //     margin-left: .5rem;
+    // }
+    // .sex input[type='radio']:before {
+    //     content: '';
+    //     width: .28rem;
+    //     height: .28rem;
+    //     background: #dedede;
+    //     border: .04rem solid #fff;
+    //     border-radius: 50%;
+    //     overflow: hidden;
+    //     position: absolute;
+    //     top: .04rem;
+    //     left: .04rem;
+    //     z-index: 2;
+    // }
+    // .sex input[type='radio']:after {
+    //     content: '';
+    //     width: .44rem;
+    //     height: .44rem;
+    //     background: #dedede;
+    //     position: absolute;
+    //     top: 0;
+    //     left: 0;
+    //     border-radius: 50%;
+    // }
+    // .sex input[type='radio']:checked:before,
+    // .sex input[type='radio']:checked:after {
+    //     background: #dd2727;
+    // }
+    // .sex label,
+    // .sex input[type='radio'] {
+    //     float: left;
+    // }
+    // .sex label {
+    //     padding: 0 .4rem 0 .1rem;
+    //     font-size: .5rem;
+    // }
     .err {
         width: 12rem;
         margin: .1rem auto 0;
@@ -189,6 +234,9 @@ mip-jmw {
     }
     .err-show {
         display: block;
+    }
+    .hidd {
+        display: none;
     }
     .yanzm button {
         background: none;
@@ -203,6 +251,7 @@ mip-jmw {
         color: #fff;
         font-size: .6rem;
         margin: .5rem auto 0;
-        display: block;
+        text-align: center;
+        line-height: 1.5rem;
     }
 }

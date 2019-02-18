@@ -9,11 +9,35 @@ define(function (require) {
     var $ = require('zepto');
     var customElement = require('customElement').create();
     var domain = 'https://m.chunyuyisheng.com';
+    var secretSwitch = false;
 
-    customElement.prototype.build = function () {
+    // 获取开关状态
+    function getSwitchStatus(data) {
+        $.ajax({
+            url: domain + '/m/get_wx_qr_switch/',
+            type: 'get',
+            data: data || {},
+            cache: false,
+            success: function (res) {
+                secretSwitch = !!res.redirect;
+            }
+        });
+    }
+
+    customElement.prototype.firstInviewCallback = function () {
         var $ele = $(this.element);
         var autoPay = $ele.attr('auto-pay') === '1';
         var toast = require('./toast');
+        var linkUrl = $ele.attr('link-url');
+        var clinicNo = $ele.attr('clinic-no');
+        var secondClinicNo = $ele.attr('second-clinic-no');
+
+        if (linkUrl) {
+            getSwitchStatus({
+                'clinic_no': clinicNo,
+                'second_clinic_no': secondClinicNo
+            });
+        }
 
         /**
          * 初始化依赖第三方组件的部分
@@ -30,8 +54,12 @@ define(function (require) {
                 var failUrl = $ele.attr('fail-url') || '';
                 var infoDict = $ele.attr('info-dict') || '';
 
+                if (secretSwitch) {
+                    window.top.location.href = linkUrl;
+                    return;
+                }
                 if (loginUrl) {
-                    window.location.href = loginUrl;
+                    window.top.location.href = loginUrl;
                 }
                 else {
                     if ($ele.hasClass('disabled')) {

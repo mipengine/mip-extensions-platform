@@ -32,6 +32,17 @@ define(function (require) {
             return false;
         });
 
+        $form.on('keydown', function (e) {
+            var keycode = e.keyCode;
+            if (keycode === 13 || keycode === 9) {
+                e.preventDefault();
+                forSearch($phone);
+                $phone.blur();
+                return false;
+            }
+
+        });
+
         function closearticle($modelbg, $model) {
             $modelbg.fadeOut(300);
             $model.fadeOut(300);

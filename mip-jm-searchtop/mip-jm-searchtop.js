@@ -20,10 +20,15 @@ define(function (require) {
         $searchBtn.on('click', function () {
             forSearch($input);
         });
+        $form.on('keydown', function (e) {
+            var keycode = e.keyCode;
+            if (keycode === 13 || keycode === 9) {
+                e.preventDefault();
+                forSearch($input);
+                $input.blur();
+                return false;
+            }
 
-        $form.on('submit', function () {
-            forSearch($input);
-            return false;
         });
 
         function closearticle($modelbg, $model) {
@@ -50,6 +55,7 @@ define(function (require) {
         $element.find('.article_close').click(function () {
             closearticle($element.find('.model_bg'), $element.find('.article_model'));
         });
+
         function forSearch($this) {
             var zkey = $this.val();
             if (zkey === '') {

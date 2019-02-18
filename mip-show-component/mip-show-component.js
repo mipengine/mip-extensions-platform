@@ -53,8 +53,9 @@ define(function (require) {
         function (data) {
             if (typeof data !== 'undefined' && data !== '' && data != null) {
                 var title = '';
-                // 显示广告
                 showLawyerTwo(divDom, title, data, params, itemIndex);
+                $('#city').html(data.areaInfo.city);
+                $('#more-url').attr('href', 'http://m.findlaw.cn/' + data.areaInfo.pinyin + '/');
             } else {
                 divDom.html('').show();
             }

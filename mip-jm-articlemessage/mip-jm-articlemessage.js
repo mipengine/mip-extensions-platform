@@ -31,13 +31,23 @@ define(function (require) {
         });
 
         $searchBtn.on('click', function () {
-            console.log('1');
             forSearch($name, $phone, $content);
         });
 
         $form.on('submit', function () {
             forSearch($name, $phone, $content);
             return false;
+        });
+        $form.on('keydown', function (e) {
+            var keycode = e.keyCode;
+            if (keycode === 13 || keycode === 9) {
+                e.preventDefault();
+                forSearch($name, $phone, $content);
+                $name.blur();
+                $phone.blur();
+                return false;
+            }
+
         });
 
         function closearticle($modelbg, $model) {
