@@ -12,7 +12,7 @@ mip-kuhou-wdj 在静态页面上通过fetch来屏蔽某些地区
 
 ### 根据类型显示资源
 ```html
-<mip-kuhou-wdj url="http://www.kuhou.com/index.php?m=api&c=Shield&a=index1" typeid="dd_btn" cpid="cpname"></mip-kuhou-wdj>
+<mip-kuhou-wdj url="http://mip.05sun.com/ajax.asp?action=33" typeid="dd_btn" cpid="cpname"></mip-kuhou-wdj>
 <div id="cpname"></div>
 <dd class="dd_btn"><a href="http://www.one1.com">立即下载</a></dd>
 

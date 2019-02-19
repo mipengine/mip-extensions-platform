@@ -13,6 +13,14 @@ mip-show-component   网站逻辑代码
 ### 基本用法
 ```html
 <mip-show-component data-src="">
+	 <div class="recommend-law-box mr10">
+                <div class="common-title scale-1px">
+                    <div class="common-title-inner">
+                        <span class="text-left"><span id="city"></span>专业律师推荐</span>
+                        <a href="" id="more-url" class="more green fr">更多</a>
+                    </div>
+                </div>
+
 	<div class="recommend-lay-wrap">
                 <ul class="ul-tag-list clearfix j-tag-list">
                     <li class="tag-item" data-id="5">婚姻家事</li>
@@ -33,6 +41,7 @@ mip-show-component   网站逻辑代码
                 </div>
                 <div class="law-box" id="zt_cb_product"> </div>
             </div>
+			</div>
 </mip-show-component>
 ```
 

@@ -1,7 +1,7 @@
 {
     "name": "mip-kuhou-wdj",
-    "version": "1.0.0",
-    "description": "在静态页面上屏蔽某些元素",
+    "version": "1.0.1",
+    "description": "在静态页面上屏蔽某些元素,修改fetch为fetchJsonp.修改response.text()  为response.json() ",
     "contributors": [
         {
             "name": "ruizai324",

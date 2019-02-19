@@ -67,7 +67,7 @@ define(function (require) {
                 name = mipProject[m].querySelector('.input-name').innerHTML;
                 tell = mipProject[m].querySelector('.input-tell').innerHTML;
                 getYzm = mipProject[m].querySelector('.input-yanzm').innerHTML;
-                inputLiuyan = mipProject[m].querySelector('.input-liuyan').value;
+                inputLiuyan = mipProject[m].querySelector('.input-liuyan').innerHTML;
                 // 姓名
                 if (name === '' || !regName.test(name)) {
                     mipProject[m].querySelector('.err-name').classList.add('err-show');

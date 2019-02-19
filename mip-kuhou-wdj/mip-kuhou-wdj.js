@@ -14,16 +14,15 @@ define(function (require) {
         var cpid = element.getAttribute('cpid');
         kuhou();
         function kuhou() {
+            var fetchJsonp = require('fetch-jsonp');
             if ($('#' + cpid).length > 0) {
-                fetch(url)
+                fetchJsonp(url)
                 .then(function (response) {
-                    var str = response.text();
-                    str.then(function (result) {
-                        result = parseInt(result, 10);
-                        if (result === 1) {
-                            $('.' + typeid).replaceWith('<a class="downw" ><span></span>暂无下载</a>');
-                        }
-                    });
+                    return response.json();
+                }).then(function (json) {
+                    if (json === 1) {
+                        $('.' + typeid).replaceWith('<a class="downw" ><span></span>暂无下载</a>');
+                    }
                 });
             }
         }
