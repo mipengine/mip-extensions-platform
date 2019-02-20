@@ -103,14 +103,14 @@ define(function (require) {
                 body: toFormData(formData)
             }).then(function (response) {
                 return response.text();
-            }).then(function (text) {
-                submiting = false;
-                if (isFreetalk) {
-                    alert('我们将稍后和您联系，请保持电话畅通！');
-                } else {
-                    form.appendChild(dialog.get('留言发送提示', text, true));
-                }
             });
+
+            submiting = false;
+            if (isFreetalk) {
+                form.appendChild(dialog.get('留言发送提示', '我们将稍后和您联系，请保持电话畅通！', true));
+            } else {
+                form.appendChild(dialog.get('留言发送提示', '谢谢关注，留言已提交成功！', true));
+            }
         };
 
         // 提交返回的样式框
@@ -135,11 +135,6 @@ define(function (require) {
                 domDialog.appendChild(domContent);
                 domContent.appendChild(domInfo);
 
-                if (isShowWx) {
-                    var domWx = document.createElement('p');
-                    domWx.innerText = '请加微信公众号：xiangmu114';
-                    domContent.appendChild(domWx);
-                }
                 return domDialog;
             },
             close: function () {
