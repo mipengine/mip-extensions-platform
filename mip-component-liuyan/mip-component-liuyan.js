@@ -106,16 +106,27 @@ define(function (require) {
             });
 
             submiting = false;
+
+            var result = undefined;
             if (isFreetalk) {
-                form.appendChild(dialog.get('留言发送提示', '我们将稍后和您联系，请保持电话畅通！', true));
+                result = dialog.get('留言发送提示', '我们将稍后和您联系，请保持电话畅通！');
             } else {
-                form.appendChild(dialog.get('留言发送提示', '谢谢关注，留言已提交成功！', true));
+                result = dialog.get('留言发送提示', '谢谢关注，留言已提交成功！');
+            }
+            if (form.parentElement.tagName === 'MIP-COMPONENT-LIUYAN') {
+                if (form.nextElementSibling.className !== 'dialog') {
+                    form.after(result);
+                }
+            } else {
+                if (form.lastElementChild.className !== 'dialog') {
+                    form.appendChild(result);
+                }
             }
         };
 
         // 提交返回的样式框
         var dialog = {
-            get: function (headInfo, contentInfo, isShowWx) {
+            get: function (headInfo, contentInfo) {
 
                 var domDialog = document.createElement('div');
                 domDialog.className = 'dialog';
