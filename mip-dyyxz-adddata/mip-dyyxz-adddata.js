@@ -32,20 +32,13 @@ define(function (require) {
             * 添加数据
             */
             if (adddata.eq(0).attr('modeid') === ',12,' && data.recomdCity) {
-                $('.icon img').eq(0).attr('src', data.iconimg[0]);
-                $('h1,title').html(data.iconimg[1]);
-                $('.classifyhead p').html(data.iconimg[1]);
-                $('.gcinfo').html(data.introduce[0]);
-                var imghhtml = '<div class="swiper-wrapper">';
-                for (var j = 0; j < data.imglib.length; j++) {
-                    imghhtml += '<div class="swiper-slide"><img src="' + data.imglib[j] + '" /></div>';
-                }
-                $('.swiper-container1').html(imghhtml + '</div>');
                 if (adddata.eq(0).attr('datahref') !== 'undefined' && adddata.eq(0).attr('class') === 'ios') {
-                    adddata.eq(0).attr('href', data.locaUrl[0]);
+                    adddata.eq(0).attr('href', ' ').removeAttr('datahref');
+                    adddata.eq(0).addClass('no').text('暂无下载');
                 }
                 if (adddata.eq(1).attr('datahref') !== 'undefined' && adddata.eq(1).attr('class') === 'android') {
-                    adddata.eq(1).attr('href', data.locaUrl[1]);
+                    adddata.eq(0).attr('href', ' ').removeAttr('datahref');
+                    adddata.eq(0).addClass('no').text('暂无下载');
                 }
             }
         }
