@@ -1,0 +1,24 @@
+/**
+ * @file mip-258-product样式文件
+ */
+
+.Animation(@x) {
+    -webkit-transition: all @x ease-in-out 0s;
+    -moz-transition: all @x ease-in-out 0s;
+    -ms-transition: all @x ease-in-out 0s;
+    transition: all @x ease-in-out 0s;
+}
+
+.Animation {
+    .Animation(.3s)
+}
+
+mip-258-product {
+    // TODO
+    border:1px solid #fff;
+    .Animation();
+    &.active {
+        border:1px solid red;
+        .Animation();
+    }
+}

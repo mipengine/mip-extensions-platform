@@ -1,0 +1,14 @@
+{
+    "name": "mip-258-product",
+    "version": "1.0.0",
+    "description": "修改内容，判断内容是否含有符合价格单位'￥','.00'的规格，若不符合则添加。并给自身增加样式。",
+    "contributors": [
+        {
+            "name": "terry",
+            "email": "51153877@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}

@@ -37,8 +37,8 @@ define(function (require) {
                     adddata.eq(0).addClass('no').text('暂无下载');
                 }
                 if (adddata.eq(1).attr('datahref') !== 'undefined' && adddata.eq(1).attr('class') === 'android') {
-                    adddata.eq(0).attr('href', ' ').removeAttr('datahref');
-                    adddata.eq(0).addClass('no').text('暂无下载');
+                    adddata.eq(1).attr('href', ' ').removeAttr('datahref');
+                    adddata.eq(1).addClass('no').text('暂无下载');
                 }
             }
         }
