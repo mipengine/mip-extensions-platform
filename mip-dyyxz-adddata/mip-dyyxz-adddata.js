@@ -32,11 +32,9 @@ define(function (require) {
             * 添加数据
             */
             if (adddata.eq(0).attr('modeid') === ',12,' && data.recomdCity) {
-                if (adddata.eq(0).attr('datahref') !== 'undefined' && adddata.eq(0).attr('class') === 'ios') {
+                if (adddata.eq(0).attr('datahref') !== 'undefined') {
                     adddata.eq(0).attr('href', ' ').removeAttr('datahref');
                     adddata.eq(0).addClass('no').text('暂无下载');
-                }
-                if (adddata.eq(1).attr('datahref') !== 'undefined' && adddata.eq(1).attr('class') === 'android') {
                     adddata.eq(1).attr('href', ' ').removeAttr('datahref');
                     adddata.eq(1).addClass('no').text('暂无下载');
                 }
