@@ -1,0 +1,14 @@
+{
+    "name": "mip-012-tongji",
+    "version": "1.0.0",
+    "description": "记录用户操作页面动作",
+    "contributors": [
+        {
+            "name": "cooper",
+            "email": "460667926@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
