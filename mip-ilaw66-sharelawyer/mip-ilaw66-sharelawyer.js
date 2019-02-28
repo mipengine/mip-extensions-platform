@@ -22,6 +22,7 @@ define(function (require) {
 
         var bdcard = getQueryString('bdcard') ? getQueryString('bdcard') : null;
         var lawyerId = getQueryString('lawyerId') ? getQueryString('lawyerId') : null;
+        var entrance = getQueryString('entrance') ? getQueryString('entrance') : ' ';
 
         var hosturl = 'https://www.ilaw66.com/jasmine/';
 
@@ -75,7 +76,7 @@ define(function (require) {
             if (!islogin) { // 未注册
                 var qusttype = localStorage.getItem('baiduquestionType');
                 var tzurl = 'mipilaw66baidu_login?channel=baidusearch&sessionId='
-                + sessid + '&questionType=' + qusttype + '&bdcard=' + bdcard;
+                    + sessid + '&questionType=' + qusttype + '&bdcard=' + bdcard;
                 locahost(tzurl, '准备咨询');
             }
             else {
@@ -90,7 +91,7 @@ define(function (require) {
 
         function getQueryString(name) {
             var reg = new RegExp('(^|&)'
-            + name + '=([^&]*)(&|$)', 'i');
+                + name + '=([^&]*)(&|$)', 'i');
             var r = window.location.search.substr(1).match(reg);
             if (r !== null) {
                 return unescape(r[2]);
@@ -103,6 +104,7 @@ define(function (require) {
             if (sessionId !== 0) {
                 startConsulting('CT007');
             }
+
         });
 
         function getLawyerMsg(lawyerId) {
@@ -137,8 +139,8 @@ define(function (require) {
                         var lawylengt = b.lawyerFieldStr.length ? b.lawyerFieldStr.length : 0;
 
                         var htmlstring = '<mip-img src=' + b.authorizePhoto + ' class="userimg"></mip-img>'
-                        + '<h1>' + b.name + '</h1>'
-                        + '<p class="shareLawyer_p">好评率:' + b.goodCommentRate
+                            + '<h1>' + b.name + '</h1>'
+                            + '<p class="shareLawyer_p">好评率:' + b.goodCommentRate
                             + '</p><p class="shareLawyer_h2">执业信息</p>'
                             + '<p class="shareLawyer_p">执业地区:' + b.provinceName + '</p>'
                             + '<p class="shareLawyer_p">执业年限:' + b.workTime + '</p>';
@@ -146,11 +148,11 @@ define(function (require) {
                             var lawyer = ' ';
                             for (var i = 0; i < b.lawyerFieldStr.length; i++) {
                                 lawyer += '<p class="shareLawyer_p shareLawyer_p__field">'
-                                + b.lawyerFieldStr[i] + '</p>';
+                                    + b.lawyerFieldStr[i] + '</p>';
                             }
                             htmlstring += '<div class="shareLawyer_h2 shareLawyer_h2__takearea">'
-                            + '<span class="shareLawyer_h2__takeareaTxt">擅长领域</span><br/>'
-                            + lawyer + '</div>';
+                                + '<span class="shareLawyer_h2__takeareaTxt">擅长领域</span><br/>'
+                                + lawyer + '</div>';
                         }
 
                         $el.find('#authorbox').html(htmlstring);
@@ -175,7 +177,7 @@ define(function (require) {
             ajaxdatas.lawyerId = lawyerId;
             ajaxdatas.desc = lawyerId;
             ajaxdatas.origin = 'shareLawyer';
-            ajaxdatas.continueAskPage = 'shareLawyer_lawyerShare';
+            ajaxdatas.continueAskPage = entrance;
             ajaxdatas._csrf = $el.find('#_csrf').val();
             ajaxdatas.channel = 'baidusearch';
             ajaxdatas.sessionId = sessionId;
@@ -195,9 +197,9 @@ define(function (require) {
                         localStorage.setItem('goodCommentRate', data.goodCommentRate);
                         //		location.href = "informLawyer_wx?data=" + id + "&questionType=" + questionType + "&lawyerId=" + getQueryString("lawyerId") + "&PABackJumpFlg=shareLawyer";
                         var infourl = 'mipilaw66baidu_informLawyer?data='
-                        + id + '&questionType=CT007&lawyerId='
-                        + lawyerId + '&PABackJumpFlg=shareLawyer'
-                        + '&sessionId=' + sessionId;
+                            + id + '&questionType=CT007&lawyerId='
+                            + lawyerId + '&PABackJumpFlg=shareLawyer'
+                            + '&sessionId=' + sessionId;
                         locahost(infourl, '通知律师');
                     }
                     else {
@@ -227,11 +229,10 @@ define(function (require) {
             $.ajax({
                 url: hosturl + 'getUserIdFromServer',
                 type: 'GET',
-
+                data: ajaxdatas,
                 timeout: 5000, // 超时时间设置，单位毫秒
                 success: function (datas) {
                     if (datas) {
-
                         constorder();
                     }
                     else {
