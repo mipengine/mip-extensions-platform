@@ -15,6 +15,33 @@ define(function (require) {
         var $el = $(this.element);
         var ajaxurl = $el.attr('data-url');
         var smsurl = $el.attr('sms-url');
+        function closearticle($modelbg, $model) {
+            $modelbg.fadeOut(300);
+            $model.fadeOut(300);
+        }
+
+        function openarticle($modelbg, $model, $text) {
+            $el.find('.text').text($text);
+            $modelbg.fadeIn(300);
+            $model.fadeIn(300);
+        }
+
+        function openAlart($showtext, callback) {
+            openarticle($el.find('.model_bg'), $el.find('.article_model'), $showtext);
+            if (callback) {
+                $el.find('.article_close').click(function () {
+                    closearticle($el.find('.model_bg'), $el.find('.article_model'));
+                    callback();
+                });
+            }
+        }
+
+        $el.find('.article_close').click(function () {
+            closearticle($el.find('.model_bg'), $el.find('.article_model'));
+        });
+        $el.find('.qx_close').click(function () {
+            closearticle($el.find('.model_bg'), $el.find('.article_model'));
+        });
         $el.find('.register_go').click(function () {
             var phone = $.trim($el.find('.reg_mobile').val());
             var vcode = $.trim($el.find('.reg_vcode').val());
@@ -126,7 +153,7 @@ define(function (require) {
                             $el.find('input[name=verification_key]').val(data.verification_key);
                             var countdown = 60;
                             settime(That, countdown);
-                            alert('发送验证码成功');
+                            openarticle($el.find('.model_bg'), $el.find('.article_model'), '发送验证码成功');
                         }
                     },
                     error: function (e) {

@@ -54,11 +54,11 @@ define(function (require) {
                 + '        <span class="team-badge">\n'
                 + honest(value.u_card, value.u_username)
                 + '        </span>\n'
-                + '        <a href="http://m.findlaw.cn/lawyer/' + value.u_uid + '/" class="info-photo">\n'
+                + '        <a href="https://m.findlaw.cn/lawyer/' + value.u_uid + '/" class="info-photo">\n'
                 + '            <mip-img class="img" src="' + value.u_file6464 + '" alt="'
                 + value.u_username + '律师"></mip-img>\n'
                 + '        </a>\n'
-                + '        <a href="http://m.findlaw.cn/lawyer/\' + value.u_uid + \'/" class="info-title">' + value.u_username + '</a>\n'
+                + '        <a href="https://m.findlaw.cn/lawyer/' + value.u_uid + '/" class="info-title">' + value.u_username + '</a>\n'
                 + '        <p class="team-labels">\n'
                 + label(value.u_prof)
                 + '        </p>\n'
