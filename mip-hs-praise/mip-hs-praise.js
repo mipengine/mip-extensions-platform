@@ -41,9 +41,9 @@ define(function (require) {
         });
         $el.find('.praise').click(function () {
             var That = $(this);
-            var unzan = That.attr('url-unzan');
-            var zan = That.attr('url-zan');
-            var num = That.siblings('.constants').html();
+            var unzan = That.parent().attr('url-unzan');
+            var zan = That.parent().attr('url-zan');
+            var num = That.parent().siblings('.constants').html();
             if (That.hasClass('praiseon')) {
                 $.ajax({
                     type: 'post',
@@ -82,7 +82,6 @@ define(function (require) {
                     },
                     dataType: 'json',
                     success: function (data) {
-                        console.log(That);
                         if (data.status === 0) {
                             var b = That.children('i').text();
                             var oText = parseFloat(b);
