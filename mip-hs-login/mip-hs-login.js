@@ -13,6 +13,7 @@ define(function (require) {
 	 */
     customElement.prototype.firstInviewCallback = function () {
         var $el = $(this.element);
+        var $form = $el.find('form');
 
         function closearticle($modelbg, $model) {
             $modelbg.fadeOut(300);
@@ -45,8 +46,28 @@ define(function (require) {
             $el.find('.qx_close').fadeOut(300);
         });
 
+        $form.on('keydown', function (e) {
+            console.log('111');
+            var keycode = e.keyCode;
+            var $phone = $el.find('.telphone');
+            var $pass = $el.find('.passText');
+            var $code = $el.find('.input_idf');
+            if (keycode === 13 || keycode === 9) {
+                e.preventDefault();
+                submitgo();
+                $phone.blur();
+                $pass.blur();
+                $code.blur();
+                return false;
+            }
+
+        });
+
         var ajaxurl = $el.attr('data-url');
         $el.find('.login').click(function () {
+            submitgo();
+        });
+        function submitgo() {
             var phone = $.trim($el.find('.telphone').val());
             var pass = $.trim($el.find('.passText').val());
             var code = $.trim($el.find('.input_idf').val());
@@ -88,7 +109,7 @@ define(function (require) {
                     return;
                 }
             });
-        });
+        }
         $el.find('.idf_img_show').on('click', function () {
             var Url = '/captcha';
             Url = Url + '/' + Math.random();

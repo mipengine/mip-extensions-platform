@@ -13,6 +13,7 @@ define(function (require) {
 	 */
     customElement.prototype.firstInviewCallback = function () {
         var $el = $(this.element);
+        var $form = $el.find('form');
         var ajaxurl = $el.attr('data-url');
         var smsurl = $el.attr('sms-url');
 
@@ -46,7 +47,19 @@ define(function (require) {
             closearticle($el.find('.model_bg'), $el.find('.article_model'));
             $el.find('.qx_close').fadeOut(300);
         });
-        $el.find('.register_go').click(function () {
+        $form.on('keydown', function (e) {
+            console.log('111');
+            var keycode = e.keyCode;
+            var $phone = $el.find('input');
+            if (keycode === 13 || keycode === 9) {
+                e.preventDefault();
+                submitgo();
+                $phone.blur();
+                return false;
+            }
+
+        });
+        function submitgo() {
             var phone = $.trim($el.find('.reg_mobile').val());
             var vcode = $.trim($el.find('.reg_vcode').val());
             var pass = $.trim($el.find('.reg_password').val());
@@ -110,6 +123,9 @@ define(function (require) {
                     }
                 });
             }
+        }
+        $el.find('.register_go').click(function () {
+            submitgo();
         });
 
         function settime(obj, countdown) {
