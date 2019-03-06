@@ -21,6 +21,7 @@ define(function (require) {
         }
 
         function openAlart($showtext, callback) {
+            $el.find('.qx_close').show();
             openarticle($el.find('.model_bg'), $el.find('.article_model'), $showtext);
             if (callback) {
                 $el.find('.article_close').click(function () {
@@ -32,9 +33,11 @@ define(function (require) {
 
         $el.find('.article_close').click(function () {
             closearticle($el.find('.model_bg'), $el.find('.article_model'));
+            $el.find('.qx_close').fadeOut(300);
         });
         $el.find('.qx_close').click(function () {
             closearticle($el.find('.model_bg'), $el.find('.article_model'));
+            $el.find('.qx_close').fadeOut(300);
         });
 
         $('body').on('click', '.attention', function () {

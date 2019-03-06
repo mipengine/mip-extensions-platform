@@ -15,6 +15,7 @@ define(function (require) {
         var $el = $(this.element);
         var ajaxurl = $el.attr('data-url');
         var smsurl = $el.attr('sms-url');
+
         function closearticle($modelbg, $model) {
             $modelbg.fadeOut(300);
             $model.fadeOut(300);
@@ -27,6 +28,7 @@ define(function (require) {
         }
 
         function openAlart($showtext, callback) {
+            $el.find('.qx_close').show();
             openarticle($el.find('.model_bg'), $el.find('.article_model'), $showtext);
             if (callback) {
                 $el.find('.article_close').click(function () {
@@ -38,9 +40,11 @@ define(function (require) {
 
         $el.find('.article_close').click(function () {
             closearticle($el.find('.model_bg'), $el.find('.article_model'));
+            $el.find('.qx_close').fadeOut(300);
         });
         $el.find('.qx_close').click(function () {
             closearticle($el.find('.model_bg'), $el.find('.article_model'));
+            $el.find('.qx_close').fadeOut(300);
         });
         $el.find('.register_go').click(function () {
             var phone = $.trim($el.find('.reg_mobile').val());
@@ -68,13 +72,16 @@ define(function (require) {
                 }
             };
             if (!regPhone() && !regEmail()) {
-                $el.find('.error').html('请输入正确的手机号或者邮箱');
+                openarticle($el.find('.model_bg'), $el.find('.article_model'), '请输入正确的手机号或者邮箱');
+            //              $el.find('.error').html('请输入正确的手机号或者邮箱');
             }
             else if (!regvcode.test(vcode)) {
-                $el.find('.error').html('请输入正确的验证码');
+                openarticle($el.find('.model_bg'), $el.find('.article_model'), '请输入正确的验证码');
+            //              $el.find('.error').html('请输入正确的验证码');
             }
             else if (!regpass.test(pass)) {
-                $el.find('.error').html('请输入6~16位数字或字母的密码');
+                openarticle($el.find('.model_bg'), $el.find('.article_model'), '请输入6~16位数字或字母的密码');
+            //              $el.find('.error').html('请输入6~16位数字或字母的密码');
             }
             else {
                 $el.find('.error').html('');
@@ -89,14 +96,16 @@ define(function (require) {
                     success: function (data) {
                         console.log(data);
                         if (data.status !== 0) {
-                            $el.find('.error').html(data.msg);
+                            openarticle($el.find('.model_bg'), $el.find('.article_model'), data.msg);
+                        //                          $el.find('.error').html(data.msg);
                         }
                         else {
                             window.top.location.href = data.data.url;
                         }
                     },
                     error: function (e) {
-                        $el.find('.error').html('注册出错');
+                        openarticle($el.find('.model_bg'), $el.find('.article_model'), '注册出错');
+                        //                      $el.find('.error').html('注册出错');
                         return;
                     }
                 });
@@ -127,10 +136,12 @@ define(function (require) {
             var regemail = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/;
             var code = $.trim($('.idf').val());
             if (!regphone.test(phone) && !regemail.test(phone)) {
-                $el.find('.error').html('请输入正确的手机号或邮箱');
+                openarticle($el.find('.model_bg'), $el.find('.article_model'), '请输入正确的手机号或邮箱');
+            //              $el.find('.error').html('请输入正确的手机号或邮箱');
             }
             else if (!code) {
-                $('.error').html('请输入图片验证码');
+                openarticle($el.find('.model_bg'), $el.find('.article_model'), '请输入图片验证码');
+            //              $('.error').html('请输入图片验证码');
             }
             else {
                 $el.find('.error').html('');
@@ -144,7 +155,8 @@ define(function (require) {
                     async: false,
                     success: function (data) {
                         if (data.status !== 0) {
-                            $el.find('.error').html(data.msg);
+                            openarticle($el.find('.model_bg'), $el.find('.article_model'), data.msg);
+                            //                          $el.find('.error').html(data.msg);
                             var Url = '/captcha';
                             Url = Url + '/' + Math.random();
                             $el.find('.idf_img_show').attr('src', Url);
@@ -157,7 +169,8 @@ define(function (require) {
                         }
                     },
                     error: function (e) {
-                        $el.find('.error').html('发送验证码出错');
+                        openarticle($el.find('.model_bg'), $el.find('.article_model'), '发送验证码出错');
+                        //                      $el.find('.error').html('发送验证码出错');
                         return;
                     }
                 });

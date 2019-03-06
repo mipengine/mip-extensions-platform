@@ -1,6 +1,6 @@
 {
     "name": "mip-hs-replayshow",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "评论详情页回复功能组件以及与后台接口进行交互处理",
     "contributors": [
         {

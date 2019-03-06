@@ -22,6 +22,7 @@ define(function (require) {
         }
 
         function openAlart($showtext, callback) {
+            $el.find('.qx_close').show();
             openarticle($el.find('.model_bg'), $el.find('.article_model'), $showtext);
             if (callback) {
                 $el.find('.article_close').click(function () {
@@ -33,9 +34,11 @@ define(function (require) {
 
         $el.find('.article_close').click(function () {
             closearticle($el.find('.model_bg'), $el.find('.article_model'));
+            $el.find('.qx_close').fadeOut(300);
         });
         $el.find('.qx_close').click(function () {
             closearticle($el.find('.model_bg'), $el.find('.article_model'));
+            $el.find('.qx_close').fadeOut(300);
         });
         $('body').on('click', '.disnum', function () {
             var That = $(this);
@@ -111,7 +114,6 @@ define(function (require) {
                                 + comments[i].user.name + '</div><div class="replay_show_btn">'
                                 + '<span class="off_btn">取消</span><span class="on_btn ajaxSubmit">回复</span></div></div>'
                                 + '</mip-hs-replayshow></li>';
-
                         }
 
                         That.parents('.answer_other').siblings('.discuss_show').find('.discuss_list').append(str);

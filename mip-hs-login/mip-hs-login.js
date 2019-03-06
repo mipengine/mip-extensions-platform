@@ -13,6 +13,38 @@ define(function (require) {
 	 */
     customElement.prototype.firstInviewCallback = function () {
         var $el = $(this.element);
+
+        function closearticle($modelbg, $model) {
+            $modelbg.fadeOut(300);
+            $model.fadeOut(300);
+        }
+
+        function openarticle($modelbg, $model, $text) {
+            $el.find('.text').text($text);
+            $modelbg.fadeIn(300);
+            $model.fadeIn(300);
+        }
+
+        function openAlart($showtext, callback) {
+            $el.find('.qx_close').show();
+            openarticle($el.find('.model_bg'), $el.find('.article_model'), $showtext);
+            if (callback) {
+                $el.find('.article_close').click(function () {
+                    closearticle($el.find('.model_bg'), $el.find('.article_model'));
+                    callback();
+                });
+            }
+        }
+
+        $el.find('.article_close').click(function () {
+            closearticle($el.find('.model_bg'), $el.find('.article_model'));
+            $el.find('.qx_close').fadeOut(300);
+        });
+        $el.find('.qx_close').click(function () {
+            closearticle($el.find('.model_bg'), $el.find('.article_model'));
+            $el.find('.qx_close').fadeOut(300);
+        });
+
         var ajaxurl = $el.attr('data-url');
         $el.find('.login').click(function () {
             var phone = $.trim($el.find('.telphone').val());
@@ -33,7 +65,8 @@ define(function (require) {
                 async: false,
                 success: function (data) {
                     if (data.status === 1) {
-                        $el.find('.error').html(data.msg);
+                        openarticle($el.find('.model_bg'), $el.find('.article_model'), data.msg);
+                        //                      $el.find('.error').html(data.msg);
                         var Url = '/captcha';
                         Url = Url + '/' + Math.random();
                         $el.find('.idf_img_show').attr('src', Url);
@@ -50,7 +83,8 @@ define(function (require) {
 
                 },
                 error: function (e) {
-                    $el.find('.error').html('登录出错');
+                    openarticle($el.find('.model_bg'), $el.find('.article_model'), '登录出错');
+                    //                  $el.find('.error').html('登录出错');
                     return;
                 }
             });
