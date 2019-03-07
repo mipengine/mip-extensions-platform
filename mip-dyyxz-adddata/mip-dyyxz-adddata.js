@@ -34,9 +34,9 @@ define(function (require) {
             if (adddata.eq(0).attr('modeid') === ',12,' && data.recomdCity) {
                 if (adddata.eq(0).attr('datahref') !== 'undefined') {
                     adddata.eq(0).attr('href', ' ').removeAttr('datahref');
-                    adddata.eq(0).addClass('no').text('暂无下载');
+                    adddata.eq(0).addClass('no').text(data.downmsg[0]);
                     adddata.eq(1).attr('href', ' ').removeAttr('datahref');
-                    adddata.eq(1).addClass('no').text('暂无下载');
+                    adddata.eq(1).addClass('no').text(data.downmsg[0]);
                 }
             }
         }

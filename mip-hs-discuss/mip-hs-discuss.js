@@ -40,7 +40,7 @@ define(function (require) {
             closearticle($el.find('.model_bg'), $el.find('.article_model'));
             $el.find('.qx_close').fadeOut(300);
         });
-        $('body').on('click', '.disnum', function () {
+        $el.find('.disnum').click(function () {
             var That = $(this);
             That.parents('.answer_other').siblings('.discuss_show').find('.discuss_list').empty();
             var userid = That.parent().attr('user-id');
@@ -133,7 +133,7 @@ define(function (require) {
                 }
             });
         });
-        $('body').on('click', '.discuss_zannum', function () {
+        $el.find('.discuss_zannum').click(function () {
             var That = $(this);
             var unzan = That.attr('url-unzan');
             var zan = That.attr('url-zan');

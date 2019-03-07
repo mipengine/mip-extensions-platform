@@ -40,7 +40,7 @@ define(function (require) {
             closearticle($el.find('.model_bg'), $el.find('.article_model'));
             $el.find('.qx_close').fadeOut(300);
         });
-        $('body').on('click', '.zan', function () {
+        $el.find('.zan').click(function () {
             var That = $(this);
             var unzan = That.parent().attr('url-unzan');
             var zan = That.parent().attr('url-zan');

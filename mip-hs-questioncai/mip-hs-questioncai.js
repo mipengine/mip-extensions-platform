@@ -42,7 +42,7 @@ define(function (require) {
             closearticle($el.find('.model_bg'), $el.find('.article_model'));
             $el.find('.qx_close').fadeOut(300);
         });
-        $('body').on('click', '.cai', function () {
+        $el.find('.cai').click(function () {
             var That = $(this);
             var uncai = That.parent().attr('url-uncai');
             var cai = That.parent().attr('url-cai');

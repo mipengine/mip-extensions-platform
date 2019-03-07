@@ -40,7 +40,7 @@ define(function (require) {
             closearticle($el.find('.model_bg'), $el.find('.article_model'));
             $el.find('.qx_close').fadeOut(300);
         });
-        $('body').on('click', '.attention', function () {
+        $el.find('.attention').click(function () {
             var That = $(this);
             var unattention = That.parent().attr('url-unattention');
             var attention = That.parent().attr('url-attention');
