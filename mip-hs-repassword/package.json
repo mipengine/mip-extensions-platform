@@ -1,7 +1,7 @@
 {
-    "name": "mip-hs-delectcollect",
-    "version": "1.0.4",
-    "description": "个人中心收藏数据删除",
+    "name": "mip-hs-repassword",
+    "version": "1.0.0",
+    "description": "修改密码",
     "contributors": [
         {
             "name": "lin",
