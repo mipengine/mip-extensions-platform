@@ -1,6 +1,6 @@
 # mip-cfjm-pop
 
-mip-cfjm-pop 悬浮留言组件
+mip-cfjm-pop 自定义悬浮留言组件
 
 标题|内容
 ----|----

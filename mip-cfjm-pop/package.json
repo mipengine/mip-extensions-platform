@@ -1,7 +1,7 @@
 {
     "name": "mip-cfjm-pop",
     "version": "1.0.0",
-    "description": "悬浮留言组件",
+    "description": "cfjm网站自定义悬浮留言组件",
     "contributors": [
         {
             "name": "Wudi",
