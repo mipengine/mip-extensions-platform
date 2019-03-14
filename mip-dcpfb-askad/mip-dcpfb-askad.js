@@ -26,7 +26,7 @@ define(function (require) {
         var elem = this.element;
         var alSpan = $('#dcask-body');
         $.ajax({
-            url: 'https://shop.qdanyy.cn/mipextends/',
+            url: 'https://www.bdamei.com/mipextends/',
             dataType: 'json',
             success: function (data) {
                 if (data) {
