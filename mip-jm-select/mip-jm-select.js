@@ -33,10 +33,12 @@ define(function (require) {
 
         });
         $el.find('.fixed_cirle1').click(function () {
+            $el.find('.fixedshow').addClass('fixedshowbug');
             $el.find('.dialog_relaxed').show();
         });
         $el.find('.delete').click(function () {
             $el.find('.dialog_relaxed').hide();
+            $el.find('.fixedshow').removeClass('fixedshowbug');
         });
         $el.find('.on_look').click(function () {
             $el.find('.relaxed_text1').hide();
