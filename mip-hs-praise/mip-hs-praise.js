@@ -44,6 +44,12 @@ define(function (require) {
 
         function openarticle($modelbg, $model, $text) {
             stop();
+            $modelbg.bind('touchmove', function (e) {
+                e.preventDefault();
+            });
+            $model.bind('touchmove', function (e) {
+                e.preventDefault();
+            });
             $model.css('top', getScrollTop() + 300 + 'px');
             $modelbg.css('height', getScrollTop() + 1000 + 'px');
             $el.find('.text').text($text);
