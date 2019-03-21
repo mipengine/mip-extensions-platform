@@ -6,42 +6,45 @@
 define(function (require) {
     var $ = require('zepto');
     var customElement = require('customElement').create();
-
-    $('.side_left li').click(function () {
-        $(this).addClass('side_left_active').siblings().removeClass('side_left_active');
-        bianhuan($(this), $(this).attr('data-pinyin'));
-    });
-
-    function bianhuan(obj, pinyin) {
-        $.ajax({
-            type: 'post',
-            url: '/Common/cate_lst',
-            data: {
-                ppinyin: pinyin
-            },
-            dataType: 'json',
-            success: function (data) {
-                $('.get_catelists').empty();
-                if (data.length > 0) {
-                    var html = '<li class="side_right_active"><a data-type="mip" href="/'
-                        + data[0].ppinyin + '/">' + data[0].name + '</a></li>';
-                    for (var i = 1; i < data.length; i++) {
-                        html += '<li>'
-                            + '<a data-type="mip" href="/' + data[i].ppinyin
-                            + '/' + data[i].cpinyin + '/">' + data[i].name + '</a>'
-                            + '</li>';
-                    }
-                }
-                else {
-                    var html = '<li class="side_right_active"><a data-type="mip" href="/'
-                        + data[0].ppinyin + '/">' + data[0].name + '</a></li>';
-                }
-                $('.get_catelists').html(html);
-            }
-        });
-    }
     customElement.prototype.firstInviewCallback = function () {
-        // TODO
+        var $el = $(this.element);
+        $el.find('.side_left li').click(function () {
+            $(this).addClass('side_left_active').siblings().removeClass('side_left_active');
+            $el.find('.siftingsort').val($(this).attr('data-pinyin'));
+            ajaxRequest($el.find('.siftingsort').val());
+        });
+        // ajax请求获取页面跳转地址
+        function ajaxRequest(pinyin) {
+            var formData = new FormData();
+            var formUrl = '/Common/cate_lst';
+            formData.append('ppinyin', pinyin);
+            fetch(formUrl, {
+                method: 'POST',
+                body: formData
+            }).then(function (response) {
+                return response.json();
+            }).then(function (response) {
+                if (response) {
+                    $el.find('.get_catelists').empty();
+                    if (response.length > 0) {
+                        var html = '<li class="side_right_active"><a data-type="mip" href="/'
+                        + response[0].ppinyin + '/">' + response[0].name + '</a></li>';
+                        for (var i = 1; i < response.length; i++) {
+                            html += '<li>'
+                            + '<a data-type="mip" href="/' + response[i].ppinyin
+                            + '/' + response[i].cpinyin + '/">' + response[i].name + '</a>'
+                            + '</li>';
+                        }
+                    }
+                    else {
+                        var html = '<li class="side_right_active"><a data-type="mip" href="/'
+                        + response[0].ppinyin + '/">' + response[0].name + '</a></li>';
+                    }
+                    $el.find('.get_catelists').html(html);
+                }
+
+            }).catch(function (e) {});
+        }
     };
 
     return customElement;
