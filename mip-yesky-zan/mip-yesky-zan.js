@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @file mip-yesky-zan 组件
  * @author
  */
@@ -21,15 +21,23 @@ define(function (require) {
                     var getC = decodeURIComponent(arr2[1]);
                     return getC;
                 }
+
             }
             return '';
         }
+
         $(element).find('.cliup').click(function () {
             var id = $(this).siblings('.dyid').html();
             var dycookie = getCookie('yizan' + id);
             var zspan = $(this).siblings('.znum').find('span');
             var zani = $(this).siblings('.znum').find('i');
             var znum = $(this).siblings('.znum').find('span').html();
+            var url = 'https://openproduct.yesky.com/wechatapp/xinpin/voteSpokesman.jsonp?spokesmanid=' + id + '&type=0';
+            function zanHide() {
+                setTimeout(function () {
+                    zani.css('display', 'none');
+                }, 2000);
+            }
             if (dycookie === 1) {
                 // 因无法写入组件内，必须要全局选择
                 $('.daiy_yzl').show();
@@ -37,19 +45,20 @@ define(function (require) {
                     $('.daiy_yzl').css('display', 'none');
                 }, 2000);
             }
+
             else {
-                $.ajax({
-                    url: 'https://openproduct.yesky.com/wechatapp/xinpin/voteSpokesman.json?spokesmanid=' + id + '&type=0',
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function () {
-                        zani.show();
-                        zspan.html(parseInt(znum, 10) + 1);
-                        setTimeout(function () {
-                            zani.css('display', 'none');
-                        }, 2000);
-                        setCookie('yizan' + id, '1');
+                fetch(url, {
+                    method: 'GET',
+                    header: {
+                        'Content-type': 'application/json'
                     }
+                }).then(function (res) {
+                    return res.json();
+                }).then(function (json) {
+                    zani.show();
+                    zspan.html(parseInt(znum, 10) + 1);
+                    zanHide();
+                    setCookie('yizan' + id, '1');
                 });
             }
         });
