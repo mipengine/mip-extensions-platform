@@ -1,0 +1,14 @@
+{
+    "name": "mip-hlj-sdk",
+    "version": "1.0.0",
+    "description": "婚礼纪网站访问v2数据统计",
+    "contributors": [
+        {
+            "name": "kong_kong",
+            "email": "kong_kong@hunliji.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
