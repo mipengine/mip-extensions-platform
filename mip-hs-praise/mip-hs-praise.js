@@ -104,7 +104,7 @@ define(function (require) {
                     error: function (data) {
                         if (data.statusText === 'Unauthorized') {
                             openAlart('请登录', function () {
-                                window.top.location.href = '/login?service=welcome';
+                                window.top.location.href = 'https://www.izhenzhi.com.cn/login?service=welcome';
                             });
                         }
 
@@ -133,7 +133,7 @@ define(function (require) {
                     error: function (data) {
                         if (data.statusText === 'Unauthorized') {
                             openAlart('请登录', function () {
-                                window.top.location.href = '/login?service=welcome';
+                                window.top.location.href = 'https://www.izhenzhi.com.cn/login?service=welcome';
                             });
                         }
 
