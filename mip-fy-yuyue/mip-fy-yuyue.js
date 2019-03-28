@@ -13,6 +13,7 @@
  * 1.1.1 升级less文件背景图片为https。
  * 1.1.2 修改提示描述
  * 1.1.3 根据百度手机助手 百度-黄奥 的需求，修改文本提示。
+ * 1.2 根据栏目，不同栏目改为下架的提示，其余改为预约的提示。
  * @author gom3250@qq.com.
  *  */
 
@@ -41,15 +42,27 @@ define(function (require) {
                     var iosclassid = data['ios-classid'];
                     var downsize = $(ele).find('.f-game-size').text();
                     var classid = $(ele).find('.f-information').attr('data-categroyId');
+                    var rootid = $(ele).find('.f-information').attr('data-rootid');
+                    var rootnum = Number(rootid);
                     var classidnum = Number(classid);
                     var qqun = '';
                     var lowerOk = $(ele).find('#address').attr('lowerok');
                     var drurl = $(ele).find('#address').attr('href');
+                    var xiajiaok = data['rexiajiayuyueopen'];
+                    var xiajiaid = data['xiajiaid'];
                     if (drurl === fromnodown || drurl === 'javascript:;' || downsize === '0KB' || drurl === '') {
                         // 判断 是 没有下载地址
                         if (platform.isIos()) {
                             // 苹果设备访问
                             if (lowerOk !== 'yes' && $.inArray(classidnum, iosclassid) !== -1) {
+                                if (xiajiaok) {
+                                    if ($.inArray(rootnum, xiajiaid) !== -1) {
+                                        $(ele).find('#address').text('该应用已下架');
+                                        $(ele).find('#address').removeClass('m-yuyueok').attr('href', 'javascript:;');
+                                        $(ele).find('#address').css('background', '#8c8c8c');
+                                        return false;
+                                    }
+                                }
                                 $(ele).find('#address').css('background', btncolor).text('立即预约');
                                 $(ele).find('#address').attr('href', 'javascript:;').addClass('m-yuyueok');
                                 addyuyue();
@@ -59,6 +72,14 @@ define(function (require) {
                             }
                         } else {
                             if (lowerOk !== 'yes' && $.inArray(classidnum, azclassid) !== -1) {
+                                if (xiajiaok) {
+                                    if ($.inArray(rootnum, xiajiaid) !== -1) {
+                                        $(ele).find('#address').text('该应用已下架');
+                                        $(ele).find('#address').removeClass('m-yuyueok').attr('href', 'javascript:;');
+                                        $(ele).find('#address').css('background', '#8c8c8c');
+                                        return false;
+                                    }
+                                }
                                 $(ele).find('#address').css('background', btncolor).text('立即预约');
                                 $(ele).find('#address').attr('href', 'javascript:;').addClass('m-yuyueok');
                                 addyuyue();

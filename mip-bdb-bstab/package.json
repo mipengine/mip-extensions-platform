@@ -1,0 +1,14 @@
+{
+    "name": "mip-bdb-bstab",
+    "version": "1.0.0",
+    "description": "多层关联条件内容切换组件",
+    "contributors": [
+        {
+            "name": "56",
+            "email": "569477480@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
