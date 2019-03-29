@@ -1,0 +1,14 @@
+{
+    "name": "mip-damoujia-orderposts",
+    "version": "1.0.0",
+    "description": "切换订单页面的效果,提交数据处理",
+    "contributors": [
+        {
+            "name": "yb",
+            "email": "295151079@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.1"
+    }
+}
