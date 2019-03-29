@@ -5,23 +5,62 @@
 
 define(function (require) {
     var $ = require('zepto');
+    var viewport = require('viewport');
     var customElement = require('customElement').create();
 
     customElement.prototype.firstInviewCallback = function () {
         var $el = $(this.element);
+        var mo = function (e) {
+            e.preventDefault();
+        };
+        function getScrollTop() {
+            var scrollTop = 0;
+            console.log(viewport.getScrollTop());
+            if (document.documentElement && document.documentElement.scrollTop) {
+                scrollTop = document.documentElement.scrollTop;
+            }
+            else if (document.body) {
+                scrollTop = document.body.scrollTop;
+            }
+
+            return scrollTop;
+        }
+
+        /***禁止滑动***/
+        function stop() {
+            document.body.style.overflow = 'hidden';
+            document.addEventListener('touchmove', mo, false); // 禁止页面滑动
+        }
+
+        /***取消滑动限制***/
+        function move() {
+            document.body.style.overflow = ''; // 出现滚动条
+            document.removeEventListener('touchmove', mo, false);
+        }
 
         function closearticle($modelbg, $model) {
             $modelbg.fadeOut(300);
             $model.fadeOut(300);
+            move();
         }
 
         function openarticle($modelbg, $model, $text) {
+            stop();
+            $modelbg.bind('touchmove', function (e) {
+                e.preventDefault();
+            });
+            $model.bind('touchmove', function (e) {
+                e.preventDefault();
+            });
+            $model.css('top', viewport.getScrollTop() + 300 + 'px');
+            $modelbg.css('height', viewport.getScrollTop() + 1000 + 'px');
             $el.find('.text').text($text);
             $modelbg.fadeIn(300);
             $model.fadeIn(300);
         }
 
         function openAlart($showtext, callback) {
+            stop();
             $el.find('.qx_close').show();
             openarticle($el.find('.model_bg'), $el.find('.article_model'), $showtext);
             if (callback) {
@@ -67,7 +106,7 @@ define(function (require) {
                     error: function (data) {
                         if (data.statusText === 'Unauthorized') {
                             openAlart('请登录', function () {
-                                window.top.location.href = '/login?service=welcome';
+                                window.top.location.href = 'https://www.izhenzhi.com.cn/login?service=welcome';
                             });
                         }
 
@@ -96,7 +135,7 @@ define(function (require) {
                     error: function (data) {
                         if (data.statusText === 'Unauthorized') {
                             openAlart('请登录', function () {
-                                window.top.location.href = '/login?service=welcome';
+                                window.top.location.href = 'https://www.izhenzhi.com.cn/login?service=welcome';
                             });
                         }
 
