@@ -14,7 +14,7 @@ define(function (require) {
     customElement.prototype.firstInviewCallback = function () {
         var self = this;
         var element = self.element;
-        var myVideo = element.querySelector('video');
+        var myVideo = element.querySelector('mip-video');
         var request = false;
         myVideo.addEventListener('play', function () {
             if (request === true) {
