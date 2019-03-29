@@ -5,6 +5,7 @@
 
 define(function (require) {
     var $ = require('zepto');
+    var viewport = require('viewport');
     var customElement = require('customElement').create();
 
     customElement.prototype.firstInviewCallback = function () {
@@ -14,6 +15,7 @@ define(function (require) {
         };
         function getScrollTop() {
             var scrollTop = 0;
+            console.log(viewport.getScrollTop());
             if (document.documentElement && document.documentElement.scrollTop) {
                 scrollTop = document.documentElement.scrollTop;
             }
@@ -50,8 +52,8 @@ define(function (require) {
             $model.bind('touchmove', function (e) {
                 e.preventDefault();
             });
-            $model.css('top', getScrollTop() + 300 + 'px');
-            $modelbg.css('height', getScrollTop() + 1000 + 'px');
+            $model.css('top', viewport.getScrollTop() + 300 + 'px');
+            $modelbg.css('height', viewport.getScrollTop() + 1000 + 'px');
             $el.find('.text').text($text);
             $modelbg.fadeIn(300);
             $model.fadeIn(300);
