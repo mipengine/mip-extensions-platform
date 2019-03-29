@@ -5,10 +5,36 @@
 
 define(function (require) {
     var $ = require('jquery');
+    var viewport = require('viewport');
     // zepto一些方法不支持，比如is,animate等，所以使用jquery;
     var customElement = require('customElement').create();
     customElement.prototype.firstInviewCallback = function () {
         var $el = $(this.element);
+        var mo = function (e) {
+            e.preventDefault();
+        };
+
+        function stop() {
+            document.body.style.overflow = 'hidden';
+            document.addEventListener('touchmove', mo, false); // 禁止页面滑动
+        }
+
+        /***取消滑动限制***/
+        function move() {
+            document.body.style.overflow = ''; // 出现滚动条
+            document.removeEventListener('touchmove', mo, false);
+        }
+        function getScrollTop() {
+            var scrollTop = 0;
+            if (document.documentElement && document.documentElement.scrollTop) {
+                scrollTop = document.documentElement.scrollTop;
+            }
+            else if (document.body) {
+                scrollTop = document.body.scrollTop;
+            }
+
+            return scrollTop;
+        }
         $el.find('.select-text').click(function () {
             $(this).parents('.relaxed_step_option').find('.for-option').fadeIn();
             $(this).parents('.relaxed_step').siblings('.relaxed_step').find('.for-option').fadeOut();
@@ -33,14 +59,28 @@ define(function (require) {
 
         });
         $el.find('.fixed_cirle1').click(function () {
+            console.log(viewport.getScrollTop());
+            $el.find('.fixedshow').addClass('fixedshowbug');
             $el.find('.dialog_relaxed').show();
+            $el.find('.relaxed_content').css('top', viewport.getScrollTop() + 300 + 'px');
+            $el.find('.dialog_relaxed').css('height', viewport.getScrollTop() + 1000 + 'px');
+            stop();
+            $el.find('.relaxed_content').bind('touchmove', function (e) {
+                e.preventDefault();
+            });
+            $el.find('.dialog_relaxed').bind('touchmove', function (e) {
+                e.preventDefault();
+            });
         });
         $el.find('.delete').click(function () {
             $el.find('.dialog_relaxed').hide();
+            $el.find('.fixedshow').removeClass('fixedshowbug');
+            move();
         });
         $el.find('.on_look').click(function () {
             $el.find('.relaxed_text1').hide();
             $el.find('.relaxed_text2').show();
+            stop();
         });
 
         $el.find('.relaxed_step1 .for-option ul li').click(function () {
