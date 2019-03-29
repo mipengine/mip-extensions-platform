@@ -1,0 +1,286 @@
+/**
+ * @file mip-jia-redpacketplus样式文件
+ */
+mip-jia-redpacketplus {
+    .popup-maskedit {
+        position: fixed;
+        z-index: 99999;
+        top: 50%;
+        left: 50%;
+        max-width: 80%;
+        padding: .06rem .16rem;
+        line-height: .24rem;
+        text-align: center;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        background-color: rgba(0, 0, 0, .85);
+        font-size: .12rem;
+        color: #fff;
+        border-radius: .06rem;
+        white-space: nowrap
+    }
+    .loading-icon {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: .65rem;
+        height: .65rem;
+        background: url(//mued3.jia.com/image/mobile/wxStore/loading_black_Alpha.gif) center center no-repeat rgba(0, 0, 0, .8);
+        background-size: .45rem;
+        border-radius: 5px;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        z-index: 100007
+    }
+
+    .popmask {
+        display: none;
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        background-color: rgba(0, 0, 0, .7);
+        z-index: 10001;
+    }
+
+    .hb-popup {
+        display: none;
+        position: fixed;
+        left: 11%;
+        top: 50%;
+        width: 78%;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+        z-index: 10002;
+
+        .popup-box {
+            background: #f35442;
+            border-radius: .04rem;
+            text-align: center;
+            -webkit-animation: mip-jia-redpacketplus-popshow .3s;
+            animation: mip-jia-redpacketplus-popshow .3s;
+
+            .close {
+                position: absolute;
+                left: 50%;
+                bottom: -.48rem;
+                width: .3rem;
+                height: .3rem;
+                margin-left: -.15rem;
+                background: url(//mued3.jia.com/image/mobile/toutiao/hb_close_1.png) 0 0 no-repeat;
+                background-size: 100%;
+            }
+
+            .top {
+                padding: .4rem 0 .5rem;
+                background: #f45d4b;
+                border-radius: .04rem .04rem 0 0;
+
+                .img-box {
+                    font-size: 0;
+
+                    mip-img {
+                        display: inline-block;
+                        width: .6rem;
+                        height: .6rem;
+                    }
+
+                }
+
+                .name {
+                    margin-top: .04rem;
+                    font-size: .14rem;
+                    font-weight: bold;
+                    color: #ffdea7;
+                    line-height: .2rem;
+                }
+
+                .event {
+                    margin-top: .04rem;
+                    font-size: .14rem;
+                    color: #ffdea7;
+                }
+
+                .title {
+                    margin-top: .2rem;
+                    font-size: .23rem;
+                    color: #f0e5af;
+                }
+
+                .countDown-box {
+                    margin-top: .34rem;
+                    font-size: .18rem;
+                    line-height: .2rem;
+                    color: #ffdea7;
+                    text-align: center;
+                    .countDown {
+                        display: inline-block;
+                        margin-left: .05rem;
+                        margin-top: .02rem;
+                        font-size: .09rem;
+                        line-height: .16rem;
+                        vertical-align: top;
+                        em {
+                            display: inline-block;
+                            width: .16rem;
+                            text-align: center;
+                            font-size: .1rem;
+                            color: #f45d4b;
+                            background: #ffe3b4;
+                            vertical-align: top;
+                            border-radius: .02rem;
+                        }
+                    }
+                }
+
+                .input-box {
+                    width: 80%;
+                    height: .2rem;
+                    padding: .08rem;
+                    margin: .15rem auto 0;
+                    border-radius: .36rem;
+                    background: #ffe3b4;
+
+                    .form-input {
+                        display: block;
+                        width: 100%;
+                        height: .2rem;
+                        line-height: .2rem;
+                        font-size: .14rem;
+                        text-align: center;
+                        border: 0 none;
+                        background: transparent;
+
+                        &:-moz-placeholder {
+                            color: #e5bf80;
+                        }
+
+                        &::-webkit-input-placeholder {
+                            color: #e5bf80;
+                        }
+
+                    }
+
+                }
+
+            }
+
+            .circle-wrap {
+                height: .5rem;
+                overflow: hidden;
+
+                .circle-box {
+                    position: relative;
+                    height: .4rem;
+
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        left: 50%;
+                        bottom: 0;
+                        width: 200%;
+                        padding-top: 180%;
+                        -webkit-box-shadow: 0 3px 9px rgba(122, 29, 22, .14);
+                        box-shadow: 0 3px 9px rgba(122, 29, 22, .14);
+                        border-radius: 100%;
+                        -webkit-transform: translate(-50%, 0);
+                        -ms-transform: translate(-50%, 0);
+                        transform: translate(-50%, 0);
+                        background: #f45d4b;
+                    }
+
+                }
+
+            }
+
+            .headline-btn {
+                position: relative;
+                display: inline-block;
+                width: 1rem;
+                height: 1rem;
+                margin-top: -.6rem;
+                background: url(//mued3.jia.com/image/mobile/mip/hb-icon-kai-1.png) center center no-repeat;
+                background-size: 100%;
+                border-radius: 100%;
+                vertical-align: top;
+            }
+
+            .bottom {
+                position: relative;
+                height: .8rem;
+                &::after {
+                    content: '';
+                    position: absolute;
+                    bottom: .1rem;
+                    left: 50%;
+                    width: .32rem;
+                    height: .32rem;
+                    margin-left: -.16rem;
+                    background: url(//mued3.jia.com/image/mobile/mip/hb-icon-4.png) 0 0 no-repeat;
+                    background-size: 100%;
+                }
+
+            }
+
+        }
+
+    }
+
+}
+@-webkit-keyframes mip-jia-redpacketplus-hb-left {
+    0% {
+        left: -10%;
+    }
+
+    30% {
+        left: 110%;
+    }
+
+    100% {
+        left: 110%;
+    }
+
+}
+@keyframes mip-jia-redpacketplus-hb-left {
+    0% {
+        left: -10%;
+    }
+
+    30% {
+        left: 110%;
+    }
+
+    100% {
+        left: 110%;
+    }
+
+}
+@-webkit-keyframes mip-jia-redpacketplus-popshow {
+    from {
+        -webkit-transform: scale(.5);
+        transform: scale(.5);
+    }
+
+    to {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+
+}
+@keyframes mip-jia-redpacketplus-popshow {
+    from {
+        -webkit-transform: scale(.5);
+        transform: scale(.5);
+    }
+
+    to {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+
+}
