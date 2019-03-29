@@ -1,0 +1,14 @@
+{
+    "name": "mip-qb-ad",
+    "version": "1.0.0",
+    "description": "支持smua，sogou等广告代码",
+    "contributors": [
+        {
+            "name": "Xurna Yang",
+            "email": "565627595@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
