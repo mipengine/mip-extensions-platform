@@ -15,7 +15,7 @@ define(function (require) {
         });
         $('.container .page-section.second, .container .page-section.third')
             .delegate('.pic-section', 'click', function () {
-                $(this).parent().parent().parent().find('.selected').removeClass('selected');
+                $(this).closest('ul').find('.selected').removeClass('selected');
                 $(this).addClass('selected');
                 if (currentIndex === 2) {
                     if ($('.container .page-section.third .selected').parent().parent().index()) {
