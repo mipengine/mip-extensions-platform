@@ -6,7 +6,6 @@
 define(function (require) {
     var customElement = require('customElement').create();
     var md5 = require('./md5.min');
-    var fetchJsonp = require('fetch-jsonp');
 
     /**
      * 构造元素，只会运行一次
