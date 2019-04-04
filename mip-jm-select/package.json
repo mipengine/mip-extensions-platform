@@ -1,7 +1,7 @@
 {
     "name": "mip-jm-select",
-    "version": "1.0.2",
-    "description": "页面三部加盟数据交互处理",
+    "version": "1.0.6",
+    "description": "页面三部加盟数据交互处理，检测滚动距离，计算固定弹出框位置",
     "contributors": [
         {
             "name": "lin",
