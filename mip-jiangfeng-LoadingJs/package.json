@@ -1,0 +1,15 @@
+{
+    "name": "mip-jiangfeng-LoadingJs",
+    "version": "1.0.0",
+    "description": "在头部加载两个js文件",
+    "contributors": [
+        {
+            "name": "jiangfeng",
+            "email": "aiywxq@163.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
+
