@@ -1,0 +1,15 @@
+{
+    "name": "mip-cr173-yuyue",
+    "version": "1.0.0",
+    "description": "根据页面属性，对已经下架和无地址的资源判断，是软件提示“下架”，是游戏提示“预约”。 对有关联的当前设备访问的资源，根据百度手机助手 百度-黄奥 的需求，进行对应下载的提示。",
+    "contributors": [
+        {
+            "name": "gom",
+            "email": "gom3250@qq.com",
+            "url": "https://m.cr173.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.0.0"
+    }
+}
