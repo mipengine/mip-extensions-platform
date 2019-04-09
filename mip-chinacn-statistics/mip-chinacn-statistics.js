@@ -12,21 +12,24 @@ define(function (require) {
      * 第一次进入可视区回调，只会执行一次
      */
     customElement.prototype.firstInviewCallback = function () {
-        var data = {};
-        // 页面地址
-        data.url = encodeURIComponent(location.href);
-        // 来源
-        data.referrer = encodeURIComponent(document.referrer);
-        // 页面类型
-        var page = this.element.getAttribute('page');
-        // 请求
-        fetch('https://api.china.cn/dms/s.php', {
-            method: 'POST',
-            body: 'type=mip&page=' + page + '&str=' + JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        });
+        if (location.host !== 'mip.china.cn') {
+            var data = {};
+            // 页面地址
+            data.url = encodeURIComponent(location.href);
+            // 来源
+            data.referrer = encodeURIComponent(document.referrer);
+            // 页面类型
+            var page = this.element.getAttribute('page');
+            // 请求
+            fetch('https://api.china.cn/dms/s.php', {
+                method: 'POST',
+                body: 'type=mip&page=' + page + '&str=' + JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            });
+        }
+
     };
 
     return customElement;

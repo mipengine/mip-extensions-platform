@@ -6,7 +6,6 @@
 define(function (require) {
     var customElement = require('customElement').create();
     var md5 = require('./md5.min');
-    var fetchJsonp = require('fetch-jsonp');
 
     /**
      * 构造元素，只会运行一次
@@ -14,7 +13,7 @@ define(function (require) {
     customElement.prototype.firstInviewCallback = function () {
         var self = this;
         var element = self.element;
-        var myVideo = element.querySelector('video');
+        var myVideo = element.querySelector('mip-video');
         var request = false;
         myVideo.addEventListener('play', function () {
             if (request === true) {
