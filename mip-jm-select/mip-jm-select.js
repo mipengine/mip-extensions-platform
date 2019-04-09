@@ -6,9 +6,17 @@
 define(function (require) {
     var $ = require('jquery');
     // zepto一些方法不支持，比如is,animate等，所以使用jquery;
+    var viewport = require('viewport');
+    // 获取视口;
     var customElement = require('customElement').create();
     customElement.prototype.firstInviewCallback = function () {
         var $el = $(this.element);
+        var $fixedshow = $el.find('.fixedshow');
+        var $dialog = $el.find('.dialog_relaxed');
+        var $relaxedcontent = $el.find('.relaxed_content');
+        var $industry = $el.find('.industry');
+        var $trademark = $el.find('.trademark');
+        var $charge = $el.find('.charge');
         var mo = function (e) {
             e.preventDefault();
         };
@@ -22,17 +30,6 @@ define(function (require) {
         function move() {
             document.body.style.overflow = ''; // 出现滚动条
             document.removeEventListener('touchmove', mo, false);
-        }
-        function getScrollTop() {
-            var scrollTop = 0;
-            if (document.documentElement && document.documentElement.scrollTop) {
-                scrollTop = document.documentElement.scrollTop;
-            }
-            else if (document.body) {
-                scrollTop = document.body.scrollTop;
-            }
-
-            return scrollTop;
         }
         $el.find('.select-text').click(function () {
             $(this).parents('.relaxed_step_option').find('.for-option').fadeIn();
@@ -58,21 +55,17 @@ define(function (require) {
 
         });
         $el.find('.fixed_cirle1').click(function () {
-            $el.find('.fixedshow').addClass('fixedshowbug');
-            $el.find('.dialog_relaxed').show();
-            $el.find('.relaxed_content').css('top', getScrollTop() + 300 + 'px');
-            $el.find('.dialog_relaxed').css('height', getScrollTop() + 1000 + 'px');
+            var getScrollTop = viewport.getScrollTop();
+            $fixedshow.addClass('fixedshowbug');
+            $dialog.css('height', getScrollTop + 1000 + 'px').show();
+            $relaxedcontent.css('top', getScrollTop + 300 + 'px');
             stop();
-            $el.find('.relaxed_content').bind('touchmove', function (e) {
-                e.preventDefault();
-            });
-            $el.find('.dialog_relaxed').bind('touchmove', function (e) {
-                e.preventDefault();
-            });
+            $relaxedcontent.bind('touchmove', mo);
+            $dialog.bind('touchmove', mo);
         });
         $el.find('.delete').click(function () {
-            $el.find('.dialog_relaxed').hide();
-            $el.find('.fixedshow').removeClass('fixedshowbug');
+            $dialog.hide();
+            $fixedshow.removeClass('fixedshowbug');
             move();
         });
         $el.find('.on_look').click(function () {
@@ -111,14 +104,14 @@ define(function (require) {
         $('body').on('click', '.Immediatelycheck', function () {
             var content = '预计投资费用：' + $el.find('.relaxed_step3 .select-text').text();
             $el.find('.relaxed_step1 .select-text').text() === '请选择加盟行业'
-                ? $el.find('.industry').text('')
-                : $el.find('.industry').text($el.find('.relaxed_step1 .select-text').text());
+                ? $industry.text('')
+                : $industry.text($el.find('.relaxed_step1 .select-text').text());
             $el.find('.relaxed_step2 .select-text').text() === '请选择加盟品牌'
-                ? $el.find('.trademark').text('')
-                : $el.find('.trademark').text($el.find('.relaxed_step2 .select-text').text());
+                ? $trademark.text('')
+                : $trademark.text($el.find('.relaxed_step2 .select-text').text());
             $el.find('.relaxed_step3 .select-text').text() === '请选择加盟费用'
-                ? $el.find('.charge').text('')
-                : $el.find('.charge').text($el.find('.relaxed_step3 .select-text').text());
+                ? $charge.text('')
+                : $charge.text($el.find('.relaxed_step3 .select-text').text());
             $el.find('.chargevalue').val(content);
             $el.find('.cateid').val($el.find('.relaxed_text1 .select-li').attr('data-id'));
             $el.find('.projectid').val($el.find('.get_pinpai .select-li').attr('project-id'));
