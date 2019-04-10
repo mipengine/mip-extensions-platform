@@ -9,22 +9,11 @@
 所需脚本|https://c.mipcdn.com/extensions/platform/v1/mip-fy-yuyue/mip-fy-yuyue.js
 ## 示例
 
-### 基本用法
+### 基本用法 
 ```html
-
-
-
 <mip-ychlyxgs-data>
 <mip-ychlyxgs-adddata>
 <mip-fy-yuyue data-nodownurl="https://m.qqtn.com" data-color="#66d105" data-id="173398" data-yuyueurl="https://www.qqtn.com">
-
-
-
-
-
-
-
-
 <div class="g-box m-down-msg f-yydiv" id="m-down-msg">
     <header class="info">
         <div class="pic">
@@ -126,47 +115,22 @@
     </div>    
     <b class="m-black-bg"></b>    
 </mip-fixed>
-
 <div class="f-tags-box f-hide-box f-hide">
     <strong>其它版本</strong>    
-    <ul class="m-tags-android f-tags-android">   
-                
-                
-        <li data-system="Android" data-id="173385"><a href="https://m.qqtn.com/q/173385" ><i></i><p>比艺直播vip破解版下载v1.0.1 安卓版</p><b>下载</b></a></li>       
-                
-        <li data-system="Android" data-id="173377"><a href="https://m.qqtn.com/q/173377" ><i></i><p>比艺直播apk官方版下载v1.0.0 安卓版</p><b>下载</b></a></li>       
-                
-        <li data-system="Android" data-id="173370"><a href="https://m.qqtn.com/q/173370" ><i></i><p>比艺直播app下载v1.0.0 安卓版</p><b>下载</b></a></li>       
-                
-        <li data-system="Android" data-id="188764"><a href="https://m.qqtn.com/q/188764" ><i></i><p>比艺直播官方app下载v1.0.1 最新版</p><b>下载</b></a></li>       
-        
-        
+    <ul class="m-tags-android f-tags-android">
+        <li data-system="Android" data-id="173385"><a href="https://m.qqtn.com/q/173385" ><i></i><p>比艺直播vip破解版下载v1.0.1 安卓版</p><b>下载</b></a></li> 
+        <li data-system="Android" data-id="173377"><a href="https://m.qqtn.com/q/173377" ><i></i><p>比艺直播apk官方版下载v1.0.0 安卓版</p><b>下载</b></a></li> 
+        <li data-system="Android" data-id="173370"><a href="https://m.qqtn.com/q/173370" ><i></i><p>比艺直播app下载v1.0.0 安卓版</p><b>下载</b></a></li> 
+        <li data-system="Android" data-id="188764"><a href="https://m.qqtn.com/q/188764" ><i></i><p>比艺直播官方app下载v1.0.1 最新版</p><b>下载</b></a></li> 
     </ul>
-    <ul class="m-tags-ios f-tags-ios">      
-        
-        
-        
+    <ul class="m-tags-ios f-tags-ios">   
     </ul>
 </div>
-
-<div class="f-information f-hide" data-id="173398" data-path="down" data-categroyId="294" data-rootid="18" data-commendid="0" data-system="IOS" data-ppaddress="" data-ismoney="0" data-CommentTpye="0" data-Username="chenggang" data-Type="0" data-DateTime="2017/2/24" data-phpurl="2"></div>
-
-
-
-
-
-
-
-
-
-
-
-
+<div class="f-information f-hide" data-id="173398" data-path="down" data-categroyId="294" data-rootid="15" data-commendid="0" data-system="IOS" data-ppaddress="" data-ismoney="0" data-CommentTpye="0" data-Username="chenggang" data-Type="0" data-DateTime="2017/2/24" data-phpurl="2"></div>
 </mip-fy-yuyue>
 </mip-ychlyxgs-adddata>
 </mip-ychlyxgs-data>
 <mip-qqtn-num0></mip-qqtn-num0>
-
 <script src="https://c.mipcdn.com/static/v1/mip-showmore/mip-showmore.js"></script>
 <script src="https://mipcache.bdstatic.com/static/v1/mip-fixed/mip-fixed.js"></script>
 <script src="https://mipcache.bdstatic.com/extensions/platform/v1/mip-ychlyxgs-adddata/mip-ychlyxgs-adddata.js"></script>
@@ -177,14 +141,6 @@
 <script src="https://mipcache.bdstatic.com/extensions/platform/v1/mip-qqtn-num0/mip-qqtn-num0.js"></script>
 
 <script src="https://mipcache.bdstatic.com/extensions/platform/v1/mip-qqtn-shield/mip-qqtn-shield.js"></script>
-
-
-
-
-
-
-
-
 
 ```
 ## 用法
