@@ -56,82 +56,6 @@
         <div on="tap:showmore01.toggle" data-closetext="点击收起内容" class="mip-showmore-btn">加载全部内容>>></div>
     </div>
 </section> 
-<div class="g-box" id="g-keyword">
-    <div class="g-game-recomd">
-    <dl class="g-title">
-        <dt>热门推荐</dt>
-        <dd></dd>
-    </dl>
-        <div class="g-keyword-cont">
-            <ul>
-                            <li><a href="https://m.qqtn.com/q/332519"><mip-img src="https://pic.qqtn.com/up/2018-4/2018042407493872375.jpg!100_100"></mip-img><strong>侦探大师app苹果版</strong></a></li>                          <li><a href="https://m.qqtn.com/q/37667"><mip-img src="https://pic.qqtn.com/up/2018-4/201842382565427.jpg!100_100"></mip-img><strong>驾考宝典2018手机版IOS下载</strong></a></li>                         <li><a href="https://m.qqtn.com/q/35266"><mip-img src="https://pic.qqtn.com/up/2018-3/20183211338546072.jpg!100_100"></mip-img><strong>百度地图iPhone版下载</strong></a></li>                          <li><a href="https://m.qqtn.com/q/96753"><mip-img src="https://pic.qqtn.com/up/2018-3/20183171132135741.jpg!100_100"></mip-img><strong>拼多多iPhone版</strong></a></li>                         <li><a href="https://m.qqtn.com/q/33953"><mip-img src="https://pic.qqtn.com/up/2018-3/2018317103908183.png!100_100"></mip-img><strong>QQ同步助手IOS版</strong></a></li>                          <li><a href="https://m.qqtn.com/q/42524"><mip-img src="https://pic.qqtn.com/up/2018-3/2018311356383602.jpg!100_100"></mip-img><strong>wps office ios版</strong></a></li>                         <li><a href="https://m.qqtn.com/q/34861"><mip-img src="https://pic.qqtn.com/up/2016-9/2016092214142626108.png!100_100"></mip-img><strong>百度贴吧iOS版下载</strong></a></li>                           <li><a href="https://m.qqtn.com/q/38702"><mip-img src="https://pic.qqtn.com/up/2018-2/201825846503294.jpg!100_100"></mip-img><strong>快手下载苹果版</strong></a></li>            
-            </ul>
-        </div>
-    </div>
-</div>
-<section class="g-cms-relatedcms">
-    <dl class="g-title">
-        <dt>相关教程</dt>
-        <dd></dd>
-    </dl>
-    <ul class="g-cmslist">
-                <li><b></b><a href="https://m.qqtn.com/c/40059" title="12月炫联赛圣诞决赛视频直播地址和比赛时间">12月炫联赛圣诞决赛视频直播地址和比赛时间</a></li>                <li><b></b><a href="https://m.qqtn.com/c/38737" title="关注QQ炫舞炫联赛决赛直播 赢取10000点券以及非卖品奖励">关注QQ炫舞炫联赛决赛直播 赢取10000点券以及非卖品奖励</a></li>              <li><b></b><a href="https://m.qqtn.com/c/35032" title="轩辕传奇据点战怎么打？参与微博直播赢大奖">轩辕传奇据点战怎么打？参与微博直播赢大奖</a></li>              <li><b></b><a href="https://m.qqtn.com/c/29974" title="PPS网络电视（2.7.0.1248）发布 改进直播体验">PPS网络电视（2.7.0.1248）发布 改进直播体验</a></li>              <li><b></b><a href="https://m.qqtn.com/c/24705" title="看直播聊比赛 QQ群新增QQ群直播功能">看直播聊比赛 QQ群新增QQ群直播功能</a></li>                <li><b></b><a href="https://m.qqtn.com/c/24455" title="腾讯QQLive购得NBA直播权 NBA直播将落户腾讯">腾讯QQLive购得NBA直播权 NBA直播将落户腾讯</a></li>        
-    </ul>
-</section>  
-<div class="g-box f-num" id="g-keyword">
-    <div class="g-game-recomd m-tab-box">
-        <dl class="g-title">
-            <dt>猜你喜欢</dt>
-            <dd></dd>
-        </dl>
-       <mip-html-tabs tabs-type="Qi_4" tabs-nav="#tab-nav  li" tabs-key="#tab-div div" nav-cur="m-hover">
-      <ul class="g-keyword-btn m-tab-btn" id="tab-nav"></ul>        <!--相关分组-->  
-        <div id="tab-div">
-           <!--/相关分组-->  
-        </div>
-    </div>
-</div>
-<section class="g-key-ohter f-num">
-    <dl class="g-title">
-        <dt>相关合集</dt>
-        <dd></dd>
-    </dl>
-<section class="g-recomd plist" id="g-recomd-game">
-    <ul class="g-recomd-ul">
-        <li><a href="https://m.qqtn.com/k/pgzbptxz" title="苹果直播平台"><mip-img src="https://pic.qqtn.com/up/2016-10/20161081639533079.jpg!200_100" alt="苹果直播平台"></mip-img><span>苹果直播平台</span></a></li>
-    </ul>
-</section>
-</section>
-</mip-qqtn-shield>
-<footer>
-    <a href="https://www.qqtn.com/?m">访问电脑版</a> | <a href="https://m.qqtn.com/">返回首页</a>
-</footer>
-<mip-fixed type="top" class="lightbox m-click-show f-eject-cont" id="customid">
-    <div class="m-show-cont">        
-        <strong class="g-show-title">
-            <p>大家<span>还下载了</span>这些：</p>
-        </strong>        
-        <b class="m-close-btn">+</b>
-        <ul class="m-hideshow-top f-tkul"></ul>
-    </div>    
-    <b class="m-black-bg"></b>    
-</mip-fixed>
-<div class="f-tags-box f-hide-box f-hide">
-    <strong>其它版本</strong>    
-    <ul class="m-tags-android f-tags-android"> 
-        <li data-system="Android" data-id="173385"><a href="https://m.qqtn.com/q/173385" ><i></i><p>比艺直播vip破解版下载v1.0.1 安卓版</p><b>下载</b></a></li>       
-                
-        <li data-system="Android" data-id="173377"><a href="https://m.qqtn.com/q/173377" ><i></i><p>比艺直播apk官方版下载v1.0.0 安卓版</p><b>下载</b></a></li>       
-                
-        <li data-system="Android" data-id="173370"><a href="https://m.qqtn.com/q/173370" ><i></i><p>比艺直播app下载v1.0.0 安卓版</p><b>下载</b></a></li>       
-                
-        <li data-system="Android" data-id="188764"><a href="https://m.qqtn.com/q/188764" ><i></i><p>比艺直播官方app下载v1.0.1 最新版</p><b>下载</b></a></li>       
-        
-        
-    </ul>
-    <ul class="m-tags-ios f-tags-ios">  
-    </ul>
-</div>
 <div class="f-information f-hide" data-id="173398" data-path="down" data-categroyId="294" data-rootid="15" data-commendid="0" data-system="IOS" data-ppaddress="" data-ismoney="0" data-CommentTpye="0" data-Username="chenggang" data-Type="0" data-DateTime="2017/2/24" data-attr="下1架" data-downurl="" data-phpurl="2"></div>
 
 
@@ -149,7 +73,6 @@
 <script src="https://mipcache.bdstatic.com/extensions/platform/v1/mip-cambrian/mip-cambrian.js"></script>
 <script src="https://mipcache.bdstatic.com/extensions/platform/v1/mip-qqtn-num0/mip-qqtn-num0.js"></script>
 
-<script src="https://mipcache.bdstatic.com/extensions/platform/v1/mip-qqtn-shield/mip-qqtn-shield.js"></script>
 
 
 ```

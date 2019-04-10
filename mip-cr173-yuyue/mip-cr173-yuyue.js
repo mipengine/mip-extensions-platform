@@ -1,6 +1,5 @@
 /**
  * @file mip-cr173-yuyue
- * 本功能需要在其他组件执行完以后再执行，所以必须用load ，麻烦过一下，谢谢。
  * 1.0 实现功能：根据页面属性，对已经下架和无地址的资源判断，是软件提示“下架”，是游戏提示“预约”。 对有关联的当前设备访问的资源，根据百度手机助手 百度-黄奥 的需求，进行对应下载的提示。
  * @author gom3250@qq.com.
  *  */
@@ -18,11 +17,11 @@ define(function (require) {
         var yuyueid = ele.getAttribute('data-id');
         var yuyueurl = ele.getAttribute('data-yuyueurl');
         var phpurl = $(ele).find('.f-information').attr('data-phpurl');
+        // 注意。此处获取的不是url地址。只是拼接的下方json的地址的标识符。
         if (phpurl !== undefined) {
             document.onreadystatechange = subSomething;
             function subSomething() {
                 if (document.readyState === 'loaded' || document.readyState === 'complete') {
-                // 加载完成
                     fetchJsonp('https://ca.6071.com/web/index/c/' + phpurl, {
                         jsonpCallback: 'callback'
                     }).then(function (res) {
@@ -148,8 +147,6 @@ define(function (require) {
                         var yyclinum = $(ele).find('.g-yuyue').attr('data-click');
                         if (yyclinum === '0') {
                             $(ele).find('.g-yuyue,.g-yuyuebg').fadeIn();
-                        } else {
-                            alert('您已经预约过拉');
                         };
                     });
                     $(ele).find('.f-yyclose').click(function () {
@@ -161,7 +158,6 @@ define(function (require) {
                         var iputxt = $(ele).find('.g-yuyue input').val();
                         if (iputxt === '') {
                         // 为空
-                            alert('手机号不能为空');
                             return false;
                         };
                         var yyphone = $(ele).find('#f-yyPhone').val();
@@ -170,7 +166,6 @@ define(function (require) {
                         // 手机号段设置
                         if (yyphone !== '') {
                             if (!phonereg.test(yyphone)) {
-                                alert('请输入有效的手机号！');
                                 return false;
                             }
                         }
@@ -188,7 +183,6 @@ define(function (require) {
                 }).then(function (data) {
                     $(ele).find('.g-yuyue').attr('data-click', 1);
                     $(ele).find('.m-yuyueok').text('成功预约');
-                    alert('预约成功');
                     $(ele).find('.g-yuyue,.g-yuyuebg').hide();
                 });
             }
