@@ -1,0 +1,14 @@
+{
+    "name": "mip-qqtn-star",
+    "version": "1.1.0",
+    "description": "获取配置文件地区以及信息进行判断，覆盖原始内容",
+    "contributors": [
+        {
+            "name": "dgm",
+            "email": "1028212667@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.0.0"
+    }
+}
