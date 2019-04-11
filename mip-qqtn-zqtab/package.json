@@ -1,0 +1,14 @@
+{
+    "name": "mip-qqtn-zqtab",
+    "version": "1.0.0",
+    "description": "一行有存在6个栏目的情况，并且名称都是调用读取出来的，想要一行显示不重叠只能隐藏文字做区分,数值没有转型再次修改下",
+    "contributors": [
+        {
+            "name": "dgm",
+            "email": "1028212667@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.0.0"
+    }
+}
