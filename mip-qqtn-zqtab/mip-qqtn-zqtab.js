@@ -21,8 +21,8 @@ define(function (require) {
             var newval = '';
             $('.m-addkuul li span').each(function () {
                 cutval = $(this).find('a').text();
-                if (cutval.indexOf('') !== -1) {
-                    newval = cutval.split('')[0];
+                if (cutval.indexOf('[]') !== -1) {
+                    newval = cutval.split('[]')[0];
                 } else {
                     if (cutval.indexOf('，') !== -1) {
                         newval = cutval.split('，')[0];
@@ -40,6 +40,10 @@ define(function (require) {
                 }
             });
         }
+
+
+
+
         // 没有那么多数据，调一个库里面的45条进行分割。
         $(ele).find('.m-addkuul li').eq(0).find('span').each(function (i) {
             // 给调用数据条数加数字标序号

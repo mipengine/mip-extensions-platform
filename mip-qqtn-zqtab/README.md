@@ -46,7 +46,7 @@ mip-qqtn-zqtab 数据调用，抓取指定条数插入到指定地方，每12条
 <mip-qqtn-zqtab>
 
 <div class="g-addku">
-        <div class="ad-kucolname"><p><a href="javascript:;">使用教程<i>54</i></a><a href="javascript:;">常见问题<i>16</i></a><a href="javascript:;">软件应用<i>67</i></a></p></div>
+        <div class="ad-kucolname"><p><a href="javascript:;">使用教程<i>54</i></a><a href="javascript:;">常见问题<i>16</i></a><a href="javascript:;">软件下载<i>67</i></a></p></div>
         <div class="m-ttdiv pagescroll" id="g-page-scroll" data-kuname="钉钉">
             <ul class="g-recomd-ul m-addkuul clearfix">             
                   <li ><div class="clearfix">
