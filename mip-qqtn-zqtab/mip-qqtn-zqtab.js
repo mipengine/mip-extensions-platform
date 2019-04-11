@@ -40,10 +40,6 @@ define(function (require) {
                 }
             });
         }
-
-
-
-
         // 没有那么多数据，调一个库里面的45条进行分割。
         $(ele).find('.m-addkuul li').eq(0).find('span').each(function (i) {
             // 给调用数据条数加数字标序号
