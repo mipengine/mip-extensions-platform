@@ -15,22 +15,14 @@ mip-qqtn-ku 对应文字隐藏
 <mip-qqtn-ku>
 
 <ul class="g-nav-full g-game-nav">
-       
-    <li><a href="/ku/wzry">专区</a><i></i></li>
+    <li><a href="/ku/dingtalk/">专区</a><i></i></li>
     
-    <li><a href="/ku/wzry/news/">新闻公告</a><i></i></li>
+    <li><a href="/ku/dingtalk/jc/">教程</a><i></i></li>
     
-    <li><a href="/ku/wzry/gl/">攻略秘籍</a><i></i></li>
+    <li><a href="/ku/dingtalk/wt/">问题</a><i></i></li>
     
-    <li><a href="/ku/wzry/wd/">游戏问答</a><i></i></li>
-    
-    <li><a href="/ku/wzry/down/">游戏下载</a><i></i></li>
-    
-    <li><a href="/ku/wzry/fuzhu/">辅助工具</a><i></i></li>
-    
-    
-</ul> 
-
+    <li><a href="/ku/dingtalk/xz/">下载</a><i></i></li>
+</ul>
 </mip-qqtn-ku>
 
 </body>

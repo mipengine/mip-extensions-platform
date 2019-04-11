@@ -30,7 +30,7 @@ define(function (require) {
         });
         // 并且栏目为4个的时候添加class名称附加其他样式标签
         var kunav = $(ele).find('.g-game-nav li').length;
-        if (kunav === '4') {
+        if (kunav === 4) {
             $(ele).find('.g-game-nav').addClass('kuico');
         }
     };
