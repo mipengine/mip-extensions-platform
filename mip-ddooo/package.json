@@ -1,0 +1,14 @@
+{
+    "name": "mip-ddooo",
+    "version": "1.0.0",
+    "description": "非通用组件，适用于ddooo.com网站的移动端下载页面。网站菜单显示、下拉返回顶部、留言显示、板块切换、列表更多、图片幻灯",
+    "contributors": [
+        {
+            "name": "sun",
+            "email": "28259538@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
