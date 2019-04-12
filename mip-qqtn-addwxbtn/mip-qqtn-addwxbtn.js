@@ -1,6 +1,6 @@
 ﻿/**
  * @file mip-qqtn-addwxbtn
- * 获取配置文件地区以及信息进行判断，覆盖原始内容
+ * 根据配置文件添加指定内容，弹窗、关闭效果
  * @author
  */
 define(function (require) {

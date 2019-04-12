@@ -1,6 +1,6 @@
 # mip-qqtn-addwxbtn
 
-mip-qqtn-addwxbtn 获取配置文件地区以及信息进行判断，覆盖原始内容
+mip-qqtn-addwxbtn 根据配置文件添加指定内容，弹窗、关闭效果
 
 标题|内容
 ----|----
@@ -28,7 +28,7 @@ mip-qqtn-addwxbtn 获取配置文件地区以及信息进行判断，覆盖原�
         <em><time pubdate="pubdate">时间:2019/1/17 16:48:00</time>  作者:网友整理  人气:<span id="hits">1719</span></em>
         </mip-fy-hits>
     </article>
-    
+
 <div class="f-infopzwj f-hide" data-star="2"></div>
 </mip-qqtn-addwxbtn>
 
