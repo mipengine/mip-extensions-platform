@@ -1,0 +1,14 @@
+{
+    "name": "mip-qbaobei-ad",
+    "version": "1.0.0",
+    "description": "组件介绍",
+    "contributors": [
+        {
+            "name": "plin",
+            "email": "admin@plin.cc"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
