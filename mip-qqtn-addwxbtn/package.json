@@ -1,0 +1,14 @@
+{
+    "name": "mip-qqtn-addwxbtn",
+    "version": "1.0.0",
+    "description": "根据配置文件添加指定内容，弹窗、关闭效果",
+    "contributors": [
+        {
+            "name": "dgm",
+            "email": "1028212667@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.0.0"
+    }
+}
