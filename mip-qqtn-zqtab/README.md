@@ -13,7 +13,7 @@ mip-qqtn-zqtab 数据调用，抓取指定条数插入到指定地方，每12条
 ```html
 
 <style mip-custom>
-.ad-kucolname p a.m-hover {border-bottom: 2px #19b5fe solid}
+.ad-kucolname p span.m-hover {border-bottom: 2px #19b5fe solid}
 .g-addku {    width: 100%;    height: 280px;    overflow: hidden;margin-top: 0px;  position: relative; padding-top:12px;}
 
 .g-addku h6 { height: 46px; background-color: #fff;    width: 100%;    height: auto;    font-size: 18px;    font-weight: bold;    color: #09aa10;    text-indent: 14px;    border-bottom: 2px solid #eee;    padding: 10px 0;    box-sizing: border-box;    display: block;    overflow: hidden;}
@@ -36,8 +36,8 @@ mip-qqtn-zqtab 数据调用，抓取指定条数插入到指定地方，每12条
 .m-ttdiv {position: relative;  height: 100%; background-color: #fff}
 .ad-kucolname { background-color: #fff }
 .ad-kucolname p { display:-webkit-box; display:-moz-box;display:box;}
-.ad-kucolname p a{ -webkit-box-flex:1.0; -moz-box-flex:1.0;box-flex:1.0;text-align:center;display:block;height:36px;line-height:36px;font-size:16px;}
-.ad-kucolname p a i{background:#f90;color:#fff;padding:1px 6px;border-radius:4px;letter-spacing:0.6px;font-size:14px;margin-left:4px;}
+.ad-kucolname p span{ -webkit-box-flex:1.0; -moz-box-flex:1.0;box-flex:1.0;text-align:center;display:block;height:36px;line-height:36px;font-size:16px;}
+.ad-kucolname p span i{background:#f90;color:#fff;padding:1px 6px;border-radius:4px;letter-spacing:0.6px;font-size:14px;margin-left:4px;}
 
 
 .m-addkuul li.block{display:block}
@@ -46,7 +46,7 @@ mip-qqtn-zqtab 数据调用，抓取指定条数插入到指定地方，每12条
 <mip-qqtn-zqtab>
 
 <div class="g-addku">
-        <div class="ad-kucolname"><p><a href="javascript:;">使用教程<i>54</i></a><a href="javascript:;">常见问题<i>16</i></a><a href="javascript:;">软件下载<i>67</i></a></p></div>
+        <div class="ad-kucolname"><p><span>使用教程<i>54</i></span><span>常见问题<i>16</i></span><span>软件下载<i>67</i></span></p></div>
         <div class="m-ttdiv pagescroll" id="g-page-scroll" data-kuname="钉钉">
             <ul class="g-recomd-ul m-addkuul clearfix">             
                   <li ><div class="clearfix">

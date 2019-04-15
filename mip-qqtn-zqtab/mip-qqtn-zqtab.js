@@ -76,9 +76,9 @@ define(function (require) {
             // $(ele).find(".g-addku").height(sheight+108);
             // $(ele).find(".m-addkuul li").height(160)
         }
-        $(ele).find('.ad-kucolname p').find('a').eq(0).addClass('m-hover');
+        $(ele).find('.ad-kucolname p').find('span').eq(0).addClass('m-hover');
         $(ele).find('.m-addkuul').find('li').eq(0).addClass('block');
-        $(ele).find('.g-addku .ad-kucolname p a').each(function () {
+        $(ele).find('.g-addku .ad-kucolname p span').each(function () {
             if ($(this).text().indexOf('修改') !== -1 || $(this).text().indexOf('电脑版') !== -1
                 || $(this).text().indexOf('下载') !== -1 || $(this).text().indexOf('辅助') !== -1) {
                 // 读取标题名称，如果包含“修改、电脑版、下载、辅助”就移除该标题不显示
@@ -88,14 +88,14 @@ define(function (require) {
                 // 点击执行
                 $(this).addClass('m-hover').siblings().removeClass('m-hover');
                 // 自身添加class移除同级class
-                var contul = $(ele).find('.g-addku .ad-kucolname p a').index(this);
+                var contul = $(ele).find('.g-addku .ad-kucolname p span').index(this);
                 $(ele).find('.m-addkuul').find('li').eq(contul).addClass('block').siblings().removeClass('block');
                 $(ele).find('.m-scroll-num').find('li').eq(contul)
                 .addClass('m-hover').siblings().removeClass('m-hover');
                 // 做关联对应div添加class移除同级class
             });
         });
-        var kucatnum = $(ele).find('.ad-kucolname p a').size();
+        var kucatnum = $(ele).find('.ad-kucolname p span').size();
         // 判断标题个数
         if (kucatnum === 2) {
             // 标题个数为2个的时候移除div最后面的一个li。以及小图标的最后一个
