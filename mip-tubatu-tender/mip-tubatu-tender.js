@@ -478,58 +478,65 @@ define(function (require) {
                 + '<div class="layerout"></div>'
                 + '<mip-fixed type="bottom" class="fixed-footer">'
                 + '<div class="bottom-form-btn-box">'
-                + '<ul class="clearfix">'
+                + '<ul>'
                 + '<li class="btn-mfsj-list">'
-                + '<span class="btn-mfsj" data-pg="2_3_3_6475"><i></i>免费设计</span>'
+                + '<a href="javascript:void(0);" class="btn-mfsj" data-pg="2_3_7_7620"><i></i><span>免费设计</span></a>'
                 + '</li>'
                 + '<li class="btn-zxbj-list">'
-                + '<span class="btn-zxbj" data-pg="2_3_3_6476"><i></i>免费报价</span>'
+                + '<a href="javascript:void(0);" class="btn-zxbj" data-pg="2_3_7_7622"><i></i><span>免费报价</span></a>'
+                + '</li>'
+                + '<li class="btn-lhb-list">'
+                + '<a href="javascript:void(0);" class="btn-lhb" data-pg="2_3_7_7634"><i></i><span>领红包</span></a>'
+                + '</li>'
+                + '<li class="btn-zxgs-list">'
+                + '<a href="javascript:void(0);" class="btn-zxgs" data-pg="2_3_7_7628"><i></i><span>装修公司</span></a>'
+                + '</li>'
+                + '<li class="btn-zxfq-list">'
+                + '<a href="javascript:void(0);" class="btn-zxfq" data-pg="2_3_7_7632"><i></i><span>装修分期</span></a>'
                 + '</li>'
                 + '</ul>'
                 + '</div>'
+
                 + '<div class="tab-bottom-form-box">'
-                + '<div class="mfsj-form-box result-box">'
-                + '<mip-img src="https://img.to8to.com/decorate_learning/banner_mfsj.png" alt=""></mip-img>'
-                + '<mip-form action="" id="mfsj_form" url="//to8tozb.to8to.com/zb/zb-index-get.php">'
+                + '<div class="mfsj-form-box result-box tab-bottom-form-con">'
+                + '<div class="form-top-box">'
+                + '<span class="ico-mfsj-title"></span>'
+                + '<p class="title-text-mfsj title-text-box">110万合作设计师</p>'
+                + '<p class="title-text-one">合理空间布局，专业定制设计</p>'
+                + '</div>'
+                + '<mip-form id="mfsj_form" class="common-form" url="//to8tozb.to8to.com/zb/zb-index-get.php">'
                 + '<div class="mfsj-form tab-form-box">'
-                + '<div class="element-line">'
-                + '<input type="text" id="uname" name="name" placeholder="请输入您的称呼">'
+                + '<div class="element-line area-box download-arrow1">'
+                + '<input type="text" id="city" class="common-city" placeholder="选择城市" readonly="">'
                 + '</div>'
                 + '<div class="element-line clearfix">'
-                + '<div>'
-                + '<input type="tel" id="uphone" name="phone" placeholder="请输入手机号" maxlength="11">'
+                + '<input type="tel" id="uphone" name="phone" class="common-phone"'
+                + 'placeholder="请输入手机号" maxlength="11">'
                 + '</div>'
-                + '<div class="fr area-box download-arrow1">'
-                + '<input type="text" id="city" placeholder="选择城市" readonly="">'
-                + '</div>'
-                + '</div>'
-                + '<div class="element-line order_serve_check">'
-                + '<span class="check_box">'
-                + '<mip-img class="checked" src="https://img.to8to.com/decorate_learning//checked.png" alt=""></mip-img>'
-                + '<mip-img class="unchecked" src="https://img.to8to.com/decorate_learning//unchecked.png" alt=""></mip-img>'
-                + '</span>'
-                + '我已阅读并接受 <a href="https://m.to8to.com/question.html">《装修常见问题条款》</a>'
-                + '</div>'
-                + '<input type="hidden" id="mfsj_pg" name="ptag" value="">'
-                + '<span id="sub_mfsj" class="sub-mfsj-form" data-pg="">立即申请</span>'
+                + '<input type="hidden" id="mfsj_pg" name="ptag" value="2_3_7_7619">'
+                + '<a href="javascript:void(0);" id="sub_mfsj" class="sub-mfsj-form" data-pg="">立即申请</a>'
                 + '</div>'
                 + '</mip-form>'
-                + '<span class="close-box"><em></em></span>'
                 + '</div>'
-                + '<div class="zxbj-form-box result-box">'
-                + '<mip-img src="https://img.to8to.com/decorate_learning/banner_zxbj.png" alt=""></mip-img>'
+
+                + '<div class="zxbj-form-box result-box tab-bottom-form-con">'
+                + '<div class="form-top-box">'
+                + '<span class="ico-mfbj-title"></span>'
+                + '<p class="title-text-mfbj title-text-box">2600万真实业主数据</p>'
+                + '<p class="title-text-two">预知装修费用，不再花冤枉钱</p>'
+                + '</div>'
                 + '<mip-form action="" id="zxbj_form" url="//to8tozb.to8to.com/zb/zb.php">'
                 + '<div class="mfsj-form tab-form-box">'
                 + '<div class="element-line clearfix">'
                 + '<div class="area-box">'
-                + '<input type="text" id="newcity" placeholder="选择城市" readonly="">'
+                + '<input type="text" id="newcity" class="common-city" placeholder="选择城市" readonly="">'
                 + '</div>'
                 + '<div class="fr">'
                 + '<input type="number" id="quare" name="quare" placeholder="面积">'
                 + '<span>㎡</span>'
                 + '</div>'
                 + '</div>'
-                + '<div class="element-line">'
+                + '<div class="element-line area-hx-box">'
                 + '<div class="yusuan-jishi download-arrow2" id="huxingInput_test">'
                 + '<em id="testshi">1</em>室'
                 + '<em id="testting">1</em>厅'
@@ -538,10 +545,11 @@ define(function (require) {
                 + '</div>'
                 + '</div>'
                 + '<div class="element-line">'
-                + '<input type="tel" id="newphone" name="phone" placeholder="请输入手机，短信获取报价结果" maxlength="11">'
-                + '<input type="hidden" id="zxbj_pg" name="ptag" value="">'
+                + '<input type="tel" id="newphone" name="phone"'
+                + 'placeholder="请输入手机，短信获取报价结果" maxlength="11">'
+                + '<input type="hidden" id="zxbj_pg" name="ptag" value="2_3_7_7621">'
                 + '</div>'
-                + '<span id="sub_zxjb" class="sub-mfsj-form" data-pg="">立即申请</span>'
+                + '<a href="javascript:void(0);" id="sub_zxjb" class="sub-mfsj-form" data-pg="">免费获取报价</a>'
                 + '<input type="hidden" name="fang" id="secshi" value="1">'
                 + '<input type="hidden" name="ting" id="secting" value="1">'
                 + '<input type="hidden" name="wei" id="secwei" value="1">'
@@ -549,7 +557,66 @@ define(function (require) {
                 + '<input type="hidden" name="chu" id="secchu" value="1">'
                 + '</div>'
                 + '</mip-form>'
-                + '<span class="close-box"><em></em></span>'
+                + '</div>'
+                + '<div class="lhb-form-box result-box tab-bottom-form-con">'
+                + '<div class="form-top-box">'
+                + '<span class="ico-lhb-title"></span>'
+                + '<p class="title-text-lhb title-text-box">土巴兔送你的¥3000</p>'
+                + '<p class="title-text-three">定制设计、专业量房、预算规划</p>'
+                + '</div>'
+                + '<mip-form action="" id="lhb_form" class="common-form" url="//to8tozb.to8to.com/zb/zb-index-get.php">'
+                + '<div class="mfsj-form tab-form-box">'
+                + '<div class="element-line area-box download-arrow1">'
+                + '<input type="text" id="lhbcity" class="common-city" placeholder="选择城市" readonly="">'
+                + '</div>'
+                + '<div class="element-line clearfix">'
+                + '<input type="tel" id="lhbphone" name="phone"'
+                + 'class="common-phone" placeholder="请输入手机号" maxlength="11">'
+                + '</div>'
+                + '<input type="hidden" id="lhb_pg" name="ptag" value="2_3_7_7633">'
+                + '<a href="javascript:void(0);" id="sub_lhb" class="sub-mfsj-form" data-pg="">立即领取</a>'
+                + '</div>'
+                + '</mip-form>'
+                + '</div>'
+                + '<div class="zxgs-form-box result-box tab-bottom-form-con">'
+                + '<div class="form-top-box">'
+                + '<span class="ico-zxgs-title"></span>'
+                + '<p class="title-text-zxgs title-text-box">8万家合作装修公司</p>'
+                + '<p class="title-text-four">免费上门量房，货比三家，服务更满意</p>'
+                + '</div>'
+                + '<mip-form id="zxgs_form" class="common-form" url="//to8tozb.to8to.com/zb/zb-index-get.php">'
+                + '<div class="mfsj-form tab-form-box">'
+                + '<div class="element-line area-box download-arrow1">'
+                + '<input type="text" id="zxgscity" class="common-city" placeholder="选择城市" readonly="">'
+                + '</div>'
+                + '<div class="element-line clearfix">'
+                + '<input type="tel" id="zxgsphone" name="phone" class="common-phone"'
+                + 'placeholder="请输入手机号" maxlength="11">'
+                + '</div>'
+                + '<input type="hidden" id="zxgs_pg" name="ptag" value="2_3_7_7627">'
+                + '<a href="javascript:void(0);" id="sub_zxgs" class="sub-mfsj-form" data-pg="">免费获取上门量房服务</a>'
+                + '</div>'
+                + '</mip-form>'
+                + '</div>'
+                + '<div class="zxfq-form-box result-box tab-bottom-form-con">'
+                + '<div class="form-top-box">'
+                + '<span class="ico-zxfq-title"></span>'
+                + '<p class="title-text-zxfq title-text-box">中行/建行 专业贷款服务</p>'
+                + '<p class="title-text-five">门槛超低，申请简单，审核快速</p>'
+                + '</div>'
+                + '<mip-form id="zxfq_form" class="common-form" url="//to8tozb.to8to.com/zb/zb-index-get.php">'
+                + '<div class="mfsj-form tab-form-box">'
+                + '<div class="element-line area-box download-arrow1">'
+                + '<input type="text" id="zxfqcity" class="common-city" placeholder="选择城市" readonly="">'
+                + '</div>'
+                + '<div class="element-line clearfix">'
+                + '<input type="tel" id="zzxfqphone" name="phone" class="common-phone"'
+                + 'placeholder="请输入手机号" maxlength="11">'
+                + '</div>'
+                + '<input type="hidden" id="zxfq_pg" name="ptag" value="2_3_7_7631">'
+                + '<a href="javascript:void(0);" id="sub_zxfq" class="sub-mfsj-form" data-pg="">点击查看贷款额度</a>'
+                + '</div>'
+                + '</mip-form>'
                 + '</div>'
                 + '</div>'
                 + '</mip-fixed>'
@@ -557,14 +624,34 @@ define(function (require) {
 
         $('body').append(str);
 
-        window.ProvincesSelect.initialize({
-            targetDom: '#city',
-            forDom: '#mfsj_form'
+        // 获取ptag
+        if (location.href.indexOf('ask') > 0) {
+            $('.btn-mfsj').attr('data-pg', $('#btn-mfsj-pg').val());
+            $('.btn-zxbj').attr('data-pg', $('#btn-mfbj-pg').val());
+            $('.btn-lhb').attr('data-pg', $('#btn-lhb-pg').val());
+            $('.btn-zxgs').attr('data-pg', $('#btn-zxgs-pg').val());
+            $('.btn-zxfq').attr('data-pg', $('#btn-zxfq-pg').val());
+            $('#mfsj_pg').val($('#crm-mfsj-pg').val());
+            $('#zxbj_pg').val($('#crm-mfbj-pg').val());
+            $('#lhb_pg').val($('#crm-lhb-pg').val());
+            $('#zxgs_pg').val($('#crm-zxgs-pg').val());
+            $('#zxfq_pg').val($('#crm-zxfq-pg').val());
+        }
+
+        var wapTownid = getCookie('to8to_wap_townid');
+        // 接口
+        $.ajax({
+            type: 'GET',
+            dataType: 'jsonp',
+            url: '//secure.to8to.com/api/getindexdata.php?type=towninfo&townid=' + wapTownid,
+            success: function (res) {
+                $('.common-city').val(res.prov + ' ' + res.city);
+            }
         });
 
         window.ProvincesSelect.initialize({
-            targetDom: '#newcity',
-            forDom: '#zxbj_form'
+            targetDom: '.common-city',
+            forDom: '.common-form'
         });
 
         var footerlayer = new FooterLayer();
@@ -580,61 +667,70 @@ define(function (require) {
                 $('input').blur();
             });
 
-            // 获取ptag
-            $('.btn-mfsj').attr('data-pg', $('#mfsj_btn_ptag').attr('data-ptagg'));
-            $('#mfsj_pg').val($('#msfj_crm_ptag').attr('data-ptagg'));
-
-            $('.btn-zxbj').attr('data-pg', $('#zxbj_btn_ptag').attr('data-ptagg'));
-            $('#zxbj_pg').val($('#zxbj_crm_ptag').attr('data-ptagg'));
-
+            // 底部切换
             $('.bottom-form-btn-box li').on('touchstart', function () {
                 var Tthis = $(this);
                 var index = Tthis.index();
-                Tthis.addClass('active').siblings().removeClass('active');
-                $('.tab-bottom-form-box').show();
-                $('.layerout').show();
-                $('body').css({'overflow-y': 'hidden'});
+                if (Tthis.hasClass('active')) {
+                    closeBox();
+                } else {
+                    Tthis.addClass('active').siblings().removeClass('active');
+                    $('.tab-bottom-form-box').show();
+                    $('.layerout').show();
+                    $('body').css({'overflow-y': 'hidden'});
+                    var isActive = Tthis.hasClass('active');
+                    if (isActive) {
+                        Tthis.siblings().removeClass('active');
+                        Tthis.addClass('active');
 
-                var isActive = Tthis.hasClass('active');
-                if (isActive) {
-                    Tthis.siblings().removeClass('active');
-                    Tthis.addClass('active');
-
-                    var $resultBox = $('.result-box');
-                    $resultBox.eq(index).siblings('.result-box').hide();
-                    $resultBox.eq(index).show();
+                        var $resultBox = $('.result-box');
+                        $resultBox.eq(index).addClass('acitve-anim');
+                        $resultBox.eq(index).siblings('.result-box').removeClass('acitve-anim');
+                    }
                 }
             });
 
-            $('.close-box').on('click', function () {
-                closeBox();
+            // 关闭弹框
+            var closeBoxMove = false;
+            $('.layerout').on('touchstart', function (e) {
+                closeBoxMove = false;
             });
-
-            var btnDisabled = false;
-            $('.check_box').on('touchstart', function () {
-
-                if ($(this).hasClass('checkon')) {
-                    $(this).removeClass('checkon');
-                } else {
-                    $(this).addClass('checkon');
-                }
-                var show = $('.check_box .checked').css('display');
-                if (show === 'block') {
-                    btnDisabled = false;
-                    $('#sub_mfsj').removeAttr('disabled');
-                    $('#sub_mfsj').removeClass('disabled');
-                } else {
-                    btnDisabled = true;
-                    $('#sub_mfsj').attr('disabled', true);
-                    $('#sub_mfsj').addClass('disabled');
+            $('.layerout').on('touchmove', function (e) {
+                closeBoxMove = false;
+            });
+            $('.layerout').on('touchend', function (e) {
+                if (!closeBoxMove) {
+                    e.preventDefault();
+                    $('.layerout').removeClass('layerout-z');
+                    $('.mfsj-layer-box').remove();
+                    closeBox();
                 }
             });
 
             $('#sub_mfsj').on('click', function () {
-                if (!$('#sub_mfsj').hasClass('disabled')) {
-                    mfsjCheckform();
-                }
+                var ptag = $('#mfsj_pg').val();
+                sjCheckForm(ptag, 21);
             });
+
+            $('#sub_lhb').on('click', function () {
+                var ptag = $('#lhb_pg').val();
+                sjCheckForm(ptag, 23);
+            });
+
+            $('#sub_zxgs').on('click', function () {
+                var ptag = $('#zxgs_pg').val();
+                sjCheckForm(ptag, 23);
+            });
+
+            $('#sub_zxfq').on('click', function () {
+                var ptag = $('#zxfq_pg').val();
+                sjCheckForm(ptag, 28);
+            });
+
+            $('#sub_zxjb').on('click', function () {
+                zxbjCheckform();
+            });
+
 
             $('.layerout,.tab-bottom-form-box').on('touchmove', function (e) {
                 e.stopPropagation();
@@ -647,9 +743,6 @@ define(function (require) {
                 closeBox();
             });
 
-            $('#sub_zxjb').on('click', function () {
-                zxbjCheckform();
-            });
 
             $('#quare').on('keyup', function () {
                 selectDoorModle($(this).val(), this);
@@ -727,24 +820,50 @@ define(function (require) {
         };
     }
 
+    function getCookie(cName) {
+        var vClaue = document.cookie;
+        var vStart = vClaue.indexOf(' ' + cName + '=');
+        if (vStart === -1) {
+            vStart = vClaue.indexOf(cName + '=');
+        }
+        if (vStart === -1) {
+            vClaue = null;
+        } else {
+            vStart = vClaue.indexOf('=', vStart) + 1;
+            var cEnd = vClaue.indexOf(';', vStart);
+            if (cEnd === -1) {
+                cEnd = vClaue.length;
+            }
+            vClaue = catchCodeComponent(vClaue.substring(vStart, cEnd));
+        }
+        return vClaue;
+    }
+
+    function catchCodeComponent(str) {
+        var result = '';
+        try {
+            result = decodeURIComponent(str);
+        } catch (e) {
+            result = str;
+        }
+        return result;
+    }
+
     function closeBox() {
         $('body').css({'overflow-y': 'initial'});
-        $('.tab-bottom-form-box').hide();
-        $('.mfsj-form-box').hide();
-        $('.zxbj-form-box').hide();
+        $('.result-box').removeClass('acitve-anim');
         $('.layerout').hide();
         $('.bottom-form-btn-box li').removeClass('active');
     }
 
-    function mfsjCheckform() {
-        var mfsjNmae = $('#uname').val();
-        var mfsjPhone = $('#uphone').val();
-        var mfsjCity = $('#city').val();
+    function sjCheckForm(ptag, applyType) {
+        var mfsjPhone = $('.acitve-anim .common-phone').val();
+        var mfsjCity = $('.acitve-anim .common-city').val();
         var addArr = mfsjCity.split(' ');
         var uuid = createGuid();
 
-        if (mfsjNmae.length === 0) {
-            errorLayer('请输入用户名');
+        if (mfsjCity.length === 0) {
+            errorLayer('请输入城市');
             return false;
         }
         if (mfsjPhone.length === 0) {
@@ -755,24 +874,19 @@ define(function (require) {
             errorLayer('请输入正确的手机号码');
             return false;
         }
-        if (mfsjCity.length === 0) {
-            errorLayer('请输入城市');
-            return false;
-        }
-
         var sendData = 'shen='
-            + addArr[0]
-            + '&city='
-            + addArr[1]
-            + '&chenghu='
-            + mfsjNmae
-            + '&phone='
-            + mfsjPhone
-            + '&ptag='
-            + $('#mfsj_pg').val()
-            + '&modeltype=6&not_send_mobile_msg=1'
-            + '&uuid='
-            + uuid;
+        + addArr[0]
+        + '&city='
+        + addArr[1]
+        + '&phone='
+        + mfsjPhone
+        + '&ptag='
+        + ptag
+        + '&apply_type='
+        + applyType
+        + '&modeltype=6&not_send_mobile_msg=1'
+        + '&uuid='
+        + uuid;
 
         if (!repeatFlag) {
             // repeatFlag = true;
@@ -788,18 +902,20 @@ define(function (require) {
                     repeatFlag = false;
                     if (res.status === 1) {
 
-                        $('#uname').val('');
-                        $('#uphone').val('');
-                        $('#city').val('');
+                        $('.common-phone').val('');
 
-                        var html = '<div class="mfsj-layer-box">'
-                            + '<img src="//img.to8to.com/wap/service_assurance/success.png">'
-                            + '<h2>预约成功！</h2>'
-                            + '<p style="color: #fe8e20; font-size: 14px;">稍后客服管家将会致电您和你确认预定信息</p>'
-                            + '<a href="javascript:void(0);" class="mfsj-close-box" data-pg=""><em data-pg=""></em></a>'
-                            + '</div>';
-                        $('.layerout').addClass('layerout-z');
-                        $('body').append(html);
+                        if ($('.acitve-anim').hasClass('lhb-form-box')) {
+                            window.location.href = 'https://m.to8to.com/tubatu/decouponLhbsuccess.html';
+                        } else {
+                            var html = '<div class="mfsj-layer-box">'
+                                + '<img src="//static.to8to.com/wap/static/images/decorate_learning/ico_succes.png">'
+                                + '<h2>预约成功</h2>'
+                                + '<p class="mfsj-kf-text tell-text">预约成功，稍后客服管家将致电与您确认您的预留信息</p>'
+                                + '<a href="javascript:void(0);" class="mfsj-close-box">好的</a>'
+                                + '</div>';
+                            $('.layerout').addClass('layerout-z');
+                            $('body').append(html);
+                        }
                     }
                     if (res.status === 5) {
                         // errorLayer('非常抱歉，您当前的城市' + addArr[1] + '尚未开通免费设计服务，敬请期待！');
