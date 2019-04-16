@@ -14,12 +14,17 @@ define(function (require) {
      * @param {Object} params [来自mip-asy-law的属性]
      */
     function bindEven(element, params) {
-        document.addEventListener('DOMContentLoaded', function () {
+        $(document).ready(function () {
             if (!params.url) {
                 return;
-            }
-            $.getJSON(params.url, function (result) {
-                $('#' + params.containerId).append(toHtml(result));
+            };
+            $.ajax({
+                url: params.url,
+                type: 'GET',
+                dataType: 'jsonp',
+                success: function (result) {
+                    $('#' + params.containerId).append(toHtml(result));
+                }
             });
         });
     }
