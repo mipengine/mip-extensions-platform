@@ -1,0 +1,14 @@
+{
+    "name": "mip-qqtn-dnumber",
+    "version": "1.0.0",
+    "description": "给下载按钮添加onclick并记录点击下载次数",
+    "contributors": [
+        {
+            "name": "dgm",
+            "email": "1028212667@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.0.0"
+    }
+}
