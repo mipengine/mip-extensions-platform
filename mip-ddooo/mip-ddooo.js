@@ -114,9 +114,13 @@ define(function (require) {
     if (xgwzheight > 10) {
         $('.mation .xgwzlist').css({height: 400});
         $('#xgwzlist').css({display: 'block'});
-    }
-    else {
+    } else {
         $('.mation .xgwzlist').css({height: 'auto'});
+    }
+    if ($('.DSContent').height() > 309) {
+        $('#DSContent').css({display: 'block'});
+    } else {
+        $('#DSContent').css({display: 'none'});
     }
     function trim(s) {
         return s.replace(/(^\s*)|(\s*$)/g, '');
@@ -132,11 +136,11 @@ define(function (require) {
             $(this).html('<span>更多其它版本</span><i></i>');
         }
         if (btnText === '展开全部内容') {
-            $('.DSContent').css({height: 'auto'});
+            $('.DSContent').css({'max-height': '100%'});
             $(this).html('<span>收起内容</span><i class=\'cur\'></i>');
         }
         if (btnText === '收起内容') {
-            $('.DSContent').css({height: 310});
+            $('.DSContent').css({'max-height': 315});
             $(this).html('<span>展开全部内容</span><i></i>');
         }
         if (btnText === '点击查看更多') {
