@@ -1,6 +1,6 @@
 {
   "name": "mip-asy-law",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "页面加载完成时ajax异步加载数据到指定容器",
   "contributors": [
     {
