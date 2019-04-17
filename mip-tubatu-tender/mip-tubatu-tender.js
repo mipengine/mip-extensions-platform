@@ -626,16 +626,16 @@ define(function (require) {
 
         // 获取ptag
         if (location.href.indexOf('ask') > 0) {
-            $('.btn-mfsj').attr('data-pg', $('#btn-mfsj-pg').val());
-            $('.btn-zxbj').attr('data-pg', $('#btn-mfbj-pg').val());
-            $('.btn-lhb').attr('data-pg', $('#btn-lhb-pg').val());
-            $('.btn-zxgs').attr('data-pg', $('#btn-zxgs-pg').val());
-            $('.btn-zxfq').attr('data-pg', $('#btn-zxfq-pg').val());
-            $('#mfsj_pg').val($('#crm-mfsj-pg').val());
-            $('#zxbj_pg').val($('#crm-mfbj-pg').val());
-            $('#lhb_pg').val($('#crm-lhb-pg').val());
-            $('#zxgs_pg').val($('#crm-zxgs-pg').val());
-            $('#zxfq_pg').val($('#crm-zxfq-pg').val());
+            $('.btn-mfsj').attr('data-pg', $('#btn-mfsj-pg').attr('data-ptagg'));
+            $('.btn-zxbj').attr('data-pg', $('#btn-mfbj-pg').attr('data-ptagg'));
+            $('.btn-lhb').attr('data-pg', $('#btn-lhb-pg').attr('data-ptagg'));
+            $('.btn-zxgs').attr('data-pg', $('#btn-zxgs-pg').attr('data-ptagg'));
+            $('.btn-zxfq').attr('data-pg', $('#btn-zxfq-pg').attr('data-ptagg'));
+            $('#mfsj_pg').val($('#crm-mfsj-pg').attr('data-ptagg'));
+            $('#zxbj_pg').val($('#crm-mfbj-pg').attr('data-ptagg'));
+            $('#lhb_pg').val($('#crm-lhb-pg').attr('data-ptagg'));
+            $('#zxgs_pg').val($('#crm-zxgs-pg').attr('data-ptagg'));
+            $('#zxfq_pg').val($('#crm-zxfq-pg').attr('data-ptagg'));
         }
 
         var wapTownid = getCookie('to8to_wap_townid');
