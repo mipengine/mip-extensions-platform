@@ -1,0 +1,15 @@
+{
+    "name": "mip-bnmanhua-ws",
+    "version": "1.0.0",
+    "description": "用于投放第本站产品广告",
+    "contributors": [
+        {
+            "name": "bnmanhua",
+            "email": "513741179@qq.com",
+            "url": "https://www.bnmanhua.com/"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
