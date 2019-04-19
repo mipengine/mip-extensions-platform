@@ -48,12 +48,19 @@ define(function (require) {
         var snum = $(ele).find('.m-addkuul li').eq(0).find('span').length;
         var sheight = 46;
         $(ele).find('.m-addkuul li').width($(window).width());
-        if (snum < 12) {
-            // 判断调用数据条数小于12条
+        // 判断调用数据条数小于12条
+        if (snum <= 12) {
             if (snum <= 3) {
                 $(ele).find('.g-addku').height(sheight + 84);
-            } else {
+            }
+            if (snum > 3 && snum <= 6) {
                 $(ele).find('.g-addku').height((sheight * 2) + 84);
+            }
+            if (snum > 6 && snum <= 9) {
+                $(ele).find('.g-addku').height((sheight * 3) + 84);
+            }
+            if (snum > 9 && snum <= 12) {
+                $(ele).find('.g-addku').height((sheight * 4) + 84);
             }
             $(ele).find('.g-addku .m-scroll-num').hide();
         }
@@ -62,7 +69,8 @@ define(function (require) {
             $(ele).find('.m-addkuul li').eq(0).find('div span').slice(12, 24)
             .wrapAll('<p class="clearfix shuju2"></p>');
             $(ele).find('.m-addkuul li.m-li2 div').append($('.shuju2')[0]);
-            $(ele).find('.m-scroll-num li:last').remove();
+            $(ele).find('.m-scroll-num li').last().remove();
+            $(ele).find('.g-addku').height((sheight * 4) + 84);
         }
         if (snum > 25) {
             // 判断调用数据条数小于大于25条
@@ -78,7 +86,7 @@ define(function (require) {
             // 把新建的shuju2这个p标签放到指定m-li2 div下面展示
             $(ele).find('.m-addkuul li.m-li3 div').append($('.shuju3')[0]);
             // 把新建的shuju3这个p标签放到指定m-li3 div下面展示
-            // $(ele).find(".g-addku").height(sheight+108);
+            $(ele).find('.g-addku').height((sheight * 4) + 84);
             // $(ele).find(".m-addkuul li").height(160)
         }
         $(ele).find('.ad-kucolname p').find('span').eq(0).addClass('m-hover');
@@ -112,3 +120,4 @@ define(function (require) {
     };
     return customElement;
 });
+

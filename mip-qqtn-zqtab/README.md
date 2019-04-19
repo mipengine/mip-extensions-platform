@@ -45,12 +45,12 @@ mip-qqtn-zqtab 数据调用，抓取指定条数插入到指定地方，每12条
 
 <mip-qqtn-zqtab>
 
- <div class="g-addku">
-        <div class="ad-kucolname"><p><a href="javascript:;">新闻公告<i>1</i></a><a href="javascript:;">攻略秘籍<i>1</i></a><a href="javascript:;">游戏问答<i>2</i></a><a href="javascript:;">游戏下载<i>17</i></a></p></div>
-        <div class="m-ttdiv pagescroll" id="g-page-scroll" data-kuname="魔剑奇兵">
+<div class="g-addku">
+        <div class="ad-kucolname"><p><span>新闻公告<i>2</i></span><span>攻略秘籍<i>4</i></span><span>游戏问答<i>6</i></span><span>游戏下载<i>15</i></span></p></div>
+        <div class="m-ttdiv pagescroll" id="g-page-scroll" data-kuname="航海王强者之路">
             <ul class="g-recomd-ul m-addkuul clearfix">             
                   <li ><div class="clearfix">
-                  <span><a href="/c/264528">公测上线时间</a></span><span><a href="/c/264545">坐骑系统</a></span><span><a href="/c/264540">神器系统</a></span><span><a href="/c/264535">提升战力</a></span> </div>
+                  <span><a href="/c/263345">礼包大全</a></span><span><a href="/c/123206">航海王强者之路什么时候可以玩 不删档计费测试</a></span><span><a href="/c/263350">一人流攻略</a></span><span><a href="/c/123384">航海王强者之路iOS版本安装与打开指南</a></span><span><a href="/c/123222">航海王强者之路辅助器烧饼修改器修改教程</a></span><span><a href="/c/123210">航海王强者之路苹果电脑版下载地址 航海王强者之路电脑版iOS模拟器有没有</a></span><span><a href="/c/263352">红卡速成</a></span><span><a href="/c/123396">航海王强者之路手游初始耐力上限是多少 游戏中如何获得更多耐力</a></span><span><a href="/c/123392">航海王强者之路手游体力怎么获得 体力获得方法大全</a></span><span><a href="/c/123389">航海王强者之路常见问题解答FAQ指南官方版</a></span><span><a href="/c/123218">航海王强者之路辅助修改器 航海王强者之路游戏辅助有没有</a></span><span><a href="/c/123215">航海王强者之路手游金币价格是多少</a></span> </div>
                 </li>
                 <li class="m-li2">
                         <div class="clearfix"></div>
@@ -61,8 +61,11 @@ mip-qqtn-zqtab 数据调用，抓取指定条数插入到指定地方，每12条
             </ul>
             <ul class="m-scroll-num"><li class="m-hover"></li><li></li><li></li></ul>
         </div>  
-        <div class="more"><a href="/ku/mjqbsy/">进入<i>魔剑奇兵</i>专区<span></span></a></div>  
+        <div class="more"><a href="/ku/hhwqzzl/">进入<i>航海王强者之路</i>专区<span></span></a></div>  
     </div>    
+
+
+
      
 
 
