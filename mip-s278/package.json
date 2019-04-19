@@ -1,0 +1,14 @@
+{
+    "name": "mip-s278",
+    "version": "1.0.0",
+    "description": "s278历史记录组件",
+    "contributors": [
+        {
+            "name": "s278",
+            "email": "admin@s278.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
