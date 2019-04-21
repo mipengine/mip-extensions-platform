@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @file mip-qqtn-zqtab
  * 数据调用，抓取指定条数插入到指定地方，每12条为一个p标签差入。然后进行点击切换对应显示的p标签，并且截取设置的字符隐藏
  * @author
@@ -47,20 +47,21 @@ define(function (require) {
         });
         var snum = $(ele).find('.m-addkuul li').eq(0).find('span').length;
         var sheight = 46;
+        var fourh = 40;
         $(ele).find('.m-addkuul li').width($(window).width());
         // 判断调用数据条数小于12条
         if (snum <= 12) {
             if (snum <= 3) {
-                $(ele).find('.g-addku').height(sheight + 84);
+                $(ele).find('.g-addku').height(fourh + 84);
             }
             if (snum > 3 && snum <= 6) {
-                $(ele).find('.g-addku').height((sheight * 2) + 84);
+                $(ele).find('.g-addku').height((fourh * 2) + 84);
             }
             if (snum > 6 && snum <= 9) {
-                $(ele).find('.g-addku').height((sheight * 3) + 84);
+                $(ele).find('.g-addku').height((fourh * 3) + 84);
             }
             if (snum > 9 && snum <= 12) {
-                $(ele).find('.g-addku').height((sheight * 4) + 84);
+                $(ele).find('.g-addku').height((fourh * 4) + 84);
             }
             $(ele).find('.g-addku .m-scroll-num').hide();
         }
@@ -120,4 +121,6 @@ define(function (require) {
     };
     return customElement;
 });
+
+
 
