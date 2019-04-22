@@ -6,7 +6,7 @@ mip-shuyang-count 组件说明
 ----|----
 类型|通用
 支持布局|responsive,fixed-height,fill,container,fixed
-所需脚本|https://c.mipcdn.com/static/v1/mip-shuyang-count/mip-shuyang-count.js
+所需脚本|http://mipcache.bdstatic.com/static/v1/mip-shuyang-count/mip-shuyang-count.js
 
 ## 示例
 
@@ -14,6 +14,7 @@ mip-shuyang-count 组件说明
 ```html
 <mip-shuyang-count op="count" id="276838" modelid="1" catid="213215">
     自定义内容，可以嵌套其他组件
+	<div id="todaydowns"></div>
 </mip-shuyang-count>
 ```
 
@@ -28,4 +29,3 @@ mip-shuyang-count 组件说明
 默认值：无
 
 ## 注意事项
-无
