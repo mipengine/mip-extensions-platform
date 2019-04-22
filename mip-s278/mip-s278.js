@@ -3,14 +3,14 @@
  * @author  s278作者
  */
 
-define(function (require) {
+define(function (e) {
 
-    var customElement = require('customElement').create();
-
+    var a = e('customElement').create();
+    var n = e('zepto');
     /**
      * 构造元素，只会运行一次
      */
-    customElement.prototype.build = function () {
+    a.prototype.firstInviewCallback = function () {
         var stui = {
             Cookie: {
                 set: function (name, value, days) {
@@ -38,14 +38,14 @@ define(function (require) {
             common: {
                 history: function () {
                     if (stui.Cookie.get('recente')) {
-                        var json =  stui.Cookie.get('recente');
+                        var json =  $.parseJSON('+stui.Cookie.get("recente")+');
 
                         for (var i = 0; i < json.length; i++) {
                             var li = document.createElement('li');
                             li.innerHTML = '<a href=\'' + json[i].vodurl + '\' title=\'' + json[i].vodname + '\'>';
                             li.innerHTML += '<span class=\'pull-right text-red\'>' + json[i].vodpart;
                             li.innerHTML += '</span>' + json[i].vodname + '</a>';
-                            document.getElementById('stui_history').appendChild(li);
+                            n('#stui_history').append(li);
                         }
                     }
                     else {
@@ -53,17 +53,17 @@ define(function (require) {
                         p.innerHTML = '您还没有看过影片哦';
                         p.style.textAlign = 'center';
                         p.style.padding = '80px 0';
-                        document.getElementById('stui_history').appendChild(p);
+                        n('#stui_history').append(p);
                     }
-                    document.getElementsByClassName('historyclean')[0].onclick = function () {
+                    n('.historyclean').first().click(function () {
                         stui.Cookie.del('recente');
-                    };
+                    });
                 }
             }
         };
         window.onload = function () {
-            var his = document.getElementsByClassName('stui-his')[0];
-            var drop = document.getElementsByClassName('dropdown')[0];
+            var his = n('.stui-his').first();
+            var drop = n('.dropdown').first();
             his.onmouseover = function () {
                 drop.style.display = 'block';
             };
@@ -80,14 +80,14 @@ define(function (require) {
             };
             stui.common.history();
             if (window.location.href.indexOf('play') > -1) {
-                var vodname = document.getElementById('vodname').innerHTML;
-                var vodpart = document.getElementById('playname').innerHTML;
+                var vodname = n('vodname').html();
+                var vodpart = n('playname').html();
                 var vodurl = window.location.href;
                 var recente = stui.Cookie.get('recente');
                 var len = 0;
                 var canadd = true;
                 if (recente) {
-                    recente = recente;
+                    recente = $.parseJSON('+recente+');
                     len = recente.length;
                     $(recente).each(function () {
                         if (vodname === this.vodName) { // 已记录则修改
@@ -154,5 +154,5 @@ define(function (require) {
         };
     };
 
-    return customElement;
+    return a;
 });
