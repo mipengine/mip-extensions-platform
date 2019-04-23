@@ -5,13 +5,8 @@
 
 define(function (e) {
 
-    var a = e('customElement').create();
     var n = e('zepto');
-    /**
-     * 构造元素，只会运行一次
-     */
-    a.prototype.firstInviewCallback = function () {
-        var stui = {
+    var stui = {
             Cookie: {
                 set: function (name, value, days) {
                     var exp = new Date();
@@ -38,7 +33,7 @@ define(function (e) {
             common: {
                 history: function () {
                     if (stui.Cookie.get('recente')) {
-                        var json =  $.parseJSON('+stui.Cookie.get("recente")+');
+                        var json =  n.parseJSON(stui.Cookie.get('recente'));
 
                         for (var i = 0; i < json.length; i++) {
                             var li = document.createElement('li');
@@ -61,16 +56,15 @@ define(function (e) {
                 }
             }
         };
-        window.onload = function () {
-            var his = n('.stui-his').first();
-            var drop = n('.dropdown').first();
-            his.onmouseover = function () {
+    var his = n('.stui-his').first();
+    var drop = n('.dropdown').first();
+    his.onmouseover = function () {
                 drop.style.display = 'block';
             };
-            his.onmouseout = function () {
+    his.onmouseout = function () {
                 drop.style.display = 'none';
             };
-            his.onclick = function () {
+    his.onclick = function () {
                 if (drop.style.display === 'none') {
                     drop.style.display = 'block';
                 }
@@ -78,18 +72,18 @@ define(function (e) {
                     drop.style.display = 'none';
                 }
             };
-            stui.common.history();
-            if (window.location.href.indexOf('play') > -1) {
-                var vodname = n('vodname').html();
-                var vodpart = n('playname').html();
-                var vodurl = window.location.href;
-                var recente = stui.Cookie.get('recente');
-                var len = 0;
-                var canadd = true;
-                if (recente) {
-                    recente = $.parseJSON('+recente+');
-                    len = recente.length;
-                    $(recente).each(function () {
+    stui.common.history();
+    if (window.location.href.indexOf('play') > -1) {
+        var vodname = n('vodname').html();
+        var vodpart = n('playname').html();
+        var vodurl = window.location.href;
+        var recente = stui.Cookie.get('recente');
+        var len = 0;
+        var canadd = true;
+        if (recente) {
+            recente = n.parseJSON(recente);
+            len = recente.length;
+            $(recente).each(function () {
                         if (vodname === this.vodName) { // 已记录则修改
                             canadd = false;
                             var json = '[';
@@ -123,36 +117,29 @@ define(function (e) {
                         }
 
                     });
-                }
-
-                if (canadd) { // 无记录则添加
-                    var json = '[';
-                    var isfirst = ']';
-                    isfirst = !len ? ']' : ',';
-                    json += '{"vodname":"' + vodname + '","vodurl":"' + vodurl;
-                    json += '","vodpart":"' + vodpart + '"}' + isfirst;
-                    if (len > 9) {
-                        len -= 1;
-                    }
-
-                    for (var i = 0; i < len - 1; i++) {
-                        json += '{"vodname":"' + recente[i].vodname + '","vodurl":"' + recente[i].vodurl;
-                        json += '","vodpart":"' + recente[i].vodpart + '"},';
-                    }
-                    if (len > 0) {
-                        json += '{"vodname":"' + recente[len - 1].vodname + '","vodurl":"' + recente[len - 1].vodurl;
-                        json += '","vodpart":"' + recente[len - 1].vodpart + '"}]';
-                    }
-
-                    stui.Cookie.set('recente', json, {
-                        path: '/',
-                        expires: (2)
-                    });
-                }
+        }
+        if (canadd) { // 无记录则添加
+            var json = '[';
+            var isfirst = ']';
+            isfirst = !len ? ']' : ',';
+            json += '{"vodname":"' + vodname + '","vodurl":"' + vodurl;
+            json += '","vodpart":"' + vodpart + '"}' + isfirst;
+            if (len > 9) {
+                len -= 1;
             }
+            for (var i = 0; i < len - 1; i++) {
+                json += '{"vodname":"' + recente[i].vodname + '","vodurl":"' + recente[i].vodurl;
+                json += '","vodpart":"' + recente[i].vodpart + '"},';
+            }
+            if (len > 0) {
+                json += '{"vodname":"' + recente[len - 1].vodname + '","vodurl":"' + recente[len - 1].vodurl;
+                json += '","vodpart":"' + recente[len - 1].vodpart + '"}]';
+            }
+            stui.Cookie.set('recente', json, {
+                path: '/',
+                expires: (2)
+            });
+        }
+    }
 
-        };
-    };
-
-    return a;
 });
