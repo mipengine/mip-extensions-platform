@@ -29,6 +29,13 @@ define(function (require) {
     var ltClick = 'ppweb-click';
     var logUrl = '';
     var referrer = document.referrer;
+    var seoHostList = {
+        'default': 'baidu',
+        'baidu': 'baidu.com',
+        'sm': 'sm.cn',
+        'sogou': 'sogou.com',
+        '360': 'so.com'
+    };
 
     var queryFormat = function (url, obj) {
         typeof url !== 'string' && (url = '');
@@ -102,6 +109,22 @@ define(function (require) {
         return $dom.closest('.log-param-f').attr(chKey);
     };
 
+    var getSource = function () {
+        var host = window.location.hostname || 'm.baidu.com';
+        var defaultPrefix = seoHostList['default'] || 'baidu';
+        var prefix = defaultPrefix;
+
+        for (var i in seoHostList) {
+            if (host.indexOf(seoHostList[i]) > -1) {
+                prefix = i;
+            }
+        }
+        return {
+            chPrefix: prefix,
+            defaultPrefix: defaultPrefix
+        };
+    };
+
     /**
      * 使用img的方式发送日志
      *
@@ -150,6 +173,9 @@ define(function (require) {
             trackConfig.lt = ltAccess;
             ch = chGet($dom);
         }
+
+        ch = [getSource()['chPrefix'], ch].join('_');
+
         var extendObj = {ch: ch, ppz: config.ppz};
         if (config.host.match(/track/)) {
             extendObj = $.extend(dataObj, extendObj, trackConfig, {type: type, referrer: referrer});
@@ -186,6 +212,25 @@ define(function (require) {
         }
     };
 
+
+    /**
+     * 初始化下载链接地址
+     *
+     * @return {undefined}
+     */
+    var initDlSource = function () {
+        var source = getSource();
+        var defaultPrefix = source['defaultPrefix'];
+        var chPrefix = source['chPrefix'];
+
+        if (config.setting && config.setting.download && config.setting.download.selector) {
+            $(config.setting.download.selector).each(function () {
+                var that = $(this);
+                that.attr('href', that.attr('href').replace('wap_' + defaultPrefix, 'wap_' + chPrefix));
+            });
+        }
+    };
+
     /**
      * 构造元素，只会运行一次，初始化日志配置及发送日志功能
      *
@@ -207,6 +252,7 @@ define(function (require) {
         }
         logUrl = config.host;
         initEvent();
+        initDlSource();
     };
 
 
