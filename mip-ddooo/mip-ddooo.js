@@ -6,6 +6,12 @@ define(function (require) {
     var $ = require('zepto');
     var b = 0;
     var n = 0;
+    var PageType = 'asp';
+    if ($('#SOHUCS').length > 0) {
+        if ($('#SOHUCS').attr('PageType') !== undefined) {
+            PageType = $('#SOHUCS').attr('PageType');
+        }
+    }
     $('.SearchBox').click(function () {
         if (0 === b) {
             $('#mclassifyCont').css({display: 'none'});
@@ -168,7 +174,7 @@ define(function (require) {
         $('.guessCont').eq(numm).show();
     });
     $('.plbutton').hide();
-    $('.plbutton mip-img').attr('src', '/getcode.asp?time=' + Math.random());
+    $('.plbutton mip-img').attr('src', '/getcode.' + PageType + '?time=' + Math.random());
     $('#pltext').click(function () {
         $('.plbutton').show();
     });
@@ -191,7 +197,7 @@ define(function (require) {
             $('.yzm').focus();
             return false;
         }
-        $.post('/postfrm_ajax.asp', {
+        $.post('/postfrm_ajax.' + PageType, {
             comment: (msg),
             softid: temsoftid,
             pImgCode: escape(imgcode)
@@ -201,7 +207,7 @@ define(function (require) {
                 $('#alertmes').html('验证码错误，请重新输入！');
                 $('.hClassCont,.hClassContDiv').css({display: 'block'});
                 $('.yzm').focus();
-                $('.plbutton mip-img').attr('src', '/getcode.asp?time=' + Math.random());
+                $('.plbutton mip-img').attr('src', '/getcode.' + PageType + '?time=' + Math.random());
             }
             else if (data === 'OK') {
                 $('#pltext').focus();
@@ -229,7 +235,7 @@ define(function (require) {
             $('.hClassCont,.hClassContDiv').css({display: 'block'});
             return false;
         }
-        var forpath = '/search.asp?wd=' + encodeURI(sV);
+        var forpath = '/search.' + PageType + '?wd=' + encodeURI(sV);
         window.location.href = forpath;
     });
 });
