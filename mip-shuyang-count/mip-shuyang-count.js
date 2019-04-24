@@ -4,14 +4,12 @@
  */
 
 define(function (require) {
-
     var customElement = require('customElement').create();
 
     /**
      * 构造元素，只会运行一次
      */
-    customElement.prototype.build = function () {
-        var $ = require('jquery');
+    customElement.prototype.firstInviewCallback = function () {
         var element = this.element;
         var op = element.getAttribute('op');
         var id = element.getAttribute('id');
@@ -21,13 +19,14 @@ define(function (require) {
         if (op === 'count' && id && parseInt(id, 10).toString().length === id.length
             && modelid && parseInt(modelid, 10).toString().length === modelid.length) {
             url = 'https://api.shuyanghao.com/?op=count&id=' + parseInt(id, 10) + '&modelid=' + parseInt(modelid, 10);
-            $.getScript(url);
         }
         else if (op === 'stats' && catid && parseInt(catid, 10).toString().length === catid.length) {
-            url = 'https://api.shuyanghao.com?op=stats&catid=' + parseInt(catid, 10) + '&edi=mobile';
-            $.getScript(url);
+            url = 'https://api.shuyanghao.com/?op=stats&catid=' + parseInt(catid, 10) + '&edi=mobile';
+        }
+        if (url) {
+            var i = new Image();
+            i.src = url;
         }
     };
-
     return customElement;
 });

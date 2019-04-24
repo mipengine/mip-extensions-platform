@@ -1,7 +1,7 @@
 {
     "name": "mip-shuyang-count",
-    "version": "1.0.1",
-    "description": "接口回调组件",
+    "version": "1.1.11",
+    "description": "站点：大沭网  https://www.shuyanghao.com/ 组件功能：调用专用接口。老接口失效，更换新接口",
     "author": "EDI",
     "contributors": [
         {
@@ -10,6 +10,6 @@
         }
     ],
     "engines": {
-        "mip": ">=1.1.0"
+        "mip": ">=1.1.4"
     }
 }
