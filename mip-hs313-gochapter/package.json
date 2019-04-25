@@ -1,0 +1,14 @@
+{
+    "name": "mip-hs313-gochapter",
+    "version": "1.0.0",
+    "description": "根据输入的章节ID，快速跳转到指定ID的页面进行阅读。",
+    "contributors": [
+        {
+            "name": "hs3113.net",
+            "email": "admin@hs3113.net"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
