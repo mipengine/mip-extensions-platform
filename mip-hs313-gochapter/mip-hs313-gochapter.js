@@ -10,16 +10,16 @@ define(function (require) {
         var ele = this.element;
         var novelid = ele.getAttribute('novelid');
         if (novelid) {
-            document.getElementsByTagName('button')[0].addEventListener('click', function () {
+            ele.getElementsByTagName('button')[0].addEventListener('click', function () {
                 var chapterid = document.getElementById('chapterid').value;
                 var re = /^[0-9]+.?[0-9]*$/;
                 if (!re.test(chapterid)) {
                     var tag = document.createElement('div');
-                    tag.setAttribute('class', 'alert');
+                    tag.setAttribute('class', 'mip-gochapter-alert');
                     tag.innerHTML = '请输入数字！';
                     ele.appendChild(tag);
                     setTimeout(function () {
-                        ele.removeChild(document.getElementsByClassName('alert')[0]);
+                        ele.removeChild(document.getElementsByClassName('mip-gochapter-alert')[0]);
                     }, 1000);
                     return false;
                 }
