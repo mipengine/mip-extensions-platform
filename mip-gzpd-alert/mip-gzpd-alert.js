@@ -102,13 +102,13 @@ define(function (require) {
             + '<div class="mip-gzpd-alert-cservice mip-gzpd-alert-bounceIn">'
             + '    <div class="claos"></div>'
             + '    <div class="phone-pic">'
-            + '        <h1 class="kefu-name">客服微信号: ' + config.kefu + '</h1>'
-            + '        <span class="copy-txt-btn"><a href="weixin://">打开微信</a></span>'
+            + '        <h1 class="kefu-name">' + config.kefu + '</h1>'
+            + '        <span class="copy-txt-btn">' + config.kefubt + '</span>'
             + '    </div>'
             + '    <div class="phone-art">'
             + '        <span style="color:#ff6600;">付费成功后，若无法使用请联系客服</span>'
             + '        <span>在线时间：周一至周五</span>'
-            + '        <span>8:30~12:30 14:00~18:00</span>'
+            + '        <span>9:00~12:30 14:00~18:00</span>'
             + '        <input type="text" value="' + config.kefu + '" id="kefu-name-input">'
             + '    </div>'
             + '</div>'
@@ -118,7 +118,7 @@ define(function (require) {
     customElem.prototype.firstInviewCallback = function () {
         var ele = this.element;
 
-        $.getJSON('//my.pincai.com/wx_app/miniapp/config/mip.copy.json', function (config) {
+        $.getJSON('//my.pincai.com/wx_app/miniapp/config/mip.copy.2.json', function (config) {
             if (config.code !== 200) {
                 return;
             }
