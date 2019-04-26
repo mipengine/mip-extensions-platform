@@ -1,0 +1,12 @@
+{
+  "name": "mip-gzpd-infinite",
+  "version": "1.0.6",
+  "description": "相关内容推荐瀑布流",
+  "author": {
+    "name": "jfdsies",
+    "email": "jfdsies@gmail.com"
+  },
+  "engines": {
+    "mip": ">=1.1.0"
+  }
+}
