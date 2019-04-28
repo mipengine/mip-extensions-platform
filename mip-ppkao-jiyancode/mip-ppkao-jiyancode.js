@@ -23,7 +23,7 @@ define(function (require) {
                 type: 'POST',
                 async: false,
                 cache: false,
-                url: '//data.api.ppkao.com/user/IsLogin.ashx?action=GetUserIP',
+                url: '//api.ppkao.com/user/IsLogin.ashx?action=GetUserIP',
                 dataType: 'jsonp',
                 crossDomain: true,
                 contentType: 'application/x-www-form-urlencoded;charset=utf-8',
@@ -34,7 +34,7 @@ define(function (require) {
                         window.top.location.href = openUrl;
                         return false;
                     } else {
-                        window.top.location.href = 'https://data.api.ppkao.com/user/login/index_upvip.html';
+                        window.top.location.href = 'https://api.ppkao.com/user/login/index_upvip.html';
                         return false;
                     }
                 },
