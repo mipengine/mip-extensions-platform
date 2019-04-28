@@ -32,7 +32,7 @@ define(function (require) {
     var seoHostList = {
         'default': 'baidu',
         'baidu': 'baidu.com',
-        'sm': 'sm.cn',
+        'sm': 'sm-tc.cn',
         'sogou': 'sogou.com',
         '360': 'so.com'
     };
