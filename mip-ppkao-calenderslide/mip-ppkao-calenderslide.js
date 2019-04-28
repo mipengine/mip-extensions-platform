@@ -20,7 +20,7 @@ define(function (require) {
         });
         var calenderContainer = showmore.parents('.kaoshi-fenlei').find('.calender-container');
         var xscs = true;
-        var url = '//data.api.ppkao.com/Interface/PageAPI.ashx?action=Get_ksTimeInfo';
+        var url = '//api.ppkao.com/Interface/PageAPI.ashx?action=Get_ksTimeInfo';
         showmore.find('.kemulist li').on('click', function () {
             button.find('b').text($(this).text());
             var CategoryID = $(this).data('categoryid');
