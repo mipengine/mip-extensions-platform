@@ -23,7 +23,7 @@ define(function (require) {
                     }, 1000);
                     return false;
                 }
-                var url = '/book/' + novelid + '/' + chapterid + '.html';
+                var url = 'https://m.hs313.net/book/' + novelid + '/' + chapterid + '.html';
                 window.top.location.href = url;
             });
         }
