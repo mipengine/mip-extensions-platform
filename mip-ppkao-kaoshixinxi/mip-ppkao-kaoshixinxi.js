@@ -26,7 +26,7 @@ define(function (require) {
         var base64 = new Base64();
 
         $(document).ready(function () {
-            var url = 'http://data.api.ppkao.com/Interface/YXK/PublicApi.ashx?action=' + ele.dataset.action;
+            var url = 'http://api.ppkao.com/Interface/YXK/PublicApi.ashx?action=' + ele.dataset.action;
             $.ajax({
                 url: url,
                 type: 'POST',
