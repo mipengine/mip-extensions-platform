@@ -1,8 +1,8 @@
 /**
 * @file 脚本支持
 * @author  hejieye
-* @time  2018-05-22
-* @version 1.3.3
+* @time  2018-09-19
+* @version 1.3.4
 */
 define(function (require) {
     var $ = require('zepto');
@@ -11,7 +11,6 @@ define(function (require) {
     var effects = {
         // 标签切换
         switchBlock: function () {
-            // 因为多个功能都集成在一个组件内，所以需要用到全局的选择器
             $('.similar-nav').on('click', 'li',
             function () {
                 event.preventDefault();
@@ -28,11 +27,10 @@ define(function (require) {
         },
         // 换一换
         changeMore: function () {
-            // 因为多个功能都集成在一个组件内，所以需要用到全局的选择器
             $('.link-change').on('click', function (event) {
                 event.preventDefault();
                 try {
-                    var pagesize = parseInt($(this).attr('showSize'));
+                    var pagesize = parseInt($(this).attr('showSize'), 10);
                     var childNodes = $(this).parent().next().children();
                     var pagecount = $(this).attr('pagecount');
                     if (!pagecount) {
@@ -50,23 +48,21 @@ define(function (require) {
             });
         },
         // 相关知识换一换
-        kownlegMore: function() {
-            // 因为多个功能都集成在一个组件内，所以需要用到全局的选择器
-        	$('.kownleg-change').on('click', function (event) {
+        kownlegMore: function () {
+            $('.kownleg-change').on('click', function (event) {
                 event.preventDefault();
-        		$("div.similar").find("div.show").removeClass("show").addClass("hide").appendTo($("div.similar"));
-        		var i = 1;
-        		$('div.similar').find('div.hide').each(function (){
-        			if(i == 1) {
-        				$(this).removeClass('hide').addClass('show');
-        			}
-        			i ++;
-        		});
-        	});
+                $('div.similar').find('div.show').removeClass('show').addClass('hide').appendTo($('div.similar'));
+                var i = 1;
+                $('div.similar').find('div.hide').each(function () {
+                    if (i === 1) {
+                        $(this).removeClass('hide').addClass('show');
+                    }
+                    i ++;
+                });
+            });
         },
         // 展开 or 收起
         openOrStop: function () {
-            // 因为多个功能都集成在一个组件内，所以需要用到全局的选择器
             $('.os-click').on('click',
             function (event) {
                 event.preventDefault();
@@ -86,35 +82,32 @@ define(function (require) {
         },
         // 问题搜索
         btnSearch: function () {
-            // 因为多个功能都集成在一个组件内，所以需要用到全局的选择器
             $('.btn-search').click(function () {
                 var content = $('.search-input').val();
                 if (content.trim().length < 2) {
                     alert('关键字必须大于等于2个字!');
                     return;
                 }
-                effects.openUrl('https://mipp.iask.cn/search/1.html?content=' + content);
+                effects.openUrl('//m.iask.sina.com.cn/search/1.html?content=' + content);
             });
         },
         // 提问
         btnSend: function () {
             try {
-                // 因为多个功能都集成在一个组件内，所以需要用到全局的选择器
                 $('.btn-send').click(function () {
                     event.preventDefault();
                     var content = $('.search-input').val();
-                    effects.openUrl('https://mipp.iask.cn/ask?content=' + content);
+                    effects.openUrl('//m.iask.sina.com.cn/ask?content=' + content);
                 });
             }
             catch (e) {}
         },
         // 验证登录信息
         checkLogin: function () {
-            // 因为多个功能都集成在一个组件内，所以需要用到全局的选择器
             /*该参数是作为组件外部参数,所以需要用到全局选择器*/
             var $that = document.querySelector('.paramDiv');
-    	    var cid = $that.getAttribute("cid");
-            var checkLoginUrl = 'https://mipp.iask.cn/checkLogin?mip=' + Math.random() + '&iask_cookie=0000&cid=' + cid;;
+            var cid = $that.getAttribute('cid');
+            var checkLoginUrl = '//m.iask.sina.com.cn/checkLogin?mip=' + Math.random() + '&cid=' + cid;
             $.get(checkLoginUrl);
         },
         userInfoHide: function () {
@@ -126,39 +119,102 @@ define(function (require) {
             });
         },
         // 折叠
-        accordion : function () {
-            // 因为多个功能都集成在一个组件内，所以需要用到全局的选择器
-        	$('.iask-show-more').click(function () {
-        		$(this).parent().siblings('.iask-accordion').each(function () {
-        			$(this).show();
-        		});
-        		$(this).hide();
-        		$(this).siblings('.iask-show-less').show();
-        	});
-        	
-        	$('.iask-show-less').click(function () {
-        		$(this).parent().siblings('.iask-accordion').each(function () {
-        			$(this).hide();
-        		});
-        		$(this).hide();
-        		$(this).siblings('.iask-show-more').show();
-        	});
+        accordion: function () {
+            $('.iask-show-more').click(function () {
+                $(this).parent().siblings('.iask-accordion').each(function () {
+                    $(this).show();
+                });
+                $(this).hide();
+                $(this).siblings('.iask-show-less').show();
+            });
+            $('.iask-show-less').click(function () {
+                $(this).parent().siblings('.iask-accordion').each(function () {
+                    $(this).hide();
+                });
+                $(this).hide();
+                $(this).siblings('.iask-show-more').show();
+            });
         },
-        openUrl : function (url) {
-        	var $that = document.querySelectorAll('.camnpr');
-        	if($that.length > 0) {
-        		for(var i=0; i<$that.length; i++) {
-        			var t = $that[i];
-        			t.parentNode.removeChild(t);
-        		}
-        	}
-             var a = document.createElement("a");  
-             a.setAttribute("href", url);  
-             a.setAttribute("class", "camnpr");  
-             ele.body.appendChild(a);  
-             a.click();
+        openUrl: function (url) {
+            var $that = document.querySelectorAll('.camnpr');
+            if ($that.length > 0) {
+                for (var i = 0; i < $that.length; i++) {
+                    var t = $that[i];
+                    t.parentNode.removeChild(t);
+                }
+            }
+            var a = document.createElement('a');
+            a.setAttribute('href', url);
+            a.setAttribute('class', 'camnpr');
+            document.body.appendChild(a);
+            a.click();
         },
-        init: function () {
+        login: function () {
+            $('.icon-ency-login').click(function (event) {
+                window.document.location = 'https://iask.sina.com.cn/cas/m/logins?pf=1&location=' + encodeURIComponent(window.document.location) + '&terminal=m&businessSys=iask';
+                // window.document.location = 'https://iask.sina.com.cn/cas/m/bind?pf=1&location='+encodeURIComponent(window.document.location)+'&terminal=m&businessSys=iask&mobile=1312312';
+            });
+        },
+        reportHide: function () {
+            $('.cannelReport').click(function (event) {
+                $('.report-body').hide();
+            });
+        },
+        checkSearch: function (value) {
+            var ref = '';
+            if (document.referrer.length > 0) {
+                ref = document.referrer;
+            }
+            try {
+                if (ref.length === 0 && opener.location.href.length > 0) {
+                    ref = opener.location.href;
+                }
+            } catch (e) {}
+
+            return ref.indexOf(value) > -1;
+        },
+        openWindowUrl: function (ele, url) {
+            var $that = ele.querySelectorAll('.camnpr');
+            if ($that.length > 0) {
+                for (var i = 0; i < $that.length; i++) {
+                    var t = $that[i];
+                    t.parentNode.removeChild(t);
+                }
+            }
+            var a = ele.createElement('a');
+            a.setAttribute('href', url);
+            a.setAttribute('target', '_blank');
+            a.setAttribute('class', 'camnpr');
+            ele.body.appendChild(a);
+            a.click();
+        },
+        searchToPage: function (ele, value, flag) {
+            if (value) {
+                var url = window.location.href;
+                if (url.lastIndexOf('?') > -1) {
+                    url += '&searchid=' + flag;
+                }
+                else {
+                    url += '?searchid=' + flag;
+                }
+                this.openWindowUrl(ele, url);
+            }
+        },
+
+        antSearch: function (element) {
+
+            var type = element.getAttribute('type');
+
+            var value = element.getAttribute('value');
+
+            var flag = element.getAttribute('flag');
+
+            if (type === 'search') {
+                var searchValue = this.checkSearch(value);
+                this.searchToPage(element, searchValue, flag);
+            }
+        },
+        init: function (element) {
             this.switchBlock();
             this.changeMore();
             this.openOrStop();
@@ -168,12 +224,16 @@ define(function (require) {
             this.userInfoHide();
             this.accordion();
             this.kownlegMore();
+            this.login();
+            this.reportHide();
+            this.antSearch(element);
         }
     };
 
     // build 方法，元素插入到文档时执行，仅会执行一次
     customElem.prototype.build = function () {
-        effects.init();
+        var element = this.element;
+        effects.init(element);
     };
 
     return customElem;
