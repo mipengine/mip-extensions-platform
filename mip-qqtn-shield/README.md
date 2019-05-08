@@ -1,6 +1,6 @@
 # mip-qqtn-shield
 
-mip-qqtn-shield 根据下载地址来进行判断，规则1：假如包含A类地址，更换页面内容。规则2：包含B地址，将该应用进行下架处理
+mip-qqtn-shield 根据下载地址来进行判断，规则1：假如包含A类地址，更换页面内容。规则2：包含B地址，将该应用进行下架处理   1.1 :新增根据来路进行不同的提示
 
 标题|内容
 ----|----
@@ -28,7 +28,7 @@ mip-qqtn-shield 根据下载地址来进行判断，规则1：假如包含A类�
         </div>
         <div id="downAddress">
             <ul class="m-down-ul f-downbtn-url">
-                <li class="m-down-last"><a href="http://tj.tt1386.com/0006/5084" class="span9 m-game-down down f-eject-btn" data-flag="downbtn" id="address">点击下载</a></li>
+                <li class="m-down-last"><a href="http://tj.qqtj99.com/0006/5084" class="span9 m-game-down down f-eject-btn" data-flag="downbtn" id="address">点击下载</a></li>
             </ul>
         </div>
         
@@ -64,25 +64,46 @@ mip-qqtn-shield 根据下载地址来进行判断，规则1：假如包含A类�
         </ul>
     </section>
 </section>
-<div class="f-information f-hide" data-id="304971" data-path="down" data-categroyId="202" data-rootid="16" data-commendid="0" data-system="Android" data-ppaddress="" data-ismoney="0" data-CommentTpye="0" data-Username="hjw" data-Type="0" data-DateTime="2018/1/24" data-phpurl="2"></div>
+<div class="f-information f-hide" data-id="304971" data-path="down" data-categroyId="187" data-rootid="16" data-commendid="0" data-system="Android" data-ppaddress="" data-ismoney="0" data-CommentTpye="0" data-Username="hjw" data-Type="0" data-DateTime="2018/1/24" data-phpurl="2"></div>
 </mip-qqtn-shield>
 </mip-qqtn-downts>
 </mip-ychlyxgs-adddata>
 <script src="https://c.mipcdn.com/static/v1/mip-showmore/mip-showmore.js"></script>
 <script src="https://mipcache.bdstatic.com/extensions/platform/v1/mip-ychlyxgs-adddata/mip-ychlyxgs-adddata.js"></script>
 <script src="https://mipcache.bdstatic.com/extensions/platform/v1/mip-qqtn-downts/mip-qqtn-downts.js"></script>
+
 ```
 ## 用法
-- 用来判断的相关`href`的`ID`必须命名为`address`，然后通过获取json数据来进行比对，如果相同则不进行下载，并且提示下架。
+- 用来判断的相关`href`的`ID`必须命名为`address`，假如为空或者为指定地址，则更改按钮为预约。
+
 
 ## 属性
 
-###  data-shield
-- 说明：作用为不同站点获取不同接口地址，必须属性，否则无法获取到数据
-- 取值：各站点自定义。
+###  data-nodownurl
+- 说明：用来跟address的heaf比对，当值一样时才会执行。
+- 取值：没有下载地址的。
 - 必选项：是
-- 类型：接口地址
+- 类型：指定字符串
 
 ## 注意事项
 
-- 接口地址必须是 `https` 否则会报错。
+- 下载地址的a标签id必须为 `address` 。
+
+###  data-color
+- 说明：配置预约按钮背景颜色，提供不同风格网站需要。
+- 取值：rgb色值。
+- 必选项：是
+
+###  data-id
+- 说明：预约的ID号，会以jsonp的方式传送。
+- 取值：ID。
+- 必选项：是
+
+###  data-yuyueurl
+- 说明：接口地址，用于不同网站定义。
+- 取值：URL。
+- 必选项：是
+
+## 注意事项
+
+- 地址必须为 `https` 。
