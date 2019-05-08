@@ -1,0 +1,14 @@
+{
+    "name": "mip-hushenao-test1",
+    "version": "0.1.3",
+    "description": "引入外部链接的iframe组件",
+    "contributors": [
+        {
+            "name": "WeDoctor",
+            "email": "husa@guahao.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
