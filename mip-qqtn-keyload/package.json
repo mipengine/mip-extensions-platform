@@ -1,0 +1,14 @@
+{
+    "name": "mip-qqtn-keyload",
+    "version": "1.0.1",
+    "description": "点击按钮根据接口加载更多数据,接口id和接口地址通过模版获取，接口网址为https.",
+    "contributors": [
+        {
+            "name": "dgm",
+            "email": "1028212667@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.0.0"
+    }
+}
