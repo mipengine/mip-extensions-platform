@@ -1,5 +1,5 @@
 /**
- * @file mip-qqtn-shield 获取下载地址，根据不同下载地址显示不同的提示,提示内容放入模版里的https json中。1.1.0 ：新增 根据来路，提示不同内容。   1.1.1 之前无法获取真实地址用于比对。升级获取地址的方法
+ * @file mip-qqtn-shield 获取下载地址，根据不同下载地址显示不同的提示,提示内容放入模版里的https json中。1.1.0 ：新增 根据来路，提示不同内容。   1.1.1 之前无法获取真实地址用于比对。升级获取地址的方法 1.1.2 老页面没有地址会报错 ，增加对老页面的兼容
  * @author gom3250@qq.com.
  * @version 1.1.0
  *  */
@@ -95,6 +95,10 @@ define(function (require) {
                 // 获取应用子分类ID 子栏目ID号
                 var truedown = $(ele).find('.f-information').attr('data-durl');
                 // 获取真实url用于比对。
+                if (truedown === undefined) {
+                    truedown = '';
+                }
+                // 兼容老页面
                 if (truedown.indexOf(cpUrl) !== -1 && $.inArray(catId, cpIds) !== -1 && regexp.test(where)) {
                     if (platform.isIos() && cpiosurl !== '') {
                         // 是苹果设备并且值不为空
