@@ -1,0 +1,14 @@
+{
+    "name": "mip-wedoctor-ad",
+    "version": "0.1.5",
+    "description": "用于支持页面内投放微医广告的组件",
+    "contributors": [
+        {
+            "name": "hsua@guahao.com",
+            "email": "hsua@guahao.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
