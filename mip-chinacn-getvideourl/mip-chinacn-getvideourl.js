@@ -10,12 +10,12 @@ define(function (require) {
     /**
      * 构造元素，只会运行一次
      */
-    customElement.prototype.firstInviewCallback = function () {
+    customElement.prototype.build = function () {
         var self = this;
         var element = self.element;
         var myVideo = element.querySelector('mip-video');
         var request = false;
-        myVideo.addEventListener('play', function () {
+        myVideo.addEventListener('click', function () {
             if (request === true) {
                 return;
             } else {
@@ -29,8 +29,9 @@ define(function (require) {
                     .then(function (myJson) {
                         request = true;
                         var videoUrl = myJson.data;
+                        var videoBox = element.querySelector('video');
                         myVideo.setAttribute('src', videoUrl);
-                        myVideo.play();
+                        videoBox.play();
                     }).catch(function (e) {
                         console.log(e);
                     });
