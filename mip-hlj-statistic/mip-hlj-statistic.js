@@ -75,7 +75,7 @@ define(function (require) {
             id = 0;
         }
         $.ajax({
-            url: 'https://www.hunliji.com/sms/ip',
+            url: 'https://m.hunliji.com/sms/ip',
             type: 'get',
             success: function (result) {
                 ip = result;
