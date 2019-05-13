@@ -1,5 +1,5 @@
 /**
- * @file mip-qqtn-shield 获取下载地址，根据不同下载地址显示不同的提示,提示内容放入模版里的https json中。1.1.0 ：新增 根据来路，提示不同内容。   1.1.1 之前无法获取真实地址用于比对。升级获取地址的方法 1.1.2 老页面没有地址会报错 ，增加对老页面的兼容
+ * @file mip-qqtn-shield 获取下载地址，根据不同下载地址显示不同的提示,提示内容放入模版里的https json中。1.1.0 ：新增 根据来路，提示不同内容。   1.1.1 之前无法获取真实地址用于比对。升级获取地址的方法 1.1.2 老页面没有地址会报错 ，增加对老页面的兼容,1.1.3 修改搜索引擎来路获取方式,因为页面有点多，所以多次测试，本地测试和线上测试效果有点出入，所以最后修改了一次获取方式，烦请通过，谢谢。
  * @author gom3250@qq.com.
  * @version 1.1.0
  *  */
@@ -88,8 +88,9 @@ define(function (require) {
                 // 获取远程json文件里的苹果访问地址
                 var cpazurl = data.azu;
                 // 获取远程json文件里的安卓访问地址
-                var regexp = /\.(sogou|soso|baidu|google|youdao|bing|so|360|sm)(\.[a-z0-9\-]+){1, 2}\//ig;
                 var where = document.referrer;
+                var auso = ['sm', 'baidu', 'so', 'sogou', 'soso', 'google', 'youdao', 'bing', '360'];
+                var sonum = auso.length;
                 // 用于判断来路是否搜索引擎
                 var catId = $(ele).find('.f-information').attr('data-categroyId');
                 // 获取应用子分类ID 子栏目ID号
@@ -99,12 +100,17 @@ define(function (require) {
                     truedown = '';
                 }
                 // 兼容老页面
-                if (truedown.indexOf(cpUrl) !== -1 && $.inArray(catId, cpIds) !== -1 && regexp.test(where)) {
-                    if (platform.isIos() && cpiosurl !== '') {
-                        // 是苹果设备并且值不为空
-                        $(ele).find('#address').attr('href', cpiosurl);
-                    } else if (cpazurl !== '') {
-                        $(ele).find('#address').attr('href', cpazurl);
+                var h = 0;
+                for (h = 0; h < sonum; h++) {
+                    if (where.indexOf(auso[h]) !== -1) {
+                        if (truedown.indexOf(cpUrl) !== -1 && $.inArray(catId, cpIds) !== -1) {
+                            if (platform.isIos() && cpiosurl !== '') {
+                                // 是苹果设备并且值不为空
+                                $(ele).find('#address').attr('href', cpiosurl);
+                            } else if (cpazurl !== '') {
+                                $(ele).find('#address').attr('href', cpazurl);
+                            }
+                        }
                     }
                 }
             }
