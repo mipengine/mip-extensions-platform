@@ -22,10 +22,10 @@ define(function (require) {
         var fosi = 20 * (width / 375);
         var adtypeWidth = {
             firstadtype: {
-                height: 3
+                height: 2.5
             },
             secondadtype: {
-                height: 2.5
+                height: 3
             },
             thirdadtype: {
                 height: 2.5
@@ -34,8 +34,8 @@ define(function (require) {
         iframe.setAttribute('style', 'display: block;');
         iframe.setAttribute('width', width);
         iframe.setAttribute('height', adtypeWidth[type] && adtypeWidth[type].height * fosi);
-        iframe.setAttribute('src', 'http://192.168.128.223:9999/index.html?ad-type=' + type + '&uri=' + uri + '&width=' + width + '&height=' + height + '');
-        // iframe.setAttribute('src', 'https://houtai.xindingwealth.com/ad-index.html?ad-type=' + type + '&uri=' + uri + '&width=' + width + '&height=' + height + '');
+        // iframe.setAttribute('src', 'http://192.168.128.223:9999/index.html?ad-type=' + type + '&uri=' + uri + '&width=' + width + '&height=' + height + '');
+        iframe.setAttribute('src', 'https://houtai.xindingwealth.com/ad-index.html?ad-type=' + type + '&uri=' + uri + '&width=' + width + '&height=' + height + '');
         element.append(iframe);
     };
 
