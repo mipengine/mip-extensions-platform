@@ -43,7 +43,7 @@ define(function (require) {
     function sdk(obj, type) {
         var ip;
         $.ajax({
-            url: '//www.hunliji.com/sms/ip',
+            url: '//m.hunliji.com/sms/ip',
             type: 'get',
             success: function (result) {
                 ip = result;
