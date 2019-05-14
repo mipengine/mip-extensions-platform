@@ -109,9 +109,9 @@ define(function (require) {
 
             var result = undefined;
             if (isFreetalk) {
-                result = dialog.get('留言发送提示', '我们将稍后和您联系，请保持电话畅通！');
+                result = dialog.get('留言发送提示', '我们将稍后和您联系，请保持电话畅通！', true);
             } else {
-                result = dialog.get('留言发送提示', '谢谢关注，留言已提交成功！');
+                result = dialog.get('全球品牌网(globrand)提示：', '留言已成功提交！查看留言需要关注公众号！', false);
             }
             if (form.parentElement.tagName === 'MIP-COMPONENT-LIUYAN') {
                 if (form.nextElementSibling.className !== 'dialog') {
@@ -126,7 +126,7 @@ define(function (require) {
 
         // 提交返回的样式框
         var dialog = {
-            get: function (headInfo, contentInfo) {
+            get: function (headInfo, contentInfo, isFreetalk) {
 
                 var domDialog = document.createElement('div');
                 domDialog.className = 'dialog';
@@ -139,12 +139,23 @@ define(function (require) {
                 var domContent = document.createElement('div');
                 domContent.className = 'dialog-content';
 
-                var domInfo = document.createElement('p');
-                domInfo.innerText = contentInfo;
+                if (isFreetalk) {
+                    var domInfo = document.createElement('p');
+                    domInfo.innerText = contentInfo;
+                    domContent.appendChild(domInfo);
+                } else {
+                    var domInfo = document.createElement('div');
+                    domInfo.innerText = contentInfo;
+                    domInfo.className = 'tipmsg';
+                    domContent.appendChild(domInfo);
+
+                    var domWx = document.createElement('div');
+                    domWx.className = 'ewcode';
+                    domContent.appendChild(domWx);
+                }
 
                 domDialog.appendChild(domHead);
                 domDialog.appendChild(domContent);
-                domContent.appendChild(domInfo);
 
                 return domDialog;
             },
