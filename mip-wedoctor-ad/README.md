@@ -17,12 +17,12 @@
 
 ## 属性
 
-### firstadtype
+### wd-ad-type
 
 说明：用来表示页面展示的广告类型
 必选项：是
 类型：String
-取值范围：无
+取值范围：['firstadtype', 'secondadtype', 'thirdadtype']
 单位：无
 默认值：无
 
