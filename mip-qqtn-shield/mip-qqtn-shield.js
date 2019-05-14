@@ -1,7 +1,7 @@
 /**
- * @file mip-qqtn-shield 获取下载地址，根据不同下载地址显示不同的提示,提示内容放入模版里的https json中。1.1.0 ：新增 根据来路，提示不同内容。   1.1.1 之前无法获取真实地址用于比对。升级获取地址的方法 1.1.2 老页面没有地址会报错 ，增加对老页面的兼容,1.1.3 修改搜索引擎来路获取方式,因为页面有点多，所以多次测试，本地测试和线上测试效果有点出入，所以最后修改了一次获取方式，烦请通过，谢谢。
+ * @file mip-qqtn-shield 获取下载地址，根据不同下载地址显示不同的提示,提示内容放入模版里的https json中。1.1.0 ：新增 根据来路，提示不同内容。1.1.3 修改搜索引擎来路获取方式,  1.2 增加对其他组件的兼容性。
  * @author gom3250@qq.com.
- * @version 1.1.0
+ * @version 1.2.0
  *  */
 define(function (require) {
     var $ = require('zepto');
@@ -107,8 +107,14 @@ define(function (require) {
                             if (platform.isIos() && cpiosurl !== '') {
                                 // 是苹果设备并且值不为空
                                 $(ele).find('#address').attr('href', cpiosurl);
+                                // 处理苹果地址
+                                $('head style').append('mip-fy-yuyue .m-tisp1{display:none}');
+                                //  兼容其他组件,不显示提示。
                             } else if (cpazurl !== '') {
                                 $(ele).find('#address').attr('href', cpazurl);
+                                // 处理安卓地址
+                                $('head style').append('mip-fy-yuyue .m-tisp1{display:none}');
+                                // 兼容其他组件
                             }
                         }
                     }
