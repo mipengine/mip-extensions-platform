@@ -1,7 +1,7 @@
 /**
- * @file mip-qqtn-shield 获取下载地址，根据不同下载地址显示不同的提示,提示内容放入模版里的https json中。1.1.0 ：新增 根据来路，提示不同内容。1.1.3 修改搜索引擎来路获取方式,  1.2 增加对其他组件的兼容性。
+ * @file mip-qqtn-shield 获取下载地址，根据不同下载地址显示不同的提示,提示内容放入模版里的https json中。1.1.0 ：根据来路，提示不同内容。1.2.0 增加对其他组件的兼容性。已经定位问题。解决和其他组件冲突问题。
  * @author gom3250@qq.com.
- * @version 1.2.0
+ * @version 1.1.0
  *  */
 define(function (require) {
     var $ = require('zepto');
