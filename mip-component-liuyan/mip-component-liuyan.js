@@ -109,9 +109,9 @@ define(function (require) {
 
             var result = undefined;
             if (isFreetalk) {
-                result = dialog.get('留言发送提示', '我们将稍后和您联系，请保持电话畅通！', true);
+                result = dialog.get('全球品牌网(globrand)提示：', '我们将稍后和您联系，请保持电话畅通！', true);
             } else {
-                result = dialog.get('全球品牌网(globrand)提示：', '留言已成功提交！查看留言需要关注公众号！', false);
+                result = dialog.get('全球品牌网(globrand)提示：', '留言已成功提交，跟进留言回复进展需要关注公众号。', false);
             }
             if (form.parentElement.tagName === 'MIP-COMPONENT-LIUYAN') {
                 if (form.nextElementSibling.className !== 'dialog') {
