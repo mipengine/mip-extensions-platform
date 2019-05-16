@@ -1,0 +1,14 @@
+{
+    "name": "mip-qqtn-onblock",
+    "version": "1.0.0",
+    "description": "点击查看更多按钮每次展开10个li标签的高度",
+    "contributors": [
+        {
+            "name": "dgm",
+            "email": "1028212667@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.0.0"
+    }
+}
