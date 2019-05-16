@@ -14,9 +14,8 @@ define(function (require) {
         var bodyHeight = $('body').outerHeight(true);
         var windowHeight = $(window).height();
         if (bodyHeight < windowHeight) {
-            var lastDom = $('.fix-bottom').prev();
-            var remainHeight = $(lastDom).position().top + $(lastDom).outerHeight(true);
-            $(element).css('min-height', $(element).height() + remainHeight - 50);
+            var remainHeight = windowHeight - bodyHeight;
+            $(element).css('min-height', $(element).height() + remainHeight);
         }
         $('body').css('visibility', 'visible');
     };
