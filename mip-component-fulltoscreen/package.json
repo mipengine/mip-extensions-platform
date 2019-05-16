@@ -1,0 +1,14 @@
+{
+    "name": "mip-component-fulltoscreen",
+    "version": "1.0.0",
+    "description": "用于当页面不足一屏时，组件节点拓展至一屏",
+    "contributors": [
+        {
+            "name": "林登峰",
+            "email": "759952225@qq.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
