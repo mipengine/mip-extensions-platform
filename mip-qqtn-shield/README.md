@@ -1,6 +1,6 @@
 # mip-qqtn-shield
 
-mip-qqtn-shield 根据下载地址来进行判断，规则1：假如包含A类地址，更换页面内容。规则2：包含B地址，将该应用进行下架处理   1.1 :新增根据来路进行不同的提示 1.1.3 修改了搜索引起来路获取方式
+mip-qqtn-shield 根据下载地址来进行判断，规则1：假如包含A类地址，更换页面内容。规则2：包含B地址，将该应用进行下架处理   1.2 增加对其他组件的兼容性
 
 标题|内容
 ----|----
@@ -14,6 +14,8 @@ mip-qqtn-shield 根据下载地址来进行判断，规则1：假如包含A类�
 ```html
 <mip-ychlyxgs-adddata>
 <mip-qqtn-downts>
+<mip-fy-yuyue data-nodownurl="https://m.qqtn.com" data-color="#19b5fe" data-id="115303" data-yuyueurl="https://www.qqtn.com">
+
 <mip-qqtn-shield data-shield="qqtn">
 <title>阿斯顿</title>
 <div class="g-box m-down-msg" id="m-down-msg">
@@ -67,10 +69,13 @@ mip-qqtn-shield 根据下载地址来进行判断，规则1：假如包含A类�
 <div class="f-information f-hide" data-id="304971" data-path="down" data-categroyId="187" data-rootid="16" data-commendid="0" data-system="Android" data-ppaddress="" data-ismoney="0" data-CommentTpye="0" data-Username="hjw" data-Type="0" data-DateTime="2018/1/24" data-phpurl="2" data-durl="http://tj.qqtj99.com/0006/5084"></div>
 </mip-qqtn-shield>
 </mip-qqtn-downts>
+</mip-fy-yuyue>
+
 </mip-ychlyxgs-adddata>
 <script src="https://c.mipcdn.com/static/v1/mip-showmore/mip-showmore.js"></script>
 <script src="https://mipcache.bdstatic.com/extensions/platform/v1/mip-ychlyxgs-adddata/mip-ychlyxgs-adddata.js"></script>
 <script src="https://mipcache.bdstatic.com/extensions/platform/v1/mip-qqtn-downts/mip-qqtn-downts.js"></script>
+<script src="https://mipcache.bdstatic.com/extensions/platform/v1/mip-fy-yuyue/mip-fy-yuyue.js"></script>
 
 
 ```
