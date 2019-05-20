@@ -1,6 +1,6 @@
 # mip-qqtn-onblock
 
-mip-qqtn-onblock 点击查看更多按钮每次展开10个li标签的高度
+mip-qqtn-onblock 判断div下总的li个数大于10个就添加一个查看更多按钮，并且每点击一次查看按钮累加一次10乘以单个li的高度
 
 标题|内容
 ----|----

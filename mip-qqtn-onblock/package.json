@@ -1,7 +1,7 @@
 {
     "name": "mip-qqtn-onblock",
-    "version": "1.0.0",
-    "description": "点击查看更多按钮每次展开10个li标签的高度",
+    "version": "1.0.1",
+    "description": "判断div下总的li个数大于10个就添加一个查看更多按钮，并且每点击一次查看按钮累加一次10乘以单个li的高度",
     "contributors": [
         {
             "name": "dgm",
