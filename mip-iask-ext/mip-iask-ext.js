@@ -2,7 +2,7 @@
 * @file 脚本支持
 * @author  hejieye
 * @time  2018-09-19
-* @version 1.3.4
+* @version 1.3.6
 */
 define(function (require) {
     var $ = require('zepto');
@@ -160,8 +160,9 @@ define(function (require) {
                 $('.report-body').hide();
             });
         },
-        checkSearch: function (value) {
+        checkSearch: function (value, hostStr) {
             var ref = '';
+            var host = window.location.host || '';
             if (document.referrer.length > 0) {
                 ref = document.referrer;
             }
@@ -170,8 +171,7 @@ define(function (require) {
                     ref = opener.location.href;
                 }
             } catch (e) {}
-
-            return ref.indexOf(value) > -1;
+            return (ref.indexOf(value) > -1 || host.indexOf(hostStr) > -1);
         },
         openWindowUrl: function (ele, url) {
             var $that = ele.querySelectorAll('.camnpr');
@@ -207,10 +207,12 @@ define(function (require) {
 
             var value = element.getAttribute('value');
 
+            var value2 = element.getAttribute('value2');
+
             var flag = element.getAttribute('flag');
 
             if (type === 'search') {
-                var searchValue = this.checkSearch(value);
+                var searchValue = this.checkSearch(value, value2);
                 this.searchToPage(element, searchValue, flag);
             }
         },
