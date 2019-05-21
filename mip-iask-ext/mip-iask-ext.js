@@ -173,22 +173,7 @@ define(function (require) {
             } catch (e) {}
             return (ref.indexOf(value) > -1 || host.indexOf(hostStr) > -1);
         },
-        openWindowUrl: function (ele, url) {
-            var $that = ele.querySelectorAll('.camnpr');
-            if ($that.length > 0) {
-                for (var i = 0; i < $that.length; i++) {
-                    var t = $that[i];
-                    t.parentNode.removeChild(t);
-                }
-            }
-            var a = ele.createElement('a');
-            a.setAttribute('href', url);
-            a.setAttribute('target', '_blank');
-            a.setAttribute('class', 'camnpr');
-            ele.body.appendChild(a);
-            a.click();
-        },
-        searchToPage: function (ele, value, flag) {
+        searchToPage: function (value, flag) {
             if (value) {
                 var url = window.location.href;
                 if (url.lastIndexOf('?') > -1) {
@@ -197,7 +182,7 @@ define(function (require) {
                 else {
                     url += '?searchid=' + flag;
                 }
-                this.openWindowUrl(ele, url);
+                effects.openUrl(url);
             }
         },
 
@@ -213,7 +198,7 @@ define(function (require) {
 
             if (type === 'search') {
                 var searchValue = this.checkSearch(value, value2);
-                this.searchToPage(element, searchValue, flag);
+                this.searchToPage(searchValue, flag);
             }
         },
         init: function (element) {
