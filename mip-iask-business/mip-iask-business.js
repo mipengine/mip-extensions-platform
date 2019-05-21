@@ -1,8 +1,8 @@
 /**
 * @file 脚本支持
 * @author hejieye
-* @time  2018-06-20
-* @version 2.1.8
+* @time  2019-05-16
+* @version 2.2.0
 */
 define(function (require) {
     var $ = require('zepto');
@@ -362,42 +362,6 @@ define(function (require) {
         }
         return pos;
     };
- // 动态添加 mip-fixed悬浮广告
-    var putMXfAd = function (picLink, picLocal, statsBaidu, pos) {
-        var htmls = '';
-        htmls += '<mip-fixed still type=\'top\' id=\'customid\' >';
-        htmls += '<div class=\'mip-adbd\'>';
-        htmls += '<div on=\'tap:customid.close\' class=\'mip-adbd-close\'><span>关闭</span></div>';
-        if (pos === '') {
-            htmls += '<div href=' + picLink + ' class=\'href_log\' ' + statsBaidu + '>';
-        }
-        else {
-            htmls += '<div href=' + picLink + ' pos="' + pos + '" class=\'href_log\'' + statsBaidu + '>';
-        }
-        htmls += '<mip-img class=\'mip-img bottom-img\' src=' + picLocal + '></mip-img>';
-        htmls += '</div>';
-        htmls += '<span class=\'icon-bai-bottom\'></span>';
-        htmls += '</div></mip-fixed>';
-        return htmls;
-    };
-    // 顶部悬浮广告-拨打电话
-    var putMXfAdTel = function (picLink, picLocal, statsBaidu, pos) {
-        var htmls = '';
-        htmls += '<mip-fixed still type=\'top\' id=\'customid\' >';
-        htmls += '<div class=\'mip-adbd\'>';
-        htmls += '<div on=\'tap:customid.close\' class=\'mip-adbd-close\'><span>关闭</span></div>';
-        if (pos === '') {
-            htmls += '<a href="tel:' + picLink + '"  ' + statsBaidu + '>';
-        }
-        else {
-            htmls += '<a href="tel:' + picLink + '" pos="' + pos + '" ' + statsBaidu + '>';
-        }
-        htmls += '<mip-img class=\'mip-img bottom-img\' src=' + picLocal + '></mip-img>';
-        htmls += '</a>';
-        htmls += '<span class=\'icon-bai-bottom\'></span>';
-        htmls += '</div></mip-fixed>';
-        return htmls;
-    };
     // 企业信息广告
     var putQiyeInfo = function (ele, companyName, drName, website, picLocal, statsBaidu, pos, newSource) {
         var $thatQS = ele.querySelectorAll('.qs_bar');
@@ -631,7 +595,7 @@ define(function (require) {
         if ($that.length > 0) {
             for (var i = 0; i < $that.length; i++) {
                 var t = $that[i];
-                t.parentNode.removeChild(t);
+                t.style.display = 'none';
             }
         }
     };
