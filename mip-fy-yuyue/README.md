@@ -26,7 +26,7 @@
         </div>
         <div id="downAddress">
             <ul class="m-down-ul f-downbtn-url">
-                <li class="m-down-last"><a href="https://m.qqtn.com" class="span9 m-game-down down f-eject-btn" data-flag="downbtn" id="address">点击下载</a></li>
+                <li class="m-down-last"><a href="https://m.asdasdasd.com/asdasdasdasd.htsfadasda" class="span9 m-game-down down f-eject-btn" data-flag="downbtn" id="address">点击下载</a></li>
             </ul>
         </div>        
     </header>
@@ -118,10 +118,10 @@
 <div class="f-tags-box f-hide-box f-hide">
     <strong>其它版本</strong>    
     <ul class="m-tags-android f-tags-android">
-        <li data-system="Android" data-id="173385"><a href="https://m.qqtn.com/q/173385" ><i></i><p>比艺直播vip破解版下载v1.0.1 安卓版</p><b>下载</b></a></li> 
+        <!-- <li data-system="Android" data-id="173385"><a href="https://m.qqtn.com/q/173385" ><i></i><p>比艺直播vip破解版下载v1.0.1 安卓版</p><b>下载</b></a></li> 
         <li data-system="Android" data-id="173377"><a href="https://m.qqtn.com/q/173377" ><i></i><p>比艺直播apk官方版下载v1.0.0 安卓版</p><b>下载</b></a></li> 
         <li data-system="Android" data-id="173370"><a href="https://m.qqtn.com/q/173370" ><i></i><p>比艺直播app下载v1.0.0 安卓版</p><b>下载</b></a></li> 
-        <li data-system="Android" data-id="188764"><a href="https://m.qqtn.com/q/188764" ><i></i><p>比艺直播官方app下载v1.0.1 最新版</p><b>下载</b></a></li> 
+        <li data-system="Android" data-id="188764"><a href="https://m.qqtn.com/q/188764" ><i></i><p>比艺直播官方app下载v1.0.1 最新版</p><b>下载</b></a></li>  -->
     </ul>
     <ul class="m-tags-ios f-tags-ios">   
     </ul>

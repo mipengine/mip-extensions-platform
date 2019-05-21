@@ -15,6 +15,7 @@
  * 1.1.3 根据百度手机助手 百度-黄奥 的需求，修改文本提示。
  * 1.2 根据栏目，不同栏目改为下架的提示，其余改为预约的提示。
  * 1.2.1 增加单独的，针对下架的提示.
+ * 1.2.2 新增一种更合理的判断方式
  * @author gom3250@qq.com.
  *  */
 
@@ -30,14 +31,14 @@ define(function (require) {
         var btncolor = ele.getAttribute('data-color');
         var yuyueid = ele.getAttribute('data-id');
         var yuyueurl = ele.getAttribute('data-yuyueurl');
-        var phpurl = $(ele).find('.f-information').attr('data-phpurl');
-        // 获取配置文件地址
-        if (phpurl !== undefined) {
+        var phpopid = $(ele).find('.f-information').attr('data-phpurl');
+        // 获取配置文件地址,
+        if (phpopid !== undefined) {
             document.onreadystatechange = subSomething;
             function subSomething() {
                 if (document.readyState === 'loaded' || document.readyState === 'complete') {
                 // 页面加载完成,
-                    fetchJsonp('https://ca.6071.com/web/index/c/' + phpurl, {
+                    fetchJsonp('https://ca.6071.com/web/index/c/' + phpopid, {
                         jsonpCallback: 'callback'
                     }).then(function (res) {
                         return res.json();
@@ -99,7 +100,7 @@ define(function (require) {
                                     }
                                     // 对安卓资源操作结束
                                 } else {
-                                    // 安卓设备访问非安卓资源提示
+                                    // 安卓设备访问非安卓资源提示！
                                     $(ele).find('#address').text('暂无安卓版').attr('href', 'javascript:;');
                                     $(ele).find('#address').css({'background': '#ccc', 'color': '#fff'});
                                 }
@@ -110,17 +111,17 @@ define(function (require) {
                                 if (platform.isIos()) {
                                     // 是苹果设备
                                     $(ele).find('#address').text('暂无安卓版');
-                                    var systxt = '该软件没有对应苹果版';
-
+                                    systxt = '该软件没有对应苹果版';
+                                    // 苹果的提示
                                 } else {
-                                    var systxt = '该软件没有对应安卓版';
+                                    systxt = '该软件没有对应安卓版';
+                                    //  安卓提示，非重复声明！
                                 }
                                 $(ele).find('#address').text(systxt);
                             }
                         } else {
                             // 有下载地址
                             var sys = '';
-                            var colsys = '';
                             var tiyes = '';
                             var firname = $(ele).find('.f-tags-box li').eq(0).find('p').text();
                             if (platform.isIos()) {
@@ -128,7 +129,6 @@ define(function (require) {
                                 var sys = '苹果';
                                 if ($.inArray(classidnum, azclassid) !== -1) {
                                     // 访问的是安卓资源
-                                    var colsys = '安卓';
                                     var tiyes = 'yes';
                                 }
                             } else {
@@ -136,7 +136,6 @@ define(function (require) {
                                 var sys = '安卓';
                                 if ($.inArray(classidnum, iosclassid) !== -1) {
                                     // 访问的是ios资源
-                                    var colsys = '苹果';
                                     var tiyes = 'yes';
                                 }
                             }
@@ -148,7 +147,8 @@ define(function (require) {
                             var titshi = '<p class="m-tisp1"><i></i>检测到您是' + sys + '设备，';
                             titshi += '点击下载的是：<span>' + firname + '</span></p>';
                             // 有地址的情况切换
-                            if (tiyes === 'yes') {
+                            if (tiyes === 'yes' && firname !== null) {
+                                // 新增一个获取内容不为null的判断
                                 $(ele).find('#downAddress ul').after(titshi);
                             }
                         }
@@ -173,7 +173,6 @@ define(function (require) {
                 return res.json();
             }).then(function (data) {
                 var qqun = data.list[0].qqgroup;
-                var weixinname = '';
                 var yuyuediv = '<div class="g-yuyue" data-click="0"><div class="m-yytit">请输入您的预约信息：';
                 yuyuediv += '<span class="f-fr f-yyclose">×</span></div><div class="m-yyinfo"><span></span>';
                 yuyuediv += '<input type="text" id="f-yyPhone" placeholder="输入手机号码" maxlength="11">';
@@ -191,11 +190,11 @@ define(function (require) {
                     if (yyclinum === '0') {
                         $(ele).find('.g-yuyue,.g-yuyuebg').fadeIn();
                     } else {
-                        alert('您已经预约过拉');
+                        return false;
                     };
                 });
                 $(ele).find('.f-yyclose').click(function () {
-                // 关闭
+                    // 执行关闭操作
                     $(ele).find('.g-yuyue,.g-yuyuebg').hide();
                 });
                 $(ele).find('.f-yybtn').click(function () {
@@ -203,7 +202,6 @@ define(function (require) {
                     var iputxt = $(ele).find('.g-yuyue input').val();
                     if (iputxt === '') {
                     // 为空
-                        alert('手机号不能为空');
                         return false;
                     };
                     var yyphone = $(ele).find('#f-yyPhone').val();
@@ -212,7 +210,6 @@ define(function (require) {
                     // 手机号段设置
                     if (yyphone !== '') {
                         if (!phonereg.test(yyphone)) {
-                            alert('请输入有效的手机号！');
                             return false;
                         }
                     }
