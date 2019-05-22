@@ -34,7 +34,7 @@ define(function (require) {
         if (type === 'secondadtype') {
             // XMLHttpRequest对象用于在后台与服务器交换数据
             var xhr = new XMLHttpRequest();
-            xhr.open('GET', 'https://houtai.xindingwealth.com/throwin/getPictureNum', true);
+            xhr.open('GET', 'https://houtai.xindingwealth.com/api/throwin/getPictureNum', true);
             xhr.onreadystatechange = function () {
                 // readyState == 4说明请求已完成
                 if (xhr.readyState === 4 && xhr.status === 200 || xhr.status === 304) {
