@@ -1,5 +1,5 @@
 /**
- * @file mip-qqtn-shield 获取下载地址，根据不同下载地址显示不同的提示,提示内容放入模版里的https json中。1.1.0 ：根据来路，提示不同内容。1.2.0 增加对其他组件的兼容性。已经定位问题。解决和其他组件冲突问题。
+ * @file mip-qqtn-shield 获取下载地址，根据不同下载地址显示不同的提示,提示内容放入模版里的https json中。1.1.0 ：根据来路，提示不同内容。1.2.0 增加对其他组件的兼容性。已经定位问题。解决和其他组件冲突问题。1.2.1 去掉除ios设备的判断
  * @author gom3250@qq.com.
  * @version 1.1.0
  *  */
@@ -110,11 +110,6 @@ define(function (require) {
                                 // 处理苹果地址
                                 $('head style').append('mip-fy-yuyue .m-tisp1{display:none}');
                                 //  兼容其他组件,不显示提示。
-                            } else if (cpazurl !== '') {
-                                $(ele).find('#address').attr('href', cpazurl);
-                                // 处理安卓地址
-                                $('head style').append('mip-fy-yuyue .m-tisp1{display:none}');
-                                // 兼容其他组件
                             }
                         }
                     }
