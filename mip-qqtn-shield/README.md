@@ -77,3 +77,39 @@ mip-qqtn-shield 根据下载地址来进行判断，规则1：假如包含A类�
 <script src="https://mipcache.bdstatic.com/extensions/platform/v1/mip-qqtn-downts/mip-qqtn-downts.js"></script>
 <script src="https://mipcache.bdstatic.com/extensions/platform/v1/mip-fy-yuyue/mip-fy-yuyue.js"></script>
 
+
+```
+## 用法
+- 用来判断的相关`href`的`ID`必须命名为`address`，假如为空或者为指定地址，则更改按钮为预约。
+
+
+## 属性
+
+###  data-nodownurl
+- 说明：用来跟address的heaf比对，当值一样时才会执行。
+- 取值：没有下载地址的。
+- 必选项：是
+- 类型：指定字符串
+
+## 注意事项
+
+- 下载地址的a标签id必须为 `address` 。
+
+###  data-color
+- 说明：配置预约按钮背景颜色，提供不同风格网站需要。
+- 取值：rgb色值。
+- 必选项：是
+
+###  data-id
+- 说明：预约的ID号，会以jsonp的方式传送。
+- 取值：ID。
+- 必选项：是
+
+###  data-yuyueurl
+- 说明：接口地址，用于不同网站定义。
+- 取值：URL。
+- 必选项：是
+
+## 注意事项
+
+- 地址必须为 `https` 。
