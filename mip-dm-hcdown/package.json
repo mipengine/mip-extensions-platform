@@ -1,0 +1,14 @@
+{
+    "name": "mip-dm-hcdown",
+    "version": "1.0.0",
+    "description": "组件介绍",
+    "contributors": [
+        {
+            "name": "lls",
+            "email": "leedemo2048@gmail.com"
+        }
+    ],
+    "engines": {
+        "mip": ">=1.1.0"
+    }
+}
