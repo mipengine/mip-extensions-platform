@@ -21,39 +21,41 @@ define(function (require) {
         var height = window.innerHeight;
         var fosi = 20 * (width / 375);
         var adtypeWidth = {
+            // 广告
             firstadtype: {
-                height: 2.5
+                height: 2.5,
+                multiple: 'advertisingmap'
             },
+            // 医生头像
             secondadtype: {
-                height: 3
+                height: 3,
+                multiple: 'driftdiagram'
             },
+            // 底部飘图
             thirdadtype: {
-                height: 2.5
+                height: 2.5,
+                multiple: 'headpicture'
             }
         };
-        if (type === 'secondadtype') {
-            // XMLHttpRequest对象用于在后台与服务器交换数据
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', 'https://houtai.xindingwealth.com/api/throwin/getPictureNum?targeturl=' + uri, true);
-            xhr.onreadystatechange = function () {
-                // readyState == 4说明请求已完成
-                if (xhr.readyState === 4 && xhr.status === 200 || xhr.status === 304) {
-                    // 从服务器获得数据
-                    append(JSON.parse(xhr.responseText).data.num);
-                }
-            };
-            xhr.send();
-        }
-        else
-        {
-            append(1);
+        // XMLHttpRequest对象用于在后台与服务器交换数据
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'https://houtai.xindingwealth.com/api/throwin/getPictureNumber?targeturl=' + uri, true);
+        xhr.onreadystatechange = function () {
+            // readyState == 4说明请求已完成
+            if (xhr.readyState === 4 && xhr.status === 200 || xhr.status === 304) {
+                // 从服务器获得数据
+                append(JSON.parse(xhr.responseText).data);
+            }
         };
+        xhr.send();
         function append(num) {
-            num = num !== null ? num : 1;
+            // console.log(num);
             iframe.setAttribute('style', 'display: block;');
             iframe.setAttribute('width', width);
-            iframe.setAttribute('height', adtypeWidth[type] && adtypeWidth[type].height * fosi * num);
-            // iframe.setAttribute('src', 'http://192.168.128.223:9999/index.html?ad-type=' + type + '&uri=' + uri + '&width=' + width + '&height=' + height + '');
+            iframe.setAttribute(
+                'height',
+                adtypeWidth[type] && adtypeWidth[type].height * fosi * (num[adtypeWidth[type].multiple] || 0)
+            );
             iframe.setAttribute('src', 'https://houtai.xindingwealth.com/ad-index.html?ad-type=' + type + '&uri=' + uri + '&width=' + width + '&height=' + height + '');
             element.append(iframe);
         }
