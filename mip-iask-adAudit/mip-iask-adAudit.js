@@ -2,7 +2,7 @@
 * @file 脚本支持
 * @author hejieye
 * @time  2018-11-15
-* @version 1.0.0
+* @version 1.0.1
 */
 define(function (require) {
     var $ = require('zepto');
@@ -76,7 +76,7 @@ define(function (require) {
         });
         // 上报分子
         var intervalID = window.setInterval(function () {
-            $('mip-embed').each(function () {
+            $('mip-ad').each(function () {
                 var $embed = $(this);
                 // 判断百度广告是否展示
                 // 根据token去获取广告对应的相关信息

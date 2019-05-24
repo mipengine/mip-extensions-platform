@@ -6,7 +6,7 @@ mip-iask-adAudit 爱问百度广告展示率监控
 ----|----
 类型|业务
 支持布局|N,S|
-所需脚本|https://c.mipcdn.com/static/v1/mip-iask-business/mip-iask-adAudit.js
+所需脚本|https://c.mipcdn.com/static/v1/mip-iask-adAudit/mip-iask-adAudit.js
 
 ## 示例
 
