@@ -40,6 +40,7 @@ define(function (require) {
         // XMLHttpRequest对象用于在后台与服务器交换数据
         var xhr = new XMLHttpRequest();
         xhr.open('GET', 'https://houtai.xindingwealth.com/api/throwin/getPictureNumber?targeturl=' + uri, true);
+        // xhr.open('GET', 'https://houtai.xindingwealth.com/api/throwin/getPictureNumber?targeturl=' + 'https://www.med-credit.org.cn/ask/1014640.html', true);
         xhr.onreadystatechange = function () {
             // readyState == 4说明请求已完成
             if (xhr.readyState === 4 && xhr.status === 200 || xhr.status === 304) {
@@ -50,13 +51,25 @@ define(function (require) {
         xhr.send();
         function append(num) {
             // console.log(num);
+            // num = {
+            //     advertisingmap: 1,
+            //     driftdiagram: 3,
+            //     headpicture: 1,
+            //     driftdiagramheight: 50
+            // }
+            // num.driftdiagramheight = 50;
+            var domHeight = adtypeWidth[type]
+                && adtypeWidth[type].height * fosi * (num[adtypeWidth[type].multiple] || 0);
+            if (type === 'secondadtype' && domHeight > 0) {
+                // console.log(num.driftdiagramheight, fosi);
+                domHeight += (num.driftdiagramheight / 20 * fosi);
+            }
+            // console.log(domHeight);
             iframe.setAttribute('style', 'display: block;');
             iframe.setAttribute('width', width);
-            iframe.setAttribute(
-                'height',
-                adtypeWidth[type] && adtypeWidth[type].height * fosi * (num[adtypeWidth[type].multiple] || 0)
-            );
+            iframe.setAttribute('height', domHeight);
             iframe.setAttribute('src', 'https://houtai.xindingwealth.com/ad-index.html?ad-type=' + type + '&uri=' + uri + '&width=' + width + '&height=' + height + '');
+            // iframe.setAttribute('src', 'http://192.168.128.223:9999/ad-index.html?ad-type=' + type + '&uri=' + 'https://www.med-credit.org.cn/ask/1014640.html' + '&width=' + width + '&height=' + height + '');
             element.append(iframe);
         }
     };
